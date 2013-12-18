@@ -17,7 +17,7 @@
     You should have received a copy of the GNU Library General Public License
     along with this library; see the file COPYING.LIB.  If not, write to
     the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA 02110-1301, USA. 
+    Boston, MA 02110-1301, USA.
 */
 
 #include "kshell.h"
@@ -92,16 +92,18 @@ QStringList KShell::splitArgs(const QString &_args, Options flags, Errors *err)
     if (flags & AbortOnMeta) {
         args.remove(PERCENT_ESCAPE);
         if (args.indexOf(QLatin1Char('%')) >= 0) {
-            if (err)
+            if (err) {
                 *err = FoundMeta;
+            }
             return QStringList();
         }
 
         args = _args;
         args.replace(PERCENT_ESCAPE, QLatin1String("%"));
 
-        if (!args.isEmpty() && args[0].unicode() == '@')
+        if (!args.isEmpty() && args[0].unicode() == '@') {
             args.remove(0, 1);
+        }
 
         for (int p = 0; p < args.length(); p++) {
             ushort c = args[p].unicode();
@@ -111,34 +113,42 @@ QStringList KShell::splitArgs(const QString &_args, Options flags, Errors *err)
                 while (++p < args.length() && args[p].unicode() != '"')
                     ;
             } else if (isMetaChar(c)) {
-                if (err)
+                if (err) {
                     *err = FoundMeta;
+                }
                 return QStringList();
             }
         }
     }
 
-    if (err)
+    if (err) {
         *err = NoError;
+    }
 
     int p = 0;
     const int length = args.length();
     forever {
-        while (p < length && isWhiteSpace(args[p].unicode()))
+    while (p < length && isWhiteSpace(args[p].unicode()))
+        {
             ++p;
+        }
         if (p == length)
+        {
             return ret;
+        }
 
         QString arg;
         bool inquote = false;
         forever {
-            bool copy = true; // copy this char
-            int bslashes = 0; // number of preceding backslashes to insert
-            while (p < length && args[p] == bs) {
+        bool copy = true; // copy this char
+        int bslashes = 0; // number of preceding backslashes to insert
+        while (p < length && args[p] == bs)
+            {
                 ++p;
                 ++bslashes;
             }
-            if (p < length && args[p] == dq) {
+            if (p < length && args[p] == dq)
+            {
                 if (bslashes % 2 == 0) {
                     // Even number of backslashes, so the quote is not escaped.
                     if (inquote) {
@@ -161,20 +171,26 @@ QStringList KShell::splitArgs(const QString &_args, Options flags, Errors *err)
             }
 
             while (--bslashes >= 0)
+            {
                 arg.append(bs);
+            }
 
-            if (p == length || (!inquote && isWhiteSpace(args[p].unicode()))) {
+            if (p == length || (!inquote && isWhiteSpace(args[p].unicode())))
+            {
                 ret.append(arg);
                 if (inquote) {
-                    if (err)
+                    if (err) {
                         *err = BadQuoting;
+                    }
                     return QStringList();
                 }
                 break;
             }
 
             if (copy)
+            {
                 arg.append(args[p]);
+            }
             ++p;
         }
     }
@@ -198,16 +214,18 @@ QString KShell::quoteArgInternal(const QString &arg, bool _inquote)
                 ret.append(dq);
                 inquote = false;
             }
-            for (; bslashes; bslashes--)
+            for (; bslashes; bslashes--) {
                 ret.append(QLatin1String("\\\\"));
+            }
             ret.append(QLatin1String("\\^\""));
         } else {
             if (!inquote) {
                 ret.append(dq);
                 inquote = true;
             }
-            for (; bslashes; bslashes--)
+            for (; bslashes; bslashes--) {
                 ret.append(bs);
+            }
             ret.append(arg[p]);
         }
     }
@@ -215,13 +233,16 @@ QString KShell::quoteArgInternal(const QString &arg, bool _inquote)
     if (bslashes) {
         // Ensure that we don't have directly trailing backslashes,
         // so concatenating with another string won't cause surprises.
-        if (!inquote && !_inquote)
+        if (!inquote && !_inquote) {
             ret.append(dq);
-        for (; bslashes; bslashes--)
+        }
+        for (; bslashes; bslashes--) {
             ret.append(QLatin1String("\\\\"));
+        }
         ret.append(dq);
-        if (inquote && _inquote)
+        if (inquote && _inquote) {
             ret.append(dq);
+        }
     } else if (inquote != _inquote) {
         ret.append(dq);
     }
@@ -230,17 +251,20 @@ QString KShell::quoteArgInternal(const QString &arg, bool _inquote)
 
 QString KShell::quoteArg(const QString &arg)
 {
-    if (arg.isEmpty())
+    if (arg.isEmpty()) {
         return QString::fromLatin1("\"\"");
+    }
 
     // Ensure that we don't have directly trailing backslashes,
     // so concatenating with another string won't cause surprises.
-    if (arg.endsWith(QLatin1Char('\\')))
+    if (arg.endsWith(QLatin1Char('\\'))) {
         return quoteArgInternal(arg, false);
+    }
 
     for (int x = arg.length() - 1; x >= 0; --x)
-        if (isSpecialChar(arg[x].unicode()))
+        if (isSpecialChar(arg[x].unicode())) {
             return quoteArgInternal(arg, false);
+        }
 
     // Escape quotes. Preceding backslashes are doubled.
     // Note that the remaining string is not quoted.

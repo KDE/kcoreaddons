@@ -38,11 +38,11 @@ protected:
     virtual bool doKill();
 
 public:
-    void setError( int errorCode );
-    void setErrorText( const QString &errorText );
-    void setProcessedSize( qulonglong size );
-    void setTotalSize( qulonglong size );
-    void setPercent( unsigned long percentage );
+    void setError(int errorCode);
+    void setErrorText(const QString &errorText);
+    void setProcessedSize(qulonglong size);
+    void setTotalSize(qulonglong size);
+    void setPercent(unsigned long percentage);
 
 private Q_SLOTS:
     void doEmit();
@@ -52,7 +52,7 @@ class TestJobUiDelegate : public KJobUiDelegate
 {
     Q_OBJECT
 protected:
-    virtual void connectJob( KJob *job );
+    virtual void connectJob(KJob *job);
 };
 
 class WaitJob;
@@ -81,7 +81,7 @@ private Q_SLOTS:
     void testDelegateUsage();
     void testNestedExec();
 
-    void slotResult( KJob *job );
+    void slotResult(KJob *job);
     void slotFinished(KJob *job);
 
 private:

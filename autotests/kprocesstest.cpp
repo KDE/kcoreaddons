@@ -27,7 +27,8 @@
 #include <stdlib.h>
 #include <signal.h>
 
-class KProcessTest : public QObject {
+class KProcessTest : public QObject
+{
     Q_OBJECT
 
 private Q_SLOTS:
@@ -110,6 +111,6 @@ static void recursor(char **argv)
     gargv = argv;
 }
 
-QTEST_MAIN( recursor(argv); KProcessTest )
+QTEST_MAIN(recursor(argv); KProcessTest)
 
 #include "kprocesstest.moc"

@@ -33,7 +33,10 @@ template <class T> class QList;
 class QCommandLineParser;
 class QVariant;
 class KAboutData;
-namespace KCrash { void defaultCrashHandler(int sig); }
+namespace KCrash
+{
+void defaultCrashHandler(int sig);
+}
 
 /**
  * This class is used to store information about a person or developer.
@@ -86,7 +89,7 @@ public:
      * Copy constructor.  Performs a deep copy.
      * @param other object to copy
      */
-    KAboutPerson(const KAboutPerson& other);
+    KAboutPerson(const KAboutPerson &other);
 
     ~KAboutPerson();
 
@@ -94,8 +97,7 @@ public:
      * Assignment operator.  Performs a deep copy.
      * @param other object to copy
      */
-    KAboutPerson& operator=(const KAboutPerson& other);
-
+    KAboutPerson &operator=(const KAboutPerson &other);
 
     /**
      * The person's name
@@ -186,36 +188,34 @@ public:
      */
     static KAboutData *pluginData(const QString &componentName);
 
-  /**
-   * Describes the license of the software.
-   */
-    enum LicenseKey // KDE5: move to KAboutLicense, cut License_ prefix
-    {
-      License_Custom = -2,
-      License_File = -1,
-      License_Unknown = 0,
-      License_GPL  = 1,
-      License_GPL_V2 = 1,
-      License_LGPL = 2,
-      License_LGPL_V2 = 2,
-      License_BSD  = 3,
-      License_Artistic = 4,
-      License_QPL = 5,
-      License_QPL_V1_0 = 5,
-      License_GPL_V3 = 6,
-      License_LGPL_V3 = 7
+    /**
+     * Describes the license of the software.
+     */
+    enum LicenseKey { // KDE5: move to KAboutLicense, cut License_ prefix
+        License_Custom = -2,
+        License_File = -1,
+        License_Unknown = 0,
+        License_GPL  = 1,
+        License_GPL_V2 = 1,
+        License_LGPL = 2,
+        License_LGPL_V2 = 2,
+        License_BSD  = 3,
+        License_Artistic = 4,
+        License_QPL = 5,
+        License_QPL_V1_0 = 5,
+        License_GPL_V3 = 6,
+        License_LGPL_V3 = 7
     };
 
-  /**
-   * Format of the license name.
-   */
-    enum NameFormat // KDE5: move to KAboutLicense
-    {
+    /**
+     * Format of the license name.
+     */
+    enum NameFormat { // KDE5: move to KAboutLicense
         ShortName,
         FullName
     };
 
-  public:
+public:
     /**
      * Constructor.
      *
@@ -258,31 +258,31 @@ public:
      *        This defaults to the kde.org bug system.
      *
      */
-    KAboutData( const QString &componentName,
-                const QString &catalogName,
-                const QString &displayName,
-                const QString &version,
-                const QString &shortDescription = QString(),
-                enum LicenseKey licenseType = License_Unknown,
-                const QString &copyrightStatement = QString(),
-                const QString &otherText = QString(),
-                const QString &homePageAddress = QString(),
-                const QString &bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
+    KAboutData(const QString &componentName,
+               const QString &catalogName,
+               const QString &displayName,
+               const QString &version,
+               const QString &shortDescription = QString(),
+               enum LicenseKey licenseType = License_Unknown,
+               const QString &copyrightStatement = QString(),
+               const QString &otherText = QString(),
+               const QString &homePageAddress = QString(),
+               const QString &bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
               );
 
     /**
      * Copy constructor.  Performs a deep copy.
      * @param other object to copy
      */
-     KAboutData(const KAboutData& other);
+    KAboutData(const KAboutData &other);
 
     /**
      * Assignment operator.  Performs a deep copy.
      * @param other object to copy
      */
-     KAboutData& operator=(const KAboutData& other);
+    KAboutData &operator=(const KAboutData &other);
 
-     ~KAboutData();
+    ~KAboutData();
 
     /**
      * Defines an author.
@@ -308,12 +308,11 @@ public:
      *        The provider can be optionally specified with @see setOcsProvider.
      *
      */
-    KAboutData &addAuthor( const QString &name,
-                           const QString &task = QString(),
-                           const QString &emailAddress = QString(),
-                           const QString &webAddress = QString(),
-                           const QString &ocsUsername = QString());
-
+    KAboutData &addAuthor(const QString &name,
+                          const QString &task = QString(),
+                          const QString &emailAddress = QString(),
+                          const QString &webAddress = QString(),
+                          const QString &ocsUsername = QString());
 
     /**
      * Defines a person that deserves credit.
@@ -366,8 +365,8 @@ public:
      * @param emailAddress the email address(es) of the translator(s)
      * @see KAboutTranslator
      */
-    KAboutData &setTranslator( const QString& name,
-                               const QString& emailAddress );
+    KAboutData &setTranslator(const QString &name,
+                              const QString &emailAddress);
 
     /**
      * Defines a license text, which is translated.
@@ -379,7 +378,7 @@ public:
      *
      * @param license The license text.
      */
-    KAboutData &setLicenseText( const QString &license );
+    KAboutData &setLicenseText(const QString &license);
 
     /**
      * Adds a license text, which is translated.
@@ -396,7 +395,7 @@ public:
      * @see setLicenseText, addLicense, addLicenseTextFile
      * @since 4.1
      */
-    KAboutData &addLicenseText( const QString &license );
+    KAboutData &addLicenseText(const QString &license);
 
     /**
      * Defines a license text by pointing to a file where it resides.
@@ -404,7 +403,7 @@ public:
      *
      * @param file Path to the file in the local filesystem containing the license text.
      */
-    KAboutData &setLicenseTextFile( const QString &file );
+    KAboutData &setLicenseTextFile(const QString &file);
 
     /**
      * Adds a license text by pointing to a file where it resides.
@@ -417,7 +416,7 @@ public:
      * @see addLicenseText, addLicense, setLicenseTextFile
      * @since 4.1
      */
-    KAboutData &addLicenseTextFile( const QString &file );
+    KAboutData &addLicenseTextFile(const QString &file);
 
     /**
      * Defines the component name used internally.
@@ -433,7 +432,7 @@ public:
      *        translated.
      *        Example: i18n("Advanced Text Editor").
      */
-    KAboutData &setDisplayName( const QString &displayName );
+    KAboutData &setDisplayName(const QString &displayName);
 
     /**
      * Defines the program icon.
@@ -445,7 +444,7 @@ public:
      * @see programIconName()
      * @since 4.1
      */
-    KAboutData &setProgramIconName( const QString &iconName );
+    KAboutData &setProgramIconName(const QString &iconName);
 
     /**
      * Defines the program logo.
@@ -459,7 +458,7 @@ public:
      * @param image logo image.
      * @see programLogo()
     */
-    KAboutData &setProgramLogo(const QVariant& image);
+    KAboutData &setProgramLogo(const QVariant &image);
 
     /**
      * Specifies an Open Collaboration Services provider by URL.
@@ -473,14 +472,14 @@ public:
      *
      * @param providerUrl The provider URL as defined in the provider file.
      */
-    KAboutData &setOcsProvider( const QString &providerUrl );
+    KAboutData &setOcsProvider(const QString &providerUrl);
 
     /**
      * Defines the program version string.
      *
      * @param version The program version.
      */
-    KAboutData &setVersion( const QByteArray &version );
+    KAboutData &setVersion(const QByteArray &version);
 
     /**
      * Defines a short description of what the program does.
@@ -489,7 +488,7 @@ public:
      *        be translated. Example: i18n("An advanced text
      *        editor with syntax highlighting support.").
      */
-    KAboutData &setShortDescription( const QString &shortDescription );
+    KAboutData &setShortDescription(const QString &shortDescription);
 
     /**
      * Defines the translation catalog that the program uses.
@@ -504,7 +503,7 @@ public:
      * @param licenseKey The license identifier.
      * @see addLicenseText, setLicenseText, setLicenseTextFile
      */
-    KAboutData &setLicense( LicenseKey licenseKey );
+    KAboutData &setLicense(LicenseKey licenseKey);
 
     /**
      * Adds a license identifier.
@@ -516,7 +515,7 @@ public:
      * @see setLicenseText, addLicenseText, addLicenseTextFile
      * @since 4.1
      */
-    KAboutData &addLicense( LicenseKey licenseKey );
+    KAboutData &addLicense(LicenseKey licenseKey);
 
     /**
      * Defines the copyright statement to show when displaying the license.
@@ -525,7 +524,7 @@ public:
      *        this: i18n("Copyright (C) 1999-2000 Name"). The string specified here is
      *        taken verbatim; the author information from addAuthor is not used.
      */
-    KAboutData &setCopyrightStatement( const QString &copyrightStatement );
+    KAboutData &setCopyrightStatement(const QString &copyrightStatement);
 
     /**
      * Defines the additional text to show in the about dialog.
@@ -534,7 +533,7 @@ public:
      *        information. The text can contain newlines. This string
      *        should be translated.
      */
-    KAboutData &setOtherText( const QString &otherText );
+    KAboutData &setOtherText(const QString &otherText);
 
     /**
      * Defines the program homepage.
@@ -551,7 +550,7 @@ public:
      * @param bugAddress The bug report email address string.
      *        This defaults to the kde.org bug system.
      */
-    KAboutData &setBugAddress( const QByteArray &bugAddress );
+    KAboutData &setBugAddress(const QByteArray &bugAddress);
 
     /**
      * Defines the Internet domain of the organization that wrote this application.
@@ -570,7 +569,7 @@ public:
      *
      * @param domain the domain name, for instance kde.org, koffice.org, kdevelop.org, etc.
      */
-    KAboutData &setOrganizationDomain( const QByteArray &domain );
+    KAboutData &setOrganizationDomain(const QByteArray &domain);
 
     /**
      * Defines the product name which will be used in the KBugReport dialog.
@@ -580,7 +579,7 @@ public:
      *
      * @param name The name of product
      */
-    KAboutData &setProductName( const QByteArray &name );
+    KAboutData &setProductName(const QByteArray &name);
 
     /**
      * Returns the application's internal name.
@@ -614,7 +613,7 @@ public:
      * @internal
      * Provided for use by KCrash
      */
-    const char* internalProgramName() const;
+    const char *internalProgramName() const;
 
     /**
      * Returns the program's icon name.
@@ -656,7 +655,7 @@ public:
      * @internal
      * Provided for use by KCrash
      */
-    const char* internalVersion() const;
+    const char *internalVersion() const;
 
     /**
      * Returns a short, translated description.
@@ -688,7 +687,7 @@ public:
      * @internal
      * Provided for use by KCrash
      */
-    const char* internalBugAddress() const;
+    const char *internalBugAddress() const;
 
     /**
      * Returns a list of authors.
@@ -822,16 +821,14 @@ public:
      */
     void processCommandLine(QCommandLineParser *parser);
 
-  private:
+private:
 
     friend void KCrash::defaultCrashHandler(int sig);
-    static const KAboutData* applicationDataPointer();
-
+    static const KAboutData *applicationDataPointer();
 
     class Private;
     Private *const d;
 };
-
 
 /**
  * This class is used to store information about a license.
@@ -851,7 +848,7 @@ public:
      * Copy constructor.  Performs a deep copy.
      * @param other object to copy
      */
-    KAboutLicense(const KAboutLicense& other);
+    KAboutLicense(const KAboutLicense &other);
 
     ~KAboutLicense();
 
@@ -859,8 +856,7 @@ public:
      * Assignment operator.  Performs a deep copy.
      * @param other object to copy
      */
-    KAboutLicense& operator=(const KAboutLicense& other);
-
+    KAboutLicense &operator=(const KAboutLicense &other);
 
     /**
      * Returns the full license text. If the licenseType argument of the
@@ -914,7 +910,7 @@ private:
     /**
      * @internal Used by KAboutData to construct a predefined license.
      */
-    explicit KAboutLicense( enum KAboutData::LicenseKey licenseType, const KAboutData *aboutData );
+    explicit KAboutLicense(enum KAboutData::LicenseKey licenseType, const KAboutData *aboutData);
     /**
      * @internal Used by KAboutData to construct a KAboutLicense
      */

@@ -30,7 +30,7 @@ class KProcessPrivate;
 
 /**
  * \class KProcess kprocess.h <KProcess>
- * 
+ *
  * Child process invocation, monitoring and control.
  *
  * This class extends QProcess by some useful functionality, overrides
@@ -53,16 +53,16 @@ public:
      */
     enum OutputChannelMode {
         SeparateChannels = QProcess::SeparateChannels,
-            /**< Standard output and standard error are handled by KProcess
-                 as separate channels */
+        /**< Standard output and standard error are handled by KProcess
+             as separate channels */
         MergedChannels = QProcess::MergedChannels,
-            /**< Standard output and standard error are handled by KProcess
-                 as one channel */
+        /**< Standard output and standard error are handled by KProcess
+             as one channel */
         ForwardedChannels = QProcess::ForwardedChannels,
-            /**< Both standard output and standard error are forwarded
-                 to the parent process' respective channel */
+        /**< Both standard output and standard error are forwarded
+             to the parent process' respective channel */
         OnlyStdoutChannel,
-            /**< Only standard output is handled; standard error is forwarded */
+        /**< Only standard output is handled; standard error is forwarded */
         OnlyStderrChannel  /**< Only standard error is handled; standard output is forwarded */
     };
 
@@ -174,7 +174,7 @@ public:
      * @param arg the argument to add
      * @return a reference to this KProcess
      */
-    KProcess &operator<<(const QString& arg);
+    KProcess &operator<<(const QString &arg);
 
     /**
      * @overload
@@ -182,7 +182,7 @@ public:
      * @param args the arguments to add
      * @return a reference to this KProcess
      */
-    KProcess &operator<<(const QStringList& args);
+    KProcess &operator<<(const QStringList &args);
 
     /**
      * Clear the program and command line argument list.
@@ -324,7 +324,7 @@ protected:
     /**
      * @internal
      */
-    KProcessPrivate * const d_ptr;
+    KProcessPrivate *const d_ptr;
 
 private:
     // hide those

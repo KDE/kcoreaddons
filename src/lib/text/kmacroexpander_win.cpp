@@ -27,7 +27,7 @@
 #include <QString>
 #include <QStringList>
 
-bool KMacroExpanderBase::expandMacrosShellQuote( QString &str, int &pos )
+bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
 {
     int len;
     int pos2;
@@ -43,67 +43,77 @@ bool KMacroExpanderBase::expandMacrosShellQuote( QString &str, int &pos )
 
     while (pos < str.length()) {
         ushort cc = str.unicode()[pos].unicode();
-        if (escaped) // prevent anomalies due to expansion
+        if (escaped) { // prevent anomalies due to expansion
             goto notcf;
-        if (ec != 0) {
-            if (cc != ec)
-                goto nohit;
-            if (!(len = expandEscapedMacro( str, pos, rst )))
-                goto nohit;
-        } else {
-            if (!(len = expandPlainMacro( str, pos, rst )))
-                goto nohit;
         }
-            if (len < 0) {
-                pos -= len;
+        if (ec != 0) {
+            if (cc != ec) {
+                goto nohit;
+            }
+            if (!(len = expandEscapedMacro(str, pos, rst))) {
+                goto nohit;
+            }
+        } else {
+            if (!(len = expandPlainMacro(str, pos, rst))) {
+                goto nohit;
+            }
+        }
+        if (len < 0) {
+            pos -= len;
+            continue;
+        }
+        if (shellQuote != crtQuote) { // Silly, isn't it? Ahoy to Redmond.
+            return false;
+        }
+        if (shellQuote) {
+            rsts = KShell::quoteArgInternal(rst.join(QLatin1String(" ")), true);
+        } else {
+            if (rst.isEmpty()) {
+                str.remove(pos, len);
                 continue;
             }
-            if (shellQuote != crtQuote) // Silly, isn't it? Ahoy to Redmond.
-                return false;
-            if (shellQuote) {
-                rsts = KShell::quoteArgInternal( rst.join( QLatin1String(" ") ), true );
-            } else {
-                if (rst.isEmpty()) {
-                    str.remove( pos, len );
-                    continue;
-                }
-                rsts = KShell::joinArgs( rst );
+            rsts = KShell::joinArgs(rst);
+        }
+        pos2 = 0;
+        while (pos2 < rsts.length() &&
+                ((uc = rsts.unicode()[pos2].unicode()) == '\\' || uc == '^')) {
+            pos2++;
+        }
+        if (pos2 < rsts.length() && rsts.unicode()[pos2].unicode() == '"') {
+            QString bsl;
+            bsl.reserve(bslashes);
+            for (; bslashes; bslashes--) {
+                bsl.append(QLatin1String("\\"));
             }
-            pos2 = 0;
-            while (pos2 < rsts.length() &&
-                   ((uc = rsts.unicode()[pos2].unicode()) == '\\' || uc == '^'))
-                pos2++;
-            if (pos2 < rsts.length() && rsts.unicode()[pos2].unicode() == '"') {
-                QString bsl;
-                bsl.reserve( bslashes );
-                for (; bslashes; bslashes--)
-                    bsl.append( QLatin1String("\\") );
-                rsts.prepend( bsl );
-            }
-            bslashes = 0;
-            rst.clear();
-            str.replace( pos, len, rsts );
-            pos += rsts.length();
-            continue;
-      nohit:
+            rsts.prepend(bsl);
+        }
+        bslashes = 0;
+        rst.clear();
+        str.replace(pos, len, rsts);
+        pos += rsts.length();
+        continue;
+    nohit:
         if (!escaped && !shellQuote && cc == '^') {
             escaped = true;
         } else {
-          notcf:
+        notcf:
             if (cc == '\\') {
                 bslashes++;
             } else {
                 if (cc == '"') {
-                    if (!escaped)
+                    if (!escaped) {
                         shellQuote = !shellQuote;
-                    if (!(bslashes & 1))
+                    }
+                    if (!(bslashes & 1)) {
                         crtQuote = !crtQuote;
+                    }
                 } else if (!shellQuote) {
-                    if (cc == '(')
+                    if (cc == '(') {
                         parens++;
-                    else if (cc == ')')
-                        if (--parens < 0)
+                    } else if (cc == ')')
+                        if (--parens < 0) {
                             break;
+                        }
                 }
                 bslashes = 0;
             }

@@ -56,15 +56,16 @@ void KProcessPrivate::writeAll(const QByteArray &buf, int fd)
         WriteFile(h, buf.data(), buf.size(), &wr, 0);
     }
 #else
-    fwrite(buf.data(), 1, buf.size(), (FILE*)fd);
+    fwrite(buf.data(), 1, buf.size(), (FILE *)fd);
 #endif
 #else
     int off = 0;
     do {
         int ret = QT_WRITE(fd, buf.data() + off, buf.size() - off);
         if (ret < 0) {
-            if (errno != EINTR)
+            if (errno != EINTR) {
                 return;
+            }
         } else {
             off += ret;
         }
@@ -200,8 +201,9 @@ void KProcess::unsetEnv(const QString &name)
     for (QStringList::Iterator it = env.begin(); it != env.end(); ++it)
         if ((*it).startsWith(fname)) {
             env.erase(it);
-            if (env.isEmpty())
+            if (env.isEmpty()) {
                 env.append(QString::fromLatin1(DUMMYENV));
+            }
             setEnvironment(env);
             return;
         }
@@ -222,7 +224,7 @@ void KProcess::setProgram(const QStringList &argv)
 {
     Q_D(KProcess);
 
-    Q_ASSERT( !argv.isEmpty() );
+    Q_ASSERT(!argv.isEmpty());
     d->args = argv;
     d->prog = d->args.takeFirst();
 #ifdef Q_OS_WIN
@@ -234,10 +236,11 @@ KProcess &KProcess::operator<<(const QString &arg)
 {
     Q_D(KProcess);
 
-    if (d->prog.isEmpty())
+    if (d->prog.isEmpty()) {
         d->prog = arg;
-    else
+    } else {
         d->args << arg;
+    }
     return *this;
 }
 
@@ -245,10 +248,11 @@ KProcess &KProcess::operator<<(const QStringList &args)
 {
     Q_D(KProcess);
 
-    if (d->prog.isEmpty())
+    if (d->prog.isEmpty()) {
         setProgram(args);
-    else
+    } else {
         d->args << args;
+    }
     return *this;
 }
 
@@ -269,7 +273,7 @@ void KProcess::setShellCommand(const QString &cmd)
 
     KShell::Errors err;
     d->args = KShell::splitArgs(
-            cmd, KShell::AbortOnMeta | KShell::TildeExpand, &err);
+                  cmd, KShell::AbortOnMeta | KShell::TildeExpand, &err);
     if (err == KShell::NoError && !d->args.isEmpty()) {
         d->prog = QStandardPaths::findExecutable(d->args[0]);
         if (!d->prog.isEmpty()) {
@@ -301,7 +305,9 @@ void KProcess::setShellCommand(const QString &cmd)
                     d->prog = QStandardPaths::findExecutable(QString::fromLatin1("zsh"));
                     if (d->prog.isEmpty())
                         // We're pretty much screwed, to be honest ...
+                    {
                         d->prog = QString::fromLatin1("/bin/sh");
+                    }
                 }
             }
         }
@@ -377,8 +383,9 @@ int KProcess::startDetached()
     Q_D(KProcess);
 
     qint64 pid;
-    if (!QProcess::startDetached(d->prog, d->args, workingDirectory(), &pid))
+    if (!QProcess::startDetached(d->prog, d->args, workingDirectory(), &pid)) {
         return 0;
+    }
     return (int) pid;
 }
 
@@ -386,8 +393,9 @@ int KProcess::startDetached()
 int KProcess::startDetached(const QString &exe, const QStringList &args)
 {
     qint64 pid;
-    if (!QProcess::startDetached(exe, args, QString(), &pid))
+    if (!QProcess::startDetached(exe, args, QString(), &pid)) {
         return 0;
+    }
     return (int) pid;
 }
 

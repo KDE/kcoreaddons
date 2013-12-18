@@ -25,12 +25,11 @@
 class KUrlMimeDataTest : public QObject
 {
     Q_OBJECT
-    private Q_SLOTS:
-        void testURLList();
-        void testOneURL();
-        void testFromQUrl();
-        void testMostLocalUrlList();
+private Q_SLOTS:
+    void testURLList();
+    void testOneURL();
+    void testFromQUrl();
+    void testMostLocalUrlList();
 };
-
 
 #endif

@@ -27,7 +27,7 @@
 
 #include <QtTest/QtTest>
 
-QTEST_MAIN( KAutoSaveFileTest )
+QTEST_MAIN(KAutoSaveFileTest)
 
 void KAutoSaveFileTest::initTestCase()
 {
@@ -45,20 +45,20 @@ void KAutoSaveFileTest::test_readWrite()
 {
     QTemporaryFile file;
 
-    QVERIFY( file.open() );
+    QVERIFY(file.open());
 
-    QUrl normalFile( QFileInfo(file).absoluteFilePath() );
+    QUrl normalFile(QFileInfo(file).absoluteFilePath());
 
     //Test basic functionality
     KAutoSaveFile saveFile(normalFile);
 
-    QVERIFY( !QFile::exists(saveFile.fileName()) );
-    QVERIFY( saveFile.open(QIODevice::ReadWrite) );
+    QVERIFY(!QFile::exists(saveFile.fileName()));
+    QVERIFY(saveFile.open(QIODevice::ReadWrite));
 
     QString inText = QString::fromLatin1("This is test data one.\n");
 
     {
-        QTextStream ts ( &saveFile );
+        QTextStream ts(&saveFile);
         ts << inText;
         ts.flush();
     }
@@ -68,13 +68,12 @@ void KAutoSaveFileTest::test_readWrite()
     {
         QFile testReader(saveFile.fileName());
         testReader.open(QIODevice::ReadWrite);
-        QTextStream ts ( &testReader );
+        QTextStream ts(&testReader);
 
         QString outText = ts.readAll();
 
-        QCOMPARE( outText, inText );
+        QCOMPARE(outText, inText);
     }
-
 
     filesToRemove << file.fileName();
 }
@@ -91,30 +90,30 @@ void KAutoSaveFileTest::test_applicationStaleFiles()
 
 void KAutoSaveFileTest::test_locking()
 {
-    QUrl normalFile( QString::fromLatin1("fish://user@example.com/home/remote/test.txt") );
+    QUrl normalFile(QString::fromLatin1("fish://user@example.com/home/remote/test.txt"));
 
     KAutoSaveFile saveFile(normalFile);
 
-    QVERIFY( !QFile::exists(saveFile.fileName()) );
-    QVERIFY( saveFile.open(QIODevice::ReadWrite) );
+    QVERIFY(!QFile::exists(saveFile.fileName()));
+    QVERIFY(saveFile.open(QIODevice::ReadWrite));
 
-    const QList<KAutoSaveFile *> staleFiles( KAutoSaveFile::staleFiles( normalFile ) );
+    const QList<KAutoSaveFile *> staleFiles(KAutoSaveFile::staleFiles(normalFile));
 
-    QVERIFY( !staleFiles.isEmpty() );
+    QVERIFY(!staleFiles.isEmpty());
 
-    KAutoSaveFile* saveFile2 = staleFiles.at(0);
+    KAutoSaveFile *saveFile2 = staleFiles.at(0);
 
     const QString fn = saveFile2->fileName();
     // It looks like $XDG_DATA_HOME/stalefiles/qttest/test.txtXXXfish_%2Fhome%2FremoteXXXXXXX
-    QVERIFY2( fn.contains(QLatin1String("stalefiles/qttest/test.txt")), qPrintable(fn) );
-    QVERIFY2( fn.contains(QLatin1String("fish_%2Fhome%2Fremote")), qPrintable(fn) );
+    QVERIFY2(fn.contains(QLatin1String("stalefiles/qttest/test.txt")), qPrintable(fn));
+    QVERIFY2(fn.contains(QLatin1String("fish_%2Fhome%2Fremote")), qPrintable(fn));
 
-    QVERIFY( QFile::exists(saveFile2->fileName()) );
-    QVERIFY( !saveFile2->open(QIODevice::ReadWrite) );
+    QVERIFY(QFile::exists(saveFile2->fileName()));
+    QVERIFY(!saveFile2->open(QIODevice::ReadWrite));
 
     saveFile.releaseLock();
 
-    QVERIFY( saveFile2->open(QIODevice::ReadWrite) );
+    QVERIFY(saveFile2->open(QIODevice::ReadWrite));
 
     delete saveFile2;
 

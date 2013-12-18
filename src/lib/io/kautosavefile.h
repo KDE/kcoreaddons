@@ -29,7 +29,7 @@
 class KAutoSaveFilePrivate;
 /**
  * \class KAutoSaveFile kautosavefile.h <KAutoSaveFile>
- * 
+ *
  * @brief Creates and manages a temporary "auto-save" file.
  * Autosave files are temporary files that applications use to store
  * the unsaved data in a file they have open for
@@ -223,8 +223,8 @@ public:
      * then erase the stale autosave file.
      */
     static QList<KAutoSaveFile *> staleFiles(const QUrl &url,
-                                             const QString &applicationName =
-                                             QString());
+            const QString &applicationName =
+                QString());
 
     /**
      * Returns all stale autosave files left behind by crashed or
@@ -237,12 +237,12 @@ public:
      * See staleFiles() for information on the returned objects.
      */
     static QList<KAutoSaveFile *> allStaleFiles(const QString &applicationName =
-                                                QString());
+                QString());
 
 private:
     Q_DISABLE_COPY(KAutoSaveFile)
     friend class KAutoSaveFilePrivate;
-    KAutoSaveFilePrivate* const d;
+    KAutoSaveFilePrivate *const d;
 };
 
 #endif // KAUTOSAVEFILE_H

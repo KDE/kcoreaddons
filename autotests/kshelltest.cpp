@@ -31,7 +31,7 @@ class KShellTest : public QObject
 {
     Q_OBJECT
 
-  private Q_SLOTS:
+private Q_SLOTS:
     void tildeExpand();
     void quoteArg();
     void joinArgs();
@@ -44,9 +44,9 @@ KShellTest::tildeExpand()
 {
     QString me(KUser().loginName());
     QCOMPARE(KShell::tildeExpand("~"), QDir::homePath());
-    QCOMPARE(KShell::tildeExpand("~/dir"), QString(QDir::homePath()+"/dir"));
+    QCOMPARE(KShell::tildeExpand("~/dir"), QString(QDir::homePath() + "/dir"));
     QCOMPARE(KShell::tildeExpand('~' + me), QDir::homePath());
-    QCOMPARE(KShell::tildeExpand('~' + me + "/dir"), QString(QDir::homePath()+"/dir"));
+    QCOMPARE(KShell::tildeExpand('~' + me + "/dir"), QString(QDir::homePath() + "/dir"));
 #ifdef Q_OS_WIN
     QCOMPARE(KShell::tildeExpand("^~" + me), QString('~' + me));
 #else
@@ -81,7 +81,7 @@ KShellTest::joinArgs()
     QCOMPARE(KShell::joinArgs(list), QString("this is a test"));
 }
 
-static QString sj(const QString& str, KShell::Options flags, KShell::Errors* ret)
+static QString sj(const QString &str, KShell::Options flags, KShell::Errors *ret)
 {
     return KShell::joinArgs(KShell::splitArgs(str, flags, ret));
 }

@@ -30,14 +30,14 @@
 
 class KSharedDataCache::Private
 {
-    public:
+public:
     KSharedDataCache::EvictionPolicy evictionPolicy;
     QCache<QString, QByteArray> cache;
 };
 
 KSharedDataCache::KSharedDataCache(const QString &cacheName,
-                 unsigned defaultCacheSize,
-                 unsigned expectedItemSize)
+                                   unsigned defaultCacheSize,
+                                   unsigned expectedItemSize)
     : d(new Private)
 {
     d->cache.setMaxCost(defaultCacheSize);
@@ -75,8 +75,7 @@ bool KSharedDataCache::find(const QString &key, QByteArray *destination) const
             *destination = *value;
         }
         return true;
-    }
-    else {
+    } else {
         return false;
     }
 }
@@ -105,8 +104,7 @@ unsigned KSharedDataCache::freeSize() const
 {
     if (d->cache.totalCost() < d->cache.maxCost()) {
         return static_cast<unsigned>(d->cache.maxCost() - d->cache.totalCost());
-    }
-    else {
+    } else {
         return 0;
     }
 }

@@ -68,17 +68,15 @@ KJob::~KJob()
     delete d_ptr;
 }
 
-void KJob::setUiDelegate( KJobUiDelegate *delegate )
+void KJob::setUiDelegate(KJobUiDelegate *delegate)
 {
     Q_D(KJob);
-    if ( delegate == 0 || delegate->setJob( this ) )
-    {
+    if (delegate == 0 || delegate->setJob(this)) {
         delete d->uiDelegate;
         d->uiDelegate = delegate;
 
-        if ( d->uiDelegate )
-        {
-            d->uiDelegate->connectJob( this );
+        if (d->uiDelegate) {
+            d->uiDelegate->connectJob(this);
         }
     }
 }
@@ -98,31 +96,26 @@ bool KJob::isSuspended() const
     return d_func()->suspended;
 }
 
-bool KJob::kill( KillVerbosity verbosity )
+bool KJob::kill(KillVerbosity verbosity)
 {
     Q_D(KJob);
-    if ( doKill() )
-    {
-        setError( KilledJobError );
+    if (doKill()) {
+        setError(KilledJobError);
 
-        if ( verbosity!=Quietly )
-        {
+        if (verbosity != Quietly) {
             emitResult();
-        }
-        else
-        {
+        } else {
             // If we are displaying a progress dialog, remove it first.
             d->isFinished = true;
             emit finished(this, QPrivateSignal());
 
-            if ( isAutoDelete() )
+            if (isAutoDelete()) {
                 deleteLater();
+            }
         }
 
         return true;
-    }
-    else
-    {
+    } else {
         return false;
     }
 }
@@ -130,10 +123,8 @@ bool KJob::kill( KillVerbosity verbosity )
 bool KJob::suspend()
 {
     Q_D(KJob);
-    if ( !d->suspended )
-    {
-        if ( doSuspend() )
-        {
+    if (!d->suspended) {
+        if (doSuspend()) {
             d->suspended = true;
             emit suspended(this, QPrivateSignal());
 
@@ -147,10 +138,8 @@ bool KJob::suspend()
 bool KJob::resume()
 {
     Q_D(KJob);
-    if ( d->suspended )
-    {
-        if ( doResume() )
-        {
+    if (d->suspended) {
+        if (doResume()) {
             d->suspended = false;
             emit resumed(this, QPrivateSignal());
 
@@ -176,7 +165,7 @@ bool KJob::doResume()
     return false;
 }
 
-void KJob::setCapabilities( KJob::Capabilities capabilities )
+void KJob::setCapabilities(KJob::Capabilities capabilities)
 {
     Q_D(KJob);
     d->capabilities = capabilities;
@@ -191,23 +180,23 @@ bool KJob::exec()
     // have been deleted when exec() returns. This crashes, so temporarily
     // suspend autodeletion and manually do it afterwards.
     const bool wasAutoDelete = isAutoDelete();
-    setAutoDelete( false );
+    setAutoDelete(false);
 
-    Q_ASSERT( ! d->eventLoop );
+    Q_ASSERT(! d->eventLoop);
 
-    QEventLoop loop( this );
+    QEventLoop loop(this);
     d->eventLoop = &loop;
 
     start();
-    if( !d->isFinished ) {
+    if (!d->isFinished) {
         d->eventLoop->exec(QEventLoop::ExcludeUserInputEvents);
     }
     d->eventLoop = 0;
 
-    if ( wasAutoDelete ) {
+    if (wasAutoDelete) {
         deleteLater();
     }
-    return ( d->error == NoError );
+    return (d->error == NoError);
 }
 
 int KJob::error() const
@@ -240,13 +229,13 @@ unsigned long KJob::percent() const
     return d_func()->percentage;
 }
 
-void KJob::setError( int errorCode )
+void KJob::setError(int errorCode)
 {
     Q_D(KJob);
     d->error = errorCode;
 }
 
-void KJob::setErrorText( const QString &errorText )
+void KJob::setErrorText(const QString &errorText)
 {
     Q_D(KJob);
     d->errorText = errorText;
@@ -259,10 +248,9 @@ void KJob::setProcessedAmount(Unit unit, qulonglong amount)
 
     d->processedAmount[unit] = amount;
 
-    if ( should_emit )
-    {
+    if (should_emit) {
         emit processedAmount(this, unit, amount);
-        if (unit==d->progressUnit) {
+        if (unit == d->progressUnit) {
             emit processedSize(this, amount);
             emitPercent(d->processedAmount[unit], d->totalAmount[unit]);
         }
@@ -276,23 +264,21 @@ void KJob::setTotalAmount(Unit unit, qulonglong amount)
 
     d->totalAmount[unit] = amount;
 
-    if ( should_emit )
-    {
+    if (should_emit) {
         emit totalAmount(this, unit, amount);
-        if (unit==d->progressUnit) {
+        if (unit == d->progressUnit) {
             emit totalSize(this, amount);
             emitPercent(d->processedAmount[unit], d->totalAmount[unit]);
         }
     }
 }
 
-void KJob::setPercent( unsigned long percentage )
+void KJob::setPercent(unsigned long percentage)
 {
     Q_D(KJob);
-    if ( d->percentage!=percentage )
-    {
+    if (d->percentage != percentage) {
         d->percentage = percentage;
-        emit percent( this, percentage );
+        emit percent(this, percentage);
     }
 }
 
@@ -301,28 +287,29 @@ void KJob::emitResult()
     Q_D(KJob);
     d->isFinished = true;
 
-    if ( d->eventLoop ) {
+    if (d->eventLoop) {
         d->eventLoop->quit();
     }
 
     // If we are displaying a progress dialog, remove it first.
-    emit finished( this, QPrivateSignal() );
+    emit finished(this, QPrivateSignal());
 
-    emit result( this, QPrivateSignal() );
+    emit result(this, QPrivateSignal());
 
-    if ( isAutoDelete() )
+    if (isAutoDelete()) {
         deleteLater();
+    }
 }
 
-void KJob::emitPercent( qulonglong processedAmount, qulonglong totalAmount )
+void KJob::emitPercent(qulonglong processedAmount, qulonglong totalAmount)
 {
     Q_D(KJob);
     // calculate percents
     if (totalAmount) {
         unsigned long oldPercentage = d->percentage;
-        d->percentage = (unsigned long)(( (float)(processedAmount) / (float)(totalAmount) ) * 100.0);
-        if ( d->percentage != oldPercentage ) {
-            emit percent( this, d->percentage );
+        d->percentage = (unsigned long)(((float)(processedAmount) / (float)(totalAmount)) * 100.0);
+        if (d->percentage != oldPercentage) {
+            emit percent(this, d->percentage);
         }
     }
 }
@@ -354,7 +341,7 @@ bool KJob::isAutoDelete() const
     return d->isAutoDelete;
 }
 
-void KJob::setAutoDelete( bool autodelete )
+void KJob::setAutoDelete(bool autodelete)
 {
     Q_D(KJob);
     d->isAutoDelete = autodelete;

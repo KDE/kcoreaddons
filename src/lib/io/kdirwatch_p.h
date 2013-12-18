@@ -50,10 +50,8 @@ class QSocketNotifier;
 #include <fam.h>
 #endif
 
-
 #include <sys/types.h> // time_t, ino_t
 #include <ctime>
-
 
 #define invalid_ctime ((time_t)-1)
 
@@ -74,23 +72,23 @@ class QSocketNotifier;
  */
 class KFileSystemWatcher : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
-  KFileSystemWatcher();
-  ~KFileSystemWatcher();
-  void addPath(const QString &file);
-  void removePath(const QString &file);
+    KFileSystemWatcher();
+    ~KFileSystemWatcher();
+    void addPath(const QString &file);
+    void removePath(const QString &file);
 
 Q_SIGNALS:
     void fileChanged(const QString &path);
     void directoryChanged(const QString &path);
 
 private:
-  QFileSystemWatcher* availableWatcher();
-  QFileSystemWatcher* m_recentWatcher;
-  QList<QFileSystemWatcher*> m_watchers;
-  QHash<QFileSystemWatcher*, uint> m_usedObjects;
-  QHash<QString,QFileSystemWatcher*> m_paths;
+    QFileSystemWatcher *availableWatcher();
+    QFileSystemWatcher *m_recentWatcher;
+    QList<QFileSystemWatcher *> m_watchers;
+    QHash<QFileSystemWatcher *, uint> m_usedObjects;
+    QHash<QString, QFileSystemWatcher *> m_paths;
 };
 #else
 typedef QFileSystemWatcher KFileSystemWatcher;
@@ -102,157 +100,167 @@ typedef QFileSystemWatcher KFileSystemWatcher;
  */
 class KDirWatchPrivate : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 public:
 
-  enum entryStatus { Normal = 0, NonExistent };
-  enum entryMode { UnknownMode = 0, StatMode, DNotifyMode, INotifyMode, FAMMode, QFSWatchMode };
-  enum { NoChange=0, Changed=1, Created=2, Deleted=4 };
+    enum entryStatus { Normal = 0, NonExistent };
+    enum entryMode { UnknownMode = 0, StatMode, DNotifyMode, INotifyMode, FAMMode, QFSWatchMode };
+    enum { NoChange = 0, Changed = 1, Created = 2, Deleted = 4 };
 
+    struct Client {
+        KDirWatch *instance;
+        int count;
+        // did the instance stop watching
+        bool watchingStopped;
+        // events blocked when stopped
+        int pending;
+        KDirWatch::WatchModes m_watchModes;
+    };
 
-  struct Client {
-    KDirWatch *instance;
-    int count;
-    // did the instance stop watching
-    bool watchingStopped;
-    // events blocked when stopped
-    int pending;
-    KDirWatch::WatchModes m_watchModes;
-  };
+    class Entry
+    {
+    public:
+        // the last observed modification time
+        time_t m_ctime;
+        // the last observed link count
+        int m_nlink;
+        // last observed inode
+        ino_t m_ino;
+        entryStatus m_status;
+        entryMode m_mode;
+        bool isDir;
+        // instances interested in events
+        QList<Client *> m_clients;
+        // nonexistent entries of this directory
+        QList<Entry *> m_entries;
+        QString path;
 
-  class Entry
-  {
-  public:
-    // the last observed modification time
-    time_t m_ctime;
-    // the last observed link count
-    int m_nlink;
-    // last observed inode
-    ino_t m_ino;
-    entryStatus m_status;
-    entryMode m_mode;
-    bool isDir;
-    // instances interested in events
-    QList<Client *> m_clients;
-    // nonexistent entries of this directory
-    QList<Entry *> m_entries;
-    QString path;
+        int msecLeft, freq;
 
-    int msecLeft, freq;
-
-    QString parentDirectory() const;
-    void addClient(KDirWatch*, KDirWatch::WatchModes);
-    void removeClient(KDirWatch*);
-    int clientCount() const;
-    bool isValid() { return m_clients.count() || m_entries.count(); }
-
-    Entry* findSubEntry(const QString &path) const {
-        Q_FOREACH(Entry *sub_entry, m_entries) {
-            if (sub_entry->path == path)
-                return sub_entry;
+        QString parentDirectory() const;
+        void addClient(KDirWatch *, KDirWatch::WatchModes);
+        void removeClient(KDirWatch *);
+        int clientCount() const;
+        bool isValid()
+        {
+            return m_clients.count() || m_entries.count();
         }
-        return 0;
+
+        Entry *findSubEntry(const QString &path) const
+        {
+            Q_FOREACH (Entry *sub_entry, m_entries) {
+                if (sub_entry->path == path) {
+                    return sub_entry;
+                }
+            }
+            return 0;
+        }
+
+        bool dirty;
+        void propagate_dirty();
+
+        QList<Client *> clientsForFileOrDir(const QString &tpath, bool *isDir) const;
+        QList<Client *> inotifyClientsForFileOrDir(bool isDir) const;
+
+#if HAVE_FAM
+        FAMRequest fr;
+#endif
+
+#if HAVE_SYS_INOTIFY_H
+        int wd;
+        // Creation and Deletion of files happens infrequently, so
+        // can safely be reported as they occur.  File changes i.e. those that emity "dirty()" can
+        // happen many times per second, though, so maintain a list of files in this directory
+        // that can be emitted and flushed at the next slotRescan(...).
+        // This will be unused if the Entry is not a directory.
+        QList<QString> m_pendingFileChanges;
+#endif
+    };
+
+    typedef QMap<QString, Entry> EntryMap;
+
+    KDirWatchPrivate();
+    ~KDirWatchPrivate();
+
+    void resetList(KDirWatch *instance, bool skippedToo);
+    void useFreq(Entry *e, int newFreq);
+    void addEntry(KDirWatch *instance, const QString &_path, Entry *sub_entry,
+                  bool isDir, KDirWatch::WatchModes watchModes = KDirWatch::WatchDirOnly);
+    bool removeEntry(KDirWatch *instance, const QString &path, Entry *sub_entry);
+    void removeEntry(KDirWatch *instance, Entry *e, Entry *sub_entry);
+    bool stopEntryScan(KDirWatch *instance, Entry *e);
+    bool restartEntryScan(KDirWatch *instance, Entry *e, bool notify);
+    void stopScan(KDirWatch *instance);
+    void startScan(KDirWatch *instance, bool notify, bool skippedToo);
+
+    void removeEntries(KDirWatch *instance);
+    void statistics();
+
+    void addWatch(Entry *entry);
+    void removeWatch(Entry *entry);
+    Entry *entry(const QString &_path);
+    int scanEntry(Entry *e);
+    void emitEvent(const Entry *e, int event, const QString &fileName = QString());
+
+    // Memory management - delete when last KDirWatch gets deleted
+    void ref()
+    {
+        m_ref++;
+    }
+    bool deref()
+    {
+        return (--m_ref == 0);
     }
 
-    bool dirty;
-    void propagate_dirty();
-
-    QList<Client *> clientsForFileOrDir(const QString &tpath, bool *isDir) const;
-    QList<Client *> inotifyClientsForFileOrDir(bool isDir) const;
-
-#if HAVE_FAM
-    FAMRequest fr;
-#endif
-
-#if HAVE_SYS_INOTIFY_H
-    int wd;
-    // Creation and Deletion of files happens infrequently, so
-    // can safely be reported as they occur.  File changes i.e. those that emity "dirty()" can
-    // happen many times per second, though, so maintain a list of files in this directory
-    // that can be emitted and flushed at the next slotRescan(...).
-    // This will be unused if the Entry is not a directory.
-    QList<QString> m_pendingFileChanges;
-#endif
-  };
-
-  typedef QMap<QString, Entry> EntryMap;
-
-  KDirWatchPrivate();
-  ~KDirWatchPrivate();
-
-  void resetList(KDirWatch *instance, bool skippedToo);
-  void useFreq(Entry *e, int newFreq);
-  void addEntry(KDirWatch *instance, const QString &_path, Entry *sub_entry,
-        bool isDir, KDirWatch::WatchModes watchModes = KDirWatch::WatchDirOnly);
-  bool removeEntry(KDirWatch *instance, const QString &path, Entry *sub_entry);
-  void removeEntry(KDirWatch *instance, Entry* e, Entry* sub_entry);
-  bool stopEntryScan(KDirWatch *instance, Entry *e);
-  bool restartEntryScan(KDirWatch* instance, Entry *e, bool notify);
-  void stopScan(KDirWatch *instance);
-  void startScan(KDirWatch *instance, bool notify, bool skippedToo);
-
-  void removeEntries(KDirWatch *instance);
-  void statistics();
-
-  void addWatch(Entry *entry);
-  void removeWatch(Entry *entry);
-  Entry* entry(const QString &_path);
-  int scanEntry(Entry *e);
-  void emitEvent(const Entry* e, int event, const QString &fileName = QString());
-
-  // Memory management - delete when last KDirWatch gets deleted
-  void ref() { m_ref++; }
-  bool deref() { return ( --m_ref == 0 ); }
-
- static bool isNoisyFile(const char *filename);
+    static bool isNoisyFile(const char *filename);
 
 public Q_SLOTS:
-  void slotRescan();
-  void famEventReceived(); // for FAM
-  void inotifyEventReceived(); // for inotify
-  void slotRemoveDelayed();
-  void fswEventReceived(const QString &path);  // for QFileSystemWatcher
+    void slotRescan();
+    void famEventReceived(); // for FAM
+    void inotifyEventReceived(); // for inotify
+    void slotRemoveDelayed();
+    void fswEventReceived(const QString &path);  // for QFileSystemWatcher
 
 public:
-  QTimer timer;
-  EntryMap m_mapEntries;
+    QTimer timer;
+    EntryMap m_mapEntries;
 
-  KDirWatch::Method m_preferredMethod, m_nfsPreferredMethod;
-  int freq;
-  int statEntries;
-  int m_nfsPollInterval, m_PollInterval;
-  int m_ref;
-  bool useStat(Entry *e);
+    KDirWatch::Method m_preferredMethod, m_nfsPreferredMethod;
+    int freq;
+    int statEntries;
+    int m_nfsPollInterval, m_PollInterval;
+    int m_ref;
+    bool useStat(Entry *e);
 
-  // removeList is allowed to contain any entry at most once
-  QSet<Entry *> removeList;
-  bool delayRemove;
+    // removeList is allowed to contain any entry at most once
+    QSet<Entry *> removeList;
+    bool delayRemove;
 
-  bool rescan_all;
-  QTimer rescan_timer;
+    bool rescan_all;
+    QTimer rescan_timer;
 
 #if HAVE_FAM
-  QSocketNotifier *sn;
-  FAMConnection fc;
-  bool use_fam;
+    QSocketNotifier *sn;
+    FAMConnection fc;
+    bool use_fam;
 
-  void checkFAMEvent(FAMEvent *fe);
-  bool useFAM(Entry *e);
+    void checkFAMEvent(FAMEvent *fe);
+    bool useFAM(Entry *e);
 #endif
 
 #if HAVE_SYS_INOTIFY_H
-  QSocketNotifier *mSn;
-  bool supports_inotify;
-  int m_inotify_fd;
+    QSocketNotifier *mSn;
+    bool supports_inotify;
+    int m_inotify_fd;
 
-  bool useINotify(Entry *e);
+    bool useINotify(Entry *e);
 #endif
 #if HAVE_QFILESYSTEMWATCHER
-  KFileSystemWatcher *fsWatcher;
-  bool useQFSWatch(Entry *e);
+    KFileSystemWatcher *fsWatcher;
+    bool useQFSWatch(Entry *e);
 #endif
 
-  bool _isStopped;
+    bool _isStopped;
 };
 
 QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry);

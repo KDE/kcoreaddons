@@ -63,7 +63,6 @@ QString KFormat::formatSpelloutDuration(quint64 msecs) const
     return d->formatSpelloutDuration(msecs);
 }
 
-
 QString KFormat::formatRelativeDate(const QDate &date,
                                     QLocale::FormatType format) const
 {

@@ -24,7 +24,8 @@
 
 #include "kprocess.h"
 
-class KProcessPrivate {
+class KProcessPrivate
+{
     Q_DECLARE_PUBLIC(KProcess)
 protected:
     KProcessPrivate() :
@@ -43,6 +44,5 @@ protected:
 
     KProcess *q_ptr;
 };
-
 
 #endif

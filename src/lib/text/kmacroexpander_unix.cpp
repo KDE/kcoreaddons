@@ -22,23 +22,24 @@
 
 #include "kmacroexpander_p.h"
 
-
 #include <QtCore/QStringList>
 #include <QtCore/QStack>
 #include <QtCore/QRegExp>
 
-namespace KMacroExpander {
+namespace KMacroExpander
+{
 
-    enum Quoting { noquote, singlequote, doublequote, dollarquote, 
-                   paren, subst, group, math };
-    typedef struct {
-        Quoting current;
-        bool dquote;
-    } State;
-    typedef struct {
-        QString str;
-        int pos;
-    } Save;
+enum Quoting { noquote, singlequote, doublequote, dollarquote,
+               paren, subst, group, math
+             };
+typedef struct {
+    Quoting current;
+    bool dquote;
+} State;
+typedef struct {
+    QString str;
+    int pos;
+} Save;
 
 }
 
@@ -46,41 +47,43 @@ using namespace KMacroExpander;
 
 #pragma message("KDE5 TODO: Import these methods into Qt5")
 
-inline static bool isSpecial( QChar cUnicode )
+inline static bool isSpecial(QChar cUnicode)
 {
     static const uchar iqm[] = {
         0xff, 0xff, 0xff, 0xff, 0xdf, 0x07, 0x00, 0xd8,
         0x00, 0x00, 0x00, 0x38, 0x01, 0x00, 0x00, 0x78
     }; // 0-32 \'"$`<>|;&(){}*?#!~[]
 
-    uint c = cUnicode.unicode ();
+    uint c = cUnicode.unicode();
     return (c < sizeof(iqm) * 8) && (iqm[c / 8] & (1 << (c & 7)));
 }
 
-static QString quoteArg( const QString &arg )
+static QString quoteArg(const QString &arg)
 {
-    if (!arg.length())
+    if (!arg.length()) {
         return QString::fromLatin1("''");
+    }
     for (int i = 0; i < arg.length(); i++)
-        if (isSpecial( arg.unicode()[i] )) {
-            QChar q( QLatin1Char('\'') );
-            return QString( arg ).replace( q, QLatin1String("'\\''") ).prepend( q ).append( q );
+        if (isSpecial(arg.unicode()[i])) {
+            QChar q(QLatin1Char('\''));
+            return QString(arg).replace(q, QLatin1String("'\\''")).prepend(q).append(q);
         }
     return arg;
 }
 
-static QString joinArgs( const QStringList &args )
+static QString joinArgs(const QStringList &args)
 {
     QString ret;
     for (QStringList::ConstIterator it = args.begin(); it != args.end(); ++it) {
-        if (!ret.isEmpty())
+        if (!ret.isEmpty()) {
             ret.append(QLatin1Char(' '));
+        }
         ret.append(quoteArg(*it));
     }
     return ret;
 }
 
-bool KMacroExpanderBase::expandMacrosShellQuote( QString &str, int &pos )
+bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
 {
     int len;
     int pos2;
@@ -94,57 +97,62 @@ bool KMacroExpanderBase::expandMacrosShellQuote( QString &str, int &pos )
     while (pos < str.length()) {
         ushort cc = str.unicode()[pos].unicode();
         if (ec != 0) {
-            if (cc != ec)
+            if (cc != ec) {
                 goto nohit;
-            if (!(len = expandEscapedMacro( str, pos, rst )))
+            }
+            if (!(len = expandEscapedMacro(str, pos, rst))) {
                 goto nohit;
+            }
         } else {
-            if (!(len = expandPlainMacro( str, pos, rst )))
+            if (!(len = expandPlainMacro(str, pos, rst))) {
                 goto nohit;
+            }
         }
-            if (len < 0) {
-                pos -= len;
-                continue;
-            }
-            if (state.dquote) {
-                rsts = rst.join( QLatin1String(" ") );
-                rsts.replace( QRegExp(QLatin1String("([$`\"\\\\])")), QLatin1String("\\\\1") );
-            } else if (state.current == dollarquote) {
-                rsts = rst.join( QLatin1String(" ") );
-                rsts.replace( QRegExp(QLatin1String("(['\\\\])")), QLatin1String("\\\\1") );
-            } else if (state.current == singlequote) {
-                rsts = rst.join( QLatin1String(" ") );
-                rsts.replace( QLatin1Char('\''), QLatin1String("'\\''") );
-            } else {
-                if (rst.isEmpty()) {
-                    str.remove( pos, len );
-                    continue;
-                } else {
-                    rsts = joinArgs( rst );
-                }
-            }
-            rst.clear();
-            str.replace( pos, len, rsts );
-            pos += rsts.length();
+        if (len < 0) {
+            pos -= len;
             continue;
-      nohit:
+        }
+        if (state.dquote) {
+            rsts = rst.join(QLatin1String(" "));
+            rsts.replace(QRegExp(QLatin1String("([$`\"\\\\])")), QLatin1String("\\\\1"));
+        } else if (state.current == dollarquote) {
+            rsts = rst.join(QLatin1String(" "));
+            rsts.replace(QRegExp(QLatin1String("(['\\\\])")), QLatin1String("\\\\1"));
+        } else if (state.current == singlequote) {
+            rsts = rst.join(QLatin1String(" "));
+            rsts.replace(QLatin1Char('\''), QLatin1String("'\\''"));
+        } else {
+            if (rst.isEmpty()) {
+                str.remove(pos, len);
+                continue;
+            } else {
+                rsts = joinArgs(rst);
+            }
+        }
+        rst.clear();
+        str.replace(pos, len, rsts);
+        pos += rsts.length();
+        continue;
+    nohit:
         if (state.current == singlequote) {
-            if (cc == '\'')
+            if (cc == '\'') {
                 state = sstack.pop();
+            }
         } else if (cc == '\\') {
             // always swallow the char -> prevent anomalies due to expansion
             pos += 2;
             continue;
         } else if (state.current == dollarquote) {
-            if (cc == '\'')
+            if (cc == '\'') {
                 state = sstack.pop();
+            }
         } else if (cc == '$') {
             cc = str.unicode()[++pos].unicode();
             if (cc == '(') {
-                sstack.push( state );
+                sstack.push(state);
                 if (str.unicode()[pos + 1].unicode() == '(') {
                     Save sav = { str, pos + 2 };
-                    ostack.push( sav );
+                    ostack.push(sav);
                     state.current = math;
                     pos += 2;
                     continue;
@@ -153,21 +161,21 @@ bool KMacroExpanderBase::expandMacrosShellQuote( QString &str, int &pos )
                     state.dquote = false;
                 }
             } else if (cc == '{') {
-                sstack.push( state );
+                sstack.push(state);
                 state.current = subst;
             } else if (!state.dquote) {
                 if (cc == '\'') {
-                    sstack.push( state );
+                    sstack.push(state);
                     state.current = dollarquote;
                 } else if (cc == '"') {
-                    sstack.push( state );
+                    sstack.push(state);
                     state.current = doublequote;
                     state.dquote = true;
                 }
             }
             // always swallow the char -> prevent anomalies due to expansion
         } else if (cc == '`') {
-            str.replace( pos, 1, QLatin1String("$( " )); // add space -> avoid creating $((
+            str.replace(pos, 1, QLatin1String("$( "));   // add space -> avoid creating $((
             pos2 = pos += 3;
             for (;;) {
                 if (pos2 >= str.length()) {
@@ -175,41 +183,43 @@ bool KMacroExpanderBase::expandMacrosShellQuote( QString &str, int &pos )
                     return false;
                 }
                 cc = str.unicode()[pos2].unicode();
-                if (cc == '`')
+                if (cc == '`') {
                     break;
+                }
                 if (cc == '\\') {
                     cc = str.unicode()[++pos2].unicode();
                     if (cc == '$' || cc == '`' || cc == '\\' ||
-                        (cc == '"' && state.dquote))
-                    {
-                        str.remove( pos2 - 1, 1 );
+                            (cc == '"' && state.dquote)) {
+                        str.remove(pos2 - 1, 1);
                         continue;
                     }
                 }
                 pos2++;
             }
             str[pos2] = QLatin1Char(')');
-            sstack.push( state );
+            sstack.push(state);
             state.current = paren;
             state.dquote = false;
             continue;
         } else if (state.current == doublequote) {
-            if (cc == '"')
+            if (cc == '"') {
                 state = sstack.pop();
+            }
         } else if (cc == '\'') {
             if (!state.dquote) {
-                sstack.push( state );
+                sstack.push(state);
                 state.current = singlequote;
             }
         } else if (cc == '"') {
             if (!state.dquote) {
-                sstack.push( state );
+                sstack.push(state);
                 state.current = doublequote;
                 state.dquote = true;
             }
         } else if (state.current == subst) {
-            if (cc == '}')
+            if (cc == '}') {
                 state = sstack.pop();
+            }
         } else if (cc == ')') {
             if (state.current == math) {
                 if (str.unicode()[pos + 1].unicode() == ')') {
@@ -223,23 +233,25 @@ bool KMacroExpanderBase::expandMacrosShellQuote( QString &str, int &pos )
                     ostack.pop();
                     state.current = paren;
                     state.dquote = false;
-                    sstack.push( state );
+                    sstack.push(state);
                 }
                 continue;
-            } else if (state.current == paren)
+            } else if (state.current == paren) {
                 state = sstack.pop();
-            else
+            } else {
                 break;
+            }
         } else if (cc == '}') {
-            if (state.current == KMacroExpander::group)
+            if (state.current == KMacroExpander::group) {
                 state = sstack.pop();
-            else
+            } else {
                 break;
+            }
         } else if (cc == '(') {
-            sstack.push( state );
+            sstack.push(state);
             state.current = paren;
         } else if (cc == '{') {
-            sstack.push( state );
+            sstack.push(state);
             state.current = KMacroExpander::group;
         }
         pos++;

@@ -32,8 +32,8 @@ class KAutoSaveFilePrivate
 {
 public:
     KAutoSaveFilePrivate()
-            : lock(0),
-              managedFileNameChanged(false)
+        : lock(0),
+          managedFileNameChanged(false)
     {}
 
     QString tempFileName();
@@ -45,15 +45,15 @@ public:
 
 const int KAutoSaveFilePrivate::padding = 8;
 
-static QStringList findAllStales(const QString& appName)
+static QStringList findAllStales(const QString &appName)
 {
     const QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
     QStringList files;
 
-    Q_FOREACH(const QString& dir, dirs) {
+    Q_FOREACH (const QString &dir, dirs) {
         QDir appDir(dir + QString::fromLatin1("/stalefiles/") + appName);
         //qDebug() << "Looking in" << appDir.absolutePath();
-        Q_FOREACH(const QString& file, appDir.entryList(QDir::Files)) {
+        Q_FOREACH (const QString &file, appDir.entryList(QDir::Files)) {
             files << (appDir.absolutePath() + QLatin1Char('/') + file);
         }
     }
@@ -66,7 +66,7 @@ QString KAutoSaveFilePrivate::tempFileName()
 
     // Note: we drop any query string and user/pass info
     const QString protocol(managedFile.scheme());
-    QString path(managedFile.adjusted(QUrl::RemoveFilename|QUrl::StripTrailingSlash).path());
+    QString path(managedFile.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
     QString name(managedFile.fileName());
 
     // Remove any part of the path to the right if it is longer than the max file size and
@@ -84,15 +84,15 @@ QString KAutoSaveFilePrivate::tempFileName()
 }
 
 KAutoSaveFile::KAutoSaveFile(const QUrl &filename, QObject *parent)
-        : QFile(parent),
-          d(new KAutoSaveFilePrivate)
+    : QFile(parent),
+      d(new KAutoSaveFilePrivate)
 {
     setManagedFile(filename);
 }
 
 KAutoSaveFile::KAutoSaveFile(QObject *parent)
-        : QFile(parent),
-          d(new KAutoSaveFilePrivate)
+    : QFile(parent),
+      d(new KAutoSaveFilePrivate)
 {
 
 }
@@ -121,7 +121,7 @@ void KAutoSaveFile::releaseLock()
 {
     if (d->lock && d->lock->isLocked()) {
         delete d->lock;
-	d->lock = NULL;
+        d->lock = NULL;
         if (!fileName().isEmpty()) {
             remove();
         }
@@ -138,8 +138,9 @@ bool KAutoSaveFile::open(OpenMode openmode)
     if (d->managedFileNameChanged) {
         QString staleFilesDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
                                 QString::fromLatin1("/stalefiles/") + QCoreApplication::instance()->applicationName();
-        if (!QDir().mkpath(staleFilesDir))
+        if (!QDir().mkpath(staleFilesDir)) {
             return false;
+        }
         tempFile = staleFilesDir + QChar::fromLatin1('/') + d->tempFileName();
     } else {
         tempFile = fileName();
@@ -176,12 +177,13 @@ QList<KAutoSaveFile *> KAutoSaveFile::staleFiles(const QUrl &filename, const QSt
     const QStringList files = findAllStales(appName);
 
     QList<KAutoSaveFile *> list;
-    KAutoSaveFile * asFile;
+    KAutoSaveFile *asFile;
 
     // contruct a KAutoSaveFile for each stale file
-    Q_FOREACH(const QString &file, files) {
-        if (file.endsWith(QLatin1String(".lock")))
+    Q_FOREACH (const QString &file, files) {
+        if (file.endsWith(QLatin1String(".lock"))) {
             continue;
+        }
         // sets managedFile
         asFile = new KAutoSaveFile(filename);
         asFile->setFileName(file);
@@ -207,9 +209,10 @@ QList<KAutoSaveFile *> KAutoSaveFile::allStaleFiles(const QString &applicationNa
     QList<KAutoSaveFile *> list;
 
     // contruct a KAutoSaveFile for each stale file
-    Q_FOREACH(QString file, files) { // krazy:exclude=foreach (no const& because modified below)
-        if (file.endsWith(QLatin1String(".lock")))
+    Q_FOREACH (QString file, files) { // krazy:exclude=foreach (no const& because modified below)
+        if (file.endsWith(QLatin1String(".lock"))) {
             continue;
+        }
         const QString sep = file.right(3);
         file.chop(KAutoSaveFilePrivate::padding);
 
@@ -221,7 +224,7 @@ QList<KAutoSaveFile *> KAutoSaveFile::allStaleFiles(const QString &applicationNa
         name.setPath(QUrl::fromPercentEncoding(encodedPath));
 
         // sets managedFile
-        KAutoSaveFile* asFile = new KAutoSaveFile(name);
+        KAutoSaveFile *asFile = new KAutoSaveFile(name);
         asFile->setFileName(file);
         // flags the name, so it isn't regenerated
         asFile->d->managedFileNameChanged = false;

@@ -1,4 +1,3 @@
-/* kate: tab-indents off; replace-tabs on; tab-width 4; remove-trailing-space on; encoding utf-8;*/
 /*
   This file is part of the KDE libraries
   Copyright 1999 Waldo Bastian <bastian@kde.org>
@@ -33,7 +32,7 @@
 namespace KBackup
 {
 
-bool backupFile( const QString& qFilename, const QString& backupDir )
+bool backupFile(const QString &qFilename, const QString &backupDir)
 {
     // get backup type from config, by default use "simple"
     // get extension from config, by default use "~"
@@ -41,29 +40,29 @@ bool backupFile( const QString& qFilename, const QString& backupDir )
 #pragma message("KDE5 TODO: Remove KConfig correctly")
 #if 0
     KConfigGroup g(KSharedConfig::openConfig(), "Backups"); // look in the Backups section
-    QString type = g.readEntry( "Type", "simple" );
-    QString extension = g.readEntry( "Extension", "~" );
-    QString message = g.readEntry( "Message", "Automated KDE Commit" );
-    int maxnum = g.readEntry( "MaxBackups", 10 );
-    if ( type.toLower() == QLatin1String("numbered") ) {
-        return( numberedBackupFile( qFilename, backupDir, extension, maxnum ) );
-    } else if ( type.toLower() == QLatin1String("rcs") ) {
-        return( rcsBackupFile( qFilename, backupDir, message ) );
+    QString type = g.readEntry("Type", "simple");
+    QString extension = g.readEntry("Extension", "~");
+    QString message = g.readEntry("Message", "Automated KDE Commit");
+    int maxnum = g.readEntry("MaxBackups", 10);
+    if (type.toLower() == QLatin1String("numbered")) {
+        return (numberedBackupFile(qFilename, backupDir, extension, maxnum));
+    } else if (type.toLower() == QLatin1String("rcs")) {
+        return (rcsBackupFile(qFilename, backupDir, message));
     } else {
-        return( simpleBackupFile( qFilename, backupDir, extension ) );
+        return (simpleBackupFile(qFilename, backupDir, extension));
     }
 #endif
-    return( simpleBackupFile( qFilename, backupDir, QLatin1String("~") ) );
+    return (simpleBackupFile(qFilename, backupDir, QLatin1String("~")));
 }
 
-bool simpleBackupFile( const QString& qFilename,
-                                  const QString& backupDir,
-                                  const QString& backupExtension )
+bool simpleBackupFile(const QString &qFilename,
+                      const QString &backupDir,
+                      const QString &backupExtension)
 {
     QString backupFileName = qFilename + backupExtension;
 
-    if ( !backupDir.isEmpty() ) {
-        QFileInfo fileInfo ( qFilename );
+    if (!backupDir.isEmpty()) {
+        QFileInfo fileInfo(qFilename);
         backupFileName = backupDir + QLatin1Char('/') + fileInfo.fileName() + backupExtension;
     }
 
@@ -72,26 +71,25 @@ bool simpleBackupFile( const QString& qFilename,
     return QFile::copy(qFilename, backupFileName);
 }
 
-bool rcsBackupFile( const QString& qFilename,
-                               const QString& backupDir,
-                               const QString& backupMessage )
+bool rcsBackupFile(const QString &qFilename,
+                   const QString &backupDir,
+                   const QString &backupMessage)
 {
-    QFileInfo fileInfo ( qFilename );
+    QFileInfo fileInfo(qFilename);
 
     QString qBackupFilename;
-    if ( backupDir.isEmpty() ) {
+    if (backupDir.isEmpty()) {
         qBackupFilename = qFilename;
     } else {
         qBackupFilename = backupDir + fileInfo.fileName();
     }
-    qBackupFilename += QString::fromLatin1( ",v" );
+    qBackupFilename += QString::fromLatin1(",v");
 
     // If backupDir is specified, copy qFilename to the
     // backupDir and perform the commit there, unlinking
     // backupDir/qFilename when finished.
-    if ( !backupDir.isEmpty() )
-    {
-        if ( !QFile::copy(qFilename, backupDir + fileInfo.fileName()) ) {
+    if (!backupDir.isEmpty()) {
+        if (!QFile::copy(qFilename, backupDir + fileInfo.fileName())) {
             return false;
         }
         fileInfo.setFile(backupDir + QLatin1Char('/') + fileInfo.fileName());
@@ -100,55 +98,63 @@ bool rcsBackupFile( const QString& qFilename,
     const QString cipath = QStandardPaths::findExecutable(QString::fromLatin1("ci"));
     const QString copath = QStandardPaths::findExecutable(QString::fromLatin1("co"));
     const QString rcspath = QStandardPaths::findExecutable(QString::fromLatin1("rcs"));
-    if ( cipath.isEmpty() || copath.isEmpty() || rcspath.isEmpty() )
+    if (cipath.isEmpty() || copath.isEmpty() || rcspath.isEmpty()) {
         return false;
+    }
 
     // Check in the file unlocked with 'ci'
     QProcess ci;
-    if ( !backupDir.isEmpty() )
-        ci.setWorkingDirectory( backupDir );
-    ci.start( cipath, QStringList() << QString::fromLatin1("-u") << fileInfo.filePath() );
-    if ( !ci.waitForStarted() )
+    if (!backupDir.isEmpty()) {
+        ci.setWorkingDirectory(backupDir);
+    }
+    ci.start(cipath, QStringList() << QString::fromLatin1("-u") << fileInfo.filePath());
+    if (!ci.waitForStarted()) {
         return false;
-    ci.write( backupMessage.toLatin1() );
+    }
+    ci.write(backupMessage.toLatin1());
     ci.write(".");
     ci.closeWriteChannel();
-    if( !ci.waitForFinished() )
+    if (!ci.waitForFinished()) {
         return false;
+    }
 
     // Use 'rcs' to unset strict locking
     QProcess rcs;
-    if ( !backupDir.isEmpty() )
-        rcs.setWorkingDirectory( backupDir );
-    rcs.start( rcspath, QStringList() << QString::fromLatin1("-U") << qBackupFilename );
-    if ( !rcs.waitForFinished() )
+    if (!backupDir.isEmpty()) {
+        rcs.setWorkingDirectory(backupDir);
+    }
+    rcs.start(rcspath, QStringList() << QString::fromLatin1("-U") << qBackupFilename);
+    if (!rcs.waitForFinished()) {
         return false;
+    }
 
     // Use 'co' to checkout the current revision and restore permissions
     QProcess co;
-    if ( !backupDir.isEmpty() )
-        co.setWorkingDirectory( backupDir );
-    co.start( copath, QStringList() << qBackupFilename );
-    if ( !co.waitForFinished() )
+    if (!backupDir.isEmpty()) {
+        co.setWorkingDirectory(backupDir);
+    }
+    co.start(copath, QStringList() << qBackupFilename);
+    if (!co.waitForFinished()) {
         return false;
+    }
 
-    if ( !backupDir.isEmpty() ) {
-        return QFile::remove( fileInfo.filePath() );
+    if (!backupDir.isEmpty()) {
+        return QFile::remove(fileInfo.filePath());
     } else {
         return true;
     }
 }
 
-bool numberedBackupFile( const QString& qFilename,
-                                    const QString& backupDir,
-                                    const QString& backupExtension,
-                                    const uint maxBackups )
+bool numberedBackupFile(const QString &qFilename,
+                        const QString &backupDir,
+                        const QString &backupExtension,
+                        const uint maxBackups)
 {
-    QFileInfo fileInfo ( qFilename );
+    QFileInfo fileInfo(qFilename);
 
     // The backup file name template.
     QString sTemplate;
-    if ( backupDir.isEmpty() ) {
+    if (backupDir.isEmpty()) {
         sTemplate = qFilename + QLatin1String(".%1") + backupExtension;
     } else {
         sTemplate = backupDir + QLatin1Char('/') + fileInfo.fileName() + QLatin1String(".%1") + backupExtension;
@@ -157,27 +163,27 @@ bool numberedBackupFile( const QString& qFilename,
     // First, search backupDir for numbered backup files to remove.
     // Remove all with number 'maxBackups' and greater.
     QDir d = backupDir.isEmpty() ? fileInfo.dir() : backupDir;
-    d.setFilter( QDir::Files | QDir::Hidden | QDir::NoSymLinks );
-    const QStringList nameFilters = QStringList( fileInfo.fileName() + QLatin1String(".*") + backupExtension );
-    d.setNameFilters( nameFilters );
-    d.setSorting( QDir::Name );
+    d.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
+    const QStringList nameFilters = QStringList(fileInfo.fileName() + QLatin1String(".*") + backupExtension);
+    d.setNameFilters(nameFilters);
+    d.setSorting(QDir::Name);
 
     uint maxBackupFound = 0;
-    Q_FOREACH ( const QFileInfo &fi, d.entryInfoList() ) {
-        if ( fi.fileName().endsWith( backupExtension ) ) {
+    Q_FOREACH (const QFileInfo &fi, d.entryInfoList()) {
+        if (fi.fileName().endsWith(backupExtension)) {
             // sTemp holds the file name, without the ending backupExtension
             QString sTemp = fi.fileName();
-            sTemp.truncate( fi.fileName().length()-backupExtension.length() );
+            sTemp.truncate(fi.fileName().length() - backupExtension.length());
             // compute the backup number
-            int idex = sTemp.lastIndexOf( QLatin1Char('.') );
-            if ( idex > 0 ) {
+            int idex = sTemp.lastIndexOf(QLatin1Char('.'));
+            if (idex > 0) {
                 bool ok;
-                uint num = sTemp.mid( idex+1 ).toUInt( &ok );
-                if ( ok ) {
-                    if ( num >= maxBackups ) {
-                        QFile::remove( fi.filePath() );
+                uint num = sTemp.mid(idex + 1).toUInt(&ok);
+                if (ok) {
+                    if (num >= maxBackups) {
+                        QFile::remove(fi.filePath());
                     } else {
-                        maxBackupFound = qMax( maxBackupFound, num );
+                        maxBackupFound = qMax(maxBackupFound, num);
                     }
                 }
             }
@@ -185,11 +191,11 @@ bool numberedBackupFile( const QString& qFilename,
     }
 
     // Next, rename max-1 to max, max-2 to max-1, etc.
-    QString to=sTemplate.arg( maxBackupFound+1 );
-    for ( int i=maxBackupFound; i>0; i-- ) {
-        QString from = sTemplate.arg( i );
+    QString to = sTemplate.arg(maxBackupFound + 1);
+    for (int i = maxBackupFound; i > 0; i--) {
+        QString from = sTemplate.arg(i);
 //        qDebug() << "KBackup renaming " << from << " to " << to;
-        QFile::rename( from, to );
+        QFile::rename(from, to);
         to = from;
     }
 
@@ -198,5 +204,4 @@ bool numberedBackupFile( const QString& qFilename,
     return QFile::copy(qFilename, sTemplate.arg(1));
 }
 
-  
 }

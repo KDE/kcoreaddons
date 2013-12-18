@@ -32,20 +32,21 @@ class KMacroExpanderBasePrivate;
 
 /**
  * \class KMacroExpanderBase kmacroexpander.h <KMacroExpanderBase>
- * 
+ *
  * Abstract base class for the worker classes behind the KMacroExpander namespace
  * and the KCharMacroExpander and KWordMacroExpander classes.
  *
  * @author Oswald Buddenhagen <ossi@kde.org>
  */
-class KCOREADDONS_EXPORT KMacroExpanderBase {
+class KCOREADDONS_EXPORT KMacroExpanderBase
+{
 
 public:
     /**
      * Constructor.
      * @param c escape char indicating start of macros, or QChar::null for none
      */
-    explicit KMacroExpanderBase( QChar c = QLatin1Char('%') );
+    explicit KMacroExpanderBase(QChar c = QLatin1Char('%'));
 
     /**
      * Destructor.
@@ -57,7 +58,7 @@ public:
      *
      * @param str the string in which macros are expanded in-place
      */
-    void expandMacros( QString &str );
+    void expandMacros(QString &str);
 
     // TODO: This documentation is relevant for end-users. Where to put it?
     /**
@@ -79,7 +80,7 @@ public:
      * The rest of the shell (incl. bash) syntax is simply ignored,
      * as it is not expected to cause problems.
      *
-     * Note that bash contains a bug which makes macro expansion within 
+     * Note that bash contains a bug which makes macro expansion within
      * double quoted substitutions (<tt>"${VAR:-%macro}"</tt>) inherently
      * insecure.
      *
@@ -107,19 +108,19 @@ public:
      *  or brace outside any shell construct is @em not an error (unlike in
      *  the function below), but still prematurely terminates processing.
      */
-    bool expandMacrosShellQuote( QString &str, int &pos );
+    bool expandMacrosShellQuote(QString &str, int &pos);
 
     /**
      * Same as above, but always starts at position 0, and unmatched closing
      * parens and braces are treated as errors.
      */
-    bool expandMacrosShellQuote( QString &str );
+    bool expandMacrosShellQuote(QString &str);
 
     /**
      * Set the macro escape character.
      * @param c escape char indicating start of macros, or QChar::null if none
      */
-    void setEscapeChar( QChar c );
+    void setEscapeChar(QChar c);
 
     /**
      * Obtain the macro escape character.
@@ -141,7 +142,7 @@ protected:
      *  than zero, subtract this value from @p pos (to skip a macro, i.e.,
      *  substitute it with itself). If zero, no macro starts at @p pos.
      */
-    virtual int expandPlainMacro( const QString &str, int pos, QStringList &ret );
+    virtual int expandPlainMacro(const QString &str, int pos, QStringList &ret);
 
     /**
      * This function is called every time the escape char is found if it is
@@ -158,15 +159,15 @@ protected:
      *  substitute it with itself). If zero, scanning continues as if no
      *  escape char was encountered at all.
      */
-    virtual int expandEscapedMacro( const QString &str, int pos, QStringList &ret );
+    virtual int expandEscapedMacro(const QString &str, int pos, QStringList &ret);
 
 private:
-    KMacroExpanderBasePrivate * const d;
+    KMacroExpanderBasePrivate *const d;
 };
 
 /**
  * \class KWordMacroExpander kmacroexpander.h <KMacroExpanderBase>
- * 
+ *
  * Abstract base class for simple word macro substitutors. Use this instead of
  * the functions in the KMacroExpander namespace if speculatively pre-filling
  * the substitution map would be too expensive.
@@ -214,20 +215,21 @@ private:
  *
  * @author Oswald Buddenhagen <ossi@kde.org>
  */
-class KCOREADDONS_EXPORT KWordMacroExpander : public KMacroExpanderBase {
+class KCOREADDONS_EXPORT KWordMacroExpander : public KMacroExpanderBase
+{
 
 public:
     /**
      * Constructor.
      * @param c escape char indicating start of macros, or QChar::null for none
      */
-    explicit KWordMacroExpander( QChar c = QLatin1Char('%') ) : KMacroExpanderBase( c ) {}
+    explicit KWordMacroExpander(QChar c = QLatin1Char('%')) : KMacroExpanderBase(c) {}
 
 protected:
     /** \internal Not to be called or reimplemented. */
-    virtual int expandPlainMacro( const QString &str, int pos, QStringList &ret );
+    virtual int expandPlainMacro(const QString &str, int pos, QStringList &ret);
     /** \internal Not to be called or reimplemented. */
-    virtual int expandEscapedMacro( const QString &str, int pos, QStringList &ret );
+    virtual int expandEscapedMacro(const QString &str, int pos, QStringList &ret);
 
     /**
      * Return substitution list @p ret for string macro @p str.
@@ -236,12 +238,12 @@ protected:
      *  when expandMacro is entered.
      * @return @c true iff @p chr was a recognized macro name
      */
-    virtual bool expandMacro( const QString &str, QStringList &ret ) = 0;
+    virtual bool expandMacro(const QString &str, QStringList &ret) = 0;
 };
 
 /**
  * \class KCharMacroExpander kmacroexpander.h <KMacroExpanderBase>
- * 
+ *
  * Abstract base class for single char macro substitutors. Use this instead of
  * the functions in the KMacroExpander namespace if speculatively pre-filling
  * the substitution map would be too expensive.
@@ -250,20 +252,21 @@ protected:
  *
  * @author Oswald Buddenhagen <ossi@kde.org>
  */
-class KCOREADDONS_EXPORT KCharMacroExpander : public KMacroExpanderBase {
+class KCOREADDONS_EXPORT KCharMacroExpander : public KMacroExpanderBase
+{
 
 public:
     /**
      * Constructor.
      * @param c escape char indicating start of macros, or QChar::null for none
      */
-    explicit KCharMacroExpander( QChar c = QLatin1Char('%') ) : KMacroExpanderBase( c ) {}
+    explicit KCharMacroExpander(QChar c = QLatin1Char('%')) : KMacroExpanderBase(c) {}
 
 protected:
     /** \internal Not to be called or reimplemented. */
-    virtual int expandPlainMacro( const QString &str, int pos, QStringList &ret );
+    virtual int expandPlainMacro(const QString &str, int pos, QStringList &ret);
     /** \internal Not to be called or reimplemented. */
-    virtual int expandEscapedMacro( const QString &str, int pos, QStringList &ret );
+    virtual int expandEscapedMacro(const QString &str, int pos, QStringList &ret);
 
     /**
      * Return substitution list @p ret for single-character macro @p chr.
@@ -272,137 +275,138 @@ protected:
      *  when expandMacro is entered.
      * @return @c true iff @p chr was a recognized macro name
      */
-    virtual bool expandMacro( QChar chr, QStringList &ret ) = 0;
+    virtual bool expandMacro(QChar chr, QStringList &ret) = 0;
 };
 
 /**
  * A group of functions providing macro expansion (substitution) in strings,
  * optionally with quoting appropriate for shell execution.
  */
-namespace KMacroExpander {
-    /**
-     * Perform safe macro expansion (substitution) on a string.
-     * The escape char must be quoted with itself to obtain its literal
-     * representation in the resulting string.
-     *
-     * @param str The string to expand
-     * @param map map with substitutions
-     * @param c escape char indicating start of macro, or QChar::null if none
-     * @return the string with all valid macros expanded
-     *
-     * \code
-     * // Code example
-     * QHash<QChar,QString> map;
-     * map.insert('u', "/tmp/myfile.txt");
-     * map.insert('n', "My File");
-     * QString s = "%% Title: %u:%n";
-     * s = KMacroExpander::expandMacros(s, map);
-     * // s is now "% Title: /tmp/myfile.txt:My File";
-     * \endcode
-     */
-    KCOREADDONS_EXPORT QString expandMacros( const QString &str, const QHash<QChar,QString> &map, QChar c = QLatin1Char('%') );
+namespace KMacroExpander
+{
+/**
+ * Perform safe macro expansion (substitution) on a string.
+ * The escape char must be quoted with itself to obtain its literal
+ * representation in the resulting string.
+ *
+ * @param str The string to expand
+ * @param map map with substitutions
+ * @param c escape char indicating start of macro, or QChar::null if none
+ * @return the string with all valid macros expanded
+ *
+ * \code
+ * // Code example
+ * QHash<QChar,QString> map;
+ * map.insert('u', "/tmp/myfile.txt");
+ * map.insert('n', "My File");
+ * QString s = "%% Title: %u:%n";
+ * s = KMacroExpander::expandMacros(s, map);
+ * // s is now "% Title: /tmp/myfile.txt:My File";
+ * \endcode
+ */
+KCOREADDONS_EXPORT QString expandMacros(const QString &str, const QHash<QChar, QString> &map, QChar c = QLatin1Char('%'));
 
-    /**
-     * Perform safe macro expansion (substitution) on a string for use
-     * in shell commands.
-     * The escape char must be quoted with itself to obtain its literal
-     * representation in the resulting string.
-     *
-     * @param str The string to expand
-     * @param map map with substitutions
-     * @param c escape char indicating start of macro, or QChar::null if none
-     * @return the string with all valid macros expanded, or a null string
-     *  if a shell syntax error was detected in the command
-     *
-     * \code
-     * // Code example
-     * QHash<QChar,QString> map;
-     * map.insert('u', "/tmp/myfile.txt");
-     * map.insert('n', "My File");
-     * QString s = "kedit --caption %n %u";
-     * s = KMacroExpander::expandMacrosShellQuote(s, map);
-     * // s is now "kedit --caption 'My File' '/tmp/myfile.txt'";
-     * system(QFile::encodeName(s));
-     * \endcode
-     */
-    KCOREADDONS_EXPORT QString expandMacrosShellQuote( const QString &str, const QHash<QChar,QString> &map,
-                                                   QChar c = QLatin1Char('%') );
+/**
+ * Perform safe macro expansion (substitution) on a string for use
+ * in shell commands.
+ * The escape char must be quoted with itself to obtain its literal
+ * representation in the resulting string.
+ *
+ * @param str The string to expand
+ * @param map map with substitutions
+ * @param c escape char indicating start of macro, or QChar::null if none
+ * @return the string with all valid macros expanded, or a null string
+ *  if a shell syntax error was detected in the command
+ *
+ * \code
+ * // Code example
+ * QHash<QChar,QString> map;
+ * map.insert('u', "/tmp/myfile.txt");
+ * map.insert('n', "My File");
+ * QString s = "kedit --caption %n %u";
+ * s = KMacroExpander::expandMacrosShellQuote(s, map);
+ * // s is now "kedit --caption 'My File' '/tmp/myfile.txt'";
+ * system(QFile::encodeName(s));
+ * \endcode
+ */
+KCOREADDONS_EXPORT QString expandMacrosShellQuote(const QString &str, const QHash<QChar, QString> &map,
+        QChar c = QLatin1Char('%'));
 
-    /**
-     * Perform safe macro expansion (substitution) on a string.
-     * The escape char must be quoted with itself to obtain its literal
-     * representation in the resulting string.
-     * Macro names can consist of chars in the range [A-Za-z0-9_];
-     * use braces to delimit macros from following words starting
-     * with these chars, or to use other chars for macro names.
-     *
-     * @param str The string to expand
-     * @param map map with substitutions
-     * @param c escape char indicating start of macro, or QChar::null if none
-     * @return the string with all valid macros expanded
-     *
-     * \code
-     * // Code example
-     * QHash<QString,QString> map;
-     * map.insert("url", "/tmp/myfile.txt");
-     * map.insert("name", "My File");
-     * QString s = "Title: %{url}-%name";
-     * s = KMacroExpander::expandMacros(s, map);
-     * // s is now "Title: /tmp/myfile.txt-My File";
-     * \endcode
-     */
-    KCOREADDONS_EXPORT QString expandMacros( const QString &str, const QHash<QString,QString> &map,
-                                         QChar c = QLatin1Char('%') );
+/**
+ * Perform safe macro expansion (substitution) on a string.
+ * The escape char must be quoted with itself to obtain its literal
+ * representation in the resulting string.
+ * Macro names can consist of chars in the range [A-Za-z0-9_];
+ * use braces to delimit macros from following words starting
+ * with these chars, or to use other chars for macro names.
+ *
+ * @param str The string to expand
+ * @param map map with substitutions
+ * @param c escape char indicating start of macro, or QChar::null if none
+ * @return the string with all valid macros expanded
+ *
+ * \code
+ * // Code example
+ * QHash<QString,QString> map;
+ * map.insert("url", "/tmp/myfile.txt");
+ * map.insert("name", "My File");
+ * QString s = "Title: %{url}-%name";
+ * s = KMacroExpander::expandMacros(s, map);
+ * // s is now "Title: /tmp/myfile.txt-My File";
+ * \endcode
+ */
+KCOREADDONS_EXPORT QString expandMacros(const QString &str, const QHash<QString, QString> &map,
+                                        QChar c = QLatin1Char('%'));
 
-    /**
-     * Perform safe macro expansion (substitution) on a string for use
-     * in shell commands. See KMacroExpanderBase::expandMacrosShellQuote()
-     * for the exact semantics.
-     * The escape char must be quoted with itself to obtain its literal
-     * representation in the resulting string.
-     * Macro names can consist of chars in the range [A-Za-z0-9_];
-     * use braces to delimit macros from following words starting
-     * with these chars, or to use other chars for macro names.
-     *
-     * @param str The string to expand
-     * @param map map with substitutions
-     * @param c escape char indicating start of macro, or QChar::null if none
-     * @return the string with all valid macros expanded, or a null string
-     *  if a shell syntax error was detected in the command
-     *
-     * \code
-     * // Code example
-     * QHash<QString,QString> map;
-     * map.insert("url", "/tmp/myfile.txt");
-     * map.insert("name", "My File");
-     * QString s = "kedit --caption %name %{url}";
-     * s = KMacroExpander::expandMacrosShellQuote(s, map);
-     * // s is now "kedit --caption 'My File' '/tmp/myfile.txt'";
-     * system(QFile::encodeName(s));
-     * \endcode
-     */
-    KCOREADDONS_EXPORT QString expandMacrosShellQuote( const QString &str, const QHash<QString,QString> &map,
-                                                   QChar c = QLatin1Char('%') );
+/**
+ * Perform safe macro expansion (substitution) on a string for use
+ * in shell commands. See KMacroExpanderBase::expandMacrosShellQuote()
+ * for the exact semantics.
+ * The escape char must be quoted with itself to obtain its literal
+ * representation in the resulting string.
+ * Macro names can consist of chars in the range [A-Za-z0-9_];
+ * use braces to delimit macros from following words starting
+ * with these chars, or to use other chars for macro names.
+ *
+ * @param str The string to expand
+ * @param map map with substitutions
+ * @param c escape char indicating start of macro, or QChar::null if none
+ * @return the string with all valid macros expanded, or a null string
+ *  if a shell syntax error was detected in the command
+ *
+ * \code
+ * // Code example
+ * QHash<QString,QString> map;
+ * map.insert("url", "/tmp/myfile.txt");
+ * map.insert("name", "My File");
+ * QString s = "kedit --caption %name %{url}";
+ * s = KMacroExpander::expandMacrosShellQuote(s, map);
+ * // s is now "kedit --caption 'My File' '/tmp/myfile.txt'";
+ * system(QFile::encodeName(s));
+ * \endcode
+ */
+KCOREADDONS_EXPORT QString expandMacrosShellQuote(const QString &str, const QHash<QString, QString> &map,
+        QChar c = QLatin1Char('%'));
 
-    /**
-     * Same as above, except that the macros expand to string lists that
-     * are simply join(" ")ed together.
-     */
-    KCOREADDONS_EXPORT QString expandMacros( const QString &str, const QHash<QChar,QStringList> &map,
-                                         QChar c = QLatin1Char('%') );
-    KCOREADDONS_EXPORT QString expandMacros( const QString &str, const QHash<QString,QStringList> &map,
-                                         QChar c = QLatin1Char('%') );
+/**
+ * Same as above, except that the macros expand to string lists that
+ * are simply join(" ")ed together.
+ */
+KCOREADDONS_EXPORT QString expandMacros(const QString &str, const QHash<QChar, QStringList> &map,
+                                        QChar c = QLatin1Char('%'));
+KCOREADDONS_EXPORT QString expandMacros(const QString &str, const QHash<QString, QStringList> &map,
+                                        QChar c = QLatin1Char('%'));
 
-    /**
-     * Same as above, except that the macros expand to string lists.
-     * If the macro appears inside a quoted string, the list is simply
-     * join(" ")ed together; otherwise every element expands to a separate
-     * quoted string.
-     */
-    KCOREADDONS_EXPORT QString expandMacrosShellQuote( const QString &str, const QHash<QChar,QStringList> &map,
-                                                   QChar c = QLatin1Char('%') );
-    KCOREADDONS_EXPORT QString expandMacrosShellQuote( const QString &str, const QHash<QString,QStringList> &map, 
-                                                   QChar c = QLatin1Char('%') );
+/**
+ * Same as above, except that the macros expand to string lists.
+ * If the macro appears inside a quoted string, the list is simply
+ * join(" ")ed together; otherwise every element expands to a separate
+ * quoted string.
+ */
+KCOREADDONS_EXPORT QString expandMacrosShellQuote(const QString &str, const QHash<QChar, QStringList> &map,
+        QChar c = QLatin1Char('%'));
+KCOREADDONS_EXPORT QString expandMacrosShellQuote(const QString &str, const QHash<QString, QStringList> &map,
+        QChar c = QLatin1Char('%'));
 }
 
 #endif /* KMACROEXPANDER_H */

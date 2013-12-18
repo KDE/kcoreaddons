@@ -30,7 +30,7 @@ class KJob;
 /**
  * The base class for all KJob UI delegate.
  *
- * A UI delegate is responsible for the events of a 
+ * A UI delegate is responsible for the events of a
  * job and provides a UI for them (an error message
  * box or warning etc.).
  *
@@ -57,7 +57,7 @@ protected:
      *
      * @return true if the job we're correctly attached to the job, false otherwise.
      */
-    virtual bool setJob( KJob *job );
+    virtual bool setJob(KJob *job);
 
 protected:
     /**
@@ -91,7 +91,7 @@ public:
      * @param enable enable or disable automatic error handling
      * @see isAutoErrorHandlingEnabled()
      */
-    void setAutoErrorHandlingEnabled( bool enable );
+    void setAutoErrorHandlingEnabled(bool enable);
 
     /**
      * Returns whether automatic error handling is enabled or disabled.
@@ -113,7 +113,7 @@ public:
      * @param enable enable or disable automatic warning handling
      * @see isAutoWarningHandlingEnabled()
      */
-    void setAutoWarningHandlingEnabled( bool enable );
+    void setAutoWarningHandlingEnabled(bool enable);
 
     /**
      * Returns whether automatic warning handling is enabled or disabled.
@@ -129,10 +129,10 @@ protected Q_SLOTS:
 private:
     void connectJob(KJob *job);
 
-    Q_PRIVATE_SLOT(d, void _k_result(KJob*))
+    Q_PRIVATE_SLOT(d, void _k_result(KJob *))
 
     class Private;
-    Private * const d;
+    Private *const d;
 };
 
 #endif // KJOBUIDELEGATE_H

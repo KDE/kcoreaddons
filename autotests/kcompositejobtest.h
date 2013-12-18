@@ -30,7 +30,7 @@ class TestJob : public KJob
     Q_OBJECT
 
 public:
-    explicit TestJob(QObject* parent = 0);
+    explicit TestJob(QObject *parent = 0);
 
     /// Takes 1 second to finish
     virtual void start();
@@ -44,13 +44,13 @@ class CompositeJob : public KCompositeJob
     Q_OBJECT
 
 public:
-    explicit CompositeJob(QObject* parent = 0) : KCompositeJob(parent) {}
+    explicit CompositeJob(QObject *parent = 0) : KCompositeJob(parent) {}
 
     virtual void start();
-    virtual bool addSubjob(KJob* job);
+    virtual bool addSubjob(KJob *job);
 
 protected Q_SLOTS:
-    virtual void slotResult(KJob* job);
+    virtual void slotResult(KJob *job);
 };
 
 class KCompositeJobTest : public QObject

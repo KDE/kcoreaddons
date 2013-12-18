@@ -22,17 +22,17 @@
 #include <QMimeData>
 #include <kurlmimedata.h>
 
-QTEST_MAIN( KUrlMimeDataTest )
+QTEST_MAIN(KUrlMimeDataTest)
 
 void KUrlMimeDataTest::testURLList()
 {
-    QMimeData* mimeData = new QMimeData();
+    QMimeData *mimeData = new QMimeData();
     QVERIFY(!mimeData->hasUrls());
 
     QList<QUrl> urls;
-    urls.append( QUrl( QLatin1String( "http://www.kde.org" ) ) );
-    urls.append( QUrl( QLatin1String( "http://wstephenson:secret@example.com/path" ) ) );
-    urls.append( QUrl( QLatin1String( "file:///home/dfaure/konqtests/Mat%C3%A9riel" ) ) );
+    urls.append(QUrl(QLatin1String("http://www.kde.org")));
+    urls.append(QUrl(QLatin1String("http://wstephenson:secret@example.com/path")));
+    urls.append(QUrl(QLatin1String("file:///home/dfaure/konqtests/Mat%C3%A9riel")));
     QMap<QString, QString> metaData;
     metaData[QLatin1String("key")] = QLatin1String("value");
     metaData[QLatin1String("key2")] = QLatin1String("value2");
@@ -45,64 +45,65 @@ void KUrlMimeDataTest::testURLList()
 
     QMap<QString, QString> decodedMetaData;
     QList<QUrl> decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData, KUrlMimeData::PreferKdeUrls, &decodedMetaData);
-    QVERIFY( !decodedURLs.isEmpty() );
+    QVERIFY(!decodedURLs.isEmpty());
     QList<QUrl> expectedUrls = urls;
     expectedUrls[1] = QUrl(QLatin1String("http://wstephenson:secret@example.com/path")); // password kept, unlike in KDE4, but that's okay, it's not displayed
-    QCOMPARE( expectedUrls, decodedURLs );
+    QCOMPARE(expectedUrls, decodedURLs);
 
     const QList<QUrl> qurls = mimeData->urls();
     QCOMPARE(qurls.count(), urls.count());
-    for (int i = 0; i < qurls.count(); ++i )
+    for (int i = 0; i < qurls.count(); ++i) {
         QCOMPARE(qurls[i], decodedURLs[i]);
+    }
 
-    QVERIFY( !decodedMetaData.isEmpty() );
-    QCOMPARE( decodedMetaData[QLatin1String("key")], QString::fromLatin1( "value" ) );
-    QCOMPARE( decodedMetaData[QLatin1String("key2")], QString::fromLatin1( "value2" ) );
+    QVERIFY(!decodedMetaData.isEmpty());
+    QCOMPARE(decodedMetaData[QLatin1String("key")], QString::fromLatin1("value"));
+    QCOMPARE(decodedMetaData[QLatin1String("key2")], QString::fromLatin1("value2"));
 
     delete mimeData;
 }
 
 void KUrlMimeDataTest::testOneURL()
 {
-    QUrl oneURL( QLatin1String("file:///tmp") );
+    QUrl oneURL(QLatin1String("file:///tmp"));
     QList<QUrl> oneEltList;
     oneEltList.append(oneURL);
-    QMimeData* mimeData = new QMimeData();
+    QMimeData *mimeData = new QMimeData();
 
     KUrlMimeData::setUrls(QList<QUrl>(), oneEltList, mimeData);
     QVERIFY(mimeData->hasUrls());
 
     QMap<QString, QString> decodedMetaData;
     QList<QUrl> decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData, KUrlMimeData::PreferKdeUrls, &decodedMetaData);
-    QVERIFY( !decodedURLs.isEmpty() );
-    QCOMPARE( decodedURLs.count(), 1 );
-    QCOMPARE( decodedURLs[0], oneURL );
-    QVERIFY( decodedMetaData.isEmpty() );
+    QVERIFY(!decodedURLs.isEmpty());
+    QCOMPARE(decodedURLs.count(), 1);
+    QCOMPARE(decodedURLs[0], oneURL);
+    QVERIFY(decodedMetaData.isEmpty());
     delete mimeData;
 }
 
 void KUrlMimeDataTest::testFromQUrl()
 {
     QList<QUrl> qurls;
-    qurls.append( QUrl( QLatin1String("http://www.kde.org") ) );
-    qurls.append( QUrl( QLatin1String("file:///home/dfaure/konqtests/Mat%C3%A9riel") ) );
-    QMimeData* mimeData = new QMimeData();
+    qurls.append(QUrl(QLatin1String("http://www.kde.org")));
+    qurls.append(QUrl(QLatin1String("file:///home/dfaure/konqtests/Mat%C3%A9riel")));
+    QMimeData *mimeData = new QMimeData();
     KUrlMimeData::setUrls(QList<QUrl>(), qurls, mimeData);
     QVERIFY(mimeData->hasUrls());
 
     QMap<QString, QString> decodedMetaData;
     QList<QUrl> decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData, KUrlMimeData::PreferKdeUrls, &decodedMetaData);
-    QVERIFY( !decodedURLs.isEmpty() );
-    QCOMPARE( decodedURLs.count(), 2 );
-    QCOMPARE( decodedURLs[0], qurls[0] );
-    QCOMPARE( decodedURLs[1], qurls[1] );
-    QVERIFY( decodedMetaData.isEmpty() );
+    QVERIFY(!decodedURLs.isEmpty());
+    QCOMPARE(decodedURLs.count(), 2);
+    QCOMPARE(decodedURLs[0], qurls[0]);
+    QCOMPARE(decodedURLs[1], qurls[1]);
+    QVERIFY(decodedMetaData.isEmpty());
     delete mimeData;
 }
 
 void KUrlMimeDataTest::testMostLocalUrlList()
 {
-    QMimeData* mimeData = new QMimeData();
+    QMimeData *mimeData = new QMimeData();
     QList<QUrl> urls;
     urls.append(QUrl(QLatin1String("desktop:/foo")));
     urls.append(QUrl(QLatin1String("desktop:/bar")));
@@ -120,17 +121,18 @@ void KUrlMimeDataTest::testMostLocalUrlList()
     // urlsFromMimeData decodes the real "kde" urls by default
     QList<QUrl> decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData);
     QVERIFY(!decodedURLs.isEmpty());
-    QCOMPARE(decodedURLs, urls );
+    QCOMPARE(decodedURLs, urls);
 
     // urlsFromMimeData can also be told to decode the "most local" urls
     decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData, KUrlMimeData::PreferLocalUrls);
     QVERIFY(!decodedURLs.isEmpty());
-    QCOMPARE(decodedURLs, localUrls );
+    QCOMPARE(decodedURLs, localUrls);
 
     // QMimeData decodes the "most local" urls
     const QList<QUrl> qurls = mimeData->urls();
     QCOMPARE(qurls.count(), localUrls.count());
-    for (int i = 0; i < qurls.count(); ++i )
+    for (int i = 0; i < qurls.count(); ++i) {
         QCOMPARE(qurls[i], static_cast<QUrl>(localUrls[i]));
+    }
 
 }

@@ -33,7 +33,7 @@ public:
     KCompositeJobPrivate();
     ~KCompositeJobPrivate();
 
-    QList<KJob*> subjobs;
+    QList<KJob *> subjobs;
 
     Q_DECLARE_PUBLIC(KCompositeJob)
 };

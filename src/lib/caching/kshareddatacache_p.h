@@ -90,7 +90,8 @@
  * proper locking and unlocking depending on what the platform supports at
  * runtime and compile-time.
  */
-class KSDCLock {
+class KSDCLock
+{
 public:
     virtual ~KSDCLock()
     {
@@ -170,7 +171,7 @@ private:
 #else
         // Sleep for shortest possible time (nanosleep should round-up).
         struct timespec wait_time = { 0 /* sec */, 100 /* ns */ };
-        ::nanosleep(&wait_time, static_cast<struct timespec*>(0));
+        ::nanosleep(&wait_time, static_cast<struct timespec *>(0));
 #endif
     }
 
@@ -196,8 +197,7 @@ public:
         // the mutex.
         if (::sysconf(_SC_THREAD_PROCESS_SHARED) >= 200112L && pthread_mutexattr_init(&mutexAttr) == 0) {
             if (pthread_mutexattr_setpshared(&mutexAttr, PTHREAD_PROCESS_SHARED) == 0 &&
-                pthread_mutex_init(&m_mutex, &mutexAttr) == 0)
-            {
+                    pthread_mutex_init(&m_mutex, &mutexAttr) == 0) {
                 processSharingSupported = true;
             }
             pthread_mutexattr_destroy(&mutexAttr);
@@ -330,10 +330,8 @@ enum SharedLockId {
 
 // This type is a union of all possible lock types, with a SharedLockId used
 // to choose which one is actually in use.
-struct SharedLock
-{
-    union
-    {
+struct SharedLock {
+    union {
 #if defined(KSDC_THREAD_PROCESS_SHARED_SUPPORTED)
         pthread_mutex_t mutex;
 #endif
@@ -380,8 +378,7 @@ static SharedLockId findBestSharedLock()
 #ifdef KSDC_TIMEOUTS_SUPPORTED
             tempLock = QSharedPointer<KSDCLock>(new pthreadTimedLock(tempMutex));
 #endif
-        }
-        else {
+        } else {
             tempLock = QSharedPointer<KSDCLock>(new pthreadLock(tempMutex));
         }
 
@@ -390,7 +387,7 @@ static SharedLockId findBestSharedLock()
 #endif
 
     // Our first choice is pthread_mutex_t for compatibility.
-    if(timeoutsSupported && pthreadsProcessShared) {
+    if (timeoutsSupported && pthreadsProcessShared) {
         return LOCKTYPE_MUTEX;
     }
 
@@ -400,8 +397,7 @@ static SharedLockId findBestSharedLock()
         QSharedPointer<KSDCLock> tempLock(0);
         if (timeoutsSupported) {
             tempLock = QSharedPointer<KSDCLock>(new semaphoreTimedLock(tempSemaphore));
-        }
-        else {
+        } else {
             tempLock = QSharedPointer<KSDCLock>(new semaphoreLock(tempSemaphore));
         }
 
@@ -409,13 +405,11 @@ static SharedLockId findBestSharedLock()
     }
 #endif
 
-    if(timeoutsSupported && semaphoresProcessShared) {
+    if (timeoutsSupported && semaphoresProcessShared) {
         return LOCKTYPE_SEMAPHORE;
-    }
-    else if(pthreadsProcessShared) {
+    } else if (pthreadsProcessShared) {
         return LOCKTYPE_MUTEX;
-    }
-    else if(semaphoresProcessShared) {
+    } else if (semaphoresProcessShared) {
         return LOCKTYPE_SEMAPHORE;
     }
 
@@ -425,7 +419,7 @@ static SharedLockId findBestSharedLock()
 
 static KSDCLock *createLockFromId(SharedLockId id, SharedLock &lock)
 {
-    switch(id) {
+    switch (id) {
 #ifdef KSDC_THREAD_PROCESS_SHARED_SUPPORTED
     case LOCKTYPE_MUTEX:
 #ifdef KSDC_TIMEOUTS_SUPPORTED
@@ -435,7 +429,7 @@ static KSDCLock *createLockFromId(SharedLockId id, SharedLock &lock)
 #endif
         return new pthreadLock(lock.mutex);
 
-    break;
+        break;
 #endif
 
 #ifdef KSDC_SEMAPHORES_SUPPORTED
@@ -447,12 +441,12 @@ static KSDCLock *createLockFromId(SharedLockId id, SharedLock &lock)
 #endif
         return new semaphoreLock(lock.semaphore);
 
-    break;
+        break;
 #endif
 
     case LOCKTYPE_SPINLOCK:
         return new simpleSpinLock(lock.spinlock);
-    break;
+        break;
 
     default:
         qCritical() << "Creating shell of a lock!";
@@ -470,9 +464,9 @@ static bool ensureFileAllocated(int fd, size_t fileSize)
 
     if (result < 0) {
         qCritical() << "The operating system is unable to promise"
-                           << fileSize
-                           << "bytes for mapped cache, "
-                              "abandoning the cache for crash-safety.";
+                    << fileSize
+                    << "bytes for mapped cache, "
+                    "abandoning the cache for crash-safety.";
         return false;
     }
 
@@ -483,8 +477,8 @@ static bool ensureFileAllocated(int fd, size_t fileSize)
 #warning "This system does not seem to support posix_fallocate, which is needed to ensure KSharedDataCache's underlying files are fully committed to disk to avoid crashes with low disk space."
 #endif
     qWarning() << "This system misses support for posix_fallocate()"
-                            " -- ensure this partition has room for at least"
-                         << fileSize << "bytes.";
+               " -- ensure this partition has room for at least"
+               << fileSize << "bytes.";
 
     // TODO: It's possible to emulate the functionality, but doing so
     // overwrites the data in the file so we don't do this. If you were to add

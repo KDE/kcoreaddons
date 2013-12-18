@@ -39,18 +39,21 @@ QString KFormatPrivate::formatByteSize(double size, int precision,
                                        KFormat::BinaryUnitDialect dialect, KFormat::BinarySizeUnits units) const
 {
     // Current KDE default is IECBinaryDialect
-    if (dialect <= KFormat::DefaultBinaryDialect || dialect > KFormat::LastBinaryDialect)
+    if (dialect <= KFormat::DefaultBinaryDialect || dialect > KFormat::LastBinaryDialect) {
         dialect = KFormat::IECBinaryDialect;
+    }
 
     // Current KDE default is to auto-adjust so the size falls in the range 0 to 1000/1024
-    if (units < KFormat::DefaultBinaryUnits || units > KFormat::UnitLastUnit)
+    if (units < KFormat::DefaultBinaryUnits || units > KFormat::UnitLastUnit) {
         units = KFormat::DefaultBinaryUnits;
+    }
 
     int unit = 0; // Selects what unit to use
     double multiplier = 1024.0;
 
-    if (dialect == KFormat::MetricBinaryDialect)
+    if (dialect == KFormat::MetricBinaryDialect) {
         multiplier = 1000.0;
+    }
 
     // If a specific unit conversion is given, use it directly.  Otherwise
     // search until the result is in [0, multiplier] (or out of our range).
@@ -62,13 +65,15 @@ QString KFormatPrivate::formatByteSize(double size, int precision,
     } else {
         // A specific unit is in use
         unit = static_cast<int>(units);
-        if (unit > 0)
+        if (unit > 0) {
             size /= pow(multiplier, unit);
+        }
     }
 
     // Bytes, no rounding
-    if (unit == 0)
-       precision = 0;
+    if (unit == 0) {
+        precision = 0;
+    }
 
     QString numString = m_locale.toString(size, 'f', precision);
 
@@ -193,59 +198,59 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
     if ((options & KFormat::InitialDuration) == KFormat::InitialDuration) {
 
         if ((options & KFormat::FoldHours) == KFormat::FoldHours
-            && (options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
+                && (options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
             //: @item:intext Duration format minutes, seconds and milliseconds
             return tr("%1m%2.%3s").arg(hours * 60 + minutes, 1, 10, QLatin1Char('0'))
-                                  .arg(seconds, 2, 10, QLatin1Char('0'))
-                                  .arg(ms, 3, 10, QLatin1Char('0'));
+                   .arg(seconds, 2, 10, QLatin1Char('0'))
+                   .arg(ms, 3, 10, QLatin1Char('0'));
         } else if ((options & KFormat::FoldHours) == KFormat::FoldHours) {
             //: @item:intext Duration format minutes and seconds
             return tr("%1m%2s").arg(hours * 60 + minutes, 1, 10, QLatin1Char('0'))
-                               .arg(roundSeconds, 2, 10, QLatin1Char('0'));
+                   .arg(roundSeconds, 2, 10, QLatin1Char('0'));
         } else if ((options & KFormat::HideSeconds) == KFormat::HideSeconds) {
             //: @item:intext Duration format hours and minutes
             return tr("%1h%2m").arg(hours, 1, 10, QLatin1Char('0'))
-                               .arg(roundMinutes, 2, 10, QLatin1Char('0'));
+                   .arg(roundMinutes, 2, 10, QLatin1Char('0'));
         } else if ((options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
             //: @item:intext Duration format hours, minutes, seconds, milliseconds
             return tr("%1h%2m%3.%4s").arg(hours, 1, 10, QLatin1Char('0'))
-                                     .arg(minutes, 2, 10, QLatin1Char('0'))
-                                     .arg(seconds, 2, 10, QLatin1Char('0'))
-                                     .arg(ms, 3, 10, QLatin1Char('0'));
+                   .arg(minutes, 2, 10, QLatin1Char('0'))
+                   .arg(seconds, 2, 10, QLatin1Char('0'))
+                   .arg(ms, 3, 10, QLatin1Char('0'));
         } else { // Default
             //: @item:intext Duration format hours, minutes, seconds
             return tr("%1h%2m%3s").arg(hours, 1, 10, QLatin1Char('0'))
-                                  .arg(minutes, 2, 10, QLatin1Char('0'))
-                                  .arg(roundSeconds, 2, 10, QLatin1Char('0'));
+                   .arg(minutes, 2, 10, QLatin1Char('0'))
+                   .arg(roundSeconds, 2, 10, QLatin1Char('0'));
         }
 
     } else {
 
         if ((options & KFormat::FoldHours) == KFormat::FoldHours
-            && (options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
+                && (options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
             //: @item:intext Duration format minutes, seconds and milliseconds
             return tr("%1:%2.%3").arg(hours * 60 + minutes, 1, 10, QLatin1Char('0'))
-                                 .arg(seconds, 2, 10, QLatin1Char('0'))
-                                 .arg(ms, 3, 10, QLatin1Char('0'));
+                   .arg(seconds, 2, 10, QLatin1Char('0'))
+                   .arg(ms, 3, 10, QLatin1Char('0'));
         } else if ((options & KFormat::FoldHours) == KFormat::FoldHours) {
             //: @item:intext Duration format minutes and seconds
             return tr("%1:%2").arg(hours * 60 + minutes, 1, 10, QLatin1Char('0'))
-                              .arg(roundSeconds, 2, 10, QLatin1Char('0'));
+                   .arg(roundSeconds, 2, 10, QLatin1Char('0'));
         } else if ((options & KFormat::HideSeconds) == KFormat::HideSeconds) {
             //: @item:intext Duration format hours and minutes
             return tr("%1:%2").arg(hours, 1, 10, QLatin1Char('0'))
-                              .arg(roundMinutes, 2, 10, QLatin1Char('0'));
+                   .arg(roundMinutes, 2, 10, QLatin1Char('0'));
         } else if ((options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
             //: @item:intext Duration format hours, minutes, seconds, milliseconds
             return tr("%1:%2:%3.%4").arg(hours, 1, 10, QLatin1Char('0'))
-                                    .arg(minutes, 2, 10, QLatin1Char('0'))
-                                    .arg(seconds, 2, 10, QLatin1Char('0'))
-                                    .arg(ms, 3, 10, QLatin1Char('0'));
+                   .arg(minutes, 2, 10, QLatin1Char('0'))
+                   .arg(seconds, 2, 10, QLatin1Char('0'))
+                   .arg(ms, 3, 10, QLatin1Char('0'));
         } else { // Default
             //: @item:intext Duration format hours, minutes, seconds
             return tr("%1:%2:%3").arg(hours, 1, 10, QLatin1Char('0'))
-                                 .arg(minutes, 2, 10, QLatin1Char('0'))
-                                 .arg(roundSeconds, 2, 10, QLatin1Char('0'));
+                   .arg(minutes, 2, 10, QLatin1Char('0'))
+                   .arg(roundSeconds, 2, 10, QLatin1Char('0'));
         }
 
     }
@@ -314,28 +319,29 @@ QString KFormatPrivate::formatSpelloutDuration(quint64 msecs) const
     int seconds = qRound(ms / 1000.0);
 
     // Handle correctly problematic case #1 (look at KFormatTest::prettyFormatDuration())
-    if (seconds == 60)
+    if (seconds == 60) {
         return formatSpelloutDuration(msecs - ms + MSecsInMinute);
+    }
 
     if (days && hours) {
         /*: @item:intext days and hours. This uses the previous item:intext messages.
             If this does not fit the grammar of your language please contact the i18n team to solve the problem */
         return tr("%1 and %2").arg(formatSingleDuration(Days, days))
-                              .arg(formatSingleDuration(Hours, hours));
+               .arg(formatSingleDuration(Hours, hours));
     } else if (days) {
         return formatSingleDuration(Days, days);
     } else if (hours && minutes) {
         /*: @item:intext hours and minutes. This uses the previous item:intext messages.
             If this does not fit the grammar of your language please contact the i18n team to solve the problem */
         return tr("%1 and %2").arg(formatSingleDuration(Hours, hours))
-                              .arg(formatSingleDuration(Minutes, minutes));
+               .arg(formatSingleDuration(Minutes, minutes));
     } else if (hours) {
         return formatSingleDuration(Hours, hours);
     } else if (minutes && seconds) {
         /*: @item:intext minutes and seconds. This uses the previous item:intext messages.
             If this does not fit the grammar of your language please contact the i18n team to solve the problem */
         return tr("%1 and %2").arg(formatSingleDuration(Minutes, minutes))
-                              .arg(formatSingleDuration(Seconds, seconds));
+               .arg(formatSingleDuration(Seconds, seconds));
     } else if (minutes) {
         return formatSingleDuration(Minutes, minutes);
     } else {
@@ -346,8 +352,9 @@ QString KFormatPrivate::formatSpelloutDuration(quint64 msecs) const
 QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatType format) const
 {
     int daysTo = QDate::currentDate().daysTo(date);
-    if (daysTo > 7 || daysTo < -7)
+    if (daysTo > 7 || daysTo < -7) {
         return m_locale.toString(date, format);
+    }
 
     switch (daysTo) {
     case 1:
@@ -361,11 +368,14 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
     if (daysTo < -1)
         /*: a day of the week, eg "Monday" (but translated). Refers to the most recent such day that
             has already happened. */
+    {
         return tr("Last %1").arg(m_locale.dayName(date.dayOfWeek(), format));
-    else if (daysTo > 1)
+    } else if (daysTo > 1)
         /*: a day of the week, eg "Monday" (but translated). Refers to the soonest such day that
             has not already happened. */
+    {
         return tr("Next %1").arg(m_locale.dayName(date.dayOfWeek(), format));
+    }
 
     return m_locale.toString(date, format);
 }
@@ -373,11 +383,12 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
 QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const
 {
     int daysTo = QDate::currentDate().daysTo(dateTime.date());
-    if (daysTo > 7 || daysTo < -7)
+    if (daysTo > 7 || daysTo < -7) {
         return m_locale.toString(dateTime, format);
+    }
 
     /*: relative datetime with %1 result of formatReleativeDate() and %2 the formatted time
         If this does not fit the grammar of your language please contact the i18n team to solve the problem */
     return tr("%1, %2").arg(formatRelativeDate(dateTime.date(), format))
-                       .arg(m_locale.toString(dateTime.time(), format));
+           .arg(m_locale.toString(dateTime.time(), format));
 }

@@ -24,23 +24,26 @@
 
 #include <QtCore/QDir>
 
-namespace KShell {
-
-QString homeDir( const QString &user )
+namespace KShell
 {
-    if (user.isEmpty())
+
+QString homeDir(const QString &user)
+{
+    if (user.isEmpty()) {
         return QDir::homePath();
+    }
     return KUser(user).homeDir();
 }
 
 }
 
-QString KShell::joinArgs( const QStringList &args )
+QString KShell::joinArgs(const QStringList &args)
 {
     QString ret;
     for (QStringList::ConstIterator it = args.begin(); it != args.end(); ++it) {
-        if (!ret.isEmpty())
+        if (!ret.isEmpty()) {
             ret.append(QLatin1Char(' '));
+        }
         ret.append(quoteArg(*it));
     }
     return ret;
@@ -52,15 +55,17 @@ QString KShell::joinArgs( const QStringList &args )
 # define ESCAPE '\\'
 #endif
 
-QString KShell::tildeExpand( const QString &fname )
+QString KShell::tildeExpand(const QString &fname)
 {
     if (fname.length() && fname[0] == QLatin1Char('~')) {
-        int pos = fname.indexOf( QLatin1Char('/') );
-        if (pos < 0)
-            return homeDir( fname.mid(1) );
-        QString ret = homeDir( fname.mid(1, pos-1) );
-        if (!ret.isNull())
+        int pos = fname.indexOf(QLatin1Char('/'));
+        if (pos < 0) {
+            return homeDir(fname.mid(1));
+        }
+        QString ret = homeDir(fname.mid(1, pos - 1));
+        if (!ret.isNull()) {
             ret += fname.mid(pos);
+        }
         return ret;
     } else if (fname.length() > 1 && fname[0] == QLatin1Char(ESCAPE) && fname[1] == QLatin1Char('~')) {
         return fname.mid(1);

@@ -30,104 +30,104 @@
 
 class KUser::Private : public QSharedData
 {
-    public:
-        PUSER_INFO_11 userInfo;
-        PSID sid;
+public:
+    PUSER_INFO_11 userInfo;
+    PSID sid;
 
-        Private() : userInfo(0), sid(0) {}
+    Private() : userInfo(0), sid(0) {}
 
-        Private(PUSER_INFO_11 userInfo_, PSID sid_ = 0) : userInfo(userInfo_) {}
+    Private(PUSER_INFO_11 userInfo_, PSID sid_ = 0) : userInfo(userInfo_) {}
 
-        Private(const QString &name, PSID sid_ = 0) : userInfo(0), sid(NULL)
-        {
-            LPBYTE servername;
-            NET_API_STATUS status = NetGetAnyDCName(0, 0, &servername);
-            if (status != NERR_Success)
-            {
-                servername = NULL;
-            }
+    Private(const QString &name, PSID sid_ = 0) : userInfo(0), sid(NULL)
+    {
+        LPBYTE servername;
+        NET_API_STATUS status = NetGetAnyDCName(0, 0, &servername);
+        if (status != NERR_Success) {
+            servername = NULL;
+        }
 
-            if (NetUserGetInfo((LPCWSTR) servername, (LPCWSTR) name.utf16(), 11, (LPBYTE *) &userInfo) != NERR_Success) {
+        if (NetUserGetInfo((LPCWSTR) servername, (LPCWSTR) name.utf16(), 11, (LPBYTE *) &userInfo) != NERR_Success) {
+            goto error;
+        }
+        if (servername) {
+            NetApiBufferFree(servername);
+            servername = 0;
+        }
+
+        if (!sid_) {
+            DWORD size = 0;
+            SID_NAME_USE nameuse;
+            DWORD cchReferencedDomainName = 0;
+            WCHAR *referencedDomainName = NULL;
+
+            // the following line definitely fails:
+            // both the sizes for sid and for referencedDomainName are Null
+            // the needed sizes are set in size and cchReferencedDomainName
+            LookupAccountNameW(NULL, (LPCWSTR) name.utf16(), sid, &size, referencedDomainName, &cchReferencedDomainName, &nameuse);
+            sid = (PSID) new SID[size + 1];
+            referencedDomainName = new WCHAR[cchReferencedDomainName + 1];
+            if (!LookupAccountNameW(NULL, (LPCWSTR) name.utf16(), sid, &size, referencedDomainName, &cchReferencedDomainName, &nameuse)) {
+                delete[] referencedDomainName;
                 goto error;
             }
-            if (servername)
-            {
-                NetApiBufferFree(servername);
-                servername = 0;
+
+            // if you want to see both the DomainName and the sid of the user
+            // uncomment the following lines
+            /*                LPWSTR sidstring;
+                            ConvertSidToStringSidW(sid, &sidstring);
+                            qDebug() << QString("\\\\") + QString::fromUtf16(reinterpret_cast<ushort*>(referencedDomainName)) + \
+                                        "\\" + name + "(" + QString::fromUtf16(reinterpret_cast<ushort*>(sidstring)) + ")";
+
+                            LocalFree(sidstring);*/
+            delete[] referencedDomainName;
+        } else {
+            if (!IsValidSid(sid_)) {
+                goto error;
             }
 
-            if (!sid_) {
-                DWORD size = 0;
-                SID_NAME_USE nameuse;
-                DWORD cchReferencedDomainName = 0;
-                WCHAR* referencedDomainName = NULL;
-
-                // the following line definitely fails:
-                // both the sizes for sid and for referencedDomainName are Null
-                // the needed sizes are set in size and cchReferencedDomainName
-                LookupAccountNameW(NULL, (LPCWSTR) name.utf16(), sid, &size, referencedDomainName, &cchReferencedDomainName, &nameuse);
-                sid = (PSID) new SID[size + 1];
-                referencedDomainName = new WCHAR[cchReferencedDomainName + 1];
-                if (!LookupAccountNameW(NULL, (LPCWSTR) name.utf16(), sid, &size, referencedDomainName, &cchReferencedDomainName, &nameuse)) {
-                    delete[] referencedDomainName;
-                    goto error;
-                }
-
-                // if you want to see both the DomainName and the sid of the user
-                // uncomment the following lines
-/*                LPWSTR sidstring;
-                ConvertSidToStringSidW(sid, &sidstring);
-                qDebug() << QString("\\\\") + QString::fromUtf16(reinterpret_cast<ushort*>(referencedDomainName)) + \
-                            "\\" + name + "(" + QString::fromUtf16(reinterpret_cast<ushort*>(sidstring)) + ")";
-
-                LocalFree(sidstring);*/
-                delete[] referencedDomainName;
-            }
-            else {
-                if (!IsValidSid(sid_))
-                    goto error;
-
-                DWORD sidlength = GetLengthSid(sid_);
-                sid = (PSID) new BYTE[sidlength];
-                if (!CopySid(sidlength, sid, sid_))
-                    goto error;
-            }
-
-            return;
-
-          error:
-            delete[] sid;
-            sid = 0;
-            if (userInfo) {
-                NetApiBufferFree(userInfo);
-                userInfo = 0;
-            }
-            if (servername)
-            {
-                NetApiBufferFree(servername);
-                servername = 0;
+            DWORD sidlength = GetLengthSid(sid_);
+            sid = (PSID) new BYTE[sidlength];
+            if (!CopySid(sidlength, sid, sid_)) {
+                goto error;
             }
         }
 
-        ~Private()
-        {
-            if (userInfo)
-                NetApiBufferFree(userInfo);
+        return;
 
-            delete[] sid;
+    error:
+        delete[] sid;
+        sid = 0;
+        if (userInfo) {
+            NetApiBufferFree(userInfo);
+            userInfo = 0;
         }
+        if (servername) {
+            NetApiBufferFree(servername);
+            servername = 0;
+        }
+    }
+
+    ~Private()
+    {
+        if (userInfo) {
+            NetApiBufferFree(userInfo);
+        }
+
+        delete[] sid;
+    }
 };
 
 KUser::KUser(UIDMode mode)
-        : d(0)
+    : d(0)
 {
     Q_UNUSED(mode)
 
     DWORD bufferLen = UNLEN + 1;
     ushort buffer[UNLEN + 1];
 
-    if (GetUserNameW((LPWSTR) buffer, &bufferLen))
+    if (GetUserNameW((LPWSTR) buffer, &bufferLen)) {
         d = new Private(QString::fromUtf16(buffer));
+    }
 }
 
 KUser::KUser(K_UID uid)
@@ -137,8 +137,9 @@ KUser::KUser(K_UID uid)
     ushort buffer[UNLEN + 1];
     SID_NAME_USE eUse;
 
-    if (LookupAccountSidW(NULL, uid, (LPWSTR) buffer, &bufferLen, NULL, NULL, &eUse))
+    if (LookupAccountSidW(NULL, uid, (LPWSTR) buffer, &bufferLen, NULL, NULL, &eUse)) {
         d = new Private(QString::fromUtf16(buffer), uid);
+    }
 }
 
 KUser::KUser(const QString &name)
@@ -147,7 +148,7 @@ KUser::KUser(const QString &name)
 }
 
 KUser::KUser(const char *name)
-    :d(new Private(QString::fromLocal8Bit(name)))
+    : d(new Private(QString::fromLocal8Bit(name)))
 {
 }
 
@@ -164,8 +165,9 @@ KUser &KUser::operator=(const KUser &user)
 
 bool KUser::operator==(const KUser &user) const
 {
-    if (!isValid() || !user.isValid())
+    if (!isValid() || !user.isValid()) {
         return false;
+    }
     return EqualSid(d->sid, user.d->sid);
 }
 
@@ -198,7 +200,7 @@ QString KUser::fullName() const
 
 QString KUser::homeDir() const
 {
-	return QDir::fromNativeSeparators(QString::fromLocal8Bit(qgetenv("USERPROFILE")));
+    return QDir::fromNativeSeparators(QString::fromLocal8Bit(qgetenv("USERPROFILE")));
 }
 
 QString KUser::faceIconPath() const
@@ -258,8 +260,9 @@ K_UID KUser::uid() const
 
 QVariant KUser::property(UserProperty which) const
 {
-    if (which == FullName)
+    if (which == FullName) {
         return QVariant(d->userInfo ? QString::fromUtf16((ushort *) d->userInfo->usri11_full_name) : QString());
+    }
 
     return QVariant();
 }
@@ -277,7 +280,7 @@ QList<KUser> KUser::allUsers()
     KUser tmp;
 
     do {
-        nStatus = NetUserEnum(NULL, 11, 0, (LPBYTE*) &pUser, 1, &dwEntriesRead, &dwTotalEntries, &dwResumeHandle);
+        nStatus = NetUserEnum(NULL, 11, 0, (LPBYTE *) &pUser, 1, &dwEntriesRead, &dwTotalEntries, &dwResumeHandle);
 
         if ((nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) && dwEntriesRead > 0) {
             tmp.d = new Private(pUser);
@@ -297,7 +300,7 @@ QStringList KUser::allUserNames()
     DWORD dwEntriesRead = 0;
     DWORD dwTotalEntries = 0;
 
-    nStatus = NetUserEnum(NULL, 0, 0, (LPBYTE*) &pUsers, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, NULL);
+    nStatus = NetUserEnum(NULL, 0, 0, (LPBYTE *) &pUsers, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, NULL);
 
     if (nStatus == NERR_Success) {
         for (DWORD i = 0; i < dwEntriesRead; ++i) {
@@ -318,22 +321,22 @@ KUser::~KUser()
 
 class KUserGroup::Private : public QSharedData
 {
-    public:
-        PGROUP_INFO_0 groupInfo;
+public:
+    PGROUP_INFO_0 groupInfo;
 
-        Private() : groupInfo(NULL) {}
-        Private(PGROUP_INFO_0 groupInfo_) : groupInfo(groupInfo_) {}
-        Private(const QString &Name) : groupInfo(NULL)
-        {
-            NetGroupGetInfo(NULL, (PCWSTR) Name.utf16(), 0, (PBYTE *) &groupInfo);
-        }
+    Private() : groupInfo(NULL) {}
+    Private(PGROUP_INFO_0 groupInfo_) : groupInfo(groupInfo_) {}
+    Private(const QString &Name) : groupInfo(NULL)
+    {
+        NetGroupGetInfo(NULL, (PCWSTR) Name.utf16(), 0, (PBYTE *) &groupInfo);
+    }
 
-        ~Private()
-        {
-            if (groupInfo) {
-                NetApiBufferFree(groupInfo);
-            }
+    ~Private()
+    {
+        if (groupInfo) {
+            NetApiBufferFree(groupInfo);
         }
+    }
 };
 
 KUserGroup::KUserGroup(const QString &_name)
@@ -351,7 +354,7 @@ KUserGroup::KUserGroup(const KUserGroup &group)
 {
 }
 
-KUserGroup& KUserGroup::operator =(const KUserGroup &group)
+KUserGroup &KUserGroup::operator =(const KUserGroup &group)
 {
     d = group.d;
     return *this;
@@ -377,8 +380,9 @@ bool KUserGroup::isValid() const
 
 QString KUserGroup::name() const
 {
-    if(d && d->groupInfo)
+    if (d && d->groupInfo) {
         return QString::fromUtf16((ushort *) d->groupInfo->grpi0_name);
+    }
     return QString();
 }
 
@@ -386,7 +390,7 @@ QList<KUser> KUserGroup::users() const
 {
     QList<KUser> Result;
 
-    Q_FOREACH(const QString &user, userNames()) {
+    Q_FOREACH (const QString &user, userNames()) {
         Result.append(KUser(user));
     }
 
@@ -426,15 +430,15 @@ QList<KUserGroup> KUserGroup::allGroups()
     QList<KUserGroup> result;
 
     NET_API_STATUS nStatus;
-    PGROUP_INFO_0 pGroup=NULL;
-    DWORD dwEntriesRead=0;
-    DWORD dwTotalEntries=0;
-    DWORD dwResumeHandle=0;
+    PGROUP_INFO_0 pGroup = NULL;
+    DWORD dwEntriesRead = 0;
+    DWORD dwTotalEntries = 0;
+    DWORD dwResumeHandle = 0;
 
     KUserGroup tmp("");
 
     do {
-        nStatus = NetGroupEnum(NULL, 0, (LPBYTE*) &pGroup, 1, &dwEntriesRead, &dwTotalEntries, (PDWORD_PTR)&dwResumeHandle);
+        nStatus = NetGroupEnum(NULL, 0, (LPBYTE *) &pGroup, 1, &dwEntriesRead, &dwTotalEntries, (PDWORD_PTR)&dwResumeHandle);
 
         if ((nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) && dwEntriesRead > 0) {
             tmp.d = new Private(pGroup);
@@ -450,11 +454,11 @@ QStringList KUserGroup::allGroupNames()
     QStringList result;
 
     NET_API_STATUS nStatus;
-    PGROUP_INFO_0 pGroups=NULL;
-    DWORD dwEntriesRead=0;
-    DWORD dwTotalEntries=0;
+    PGROUP_INFO_0 pGroups = NULL;
+    DWORD dwEntriesRead = 0;
+    DWORD dwTotalEntries = 0;
 
-    nStatus = NetGroupEnum(NULL, 0, (LPBYTE*) &pGroups, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, NULL);
+    nStatus = NetGroupEnum(NULL, 0, (LPBYTE *) &pGroups, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, NULL);
 
     if (nStatus == NERR_Success) {
         for (DWORD i = 0; i < dwEntriesRead; ++i) {

@@ -84,24 +84,25 @@ class KJobPrivate;
 class KCOREADDONS_EXPORT KJob : public QObject
 {
     Q_OBJECT
-    Q_ENUMS( KillVerbosity Capability Unit )
-    Q_FLAGS( Capabilities )
+    Q_ENUMS(KillVerbosity Capability Unit)
+    Q_FLAGS(Capabilities)
 
 public:
     enum Unit { Bytes, Files, Directories };
 
     enum Capability { NoCapabilities = 0x0000,
                       Killable       = 0x0001,
-                      Suspendable    = 0x0002 };
+                      Suspendable    = 0x0002
+                    };
 
-    Q_DECLARE_FLAGS( Capabilities, Capability )
+    Q_DECLARE_FLAGS(Capabilities, Capability)
 
     /**
      * Creates a new KJob object.
      *
      * @param parent the parent QObject
      */
-    explicit KJob( QObject *parent = 0 );
+    explicit KJob(QObject *parent = 0);
 
     /**
      * Destroys a KJob object.
@@ -117,7 +118,7 @@ public:
      * @param delegate the new UI delegate to use
      * @see KJobUiDelegate
      */
-    void setUiDelegate( KJobUiDelegate *delegate );
+    void setUiDelegate(KJobUiDelegate *delegate);
 
     /**
      * Retrieves the delegate attached to this job.
@@ -181,7 +182,7 @@ public Q_SLOTS:
      * set to Quietly, signal result will NOT be emitted.
      * @return true if the operation is supported and succeeded, false otherwise
      */
-    bool kill( KillVerbosity verbosity = Quietly );
+    bool kill(KillVerbosity verbosity = Quietly);
 
     /**
      * Suspends this job.
@@ -228,7 +229,7 @@ protected:
      * @param capabilities are the capabilities supported by this job
      * @see capabilities()
      */
-    void setCapabilities( Capabilities capabilities );
+    void setCapabilities(Capabilities capabilities);
 
 public:
     /**
@@ -251,8 +252,7 @@ public:
      */
     bool exec();
 
-    enum
-    {
+    enum {
         /*** Indicates there is no error */
         NoError = 0,
         /*** Indicates the job was killed */
@@ -260,7 +260,6 @@ public:
         /*** Subclasses should define error codes starting at this value */
         UserDefinedError = 100
     };
-
 
     /**
      * Returns the error code, if there has been an error.
@@ -303,7 +302,6 @@ public:
      */
     virtual QString errorString() const;
 
-
     /**
      * Returns the processed amount of a given unit for this job.
      *
@@ -336,7 +334,7 @@ public:
      * @param autodelete set to false to disable automatic deletion
      * of the job.
      */
-    void setAutoDelete( bool autodelete );
+    void setAutoDelete(bool autodelete);
 
     /**
      * Returns whether this job automatically deletes itself once
@@ -366,9 +364,9 @@ Q_SIGNALS:
      * @see result
      */
     void finished(KJob *job
-                 #if !defined(DOXYGEN_SHOULD_SKIP_THIS)
-                 , QPrivateSignal
-                 #endif
+#if !defined(DOXYGEN_SHOULD_SKIP_THIS)
+                  , QPrivateSignal
+#endif
                  );
 
     /**
@@ -380,9 +378,9 @@ Q_SIGNALS:
      * @param job the job that emitted this signal
      */
     void suspended(KJob *job
-                  #if !defined(DOXYGEN_SHOULD_SKIP_THIS)
-                  , QPrivateSignal
-                  #endif
+#if !defined(DOXYGEN_SHOULD_SKIP_THIS)
+                   , QPrivateSignal
+#endif
                   );
 
     /**
@@ -394,9 +392,9 @@ Q_SIGNALS:
      * @param job the job that emitted this signal
      */
     void resumed(KJob *job
-                #if !defined(DOXYGEN_SHOULD_SKIP_THIS)
-                , QPrivateSignal
-                #endif
+#if !defined(DOXYGEN_SHOULD_SKIP_THIS)
+                 , QPrivateSignal
+#endif
                 );
 
     /**
@@ -414,9 +412,9 @@ Q_SIGNALS:
      * @see kill
      */
     void result(KJob *job
-               #if !defined(DOXYGEN_SHOULD_SKIP_THIS)
-               , QPrivateSignal
-               #endif
+#if !defined(DOXYGEN_SHOULD_SKIP_THIS)
+                , QPrivateSignal
+#endif
                );
 
     /**
@@ -444,7 +442,7 @@ Q_SIGNALS:
      * @param plain the info message
      * @param rich the rich text version of the message, or QString() is none is available
      */
-    void infoMessage( KJob *job, const QString &plain, const QString &rich = QString() );
+    void infoMessage(KJob *job, const QString &plain, const QString &rich = QString());
 
     /**
      * Emitted to display a warning about this job.
@@ -453,8 +451,7 @@ Q_SIGNALS:
      * @param plain the warning message
      * @param rich the rich text version of the message, or QString() is none is available
      */
-    void warning( KJob *job, const QString &plain, const QString &rich = QString() );
-
+    void warning(KJob *job, const QString &plain, const QString &rich = QString());
 
 Q_SIGNALS:
 #if !defined(Q_MOC_RUN) && !defined(DOXYGEN_SHOULD_SKIP_THIS) && !defined(IN_IDE_PARSER)
@@ -525,7 +522,7 @@ private: // don't tell moc, doxygen or kdevelop, but those signals are in fact p
      * @param job the job that emitted this signal
      * @param percent the percentage
      */
-    void percent( KJob *job, unsigned long percent );
+    void percent(KJob *job, unsigned long percent);
 
     /**
      * Emitted to display information about the speed of this job.
@@ -558,7 +555,7 @@ protected:
      * @param errorCode the error code
      * @see emitResult()
      */
-    void setError( int errorCode );
+    void setError(int errorCode);
 
     /**
      * Sets the error text.
@@ -573,8 +570,7 @@ protected:
      * @param errorText the error text
      * @see emitResult(), errorString(), setError()
      */
-    void setErrorText( const QString &errorText );
-
+    void setErrorText(const QString &errorText);
 
     /**
      * Sets the processed size. The processedAmount() and percent() signals
@@ -602,8 +598,7 @@ protected:
      *
      * @param percentage the new overall progress
      */
-    void setPercent( unsigned long percentage );
-
+    void setPercent(unsigned long percentage);
 
     /**
      * Utility function to emit the result signal, and suicide this job.
@@ -626,7 +621,7 @@ protected:
      * @param totalAmount the total amount
      * @see percent()
      */
-    void emitPercent( qulonglong processedAmount, qulonglong totalAmount );
+    void emitPercent(qulonglong processedAmount, qulonglong totalAmount);
 
     /**
      * Utility function for inherited jobs.
@@ -645,6 +640,6 @@ private:
     Q_DECLARE_PRIVATE(KJob)
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS( KJob::Capabilities )
+Q_DECLARE_OPERATORS_FOR_FLAGS(KJob::Capabilities)
 
 #endif

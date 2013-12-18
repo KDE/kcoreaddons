@@ -26,20 +26,24 @@
 inline KFileSystemType::Type kde_typeFromName(const char *name)
 {
     if (qstrncmp(name, "nfs", 3) == 0
-        || qstrncmp(name, "autofs", 6) == 0
-        || qstrncmp(name, "cachefs", 7) == 0
-        || qstrncmp(name, "fuse.sshfs", 10) == 0
-        || qstrncmp(name, "xtreemfs@", 9) == 0) // #178678
+            || qstrncmp(name, "autofs", 6) == 0
+            || qstrncmp(name, "cachefs", 7) == 0
+            || qstrncmp(name, "fuse.sshfs", 10) == 0
+            || qstrncmp(name, "xtreemfs@", 9) == 0) { // #178678
         return KFileSystemType::Nfs;
+    }
     if (qstrncmp(name, "fat", 3) == 0
-        || qstrncmp(name, "vfat", 4) == 0
-        || qstrncmp(name, "msdos", 5) == 0)
+            || qstrncmp(name, "vfat", 4) == 0
+            || qstrncmp(name, "msdos", 5) == 0) {
         return KFileSystemType::Fat;
+    }
     if (qstrncmp(name, "cifs", 4) == 0
-        || qstrncmp(name, "smbfs", 5) == 0)
+            || qstrncmp(name, "smbfs", 5) == 0) {
         return KFileSystemType::Smb;
-    if (qstrncmp(name, "ramfs", 5) == 0)
+    }
+    if (qstrncmp(name, "ramfs", 5) == 0) {
         return KFileSystemType::Ramfs;
+    }
 
     return KFileSystemType::Other;
 }
@@ -48,18 +52,19 @@ inline KFileSystemType::Type kde_typeFromName(const char *name)
 # include <sys/param.h>
 # include <sys/mount.h>
 
-KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray& path)
+KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
     struct statfs buf;
-    if (statfs(path.constData(), &buf) != 0)
+    if (statfs(path.constData(), &buf) != 0) {
         return KFileSystemType::Unknown;
+    }
     return kde_typeFromName(buf.f_fstypename);
 }
 
 #elif defined(Q_OS_LINUX) || defined(Q_OS_HURD)
 # include <sys/vfs.h>
 # ifdef QT_LINUXBASE
-   // LSB 3.2 has statfs in sys/statfs.h, sys/vfs.h is just an empty dummy header
+// LSB 3.2 has statfs in sys/statfs.h, sys/vfs.h is just an empty dummy header
 #  include <sys/statfs.h>
 # endif
 # ifndef NFS_SUPER_MAGIC
@@ -87,7 +92,7 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray& path)
 // Reverse-engineering without C++ code:
 // strace stat -f /mnt 2>&1|grep statfs|grep mnt, and look for f_type
 
-KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray& path)
+KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
     struct statfs buf;
     if (statfs(path.constData(), &buf) != 0) {
@@ -116,11 +121,12 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray& path)
       || defined(Q_OS_UNIXWARE) || defined(Q_OS_RELIANT) || defined(Q_OS_NETBSD)
 # include <sys/statvfs.h>
 
-KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray& path)
+KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
     struct statvfs buf;
-    if (statvfs(path.constData(), &buf) != 0)
+    if (statvfs(path.constData(), &buf) != 0) {
         return KFileSystemType::Unknown;
+    }
 #if defined(Q_OS_NETBSD)
     return kde_typeFromName(buf.f_fstypename);
 #else
@@ -129,13 +135,13 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray& path)
 }
 #endif
 #else
-KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray& path)
+KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
     return KFileSystemType::Unknown;
 }
 #endif
 
-KFileSystemType::Type KFileSystemType::fileSystemType(const QString& path)
+KFileSystemType::Type KFileSystemType::fileSystemType(const QString &path)
 {
     return determineFileSystemTypeImpl(QFile::encodeName(path));
 }

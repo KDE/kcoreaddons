@@ -40,7 +40,7 @@ public:
      *
      * @param parent the parent QObject
      */
-    explicit KCompositeJob( QObject *parent = 0 );
+    explicit KCompositeJob(QObject *parent = 0);
 
     /**
      * Destroys a KCompositeJob object.
@@ -58,7 +58,7 @@ protected:
      * @param job the subjob to add
      * @return true if the job has been added correctly, false otherwise
      */
-    virtual bool addSubjob( KJob *job );
+    virtual bool addSubjob(KJob *job);
 
     /**
      * Mark a sub job as being done.
@@ -68,7 +68,7 @@ protected:
      * @param job the subjob to remove
      * @return true if the job has been removed correctly, false otherwise
      */
-    virtual bool removeSubjob( KJob *job );
+    virtual bool removeSubjob(KJob *job);
 
     /**
      * Checks if this job has subjobs running.
@@ -82,7 +82,7 @@ protected:
      *
      * @return the full list of sub jobs
      */
-    const QList<KJob*> &subjobs() const;
+    const QList<KJob *> &subjobs() const;
 
     /**
      * Clears the list of subjobs.
@@ -100,7 +100,7 @@ protected Q_SLOTS:
      *
      * @param job the subjob
      */
-    virtual void slotResult( KJob *job );
+    virtual void slotResult(KJob *job);
 
     /**
      * Forward signal from subjob.
@@ -110,7 +110,7 @@ protected Q_SLOTS:
      * @param rich the info message in rich text version
      * @see infoMessage()
      */
-    virtual void slotInfoMessage( KJob *job, const QString &plain, const QString &rich );
+    virtual void slotInfoMessage(KJob *job, const QString &plain, const QString &rich);
 
 protected:
     KCompositeJob(KCompositeJobPrivate &dd, QObject *parent);

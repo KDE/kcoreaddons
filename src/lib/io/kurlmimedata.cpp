@@ -23,13 +23,13 @@
 
 static const char s_kdeUriListMime[] = "application/x-kde4-urilist"; // keep this name "kde4" for compat.
 
-static QByteArray uriListData(const QList<QUrl>& urls)
+static QByteArray uriListData(const QList<QUrl> &urls)
 {
     // compatible with qmimedata.cpp encoding of QUrls
     QByteArray result;
     for (int i = 0; i < urls.size(); ++i) {
-      result += urls.at(i).toEncoded();
-      result += "\r\n";
+        result += urls.at(i).toEncoded();
+        result += "\r\n";
     }
     return result;
 }
@@ -44,10 +44,10 @@ void KUrlMimeData::setUrls(const QList<QUrl> &urls, const QList<QUrl> &mostLocal
     mimeData->setData(QString::fromLatin1(s_kdeUriListMime), uriListData(urls));
 }
 
-void KUrlMimeData::setMetaData(const MetaDataMap& metaData, QMimeData *mimeData)
+void KUrlMimeData::setMetaData(const MetaDataMap &metaData, QMimeData *mimeData)
 {
     QByteArray metaDataData; // :)
-    for(MetaDataMap::const_iterator it = metaData.begin(); it != metaData.end(); ++it) {
+    for (MetaDataMap::const_iterator it = metaData.begin(); it != metaData.end(); ++it) {
         metaDataData += it.key().toUtf8();
         metaDataData += "$@@$";
         metaDataData += it.value().toUtf8();
@@ -62,25 +62,27 @@ QStringList KUrlMimeData::mimeDataTypes()
 }
 
 QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
-                                           DecodeOptions decodeOptions,
-                                           MetaDataMap* metaData)
+        DecodeOptions decodeOptions,
+        MetaDataMap *metaData)
 {
     QList<QUrl> uris;
-    const char* firstMimeType = s_kdeUriListMime;
-    const char* secondMimeType = "text/uri-list";
+    const char *firstMimeType = s_kdeUriListMime;
+    const char *secondMimeType = "text/uri-list";
     if (decodeOptions == PreferLocalUrls) {
         qSwap(firstMimeType, secondMimeType);
     }
     QByteArray ba = mimeData->data(QString::fromLatin1(firstMimeType));
-    if (ba.isEmpty())
+    if (ba.isEmpty()) {
         ba = mimeData->data(QString::fromLatin1(secondMimeType));
+    }
     if (!ba.isEmpty()) {
         // Code from qmimedata.cpp
         QList<QByteArray> urls = ba.split('\n');
         for (int i = 0; i < urls.size(); ++i) {
             QByteArray data = urls.at(i).trimmed();
-            if (!data.isEmpty())
+            if (!data.isEmpty()) {
                 uris.append(QUrl::fromEncoded(data));
+            }
         }
     }
     if (metaData) {
@@ -92,11 +94,12 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
             const QStringList lst = str.split(QLatin1String("$@@$"));
             bool readingKey = true; // true, then false, then true, etc.
             QString key;
-            for ( QStringList::const_iterator it = lst.begin(); it != lst.end(); ++it ) {
-                if (readingKey)
+            for (QStringList::const_iterator it = lst.begin(); it != lst.end(); ++it) {
+                if (readingKey) {
                     key = *it;
-                else
+                } else {
                     metaData->insert(key, *it);
+                }
                 readingKey = !readingKey;
             }
             Q_ASSERT(readingKey); // an odd number of items would be, well, odd ;-)

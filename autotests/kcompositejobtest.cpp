@@ -46,12 +46,12 @@ void CompositeJob::start()
     }
 }
 
-bool CompositeJob::addSubjob(KJob* job)
+bool CompositeJob::addSubjob(KJob *job)
 {
     return KCompositeJob::addSubjob(job);
 }
 
-void CompositeJob::slotResult(KJob* job)
+void CompositeJob::slotResult(KJob *job)
 {
     KCompositeJob::slotResult(job);
 
@@ -64,7 +64,6 @@ void CompositeJob::slotResult(KJob* job)
         emitResult();
     }
 }
-
 
 KCompositeJobTest::KCompositeJobTest()
     : loop(this)
@@ -82,7 +81,7 @@ void KCompositeJobTest::testDeletionDuringExecution()
     QObject *someParent = new QObject;
     KJob *job = new TestJob(someParent);
 
-    CompositeJob* compositeJob = new CompositeJob;
+    CompositeJob *compositeJob = new CompositeJob;
     compositeJob->setAutoDelete(false);
     QVERIFY(compositeJob->addSubjob(job));
 
@@ -103,5 +102,5 @@ void KCompositeJobTest::testDeletionDuringExecution()
     QCOMPARE(destroyed_spy.size(), 1);
 }
 
-QTEST_GUILESS_MAIN( KCompositeJobTest );
+QTEST_GUILESS_MAIN(KCompositeJobTest);
 

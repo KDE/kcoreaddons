@@ -38,38 +38,41 @@
 
 int KRandom::random()
 {
-   static bool init = false;
-   if (!init)
-   {
-      unsigned int seed;
-      init = true;
-      QFile urandom(QString::fromLatin1("/dev/urandom"));
-      bool opened = urandom.open(QIODevice::ReadOnly);
-      if (!opened || urandom.read((char *)&seed, sizeof(seed)) != sizeof(seed))
-      {
+    static bool init = false;
+    if (!init) {
+        unsigned int seed;
+        init = true;
+        QFile urandom(QString::fromLatin1("/dev/urandom"));
+        bool opened = urandom.open(QIODevice::ReadOnly);
+        if (!opened || urandom.read((char *)&seed, sizeof(seed)) != sizeof(seed)) {
             // No /dev/urandom... try something else.
             srand(getpid());
-            seed = rand()+time(0);
-      }
-      srand(seed);
-   }
-   return rand();
+            seed = rand() + time(0);
+        }
+        srand(seed);
+    }
+    return rand();
 }
 
 QString KRandom::randomString(int length)
 {
-   if (length <=0 ) return QString();
+    if (length <= 0) {
+        return QString();
+    }
 
-   QString str; str.resize( length );
-   int i = 0;
-   while (length--)
-   {
-      int r=random() % 62;
-      r+=48;
-      if (r>57) r+=7;
-      if (r>90) r+=6;
-      str[i++] =  char(r);
-      // so what if I work backwards?
-   }
-   return str;
+    QString str; str.resize(length);
+    int i = 0;
+    while (length--) {
+        int r = random() % 62;
+        r += 48;
+        if (r > 57) {
+            r += 7;
+        }
+        if (r > 90) {
+            r += 6;
+        }
+        str[i++] =  char(r);
+        // so what if I work backwards?
+    }
+    return str;
 }

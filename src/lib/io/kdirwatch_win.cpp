@@ -21,57 +21,58 @@
 #include <windows.h>
 
 KFileSystemWatcher::KFileSystemWatcher()
- : QObject(), m_recentWatcher(0)
+    : QObject(), m_recentWatcher(0)
 {
 }
 
 KFileSystemWatcher::~KFileSystemWatcher()
 {
-  qDeleteAll(m_watchers);
+    qDeleteAll(m_watchers);
 }
 
-QFileSystemWatcher* KFileSystemWatcher::availableWatcher()
+QFileSystemWatcher *KFileSystemWatcher::availableWatcher()
 {
-  QFileSystemWatcher* watcher = m_recentWatcher;
-  if (!watcher || m_usedObjects.value(watcher) >= MAXIMUM_WAIT_OBJECTS) {
-    uint i = 0;
-    watcher = 0;
-    for (QList<QFileSystemWatcher*>::ConstIterator watchersIt(m_watchers.constBegin());
-      watchersIt!=m_watchers.constEnd(); ++watchersIt, i++)
-    {
-      if (m_usedObjects.value(*watchersIt) < MAXIMUM_WAIT_OBJECTS) {
-        watcher = *watchersIt;
-        m_recentWatcher = watcher;
-        return watcher;
-      }
+    QFileSystemWatcher *watcher = m_recentWatcher;
+    if (!watcher || m_usedObjects.value(watcher) >= MAXIMUM_WAIT_OBJECTS) {
+        uint i = 0;
+        watcher = 0;
+        for (QList<QFileSystemWatcher *>::ConstIterator watchersIt(m_watchers.constBegin());
+                watchersIt != m_watchers.constEnd(); ++watchersIt, i++) {
+            if (m_usedObjects.value(*watchersIt) < MAXIMUM_WAIT_OBJECTS) {
+                watcher = *watchersIt;
+                m_recentWatcher = watcher;
+                return watcher;
+            }
+        }
     }
-  }
-  if (!watcher) { //new one needed
-    watcher = new QFileSystemWatcher();
-    connect(watcher, SIGNAL(directoryChanged(QString)), this, SIGNAL(directoryChanged(QString)));
-    connect(watcher, SIGNAL(fileChanged(QString)), this, SIGNAL(fileChanged(QString)));
-    m_watchers.append( watcher );
-    m_usedObjects.insert(watcher, 0);
-    m_recentWatcher = watcher;
-  }
-  return watcher;
+    if (!watcher) { //new one needed
+        watcher = new QFileSystemWatcher();
+        connect(watcher, SIGNAL(directoryChanged(QString)), this, SIGNAL(directoryChanged(QString)));
+        connect(watcher, SIGNAL(fileChanged(QString)), this, SIGNAL(fileChanged(QString)));
+        m_watchers.append(watcher);
+        m_usedObjects.insert(watcher, 0);
+        m_recentWatcher = watcher;
+    }
+    return watcher;
 }
 
 void KFileSystemWatcher::addPath(const QString &file)
 {
-  QFileSystemWatcher* watcher = availableWatcher();
-  watcher->addPath(file);
-  m_usedObjects[watcher]++;
-  m_paths.insert(file, watcher);
+    QFileSystemWatcher *watcher = availableWatcher();
+    watcher->addPath(file);
+    m_usedObjects[watcher]++;
+    m_paths.insert(file, watcher);
 }
 
 void KFileSystemWatcher::removePath(const QString &file)
 {
-  QFileSystemWatcher* watcher = m_paths.value(file);
-  if (!watcher)
-    return;
-  watcher->removePath(file);
-  m_usedObjects[watcher]--;
-  if (m_recentWatcher != watcher)
-    m_recentWatcher = 0;
+    QFileSystemWatcher *watcher = m_paths.value(file);
+    if (!watcher) {
+        return;
+    }
+    watcher->removePath(file);
+    m_usedObjects[watcher]--;
+    if (m_recentWatcher != watcher) {
+        m_recentWatcher = 0;
+    }
 }

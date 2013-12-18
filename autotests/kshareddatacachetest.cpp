@@ -49,13 +49,14 @@ void KSharedDataCacheTest::simpleInsert()
     // clear the cache
     QString cacheFile = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/") + cacheName + QLatin1String(".kcache");
     QFile file(cacheFile);
-    if (file.exists())
+    if (file.exists()) {
         QVERIFY(file.remove());
+    }
     // insert something into it
-    KSharedDataCache cache(cacheName, 5*1024*1024);
- #ifndef Q_OS_WIN // the windows implementation is currently only memory based and not really shared
+    KSharedDataCache cache(cacheName, 5 * 1024 * 1024);
+#ifndef Q_OS_WIN // the windows implementation is currently only memory based and not really shared
     QVERIFY(file.exists()); // make sure we got the cache filename right
- #endif
+#endif
     QByteArray data;
     data.resize(9228);
     strcpy(data.data(), "Hello world");

@@ -21,20 +21,18 @@
 
 #include "kstringhandler.h"
 
-#include <stdlib.h>		// random()
+#include <stdlib.h>     // random()
 
 #include <QtCore/QRegExp>            // for the word ranges
 #include <QtCore/QCharRef>
 #include <QtCore/QMutableStringListIterator>
 
-
-
 //
 // Capitalization routines
 //
-QString KStringHandler::capwords( const QString &text )
+QString KStringHandler::capwords(const QString &text)
 {
-    if ( text.isEmpty() ) {
+    if (text.isEmpty()) {
         return text;
     }
 
@@ -47,173 +45,176 @@ QString KStringHandler::capwords( const QString &text )
     return result;
 }
 
-QStringList KStringHandler::capwords( const QStringList &list )
+QStringList KStringHandler::capwords(const QStringList &list)
 {
     QStringList tmp = list;
-    for ( QStringList::Iterator it = tmp.begin(); it != tmp.end(); ++it ) {
-        *it = ( *it )[ 0 ].toUpper() + ( *it ).mid( 1 );
+    for (QStringList::Iterator it = tmp.begin(); it != tmp.end(); ++it) {
+        *it = (*it)[ 0 ].toUpper() + (*it).mid(1);
     }
     return tmp;
 }
 
-
-QString KStringHandler::lsqueeze( const QString & str, int maxlen )
+QString KStringHandler::lsqueeze(const QString &str, int maxlen)
 {
-  if (str.length() > maxlen) {
-    int part = maxlen-3;
-    return QString::fromLatin1("...") + str.right(part);
-  }
-  else return str;
+    if (str.length() > maxlen) {
+        int part = maxlen - 3;
+        return QString::fromLatin1("...") + str.right(part);
+    } else {
+        return str;
+    }
 }
 
-QString KStringHandler::csqueeze( const QString & str, int maxlen )
+QString KStringHandler::csqueeze(const QString &str, int maxlen)
 {
-  if (str.length() > maxlen && maxlen > 3) {
-    const int part = (maxlen-3)/2;
-    return str.left(part) + QLatin1String("...") + str.right(part);
-  }
-  else return str;
+    if (str.length() > maxlen && maxlen > 3) {
+        const int part = (maxlen - 3) / 2;
+        return str.left(part) + QLatin1String("...") + str.right(part);
+    } else {
+        return str;
+    }
 }
 
-QString KStringHandler::rsqueeze( const QString & str, int maxlen )
+QString KStringHandler::rsqueeze(const QString &str, int maxlen)
 {
-  if (str.length() > maxlen) {
-    int part = maxlen-3;
-    return str.left(part) + QLatin1String("...");
-  }
-  else return str;
+    if (str.length() > maxlen) {
+        int part = maxlen - 3;
+        return str.left(part) + QLatin1String("...");
+    } else {
+        return str;
+    }
 }
 
-QStringList KStringHandler::perlSplit(const QString & sep, const QString & s, int max)
+QStringList KStringHandler::perlSplit(const QString &sep, const QString &s, int max)
 {
-  bool ignoreMax = 0 == max;
+    bool ignoreMax = 0 == max;
 
-  QStringList l;
+    QStringList l;
 
-  int searchStart = 0;
+    int searchStart = 0;
 
-  int tokenStart = s.indexOf(sep, searchStart);
+    int tokenStart = s.indexOf(sep, searchStart);
 
-  while (-1 != tokenStart && (ignoreMax || l.count() < max - 1))
-  {
-    if (!s.mid(searchStart, tokenStart - searchStart).isEmpty())
-      l << s.mid(searchStart, tokenStart - searchStart);
+    while (-1 != tokenStart && (ignoreMax || l.count() < max - 1)) {
+        if (!s.mid(searchStart, tokenStart - searchStart).isEmpty()) {
+            l << s.mid(searchStart, tokenStart - searchStart);
+        }
 
-    searchStart = tokenStart + sep.length();
-    tokenStart = s.indexOf(sep, searchStart);
-  }
+        searchStart = tokenStart + sep.length();
+        tokenStart = s.indexOf(sep, searchStart);
+    }
 
-  if (!s.mid(searchStart, s.length() - searchStart).isEmpty())
-    l << s.mid(searchStart, s.length() - searchStart);
+    if (!s.mid(searchStart, s.length() - searchStart).isEmpty()) {
+        l << s.mid(searchStart, s.length() - searchStart);
+    }
 
-  return l;
+    return l;
 }
 
-QStringList KStringHandler::perlSplit(const QChar & sep, const QString & s, int max)
+QStringList KStringHandler::perlSplit(const QChar &sep, const QString &s, int max)
 {
-  bool ignoreMax = 0 == max;
+    bool ignoreMax = 0 == max;
 
-  QStringList l;
+    QStringList l;
 
-  int searchStart = 0;
+    int searchStart = 0;
 
-  int tokenStart = s.indexOf(sep, searchStart);
+    int tokenStart = s.indexOf(sep, searchStart);
 
-  while (-1 != tokenStart && (ignoreMax || l.count() < max - 1))
-  {
-    if (!s.mid(searchStart, tokenStart - searchStart).isEmpty())
-      l << s.mid(searchStart, tokenStart - searchStart);
+    while (-1 != tokenStart && (ignoreMax || l.count() < max - 1)) {
+        if (!s.mid(searchStart, tokenStart - searchStart).isEmpty()) {
+            l << s.mid(searchStart, tokenStart - searchStart);
+        }
 
-    searchStart = tokenStart + 1;
-    tokenStart = s.indexOf(sep, searchStart);
-  }
+        searchStart = tokenStart + 1;
+        tokenStart = s.indexOf(sep, searchStart);
+    }
 
-  if (!s.mid(searchStart, s.length() - searchStart).isEmpty())
-    l << s.mid(searchStart, s.length() - searchStart);
+    if (!s.mid(searchStart, s.length() - searchStart).isEmpty()) {
+        l << s.mid(searchStart, s.length() - searchStart);
+    }
 
-  return l;
+    return l;
 }
 
-QStringList KStringHandler::perlSplit(const QRegExp & sep, const QString & s, int max)
+QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int max)
 {
-  bool ignoreMax = 0 == max;
+    bool ignoreMax = 0 == max;
 
-  QStringList l;
+    QStringList l;
 
-  int searchStart = 0;
-  int tokenStart = sep.indexIn(s, searchStart);
-  int len = sep.matchedLength();
+    int searchStart = 0;
+    int tokenStart = sep.indexIn(s, searchStart);
+    int len = sep.matchedLength();
 
-  while (-1 != tokenStart && (ignoreMax || l.count() < max - 1))
-  {
-    if (!s.mid(searchStart, tokenStart - searchStart).isEmpty())
-      l << s.mid(searchStart, tokenStart - searchStart);
+    while (-1 != tokenStart && (ignoreMax || l.count() < max - 1)) {
+        if (!s.mid(searchStart, tokenStart - searchStart).isEmpty()) {
+            l << s.mid(searchStart, tokenStart - searchStart);
+        }
 
-    searchStart = tokenStart + len;
-    tokenStart = sep.indexIn(s, searchStart);
-    len = sep.matchedLength();
-  }
+        searchStart = tokenStart + len;
+        tokenStart = sep.indexIn(s, searchStart);
+        len = sep.matchedLength();
+    }
 
-  if (!s.mid(searchStart, s.length() - searchStart).isEmpty())
-    l << s.mid(searchStart, s.length() - searchStart);
+    if (!s.mid(searchStart, s.length() - searchStart).isEmpty()) {
+        l << s.mid(searchStart, s.length() - searchStart);
+    }
 
-  return l;
+    return l;
 }
 
-QString KStringHandler::tagUrls( const QString& text )
+QString KStringHandler::tagUrls(const QString &text)
 {
     /*static*/ QRegExp urlEx(QLatin1String("(www\\.(?!\\.)|(fish|(f|ht)tp(|s))://)[\\d\\w\\./,:_~\\?=&;#@\\-\\+\\%\\$]+[\\d\\w/]"));
 
-    QString richText( text );
+    QString richText(text);
     int urlPos = 0, urlLen;
-    while ((urlPos = urlEx.indexIn(richText, urlPos)) >= 0)
-    {
+    while ((urlPos = urlEx.indexIn(richText, urlPos)) >= 0) {
         urlLen = urlEx.matchedLength();
-        QString href = richText.mid( urlPos, urlLen );
+        QString href = richText.mid(urlPos, urlLen);
         // Qt doesn't support (?<=pattern) so we do it here
-        if((urlPos > 0) && richText[urlPos-1].isLetterOrNumber()){
+        if ((urlPos > 0) && richText[urlPos - 1].isLetterOrNumber()) {
             urlPos++;
             continue;
         }
         // Don't use QString::arg since %01, %20, etc could be in the string
         QString anchor = QString::fromLatin1("<a href=\"") + href + QLatin1String("\">") + href + QLatin1String("</a>");
-        richText.replace( urlPos, urlLen, anchor );
-
+        richText.replace(urlPos, urlLen, anchor);
 
         urlPos += anchor.length();
     }
     return richText;
 }
 
-QString KStringHandler::obscure( const QString &str )
+QString KStringHandler::obscure(const QString &str)
 {
-  QString result;
-  const QChar *unicode = str.unicode();
-  for ( int i = 0; i < str.length(); ++i )
-    // yes, no typo. can't encode ' ' or '!' because
-    // they're the unicode BOM. stupid scrambling. stupid.
-    result += ( unicode[ i ].unicode() <= 0x21 ) ? unicode[ i ] :
-        QChar( 0x1001F - unicode[ i ].unicode() );
+    QString result;
+    const QChar *unicode = str.unicode();
+    for (int i = 0; i < str.length(); ++i)
+        // yes, no typo. can't encode ' ' or '!' because
+        // they're the unicode BOM. stupid scrambling. stupid.
+        result += (unicode[ i ].unicode() <= 0x21) ? unicode[ i ] :
+                  QChar(0x1001F - unicode[ i ].unicode());
 
-  return result;
+    return result;
 }
 
-
-bool KStringHandler::isUtf8( const char *buf )
+bool KStringHandler::isUtf8(const char *buf)
 {
-  int i, n;
-  register unsigned char c;
-  bool gotone = false;
+    int i, n;
+    register unsigned char c;
+    bool gotone = false;
 
-  if (!buf)
-    return true; // whatever, just don't crash
+    if (!buf) {
+        return true;    // whatever, just don't crash
+    }
 
 #define F 0   /* character never appears in text */
 #define T 1   /* character appears in plain ASCII text */
 #define I 2   /* character appears in ISO-8859 text */
 #define X 3   /* character appears in non-ISO extended ASCII (Mac, IBM PC) */
 
-  static const unsigned char text_chars[256] = {
+    static const unsigned char text_chars[256] = {
         /*                  BEL BS HT LF    FF CR    */
         F, F, F, F, F, F, F, T, T, T, T, F, T, T, F, F,  /* 0x0X */
         /*                              ESC          */
@@ -233,50 +234,54 @@ bool KStringHandler::isUtf8( const char *buf )
         I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xdX */
         I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xeX */
         I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I   /* 0xfX */
-  };
+    };
 
-  /* *ulen = 0; */
-  for (i = 0; (c = buf[i]); ++i) {
-    if ((c & 0x80) == 0) {        /* 0xxxxxxx is plain ASCII */
-      /*
-       * Even if the whole file is valid UTF-8 sequences,
-       * still reject it if it uses weird control characters.
-       */
+    /* *ulen = 0; */
+    for (i = 0; (c = buf[i]); ++i) {
+        if ((c & 0x80) == 0) {        /* 0xxxxxxx is plain ASCII */
+            /*
+             * Even if the whole file is valid UTF-8 sequences,
+             * still reject it if it uses weird control characters.
+             */
 
-      if (text_chars[c] != T)
-        return false;
+            if (text_chars[c] != T) {
+                return false;
+            }
 
-    } else if ((c & 0x40) == 0) { /* 10xxxxxx never 1st byte */
-      return false;
-    } else {                           /* 11xxxxxx begins UTF-8 */
-      int following;
+        } else if ((c & 0x40) == 0) { /* 10xxxxxx never 1st byte */
+            return false;
+        } else {                           /* 11xxxxxx begins UTF-8 */
+            int following;
 
-    if ((c & 0x20) == 0) {             /* 110xxxxx */
-      following = 1;
-    } else if ((c & 0x10) == 0) {      /* 1110xxxx */
-      following = 2;
-    } else if ((c & 0x08) == 0) {      /* 11110xxx */
-      following = 3;
-    } else if ((c & 0x04) == 0) {      /* 111110xx */
-      following = 4;
-    } else if ((c & 0x02) == 0) {      /* 1111110x */
-      following = 5;
-    } else
-      return false;
+            if ((c & 0x20) == 0) {             /* 110xxxxx */
+                following = 1;
+            } else if ((c & 0x10) == 0) {      /* 1110xxxx */
+                following = 2;
+            } else if ((c & 0x08) == 0) {      /* 11110xxx */
+                following = 3;
+            } else if ((c & 0x04) == 0) {      /* 111110xx */
+                following = 4;
+            } else if ((c & 0x02) == 0) {      /* 1111110x */
+                following = 5;
+            } else {
+                return false;
+            }
 
-      for (n = 0; n < following; ++n) {
-        i++;
-        if (!(c = buf[i]))
-          goto done;
+            for (n = 0; n < following; ++n) {
+                i++;
+                if (!(c = buf[i])) {
+                    goto done;
+                }
 
-        if ((c & 0x80) == 0 || (c & 0x40))
-          return false;
-      }
-      gotone = true;
+                if ((c & 0x80) == 0 || (c & 0x40)) {
+                    return false;
+                }
+            }
+            gotone = true;
+        }
     }
-  }
 done:
-  return gotone;   /* don't claim it's UTF-8 if it's all 7-bit */
+    return gotone;   /* don't claim it's UTF-8 if it's all 7-bit */
 }
 
 #undef F
@@ -284,17 +289,18 @@ done:
 #undef I
 #undef X
 
-QString KStringHandler::from8Bit( const char *str )
+QString KStringHandler::from8Bit(const char *str)
 {
-  if (!str)
-    return QString();
-  if (!*str) {
-    static const QLatin1String emptyString("");
-    return emptyString;
-  }
-  return KStringHandler::isUtf8( str ) ?
-             QString::fromUtf8( str ) :
-             QString::fromLocal8Bit( str );
+    if (!str) {
+        return QString();
+    }
+    if (!*str) {
+        static const QLatin1String emptyString("");
+        return emptyString;
+    }
+    return KStringHandler::isUtf8(str) ?
+           QString::fromUtf8(str) :
+           QString::fromLocal8Bit(str);
 }
 
 QString KStringHandler::preProcessWrap(const QString &text)
@@ -307,24 +313,27 @@ QString KStringHandler::preProcessWrap(const QString &text)
     for (int i = 0; i < text.length(); i++) {
         const QChar c = text[i];
         bool openingParens = (c == QLatin1Char('(') || c == QLatin1Char('{') || c == QLatin1Char('['));
-        bool singleQuote = (c == QLatin1Char('\'') );
+        bool singleQuote = (c == QLatin1Char('\''));
         bool closingParens = (c == QLatin1Char(')') || c == QLatin1Char('}') || c == QLatin1Char(']'));
         bool breakAfter   = (closingParens || c.isPunct() || c.isSymbol());
         bool nextIsSpace  = (i == (text.length() - 1) || text[i + 1].isSpace());
         bool prevIsSpace  = (i == 0 || text[i - 1].isSpace() || result[result.length() - 1] == zwsp);
 
         // Provide a breaking opportunity before opening parenthesis
-        if (openingParens && !prevIsSpace)
+        if (openingParens && !prevIsSpace) {
             result += zwsp;
-        
+        }
+
         // Provide a word joiner before the single quote
-        if (singleQuote && !prevIsSpace)
+        if (singleQuote && !prevIsSpace) {
             result += QChar(0x2060);
+        }
 
         result += c;
 
-        if (breakAfter && !openingParens && !nextIsSpace && !singleQuote) 
+        if (breakAfter && !openingParens && !nextIsSpace && !singleQuote) {
             result += zwsp;
+        }
     }
 
     return result;

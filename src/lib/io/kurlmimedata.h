@@ -56,7 +56,7 @@ KCOREADDONS_EXPORT void setUrls(const QList<QUrl> &urls, const QList<QUrl> &most
  * @param metaData KIO metadata shipped in the mime data, which is used for instance to
  * set a correct HTTP referrer (some websites require it for downloading e.g. an image)
  */
-KCOREADDONS_EXPORT void setMetaData(const MetaDataMap& metaData, QMimeData *mimeData);
+KCOREADDONS_EXPORT void setMetaData(const MetaDataMap &metaData, QMimeData *mimeData);
 
 /**
  * Return the list of mimeTypes that can be decoded by urlsFromMimeData
@@ -98,8 +98,8 @@ enum DecodeOptions {
  * @return the list of urls
  */
 KCOREADDONS_EXPORT QList<QUrl> urlsFromMimeData(const QMimeData *mimeData,
-                                                DecodeOptions decodeOptions = PreferKdeUrls,
-                                                MetaDataMap* metaData = 0);
+        DecodeOptions decodeOptions = PreferKdeUrls,
+        MetaDataMap *metaData = 0);
 
 }
 

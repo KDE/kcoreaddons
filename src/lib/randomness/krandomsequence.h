@@ -23,7 +23,7 @@
 
 /**
  * \class KRandomSequence krandomsequence.h <KRandomSequence>
- * 
+ *
  * A class to create a pseudo-random sequence
  *
  * Given a seed number, this class will produce a sequence of
@@ -40,110 +40,110 @@
 class KCOREADDONS_EXPORT KRandomSequence
 {
 public:
-  /**
-   * Creates a pseudo-random sequence based on the seed lngSeed.
-   *
-   * A Pseudo-random sequence is different for each seed but can be
-   * reproduced by starting the sequence with the same seed.
-   *
-   * If you need a single value which needs to be unpredictable,
-   * you need to use KRandom::random() instead.
-   *
-   * @param lngSeed Seed to initialize the sequence with.
-   * If lngSeed is 0, the sequence is initialized with a value from
-   * KRandom::random().
-   */
-  explicit KRandomSequence( long lngSeed = 0 );
+    /**
+     * Creates a pseudo-random sequence based on the seed lngSeed.
+     *
+     * A Pseudo-random sequence is different for each seed but can be
+     * reproduced by starting the sequence with the same seed.
+     *
+     * If you need a single value which needs to be unpredictable,
+     * you need to use KRandom::random() instead.
+     *
+     * @param lngSeed Seed to initialize the sequence with.
+     * If lngSeed is 0, the sequence is initialized with a value from
+     * KRandom::random().
+     */
+    explicit KRandomSequence(long lngSeed = 0);
 
-  /**
-   * Standard destructor
-   */
-  virtual ~KRandomSequence();
+    /**
+     * Standard destructor
+     */
+    virtual ~KRandomSequence();
 
-  /**
-   * Copy constructor
-   */
-  KRandomSequence(const KRandomSequence &a);
+    /**
+     * Copy constructor
+     */
+    KRandomSequence(const KRandomSequence &a);
 
-  /**
-   * Assignment
-   */
-  KRandomSequence &operator=(const KRandomSequence &a);
+    /**
+     * Assignment
+     */
+    KRandomSequence &operator=(const KRandomSequence &a);
 
-  /**
-   * Restart the sequence based on lngSeed.
-   * @param lngSeed Seed to initialize the sequence with.
-   * If lngSeed is 0, the sequence is initialized with a value from
-   * KRandom::random().
-   */
-  void setSeed( long lngSeed = 0 );
+    /**
+     * Restart the sequence based on lngSeed.
+     * @param lngSeed Seed to initialize the sequence with.
+     * If lngSeed is 0, the sequence is initialized with a value from
+     * KRandom::random().
+     */
+    void setSeed(long lngSeed = 0);
 
-  /**
-   * Get the next number from the pseudo-random sequence.
-   *
-   * @return a pseudo-random double value between [0,1)
-   */
-  double getDouble();
+    /**
+     * Get the next number from the pseudo-random sequence.
+     *
+     * @return a pseudo-random double value between [0,1)
+     */
+    double getDouble();
 
-  /**
-   * Get the next number from the pseudo-random sequence.
-   *
-   * @return a pseudo-random integer value between [0, max)
-   * with 0 <= max < 1.000.000
-   */
-  unsigned long getLong(unsigned long max);
+    /**
+     * Get the next number from the pseudo-random sequence.
+     *
+     * @return a pseudo-random integer value between [0, max)
+     * with 0 <= max < 1.000.000
+     */
+    unsigned long getLong(unsigned long max);
 
-  /**
-   * Get a boolean from the pseudo-random sequence.
-   *
-   * @return a boolean which is either true or false
-   */
-  bool getBool();
+    /**
+     * Get a boolean from the pseudo-random sequence.
+     *
+     * @return a boolean which is either true or false
+     */
+    bool getBool();
 
-  /**
-   * Put a list in random order. Since KDE 4.11, this function uses a more
-   * efficient algorithm (Fisher-Yates). Therefore, the order of the items
-   * in the randomized list is different from the one in earlier versions
-   * if the same seed value is used for the random sequence.
-   *
-   * @param list the list whose order will be modified
-   * @note modifies the list in place
-   */
-  template<typename T> void randomize(QList<T>& list) {
-      // Fisher-Yates algorithm
-      for (int index = list.count() - 1; index > 0; --index) {
-          const int swapIndex = getLong(index + 1);
-          qSwap(list[index], list[swapIndex]);
-      }
-  }
+    /**
+     * Put a list in random order. Since KDE 4.11, this function uses a more
+     * efficient algorithm (Fisher-Yates). Therefore, the order of the items
+     * in the randomized list is different from the one in earlier versions
+     * if the same seed value is used for the random sequence.
+     *
+     * @param list the list whose order will be modified
+     * @note modifies the list in place
+     */
+    template<typename T> void randomize(QList<T> &list)
+    {
+        // Fisher-Yates algorithm
+        for (int index = list.count() - 1; index > 0; --index) {
+            const int swapIndex = getLong(index + 1);
+            qSwap(list[index], list[swapIndex]);
+        }
+    }
 
-
-  /**
-   * Modulate the random sequence.
-   *
-   * If S(i) is the sequence of numbers that will follow
-   * given the current state after calling modulate(i),
-   * then S(i) != S(j) for i != j and
-   *      S(i) == S(j) for i == j.
-   *
-   * This can be useful in game situation where "undo" restores
-   * the state of the random sequence. If the game modulates the
-   * random sequence with the move chosen by the player, the
-   * random sequence will be identical whenever the player "redo"-s
-   * his or hers original move, but different when the player
-   * chooses another move.
-   *
-   * With this scenario "undo" can no longer be used to repeat a
-   * certain move over and over again until the computer reacts
-   * with a favorable response or to predict the response for a
-   * certain move based on the response to another move.
-   * @param i the sequence identified
-   */
-  void modulate(int i);
+    /**
+     * Modulate the random sequence.
+     *
+     * If S(i) is the sequence of numbers that will follow
+     * given the current state after calling modulate(i),
+     * then S(i) != S(j) for i != j and
+     *      S(i) == S(j) for i == j.
+     *
+     * This can be useful in game situation where "undo" restores
+     * the state of the random sequence. If the game modulates the
+     * random sequence with the move chosen by the player, the
+     * random sequence will be identical whenever the player "redo"-s
+     * his or hers original move, but different when the player
+     * chooses another move.
+     *
+     * With this scenario "undo" can no longer be used to repeat a
+     * certain move over and over again until the computer reacts
+     * with a favorable response or to predict the response for a
+     * certain move based on the response to another move.
+     * @param i the sequence identified
+     */
+    void modulate(int i);
 
 private:
-  class Private;
-  Private *const d;
+    class Private;
+    Private *const d;
 };
 
 #endif
