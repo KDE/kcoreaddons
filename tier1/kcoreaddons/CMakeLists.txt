@@ -1,0 +1,65 @@
+cmake_minimum_required(VERSION 2.8.12)
+
+project(KCoreAddons)
+
+find_package(ECM 0.0.9 REQUIRED NO_MODULE)
+
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
+
+include(FeatureSummary)
+include(CMakePackageConfigHelpers)
+include(ECMSetupVersion)
+
+include(KDEInstallDirs)
+include(KDEFrameworkCompilerSettings)
+include(KDECMakeSettings)
+
+set(REQUIRED_QT_VERSION 5.2.0)
+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
+
+# Configure checks for kdirwatch
+find_package(FAM)
+
+set_package_properties(FAM PROPERTIES
+     PURPOSE "Provides file alteration notification facilities using a separate service. FAM provides additional support for NFS.")
+
+set(HAVE_FAM ${FAM_FOUND})
+
+include(CheckIncludeFiles)
+check_include_files(sys/inotify.h SYS_INOTIFY_H_FOUND)
+set(HAVE_SYS_INOTIFY_H ${SYS_INOTIFY_H_FOUND})
+
+
+# Generate io/config-kdirwatch.h
+configure_file(src/lib/io/config-kdirwatch.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/lib/io/config-kdirwatch.h)
+
+ecm_setup_version(5.0.0 VARIABLE_PREFIX KCOREADDONS
+                        VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_version.h"
+                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5CoreAddonsConfigVersion.cmake")
+
+
+add_subdirectory(src)
+add_subdirectory(autotests)
+add_subdirectory(tests)
+
+# create a Config.cmake and a ConfigVersion.cmake file and install them
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5CoreAddons")
+
+configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KF5CoreAddonsConfig.cmake.in"
+                              "${CMAKE_CURRENT_BINARY_DIR}/KF5CoreAddonsConfig.cmake"
+                              INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+                              )
+
+install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/KF5CoreAddonsConfig.cmake"
+               "${CMAKE_CURRENT_BINARY_DIR}/KF5CoreAddonsConfigVersion.cmake"
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel )
+
+install(EXPORT KF5CoreAddonsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5CoreAddonsTargets.cmake NAMESPACE KF5:: )
+
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_version.h
+        DESTINATION ${INCLUDE_INSTALL_DIR} COMPONENT Devel )
+
+if ("${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}")
+    feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+endif()

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+It comes with ABSOLUTELY NO WARRANTY, to the extent permitted by law. You may
+redistribute copies of update-mime-database under the terms of the GNU General
+Public License. For more information about these matters, see the file named
+COPYING.
+-->
+<!--
+Notes:
+- the mime types in this file are valid with the version 0.30 of the
+  shared-mime-info package.
+- the "fdo #xxxxx" are the wish in the freedesktop.org bug database to include
+  the mime type there.
+-->
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/metalink+xml">
+    <sub-class-of type="application/xml"/>
+    <comment>Metalink download</comment>
+    <glob pattern="*.metalink"/>
+  </mime-type>
+  <mime-type type="application/relaxng">
+    <sub-class-of type="application/xml"/>
+    <comment>RELAX NG</comment>
+    <glob pattern="*.rng"/>
+  </mime-type>
+  <mime-type type="application/x-cda">
+    <comment>CD audio</comment>
+    <glob pattern="*.cda"/>
+  </mime-type>
+  <mime-type type="application/x-font-snf">
+    <comment>SNF bitmap font</comment>
+    <glob pattern="*.snf"/>
+    <glob pattern="*.snf.Z"/>
+    <glob pattern="*.snf.gz"/>
+  </mime-type>
+  <mime-type type="application/x-java-applet">
+    <comment>Java applet</comment>
+  </mime-type>
+  <mime-type type="application/x-khtml-adaptor">
+    <comment>KHTML Extension Adaptor</comment>
+  </mime-type>
+  <mime-type type="application/x-kcsrc">
+    <comment>KDE color scheme</comment>
+    <acronym>KDE</acronym>
+    <expanded-acronym>K Desktop Environment</expanded-acronym>
+    <glob pattern="*.kcsrc"/>
+  </mime-type>
+  <mime-type type="application/x-kns">
+    <sub-class-of type="application/zip"/>
+    <comment>KNewStuff package</comment>
+    <glob pattern="*.kns"/>
+  </mime-type>
+  <mime-type type="application/x-kwallet"> <!-- fdo #6326 rejected, will stay KDE-specific -->
+    <comment>KWallet wallet</comment>
+    <magic priority="80">
+      <match type="string" value="KWALLET" offset="0"/>
+    </magic>
+    <glob pattern="*.kwl"/>
+  </mime-type>
+  <mime-type type="application/x-kudesigner">
+    <comment>Kugar report template</comment>
+    <glob pattern="*.kut"/>
+  </mime-type>
+  <mime-type type="application/x-mimearchive">
+    <comment>mime encapsulated web archive</comment>
+    <glob pattern="*.mhtml"/>
+    <glob pattern="*.mht"/>
+  </mime-type>
+  <mime-type type="application/x-nzb"> <!-- fdo #10029 -->
+    <comment>NewzBin usenet index</comment>
+    <sub-class-of type="application/xml"/>
+    <magic priority="80">
+      <match type="string" value="&lt;nzb" offset="0:256"/>
+    </magic>
+    <glob pattern="*.nzb"/>
+  </mime-type>
+  <mime-type type="application/x-plasma">
+    <sub-class-of type="application/zip"/>
+    <comment>plasmoid</comment>
+    <glob pattern="*.plasmoid"/>
+  </mime-type>
+  <mime-type type="application/x-superkaramba">
+    <sub-class-of type="application/zip"/>
+    <comment>SuperKaramba theme</comment>
+    <glob pattern="*.skz"/>
+  </mime-type>
+  <mime-type type="application/x-vnd.kde.plan">
+    <comment>Calligra Plan project management document</comment>
+    <glob pattern="*.plan"/>
+  </mime-type>
+  <mime-type type="application/x-vnd.kde.plan.work">
+    <comment>Calligra Plan work package document</comment>
+    <glob pattern="*.planwork"/>
+  </mime-type>
+  <mime-type type="application/x-vnd.kde.kplato">
+    <comment>KPlato project management document</comment>
+    <glob pattern="*.kplato"/>
+  </mime-type>
+  <mime-type type="application/x-vnd.kde.kplato.work">
+    <comment>KPlato project management work package</comment>
+    <glob pattern="*.kplatowork"/>
+  </mime-type>
+  <mime-type type="application/x-vnd.kde.kugar.mixed">
+    <comment>Kugar archive</comment>
+    <glob pattern="*.kug"/>
+  </mime-type>
+  <mime-type type="application/x-webarchive">
+    <sub-class-of type="application/x-compressed-tar"/>
+    <sub-class-of type="application/x-gzip"/> <!-- only necessary because x-compressed-tar is not specifying this sub-class-of (shared-mime-info 0.8) -->
+    <comment>web archive</comment>
+    <glob pattern="*.war"/>
+  </mime-type>
+  <mime-type type="application/xsd">
+    <sub-class-of type="application/xml"/>
+    <comment>W3C XML schema</comment>
+    <glob pattern="*.xsd"/>
+  </mime-type>
+  <mime-type type="audio/aac">
+    <comment>AAC sound</comment>
+    <glob pattern="*.aac"/>
+  </mime-type>
+  <mime-type type="audio/x-pn-realaudio-plugin"> <!-- Not a type of file, so will not go to shared-mime-info -->
+    <comment>RealAudio plugin file</comment>
+  </mime-type>
+  <mime-type type="application/vnd.kde.kphotoalbum-import"> <!-- fdo #12732 rejected, will stay KDE-specific -->
+    <comment>KPhotoAlbum import</comment>
+    <glob pattern="*.kim"/>
+  </mime-type>
+  <mime-type type="image/x-hdr"> <!-- TODO fdo report -->
+    <comment>HDR image</comment>
+    <acronym>HDR</acronym>
+    <expanded-acronym>High Dynamic Range</expanded-acronym>
+    <glob pattern="*.hdr"/>
+    <glob pattern="*.pic"/>
+  </mime-type>
+  <mime-type type="image/x-kde-raw">
+    <sub-class-of type="image/x-dcraw"/>
+    <comment>KDE raw image formats</comment>
+    <glob pattern="*.bay"/>
+    <glob pattern="*.bmq"/>
+    <glob pattern="*.cs1"/>
+    <glob pattern="*.cs2"/>
+    <glob pattern="*.erf"/>
+    <glob pattern="*.fff"/>
+    <glob pattern="*.hrd"/>
+    <glob pattern="*.mdc"/>
+    <glob pattern="*.mos"/>
+    <glob pattern="*.pnx"/>
+    <glob pattern="*.rdc"/>
+  </mime-type>
+  <mime-type type="text/plain"> <!-- As discussed on xdg list, *.doc is needed here for disambiguation -->
+    <glob pattern="*.doc"/>
+  </mime-type>
+  <mime-type type="text/x-hex">
+    <sub-class-of type="text/plain"/>
+    <comment>Intel® hexadecimal object file</comment>
+    <glob pattern="*.hex"/>
+  </mime-type>
+  <mime-type type="text/x-katefilelist">
+    <sub-class-of type="text/plain"/>
+    <comment>Kate file list loader plugin list</comment>
+    <glob pattern="*.katefl"/>
+  </mime-type>
+  <mime-type type="text/x-objchdr"> <!-- ??? Useless, without glob or magic. Remove? -->
+    <sub-class-of type="text/x-csrc"/>
+    <comment>Objective-C header</comment>
+  </mime-type>
+  <mime-type type="text/vnd.abc"> <!-- fdo #6578 -->
+    <sub-class-of type="text/plain"/>
+    <comment>abc musical notation file</comment>
+    <magic priority="80">
+      <match type="string" value="%abc" offset="0"/>
+    </magic>
+    <glob pattern="*.abc"/>
+  </mime-type>
+
+  <!-- all/ fake mime types -->
+  <mime-type type="all/all">
+    <comment>all files and folders</comment>
+  </mime-type>
+  <mime-type type="all/allfiles">
+    <comment>all files</comment>
+  </mime-type>
+
+  <!-- uri/ fake mime types -->
+  <mime-type type="uri/mms">
+    <comment>mms: URIs</comment>
+  </mime-type>
+  <mime-type type="uri/mmst">
+    <comment>mmst: URIs</comment>
+  </mime-type>
+  <mime-type type="uri/mmsu">
+    <comment>mmsu: URIs</comment>
+  </mime-type>
+  <mime-type type="uri/pnm">
+    <comment>pnm: URIs</comment>
+  </mime-type>
+  <mime-type type="uri/rtspt">
+    <comment>rtspt: URIs</comment>
+  </mime-type>
+  <mime-type type="uri/rtspu">
+    <comment>rtspu: URIs</comment>
+  </mime-type>
+
+  <mime-type type="application/vnd.kde.fontspackage">
+    <sub-class-of type="application/zip"/>
+    <comment>fonts package</comment>
+    <glob pattern="*.fonts.zip"/>
+  </mime-type>
+
+  <mime-type type="application/x-smb-server"> <!-- KDE-specific -->
+    <sub-class-of type="inode/directory"/>
+    <comment>Windows server</comment>
+  </mime-type>
+  <mime-type type="application/x-smb-workgroup"> <!-- KDE-specific -->
+    <sub-class-of type="inode/directory"/>
+    <comment>Windows workgroup</comment>
+  </mime-type>
+  <mime-type type="application/x-ksysguard">
+    <!-- <sub-class-of type="application/xml"/> -->
+    <comment>KDE system monitor</comment>
+    <glob pattern="*.sgrd"/>
+  </mime-type>
+  <mime-type type="application/x-ktheme">
+    <sub-class-of type="application/zip"/>
+    <comment>KDE theme</comment>
+    <glob pattern="*.kth"/>
+  </mime-type>
+
+  <mime-type type="application/x-quanta">
+    <sub-class-of type="text/plain"/>
+    <comment>Quanta project</comment>
+    <glob pattern="*.quanta"/>
+  </mime-type>
+  <mime-type type="application/x-kommander">
+    <sub-class-of type="text/plain"/>
+    <comment>Kommander file</comment>
+    <glob pattern="*.kmdr"/>
+  </mime-type>
+
+  <mime-type type="application/x-tuberling">
+    <comment>potato</comment>
+    <glob pattern="*.tuberling"/>
+  </mime-type>
+  <mime-type type="application/x-kolf">
+    <comment>Kolf saved game</comment>
+    <magic priority="80">
+      <match offset="0" type="string" value="[0 Saved Game]" />
+    </magic>
+    <glob pattern="*.kolfgame"/>
+  </mime-type>
+  <mime-type type="application/x-kourse">
+    <comment>Kolf course</comment>
+    <magic priority="80">
+      <match offset="0" type="string" value="[0-course@-50,-50]" />
+    </magic>
+    <glob pattern="*.kolf"/>
+    <glob pattern="*.course"/>
+    <glob pattern="*.kourse"/>
+  </mime-type>
+
+  <mime-type type="application/vnd.kde.okular-archive">
+    <comment>Okular document archive</comment>
+    <glob pattern="*.okular"/>
+  </mime-type>
+
+  <mime-type type="application/x-cabri">
+    <comment>Cabri figure</comment>
+    <magic priority="80">
+      <match offset="0" type="string" value="FIGURE CabriII vers. " /> <!-- Cabri 1.0 -->
+      <match offset="0" type="string" value="Figure Cabri II " /> <!-- Cabri 1.2 -->
+    </magic>
+    <glob pattern="*.fig"/>
+  </mime-type>
+  <mime-type type="application/x-drgeo">
+    <comment>Dr. Geo figure</comment>
+    <magic priority="80">
+      <match offset="0" type="string" value="&lt;?xml version=&quot;1.0&quot;?&gt;\n&lt;drgenius&gt;" />
+    </magic>
+    <glob pattern="*.fgeo"/>
+  </mime-type>
+  <mime-type type="application/x-kgeo">
+    <comment>KGeo figure</comment>
+    <glob pattern="*.kgeo"/>
+  </mime-type>
+  <mime-type type="application/x-kig">
+    <comment>Kig figure</comment>
+    <glob pattern="*.kig"/>
+    <glob pattern="*.kigz"/>
+  </mime-type>
+  <mime-type type="application/x-kseg">
+    <comment>KSeg document</comment>
+    <glob pattern="*.seg"/>
+  </mime-type>
+  <mime-type type="application/x-kvtml">
+    <sub-class-of type="application/xml"/>
+    <comment>vocabulary trainer document</comment>
+    <glob pattern="*.kvtml"/>
+  </mime-type>
+  <mime-type type="application/x-kmplot">
+    <comment>KmPlot file</comment>
+    <glob pattern="*.fkt"/>
+  </mime-type>
+  <mime-type type="application/x-kwordquiz">
+    <comment>KWordQuiz vocabulary</comment>
+    <glob pattern="*.wql"/>
+  </mime-type>
+
+  <mime-type type="application/x-kcachegrind">
+    <comment>Cachegrind/Callgrind profile dump</comment>
+    <glob pattern="cachegrind.out*"/>
+    <glob pattern="callgrind.out*"/>
+  </mime-type>
+  <mime-type type="application/x-uml">
+    <comment>Umbrello UML Modeller file</comment>
+    <glob pattern="*.xmi"/>
+    <glob pattern="*.xmi.tgz"/>
+    <glob pattern="*.xmi.tar.bz2"/>
+  </mime-type>
+
+  <mime-type type="application/x-ms-shortcut">
+    <comment>Windows link</comment>
+    <alias type="application/x-win-lnk"/>
+    <glob pattern="*.lnk"/>
+  </mime-type>
+
+  <mime-type type="application/x-kgetlist">
+    <sub-class-of type="application/xml"/>
+    <comment>KGet download list</comment>
+    <glob pattern="*.kgt"/>
+  </mime-type>
+  <mime-type type="application/x-kopete-emoticons">
+    <comment>Kopete emoticons archive</comment>
+    <glob pattern="*.kopete-emoticons"/>
+  </mime-type>
+  <mime-type type="application/x-icq">
+    <comment>ICQ contact</comment>
+    <glob pattern="*.uin"/>
+    <glob pattern="*.icq"/>
+  </mime-type>
+
+  <mime-type type="video/x-ms-wmp"> <!-- fdo #19671, rejected because "not a file type, only a plugin type" -->
+    <comment>Microsoft Media Format</comment>
+    <sub-class-of type="video/x-ms-wmv"/>
+    <alias type="video/mediaplayer"/>
+    <alias type="application/x-mplayer2"/>
+    <glob pattern="*.wmp"/>
+  </mime-type>
+
+  <!-- http://www4.wiwiss.fu-berlin.de/bizer/TriG/ -->
+  <!-- Used in Nepomuk to encode almost all ontologies -->
+  <mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-trig"> <!-- fdo #18089 -->
+    <comment>TriG RDF document</comment>
+    <sub-class-of type="text/plain" />
+    <glob pattern="*.trig" />
+  </mime-type>
+  <!-- http://www.dajobe.org/2004/01/turtle/#sec-mime -->
+  <!-- Important: the SPARQL RDF query lanaguge uses turtle encoding for graph patterns. -->
+  <mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-turtle"> <!-- fdo #18089 -->
+    <comment>Turtle RDF document</comment>
+    <sub-class-of type="text/plain" />
+  </mime-type>
+  <mime-type type="image/x-pic"> <!-- fdo #26038 -->
+    <comment>Softimage PIC image</comment>
+    <magic priority="80">
+      <match value="0x5380f634" type="big32" offset="0"/>
+    </magic>
+    <glob pattern="*.pic"/>
+  </mime-type>
+  <mime-type type="text/x-qml"> <!-- in fdo smi > 0.90 -->
+    <comment>Qt Markup Language file</comment>
+    <magic priority="80">
+      <match type="string" value="import Qt " offset="0:256"/>
+    </magic>
+    <glob pattern="*.qml"/>
+  </mime-type>
+  <mime-type type="application/x-mobipocket-ebook">
+    <comment>Mobipocket e-book</comment>
+    <sub-class-of type="application/x-palm-database"/>
+    <generic-icon name="x-office-document"/>
+    <glob pattern="*.mobi"/>
+    <glob pattern="*.prc" />
+    <magic priority="30">
+      <!-- This also matches AportisDoc, so lower the priority and prefer extension -->
+      <match type="string" offset="60" value="TEXtREAd" />
+    </magic>
+    <magic priority="80">
+      <match type="string" offset="60" value="BOOKMOBI" />
+    </magic>
+  </mime-type>
+</mime-info>
