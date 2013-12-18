@@ -29,8 +29,7 @@
  * You can later access the version number with KPluginLoader::pluginVersion()
  */
 #define K_EXPORT_PLUGIN_VERSION(version) \
-Q_EXTERN_C KSERVICE_EXPORT const quint32 kde_plugin_version = version;
-
+    Q_EXTERN_C KSERVICE_EXPORT const quint32 kde_plugin_version = version;
 
 /**
  * \relates KPluginLoader
@@ -50,7 +49,7 @@ class KSERVICE_DEPRECATED_EXPORT K_EXPORT_PLUGIN_is_deprecated_see_KDE5PORTING
 };
 
 #define K_EXPORT_PLUGIN(factory) \
-            K_EXPORT_PLUGIN_is_deprecated_see_KDE5PORTING dummy;
+    K_EXPORT_PLUGIN_is_deprecated_see_KDE5PORTING dummy;
 #endif
 
 #endif

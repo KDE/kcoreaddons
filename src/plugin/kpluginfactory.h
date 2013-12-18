@@ -31,7 +31,10 @@
 #include <kexportplugin.h> // for source compat
 
 class KPluginFactoryPrivate;
-namespace KParts { class Part; }
+namespace KParts
+{
+class Part;
+}
 
 #define KPluginFactory_iid "org.kde.KPluginFactory"
 
@@ -39,26 +42,26 @@ namespace KParts { class Part; }
     K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, "")
 
 #define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, json) \
-class name : public KPluginFactory \
-{ \
-    Q_OBJECT \
-    Q_PLUGIN_METADATA(IID KPluginFactory_iid FILE json) \
-    Q_INTERFACES(KPluginFactory) \
+    class name : public KPluginFactory \
+    { \
+        Q_OBJECT \
+        Q_PLUGIN_METADATA(IID KPluginFactory_iid FILE json) \
+        Q_INTERFACES(KPluginFactory) \
     public: \
         explicit name(const char * = 0, QObject * = 0); \
         ~name(); \
     private: \
         void init(); \
-};
+    };
 
 #define K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations) \
-name::name(const char *componentName, QObject *parent) \
-    : baseFactory(componentName, parent) { init(); } \
-void name::init() \
-{ \
-    pluginRegistrations \
-} \
-name::~name() {}
+    name::name(const char *componentName, QObject *parent) \
+        : baseFactory(componentName, parent) { init(); } \
+    void name::init() \
+    { \
+        pluginRegistrations \
+    } \
+    name::~name() {}
 
 #define K_PLUGIN_FACTORY_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations) \
     K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory) \
@@ -105,7 +108,6 @@ name::~name() {}
  * \see K_PLUGIN_FACTORY_DEFINITION
  */
 #define K_PLUGIN_FACTORY(name, pluginRegistrations) K_PLUGIN_FACTORY_WITH_BASEFACTORY(name, KPluginFactory, pluginRegistrations)
-
 
 /**
  * \relates KPluginFactory
@@ -402,7 +404,7 @@ protected:
      */
     template<class T>
     void registerPlugin(const QString &keyword = QString(), CreateInstanceFunction instanceFunction
-            = InheritanceChecker<T>().createInstanceFunction(reinterpret_cast<T *>(0)))
+                        = InheritanceChecker<T>().createInstanceFunction(reinterpret_cast<T *>(0)))
     {
         registerPlugin(keyword, &T::staticMetaObject, instanceFunction);
     }
@@ -462,11 +464,19 @@ protected:
      * You can inherit it, if you want to add new classes and still keep support for the old ones.
      */
     template<class impl>
-    struct InheritanceChecker
-    {
-        CreateInstanceFunction createInstanceFunction(KParts::Part *) { return &createPartInstance<impl>; }
-        CreateInstanceFunction createInstanceFunction(QWidget *) { return &createInstance<impl, QWidget>; }
-        CreateInstanceFunction createInstanceFunction(...) { return &createInstance<impl, QObject>; }
+    struct InheritanceChecker {
+        CreateInstanceFunction createInstanceFunction(KParts::Part *)
+        {
+            return &createPartInstance<impl>;
+        }
+        CreateInstanceFunction createInstanceFunction(QWidget *)
+        {
+            return &createInstance<impl, QWidget>;
+        }
+        CreateInstanceFunction createInstanceFunction(...)
+        {
+            return &createInstance<impl, QObject>;
+        }
     };
 
 private:
@@ -478,7 +488,7 @@ typedef KPluginFactory KLibFactory;
 template<typename T>
 inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
 {
-    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent): 0, parent, args, QString());
+    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : 0, parent, args, QString());
 
     T *t = qobject_cast<T *>(o);
     if (!t) {
@@ -490,7 +500,7 @@ inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
 template<typename T>
 inline T *KPluginFactory::create(const QString &keyword, QObject *parent, const QVariantList &args)
 {
-    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent): 0, parent, args, keyword);
+    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : 0, parent, args, keyword);
 
     T *t = qobject_cast<T *>(o);
     if (!t) {
@@ -510,7 +520,6 @@ inline T *KPluginFactory::create(QWidget *parentWidget, QObject *parent, const Q
     }
     return t;
 }
-
 
 Q_DECLARE_INTERFACE(KPluginFactory, KPluginFactory_iid)
 

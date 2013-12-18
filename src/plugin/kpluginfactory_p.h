@@ -32,7 +32,6 @@ class KPluginFactoryPrivate
 protected:
     typedef QPair<const QMetaObject *, KPluginFactory::CreateInstanceFunction> Plugin;
 
-
     KPluginFactoryPrivate() : catalogInitialized(false) {}
     ~KPluginFactoryPrivate()
     {

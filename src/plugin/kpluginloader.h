@@ -143,5 +143,4 @@ private:
     KPluginLoaderPrivate *const d_ptr;
 };
 
-
 #endif

@@ -21,9 +21,18 @@
 #if 0 // TEMP_KF5_REENABLE
 #include <klocalizedstring.h>
 #else
-QString i18n(QString a) { return a; }
-QString i18n(QString a, QString b) { return a.arg(b); }
-QString i18n(QString a, QString b, QString c) { return a.arg(b, c); }
+QString i18n(QString a)
+{
+    return a;
+}
+QString i18n(QString a, QString b)
+{
+    return a.arg(b);
+}
+QString i18n(QString a, QString b, QString c)
+{
+    return a.arg(b, c);
+}
 #endif
 #include "kpluginfactory.h"
 #include <kservice.h>
@@ -55,22 +64,25 @@ protected:
     KLibrary *lib;
 };
 
-inline QString makeLibName( const QString &libname )
+inline QString makeLibName(const QString &libname)
 {
 #if defined(Q_OS_WIN) || defined(Q_OS_CYGWIN)
-    if (!libname.endsWith(QLatin1String(".dll")))
+    if (!libname.endsWith(QLatin1String(".dll"))) {
         return libname + QLatin1String(".dll");
+    }
     return libname;
 #else
     int pos = libname.lastIndexOf(QLatin1Char('/'));
-    if (pos < 0)
-      pos = 0;
+    if (pos < 0) {
+        pos = 0;
+    }
     if (libname.indexOf(QLatin1Char('.'), pos) < 0) {
-        const char* const extList[] = { ".so", ".dylib", ".bundle", ".sl" };
+        const char *const extList[] = { ".so", ".dylib", ".bundle", ".sl" };
         for (uint i = 0; i < sizeof(extList) / sizeof(*extList); ++i) {
             const QString lib = libname + QString::fromLatin1(extList[i]);
-            if (QLibrary::isLibrary(lib))
+            if (QLibrary::isLibrary(lib)) {
                 return lib;
+            }
         }
     }
     return libname;
@@ -78,7 +90,7 @@ inline QString makeLibName( const QString &libname )
 }
 
 #ifdef Q_OS_WIN
-extern QString fixLibPrefix(const QString& libname);
+extern QString fixLibPrefix(const QString &libname);
 #endif
 
 QString findLibraryInternal(const QString &name)
@@ -89,20 +101,22 @@ QString findLibraryInternal(const QString &name)
     bool hasPrefix = fileinfo.fileName().startsWith(QLatin1String("lib"));
     bool kdeinit = fileinfo.fileName().startsWith(QLatin1String("libkdeinit5_"));
 
-    if (hasPrefix && !kdeinit)
+    if (hasPrefix && !kdeinit) {
         qDebug() << "plugins should not have a 'lib' prefix:" << libname;
+    }
 #ifdef Q_CC_MSVC
     // first remove the 'lib' prefix in front of windows plugins
     libname = fixLibPrefix(libname);
 #endif
 
     // If it is a absolute path just return it
-    if (!QDir::isRelativePath(libname))
+    if (!QDir::isRelativePath(libname)) {
         return libname;
+    }
 
 #if 0
     // TEMPORARY HACK
-    Q_FOREACH(const QString &path, QFile::decodeName(qgetenv("LD_LIBRARY_PATH")).split(QLatin1Char(':'), QString::SkipEmptyParts)) {
+    Q_FOREACH (const QString &path, QFile::decodeName(qgetenv("LD_LIBRARY_PATH")).split(QLatin1Char(':'), QString::SkipEmptyParts)) {
         QString libfile = path + QLatin1String("/kde5/") + libname;
         if (QFile::exists(libfile)) {
             //qDebug() << "Looking at" << libfile << ": FOUND!";
@@ -120,7 +134,7 @@ QString findLibraryInternal(const QString &name)
 #endif
 
     // Ask Qt for the list of based paths containing plugins
-    Q_FOREACH(const QString &path, QCoreApplication::libraryPaths()) {
+    Q_FOREACH (const QString &path, QCoreApplication::libraryPaths()) {
         // Check for kde modules/plugins?
         QString libfile = path + QLatin1String("/kf5/") + libname;
         if (QFile::exists(libfile)) {
@@ -130,10 +144,11 @@ QString findLibraryInternal(const QString &name)
         //qDebug() << "Looking at" << libfile << ": doesn't exist";
 
 #if 0 // old code, not sure how to port
-    // Now look where they don't belong but sometimes are
+        // Now look where they don't belong but sometimes are
 #ifndef Q_CC_MSVC
-    if (!hasPrefix)
-        libname = fileinfo.path() + QLatin1String("/lib") + fileinfo.fileName();
+        if (!hasPrefix) {
+            libname = fileinfo.path() + QLatin1String("/lib") + fileinfo.fileName();
+        }
 #endif
 #endif
 
@@ -164,16 +179,15 @@ KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
     // No lib, no fun.
     if (fileName().isEmpty()) {
         d->errorString = i18n(
-                "Could not find plugin '%1' for application '%2'",
-                plugin,
-                QCoreApplication::instance()->applicationName());
+                             "Could not find plugin '%1' for application '%2'",
+                             plugin,
+                             QCoreApplication::instance()->applicationName());
         return;
     }
 }
 
-
 KPluginLoader::KPluginLoader(const KService &service, QObject *parent)
-: QPluginLoader(findLibraryInternal(service.library()), parent), d_ptr(new KPluginLoaderPrivate(service.library()))
+    : QPluginLoader(findLibraryInternal(service.library()), parent), d_ptr(new KPluginLoaderPrivate(service.library()))
 {
     d_ptr->q_ptr = this;
     Q_D(KPluginLoader);
@@ -195,9 +209,9 @@ KPluginLoader::KPluginLoader(const KService &service, QObject *parent)
     // find the lib.
     if (fileName().isEmpty()) {
         d->errorString = i18n(
-                "Could not find plugin '%1' for application '%2'",
-                service.name(),
-                QCoreApplication::instance()->applicationName());
+                             "Could not find plugin '%1' for application '%2'",
+                             service.name(),
+                             QCoreApplication::instance()->applicationName());
         return;
     }
 }
@@ -211,8 +225,9 @@ KPluginFactory *KPluginLoader::factory()
 {
     Q_D(KPluginLoader);
 
-    if (!load())
+    if (!load()) {
         return 0;
+    }
 
 #ifndef KDE_NO_DEPRECATED
     if (d->lib) {
@@ -225,15 +240,16 @@ KPluginFactory *KPluginLoader::factory()
 
     QObject *obj = instance();
 
-    if (!obj)
+    if (!obj) {
         return 0;
+    }
 
     KPluginFactory *factory = qobject_cast<KPluginFactory *>(obj);
 
     if (factory == 0) {
         qDebug() << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
         delete obj;
-        d->errorString = i18n("The library %1 does not offer a KDE 4 compatible factory." , d->name);
+        d->errorString = i18n("The library %1 does not offer a KDE 4 compatible factory.", d->name);
     }
 
     return factory;
@@ -243,13 +259,15 @@ bool KPluginLoader::load()
 {
     Q_D(KPluginLoader);
 
-    if (isLoaded())
+    if (isLoaded()) {
         return true;
+    }
 
     if (!QPluginLoader::load()) {
         d->lib = new KLibrary(d->name);
-        if (d->lib->load())
+        if (d->lib->load()) {
             return true;
+        }
 
         return false;
     }
@@ -259,10 +277,11 @@ bool KPluginLoader::load()
     Q_ASSERT(lib.isLoaded()); // already loaded by QPluginLoader::load()
 
     quint32 *version = (quint32 *) lib.resolve("kde_plugin_version");
-    if (version)
+    if (version) {
         d->pluginVersion = *version;
-    else
+    } else {
         d->pluginVersion = ~0U;
+    }
 
     return true;
 }
@@ -271,8 +290,9 @@ QString KPluginLoader::errorString() const
 {
     Q_D(const KPluginLoader);
 
-    if (!d->errorString.isEmpty())
+    if (!d->errorString.isEmpty()) {
         return d->errorString;
+    }
 
     return QPluginLoader::errorString();
 }
@@ -280,14 +300,14 @@ QString KPluginLoader::errorString() const
 quint32 KPluginLoader::pluginVersion() const
 {
     Q_D(const KPluginLoader);
-    const_cast<KPluginLoader*>(this)->load();
+    const_cast<KPluginLoader *>(this)->load();
     return d->pluginVersion;
 }
 
 QString KPluginLoader::pluginName() const
 {
     Q_D(const KPluginLoader);
-    const_cast<KPluginLoader*>(this)->load();
+    const_cast<KPluginLoader *>(this)->load();
     return d->name;
 }
 

@@ -35,8 +35,9 @@ KPluginFactory::KPluginFactory(const char *componentName, QObject *parent)
     Q_D(KPluginFactory);
     d->q_ptr = this;
 
-    if (componentName)
+    if (componentName) {
         d->componentName = QString::fromUtf8(componentName);
+    }
 
     factorycleanup()->add(this);
 }
@@ -129,9 +130,10 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
     if (keyword.isEmpty()) {
 
         // KDE5 TODO: kde3-kparts compatibility, remove in kde5
-        const char* kpartsIface = iface;
-        if (args.contains(QVariant(QString::fromLatin1("Browser/View"))))
+        const char *kpartsIface = iface;
+        if (args.contains(QVariant(QString::fromLatin1("Browser/View")))) {
             kpartsIface = "Browser/View";
+        }
 
         const QStringList argsStringList = variantListToStringList(args);
 
@@ -171,16 +173,18 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
 QStringList KPluginFactory::variantListToStringList(const QVariantList &list)
 {
     QStringList stringlist;
-    Q_FOREACH(const QVariant& var, list)
+    Q_FOREACH (const QVariant &var, list) {
         stringlist << var.toString();
+    }
     return stringlist;
 }
 
 QVariantList KPluginFactory::stringListToVariantList(const QStringList &list)
 {
     QVariantList variantlist;
-    Q_FOREACH(const QString& str, list)
+    Q_FOREACH (const QString &str, list) {
         variantlist << QVariant(str);
+    }
     return variantlist;
 }
 
