@@ -102,6 +102,8 @@ else()
   target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/${INCLUDE_INSTALL_DIR}>" )
 endif()
 
+target_compile_definitions(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
+
 set_target_properties(KF5CoreAddons PROPERTIES VERSION   ${KCOREADDONS_VERSION_STRING}
                                                SOVERSION ${KCOREADDONS_SOVERSION}
                                                EXPORT_NAME CoreAddons
