@@ -96,7 +96,7 @@ else()
     target_link_libraries(KF5CoreAddons PRIVATE netapi32)
 endif()
 
-target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/kcoreaddons>" )
+target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/kcoreaddons;${INCLUDE_INSTALL_DIR}/KCoreAddons>" )
 
 target_compile_definitions(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
 
