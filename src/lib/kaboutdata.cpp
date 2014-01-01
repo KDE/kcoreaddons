@@ -956,11 +956,11 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         } else {
             printf(qPrintable(QCoreApplication::translate("KAboutData CLI", "%s was written by:\n")), qPrintable(qAppName()));
             Q_FOREACH (const KAboutPerson &person, d->_authorList) {
-                printf("   %s", qPrintable(person.name()));
+                QString authorData = QStringLiteral("    ") + person.name();
                 if (!person.emailAddress().isEmpty()) {
-                    printf("%s", qPrintable(person.emailAddress()));
+                    authorData.append(QStringLiteral(" <") + person.emailAddress() + QStringLiteral(">"));
                 }
-                printf("\n");
+                printf("%s\n", qPrintable(authorData));;
             }
         }
     } else if (parser->isSet(QStringLiteral("license"))) {
