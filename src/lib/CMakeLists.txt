@@ -96,7 +96,7 @@ else()
     target_link_libraries(KF5CoreAddons PRIVATE netapi32)
 endif()
 
-target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/kcoreaddons;${INCLUDE_INSTALL_DIR}/KCoreAddons>" )
+target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/KCoreAddons>" )
 
 target_compile_definitions(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
 
@@ -166,5 +166,5 @@ install(FILES
     ${KCoreAddons_HEADERS}
     io/kfilesystemtype_p.h #Needed for building kio, KFileSystemType
     ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_export.h
-    DESTINATION ${INCLUDE_INSTALL_DIR}/kcoreaddons COMPONENT Devel
+    DESTINATION ${INCLUDE_INSTALL_DIR}/KCoreAddons COMPONENT Devel
 )
