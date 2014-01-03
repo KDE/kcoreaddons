@@ -103,7 +103,7 @@ public:
 
     /**
      * Used to obtain the factory object of the plugin. The returned object is usually created
-     * from a K_PLUGIN_FACTORY invokation.
+     * from a K_PLUGIN_FACTORY invocation.
      *
      * \returns The factory of the plugin or 0 on error.
      */
