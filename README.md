@@ -1,5 +1,7 @@
 # KCoreAddons
 
+Utilities for core application functionality and accessing the OS
+
 ## Introduction
 
 KCoreAddons provides classes built on top of QtCore to perform various tasks
@@ -9,6 +11,7 @@ replacement, accessing user information and many more.
 
 ## Links
 
+- Home page: <https://projects.kde.org/projects/frameworks/kcoreaddons>
 - Mailing list: <https://mail.kde.org/mailman/listinfo/kde-frameworks-devel>
 - IRC channel: #kde-devel on Freenode
 - Git repository: <https://projects.kde.org/projects/frameworks/kcoreaddons/repository>
