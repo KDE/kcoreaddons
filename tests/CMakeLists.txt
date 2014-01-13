@@ -1,6 +1,10 @@
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
-find_package(Qt5Widgets 5.2.0 REQUIRED NO_MODULE)
+find_package(Qt5Widgets ${REQUIRED_QT_VERSION} CONFIG QUIET)
+if(NOT Qt5Widgets_FOUND)
+    message(STATUS "Qt5Widgets not found, examples will not be built.")
+    return()
+endif()
 
 macro(KCOREADDONS_EXAMPLES)
     foreach(_testname ${ARGN})
