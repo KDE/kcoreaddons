@@ -191,7 +191,7 @@ QString KUser::loginName() const
     return (d->userInfo ? QString::fromUtf16((ushort *) d->userInfo->usri11_name) : QString());
 }
 
-#ifndef KDE_NO_DEPRECATED
+#ifndef KCOREADDONS_NO_DEPRECATED
 QString KUser::fullName() const
 {
     return (d->userInfo ? QString::fromUtf16((ushort *) d->userInfo->usri11_full_name) : QString());

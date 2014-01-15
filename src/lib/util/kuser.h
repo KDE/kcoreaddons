@@ -176,7 +176,7 @@ public:
      * @return the full name of the user or QString() if user is invalid
      * @deprecated use property(KUser::FullName) instead
      */
-#ifndef KDE_NO_DEPRECATED
+#ifndef KCOREADDONS_NO_DEPRECATED
     KCOREADDONS_DEPRECATED QString fullName() const;
 #endif
 
