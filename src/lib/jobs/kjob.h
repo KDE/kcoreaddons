@@ -86,6 +86,10 @@ class KCOREADDONS_EXPORT KJob : public QObject
     Q_OBJECT
     Q_ENUMS(KillVerbosity Capability Unit)
     Q_FLAGS(Capabilities)
+    Q_PROPERTY(int error READ error NOTIFY result)
+    Q_PROPERTY(QString errorText READ errorText NOTIFY result)
+    Q_PROPERTY(QString errorString READ errorString NOTIFY result)
+    Q_PROPERTY(unsigned long percent READ percent NOTIFY percent)
 
 public:
     enum Unit { Bytes, Files, Directories };
@@ -164,7 +168,7 @@ public:
      * }
      * \endcode
      */
-    virtual void start() = 0;
+    Q_SCRIPTABLE virtual void start() = 0;
 
     enum KillVerbosity { Quietly, EmitResult };
 
@@ -308,7 +312,7 @@ public:
      * @param unit the unit of the requested amount
      * @return the processed size
      */
-    qulonglong processedAmount(Unit unit) const;
+    Q_SCRIPTABLE qulonglong processedAmount(Unit unit) const;
 
     /**
      * Returns the total amount of a given unit for this job.
@@ -316,7 +320,7 @@ public:
      * @param unit the unit of the requested amount
      * @return the total size
      */
-    qulonglong totalAmount(Unit unit) const;
+    Q_SCRIPTABLE qulonglong totalAmount(Unit unit) const;
 
     /**
      * Returns the overall progress of this job.
