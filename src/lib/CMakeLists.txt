@@ -168,3 +168,7 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_export.h
     DESTINATION ${INCLUDE_INSTALL_DIR}/KCoreAddons COMPONENT Devel
 )
+
+include(ECMGeneratePriFile)
+ecm_generate_pri_file(BASE_NAME KCoreAddons LIB_NAME KF5CoreAddons DEPS "core" FILENAME_VAR PRI_FILENAME)
+install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
