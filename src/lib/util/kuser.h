@@ -177,7 +177,10 @@ public:
      * @deprecated use property(KUser::FullName) instead
      */
 #ifndef KCOREADDONS_NO_DEPRECATED
-    KCOREADDONS_DEPRECATED QString fullName() const;
+    KCOREADDONS_DEPRECATED QString fullName() const
+    {
+        return property(FullName).toString();
+    }
 #endif
 
     /**

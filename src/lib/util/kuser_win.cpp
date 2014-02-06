@@ -191,13 +191,6 @@ QString KUser::loginName() const
     return (d->userInfo ? QString::fromUtf16((ushort *) d->userInfo->usri11_name) : QString());
 }
 
-#ifndef KCOREADDONS_NO_DEPRECATED
-QString KUser::fullName() const
-{
-    return (d->userInfo ? QString::fromUtf16((ushort *) d->userInfo->usri11_full_name) : QString());
-}
-#endif
-
 QString KUser::homeDir() const
 {
     return QDir::fromNativeSeparators(QString::fromLocal8Bit(qgetenv("USERPROFILE")));
