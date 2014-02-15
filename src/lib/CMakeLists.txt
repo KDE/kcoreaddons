@@ -105,60 +105,57 @@ set_target_properties(KF5CoreAddons PROPERTIES VERSION   ${KCOREADDONS_VERSION_S
                                                EXPORT_NAME CoreAddons
 )
 
-ecm_generate_headers(
-  KAboutData
-
-  REQUIRED_HEADERS KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_HEADERS
+    HEADER_NAMES KAboutData
+    REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(
-  KSharedDataCache
-
-  RELATIVE caching
-  REQUIRED_HEADERS KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_HEADERS
+    HEADER_NAMES KSharedDataCache
+    RELATIVE caching
+    REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(
-  KAutoSaveFile
-  KDirWatch
-  KMessage
-  KProcess
-  KBackup
-  KUrlMimeData
-
-  RELATIVE io
-  REQUIRED_HEADERS KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_HEADERS
+    HEADER_NAMES
+        KAutoSaveFile
+        KDirWatch
+        KMessage
+        KProcess
+        KBackup
+        KUrlMimeData
+    RELATIVE io
+    REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(
-  KCompositeJob
-  KJob
-  KJobTrackerInterface
-  KJobUiDelegate
-
-  RELATIVE jobs
-  REQUIRED_HEADERS KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_HEADERS
+    HEADER_NAMES
+        KCompositeJob
+        KJob
+        KJobTrackerInterface
+        KJobUiDelegate
+    RELATIVE jobs
+    REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(
-  KRandom
-  KRandomSequence
-
-  RELATIVE randomness
-  REQUIRED_HEADERS KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_HEADERS
+    HEADER_NAMES
+        KRandom
+        KRandomSequence
+    RELATIVE randomness
+    REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(
-  KMacroExpander
-  KStringHandler
-
-  RELATIVE text
-  REQUIRED_HEADERS KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_HEADERS
+    HEADER_NAMES
+        KMacroExpander
+        KStringHandler
+    RELATIVE text
+    REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(
-  KFormat
-  KUser
-  KShell
-
-  RELATIVE util
-  REQUIRED_HEADERS KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_HEADERS
+    HEADER_NAMES
+        KFormat
+        KUser
+        KShell
+    RELATIVE util
+    REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons DESTINATION  ${INCLUDE_INSTALL_DIR} COMPONENT Devel )
 
 install(TARGETS KF5CoreAddons EXPORT KF5CoreAddonsTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
