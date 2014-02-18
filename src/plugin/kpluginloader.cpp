@@ -89,8 +89,11 @@ inline QString makeLibName(const QString &libname)
 #endif
 }
 
-#ifdef Q_OS_WIN
-extern QString fixLibPrefix(const QString &libname);
+#ifdef Q_CC_MSVC
+static QString removeLibPrefix(const QString &libname)
+{
+    return libname.startsWith(QStringLiteral("lib")) ? libname.mid(3) : libname;
+}
 #endif
 
 QString findLibraryInternal(const QString &name)
@@ -106,7 +109,7 @@ QString findLibraryInternal(const QString &name)
     }
 #ifdef Q_CC_MSVC
     // first remove the 'lib' prefix in front of windows plugins
-    libname = fixLibPrefix(libname);
+    libname = removeLibPrefix(libname);
 #endif
 
     // If it is a absolute path just return it
