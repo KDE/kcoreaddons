@@ -171,8 +171,13 @@ public:
      * provided that the main() called setApplicationData.
      */
     static KAboutData applicationData();
+
     /**
      * Sets the application data for this application.
+     *
+     * In addition to changing the result of applicationData(), this initializes
+     * the relevant properties of QCoreApplication (and its subclasses) with
+     * information from @p aboutData.
      */
     static void setApplicationData(const KAboutData &aboutData);
 

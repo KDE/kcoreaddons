@@ -911,8 +911,12 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
         s_registry->m_appData = new KAboutData(aboutData);
     }
 
-    if (QCoreApplication::instance()) {
-        QCoreApplication::instance()->setProperty("applicationIconName", s_registry->m_appData->programIconName());
+    QCoreApplication* app = QCoreApplication::instance();
+    if (app) {
+        app->setApplicationVersion(aboutData.version());
+        app->setApplicationName(aboutData.componentName());
+        app->setProperty("applicationDisplayName", aboutData.displayName());
+        app->setProperty("applicationIconName", s_registry->m_appData->programIconName());
     }
 }
 
