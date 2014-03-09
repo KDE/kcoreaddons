@@ -25,6 +25,7 @@
 #include <qplatformdefs.h>
 #include <kshell.h>
 #ifdef Q_OS_WIN
+# include <qt_windows.h>
 # include <kshell_p.h>
 #endif
 
