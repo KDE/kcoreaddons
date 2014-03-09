@@ -61,9 +61,10 @@ public:
         ForwardedChannels = QProcess::ForwardedChannels,
         /**< Both standard output and standard error are forwarded
              to the parent process' respective channel */
-        OnlyStdoutChannel,
+        OnlyStdoutChannel = QProcess::ForwardedErrorChannel,
         /**< Only standard output is handled; standard error is forwarded */
-        OnlyStderrChannel  /**< Only standard error is handled; standard output is forwarded */
+        OnlyStderrChannel = QProcess::ForwardedOutputChannel
+        /**< Only standard error is handled; standard output is forwarded */
     };
 
     /**
@@ -332,9 +333,6 @@ private:
     using QProcess::readChannelMode;
     using QProcess::setProcessChannelMode;
     using QProcess::processChannelMode;
-
-    Q_PRIVATE_SLOT(d_func(), void _k_forwardStdout())
-    Q_PRIVATE_SLOT(d_func(), void _k_forwardStderr())
 };
 
 #endif
