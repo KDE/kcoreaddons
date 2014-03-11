@@ -135,9 +135,11 @@ KUser::KUser(K_UID uid)
 {
     DWORD bufferLen = UNLEN + 1;
     ushort buffer[UNLEN + 1];
+    DWORD domainBufferLen = UNLEN + 1;
+    WCHAR domainBuffer[UNLEN + 1];
     SID_NAME_USE eUse;
 
-    if (LookupAccountSidW(NULL, uid, (LPWSTR) buffer, &bufferLen, NULL, NULL, &eUse)) {
+    if (uid && LookupAccountSidW(NULL, uid, (LPWSTR)buffer, &bufferLen, domainBuffer, &domainBufferLen, &eUse)) {
         d = new Private(QString::fromUtf16(buffer), uid);
     }
 }
@@ -147,9 +149,11 @@ KUser::KUser(KUserId uid)
 {
     DWORD bufferLen = UNLEN + 1;
     ushort buffer[UNLEN + 1];
+    DWORD domainBufferLen = UNLEN + 1;
+    WCHAR domainBuffer[UNLEN + 1];
     SID_NAME_USE eUse;
 
-    if (uid.isValid() && LookupAccountSidW(NULL, uid.nativeId(), (LPWSTR)buffer, &bufferLen, NULL, NULL, &eUse)) {
+    if (uid.isValid() && LookupAccountSidW(NULL, uid.nativeId(), (LPWSTR)buffer, &bufferLen, domainBuffer, &domainBufferLen, &eUse)) {
         d = new Private(QString::fromUtf16(buffer), uid.nativeId());
     }
 }
@@ -359,9 +363,11 @@ KUserGroup::KUserGroup(KGroupId gid)
 {
     DWORD bufferLen = UNLEN + 1;
     ushort buffer[UNLEN + 1];
+    DWORD domainBufferLen = UNLEN + 1;
+    WCHAR domainBuffer[UNLEN + 1];
     SID_NAME_USE eUse;
 
-    if (gid.isValid() && LookupAccountSidW(NULL, gid.nativeId(), (LPWSTR)buffer, &bufferLen, NULL, NULL, &eUse)) {
+    if (gid.isValid() && LookupAccountSidW(NULL, gid.nativeId(), (LPWSTR)buffer, &bufferLen, domainBuffer, &domainBufferLen, &eUse)) {
         d = new Private(QString::fromUtf16(buffer));
     }
 }
