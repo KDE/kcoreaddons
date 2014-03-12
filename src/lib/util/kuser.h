@@ -85,6 +85,11 @@ public:
      * long as the native pointer is needed.
      */
     NativeType nativeId() const;
+    /** @return A string representation of this user ID, not the name of the user
+     * On UNIX this is a simple integer, e.g. "0" for root. On Windows this is a string
+     * like e.g. "S-1-5-32-544" for the Administrators group
+     */
+    QString toString() const;
     bool operator==(const KUserOrGroupId &other) const;
     bool operator!=(const KUserOrGroupId &other) const;
 private:
@@ -509,7 +514,11 @@ inline typename KUserOrGroupId<T>::NativeType KUserOrGroupId<T>::nativeId() cons
 {
     return id;
 }
-
+template<typename T>
+inline QString KUserOrGroupId<T>::toString() const
+{
+    return QString::number(id);
+}
 template<typename T>
 inline KUserOrGroupId<T>::KUserOrGroupId()
     : id(-1)

@@ -585,6 +585,27 @@ bool KUserOrGroupId<void*>::operator!=(const KUserOrGroupId<void*> &other) const
     return !(*this == other);
 }
 
+static const auto invalidSidString = QStringLiteral("<invalid SID>");
+
+static QString sidToString(void* sid) {
+    if (!sid || !IsValidSid(sid)) {
+        return invalidSidString;
+    }
+    WCHAR* sidStr; // allocated by ConvertStringSidToSidW, must be freed using LocalFree()
+    if (!ConvertSidToStringSidW(sid, &sidStr)) {
+        return invalidSidString;
+    }
+    QString ret = QString::fromWCharArray(sidStr);
+    LocalFree(sidStr);
+    return ret;
+}
+
+template<>
+QString KUserOrGroupId<void*>::toString() const
+{
+    return sidToString(data ? data->sidBuffer : nullptr);
+}
+
 static bool sidFromName(const QString& name, char(*buffer)[SECURITY_MAX_SID_SIZE], PSID_NAME_USE sidType)
 {
     DWORD sidLength = SECURITY_MAX_SID_SIZE;
@@ -600,21 +621,6 @@ static bool sidFromName(const QString& name, char(*buffer)[SECURITY_MAX_SID_SIZE
         return false;
     }
     return true;
-}
-
-static const auto invalidSidString = QStringLiteral("<invalid SID>");
-
-static QString sidToString(void* sid) {
-    if (!sid || !IsValidSid(sid)) {
-        return invalidSidString;
-    }
-    WCHAR* sidStr; // allocated by ConvertStringSidToSidW, must be freed using LocalFree()
-    if (!ConvertSidToStringSidW(sid, &sidStr)) {
-        return invalidSidString;
-    }
-    QString ret = QString::fromWCharArray(sidStr);
-    LocalFree(sidStr); 
-    return ret;
 }
 
 KUserId KUserId::fromName(const QString& name) {
