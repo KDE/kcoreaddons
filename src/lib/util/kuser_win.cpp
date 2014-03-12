@@ -24,6 +24,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
 
+#include <memory> // unique_ptr
 #include <windows.h>
 #include <lm.h>
 #include <sddl.h>
@@ -652,3 +653,46 @@ KGroupId KGroupId::fromName(const QString& name) {
     }
     return KGroupId(sidBuffer);
 }
+
+struct HANDLEDeleter {
+    static inline void cleanup(HANDLE h) { CloseHandle(h); }
+};
+typedef QScopedPointer<HANDLE, HANDLEDeleter> ScopedHANDLE;
+
+static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS type)
+{
+    HANDLE _token;
+    if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &_token)) {
+        qWarning("Failed to get the token for the current process: %d", GetLastError());
+        return false;
+    }
+    // automatically free the resources on exit
+    const auto handleCloser = [](HANDLE h) { CloseHandle(h); };
+    std::unique_ptr<void, decltype(handleCloser)> token(_token, handleCloser);
+    std::unique_ptr<char[]> buffer;
+    // query required size
+    DWORD requiredSize;
+    if (!GetTokenInformation(token.get(), type, nullptr, 0, &requiredSize)) {
+        if (GetLastError() != ERROR_INSUFFICIENT_BUFFER) {
+            qWarning("Failed to get the required size for the token information %d: %d",
+                type, GetLastError());
+            return nullptr;
+        }
+    }
+    buffer.reset(new char[requiredSize]);
+    if (!GetTokenInformation(token.get(), type, buffer.get(), requiredSize, &requiredSize)) {
+        qWarning("Failed to get token information %d from current process: %d",
+            type, GetLastError());
+        return nullptr;
+    }
+    return buffer;
+}
+
+inline KUserId KUserId::currentUserId()
+{
+    std::unique_ptr<char[]> userTokenBuffer = queryProcessInformation(TokenUser);
+    TOKEN_USER* userToken = (TOKEN_USER*)userTokenBuffer.get();
+    return KUserId(userToken->User.Sid);
+}
+
+KUserId KUserId::currentEffectiveUserId() { return currentUserId(); }

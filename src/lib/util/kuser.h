@@ -112,7 +112,10 @@ struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<uid_t> {
     KUserId(NativeType nativeUid) : KUserOrGroupId(nativeUid) {}
     KUserId(const KUserId &other) : KUserOrGroupId(other) {}
     ~KUserId() {};
+    //TODO: document
     static KUserId fromName(const QString& name);
+    static KUserId currentUserId();
+    static KUserId currentEffectiveUserId();
 };
 
 /** A platform independent group ID.
@@ -544,7 +547,6 @@ template<typename T>
 inline KUserOrGroupId<T>::~KUserOrGroupId()
 {
 }
-
 #endif // !defined(Q_OS_WIN)
 
 #endif

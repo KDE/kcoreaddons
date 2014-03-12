@@ -35,34 +35,46 @@ private Q_SLOTS:
 
 void KUserTest::testKUserId()
 {
-    KUser currentUser;
-    KUserId currentUserId(currentUser.uid());
-    KUserId currentUserIdCopy = currentUserId;
-    KUserId currentUserIdFromStr = KUserId::fromName(currentUser.loginName());
+    // make sure KUser::currentUserId() and KUser::curretEffectiveUserId() work
+    KUserId currentUser = KUserId::currentUserId();
+    QVERIFY(currentUser.isValid());
+    KUserId currentEffectiveUser = KUserId::currentEffectiveUserId();
+    QVERIFY(currentEffectiveUser.isValid());
+    // these should be the same since this is not a setuid program
+    QVERIFY(currentUser == currentEffectiveUser);
+
+    //now get the same user from his name
+    QString userName = KUser(currentUser).loginName();
+    qDebug("Current user: %s, id: %s", qPrintable(userName), qPrintable(currentUser.toString()));
+    QVERIFY(!userName.isEmpty());
+    KUserId currentUserFromStr = KUserId::fromName(userName);
+    QVERIFY(currentUserFromStr.isValid());
     KUserId invalid;
+    QVERIFY(!invalid.isValid());
 #ifdef Q_OS_WIN
     KUserId invalid2(nullptr);
 #else
     KUserId invalid2(-1);
 #endif
+    QVERIFY(!invalid2.isValid());
     // I guess it is safe to assume no user with this name exists
     KUserId invalid3 = KUserId::fromName("This_user_does_not_exist");
-    
-    QVERIFY(!invalid.isValid());
-    QVERIFY(!invalid2.isValid());
     QVERIFY(!invalid3.isValid());
+
+    //check comparison
     QVERIFY(invalid == KUserId());
     QVERIFY(invalid == invalid2);
     QVERIFY(invalid == invalid3);
-    QVERIFY(currentUserId.isValid());
-    QVERIFY(currentUserIdCopy.isValid());
-    QVERIFY(currentUserIdFromStr.isValid());
-    QVERIFY(currentUserId == currentUserIdCopy);
-    QVERIFY(currentUserId == currentUserIdFromStr);
-    QVERIFY(currentUserId == KUserId(currentUserId));
-    QVERIFY(currentUserId != invalid);
-    QVERIFY(currentUserId != invalid2);
-    QVERIFY(currentUserId != invalid3);
+    QVERIFY(currentUser == currentUserFromStr);
+    QVERIFY(invalid != currentUser);
+    QVERIFY(currentUser != invalid);
+    QVERIFY(currentUser != invalid2);
+    QVERIFY(currentUser != invalid3);
+    //Copy constructor and assignment
+    KUserId currentUserCopy = currentUser;
+    QVERIFY(currentUser == currentUserCopy);
+    QVERIFY(currentUser == KUserId(currentUser));
+    QVERIFY(currentEffectiveUser == KUserId(currentUser));
 }
 
 void KUserTest::testKGroupId()

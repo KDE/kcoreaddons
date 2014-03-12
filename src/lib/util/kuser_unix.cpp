@@ -413,3 +413,7 @@ KGroupId KGroupId::fromName(const QString& name)
     }
     return KGroupId(g->gr_gid);
 }
+
+KUserId KUserId::currentUserId() { return KUserId(getuid()); }
+
+KUserId KUserId::currentEffectiveUserId() { return KUserId(geteuid()); }
