@@ -79,15 +79,46 @@ void KUserTest::testKUserId()
 
 void KUserTest::testKGroupId()
 {
+    // make sure KGroup::currentGroupId() and KGroup::curretEffectiveGroupId() work
+    KGroupId currentGroup = KGroupId::currentGroupId();
+    QVERIFY(currentGroup.isValid());
+    KGroupId currentEffectiveGroup = KGroupId::currentEffectiveGroupId();
+    QVERIFY(currentEffectiveGroup.isValid());
+    // these should be the same since this is not a setuid program
+    QVERIFY(currentGroup == currentEffectiveGroup);
+
+    //now get the same Group from his name
+    QString groupName = KUserGroup(currentGroup).name();
+    qDebug("Current group: %s, id: %s", qPrintable(groupName), qPrintable(currentGroup.toString()));
+    QVERIFY(!groupName.isEmpty());
+    KGroupId currentGroupFromStr = KGroupId::fromName(groupName);
+    QVERIFY(currentGroupFromStr.isValid());
     KGroupId invalid;
+    QVERIFY(!invalid.isValid());
 #ifdef Q_OS_WIN
     KGroupId invalid2(nullptr);
 #else
     KGroupId invalid2(-1);
 #endif
-    QVERIFY(!invalid.isValid());
     QVERIFY(!invalid2.isValid());
+    // I guess it is safe to assume no Group with this name exists
+    KGroupId invalid3 = KGroupId::fromName("This_Group_does_not_exist");
+    QVERIFY(!invalid3.isValid());
+
+    //check comparison
+    QVERIFY(invalid == KGroupId());
     QVERIFY(invalid == invalid2);
+    QVERIFY(invalid == invalid3);
+    QVERIFY(currentGroup == currentGroupFromStr);
+    QVERIFY(invalid != currentGroup);
+    QVERIFY(currentGroup != invalid);
+    QVERIFY(currentGroup != invalid2);
+    QVERIFY(currentGroup != invalid3);
+    //Copy constructor and assignment
+    KGroupId currentGroupCopy = currentGroup;
+    QVERIFY(currentGroup == currentGroupCopy);
+    QVERIFY(currentGroup == KGroupId(currentGroup));
+    QVERIFY(currentEffectiveGroup == KGroupId(currentGroup));
 }
 
 

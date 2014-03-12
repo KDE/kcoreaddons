@@ -694,5 +694,13 @@ inline KUserId KUserId::currentUserId()
     TOKEN_USER* userToken = (TOKEN_USER*)userTokenBuffer.get();
     return KUserId(userToken->User.Sid);
 }
+inline KGroupId KGroupId::currentGroupId()
+{
+    std::unique_ptr<char[]> primaryGroupBuffer = queryProcessInformation(TokenPrimaryGroup);
+    TOKEN_PRIMARY_GROUP* primaryGroup = (TOKEN_PRIMARY_GROUP*)primaryGroupBuffer.get();
+    return KGroupId(primaryGroup->PrimaryGroup);
+}
 
 KUserId KUserId::currentEffectiveUserId() { return currentUserId(); }
+
+KGroupId KGroupId::currentEffectiveGroupId() { return currentGroupId(); }

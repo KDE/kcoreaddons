@@ -130,7 +130,10 @@ struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<gid_t> {
     KGroupId(NativeType nativeUid) : KUserOrGroupId(nativeUid) {}
     KGroupId(const KGroupId &other) : KUserOrGroupId(other) {}
     ~KGroupId() {};
+    //TODO: document
     static KGroupId fromName(const QString& name);
+    static KGroupId currentGroupId();
+    static KGroupId currentEffectiveGroupId();
 };
 
 /**
