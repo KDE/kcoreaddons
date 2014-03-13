@@ -21,9 +21,8 @@
 
 #include "kuser.h"
 
-#include <QtCore/QMutableStringListIterator>
-#include <QtCore/QDebug>
-#include <QtCore/QDir>
+#include <QDebug>
+#include <QDir>
 #include <QStandardPaths>
 
 #include <memory> // unique_ptr
@@ -41,17 +40,20 @@ static const auto netApiBufferDeleter = [](void* buffer) {
         NetApiBufferFree(buffer);
     }
 };
-typedef std::unique_ptr<BYTE, decltype(netApiBufferDeleter)> ScopedNetApiBuffer;
-typedef std::unique_ptr<USER_INFO_11, decltype(netApiBufferDeleter)> ScopedUSER_INFO_11;
-typedef std::unique_ptr<GROUP_USERS_INFO_0, decltype(netApiBufferDeleter)> ScopedGROUP_USERS_INFO_0;
-typedef std::unique_ptr<GROUP_INFO_0, decltype(netApiBufferDeleter)> ScopedGROUP_INFO_0;
+
+template<typename T>
+class ScopedNetApiBuffer : public std::unique_ptr<T, decltype(netApiBufferDeleter)> {
+public:
+    inline explicit ScopedNetApiBuffer(T* data)
+        : std::unique_ptr<T, decltype(netApiBufferDeleter)>(data, netApiBufferDeleter) {}
+};
+
 const auto handleCloser = [](HANDLE h) {
     if (h != INVALID_HANDLE_VALUE) {
         CloseHandle(h);
     }
 };
 typedef std::unique_ptr<std::remove_pointer<HANDLE>::type, decltype(handleCloser)> ScopedHANDLE;
-
 
 static bool sidFromName(LPCWSTR name, char(*buffer)[SECURITY_MAX_SID_SIZE], PSID_NAME_USE sidType, QString* domainName = nullptr)
 {
@@ -77,13 +79,13 @@ class KUser::Private : public QSharedData
     Private() : userInfo(nullptr) {}
     //takes ownership over userInfo_
     Private(USER_INFO_11* userInfo_, KUserId uid_, const QString& nameWithDomain_)
-        : userInfo(userInfo_, netApiBufferDeleter), uid(uid_), nameWithDomain(nameWithDomain_)
+        : userInfo(userInfo_), uid(uid_), nameWithDomain(nameWithDomain_)
     {
         Q_ASSERT(uid.isValid());
     }
 public:
     static Ptr sharedNull;
-    ScopedUSER_INFO_11 userInfo;
+    ScopedNetApiBuffer<USER_INFO_11> userInfo;
     KUserId uid;
     QString nameWithDomain;
 
@@ -148,7 +150,7 @@ public:
             //qDebug("NetGetAnyDCName failed with error %d", status);
             servernameTmp = nullptr;
         }
-        std::unique_ptr<WCHAR, decltype(netApiBufferDeleter)> servername(servernameTmp, netApiBufferDeleter);
+        ScopedNetApiBuffer<WCHAR> servername(servernameTmp);
 
         // since level = 11 a USER_INFO_11 structure gets filled in and allocated by NetUserGetInfo()
         USER_INFO_11* userInfoTmp;
@@ -315,21 +317,17 @@ QStringList KUser::groupNames() const
         return result;
     }
 
-    PGROUP_USERS_INFO_0 pGroups = NULL;
+    LPBYTE groupsBuffer = nullptr;
     DWORD dwEntriesRead = 0;
     DWORD dwTotalEntries = 0;
     NET_API_STATUS nStatus;
 
-    nStatus = NetUserGetGroups(NULL, d->userInfo->usri11_name, 0, (LPBYTE *) &pGroups, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries);
-
+    nStatus = NetUserGetGroups(NULL, d->userInfo->usri11_name, 0, &groupsBuffer, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries);
+    ScopedNetApiBuffer<GROUP_USERS_INFO_0> groups((GROUP_USERS_INFO_0*)groupsBuffer);
     if (nStatus == NERR_Success) {
         for (DWORD i = 0; i < dwEntriesRead; ++i) {
-            result.append(QString::fromWCharArray(pGroups[i].grui0_name));
+            result.append(QString::fromWCharArray(groups.get()[i].grui0_name));
         }
-    }
-
-    if (pGroups) {
-        NetApiBufferFree(pGroups);
     }
 
     return result;
@@ -360,7 +358,7 @@ QList<KUser> KUser::allUsers()
     QList<KUser> result;
 
     NET_API_STATUS nStatus;
-    PUSER_INFO_11 pUser = NULL;
+    PUSER_INFO_11 pUser = nullptr;
     DWORD dwEntriesRead = 0;
     DWORD dwTotalEntries = 0;
     DWORD dwResumeHandle = 0;
@@ -384,20 +382,16 @@ QStringList KUser::allUserNames()
     QStringList result;
 
     NET_API_STATUS nStatus;
-    PUSER_INFO_0 pUsers = NULL;
+    LPBYTE userBuffer = nullptr;
     DWORD dwEntriesRead = 0;
     DWORD dwTotalEntries = 0;
 
-    nStatus = NetUserEnum(NULL, 0, 0, (LPBYTE *) &pUsers, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, NULL);
-
+    nStatus = NetUserEnum(NULL, 0, 0, &userBuffer, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, NULL);
+    ScopedNetApiBuffer<USER_INFO_0> users((PUSER_INFO_0)userBuffer);
     if (nStatus == NERR_Success) {
         for (DWORD i = 0; i < dwEntriesRead; ++i) {
-            result.append(QString::fromWCharArray(pUsers[i].usri0_name));
+            result.append(QString::fromWCharArray(users.get()[i].usri0_name));
         }
-    }
-
-    if (pUsers) {
-        NetApiBufferFree(pUsers);
     }
 
     return result;
@@ -417,10 +411,10 @@ public:
         : name(name), gid(id)
     {
         if (!name.isEmpty()) {
-            PBYTE groupInfoTmp;
-            ScopedGROUP_INFO_0 groupInfo;
+            PBYTE groupInfoTmp = nullptr;
             NET_API_STATUS status = NetGroupGetInfo(nullptr, (LPCWSTR)name.utf16(), 0, &groupInfoTmp);
-            groupInfo.reset((GROUP_INFO_0*)groupInfoTmp); // must always be freed, even on error
+            // must always be freed, even on error
+            ScopedNetApiBuffer<GROUP_INFO_0> groupInfo((GROUP_INFO_0*)groupInfoTmp);
             if (status != NERR_Success) {
                 qWarning() << "Failed to find group with name" << name << "error =" << status;
                 groupInfo.reset();
@@ -524,7 +518,7 @@ QStringList KUserGroup::userNames() const
     nStatus = NetGroupGetUsers(nullptr, (LPCWSTR)d->name.utf16(), 0, &userBuf, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, nullptr);
 
     // userBuf must always be freed, even on error
-    ScopedGROUP_USERS_INFO_0 users((GROUP_USERS_INFO_0*)userBuf, netApiBufferDeleter);
+    ScopedNetApiBuffer<GROUP_USERS_INFO_0> users((GROUP_USERS_INFO_0*)userBuf);
 
     if (nStatus == NERR_Success) {
         for (DWORD i = 0; i < dwEntriesRead; ++i) {
@@ -539,14 +533,14 @@ QStringList KUserGroup::userNames() const
 template<typename T>
 static void iterateGroups(DWORD level, T callback) {
     NET_API_STATUS nStatus = NERR_Success;
+    ULONG_PTR resumeHandle = 0;
     do {
         LPBYTE groupBuffer = NULL;
         DWORD entriesRead = 0;
         DWORD totalEntries = 0;
-        ULONG_PTR resumeHandle = 0;
         nStatus = NetGroupEnum(NULL, 0, &groupBuffer, 1, &entriesRead, &totalEntries, &resumeHandle);
         // buffer must always be freed, even if NetGroupEnum fails
-        std::unique_ptr<BYTE, decltype(netApiBufferDeleter)> groupInfo(groupBuffer, netApiBufferDeleter);
+        ScopedNetApiBuffer<BYTE> groupInfo(groupBuffer);
         if ((nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) && entriesRead > 0) {
             callback(groupInfo.get());
         }
