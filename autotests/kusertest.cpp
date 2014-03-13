@@ -17,6 +17,7 @@
 *  Boston, MA 02110-1301, USA.
 */
 #include <QTest>
+#include <QDebug>
 
 #include "kuser.h"
 
@@ -28,10 +29,29 @@
 class KUserTest : public QObject {
     Q_OBJECT
 private Q_SLOTS:
+    void testKUser();
     void testKUserId();
     void testKGroupId();
 };
 
+void KUserTest::testKUser()
+{
+    KUser user(KUser::UseRealUserID);
+    KUser effectiveUser(KUser::UseRealUserID);
+    QVERIFY(user.isValid());
+    QVERIFY(effectiveUser.isValid());
+    QVERIFY(user == effectiveUser); // should be the same, no suid
+    // We can't test the KUser properties, since they differ on each system
+    // instead just print them all out, this can be verified by the person running the test
+    qDebug() << "Current User:" << user.loginName();
+    qDebug() << "Full name:" << user.fullName();
+    qDebug() << "User ID:" << user.userId().toString();
+    qDebug() << "Home dir:" << user.homeDir();
+    qDebug() << "Superuser:" << user.isSuperUser();
+    qDebug() << "Shell: " << user.shell();
+    qDebug() << "Face icon path:" << user.faceIconPath();
+    qDebug() << "Groups:" << user.groupNames();
+}
 
 void KUserTest::testKUserId()
 {
