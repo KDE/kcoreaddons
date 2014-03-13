@@ -345,6 +345,11 @@ K_GID KUserGroup::gid() const
     return d->gid;
 }
 
+KGroupId KUserGroup::groupId() const
+{
+    return KGroupId(d->gid);
+}
+
 QString KUserGroup::name() const
 {
     return d->name;

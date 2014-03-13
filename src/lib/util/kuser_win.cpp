@@ -492,6 +492,11 @@ QString KUserGroup::name() const
     return d->name;
 }
 
+KGroupId KUserGroup::groupId() const
+{
+    return d->gid;
+}
+
 QList<KUser> KUserGroup::users() const
 {
     QList<KUser> Result;
@@ -736,13 +741,14 @@ static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS t
     return buffer;
 }
 
-inline KUserId KUserId::currentUserId()
+KUserId KUserId::currentUserId()
 {
     std::unique_ptr<char[]> userTokenBuffer = queryProcessInformation(TokenUser);
     TOKEN_USER* userToken = (TOKEN_USER*)userTokenBuffer.get();
     return KUserId(userToken->User.Sid);
 }
-inline KGroupId KGroupId::currentGroupId()
+
+KGroupId KGroupId::currentGroupId()
 {
     std::unique_ptr<char[]> primaryGroupBuffer = queryProcessInformation(TokenPrimaryGroup);
     TOKEN_PRIMARY_GROUP* primaryGroup = (TOKEN_PRIMARY_GROUP*)primaryGroupBuffer.get();

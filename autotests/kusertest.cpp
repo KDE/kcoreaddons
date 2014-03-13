@@ -113,11 +113,14 @@ void KUserTest::testKGroupId()
     QVERIFY(currentGroup == currentEffectiveGroup);
 
     //now get the same Group from his name
-    QString groupName = KUserGroup(currentGroup).name();
+    KUserGroup kuserGroup(currentGroup);
+    QString groupName = kuserGroup.name();
     qDebug("Current group: %s, id: %s", qPrintable(groupName), qPrintable(currentGroup.toString()));
     QVERIFY(!groupName.isEmpty());
     KGroupId currentGroupFromStr = KGroupId::fromName(groupName);
     QVERIFY(currentGroupFromStr.isValid());
+    KGroupId currentGroupCopyFromKUserGroup = kuserGroup.groupId();
+    QVERIFY(currentGroupCopyFromKUserGroup.isValid());
     KGroupId invalid;
     QVERIFY(!invalid.isValid());
 #ifdef Q_OS_WIN
@@ -135,6 +138,8 @@ void KUserTest::testKGroupId()
     QVERIFY(invalid == invalid2);
     QVERIFY(invalid == invalid3);
     QVERIFY(currentGroup == currentGroupFromStr);
+    QVERIFY(currentGroup == currentEffectiveGroup);
+    QVERIFY(currentGroup == currentGroupCopyFromKUserGroup);
     QVERIFY(invalid != currentGroup);
     QVERIFY(currentGroup != invalid);
     QVERIFY(currentGroup != invalid2);

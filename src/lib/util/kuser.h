@@ -454,6 +454,9 @@ public:
     K_GID gid() const;
 #endif
 
+    /** @return the native group id of the user. */
+    KGroupId groupId() const;
+
     /**
      * The name of the group.
      * @return the name of the group
