@@ -70,7 +70,7 @@ protected:
     /** Creates a KUserOrGroupId from a native user/group ID. On windows this will not take
      * ownership over the passed SID, a copy will be created instead.
      */
-    KUserOrGroupId(NativeType nativeId);
+    explicit KUserOrGroupId(NativeType nativeId);
     /** Copy constructor. This is very fast, objects can be passed by value */
     KUserOrGroupId(const KUserOrGroupId<T> &other);
     KUserOrGroupId& operator=(const KUserOrGroupId<T>& other);
@@ -103,13 +103,9 @@ private:
 /** A platform independent user ID.
 * @see KUserOrGroupId
 */
-#ifdef Q_OS_WIN
-struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<void*> {
-#else
-struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<uid_t> {
-#endif
+struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<K_UID> {
     KUserId() {}
-    KUserId(NativeType nativeUid) : KUserOrGroupId(nativeUid) {}
+    explicit KUserId(K_UID uid) : KUserOrGroupId(uid) {}
     KUserId(const KUserId &other) : KUserOrGroupId(other) {}
     ~KUserId() {};
     //TODO: document
@@ -121,13 +117,9 @@ struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<uid_t> {
 /** A platform independent group ID.
  * @see KUserOrGroupId
  */
-#ifdef Q_OS_WIN
-struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<void*> {
-#else
-struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<gid_t> {
-#endif
+struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
     KGroupId() {}
-    KGroupId(NativeType nativeUid) : KUserOrGroupId(nativeUid) {}
+    explicit KGroupId(K_GID gid) : KUserOrGroupId(gid) {}
     KGroupId(const KGroupId &other) : KUserOrGroupId(other) {}
     ~KGroupId() {};
     //TODO: document
@@ -247,7 +239,7 @@ public:
 
     /**
      * Returns the user id of the user.
-     * @return the id of the user or -1 if user is invalid
+     * @return the id of the user or -1 (UNIX)/ null(Windows) if user is invalid
      */
     K_UID uid() const;
 
