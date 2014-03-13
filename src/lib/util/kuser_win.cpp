@@ -27,6 +27,7 @@
 #include <QStandardPaths>
 
 #include <memory> // unique_ptr
+#include <type_traits>
 
 #undef _WIN32_WINNT
 #define _WIN32_WINNT 0x600 //Vista for SHGetKnownFolderPath
@@ -40,6 +41,17 @@ static const auto netApiBufferDeleter = [](void* buffer) {
         NetApiBufferFree(buffer);
     }
 };
+typedef std::unique_ptr<BYTE, decltype(netApiBufferDeleter)> ScopedNetApiBuffer;
+typedef std::unique_ptr<USER_INFO_11, decltype(netApiBufferDeleter)> ScopedUSER_INFO_11;
+typedef std::unique_ptr<GROUP_USERS_INFO_0, decltype(netApiBufferDeleter)> ScopedGROUP_USERS_INFO_0;
+typedef std::unique_ptr<GROUP_INFO_0, decltype(netApiBufferDeleter)> ScopedGROUP_INFO_0;
+const auto handleCloser = [](HANDLE h) {
+    if (h != INVALID_HANDLE_VALUE) {
+        CloseHandle(h);
+    }
+};
+typedef std::unique_ptr<std::remove_pointer<HANDLE>::type, decltype(handleCloser)> ScopedHANDLE;
+
 
 static bool sidFromName(LPCWSTR name, char(*buffer)[SECURITY_MAX_SID_SIZE], PSID_NAME_USE sidType, QString* domainName = nullptr)
 {
@@ -71,7 +83,6 @@ class KUser::Private : public QSharedData
     }
 public:
     static Ptr sharedNull;
-    typedef std::unique_ptr<USER_INFO_11, decltype(netApiBufferDeleter)> ScopedUSER_INFO_11;
     ScopedUSER_INFO_11 userInfo;
     KUserId uid;
     QString nameWithDomain;
@@ -131,7 +142,7 @@ public:
             return sharedNull;
         }
         // now get the server name to query (could be null for local machine)
-        LPWSTR servernameTmp;
+        LPWSTR servernameTmp = nullptr;
         NET_API_STATUS status = NetGetAnyDCName(nullptr, 0, (LPBYTE*)&servernameTmp);
         if (status != NERR_Success) {
             //qDebug("NetGetAnyDCName failed with error %d", status);
@@ -313,7 +324,7 @@ QStringList KUser::groupNames() const
 
     if (nStatus == NERR_Success) {
         for (DWORD i = 0; i < dwEntriesRead; ++i) {
-            result.append(QString::fromUtf16((ushort *) pGroups[i].grui0_name));
+            result.append(QString::fromWCharArray(pGroups[i].grui0_name));
         }
     }
 
@@ -338,7 +349,7 @@ KUserId KUser::userId() const
 QVariant KUser::property(UserProperty which) const
 {
     if (which == FullName) {
-        return QVariant(d->userInfo ? QString::fromUtf16((ushort *) d->userInfo->usri11_full_name) : QString());
+        return QVariant(d->userInfo ? QString::fromWCharArray(d->userInfo->usri11_full_name) : QString());
     }
 
     return QVariant();
@@ -381,7 +392,7 @@ QStringList KUser::allUserNames()
 
     if (nStatus == NERR_Success) {
         for (DWORD i = 0; i < dwEntriesRead; ++i) {
-            result.append(QString::fromUtf16((ushort *) pUsers[i].usri0_name));
+            result.append(QString::fromWCharArray(pUsers[i].usri0_name));
         }
     }
 
@@ -399,45 +410,55 @@ KUser::~KUser()
 class KUserGroup::Private : public QSharedData
 {
 public:
-    PGROUP_INFO_0 groupInfo;
-
-    Private() : groupInfo(NULL) {}
-    Private(PGROUP_INFO_0 groupInfo_) : groupInfo(groupInfo_) {}
-    Private(const QString &Name) : groupInfo(NULL)
+    QString name;
+    KGroupId gid;
+    Private() {}
+    Private(const QString &name, KGroupId id)
+        : name(name), gid(id)
     {
-        NetGroupGetInfo(NULL, (PCWSTR) Name.utf16(), 0, (PBYTE *) &groupInfo);
-    }
-
-    ~Private()
-    {
-        if (groupInfo) {
-            NetApiBufferFree(groupInfo);
+        if (!name.isEmpty()) {
+            PBYTE groupInfoTmp;
+            ScopedGROUP_INFO_0 groupInfo;
+            NET_API_STATUS status = NetGroupGetInfo(nullptr, (LPCWSTR)name.utf16(), 0, &groupInfoTmp);
+            groupInfo.reset((GROUP_INFO_0*)groupInfoTmp); // must always be freed, even on error
+            if (status != NERR_Success) {
+                qWarning() << "Failed to find group with name" << name << "error =" << status;
+                groupInfo.reset();
+            }
+            if (!id.isValid()) {
+                gid = KGroupId::fromName(name);
+            }
         }
     }
 };
 
 KUserGroup::KUserGroup(const QString &_name)
-    : d(new Private(_name))
+    : d(new Private(_name, KGroupId()))
 {
 }
 
 KUserGroup::KUserGroup(const char *_name)
-    : d(new Private(QLatin1String(_name)))
+    : d(new Private(QLatin1String(_name), KGroupId()))
 {
 }
 
 KUserGroup::KUserGroup(KGroupId gid)
-: d(0)
 {
     DWORD bufferLen = UNLEN + 1;
-    ushort buffer[UNLEN + 1];
+    WCHAR buffer[UNLEN + 1];
     DWORD domainBufferLen = UNLEN + 1;
     WCHAR domainBuffer[UNLEN + 1];
     SID_NAME_USE eUse;
-
-    if (gid.isValid() && LookupAccountSidW(NULL, gid.nativeId(), (LPWSTR)buffer, &bufferLen, domainBuffer, &domainBufferLen, &eUse)) {
-        d = new Private(QString::fromUtf16(buffer));
+    QString name;
+    if (gid.isValid() && LookupAccountSidW(NULL, gid.nativeId(), buffer, &bufferLen, domainBuffer, &domainBufferLen, &eUse)) {
+        if (eUse == SidTypeGroup || eUse == SidTypeWellKnownGroup) {
+            name = QString::fromWCharArray(buffer);
+        } else {
+            qWarning() << QString::fromWCharArray(buffer) << "is not a group, SID type is" << eUse;
+        }
     }
+    d = new Private(name, gid);
+
 }
 
 KUserGroup::KUserGroup(const KUserGroup &group)
@@ -453,10 +474,7 @@ KUserGroup &KUserGroup::operator =(const KUserGroup &group)
 
 bool KUserGroup::operator==(const KUserGroup &group) const
 {
-    if (d->groupInfo == NULL || group.d->groupInfo == NULL) {
-        return false;
-    }
-    return wcscmp(d->groupInfo->grpi0_name, group.d->groupInfo->grpi0_name) == 0;
+    return d->gid == group.d->gid && d->name == group.d->name;
 }
 
 bool KUserGroup::operator!=(const KUserGroup &group) const
@@ -466,15 +484,12 @@ bool KUserGroup::operator!=(const KUserGroup &group) const
 
 bool KUserGroup::isValid() const
 {
-    return d->groupInfo != NULL;
+    return d->gid.isValid() && !d->name.isEmpty();
 }
 
 QString KUserGroup::name() const
 {
-    if (d && d->groupInfo) {
-        return QString::fromUtf16((ushort *) d->groupInfo->grpi0_name);
-    }
-    return QString();
+    return d->name;
 }
 
 QList<KUser> KUserGroup::users() const
@@ -492,75 +507,68 @@ QStringList KUserGroup::userNames() const
 {
     QStringList result;
 
-    if (!d->groupInfo) {
+    if (d->name.isEmpty()) {
         return result;
     }
 
-    PGROUP_USERS_INFO_0 pUsers = NULL;
     DWORD dwEntriesRead = 0;
     DWORD dwTotalEntries = 0;
     NET_API_STATUS nStatus;
 
-    nStatus = NetGroupGetUsers(NULL, d->groupInfo->grpi0_name, 0, (LPBYTE *) &pUsers, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, NULL);
+    LPBYTE userBuf;
+    nStatus = NetGroupGetUsers(nullptr, (LPCWSTR)d->name.utf16(), 0, &userBuf, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, nullptr);
+
+    // userBuf must always be freed, even on error
+    ScopedGROUP_USERS_INFO_0 users((GROUP_USERS_INFO_0*)userBuf, netApiBufferDeleter);
 
     if (nStatus == NERR_Success) {
         for (DWORD i = 0; i < dwEntriesRead; ++i) {
-            result.append(QString::fromUtf16((ushort *) pUsers[i].grui0_name));
+            result.append(QString::fromWCharArray(users.get()[i].grui0_name));
         }
-    }
-
-    if (pUsers) {
-        NetApiBufferFree(pUsers);
     }
 
     return result;
 }
 
+/** If @p level is 0 a GROUP_INFO_0* will be passed to callback, if 3 a GROUP_INFO_0*, etc */
+template<typename T>
+static void iterateGroups(DWORD level, T callback) {
+    NET_API_STATUS nStatus = NERR_Success;
+    do {
+        LPBYTE groupBuffer = NULL;
+        DWORD entriesRead = 0;
+        DWORD totalEntries = 0;
+        ULONG_PTR resumeHandle = 0;
+        nStatus = NetGroupEnum(NULL, 0, &groupBuffer, 1, &entriesRead, &totalEntries, &resumeHandle);
+        // buffer must always be freed, even if NetGroupEnum fails
+        std::unique_ptr<BYTE, decltype(netApiBufferDeleter)> groupInfo(groupBuffer, netApiBufferDeleter);
+        if ((nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) && entriesRead > 0) {
+            callback(groupInfo.get());
+        }
+    } while (nStatus == ERROR_MORE_DATA);
+}
+
 QList<KUserGroup> KUserGroup::allGroups()
 {
     QList<KUserGroup> result;
-
-    NET_API_STATUS nStatus;
-    PGROUP_INFO_0 pGroup = NULL;
-    DWORD dwEntriesRead = 0;
-    DWORD dwTotalEntries = 0;
-    DWORD dwResumeHandle = 0;
-
-    KUserGroup tmp("");
-
-    do {
-        nStatus = NetGroupEnum(NULL, 0, (LPBYTE *) &pGroup, 1, &dwEntriesRead, &dwTotalEntries, (PDWORD_PTR)&dwResumeHandle);
-
-        if ((nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) && dwEntriesRead > 0) {
-            tmp.d = new Private(pGroup);
-            result.append(tmp);
-        }
-    } while (nStatus == ERROR_MORE_DATA);
-
+    iterateGroups(3, [&result](LPBYTE data) {
+        GROUP_INFO_3* groupInfo = (GROUP_INFO_3*)data;
+        KUserGroup tmp(nullptr); // invalid KUserGroup
+        Q_ASSERT(!tmp.isValid());
+        tmp.d = new KUserGroup::Private(QString::fromWCharArray(groupInfo->grpi3_name),
+            KGroupId(groupInfo->grpi3_group_sid));
+        result.append(tmp);
+    });
     return result;
 }
 
 QStringList KUserGroup::allGroupNames()
 {
     QStringList result;
-
-    NET_API_STATUS nStatus;
-    PGROUP_INFO_0 pGroups = NULL;
-    DWORD dwEntriesRead = 0;
-    DWORD dwTotalEntries = 0;
-
-    nStatus = NetGroupEnum(NULL, 0, (LPBYTE *) &pGroups, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, NULL);
-
-    if (nStatus == NERR_Success) {
-        for (DWORD i = 0; i < dwEntriesRead; ++i) {
-            result.append(QString::fromUtf16((ushort *) pGroups[i].grpi0_name));
-        }
-    }
-
-    if (pGroups) {
-        NetApiBufferFree(pGroups);
-    }
-
+    iterateGroups(0, [&result](LPBYTE data) {
+        GROUP_INFO_0* groupInfo = (GROUP_INFO_0*)data;
+        result.append(QString::fromWCharArray(groupInfo->grpi0_name));
+    });
     return result;
 }
 
@@ -702,11 +710,6 @@ KGroupId KGroupId::fromName(const QString& name) {
     return KGroupId(sidBuffer);
 }
 
-struct HANDLEDeleter {
-    static inline void cleanup(HANDLE h) { CloseHandle(h); }
-};
-typedef QScopedPointer<HANDLE, HANDLEDeleter> ScopedHANDLE;
-
 static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS type)
 {
     HANDLE _token;
@@ -714,10 +717,7 @@ static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS t
         qWarning("Failed to get the token for the current process: %d", GetLastError());
         return false;
     }
-    // automatically free the resources on exit
-    const auto handleCloser = [](HANDLE h) { CloseHandle(h); };
-    std::unique_ptr<void, decltype(handleCloser)> token(_token, handleCloser);
-    std::unique_ptr<char[]> buffer;
+    ScopedHANDLE token(_token, handleCloser);
     // query required size
     DWORD requiredSize;
     if (!GetTokenInformation(token.get(), type, nullptr, 0, &requiredSize)) {
@@ -727,7 +727,7 @@ static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS t
             return nullptr;
         }
     }
-    buffer.reset(new char[requiredSize]);
+    std::unique_ptr<char[]> buffer(new char[requiredSize]);
     if (!GetTokenInformation(token.get(), type, buffer.get(), requiredSize, &requiredSize)) {
         qWarning("Failed to get token information %d from current process: %d",
             type, GetLastError());
