@@ -251,6 +251,9 @@ public:
      */
     K_UID uid() const;
 
+    /** @return the native user id of the user. */
+    KUserId userId() const;
+
 #ifndef Q_OS_WIN
     /**
      * Returns the group id of the user.

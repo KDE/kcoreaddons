@@ -43,12 +43,15 @@ void KUserTest::testKUserId()
     // these should be the same since this is not a setuid program
     QVERIFY(currentUser == currentEffectiveUser);
 
+    KUser kuser(currentUser);
     //now get the same user from his name
-    QString userName = KUser(currentUser).loginName();
+    QString userName = kuser.loginName();
     qDebug("Current user: %s, id: %s", qPrintable(userName), qPrintable(currentUser.toString()));
     QVERIFY(!userName.isEmpty());
     KUserId currentUserFromStr = KUserId::fromName(userName);
     QVERIFY(currentUserFromStr.isValid());
+    KUserId currentUserCopyFromKUser = kuser.userId();
+    QVERIFY(currentUserCopyFromKUser.isValid());
     KUserId invalid;
     QVERIFY(!invalid.isValid());
 #ifdef Q_OS_WIN
@@ -66,10 +69,12 @@ void KUserTest::testKUserId()
     QVERIFY(invalid == invalid2);
     QVERIFY(invalid == invalid3);
     QVERIFY(currentUser == currentUserFromStr);
-    QVERIFY(invalid != currentUser);
+    QVERIFY(currentUser == currentEffectiveUser);
+    QVERIFY(currentUser == currentUserCopyFromKUser);
     QVERIFY(currentUser != invalid);
     QVERIFY(currentUser != invalid2);
     QVERIFY(currentUser != invalid3);
+    QVERIFY(invalid != currentUser);
     //Copy constructor and assignment
     KUserId currentUserCopy = currentUser;
     QVERIFY(currentUser == currentUserCopy);

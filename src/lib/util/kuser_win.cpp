@@ -282,6 +282,12 @@ K_UID KUser::uid() const
     return d->uid.nativeId();
 }
 
+KUserId KUser::userId() const
+{
+    return d->uid;
+}
+
+
 QVariant KUser::property(UserProperty which) const
 {
     if (which == FullName) {

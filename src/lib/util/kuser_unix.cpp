@@ -148,6 +148,11 @@ K_UID KUser::uid() const
     return d->uid;
 }
 
+KUserId KUser::userId() const
+{
+    return KUserId(d->uid);
+}
+
 K_GID KUser::gid() const
 {
     return d->gid;
