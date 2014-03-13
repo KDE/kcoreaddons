@@ -34,6 +34,18 @@ private Q_SLOTS:
     void testKGroupId();
 };
 
+static inline void printUserInfo(KUser user)
+{
+    qDebug() << "Login name:" << user.loginName();
+    qDebug() << "Full name:" << user.fullName();
+    qDebug() << "User ID:" << user.userId().toString();
+    qDebug() << "Home dir:" << user.homeDir();
+    qDebug() << "Superuser:" << user.isSuperUser();
+    qDebug() << "Shell: " << user.shell();
+    qDebug() << "Face icon path:" << user.faceIconPath();
+    qDebug() << "Groups:" << user.groupNames();
+}
+
 void KUserTest::testKUser()
 {
     KUser user(KUser::UseRealUserID);
@@ -43,14 +55,14 @@ void KUserTest::testKUser()
     QVERIFY(user == effectiveUser); // should be the same, no suid
     // We can't test the KUser properties, since they differ on each system
     // instead just print them all out, this can be verified by the person running the test
-    qDebug() << "Current User:" << user.loginName();
-    qDebug() << "Full name:" << user.fullName();
-    qDebug() << "User ID:" << user.userId().toString();
-    qDebug() << "Home dir:" << user.homeDir();
-    qDebug() << "Superuser:" << user.isSuperUser();
-    qDebug() << "Shell: " << user.shell();
-    qDebug() << "Face icon path:" << user.faceIconPath();
-    qDebug() << "Groups:" << user.groupNames();
+    printUserInfo(user);
+
+    QStringList allUserNames = KUser::allUserNames();
+    QVERIFY(allUserNames.size() > 1); //every system should have a least 2 users
+    qDebug() << "All users: " << allUserNames;
+
+    QList<KUser> users = KUser::allUsers();
+    QVERIFY(users.size() > 1);
 }
 
 void KUserTest::testKUserId()
