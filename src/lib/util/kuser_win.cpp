@@ -227,10 +227,27 @@ QString KUser::homeDir() const
     return QDir::fromNativeSeparators(QString::fromLocal8Bit(qgetenv("USERPROFILE")));
 }
 
+/* From MSDN: (http://msdn.microsoft.com/en-us/library/windows/desktop/bb776892%28v=vs.85%29.aspx)
+*
+* The user's tile image is stored in the %SystemDrive%\Users\<username>\AppData\Local\Temp
+* folder as <username>.bmp. Any slash characters (\) are converted to plus sign characters (+).
+* For example, DOMAIN\user is converted to DOMAIN+user.
+*
+* The image file appears in the user's Temp folder */
+static inline QString tileImageName(const QString& user) {
+    QString ret = user;
+    ret.replace(QLatin1Char('\\'), QLatin1Char('+'));
+    return ret + QStringLiteral(".bmp");
+}
+
 QString KUser::faceIconPath() const
 {
-    // FIXME: this needs to be adapted to windows systems (BC changes)
-    return QString();
+    // try name with domain first, then fallback to logon name
+    QString imagePath = QStandardPaths::locate(QStandardPaths::TempLocation, tileImageName(d->nameWithDomain));
+    if (imagePath.isEmpty()) {
+        imagePath = QStandardPaths::locate(QStandardPaths::TempLocation, tileImageName(loginName()));
+    }
+    return imagePath;
 }
 
 QString KUser::shell() const
