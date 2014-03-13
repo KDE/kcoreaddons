@@ -24,12 +24,16 @@
 #include <QtCore/QMutableStringListIterator>
 #include <QtCore/QDebug>
 #include <QtCore/QDir>
+#include <QStandardPaths>
 
 #include <memory> // unique_ptr
 
+#undef _WIN32_WINNT
+#define _WIN32_WINNT 0x600 //Vista for SHGetKnownFolderPath
 #include <qt_windows.h>
 #include <LM.h> //Net*
 #include <sddl.h> //ConvertSidToStringSidW
+#include <Shlobj.h>
 
 static const auto netApiBufferDeleter = [](void* buffer) {
     if (buffer) {
@@ -224,7 +228,33 @@ QString KUser::loginName() const
 
 QString KUser::homeDir() const
 {
-    return QDir::fromNativeSeparators(QString::fromLocal8Bit(qgetenv("USERPROFILE")));
+    if (!d->userInfo) {
+        return QString();
+    }
+    QString homeDir = QString::fromWCharArray(d->userInfo->usri11_home_dir);
+    if (!homeDir.isEmpty()) {
+        return homeDir;
+    }
+    // usri11_home_dir is often empty -> check whether it is the homedir for the current user
+    // if not then fall back to "<user profiles dir>\<user name>"
+
+    if (d->uid == KUserId::currentUserId()) {
+        return QDir::homePath();
+    }
+    static QString userProfilesDir;
+    if (userProfilesDir.isEmpty()) {
+        WCHAR* path; // must be freed using CoTaskMemFree()
+        //TODO: what does KF_FLAG_SIMPLE_IDLIST do?
+        HRESULT result = SHGetKnownFolderPath(FOLDERID_UserProfiles, KF_FLAG_DONT_VERIFY, nullptr, &path);
+        if (result == S_OK) {
+            userProfilesDir = QString::fromWCharArray(path);
+            CoTaskMemFree(path);
+        }
+    }
+    // This might not be correct: e.g. with local user and domain user with same
+    // In that case it could be C:\Users\Foo (local user) vs C:\Users\Foo.DOMAIN (domain user)
+    // However it is still much better than the previous code which just returned the current users home dir
+    return userProfilesDir.isEmpty() ? QString() : userProfilesDir + QLatin1Char('\\') + loginName();
 }
 
 /* From MSDN: (http://msdn.microsoft.com/en-us/library/windows/desktop/bb776892%28v=vs.85%29.aspx)
