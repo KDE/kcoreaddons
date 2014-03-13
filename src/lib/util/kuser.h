@@ -347,7 +347,7 @@ public:
 
 private:
     class Private;
-    QSharedDataPointer<Private> d;
+    QExplicitlySharedDataPointer<Private> d;
 };
 
 /**
