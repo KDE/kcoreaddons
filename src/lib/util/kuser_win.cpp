@@ -680,9 +680,13 @@ QString KUserOrGroupId<void*>::toString() const
 }
 
 KUserId KUserId::fromName(const QString& name) {
+    if (name.isEmpty()) {
+        // for some reason empty string will always return S-1-5-32 which is of type domain
+        return KUserId();
+    }
     char sidBuffer[SECURITY_MAX_SID_SIZE];
     SID_NAME_USE sidType;
-    if (!sidFromName((LPWSTR)name.utf16(), &sidBuffer, &sidType)) {
+    if (!sidFromName((LPCWSTR)name.utf16(), &sidBuffer, &sidType)) {
         return KUserId();
     }
     if (sidType != SidTypeUser && sidType != SidTypeDeletedAccount) {
@@ -695,6 +699,10 @@ KUserId KUserId::fromName(const QString& name) {
 }
 
 KGroupId KGroupId::fromName(const QString& name) {
+    if (name.isEmpty()) {
+        // for some reason empty string will always return S-1-5-32 which is of type domain
+        return KGroupId();
+    }
     char sidBuffer[SECURITY_MAX_SID_SIZE];
     SID_NAME_USE sidType;
     if (!sidFromName((LPWSTR)name.utf16(), &sidBuffer, &sidType)) {
