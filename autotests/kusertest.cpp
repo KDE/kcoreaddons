@@ -63,7 +63,13 @@ void KUserTest::testKUser()
     QVERIFY(!allUserNames.isEmpty());
     QVERIFY(!allUsers.isEmpty());
     QCOMPARE(allUsers.size(), allUserNames.size());
+    // check that the limiting works
+    QCOMPARE(user.groups(1).size(), 1);
+    QCOMPARE(user.groupNames(1).size(), 1);
     qDebug() << "All users: " << allUserNames;
+    // check that the limiting works
+    QCOMPARE(KUser::allUserNames(1).size(), 1);
+    QCOMPARE(KUser::allUsers(1).size(), 1);
     // We can't test the KUser properties, since they differ on each system
     // instead just print them all out, this can be verified by the person running the test
     printUserInfo(user);
@@ -92,6 +98,9 @@ void KUserTest::testKUserGroup()
         QVERIFY(!groupUsers.isEmpty()); // group must have at least one user (the current user)
         QVERIFY(!groupUserNames.isEmpty()); // group must have at least one user (the current user)
         QCOMPARE(groupUsers.size(), groupUserNames.size());
+        // check that the limiting works
+        QCOMPARE(group.users(1).size(), 1);
+        QCOMPARE(group.userNames(1).size(), 1);
     }
 
     QStringList allGroupNames = KUserGroup::allGroupNames();
@@ -100,6 +109,9 @@ void KUserTest::testKUserGroup()
     QVERIFY(!allGroups.isEmpty());
     QCOMPARE(allGroups.size(), allGroupNames.size());
     qDebug() << "All groups: " << allGroupNames;
+    // check that the limiting works
+    QCOMPARE(KUserGroup::allGroupNames(1).size(), 1);
+    QCOMPARE(KUserGroup::allGroups(1).size(), 1);
     // We can't test the KUser properties, since they differ on each system
     // instead just print them all out, this can be verified by the person running the test
     qDebug().nospace() << "Current group: " << group.name() << ", group ID =" << group.groupId().toString();
