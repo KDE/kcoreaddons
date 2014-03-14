@@ -55,24 +55,6 @@ const auto handleCloser = [](HANDLE h) {
 };
 typedef std::unique_ptr<std::remove_pointer<HANDLE>::type, decltype(handleCloser)> ScopedHANDLE;
 
-static bool sidFromName(LPCWSTR name, char(*buffer)[SECURITY_MAX_SID_SIZE], PSID_NAME_USE sidType, QString* domainName = nullptr)
-{
-    DWORD sidLength = SECURITY_MAX_SID_SIZE;
-    // ReferencedDomainName must be passed or LookupAccountNameW fails
-    // Documentation says it is optional, however if not passed the function fails and returns the required size
-    WCHAR domainBuffer[1024];
-    DWORD domainBufferSize = 1024;
-    bool ok = LookupAccountNameW(nullptr, name, *buffer, &sidLength, domainBuffer, &domainBufferSize, sidType);
-    if (!ok) {
-        qWarning() << "Failed to lookup account" << QString::fromWCharArray(name) << "error code =" << GetLastError();
-        return false;
-    }
-    if (domainName) {
-        *domainName = QString::fromWCharArray(domainBuffer);
-    }
-    return true;
-}
-
 class KUser::Private : public QSharedData
 {
     typedef QExplicitlySharedDataPointer<Private> Ptr;
@@ -671,42 +653,52 @@ QString KUserOrGroupId<void*>::toString() const
     return sidToString(data ? data->sidBuffer : nullptr);
 }
 
-KUserId KUserId::fromName(const QString& name) {
+/** T must be either KUserId or KGroupId, Callback has signature T(PSID, SID_NAME_USE) */
+template<class T, class Callback>
+static T sidFromName(const QString& name, Callback callback)
+{
     if (name.isEmpty()) {
         // for some reason empty string will always return S-1-5-32 which is of type domain
-        return KUserId();
+        // we only want users or groups -> return invalid
+        return T();
     }
-    char sidBuffer[SECURITY_MAX_SID_SIZE];
+    char buffer[SECURITY_MAX_SID_SIZE];
+    DWORD sidLength = SECURITY_MAX_SID_SIZE;
+    // ReferencedDomainName must be passed or LookupAccountNameW fails
+    // Documentation says it is optional, however if not passed the function fails and returns the required size
+    WCHAR domainBuffer[1024];
+    DWORD domainBufferSize = 1024;
     SID_NAME_USE sidType;
-    if (!sidFromName((LPCWSTR)name.utf16(), &sidBuffer, &sidType)) {
-        return KUserId();
+    bool ok = LookupAccountNameW(nullptr, (LPCWSTR)name.utf16(), buffer, &sidLength, domainBuffer, &domainBufferSize, &sidType);
+    if (!ok) {
+        qWarning() << "Failed to lookup account" << name << "error code =" << GetLastError();
+        return T();
     }
-    if (sidType != SidTypeUser && sidType != SidTypeDeletedAccount) {
-        qWarning().nospace() << "Failed to lookup user name " << name
-            << ": resulting SID " << sidToString(sidBuffer) << " is not a user."
-            " Got SID type " << sidType << " instead.";
-        return KUserId();
-    }
-    return KUserId(sidBuffer);
+    return callback(buffer, sidType);
+}
+
+KUserId KUserId::fromName(const QString& name) {
+    return sidFromName<KUserId>(name, [&](PSID sid, SID_NAME_USE sidType) {
+        if (sidType != SidTypeUser && sidType != SidTypeDeletedAccount) {
+            qWarning().nospace() << "Failed to lookup user name " << name
+                << ": resulting SID " << sidToString(sid) << " is not a user."
+                " Got SID type " << sidType << " instead.";
+            return KUserId();
+        }
+        return KUserId(sid);
+    });
 }
 
 KGroupId KGroupId::fromName(const QString& name) {
-    if (name.isEmpty()) {
-        // for some reason empty string will always return S-1-5-32 which is of type domain
-        return KGroupId();
-    }
-    char sidBuffer[SECURITY_MAX_SID_SIZE];
-    SID_NAME_USE sidType;
-    if (!sidFromName((LPWSTR)name.utf16(), &sidBuffer, &sidType)) {
-        return KGroupId();
-    }
-    if (sidType != SidTypeGroup && sidType != SidTypeWellKnownGroup) {
-        qWarning().nospace() << "Failed to lookup user name " << name
-            << ": resulting SID " << sidToString(sidBuffer) << " is not a group."
-            " Got SID type " << sidType << " instead.";
-        return KGroupId();
-    }
-    return KGroupId(sidBuffer);
+    return sidFromName<KGroupId>(name, [&](PSID sid, SID_NAME_USE sidType) {
+        if (sidType != SidTypeGroup && sidType != SidTypeWellKnownGroup) {
+            qWarning().nospace() << "Failed to lookup user name " << name
+                << ": resulting SID " << sidToString(sid) << " is not a group."
+                " Got SID type " << sidType << " instead.";
+            return KGroupId();
+        }
+        return KGroupId(sid);
+    });
 }
 
 static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS type)
