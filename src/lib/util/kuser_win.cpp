@@ -89,32 +89,6 @@ public:
     KUserId uid;
     QString nameWithDomain;
 
-    // takes ownership
-    static Ptr create(USER_INFO_11* userInfo) {
-        if (!userInfo) {
-            return sharedNull;
-        }
-        QString qualifiedName;
-        char sidBuffer[SECURITY_MAX_SID_SIZE];
-        SID_NAME_USE sidType;
-        if (!sidFromName(userInfo->usri11_name, &sidBuffer, &sidType, &qualifiedName)) {
-            return sharedNull;
-        }
-        if (!qualifiedName.isEmpty()) {
-            qualifiedName.append(QLatin1Char('\\'));
-        }
-        qualifiedName.append(QString::fromWCharArray(userInfo->usri11_name));
-        KUserId uid(sidBuffer);
-        if (sidType != SidTypeUser && sidType != SidTypeDeletedAccount) {
-            qWarning().nospace() << "SID for " << qualifiedName << " (" << uid.toString()
-                << ") is not of type user (" << SidTypeUser << " or " << SidTypeDeletedAccount
-                << "). Got type " << sidType << " instead.";
-            return sharedNull;
-        }
-        return Ptr(new Private(userInfo, uid, qualifiedName));
-    }
-
-
     /** Creates a user info from a SID (always returns a valid object) */
     static Ptr create(KUserId sid)
     {
@@ -148,7 +122,6 @@ public:
         NET_API_STATUS status = NetGetAnyDCName(nullptr, 0, (LPBYTE*)&servernameTmp);
         if (status != NERR_Success) {
             //qDebug("NetGetAnyDCName failed with error %d", status);
-            servernameTmp = nullptr;
         }
         ScopedNetApiBuffer<WCHAR> servername(servernameTmp);
 
@@ -270,13 +243,13 @@ QString KUser::homeDir() const
     return userProfilesDir.isEmpty() ? QString() : userProfilesDir + QLatin1Char('\\') + loginName();
 }
 
-/* From MSDN: (http://msdn.microsoft.com/en-us/library/windows/desktop/bb776892%28v=vs.85%29.aspx)
-*
-* The user's tile image is stored in the %SystemDrive%\Users\<username>\AppData\Local\Temp
-* folder as <username>.bmp. Any slash characters (\) are converted to plus sign characters (+).
-* For example, DOMAIN\user is converted to DOMAIN+user.
-*
-* The image file appears in the user's Temp folder */
+/* See MSDN (http://msdn.microsoft.com/en-us/library/windows/desktop/bb776892%28v=vs.85%29.aspx)
+ *
+ * The user's tile image is stored in the the current temporary directory 
+ * (%TEMP%, usually C:\Users\Alex\AppData\Local\Temp) as <username>.bmp.
+ * Any slash characters (\) are converted to plus sign characters (+).
+ * For example, DOMAIN\user is converted to DOMAIN+user.
+ */
 static inline QString tileImageName(const QString& user) {
     QString ret = user;
     ret.replace(QLatin1Char('\\'), QLatin1Char('+'));
@@ -298,41 +271,6 @@ QString KUser::shell() const
     return QString::fromLatin1("cmd.exe");
 }
 
-QList<KUserGroup> KUser::groups() const
-{
-    QList<KUserGroup> result;
-
-    Q_FOREACH (const QString &name, groupNames()) {
-        result.append(KUserGroup(name));
-    }
-
-    return result;
-}
-
-QStringList KUser::groupNames() const
-{
-    QStringList result;
-
-    if (!d->userInfo) {
-        return result;
-    }
-
-    LPBYTE groupsBuffer = nullptr;
-    DWORD dwEntriesRead = 0;
-    DWORD dwTotalEntries = 0;
-    NET_API_STATUS nStatus;
-
-    nStatus = NetUserGetGroups(NULL, d->userInfo->usri11_name, 0, &groupsBuffer, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries);
-    ScopedNetApiBuffer<GROUP_USERS_INFO_0> groups((GROUP_USERS_INFO_0*)groupsBuffer);
-    if (nStatus == NERR_Success) {
-        for (DWORD i = 0; i < dwEntriesRead; ++i) {
-            result.append(QString::fromWCharArray(groups.get()[i].grui0_name));
-        }
-    }
-
-    return result;
-}
-
 K_UID KUser::uid() const
 {
     return d->uid.nativeId();
@@ -351,50 +289,6 @@ QVariant KUser::property(UserProperty which) const
     }
 
     return QVariant();
-}
-
-QList<KUser> KUser::allUsers()
-{
-    QList<KUser> result;
-
-    NET_API_STATUS nStatus;
-    PUSER_INFO_11 pUser = nullptr;
-    DWORD dwEntriesRead = 0;
-    DWORD dwTotalEntries = 0;
-    DWORD dwResumeHandle = 0;
-
-
-    do {
-        nStatus = NetUserEnum(NULL, 11, 0, (LPBYTE *) &pUser, 1, &dwEntriesRead, &dwTotalEntries, &dwResumeHandle);
-
-        if ((nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) && dwEntriesRead > 0) {
-            KUser tmp;
-            tmp.d = Private::create(pUser);
-            result.append(tmp);
-        }
-    } while (nStatus == ERROR_MORE_DATA);
-
-    return result;
-}
-
-QStringList KUser::allUserNames()
-{
-    QStringList result;
-
-    NET_API_STATUS nStatus;
-    LPBYTE userBuffer = nullptr;
-    DWORD dwEntriesRead = 0;
-    DWORD dwTotalEntries = 0;
-
-    nStatus = NetUserEnum(NULL, 0, 0, &userBuffer, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, NULL);
-    ScopedNetApiBuffer<USER_INFO_0> users((PUSER_INFO_0)userBuffer);
-    if (nStatus == NERR_Success) {
-        for (DWORD i = 0; i < dwEntriesRead; ++i) {
-            result.append(QString::fromWCharArray(users.get()[i].usri0_name));
-        }
-    }
-
-    return result;
 }
 
 KUser::~KUser()
@@ -491,72 +385,103 @@ KGroupId KUserGroup::groupId() const
     return d->gid;
 }
 
-QList<KUser> KUserGroup::users() const
+KUserGroup::~KUserGroup()
 {
-    QList<KUser> Result;
-
-    Q_FOREACH (const QString &user, userNames()) {
-        Result.append(KUser(user));
-    }
-
-    return Result;
 }
 
-QStringList KUserGroup::userNames() const
-{
-    QStringList result;
+//enumeration functions
 
-    if (d->name.isEmpty()) {
-        return result;
-    }
+/** Make sure the NetApi functions are called with the correct level argument (for template functions)
+* This argument can be retrieved by using NetApiTypeInfo<T>::level. In order to do so the type must be
+* registered by writing e.g. NETAPI_TYPE_INFO(GROUP_INFO, 0) for GROUP_INFO_0
+*/
+template<typename T> struct NetApiTypeInfo {};
+#define NETAPI_TYPE_INFO(prefix, n) template<> struct NetApiTypeInfo<prefix##_##n> { enum { level = n }; };
+NETAPI_TYPE_INFO(GROUP_INFO, 0);
+NETAPI_TYPE_INFO(GROUP_INFO, 3);
+NETAPI_TYPE_INFO(USER_INFO, 0);
+NETAPI_TYPE_INFO(GROUP_USERS_INFO, 0);
 
-    DWORD dwEntriesRead = 0;
-    DWORD dwTotalEntries = 0;
-    NET_API_STATUS nStatus;
+/** simplify calling the Net*Enum functions to prevent copy and paste for allUsers(), allUserNames(), allGroups(), allGroupNames()
+* @tparam T The type that is enumerated (e.g. USER_INFO_11) Must be registered using NETAPI_TYPE_INFO.
+* @param callback Callback for each listed object. Signature: void(const T&)
+* @param enumFunc This function enumerates the data using a Net* function.
+* It will be called in a loop as long as it returns ERROR_MORE_DATA.
+*
+*/
+template<class T, class Callback, class EnumFunction>
+static void netApiEnumerate(Callback callback, EnumFunction enumFunc) {
+    NET_API_STATUS nStatus = NERR_Success;
+    quint64 resumeHandle = 0;
+    int level = NetApiTypeInfo<T>::level;
+    do {
+        LPBYTE buffer = nullptr;
+        DWORD entriesRead = 0;
+        DWORD totalEntries = 0;
+        nStatus = enumFunc(level, &buffer, &entriesRead, &totalEntries, &resumeHandle);
+        //qDebug("Net*Enum(level = %d) returned %d entries, total was (%d), status = %d, resume handle = %llx",
+        //    level, entriesRead, totalEntries, nStatus, resumeHandle);
 
-    LPBYTE userBuf;
-    nStatus = NetGroupGetUsers(nullptr, (LPCWSTR)d->name.utf16(), 0, &userBuf, MAX_PREFERRED_LENGTH, &dwEntriesRead, &dwTotalEntries, nullptr);
-
-    // userBuf must always be freed, even on error
-    ScopedNetApiBuffer<GROUP_USERS_INFO_0> users((GROUP_USERS_INFO_0*)userBuf);
-
-    if (nStatus == NERR_Success) {
-        for (DWORD i = 0; i < dwEntriesRead; ++i) {
-            result.append(QString::fromWCharArray(users.get()[i].grui0_name));
+        // buffer must always be freed, even if Net*Enum fails
+        ScopedNetApiBuffer<T> groupInfo((T*)buffer);
+        if (nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) {
+            for (DWORD i = 0; i < entriesRead; i++) {
+                callback(groupInfo.get()[i]);
+            }
+        } else {
+            qWarning("NetApi enumerate function failed: status = %d", nStatus);
         }
-    }
+    } while (nStatus == ERROR_MORE_DATA);
+}
 
+template<class T, class Callback>
+void enumerateAllUsers(Callback callback) {
+    netApiEnumerate<T>(callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+        // pass 0 as filter -> get all users
+        // Why does this function take a DWORD* as resume handle and NetUserEnum/NetGroupGetUsers a UINT64*
+        // Great API design by Microsoft...
+        //casting the uint64* to uint32* is fine, it just writes to the first 32 bits
+        return NetUserEnum(nullptr, level, 0, buffer, MAX_PREFERRED_LENGTH, count, total, (PDWORD)resumeHandle);
+    });
+}
+
+QList<KUser> KUser::allUsers()
+{
+    QList<KUser> result;
+    // No advantage if we take a USER_INFO_11, since there is no way of copying it
+    // and it is not owned by this function!
+    // -> get a USER_INFO_0 instead and then use KUser(QString)
+    // USER_INFO_23 or USER_INFO_23 would be ideal here since they contains a SID,
+    // but that fails with error code 0x7c (bad level)
+    enumerateAllUsers<USER_INFO_0>([&result](const USER_INFO_0& info) {
+        result.append(KUser(QString::fromWCharArray(info.usri0_name)));
+    });
     return result;
 }
 
-/** If @p level is 0 a GROUP_INFO_0* will be passed to callback, if 3 a GROUP_INFO_0*, etc */
-template<typename T>
-static void iterateGroups(DWORD level, T callback) {
-    NET_API_STATUS nStatus = NERR_Success;
-    ULONG_PTR resumeHandle = 0;
-    do {
-        LPBYTE groupBuffer = NULL;
-        DWORD entriesRead = 0;
-        DWORD totalEntries = 0;
-        nStatus = NetGroupEnum(NULL, 0, &groupBuffer, 1, &entriesRead, &totalEntries, &resumeHandle);
-        // buffer must always be freed, even if NetGroupEnum fails
-        ScopedNetApiBuffer<BYTE> groupInfo(groupBuffer);
-        if ((nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) && entriesRead > 0) {
-            callback(groupInfo.get());
-        }
-    } while (nStatus == ERROR_MORE_DATA);
+QStringList KUser::allUserNames()
+{
+    QStringList result;
+    enumerateAllUsers<USER_INFO_0>([&result](const USER_INFO_0& info) {
+        result.append(QString::fromWCharArray(info.usri0_name));
+    });
+    return result;
+}
+
+template<typename T, class Callback>
+void enumerateAllGroups(Callback callback) {
+    netApiEnumerate<T>(callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+        return NetGroupEnum(nullptr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
+    });
 }
 
 QList<KUserGroup> KUserGroup::allGroups()
 {
     QList<KUserGroup> result;
-    iterateGroups(3, [&result](LPBYTE data) {
-        GROUP_INFO_3* groupInfo = (GROUP_INFO_3*)data;
-        KUserGroup tmp(nullptr); // invalid KUserGroup
-        Q_ASSERT(!tmp.isValid());
-        tmp.d = new KUserGroup::Private(QString::fromWCharArray(groupInfo->grpi3_name),
-            KGroupId(groupInfo->grpi3_group_sid));
-        result.append(tmp);
+    // MSDN documentation say 3 is a valid level, however the function fails with invalid level!!!
+    // User GROUP_INFO_0 instead...
+    enumerateAllGroups<GROUP_INFO_0>([&result](const GROUP_INFO_0 &groupInfo) {
+        result.append(KUserGroup(QString::fromWCharArray(groupInfo.grpi0_name)));
     });
     return result;
 }
@@ -564,15 +489,82 @@ QList<KUserGroup> KUserGroup::allGroups()
 QStringList KUserGroup::allGroupNames()
 {
     QStringList result;
-    iterateGroups(0, [&result](LPBYTE data) {
-        GROUP_INFO_0* groupInfo = (GROUP_INFO_0*)data;
-        result.append(QString::fromWCharArray(groupInfo->grpi0_name));
+    enumerateAllGroups<GROUP_INFO_0>([&result](const GROUP_INFO_0 &groupInfo) {
+        result.append(QString::fromWCharArray(groupInfo.grpi0_name));
     });
     return result;
 }
 
-KUserGroup::~KUserGroup()
+template<typename T, class Callback>
+void enumerateGroupsForUser(const QString& name, Callback callback) {
+    LPCWSTR nameStr = (LPCWSTR)name.utf16();
+    netApiEnumerate<T>(callback, [&](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+        NET_API_STATUS ret = NetUserGetGroups(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total);
+        // if we return ERROR_MORE_DATA here it will result in an enless loop
+        if (ret == ERROR_MORE_DATA) {
+            qWarning() << "NetUserGetGroups for user" << name << "returned ERROR_MORE_DATA. This should not happen!";
+                ret = NERR_Success;
+        }
+        return ret;
+    });
+}
+
+QList<KUserGroup> KUser::groups() const
 {
+    QList<KUserGroup> result;
+    if (!isValid()) {
+        return result;
+    }
+    const QString name = QString::fromWCharArray(d->userInfo->usri11_name);
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(name, [&result](const GROUP_USERS_INFO_0 &info) {
+        result.append(KUserGroup(QString::fromWCharArray(info.grui0_name)));
+    });
+    return result;
+}
+
+QStringList KUser::groupNames() const
+{
+    QStringList result;
+    if (!isValid()) {
+        return result;
+    }
+    const QString name = QString::fromWCharArray(d->userInfo->usri11_name);
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(name, [&result](const GROUP_USERS_INFO_0 &info) {
+        result.append(QString::fromWCharArray(info.grui0_name));
+    });
+    return result;
+}
+
+template<typename T, class Callback>
+void enumerateUsersForGroup(const QString &name, Callback callback) {
+    LPCWSTR nameStr = (LPCWSTR)name.utf16();
+    netApiEnumerate<T>(callback, [nameStr](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+        return NetGroupGetUsers(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
+    });
+}
+
+QList<KUser> KUserGroup::users() const
+{
+    QList<KUser> result;
+    if (!isValid()) {
+        return result;
+    }
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(d->name, [&result](const GROUP_USERS_INFO_0 &info) {
+        result.append(KUser(QString::fromWCharArray(info.grui0_name)));
+    });
+    return result;
+}
+
+QStringList KUserGroup::userNames() const
+{
+    QStringList result;
+    if (!isValid()) {
+        return result;
+    }
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(d->name, [&result](const GROUP_USERS_INFO_0 &info) {
+        result.append(QString::fromWCharArray(info.grui0_name));
+    });
+    return result;
 }
 
 static const auto invalidSidString = QStringLiteral("<invalid SID>");
