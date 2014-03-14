@@ -30,6 +30,7 @@ class KUserTest : public QObject {
     Q_OBJECT
 private Q_SLOTS:
     void testKUser();
+    void testKUserGroup();
     void testKUserId();
     void testKGroupId();
 };
@@ -53,16 +54,62 @@ void KUserTest::testKUser()
     QVERIFY(user.isValid());
     QVERIFY(effectiveUser.isValid());
     QVERIFY(user == effectiveUser); // should be the same, no suid
+    QVERIFY(!user.groups().isEmpty()); // user must be in at least one group
+    QVERIFY(!user.groupNames().isEmpty()); // user must be in at least one group
+    QCOMPARE(user.groups().size(), user.groupNames().size());
+
+    QStringList allUserNames = KUser::allUserNames();
+    QList<KUser> allUsers = KUser::allUsers();
+    QVERIFY(!allUserNames.isEmpty());
+    QVERIFY(!allUsers.isEmpty());
+    QCOMPARE(allUsers.size(), allUserNames.size());
+    qDebug() << "All users: " << allUserNames;
     // We can't test the KUser properties, since they differ on each system
     // instead just print them all out, this can be verified by the person running the test
     printUserInfo(user);
+#if 0 //enable this if you think that KUser might not be working correctly
+    Q_FOREACH(const KUser& u, allUsers) {
+        printUserInfo(u);
+    }
+#endif
+}
 
-    QStringList allUserNames = KUser::allUserNames();
-    QVERIFY(allUserNames.size() > 1); //every system should have a least 2 users
-    qDebug() << "All users: " << allUserNames;
+void KUserTest::testKUserGroup()
+{
+    KUserGroup group(KGroupId::currentGroupId());
+    KUserGroup effectiveUser(KGroupId::currentEffectiveGroupId());
+    QVERIFY(group.isValid());
+    QVERIFY(effectiveUser.isValid());
+    QVERIFY(group == effectiveUser); // should be the same, no suid
+#ifdef Q_OS_WIN
+    // on Windows the special group "None" has no members (often the only group that exists)
+    if (group.name() != QLatin1String("None")) {
+#else
+    {
+#endif
+        QStringList groupUserNames = group.userNames();
+        QList<KUser> groupUsers = group.users();
+        QVERIFY(!groupUsers.isEmpty()); // group must have at least one user (the current user)
+        QVERIFY(!groupUserNames.isEmpty()); // group must have at least one user (the current user)
+        QCOMPARE(groupUsers.size(), groupUserNames.size());
+    }
 
-    QList<KUser> users = KUser::allUsers();
-    QVERIFY(users.size() > 1);
+    QStringList allGroupNames = KUserGroup::allGroupNames();
+    QList<KUserGroup> allGroups = KUserGroup::allGroups();
+    QVERIFY(!allGroupNames.isEmpty());
+    QVERIFY(!allGroups.isEmpty());
+    QCOMPARE(allGroups.size(), allGroupNames.size());
+    qDebug() << "All groups: " << allGroupNames;
+    // We can't test the KUser properties, since they differ on each system
+    // instead just print them all out, this can be verified by the person running the test
+    qDebug().nospace() << "Current group: " << group.name() << ", group ID =" << group.groupId().toString();
+#if 0 //enable this if you think that KUser might not be working correctly
+    for (int i = 0; i < allGroups.size(); ++i) {
+        qDebug().nospace() << "Group " << i << ": name = " << allGroups[i].name()
+            << ", group ID =" << allGroups[i].groupId().toString();
+        qDebug() << allGroups[i].name() << "members:" << allGroups[i].userNames();
+    }
+#endif
 }
 
 void KUserTest::testKUserId()
@@ -111,6 +158,7 @@ void KUserTest::testKUserId()
     KUserId currentUserCopy = currentUser;
     QVERIFY(currentUser == currentUserCopy);
     QVERIFY(currentUser == KUserId(currentUser));
+    
     QVERIFY(currentEffectiveUser == KUserId(currentUser));
 }
 
