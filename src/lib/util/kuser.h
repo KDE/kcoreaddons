@@ -273,22 +273,25 @@ public:
      */
     bool isValid() const;
 
-    /**
-     * Returns the user id of the user.
-     * @return the id of the user or -1 (UNIX)/ null(Windows) if user is invalid
-     */
-    K_UID uid() const;
-
     /** @return the native user id of the user. */
     KUserId userId() const;
 
 #ifndef Q_OS_WIN
+    /** @return the native user id of the user. */
+    KGroupId groupId() const;
+
+#ifndef KCOREADDONS_NO_DEPRECATED
     /**
      * Returns the group id of the user.
      * @return the id of the group or -1 if user is invalid
+     * @deprecated since 5.0 use KUser::groupId()
      */
-    K_GID gid() const;
+    KCOREADDONS_DEPRECATED K_GID gid() const
+    {
+        return groupId().nativeId();
+    }
 #endif
+#endif // !defined(Q_OS_WIN)
 
     /**
      * Checks whether the user is the super user (root).
@@ -311,6 +314,15 @@ public:
     KCOREADDONS_DEPRECATED QString fullName() const
     {
         return property(FullName).toString();
+    }
+    /**
+     * Returns the user id of the user.
+     * @return the id of the user or -1 (UNIX)/ null(Windows) if user is invalid
+     * @deprecated since 5.0 use KUser::groupId()
+     */
+    KCOREADDONS_DEPRECATED K_UID uid() const
+    {
+        return userId().nativeId();
     }
 #endif
 
@@ -482,12 +494,16 @@ public:
      */
     bool isValid() const;
 
-#ifndef Q_OS_WIN
+#ifndef KCOREADDONS_NO_DEPRECATED
     /**
      * Returns the group id of the group.
      * @return the group id of the group or -1 if the group is invalid
+     * @deprecated since 5.0 use KUserGroup::groupId()
      */
-    K_GID gid() const;
+    KCOREADDONS_DEPRECATED K_GID gid() const
+    {
+        return groupId().nativeId();
+    }
 #endif
 
     /** @return the native group id of the user. */

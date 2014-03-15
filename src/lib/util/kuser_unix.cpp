@@ -83,9 +83,9 @@ KUser::KUser(UIDMode mode)
         d = new Private(::getpwuid(_euid));
     } else {
         d = new Private(qgetenv("LOGNAME").constData());
-        if (uid() != _uid) {
+        if (d->uid != _uid) {
             d = new Private(qgetenv("USER").constData());
-            if (uid() != _uid) {
+            if (d->uid != _uid) {
                 d = new Private(::getpwuid(_uid));
             }
         }
@@ -130,22 +130,17 @@ KUser &KUser::operator =(const KUser &user)
 
 bool KUser::operator ==(const KUser &user) const
 {
-    return (uid() == user.uid()) && (uid() != uid_t(-1));
+    return isValid() && (d->uid == user.d->uid);
 }
 
 bool KUser::operator !=(const KUser &user) const
 {
-    return (uid() != user.uid()) || (uid() == uid_t(-1));
+    return !operator==(user);
 }
 
 bool KUser::isValid() const
 {
-    return uid() != uid_t(-1);
-}
-
-K_UID KUser::uid() const
-{
-    return d->uid;
+    return d->uid != uid_t(-1);
 }
 
 KUserId KUser::userId() const
@@ -153,14 +148,14 @@ KUserId KUser::userId() const
     return KUserId(d->uid);
 }
 
-K_GID KUser::gid() const
+KGroupId KUser::groupId() const
 {
-    return d->gid;
+    return KGroupId(d->gid);
 }
 
 bool KUser::isSuperUser() const
 {
-    return uid() == 0;
+    return d->uid == 0;
 }
 
 QString KUser::loginName() const
@@ -294,7 +289,7 @@ public:
 
 KUserGroup::KUserGroup(KUser::UIDMode mode)
 {
-    d = new Private(getgrgid(KUser(mode).gid()));
+    d = new Private(getgrgid(KUser(mode).groupId().nativeId()));
 }
 
 KUserGroup::KUserGroup(K_GID _gid)
@@ -335,22 +330,17 @@ KUserGroup &KUserGroup::operator =(const KUserGroup &group)
 
 bool KUserGroup::operator ==(const KUserGroup &group) const
 {
-    return (gid() == group.gid()) && (gid() != gid_t(-1));
+    return isValid() && (d->gid == group.d->gid);
 }
 
 bool KUserGroup::operator !=(const KUserGroup &user) const
 {
-    return (gid() != user.gid()) || (gid() == gid_t(-1));
+    return !operator==(user);
 }
 
 bool KUserGroup::isValid() const
 {
-    return gid() != gid_t(-1);
-}
-
-K_GID KUserGroup::gid() const
-{
-    return d->gid;
+    return d->gid != gid_t(-1);
 }
 
 KGroupId KUserGroup::groupId() const
