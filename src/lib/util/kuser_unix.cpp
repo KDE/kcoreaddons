@@ -233,6 +233,7 @@ QList<KUser> KUser::allUsers(uint maxCount)
     QList<KUser> result;
 
     passwd *p;
+    setpwent();
 
     for (uint i = 0; i < maxCount && (p = getpwent()); ++i) {
         result.append(KUser(p));
@@ -248,6 +249,7 @@ QStringList KUser::allUserNames(uint maxCount)
     QStringList result;
 
     passwd *p;
+    setpwent();
 
     for (uint i = 0; i < maxCount && (p = getpwent()); ++i) {
         result.append(QString::fromLocal8Bit(p->pw_name));
@@ -383,6 +385,7 @@ QList<KUserGroup> KUserGroup::allGroups(uint maxCount)
     QList<KUserGroup> result;
 
     ::group *g;
+    setgrent();
 
     for (uint i = 0; i < maxCount && (g = getgrent()); ++i) {
         result.append(KUserGroup(g));
@@ -398,6 +401,7 @@ QStringList KUserGroup::allGroupNames(uint maxCount)
     QStringList result;
 
     ::group *g;
+    setgrent();
 
     for (uint i = 0; i < maxCount && (g = getgrent()); ++i) {
         result.append(QString::fromLocal8Bit(g->gr_name));
