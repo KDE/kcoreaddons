@@ -39,6 +39,7 @@ kcoreaddons_unit_tests(
     kshelltest
     kurlmimedatatest
     kstringhandlertest
+    kusertest
 )
 
 set(KDIRWATCH_BACKENDS_TO_TEST Stat)#Stat is always compiled
