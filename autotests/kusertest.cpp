@@ -78,6 +78,12 @@ void KUserTest::testKUser()
         printUserInfo(u);
     }
 #endif
+
+    // test operator==
+    KUser invalidKUser = KUser(KUserId());
+    QVERIFY(invalidKUser != invalidKUser); //invalid never equal
+    QVERIFY(invalidKUser != user);
+    QVERIFY(user != invalidKUser);    // now test the other way around
 }
 
 void KUserTest::testKUserGroup()
@@ -122,6 +128,11 @@ void KUserTest::testKUserGroup()
         qDebug() << allGroups[i].name() << "members:" << allGroups[i].userNames();
     }
 #endif
+    // test operator==
+    KUserGroup invalidKUserGroup = KUserGroup(KGroupId());
+    QVERIFY(invalidKUserGroup != invalidKUserGroup); //invalid never equal
+    QVERIFY(invalidKUserGroup != group);
+    QVERIFY(group != invalidKUserGroup);    // now test the other way around
 }
 
 void KUserTest::testKUserId()
