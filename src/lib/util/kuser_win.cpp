@@ -55,23 +55,75 @@ const auto handleCloser = [](HANDLE h) {
 };
 typedef std::unique_ptr<std::remove_pointer<HANDLE>::type, decltype(handleCloser)> ScopedHANDLE;
 
+/** Make sure the NetApi functions are called with the correct level argument (for template functions)
+* This argument can be retrieved by using NetApiTypeInfo<T>::level. In order to do so the type must be
+* registered by writing e.g. NETAPI_TYPE_INFO(GROUP_INFO, 0) for GROUP_INFO_0
+*/
+template<typename T> struct NetApiTypeInfo {};
+#define NETAPI_TYPE_INFO(prefix, n) template<> struct NetApiTypeInfo<prefix##_##n> { enum { level = n }; };
+NETAPI_TYPE_INFO(GROUP_INFO, 0);
+NETAPI_TYPE_INFO(GROUP_INFO, 3);
+NETAPI_TYPE_INFO(USER_INFO, 0);
+NETAPI_TYPE_INFO(USER_INFO, 11);
+NETAPI_TYPE_INFO(GROUP_USERS_INFO, 0);
+
+// T must be a USER_INFO_* structure
+template<typename T>
+ScopedNetApiBuffer<T> getUserInfo(LPCWSTR server, const QString& userName, NET_API_STATUS* errCode)
+{
+    LPBYTE userInfoTmp = nullptr;
+    // if level = 11 a USER_INFO_11 structure gets filled in and allocated by NetUserGetInfo(), etc.
+    NET_API_STATUS status = NetUserGetInfo(server, (LPCWSTR)userName.utf16(), NetApiTypeInfo<T>::level, &userInfoTmp);
+    if (status != NERR_Success) {
+        userInfoTmp = nullptr;
+    }
+    if (errCode) {
+        *errCode = status;
+    }
+    return ScopedNetApiBuffer<T>((T*)userInfoTmp);
+}
+
 class KUser::Private : public QSharedData
 {
     typedef QExplicitlySharedDataPointer<Private> Ptr;
-    Private() : userInfo(nullptr) {}
+    Private() : isAdmin(false) {}
     //takes ownership over userInfo_
-    Private(USER_INFO_11* userInfo_, KUserId uid_, const QString& nameWithDomain_)
-        : userInfo(userInfo_), uid(uid_), nameWithDomain(nameWithDomain_)
+    Private(KUserId uid, const QString& loginName, const QString& fullName,
+        const QString& domain, const QString& homeDir, bool isAdmin)
+        : uid(uid), loginName(loginName), fullName(fullName), domain(domain), homeDir(homeDir), isAdmin(isAdmin)
     {
         Q_ASSERT(uid.isValid());
     }
+    static QString guessHomeDir(const QString& username, KUserId uid)
+    {
+        // usri11_home_dir/usri4_home_dir is often empty
+        // check whether it is the homedir for the current user and if not then fall back to "<user profiles dir>\<user name>"
+        if (uid == KUserId::currentUserId()) {
+            return QDir::homePath();
+        }
+        QString homeDir;
+        WCHAR* profileDirPath; // must be freed using CoTaskMemFree()
+        //TODO: what does KF_FLAG_SIMPLE_IDLIST do?
+        HRESULT result = SHGetKnownFolderPath(FOLDERID_UserProfiles, KF_FLAG_DONT_VERIFY, nullptr, &profileDirPath);
+        if (result == S_OK) {
+            // This might not be correct: e.g. with local user and domain user with same
+            // In that case it could be C:\Users\Foo (local user) vs C:\Users\Foo.DOMAIN (domain user)
+            // However it is still much better than the previous code which just returned the current users home dir
+            homeDir = QString::fromWCharArray(profileDirPath) + QLatin1Char('\\') + username;
+            CoTaskMemFree(profileDirPath);
+        }
+        return homeDir;
+    }
 public:
     static Ptr sharedNull;
-    ScopedNetApiBuffer<USER_INFO_11> userInfo;
     KUserId uid;
-    QString nameWithDomain;
+    QString loginName;
+    QString fullName;
+    QString domain;
+    QString homeDir;
+    bool isAdmin;
 
-    /** Creates a user info from a SID (always returns a valid object) */
+    /** Creates a user info from a SID (never returns null) */
     static Ptr create(KUserId sid)
     {
         if (!sid.isValid()) {
@@ -87,14 +139,10 @@ public:
             qWarning() << "Could not lookup user " << sid.toString() << "error =" << GetLastError();
             return sharedNull;
         }
-        QString qualifiedName = QString::fromWCharArray(domainBuffer);
-        if (!qualifiedName.isEmpty()) {
-            qualifiedName.append(QLatin1Char('\\'));
-        }
-        qualifiedName.append(QString::fromWCharArray(nameBuffer));
-        qDebug() << "Qualified name for" << sid.toString() << "is" << qualifiedName << "SID type =" << use;
+        QString loginName = QString::fromWCharArray(nameBuffer);
+        QString domainName = QString::fromWCharArray(domainBuffer);
         if (use != SidTypeUser && use != SidTypeDeletedAccount) {
-            qWarning().nospace() << "SID for " << qualifiedName << " (" << sid.toString()
+            qWarning().nospace() << "SID for " << domainName << "\\" << loginName << " (" << sid.toString()
                 << ") is not of type user (" << SidTypeUser << " or " << SidTypeDeletedAccount
                 << "). Got type " << use << " instead.";
             return sharedNull;
@@ -103,24 +151,25 @@ public:
         LPWSTR servernameTmp = nullptr;
         NET_API_STATUS status = NetGetAnyDCName(nullptr, 0, (LPBYTE*)&servernameTmp);
         if (status != NERR_Success) {
-            //qDebug("NetGetAnyDCName failed with error %d", status);
+            // this always fails on my desktop system, don't spam the output
+            // qDebug("NetGetAnyDCName failed with error %d", status);
         }
         ScopedNetApiBuffer<WCHAR> servername(servernameTmp);
 
-        // since level = 11 a USER_INFO_11 structure gets filled in and allocated by NetUserGetInfo()
-        USER_INFO_11* userInfoTmp;
-        // must NOT pass the qualified name here or lookup fails -> just the name from LookupAccountSid
-        status = NetUserGetInfo(servername.get(), nameBuffer, 11, (LPBYTE *)&userInfoTmp);
-        if (status != NERR_Success) {
-            qDebug().nospace() << "Could not get information for user " << qualifiedName
+        // must NOT pass the qualified name ("domain\user") here or lookup fails -> just the name
+        ScopedNetApiBuffer<USER_INFO_11> userInfo11(getUserInfo<USER_INFO_11>(servername.get(), loginName, &status));
+        if (!userInfo11) {
+            qDebug().nospace() << "Could not get information for user " << domainName << "\\" << loginName
                 << ": error code = " << status;
             return sharedNull;
         }
-        return Ptr(new Private(userInfoTmp, sid, qualifiedName));
-    }
-
-    ~Private()
-    {
+        QString fullName = QString::fromWCharArray(userInfo11->usri11_full_name);
+        QString homeDir = QString::fromWCharArray(userInfo11->usri11_home_dir);
+        bool isAdmin = userInfo11->usri11_priv == USER_PRIV_ADMIN;
+        if (homeDir.isEmpty()) {
+            homeDir = guessHomeDir(loginName, sid);
+        }
+        return Ptr(new Private(sid, loginName, fullName, domainName, homeDir, isAdmin));
     }
 };
 
@@ -186,43 +235,17 @@ bool KUser::isValid() const
 
 bool KUser::isSuperUser() const
 {
-    return d->userInfo && d->userInfo->usri11_priv == USER_PRIV_ADMIN;
+    return d->isAdmin;
 }
 
 QString KUser::loginName() const
 {
-    return (d->userInfo ? QString::fromWCharArray(d->userInfo->usri11_name) : QString());
+    return d->loginName;
 }
 
 QString KUser::homeDir() const
 {
-    if (!d->userInfo) {
-        return QString();
-    }
-    QString homeDir = QString::fromWCharArray(d->userInfo->usri11_home_dir);
-    if (!homeDir.isEmpty()) {
-        return homeDir;
-    }
-    // usri11_home_dir is often empty -> check whether it is the homedir for the current user
-    // if not then fall back to "<user profiles dir>\<user name>"
-
-    if (d->uid == KUserId::currentUserId()) {
-        return QDir::homePath();
-    }
-    static QString userProfilesDir;
-    if (userProfilesDir.isEmpty()) {
-        WCHAR* path; // must be freed using CoTaskMemFree()
-        //TODO: what does KF_FLAG_SIMPLE_IDLIST do?
-        HRESULT result = SHGetKnownFolderPath(FOLDERID_UserProfiles, KF_FLAG_DONT_VERIFY, nullptr, &path);
-        if (result == S_OK) {
-            userProfilesDir = QString::fromWCharArray(path);
-            CoTaskMemFree(path);
-        }
-    }
-    // This might not be correct: e.g. with local user and domain user with same
-    // In that case it could be C:\Users\Foo (local user) vs C:\Users\Foo.DOMAIN (domain user)
-    // However it is still much better than the previous code which just returned the current users home dir
-    return userProfilesDir.isEmpty() ? QString() : userProfilesDir + QLatin1Char('\\') + loginName();
+    return d->homeDir;
 }
 
 /* See MSDN (http://msdn.microsoft.com/en-us/library/windows/desktop/bb776892%28v=vs.85%29.aspx)
@@ -241,7 +264,8 @@ static inline QString tileImageName(const QString& user) {
 QString KUser::faceIconPath() const
 {
     // try name with domain first, then fallback to logon name
-    QString imagePath = QStandardPaths::locate(QStandardPaths::TempLocation, tileImageName(d->nameWithDomain));
+    const QString nameWithDomain = d->domain + QLatin1Char('\\') + d->loginName;
+    QString imagePath = QStandardPaths::locate(QStandardPaths::TempLocation, tileImageName(nameWithDomain));
     if (imagePath.isEmpty()) {
         imagePath = QStandardPaths::locate(QStandardPaths::TempLocation, tileImageName(loginName()));
     }
@@ -262,7 +286,7 @@ KUserId KUser::userId() const
 QVariant KUser::property(UserProperty which) const
 {
     if (which == FullName) {
-        return QVariant(d->userInfo ? QString::fromWCharArray(d->userInfo->usri11_full_name) : QString());
+        return QVariant(d->fullName);
     }
 
     return QVariant();
@@ -367,18 +391,6 @@ KUserGroup::~KUserGroup()
 }
 
 //enumeration functions
-
-/** Make sure the NetApi functions are called with the correct level argument (for template functions)
-* This argument can be retrieved by using NetApiTypeInfo<T>::level. In order to do so the type must be
-* registered by writing e.g. NETAPI_TYPE_INFO(GROUP_INFO, 0) for GROUP_INFO_0
-*/
-template<typename T> struct NetApiTypeInfo {};
-#define NETAPI_TYPE_INFO(prefix, n) template<> struct NetApiTypeInfo<prefix##_##n> { enum { level = n }; };
-NETAPI_TYPE_INFO(GROUP_INFO, 0);
-NETAPI_TYPE_INFO(GROUP_INFO, 3);
-NETAPI_TYPE_INFO(USER_INFO, 0);
-NETAPI_TYPE_INFO(GROUP_USERS_INFO, 0);
-
 /** simplify calling the Net*Enum functions to prevent copy and paste for allUsers(), allUserNames(), allGroups(), allGroupNames()
 * @tparam T The type that is enumerated (e.g. USER_INFO_11) Must be registered using NETAPI_TYPE_INFO.
 * @param callback Callback for each listed object. Signature: void(const T&)
@@ -493,8 +505,7 @@ QList<KUserGroup> KUser::groups(uint maxCount) const
     if (!isValid()) {
         return result;
     }
-    const QString name = QString::fromWCharArray(d->userInfo->usri11_name);
-    enumerateGroupsForUser<GROUP_USERS_INFO_0>(maxCount, name, [&result](const GROUP_USERS_INFO_0 &info) {
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(maxCount, d->loginName, [&result](const GROUP_USERS_INFO_0 &info) {
         result.append(KUserGroup(QString::fromWCharArray(info.grui0_name)));
     });
     return result;
@@ -506,8 +517,7 @@ QStringList KUser::groupNames(uint maxCount) const
     if (!isValid()) {
         return result;
     }
-    const QString name = QString::fromWCharArray(d->userInfo->usri11_name);
-    enumerateGroupsForUser<GROUP_USERS_INFO_0>(maxCount, name, [&result](const GROUP_USERS_INFO_0 &info) {
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(maxCount, d->loginName, [&result](const GROUP_USERS_INFO_0 &info) {
         result.append(QString::fromWCharArray(info.grui0_name));
     });
     return result;

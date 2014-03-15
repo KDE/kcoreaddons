@@ -21,11 +21,6 @@
 
 #include "kuser.h"
 
-#ifdef Q_OS_WIN
-#include <qt_windows.h>
-#include <sddl.h>
-#endif
-
 class KUserTest : public QObject {
     Q_OBJECT
 private Q_SLOTS:
