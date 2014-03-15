@@ -745,3 +745,23 @@ KGroupId KGroupId::currentGroupId()
 KUserId KUserId::currentEffectiveUserId() { return currentUserId(); }
 
 KGroupId KGroupId::currentEffectiveGroupId() { return currentGroupId(); }
+
+KCOREADDONS_EXPORT uint qHash(const KUserId &id, uint seed)
+{
+    if (!id.isValid()) {
+        return seed;
+    }
+    // we can't just hash the pointer since equal object must have the same hash -> hash contents
+    char* sid = (char*)id.nativeId();
+    return qHash(QByteArray::fromRawData(sid, GetLengthSid(sid)), seed);
+}
+
+KCOREADDONS_EXPORT uint qHash(const KGroupId &id, uint seed)
+{
+    if (!id.isValid()) {
+        return seed;
+    }
+    // we can't just hash the pointer since equal object must have the same hash -> hash contents
+    char* sid = (char*)id.nativeId();
+    return qHash(QByteArray::fromRawData(sid, GetLengthSid(sid)), seed);
+}

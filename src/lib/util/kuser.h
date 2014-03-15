@@ -128,6 +128,15 @@ struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
     static KGroupId currentEffectiveGroupId();
 };
 
+#ifndef Q_OS_WIN
+inline uint qHash(const KUserId &id, uint seed = 0) { return qHash(id.nativeId(), seed); }
+inline uint qHash(const KGroupId &id, uint seed = 0) { return qHash(id.nativeId(), seed); }
+#else
+// can't be inline on windows
+KCOREADDONS_EXPORT uint qHash(const KUserId &id, uint seed = 0);
+KCOREADDONS_EXPORT uint qHash(const KGroupId &id, uint seed = 0);
+#endif
+
 /**
  * \class KUser kuser.h <KUser>
  *
