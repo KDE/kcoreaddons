@@ -54,6 +54,7 @@ static inline void printUserInfo(KUser user)
     qDebug() << "Shell: " << user.shell();
     qDebug() << "Face icon path:" << user.faceIconPath();
     qDebug() << "Groups:" << user.groupNames();
+    qDebug();
 }
 
 void KUserTest::testKUser()
@@ -95,6 +96,21 @@ void KUserTest::testKUser()
     QVERIFY(invalidKUser != invalidKUser); //invalid never equal
     QVERIFY(invalidKUser != user);
     QVERIFY(user != invalidKUser);    // now test the other way around
+    QCOMPARE(user, user);
+
+    // make sure we don't crash when accessing properties of an invalid instace
+    QCOMPARE(invalidKUser.faceIconPath(), QString());
+    QCOMPARE(invalidKUser.fullName(), QString());
+    QCOMPARE(invalidKUser.groupId(), KGroupId());
+    QCOMPARE(invalidKUser.groupNames(), QStringList());
+    QCOMPARE(invalidKUser.groups(), QList<KUserGroup>());
+    QCOMPARE(invalidKUser.homeDir(), QString());
+    QCOMPARE(invalidKUser.isSuperUser(), false);
+    QCOMPARE(invalidKUser.loginName(), QString());
+    QCOMPARE(invalidKUser.shell(), QString());
+    QCOMPARE(invalidKUser.userId(), KUserId());
+    QCOMPARE(invalidKUser.userId(), KUserId());
+    QCOMPARE(invalidKUser.property(KUser::RoomNumber), QVariant());
 }
 
 void KUserTest::testKUserGroup()
@@ -103,7 +119,7 @@ void KUserTest::testKUserGroup()
     KUserGroup effectiveUser(KGroupId::currentEffectiveGroupId());
     QVERIFY(group.isValid());
     QVERIFY(effectiveUser.isValid());
-    QVERIFY(group == effectiveUser); // should be the same, no suid
+    QCOMPARE(group, effectiveUser); // should be the same, no suid
 #ifdef Q_OS_WIN
     // on Windows the special group "None" has no members (often the only group that exists)
     if (group.name() != QLatin1String("None")) {
@@ -144,6 +160,14 @@ void KUserTest::testKUserGroup()
     QVERIFY(invalidKUserGroup != invalidKUserGroup); //invalid never equal
     QVERIFY(invalidKUserGroup != group);
     QVERIFY(group != invalidKUserGroup);    // now test the other way around
+    QCOMPARE(group, group);
+
+    // make sure we don't crash when accessing an invalid KUserGroup
+    QCOMPARE(invalidKUserGroup.groupId(), KGroupId());
+    QCOMPARE(invalidKUserGroup.name(), QString());
+    QCOMPARE(invalidKUserGroup.userNames(), QStringList());
+    QCOMPARE(invalidKUserGroup.users(), QList<KUser>());
+
 }
 
 void KUserTest::testKUserId()
@@ -154,7 +178,7 @@ void KUserTest::testKUserId()
     KUserId currentEffectiveUser = KUserId::currentEffectiveUserId();
     QVERIFY(currentEffectiveUser.isValid());
     // these should be the same since this is not a setuid program
-    QVERIFY(currentUser == currentEffectiveUser);
+    QCOMPARE(currentUser, currentEffectiveUser);
 
     KUser kuser(currentUser);
     //now get the same user from his name
@@ -178,22 +202,21 @@ void KUserTest::testKUserId()
     QVERIFY(!invalid3.isValid());
 
     //check comparison
-    QVERIFY(invalid == KUserId());
-    QVERIFY(invalid == invalid2);
-    QVERIFY(invalid == invalid3);
-    QVERIFY(currentUser == currentUserFromStr);
-    QVERIFY(currentUser == currentEffectiveUser);
-    QVERIFY(currentUser == currentUserCopyFromKUser);
+    QCOMPARE(invalid, KUserId());
+    QCOMPARE(invalid, invalid2);
+    QCOMPARE(invalid, invalid3);
+    QCOMPARE(currentUser, currentUserFromStr);
+    QCOMPARE(currentUser, currentEffectiveUser);
+    QCOMPARE(currentUser, currentUserCopyFromKUser);
     QVERIFY(currentUser != invalid);
     QVERIFY(currentUser != invalid2);
     QVERIFY(currentUser != invalid3);
     QVERIFY(invalid != currentUser);
     //Copy constructor and assignment
     KUserId currentUserCopy = currentUser;
-    QVERIFY(currentUser == currentUserCopy);
-    QVERIFY(currentUser == KUserId(currentUser));
-    
-    QVERIFY(currentEffectiveUser == KUserId(currentUser));
+    QCOMPARE(currentUser, currentUserCopy);
+    QCOMPARE(currentUser, KUserId(currentUser));
+    QCOMPARE(currentEffectiveUser, KUserId(currentUser));
 }
 
 void KUserTest::testKGroupId()
@@ -204,7 +227,7 @@ void KUserTest::testKGroupId()
     KGroupId currentEffectiveGroup = KGroupId::currentEffectiveGroupId();
     QVERIFY(currentEffectiveGroup.isValid());
     // these should be the same since this is not a setuid program
-    QVERIFY(currentGroup == currentEffectiveGroup);
+    QCOMPARE(currentGroup, currentEffectiveGroup);
 
     //now get the same Group from his name
     KUserGroup kuserGroup(currentGroup);
@@ -228,21 +251,21 @@ void KUserTest::testKGroupId()
     QVERIFY(!invalid3.isValid());
 
     //check comparison
-    QVERIFY(invalid == KGroupId());
-    QVERIFY(invalid == invalid2);
-    QVERIFY(invalid == invalid3);
-    QVERIFY(currentGroup == currentGroupFromStr);
-    QVERIFY(currentGroup == currentEffectiveGroup);
-    QVERIFY(currentGroup == currentGroupCopyFromKUserGroup);
+    QCOMPARE(invalid, KGroupId());
+    QCOMPARE(invalid, invalid2);
+    QCOMPARE(invalid, invalid3);
+    QCOMPARE(currentGroup, currentGroupFromStr);
+    QCOMPARE(currentGroup, currentEffectiveGroup);
+    QCOMPARE(currentGroup, currentGroupCopyFromKUserGroup);
     QVERIFY(invalid != currentGroup);
     QVERIFY(currentGroup != invalid);
     QVERIFY(currentGroup != invalid2);
     QVERIFY(currentGroup != invalid3);
     //Copy constructor and assignment
     KGroupId currentGroupCopy = currentGroup;
-    QVERIFY(currentGroup == currentGroupCopy);
-    QVERIFY(currentGroup == KGroupId(currentGroup));
-    QVERIFY(currentEffectiveGroup == KGroupId(currentGroup));
+    QCOMPARE(currentGroup, currentGroupCopy);
+    QCOMPARE(currentGroup, KGroupId(currentGroup));
+    QCOMPARE(currentEffectiveGroup, KGroupId(currentGroup));
 }
 
 

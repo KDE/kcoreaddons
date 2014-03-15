@@ -380,7 +380,7 @@ QString KUser::faceIconPath() const
 
 QString KUser::shell() const
 {
-    return QString::fromLatin1("cmd.exe");
+    return isValid() ? QStringLiteral("cmd.exe") : QString();
 }
 
 KUserId KUser::userId() const
