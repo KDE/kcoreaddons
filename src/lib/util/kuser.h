@@ -429,7 +429,6 @@ public:
     */
     explicit KUserGroup(KGroupId gid);
 
-#ifndef Q_OS_WIN
     /**
      * Create an object from the group of the current user.
      * @param mode if #KUser::UseEffectiveUID is passed the effective user
@@ -449,6 +448,7 @@ public:
      */
     explicit KUserGroup(K_GID gid);
 
+#ifndef Q_OS_WIN
     /**
      * Creates an object from a group structure.
      * If the pointer is null, isValid() will return false.

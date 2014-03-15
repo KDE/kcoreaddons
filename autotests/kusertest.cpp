@@ -115,8 +115,8 @@ void KUserTest::testKUser()
 
 void KUserTest::testKUserGroup()
 {
-    KUserGroup group(KGroupId::currentGroupId());
-    KUserGroup effectiveUser(KGroupId::currentEffectiveGroupId());
+    KUserGroup group(KUser::UseRealUserID);
+    KUserGroup effectiveUser(KUser::UseEffectiveUID);
     QVERIFY(group.isValid());
     QVERIFY(effectiveUser.isValid());
     QCOMPARE(group, effectiveUser); // should be the same, no suid

@@ -442,23 +442,47 @@ KUserGroup::KUserGroup(const char *_name)
 {
 }
 
-KUserGroup::KUserGroup(KGroupId gid)
-{
+static QString nameFromGroupId(KGroupId gid) {
+    if (!gid.isValid()) {
+        return QString();
+    }
+
     DWORD bufferLen = UNLEN + 1;
     WCHAR buffer[UNLEN + 1];
     DWORD domainBufferLen = UNLEN + 1;
     WCHAR domainBuffer[UNLEN + 1];
     SID_NAME_USE eUse;
     QString name;
-    if (gid.isValid() && LookupAccountSidW(NULL, gid.nativeId(), buffer, &bufferLen, domainBuffer, &domainBufferLen, &eUse)) {
+    if (LookupAccountSidW(NULL, gid.nativeId(), buffer, &bufferLen, domainBuffer, &domainBufferLen, &eUse)) {
         if (eUse == SidTypeGroup || eUse == SidTypeWellKnownGroup) {
             name = QString::fromWCharArray(buffer);
         } else {
             qWarning() << QString::fromWCharArray(buffer) << "is not a group, SID type is" << eUse;
         }
     }
-    d = new Private(name, gid);
+    return name;
+}
 
+KUserGroup::KUserGroup(KGroupId gid)
+    :d(new Private(nameFromGroupId(gid), gid))
+{
+}
+
+KUserGroup::KUserGroup(K_GID gid)
+{
+    KGroupId groupId(gid);
+    d = new Private(nameFromGroupId(groupId), groupId);
+}
+
+KUserGroup::KUserGroup(KUser::UIDMode mode)
+{
+    KGroupId gid;
+    if (mode == KUser::UseEffectiveUID) {
+        gid = KGroupId::currentGroupId();
+    } else if (mode == KUser::UseRealUserID) {
+        gid = KGroupId::currentEffectiveGroupId();
+    }
+    d = new Private(nameFromGroupId(gid), gid);
 }
 
 KUserGroup::KUserGroup(const KUserGroup &group)
