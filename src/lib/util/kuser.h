@@ -602,4 +602,14 @@ inline KUserOrGroupId<T>::~KUserOrGroupId()
 }
 #endif // !defined(Q_OS_WIN)
 
+inline bool KUser::operator!=(const KUser &other) const
+{
+    return !operator==(other);
+}
+
+inline bool KUserGroup::operator!=(const KUserGroup &other) const
+{
+    return !operator==(other);
+}
+
 #endif

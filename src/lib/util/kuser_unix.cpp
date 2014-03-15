@@ -134,11 +134,6 @@ bool KUser::operator ==(const KUser &user) const
     return isValid() && (d->uid == user.d->uid);
 }
 
-bool KUser::operator !=(const KUser &user) const
-{
-    return !operator==(user);
-}
-
 bool KUser::isValid() const
 {
     return d->uid != uid_t(-1);
@@ -332,11 +327,6 @@ KUserGroup &KUserGroup::operator =(const KUserGroup &group)
 bool KUserGroup::operator ==(const KUserGroup &group) const
 {
     return isValid() && (d->gid == group.d->gid);
-}
-
-bool KUserGroup::operator !=(const KUserGroup &user) const
-{
-    return !operator==(user);
 }
 
 bool KUserGroup::isValid() const
