@@ -47,7 +47,6 @@ struct group;
 
 /** A platform independent user or group ID.
  *
- * This struct must not be used directly, instead use KUserId and KGroupId
  *
  * This struct is required since Windows does not have an integer uid_t/gid_t type
  * but instead uses an opaque binary blob (SID) which must free allocated memory.
@@ -59,6 +58,7 @@ struct group;
  * an abstraction over the native user/group ID type. If more information is necessary, a
  * KUser or KUserGroup instance can be constructed from this ID
  *
+ * @internal
  * @author Alex Richardson <arichardson.kde@gmail.com>
  */
 template<typename T>
@@ -76,7 +76,10 @@ protected:
     KUserOrGroupId& operator=(const KUserOrGroupId<T>& other);
     ~KUserOrGroupId();
 public:
-    /** @return true if this object references a valid user/group ID */
+    /** @return true if this object references a valid user/group ID.
+     * @note If this returns true it doesn't necessarily mean that the referenced user/group exists,
+     * it only checks whether this value could be a valid user/group ID.
+     */
     bool isValid() const;
     /**
      * @return A user/group ID that can be used in operating system specific functions
@@ -90,7 +93,9 @@ public:
      * like e.g. "S-1-5-32-544" for the Administrators group
      */
     QString toString() const;
+    /** @return whether this KUserOrGroupId is equal to @p other */
     bool operator==(const KUserOrGroupId &other) const;
+    /** @return whether this KUserOrGroupId is not equal to @p other */
     bool operator!=(const KUserOrGroupId &other) const;
 private:
 #ifdef Q_OS_WIN
@@ -101,30 +106,52 @@ private:
 };
 
 /** A platform independent user ID.
-* @see KUserOrGroupId
-*/
+ * @see KUserOrGroupId
+ * @since 5.0
+ * @author Alex Richardson <arichardson.kde@gmail.com>
+ */
 struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<K_UID> {
+    /** Creates an invalid KUserId */
     KUserId() {}
+    /** Creates an KUserId from the native user ID type */
     explicit KUserId(K_UID uid) : KUserOrGroupId(uid) {}
     KUserId(const KUserId &other) : KUserOrGroupId(other) {}
     ~KUserId() {};
-    //TODO: document
+    /** @return a KUserId for the user with name @p name, or an invalid KUserId if no
+     * user with this name was found on the system
+     */
     static KUserId fromName(const QString& name);
+    /** @return a KUserId for the current user. This is like ::getuid() on UNIX. */
     static KUserId currentUserId();
+    /** @return a KUserId for the current effective user. This is like ::geteuid() on UNIX.
+     * @note Windows does not have setuid binaries, so on Windows this will always be the same
+     * as KUserId::currentUserId()
+     */
     static KUserId currentEffectiveUserId();
 };
 
 /** A platform independent group ID.
  * @see KUserOrGroupId
+ * @since 5.0
+ * @author Alex Richardson <arichardson.kde@gmail.com>
  */
 struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
+    /** Creates an invalid KGroupId */
     KGroupId() {}
+    /** Creates an KGroupId from the native group ID type */
     explicit KGroupId(K_GID gid) : KUserOrGroupId(gid) {}
     KGroupId(const KGroupId &other) : KUserOrGroupId(other) {}
     ~KGroupId() {};
-    //TODO: document
+    /** @return A KGroupId for the user with name @p name, or an invalid KGroupId if no
+     * user with this name was found on the system
+     */
     static KGroupId fromName(const QString& name);
+    /** @return a KGroupId for the current user. This is like ::getgid() on UNIX. */
     static KGroupId currentGroupId();
+    /** @return a KGroupId for the current effective user. This is like ::getegid() on UNIX.
+     * @note Windows does not have setuid binaries, so on Windows this will always be the same
+     * as KGroupId::currentGroupId()
+     */
     static KGroupId currentEffectiveGroupId();
 };
 
@@ -132,7 +159,7 @@ struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
 inline uint qHash(const KUserId &id, uint seed = 0) { return qHash(id.nativeId(), seed); }
 inline uint qHash(const KGroupId &id, uint seed = 0) { return qHash(id.nativeId(), seed); }
 #else
-// can't be inline on windows
+// can't be inline on windows, because we would need to include windows.h (which can break code)
 KCOREADDONS_EXPORT uint qHash(const KUserId &id, uint seed = 0);
 KCOREADDONS_EXPORT uint qHash(const KGroupId &id, uint seed = 0);
 #endif
