@@ -189,7 +189,7 @@ QString KUser::shell() const
     return d->shell;
 }
 
-QList<KUserGroup> KUser::groups() const
+QList<KUserGroup> KUser::groups(uint maxCount) const
 {
     QList<KUserGroup> result;
     const QList<KUserGroup> allGroups = KUserGroup::allGroups();
@@ -197,13 +197,16 @@ QList<KUserGroup> KUser::groups() const
     for (it = allGroups.begin(); it != allGroups.end(); ++it) {
         const QList<KUser> users = (*it).users();
         if (users.contains(*this)) {
+            if ((uint)result.size() >= maxCount) {
+                break;
+            }
             result.append(*it);
         }
     }
     return result;
 }
 
-QStringList KUser::groupNames() const
+QStringList KUser::groupNames(uint maxCount) const
 {
     QStringList result;
     const QList<KUserGroup> allGroups = KUserGroup::allGroups();
@@ -211,6 +214,9 @@ QStringList KUser::groupNames() const
     for (it = allGroups.begin(); it != allGroups.end(); ++it) {
         const QList<KUser> users = (*it).users();
         if (users.contains(*this)) {
+            if ((uint)result.size() >= maxCount) {
+                break;
+            }
             result.append((*it).name());
         }
     }
@@ -222,13 +228,13 @@ QVariant KUser::property(UserProperty which) const
     return d->properties.value(which);
 }
 
-QList<KUser> KUser::allUsers()
+QList<KUser> KUser::allUsers(uint maxCount)
 {
     QList<KUser> result;
 
     passwd *p;
 
-    while ((p = getpwent()))  {
+    for (uint i = 0; i < maxCount && (p = getpwent()); ++i) {
         result.append(KUser(p));
     }
 
@@ -237,13 +243,13 @@ QList<KUser> KUser::allUsers()
     return result;
 }
 
-QStringList KUser::allUserNames()
+QStringList KUser::allUserNames(uint maxCount)
 {
     QStringList result;
 
     passwd *p;
 
-    while ((p = getpwent()))  {
+    for (uint i = 0; i < maxCount && (p = getpwent()); ++i) {
         result.append(QString::fromLocal8Bit(p->pw_name));
     }
 
@@ -355,27 +361,30 @@ QString KUserGroup::name() const
     return d->name;
 }
 
-QList<KUser> KUserGroup::users() const
+QList<KUser> KUserGroup::users(uint maxCount) const
 {
-    return d->users;
+    if ((int)maxCount < 0) {
+        return d->users;
+    }
+    return d->users.mid(0, (int)maxCount);
 }
 
-QStringList KUserGroup::userNames() const
+QStringList KUserGroup::userNames(uint maxCount) const
 {
     QStringList result;
-    QList<KUser>::const_iterator it;
-    for (it = d->users.begin(); it != d->users.end(); ++it) {
-        result.append((*it).loginName());
+    for (uint i = 0; i < (uint)d->users.size() && i < maxCount; ++i) {
+        result.append(d->users[i].loginName());
     }
     return result;
 }
 
-QList<KUserGroup> KUserGroup::allGroups()
+QList<KUserGroup> KUserGroup::allGroups(uint maxCount)
 {
     QList<KUserGroup> result;
 
     ::group *g;
-    while ((g = getgrent()))  {
+
+    for (uint i = 0; i < maxCount && (g = getgrent()); ++i) {
         result.append(KUserGroup(g));
     }
 
@@ -384,12 +393,13 @@ QList<KUserGroup> KUserGroup::allGroups()
     return result;
 }
 
-QStringList KUserGroup::allGroupNames()
+QStringList KUserGroup::allGroupNames(uint maxCount)
 {
     QStringList result;
 
     ::group *g;
-    while ((g = getgrent()))  {
+
+    for (uint i = 0; i < maxCount && (g = getgrent()); ++i) {
         result.append(QString::fromLocal8Bit(g->gr_name));
     }
 

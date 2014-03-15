@@ -392,9 +392,10 @@ NETAPI_TYPE_INFO(GROUP_USERS_INFO, 0);
 *
 */
 template<class T, class Callback, class EnumFunction>
-static void netApiEnumerate(Callback callback, EnumFunction enumFunc) {
+static void netApiEnumerate(uint maxCount, Callback callback, EnumFunction enumFunc) {
     NET_API_STATUS nStatus = NERR_Success;
     quint64 resumeHandle = 0;
+    uint total = 0;
     int level = NetApiTypeInfo<T>::level;
     do {
         LPBYTE buffer = nullptr;
@@ -407,7 +408,7 @@ static void netApiEnumerate(Callback callback, EnumFunction enumFunc) {
         // buffer must always be freed, even if Net*Enum fails
         ScopedNetApiBuffer<T> groupInfo((T*)buffer);
         if (nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) {
-            for (DWORD i = 0; i < entriesRead; i++) {
+            for (DWORD i = 0; total < maxCount && i < entriesRead; i++, total++) {
                 callback(groupInfo.get()[i]);
             }
         } else {
@@ -417,8 +418,8 @@ static void netApiEnumerate(Callback callback, EnumFunction enumFunc) {
 }
 
 template<class T, class Callback>
-void enumerateAllUsers(Callback callback) {
-    netApiEnumerate<T>(callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+void enumerateAllUsers(uint maxCount, Callback callback) {
+    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
         // pass 0 as filter -> get all users
         // Why does this function take a DWORD* as resume handle and NetUserEnum/NetGroupGetUsers a UINT64*
         // Great API design by Microsoft...
@@ -427,7 +428,7 @@ void enumerateAllUsers(Callback callback) {
     });
 }
 
-QList<KUser> KUser::allUsers()
+QList<KUser> KUser::allUsers(uint maxCount)
 {
     QList<KUser> result;
     // No advantage if we take a USER_INFO_11, since there is no way of copying it
@@ -435,52 +436,52 @@ QList<KUser> KUser::allUsers()
     // -> get a USER_INFO_0 instead and then use KUser(QString)
     // USER_INFO_23 or USER_INFO_23 would be ideal here since they contains a SID,
     // but that fails with error code 0x7c (bad level)
-    enumerateAllUsers<USER_INFO_0>([&result](const USER_INFO_0& info) {
+    enumerateAllUsers<USER_INFO_0>(maxCount, [&result](const USER_INFO_0& info) {
         result.append(KUser(QString::fromWCharArray(info.usri0_name)));
     });
     return result;
 }
 
-QStringList KUser::allUserNames()
+QStringList KUser::allUserNames(uint maxCount)
 {
     QStringList result;
-    enumerateAllUsers<USER_INFO_0>([&result](const USER_INFO_0& info) {
+    enumerateAllUsers<USER_INFO_0>(maxCount, [&result](const USER_INFO_0& info) {
         result.append(QString::fromWCharArray(info.usri0_name));
     });
     return result;
 }
 
 template<typename T, class Callback>
-void enumerateAllGroups(Callback callback) {
-    netApiEnumerate<T>(callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+void enumerateAllGroups(uint maxCount, Callback callback) {
+    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
         return NetGroupEnum(nullptr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
     });
 }
 
-QList<KUserGroup> KUserGroup::allGroups()
+QList<KUserGroup> KUserGroup::allGroups(uint maxCount)
 {
     QList<KUserGroup> result;
     // MSDN documentation say 3 is a valid level, however the function fails with invalid level!!!
     // User GROUP_INFO_0 instead...
-    enumerateAllGroups<GROUP_INFO_0>([&result](const GROUP_INFO_0 &groupInfo) {
+    enumerateAllGroups<GROUP_INFO_0>(maxCount, [&result](const GROUP_INFO_0 &groupInfo) {
         result.append(KUserGroup(QString::fromWCharArray(groupInfo.grpi0_name)));
     });
     return result;
 }
 
-QStringList KUserGroup::allGroupNames()
+QStringList KUserGroup::allGroupNames(uint maxCount)
 {
     QStringList result;
-    enumerateAllGroups<GROUP_INFO_0>([&result](const GROUP_INFO_0 &groupInfo) {
+    enumerateAllGroups<GROUP_INFO_0>(maxCount, [&result](const GROUP_INFO_0 &groupInfo) {
         result.append(QString::fromWCharArray(groupInfo.grpi0_name));
     });
     return result;
 }
 
 template<typename T, class Callback>
-void enumerateGroupsForUser(const QString& name, Callback callback) {
+void enumerateGroupsForUser(uint maxCount, const QString& name, Callback callback) {
     LPCWSTR nameStr = (LPCWSTR)name.utf16();
-    netApiEnumerate<T>(callback, [&](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+    netApiEnumerate<T>(maxCount, callback, [&](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
         NET_API_STATUS ret = NetUserGetGroups(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total);
         // if we return ERROR_MORE_DATA here it will result in an enless loop
         if (ret == ERROR_MORE_DATA) {
@@ -491,59 +492,59 @@ void enumerateGroupsForUser(const QString& name, Callback callback) {
     });
 }
 
-QList<KUserGroup> KUser::groups() const
+QList<KUserGroup> KUser::groups(uint maxCount) const
 {
     QList<KUserGroup> result;
     if (!isValid()) {
         return result;
     }
     const QString name = QString::fromWCharArray(d->userInfo->usri11_name);
-    enumerateGroupsForUser<GROUP_USERS_INFO_0>(name, [&result](const GROUP_USERS_INFO_0 &info) {
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(maxCount, name, [&result](const GROUP_USERS_INFO_0 &info) {
         result.append(KUserGroup(QString::fromWCharArray(info.grui0_name)));
     });
     return result;
 }
 
-QStringList KUser::groupNames() const
+QStringList KUser::groupNames(uint maxCount) const
 {
     QStringList result;
     if (!isValid()) {
         return result;
     }
     const QString name = QString::fromWCharArray(d->userInfo->usri11_name);
-    enumerateGroupsForUser<GROUP_USERS_INFO_0>(name, [&result](const GROUP_USERS_INFO_0 &info) {
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(maxCount, name, [&result](const GROUP_USERS_INFO_0 &info) {
         result.append(QString::fromWCharArray(info.grui0_name));
     });
     return result;
 }
 
 template<typename T, class Callback>
-void enumerateUsersForGroup(const QString &name, Callback callback) {
+void enumerateUsersForGroup(const QString &name, uint maxCount, Callback callback) {
     LPCWSTR nameStr = (LPCWSTR)name.utf16();
-    netApiEnumerate<T>(callback, [nameStr](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+    netApiEnumerate<T>(maxCount, callback, [nameStr](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
         return NetGroupGetUsers(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
     });
 }
 
-QList<KUser> KUserGroup::users() const
+QList<KUser> KUserGroup::users(uint maxCount) const
 {
     QList<KUser> result;
     if (!isValid()) {
         return result;
     }
-    enumerateGroupsForUser<GROUP_USERS_INFO_0>(d->name, [&result](const GROUP_USERS_INFO_0 &info) {
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(maxCount, d->name, [&result](const GROUP_USERS_INFO_0 &info) {
         result.append(KUser(QString::fromWCharArray(info.grui0_name)));
     });
     return result;
 }
 
-QStringList KUserGroup::userNames() const
+QStringList KUserGroup::userNames(uint maxCount) const
 {
     QStringList result;
     if (!isValid()) {
         return result;
     }
-    enumerateGroupsForUser<GROUP_USERS_INFO_0>(d->name, [&result](const GROUP_USERS_INFO_0 &info) {
+    enumerateGroupsForUser<GROUP_USERS_INFO_0>(maxCount, d->name, [&result](const GROUP_USERS_INFO_0 &info) {
         result.append(QString::fromWCharArray(info.grui0_name));
     });
     return result;

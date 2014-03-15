@@ -300,16 +300,16 @@ public:
     QString shell() const;
 
     /**
-     * Returns all groups of the user
+     * @param maxCount the maximum number of groups to return
      * @return all groups of the user
      */
-    QList<KUserGroup> groups() const;
+    QList<KUserGroup> groups(uint maxCount = std::numeric_limits<uint>::max()) const;
 
     /**
-     * Returns all group names of the user
+     * @param maxCount the maximum number of groups to return
      * @return all group names of the user
      */
-    QStringList groupNames() const;
+    QStringList groupNames(uint maxCount = std::numeric_limits<uint>::max()) const;
 
     enum UserProperty { FullName, RoomNumber, WorkPhone, HomePhone };
 
@@ -329,16 +329,16 @@ public:
     ~KUser();
 
     /**
-     * Returns all users of the system.
+     * @param maxCount the maximum number of users to return
      * @return all users of the system.
      */
-    static QList<KUser> allUsers();
+    static QList<KUser> allUsers(uint maxCount = std::numeric_limits<uint>::max());
 
     /**
-     * Returns all user names of the system.
-     * @return all user names of the system.
-     */
-    static QStringList allUserNames();
+    * @param maxCount the maximum number of users to return
+    * @return all user names of the system.
+    */
+    static QStringList allUserNames(uint maxCount = std::numeric_limits<uint>::max());
 
 private:
     class Private;
@@ -464,16 +464,16 @@ public:
     QString name() const;
 
     /**
-     * Returns a list of all users of the group.
+     * @param maxCount the maximum number of users to return
      * @return a list of all users of the group
      */
-    QList<KUser> users() const;
+    QList<KUser> users(uint maxCount = std::numeric_limits<uint>::max()) const;
 
     /**
-     * Returns a list of all user login names of the group.
+     * @param maxCount the maximum number of groups to return
      * @return a list of all user login names of the group
      */
-    QStringList userNames() const;
+    QStringList userNames(uint maxCount = std::numeric_limits<uint>::max()) const;
 
     /**
      * Destructor.
@@ -481,14 +481,16 @@ public:
     ~KUserGroup();
 
     /**
-     * Returns a list of all groups on this system
+     * @param maxCount the maximum number of groups to return
+     * @return a list of all groups on this system
      */
-    static QList<KUserGroup> allGroups();
+    static QList<KUserGroup> allGroups(uint maxCount = std::numeric_limits<uint>::max());
 
     /**
-     * Returns a list of all group names on this system
+     * @param maxCount the maximum number of groups to return
+     * @return a list of all group names on this system
      */
-    static QStringList allGroupNames();
+    static QStringList allGroupNames(uint maxCount = std::numeric_limits<uint>::max());
 
 private:
     class Private;
