@@ -21,6 +21,19 @@
 
 #include "kuser.h"
 
+namespace QTest {
+    template<>
+    char* toString(const KUserId &id)
+    {
+        return qstrdup(id.toString().toLocal8Bit().data());
+    }
+    template<>
+    char* toString(const KGroupId &id)
+    {
+        return qstrdup(id.toString().toLocal8Bit().data());
+    }
+}
+
 class KUserTest : public QObject {
     Q_OBJECT
 private Q_SLOTS:
@@ -35,6 +48,7 @@ static inline void printUserInfo(KUser user)
     qDebug() << "Login name:" << user.loginName();
     qDebug() << "Full name:" << user.fullName();
     qDebug() << "User ID:" << user.userId().toString();
+    qDebug() << "Group ID:" << user.groupId().toString();
     qDebug() << "Home dir:" << user.homeDir();
     qDebug() << "Superuser:" << user.isSuperUser();
     qDebug() << "Shell: " << user.shell();
@@ -48,7 +62,9 @@ void KUserTest::testKUser()
     KUser effectiveUser(KUser::UseRealUserID);
     QVERIFY(user.isValid());
     QVERIFY(effectiveUser.isValid());
-    QVERIFY(user == effectiveUser); // should be the same, no suid
+    QCOMPARE(user, effectiveUser); // should be the same, no suid
+    QVERIFY(user.groupId().isValid());
+    QCOMPARE(user.groupId(), KGroupId::currentGroupId());
     QVERIFY(!user.groups().isEmpty()); // user must be in at least one group
     QVERIFY(!user.groupNames().isEmpty()); // user must be in at least one group
     QCOMPARE(user.groups().size(), user.groupNames().size());

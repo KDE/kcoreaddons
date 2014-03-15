@@ -276,7 +276,6 @@ public:
     /** @return the native user id of the user. */
     KUserId userId() const;
 
-#ifndef Q_OS_WIN
     /** @return the native user id of the user. */
     KGroupId groupId() const;
 
@@ -291,7 +290,6 @@ public:
         return groupId().nativeId();
     }
 #endif
-#endif // !defined(Q_OS_WIN)
 
     /**
      * Checks whether the user is the super user (root).

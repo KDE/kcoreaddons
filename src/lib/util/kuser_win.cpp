@@ -64,6 +64,7 @@ template<typename T> struct NetApiTypeInfo {};
 NETAPI_TYPE_INFO(GROUP_INFO, 0);
 NETAPI_TYPE_INFO(GROUP_INFO, 3);
 NETAPI_TYPE_INFO(USER_INFO, 0);
+NETAPI_TYPE_INFO(USER_INFO, 4);
 NETAPI_TYPE_INFO(USER_INFO, 11);
 NETAPI_TYPE_INFO(GROUP_USERS_INFO, 0);
 
@@ -83,14 +84,90 @@ ScopedNetApiBuffer<T> getUserInfo(LPCWSTR server, const QString& userName, NET_A
     return ScopedNetApiBuffer<T>((T*)userInfoTmp);
 }
 
+//enumeration functions
+/** simplify calling the Net*Enum functions to prevent copy and paste for allUsers(), allUserNames(), allGroups(), allGroupNames()
+* @tparam T The type that is enumerated (e.g. USER_INFO_11) Must be registered using NETAPI_TYPE_INFO.
+* @param callback Callback for each listed object. Signature: void(const T&)
+* @param enumFunc This function enumerates the data using a Net* function.
+* It will be called in a loop as long as it returns ERROR_MORE_DATA.
+*
+*/
+template<class T, class Callback, class EnumFunction>
+static void netApiEnumerate(uint maxCount, Callback callback, EnumFunction enumFunc) {
+    NET_API_STATUS nStatus = NERR_Success;
+    quint64 resumeHandle = 0;
+    uint total = 0;
+    int level = NetApiTypeInfo<T>::level;
+    do {
+        LPBYTE buffer = nullptr;
+        DWORD entriesRead = 0;
+        DWORD totalEntries = 0;
+        nStatus = enumFunc(level, &buffer, &entriesRead, &totalEntries, &resumeHandle);
+        //qDebug("Net*Enum(level = %d) returned %d entries, total was (%d), status = %d, resume handle = %llx",
+        //    level, entriesRead, totalEntries, nStatus, resumeHandle);
+
+        // buffer must always be freed, even if Net*Enum fails
+        ScopedNetApiBuffer<T> groupInfo((T*)buffer);
+        if (nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) {
+            for (DWORD i = 0; total < maxCount && i < entriesRead; i++, total++) {
+                callback(groupInfo.get()[i]);
+            }
+        }
+        else {
+            qWarning("NetApi enumerate function failed: status = %d", nStatus);
+        }
+    } while (nStatus == ERROR_MORE_DATA);
+}
+
+template<class T, class Callback>
+void enumerateAllUsers(uint maxCount, Callback callback) {
+    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+        // pass 0 as filter -> get all users
+        // Why does this function take a DWORD* as resume handle and NetUserEnum/NetGroupGetUsers a UINT64*
+        // Great API design by Microsoft...
+        //casting the uint64* to uint32* is fine, it just writes to the first 32 bits
+        return NetUserEnum(nullptr, level, 0, buffer, MAX_PREFERRED_LENGTH, count, total, (PDWORD)resumeHandle);
+    });
+}
+
+template<typename T, class Callback>
+void enumerateAllGroups(uint maxCount, Callback callback) {
+    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+        return NetGroupEnum(nullptr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
+    });
+}
+
+template<typename T, class Callback>
+void enumerateGroupsForUser(uint maxCount, const QString& name, Callback callback) {
+    LPCWSTR nameStr = (LPCWSTR)name.utf16();
+    netApiEnumerate<T>(maxCount, callback, [&](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+        NET_API_STATUS ret = NetUserGetGroups(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total);
+        // if we return ERROR_MORE_DATA here it will result in an enless loop
+        if (ret == ERROR_MORE_DATA) {
+            qWarning() << "NetUserGetGroups for user" << name << "returned ERROR_MORE_DATA. This should not happen!";
+            ret = NERR_Success;
+        }
+        return ret;
+    });
+}
+
+template<typename T, class Callback>
+void enumerateUsersForGroup(const QString &name, uint maxCount, Callback callback) {
+    LPCWSTR nameStr = (LPCWSTR)name.utf16();
+    netApiEnumerate<T>(maxCount, callback, [nameStr](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+        return NetGroupGetUsers(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
+    });
+}
+
 class KUser::Private : public QSharedData
 {
     typedef QExplicitlySharedDataPointer<Private> Ptr;
     Private() : isAdmin(false) {}
     //takes ownership over userInfo_
-    Private(KUserId uid, const QString& loginName, const QString& fullName,
+    Private(KUserId uid, KGroupId gid, const QString& loginName, const QString& fullName,
         const QString& domain, const QString& homeDir, bool isAdmin)
-        : uid(uid), loginName(loginName), fullName(fullName), domain(domain), homeDir(homeDir), isAdmin(isAdmin)
+        : uid(uid), gid(gid), loginName(loginName), fullName(fullName),
+        domain(domain), homeDir(homeDir), isAdmin(isAdmin)
     {
         Q_ASSERT(uid.isValid());
     }
@@ -117,6 +194,7 @@ class KUser::Private : public QSharedData
 public:
     static Ptr sharedNull;
     KUserId uid;
+    KGroupId gid;
     QString loginName;
     QString fullName;
     QString domain;
@@ -124,9 +202,9 @@ public:
     bool isAdmin;
 
     /** Creates a user info from a SID (never returns null) */
-    static Ptr create(KUserId sid)
+    static Ptr create(KUserId uid)
     {
-        if (!sid.isValid()) {
+        if (!uid.isValid()) {
             return sharedNull;
         }
         // now find the fully qualified name for the user
@@ -135,14 +213,14 @@ public:
         DWORD domainBufferLen = UNLEN + 1;
         WCHAR domainBuffer[UNLEN + 1];
         SID_NAME_USE use;
-        if (!LookupAccountSidW(nullptr, sid.nativeId(), nameBuffer, &nameBufferLen, domainBuffer, &domainBufferLen, &use)) {
-            qWarning() << "Could not lookup user " << sid.toString() << "error =" << GetLastError();
+        if (!LookupAccountSidW(nullptr, uid.nativeId(), nameBuffer, &nameBufferLen, domainBuffer, &domainBufferLen, &use)) {
+            qWarning() << "Could not lookup user " << uid.toString() << "error =" << GetLastError();
             return sharedNull;
         }
         QString loginName = QString::fromWCharArray(nameBuffer);
         QString domainName = QString::fromWCharArray(domainBuffer);
         if (use != SidTypeUser && use != SidTypeDeletedAccount) {
-            qWarning().nospace() << "SID for " << domainName << "\\" << loginName << " (" << sid.toString()
+            qWarning().nospace() << "SID for " << domainName << "\\" << loginName << " (" << uid.toString()
                 << ") is not of type user (" << SidTypeUser << " or " << SidTypeDeletedAccount
                 << "). Got type " << use << " instead.";
             return sharedNull;
@@ -156,20 +234,48 @@ public:
         }
         ScopedNetApiBuffer<WCHAR> servername(servernameTmp);
 
+
+        QString fullName;
+        QString homeDir;
+        KGroupId group;
+        bool isAdmin = false;
         // must NOT pass the qualified name ("domain\user") here or lookup fails -> just the name
-        ScopedNetApiBuffer<USER_INFO_11> userInfo11(getUserInfo<USER_INFO_11>(servername.get(), loginName, &status));
-        if (!userInfo11) {
-            qDebug().nospace() << "Could not get information for user " << domainName << "\\" << loginName
+        // try USER_INFO_4 first, MSDN says it is valid only on servers (whatever that means), it works on my desktop system
+        // If it fails fall back to USER_INFO11, which has all the needed information except primary group
+        if (auto userInfo4 = getUserInfo<USER_INFO_4>(servername.get(), loginName, &status)) {
+            Q_ASSERT(KUserId(userInfo4->usri4_user_sid) == uid); // if this is not the same we have a logic error
+            fullName = QString::fromWCharArray(userInfo4->usri4_full_name);
+            homeDir = QString::fromWCharArray(userInfo4->usri4_home_dir);
+            isAdmin = userInfo4->usri4_priv == USER_PRIV_ADMIN;
+            // now determine the primary group:
+            const DWORD primaryGroup = userInfo4->usri4_primary_group_id;
+            // primary group is a relative identifier, i.e. in order to get the SID for that group
+            // we have to take the user SID and replace the last subauthority value with the relative identifier
+            group = KGroupId(uid.nativeId()); // constructor does not check whether the sid refers to a group
+            Q_ASSERT(group.isValid());
+            UCHAR numSubauthorities = *GetSidSubAuthorityCount(group.nativeId());
+            PDWORD lastSubAutority = GetSidSubAuthority(group.nativeId(), numSubauthorities - 1);
+            *lastSubAutority = primaryGroup;
+        } else if (auto userInfo11 = getUserInfo<USER_INFO_11>(servername.get(), loginName, &status)) {
+            fullName = QString::fromWCharArray(userInfo11->usri11_full_name);
+            homeDir = QString::fromWCharArray(userInfo11->usri11_home_dir);
+            isAdmin = userInfo11->usri11_priv == USER_PRIV_ADMIN;
+        }
+        else {
+            qWarning().nospace() << "Could not get information for user " << domainName << "\\" << loginName
                 << ": error code = " << status;
             return sharedNull;
         }
-        QString fullName = QString::fromWCharArray(userInfo11->usri11_full_name);
-        QString homeDir = QString::fromWCharArray(userInfo11->usri11_home_dir);
-        bool isAdmin = userInfo11->usri11_priv == USER_PRIV_ADMIN;
         if (homeDir.isEmpty()) {
-            homeDir = guessHomeDir(loginName, sid);
+            homeDir = guessHomeDir(loginName, uid);
         }
-        return Ptr(new Private(sid, loginName, fullName, domainName, homeDir, isAdmin));
+        //if we couldn't find a primary group just take the first group found for this user
+        if (!group.isValid()) {
+            enumerateGroupsForUser<GROUP_USERS_INFO_0>(1, loginName, [&](const GROUP_USERS_INFO_0 &info) {
+                group = KGroupId::fromName(QString::fromWCharArray(info.grui0_name));
+            });
+        }
+        return Ptr(new Private(uid, group, loginName, fullName, domainName, homeDir, isAdmin));
     }
 };
 
@@ -282,6 +388,11 @@ KUserId KUser::userId() const
     return d->uid;
 }
 
+KGroupId KUser::groupId() const
+{
+    return d->gid;
+}
+
 
 QVariant KUser::property(UserProperty which) const
 {
@@ -390,51 +501,6 @@ KUserGroup::~KUserGroup()
 {
 }
 
-//enumeration functions
-/** simplify calling the Net*Enum functions to prevent copy and paste for allUsers(), allUserNames(), allGroups(), allGroupNames()
-* @tparam T The type that is enumerated (e.g. USER_INFO_11) Must be registered using NETAPI_TYPE_INFO.
-* @param callback Callback for each listed object. Signature: void(const T&)
-* @param enumFunc This function enumerates the data using a Net* function.
-* It will be called in a loop as long as it returns ERROR_MORE_DATA.
-*
-*/
-template<class T, class Callback, class EnumFunction>
-static void netApiEnumerate(uint maxCount, Callback callback, EnumFunction enumFunc) {
-    NET_API_STATUS nStatus = NERR_Success;
-    quint64 resumeHandle = 0;
-    uint total = 0;
-    int level = NetApiTypeInfo<T>::level;
-    do {
-        LPBYTE buffer = nullptr;
-        DWORD entriesRead = 0;
-        DWORD totalEntries = 0;
-        nStatus = enumFunc(level, &buffer, &entriesRead, &totalEntries, &resumeHandle);
-        //qDebug("Net*Enum(level = %d) returned %d entries, total was (%d), status = %d, resume handle = %llx",
-        //    level, entriesRead, totalEntries, nStatus, resumeHandle);
-
-        // buffer must always be freed, even if Net*Enum fails
-        ScopedNetApiBuffer<T> groupInfo((T*)buffer);
-        if (nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) {
-            for (DWORD i = 0; total < maxCount && i < entriesRead; i++, total++) {
-                callback(groupInfo.get()[i]);
-            }
-        } else {
-            qWarning("NetApi enumerate function failed: status = %d", nStatus);
-        }
-    } while (nStatus == ERROR_MORE_DATA);
-}
-
-template<class T, class Callback>
-void enumerateAllUsers(uint maxCount, Callback callback) {
-    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
-        // pass 0 as filter -> get all users
-        // Why does this function take a DWORD* as resume handle and NetUserEnum/NetGroupGetUsers a UINT64*
-        // Great API design by Microsoft...
-        //casting the uint64* to uint32* is fine, it just writes to the first 32 bits
-        return NetUserEnum(nullptr, level, 0, buffer, MAX_PREFERRED_LENGTH, count, total, (PDWORD)resumeHandle);
-    });
-}
-
 QList<KUser> KUser::allUsers(uint maxCount)
 {
     QList<KUser> result;
@@ -458,13 +524,6 @@ QStringList KUser::allUserNames(uint maxCount)
     return result;
 }
 
-template<typename T, class Callback>
-void enumerateAllGroups(uint maxCount, Callback callback) {
-    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
-        return NetGroupEnum(nullptr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
-    });
-}
-
 QList<KUserGroup> KUserGroup::allGroups(uint maxCount)
 {
     QList<KUserGroup> result;
@@ -483,20 +542,6 @@ QStringList KUserGroup::allGroupNames(uint maxCount)
         result.append(QString::fromWCharArray(groupInfo.grpi0_name));
     });
     return result;
-}
-
-template<typename T, class Callback>
-void enumerateGroupsForUser(uint maxCount, const QString& name, Callback callback) {
-    LPCWSTR nameStr = (LPCWSTR)name.utf16();
-    netApiEnumerate<T>(maxCount, callback, [&](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
-        NET_API_STATUS ret = NetUserGetGroups(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total);
-        // if we return ERROR_MORE_DATA here it will result in an enless loop
-        if (ret == ERROR_MORE_DATA) {
-            qWarning() << "NetUserGetGroups for user" << name << "returned ERROR_MORE_DATA. This should not happen!";
-                ret = NERR_Success;
-        }
-        return ret;
-    });
 }
 
 QList<KUserGroup> KUser::groups(uint maxCount) const
@@ -521,14 +566,6 @@ QStringList KUser::groupNames(uint maxCount) const
         result.append(QString::fromWCharArray(info.grui0_name));
     });
     return result;
-}
-
-template<typename T, class Callback>
-void enumerateUsersForGroup(const QString &name, uint maxCount, Callback callback) {
-    LPCWSTR nameStr = (LPCWSTR)name.utf16();
-    netApiEnumerate<T>(maxCount, callback, [nameStr](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
-        return NetGroupGetUsers(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
-    });
 }
 
 QList<KUser> KUserGroup::users(uint maxCount) const
