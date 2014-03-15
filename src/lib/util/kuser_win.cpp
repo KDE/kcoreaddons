@@ -142,6 +142,18 @@ KUser::KUser(K_UID uid)
     }
 }
 
+KUser::KUser(KUserId uid)
+: d(0)
+{
+    DWORD bufferLen = UNLEN + 1;
+    ushort buffer[UNLEN + 1];
+    SID_NAME_USE eUse;
+
+    if (uid.isValid() && LookupAccountSidW(NULL, uid.nativeId(), (LPWSTR)buffer, &bufferLen, NULL, NULL, &eUse)) {
+        d = new Private(QString::fromUtf16(buffer), uid.nativeId());
+    }
+}
+
 KUser::KUser(const QString &name)
     : d(new Private(name))
 {
@@ -342,6 +354,18 @@ KUserGroup::KUserGroup(const char *_name)
 {
 }
 
+KUserGroup::KUserGroup(KGroupId gid)
+: d(0)
+{
+    DWORD bufferLen = UNLEN + 1;
+    ushort buffer[UNLEN + 1];
+    SID_NAME_USE eUse;
+
+    if (gid.isValid() && LookupAccountSidW(NULL, gid.nativeId(), (LPWSTR)buffer, &bufferLen, NULL, NULL, &eUse)) {
+        d = new Private(QString::fromUtf16(buffer));
+    }
+}
+
 KUserGroup::KUserGroup(const KUserGroup &group)
     : d(group.d)
 {
@@ -468,4 +492,151 @@ QStringList KUserGroup::allGroupNames()
 
 KUserGroup::~KUserGroup()
 {
+}
+
+struct WindowsSIDWrapper : public QSharedData {
+    char sidBuffer[SECURITY_MAX_SID_SIZE];
+    /** @return a copy of @p sid or null if sid is not valid or an error occurs */
+    static WindowsSIDWrapper* copySid(PSID sid)
+    {
+        if (!sid || !IsValidSid(sid)) {
+            return nullptr;
+        }
+        //create a copy of sid
+        WindowsSIDWrapper* copy = new WindowsSIDWrapper();
+        bool success = CopySid(SECURITY_MAX_SID_SIZE, copy->sidBuffer, sid);
+        if (!success) {
+            char* sidString = nullptr;
+            ConvertSidToStringSidA(sid, &sidString);
+            qWarning("Failed to copy SID %s, error = %d", sidString, GetLastError());
+            LocalFree(sidString);
+            delete copy;
+            return nullptr;
+        }
+        return copy;
+    }
+};
+
+template<>
+KUserOrGroupId<void*>::KUserOrGroupId()
+{
+}
+
+template<>
+KUserOrGroupId<void*>::~KUserOrGroupId()
+{
+}
+
+template<>
+KUserOrGroupId<void*>::KUserOrGroupId(const KUserOrGroupId<void*> &other)
+    : data(other.data)
+{
+}
+
+template<>
+inline KUserOrGroupId<void*>& KUserOrGroupId<void*>::operator=(const KUserOrGroupId<void*>& other)
+{
+    data = other.data;
+    return *this;
+}
+
+template<>
+KUserOrGroupId<void*>::KUserOrGroupId(void* nativeId)
+    : data(WindowsSIDWrapper::copySid(nativeId))
+{
+}
+
+template<>
+bool KUserOrGroupId<void*>::isValid() const
+{
+    return data;
+}
+
+template<>
+void* KUserOrGroupId<void*>::nativeId() const
+{
+    if (!data) {
+        return nullptr;
+    }
+    return data->sidBuffer;
+}
+
+template<>
+bool KUserOrGroupId<void*>::operator==(const KUserOrGroupId<void*>& other) const
+{
+    if (data) {
+        if (!other.data) {
+            return false;
+        }
+        return EqualSid(data->sidBuffer, other.data->sidBuffer);
+    }
+    return !other.data; //only equal if other data is also invalid
+}
+
+template<>
+bool KUserOrGroupId<void*>::operator!=(const KUserOrGroupId<void*> &other) const
+{
+    return !(*this == other);
+}
+
+static bool sidFromName(const QString& name, char(*buffer)[SECURITY_MAX_SID_SIZE], PSID_NAME_USE sidType)
+{
+    DWORD sidLength = SECURITY_MAX_SID_SIZE;
+    // ReferencedDomainName must be passed or LookupAccountNameW fails
+    // Documentation says it is optional, however if not passed the function fails and returns the required size
+    // we only want the SID, so pass a buffer dummy buffer of sufficient size
+    WCHAR dummyBuffer[1024];
+    DWORD dummyBufferSize = 1024;
+    bool ok = LookupAccountNameW(nullptr, (LPCWSTR)name.utf16(), *buffer, &sidLength, dummyBuffer, &dummyBufferSize, sidType);
+    if (!ok) {
+        //TODO: error string
+        qWarning() << "Failed to lookup account" << name << "error code =" << GetLastError();
+        return false;
+    }
+    return true;
+}
+
+static const auto invalidSidString = QStringLiteral("<invalid SID>");
+
+static QString sidToString(void* sid) {
+    if (!sid || !IsValidSid(sid)) {
+        return invalidSidString;
+    }
+    WCHAR* sidStr; // allocated by ConvertStringSidToSidW, must be freed using LocalFree()
+    if (!ConvertSidToStringSidW(sid, &sidStr)) {
+        return invalidSidString;
+    }
+    QString ret = QString::fromWCharArray(sidStr);
+    LocalFree(sidStr); 
+    return ret;
+}
+
+KUserId KUserId::fromName(const QString& name) {
+    char sidBuffer[SECURITY_MAX_SID_SIZE];
+    SID_NAME_USE sidType;
+    if (!sidFromName(name, &sidBuffer, &sidType)) {
+        return KUserId();
+    }
+    if (sidType != SidTypeUser && sidType != SidTypeDeletedAccount) {
+        qWarning().nospace() << "Failed to lookup user name " << name
+            << ": resulting SID " << sidToString(sidBuffer) << " is not a user."
+            " Got SID type " << sidType << " instead.";
+        return KUserId();
+    }
+    return KUserId(sidBuffer);
+}
+
+KGroupId KGroupId::fromName(const QString& name) {
+    char sidBuffer[SECURITY_MAX_SID_SIZE];
+    SID_NAME_USE sidType;
+    if (!sidFromName(name, &sidBuffer, &sidType)) {
+        return KGroupId();
+    }
+    if (sidType != SidTypeGroup && sidType != SidTypeWellKnownGroup) {
+        qWarning().nospace() << "Failed to lookup user name " << name
+            << ": resulting SID " << sidToString(sidBuffer) << " is not a group."
+            " Got SID type " << sidType << " instead.";
+        return KGroupId();
+    }
+    return KGroupId(sidBuffer);
 }

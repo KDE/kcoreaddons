@@ -1,7 +1,7 @@
 /*
  *  KUser - represent a user/account
  *  Copyright (C) 2002 Tim Jansen <tim@tjansen.de>
- *
+ *  Copyright (C) 2014 Alex Richardson <arichardson.kde@gmail.com>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public
@@ -94,6 +94,11 @@ KUser::KUser(UIDMode mode)
 
 KUser::KUser(K_UID _uid)
     : d(new Private(::getpwuid(_uid)))
+{
+}
+
+KUser::KUser(KUserId _uid)
+: d(new Private(::getpwuid(_uid.nativeId())))
 {
 }
 
@@ -284,6 +289,11 @@ KUserGroup::KUserGroup(K_GID _gid)
 {
 }
 
+KUserGroup::KUserGroup(KGroupId _gid)
+    : d(new Private(getgrgid(_gid.nativeId())))
+{
+}
+
 KUserGroup::KUserGroup(const QString &_name)
     : d(new Private(_name.toLocal8Bit().data()))
 {
@@ -380,4 +390,26 @@ QStringList KUserGroup::allGroupNames()
 
 KUserGroup::~KUserGroup()
 {
+}
+
+KUserId KUserId::fromName(const QString& name)
+{
+    QByteArray name8Bit = name.toLocal8Bit();
+    struct passwd* p = ::getpwnam(name8Bit.constData());
+    if (!p) {
+        qWarning("Failed to lookup user %s: %s", name8Bit.constData(), strerror(errno));
+        return KUserId();
+    }
+    return KUserId(p->pw_uid);
+}
+
+KGroupId KGroupId::fromName(const QString& name)
+{
+    QByteArray name8Bit = name.toLocal8Bit();
+    struct group* g = ::getgrnam(name8Bit.constData());
+    if (!g) {
+        qWarning("Failed to lookup group %s: %s", name8Bit.constData(), strerror(errno));
+        return KGroupId();
+    }
+    return KGroupId(g->gr_gid);
 }

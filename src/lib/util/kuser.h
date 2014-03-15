@@ -3,6 +3,7 @@
  *  Copyright (C) 2002-2003 Tim Jansen <tim@tjansen.de>
  *  Copyright (C) 2003 Oswald Buddenhagen <ossi@kde.org>
  *  Copyright (C) 2004 Jan Schaefer <j_schaef@informatik.uni-kl.de>
+ *  Copyright (C) 2014 Alex Richardson <arichardson.kde@gmail.com>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public
@@ -35,6 +36,7 @@ template <class T> class QList;
 #ifdef Q_OS_WIN
 typedef void *K_UID;
 typedef void *K_GID;
+struct WindowsSIDWrapper;
 #else
 #include <sys/types.h>
 typedef uid_t K_UID;
@@ -42,6 +44,86 @@ typedef gid_t K_GID;
 struct passwd;
 struct group;
 #endif
+
+/** A platform independent user or group ID.
+ *
+ * This struct must not be used directly, instead use KUserId and KGroupId
+ *
+ * This struct is required since Windows does not have an integer uid_t/gid_t type
+ * but instead uses an opaque binary blob (SID) which must free allocated memory.
+ * On UNIX this is simply a uid_t/gid_t and all operations are inline, so there is
+ * no runtime overhead over using the uid_t/gid_t directly. On Windows this is an implicitly
+ * shared class that frees the underlying SID once no more references remain.
+ *
+ * Unlike KUser/KUserGroup this does not query additional information, it is simply
+ * an abstraction over the native user/group ID type. If more information is necessary, a
+ * KUser or KUserGroup instance can be constructed from this ID
+ *
+ * @author Alex Richardson <arichardson.kde@gmail.com>
+ */
+template<typename T>
+struct KCOREADDONS_EXPORT KUserOrGroupId {
+    typedef T NativeType;
+protected:
+    /** Creates an invalid KUserOrGroupId */
+    KUserOrGroupId();
+    /** Creates a KUserOrGroupId from a native user/group ID. On windows this will not take
+     * ownership over the passed SID, a copy will be created instead.
+     */
+    KUserOrGroupId(NativeType nativeId);
+    /** Copy constructor. This is very fast, objects can be passed by value */
+    KUserOrGroupId(const KUserOrGroupId<T> &other);
+    KUserOrGroupId& operator=(const KUserOrGroupId<T>& other);
+    ~KUserOrGroupId();
+public:
+    /** @return true if this object references a valid user/group ID */
+    bool isValid() const;
+    /**
+     * @return A user/group ID that can be used in operating system specific functions
+     * @note On Windows the returned pointer will be freed once the last KUserOrGroupId referencing
+     * this user/group ID is deleted. Make sure that the KUserOrGroupId object remains valid as
+     * long as the native pointer is needed.
+     */
+    NativeType nativeId() const;
+    bool operator==(const KUserOrGroupId &other) const;
+    bool operator!=(const KUserOrGroupId &other) const;
+private:
+#ifdef Q_OS_WIN
+    QExplicitlySharedDataPointer<WindowsSIDWrapper> data;
+#else
+    NativeType id;
+#endif
+};
+
+/** A platform independent user ID.
+* @see KUserOrGroupId
+*/
+#ifdef Q_OS_WIN
+struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<void*> {
+#else
+struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<uid_t> {
+#endif
+    KUserId() {}
+    KUserId(NativeType nativeUid) : KUserOrGroupId(nativeUid) {}
+    KUserId(const KUserId &other) : KUserOrGroupId(other) {}
+    ~KUserId() {};
+    static KUserId fromName(const QString& name);
+};
+
+/** A platform independent group ID.
+ * @see KUserOrGroupId
+ */
+#ifdef Q_OS_WIN
+struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<void*> {
+#else
+struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<gid_t> {
+#endif
+    KGroupId() {}
+    KGroupId(NativeType nativeUid) : KUserOrGroupId(nativeUid) {}
+    KGroupId(const KGroupId &other) : KUserOrGroupId(other) {}
+    ~KGroupId() {};
+    static KGroupId fromName(const QString& name);
+};
 
 /**
  * \class KUser kuser.h <KUser>
@@ -86,6 +168,13 @@ public:
      * @param uid the user id
      */
     explicit KUser(K_UID uid);
+
+    /**
+    * Creates an object for the user with the given user id.
+    * If the KUserId object is invalid this one will be, too.
+    * @param uid the user id
+    */
+    explicit KUser(KUserId uid);
 
     /**
      * Creates an object that contains information about the user with the given
@@ -281,6 +370,13 @@ public:
      */
     explicit KUserGroup(const char *name);
 
+    /**
+    * Creates an object for the group with the given group id.
+    * If the KGroupId object is invalid this one will be, too.
+    * @param gid the group id
+    */
+    explicit KUserGroup(KGroupId gid);
+
 #ifndef Q_OS_WIN
     /**
      * Create an object from the group of the current user.
@@ -389,5 +485,57 @@ private:
     class Private;
     QSharedDataPointer<Private> d;
 };
+
+
+#if !defined(Q_OS_WIN)
+// inline UNIX implementation of KUserOrGroupId
+template<typename T>
+inline bool KUserOrGroupId<T>::isValid() const
+{
+    return id != NativeType(-1);
+}
+template<typename T>
+inline bool KUserOrGroupId<T>::operator==(const KUserOrGroupId<T> &other) const
+{
+    return id == other.id;
+}
+template<typename T>
+inline bool KUserOrGroupId<T>::operator!=(const KUserOrGroupId<T> &other) const
+{
+    return id != other.id;
+}
+template<typename T>
+inline typename KUserOrGroupId<T>::NativeType KUserOrGroupId<T>::nativeId() const
+{
+    return id;
+}
+
+template<typename T>
+inline KUserOrGroupId<T>::KUserOrGroupId()
+    : id(-1)
+{
+}
+template<typename T>
+inline KUserOrGroupId<T>::KUserOrGroupId(KUserOrGroupId<T>::NativeType nativeId)
+    : id(nativeId)
+{
+}
+template<typename T>
+inline KUserOrGroupId<T>::KUserOrGroupId(const KUserOrGroupId<T>& other)
+    : id(other.id)
+{
+}
+template<typename T>
+inline KUserOrGroupId<T>& KUserOrGroupId<T>::operator=(const KUserOrGroupId<T>& other)
+{
+    id = other.id;
+    return *this;
+}
+template<typename T>
+inline KUserOrGroupId<T>::~KUserOrGroupId()
+{
+}
+
+#endif // !defined(Q_OS_WIN)
 
 #endif
