@@ -50,7 +50,7 @@ enum Option {
 
     /**
      * Put the parser into full shell mode and bail out if a too complex
-     * construct is encoutered.
+     * construct is encountered.
      * A particular purpose of this flag is finding out whether the
      * command line being split would be executable directly (via
      * KProcess::setProgram()) or whether it needs to be run through
@@ -97,7 +97,7 @@ enum Errors {
 
     /**
      * The AbortOnMeta flag was set and an unhandled shell meta character
-     * was encoutered.
+     * was encountered.
      */
     FoundMeta
 };
