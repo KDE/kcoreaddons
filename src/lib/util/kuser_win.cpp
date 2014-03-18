@@ -140,7 +140,7 @@ void enumerateAllGroups(uint maxCount, Callback callback) {
 template<typename T, class Callback>
 void enumerateGroupsForUser(uint maxCount, const QString& name, Callback callback) {
     LPCWSTR nameStr = (LPCWSTR)name.utf16();
-    netApiEnumerate<T>(maxCount, callback, [&](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+    netApiEnumerate<T>(maxCount, callback, [&](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) -> NET_API_STATUS {
         NET_API_STATUS ret = NetUserGetGroups(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total);
         // if we return ERROR_MORE_DATA here it will result in an enless loop
         if (ret == ERROR_MORE_DATA) {
@@ -735,7 +735,7 @@ static T sidFromName(const QString& name, Callback callback)
 }
 
 KUserId KUserId::fromName(const QString& name) {
-    return sidFromName<KUserId>(name, [&](PSID sid, SID_NAME_USE sidType) {
+    return sidFromName<KUserId>(name, [&](PSID sid, SID_NAME_USE sidType) -> KUserId {
         if (sidType != SidTypeUser && sidType != SidTypeDeletedAccount) {
             qWarning().nospace() << "Failed to lookup user name " << name
                 << ": resulting SID " << sidToString(sid) << " is not a user."
@@ -747,7 +747,7 @@ KUserId KUserId::fromName(const QString& name) {
 }
 
 KGroupId KGroupId::fromName(const QString& name) {
-    return sidFromName<KGroupId>(name, [&](PSID sid, SID_NAME_USE sidType) {
+    return sidFromName<KGroupId>(name, [&](PSID sid, SID_NAME_USE sidType) -> KGroupId {
         if (sidType != SidTypeGroup && sidType != SidTypeWellKnownGroup) {
             qWarning().nospace() << "Failed to lookup user name " << name
                 << ": resulting SID " << sidToString(sid) << " is not a group."
