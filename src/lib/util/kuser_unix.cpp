@@ -28,6 +28,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <grp.h>
+#include <errno.h>
 
 class KUser::Private : public QSharedData
 {
