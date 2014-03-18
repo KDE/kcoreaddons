@@ -133,7 +133,7 @@ void enumerateAllUsers(uint maxCount, Callback callback) {
 template<typename T, class Callback>
 void enumerateAllGroups(uint maxCount, Callback callback) {
     netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
-        return NetGroupEnum(nullptr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
+        return NetGroupEnum(nullptr, level, buffer, MAX_PREFERRED_LENGTH, count, total, (PDWORD)resumeHandle);
     });
 }
 
