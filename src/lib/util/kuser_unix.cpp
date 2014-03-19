@@ -30,6 +30,8 @@
 #include <grp.h>
 #include <errno.h>
 
+#include <algorithm> //std::find
+
 class KUser::Private : public QSharedData
 {
 public:
@@ -259,7 +261,6 @@ class KUserGroup::Private : public QSharedData
 public:
     gid_t gid;
     QString name;
-    QList<KUser> users;
 
     Private() : gid(gid_t(-1)) {}
     Private(const char *_name) : gid(gid_t(-1))
@@ -276,9 +277,6 @@ public:
         if (p) {
             gid = p->gr_gid;
             name = QString::fromLocal8Bit(p->gr_name);
-            for (char **user = p->gr_mem; *user; user++) {
-                users.append(KUser(*user));
-            }
         }
     }
 };
@@ -344,20 +342,59 @@ QString KUserGroup::name() const
     return d->name;
 }
 
+void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd*)> handleNextGroupUser)
+{
+    if (maxCount == 0) {
+        return;
+    }
+    struct group *g = getgrgid(gid);
+    if (!g) {
+        return;
+    }
+    uint found = 0;
+    QVarLengthArray<uid_t> addedUsers;
+    struct passwd *p = 0;
+    for (char **user = g->gr_mem; *user; user++) {
+        if ((p = getpwnam(*user))) {
+            addedUsers.append(p->pw_uid);
+            handleNextGroupUser(p);
+            found++;
+            if (found >= maxCount) {
+                break;
+            }
+        }
+    }
+
+    //gr_mem doesn't contain users where the primary group == gid -> we have to iterate over all users
+    setpwent();
+    while ((p = getpwent()) && found < maxCount) {
+        if (p->pw_gid != gid) {
+            continue; // only need primary gid since otherwise gr_mem already contains this user
+        }
+        // make sure we don't list a user twice
+        if (std::find(addedUsers.cbegin(), addedUsers.cend(), p->pw_uid) == addedUsers.cend()) {
+            handleNextGroupUser(p);
+            found++;
+        }
+    }
+    endpwent();
+}
+
 QList<KUser> KUserGroup::users(uint maxCount) const
 {
-    if ((int)maxCount < 0) {
-        return d->users;
-    }
-    return d->users.mid(0, (int)maxCount);
+    QList<KUser> result;
+    listGroupMembers(d->gid, maxCount, [&](const passwd* p) {
+        result.append(KUser(p));
+    });
+    return result;
 }
 
 QStringList KUserGroup::userNames(uint maxCount) const
 {
     QStringList result;
-    for (uint i = 0; i < (uint)d->users.size() && i < maxCount; ++i) {
-        result.append(d->users[i].loginName());
-    }
+    listGroupMembers(d->gid, maxCount, [&](const passwd* p) {
+        result.append(QString::fromLocal8Bit(p->pw_name));
+    });
     return result;
 }
 

@@ -147,7 +147,7 @@ void KUserTest::testKUserGroup()
     QCOMPARE(KUserGroup::allGroups(1).size(), 1);
     // We can't test the KUser properties, since they differ on each system
     // instead just print them all out, this can be verified by the person running the test
-    qDebug().nospace() << "Current group: " << group.name() << ", group ID =" << group.groupId().toString();
+    qDebug().nospace() << "Current group: " << group.name() << ", group ID =" << group.groupId().toString() << ", members = " << group.userNames();
 #if 0 //enable this if you think that KUser might not be working correctly
     for (int i = 0; i < allGroups.size(); ++i) {
         qDebug().nospace() << "Group " << i << ": name = " << allGroups[i].name()
