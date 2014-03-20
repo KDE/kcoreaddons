@@ -38,21 +38,21 @@ class Part;
 
 #define KPluginFactory_iid "org.kde.KPluginFactory"
 
-#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory) \
-    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, "")
-
-#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, json) \
+#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory, ...) \
     class name : public KPluginFactory \
     { \
         Q_OBJECT \
-        Q_PLUGIN_METADATA(IID KPluginFactory_iid FILE json) \
         Q_INTERFACES(KPluginFactory) \
+        __VA_ARGS__ \
     public: \
         explicit name(const char * = 0, QObject * = 0); \
         ~name(); \
     private: \
         void init(); \
     };
+
+#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, json) \
+    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory, Q_PLUGIN_METADATA(IID KPluginFactory_iid FILE json))
 
 #define K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations) \
     name::name(const char *componentName, QObject *parent) \
