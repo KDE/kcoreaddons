@@ -49,19 +49,15 @@ class KPluginLoaderPrivate
     Q_DECLARE_PUBLIC(KPluginLoader)
 protected:
     KPluginLoaderPrivate(const QString &libname)
-        : name(libname), pluginVersion(~0U), lib(0)
+        : name(libname), pluginVersion(~0U)
     {}
     ~KPluginLoaderPrivate()
-    {
-        delete lib;
-    }
+    {}
 
     KPluginLoader *q_ptr;
     const QString name;
     quint32 pluginVersion;
     QString errorString;
-
-    KLibrary *lib;
 };
 
 inline QString makeLibName(const QString &libname)
@@ -168,11 +164,6 @@ QString KPluginLoader::findPlugin(const QString &name)
     return QString();
 }
 
-bool KPluginLoader::isLoaded() const
-{
-    return QPluginLoader::isLoaded() || d_ptr->lib;
-}
-
 KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
     : QPluginLoader(findPlugin(plugin), parent), d_ptr(new KPluginLoaderPrivate(plugin))
 {
@@ -232,15 +223,6 @@ KPluginFactory *KPluginLoader::factory()
         return 0;
     }
 
-#ifndef KDE_NO_DEPRECATED
-    if (d->lib) {
-        // Calling a deprecated method, but this is the only way to
-        // support both new and old-style factories for now.
-        // KDE5: remove the whole if().
-        return d->lib->factory(d->name.toUtf8());
-    }
-#endif
-
     QObject *obj = instance();
 
     if (!obj) {
@@ -252,7 +234,7 @@ KPluginFactory *KPluginLoader::factory()
     if (factory == 0) {
         qDebug() << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
         delete obj;
-        d->errorString = i18n("The library %1 does not offer a KDE 4 compatible factory.", d->name);
+        d->errorString = i18n("The library %1 does not offer a KPluginFactory.", d->name);
     }
 
     return factory;
@@ -267,11 +249,6 @@ bool KPluginLoader::load()
     }
 
     if (!QPluginLoader::load()) {
-        d->lib = new KLibrary(d->name);
-        if (d->lib->load()) {
-            return true;
-        }
-
         return false;
     }
 

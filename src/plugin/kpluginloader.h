@@ -156,8 +156,6 @@ public:
      */
     QString errorString() const;
 
-    bool isLoaded() const;
-
     /**
      * Locates a plugin.
      *
