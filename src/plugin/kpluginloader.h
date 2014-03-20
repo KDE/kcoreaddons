@@ -129,6 +129,29 @@ public:
 
     bool isLoaded() const;
 
+    /**
+     * Locates a plugin.
+     *
+     * Searches for a dynamic object file in the locations specified by
+     * QCoreApplication::libraryPaths(), and the "kf5" subdirectories of those
+     * locations.  Plugins in "kf5" subdirectories will be preferred over ones
+     * in the parent directory.
+     *
+     * This can be useful if you wish to use a plugin that does not conform to
+     * the Qt plugin scheme of providing a QObject that declares
+     * Q_PLUGIN_METADATA and does not use one of the KPluginFactory macros.
+     * In this case, you can find the plugin with this method, and load it with
+     * QLibrary.
+     *
+     * \param name  The name of the plugin (can be a relative path; see above).
+     *              This should not include a file extension (like .so or .dll).
+     * \returns     The full path of the plugin if it was found, or QString() if
+     *              it could not be found.
+     *
+     * @since 5.0
+     */
+    static QString findPlugin(const QString &name);
+
 protected:
     /**
      * Performs the loading of the plugin.

@@ -96,7 +96,7 @@ static QString removeLibPrefix(const QString &libname)
 }
 #endif
 
-QString findLibraryInternal(const QString &name)
+QString KPluginLoader::findPlugin(const QString &name)
 {
     // Convert name to a valid platform libname
     QString libname = makeLibName(name);
@@ -174,7 +174,7 @@ bool KPluginLoader::isLoaded() const
 }
 
 KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
-    : QPluginLoader(findLibraryInternal(plugin), parent), d_ptr(new KPluginLoaderPrivate(plugin))
+    : QPluginLoader(findPlugin(plugin), parent), d_ptr(new KPluginLoaderPrivate(plugin))
 {
     d_ptr->q_ptr = this;
     Q_D(KPluginLoader);
@@ -190,7 +190,7 @@ KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
 }
 
 KPluginLoader::KPluginLoader(const KService &service, QObject *parent)
-    : QPluginLoader(findLibraryInternal(service.library()), parent), d_ptr(new KPluginLoaderPrivate(service.library()))
+    : QPluginLoader(findPlugin(service.library()), parent), d_ptr(new KPluginLoaderPrivate(service.library()))
 {
     d_ptr->q_ptr = this;
     Q_D(KPluginLoader);
