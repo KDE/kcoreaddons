@@ -101,10 +101,13 @@ public:
     bool getBool();
 
     /**
-     * Put a list in random order. Since KDE 4.11, this function uses a more
-     * efficient algorithm (Fisher-Yates). Therefore, the order of the items
-     * in the randomized list is different from the one in earlier versions
-     * if the same seed value is used for the random sequence.
+     * Put a list in random order.
+     *
+     * Since kdelibs 4.11, this function uses a more efficient
+     * algorithm (Fisher-Yates). Therefore, the order of the items in
+     * the randomized list is different from the one in earlier
+     * versions if the same seed value is used for the random
+     * sequence.
      *
      * @param list the list whose order will be modified
      * @note modifies the list in place
