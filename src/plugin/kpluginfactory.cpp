@@ -129,15 +129,9 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
 #ifndef KDE_NO_DEPRECATED
     if (keyword.isEmpty()) {
 
-        // KDE5 TODO: kde3-kparts compatibility, remove in kde5
-        const char *kpartsIface = iface;
-        if (args.contains(QVariant(QString::fromLatin1("Browser/View")))) {
-            kpartsIface = "Browser/View";
-        }
-
         const QStringList argsStringList = variantListToStringList(args);
 
-        if ((obj = reinterpret_cast<QObject *>(createPartObject(parentWidget, parent, kpartsIface, argsStringList)))) {
+        if ((obj = reinterpret_cast<QObject *>(createPartObject(parentWidget, parent, iface, argsStringList)))) {
             objectCreated(obj);
             return obj;
         }
