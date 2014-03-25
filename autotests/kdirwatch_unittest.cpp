@@ -42,8 +42,6 @@ static const char *methodToString(KDirWatch::Method method)
         return "Fam";
     case KDirWatch::INotify:
         return "INotify";
-    case KDirWatch::DNotify:
-        return "DNotify";
     case KDirWatch::Stat:
         return "Stat";
     case KDirWatch::QFSWatch:

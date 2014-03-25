@@ -104,7 +104,7 @@ class KDirWatchPrivate : public QObject
 public:
 
     enum entryStatus { Normal = 0, NonExistent };
-    enum entryMode { UnknownMode = 0, StatMode, DNotifyMode, INotifyMode, FAMMode, QFSWatchMode };
+    enum entryMode { UnknownMode = 0, StatMode, INotifyMode, FAMMode, QFSWatchMode };
     enum { NoChange = 0, Changed = 1, Created = 2, Deleted = 4 };
 
     struct Client {

@@ -121,8 +121,6 @@ static const char *methodToString(KDirWatch::Method method)
         return "Fam";
     case KDirWatch::INotify:
         return "INotify";
-    case KDirWatch::DNotify:
-        return "DNotify";
     case KDirWatch::Stat:
         return "Stat";
     case KDirWatch::QFSWatch:
@@ -583,7 +581,6 @@ QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry)
     }
     debug << ", using " << ((entry.m_mode == KDirWatchPrivate::FAMMode) ? "FAM" :
                             (entry.m_mode == KDirWatchPrivate::INotifyMode) ? "INotify" :
-                            (entry.m_mode == KDirWatchPrivate::DNotifyMode) ? "DNotify" :
                             (entry.m_mode == KDirWatchPrivate::QFSWatchMode) ? "QFSWatch" :
                             (entry.m_mode == KDirWatchPrivate::StatMode) ? "Stat" : "Unknown Method");
 #if HAVE_SYS_INOTIFY_H
