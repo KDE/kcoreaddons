@@ -35,14 +35,6 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 
-static QString tr(const char *message, const char *disambiguation = 0, int n = -1)
-{
-    return QCoreApplication::translate("KAboutData", message, disambiguation, n);
-}
-
-// PORTING HACK (KDE5 TODO: clean up)
-#define i18nc(a,b) tr(b, a)
-
 class KAboutPerson::Private
 {
 public:
