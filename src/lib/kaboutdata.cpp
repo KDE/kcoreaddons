@@ -231,13 +231,15 @@ QString KAboutLicense::text() const
         }
     // fall through
     default:
-        result += tr("No licensing terms for this program have been specified.\n"
+        result += QCoreApplication::translate("KAboutLicense",
+                     "No licensing terms for this program have been specified.\n"
                      "Please check the documentation or the source for any\n"
                      "licensing terms.\n");
     }
 
     if (knownLicense) {
-        result += tr("This program is distributed under the terms of the %1.").arg(name(KAboutData::ShortName));
+        result += QCoreApplication::translate("KAboutLicense",
+            "This program is distributed under the terms of the %1.").arg(name(KAboutData::ShortName));
         if (!pathToFile.isEmpty()) {
             result += lineFeed;
         }
