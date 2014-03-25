@@ -53,6 +53,9 @@ private Q_SLOTS:
         KPluginLoader vplugin("versionedplugin");
         QCOMPARE(vplugin.pluginVersion(), quint32(5));
 
+        KPluginLoader vplugin2("versionedplugin");
+        QCOMPARE(vplugin2.pluginVersion(), quint32(5));
+
         KPluginLoader uplugin("unversionedplugin");
         QCOMPARE(uplugin.pluginVersion(), quint32(-1));
 

@@ -34,7 +34,7 @@ class KPluginLoaderPrivate
     Q_DECLARE_PUBLIC(KPluginLoader)
 protected:
     KPluginLoaderPrivate(const QString &libname)
-        : name(libname), pluginVersion(~0U)
+        : name(libname), pluginVersion(~0U), pluginVersionResolved(false)
     {}
     ~KPluginLoaderPrivate()
     {}
@@ -43,6 +43,7 @@ protected:
     const QString name;
     quint32 pluginVersion;
     QString errorString;
+    bool pluginVersionResolved;
 };
 
 inline QString makeLibName(const QString &libname)
@@ -229,12 +230,14 @@ bool KPluginLoader::load()
 {
     Q_D(KPluginLoader);
 
-    if (isLoaded()) {
-        return true;
+    if (!isLoaded()) {
+        if (!QPluginLoader::load()) {
+            return false;
+        }
     }
 
-    if (!QPluginLoader::load()) {
-        return false;
+    if (d->pluginVersionResolved) {
+        return true;
     }
 
     Q_ASSERT(!fileName().isEmpty());
@@ -247,6 +250,7 @@ bool KPluginLoader::load()
     } else {
         d->pluginVersion = ~0U;
     }
+    d->pluginVersionResolved = true;
 
     return true;
 }
