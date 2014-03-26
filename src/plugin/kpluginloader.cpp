@@ -21,7 +21,6 @@
 #include <klocalizedstring.h>
 #include "kpluginfactory.h"
 #include <kservice.h>
-#include "klibrary.h"
 
 #include <QtCore/QLibrary>
 #include <QtCore/QDir>
