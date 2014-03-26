@@ -255,39 +255,39 @@ QString KAboutLicense::name(KAboutData::NameFormat formatName) const
 
     switch (d->_licenseKey) {
     case KAboutData::License_GPL_V2:
-        licenseShort = i18nc("@item license (short name)", "GPL v2");
-        licenseFull = i18nc("@item license", "GNU General Public License Version 2");
+        licenseShort = QCoreApplication::translate("KAboutLicense", "@item license (short name)", "GPL v2");
+        licenseFull = QCoreApplication::translate("KAboutLicense", "@item license", "GNU General Public License Version 2");
         break;
     case KAboutData::License_LGPL_V2:
-        licenseShort = i18nc("@item license (short name)", "LGPL v2");
-        licenseFull = i18nc("@item license", "GNU Lesser General Public License Version 2");
+        licenseShort = QCoreApplication::translate("KAboutLicense", "@item license (short name)", "LGPL v2");
+        licenseFull = QCoreApplication::translate("KAboutLicense", "@item license", "GNU Lesser General Public License Version 2");
         break;
     case KAboutData::License_BSD:
-        licenseShort = i18nc("@item license (short name)", "BSD License");
-        licenseFull = i18nc("@item license", "BSD License");
+        licenseShort = QCoreApplication::translate("KAboutLicense", "@item license (short name)", "BSD License");
+        licenseFull = QCoreApplication::translate("KAboutLicense", "@item license", "BSD License");
         break;
     case KAboutData::License_Artistic:
-        licenseShort = i18nc("@item license (short name)", "Artistic License");
-        licenseFull = i18nc("@item license", "Artistic License");
+        licenseShort = QCoreApplication::translate("KAboutLicense", "@item license (short name)", "Artistic License");
+        licenseFull = QCoreApplication::translate("KAboutLicense", "@item license", "Artistic License");
         break;
     case KAboutData::License_QPL_V1_0:
-        licenseShort = i18nc("@item license (short name)", "QPL v1.0");
-        licenseFull = i18nc("@item license", "Q Public License");
+        licenseShort = QCoreApplication::translate("KAboutLicense", "@item license (short name)", "QPL v1.0");
+        licenseFull = QCoreApplication::translate("KAboutLicense", "@item license", "Q Public License");
         break;
     case KAboutData::License_GPL_V3:
-        licenseShort = i18nc("@item license (short name)", "GPL v3");
-        licenseFull = i18nc("@item license", "GNU General Public License Version 3");
+        licenseShort = QCoreApplication::translate("KAboutLicense", "@item license (short name)", "GPL v3");
+        licenseFull = QCoreApplication::translate("KAboutLicense", "@item license", "GNU General Public License Version 3");
         break;
     case KAboutData::License_LGPL_V3:
-        licenseShort = i18nc("@item license (short name)", "LGPL v3");
-        licenseFull = i18nc("@item license", "GNU Lesser General Public License Version 3");
+        licenseShort = QCoreApplication::translate("KAboutLicense", "@item license (short name)", "LGPL v3");
+        licenseFull = QCoreApplication::translate("KAboutLicense", "@item license", "GNU Lesser General Public License Version 3");
         break;
     case KAboutData::License_Custom:
     case KAboutData::License_File:
-        licenseShort = licenseFull = i18nc("@item license", "Custom");
+        licenseShort = licenseFull = QCoreApplication::translate("KAboutLicense", "@item license", "Custom");
         break;
     default:
-        licenseShort = licenseFull = i18nc("@item license", "Not specified");
+        licenseShort = licenseFull = QCoreApplication::translate("KAboutLicense", "@item license", "Not specified");
     }
 
     const QString result =
@@ -757,14 +757,14 @@ QList<KAboutPerson> KAboutData::translators() const
     if (!d->translatorName.isEmpty()) {
         translatorName = d->translatorName;
     } else {
-        translatorName = i18nc("NAME OF TRANSLATORS", NAME_OF_TRANSLATORS); //toString(tmpLocale);
+        translatorName = QCoreApplication::translate("KAboutPerson", "NAME OF TRANSLATORS", NAME_OF_TRANSLATORS); //toString(tmpLocale);
     }
 
     QString translatorEmail;
     if (!d->translatorEmail.isEmpty()) {
         translatorEmail = d->translatorEmail;
     } else {
-        translatorEmail = i18nc("EMAIL OF TRANSLATORS", EMAIL_OF_TRANSLATORS); //toString(tmpLocale);
+        translatorEmail = QCoreApplication::translate("KAboutPerson", "EMAIL OF TRANSLATORS", EMAIL_OF_TRANSLATORS); //toString(tmpLocale);
     }
 #if 0
     delete tmpLocale;
@@ -798,7 +798,7 @@ QList<KAboutPerson> KAboutData::translators() const
 
 QString KAboutData::aboutTranslationTeam()
 {
-    return i18nc("replace this with information about your translation team",
+    return QCoreApplication::translate("KAboutData", "replace this with information about your translation team",
                  "<p>KDE is translated into many languages thanks to the work "
                  "of the translation teams all over the world.</p>"
                  "<p>For more information on KDE internationalization "
