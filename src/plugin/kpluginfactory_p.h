@@ -38,7 +38,6 @@ protected:
     }
 
     QHash<QString, Plugin> createInstanceHash;
-    QString componentName;
     QString catalogName;
     bool catalogInitialized;
 

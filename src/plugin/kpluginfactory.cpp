@@ -29,21 +29,17 @@ Q_GLOBAL_STATIC(QObjectCleanupHandler, factorycleanup)
 
 extern int kLibraryDebugArea();
 
-KPluginFactory::KPluginFactory(const char *componentName, QObject *parent)
-    : QObject(parent), d_ptr(new KPluginFactoryPrivate)
+KPluginFactory::KPluginFactory()
+    : d_ptr(new KPluginFactoryPrivate)
 {
     Q_D(KPluginFactory);
     d->q_ptr = this;
 
-    if (componentName) {
-        d->componentName = QString::fromUtf8(componentName);
-    }
-
     factorycleanup()->add(this);
 }
 
-KPluginFactory::KPluginFactory(KPluginFactoryPrivate &d, QObject *parent)
-    : QObject(parent), d_ptr(&d)
+KPluginFactory::KPluginFactory(KPluginFactoryPrivate &d)
+    : d_ptr(&d)
 {
     factorycleanup()->add(this);
 }
@@ -51,12 +47,6 @@ KPluginFactory::KPluginFactory(KPluginFactoryPrivate &d, QObject *parent)
 KPluginFactory::~KPluginFactory()
 {
     delete d_ptr;
-}
-
-QString KPluginFactory::componentName() const
-{
-    Q_D(const KPluginFactory);
-    return d->componentName;
 }
 
 void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceFunction instanceFunction)

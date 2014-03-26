@@ -45,7 +45,7 @@ class Part;
         Q_INTERFACES(KPluginFactory) \
         __VA_ARGS__ \
     public: \
-        explicit name(const char * = 0, QObject * = 0); \
+        explicit name(); \
         ~name(); \
     private: \
         void init(); \
@@ -58,9 +58,7 @@ class Part;
     K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, Q_PLUGIN_METADATA(IID KPluginFactory_iid))
 
 #define K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations) \
-    name::name(const char *componentName, QObject *parent) \
-        : baseFactory(componentName, parent) { init(); } \
-    void name::init() \
+    name::name() \
     { \
         pluginRegistrations \
     } \
@@ -76,32 +74,32 @@ class Part;
 
 /**
  * \relates KPluginFactory
- * Defines a KPluginFactory subclass with two constructors and a static componentData function.
+ *
+ * Create a KPluginFactory subclass and export it as the root plugin object.
  *
  * \param name The name of the KPluginFactory derived class.
  *
- * \param pluginRegistrations This is code inserted into the constructors the class. You'll want to
- * call registerPlugin from there.
+ * \param pluginRegistrations Code to be inserted into the constructor of the
+ * class. Usually a series of registerPlugin() calls.
  *
  * Example:
  * \code
  * #include <KPluginFactory>
- * #include <KPluginLoader>
  * #include <plugininterface.h>
  *
- * class MyPlugin;
+ * class MyPlugin : public PluginInterface
+ * {
+ * public:
+ *     MyPlugin(QObject *parent, const QVariantList &args)
+ *         : PluginInterface(parent)
+ *     {}
+ * };
  *
  * K_PLUGIN_FACTORY(MyPluginFactory,
  *                  registerPlugin<MyPlugin>();
  *                 )
  *
- * class MyPlugin : public PluginInterface
- * {
- *     ...
- *     KAboutData pluginAboutData("componentName", i18n("My Component"), "1.0");
- *     KAboutData::registerPluginData(pluginAboutData);
- *     ...
- * };
+ * #include <myplugin.moc>
  * \endcode
  *
  * If you want to compile a .json file into the plugin, use K_PLUGIN_FACTORY_WITH_JSON.
@@ -114,38 +112,39 @@ class Part;
 
 /**
  * \relates KPluginFactory
- * Defines a KPluginFactory subclass with two constructors and a static componentData function.
  *
- * This macro does the same as K_PLUGIN_FACTORY, but allows to build a custom json file as metadata
- * into the plugin.
+ * Create a KPluginFactory subclass and export it as the root plugin object with
+ * JSON metadata.
+ *
+ * This macro does the same as K_PLUGIN_FACTORY, but adds a JSON file as plugin
+ * metadata.  See Q_PLUGIN_METADATA() for more information.
  *
  * \param name The name of the KPluginFactory derived class.
  *
- * \param pluginRegistrations This is code inserted into the constructors the class. You'll want to
- * call registerPlugin from there.
+ * \param pluginRegistrations Code to be inserted into the constructor of the
+ * class. Usually a series of registerPlugin() calls.
  *
  * \param jsonFile Name of the json file to be compiled into the plugin as metadata
  *
  * Example:
  * \code
  * #include <KPluginFactory>
- * #include <KPluginLoader>
  * #include <plugininterface.h>
  *
- * class MyPlugin;
+ * class MyPlugin : public PluginInterface
+ * {
+ * public:
+ *     MyPlugin(QObject *parent, const QVariantList &args)
+ *         : PluginInterface(parent)
+ *     {}
+ * };
  *
  * K_PLUGIN_FACTORY_WITH_JSON(MyPluginFactory,
  *                  "metadata.json",
  *                  registerPlugin<MyPlugin>();
  *                 )
  *
- * class MyPlugin : public PluginInterface
- * {
- *     ...
- *     KAboutData pluginAboutData("componentName", "catalogName", i18n("My Component"), "1.0");
- *     KAboutData::registerPluginData(pluginAboutData);
- *     ...
- * };
+ * #include <myplugin.moc>
  * \endcode
  *
  * \see K_PLUGIN_FACTORY
@@ -158,8 +157,9 @@ class Part;
 
 /**
  * \relates KPluginFactory
- * K_PLUGIN_FACTORY_DECLARATION declares the KPluginFactory subclass. This macro can be used in a
- * header file.
+ *
+ * K_PLUGIN_FACTORY_DECLARATION declares the KPluginFactory subclass. This macro
+ * can be used in a header file.
  *
  * \param name The name of the KPluginFactory derived class.
  *
@@ -170,13 +170,13 @@ class Part;
 
 /**
  * \relates KPluginFactory
- * K_PLUGIN_FACTORY_DEFINITION defines the KPluginFactory subclass. This macro can <b>not</b> be used in a
- * header file.
+ * K_PLUGIN_FACTORY_DEFINITION defines the KPluginFactory subclass. This macro
+ * can <b>not</b> be used in a header file.
  *
  * \param name The name of the KPluginFactory derived class.
  *
- * \param pluginRegistrations This is code inserted into the constructors the class. You'll want to
- * call registerPlugin from there.
+ * \param pluginRegistrations Code to be inserted into the constructor of the
+ * class. Usually a series of registerPlugin() calls.
  *
  * \see K_PLUGIN_FACTORY
  * \see K_PLUGIN_FACTORY_DECLARATION
@@ -186,40 +186,56 @@ class Part;
 /**
  * \class KPluginFactory kpluginfactory.h <KPluginFactory>
  *
- * If you develop a library that is to be loaded dynamically at runtime, then
- * you should return a pointer to a KPluginFactory.
+ * KPluginFactory provides a convenient way to provide factory-style plugins.
+ * Qt plugins provide a singleton object, but a common pattern is for plugins
+ * to generate as many objects of a particular type as the application requires.
+ * By using KPluginFactory, you can avoid implementing the factory pattern
+ * yourself.
  *
- * For most cases it is enough to use the K_PLUGIN_FACTORY macro to create the factory.
+ * KPluginFactory also allows plugins to provide multiple different object
+ * types, indexed by keywords.
  *
- * Example:
+ * The objects created by KPluginFactory must inherit QObject, and must have a
+ * standard constructor pattern:
+ * \li if the object is a KPart::Part, it must be of the form
+ * \code
+ * T(QWidget *parentWidget, QObject *parent, const QVariantList &args)
+ * \endcode
+ * \li if it is a QWidget, it must be of the form
+ * \code
+ * T(QWidget *parent, const QVariantList &args)
+ * \endcode
+ * \li otherwise it must be of the form
+ * \code
+ * T(QObject *parent, const QVariantList &args)
+ * \endcode
+ *
+ * You should typically use either K_PLUGIN_FACTORY() or
+ * K_PLUGIN_FACTORY_WITH_JSON() in your plugin code to create the factory.  The
+ * typical pattern is
+ *
  * \code
  * #include <KPluginFactory>
- * #include <KPluginLoader>
  * #include <plugininterface.h>
  *
- * class MyPlugin;
+ * class MyPlugin : public PluginInterface
+ * {
+ * public:
+ *     MyPlugin(QObject *parent, const QVariantList &args)
+ *         : PluginInterface(parent)
+ *     {}
+ * };
  *
  * K_PLUGIN_FACTORY(MyPluginFactory,
  *                  registerPlugin<MyPlugin>();
  *                 )
- *
- * class MyPlugin : public PluginInterface
- * {
- *     ...
- *     KAboutData pluginAboutData("componentName", i18n("My Component"), "1.0");
- *     KAboutData::registerPluginData(pluginAboutData);
- *     ...
- * };
+ * #include <myplugin.moc>
  * \endcode
  *
- * K_PLUGIN_FACTORY is a convenient macro that expands to a class derived from KPluginFactory
- * providing two constructors and a static componentData() function. The second argument to
- * K_PLUGIN_FACTORY is code that is called from the constructors. There you can use registerPlugin
- * to register as many plugins for the factory as you want to.
- *
- * If you want to write a custom KPluginFactory not using the standard macro(s) you can reimplement
- * the create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword)
- * function.
+ * If you want to write a custom KPluginFactory not using the standard macro(s)
+ * you can reimplement the
+ * create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword)
+ * method.
  *
  * Example:
  * \code
@@ -228,7 +244,6 @@ class Part;
  *     Q_OBJECT
  * public:
  *     SomeScriptLanguageFactory()
- *         : KPluginFactory("SomeScriptLanguageComponent")
  *     {}
  *
  * protected:
@@ -263,27 +278,14 @@ class KSERVICE_EXPORT KPluginFactory : public QObject
     Q_DECLARE_PRIVATE(KPluginFactory)
 public:
     /**
-     * This constructor creates a factory for a plugin with the given \p componentName.
-     *
-     * \param componentName the component name of the plugin
-     * \param parent a parent object
+     * This constructor creates a factory for a plugin.
      */
-    explicit KPluginFactory(const char *componentName = 0, QObject *parent = 0);
+    explicit KPluginFactory();
 
     /**
      * This destroys the PluginFactory.
      */
     virtual ~KPluginFactory();
-
-    /**
-     * You can use this method to get the component name of the plugin. It is filled with the
-     * information given to the constructor of KPluginFactory.
-     * The K_PLUGIN_FACTORY macros provide a static version of this method, this can be used from
-     * any place within the plugin.
-     *
-     * \returns The name of the plugin
-     */
-    QString componentName() const;
 
     /**
      * Use this method to create an object. It will try to create an object which inherits
@@ -372,7 +374,7 @@ protected:
      */
     typedef QObject *(*CreateInstanceFunction)(QWidget *, QObject *, const QVariantList &);
 
-    explicit KPluginFactory(KPluginFactoryPrivate &dd, QObject *parent = 0);
+    explicit KPluginFactory(KPluginFactoryPrivate &dd);
 
     /**
      * Registers a plugin with the factory. Call this function from the constructor of the
