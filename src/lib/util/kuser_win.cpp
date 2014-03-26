@@ -95,7 +95,7 @@ ScopedNetApiBuffer<T> getUserInfo(LPCWSTR server, const QString& userName, NET_A
 template<class T, class Callback, class EnumFunction>
 static void netApiEnumerate(uint maxCount, Callback callback, EnumFunction enumFunc) {
     NET_API_STATUS nStatus = NERR_Success;
-    quint64 resumeHandle = 0;
+    DWORD_PTR resumeHandle = 0;
     uint total = 0;
     int level = NetApiTypeInfo<T>::level;
     do {
@@ -121,7 +121,7 @@ static void netApiEnumerate(uint maxCount, Callback callback, EnumFunction enumF
 
 template<class T, class Callback>
 void enumerateAllUsers(uint maxCount, Callback callback) {
-    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, PDWORD_PTR resumeHandle) {
         // pass 0 as filter -> get all users
         // Why does this function take a DWORD* as resume handle and NetUserEnum/NetGroupGetUsers a UINT64*
         // Great API design by Microsoft...
@@ -132,15 +132,15 @@ void enumerateAllUsers(uint maxCount, Callback callback) {
 
 template<typename T, class Callback>
 void enumerateAllGroups(uint maxCount, Callback callback) {
-    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
-        return NetGroupEnum(nullptr, level, buffer, MAX_PREFERRED_LENGTH, count, total, (PDWORD)resumeHandle);
+    netApiEnumerate<T>(maxCount, callback, [](int level, LPBYTE* buffer, DWORD* count, DWORD* total, PDWORD_PTR resumeHandle) {
+        return NetGroupEnum(nullptr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
     });
 }
 
 template<typename T, class Callback>
 void enumerateGroupsForUser(uint maxCount, const QString& name, Callback callback) {
     LPCWSTR nameStr = (LPCWSTR)name.utf16();
-    netApiEnumerate<T>(maxCount, callback, [&](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) -> NET_API_STATUS {
+    netApiEnumerate<T>(maxCount, callback, [&](int level, LPBYTE* buffer, DWORD* count, DWORD* total, PDWORD_PTR resumeHandle) -> NET_API_STATUS {
         NET_API_STATUS ret = NetUserGetGroups(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total);
         // if we return ERROR_MORE_DATA here it will result in an enless loop
         if (ret == ERROR_MORE_DATA) {
@@ -154,7 +154,7 @@ void enumerateGroupsForUser(uint maxCount, const QString& name, Callback callbac
 template<typename T, class Callback>
 void enumerateUsersForGroup(const QString &name, uint maxCount, Callback callback) {
     LPCWSTR nameStr = (LPCWSTR)name.utf16();
-    netApiEnumerate<T>(maxCount, callback, [nameStr](int level, LPBYTE* buffer, DWORD* count, DWORD* total, quint64* resumeHandle) {
+    netApiEnumerate<T>(maxCount, callback, [nameStr](int level, LPBYTE* buffer, DWORD* count, DWORD* total, PDWORD_PTR resumeHandle) {
         return NetGroupGetUsers(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total, resumeHandle);
     });
 }
