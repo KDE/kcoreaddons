@@ -31,19 +31,20 @@ class KPluginLoaderPrivate;
 /**
  * \class KPluginLoader kpluginloader.h <KPluginLoader>
  *
- * This class extends QPluginLoader in three ways:
+ * This class behaves largely like QPluginLoader (and, indeed, uses it
+ * internally).  It extends its functionality in three ways:
  *
  * - it additionally searches for plugins in the "kf5" subdirectories of
  *   directories in QCoreApplication::libraryPaths() (see findPlugin()); this
  *   corresponds to the ${PLUGIN_INSTALL_DIR} of the KDEInstallDirs CMake module
  *   in extra-cmake-modules
- * - it reads the plugin version, as provided by the K_EXPORT_PLUGIN_VERSION macro
- *   (see pluginVersion())
+ * - it reads the plugin version, as provided by the K_EXPORT_PLUGIN_VERSION
+ *   macro (see pluginVersion())
  * - it provides access to a KPluginFactory instance if the plugin provides one
  *   (see factory())
  *
- * Unlike QPluginLoader, KPluginLoader does not allow re-use by changing the
- * fileName property.
+ * Unlike QPluginLoader, it is not possible to re-use KPluginLoader for more
+ * than one plugin (it provides no setFileName method).
  *
  * This class is reentrant, you can load plugins from different threads. You can
  * also have multiple PluginLoaders for one library without negative effects.
@@ -83,9 +84,13 @@ class KPluginLoaderPrivate;
  *
  * \author Bernhard Loos <nhuh.put@web.de>
  */
-class KSERVICE_EXPORT KPluginLoader : public QPluginLoader
+class KSERVICE_EXPORT KPluginLoader : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString fileName READ fileName)
+    Q_PROPERTY(QLibrary::LoadHints loadHints READ loadHints WRITE setLoadHints)
+    Q_PROPERTY(QString pluginName READ pluginName)
+    Q_PROPERTY(quint32 pluginVersion READ pluginVersion)
 public:
     /**
      * Load a plugin by name.
@@ -93,7 +98,7 @@ public:
      * This should be the name of the plugin object file, without any suffix
      * (like .so or .dll).  Plugin object files should not have a 'lib' prefix.
      *
-     * errorString() will be set if problems are encountered.
+     * fileName() will be empty if the plugin could not be found.
      *
      * \param plugin The name of the plugin.
      * \param parent A parent object.
@@ -101,11 +106,10 @@ public:
     explicit KPluginLoader(const QString &plugin, QObject *parent = 0);
 
     /**
-     * load a plugin from a service.
+     * Load a plugin from a service.
      *
-     * The service must contain a library.
-     *
-     * errorString() will be set if problems are encountered.
+     * The service must contain a library.  fileName() will be empty if the
+     * service did not contain a library or if the library could not be found.
      *
      * \param service The service that provides the plugin.
      * \param parent A parent object.
@@ -138,23 +142,20 @@ public:
      * provided by the service.
      *
      * \returns The plugin name.
+     *
+     * \see fileName()
      */
     QString pluginName() const;
 
     /**
      * Returns the plugin version.
      *
-     * \returns The version given to K_EXPORT_PLUGIN_VERSION, or (quint32) -1 if
-     *          the macro was not used.
-     */
-    quint32 pluginVersion() const;
-
-    /**
-     * Queries the last error.
+     * This will load the plugin if it is not already loaded.
      *
-     * \returns The description of the last error.
+     * \returns The version given to K_EXPORT_PLUGIN_VERSION, or (quint32) -1 if
+     *          the macro was not used or the plugin could not be loaded.
      */
-    QString errorString() const;
+    quint32 pluginVersion();
 
     /**
      * Locates a plugin.
@@ -179,16 +180,114 @@ public:
      */
     static QString findPlugin(const QString &name);
 
-protected:
     /**
-     * Performs the loading of the plugin.
+     * Returns the last error.
+     *
+     * \returns The description of the last error.
+     *
+     * \see QPluginLoader::errorString()
+     */
+    QString errorString() const;
+
+    /**
+     * Returns the path of the plugin.
+     *
+     * This will be the full path of the plugin if it was found, and empty if
+     * it could not be found.
+     *
+     * \returns The full path of the plugin, or the null string if it could
+     *          not be found.
+     *
+     * \see QPluginLoader::fileName(), pluginName()
+     */
+    QString fileName() const;
+
+    /**
+     * Returns the root object of the plugin.
+     *
+     * The plugin will be loaded if necessary.  If the plugin used one of the
+     * KPluginFactory macros, you should use factory() instead.
+     *
+     * \returns The plugin's root object.
+     *
+     * \see QPluginLoader::instance()
+     */
+    QObject *instance();
+
+    /**
+     * Determines whether the plugin is loaded.
+     *
+     * \returns  @c True if the plugin is loaded, @c false otherwise.
+     *
+     * \see QPluginLoader::isLoaded()
+     */
+    bool isLoaded() const;
+
+    /**
+     * Loads the plugin.
+     *
+     * It is safe to call this multiple times; if the plugin was already loaded,
+     * it will just return @c true.
+     *
+     * Methods that require the plugin to be loaded will load it as necessary
+     * anyway, so you do not normally need to call this method.
+     *
+     * \returns  @c True if the plugin was loaded successfully, @c false
+     *           otherwise.
+     *
+     * \see QPluginLoader::load()
      */
     bool load();
+
+    /**
+     * Returns the load hints for the plugin.
+     *
+     * Determines how load() should work.  See QLibrary::loadHints for more
+     * information.
+     *
+     * \returns  The load hints for the plugin.
+     *
+     * \see QPluginLoader::loadHints(), setLoadHints()
+     */
+    QLibrary::LoadHints loadHints() const;
+
+    /**
+     * Returns the meta data for the plugin.
+     *
+     * \returns  A JSON object containing the plugin's metadata, if found.
+     *
+     * \see QPluginLoader::metaData()
+     */
+    QJsonObject metaData() const;
+
+    /**
+     * Set the load hints for the plugin.
+     *
+     * Determines how load() should work.  See QLibrary::loadHints for more
+     * information.
+     *
+     * \param loadHints  The load hints for the plugin.
+     *
+     * \see QPluginLoader::setLoadHints(), loadHints()
+     */
+    void setLoadHints(QLibrary::LoadHints loadHints);
+
+    /**
+     * Attempts to unload the plugin.
+     *
+     * If other instances of KPluginLoader or QPluginLoader are using the same
+     * plugin, this will fail; unloading will only happen when every instance
+     * has called unload().
+     *
+     * \returns  @c True if the plugin was unloaded, @c false otherwise.
+     *
+     * \see QPluginLoader::unload(), load(), instance(), factory()
+     */
+    bool unload();
+
 private:
     Q_DECLARE_PRIVATE(KPluginLoader)
     Q_DISABLE_COPY(KPluginLoader)
-
-    using QPluginLoader::setFileName;
 
     KPluginLoaderPrivate *const d_ptr;
 };

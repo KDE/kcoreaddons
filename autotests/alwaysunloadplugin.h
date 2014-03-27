@@ -20,19 +20,23 @@
  *
  */
 
-#include "unversionedplugin.h"
-#include <kexportplugin.h>
-#include <kpluginfactory.h>
-#include <QDebug>
+#ifndef ALWAYSUNLOADPLUGIN_H
+#define ALWAYSUNLOADPLUGIN_H
 
-UnversionedPlugin::UnversionedPlugin(QObject *parent, const QVariantList &args)
-    : QObject(parent),
-      m_pluginInfo(args)
+#include <QObject>
+
+#include <kplugininfo.h>
+
+class AlwaysUnloadPlugin : public QObject
 {
-    qDebug() << "SUCCESS!" << m_pluginInfo.pluginName() << m_pluginInfo.name() << m_pluginInfo.comment();
-    setObjectName(m_pluginInfo.comment());
-}
+    Q_OBJECT
 
-K_PLUGIN_FACTORY(UnversionedPluginFactory, registerPlugin<UnversionedPlugin>();)
+public:
+    AlwaysUnloadPlugin(QObject *parent, const QVariantList &args);
 
-#include "unversionedplugin.moc"
+private:
+    KPluginInfo m_pluginInfo;
+
+};
+
+#endif // ALWAYSUNLOADPLUGIN_H

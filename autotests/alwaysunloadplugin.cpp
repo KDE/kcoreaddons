@@ -20,12 +20,12 @@
  *
  */
 
-#include "unversionedplugin.h"
+#include "alwaysunloadplugin.h"
 #include <kexportplugin.h>
 #include <kpluginfactory.h>
 #include <QDebug>
 
-UnversionedPlugin::UnversionedPlugin(QObject *parent, const QVariantList &args)
+AlwaysUnloadPlugin::AlwaysUnloadPlugin(QObject *parent, const QVariantList &args)
     : QObject(parent),
       m_pluginInfo(args)
 {
@@ -33,6 +33,6 @@ UnversionedPlugin::UnversionedPlugin(QObject *parent, const QVariantList &args)
     setObjectName(m_pluginInfo.comment());
 }
 
-K_PLUGIN_FACTORY(UnversionedPluginFactory, registerPlugin<UnversionedPlugin>();)
+K_PLUGIN_FACTORY(AlwaysUnloadPluginFactory, registerPlugin<AlwaysUnloadPlugin>();)
 
-#include "unversionedplugin.moc"
+#include "alwaysunloadplugin.moc"

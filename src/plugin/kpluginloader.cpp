@@ -33,16 +33,38 @@ class KPluginLoaderPrivate
     Q_DECLARE_PUBLIC(KPluginLoader)
 protected:
     KPluginLoaderPrivate(const QString &libname)
-        : name(libname), pluginVersion(~0U), pluginVersionResolved(false)
+        : name(libname),
+          pluginVersion(~0U),
+          pluginVersionResolved(false),
+          loader(0)
     {}
     ~KPluginLoaderPrivate()
     {}
+
+    // NB: should only be called from constructors (does not update name
+    //     or pluginVersion or pluginVersionResolved).
+    void setFileName(const QString &fileName)
+    {
+        Q_ASSERT(loader);
+
+        const QString pluginLocation = KPluginLoader::findPlugin(fileName);
+
+        if (pluginLocation.isEmpty()) {
+            errorString = i18n(
+                "Could not find plugin '%1' for application '%2'",
+                fileName,
+                QCoreApplication::instance()->applicationName());
+        } else {
+            loader->setFileName(pluginLocation);
+        }
+    }
 
     KPluginLoader *q_ptr;
     const QString name;
     quint32 pluginVersion;
     QString errorString;
     bool pluginVersionResolved;
+    QPluginLoader *loader;
 };
 
 inline QString makeLibName(const QString &libname)
@@ -150,49 +172,36 @@ QString KPluginLoader::findPlugin(const QString &name)
 }
 
 KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
-    : QPluginLoader(findPlugin(plugin), parent), d_ptr(new KPluginLoaderPrivate(plugin))
+    : QObject(parent),
+      d_ptr(new KPluginLoaderPrivate(plugin))
 {
     d_ptr->q_ptr = this;
     Q_D(KPluginLoader);
 
-    // No lib, no fun.
-    if (fileName().isEmpty()) {
-        d->errorString = i18n(
-                             "Could not find plugin '%1' for application '%2'",
-                             plugin,
-                             QCoreApplication::instance()->applicationName());
-        return;
-    }
+    d->loader = new QPluginLoader(this);
+    d->setFileName(plugin);
 }
 
 KPluginLoader::KPluginLoader(const KService &service, QObject *parent)
-    : QPluginLoader(findPlugin(service.library()), parent), d_ptr(new KPluginLoaderPrivate(service.library()))
+    : QObject(parent),
+      d_ptr(new KPluginLoaderPrivate(service.isValid() ? service.library() : QString()))
 {
     d_ptr->q_ptr = this;
     Q_D(KPluginLoader);
 
-    // It's probably to late to check this because service.library() is used
-    // above.
+    d->loader = new QPluginLoader(this);
+
     if (!service.isValid()) {
         d->errorString = i18n("The provided service is not valid");
         return;
     }
 
-    // service.library() is used to find the lib. So first check if it is empty.
     if (service.library().isEmpty()) {
         d->errorString = i18n("The service '%1' provides no library or the Library key is missing", service.entryPath());
         return;
     }
 
-    // No lib, no fun. service.library() was set but we were still unable to
-    // find the lib.
-    if (fileName().isEmpty()) {
-        d->errorString = i18n(
-                             "Could not find plugin '%1' for application '%2'",
-                             service.name(),
-                             QCoreApplication::instance()->applicationName());
-        return;
-    }
+    d->setFileName(service.library());
 }
 
 KPluginLoader::~KPluginLoader()
@@ -225,14 +234,64 @@ KPluginFactory *KPluginLoader::factory()
     return factory;
 }
 
+quint32 KPluginLoader::pluginVersion()
+{
+    Q_D(const KPluginLoader);
+
+    if (!load()) {
+        return qint32(-1);
+    }
+    return d->pluginVersion;
+}
+
+QString KPluginLoader::pluginName() const
+{
+    Q_D(const KPluginLoader);
+
+    return d->name;
+}
+
+QString KPluginLoader::errorString() const
+{
+    Q_D(const KPluginLoader);
+
+    if (!d->errorString.isEmpty()) {
+        return d->errorString;
+    }
+
+    return d->loader->errorString();
+}
+
+QString KPluginLoader::fileName() const
+{
+    Q_D(const KPluginLoader);
+    return d->loader->fileName();
+}
+
+QObject *KPluginLoader::instance()
+{
+    Q_D(const KPluginLoader);
+
+    if (!load()) {
+        return 0;
+    }
+
+    return d->loader->instance();
+}
+
+bool KPluginLoader::isLoaded() const
+{
+    Q_D(const KPluginLoader);
+
+    return d->loader->isLoaded() && d->pluginVersionResolved;
+}
+
 bool KPluginLoader::load()
 {
     Q_D(KPluginLoader);
 
-    if (!isLoaded()) {
-        if (!QPluginLoader::load()) {
-            return false;
-        }
+    if (!d->loader->load()) {
+        return false;
     }
 
     if (d->pluginVersionResolved) {
@@ -254,28 +313,35 @@ bool KPluginLoader::load()
     return true;
 }
 
-QString KPluginLoader::errorString() const
+QLibrary::LoadHints KPluginLoader::loadHints() const
 {
     Q_D(const KPluginLoader);
 
-    if (!d->errorString.isEmpty()) {
-        return d->errorString;
-    }
-
-    return QPluginLoader::errorString();
+    return d->loader->loadHints();
 }
 
-quint32 KPluginLoader::pluginVersion() const
+QJsonObject KPluginLoader::metaData() const
 {
     Q_D(const KPluginLoader);
-    const_cast<KPluginLoader *>(this)->load();
-    return d->pluginVersion;
+
+    return d->loader->metaData();
 }
 
-QString KPluginLoader::pluginName() const
+void KPluginLoader::setLoadHints(QLibrary::LoadHints loadHints)
 {
-    Q_D(const KPluginLoader);
-    const_cast<KPluginLoader *>(this)->load();
-    return d->name;
+    Q_D(KPluginLoader);
+
+    d->loader->setLoadHints(loadHints);
+}
+
+bool KPluginLoader::unload()
+{
+    Q_D(KPluginLoader);
+
+    // Even if *this* call does not unload it, another might,
+    // so we err on the side of re-resolving the version.
+    d->pluginVersionResolved = false;
+
+    return d->loader->unload();
 }
 
