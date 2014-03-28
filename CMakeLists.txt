@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.12)
 
 project(KCoreAddons)
 
-find_package(ECM 0.0.11 REQUIRED NO_MODULE)
+find_package(ECM 0.0.12 REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
@@ -35,7 +35,7 @@ set(HAVE_SYS_INOTIFY_H ${SYS_INOTIFY_H_FOUND})
 # Generate io/config-kdirwatch.h
 configure_file(src/lib/io/config-kdirwatch.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/lib/io/config-kdirwatch.h)
 
-set(KF5_VERSION "4.97.0")
+set(KF5_VERSION "4.98.0")
 
 ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KCOREADDONS
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_version.h"
