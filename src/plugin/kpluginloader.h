@@ -24,9 +24,9 @@
 #include <QtCore/QtPlugin>
 
 class KPluginFactory;
-class KService;
 
 class KPluginLoaderPrivate;
+class KPluginName;
 
 /**
  * \class KPluginLoader kpluginloader.h <KPluginLoader>
@@ -106,15 +106,16 @@ public:
     explicit KPluginLoader(const QString &plugin, QObject *parent = 0);
 
     /**
-     * Load a plugin from a service.
+     * Load a plugin by name.
      *
-     * The service must contain a library.  fileName() will be empty if the
-     * service did not contain a library or if the library could not be found.
+     * This constructor behaves exactly the same as
+     * KPluginLoader(const QString&,QObject*).  It allows any class that can be
+     * cast to KPluginName (such as KService) to be passed to KPluginLoader.
      *
-     * \param service The service that provides the plugin.
+     * \param name   The name of the plugin.
      * \param parent A parent object.
      */
-    explicit KPluginLoader(const KService &service, QObject *parent = 0);
+    explicit KPluginLoader(const KPluginName &name, QObject *parent = 0);
 
     /**
      * Destroys the plugin loader.
@@ -291,5 +292,97 @@ private:
 
     KPluginLoaderPrivate *const d_ptr;
 };
+
+/**
+ * Represents the name of a plugin intended for KPluginLoader.
+ *
+ * This exists only so that classes such as KService can provide a cast
+ * operator to allow them to be used as arguments to KPluginLoader.
+ * Unless you are implementing such a cast operator, you should never
+ * need to use this class directly.
+ */
+// NOTE: this class is all inline, as it mainly exists for typing reasons
+//       (ie: to prevent the issues that would be caused by adding an
+//       operator QString() method to KService)
+class KSERVICE_EXPORT KPluginName
+{
+public:
+    /**
+     * Construct a (valid) plugin name from a string.
+     *
+     * If there was an error and the name could not be determined,
+     * fromErrorString() should be used instead to construct an
+     * appropriate error message.
+     *
+     * @param name  The name of the plugin; this should not be empty.
+     */
+    inline explicit KPluginName(const QString &name);
+
+    /**
+     * The name of the plugin.
+     *
+     * @returns  The string passed to the constructor if isValid() is
+     *           @c true, QString() otherwise.
+     */
+    inline QString name() const;
+
+    /**
+     * Whether the name is valid.
+     *
+     * Note that this only determines how the KPluginName was
+     * constructed, not anything about the value of the string.
+     *
+     * @returns @c true if the KPluginName(const QString&) constructor
+     *          was used, @c false if fromErrorString() was used.
+     */
+    inline bool isValid() const;
+
+    /**
+     * The error string if no name could be determined.
+     *
+     * @returns  The string passed to fromErrorString() if isValid() is
+     *           @c false, QString() otherwise.
+     */
+    inline QString errorString() const;
+
+    /**
+     * Construct an invalid plugin name with an error message.
+     *
+     * When this object is passed to KPluginLoader, @param errorString
+     * will be used for KPluginLoader::errorString().
+     *
+     * @param errorString  The (translated) error string.
+     */
+    static inline KPluginName fromErrorString(const QString &errorString);
+
+private:
+    inline KPluginName(const QString &name, bool isError);
+
+    QString m_name;
+    bool m_isError;
+};
+
+inline KPluginName::KPluginName(const QString &name)
+    : m_name(name), m_isError(false)
+{}
+inline KPluginName::KPluginName(const QString &name, bool isError)
+    : m_name(name), m_isError(isError)
+{}
+inline QString KPluginName::name() const
+{
+    return m_isError ? QString() : m_name;
+}
+inline bool KPluginName::isValid() const
+{
+    return !m_isError;
+}
+inline QString KPluginName::errorString() const
+{
+    return m_isError ? m_name : QString();
+}
+inline KPluginName KPluginName::fromErrorString(const QString &errorString)
+{
+    return KPluginName(errorString, true);
+}
 
 #endif

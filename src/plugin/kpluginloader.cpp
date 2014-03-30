@@ -20,7 +20,6 @@
 
 #include <klocalizedstring.h>
 #include "kpluginfactory.h"
-#include <kservice.h>
 
 #include <QtCore/QLibrary>
 #include <QtCore/QDir>
@@ -182,26 +181,20 @@ KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
     d->setFileName(plugin);
 }
 
-KPluginLoader::KPluginLoader(const KService &service, QObject *parent)
+KPluginLoader::KPluginLoader(const KPluginName &pluginName, QObject *parent)
     : QObject(parent),
-      d_ptr(new KPluginLoaderPrivate(service.isValid() ? service.library() : QString()))
+      d_ptr(new KPluginLoaderPrivate(pluginName.name()))
 {
     d_ptr->q_ptr = this;
     Q_D(KPluginLoader);
 
     d->loader = new QPluginLoader(this);
 
-    if (!service.isValid()) {
-        d->errorString = i18n("The provided service is not valid");
-        return;
+    if (pluginName.isValid()) {
+        d->setFileName(pluginName.name());
+    } else {
+        d->errorString = pluginName.errorString();
     }
-
-    if (service.library().isEmpty()) {
-        d->errorString = i18n("The service '%1' provides no library or the Library key is missing", service.entryPath());
-        return;
-    }
-
-    d->setFileName(service.library());
 }
 
 KPluginLoader::~KPluginLoader()

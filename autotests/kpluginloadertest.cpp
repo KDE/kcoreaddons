@@ -29,12 +29,6 @@ class KPluginLoaderTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void initTestCase()
-    {
-        const QString serviceFile = QFINDTESTDATA("fakeplugin.desktop");
-        QVERIFY(!serviceFile.isEmpty());
-    }
-
     void testFindPlugin_missing()
     {
         const QString location = KPluginLoader::findPlugin("idonotexist");
@@ -43,7 +37,7 @@ private Q_SLOTS:
 
     void testFindPlugin()
     {
-        const QString location = KPluginLoader::findPlugin("fakeplugin");
+        const QString location = KPluginLoader::findPlugin("jsonplugin");
         QVERIFY2(!location.isEmpty(), qPrintable(location));
     }
 
@@ -58,9 +52,11 @@ private Q_SLOTS:
         KPluginLoader uplugin("unversionedplugin");
         QCOMPARE(uplugin.pluginVersion(), quint32(-1));
 
-        KService service(QFINDTESTDATA("fakeplugin.desktop"));
-        KPluginLoader fplugin(service);
-        QCOMPARE(fplugin.pluginVersion(), quint32(-1));
+        KPluginLoader jplugin(KPluginName("jsonplugin"));
+        QCOMPARE(jplugin.pluginVersion(), quint32(-1));
+
+        KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
+        QCOMPARE(eplugin.pluginVersion(), quint32(-1));
 
         KPluginLoader noplugin("idonotexist");
         QCOMPARE(noplugin.pluginVersion(), quint32(-1));
@@ -71,9 +67,11 @@ private Q_SLOTS:
         KPluginLoader vplugin("versionedplugin");
         QCOMPARE(vplugin.pluginName(), QString::fromLatin1("versionedplugin"));
 
-        KService service(QFINDTESTDATA("fakeplugin.desktop"));
-        KPluginLoader fplugin(service);
-        QCOMPARE(fplugin.pluginName(), QString::fromLatin1("fakeplugin"));
+        KPluginLoader jplugin(KPluginName("jsonplugin"));
+        QCOMPARE(jplugin.pluginName(), QString::fromLatin1("jsonplugin"));
+
+        KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
+        QVERIFY2(eplugin.pluginName().isEmpty(), qPrintable(eplugin.pluginName()));
 
         KPluginLoader noplugin("idonotexist");
         QCOMPARE(noplugin.pluginName(), QString::fromLatin1("idonotexist"));
@@ -84,12 +82,20 @@ private Q_SLOTS:
         KPluginLoader vplugin("versionedplugin");
         QVERIFY(vplugin.factory());
 
-        KService service(QFINDTESTDATA("fakeplugin.desktop"));
-        KPluginLoader fplugin(service);
-        QVERIFY(fplugin.factory());
+        KPluginLoader jplugin(KPluginName("jsonplugin"));
+        QVERIFY(jplugin.factory());
+
+        KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
+        QVERIFY(!eplugin.factory());
 
         KPluginLoader noplugin("idonotexist");
         QVERIFY(!noplugin.factory());
+    }
+
+    void testErrorString()
+    {
+        KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
+        QCOMPARE(eplugin.errorString(), QString::fromLatin1("there was an error"));
     }
 
     void testFileName()
@@ -97,9 +103,11 @@ private Q_SLOTS:
         KPluginLoader vplugin("versionedplugin");
         QCOMPARE(vplugin.fileName(), QString::fromLatin1(VERSIONEDPLUGIN_FILE));
 
-        KService service(QFINDTESTDATA("fakeplugin.desktop"));
-        KPluginLoader fplugin(service);
-        QCOMPARE(fplugin.fileName(), QString::fromLatin1(FAKEPLUGIN_FILE));
+        KPluginLoader jplugin(KPluginName("jsonplugin"));
+        QCOMPARE(jplugin.fileName(), QString::fromLatin1(JSONPLUGIN_FILE));
+
+        KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
+        QVERIFY2(eplugin.fileName().isEmpty(), qPrintable(eplugin.fileName()));
 
         KPluginLoader noplugin("idonotexist");
         QVERIFY2(noplugin.fileName().isEmpty(), qPrintable(noplugin.fileName()));
@@ -110,9 +118,11 @@ private Q_SLOTS:
         KPluginLoader vplugin("versionedplugin");
         QVERIFY(vplugin.instance());
 
-        KService service(QFINDTESTDATA("fakeplugin.desktop"));
-        KPluginLoader fplugin(service);
-        QVERIFY(fplugin.instance());
+        KPluginLoader jplugin(KPluginName("jsonplugin"));
+        QVERIFY(jplugin.instance());
+
+        KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
+        QVERIFY(!eplugin.instance());
 
         KPluginLoader noplugin("idonotexist");
         QVERIFY(!noplugin.instance());
@@ -125,11 +135,10 @@ private Q_SLOTS:
         QVERIFY(vplugin.load());
         QVERIFY(vplugin.isLoaded());
 
-        KService service(QFINDTESTDATA("fakeplugin.desktop"));
-        KPluginLoader fplugin(service);
-        QVERIFY(!fplugin.isLoaded());
-        QVERIFY(fplugin.load());
-        QVERIFY(fplugin.isLoaded());
+        KPluginLoader jplugin(KPluginName("jsonplugin"));
+        QVERIFY(!jplugin.isLoaded());
+        QVERIFY(jplugin.load());
+        QVERIFY(jplugin.isLoaded());
 
         KPluginLoader aplugin("alwaysunloadplugin");
         QVERIFY(!aplugin.isLoaded());
@@ -140,6 +149,11 @@ private Q_SLOTS:
         } else {
             qDebug() << "Could not unload alwaysunloadplugin:" << aplugin.errorString();
         }
+
+        KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
+        QVERIFY(!eplugin.isLoaded());
+        QVERIFY(!eplugin.load());
+        QVERIFY(!eplugin.isLoaded());
 
         KPluginLoader noplugin("idonotexist");
         QVERIFY(!noplugin.isLoaded());
@@ -152,9 +166,11 @@ private Q_SLOTS:
         KPluginLoader vplugin("versionedplugin");
         QVERIFY(vplugin.load());
 
-        KService service(QFINDTESTDATA("fakeplugin.desktop"));
-        KPluginLoader fplugin(service);
-        QVERIFY(fplugin.load());
+        KPluginLoader jplugin(KPluginName("jsonplugin"));
+        QVERIFY(jplugin.load());
+
+        KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
+        QVERIFY(!eplugin.load());
 
         KPluginLoader noplugin("idonotexist");
         QVERIFY(!noplugin.load());
@@ -177,17 +193,19 @@ private Q_SLOTS:
         QVERIFY(ametadata_metadata.toObject().isEmpty());
         QVERIFY(!aplugin.isLoaded()); // didn't load anything
 
-        KService service(QFINDTESTDATA("fakeplugin.desktop"));
-        KPluginLoader fplugin(service);
-        QJsonObject fmetadata = fplugin.metaData();
-        QVERIFY(!fmetadata.isEmpty());
-        QJsonValue fmetadata_metadata = fmetadata.value("MetaData");
-        QVERIFY(fmetadata_metadata.isObject());
-        QJsonObject fmetadata_obj = fmetadata_metadata.toObject();
-        QVERIFY(!fmetadata_obj.isEmpty());
-        QJsonValue comment = fmetadata_obj.value("Comment");
+        KPluginLoader jplugin(KPluginName("jsonplugin"));
+        QJsonObject jmetadata = jplugin.metaData();
+        QVERIFY(!jmetadata.isEmpty());
+        QJsonValue jmetadata_metadata = jmetadata.value("MetaData");
+        QVERIFY(jmetadata_metadata.isObject());
+        QJsonObject jmetadata_obj = jmetadata_metadata.toObject();
+        QVERIFY(!jmetadata_obj.isEmpty());
+        QJsonValue comment = jmetadata_obj.value("Comment");
         QVERIFY(comment.isString());
-        QCOMPARE(comment.toString(), QString::fromLatin1("Test Plugin Spy"));
+        QCOMPARE(comment.toString(), QString::fromLatin1("This is a plugin"));
+
+        KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
+        QVERIFY(eplugin.metaData().isEmpty());
 
         KPluginLoader noplugin("idonotexist");
         QVERIFY(noplugin.metaData().isEmpty());
