@@ -349,28 +349,52 @@ QString KUser::homeDir() const
     return d->homeDir;
 }
 
-/* See MSDN (http://msdn.microsoft.com/en-us/library/windows/desktop/bb776892%28v=vs.85%29.aspx)
- *
- * The user's tile image is stored in the the current temporary directory 
- * (%TEMP%, usually C:\Users\Alex\AppData\Local\Temp) as <username>.bmp.
- * Any slash characters (\) are converted to plus sign characters (+).
- * For example, DOMAIN\user is converted to DOMAIN+user.
- */
-static inline QString tileImageName(const QString& user) {
-    QString ret = user;
-    ret.replace(QLatin1Char('\\'), QLatin1Char('+'));
-    return ret + QStringLiteral(".bmp");
-}
+// Some RAII objects to help uninitializing/destroying WinAPI stuff
+// used in faceIconPath.
+class COMInitializer {
+public:
+    COMInitializer() : result(CoInitialize(nullptr)) {}
+    ~COMInitializer() {
+        if (SUCCEEDED(result)) CoUninitialize();
+    }
+    HRESULT result;
+};
+class W32Library {
+public:
+    W32Library(HMODULE h): h(h) {}
+    ~W32Library() {
+        if (h) FreeLibrary(h);
+    }
+    operator HMODULE() { return h; }
+    HMODULE h;
+};
+
+// This uses undocumented Windows API, only accessible by ordinal,
+// unofficially documented at
+// http://undoc.airesoft.co.uk/shell32.dll/SHGetUserPicturePath.php
+typedef HRESULT (WINAPI *SGUPP_ptr)(LPCWSTR, DWORD, LPWSTR, UINT);
 
 QString KUser::faceIconPath() const
 {
-    // try name with domain first, then fallback to logon name
-    const QString nameWithDomain = d->domain + QLatin1Char('\\') + d->loginName;
-    QString imagePath = QStandardPaths::locate(QStandardPaths::TempLocation, tileImageName(nameWithDomain));
-    if (imagePath.isEmpty()) {
-        imagePath = QStandardPaths::locate(QStandardPaths::TempLocation, tileImageName(loginName()));
+    static COMInitializer COMinit;
+
+    if (!isValid()) return QString();
+
+    // TODO implement Windows XP version
+    static W32Library shellMod = LoadLibraryA("shell32.dll");
+    if (!shellMod) {
+        return QString();
     }
-    return imagePath;
+    static SGUPP_ptr SHGetUserPicturePath = reinterpret_cast<SGUPP_ptr>(GetProcAddress(shellMod, MAKEINTRESOURCEA(261)));
+    if (!SHGetUserPicturePath) { return QString(); }
+
+    WCHAR pathBuf[MAX_PATH];
+
+    HRESULT res = SHGetUserPicturePath(reinterpret_cast<const WCHAR*>(d->loginName.utf16()), 0, pathBuf, MAX_PATH);
+    if (res != S_OK) {
+        return QString();
+    }
+    return QString::fromWCharArray(pathBuf);
 }
 
 QString KUser::shell() const
