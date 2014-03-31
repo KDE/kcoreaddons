@@ -64,6 +64,7 @@ set(libkcoreaddons_SRCS
     util/kformatprivate.cpp
     util/kshell.cpp
     ${kcoreaddons_OPTIONAL_SRCS}
+    ${kcoreaddons_QM_LOADER}
 )
 
 
