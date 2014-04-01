@@ -221,6 +221,7 @@ public:
     };
 
 public:
+#ifndef KCOREADDONS_NO_DEPRECATED
     /**
      * Constructor.
      *
@@ -262,8 +263,10 @@ public:
      * @param bugsEmailAddress The bug report email address string.
      *        This defaults to the kde.org bug system.
      *
+     *
+     * @deprecated since 5.0, use one of the other constructor overloads instead.
      */
-    KAboutData(const QString &componentName,
+    KCOREADDONS_DEPRECATED KAboutData(const QString &componentName,
                const QString &catalogName,
                const QString &displayName,
                const QString &version,
@@ -273,6 +276,73 @@ public:
                const QString &otherText = QString(),
                const QString &homePageAddress = QString(),
                const QString &bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
+              );
+#endif // KCOREADDONS_NO_DEPRECATED
+
+    /**
+     * Constructor.
+     *
+     * @param componentName The program name or plugin name used internally.
+     * Example: "kwrite".
+     *
+     * @param displayName A displayable name for the program or plugin. This string
+     *        should be translated. Example: i18n("KWrite")
+     *
+     * @param version The component version string.
+     *
+     * @param shortDescription A short description of what the component does.
+     *        This string should be translated.
+     *        Example: i18n("A simple text editor.")
+     *
+     * @param licenseType The license identifier. Use setLicenseText or
+              setLicenseTextFile if you use a license not predefined here.
+     *
+     * @param copyrightStatement A copyright statement, that can look like this:
+     *        i18n("Copyright (C) 1999-2000 Name"). The string specified here is
+     *        taken verbatim; the author information from addAuthor is not used.
+     *
+     * @param otherText Some free form text, that can contain any kind of
+     *        information. The text can contain newlines. This string
+     *        should be translated.
+     *
+     * @param homePageAddress The component's homepage string.
+     *        Start the address with "http://". "http://some.domain" is
+     *        is correct, "some.domain" is not.
+     * IMPORTANT: if you set a home page address, this will change the "organization domain"
+     * of the application, which is used for automatic D-Bus registration.
+     * @see setOrganizationDomain
+     *
+     * @param bugsEmailAddress The bug report email address string.
+     *        This defaults to the kde.org bug system.
+     *
+     */
+    // KF6: remove constructor that includes catalogName, and put default
+    //      values back in for shortDescription and licenseType
+    KAboutData(const QString &componentName,
+               const QString &displayName,
+               const QString &version,
+               const QString &shortDescription,
+               enum LicenseKey licenseType,
+               const QString &copyrightStatement = QString(),
+               const QString &otherText = QString(),
+               const QString &homePageAddress = QString(),
+               const QString &bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
+              );
+
+    /**
+     * Constructor.
+     *
+     * @param componentName The program name or plugin name used internally.
+     * Example: "kwrite".
+     *
+     * @param displayName A displayable name for the program or plugin. This string
+     *        should be translated. Example: i18n("KWrite")
+     *
+     * @param version The component version string.
+     */
+    KAboutData(const QString &componentName,
+               const QString &displayName,
+               const QString &version
               );
 
     /**
@@ -499,8 +569,14 @@ public:
      * Defines the translation catalog that the program uses.
      *
      * @param catalogName The translation catalog name.
+     *
+     * @deprecated since 5.0, use the mechanism provided by your translation
+     * framework to load the correct catalogue instead (eg:
+     * KLocalizedString::setApplicationDomain() for KI18n, or
+     * QCoreApplication::installTranslator() for Qt's translation system).
+     *
      */
-    KAboutData &setCatalogName(const QString &catalogName);
+    KCOREADDONS_DEPRECATED KAboutData &setCatalogName(const QString &catalogName);
 
     /**
      * Defines the license identifier.
@@ -672,8 +748,10 @@ public:
     /**
      * Returns the program's translation catalog name.
      * @return the catalog name.
+     *
+     * @deprecated since 5.0 (see setCatalogName()).
      */
-    QString catalogName() const;
+    KCOREADDONS_DEPRECATED QString catalogName() const;
 
     /**
      * Returns the application homepage.

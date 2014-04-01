@@ -29,8 +29,13 @@ class KAboutDataTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void testConstructorWithDefaults();
-    void testConstructor();
+#ifndef KCOREADDONS_NO_DEPRECATED
+    void testDeprecatedConstructorWithDefaults();
+    void testDeprecatedConstructor();
+#endif
+    void testLongFormConstructorWithDefaults();
+    void testLongFormConstructor();
+    void testShortFormConstructor();
     void testSetAddLicense();
     void testSetProgramIconName();
     void testCopying();
@@ -53,7 +58,8 @@ static const char LicenseText[] =        "free to write, reading forbidden";
 static const char LicenseFileName[] =    "testlicensefile";
 static const char LicenseFileText[] =    "free to write, reading forbidden, in the file";
 
-void KAboutDataTest::testConstructorWithDefaults()
+#ifndef KCOREADDONS_NO_DEPRECATED
+void KAboutDataTest::testDeprecatedConstructorWithDefaults()
 {
     KAboutData aboutData(AppName, CatalogName, QLatin1String(ProgramName), Version);
 
@@ -94,7 +100,7 @@ void KAboutDataTest::testConstructorWithDefaults()
     //TODO: test internalVersion, internalProgramName, internalBugAddress
 }
 
-void KAboutDataTest::testConstructor()
+void KAboutDataTest::testDeprecatedConstructor()
 {
     KAboutData aboutData(AppName, CatalogName, QLatin1String(ProgramName), Version,
                          QLatin1String(ShortDescription), KAboutData::License_Unknown,
@@ -136,16 +142,149 @@ void KAboutDataTest::testConstructor()
     QVERIFY(!aboutData.customAuthorTextEnabled());
     //TODO: test internalVersion, internalProgramName, internalBugAddress
 }
+#endif // KCOREADDONS_NO_DEPRECATED
+
+void KAboutDataTest::testLongFormConstructorWithDefaults()
+{
+    KAboutData aboutData(AppName, QLatin1String(ProgramName), Version,
+                         QLatin1String(ShortDescription), KAboutData::License_Unknown);
+
+    QCOMPARE(aboutData.componentName(), QLatin1String(AppName));
+    QCOMPARE(aboutData.productName(), QLatin1String(AppName));
+    QCOMPARE(aboutData.displayName(), QLatin1String(ProgramName));
+    QCOMPARE(aboutData.programIconName(), QLatin1String(AppName));
+    QCOMPARE(aboutData.programLogo(), QVariant());
+    QCOMPARE(aboutData.organizationDomain(), QString::fromLatin1("kde.org"));
+    QCOMPARE(aboutData.version(), QString::fromLatin1(Version));
+#ifndef KCOREADDONS_NO_DEPRECATED
+    QCOMPARE(aboutData.catalogName(), QLatin1String(AppName));
+#endif
+    QCOMPARE(aboutData.homepage(), QString());
+    QCOMPARE(aboutData.bugAddress(), QString::fromLatin1("submit@bugs.kde.org"));
+    QVERIFY(aboutData.authors().isEmpty());
+    QVERIFY(aboutData.credits().isEmpty());
+    QVERIFY(aboutData.translators().isEmpty());
+    QCOMPARE(aboutData.otherText(), QString());
+// We don't know the default text, do we?
+//     QCOMPARE( aboutData.licenseName(KAboutData::ShortName), QString(WarningText) );
+    QVERIFY(!aboutData.licenseName(KAboutData::ShortName).isEmpty());
+//     QCOMPARE( aboutData.licenseName(KAboutData::FullName), QString(WarningText) );
+    QVERIFY(!aboutData.licenseName(KAboutData::FullName).isEmpty());
+//     QCOMPARE( aboutData.license(), QString(WarningText) );
+    QVERIFY(!aboutData.license().isEmpty());
+    QCOMPARE(aboutData.licenses().count(), 1);
+// We don't know the default text, do we?
+//     QCOMPARE( aboutData.licenses().at(0).name(KAboutData::ShortName), QString(WarningText) );
+    QVERIFY(!aboutData.licenses().at(0).name(KAboutData::ShortName).isEmpty());
+//     QCOMPARE( aboutData.licenses().at(0).name(KAboutData::FullName), QString(WarningText) );
+    QVERIFY(!aboutData.licenses().at(0).name(KAboutData::FullName).isEmpty());
+//     QCOMPARE( aboutData.licenses().at(0).text(), QString(WarningText) );
+    QVERIFY(!aboutData.licenses().at(0).text().isEmpty());
+    QCOMPARE(aboutData.copyrightStatement(), QString());
+    QCOMPARE(aboutData.shortDescription(), QLatin1String(ShortDescription));
+    QCOMPARE(aboutData.customAuthorPlainText(), QString());
+    QCOMPARE(aboutData.customAuthorRichText(), QString());
+    QVERIFY(!aboutData.customAuthorTextEnabled());
+    //TODO: test internalVersion, internalProgramName, internalBugAddress
+}
+
+void KAboutDataTest::testLongFormConstructor()
+{
+    KAboutData aboutData(AppName, QLatin1String(ProgramName), Version,
+                         QLatin1String(ShortDescription), KAboutData::License_Unknown,
+                         QLatin1String(CopyrightStatement), QLatin1String(Text),
+                         HomePageAddress, BugsEmailAddress);
+
+    QCOMPARE(aboutData.componentName(), QLatin1String(AppName));
+    QCOMPARE(aboutData.productName(), QLatin1String(AppName));
+    QCOMPARE(aboutData.displayName(), QLatin1String(ProgramName));
+    QCOMPARE(aboutData.programIconName(), QLatin1String(AppName));
+    QCOMPARE(aboutData.programLogo(), QVariant());
+    QCOMPARE(aboutData.organizationDomain(), QString::fromLatin1(OrganizationDomain));
+    QCOMPARE(aboutData.version(), QString::fromLatin1(Version));
+#ifndef KCOREADDONS_NO_DEPRECATED
+    QCOMPARE(aboutData.catalogName(), QLatin1String(AppName));
+#endif
+    QCOMPARE(aboutData.homepage(), QString::fromLatin1(HomePageAddress));
+    QCOMPARE(aboutData.bugAddress(), QString::fromLatin1(BugsEmailAddress));
+    QVERIFY(aboutData.authors().isEmpty());
+    QVERIFY(aboutData.credits().isEmpty());
+    QVERIFY(aboutData.translators().isEmpty());
+    QCOMPARE(aboutData.otherText(), QString::fromLatin1(Text));
+//     QCOMPARE( aboutData.licenseName(KAboutData::ShortName), QString(WarningText) );
+    QVERIFY(!aboutData.licenseName(KAboutData::ShortName).isEmpty());
+//     QCOMPARE( aboutData.licenseName(KAboutData::FullName), QString(WarningText) );
+    QVERIFY(!aboutData.licenseName(KAboutData::FullName).isEmpty());
+//     QCOMPARE( aboutData.license(), QString(WarningText) );
+    QVERIFY(!aboutData.license().isEmpty());
+    QCOMPARE(aboutData.licenses().count(), 1);
+// We don't know the default text, do we?
+//     QCOMPARE( aboutData.licenses().at(0).name(KAboutData::ShortName), QString(WarningText) );
+    QVERIFY(!aboutData.licenses().at(0).name(KAboutData::ShortName).isEmpty());
+//     QCOMPARE( aboutData.licenses().at(0).name(KAboutData::FullName), QString(WarningText) );
+    QVERIFY(!aboutData.licenses().at(0).name(KAboutData::FullName).isEmpty());
+//     QCOMPARE( aboutData.licenses().at(0).text(), QString(WarningText) );
+    QVERIFY(!aboutData.licenses().at(0).text().isEmpty());
+    QCOMPARE(aboutData.copyrightStatement(), QLatin1String(CopyrightStatement));
+    QCOMPARE(aboutData.shortDescription(), QLatin1String(ShortDescription));
+    QCOMPARE(aboutData.customAuthorPlainText(), QString());
+    QCOMPARE(aboutData.customAuthorRichText(), QString());
+    QVERIFY(!aboutData.customAuthorTextEnabled());
+    //TODO: test internalVersion, internalProgramName, internalBugAddress
+}
+
+void KAboutDataTest::testShortFormConstructor()
+{
+    KAboutData aboutData(AppName, QLatin1String(ProgramName), Version);
+
+    QCOMPARE(aboutData.componentName(), QLatin1String(AppName));
+    QCOMPARE(aboutData.productName(), QLatin1String(AppName));
+    QCOMPARE(aboutData.displayName(), QLatin1String(ProgramName));
+    QCOMPARE(aboutData.programIconName(), QLatin1String(AppName));
+    QCOMPARE(aboutData.programLogo(), QVariant());
+    QCOMPARE(aboutData.organizationDomain(), QString::fromLatin1("kde.org"));
+    QCOMPARE(aboutData.version(), QString::fromLatin1(Version));
+#ifndef KCOREADDONS_NO_DEPRECATED
+    QCOMPARE(aboutData.catalogName(), QLatin1String(AppName));
+#endif
+    QCOMPARE(aboutData.homepage(), QString());
+    QCOMPARE(aboutData.bugAddress(), QString::fromLatin1("submit@bugs.kde.org"));
+    QVERIFY(aboutData.authors().isEmpty());
+    QVERIFY(aboutData.credits().isEmpty());
+    QVERIFY(aboutData.translators().isEmpty());
+    QCOMPARE(aboutData.otherText(), QString());
+// We don't know the default text, do we?
+//     QCOMPARE( aboutData.licenseName(KAboutData::ShortName), QString(WarningText) );
+    QVERIFY(!aboutData.licenseName(KAboutData::ShortName).isEmpty());
+//     QCOMPARE( aboutData.licenseName(KAboutData::FullName), QString(WarningText) );
+    QVERIFY(!aboutData.licenseName(KAboutData::FullName).isEmpty());
+//     QCOMPARE( aboutData.license(), QString(WarningText) );
+    QVERIFY(!aboutData.license().isEmpty());
+    QCOMPARE(aboutData.licenses().count(), 1);
+// We don't know the default text, do we?
+//     QCOMPARE( aboutData.licenses().at(0).name(KAboutData::ShortName), QString(WarningText) );
+    QVERIFY(!aboutData.licenses().at(0).name(KAboutData::ShortName).isEmpty());
+//     QCOMPARE( aboutData.licenses().at(0).name(KAboutData::FullName), QString(WarningText) );
+    QVERIFY(!aboutData.licenses().at(0).name(KAboutData::FullName).isEmpty());
+//     QCOMPARE( aboutData.licenses().at(0).text(), QString(WarningText) );
+    QVERIFY(!aboutData.licenses().at(0).text().isEmpty());
+    QCOMPARE(aboutData.copyrightStatement(), QString());
+    QCOMPARE(aboutData.shortDescription(), QString());
+    QCOMPARE(aboutData.customAuthorPlainText(), QString());
+    QCOMPARE(aboutData.customAuthorRichText(), QString());
+    QVERIFY(!aboutData.customAuthorTextEnabled());
+    //TODO: test internalVersion, internalProgramName, internalBugAddress
+}
 
 void KAboutDataTest::testKAboutDataOrganizationDomain()
 {
-    KAboutData data("app", 0, QLatin1String("program"), "version",
+    KAboutData data("app", QLatin1String("program"), "version",
                     QLatin1String("description"), KAboutData::License_LGPL,
                     QLatin1String("copyright"), QLatin1String("hello world"),
                     "http://www.koffice.org");
     QCOMPARE(data.organizationDomain(), QString::fromLatin1("koffice.org"));
 
-    KAboutData data2("app", 0, QLatin1String("program"), "version",
+    KAboutData data2("app", QLatin1String("program"), "version",
                      QLatin1String("description"), KAboutData::License_LGPL,
                      QLatin1String("copyright"), QLatin1String("hello world"),
                      "http://edu.kde.org/kig");
@@ -164,7 +303,7 @@ void KAboutDataTest::testSetAddLicense()
     const QString copyrightStatement = QLatin1String(CopyrightStatement);
     const QString lineFeed = QString::fromLatin1("\n\n");
 
-    KAboutData aboutData(AppName, CatalogName, QLatin1String(ProgramName), Version,
+    KAboutData aboutData(AppName, QLatin1String(ProgramName), Version,
                          QLatin1String(ShortDescription), KAboutData::License_Unknown,
                          QLatin1String(CopyrightStatement), QLatin1String(Text),
                          HomePageAddress, BugsEmailAddress);
@@ -244,7 +383,7 @@ void KAboutDataTest::testSetProgramIconName()
 {
     const QLatin1String programIconName(ProgramIconName);
 
-    KAboutData aboutData(AppName, CatalogName, QLatin1String(ProgramName), Version,
+    KAboutData aboutData(AppName, QLatin1String(ProgramName), Version,
                          QLatin1String(ShortDescription), KAboutData::License_Unknown,
                          QLatin1String(CopyrightStatement), QLatin1String(Text),
                          HomePageAddress, BugsEmailAddress);
@@ -256,11 +395,11 @@ void KAboutDataTest::testSetProgramIconName()
 
 void KAboutDataTest::testCopying()
 {
-    KAboutData aboutData(AppName, CatalogName, QLatin1String(ProgramName), Version,
+    KAboutData aboutData(AppName, QLatin1String(ProgramName), Version,
                          QLatin1String(ShortDescription), KAboutData::License_GPL_V2);
 
     {
-        KAboutData aboutData2(AppName, CatalogName, QLatin1String(ProgramName), Version,
+        KAboutData aboutData2(AppName, QLatin1String(ProgramName), Version,
                               QLatin1String(ShortDescription), KAboutData::License_GPL_V3);
         aboutData2.addLicense(KAboutData::License_GPL_V2);
         aboutData = aboutData2;

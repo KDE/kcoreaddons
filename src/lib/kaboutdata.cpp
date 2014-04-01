@@ -377,6 +377,7 @@ public:
     QByteArray _bugEmailAddress;
 };
 
+#ifndef KCOREADDONS_NO_DEPRECATED
 KAboutData::KAboutData(const QString &_componentName,
                        const QString &_catalogName,
                        const QString &_displayName,
@@ -423,6 +424,77 @@ KAboutData::KAboutData(const QString &_componentName,
     } else {
         d->organizationDomain = QString::fromLatin1("kde.org");
     }
+}
+#endif // KCOREADDONS_NO_DEPRECATED
+
+KAboutData::KAboutData(const QString &_componentName,
+                       const QString &_displayName,
+                       const QString &_version,
+                       const QString &_shortDescription,
+                       enum LicenseKey licenseType,
+                       const QString &_copyrightStatement,
+                       const QString &text,
+                       const QString &homePageAddress,
+                       const QString &bugsEmailAddress
+                      )
+    : d(new Private)
+{
+    d->_componentName = _componentName;
+    int p = d->_componentName.indexOf(QLatin1Char('/'));
+    if (p >= 0) {
+        d->_componentName = d->_componentName.mid(p + 1);
+    }
+
+    d->_displayName = _displayName;
+    if (!d->_displayName.isEmpty()) { // KComponentData("klauncher") gives empty program name
+        d->_internalProgramName = _displayName.toUtf8();
+    }
+    d->_version = _version.toUtf8();
+    d->_shortDescription = _shortDescription;
+    d->_licenseList.append(KAboutLicense(licenseType, this));
+    d->_copyrightStatement = _copyrightStatement;
+    d->_otherText = text;
+    d->_homepageAddress = homePageAddress;
+    d->_bugEmailAddress = bugsEmailAddress.toUtf8();
+
+    if (d->_homepageAddress.contains(QLatin1String("http://"))) {
+        const int dot = d->_homepageAddress.indexOf(QLatin1Char('.'));
+        if (dot >= 0) {
+            d->organizationDomain = d->_homepageAddress.mid(dot + 1);
+            const int slash = d->organizationDomain.indexOf(QLatin1Char('/'));
+            if (slash >= 0) {
+                d->organizationDomain.truncate(slash);
+            }
+        } else {
+            d->organizationDomain = QString::fromLatin1("kde.org");
+        }
+    } else {
+        d->organizationDomain = QString::fromLatin1("kde.org");
+    }
+}
+
+KAboutData::KAboutData(const QString &_componentName,
+                       const QString &_displayName,
+                       const QString &_version
+                      )
+    : d(new Private)
+{
+    d->_componentName = _componentName;
+    int p = d->_componentName.indexOf(QLatin1Char('/'));
+    if (p >= 0) {
+        d->_componentName = d->_componentName.mid(p + 1);
+    }
+
+    d->_displayName = _displayName;
+    if (!d->_displayName.isEmpty()) { // KComponentData("klauncher") gives empty program name
+        d->_internalProgramName = _displayName.toUtf8();
+    }
+    d->_version = _version.toUtf8();
+
+    // match behaviour of other constructors
+    d->_licenseList.append(KAboutLicense(License_Unknown, this));
+    d->_bugEmailAddress = "submit@bugs.kde.org";
+    d->organizationDomain = QString::fromLatin1("kde.org");
 }
 
 KAboutData::~KAboutData()
@@ -887,7 +959,6 @@ KAboutData KAboutData::applicationData()
 {
     if (!s_registry->m_appData) {
         s_registry->m_appData = new KAboutData(QCoreApplication::applicationName(),
-                                               QCoreApplication::applicationName(),
                                                QString(),
                                                QString());
     }
