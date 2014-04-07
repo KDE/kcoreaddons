@@ -217,26 +217,6 @@ KDirWatchPrivate::KDirWatchPrivate()
         supports_inotify = false;
     }
 
-    {
-        struct utsname uts;
-        int major, minor, patch;
-        if (uname(&uts) < 0) {
-            supports_inotify = false;
-            qDebug() << "Unable to get uname";
-        } else if (sscanf(uts.release, "%d.%d", &major, &minor) != 2) {
-            supports_inotify = false;
-            qDebug() << "The version is malformed: " << uts.release;
-        } else if (major == 2 && minor == 6) { // If it is 2.6 check further...
-            if (sscanf(uts.release, "%d.%d.%d", &major, &minor, &patch) != 3) {
-                supports_inotify = false;
-                qDebug() << "Detected 2.6 kernel but can't know more: " << uts.release;
-            } else if (major * 1000000 + minor * 1000 + patch < 2006014) {
-                supports_inotify = false;
-                qDebug() << "Can't use INotify, Linux kernel too old " << uts.release;
-            }
-        }
-    }
-
     //qDebug() << "INotify available: " << supports_inotify;
     if (supports_inotify) {
         availableMethods << "INotify";
