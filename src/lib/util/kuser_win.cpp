@@ -28,10 +28,9 @@
 #include <memory> // unique_ptr
 #include <type_traits>
 
-#undef _WIN32_WINNT
-#define _WIN32_WINNT 0x600 //Vista for SHGetKnownFolderPath
 #include <qt_windows.h>
 #include <LM.h> //Net*
+#include <Userenv.h> //GetProfilesDirectoryW
 #include <sddl.h> //ConvertSidToStringSidW
 #include <Shlobj.h>
 
@@ -179,15 +178,14 @@ class KUser::Private : public QSharedData
             return QDir::homePath();
         }
         QString homeDir;
-        WCHAR* profileDirPath; // must be freed using CoTaskMemFree()
-        //TODO: what does KF_FLAG_SIMPLE_IDLIST do?
-        HRESULT result = SHGetKnownFolderPath(FOLDERID_UserProfiles, KF_FLAG_DONT_VERIFY, nullptr, &profileDirPath);
-        if (result == S_OK) {
+        WCHAR profileDirPath[MAX_PATH];
+        DWORD bufSize = MAX_PATH;
+        BOOL result = GetProfilesDirectoryW(profileDirPath, &bufSize);
+        if (result) {
             // This might not be correct: e.g. with local user and domain user with same
             // In that case it could be C:\Users\Foo (local user) vs C:\Users\Foo.DOMAIN (domain user)
             // However it is still much better than the previous code which just returned the current users home dir
             homeDir = QString::fromWCharArray(profileDirPath) + QLatin1Char('\\') + username;
-            CoTaskMemFree(profileDirPath);
         }
         return homeDir;
     }

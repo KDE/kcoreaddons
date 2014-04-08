@@ -94,7 +94,7 @@ target_link_libraries(KF5CoreAddons
 if(NOT WIN32)
     target_link_libraries(KF5CoreAddons PRIVATE pthread)
 else()
-    target_link_libraries(KF5CoreAddons PRIVATE netapi32)
+    target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv)
 endif()
 
 target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/KCoreAddons>" )
