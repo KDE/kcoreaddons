@@ -19,7 +19,8 @@
  *  Boston, MA 02110-1301, USA.
  */
 
-#include <kuser.h>
+#include "kuser.h"
+#include "config-getgrouplist.h"
 
 #include <QtCore/QMutableStringListIterator>
 #include <QtCore/QDir>
@@ -182,37 +183,86 @@ QString KUser::shell() const
     return d->shell;
 }
 
+template<class Func>
+static void listGroupsForUser(const char *name, gid_t gid, uint maxCount, Func handleNextGroup)
+{
+    if (Q_UNLIKELY(maxCount == 0)) {
+        return;
+    }
+    uint found = 0;
+#if HAVE_GETGROUPLIST
+    QVarLengthArray<gid_t, 100> gid_buffer;
+    gid_buffer.resize(100);
+    int numGroups = gid_buffer.size();
+    int result = getgrouplist(name, gid, gid_buffer.data(), &numGroups);
+    if (result < 0 && uint(numGroups) < maxCount) {
+        // getgrouplist returns -1 if the buffer was too small to store all entries, the required size is in numGroups
+        qDebug("Buffer was too small: %d, need %d", gid_buffer.size(), numGroups);
+        gid_buffer.resize(numGroups);
+        numGroups = gid_buffer.size();
+        getgrouplist(name, gid, gid_buffer.data(), &numGroups);
+    }
+    for (int i = 0; i < numGroups && found < maxCount; ++i) {
+        struct group *g = getgrgid(gid_buffer[i]);
+        // should never be null, but better be safe than crash
+        if (g) {
+            found++;
+            handleNextGroup(g);
+        }
+    }
+#else
+    // fall back to getgrent() and reading gr->gr_mem
+    // This is slower than getgrouplist, but works as well
+    // add the current gid, this is often not part of g->gr_mem (e.g. build.kde.org or my openSuSE 13.1 system)
+    struct group *g = getgrgid(gid);
+    if (g) {
+        handleNextGroup(g);
+        found++;
+        if (found >= maxCount) {
+            return;
+        }
+    }
+
+    static const auto groupContainsUser = [](struct group *g, const char *name) -> bool {
+        for (char **user = g->gr_mem; *user; user++) {
+            if (strcmp(name, *user) == 0) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    setgrent();
+    while ((g = getgrent())) {
+        // don't add the current gid again
+        if (g->gr_gid != gid && groupContainsUser(g, name)) {
+            handleNextGroup(g);
+            found++;
+            if (found >= maxCount) {
+                break;
+            }
+        }
+    }
+    endgrent();
+#endif
+}
+
+
 QList<KUserGroup> KUser::groups(uint maxCount) const
 {
     QList<KUserGroup> result;
-    const QList<KUserGroup> allGroups = KUserGroup::allGroups();
-    QList<KUserGroup>::const_iterator it;
-    for (it = allGroups.begin(); it != allGroups.end(); ++it) {
-        const QList<KUser> users = (*it).users();
-        if (users.contains(*this)) {
-            if ((uint)result.size() >= maxCount) {
-                break;
-            }
-            result.append(*it);
-        }
-    }
+    listGroupsForUser(d->loginName.toLocal8Bit().constData(), d->gid, maxCount, [&](const group *g) {
+        result.append(KUserGroup(g));
+    });
     return result;
 }
 
 QStringList KUser::groupNames(uint maxCount) const
 {
     QStringList result;
-    const QList<KUserGroup> allGroups = KUserGroup::allGroups();
-    QList<KUserGroup>::const_iterator it;
-    for (it = allGroups.begin(); it != allGroups.end(); ++it) {
-        const QList<KUser> users = (*it).users();
-        if (users.contains(*this)) {
-            if ((uint)result.size() >= maxCount) {
-                break;
-            }
-            result.append((*it).name());
-        }
-    }
+    listGroupsForUser(d->loginName.toLocal8Bit().constData(), d->gid, maxCount, [&](const group *g) {
+        result.append(QString::fromLocal8Bit(g->gr_name));
+    });
     return result;
 }
 

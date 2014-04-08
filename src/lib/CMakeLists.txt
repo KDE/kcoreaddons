@@ -3,6 +3,10 @@ include(CheckIncludeFiles)
 check_include_files("sys/types.h;sys/mman.h" HAVE_SYS_MMAN_H)
 configure_file(caching/config-caching.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-caching.h)
 
+include(CheckSymbolExists)
+check_symbol_exists("getgrouplist" "grp.h" HAVE_GETGROUPLIST)
+configure_file(util/config-getgrouplist.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-getgrouplist.h)
+
 set(kcoreaddons_OPTIONAL_SRCS )
 set(kcoreaddons_OPTIONAL_LIBS )
 
