@@ -367,32 +367,64 @@ public:
     HMODULE h;
 };
 
-// This uses undocumented Windows API, only accessible by ordinal,
-// unofficially documented at
+// faceIconPath uses undocumented Windows API known as SHGetUserPicturePath,
+// only accessible by ordinal, unofficially documented at
 // http://undoc.airesoft.co.uk/shell32.dll/SHGetUserPicturePath.php
-typedef HRESULT (WINAPI *SGUPP_ptr)(LPCWSTR, DWORD, LPWSTR, UINT);
 
-QString KUser::faceIconPath() const
-{
+// The function has a different ordinal and parameters on Windows XP and Vista/7.
+// These structs encapsulate the differences.
+
+struct FaceIconPath_XP {
+    typedef HRESULT (WINAPI *funcptr_t)(LPCWSTR, DWORD, LPWSTR);
+    static const int ordinal = 233;
+    static HRESULT getPicturePath(funcptr_t SHGetUserPicturePathXP, LPCWSTR username, LPWSTR buf, UINT bufsize) {
+        // assumes the buffer is MAX_PATH in size
+        return SHGetUserPicturePathXP(username, 0, buf);
+    }
+};
+struct FaceIconPath_Vista {
+    typedef HRESULT (WINAPI *funcptr_t)(LPCWSTR, DWORD, LPWSTR, UINT);
+    static const int ordinal = 261;
+    static HRESULT getPicturePath(funcptr_t SHGetUserPicturePathV, LPCWSTR username, LPWSTR buf, UINT bufsize) {
+        return SHGetUserPicturePathV(username, 0, buf, bufsize);
+    }
+};
+
+template <typename Platform>
+static QString faceIconPathImpl(LPCWSTR username) {
     static COMInitializer COMinit;
 
-    if (!isValid()) return QString();
-
-    // TODO implement Windows XP version
     static W32Library shellMod = LoadLibraryA("shell32.dll");
     if (!shellMod) {
         return QString();
     }
-    static SGUPP_ptr SHGetUserPicturePath = reinterpret_cast<SGUPP_ptr>(GetProcAddress(shellMod, MAKEINTRESOURCEA(261)));
-    if (!SHGetUserPicturePath) { return QString(); }
+    static Platform::funcptr_t sgupp_ptr = reinterpret_cast<Platform::funcptr_t>(
+            GetProcAddress(shellMod, MAKEINTRESOURCEA(Platform::ordinal)));
+    if (!sgupp_ptr) { return QString(); }
 
     WCHAR pathBuf[MAX_PATH];
 
-    HRESULT res = SHGetUserPicturePath(reinterpret_cast<const WCHAR*>(d->loginName.utf16()), 0, pathBuf, MAX_PATH);
+    HRESULT res = Platform::getPicturePath(sgupp_ptr, username, pathBuf, MAX_PATH);
     if (res != S_OK) {
         return QString();
     }
     return QString::fromWCharArray(pathBuf);
+}
+
+QString KUser::faceIconPath() const
+{
+    if (!isValid()) return QString();
+
+    LPCWSTR username = reinterpret_cast<const WCHAR*>(d->loginName.utf16());
+
+    if (QSysInfo::windowsVersion() == QSysInfo::WV_XP ||
+        QSysInfo::windowsVersion() == QSysInfo::WV_2003
+    ) {
+        return faceIconPathImpl<FaceIconPath_XP>(username);
+    } else if (QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA) {
+        return faceIconPathImpl<FaceIconPath_Vista>(username);
+    }
+    return QString();
 }
 
 QString KUser::shell() const
