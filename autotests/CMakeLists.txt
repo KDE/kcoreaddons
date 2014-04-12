@@ -28,18 +28,41 @@ macro(KCOREADDONS_UNIT_TESTS)
     endforeach()
 endmacro()
 
+macro(build_plugin pname)
+    add_library(${pname} MODULE ${ARGN})
+    ecm_mark_as_test(${pname})
+    target_link_libraries(${pname} KF5::CoreAddons)
+endmacro()
+
+# Build some sample plugins
+build_plugin(jsonplugin jsonplugin.cpp)
+build_plugin(versionedplugin versionedplugin.cpp)
+build_plugin(unversionedplugin unversionedplugin.cpp)
+build_plugin(multiplugin multiplugin.cpp)
+build_plugin(alwaysunloadplugin alwaysunloadplugin.cpp)
+
 kcoreaddons_unit_tests(
     kaboutdatatest
     kautosavefiletest
     kcompositejobtest
     kformattest
     kjobtest
+    kpluginfactorytest
+    kpluginloadertest
     kprocesstest
     kshareddatacachetest
     kshelltest
     kurlmimedatatest
     kstringhandlertest
     kusertest
+)
+
+target_compile_definitions(kpluginloadertest PRIVATE
+    JSONPLUGIN_FILE="$<TARGET_FILE:jsonplugin>"
+    VERSIONEDPLUGIN_FILE="$<TARGET_FILE:versionedplugin>"
+    UNVERSIONEDPLUGIN_FILE="$<TARGET_FILE:unversionedplugin>"
+    MULTIPLUGIN_FILE="$<TARGET_FILE:multiplugin>"
+    ALWAYSUNLOADPLUGIN_FILE="$<TARGET_FILE:alwaysunloadplugin>"
 )
 
 set(KDIRWATCH_BACKENDS_TO_TEST Stat)#Stat is always compiled

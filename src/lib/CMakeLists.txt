@@ -60,6 +60,8 @@ set(libkcoreaddons_SRCS
     jobs/kjob.cpp
     jobs/kjobtrackerinterface.cpp
     jobs/kjobuidelegate.cpp
+    plugin/kpluginfactory.cpp
+    plugin/kpluginloader.cpp
     randomness/krandom.cpp
     randomness/krandomsequence.cpp
     text/kmacroexpander.cpp
@@ -78,6 +80,7 @@ set(kcoreaddons_INCLUDE_DIRS
     ${CMAKE_CURRENT_BINARY_DIR}/io/
     ${CMAKE_CURRENT_SOURCE_DIR}/io/
     ${CMAKE_CURRENT_SOURCE_DIR}/jobs/
+    ${CMAKE_CURRENT_SOURCE_DIR}/plugin/
     ${CMAKE_CURRENT_SOURCE_DIR}/randomness/
     ${CMAKE_CURRENT_SOURCE_DIR}/text/
     ${CMAKE_CURRENT_SOURCE_DIR}/util/
@@ -137,6 +140,14 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KJobTrackerInterface
         KJobUiDelegate
     RELATIVE jobs
+    REQUIRED_HEADERS KCoreAddons_HEADERS
+)
+ecm_generate_headers(KCoreAddons_HEADERS
+    HEADER_NAMES
+        KExportPlugin
+        KPluginFactory
+        KPluginLoader
+    RELATIVE plugin
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
 ecm_generate_headers(KCoreAddons_HEADERS
