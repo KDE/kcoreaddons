@@ -22,7 +22,7 @@
 #ifndef KPLUGINFACTORY_H
 #define KPLUGINFACTORY_H
 
-#include "kservice_export.h"
+#include "kcoreaddons_export.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QVariant>
@@ -271,7 +271,7 @@ class Part;
  * \author Matthias Kretz <kretz@kde.org>
  * \author Bernhard Loos <nhuh.put@web.de>
  */
-class KSERVICE_EXPORT KPluginFactory : public QObject
+class KCOREADDONS_EXPORT KPluginFactory : public QObject
 {
     Q_OBJECT
     Q_DECLARE_PRIVATE(KPluginFactory)
@@ -333,9 +333,9 @@ public:
     /**
      * @deprecated
      */
-#ifndef KSERVICE_NO_DEPRECATED
+#ifndef KCOREADDONS_NO_DEPRECATED
     template<typename T>
-    KSERVICE_DEPRECATED
+    KCOREADDONS_DEPRECATED
     T *create(QObject *parent, const QStringList &args)
     {
         return create<T>(parent, stringListToVariantList(args));
@@ -345,8 +345,8 @@ public:
     /**
      * @deprecated
      */
-#ifndef KSERVICE_NO_DEPRECATED
-    KSERVICE_DEPRECATED QObject *create(QObject *parent = 0, const char *classname = "QObject", const QStringList &args = QStringList())
+#ifndef KCOREADDONS_NO_DEPRECATED
+    KCOREADDONS_DEPRECATED QObject *create(QObject *parent = 0, const char *classname = "QObject", const QStringList &args = QStringList())
     {
         return create(classname, 0, parent, stringListToVariantList(args), QString());
     }
@@ -418,15 +418,15 @@ protected:
     /**
      * @deprecated
      */
-#ifndef KSERVICE_NO_DEPRECATED
-    virtual KSERVICE_DEPRECATED QObject *createObject(QObject *parent, const char *className, const QStringList &args);
+#ifndef KCOREADDONS_NO_DEPRECATED
+    virtual KCOREADDONS_DEPRECATED QObject *createObject(QObject *parent, const char *className, const QStringList &args);
 #endif
 
     /**
      * @deprecated
      */
-#ifndef KSERVICE_NO_DEPRECATED
-    virtual KSERVICE_DEPRECATED KParts::Part *createPartObject(QWidget *parentWidget, QObject *parent, const char *classname, const QStringList &args);
+#ifndef KCOREADDONS_NO_DEPRECATED
+    virtual KCOREADDONS_DEPRECATED KParts::Part *createPartObject(QWidget *parentWidget, QObject *parent, const char *classname, const QStringList &args);
 #endif
 
     /**

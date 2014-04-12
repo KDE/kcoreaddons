@@ -84,7 +84,7 @@ class KPluginName;
  *
  * \author Bernhard Loos <nhuh.put@web.de>
  */
-class KSERVICE_EXPORT KPluginLoader : public QObject
+class KCOREADDONS_EXPORT KPluginLoader : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString fileName READ fileName)
@@ -304,7 +304,7 @@ private:
 // NOTE: this class is all inline, as it mainly exists for typing reasons
 //       (ie: to prevent the issues that would be caused by adding an
 //       operator QString() method to KService)
-class KSERVICE_EXPORT KPluginName
+class KCOREADDONS_EXPORT KPluginName
 {
 public:
     /**

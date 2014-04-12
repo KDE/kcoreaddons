@@ -20,8 +20,7 @@
 
 #include <QtCore/QPluginLoader>
 #include <QtCore/QtPlugin>
-#include <kservice_export.h>
-//#include <kservice_version.h>
+#include <kcoreaddons_export.h>
 
 /**
  * \relates KPluginLoader
@@ -43,8 +42,8 @@
 #else
 #define Q_STANDARD_CALL
 
-#ifndef KSERVICE_NO_DEPRECATED
-class KSERVICE_DEPRECATED_EXPORT K_EXPORT_PLUGIN_is_deprecated_see_KDE5PORTING
+#ifndef KCOREADDONS_NO_DEPRECATED
+class KCOREADDONS_DEPRECATED_EXPORT K_EXPORT_PLUGIN_is_deprecated_see_KDE5PORTING
 {
 };
 

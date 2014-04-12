@@ -22,7 +22,6 @@
 #include <QtTest>
 
 #include <kpluginloader.h>
-#include <kservice.h>
 
 class KPluginLoaderTest : public QObject
 {
