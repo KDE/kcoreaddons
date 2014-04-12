@@ -26,11 +26,9 @@
 #include <QDebug>
 
 VersionedPlugin::VersionedPlugin(QObject *parent, const QVariantList &args)
-    : QObject(parent),
-      m_pluginInfo(args)
+    : QObject(parent)
 {
-    qDebug() << "SUCCESS!" << m_pluginInfo.pluginName() << m_pluginInfo.name() << m_pluginInfo.comment();
-    setObjectName(m_pluginInfo.comment());
+    qDebug() << "Created VersionedPlugin with args" << args;
 }
 
 K_PLUGIN_FACTORY(VersionedPluginFactory, registerPlugin<VersionedPlugin>();)

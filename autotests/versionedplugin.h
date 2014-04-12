@@ -25,18 +25,12 @@
 
 #include <QObject>
 
-#include <kplugininfo.h>
-
 class VersionedPlugin : public QObject
 {
     Q_OBJECT
 
 public:
     VersionedPlugin(QObject *parent, const QVariantList &args);
-
-private:
-    KPluginInfo m_pluginInfo;
-
 };
 
 #endif // VERSIONEDPLUGIN_H

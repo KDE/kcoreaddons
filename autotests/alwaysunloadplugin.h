@@ -25,18 +25,12 @@
 
 #include <QObject>
 
-#include <kplugininfo.h>
-
 class AlwaysUnloadPlugin : public QObject
 {
     Q_OBJECT
 
 public:
     AlwaysUnloadPlugin(QObject *parent, const QVariantList &args);
-
-private:
-    KPluginInfo m_pluginInfo;
-
 };
 
 #endif // ALWAYSUNLOADPLUGIN_H
