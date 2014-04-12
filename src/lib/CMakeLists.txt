@@ -68,6 +68,7 @@ set(libkcoreaddons_SRCS
     randomness/krandomsequence.cpp
     text/kmacroexpander.cpp
     text/kstringhandler.cpp
+    util/kdelibs4migration.cpp
     util/kformat.cpp
     util/kformatprivate.cpp
     util/kshell.cpp
@@ -171,6 +172,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KFormat
         KUser
         KShell
+        Kdelibs4Migration
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )

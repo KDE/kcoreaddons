@@ -13,7 +13,6 @@ endif()
 macro(KCOREADDONS_EXECUTABLE_TESTS)
     foreach(_testname ${ARGN})
         add_executable(${_testname} ${_testname}.cpp)
-        # TODO: split out the QtNetwork-dependent stuff into a separate addon?
         target_link_libraries(${_testname} KF5::CoreAddons )
         ecm_mark_as_test(${_testname})
     endforeach()
@@ -55,6 +54,7 @@ kcoreaddons_unit_tests(
     kurlmimedatatest
     kstringhandlertest
     kusertest
+    kdelibs4migrationtest
 )
 
 target_compile_definitions(kpluginloadertest PRIVATE
