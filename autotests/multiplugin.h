@@ -24,7 +24,6 @@
 #define MULTIPLUGIN_H
 
 #include <QObject>
-#include <QWidget>
 
 class MultiPlugin1 : public QObject
 {
@@ -34,20 +33,12 @@ public:
     MultiPlugin1(QObject *parent, const QVariantList &args);
 };
 
-class MultiPlugin2 : public QWidget
+class MultiPlugin2 : public QObject
 {
     Q_OBJECT
 
 public:
-    MultiPlugin2(QWidget *parent, const QVariantList &args);
-};
-
-class MultiPlugin3 : public QObject
-{
-    Q_OBJECT
-
-public:
-    MultiPlugin3(QObject *parent, const QVariantList &args);
+    MultiPlugin2(QObject *parent, const QVariantList &args);
 };
 
 #endif // MULTIPLUGIN_H

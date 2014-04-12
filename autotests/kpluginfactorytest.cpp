@@ -20,7 +20,6 @@
  */
 
 #include <QtTest>
-#include <QWidget>
 
 #include <kpluginloader.h>
 #include <kpluginfactory.h>
@@ -49,23 +48,16 @@ private Q_SLOTS:
         delete obj;
         delete obj2;
 
-        QWidget *widget = factory->create<QWidget>("widget", 0, args);
-        QVERIFY(widget);
-        QCOMPARE(widget->objectName(), QString::fromLatin1("MultiPlugin2"));
-
-        // this create overload is really for KParts, but works for QWidgets
-        // (only the first argument is ignored)
-        QWidget *widget2 = factory->create<QWidget>(0, widget, "widget", args);
-        QVERIFY(widget2);
-        QCOMPARE(widget2->objectName(), QString::fromLatin1("MultiPlugin2"));
-        QVERIFY(widget != widget2);
-        delete widget2;
-        delete widget;
-
         obj = factory->create<QObject>("secondary", this, args);
         QVERIFY(obj);
-        QCOMPARE(obj->objectName(), QString::fromLatin1("MultiPlugin3"));
+        QCOMPARE(obj->objectName(), QString::fromLatin1("MultiPlugin2"));
+
+        obj2 = factory->create<QObject>("secondary", this, args);
+        QVERIFY(obj2);
+        QCOMPARE(obj2->objectName(), QString::fromLatin1("MultiPlugin2"));
+        QVERIFY(obj != obj2);
         delete obj;
+        delete obj2;
     }
 };
 
