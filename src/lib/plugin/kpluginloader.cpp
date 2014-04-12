@@ -18,7 +18,6 @@
 
 #include "kpluginloader.h"
 
-#include <klocalizedstring.h>
 #include "kpluginfactory.h"
 
 #include <QtCore/QLibrary>
@@ -49,10 +48,9 @@ protected:
         const QString pluginLocation = KPluginLoader::findPlugin(fileName);
 
         if (pluginLocation.isEmpty()) {
-            errorString = i18n(
-                "Could not find plugin '%1' for application '%2'",
-                fileName,
-                QCoreApplication::instance()->applicationName());
+            errorString = KPluginLoader::tr("Could not find plugin '%1' for application '%2'")
+                .arg(fileName)
+                .arg(QCoreApplication::instance()->applicationName());
         } else {
             loader->setFileName(pluginLocation);
         }
@@ -221,7 +219,7 @@ KPluginFactory *KPluginLoader::factory()
     if (factory == 0) {
         qDebug() << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
         delete obj;
-        d->errorString = i18n("The library %1 does not offer a KPluginFactory.", d->name);
+        d->errorString = tr("The library %1 does not offer a KPluginFactory.").arg(d->name);
     }
 
     return factory;
