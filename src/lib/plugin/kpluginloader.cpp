@@ -64,20 +64,14 @@ protected:
     QPluginLoader *loader;
 };
 
-inline QString makeLibName(const QString &libname)
+inline QString addLibExtension(const QString &libname)
 {
-#if defined(Q_OS_WIN) || defined(Q_OS_CYGWIN)
-    if (!libname.endsWith(QLatin1String(".dll"))) {
-        return libname + QLatin1String(".dll");
-    }
-    return libname;
-#else
     int pos = libname.lastIndexOf(QLatin1Char('/'));
     if (pos < 0) {
         pos = 0;
     }
     if (libname.indexOf(QLatin1Char('.'), pos) < 0) {
-        const char *const extList[] = { ".so", ".dylib", ".bundle", ".sl" };
+        const char *const extList[] = { ".so", ".dll", ".dylib", ".bundle", ".sl" };
         for (uint i = 0; i < sizeof(extList) / sizeof(*extList); ++i) {
             const QString lib = libname + QString::fromLatin1(extList[i]);
             if (QLibrary::isLibrary(lib)) {
@@ -86,55 +80,29 @@ inline QString makeLibName(const QString &libname)
         }
     }
     return libname;
-#endif
 }
 
-#ifdef Q_CC_MSVC
-static QString removeLibPrefix(const QString &libname)
-{
-    return libname.startsWith(QStringLiteral("lib")) ? libname.mid(3) : libname;
-}
-#endif
-
+// Mostly, this looks in the "kf5" subdirectories of the Qt plugin paths
+// before looking in the same places QPluginLoader would.
 QString KPluginLoader::findPlugin(const QString &name)
 {
-    // Convert name to a valid platform libname
-    QString libname = makeLibName(name);
+    // Because we use QFile::exists() later, we need to have the
+    // platform-specific file extension
+    QString libname = addLibExtension(name);
     QFileInfo fileinfo(name);
-    bool hasPrefix = fileinfo.fileName().startsWith(QLatin1String("lib"));
-    bool kdeinit = fileinfo.fileName().startsWith(QLatin1String("libkdeinit5_"));
 
-    if (hasPrefix && !kdeinit) {
-        qDebug() << "plugins should not have a 'lib' prefix:" << libname;
-    }
+    if (fileinfo.fileName().startsWith(QLatin1String("lib"))) {
+        qWarning() << "Plugins should not have a 'lib' prefix:" << libname;
 #ifdef Q_CC_MSVC
-    // first remove the 'lib' prefix in front of windows plugins
-    libname = removeLibPrefix(libname);
+        // we know the lib prefix won't be there on Windows
+        libname = fileinfo.path() + QLatin1String("/") + fileinfo.filenName().mid(3);
 #endif
+    }
 
-    // If it is a absolute path just return it
+    // If it is an absolute path just return it
     if (!QDir::isRelativePath(libname)) {
         return libname;
     }
-
-#if 0
-    // TEMPORARY HACK
-    Q_FOREACH (const QString &path, QFile::decodeName(qgetenv("LD_LIBRARY_PATH")).split(QLatin1Char(':'), QString::SkipEmptyParts)) {
-        QString libfile = path + QLatin1String("/kde5/") + libname;
-        if (QFile::exists(libfile)) {
-            //qDebug() << "Looking at" << libfile << ": FOUND!";
-            return libfile;
-        }
-        //qDebug() << "Looking at" << libfile << ": doesn't exist";
-        libfile = path + QLatin1String("/") + libname;
-        if (QFile::exists(libfile)) {
-            if (!kdeinit) {
-                qDebug() << "library" << libname << "not found under 'module' but under 'lib'";
-            }
-            return libfile;
-        }
-    }
-#endif
 
     // Ask Qt for the list of based paths containing plugins
     Q_FOREACH (const QString &path, QCoreApplication::libraryPaths()) {
@@ -144,24 +112,13 @@ QString KPluginLoader::findPlugin(const QString &name)
             //qDebug() << "Looking at" << libfile << ": FOUND!";
             return libfile;
         }
-        //qDebug() << "Looking at" << libfile << ": doesn't exist";
-
-#if 0 // old code, not sure how to port
-        // Now look where they don't belong but sometimes are
-#ifndef Q_CC_MSVC
-        if (!hasPrefix) {
-            libname = fileinfo.path() + QLatin1String("/lib") + fileinfo.fileName();
-        }
-#endif
-#endif
 
         libfile = path + QLatin1String("/") + libname;
         if (QFile::exists(libfile)) {
-            if (!kdeinit) {
-                qDebug() << "library" << libname << "not found under 'module' but under 'lib'";
-            }
+            //qDebug() << "Looking at" << libfile << ": FOUND!";
             return libfile;
         }
+        //qDebug() << "Looking at" << libfile << ": doesn't exist";
     }
 
     // Nothing found
