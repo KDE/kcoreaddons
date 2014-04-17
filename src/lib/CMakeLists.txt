@@ -7,7 +7,7 @@ include(CheckSymbolExists)
 check_symbol_exists("getgrouplist" "grp.h" HAVE_GETGROUPLIST)
 configure_file(util/config-getgrouplist.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-getgrouplist.h)
 
-ecm_create_qm_loader(kcoreaddons_QM_LOADER kcoreaddons5)
+ecm_create_qm_loader(kcoreaddons_QM_LOADER kcoreaddons5_qt)
 
 set(kcoreaddons_OPTIONAL_SRCS )
 set(kcoreaddons_OPTIONAL_LIBS )
