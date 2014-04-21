@@ -95,7 +95,7 @@ QString KPluginLoader::findPlugin(const QString &name)
         qWarning() << "Plugins should not have a 'lib' prefix:" << libname;
 #ifdef Q_CC_MSVC
         // we know the lib prefix won't be there on Windows
-        libname = fileinfo.path() + QLatin1String("/") + fileinfo.filenName().mid(3);
+        libname = fileinfo.path() + QLatin1String("/") + fileinfo.fileName().mid(3);
 #endif
     }
 
