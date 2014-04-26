@@ -1,1 +1,9 @@
+maintainer: mpyne
+description: Addons to QtCore
 tier: 1
+type: functional
+platforms:
+    - name: All
+portingAid: false
+deprecated: false
+release: true
