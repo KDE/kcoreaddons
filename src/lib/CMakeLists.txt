@@ -106,7 +106,7 @@ else()
     target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv)
 endif()
 
-target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/KCoreAddons>" )
+target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KCoreAddons>" )
 
 target_compile_definitions(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
 
@@ -175,13 +175,13 @@ ecm_generate_headers(KCoreAddons_HEADERS
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
 
-install(TARGETS KF5CoreAddons EXPORT KF5CoreAddonsTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5CoreAddons EXPORT KF5CoreAddonsTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     ${KCoreAddons_HEADERS}
     io/kfilesystemtype_p.h #Needed for building kio, KFileSystemType
     ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_export.h
-    DESTINATION ${INCLUDE_INSTALL_DIR}/KCoreAddons COMPONENT Devel
+    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KCoreAddons COMPONENT Devel
 )
 
 include(ECMGeneratePriFile)
