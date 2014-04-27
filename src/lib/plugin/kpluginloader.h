@@ -32,39 +32,20 @@ class KPluginName;
  * \class KPluginLoader kpluginloader.h <KPluginLoader>
  *
  * This class behaves largely like QPluginLoader (and, indeed, uses it
- * internally).  It extends its functionality in three ways:
+ * internally), but additionally reads the plugin version, as provided by the
+ * K_EXPORT_PLUGIN_VERSION macro (see pluginVersion()) and provides access to a
+ * KPluginFactory instance if the plugin provides one (see factory())
  *
- * - it additionally searches for plugins in the "kf5" subdirectories of
- *   directories in QCoreApplication::libraryPaths() (see findPlugin()); this
- *   corresponds to the ${PLUGIN_INSTALL_DIR} of the KDEInstallDirs CMake module
- *   in extra-cmake-modules
- * - it reads the plugin version, as provided by the K_EXPORT_PLUGIN_VERSION
- *   macro (see pluginVersion())
- * - it provides access to a KPluginFactory instance if the plugin provides one
- *   (see factory())
+ * Note that the factory() is a typesafe convenience method that just wraps a
+ * qobject_cast on the result of QPluginLoader::instance(). Therefore, if you do
+ * not need the plugin version feature, you can (and should) just use
+ * QPluginLoader instead.
  *
  * Unlike QPluginLoader, it is not possible to re-use KPluginLoader for more
  * than one plugin (it provides no setFileName method).
  *
- * This class is reentrant, you can load plugins from different threads. You can
- * also have multiple PluginLoaders for one library without negative effects.
- * The object obtained with factory() or the inherited method
- * QPluginLoader::instance() is cached inside the library. If you call factory()
- * or instance() multiple times, you will always get the same object, even from
- * different threads and different KPluginLoader instances.  You can delete this
- * object easily, a new one will be created if factory() or instance() is called
- * afterwards. factory() uses instance() internally.
- *
- * KPluginLoader inherits QPluginLoader::unload(). It is safe to call this
- * method if you loaded a plugin and decide not to use it for some reason. But
- * as soon as you start to use the factory from the plugin, you should stay away
- * from it. It's nearly impossible to keep track of all objects created directly
- * or indirectly from the plugin and all other pointers into plugin code. Using
- * unload() in this case is asking for trouble. If you really need to unload
- * your plugins, you have to take care to convert the clipboard content to text,
- * because the plugin could have registered a custom mime source. You also have
- * to delete the factory of the plugin, otherwise you will create a leak.  The
- * destructor of KPluginLoader doesn't call unload.
+ * The same notes and caveats that apply to QPluginLoader also apply to
+ * KPluginLoader.
  *
  * Sample code:
  * \code
@@ -161,21 +142,22 @@ public:
     /**
      * Locates a plugin.
      *
-     * Searches for a dynamic object file in the locations specified by
-     * QCoreApplication::libraryPaths(), and the "kf5" subdirectories of those
-     * locations.  Plugins in "kf5" subdirectories will be preferred over ones
-     * in the parent directory.
+     * Searches for a dynamic object file in the locations KPluginLoader and
+     * QPluginLoader would search (ie: the current directory and
+     * QCoreApplication::libraryPaths()).
      *
      * This can be useful if you wish to use a plugin that does not conform to
      * the Qt plugin scheme of providing a QObject that declares
-     * Q_PLUGIN_METADATA and does not use one of the KPluginFactory macros.
-     * In this case, you can find the plugin with this method, and load it with
-     * QLibrary.
+     * Q_PLUGIN_METADATA.  In this case, you can find the plugin with this
+     * method, and load it with QLibrary.
+     *
+     * Note that the path is not necessarily absolute. In particular, if the
+     * plugin is found in the current directory, it will be a relative path.
      *
      * \param name  The name of the plugin (can be a relative path; see above).
      *              This should not include a file extension (like .so or .dll).
-     * \returns     The full path of the plugin if it was found, or QString() if
-     *              it could not be found.
+     * \returns     The path to the plugin if it was found, or QString() if it
+     *              could not be found.
      *
      * @since 5.0
      */

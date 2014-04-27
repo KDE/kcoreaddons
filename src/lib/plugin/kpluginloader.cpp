@@ -26,6 +26,11 @@
 #include <QDebug>
 #include <QCoreApplication>
 
+// TODO: Upstream the versioning stuff to Qt
+// TODO: Patch for Qt to expose plugin-finding code directly
+// TODO: Add a convenience method to KFactory to replace KPluginLoader::factory()
+// TODO: (after the above) deprecate this class
+
 class KPluginLoaderPrivate
 {
     Q_DECLARE_PUBLIC(KPluginLoader)
@@ -39,23 +44,6 @@ protected:
     ~KPluginLoaderPrivate()
     {}
 
-    // NB: should only be called from constructors (does not update name
-    //     or pluginVersion or pluginVersionResolved).
-    void setFileName(const QString &fileName)
-    {
-        Q_ASSERT(loader);
-
-        const QString pluginLocation = KPluginLoader::findPlugin(fileName);
-
-        if (pluginLocation.isEmpty()) {
-            errorString = KPluginLoader::tr("Could not find plugin '%1' for application '%2'")
-                .arg(fileName)
-                .arg(QCoreApplication::instance()->applicationName());
-        } else {
-            loader->setFileName(pluginLocation);
-        }
-    }
-
     KPluginLoader *q_ptr;
     const QString name;
     quint32 pluginVersion;
@@ -64,65 +52,12 @@ protected:
     QPluginLoader *loader;
 };
 
-inline QString addLibExtension(const QString &libname)
-{
-    int pos = libname.lastIndexOf(QLatin1Char('/'));
-    if (pos < 0) {
-        pos = 0;
-    }
-    if (libname.indexOf(QLatin1Char('.'), pos) < 0) {
-        const char *const extList[] = { ".so", ".dll", ".dylib", ".bundle", ".sl" };
-        for (uint i = 0; i < sizeof(extList) / sizeof(*extList); ++i) {
-            const QString lib = libname + QString::fromLatin1(extList[i]);
-            if (QLibrary::isLibrary(lib)) {
-                return lib;
-            }
-        }
-    }
-    return libname;
-}
-
-// Mostly, this looks in the "kf5" subdirectories of the Qt plugin paths
-// before looking in the same places QPluginLoader would.
 QString KPluginLoader::findPlugin(const QString &name)
 {
-    // Because we use QFile::exists() later, we need to have the
-    // platform-specific file extension
-    QString libname = addLibExtension(name);
-    QFileInfo fileinfo(name);
-
-    if (fileinfo.fileName().startsWith(QLatin1String("lib"))) {
-        qWarning() << "Plugins should not have a 'lib' prefix:" << libname;
-#ifdef Q_CC_MSVC
-        // we know the lib prefix won't be there on Windows
-        libname = fileinfo.path() + QLatin1String("/") + fileinfo.fileName().mid(3);
-#endif
-    }
-
-    // If it is an absolute path just return it
-    if (!QDir::isRelativePath(libname)) {
-        return libname;
-    }
-
-    // Ask Qt for the list of based paths containing plugins
-    Q_FOREACH (const QString &path, QCoreApplication::libraryPaths()) {
-        // Check for kde modules/plugins?
-        QString libfile = path + QLatin1String("/kf5/") + libname;
-        if (QFile::exists(libfile)) {
-            //qDebug() << "Looking at" << libfile << ": FOUND!";
-            return libfile;
-        }
-
-        libfile = path + QLatin1String("/") + libname;
-        if (QFile::exists(libfile)) {
-            //qDebug() << "Looking at" << libfile << ": FOUND!";
-            return libfile;
-        }
-        //qDebug() << "Looking at" << libfile << ": doesn't exist";
-    }
-
-    // Nothing found
-    return QString();
+    // We just defer to Qt; unfortunately, QPluginLoader's searching code is not
+    // accessible without creating a QPluginLoader object.
+    QPluginLoader loader(name);
+    return loader.fileName();
 }
 
 KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
@@ -132,8 +67,7 @@ KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
     d_ptr->q_ptr = this;
     Q_D(KPluginLoader);
 
-    d->loader = new QPluginLoader(this);
-    d->setFileName(plugin);
+    d->loader = new QPluginLoader(plugin, this);
 }
 
 KPluginLoader::KPluginLoader(const KPluginName &pluginName, QObject *parent)
@@ -146,7 +80,7 @@ KPluginLoader::KPluginLoader(const KPluginName &pluginName, QObject *parent)
     d->loader = new QPluginLoader(this);
 
     if (pluginName.isValid()) {
-        d->setFileName(pluginName.name());
+        d->loader->setFileName(pluginName.name());
     } else {
         d->errorString = pluginName.errorString();
     }

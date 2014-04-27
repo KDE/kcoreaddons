@@ -100,10 +100,12 @@ private Q_SLOTS:
     void testFileName()
     {
         KPluginLoader vplugin("versionedplugin");
-        QCOMPARE(vplugin.fileName(), QString::fromLatin1(VERSIONEDPLUGIN_FILE));
+        QCOMPARE(QFileInfo(vplugin.fileName()).canonicalFilePath(),
+                 QFileInfo(QStringLiteral(VERSIONEDPLUGIN_FILE)).canonicalFilePath());
 
         KPluginLoader jplugin(KPluginName("jsonplugin"));
-        QCOMPARE(jplugin.fileName(), QString::fromLatin1(JSONPLUGIN_FILE));
+        QCOMPARE(QFileInfo(jplugin.fileName()).canonicalFilePath(),
+                 QFileInfo(QStringLiteral(JSONPLUGIN_FILE)).canonicalFilePath());
 
         KPluginLoader eplugin(KPluginName::fromErrorString("there was an error"));
         QVERIFY2(eplugin.fileName().isEmpty(), qPrintable(eplugin.fileName()));
