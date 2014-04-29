@@ -31,7 +31,8 @@
 #include <grp.h>
 #include <errno.h>
 
-#include <algorithm> //std::find
+#include <algorithm>  // std::find
+#include <functional> // std::function
 
 class KUser::Private : public QSharedData
 {
