@@ -21,20 +21,22 @@
 
 #include "kuser.h"
 
-namespace QTest {
-    template<>
-    char* toString(const KUserId &id)
-    {
-        return qstrdup(id.toString().toLocal8Bit().data());
-    }
-    template<>
-    char* toString(const KGroupId &id)
-    {
-        return qstrdup(id.toString().toLocal8Bit().data());
-    }
+namespace QTest
+{
+template<>
+char *toString(const KUserId &id)
+{
+    return qstrdup(id.toString().toLocal8Bit().data());
+}
+template<>
+char *toString(const KGroupId &id)
+{
+    return qstrdup(id.toString().toLocal8Bit().data());
+}
 }
 
-class KUserTest : public QObject {
+class KUserTest : public QObject
+{
     Q_OBJECT
 private Q_SLOTS:
     void testKUser();
@@ -86,7 +88,7 @@ void KUserTest::testKUser()
     // instead just print them all out, this can be verified by the person running the test
     printUserInfo(user);
 #if 0 //enable this if you think that KUser might not be working correctly
-    Q_FOREACH(const KUser& u, allUsers) {
+    Q_FOREACH (const KUser &u, allUsers) {
         printUserInfo(u);
     }
 #endif
@@ -151,7 +153,7 @@ void KUserTest::testKUserGroup()
 #if 0 //enable this if you think that KUser might not be working correctly
     for (int i = 0; i < allGroups.size(); ++i) {
         qDebug().nospace() << "Group " << i << ": name = " << allGroups[i].name()
-            << ", group ID =" << allGroups[i].groupId().toString();
+                           << ", group ID =" << allGroups[i].groupId().toString();
         qDebug() << allGroups[i].name() << "members:" << allGroups[i].userNames();
     }
 #endif
@@ -267,7 +269,6 @@ void KUserTest::testKGroupId()
     QCOMPARE(currentGroup, KGroupId(currentGroup));
     QCOMPARE(currentEffectiveGroup, KGroupId(currentGroup));
 }
-
 
 QTEST_MAIN(KUserTest)
 

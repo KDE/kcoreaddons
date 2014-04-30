@@ -34,21 +34,21 @@ int main(int argc, char **argv)
 }
 FaceIconTest::FaceIconTest()
 {
-    QVBoxLayout* layout = new QVBoxLayout(this);
+    QVBoxLayout *layout = new QVBoxLayout(this);
     listWidget = new QListWidget(this);
     layout->addWidget(listWidget);
 
     QList<KUser> users = KUser::allUsers();
-    Q_FOREACH(const KUser& u, users) {
+    Q_FOREACH (const KUser &u, users) {
         QPixmap pixmap(u.faceIconPath());
         if (pixmap.isNull()) {
-            pixmap = QPixmap(QSize(48,48));
+            pixmap = QPixmap(QSize(48, 48));
             pixmap.fill();
         } else {
-            pixmap = pixmap.scaled(48,48, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            pixmap = pixmap.scaled(48, 48, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         }
 
-        QListWidgetItem* item = new QListWidgetItem(u.loginName(), listWidget);
+        QListWidgetItem *item = new QListWidgetItem(u.loginName(), listWidget);
         item->setData(Qt::DecorationRole, pixmap);
     }
 }

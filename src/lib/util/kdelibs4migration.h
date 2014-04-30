@@ -86,7 +86,7 @@ public:
     QString saveLocation(const char *type, const QString &suffix = QString()) const;
 
 private:
-    Kdelibs4MigrationPrivate* d;
+    Kdelibs4MigrationPrivate *d;
 };
 
 #endif // KFORMAT_H

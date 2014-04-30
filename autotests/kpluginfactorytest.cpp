@@ -61,7 +61,6 @@ private Q_SLOTS:
     }
 };
 
-
 QTEST_MAIN(KPluginFactoryTest)
 
 #include "kpluginfactorytest.moc"

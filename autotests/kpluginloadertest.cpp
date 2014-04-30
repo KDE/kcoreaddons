@@ -221,7 +221,6 @@ private Q_SLOTS:
     }
 };
 
-
 QTEST_MAIN(KPluginLoaderTest)
 
 #include "kpluginloadertest.moc"

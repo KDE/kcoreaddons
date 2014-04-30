@@ -37,7 +37,8 @@ Kdelibs4Migration::Kdelibs4Migration()
         d->m_kdeHome = QString::fromLocal8Bit(qgetenv("KDEHOME"));
     } else {
         QDir homeDir = QDir::home();
-        for (const QString testSubdir: { QStringLiteral(".kde"), QStringLiteral(".kde4") }) {
+        auto testSubdirs = { QStringLiteral(".kde"), QStringLiteral(".kde4") };
+        for (const QString testSubdir : testSubdirs) {
             if (homeDir.exists(testSubdir)) {
                 //qDebug() << "Using" << testSubdir << "as the location of the old config file";
                 d->m_kdeHome = homeDir.filePath(testSubdir);

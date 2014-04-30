@@ -223,15 +223,17 @@ QString KAboutLicense::text() const
         }
     // fall through
     default:
-        result += QCoreApplication::translate("KAboutLicense",
-                     "No licensing terms for this program have been specified.\n"
-                     "Please check the documentation or the source for any\n"
-                     "licensing terms.\n");
+        result += QCoreApplication::translate(
+                      "KAboutLicense",
+                      "No licensing terms for this program have been specified.\n"
+                      "Please check the documentation or the source for any\n"
+                      "licensing terms.\n");
     }
 
     if (knownLicense) {
-        result += QCoreApplication::translate("KAboutLicense",
-            "This program is distributed under the terms of the %1.").arg(name(KAboutData::ShortName));
+        result += QCoreApplication::translate(
+                      "KAboutLicense",
+                      "This program is distributed under the terms of the %1.").arg(name(KAboutData::ShortName));
         if (!pathToFile.isEmpty()) {
             result += lineFeed;
         }
@@ -870,13 +872,14 @@ QList<KAboutPerson> KAboutData::translators() const
 
 QString KAboutData::aboutTranslationTeam()
 {
-    return QCoreApplication::translate("KAboutData",
-                 "<p>KDE is translated into many languages thanks to the work "
-                 "of the translation teams all over the world.</p>"
-                 "<p>For more information on KDE internationalization "
-                 "visit <a href=\"http://l10n.kde.org\">http://l10n.kde.org</a></p>",
-                 "replace this with information about your translation team"
-                );
+    return QCoreApplication::translate(
+               "KAboutData",
+               "<p>KDE is translated into many languages thanks to the work "
+               "of the translation teams all over the world.</p>"
+               "<p>For more information on KDE internationalization "
+               "visit <a href=\"http://l10n.kde.org\">http://l10n.kde.org</a></p>",
+               "replace this with information about your translation team"
+           );
 }
 
 QString KAboutData::otherText() const
@@ -977,7 +980,7 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
         s_registry->m_appData = new KAboutData(aboutData);
     }
 
-    QCoreApplication* app = QCoreApplication::instance();
+    QCoreApplication *app = QCoreApplication::instance();
     if (app) {
         app->setApplicationVersion(aboutData.version());
         app->setApplicationName(aboutData.componentName());

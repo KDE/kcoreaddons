@@ -73,7 +73,7 @@ protected:
     explicit KUserOrGroupId(NativeType nativeId);
     /** Copy constructor. This is very fast, objects can be passed by value */
     KUserOrGroupId(const KUserOrGroupId<T> &other);
-    KUserOrGroupId& operator=(const KUserOrGroupId<T>& other);
+    KUserOrGroupId &operator=(const KUserOrGroupId<T> &other);
     ~KUserOrGroupId();
 public:
     /** @return true if this object references a valid user/group ID.
@@ -120,7 +120,7 @@ struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<K_UID> {
     /** @return a KUserId for the user with name @p name, or an invalid KUserId if no
      * user with this name was found on the system
      */
-    static KUserId fromName(const QString& name);
+    static KUserId fromName(const QString &name);
     /** @return a KUserId for the current user. This is like ::getuid() on UNIX. */
     static KUserId currentUserId();
     /** @return a KUserId for the current effective user. This is like ::geteuid() on UNIX.
@@ -145,7 +145,7 @@ struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
     /** @return A KGroupId for the user with name @p name, or an invalid KGroupId if no
      * user with this name was found on the system
      */
-    static KGroupId fromName(const QString& name);
+    static KGroupId fromName(const QString &name);
     /** @return a KGroupId for the current user. This is like ::getgid() on UNIX. */
     static KGroupId currentGroupId();
     /** @return a KGroupId for the current effective user. This is like ::getegid() on UNIX.
@@ -156,8 +156,14 @@ struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
 };
 
 #ifndef Q_OS_WIN
-inline uint qHash(const KUserId &id, uint seed = 0) { return qHash(id.nativeId(), seed); }
-inline uint qHash(const KGroupId &id, uint seed = 0) { return qHash(id.nativeId(), seed); }
+inline uint qHash(const KUserId &id, uint seed = 0)
+{
+    return qHash(id.nativeId(), seed);
+}
+inline uint qHash(const KGroupId &id, uint seed = 0)
+{
+    return qHash(id.nativeId(), seed);
+}
 #else
 // can't be inline on windows, because we would need to include windows.h (which can break code)
 KCOREADDONS_EXPORT uint qHash(const KUserId &id, uint seed = 0);
@@ -547,7 +553,6 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-
 #if !defined(Q_OS_WIN)
 // inline UNIX implementation of KUserOrGroupId
 template<typename T>
@@ -586,12 +591,12 @@ inline KUserOrGroupId<T>::KUserOrGroupId(KUserOrGroupId<T>::NativeType nativeId)
 {
 }
 template<typename T>
-inline KUserOrGroupId<T>::KUserOrGroupId(const KUserOrGroupId<T>& other)
+inline KUserOrGroupId<T>::KUserOrGroupId(const KUserOrGroupId<T> &other)
     : id(other.id)
 {
 }
 template<typename T>
-inline KUserOrGroupId<T>& KUserOrGroupId<T>::operator=(const KUserOrGroupId<T>& other)
+inline KUserOrGroupId<T> &KUserOrGroupId<T>::operator=(const KUserOrGroupId<T> &other)
 {
     id = other.id;
     return *this;

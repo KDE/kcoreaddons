@@ -266,17 +266,18 @@ public:
      *
      * @deprecated since 5.0, use one of the other constructor overloads instead.
      */
-    KCOREADDONS_DEPRECATED KAboutData(const QString &componentName,
-               const QString &catalogName,
-               const QString &displayName,
-               const QString &version,
-               const QString &shortDescription = QString(),
-               enum LicenseKey licenseType = License_Unknown,
-               const QString &copyrightStatement = QString(),
-               const QString &otherText = QString(),
-               const QString &homePageAddress = QString(),
-               const QString &bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
-              );
+    KCOREADDONS_DEPRECATED KAboutData(
+        const QString &componentName,
+        const QString &catalogName,
+        const QString &displayName,
+        const QString &version,
+        const QString &shortDescription = QString(),
+        enum LicenseKey licenseType = License_Unknown,
+        const QString &copyrightStatement = QString(),
+        const QString &otherText = QString(),
+        const QString &homePageAddress = QString(),
+        const QString &bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
+    );
 #endif // KCOREADDONS_NO_DEPRECATED
 
     /**

@@ -40,8 +40,8 @@ MultiPlugin2::MultiPlugin2(QObject *parent, const QVariantList &args)
 }
 
 K_PLUGIN_FACTORY(MultiPluginFactory,
-        registerPlugin<MultiPlugin1>();
-        registerPlugin<MultiPlugin2>("secondary");
-        )
+                 registerPlugin<MultiPlugin1>();
+                 registerPlugin<MultiPlugin2>("secondary");
+                )
 
 #include "multiplugin.moc"

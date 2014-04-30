@@ -103,7 +103,7 @@ KUser::KUser(K_UID _uid)
 }
 
 KUser::KUser(KUserId _uid)
-: d(new Private(::getpwuid(_uid.nativeId())))
+    : d(new Private(::getpwuid(_uid.nativeId())))
 {
 }
 
@@ -224,8 +224,9 @@ static void listGroupsForUser(const char *name, gid_t gid, uint maxCount, Func h
         }
     }
 
-    static const auto groupContainsUser = [](struct group *g, const char *name) -> bool {
-        for (char **user = g->gr_mem; *user; user++) {
+    static const auto groupContainsUser = [](struct group * g, const char *name) -> bool {
+        for (char **user = g->gr_mem; *user; user++)
+        {
             if (strcmp(name, *user) == 0) {
                 return true;
             }
@@ -248,22 +249,27 @@ static void listGroupsForUser(const char *name, gid_t gid, uint maxCount, Func h
 #endif
 }
 
-
 QList<KUserGroup> KUser::groups(uint maxCount) const
 {
     QList<KUserGroup> result;
-    listGroupsForUser(d->loginName.toLocal8Bit().constData(), d->gid, maxCount, [&](const group *g) {
-        result.append(KUserGroup(g));
-    });
+    listGroupsForUser(
+        d->loginName.toLocal8Bit().constData(), d->gid, maxCount,
+        [&](const group * g) {
+            result.append(KUserGroup(g));
+        }
+    );
     return result;
 }
 
 QStringList KUser::groupNames(uint maxCount) const
 {
     QStringList result;
-    listGroupsForUser(d->loginName.toLocal8Bit().constData(), d->gid, maxCount, [&](const group *g) {
-        result.append(QString::fromLocal8Bit(g->gr_name));
-    });
+    listGroupsForUser(
+        d->loginName.toLocal8Bit().constData(), d->gid, maxCount,
+        [&](const group * g) {
+            result.append(QString::fromLocal8Bit(g->gr_name));
+        }
+    );
     return result;
 }
 
@@ -393,7 +399,7 @@ QString KUserGroup::name() const
     return d->name;
 }
 
-void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd*)> handleNextGroupUser)
+void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd *)> handleNextGroupUser)
 {
     if (maxCount == 0) {
         return;
@@ -434,7 +440,7 @@ void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd*)> han
 QList<KUser> KUserGroup::users(uint maxCount) const
 {
     QList<KUser> result;
-    listGroupMembers(d->gid, maxCount, [&](const passwd* p) {
+    listGroupMembers(d->gid, maxCount, [&](const passwd *p) {
         result.append(KUser(p));
     });
     return result;
@@ -443,7 +449,7 @@ QList<KUser> KUserGroup::users(uint maxCount) const
 QStringList KUserGroup::userNames(uint maxCount) const
 {
     QStringList result;
-    listGroupMembers(d->gid, maxCount, [&](const passwd* p) {
+    listGroupMembers(d->gid, maxCount, [&](const passwd *p) {
         result.append(QString::fromLocal8Bit(p->pw_name));
     });
     return result;
@@ -485,10 +491,10 @@ KUserGroup::~KUserGroup()
 {
 }
 
-KUserId KUserId::fromName(const QString& name)
+KUserId KUserId::fromName(const QString &name)
 {
     QByteArray name8Bit = name.toLocal8Bit();
-    struct passwd* p = ::getpwnam(name8Bit.constData());
+    struct passwd *p = ::getpwnam(name8Bit.constData());
     if (!p) {
         qWarning("Failed to lookup user %s: %s", name8Bit.constData(), strerror(errno));
         return KUserId();
@@ -496,10 +502,10 @@ KUserId KUserId::fromName(const QString& name)
     return KUserId(p->pw_uid);
 }
 
-KGroupId KGroupId::fromName(const QString& name)
+KGroupId KGroupId::fromName(const QString &name)
 {
     QByteArray name8Bit = name.toLocal8Bit();
-    struct group* g = ::getgrnam(name8Bit.constData());
+    struct group *g = ::getgrnam(name8Bit.constData());
     if (!g) {
         qWarning("Failed to lookup group %s: %s", name8Bit.constData(), strerror(errno));
         return KGroupId();
@@ -507,10 +513,22 @@ KGroupId KGroupId::fromName(const QString& name)
     return KGroupId(g->gr_gid);
 }
 
-KUserId KUserId::currentUserId() { return KUserId(getuid()); }
+KUserId KUserId::currentUserId()
+{
+    return KUserId(getuid());
+}
 
-KUserId KUserId::currentEffectiveUserId() { return KUserId(geteuid()); }
+KUserId KUserId::currentEffectiveUserId()
+{
+    return KUserId(geteuid());
+}
 
-KGroupId KGroupId::currentGroupId() { return KGroupId(getgid()); }
+KGroupId KGroupId::currentGroupId()
+{
+    return KGroupId(getgid());
+}
 
-KGroupId KGroupId::currentEffectiveGroupId() { return KGroupId(getegid()); }
+KGroupId KGroupId::currentEffectiveGroupId()
+{
+    return KGroupId(getegid());
+}
