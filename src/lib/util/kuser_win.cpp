@@ -116,7 +116,7 @@ static void netApiEnumerate(uint maxCount, Callback callback, EnumFunction enumF
                 callback(groupInfo.get()[i]);
             }
         } else {
-            qWarning("NetApi enumerate function failed: status = %d", nStatus);
+            qWarning("NetApi enumerate function failed: status = %d", (int)nStatus);
         }
     } while (nStatus == ERROR_MORE_DATA);
 }
@@ -146,6 +146,7 @@ void enumerateGroupsForUser(uint maxCount, const QString &name, Callback callbac
 {
     LPCWSTR nameStr = (LPCWSTR)name.utf16();
     netApiEnumerate<T>(maxCount, callback, [&](int level, LPBYTE *buffer, DWORD *count, DWORD *total, PDWORD_PTR resumeHandle) -> NET_API_STATUS {
+        Q_UNUSED(resumeHandle);
         NET_API_STATUS ret = NetUserGetGroups(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total);
         // if we return ERROR_MORE_DATA here it will result in an enless loop
         if (ret == ERROR_MORE_DATA) {
@@ -395,6 +396,7 @@ struct FaceIconPath_XP {
     static const int ordinal = 233;
     static HRESULT getPicturePath(funcptr_t SHGetUserPicturePathXP, LPCWSTR username, LPWSTR buf, UINT bufsize)
     {
+        Q_UNUSED(bufsize);
         // assumes the buffer is MAX_PATH in size
         return SHGetUserPicturePathXP(username, 0, buf);
     }
@@ -417,7 +419,7 @@ static QString faceIconPathImpl(LPCWSTR username)
     if (!shellMod) {
         return QString();
     }
-    static Platform::funcptr_t sgupp_ptr = reinterpret_cast<Platform::funcptr_t>(
+    static typename Platform::funcptr_t sgupp_ptr = reinterpret_cast<typename Platform::funcptr_t>(
             GetProcAddress(shellMod, MAKEINTRESOURCEA(Platform::ordinal)));
     if (!sgupp_ptr) {
         return QString();
@@ -712,7 +714,7 @@ struct WindowsSIDWrapper : public QSharedData {
         bool success = CopySid(SECURITY_MAX_SID_SIZE, copy->sidBuffer, sid);
         if (!success) {
             QString sidString = sidToString(sid);
-            qWarning("Failed to copy SID %s, error = %d", qPrintable(sidString), GetLastError());
+            qWarning("Failed to copy SID %s, error = %d", qPrintable(sidString), (int)GetLastError());
             delete copy;
             return nullptr;
         }
@@ -844,7 +846,7 @@ static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS t
 {
     HANDLE _token;
     if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &_token)) {
-        qWarning("Failed to get the token for the current process: %d", GetLastError());
+        qWarning("Failed to get the token for the current process: %d", (int)GetLastError());
         return false;
     }
     ScopedHANDLE token(_token, handleCloser);
@@ -853,14 +855,14 @@ static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS t
     if (!GetTokenInformation(token.get(), type, nullptr, 0, &requiredSize)) {
         if (GetLastError() != ERROR_INSUFFICIENT_BUFFER) {
             qWarning("Failed to get the required size for the token information %d: %d",
-                     type, GetLastError());
+                     type, (int)GetLastError());
             return nullptr;
         }
     }
     std::unique_ptr<char[]> buffer(new char[requiredSize]);
     if (!GetTokenInformation(token.get(), type, buffer.get(), requiredSize, &requiredSize)) {
         qWarning("Failed to get token information %d from current process: %d",
-                 type, GetLastError());
+                 type, (int)GetLastError());
         return nullptr;
     }
     return buffer;

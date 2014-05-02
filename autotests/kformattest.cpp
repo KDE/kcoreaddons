@@ -40,7 +40,7 @@ void KFormatTest::formatByteSize()
     QCOMPARE(format.formatByteSize(5000000), QString("4.8 MiB"));
     QCOMPARE(format.formatByteSize(50000000), QString("47.7 MiB"));
     QCOMPARE(format.formatByteSize(500000000), QString("476.8 MiB"));
-#if (__WORDSIZE == 64) || defined (_LP64) || defined(__LP64__) || defined(__ILP64__)
+#if (defined(__WORDSIZE) && (__WORDSIZE == 64)) || defined (_LP64) || defined(__LP64__) || defined(__ILP64__)
     QCOMPARE(format.formatByteSize(5000000000), QString("4.7 GiB"));
     QCOMPARE(format.formatByteSize(50000000000), QString("46.6 GiB"));
     QCOMPARE(format.formatByteSize(500000000000), QString("465.7 GiB"));

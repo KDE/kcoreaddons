@@ -48,7 +48,7 @@ private Q_SLOTS:
 static inline void printUserInfo(KUser user)
 {
     qDebug() << "Login name:" << user.loginName();
-    qDebug() << "Full name:" << user.fullName();
+    qDebug() << "Full name:" << user.property(KUser::FullName);
     qDebug() << "User ID:" << user.userId().toString();
     qDebug() << "Group ID:" << user.groupId().toString();
     qDebug() << "Home dir:" << user.homeDir();
