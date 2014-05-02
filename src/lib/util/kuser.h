@@ -105,6 +105,19 @@ private:
 #endif
 };
 
+#ifdef Q_OS_WIN
+template<> KUserOrGroupId<void *>::KUserOrGroupId();
+template<> KUserOrGroupId<void *>::~KUserOrGroupId();
+template<> KUserOrGroupId<void *>::KUserOrGroupId(KUserOrGroupId::NativeType nativeId);
+template<> KUserOrGroupId<void *>::KUserOrGroupId(const KUserOrGroupId &other);
+template<> KUserOrGroupId<void *>& KUserOrGroupId<void *>::operator=(const KUserOrGroupId &other);
+template<> bool KUserOrGroupId<void *>::isValid() const;
+template<> KUserOrGroupId<void *>::NativeType KUserOrGroupId<void *>::nativeId() const;
+template<> QString KUserOrGroupId<void *>::toString() const;
+template<> bool KUserOrGroupId<void *>::operator==(const KUserOrGroupId &other) const;
+template<> bool KUserOrGroupId<void *>::operator!=(const KUserOrGroupId &other) const;
+#endif
+
 /** A platform independent user ID.
  * @see KUserOrGroupId
  * @since 5.0
