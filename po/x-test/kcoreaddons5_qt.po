@@ -1,0 +1,524 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kcoreaddons5_qt\n"
+"PO-Revision-Date: 2014-04-28 09:02+0000\n"
+"Last-Translator: transxx.py program <null@kde.org>\n"
+"Language-Team: KDE Test Language <kde-i18n-doc@kde.org>\n"
+"Language: x-test\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Qt-Contexts: true\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:226
+msgctxt "KAboutLicense|"
+msgid ""
+"No licensing terms for this program have been specified.\n"
+"Please check the documentation or the source for any\n"
+"licensing terms.\n"
+msgstr ""
+"xxNo licensing terms for this program have been specified.\n"
+"Please check the documentation or the source for any\n"
+"licensing terms.\n"
+"xx\n"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:234
+#, qt-format
+msgctxt "KAboutLicense|"
+msgid "This program is distributed under the terms of the %1."
+msgstr "xxThis program is distributed under the terms of the %1.xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:260
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v2"
+msgstr "xxGPL v2xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:261
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 2"
+msgstr "xxGNU General Public License Version 2xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:264
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v2"
+msgstr "xxLGPL v2xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:265
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 2"
+msgstr "xxGNU Lesser General Public License Version 2xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:268
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "BSD License"
+msgstr "xxBSD Licensexx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:269
+msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "xxBSD Licensexx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:272
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "Artistic License"
+msgstr "xxArtistic Licensexx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:273
+msgctxt "KAboutLicense|@item license"
+msgid "Artistic License"
+msgstr "xxArtistic Licensexx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:276
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "QPL v1.0"
+msgstr "xxQPL v1.0xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:277
+msgctxt "KAboutLicense|@item license"
+msgid "Q Public License"
+msgstr "xxQ Public Licensexx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:280
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v3"
+msgstr "xxGPL v3xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:281
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 3"
+msgstr "xxGNU General Public License Version 3xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:284
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v3"
+msgstr "xxLGPL v3xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:285
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 3"
+msgstr "xxGNU Lesser General Public License Version 3xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:289
+msgctxt "KAboutLicense|@item license"
+msgid "Custom"
+msgstr "xxCustomxx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:292
+msgctxt "KAboutLicense|@item license"
+msgid "Not specified"
+msgstr "xxNot specifiedxx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:875
+msgctxt "KAboutData|replace this with information about your translation team"
+msgid ""
+"<p>KDE is translated into many languages thanks to the work of the "
+"translation teams all over the world.</p><p>For more information on KDE "
+"internationalization visit <a href=\"http://l10n.kde.org\">http://l10n.kde."
+"org</a></p>"
+msgstr ""
+"xx<p>KDE is translated into many languages thanks to the work of the "
+"translation teams all over the world.</p><p>For more information on KDE "
+"internationalization visit <a href=\"http://l10n.kde.org\">http://l10n.kde."
+"org</a></p>xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:1018
+msgctxt "KAboutData CLI|"
+msgid "Show author information."
+msgstr "xxShow author information.xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:1019
+msgctxt "KAboutData CLI|"
+msgid "Show license information."
+msgstr "xxShow license information.xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:1028
+msgctxt "KAboutData CLI|"
+msgid "This application was written by somebody who wants to remain anonymous."
+msgstr ""
+"xxThis application was written by somebody who wants to remain anonymous.xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/kaboutdata.cpp:1030
+msgctxt "KAboutData CLI|"
+msgid "%s was written by:\n"
+msgstr ""
+"xx%s was written by:\n"
+"xx\n"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/plugin/kpluginloader.cpp:113
+#, qt-format
+msgctxt "KPluginLoader|"
+msgid "The library %1 does not offer a KPluginFactory."
+msgstr "xxThe library %1 does not offer a KPluginFactory.xx"
+
+#. MetricBinaryDialect size in bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:88
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 B"
+msgstr "xx%1 Bxx"
+
+#. MetricBinaryDialect size in 1000 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:91
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 kB"
+msgstr "xx%1 kBxx"
+
+#. MetricBinaryDialect size in 10^6 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:94
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 MB"
+msgstr "xx%1 MBxx"
+
+#. MetricBinaryDialect size in 10^9 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:97
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 GB"
+msgstr "xx%1 GBxx"
+
+#. MetricBinaryDialect size in 10^12 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:100
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 TB"
+msgstr "xx%1 TBxx"
+
+#. MetricBinaryDialect size in 10^15 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:103
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 PB"
+msgstr "xx%1 PBxx"
+
+#. MetricBinaryDialect size in 10^18 byte
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:106
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 EB"
+msgstr "xx%1 EBxx"
+
+#. MetricBinaryDialect size in 10^21 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:109
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 ZB"
+msgstr "xx%1 ZBxx"
+
+#. MetricBinaryDialect size in 10^24 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:112
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 YB"
+msgstr "xx%1 YBxx"
+
+#. JEDECBinaryDialect memory size in bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:118
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 B"
+msgstr "xx%1 Bxx"
+
+#. JEDECBinaryDialect memory size in 1024 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:121
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 KB"
+msgstr "xx%1 KBxx"
+
+#. JEDECBinaryDialect memory size in 10^20 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:124
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 MB"
+msgstr "xx%1 MBxx"
+
+#. JEDECBinaryDialect memory size in 10^30 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:127
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 GB"
+msgstr "xx%1 GBxx"
+
+#. JEDECBinaryDialect memory size in 10^40 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:130
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 TB"
+msgstr "xx%1 TBxx"
+
+#. JEDECBinaryDialect memory size in 10^50 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:133
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 PB"
+msgstr "xx%1 PBxx"
+
+#. JEDECBinaryDialect memory size in 10^60 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:136
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 EB"
+msgstr "xx%1 EBxx"
+
+#. JEDECBinaryDialect memory size in 10^70 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:139
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 ZB"
+msgstr "xx%1 ZBxx"
+
+#. JEDECBinaryDialect memory size in 10^80 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:142
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 YB"
+msgstr "xx%1 YBxx"
+
+#. IECBinaryDialect size in bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:148
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 B"
+msgstr "xx%1 Bxx"
+
+#. IECBinaryDialect size in 1024 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:151
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 KiB"
+msgstr "xx%1 KiBxx"
+
+#. IECBinaryDialect size in 10^20 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:154
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 MiB"
+msgstr "xx%1 MiBxx"
+
+#. IECBinaryDialect size in 10^30 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:157
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 GiB"
+msgstr "xx%1 GiBxx"
+
+#. IECBinaryDialect size in 10^40 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:160
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 TiB"
+msgstr "xx%1 TiBxx"
+
+#. IECBinaryDialect size in 10^50 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:163
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 PiB"
+msgstr "xx%1 PiBxx"
+
+#. IECBinaryDialect size in 10^60 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:166
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 EiB"
+msgstr "xx%1 EiBxx"
+
+#. IECBinaryDialect size in 10^70 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:169
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 ZiB"
+msgstr "xx%1 ZiBxx"
+
+#. IECBinaryDialect size in 10^80 bytes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:172
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 YiB"
+msgstr "xx%1 YiBxx"
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:205
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2.%3s"
+msgstr "xx%1m%2.%3sxx"
+
+#. @item:intext Duration format minutes and seconds
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:210
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2s"
+msgstr "xx%1m%2sxx"
+
+#. @item:intext Duration format hours and minutes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:214
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m"
+msgstr "xx%1h%2mxx"
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:218
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3.%4s"
+msgstr "xx%1h%2m%3.%4sxx"
+
+#. @item:intext Duration format hours, minutes, seconds
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:224
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3s"
+msgstr "xx%1h%2m%3sxx"
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:234
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2.%3"
+msgstr "xx%1:%2.%3xx"
+
+#. @item:intext Duration format minutes and seconds
+#. ----------
+#. @item:intext Duration format hours and minutes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:239
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:243
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2"
+msgstr "xx%1:%2xx"
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:247
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3.%4"
+msgstr "xx%1:%2:%3.%4xx"
+
+#. @item:intext Duration format hours, minutes, seconds
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:253
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3"
+msgstr "xx%1:%2:%3xx"
+
+#. @item:intext %1 is a real number, e.g. 1.23 days
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:269
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 days"
+msgstr "xx%1 daysxx"
+
+#. @item:intext %1 is a real number, e.g. 1.23 hours
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:272
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 hours"
+msgstr "xx%1 hoursxx"
+
+#. @item:intext %1 is a real number, e.g. 1.23 minutes
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:275
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 minutes"
+msgstr "xx%1 minutesxx"
+
+#. @item:intext %1 is a real number, e.g. 1.23 seconds
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:278
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 seconds"
+msgstr "xx%1 secondsxx"
+
+#. @item:intext %1 is a whole number
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:283
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n millisecond(s)"
+msgid_plural "%n millisecond(s)"
+msgstr[0] "xx%n millisecond(s)xx"
+
+#. @item:intext %n is a whole number
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:301
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n day(s)"
+msgid_plural "%n day(s)"
+msgstr[0] "xx%n day(s)xx"
+
+#. @item:intext %n is a whole number
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:306
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n hour(s)"
+msgid_plural "%n hour(s)"
+msgstr[0] "xx%n hour(s)xx"
+
+#. @item:intext %n is a whole number
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:311
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n minute(s)"
+msgid_plural "%n minute(s)"
+msgstr[0] "xx%n minute(s)xx"
+
+#. @item:intext %n is a whole number
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:316
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n second(s)"
+msgid_plural "%n second(s)"
+msgstr[0] "xx%n second(s)xx"
+
+#. @item:intext days and hours. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext hours and minutes. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext minutes and seconds. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:341
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:348
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:355
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 and %2"
+msgstr "xx%1 and %2xx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:373
+msgctxt "KFormat|"
+msgid "Tomorrow"
+msgstr "xxTomorrowxx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:375
+msgctxt "KFormat|"
+msgid "Today"
+msgstr "xxTodayxx"
+
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:377
+msgctxt "KFormat|"
+msgid "Yesterday"
+msgstr "xxYesterdayxx"
+
+#. a day of the week, eg "Monday" (but translated). Refers to the most recent such day that has already happened.
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:384
+#, qt-format
+msgctxt "KFormat|"
+msgid "Last %1"
+msgstr "xxLast %1xx"
+
+#. a day of the week, eg "Monday" (but translated). Refers to the soonest such day that has not already happened.
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:389
+#, qt-format
+msgctxt "KFormat|"
+msgid "Next %1"
+msgstr "xxNext %1xx"
+
+#. relative datetime with %1 result of formatReleativeDate() and %2 the formatted time If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: ../../home/scripty/prod/git-unstable/frameworks_kcoreaddons/src/lib/util/kformatprivate.cpp:404
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1, %2"
+msgstr "xx%1, %2xx"
