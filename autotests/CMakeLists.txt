@@ -1,6 +1,6 @@
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
-include(ECMMarkAsTest)
+include(ECMAddTests)
 include(ConfigureChecks.cmake) #configure checks for QFileSystemWatcher
 
 find_package(Qt5Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
@@ -9,23 +9,6 @@ if(NOT Qt5Test_FOUND)
     message(STATUS "Qt5Test not found, autotests will not be built.")
     return()
 endif()
-
-macro(KCOREADDONS_EXECUTABLE_TESTS)
-    foreach(_testname ${ARGN})
-        add_executable(${_testname} ${_testname}.cpp)
-        target_link_libraries(${_testname} KF5::CoreAddons )
-        ecm_mark_as_test(${_testname})
-    endforeach()
-endmacro()
-
-macro(KCOREADDONS_UNIT_TESTS)
-    foreach(_testname ${ARGN})
-        kcoreaddons_executable_tests(${_testname})
-        target_link_libraries(${_testname} Qt5::Test)
-        add_test(kcoreaddons-${_testname} ${_testname})
-        ecm_mark_as_test(${_testname})
-    endforeach()
-endmacro()
 
 macro(build_plugin pname)
     add_library(${pname} MODULE ${ARGN})
@@ -40,24 +23,26 @@ build_plugin(unversionedplugin unversionedplugin.cpp)
 build_plugin(multiplugin multiplugin.cpp)
 build_plugin(alwaysunloadplugin alwaysunloadplugin.cpp)
 
-kcoreaddons_unit_tests(
-    kaboutdatatest
-    kautosavefiletest
-    kcompositejobtest
-    kformattest
-    kjobtest
-    kpluginfactorytest
-    kpluginloadertest
-    kprocesstest
-    kshareddatacachetest
-    kshelltest
-    kurlmimedatatest
-    kstringhandlertest
-    kusertest
-    kdelibs4migrationtest
+ecm_add_tests(
+    kaboutdatatest.cpp
+    kautosavefiletest.cpp
+    kcompositejobtest.cpp
+    kformattest.cpp
+    kjobtest.cpp
+    kpluginfactorytest.cpp
+    kpluginloadertest.cpp
+    kprocesstest.cpp
+    kshareddatacachetest.cpp
+    kshelltest.cpp
+    kurlmimedatatest.cpp
+    kstringhandlertest.cpp
+    kusertest.cpp
+    kdelibs4migrationtest.cpp
+    LINK_LIBRARIES Qt5::Test KF5::CoreAddons
+    NAME_PREFIX "kcoreaddons-"
 )
 
-target_compile_definitions(kpluginloadertest PRIVATE
+target_compile_definitions(kcoreaddons-kpluginloadertest PRIVATE
     JSONPLUGIN_FILE="$<TARGET_FILE:jsonplugin>"
     VERSIONEDPLUGIN_FILE="$<TARGET_FILE:versionedplugin>"
     UNVERSIONEDPLUGIN_FILE="$<TARGET_FILE:unversionedplugin>"
@@ -85,6 +70,6 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
     add_executable(${BACKEND_TEST_TARGET} kdirwatch_unittest.cpp)
     target_link_libraries(${BACKEND_TEST_TARGET} Qt5::Test KF5::CoreAddons)
     ecm_mark_as_test(${BACKEND_TEST_TARGET})
-    add_test(kcoreaddons-${BACKEND_TEST_TARGET} ${BACKEND_TEST_TARGET})
+    add_test(NAME kcoreaddons-${BACKEND_TEST_TARGET} COMMAND ${BACKEND_TEST_TARGET})
     target_compile_definitions(${BACKEND_TEST_TARGET} PUBLIC -DKDIRWATCH_TEST_METHOD=\"${_backendName}\")
 endforeach()
