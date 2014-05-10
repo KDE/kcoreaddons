@@ -42,7 +42,7 @@ ecm_add_tests(
     NAME_PREFIX "kcoreaddons-"
 )
 
-target_compile_definitions(kpluginloadertest PRIVATE
+target_compile_definitions(kcoreaddons-kpluginloadertest PRIVATE
     JSONPLUGIN_FILE="$<TARGET_FILE:jsonplugin>"
     VERSIONEDPLUGIN_FILE="$<TARGET_FILE:versionedplugin>"
     UNVERSIONEDPLUGIN_FILE="$<TARGET_FILE:unversionedplugin>"
