@@ -22,6 +22,7 @@
 #include "kdelibs4migration.h"
 #include <QDir>
 #include <QDebug>
+#include <QVector>
 
 class Kdelibs4MigrationPrivate
 {
@@ -37,8 +38,9 @@ Kdelibs4Migration::Kdelibs4Migration()
         d->m_kdeHome = QString::fromLocal8Bit(qgetenv("KDEHOME"));
     } else {
         QDir homeDir = QDir::home();
-        auto testSubdirs = { QStringLiteral(".kde"), QStringLiteral(".kde4") };
-        for (const QString testSubdir : testSubdirs) {
+        QVector<QString> testSubdirs;
+        testSubdirs << QStringLiteral(".kde") << QStringLiteral(".kde4");
+        Q_FOREACH (const QString &testSubdir, testSubdirs) {
             if (homeDir.exists(testSubdir)) {
                 //qDebug() << "Using" << testSubdir << "as the location of the old config file";
                 d->m_kdeHome = homeDir.filePath(testSubdir);
