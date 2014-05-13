@@ -52,10 +52,10 @@ void defaultCrashHandler(int sig);
  * with a program and re-using data from one of them:
  *
  * @code
- * KAboutData about("khello", "khello", i18n("KHello"), "0.1",
+ * KAboutData about("khello", i18n("KHello"), "0.1",
  *                   i18n("A KDE version of Hello, world!"),
- *                   KAboutData::License_LGPL,
- *                   i18n("Copyright (C) 2003 Developer"));
+ *                   KAboutLicense::LGPL,
+ *                   i18n("Copyright (C) 2014 Developer"));
  *
  * about.addAuthor(i18n("Joe Developer"), i18n("developer"), "joe@host.com", 0);
  * QList<KAboutPerson> people = about.authors();
@@ -144,7 +144,128 @@ private:
     Private *const d;
 };
 
-class KAboutLicense;
+/**
+ * This class is used to store information about a license.
+ * The license can be one of some predefined, one given as text or one
+ * that can be loaded from a file. This class is used in the KAboutData class.
+ * Explicitly creating a KAboutLicense object is not possible.
+ * If the license is wanted for a KDE component having KAboutData object,
+ * use KAboutData::licenses() to get the licenses for that component.
+ * If the license is for a non-code resource and given by a keyword
+ * (e.g. in .desktop files), try using KAboutLicense::byKeyword().
+ */
+class KCOREADDONS_EXPORT KAboutLicense
+{
+    friend class KAboutData;
+public:
+    /**
+     * Describes the license of the software.
+     */
+    enum LicenseKey {
+        Custom = -2,
+        File = -1,
+        Unknown = 0,
+        GPL  = 1,
+        GPL_V2 = 1,
+        LGPL = 2,
+        LGPL_V2 = 2,
+        BSD  = 3,
+        Artistic = 4,
+        QPL = 5,
+        QPL_V1_0 = 5,
+        GPL_V3 = 6,
+        LGPL_V3 = 7
+    };
+
+    /**
+     * Format of the license name.
+     */
+    enum NameFormat {
+        ShortName,
+        FullName
+    };
+
+    /**
+     * Copy constructor.  Performs a deep copy.
+     * @param other object to copy
+     */
+    KAboutLicense(const KAboutLicense &other);
+
+    ~KAboutLicense();
+
+    /**
+     * Assignment operator.  Performs a deep copy.
+     * @param other object to copy
+     */
+    KAboutLicense &operator=(const KAboutLicense &other);
+
+    /**
+     * Returns the full license text. If the licenseType argument of the
+     * constructor has been used, any text defined by setLicenseText is ignored,
+     * and the standard text for the chosen license will be returned.
+     *
+     * @return The license text.
+     */
+    QString text() const;
+
+    /**
+     * Returns the license name.
+     *
+     * @return The license name as a string.
+     */
+    QString name(KAboutLicense::NameFormat formatName) const;
+
+    /**
+     * Returns the license key.
+     *
+     * @return The license key as element of KAboutLicense::LicenseKey enum.
+     */
+    KAboutLicense::LicenseKey key() const;
+
+    /**
+     * Fetch a known license by a keyword.
+     *
+     * Frequently the license data is provided by a terse keyword-like string,
+     * e.g. by a field in a .desktop file. Using this method, an application
+     * can get hold of a proper KAboutLicense object, providing that the
+     * license is one of the several known to KDE, and use it to present
+     * more human-readable information to the user.
+     *
+     * Keywords are matched by stripping all whitespace and lowercasing.
+     * The known keywords correspond to the KAboutLicense::LicenseKey enumeration,
+     * e.g. any of "LGPLV3", "LGPLv3", "LGPL v3" would match KAboutLicense::LGPL_V3.
+     * If there is no match for the keyword, a valid license object is still
+     * returned, with its name and text informing about a custom license,
+     * and its key equal to KAboutLicense::Custom.
+     *
+     * @param keyword The license keyword.
+     * @return The license object.
+     *
+     * @see KAboutLicense::LicenseKey
+     */
+    static KAboutLicense byKeyword(const QString &keyword);
+
+private:
+    /**
+     * @internal Used by KAboutData to construct a predefined license.
+     */
+    explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType, const KAboutData *aboutData);
+    /**
+     * @internal Used by KAboutData to construct a KAboutLicense
+     */
+    explicit KAboutLicense(const KAboutData *aboutData);
+    /**
+     * @internal Used by KAboutData to construct license by given text
+     */
+    void setLicenseFromPath(const QString &pathToFile);
+    /**
+     * @internal Used by KAboutData to construct license by given text
+     */
+    void setLicenseFromText(const QString &licenseText);
+
+    class Private;
+    QSharedDataPointer<Private> d;
+};
 
 /**
  * This class is used to store information about a program or plugin.
@@ -155,6 +276,13 @@ class KAboutLicense;
  * Currently, the values set here are shown by the "About" box
  * (see KAboutDialog), used by the bug report dialog (see KBugReport),
  * and by the help shown on command line (see KAboutData::setupCommandLine()).
+ *
+ * Porting Notes: Since KDE Frameworks 5.0, the translation catalog mechanism
+ * must provided by your translation framework to load the correct catalog
+ * instead (eg: KLocalizedString::setApplicationDomain() for KI18n, or
+ * QCoreApplication::installTranslator() for Qt's translation system). This
+ * applies to the old setCatalogName() and catalogName() members. But see also
+ * K4AboutData in kde4support as a compatibility class.
  *
  * @short Holds information needed by the "About" box and other
  * classes.
@@ -193,95 +321,14 @@ public:
      */
     static KAboutData *pluginData(const QString &componentName);
 
-    /**
-     * Describes the license of the software.
-     */
-    enum LicenseKey { // KDE5: move to KAboutLicense, cut License_ prefix
-        License_Custom = -2,
-        License_File = -1,
-        License_Unknown = 0,
-        License_GPL  = 1,
-        License_GPL_V2 = 1,
-        License_LGPL = 2,
-        License_LGPL_V2 = 2,
-        License_BSD  = 3,
-        License_Artistic = 4,
-        License_QPL = 5,
-        License_QPL_V1_0 = 5,
-        License_GPL_V3 = 6,
-        License_LGPL_V3 = 7
-    };
-
-    /**
-     * Format of the license name.
-     */
-    enum NameFormat { // KDE5: move to KAboutLicense
-        ShortName,
-        FullName
-    };
-
 public:
-#ifndef KCOREADDONS_NO_DEPRECATED
     /**
      * Constructor.
      *
-     * @param componentName The program name or plugin name used internally.
-     * Example: "kwrite".
-     *
-     * @param catalogName The translation catalog name; if null or empty, the
-     *        @p componentName will be used. You may want the catalog name to
-     *        differ from component name, for example, when you want to group
-     *        translations of several smaller utilities under the same catalog.
-     *
-     * @param displayName A displayable name for the program or plugin. This string
-     *        should be translated. Example: i18n("KWrite")
-     *
-     * @param version The component version string.
-     *
-     * @param shortDescription A short description of what the component does.
-     *        This string should be translated.
-     *        Example: i18n("A simple text editor.")
-     *
-     * @param licenseType The license identifier. Use setLicenseText or
-              setLicenseTextFile if you use a license not predefined here.
-     *
-     * @param copyrightStatement A copyright statement, that can look like this:
-     *        i18n("Copyright (C) 1999-2000 Name"). The string specified here is
-     *        taken verbatim; the author information from addAuthor is not used.
-     *
-     * @param otherText Some free form text, that can contain any kind of
-     *        information. The text can contain newlines. This string
-     *        should be translated.
-     *
-     * @param homePageAddress The component's homepage string.
-     *        Start the address with "http://". "http://some.domain" is
-     *        is correct, "some.domain" is not.
-     * IMPORTANT: if you set a home page address, this will change the "organization domain"
-     * of the application, which is used for automatic D-Bus registration.
-     * @see setOrganizationDomain
-     *
-     * @param bugsEmailAddress The bug report email address string.
-     *        This defaults to the kde.org bug system.
-     *
-     *
-     * @deprecated since 5.0, use one of the other constructor overloads instead.
-     */
-    KCOREADDONS_DEPRECATED KAboutData(
-        const QString &componentName,
-        const QString &catalogName,
-        const QString &displayName,
-        const QString &version,
-        const QString &shortDescription = QString(),
-        enum LicenseKey licenseType = License_Unknown,
-        const QString &copyrightStatement = QString(),
-        const QString &otherText = QString(),
-        const QString &homePageAddress = QString(),
-        const QString &bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
-    );
-#endif // KCOREADDONS_NO_DEPRECATED
-
-    /**
-     * Constructor.
+     * Porting Note: The @p catalogName parameter present in KDE4 was
+     * deprecated and removed. See also K4AboutData
+     * in kde4support if this feature is needed for compatibility purposes, or
+     * consider using componentName() instead.
      *
      * @param componentName The program name or plugin name used internally.
      * Example: "kwrite".
@@ -323,7 +370,7 @@ public:
                const QString &displayName,
                const QString &version,
                const QString &shortDescription,
-               enum LicenseKey licenseType,
+               enum KAboutLicense::LicenseKey licenseType,
                const QString &copyrightStatement = QString(),
                const QString &otherText = QString(),
                const QString &homePageAddress = QString(),
@@ -469,7 +516,6 @@ public:
      *
      * @param license The license text.
      * @see setLicenseText, addLicense, addLicenseTextFile
-     * @since 4.1
      */
     KAboutData &addLicenseText(const QString &license);
 
@@ -490,7 +536,6 @@ public:
      *
      * @param file Path to the file in the local filesystem containing the license text.
      * @see addLicenseText, addLicense, setLicenseTextFile
-     * @since 4.1
      */
     KAboutData &addLicenseTextFile(const QString &file);
 
@@ -518,7 +563,6 @@ public:
      *
      * @param iconName name of the icon. Example: "accessories-text-editor"
      * @see programIconName()
-     * @since 4.1
      */
     KAboutData &setProgramIconName(const QString &iconName);
 
@@ -567,25 +611,12 @@ public:
     KAboutData &setShortDescription(const QString &shortDescription);
 
     /**
-     * Defines the translation catalog that the program uses.
-     *
-     * @param catalogName The translation catalog name.
-     *
-     * @deprecated since 5.0, use the mechanism provided by your translation
-     * framework to load the correct catalogue instead (eg:
-     * KLocalizedString::setApplicationDomain() for KI18n, or
-     * QCoreApplication::installTranslator() for Qt's translation system).
-     *
-     */
-    KCOREADDONS_DEPRECATED KAboutData &setCatalogName(const QString &catalogName);
-
-    /**
      * Defines the license identifier.
      *
      * @param licenseKey The license identifier.
      * @see addLicenseText, setLicenseText, setLicenseTextFile
      */
-    KAboutData &setLicense(LicenseKey licenseKey);
+    KAboutData &setLicense(KAboutLicense::LicenseKey licenseKey);
 
     /**
      * Adds a license identifier.
@@ -595,9 +626,8 @@ public:
      *
      * @param licenseKey The license identifier.
      * @see setLicenseText, addLicenseText, addLicenseTextFile
-     * @since 4.1
      */
-    KAboutData &addLicense(LicenseKey licenseKey);
+    KAboutData &addLicense(KAboutLicense::LicenseKey licenseKey);
 
     /**
      * Defines the copyright statement to show when displaying the license.
@@ -706,7 +736,6 @@ public:
      *
      * @return the program's icon name.
      * @see setProgramIconName()
-     * @since 4.1
      */
     QString programIconName() const;
 
@@ -745,14 +774,6 @@ public:
      *         QString() if not set.
      */
     QString shortDescription() const;
-
-    /**
-     * Returns the program's translation catalog name.
-     * @return the catalog name.
-     *
-     * @deprecated since 5.0 (see setCatalogName()).
-     */
-    KCOREADDONS_DEPRECATED QString catalogName() const;
 
     /**
      * Returns the application homepage.
@@ -804,30 +825,9 @@ public:
     QString otherText() const;
 
     /**
-     * Returns the license. If the licenseType argument of the constructor has been
-     * used, any text defined by setLicenseText is ignored,
-     * and the standard text for the chosen license will be returned.
-     *
-     * @return The license text.
-     *
-     * @deprecated There could be multiple licenses, use licenses() instead.
-     */
-    QString license() const;
-
-    /**
-     * Returns the license name.
-     *
-     * @return The license name as a string.
-     *
-     * @deprecated There could be multiple licenses, use licenses() instead.
-     */
-    QString licenseName(NameFormat formatName) const;
-
-    /**
      * Returns a list of licenses.
      *
      * @return licenses information (list of licenses)
-     * @since 4.1
      */
     QList<KAboutLicense> licenses() const;
 
@@ -912,106 +912,6 @@ private:
 
     class Private;
     Private *const d;
-};
-
-/**
- * This class is used to store information about a license.
- * The license can be one of some predefined, one given as text or one
- * that can be loaded from a file. This class is used in the KAboutData class.
- * Explicitly creating a KAboutLicense object is not possible.
- * If the license is wanted for a KDE component having KAboutData object,
- * use KAboutData::licenses() to get the licenses for that component.
- * If the license is for a non-code resource and given by a keyword
- * (e.g. in .desktop files), try using KAboutLicense::byKeyword().
- */
-class KCOREADDONS_EXPORT KAboutLicense
-{
-    friend class KAboutData;
-public:
-    /**
-     * Copy constructor.  Performs a deep copy.
-     * @param other object to copy
-     */
-    KAboutLicense(const KAboutLicense &other);
-
-    ~KAboutLicense();
-
-    /**
-     * Assignment operator.  Performs a deep copy.
-     * @param other object to copy
-     */
-    KAboutLicense &operator=(const KAboutLicense &other);
-
-    /**
-     * Returns the full license text. If the licenseType argument of the
-     * constructor has been used, any text defined by setLicenseText is ignored,
-     * and the standard text for the chosen license will be returned.
-     *
-     * @return The license text.
-     */
-    QString text() const;
-
-    /**
-     * Returns the license name.
-     *
-     * @return The license name as a string.
-     */
-    QString name(KAboutData::NameFormat formatName) const;
-
-    /**
-     * Returns the license key.
-     *
-     * @return The license key as element of KAboutData::LicenseKey enum.
-     * @since 4.1
-     */
-    KAboutData::LicenseKey key() const;
-
-    /**
-     * Fetch a known license by a keyword.
-     *
-     * Frequently the license data is provided by a terse keyword-like string,
-     * e.g. by a field in a .desktop file. Using this method, an application
-     * can get hold of a proper KAboutLicense object, providing that the
-     * license is one of the several known to KDE, and use it to present
-     * more human-readable information to the user.
-     *
-     * Keywords are matched by stripping all whitespace and lowercasing.
-     * The known keywords correspond to the KAboutData::LicenseKey enumeration,
-     * e.g. any of "LGPLV3", "LGPLv3", "LGPL v3" would match License_LGPL_V3.
-     * If there is no match for the keyword, a valid license object is still
-     * returned, with its name and text informing about a custom license,
-     * and its key equal to KAboutData::License_Custom.
-     *
-     * @param keyword The license keyword.
-     * @return The license object.
-     *
-     * @see KAboutData::LicenseKey
-     * @since 4.1
-     */
-    static KAboutLicense byKeyword(const QString &keyword);
-
-private:
-    /**
-     * @internal Used by KAboutData to construct a predefined license.
-     */
-    explicit KAboutLicense(enum KAboutData::LicenseKey licenseType, const KAboutData *aboutData);
-    /**
-     * @internal Used by KAboutData to construct a KAboutLicense
-     */
-    explicit KAboutLicense(const KAboutData *aboutData);
-    /**
-     * @internal Used by KAboutData to construct license by given text
-     */
-    void setLicenseFromPath(const QString &pathToFile);
-    //explicit KAboutLicense( const QString &pathToFile, const KAboutData *aboutData );
-    /**
-     * @internal Used by KAboutData to construct license by given text
-     */
-    void setLicenseFromText(const QString &licenseText);
-    //explicit KAboutLicense( const QString &licenseText, const KAboutData *aboutData );
-
-    class Private;
-    QSharedDataPointer<Private> d;
 };
 
 #endif
