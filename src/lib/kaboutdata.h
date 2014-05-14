@@ -169,7 +169,7 @@ public:
         GPL_V2 = 1,
         LGPL = 2,
         LGPL_V2 = 2,
-        BSD  = 3,
+        BSDL = 3,
         Artistic = 4,
         QPL = 5,
         QPL_V1_0 = 5,

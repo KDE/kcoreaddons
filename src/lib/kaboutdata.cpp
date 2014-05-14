@@ -196,7 +196,7 @@ QString KAboutLicense::text() const
         knownLicense = true;
         pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("LICENSES/LGPL_V2"));
         break;
-    case KAboutLicense::BSD:
+    case KAboutLicense::BSDL:
         knownLicense = true;
         pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("LICENSES/BSD"));
         break;
@@ -264,7 +264,7 @@ QString KAboutLicense::name(KAboutLicense::NameFormat formatName) const
         licenseShort = QCoreApplication::translate("KAboutLicense", "LGPL v2", "@item license (short name)");
         licenseFull = QCoreApplication::translate("KAboutLicense", "GNU Lesser General Public License Version 2", "@item license");
         break;
-    case KAboutLicense::BSD:
+    case KAboutLicense::BSDL:
         licenseShort = QCoreApplication::translate("KAboutLicense", "BSD License", "@item license (short name)");
         licenseFull = QCoreApplication::translate("KAboutLicense", "BSD License", "@item license");
         break;
@@ -323,7 +323,7 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
         ldict.insert("lgpl", KAboutLicense::LGPL);
         ldict.insert("lgplv2", KAboutLicense::LGPL_V2);
         ldict.insert("lgplv2+", KAboutLicense::LGPL_V2);
-        ldict.insert("bsd", KAboutLicense::BSD);
+        ldict.insert("bsd", KAboutLicense::BSDL);
         ldict.insert("artistic", KAboutLicense::Artistic);
         ldict.insert("qpl", KAboutLicense::QPL);
         ldict.insert("qplv1", KAboutLicense::QPL_V1_0);
