@@ -42,7 +42,7 @@
 
 #include "kdirwatch.h"
 #include "kdirwatch_p.h"
-#include "kfilesystemtype_p.h"
+#include "kfilesystemtype.h"
 
 #include <io/config-kdirwatch.h>
 

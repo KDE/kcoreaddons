@@ -53,7 +53,7 @@ set(libkcoreaddons_SRCS
     kaboutdata.cpp
     io/kautosavefile.cpp
     io/kdirwatch.cpp
-    io/kfilesystemtype_p.cpp
+    io/kfilesystemtype.cpp
     io/kmessage.cpp
     io/kprocess.cpp
     io/kbackup.cpp
@@ -133,6 +133,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KProcess
         KBackup
         KUrlMimeData
+        KFileSystemType
     RELATIVE io
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
@@ -181,7 +182,6 @@ install(TARGETS KF5CoreAddons EXPORT KF5CoreAddonsTargets ${KF5_INSTALL_TARGETS_
 
 install(FILES
     ${KCoreAddons_HEADERS}
-    io/kfilesystemtype_p.h #Needed for building kio, KFileSystemType
     ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_export.h
     DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KCoreAddons COMPONENT Devel
 )

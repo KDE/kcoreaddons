@@ -17,7 +17,7 @@
    Boston, MA 02110-1301, USA.
 */
 
-#include "kfilesystemtype_p.h"
+#include "kfilesystemtype.h"
 #include <QFile>
 #include <QDebug>
 //#include <errno.h>

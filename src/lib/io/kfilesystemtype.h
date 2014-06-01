@@ -34,6 +34,10 @@ enum Type {
     Other // ext, reiser, and so on. "Normal" local filesystems.
 };
 
+/**
+ * Returns the file system type at a given path, as much as we are able to figure it out.
+ * @since 5.0
+ */
 KCOREADDONS_EXPORT Type fileSystemType(const QString &path);
 
 }
