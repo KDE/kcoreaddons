@@ -164,6 +164,7 @@ public:
 
 #if HAVE_FAM
         FAMRequest fr;
+        bool m_famReportedSeen;
 #endif
 
 #if HAVE_SYS_INOTIFY_H

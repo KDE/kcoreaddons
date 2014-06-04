@@ -100,6 +100,8 @@ private:
     QList<QVariantList> waitForCreatedSignal(KDirWatch &watch, int expected);
     QList<QVariantList> waitForDeletedSignal(KDirWatch &watch, int expected);
     bool waitForOneSignal(KDirWatch &watch, const char *sig, const QString &path);
+    bool waitForRecreationSignal(KDirWatch &watch, const QString &path);
+    bool verifySignalPath(QSignalSpy &spy, const char *sig, const QString &expectedPath);
     void createFile(const QString &path);
     QString createFile(int num);
     void removeFile(int num);
@@ -250,19 +252,49 @@ bool KDirWatch_UnitTest::waitForOneSignal(KDirWatch &watch, const char *sig, con
             }
             QTest::qWait(50);
         }
-        for (int i = 0; i < spyDirty.count(); ++i) {
-            const QString got = spyDirty[i][0].toString();
-            if (got == expectedPath) {
-                return true;
-            }
-            if (got.startsWith(expectedPath + QLatin1Char('/'))) {
-                qDebug() << "Ignoring (inotify) notification of" << (sig + 1) << '(' << got << ')';
-                continue;
-            }
-            qWarning() << "Expected" << sig << '(' << removeTrailingSlash(path) << ')' << "but got" << sig << '(' << got << ')';
-            return false;
-        }
+        return verifySignalPath(spyDirty, sig, expectedPath);
     }
+}
+
+bool KDirWatch_UnitTest::verifySignalPath(QSignalSpy &spy, const char *sig, const QString &expectedPath)
+{
+  for (int i = 0; i < spy.count(); ++i) {
+    const QString got = spy[i][0].toString();
+    if (got == expectedPath) {
+      return true;
+    }
+    if (got.startsWith(expectedPath + QLatin1Char('/'))) {
+      qDebug() << "Ignoring (inotify) notification of" << (sig + 1) << '(' << got << ')';
+      continue;
+    }
+    qWarning() << "Expected" << sig << '(' << expectedPath << ')' << "but got" << sig << '(' << got << ')';
+    return false;
+  }
+  return false;
+}
+
+bool KDirWatch_UnitTest::waitForRecreationSignal(KDirWatch &watch, const QString &path)
+{
+  // When watching for a deleted + created signal pair, the two might come so close that
+  // using waitForOneSignal will miss the created signal.  This function monitors both all
+  // the time to ensure both are received.
+
+  const QString expectedPath = removeTrailingSlash(path);
+  QSignalSpy spyDeleted(&watch, SIGNAL(deleted(QString)));
+  QSignalSpy spyCreated(&watch, SIGNAL(created(QString)));
+
+  if(!spyDeleted.wait(50 * s_maxTries)) {
+    qWarning() << "Timeout waiting for KDirWatch signal deleted(QString) (" << path << ")";
+    return false;
+  }
+
+  // Don't bother waiting for the created signal if the signal spy already received a signal.
+  if(spyCreated.isEmpty() && !spyCreated.wait(50 * s_maxTries)) {
+    qWarning() << "Timeout waiting for KDirWatch signal created(QString) (" << path << ")";
+    return false;
+  }
+
+  return verifySignalPath(spyDeleted, "deleted(QString)", expectedPath) && verifySignalPath(spyCreated, "created(QString)", expectedPath);
 }
 
 QList<QVariantList> KDirWatch_UnitTest::waitForCreatedSignal(KDirWatch &watch, int expected)
@@ -478,12 +510,7 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
     //QCOMPARE(KDE::stat(QFile::encodeName(file1), &stat_buf), 0);
     //qDebug() << "new inode" << stat_buf.st_ino; // same!
 
-    if (watch.internalMethod() == KDirWatch::INotify) {
-        QVERIFY(waitForOneSignal(watch, SIGNAL(deleted(QString)), file1));
-        QVERIFY(waitForOneSignal(watch, SIGNAL(created(QString)), file1));
-    } else {
-        QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), file1));
-    }
+    QVERIFY(waitForRecreationSignal(watch, file1));
 
     waitUntilMTimeChange(file1);
 
@@ -642,14 +669,10 @@ void KDirWatch_UnitTest::testHardlinkChange()
 
     QFile::remove(existingFile);
     const QString testFile = m_path + QLatin1String("TestFile");
-    ::link(QFile::encodeName(testFile).constData(), QFile::encodeName(existingFile).constData()); // make ExistingFile "point" to TestFile
+    QVERIFY(::link(QFile::encodeName(testFile).constData(), QFile::encodeName(existingFile).constData()) == 0); // make ExistingFile "point" to TestFile
     QVERIFY(QFile::exists(existingFile));
-    //QVERIFY(waitForOneSignal(watch, SIGNAL(deleted(QString)), existingFile));
-    if (watch.internalMethod() == KDirWatch::INotify || watch.internalMethod() == KDirWatch::FAM) {
-        QVERIFY(waitForOneSignal(watch, SIGNAL(created(QString)), existingFile));
-    } else {
-        QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), existingFile));
-    }
+
+    QVERIFY(waitForRecreationSignal(watch, existingFile));
 
     //KDirWatch::statistics();
 

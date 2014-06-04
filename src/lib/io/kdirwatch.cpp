@@ -54,6 +54,7 @@
 #include <QtCore/QFile>
 #include <QtCore/QSocketNotifier>
 #include <QtCore/QTimer>
+#include <QtCore/QThread>
 #include <QtCore/QCoreApplication>
 
 #include <qplatformdefs.h> // QT_LSTAT, QT_STAT, QT_STATBUF
@@ -630,6 +631,9 @@ bool KDirWatchPrivate::useFAM(Entry *e)
 
     e->m_mode = FAMMode;
     e->dirty = false;
+    e->m_famReportedSeen = false;
+
+    bool startedFAMMonitor = false;
 
     if (e->isDir) {
         if (e->m_status == NonExistent) {
@@ -638,6 +642,7 @@ bool KDirWatchPrivate::useFAM(Entry *e)
         } else {
             int res = FAMMonitorDirectory(&fc, QFile::encodeName(e->path).data(),
                                           &(e->fr), e);
+            startedFAMMonitor = true;
             if (res < 0) {
                 e->m_mode = UnknownMode;
                 use_fam = false;
@@ -655,6 +660,7 @@ bool KDirWatchPrivate::useFAM(Entry *e)
         } else {
             int res = FAMMonitorFile(&fc, QFile::encodeName(e->path).data(),
                                      &(e->fr), e);
+            startedFAMMonitor = true;
             if (res < 0) {
                 e->m_mode = UnknownMode;
                 use_fam = false;
@@ -670,7 +676,14 @@ bool KDirWatchPrivate::useFAM(Entry *e)
 
     // handle FAM events to avoid deadlock
     // (FAM sends back all files in a directory when monitoring)
-    famEventReceived();
+    do {
+      famEventReceived();
+      if (startedFAMMonitor && !e->m_famReportedSeen) {
+        // 50 is ~half the time it takes to setup a watch.  If gamin's latency
+        // gets better, this can be reduced.
+        QThread::msleep(50);
+      }
+    } while (startedFAMMonitor &&!e->m_famReportedSeen);
 
     return true;
 }
@@ -1317,9 +1330,11 @@ int KDirWatchPrivate::scanEntry(Entry *e)
                 // The file got deleted and recreated. We need to watch it again.
                 removeWatch(e);
                 addWatch(e);
+                e->m_ino = stat_buf.st_ino;
+                return (Deleted|Created);
+            } else {
+              return Changed;
             }
-            e->m_ino = stat_buf.st_ino;
-            return Changed;
         }
 
         return NoChange;
@@ -1392,8 +1407,6 @@ void KDirWatchPrivate::emitEvent(const Entry *e, int event, const QString &fileN
 
         if (event & Deleted) {
             QMetaObject::invokeMethod(c->instance, "setDeleted", Qt::QueuedConnection, Q_ARG(QString, path));
-            // emit only Deleted event...
-            continue;
         }
 
         if (event & Created) {
@@ -1599,17 +1612,6 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
 {
     //qDebug();
 
-    // Don't be too verbose ;-)
-    if ((fe->code == FAMExists) ||
-            (fe->code == FAMEndExist) ||
-            (fe->code == FAMAcknowledge)) {
-        return;
-    }
-
-    if (isNoisyFile(fe->filename)) {
-        return;
-    }
-
     Entry *e = 0;
     EntryMap::Iterator it = m_mapEntries.begin();
     for (; it != m_mapEntries.end(); ++it)
@@ -1618,6 +1620,20 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
             e = &(*it);
             break;
         }
+
+    // Don't be too verbose ;-)
+    if ((fe->code == FAMExists) ||
+            (fe->code == FAMEndExist) ||
+            (fe->code == FAMAcknowledge)) {
+      if (e) {
+        e->m_famReportedSeen = true;
+      }
+      return;
+    }
+
+    if (isNoisyFile(fe->filename)) {
+        return;
+    }
 
     // Entry *e = static_cast<Entry*>(fe->userdata);
 
@@ -1687,8 +1703,9 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
         // This code is very similar to the one in inotifyEventReceived...
         Entry *sub_entry = e->findSubEntry(tpath);
         if (sub_entry /*&& sub_entry->isDir*/) {
-            // We were waiting for this new file/dir to be created
-            emitEvent(sub_entry, Created);
+            // We were waiting for this new file/dir to be created.  We don't actually
+            // emit an event here, as the rescan_timer will re-detect the creation and
+            // do the signal emission there.
             sub_entry->dirty = true;
             rescan_timer.start(0); // process this asap, to start watching that dir
         } else if (e->isDir && !e->m_clients.empty()) {
