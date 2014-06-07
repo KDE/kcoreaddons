@@ -29,16 +29,12 @@
 #include <QMetaType>
 #include <QTimer>
 
-bool KJobPrivate::_k_kjobUnitEnumRegistered = false;
 KJobPrivate::KJobPrivate()
     : q_ptr(0), uiDelegate(0), error(KJob::NoError),
       progressUnit(KJob::Bytes), percentage(0),
       suspended(false), capabilities(KJob::NoCapabilities),
       speedTimer(0), isAutoDelete(true), eventLoop(0), isFinished(false)
 {
-    if (!_k_kjobUnitEnumRegistered) {
-        _k_kjobUnitEnumRegistered = qRegisterMetaType<KJob::Unit>("KJob::Unit");
-    }
 }
 
 KJobPrivate::~KJobPrivate()
