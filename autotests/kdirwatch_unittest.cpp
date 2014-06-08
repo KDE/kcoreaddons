@@ -510,7 +510,15 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
     //QCOMPARE(KDE::stat(QFile::encodeName(file1), &stat_buf), 0);
     //qDebug() << "new inode" << stat_buf.st_ino; // same!
 
-    QVERIFY(waitForRecreationSignal(watch, file1));
+    {
+        QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
+        if(!waitForRecreationSignal(watch, file1)) {
+            // We may get a dirty signal here instead of a deleted/created set.
+            if (spyDirty.isEmpty() || !verifySignalPath(spyDirty, SIGNAL(dirty(QString)), file1)) {
+                QFAIL("Failed to detect file deletion and recreation through either a deleted/created signal pair or through a dirty signal!");
+            }
+        }
+    }
 
     waitUntilMTimeChange(file1);
 
