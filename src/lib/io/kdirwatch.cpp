@@ -1814,6 +1814,14 @@ void KDirWatchPrivate::fswEventReceived(const QString &path)
             Q_FOREACH (Entry *sub_entry, e->m_entries) {
                 fswEventReceived(sub_entry->path); // recurse, to call scanEntry and see if something changed
             }
+        } else {
+            /* Even though QFileSystemWatcher only reported the file as modified, it is possible that the file
+             * was in fact just deleted and then immediately recreated.  If the file was deleted, QFileSystemWatcher
+             * will delete the watch, and will ignore the file, even after it is recreated.  Since it is impossible
+             * to reliably detect this case, always re-request the watch on a dirty signal, to avoid losing the
+             * underlying OS monitor.
+             */
+            fsWatcher->addPath(e->path);
         }
     }
 }
