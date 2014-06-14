@@ -25,6 +25,7 @@
 #include <QtCore/QFileInfo>
 #include <QDebug>
 #include <QCoreApplication>
+#include <QMutex>
 
 // TODO: Upstream the versioning stuff to Qt
 // TODO: Patch for Qt to expose plugin-finding code directly
@@ -56,6 +57,11 @@ QString KPluginLoader::findPlugin(const QString &name)
 {
     // We just defer to Qt; unfortunately, QPluginLoader's searching code is not
     // accessible without creating a QPluginLoader object.
+
+    // Workaround for QTBUG-39642
+    static QMutex s_qtWorkaroundMutex;
+    QMutexLocker lock(&s_qtWorkaroundMutex);
+
     QPluginLoader loader(name);
     return loader.fileName();
 }
