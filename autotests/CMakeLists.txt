@@ -39,10 +39,9 @@ ecm_add_tests(
     kusertest.cpp
     kdelibs4migrationtest.cpp
     LINK_LIBRARIES Qt5::Test KF5::CoreAddons
-    NAME_PREFIX "kcoreaddons-"
 )
 
-target_compile_definitions(kcoreaddons-kpluginloadertest PRIVATE
+target_compile_definitions(kpluginloadertest PRIVATE
     JSONPLUGIN_FILE="$<TARGET_FILE:jsonplugin>"
     VERSIONEDPLUGIN_FILE="$<TARGET_FILE:versionedplugin>"
     UNVERSIONEDPLUGIN_FILE="$<TARGET_FILE:unversionedplugin>"
@@ -70,6 +69,6 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
     add_executable(${BACKEND_TEST_TARGET} kdirwatch_unittest.cpp)
     target_link_libraries(${BACKEND_TEST_TARGET} Qt5::Test KF5::CoreAddons)
     ecm_mark_as_test(${BACKEND_TEST_TARGET})
-    add_test(NAME kcoreaddons-${BACKEND_TEST_TARGET} COMMAND ${BACKEND_TEST_TARGET})
+    add_test(NAME ${BACKEND_TEST_TARGET} COMMAND ${BACKEND_TEST_TARGET})
     target_compile_definitions(${BACKEND_TEST_TARGET} PUBLIC -DKDIRWATCH_TEST_METHOD=\"${_backendName}\")
 endforeach()
