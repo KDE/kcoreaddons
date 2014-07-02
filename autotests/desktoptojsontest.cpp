@@ -149,6 +149,13 @@ private Q_SLOTS:
             }
             QCOMPARE(it.value(), expectedResult.value(it.key()));
         }
+        for (auto it = expectedResult.constBegin(); it != expectedResult.constEnd(); ++it) {
+            if (result.constFind(it.key()) == result.constEnd()) {
+                qCritical() << "Result is missing key" << it.key();
+                QFAIL("Invalid output");
+            }
+            QCOMPARE(it.value(), expectedResult.value(it.key()));
+        }
         //QCOMPARE(doc.object(), expectedResult);
     }
 };
