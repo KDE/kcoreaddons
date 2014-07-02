@@ -35,10 +35,13 @@
 static QTextStream cout(stdout);
 static QTextStream cerr(stderr);
 
-DesktopToJson::DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i, const QCommandLineOption &o)
+DesktopToJson::DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i,
+                             const QCommandLineOption &o, const QCommandLineOption &v)
     : m_parser(parser),
       input(i),
-      output(o)
+      output(o),
+      verbose(v),
+      m_verbose(false)
 {
 }
 
@@ -48,7 +51,9 @@ int DesktopToJson::runMain()
         cout << "Usage --help. In short: desktoptojson -i inputfile.desktop -o outputfile.json" << endl;
         return 1;
     }
-
+    if (m_parser->isSet(verbose)) {
+        m_verbose = true;
+    }
     if (!resolveFiles()) {
         cerr << "Failed to resolve filenames" << m_inFile << m_outFile << endl;
         return 1;
@@ -167,7 +172,9 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
         QByteArray line = df.readLine().trimmed();
         lineNr++;
         if (line == "[Desktop Entry]") {
-            cout << "Found desktop group in line " << lineNr << endl;
+            if (m_verbose) {
+                cout << "Found desktop group in line " << lineNr << endl;
+            }
             break;
         }
     }
@@ -188,16 +195,22 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
         const QByteArray line = df.readLine().trimmed();
         lineNr++;
         if (line.isEmpty()) {
-            cout << "Line " << lineNr << ": empty" << endl;
+            if (m_verbose) {
+                cout << "Line " << lineNr << ": empty" << endl;
+            }
             continue;
         }
         if (line.startsWith('#')) {
-            cout << "Line " << lineNr << ": comment" << endl;
+            if (m_verbose) {
+                cout << "Line " << lineNr << ": comment" << endl;
+            }
             continue; // skip comments
         }
         if (line.startsWith('[')) {
             // start of new group -> doesn't interest us anymore
-            cout << "Line " << lineNr << ": start of new group " << line << endl;
+            if (m_verbose) {
+                cout << "Line " << lineNr << ": start of new group " << line << endl;
+            }
             break;
         }
         // must have form key=value now
@@ -212,9 +225,11 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
         const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
         const QByteArray valueEscaped = escapeValue(valueRaw);
         const QString value = QString::fromUtf8(valueEscaped);
-        cout << "Line " << lineNr << ": key=\"" << key << "\", value=\"" << value << '"' << endl;
-        if (valueEscaped != valueRaw) {
-            cout << "Line " << lineNr << " contained escape sequences" << endl;
+        if (m_verbose) {
+            cout << "Line " << lineNr << ": key=\"" << key << "\", value=\"" << value << '"' << endl;
+            if (valueEscaped != valueRaw) {
+                cout << "Line " << lineNr << " contained escape sequences" << endl;
+            }
         }
         if (boolkeys.contains(key)) {
             // should only be lower case, but be tolerant here

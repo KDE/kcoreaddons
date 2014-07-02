@@ -33,7 +33,8 @@ class QCommandLineParser;
 class DesktopToJson
 {
 public:
-    DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i, const QCommandLineOption &o);
+    DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i,
+                  const QCommandLineOption &o, const QCommandLineOption &v);
     int runMain();
 
 private:
@@ -43,8 +44,10 @@ private:
     QCommandLineParser *m_parser;
     QCommandLineOption input;
     QCommandLineOption output;
+    QCommandLineOption verbose;
     QString m_inFile;
     QString m_outFile;
+    bool m_verbose;
 };
 
 #endif

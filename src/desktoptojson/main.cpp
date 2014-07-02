@@ -29,14 +29,17 @@ int main(int argc, char** argv) {
     const QString description = QStringLiteral("Converts desktop files to json");
     app.setApplicationVersion(QStringLiteral("1.0"));
 
-    const static QString _i = QStringLiteral("input");
-    const static QString _o = QStringLiteral("output");
-    const static QString _n = QStringLiteral("name");
+    const static auto _i = QStringLiteral("input");
+    const static auto _o = QStringLiteral("output");
+    const static auto _n = QStringLiteral("name");
+    const static auto _v = QStringLiteral("verbose");
 
     QCommandLineOption input = QCommandLineOption(QStringList() << QStringLiteral("i") << _i,
                                QStringLiteral("Read input from file"), _n);
     QCommandLineOption output = QCommandLineOption(QStringList() << QStringLiteral("o") << _o,
                                 QStringLiteral("Write output to file"), _n);
+    QCommandLineOption verbose = QCommandLineOption(QStringList() << QStringLiteral("v") << _v,
+                                QStringLiteral("Enable verbose (debug) output"));
 
     QCommandLineParser parser;
     parser.addVersionOption();
@@ -44,8 +47,9 @@ int main(int argc, char** argv) {
     parser.addHelpOption();
     parser.addOption(input);
     parser.addOption(output);
+    parser.addOption(verbose);
 
-    DesktopToJson dtj(&parser, input, output);
+    DesktopToJson dtj(&parser, input, output, verbose);
 
     parser.process(app);
     return dtj.runMain();
