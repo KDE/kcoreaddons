@@ -117,32 +117,27 @@ private Q_SLOTS:
         input.write("InWrongGroup=true\n");
         input.flush();
         input.close();
-        QFile f(input.fileName());
-        QVERIFY(f.open(QFile::ReadOnly));
-        qWarning().nospace() << f.readAll();
-        f.close();
-        input.setAutoRemove(false);
 
         QProcess proc;
         proc.setProgram(DESKTOP_TO_JSON_EXE);
         proc.setArguments(QStringList() << "-i" << input.fileName() << "-o" << output.fileName());
         proc.start();
         QVERIFY(proc.waitForFinished(10000));
-        qDebug() << "STDOUT\n" <<  proc.readAllStandardOutput();
-        qDebug() << "STDERR\n" <<  proc.readAllStandardError();
-        QCOMPARE(proc.readAllStandardError(), QByteArray());
+        qDebug() << "desktoptojson STDOUT:" <<  proc.readAllStandardOutput();
+        QByteArray errorOut = proc.readAllStandardError();
+        if (!errorOut.isEmpty()) {
+            qWarning() << "desktoptojson STDERR:" <<  errorOut;
+            QFAIL("desktoptojson had errors");
+        }
         QCOMPARE(proc.exitCode(), 0);
         QVERIFY(output.open());
         QByteArray jsonString = output.readAll();
-        qWarning().nospace() << jsonString;
-        qWarning();
+        //qDebug() << "result: " << jsonString;
         QJsonParseError e;
         QJsonDocument doc = QJsonDocument::fromJson(jsonString, &e);
         QCOMPARE(e.error, QJsonParseError::NoError);
-        qWarning() << doc;
         QJsonObject result = doc.object();
         for (auto it = result.constBegin(); it != result.constEnd(); ++it) {
-            qDebug() << it.key() << "=" << it.value();
             if (expectedResult.constFind(it.key()) == expectedResult.constEnd()) {
                 qCritical() << "Result has key" << it.key() << "which is not expected!";
                 QFAIL("Invalid output");
@@ -156,7 +151,6 @@ private Q_SLOTS:
             }
             QCOMPARE(it.value(), expectedResult.value(it.key()));
         }
-        //QCOMPARE(doc.object(), expectedResult);
     }
 };
 
