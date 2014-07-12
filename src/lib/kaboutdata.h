@@ -35,7 +35,7 @@ class QVariant;
 class KAboutData;
 namespace KCrash
 {
-void defaultCrashHandler(int sig);
+Q_DECL_IMPORT void defaultCrashHandler(int sig);
 }
 
 /**
