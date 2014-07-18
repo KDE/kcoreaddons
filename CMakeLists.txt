@@ -63,6 +63,7 @@ ecm_configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KF5CoreAddonsConf
 
 install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/KF5CoreAddonsConfig.cmake"
                "${CMAKE_CURRENT_BINARY_DIR}/KF5CoreAddonsConfigVersion.cmake"
+               "${CMAKE_CURRENT_SOURCE_DIR}/KF5CoreAddonsMacros.cmake"
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel )
 
