@@ -64,6 +64,7 @@ set(libkcoreaddons_SRCS
     jobs/kjobuidelegate.cpp
     plugin/kpluginfactory.cpp
     plugin/kpluginloader.cpp
+    plugin/kpluginmetadata.cpp
     randomness/krandom.cpp
     randomness/krandomsequence.cpp
     text/kmacroexpander.cpp
