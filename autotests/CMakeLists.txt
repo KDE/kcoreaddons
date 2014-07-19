@@ -18,6 +18,7 @@ endmacro()
 
 # Build some sample plugins
 build_plugin(jsonplugin jsonplugin.cpp)
+build_plugin(jsonplugin2 jsonplugin2.cpp)
 build_plugin(versionedplugin versionedplugin.cpp)
 build_plugin(unversionedplugin unversionedplugin.cpp)
 build_plugin(multiplugin multiplugin.cpp)

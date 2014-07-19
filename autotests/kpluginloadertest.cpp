@@ -20,8 +20,10 @@
  */
 
 #include <QtTest>
+#include <QFileInfo>
 
 #include <kpluginloader.h>
+#include <kpluginmetadata.h>
 
 class KPluginLoaderTest : public QObject
 {
@@ -218,6 +220,62 @@ private Q_SLOTS:
         QVERIFY(aplugin.load());
         // may need QEXPECT_FAIL on some platforms...
         QVERIFY(aplugin.unload());
+    }
+
+    void testInstantiatePlugins()
+    {
+        const QString plugin1Path = KPluginLoader::findPlugin("jsonplugin");
+        QVERIFY2(!plugin1Path.isEmpty(), qPrintable(plugin1Path));
+        const QString plugin2Path = KPluginLoader::findPlugin("unversionedplugin");
+        QVERIFY2(!plugin2Path.isEmpty(), qPrintable(plugin2Path));
+        const QString plugin3Path = KPluginLoader::findPlugin("jsonplugin2");
+        QVERIFY2(!plugin3Path.isEmpty(), qPrintable(plugin3Path));
+
+        QTemporaryDir temp;
+        QDir dir(temp.path());
+        QVERIFY2(QFile::copy(plugin1Path, dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())),
+            qPrintable(dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())));
+        QVERIFY2(QFile::copy(plugin2Path, dir.absoluteFilePath(QFileInfo(plugin2Path).fileName())),
+            qPrintable(dir.absoluteFilePath(QFileInfo(plugin2Path).fileName())));
+        QVERIFY2(QFile::copy(plugin3Path, dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())),
+            qPrintable(dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())));
+
+        // only jsonplugin, since unversionedplugin has no json metadata
+        QList<QObject*> plugins = KPluginLoader::instantiatePlugins(temp.path());
+        QCOMPARE(plugins.size(), 2);
+        QStringList classNames = QStringList() << plugins[0]->metaObject()->className()
+            << plugins[1]->metaObject()->className();
+        classNames.sort();
+        QCOMPARE(classNames[0], QStringLiteral("jsonplugin2"));
+        QCOMPARE(classNames[1], QStringLiteral("jsonpluginfa"));
+        qDeleteAll(plugins);
+
+        //try filter
+        plugins = KPluginLoader::instantiatePlugins(temp.path(), [](const KPluginMetaData & md) {
+            return md.pluginId() == "jsonplugin";
+        });
+        QCOMPARE(plugins.size(), 1);
+        QCOMPARE(plugins[0]->metaObject()->className(), "jsonpluginfa");
+        qDeleteAll(plugins);
+
+        plugins = KPluginLoader::instantiatePlugins(temp.path(), [](const KPluginMetaData & md) {
+            return md.pluginId() == "unversionedplugin";
+        });
+        QCOMPARE(plugins.size(), 0);
+
+        plugins = KPluginLoader::instantiatePlugins(temp.path(), [](const KPluginMetaData & md) {
+            return md.pluginId() == "foobar"; // ID does not macht file name, is set in JSON
+        });
+        QCOMPARE(plugins.size(), 1);
+        QCOMPARE(plugins[0]->metaObject()->className(), "jsonplugin2");
+        qDeleteAll(plugins);
+
+        // check that parent gets set
+        plugins = KPluginLoader::instantiatePlugins(temp.path(), nullptr, this);
+        QCOMPARE(plugins.size(), 2);
+        QCOMPARE(plugins[0]->parent(), this);
+        QCOMPARE(plugins[1]->parent(), this);
+        qDeleteAll(plugins);
     }
 };
 
