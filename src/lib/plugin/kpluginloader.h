@@ -23,7 +23,10 @@
 #include <QtCore/QPluginLoader>
 #include <QtCore/QtPlugin>
 
+#include <functional>
+
 class KPluginFactory;
+class KPluginMetaData;
 
 class KPluginLoaderPrivate;
 class KPluginName;
@@ -268,6 +271,84 @@ public:
      */
     bool unload();
 
+    /**
+     * Finds and instantiates (by calling QPluginLoader::instance()) all plugins from a given
+     * directory. Only plugins which have JSON metadata will be considered. A filter can be passed
+     * which determines which of the found plugins should actually be loaded.
+     *
+     * If you use KConfig you could have a group "Plugins" in your configuration file with the
+     * plugin name as the key and true/false as the value to indicate whether the plugin should
+     * be loaded. In order to easily load all the enable plugins you could use the following code:
+     * @code
+     * KConfigGroup pluginGroup = KSharedConfig::openConfig().group("Plugins");
+     * auto filter = [&](const KPluginMetaData &md) {
+     *     if (!pluginGroup.hasKey(md.pluginName())) {
+     *         return md.isEnabledByDefault();
+     *     } else {
+     *         return pluginGroup.readEntry(md.pluginName(), false);
+     *     }
+     * }
+     * QVector<QObject*> plugins = KPluginLoader::instantiatePlugins("myapp", filter);
+     * @endcode
+     *
+     * @param directory the directory to search for plugins. If a relative path is given for @p directory,
+     * all entries of  QCoreApplication::libraryPaths() will be checked with @p directory appended as a
+     * subdirectory. If an absolute path is given only that directory will be searched.
+     *
+     * @param filter a callback function that returns @c true if the found plugin should be loaded
+     * and @c false if it should be skipped. If this argument is omitted all plugins will be loaded.
+     *
+     * @param parent the parent to set for the instantiated plugins
+     *
+     * @return a list containing an instantiation of each plugin that met the filter criteria
+     *
+     * @see KPluginLoader::findPlugins()
+     *
+     * @since 5.1
+     */
+    static QList<QObject *> instantiatePlugins(const QString &directory,
+            std::function<bool(const KPluginMetaData &)> filter = Q_NULLPTR, QObject* parent = Q_NULLPTR);
+
+    /**
+     * Find all plugins inside @p directory. Only plugins which have JSON metadata will be considered.
+     *
+     * @param directory The directory to search for plugins. If a relative path is given for @p directory,
+     * all entries of QCoreApplication::libraryPaths() will be checked with @p directory appended as a
+     * subdirectory. If an absolute path is given only that directory will be searched.
+     *
+     * @param filter a callback function that returns @c true if the found plugin should be loaded
+     * and @c false if it should be skipped. If this argument is omitted all plugins will be loaded.
+     *
+     * @return all plugins found in @p directory that fulfil the constraints of @p filter
+     *
+     * @see KPluginLoader::instantiatePlugins()
+     *
+     * @since 5.1
+     */
+    static QVector<KPluginMetaData> findPlugins(const QString &directory,
+            std::function<bool(const KPluginMetaData &)> filter = Q_NULLPTR);
+
+    /**
+     * Invokes @p callback for each valid plugin found inside @p directory. This is useful if
+     * your application needs to customize the behaviour of KPluginLoader::findPlugins() or
+     * KPluginLoader::instantiatePlugins().
+     *
+     * @note The files found do not necessarily contain JSON metadata and may not be loadable using K/QPluginLoader.
+     * The only guarantee made is that they are valid library file names as determined by QLibrary::isLibrary().
+     *
+     * @param directory The directory to search for plugins. If a relative path is given for @p directory,
+     * all entries of QCoreApplication::libraryPaths() will be checked with @p directory appended as a
+     * subdirectory. If an absolute path is given only that directory will be searched.
+     *
+     * @param callback This function will be invoked for each valid plugin that is found. It will receive
+     * the absolute path to the plugin as an argument
+     *
+     * @see KPluginLoader::findPlugins(), KPluginLoader::instantiatePlugins()
+     *
+     * @since 5.1
+     */
+    static void forEachPlugin(const QString &directory,
+            std::function<void(const QString &)> callback = Q_NULLPTR);
 private:
     Q_DECLARE_PRIVATE(KPluginLoader)
     Q_DISABLE_COPY(KPluginLoader)

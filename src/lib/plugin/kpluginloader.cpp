@@ -19,9 +19,11 @@
 #include "kpluginloader.h"
 
 #include "kpluginfactory.h"
+#include "kpluginmetadata.h"
 
 #include <QtCore/QLibrary>
 #include <QtCore/QDir>
+#include <QDirIterator>
 #include <QtCore/QFileInfo>
 #include <QDebug>
 #include <QCoreApplication>
@@ -233,3 +235,60 @@ bool KPluginLoader::unload()
     return d->loader->unload();
 }
 
+
+void KPluginLoader::forEachPlugin(const QString &directory, std::function<void(const QString &)> callback)
+{
+    QStringList dirsToCheck;
+    if (QDir::isAbsolutePath(directory)) {
+        dirsToCheck << directory;
+    } else {
+        foreach (const QString &libDir, QCoreApplication::libraryPaths()) {
+            dirsToCheck << libDir + QDir::separator() + directory;
+        }
+    }
+
+    foreach (const QString &dir, dirsToCheck) {
+        QDirIterator it(dir, QDir::Files);
+        while (it.hasNext()) {
+            it.next();
+            if (QLibrary::isLibrary(it.fileName())) {
+                callback(it.fileInfo().absoluteFilePath());
+            }
+        }
+    }
+}
+
+QVector<KPluginMetaData> KPluginLoader::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)
+{
+    QVector<KPluginMetaData> ret;
+    forEachPlugin(directory, [&](const QString &pluginPath) {
+        KPluginMetaData metadata(pluginPath);
+        if (!metadata.isValid()) {
+            return;
+        }
+        if (filter && !filter(metadata)) {
+            return;
+        }
+        ret.append(metadata);
+    });
+    return ret;
+}
+
+QList<QObject *> KPluginLoader::instantiatePlugins(const QString &directory,
+        std::function<bool(const KPluginMetaData &)> filter, QObject* parent)
+{
+    QList<QObject *> ret;
+    QPluginLoader loader;
+    foreach (const KPluginMetaData &metadata, findPlugins(directory, filter)) {
+        loader.setFileName(metadata.fileName());
+        QObject* obj = loader.instance();
+        if (!obj) {
+            qWarning().nospace() << "Could not instantiate plugin \"" << metadata.fileName() << "\": "
+                << loader.errorString();
+            continue;
+        }
+        obj->setParent(parent);
+        ret.append(obj);
+    }
+    return ret;
+}
