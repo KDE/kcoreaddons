@@ -201,7 +201,7 @@ private Q_SLOTS:
         QVERIFY(jmetadata_metadata.isObject());
         QJsonObject jmetadata_obj = jmetadata_metadata.toObject();
         QVERIFY(!jmetadata_obj.isEmpty());
-        QJsonValue comment = jmetadata_obj.value("Comment");
+        QJsonValue comment = jmetadata_obj.value("KPlugin").toObject().value("Description");
         QVERIFY(comment.isString());
         QCOMPARE(comment.toString(), QString::fromLatin1("This is a plugin"));
 

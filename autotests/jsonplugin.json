@@ -1,3 +1,5 @@
 {
-    "Comment": "This is a plugin"
+    "KPlugin": {
+        "Description": "This is a plugin"
+    }
 }
