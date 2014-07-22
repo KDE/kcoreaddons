@@ -182,67 +182,6 @@ private Q_SLOTS:
         QCOMPARE(KPluginMetaData::readStringList(jo, "ArrayWithNull"), QStringList() << "foo" << "" << "bar");
         QCOMPARE(KPluginMetaData::readStringList(jo, "Object"), QStringList());
     }
-
-    void testFindPlugins()
-    {
-        const QString plugin1Path = KPluginLoader::findPlugin("jsonplugin");
-        QVERIFY2(!plugin1Path.isEmpty(), qPrintable(plugin1Path));
-        const QString plugin2Path = KPluginLoader::findPlugin("unversionedplugin");
-        QVERIFY2(!plugin2Path.isEmpty(), qPrintable(plugin2Path));
-        const QString plugin3Path = KPluginLoader::findPlugin("jsonplugin2");
-        QVERIFY2(!plugin3Path.isEmpty(), qPrintable(plugin3Path));
-
-        QTemporaryDir temp;
-        QDir dir(temp.path());
-        QVERIFY(dir.mkdir("kpluginmetadatatest"));
-        QVERIFY(dir.cd("kpluginmetadatatest"));
-        QVERIFY2(QFile::copy(plugin1Path, dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())),
-            qPrintable(dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())));
-        QVERIFY2(QFile::copy(plugin2Path, dir.absoluteFilePath(QFileInfo(plugin2Path).fileName())),
-            qPrintable(dir.absoluteFilePath(QFileInfo(plugin2Path).fileName())));
-        QVERIFY2(QFile::copy(plugin3Path, dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())),
-            qPrintable(dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())));
-        // we only want plugins from our temporary dir
-        QCoreApplication::setLibraryPaths(QStringList() << temp.path());
-
-        auto sortPlugins = [](const KPluginMetaData &a, const KPluginMetaData &b) {
-            return a.pluginId() < b.pluginId();
-        };
-        // it should find jsonplugin and jsonplugin2 since unversionedplugin does not have any meta data
-        auto plugins = KPluginLoader::findPlugins("kpluginmetadatatest");
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 2);
-        QCOMPARE(plugins[0].pluginId(), QStringLiteral("foobar")); // ID is not the filename, it is set in the JSON metadata
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-        QCOMPARE(plugins[1].pluginId(), QStringLiteral("jsonplugin"));
-        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
-
-        // filter accepts none
-        plugins = KPluginLoader::findPlugins("kpluginmetadatatest", [](const KPluginMetaData &) { return false; });
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 0);
-
-        // filter accepts all
-        plugins = KPluginLoader::findPlugins("kpluginmetadatatest", [](const KPluginMetaData &) { return true; });
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 2);
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
-
-        // invalid std::function as filter
-        plugins = KPluginLoader::findPlugins("kpluginmetadatatest", nullptr);
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 2);
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
-
-        // absolute path, no filter
-        plugins = KPluginLoader::findPlugins(dir.absolutePath());
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 2);
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
-    }
 };
 
 QTEST_MAIN(KPluginMetaDataTest)

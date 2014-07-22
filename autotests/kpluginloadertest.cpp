@@ -232,6 +232,7 @@ private Q_SLOTS:
         QVERIFY2(!plugin3Path.isEmpty(), qPrintable(plugin3Path));
 
         QTemporaryDir temp;
+        QVERIFY(temp.isValid());
         QDir dir(temp.path());
         QVERIFY2(QFile::copy(plugin1Path, dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())),
             qPrintable(dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())));
@@ -276,6 +277,159 @@ private Q_SLOTS:
         QCOMPARE(plugins[0]->parent(), this);
         QCOMPARE(plugins[1]->parent(), this);
         qDeleteAll(plugins);
+
+        const QString subDirName = dir.dirName();
+        QVERIFY(dir.cdUp()); // should now point to /tmp on Linux
+        // instantiate using relative path
+        // make sure library path is set up correctly
+        QCoreApplication::setLibraryPaths(QStringList() << dir.absolutePath());
+        QVERIFY(!QDir::isAbsolutePath(subDirName));
+        plugins = KPluginLoader::instantiatePlugins(subDirName);
+        QCOMPARE(plugins.size(), 2);
+        classNames = QStringList() << plugins[0]->metaObject()->className()
+            << plugins[1]->metaObject()->className();
+        classNames.sort();
+        QCOMPARE(classNames[0], QStringLiteral("jsonplugin2"));
+        QCOMPARE(classNames[1], QStringLiteral("jsonpluginfa"));
+        qDeleteAll(plugins);
+    }
+
+    void testFindPlugins()
+    {
+        const QString plugin1Path = KPluginLoader::findPlugin("jsonplugin");
+        QVERIFY2(!plugin1Path.isEmpty(), qPrintable(plugin1Path));
+        const QString plugin2Path = KPluginLoader::findPlugin("unversionedplugin");
+        QVERIFY2(!plugin2Path.isEmpty(), qPrintable(plugin2Path));
+        const QString plugin3Path = KPluginLoader::findPlugin("jsonplugin2");
+        QVERIFY2(!plugin3Path.isEmpty(), qPrintable(plugin3Path));
+
+        QTemporaryDir temp;
+        QVERIFY(temp.isValid());
+        QDir dir(temp.path());
+        QVERIFY(dir.mkdir("kpluginmetadatatest"));
+        QVERIFY(dir.cd("kpluginmetadatatest"));
+        QVERIFY2(QFile::copy(plugin1Path, dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())),
+            qPrintable(dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())));
+        QVERIFY2(QFile::copy(plugin2Path, dir.absoluteFilePath(QFileInfo(plugin2Path).fileName())),
+            qPrintable(dir.absoluteFilePath(QFileInfo(plugin2Path).fileName())));
+        QVERIFY2(QFile::copy(plugin3Path, dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())),
+            qPrintable(dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())));
+        // we only want plugins from our temporary dir
+        QCoreApplication::setLibraryPaths(QStringList() << temp.path());
+
+        auto sortPlugins = [](const KPluginMetaData &a, const KPluginMetaData &b) {
+            return a.pluginId() < b.pluginId();
+        };
+        // it should find jsonplugin and jsonplugin2 since unversionedplugin does not have any meta data
+        auto plugins = KPluginLoader::findPlugins("kpluginmetadatatest");
+        std::sort(plugins.begin(), plugins.end(), sortPlugins);
+        QCOMPARE(plugins.size(), 2);
+        QCOMPARE(plugins[0].pluginId(), QStringLiteral("foobar")); // ID is not the filename, it is set in the JSON metadata
+        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
+        QCOMPARE(plugins[1].pluginId(), QStringLiteral("jsonplugin"));
+        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
+
+        // filter accepts none
+        plugins = KPluginLoader::findPlugins("kpluginmetadatatest", [](const KPluginMetaData &) { return false; });
+        std::sort(plugins.begin(), plugins.end(), sortPlugins);
+        QCOMPARE(plugins.size(), 0);
+
+        // filter accepts all
+        plugins = KPluginLoader::findPlugins("kpluginmetadatatest", [](const KPluginMetaData &) { return true; });
+        std::sort(plugins.begin(), plugins.end(), sortPlugins);
+        QCOMPARE(plugins.size(), 2);
+        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
+        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
+
+        // invalid std::function as filter
+        plugins = KPluginLoader::findPlugins("kpluginmetadatatest", nullptr);
+        std::sort(plugins.begin(), plugins.end(), sortPlugins);
+        QCOMPARE(plugins.size(), 2);
+        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
+        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
+
+        // absolute path, no filter
+        plugins = KPluginLoader::findPlugins(dir.absolutePath());
+        std::sort(plugins.begin(), plugins.end(), sortPlugins);
+        QCOMPARE(plugins.size(), 2);
+        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
+        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
+    }
+
+    void testForEachPlugin()
+    {
+        const QString jsonPluginSrc = KPluginLoader::findPlugin("jsonplugin");
+        QVERIFY2(!jsonPluginSrc.isEmpty(), qPrintable(jsonPluginSrc));
+        const QString unversionedPluginSrc = KPluginLoader::findPlugin("unversionedplugin");
+        QVERIFY2(!unversionedPluginSrc.isEmpty(), qPrintable(unversionedPluginSrc));
+        const QString jsonPlugin2Src = KPluginLoader::findPlugin("jsonplugin2");
+        QVERIFY2(!jsonPlugin2Src.isEmpty(), qPrintable(jsonPlugin2Src));
+
+        QTemporaryDir temp;
+        QVERIFY(temp.isValid());
+        QDir dir(temp.path());
+        QVERIFY(dir.mkdir("for-each-plugin"));
+        QVERIFY(dir.cd("for-each-plugin"));
+        const QString jsonPluginDest = dir.absoluteFilePath(QFileInfo(jsonPluginSrc).fileName());
+        QVERIFY2(QFile::copy(jsonPluginSrc, jsonPluginDest), qPrintable(jsonPluginDest));
+        const QString unversionedPluginDest = dir.absoluteFilePath(QFileInfo(unversionedPluginSrc).fileName());
+        QVERIFY2(QFile::copy(unversionedPluginSrc, unversionedPluginDest), qPrintable(unversionedPluginDest));
+        // copy jsonplugin2 to a "for-each-plugin" subdirectory in a different directory
+        QTemporaryDir temp2;
+        QVERIFY(temp2.isValid());
+        QDir dir2(temp2.path());
+        QVERIFY(dir2.mkdir("for-each-plugin"));
+        QVERIFY(dir2.cd("for-each-plugin"));
+        const QString jsonPlugin2Dest = dir2.absoluteFilePath(QFileInfo(jsonPlugin2Src).fileName());
+        QVERIFY2(QFile::copy(jsonPlugin2Src, jsonPlugin2Dest), qPrintable(jsonPlugin2Dest));
+
+        QStringList foundPlugins;
+        QStringList expectedPlugins;
+        const auto addToFoundPlugins = [&](const QString &path) {
+            QVERIFY(!path.isEmpty());
+            foundPlugins.append(path);
+        };
+
+        // test finding with absolute path
+        expectedPlugins = QStringList() << jsonPluginDest << unversionedPluginDest;
+        expectedPlugins.sort();
+        KPluginLoader::forEachPlugin(dir.path(), addToFoundPlugins);
+        foundPlugins.sort();
+        QCOMPARE(foundPlugins, expectedPlugins);
+
+
+        expectedPlugins = QStringList() << jsonPlugin2Dest;
+        expectedPlugins.sort();
+        foundPlugins.clear();
+        KPluginLoader::forEachPlugin(dir2.path(), addToFoundPlugins);
+        foundPlugins.sort();
+        QCOMPARE(foundPlugins, expectedPlugins);
+
+        // now test relative paths
+
+        QCoreApplication::setLibraryPaths(QStringList() << temp.path());
+        expectedPlugins = QStringList() << jsonPluginDest << unversionedPluginDest;
+        expectedPlugins.sort();
+        foundPlugins.clear();
+        KPluginLoader::forEachPlugin("for-each-plugin", addToFoundPlugins);
+        foundPlugins.sort();
+        QCOMPARE(foundPlugins, expectedPlugins);
+
+        QCoreApplication::setLibraryPaths(QStringList() << temp2.path());
+        expectedPlugins = QStringList() << jsonPlugin2Dest;
+        expectedPlugins.sort();
+        foundPlugins.clear();
+        KPluginLoader::forEachPlugin("for-each-plugin", addToFoundPlugins);
+        foundPlugins.sort();
+        QCOMPARE(foundPlugins, expectedPlugins);
+
+        QCoreApplication::setLibraryPaths(QStringList() << temp.path() << temp2.path());
+        expectedPlugins = QStringList() << jsonPluginDest << unversionedPluginDest << jsonPlugin2Dest;
+        expectedPlugins.sort();
+        foundPlugins.clear();
+        KPluginLoader::forEachPlugin("for-each-plugin", addToFoundPlugins);
+        foundPlugins.sort();
+        QCOMPARE(foundPlugins, expectedPlugins);
     }
 };
 
