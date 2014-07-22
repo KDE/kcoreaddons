@@ -964,7 +964,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
     } else if (parser->isSet(QStringLiteral("license"))) {
         foundArgument = true;
         Q_FOREACH (const KAboutLicense &license, d->_licenseList) {
-            printf("%s", qPrintable(license.text()));
+            printf("%s\n", qPrintable(license.text()));
         }
     }
 
