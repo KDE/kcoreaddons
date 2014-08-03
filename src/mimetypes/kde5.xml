@@ -1333,7 +1333,7 @@ Notes:
     <comment xml:lang="nds">RealAudio-Moduuldatei</comment>
     <comment xml:lang="nl">RealAudio-bestand</comment>
     <comment xml:lang="nn">RealAudio-programtilleggfil</comment>
-    <comment xml:lang="pa">RealAudio ਪਲੱਗਇਨ ਫਾਇਲ</comment>
+    <comment xml:lang="pa">RealAudio ਪਲੱਗਇਨ ਫਾਈਲ</comment>
     <comment xml:lang="pl">Plik wtyczki RealAudio</comment>
     <comment xml:lang="pt">Ficheiro de 'plugin' do RealAudio</comment>
     <comment xml:lang="pt_BR">Arquivo de plugin do RealAudio</comment>
@@ -1585,7 +1585,7 @@ Notes:
     <comment xml:lang="nds">"Intel® hexadezimaal"-Objektdatei</comment>
     <comment xml:lang="nl">Intel® hexadecimaal objectbestand</comment>
     <comment xml:lang="nn">Intel®-heksobjektfil</comment>
-    <comment xml:lang="pa">Intel® ਹੈਕਸਾਡੈਸੀਮਲ ਆਬਜੈਕਟ ਫਾਇਲ</comment>
+    <comment xml:lang="pa">Intel® ਹੈਕਸਾਡੈਸੀਮਲ ਆਬਜੈਕਟ ਫਾਈਲ</comment>
     <comment xml:lang="pl">Plik obiektu szesnastkowego: Intel®</comment>
     <comment xml:lang="pt">Ficheiro-objecto em hexadecimal da Intel®</comment>
     <comment xml:lang="pt_BR">Arquivo objeto em hexadecimal da Intel®</comment>
@@ -1644,7 +1644,7 @@ Notes:
     <comment xml:lang="nds">Dateilistlader-Moduullist för Kate</comment>
     <comment xml:lang="nl">Kate bestandenlijstlader voor pluginlijst</comment>
     <comment xml:lang="nn">Programtilleggliste for fillistelastar i Kate</comment>
-    <comment xml:lang="pa">ਕੇਟ ਫਾਇਲ ਲਿਸਟ ਲੋਡਰ ਪਲੱਗਇਨ ਲਿਸਟ</comment>
+    <comment xml:lang="pa">ਕੇਟ ਫਾਈਲ ਲਿਸਟ ਲੋਡਰ ਪਲੱਗਇਨ ਲਿਸਟ</comment>
     <comment xml:lang="pl">Lista wtyczki do wczytywania plików Kate</comment>
     <comment xml:lang="pt">Lista de 'plugins' de carregamento de listas de ficheiros do Kate</comment>
     <comment xml:lang="pt_BR">Lista de plugins de carregamento de listas de arquivos do Kate</comment>
@@ -2181,7 +2181,7 @@ Notes:
     <comment xml:lang="nds">Kommander-Datei</comment>
     <comment xml:lang="nl">Kommander-bestand</comment>
     <comment xml:lang="nn">Kommander-fil</comment>
-    <comment xml:lang="pa">Kommander ਫਾਇਲ</comment>
+    <comment xml:lang="pa">Kommander ਫਾਈਲ</comment>
     <comment xml:lang="pl">Plik Kommandera</comment>
     <comment xml:lang="pt">Ficheiro do Kommander</comment>
     <comment xml:lang="pt_BR">Arquivo do Kommander</comment>
@@ -2842,7 +2842,7 @@ Notes:
     <comment xml:lang="nds">KmPlot-Datei</comment>
     <comment xml:lang="nl">KmPlot-bestand</comment>
     <comment xml:lang="nn">KmPlot-fil</comment>
-    <comment xml:lang="pa">KmPlot ਫਾਇਲ</comment>
+    <comment xml:lang="pa">KmPlot ਫਾਈਲ</comment>
     <comment xml:lang="pl">Plik KmPlot</comment>
     <comment xml:lang="pt">Ficheiro do KmPlot</comment>
     <comment xml:lang="pt_BR">Arquivo do KmPlot</comment>
@@ -2957,7 +2957,7 @@ Notes:
     <comment xml:lang="nds">Profilutgaav för Cachegrind/Callgrind</comment>
     <comment xml:lang="nl">Cachegrind/Callgrind profieldump</comment>
     <comment xml:lang="nn">Cachegrind/Callgrind-profildump</comment>
-    <comment xml:lang="pa">Cachegrind/Callgrind ਪਰੋਫਾਇਲ ਡੰਪ</comment>
+    <comment xml:lang="pa">Cachegrind/Callgrind ਪਰੋਫਾਈਲ ਡੰਪ</comment>
     <comment xml:lang="pl">Zrzut profilu Cachegrinda/Callgrinda</comment>
     <comment xml:lang="pt">Resultado da análise do Cachegrind/Callgrind</comment>
     <comment xml:lang="pt_BR">Resultado da análise do Cachegrind/Callgrind</comment>
@@ -3586,6 +3586,7 @@ Notes:
     <comment xml:lang="da">Mobipocket e-bog</comment>
     <comment xml:lang="de">Mobipocket-e-book</comment>
     <comment xml:lang="el">Ηλ. βιβλίο Mobipocket</comment>
+    <comment xml:lang="en_GB">Mobipocket e-book</comment>
     <comment xml:lang="es">Libro electrónico Mobipocket</comment>
     <comment xml:lang="et">Mobipocketi e-raamat</comment>
     <comment xml:lang="eu">Mobipocket liburu elektronikoa (e-book)</comment>
@@ -3645,8 +3646,11 @@ Notes:
     <comment xml:lang="cs">Obrázek WebP</comment>
     <comment xml:lang="de">WebP-Bild</comment>
     <comment xml:lang="el">Εικόνα WebP</comment>
+    <comment xml:lang="en_GB">WebP image</comment>
     <comment xml:lang="es">Imagen WebP</comment>
     <comment xml:lang="fi">WebP-kuva</comment>
+    <comment xml:lang="fr">Image WebP</comment>
+    <comment xml:lang="gl">Imaxe WebP</comment>
     <comment xml:lang="hu">WebP-kép</comment>
     <comment xml:lang="ia">Imagine de WebP</comment>
     <comment xml:lang="it">immagine WebP</comment>
