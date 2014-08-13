@@ -9,9 +9,3 @@ such as manipulating mime types, autosaving files, creating backup files,
 generating random sequences, performing text manipulations such as macro
 replacement, accessing user information and many more.
 
-## Links
-
-- Home page: <https://projects.kde.org/projects/frameworks/kcoreaddons>
-- Mailing list: <https://mail.kde.org/mailman/listinfo/kde-frameworks-devel>
-- IRC channel: #kde-devel on Freenode
-- Git repository: <https://projects.kde.org/projects/frameworks/kcoreaddons/repository>
