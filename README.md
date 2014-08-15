@@ -1,7 +1,5 @@
 # KCoreAddons
 
-Utilities for core application functionality and accessing the OS
-
 ## Introduction
 
 KCoreAddons provides classes built on top of QtCore to perform various tasks
