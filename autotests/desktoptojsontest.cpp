@@ -43,11 +43,38 @@ class DesktopToJsonTest : public QObject
 {
     Q_OBJECT
 
+private:
+    void compareJson(const QJsonObject& actual, const QJsonObject& expected) {
+        for (auto it = actual.constBegin(); it != actual.constEnd(); ++it) {
+            if (expected.constFind(it.key()) == expected.constEnd()) {
+                qCritical() << "Result has key" << it.key() << "which is not expected!";
+                QFAIL("Invalid output");
+            }
+            if (it.value().isObject() && expected.value(it.key()).isObject()) {
+                compareJson(it.value().toObject(), expected.value(it.key()).toObject());
+            } else {
+                QCOMPARE(it.value(), expected.value(it.key()));
+            }
+        }
+        for (auto it = expected.constBegin(); it != expected.constEnd(); ++it) {
+            if (actual.constFind(it.key()) == actual.constEnd()) {
+                qCritical() << "Result is missing key" << it.key();
+                QFAIL("Invalid output");
+            }
+            if (it.value().isObject() && actual.value(it.key()).isObject()) {
+                compareJson(it.value().toObject(), actual.value(it.key()).toObject());
+            } else {
+                QCOMPARE(it.value(), actual.value(it.key()));
+            }
+        }
+    }
+
 private Q_SLOTS:
     void testDesktopToJson() {
         QTemporaryFile output;
         QTemporaryFile input;
         QJsonObject expectedResult;
+        QJsonObject kpluginObj;
         QVERIFY(input.open());
         QVERIFY(output.open()); // create the file
         output.close();
@@ -60,13 +87,13 @@ private Q_SLOTS:
         input.write("[Desktop Entry]\n");
         // only data inside [Desktop Entry] should be included
         input.write("Name=Example\n");
-        expectedResult["Name"] = "Example";
+        kpluginObj["Name"] = "Example";
         //empty lines
         input.write("\n");
         input.write(" \n");
             // make sure translations are included:
         input.write("Name[de_DE]=Beispiel\n");
-        expectedResult["Name[de_DE]"] = "Beispiel";
+        kpluginObj["Name[de_DE]"] = "Beispiel";
             // ignore comments:
         input.write("#Comment=Comment\n");
         input.write("  #Comment=Comment\n");
@@ -101,22 +128,24 @@ private Q_SLOTS:
         expectedResult["EscapeSequences"] = "So me esc\nap\te se\\qu\re\\nces";
         // the standard keys that are used by plugins, make sure correct types are used:
         input.write("X-KDE-PluginInfo-Category=Examples\n"); // string key
-        expectedResult["X-KDE-PluginInfo-Category"] = "Examples";
+        kpluginObj["Category"] = "Examples";
         // The multiple values should be separated by a semicolon and the value of the key
         // may be optionally terminated by a semicolon. Trailing empty strings must always
         // be terminated with a semicolon. Semicolons in these values need to be escaped using \;.
         input.write("X-KDE-PluginInfo-Depends=foo,bar,esc\\,aped\n"); // string list key
-        expectedResult["X-KDE-PluginInfo-Depends"] = QJsonArray::fromStringList(QStringList()
+        kpluginObj["Dependencies"] = QJsonArray::fromStringList(QStringList()
             << "foo" << "bar" << "esc,aped");
         input.write("X-KDE-ServiceTypes=\n"); // empty string list
-        expectedResult["X-KDE-ServiceTypes"] = QJsonArray::fromStringList(QStringList());
+        kpluginObj["ServiceTypes"] = QJsonArray::fromStringList(QStringList());
         input.write("X-KDE-PluginInfo-EnabledByDefault=true\n"); // bool key
-        expectedResult["X-KDE-PluginInfo-EnabledByDefault"] = true;
+        kpluginObj["EnabledByDefault"] = true;
         // now start a new group
         input.write("[New Group]\n");
         input.write("InWrongGroup=true\n");
         input.flush();
         input.close();
+        expectedResult["KPlugin"] = kpluginObj;
+
 
         QProcess proc;
         proc.setProgram(DESKTOP_TO_JSON_EXE);
@@ -137,20 +166,92 @@ private Q_SLOTS:
         QJsonDocument doc = QJsonDocument::fromJson(jsonString, &e);
         QCOMPARE(e.error, QJsonParseError::NoError);
         QJsonObject result = doc.object();
-        for (auto it = result.constBegin(); it != result.constEnd(); ++it) {
-            if (expectedResult.constFind(it.key()) == expectedResult.constEnd()) {
-                qCritical() << "Result has key" << it.key() << "which is not expected!";
-                QFAIL("Invalid output");
-            }
-            QCOMPARE(it.value(), expectedResult.value(it.key()));
+        compareJson(result, expectedResult);
+        QVERIFY(!QTest::currentTestFailed());
+
+    }
+
+    // test the conversion of some existing plugin
+    void testConvertKdevCppSupport()
+    {
+        QTemporaryFile output;
+        QTemporaryFile input;
+        QVERIFY(input.open());
+        QVERIFY(output.open()); // create the file
+        output.close();
+        // this is kdevcppsupport.desktop file with a most translations stripped
+        input.write(
+            "[Desktop Entry]\n"
+            "Type=Service\n"
+            "Icon=text-x-c++src\n"
+            "Exec=blubb\n"
+            "Comment=C/C++ Language Support\n"
+            "Comment[fr]=Prise en charge du langage C/C++\n"
+            "Comment[it]=Supporto al linguaggio C/C++\n"
+            "Name=C++ Support\n"
+            "Name[fi]=C++-tuki\n"
+            "Name[fr]=Prise en charge du C++\n"
+            "GenericName=Language Support\n"
+            "GenericName[sl]=Podpora jeziku\n"
+            "ServiceTypes=KDevelop/Plugin\n"
+            "X-KDE-Library=kdevcpplanguagesupport\n"
+            "X-KDE-PluginInfo-Name=kdevcppsupport\n"
+            "X-KDE-PluginInfo-Category=Language Support\n"
+            "X-KDevelop-Version=1\n"
+            "X-KDevelop-Language=C++\n"
+            "X-KDevelop-Args=CPP\n"
+            "X-KDevelop-Interfaces=ILanguageSupport\n"
+            "X-KDevelop-SupportedMimeTypes=text/x-chdr,text/x-c++hdr,text/x-csrc,text/x-c++src\n"
+            "X-KDevelop-Mode=NoGUI\n"
+            "X-KDevelop-LoadMode=AlwaysOn"
+        );
+        input.flush();
+        input.close();
+
+        QProcess proc;
+        proc.setProgram(DESKTOP_TO_JSON_EXE);
+        proc.setArguments(QStringList() << "-i" << input.fileName() << "-o" << output.fileName());
+        proc.start();
+        QVERIFY(proc.waitForFinished(10000));
+        qDebug() << "desktoptojson STDOUT:" <<  proc.readAllStandardOutput();
+        QByteArray errorOut = proc.readAllStandardError();
+        if (!errorOut.isEmpty()) {
+            qWarning() << "desktoptojson STDERR:" <<  errorOut;
+            QFAIL("desktoptojson had errors");
         }
-        for (auto it = expectedResult.constBegin(); it != expectedResult.constEnd(); ++it) {
-            if (result.constFind(it.key()) == result.constEnd()) {
-                qCritical() << "Result is missing key" << it.key();
-                QFAIL("Invalid output");
-            }
-            QCOMPARE(it.value(), expectedResult.value(it.key()));
-        }
+        QCOMPARE(proc.exitCode(), 0);
+        QVERIFY(output.open());
+        QByteArray jsonString = output.readAll();
+        //qDebug() << "result: " << jsonString;
+        QJsonParseError e;
+        QJsonObject result = QJsonDocument::fromJson(jsonString, &e).object();
+        QCOMPARE(e.error, QJsonParseError::NoError);
+        QJsonObject expected = QJsonDocument::fromJson("{\n"
+            " \"GenericName\": \"Language Support\",\n"
+            " \"GenericName[sl]\": \"Podpora jeziku\",\n"
+            " \"KPlugin\": {\n"
+            "     \"Category\": \"Language Support\",\n"
+            "     \"Description\": \"C/C++ Language Support\",\n"
+            "     \"Description[fr]\": \"Prise en charge du langage C/C++\",\n"
+            "     \"Description[it]\": \"Supporto al linguaggio C/C++\",\n"
+            "     \"Icon\": \"text-x-c++src\",\n"
+            "     \"Id\": \"kdevcppsupport\",\n"
+            "     \"Name\": \"C++ Support\",\n"
+            "     \"Name[fi]\": \"C++-tuki\",\n"
+            "     \"Name[fr]\": \"Prise en charge du C++\",\n"
+            "     \"ServiceTypes\": [ \"KDevelop/Plugin\" ]\n"
+            " },\n"
+            " \"X-KDevelop-Args\": \"CPP\",\n"
+            " \"X-KDevelop-Interfaces\": \"ILanguageSupport\",\n"
+            " \"X-KDevelop-Language\": \"C++\",\n"
+            " \"X-KDevelop-LoadMode\": \"AlwaysOn\",\n"
+            " \"X-KDevelop-Mode\": \"NoGUI\",\n"
+            " \"X-KDevelop-SupportedMimeTypes\": \"text/x-chdr,text/x-c++hdr,text/x-csrc,text/x-c++src\",\n"
+            " \"X-KDevelop-Version\": \"1\"\n"
+            "}\n", &e).object();
+        QCOMPARE(e.error, QJsonParseError::NoError);
+        compareJson(result, expected);
+        QVERIFY(!QTest::currentTestFailed());
     }
 };
 
