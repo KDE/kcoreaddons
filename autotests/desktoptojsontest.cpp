@@ -70,117 +70,94 @@ private:
     }
 
 private Q_SLOTS:
-    void testDesktopToJson() {
-        QTemporaryFile output;
-        QTemporaryFile input;
+
+    void testDesktopToJson_data()
+    {
+        QTest::addColumn<QByteArray>("input");
+        QTest::addColumn<QJsonObject>("expectedResult");
+        QTest::addColumn<bool>("compatibilityMode");
+
         QJsonObject expectedResult;
         QJsonObject kpluginObj;
-        QVERIFY(input.open());
-        QVERIFY(output.open()); // create the file
-        output.close();
-        input.write(
+        QByteArray input =
             // include an insignificant group
             "[Some Group]\n"
             "Foo=Bar\n"
             "\n"
-        );
-        input.write("[Desktop Entry]\n");
+            "[Desktop Entry]\n"
         // only data inside [Desktop Entry] should be included
-        input.write("Name=Example\n");
-        kpluginObj["Name"] = "Example";
+            "Name=Example\n"
         //empty lines
-        input.write("\n");
-        input.write(" \n");
+            "\n"
+            " \n"
             // make sure translations are included:
-        input.write("Name[de_DE]=Beispiel\n");
-        kpluginObj["Name[de_DE]"] = "Beispiel";
+            "Name[de_DE]=Beispiel\n"
             // ignore comments:
-        input.write("#Comment=Comment\n");
-        input.write("  #Comment=Comment\n");
-        input.write("Categories=foo;bar;a\\;b\n");
-        expectedResult["Categories"] = "foo;bar;a\\;b";
+            "#Comment=Comment\n"
+            "  #Comment=Comment\n"
+            "Categories=foo;bar;a\\;b\n"
         // As the case is significant, the keys Name and NAME are not equivalent:
-        input.write("CaseSensitive=ABC\n");
-        expectedResult["CaseSensitive"] = "ABC";
-        input.write("CASESENSITIVE=abc\n");
-        expectedResult["CASESENSITIVE"] = "abc";
+            "CaseSensitive=ABC\n"
+            "CASESENSITIVE=abc\n"
         // Space before and after the equals sign should be ignored:
-        input.write("SpacesBeforeEq   =foo\n");
-        expectedResult["SpacesBeforeEq"] = "foo";
-        input.write("SpacesAfterEq=   foo\n");
-        expectedResult["SpacesAfterEq"] = "foo";
+            "SpacesBeforeEq   =foo\n"
+            "SpacesAfterEq=   foo\n"
         //  Space before and after the equals sign should be ignored; the = sign is the actual delimiter.
         // TODO: error in spec (spaces before and after the key??)
-        input.write("   SpacesBeforeKey=foo\n");
-        expectedResult["SpacesBeforeKey"] = "foo";
-        input.write("SpacesAfterKey   =foo\n");
-        expectedResult["SpacesAfterKey"] = "foo";
+            "   SpacesBeforeKey=foo\n"
+            "SpacesAfterKey   =foo\n"
         // ignore trailing spaces
-        input.write("TrailingSpaces=foo   \n");
-        expectedResult["TrailingSpaces"] = "foo";
+            "TrailingSpaces=foo   \n"
         // However spaces in the value are significant:
-        input.write("SpacesInValue=Hello, World!\n");
-        expectedResult["SpacesInValue"] = "Hello, World!";
+            "SpacesInValue=Hello, World!\n"
         //  The escape sequences \s, \n, \t, \r, and \\ are supported for values of
         // type string and localestring, meaning ASCII space, newline, tab,
         // carriage return, and backslash, respectively:
-        input.write("EscapeSequences=So\\sme esc\\nap\\te se\\\\qu\\re\\\\nces\n"); // make sure that the last n is a literal n not a newline!
-        expectedResult["EscapeSequences"] = "So me esc\nap\te se\\qu\re\\nces";
+            "EscapeSequences=So\\sme esc\\nap\\te se\\\\qu\\re\\\\nces\n" // make sure that the last n is a literal n not a newline!
         // the standard keys that are used by plugins, make sure correct types are used:
-        input.write("X-KDE-PluginInfo-Category=Examples\n"); // string key
-        kpluginObj["Category"] = "Examples";
+            "X-KDE-PluginInfo-Category=Examples\n" // string key
         // The multiple values should be separated by a semicolon and the value of the key
         // may be optionally terminated by a semicolon. Trailing empty strings must always
         // be terminated with a semicolon. Semicolons in these values need to be escaped using \;.
-        input.write("X-KDE-PluginInfo-Depends=foo,bar,esc\\,aped\n"); // string list key
-        kpluginObj["Dependencies"] = QJsonArray::fromStringList(QStringList()
-            << "foo" << "bar" << "esc,aped");
-        input.write("X-KDE-ServiceTypes=\n"); // empty string list
-        kpluginObj["ServiceTypes"] = QJsonArray::fromStringList(QStringList());
-        input.write("X-KDE-PluginInfo-EnabledByDefault=true\n"); // bool key
-        kpluginObj["EnabledByDefault"] = true;
+            "X-KDE-PluginInfo-Depends=foo,bar,esc\\,aped\n" // string list key
+            "X-KDE-ServiceTypes=\n" // empty string list
+            "X-KDE-PluginInfo-EnabledByDefault=true\n" // bool key
         // now start a new group
-        input.write("[New Group]\n");
-        input.write("InWrongGroup=true\n");
-        input.flush();
-        input.close();
+            "[New Group]\n"
+            "InWrongGroup=true\n";
+
+        expectedResult["Categories"] = "foo;bar;a\\;b";
+        expectedResult["CaseSensitive"] = "ABC";
+        expectedResult["CASESENSITIVE"] = "abc";
+        expectedResult["SpacesBeforeEq"] = "foo";
+        expectedResult["SpacesAfterEq"] = "foo";
+        expectedResult["SpacesBeforeKey"] = "foo";
+        expectedResult["SpacesAfterKey"] = "foo";
+        expectedResult["TrailingSpaces"] = "foo";
+        expectedResult["SpacesInValue"] = "Hello, World!";
+        expectedResult["EscapeSequences"] = "So me esc\nap\te se\\qu\re\\nces";
+        kpluginObj["Name"] = "Example";
+        kpluginObj["Name[de_DE]"] = "Beispiel";
+        kpluginObj["Category"] = "Examples";
+        kpluginObj["Dependencies"] = QJsonArray::fromStringList(QStringList() << "foo" << "bar" << "esc,aped");
+        kpluginObj["ServiceTypes"] = QJsonArray::fromStringList(QStringList());
+        kpluginObj["EnabledByDefault"] = true;
+        QJsonObject compatResult = expectedResult;
+        compatResult["Name"] = "Example";
+        compatResult["Name[de_DE]"] = "Beispiel";
+        compatResult["X-KDE-PluginInfo-Category"] = "Examples";
+        compatResult["X-KDE-PluginInfo-Depends"] = QJsonArray::fromStringList(QStringList() << "foo" << "bar" << "esc,aped");
+        compatResult["X-KDE-ServiceTypes"] = QJsonArray::fromStringList(QStringList());
+        compatResult["X-KDE-PluginInfo-EnabledByDefault"] = true;
+
         expectedResult["KPlugin"] = kpluginObj;
 
+        QTest::newRow("newFormat") << input << expectedResult << false;
+        QTest::newRow("compatFormat") << input << compatResult << true;
 
-        QProcess proc;
-        proc.setProgram(DESKTOP_TO_JSON_EXE);
-        proc.setArguments(QStringList() << "-i" << input.fileName() << "-o" << output.fileName());
-        proc.start();
-        QVERIFY(proc.waitForFinished(10000));
-        qDebug() << "desktoptojson STDOUT:" <<  proc.readAllStandardOutput();
-        QByteArray errorOut = proc.readAllStandardError();
-        if (!errorOut.isEmpty()) {
-            qWarning() << "desktoptojson STDERR:" <<  errorOut;
-            QFAIL("desktoptojson had errors");
-        }
-        QCOMPARE(proc.exitCode(), 0);
-        QVERIFY(output.open());
-        QByteArray jsonString = output.readAll();
-        //qDebug() << "result: " << jsonString;
-        QJsonParseError e;
-        QJsonDocument doc = QJsonDocument::fromJson(jsonString, &e);
-        QCOMPARE(e.error, QJsonParseError::NoError);
-        QJsonObject result = doc.object();
-        compareJson(result, expectedResult);
-        QVERIFY(!QTest::currentTestFailed());
 
-    }
-
-    // test the conversion of some existing plugin
-    void testConvertKdevCppSupport()
-    {
-        QTemporaryFile output;
-        QTemporaryFile input;
-        QVERIFY(input.open());
-        QVERIFY(output.open()); // create the file
-        output.close();
-        // this is kdevcppsupport.desktop file with a most translations stripped
-        input.write(
+        // test conversion of a currently existing .desktop file (excluding most of the translations):
+        QByteArray kdevInput =
             "[Desktop Entry]\n"
             "Type=Service\n"
             "Icon=text-x-c++src\n"
@@ -203,30 +180,10 @@ private Q_SLOTS:
             "X-KDevelop-Interfaces=ILanguageSupport\n"
             "X-KDevelop-SupportedMimeTypes=text/x-chdr,text/x-c++hdr,text/x-csrc,text/x-c++src\n"
             "X-KDevelop-Mode=NoGUI\n"
-            "X-KDevelop-LoadMode=AlwaysOn"
-        );
-        input.flush();
-        input.close();
+            "X-KDevelop-LoadMode=AlwaysOn";
 
-        QProcess proc;
-        proc.setProgram(DESKTOP_TO_JSON_EXE);
-        proc.setArguments(QStringList() << "-i" << input.fileName() << "-o" << output.fileName());
-        proc.start();
-        QVERIFY(proc.waitForFinished(10000));
-        qDebug() << "desktoptojson STDOUT:" <<  proc.readAllStandardOutput();
-        QByteArray errorOut = proc.readAllStandardError();
-        if (!errorOut.isEmpty()) {
-            qWarning() << "desktoptojson STDERR:" <<  errorOut;
-            QFAIL("desktoptojson had errors");
-        }
-        QCOMPARE(proc.exitCode(), 0);
-        QVERIFY(output.open());
-        QByteArray jsonString = output.readAll();
-        //qDebug() << "result: " << jsonString;
         QJsonParseError e;
-        QJsonObject result = QJsonDocument::fromJson(jsonString, &e).object();
-        QCOMPARE(e.error, QJsonParseError::NoError);
-        QJsonObject expected = QJsonDocument::fromJson("{\n"
+        QJsonObject kdevExpected = QJsonDocument::fromJson("{\n"
             " \"GenericName\": \"Language Support\",\n"
             " \"GenericName[sl]\": \"Podpora jeziku\",\n"
             " \"KPlugin\": {\n"
@@ -250,7 +207,50 @@ private Q_SLOTS:
             " \"X-KDevelop-Version\": \"1\"\n"
             "}\n", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
-        compareJson(result, expected);
+        QTest::newRow("kdevcpplanguagesupport") << kdevInput << kdevExpected << false;
+
+
+    }
+    void testDesktopToJson()
+    {
+        QTemporaryFile output;
+        QTemporaryFile inputFile;
+        QVERIFY(inputFile.open());
+        QVERIFY(output.open()); // create the file
+        QFETCH(QByteArray, input);
+        QFETCH(QJsonObject, expectedResult);
+        QFETCH(bool, compatibilityMode);
+        output.close();
+        inputFile.write(input);
+        inputFile.flush();
+        inputFile.close();
+        qDebug() << expectedResult;
+
+
+        QProcess proc;
+        proc.setProgram(DESKTOP_TO_JSON_EXE);
+        QStringList arguments = QStringList() << "-i" << inputFile.fileName() << "-o" << output.fileName();
+        if (compatibilityMode) {
+            arguments << "-c";
+        }
+        proc.setArguments(arguments);
+        proc.start();
+        QVERIFY(proc.waitForFinished(10000));
+        qDebug() << "desktoptojson STDOUT:" <<  proc.readAllStandardOutput();
+        QByteArray errorOut = proc.readAllStandardError();
+        if (!errorOut.isEmpty()) {
+            qWarning() << "desktoptojson STDERR:" <<  errorOut;
+            QFAIL("desktoptojson had errors");
+        }
+        QCOMPARE(proc.exitCode(), 0);
+        QVERIFY(output.open());
+        QByteArray jsonString = output.readAll();
+        qDebug() << "result: " << jsonString;
+        QJsonParseError e;
+        QJsonDocument doc = QJsonDocument::fromJson(jsonString, &e);
+        QCOMPARE(e.error, QJsonParseError::NoError);
+        QJsonObject result = doc.object();
+        compareJson(result, expectedResult);
         QVERIFY(!QTest::currentTestFailed());
     }
 };
