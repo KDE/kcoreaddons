@@ -152,6 +152,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KExportPlugin
         KPluginFactory
         KPluginLoader
+        KPluginMetaData
     RELATIVE plugin
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
