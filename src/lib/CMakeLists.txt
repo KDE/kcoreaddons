@@ -70,6 +70,7 @@ set(libkcoreaddons_SRCS
     text/kmacroexpander.cpp
     text/kstringhandler.cpp
     util/kdelibs4migration.cpp
+    util/kdelibs4configmigrator.cpp
     util/kformat.cpp
     util/kformatprivate.cpp
     util/kshell.cpp

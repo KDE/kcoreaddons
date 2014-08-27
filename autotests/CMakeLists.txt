@@ -24,6 +24,8 @@ build_plugin(unversionedplugin unversionedplugin.cpp)
 build_plugin(multiplugin multiplugin.cpp)
 build_plugin(alwaysunloadplugin alwaysunloadplugin.cpp)
 
+add_definitions( -DKDELIBS4CONFIGMIGRATOR_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data" )
+
 ecm_add_tests(
     kaboutdatatest.cpp
     kautosavefiletest.cpp
@@ -41,6 +43,7 @@ ecm_add_tests(
     kusertest.cpp
     kdelibs4migrationtest.cpp
     desktoptojsontest.cpp
+    kdelibs4configmigratortest.cpp
     LINK_LIBRARIES Qt5::Test KF5::CoreAddons
 )
 
