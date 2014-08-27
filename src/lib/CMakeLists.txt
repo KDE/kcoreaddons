@@ -177,6 +177,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KUser
         KShell
         Kdelibs4Migration
+        Kdelibs4ConfigMigrator
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
