@@ -910,7 +910,6 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
         app->setApplicationName(aboutData.componentName());
         app->setOrganizationDomain(aboutData.organizationDomain());
         app->setProperty("applicationDisplayName", aboutData.displayName());
-        app->setProperty("applicationIconName", s_registry->m_appData->programIconName());
     }
 }
 

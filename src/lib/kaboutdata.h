@@ -556,15 +556,19 @@ public:
     KAboutData &setDisplayName(const QString &displayName);
 
     /**
-     * Defines the program icon.
+     * Obsolete method
      *
-     * Use this if you need to have an application icon
-     * whose name is different than the application name.
+     * This method used to set the icon name but this is no longer
+     * possible in KDE Frameworks 5 because KCoreAddons does not
+     * depend on QtGui.
+     * 
+     * Use QApplication:: setWindowIcon( QIcon::fromTheme() ) instead.
      *
      * @param iconName name of the icon. Example: "accessories-text-editor"
      * @see programIconName()
      */
-    KAboutData &setProgramIconName(const QString &iconName);
+    // KF6 remove this
+    KCOREADDONS_DEPRECATED KAboutData &setProgramIconName(const QString &iconName);
 
     /**
      * Defines the program logo.
