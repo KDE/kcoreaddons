@@ -194,6 +194,8 @@ void DesktopToJson::convertToJson(const QString &key, const QString &value, QJso
         kplugin[QStringLiteral("Category")] = value;
     } else if (key == QLatin1String("X-KDE-PluginInfo-License")) {
         kplugin[QStringLiteral("License")] = value;
+    } else if (key == QLatin1String("X-KDE-PluginInfo-Version")) {
+        kplugin[QStringLiteral("Version")] = value;
     } else if (key == QLatin1String("X-KDE-PluginInfo-Website")) {
         kplugin[QStringLiteral("Website")] = value;
     } else if (key == QLatin1String("X-KDE-PluginInfo-Depends")) {

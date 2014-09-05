@@ -116,6 +116,7 @@ private Q_SLOTS:
             "EscapeSequences=So\\sme esc\\nap\\te se\\\\qu\\re\\\\nces\n" // make sure that the last n is a literal n not a newline!
         // the standard keys that are used by plugins, make sure correct types are used:
             "X-KDE-PluginInfo-Category=Examples\n" // string key
+            "X-KDE-PluginInfo-Version=1.0\n"
         // The multiple values should be separated by a semicolon and the value of the key
         // may be optionally terminated by a semicolon. Trailing empty strings must always
         // be terminated with a semicolon. Semicolons in these values need to be escaped using \;.
@@ -142,10 +143,12 @@ private Q_SLOTS:
         kpluginObj["Dependencies"] = QJsonArray::fromStringList(QStringList() << "foo" << "bar" << "esc,aped");
         kpluginObj["ServiceTypes"] = QJsonArray::fromStringList(QStringList());
         kpluginObj["EnabledByDefault"] = true;
+        kpluginObj["Version"] = "1.0";
         QJsonObject compatResult = expectedResult;
         compatResult["Name"] = "Example";
         compatResult["Name[de_DE]"] = "Beispiel";
         compatResult["X-KDE-PluginInfo-Category"] = "Examples";
+        compatResult["X-KDE-PluginInfo-Version"] = "1.0";
         compatResult["X-KDE-PluginInfo-Depends"] = QJsonArray::fromStringList(QStringList() << "foo" << "bar" << "esc,aped");
         compatResult["X-KDE-ServiceTypes"] = QJsonArray::fromStringList(QStringList());
         compatResult["X-KDE-PluginInfo-EnabledByDefault"] = true;
