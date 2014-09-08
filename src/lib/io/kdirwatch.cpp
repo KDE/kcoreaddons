@@ -114,7 +114,6 @@ static KDirWatch::Method methodFromString(const QByteArray &method)
     }
 }
 
-#ifndef NDEBUG
 static const char *methodToString(KDirWatch::Method method)
 {
     switch (method) {
@@ -130,7 +129,6 @@ static const char *methodToString(KDirWatch::Method method)
         return "ERROR!";
     }
 }
-#endif
 
 static const char s_envNfsPoll[] = "KDIRWATCH_NFSPOLLINTERVAL";
 static const char s_envPoll[] = "KDIRWATCH_POLLINTERVAL";
@@ -232,9 +230,10 @@ KDirWatchPrivate::KDirWatchPrivate()
     availableMethods << "QFileSystemWatcher";
     fsWatcher = 0;
 #endif
-#ifndef NDEBUG
-    qDebug() << "Available methods: " << availableMethods << "preferred=" << methodToString(m_preferredMethod);
-#endif
+    
+    if (s_verboseDebug) {
+        qDebug() << "Available methods: " << availableMethods << "preferred=" << methodToString(m_preferredMethod);
+    }
 }
 
 // This is called on app exit (when K_GLOBAL_STATIC deletes KDirWatch::self)
@@ -886,10 +885,12 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path,
         e->addClient(instance, watchModes);
     }
 
-    qDebug().nospace() << "Added " << (e->isDir ? "Dir " : "File ") << path
+    if (s_verboseDebug) {
+        qDebug().nospace() << "Added " << (e->isDir ? "Dir " : "File ") << path
                        << (e->m_status == NonExistent ? " NotExisting" : "")
                        << " for " << (sub_entry ? sub_entry->path : QString())
                        << " [" << (instance ? instance->objectName() : QString()) << "]";
+    }
 
     // now setup the notification method
     e->m_mode = UnknownMode;
