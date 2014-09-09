@@ -74,3 +74,5 @@ QString KFormat::formatRelativeDateTime(const QDateTime &dateTime,
 {
     return d->formatRelativeDateTime(dateTime, format);
 }
+
+#include "moc_kformat.cpp"

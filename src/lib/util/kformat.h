@@ -67,6 +67,8 @@ class KFormatPrivate;
   */
 class KCOREADDONS_EXPORT KFormat Q_DECL_FINAL
 {
+    Q_GADGET
+
 public:
     /**
      * These binary units are used in KDE by the formatByteSize()
@@ -143,6 +145,7 @@ public:
         FoldHours           = 0x8    ///< Fold the hours into the minutes, e.g. 83:45 or 83m45s, overrides HideSeconds
     };
     Q_DECLARE_FLAGS(DurationFormatOptions, DurationFormatOption)
+    Q_FLAGS(DurationFormatOption)
 
     /**
      * Constructs a KFormat.
