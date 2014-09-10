@@ -49,9 +49,17 @@ public:
     ~Kdelibs4ConfigMigrator();
 
     /**
-     * Migrate the files.
+     * Migrate the files, if any.
+     *
      * Returns true if the migration happened.
      * It will return false if there was nothing to migrate (no KDEHOME).
+     * This return value is unrelated to error handling. It is just a way to skip anything else
+     * related to migration on a clean system, by writing
+     * @code
+     * if (migrate()) {
+     *    look for old data to migrate as well
+     * }
+     * @endcode
      */
     bool migrate();
 
