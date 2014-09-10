@@ -25,24 +25,21 @@
 #include <QStringList>
 
 /**
- * \file kdelibs4configmigrator.h
+ * Kdelibs4ConfigMigrator migrates selected config files and ui files
+ * from the kdelibs 4.x location ($KDEHOME, as used by KStandardDirs)
+ * to the Qt 5.x location ($XDG_*_HOME, as used by QStandardPaths).
+ *
+ * @short Class for migration of config files and ui file from kdelibs4.
+ * @since 5.2
  */
-
-/**
-  * Kdelibs4ConfigMigrator migrates specific config file and ui file
-  * from KDE SC 4.0 to new QStandardPath.
-  *
-  * @short Class for migration of config files and ui file from KDE SC4
-  * @since 5.2
-  */
-
 class KCOREADDONS_EXPORT Kdelibs4ConfigMigrator
 {
 public:
     /**
      * Constructs a Kdelibs4ConfigMigrator
      *
-     * @param appName The application name of KDE SC 4.0
+     * @param appName The application name, which is used for the directory
+     * containing the .ui files.
      */
     explicit Kdelibs4ConfigMigrator(const QString &appName);
 
@@ -52,19 +49,21 @@ public:
     ~Kdelibs4ConfigMigrator();
 
     /**
-     * Return true if migrate was done. If we found kdehome directory
+     * Migrate the files.
+     * Returns true if the migration happened.
+     * It will return false if there was nothing to migrate (no KDEHOME).
      */
     bool migrate();
 
     /**
-     * Set list of config files we need to migrate for application
-     * @param configFileNameList list of config file
+     * Set the list of config files that need to be migrated.
+     * @param configFileNameList list of config files
      */
     void setConfigFiles(const QStringList &configFileNameList);
 
     /**
-     * Set list of ui files to migrate
-     * @param uiFileNameList list of ui file.
+     * Set the list of ui files to migrate.
+     * @param uiFileNameList list of ui files
      */
     void setUiFiles(const QStringList &uiFileNameList);
 
