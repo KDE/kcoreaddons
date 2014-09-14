@@ -34,19 +34,25 @@
 #include <sddl.h> //ConvertSidToStringSidW
 #include <Shlobj.h>
 
-static const auto netApiBufferDeleter = [](void *buffer)
-{
-    if (buffer) {
-        NetApiBufferFree(buffer);
+// this can't be a lambda due to a MSVC2012 bug
+// (works fine in 2010 and 2013)
+struct netApiBufferDeleter {
+    void operator()(void *buffer)
+    {
+        if (buffer) {
+            NetApiBufferFree(buffer);
+        }
     }
 };
 
 template<typename T>
-class ScopedNetApiBuffer : public std::unique_ptr<T, decltype(netApiBufferDeleter)>
+class ScopedNetApiBuffer : public std::unique_ptr<T, netApiBufferDeleter>
 {
 public:
+    // explicit scope resolution operator needed in ::netApiBufferDeleter
+    // because of *another* MSVC bug :(
     inline explicit ScopedNetApiBuffer(T *data)
-        : std::unique_ptr<T, decltype(netApiBufferDeleter)>(data, netApiBufferDeleter) {}
+        : std::unique_ptr<T, ::netApiBufferDeleter>(data, ::netApiBufferDeleter()) {}
 };
 
 const auto handleCloser = [](HANDLE h)
