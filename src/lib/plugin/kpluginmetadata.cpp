@@ -108,7 +108,7 @@ QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QStrin
     if (value.isUndefined() || value.isObject() || value.isNull()) {
         return QStringList();
     } else if (value.isArray()) {
-        return value.toVariant().toStringList();;
+        return value.toVariant().toStringList();
     } else if (value.isString()) {
         return QStringList(value.toString());
     } else {
