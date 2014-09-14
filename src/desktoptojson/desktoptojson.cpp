@@ -216,17 +216,19 @@ void DesktopToJson::convertToJson(const QString &key, const QString &value, QJso
         }
         kplugin[QStringLiteral("EnabledByDefault")] = boolValue;
     } else if (key == QLatin1String("X-KDE-PluginInfo-Author")) {
-        if (kplugin[QStringLiteral("Authors")].isUndefined()) {
-            kplugin[QStringLiteral("Authors")] = QJsonArray();
-            kplugin[QStringLiteral("Authors")].toArray()[0] = QJsonObject();
-        }
-        kplugin[QStringLiteral("Authors")].toArray()[0].toObject()[QStringLiteral("Name")] = value;
+        QJsonObject authorsObject = kplugin.value(QStringLiteral("Authors")).toArray().at(0).toObject();
+        // if the authors object doesn't exist yet this will create it
+        authorsObject[QStringLiteral("Name")] = value;
+        QJsonArray array;
+        array.append(authorsObject);
+        kplugin[QStringLiteral("Authors")] = array;
     } else if (key == QLatin1String("X-KDE-PluginInfo-Email")) {
-        if (kplugin[QStringLiteral("Authors")].isUndefined()) {
-            kplugin[QStringLiteral("Authors")] = QJsonArray();
-            kplugin[QStringLiteral("Authors")].toArray()[0] = QJsonObject();
-        }
-        kplugin[QStringLiteral("Authors")].toArray()[0].toObject()[QStringLiteral("Email")] = value;
+        QJsonObject authorsObject = kplugin.value(QStringLiteral("Authors")).toArray().at(0).toObject();
+        // if the authors object doesn't exist yet this will create it
+        authorsObject[QStringLiteral("Email")] = value;
+        QJsonArray array;
+        array.append(authorsObject);
+        kplugin[QStringLiteral("Authors")] = array;
     } else if (key == QLatin1String("Name") || key.startsWith(QLatin1String("Name["))) {
         // TODO: also handle GenericName? does that make any sense, or is X-KDE-PluginInfo-Category enough?
         kplugin[key] = value;

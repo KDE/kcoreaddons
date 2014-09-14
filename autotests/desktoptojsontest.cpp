@@ -212,6 +212,20 @@ private Q_SLOTS:
         QCOMPARE(e.error, QJsonParseError::NoError);
         QTest::newRow("kdevcpplanguagesupport") << kdevInput << kdevExpected << false;
 
+        // test conversion of the X-KDE-PluginInfo-Author + X-KDE-PluginInfo-Email key:
+        QByteArray authorInput =
+            "[Desktop Entry]\n"
+            "Type=Service\n"
+            "X-KDE-PluginInfo-Author=Foo Bar\n"
+            "X-KDE-PluginInfo-Email=foo.bar@baz.com\n";
+
+        QJsonObject authorsExpected = QJsonDocument::fromJson("{\n"
+            " \"KPlugin\": {\n"
+            "     \"Authors\": [ { \"Name\": \"Foo Bar\", \"Email\": \"foo.bar@baz.com\" } ]\n"
+            " }\n }\n", &e).object();
+        QCOMPARE(e.error, QJsonParseError::NoError);
+        QTest::newRow("authors") << authorInput << authorsExpected << false;
+
 
     }
     void testDesktopToJson()
