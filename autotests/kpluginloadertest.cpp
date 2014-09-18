@@ -272,7 +272,7 @@ private Q_SLOTS:
         qDeleteAll(plugins);
 
         // check that parent gets set
-        plugins = KPluginLoader::instantiatePlugins(temp.path(), nullptr, this);
+        plugins = KPluginLoader::instantiatePlugins(temp.path(), Q_NULLPTR, this);
         QCOMPARE(plugins.size(), 2);
         QCOMPARE(plugins[0]->parent(), this);
         QCOMPARE(plugins[1]->parent(), this);
@@ -342,7 +342,7 @@ private Q_SLOTS:
         QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
 
         // invalid std::function as filter
-        plugins = KPluginLoader::findPlugins("kpluginmetadatatest", nullptr);
+        plugins = KPluginLoader::findPlugins("kpluginmetadatatest");
         std::sort(plugins.begin(), plugins.end(), sortPlugins);
         QCOMPARE(plugins.size(), 2);
         QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
