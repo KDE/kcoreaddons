@@ -265,7 +265,7 @@ private Q_SLOTS:
         QCOMPARE(plugins.size(), 0);
 
         plugins = KPluginLoader::instantiatePlugins(temp.path(), [](const KPluginMetaData & md) {
-            return md.pluginId() == "foobar"; // ID does not macht file name, is set in JSON
+            return md.pluginId() == "foobar"; // ID does not match file name, is set in JSON
         });
         QCOMPARE(plugins.size(), 1);
         QCOMPARE(plugins[0]->metaObject()->className(), "jsonplugin2");
