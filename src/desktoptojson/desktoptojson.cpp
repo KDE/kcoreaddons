@@ -32,17 +32,20 @@
 #include <QTextStream>
 #include <QJsonArray>
 
+#include <QDebug>
+
 static QTextStream cout(stdout);
 static QTextStream cerr(stderr);
 
 DesktopToJson::DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i,
                              const QCommandLineOption &o, const QCommandLineOption &v,
-                             const QCommandLineOption &c)
+                             const QCommandLineOption &c, const QCommandLineOption &u)
     : m_parser(parser),
       input(i),
       output(o),
       verbose(v),
       compat(c),
+      update(u),
       m_verbose(false),
       m_compatibilityMode(false)
 {
@@ -50,17 +53,24 @@ DesktopToJson::DesktopToJson(QCommandLineParser *parser, const QCommandLineOptio
 
 int DesktopToJson::runMain()
 {
-    if (!m_parser->isSet(input)) {
+    if (!m_parser->isSet(input) && !m_parser->isSet(update)) {
         cout << "Usage --help. In short: desktoptojson -i inputfile.desktop -o outputfile.json" << endl;
         return 1;
     }
     if (m_parser->isSet(verbose)) {
         m_verbose = true;
     }
-    if (m_parser->isSet(compat)) {
+    if (m_parser->isSet(compat) || m_parser->isSet(update)) {
         m_compatibilityMode = true;
     }
-    if (!resolveFiles()) {
+
+    if (m_parser->isSet(update)) {
+        m_indexDirectory = m_parser->value(update);
+        if (m_indexDirectory == QStringLiteral("all")) {
+            // Plugin directories...
+        }
+        qDebug() << "Updating cache in " << m_indexDirectory;
+    } else if (!resolveFiles()) {
         cerr << "Failed to resolve filenames" << m_inFile << m_outFile << endl;
         return 1;
     }
@@ -260,7 +270,8 @@ void DesktopToJson::convertToCompatibilityJson(const QString &key, const QString
     static const QStringList boolkeys = QStringList()
             << QStringLiteral("Hidden") << QStringLiteral("X-KDE-PluginInfo-EnabledByDefault");
     static const QStringList stringlistkeys = QStringList()
-            << QStringLiteral("X-KDE-ServiceTypes") << QStringLiteral("X-KDE-PluginInfo-Depends");
+            << QStringLiteral("X-KDE-ServiceTypes") << QStringLiteral("X-KDE-PluginInfo-Depends")
+            << QStringLiteral("X-Plasma-Provides");
     if (boolkeys.contains(key)) {
         // should only be lower case, but be tolerant here
         if (value.toLower() == QLatin1String("true")) {

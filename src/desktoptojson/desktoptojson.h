@@ -35,13 +35,15 @@ class DesktopToJson
 public:
     DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i,
                   const QCommandLineOption &o, const QCommandLineOption &v,
-                  const QCommandLineOption &c);
+                  const QCommandLineOption &c, const QCommandLineOption &u);
     int runMain();
 
 private:
     bool convert(const QString &src, const QString &dest);
+    QJsonObject readDesktopFile(const QString &src);
     void convertToJson(const QString& key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
     void convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr);
+    bool updateIndex(const QStringList &directories);
     bool resolveFiles();
 
     QCommandLineParser *m_parser;
@@ -49,8 +51,10 @@ private:
     QCommandLineOption output;
     QCommandLineOption verbose;
     QCommandLineOption compat;
+    QCommandLineOption update;
     QString m_inFile;
     QString m_outFile;
+    QString m_indexDirectory;
     bool m_verbose;
     bool m_compatibilityMode;
 };

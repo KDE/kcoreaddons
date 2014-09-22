@@ -34,6 +34,7 @@ int main(int argc, char** argv) {
     const static auto _n = QStringLiteral("name");
     const static auto _v = QStringLiteral("verbose");
     const static auto _c = QStringLiteral("compat");
+    const static auto _u = QStringLiteral("update");
 
     QCommandLineOption input = QCommandLineOption(QStringList() << QStringLiteral("i") << _i,
                                QStringLiteral("Read input from file"), _n);
@@ -43,6 +44,8 @@ int main(int argc, char** argv) {
                                 QStringLiteral("Enable verbose (debug) output"));
     QCommandLineOption compat = QCommandLineOption(QStringList() << QStringLiteral("c") << _c,
                                 QStringLiteral("Generate JSON that is compatible with KPluginInfo instead of the new KPluginMetaData"));
+    QCommandLineOption update = QCommandLineOption(QStringList() << QStringLiteral("u") << _u,
+                                QStringLiteral("Generate or update the plugin index for faster lookups"), _n);
 
     QCommandLineParser parser;
     parser.addVersionOption();
@@ -52,8 +55,9 @@ int main(int argc, char** argv) {
     parser.addOption(output);
     parser.addOption(verbose);
     parser.addOption(compat);
+    parser.addOption(update);
 
-    DesktopToJson dtj(&parser, input, output, verbose, compat);
+    DesktopToJson dtj(&parser, input, output, verbose, compat, update);
 
     parser.process(app);
     return dtj.runMain();
