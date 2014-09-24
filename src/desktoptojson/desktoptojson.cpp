@@ -290,7 +290,7 @@ void DesktopToJson::convertToCompatibilityJson(const QString &key, const QString
     }
 }
 
-bool DesktopToJson::convert(const QString &src, const QString &dest)
+bool DesktopToJson::readDesktopFile(const QString &src, QJsonObject &json)
 {
     QFile df(src);
     if (!df.open(QFile::ReadOnly)) {
@@ -315,7 +315,6 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
     }
 
 
-    QJsonObject json;
     QJsonObject kplugin; // the "KPlugin" key of the metadata
     while (!df.atEnd()) {
         const QByteArray line = df.readLine().trimmed();
@@ -366,6 +365,15 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
     if (!m_compatibilityMode) {
         json[QStringLiteral("KPlugin")] = kplugin;
     }
+    return false;
+}
+
+bool DesktopToJson::convert(const QString &src, const QString &dest)
+{
+    QJsonObject json;
+
+    readDesktopFile(src, json);
+
     QJsonDocument jdoc;
     jdoc.setObject(json);
 

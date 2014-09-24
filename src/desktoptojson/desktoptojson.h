@@ -40,7 +40,7 @@ public:
 
 private:
     bool convert(const QString &src, const QString &dest);
-    QJsonObject readDesktopFile(const QString &src);
+    bool readDesktopFile(const QString &src, QJsonObject &json);
     void convertToJson(const QString& key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
     void convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr);
     bool updateIndex(const QStringList &directories);

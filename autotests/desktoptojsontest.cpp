@@ -270,6 +270,19 @@ private Q_SLOTS:
         compareJson(result, expectedResult);
         QVERIFY(!QTest::currentTestFailed());
     }
+
+    void testPluginIndex()
+    {
+        QProcess proc;
+        proc.setProgram(DESKTOP_TO_JSON_EXE);
+        QStringList arguments = QStringList() << "-u" << "all";
+        proc.setArguments(arguments);
+        proc.start();
+        QVERIFY(proc.waitForFinished(10000));
+        qDebug() << "desktoptojson STDOUT:" <<  proc.readAllStandardOutput();
+        qDebug() << "Plugin index.";
+        QVERIFY(true);
+    }
 };
 
 QTEST_MAIN(DesktopToJsonTest)
