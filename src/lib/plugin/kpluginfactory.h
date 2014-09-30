@@ -373,6 +373,26 @@ protected:
      */
     typedef QObject *(*CreateInstanceFunction)(QWidget *, QObject *, const QVariantList &);
 
+    /**
+     * This is used to detect the arguments need for the constructor of plugin classes.
+     * You can inherit it, if you want to add new classes and still keep support for the old ones.
+     */
+    template<class impl>
+    struct InheritanceChecker {
+        CreateInstanceFunction createInstanceFunction(KParts::Part *)
+        {
+            return &createPartInstance<impl>;
+        }
+        CreateInstanceFunction createInstanceFunction(QWidget *)
+        {
+            return &createInstance<impl, QWidget>;
+        }
+        CreateInstanceFunction createInstanceFunction(...)
+        {
+            return &createInstance<impl, QObject>;
+        }
+    };
+
     explicit KPluginFactory(KPluginFactoryPrivate &dd);
 
     /**
@@ -462,26 +482,6 @@ protected:
     {
         return new impl(parentWidget, parent, args);
     }
-
-    /**
-     * This is used to detect the arguments need for the constructor of plugin classes.
-     * You can inherit it, if you want to add new classes and still keep support for the old ones.
-     */
-    template<class impl>
-    struct InheritanceChecker {
-        CreateInstanceFunction createInstanceFunction(KParts::Part *)
-        {
-            return &createPartInstance<impl>;
-        }
-        CreateInstanceFunction createInstanceFunction(QWidget *)
-        {
-            return &createInstance<impl, QWidget>;
-        }
-        CreateInstanceFunction createInstanceFunction(...)
-        {
-            return &createInstance<impl, QObject>;
-        }
-    };
 
 private:
     void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceFunction instanceFunction);
