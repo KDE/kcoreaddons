@@ -36,6 +36,10 @@ class Kdelibs4MigrationPrivate;
   * Kdelibs4Migration provides support for locating config files
   * and application data files saved by kdelibs 4 in the user's home directory
   * ($KDEHOME, i.e. typically ~/.kde).
+  * 
+  * distributions that built kdelibs4 with a custom KDE home with
+  * the CMake option _KDE_DEFAULT_HOME_POSTFIX should use the same option
+  * here with _KDE4_DEFAULT_HOME_POSTFIX
   *
   * The purpose is to be able to let the application migrate these files
   * to the KF5/Qt5 location for these files (QStandardPaths).

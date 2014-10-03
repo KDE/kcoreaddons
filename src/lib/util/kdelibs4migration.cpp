@@ -20,6 +20,7 @@
 */
 
 #include "kdelibs4migration.h"
+#include "config-kde4home.h"
 #include <QDir>
 #include <QDebug>
 #include <QVector>
@@ -48,6 +49,10 @@ Kdelibs4Migration::Kdelibs4Migration()
             }
         }
     }
+    if (d->m_kdeHome.isEmpty()) {
+        d->m_kdeHome = QString::fromLatin1(KDE4_DEFAULT_HOME);
+    }
+
     if (!d->m_kdeHome.isEmpty() && !d->m_kdeHome.endsWith(QLatin1Char('/'))) {
         d->m_kdeHome.append(QLatin1Char('/'));
     }
@@ -60,7 +65,8 @@ Kdelibs4Migration::~Kdelibs4Migration()
 
 bool Kdelibs4Migration::kdeHomeFound() const
 {
-    return !d->m_kdeHome.isEmpty();
+    QDir homeDir = QDir::home();
+    return homeDir.exists(d->m_kdeHome);
 }
 
 QString Kdelibs4Migration::locateLocal(const char *type, const QString &filename) const

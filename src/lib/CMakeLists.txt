@@ -7,6 +7,9 @@ include(CheckSymbolExists)
 check_symbol_exists("getgrouplist" "grp.h" HAVE_GETGROUPLIST)
 configure_file(util/config-getgrouplist.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-getgrouplist.h)
 
+set (KDE4_DEFAULT_HOME ".kde${_KDE4_DEFAULT_HOME_POSTFIX}" CACHE STRING "The default KDE home directory" )
+configure_file(util/config-kde4home.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kde4home.h)
+
 ecm_create_qm_loader(kcoreaddons_QM_LOADER kcoreaddons5_qt)
 
 set(kcoreaddons_OPTIONAL_SRCS )
