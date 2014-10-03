@@ -48,11 +48,11 @@ Kdelibs4Migration::Kdelibs4Migration()
                 break;
             }
         }
+        if (d->m_kdeHome.isEmpty()) {
+            d->m_kdeHome = QString::fromLatin1(KDE4_DEFAULT_HOME);
+        }
     }
-    if (d->m_kdeHome.isEmpty()) {
-        d->m_kdeHome = QString::fromLatin1(KDE4_DEFAULT_HOME);
-    }
-
+        
     if (!d->m_kdeHome.isEmpty() && !d->m_kdeHome.endsWith(QLatin1Char('/'))) {
         d->m_kdeHome.append(QLatin1Char('/'));
     }
