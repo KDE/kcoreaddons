@@ -97,7 +97,6 @@ private:
     void waitUntilNewSecond();
     void waitUntilAfter(const QDateTime &ctime);
     QList<QVariantList> waitForDirtySignal(KDirWatch &watch, int expected);
-    QList<QVariantList> waitForCreatedSignal(KDirWatch &watch, int expected);
     QList<QVariantList> waitForDeletedSignal(KDirWatch &watch, int expected);
     bool waitForOneSignal(KDirWatch &watch, const char *sig, const QString &path);
     bool waitForRecreationSignal(KDirWatch &watch, const QString &path);
@@ -295,21 +294,6 @@ bool KDirWatch_UnitTest::waitForRecreationSignal(KDirWatch &watch, const QString
   }
 
   return verifySignalPath(spyDeleted, "deleted(QString)", expectedPath) && verifySignalPath(spyCreated, "created(QString)", expectedPath);
-}
-
-QList<QVariantList> KDirWatch_UnitTest::waitForCreatedSignal(KDirWatch &watch, int expected)
-{
-    QSignalSpy spyCreated(&watch, SIGNAL(created(QString)));
-    int numTries = 0;
-    // Give time for KDirWatch to notify us
-    while (spyCreated.count() < expected) {
-        if (++numTries > s_maxTries) {
-            qWarning() << "Timeout waiting for KDirWatch. Got" << spyCreated.count() << "created() signals, expected" << expected;
-            return spyCreated;
-        }
-        QTest::qWait(50);
-    }
-    return spyCreated;
 }
 
 QList<QVariantList> KDirWatch_UnitTest::waitForDeletedSignal(KDirWatch &watch, int expected)
