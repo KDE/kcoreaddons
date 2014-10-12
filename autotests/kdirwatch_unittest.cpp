@@ -320,8 +320,10 @@ void KDirWatch_UnitTest::touchOneFile() // watch a dir, create a file in it
     waitUntilMTimeChange(m_path);
 
     // dirty(the directory) should be emitted.
+    QSignalSpy spyCreated(&watch, SIGNAL(created(QString)));
     const QString file0 = createFile(0);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
+    QCOMPARE(spyCreated.count(), 0); // "This is not emitted when creating a file is created in a watched directory."
 
     removeFile(0);
 }

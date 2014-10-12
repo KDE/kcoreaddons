@@ -285,7 +285,8 @@ Q_SIGNALS:
     void dirty(const QString &path);
 
     /**
-     * Emitted when a file or directory is created.
+     * Emitted when a file or directory (being watched explicitly) is created.
+     * This is not emitted when creating a file is created in a watched directory.
      * @param path the path of the file or directory
      */
     void created(const QString &path);
