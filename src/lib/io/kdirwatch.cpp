@@ -201,7 +201,9 @@ KDirWatchPrivate::KDirWatchPrivate()
         connect(sn, SIGNAL(activated(int)),
                 this, SLOT(famEventReceived()));
     } else {
-        qDebug() << "Can't use FAM (fam daemon not running?)";
+        if (m_preferredMethod == KDirWatch::FAM) {
+            qDebug() << "Can't use FAM (fam daemon not running?)";
+        }
         use_fam = false;
     }
 #endif
