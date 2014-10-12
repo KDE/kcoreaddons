@@ -170,7 +170,7 @@ void KDirWatch_UnitTest::waitUntilAfter(const QDateTime &ctime)
     int totalWait = 0;
     QDateTime now;
     Q_FOREVER {
-    now = QDateTime::currentDateTime();
+        now = QDateTime::currentDateTime();
         if (now.toTime_t() == ctime.toTime_t())   // truncate milliseconds
         {
             totalWait += 50;
