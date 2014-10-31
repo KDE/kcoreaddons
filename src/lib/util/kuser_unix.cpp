@@ -493,6 +493,9 @@ KUserGroup::~KUserGroup()
 
 KUserId KUserId::fromName(const QString &name)
 {
+    if (name.isEmpty()) {
+        return KUserId();
+    }
     QByteArray name8Bit = name.toLocal8Bit();
     struct passwd *p = ::getpwnam(name8Bit.constData());
     if (!p) {
@@ -504,6 +507,9 @@ KUserId KUserId::fromName(const QString &name)
 
 KGroupId KGroupId::fromName(const QString &name)
 {
+    if (name.isEmpty()) {
+        return KGroupId();
+    }
     QByteArray name8Bit = name.toLocal8Bit();
     struct group *g = ::getgrnam(name8Bit.constData());
     if (!g) {
