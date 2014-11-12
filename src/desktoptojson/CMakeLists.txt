@@ -1,6 +1,7 @@
 include(ECMMarkNonGuiExecutable)
 
-add_executable(desktoptojson main.cpp desktoptojson.cpp)
+add_executable(desktoptojson main.cpp desktoptojson.cpp
+ ../lib/plugin/desktopfileparser.cpp)
 add_executable(KF5::desktoptojson ALIAS desktoptojson)
 
 # Mark it as non-gui so we won't create an app bundle on Mac OS X

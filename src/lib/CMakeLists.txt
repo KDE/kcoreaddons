@@ -68,6 +68,7 @@ set(libkcoreaddons_SRCS
     plugin/kpluginfactory.cpp
     plugin/kpluginloader.cpp
     plugin/kpluginmetadata.cpp
+    plugin/desktopfileparser.cpp
     randomness/krandom.cpp
     randomness/krandomsequence.cpp
     text/kmacroexpander.cpp

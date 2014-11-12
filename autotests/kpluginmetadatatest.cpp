@@ -182,6 +182,23 @@ private Q_SLOTS:
         QCOMPARE(KPluginMetaData::readStringList(jo, "ArrayWithNull"), QStringList() << "foo" << "" << "bar");
         QCOMPARE(KPluginMetaData::readStringList(jo, "Object"), QStringList());
     }
+
+    void testFromDesktopFile()
+    {
+        const QString dfile = QFINDTESTDATA("data/fakeplugin.desktop");
+        qDebug() << "plugin file: " << dfile;
+        KPluginMetaData md(dfile);
+        QVERIFY(md.isValid());
+        QCOMPARE(md.pluginId(), QStringLiteral("fakeplugin"));
+        QCOMPARE(md.fileName(), dfile);
+        QCOMPARE(md.iconName(), QStringLiteral("preferences-system-time"));
+        QCOMPARE(md.license(), QStringLiteral("LGPL"));
+        QCOMPARE(md.website(), QStringLiteral("http://kde.org/"));
+        QCOMPARE(md.category(), QStringLiteral("Examples"));
+        QCOMPARE(md.version(), QStringLiteral("1.0"));
+        QCOMPARE(md.dependencies(), QStringList());
+        QCOMPARE(md.serviceTypes(), QStringList("KService/NSA"));
+    }
 };
 
 QTEST_MAIN(KPluginMetaDataTest)

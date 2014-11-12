@@ -17,6 +17,7 @@
 */
 
 #include "kpluginmetadata.h"
+#include "desktopfileparser.h"
 
 #include <QCoreApplication>
 #include <QFileInfo>
@@ -55,9 +56,16 @@ KPluginMetaData::~KPluginMetaData()
 
 KPluginMetaData::KPluginMetaData(const QString &file)
 {
-    QPluginLoader loader(file);
-    m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
-    m_metaData = loader.metaData().value(QStringLiteral("MetaData")).toObject();
+    if (file.endsWith(QStringLiteral(".desktop"))) {
+//         qDebug() << "Loading KPluginMetaData from .desktop file" << file;
+        m_fileName = QFileInfo(file).absoluteFilePath();
+        DesktopFileParser::convert(file, m_metaData);
+
+    } else {
+        QPluginLoader loader(file);
+        m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
+        m_metaData = loader.metaData().value(QStringLiteral("MetaData")).toObject();
+    }
 }
 
 KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
@@ -253,3 +261,4 @@ QObject* KPluginMetaData::instantiate() const
 {
     return QPluginLoader(m_fileName).instance();
 }
+

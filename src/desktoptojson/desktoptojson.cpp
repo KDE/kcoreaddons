@@ -23,6 +23,8 @@
  ******************************************************************************/
 
 #include "desktoptojson.h"
+#include "../lib/plugin/desktopfileparser.h"
+
 
 #include <QDir>
 #include <QFile>
@@ -92,168 +94,6 @@ bool DesktopToJson::resolveFiles()
     return m_inFile != m_outFile && !m_inFile.isEmpty() && !m_outFile.isEmpty();
 }
 
-// This code was taken from KConfigGroupPrivate::deserializeList
-static QStringList deserializeList(const QString &data)
-{
-    if (data.isEmpty()) {
-        return QStringList();
-    }
-    if (data == QLatin1String("\\0")) {
-        return QStringList(QString());
-    }
-    QStringList value;
-    QString val;
-    val.reserve(data.size());
-    bool quoted = false;
-    for (int p = 0; p < data.length(); p++) {
-        if (quoted) {
-            val += data[p];
-            quoted = false;
-        } else if (data[p].unicode() == '\\') {
-            quoted = true;
-        } else if (data[p].unicode() == ',') {
-            val.squeeze(); // release any unused memory
-            value.append(val);
-            val.clear();
-            val.reserve(data.size() - p);
-        } else {
-            val += data[p];
-        }
-    }
-    value.append(val);
-    return value;
-}
-
-static QByteArray escapeValue(const QByteArray& input)
-{
-    // we could do this in place, but this code is simpler
-    // this tool is probably only transitional, so no need to optimize
-    QByteArray result;
-    for (int i = 0; i < input.length(); ++i) {
-        if (input[i] != '\\') {
-            result.append(input[i]);
-        } else {
-            if (i + 1 >= input.length()) {
-                // just append the backslash if we are at end of line
-                result.append(input[i]);
-                break;
-            }
-            i++; // consume next character
-            char nextChar = input[i];
-            switch (nextChar) {
-            case 's':
-                result.append(' ');
-                break;
-            case 'n':
-                result.append('\n');
-                break;
-            case 't':
-                result.append('\t');
-                break;
-            case 'r':
-                result.append('\r');
-                break;
-            case '\\':
-                result.append('\\');
-                break;
-            default:
-                result.append('\\');
-                result.append(nextChar); // just ignore the escape sequence
-            }
-        }
-    }
-    return result;
-}
-
-void DesktopToJson::convertToJson(const QString &key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr)
-{
-    /* The following keys are recognized (and added to a "KPlugin" object):
-
-        Icon=mypluginicon
-        Type=Service
-        ServiceTypes=KPluginInfo
-
-        Name=User Visible Name (translatable)
-        Comment=Description of what the plugin does (translatable)
-
-        X-KDE-PluginInfo-Author=Author's Name
-        X-KDE-PluginInfo-Email=author@foo.bar
-        X-KDE-PluginInfo-Name=internalname
-        X-KDE-PluginInfo-Version=1.1
-        X-KDE-PluginInfo-Website=http://www.plugin.org/
-        X-KDE-PluginInfo-Category=playlist
-        X-KDE-PluginInfo-Depends=plugin1,plugin3
-        X-KDE-PluginInfo-License=GPL
-        X-KDE-PluginInfo-EnabledByDefault=true
-    */
-    if (key == QLatin1String("Icon")) {
-        kplugin[QStringLiteral("Icon")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Name")) {
-        kplugin[QStringLiteral("Id")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Category")) {
-        kplugin[QStringLiteral("Category")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-License")) {
-        kplugin[QStringLiteral("License")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Version")) {
-        kplugin[QStringLiteral("Version")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Website")) {
-        kplugin[QStringLiteral("Website")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Depends")) {
-        kplugin[QStringLiteral("Dependencies")] = QJsonArray::fromStringList(deserializeList(value));
-    } else if (key == QLatin1String("X-KDE-ServiceTypes") || key == QLatin1String("ServiceTypes")) {
-        // some .desktop files still use the legacy ServiceTypes= key
-        kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(deserializeList(value));
-    } else if (key == QLatin1String("X-KDE-PluginInfo-EnabledByDefault")) {
-        bool boolValue = false;
-        // should only be lower case, but be tolerant here
-        if (value.toLower() == QLatin1String("true")) {
-            boolValue = true;
-        } else {
-            if (value.toLower() != QLatin1String("false")) {
-                cerr << "Warning: " << m_inFile << ':' << lineNr << ": Expected boolean value for key \""
-                    << key << "\" but got \"" << value << "\" instead." << endl;
-            }
-        }
-        kplugin[QStringLiteral("EnabledByDefault")] = boolValue;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Author")) {
-        QJsonObject authorsObject = kplugin.value(QStringLiteral("Authors")).toArray().at(0).toObject();
-        // if the authors object doesn't exist yet this will create it
-        authorsObject[QStringLiteral("Name")] = value;
-        QJsonArray array;
-        array.append(authorsObject);
-        kplugin[QStringLiteral("Authors")] = array;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Email")) {
-        QJsonObject authorsObject = kplugin.value(QStringLiteral("Authors")).toArray().at(0).toObject();
-        // if the authors object doesn't exist yet this will create it
-        authorsObject[QStringLiteral("Email")] = value;
-        QJsonArray array;
-        array.append(authorsObject);
-        kplugin[QStringLiteral("Authors")] = array;
-    } else if (key == QLatin1String("Name") || key.startsWith(QLatin1String("Name["))) {
-        // TODO: also handle GenericName? does that make any sense, or is X-KDE-PluginInfo-Category enough?
-        kplugin[key] = value;
-    } else if (key == QLatin1String("Comment")) {
-        kplugin[QStringLiteral("Description")] = value;
-    } else if (key.startsWith(QLatin1String("Comment["))) {
-        kplugin[QStringLiteral("Description") + key.mid(strlen("Comment"))] = value;
-    } else if (key == QLatin1String("Hidden")) {
-        if (m_verbose) {
-            cerr << "Warning: Hidden= key found in desktop file, this makes no sense"
-                " with metadata inside the plugin." << endl;
-        }
-    } else if (key == QLatin1String("Exec") || key == QLatin1String("Type") || key == QLatin1String("X-KDE-Library")) {
-        // Exec= doesn't make sense here, however some .desktop files (like e.g. in kdevelop) have a dummy value here
-        // also the Type=Service entry is no longer needed
-        // X-KDE-Library is also not needed since we already have the library to read this metadata
-        if (m_verbose) {
-            cout << "Not converting key " << key << "=" << value << endl;
-        }
-    } else {
-        // unknown key, just add it to the root object
-        json[key] = value;
-    }
-}
-
 void DesktopToJson::convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr)
 {
     // XXX: Hidden=true doesn't make sense with json plugins since the metadata is inside the .so
@@ -273,8 +113,9 @@ void DesktopToJson::convertToCompatibilityJson(const QString &key, const QString
             json[key] = false;
         }
     } else if (stringlistkeys.contains(key)) {
-        json[key] = QJsonArray::fromStringList(deserializeList(value));
+        json[key] = QJsonArray::fromStringList(DesktopFileParser::deserializeList(value));
     } else {
+
         json[key] = value;
     }
 }
@@ -338,7 +179,7 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
         // trim key and value to remove spaces around the '=' char
         const QString key = QString::fromLatin1(line.mid(0, equalsIndex).trimmed());
         const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
-        const QByteArray valueEscaped = escapeValue(valueRaw);
+        const QByteArray valueEscaped = DesktopFileParser::escapeValue(valueRaw);
         const QString value = QString::fromUtf8(valueEscaped);
         if (m_verbose) {
             cout << "Line " << lineNr << ": key=\"" << key << "\", value=\"" << value << '"' << endl;
@@ -349,7 +190,7 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
         if (m_compatibilityMode) {
             convertToCompatibilityJson(key, value, json, lineNr);
         } else {
-            convertToJson(key, value, json, kplugin, lineNr);
+            DesktopFileParser::convertToJson(key, value, json, kplugin, lineNr);
         }
     }
     if (!m_compatibilityMode) {
