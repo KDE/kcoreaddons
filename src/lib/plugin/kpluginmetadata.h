@@ -112,9 +112,14 @@ public:
     KPluginMetaData(const QPluginLoader &loader);
 
     /**
-     * Reads the plugin metadata from a plugin which can be loaded from @p file.
-     * Platform-specific library suffixes may be omitted since @p file will be resolved
+     * Reads the plugin metadata from a plugin or .desktop which can be loaded from @p file.
+     *
+     * For plugins, platform-specific library suffixes may be omitted since @p file will be resolved
      * using the same logic as QPluginLoader.
+     *
+     * If the file name ends with ".desktop", the .desktop file will be parsed instead of
+     * reading the metadata from the QPluginLoader.
+     * 
      * @see QPluginLoader::setFileName()
      */
     KPluginMetaData(const QString &file);
@@ -278,6 +283,8 @@ public:
 private:
     QJsonObject rootObject() const;
 private:
+    bool convert(const QString &src, const QString &dest);
+    void convertToJson(const QString& key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
     QJsonObject m_metaData;
     QString m_fileName;
     QExplicitlySharedDataPointer<KPluginMetaDataPrivate> d; // for future binary compatible extensions
