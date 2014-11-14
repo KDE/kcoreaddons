@@ -25,16 +25,10 @@
 
 #include "desktopfileparser.h"
 
-#include <QCoreApplication>
-#include <QFileInfo>
+#include <QFile>
 #include <QJsonArray>
-// #include <QLocale>
-// #include <QPluginLoader>
-// #include <QStringList>
 #include <QDebug>
 
-#include "kpluginloader.h"
-#include "kaboutdata.h"
 
     // This code was taken from KConfigGroupPrivate::deserializeList
 QStringList DesktopFileParser::deserializeList(const QString &data)
