@@ -459,6 +459,7 @@ Q_SIGNALS:
 
 Q_SIGNALS:
 #if !defined(Q_MOC_RUN) && !defined(DOXYGEN_SHOULD_SKIP_THIS) && !defined(IN_IDE_PARSER)
+    // TODO KF6: Use QPrivateSignal instead, to allow for new signal-slot syntax
 private: // don't tell moc, doxygen or kdevelop, but those signals are in fact private
 #endif
     /**
