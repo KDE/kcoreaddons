@@ -30,8 +30,8 @@
 class Kdelibs4ConfigMigrator::Private
 {
 public:
-    Private(const QString &appName)
-        : appName(appName)
+    Private(const QString &_appName)
+        : appName(_appName)
     {
 
     }
