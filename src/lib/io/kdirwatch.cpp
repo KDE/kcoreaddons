@@ -288,7 +288,7 @@ void KDirWatchPrivate::inotifyEventReceived()
 
         int offsetCurrent = 0;
         while (bytesAvailable >= (int)sizeof(struct inotify_event)) {
-            const struct inotify_event *const event = (struct inotify_event *) &buf[offsetCurrent];
+            const struct inotify_event *const event = reinterpret_cast<inotify_event *>(&buf[offsetCurrent]);
             const int eventSize = sizeof(struct inotify_event) + event->len;
             if (bytesAvailable < eventSize) {
                 break;
