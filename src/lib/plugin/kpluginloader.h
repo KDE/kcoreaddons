@@ -288,7 +288,7 @@ public:
      *         return pluginGroup.readEntry(md.pluginName(), false);
      *     }
      * }
-     * QVector<QObject*> plugins = KPluginLoader::instantiatePlugins("myapp", filter);
+     * QList<QObject*> plugins = KPluginLoader::instantiatePlugins("myapp", filter);
      * @endcode
      *
      * @param directory the directory to search for plugins. If a relative path is given for @p directory,
