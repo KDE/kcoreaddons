@@ -96,6 +96,16 @@ KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &fil
     m_metaData = metaData;
 }
 
+KPluginMetaData::KPluginMetaData(const QJsonObject& metaData, const QString& pluginFile, const QString& metaDataFile)
+{
+    m_fileName = pluginFile;
+    m_metaData = metaData;
+    if (!metaDataFile.isEmpty()) {
+        d = new KPluginMetaDataPrivate;
+        d->metaDataFileName = metaDataFile;
+    }
+}
+
 QJsonObject KPluginMetaData::rawData() const
 {
     return m_metaData;
