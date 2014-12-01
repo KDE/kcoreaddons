@@ -74,10 +74,7 @@ KPluginMetaData::KPluginMetaData(const KPluginLoader &loader)
 
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &file)
 {
-    // passing QFileInfo an empty string gives the CWD, which is not what we want
-    if (!file.isEmpty()) {
-        m_fileName = QFileInfo(file).absoluteFilePath();
-    }
+    m_fileName = file;
     m_metaData = metaData;
 }
 

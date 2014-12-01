@@ -100,13 +100,13 @@ public:
     KPluginMetaData();
 
     /**
-     * Reads the plugin metadata from a KPluginLoader instance. You must call setFileName()
+     * Reads the plugin metadata from a KPluginLoader instance. You must call KPluginLoader::setFileName()
      * or use the appropriate constructor on @p loader before calling this.
      */
     KPluginMetaData(const KPluginLoader &loader);
 
     /**
-     * Reads the plugin metadata from a QPluginLoader instance. You must call setFileName()
+     * Reads the plugin metadata from a QPluginLoader instance. You must call QPluginLoader::setFileName()
      * or use the appropriate constructor on @p loader before calling this.
      */
     KPluginMetaData(const QPluginLoader &loader);
@@ -146,8 +146,10 @@ public:
     bool isValid() const;
 
     /**
-     * @return the absolute path to the plugin. This string can be passed to the KPluginLoader
-     * or QPluginLoader constructors in order to load this plugin.
+     * @return the path to the plugin. This string can be passed to the KPluginLoader
+     * or QPluginLoader constructors in order to attempt to load this plugin.
+     * @note It is not guaranteed that this is a valid path to a shared library (i.e. loadable
+     * by QPluginLoader) since the metadata could also refer to a non-C++ plugin.
      */
     QString fileName() const;
 
