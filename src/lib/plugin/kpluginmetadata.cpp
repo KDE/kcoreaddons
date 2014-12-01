@@ -207,7 +207,10 @@ QString KPluginMetaData::pluginId() const
     QJsonObject root = rootObject();
     auto nameFromMetaData = root.constFind(QStringLiteral("Id"));
     if (nameFromMetaData != root.constEnd()) {
-        return nameFromMetaData.value().toString();
+        const QString id = nameFromMetaData.value().toString();
+        if (!id.isEmpty()) {
+            return id;
+        }
     }
     // passing QFileInfo an empty string gives the CWD, which is not what we want
     if (m_fileName.isEmpty()) {
