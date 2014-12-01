@@ -34,8 +34,9 @@ class KPluginMetaDataTest : public QObject
 private Q_SLOTS:
     void testFromPluginLoader()
     {
-        const QString location = KPluginLoader::findPlugin("jsonplugin");
+        QString location = KPluginLoader::findPlugin("jsonplugin");
         QVERIFY2(!location.isEmpty(), qPrintable(location));
+        location = QFileInfo(location).absoluteFilePath();
 
         KPluginMetaData fromQPluginLoader(QPluginLoader("jsonplugin"));
         KPluginMetaData fromKPluginLoader(KPluginLoader("jsonplugin"));
