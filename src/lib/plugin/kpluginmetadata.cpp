@@ -32,6 +32,8 @@
 
 class KPluginMetaDataPrivate : public QSharedData
 {
+public:
+    QString metaDataFileName;
 };
 
 KPluginMetaData::KPluginMetaData()
@@ -39,7 +41,7 @@ KPluginMetaData::KPluginMetaData()
 }
 
 KPluginMetaData::KPluginMetaData(const KPluginMetaData &other)
-    : m_metaData(other.m_metaData), m_fileName(other.fileName())
+    : m_metaData(other.m_metaData), m_fileName(other.fileName()), d(other.d)
 {
 }
 
@@ -47,6 +49,7 @@ KPluginMetaData& KPluginMetaData::operator=(const KPluginMetaData& other)
 {
     m_metaData = other.m_metaData;
     m_fileName = other.m_fileName;
+    d = other.d;
     return *this;
 }
 
@@ -57,10 +60,17 @@ KPluginMetaData::~KPluginMetaData()
 KPluginMetaData::KPluginMetaData(const QString &file)
 {
     if (file.endsWith(QStringLiteral(".desktop"))) {
-//         qDebug() << "Loading KPluginMetaData from .desktop file" << file;
-        m_fileName = QFileInfo(file).absoluteFilePath();
-        DesktopFileParser::convert(file, m_metaData);
-
+        d = new KPluginMetaDataPrivate;
+        d->metaDataFileName = QFileInfo(file).absoluteFilePath();
+        QString libraryPath;
+        DesktopFileParser::convert(file, m_metaData, &libraryPath);
+        if (!libraryPath.isEmpty()) {
+            // this was a plugin with a shared library
+            m_fileName = libraryPath;
+        } else {
+            // no library, make filename point to the .desktop file
+            m_fileName = d->metaDataFileName;
+        }
     } else {
         QPluginLoader loader(file);
         m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
@@ -95,6 +105,12 @@ QString KPluginMetaData::fileName() const
 {
     return m_fileName;
 }
+
+QString KPluginMetaData::metaDataFileName() const
+{
+    return d ? d->metaDataFileName : m_fileName;
+}
+
 
 bool KPluginMetaData::isValid() const
 {

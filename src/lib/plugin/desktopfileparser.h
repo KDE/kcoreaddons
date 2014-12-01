@@ -32,7 +32,7 @@ namespace DesktopFileParser
 {
     QByteArray escapeValue(const QByteArray& input);
     QStringList deserializeList(const QString &data);
-    bool convert(const QString &src, QJsonObject &json);
+    bool convert(const QString &src, QJsonObject &json, QString *libraryPath);
     void convertToJson(const QString& key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
 
 };

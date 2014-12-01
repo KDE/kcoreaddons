@@ -159,6 +159,15 @@ public:
     QString fileName() const;
 
     /**
+     * @return the file that the metadata was read from. This is not necessarily the same as
+     * fileName(), since not all plugins have the metadata embedded. The metadata could also be
+     * stored in a separate .desktop file.
+     *
+     * @since 5.5
+     */
+    QString metaDataFileName() const;
+
+    /**
      * @return the full metadata stored inside the plugin file.
      */
     QJsonObject rawData() const;

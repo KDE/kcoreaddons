@@ -195,7 +195,7 @@ void DesktopFileParser::convertToJson(const QString &key, const QString &value, 
     }
 }
 
-bool DesktopFileParser::convert(const QString& src, QJsonObject &json)
+bool DesktopFileParser::convert(const QString& src, QJsonObject &json, QString *libraryPath)
 {
     bool m_verbose = false; // FIXME remove
     QFile df(src);
@@ -264,6 +264,9 @@ bool DesktopFileParser::convert(const QString& src, QJsonObject &json)
             }
         }
         convertToJson(key, value, json, kplugin, lineNr);
+        if (key == QLatin1String("X-KDE-Library")) {
+            *libraryPath = value;
+        }
     }
     json[QStringLiteral("KPlugin")] = kplugin;
     /*

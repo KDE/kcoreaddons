@@ -187,11 +187,11 @@ private Q_SLOTS:
     void testFromDesktopFile()
     {
         const QString dfile = QFINDTESTDATA("data/fakeplugin.desktop");
-        qDebug() << "plugin file: " << dfile;
         KPluginMetaData md(dfile);
         QVERIFY(md.isValid());
         QCOMPARE(md.pluginId(), QStringLiteral("fakeplugin"));
-        QCOMPARE(md.fileName(), dfile);
+        QCOMPARE(md.fileName(),  QStringLiteral("fakeplugin"));
+        QCOMPARE(md.metaDataFileName(), dfile);
         QCOMPARE(md.iconName(), QStringLiteral("preferences-system-time"));
         QCOMPARE(md.license(), QStringLiteral("LGPL"));
         QCOMPARE(md.website(), QStringLiteral("http://kde.org/"));
