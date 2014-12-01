@@ -119,7 +119,7 @@ public:
      *
      * If the file name ends with ".desktop", the .desktop file will be parsed instead of
      * reading the metadata from the QPluginLoader.
-     * 
+     *
      * @see QPluginLoader::setFileName()
      */
     KPluginMetaData(const QString &file);
