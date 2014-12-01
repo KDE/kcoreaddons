@@ -40,7 +40,7 @@ Kdelibs4Migration::Kdelibs4Migration()
     } else {
         QDir homeDir = QDir::home();
         QVector<QString> testSubdirs;
-        testSubdirs << QStringLiteral(".kde") << QStringLiteral(".kde4");
+        testSubdirs << QStringLiteral(KDE4_DEFAULT_HOME) << QStringLiteral(".kde4") << QStringLiteral(".kde");
         Q_FOREACH (const QString &testSubdir, testSubdirs) {
             if (homeDir.exists(testSubdir)) {
                 //qDebug() << "Using" << testSubdir << "as the location of the old config file";
@@ -49,7 +49,7 @@ Kdelibs4Migration::Kdelibs4Migration()
             }
         }
         if (d->m_kdeHome.isEmpty()) {
-            d->m_kdeHome = QString::fromLatin1(KDE4_DEFAULT_HOME);
+            d->m_kdeHome = QStringLiteral(KDE4_DEFAULT_HOME);
         }
     }
         
