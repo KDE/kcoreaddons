@@ -283,8 +283,6 @@ public:
 private:
     QJsonObject rootObject() const;
 private:
-    bool convert(const QString &src, const QString &dest);
-    void convertToJson(const QString& key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
     QJsonObject m_metaData;
     QString m_fileName;
     QExplicitlySharedDataPointer<KPluginMetaDataPrivate> d; // for future binary compatible extensions

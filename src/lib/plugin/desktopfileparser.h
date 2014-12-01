@@ -25,15 +25,15 @@
 #ifndef DESKTOPFILEPARSER_H
 #define DESKTOPFILEPARSER_H
 
-#include <QJsonObject>
+#include <QByteArray>
+class QJsonObject;
 
-class DesktopFileParser
+namespace DesktopFileParser
 {
-public:
-    static QByteArray escapeValue(const QByteArray& input);
-    static QStringList deserializeList(const QString &data);
-    static bool convert(const QString &src, QJsonObject &json);
-    static void convertToJson(const QString& key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
+    QByteArray escapeValue(const QByteArray& input);
+    QStringList deserializeList(const QString &data);
+    bool convert(const QString &src, QJsonObject &json);
+    void convertToJson(const QString& key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
 
 };
 

@@ -27,6 +27,8 @@
 
 #include <QFile>
 #include <QJsonArray>
+#include <QJsonObject>
+
 #include <QDebug>
 
 
