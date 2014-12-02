@@ -1,6 +1,6 @@
 {
     "KPlugin": {
-        "Description": "This is another plugin",
+        "Description": "This is another plugin", 
         "Id": "foobar"
     }
 }
