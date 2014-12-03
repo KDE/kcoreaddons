@@ -73,6 +73,7 @@ set(libkcoreaddons_SRCS
     randomness/krandomsequence.cpp
     text/kmacroexpander.cpp
     text/kstringhandler.cpp
+    text/ktexttohtml.cpp
     util/kdelibs4migration.cpp
     util/kdelibs4configmigrator.cpp
     util/kformat.cpp
@@ -172,6 +173,8 @@ ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
         KMacroExpander
         KStringHandler
+        KTextToHTML
+        KTextToHTMLEmoticonsInterface
     RELATIVE text
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
