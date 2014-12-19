@@ -49,7 +49,7 @@ Kdelibs4Migration::Kdelibs4Migration()
             }
         }
         if (d->m_kdeHome.isEmpty()) {
-            d->m_kdeHome = QStringLiteral(KDE4_DEFAULT_HOME);
+            d->m_kdeHome = homeDir.filePath(QStringLiteral(KDE4_DEFAULT_HOME));
         }
     }
         
