@@ -890,7 +890,9 @@ public:
      * Configures the @p parser command line parser to provide an authors entry with
      * information about the developers of the application and an entry specifying the license.
      *
-     * Additionally, it will set the description to the command line parser.
+     * Additionally, it will set the description to the command line parser, will add the help
+     * option and if the QApplication has a version set (e.g. via KAboutData::setApplicationData)
+     * it will also add the version option
      *
      * @returns true if adding the options was successful; otherwise returns false.
      *

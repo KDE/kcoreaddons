@@ -939,6 +939,13 @@ bool KAboutData::setupCommandLine(QCommandLineParser *parser)
         parser->setApplicationDescription(d->_shortDescription);
     }
 
+    parser->addHelpOption();
+
+    QCoreApplication *app = QCoreApplication::instance();
+    if (app && !app->applicationVersion().isEmpty()) {
+        parser->addVersionOption();
+    }
+
     return parser->addOption(QCommandLineOption(QStringLiteral("author"), QCoreApplication::translate("KAboutData CLI", "Show author information.")))
            && parser->addOption(QCommandLineOption(QStringLiteral("license"), QCoreApplication::translate("KAboutData CLI", "Show license information.")));
 }
