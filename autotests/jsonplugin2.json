@@ -1,6 +1,12 @@
 {
     "KPlugin": {
         "Description": "This is another plugin", 
+        "Description[nl]": "Dit is een andere plug-in", 
+        "Description[pt]": "Este é outro 'plugin'", 
+        "Description[pt_BR]": "Isto é outro plugin", 
+        "Description[sv]": "Det här är ännu ett insticksprogram", 
+        "Description[uk]": "Це інший додаток", 
+        "Description[x-test]": "xxThis is another pluginxx", 
         "Id": "foobar"
     }
 }
