@@ -967,6 +967,15 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
                 printf("%s\n", qPrintable(authorData));;
             }
         }
+        if (!customAuthorTextEnabled()) {
+            if (bugAddress() == QLatin1String("submit@bugs.kde.org") ) {
+                printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please use http://bugs.kde.org to report bugs.")));
+            } else if (!bugAddress().isEmpty()) {
+                printf(qPrintable(QCoreApplication::translate("KAboutData CLI", "Please report bugs to %s.\n")), qPrintable(bugAddress()));
+            }
+        } else {
+            printf("%s\n", qPrintable(customAuthorPlainText()));
+        }
     } else if (parser->isSet(QStringLiteral("license"))) {
         foundArgument = true;
         Q_FOREACH (const KAboutLicense &license, d->_licenseList) {
