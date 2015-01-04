@@ -35,15 +35,24 @@ private Q_SLOTS:
     void testFromPluginLoader()
     {
         QString location = KPluginLoader::findPlugin("jsonplugin");
-        QVERIFY2(!location.isEmpty(), qPrintable(location));
+        QVERIFY2(!location.isEmpty(),"Could not find jsonplugin");
+
+        // now that this file is translated we need to read it instead of hardcoding the contents here
+        QString jsonLocation = QFINDTESTDATA("jsonplugin.json");
+        QVERIFY2(!jsonLocation.isEmpty(), "Could not find jsonplugin.json");
+        QFile jsonFile(jsonLocation);
+        QVERIFY(jsonFile.open(QFile::ReadOnly));
+        QJsonParseError e;
+        QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonFile.readAll(), &e);
+        QCOMPARE(e.error, QJsonParseError::NoError);
+
         location = QFileInfo(location).absoluteFilePath();
 
         KPluginMetaData fromQPluginLoader(QPluginLoader("jsonplugin"));
         KPluginMetaData fromKPluginLoader(KPluginLoader("jsonplugin"));
         KPluginMetaData fromFullPath(location);
         KPluginMetaData fromRelativePath("jsonplugin");
-        KPluginMetaData fromRawData(QJsonDocument::fromJson(
-            "{\"KPlugin\": { \"Description\": \"This is a plugin\"} }").object(), location);
+        KPluginMetaData fromRawData(jsonDoc.object(), location);
 
         auto description = QStringLiteral("This is a plugin");
 
