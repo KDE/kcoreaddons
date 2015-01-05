@@ -30,7 +30,6 @@ if(NOT WIN32)
 else()
     set(kcoreaddons_OPTIONAL_SRCS
         caching/kshareddatacache_win.cpp
-        io/kdirwatch_win.cpp
     )
 endif()
 
