@@ -21,6 +21,8 @@
 #ifndef KTEXTTOHTML_P_H
 #define KTEXTTOHTML_P_H
 
+#include <QObject>
+
 #include "kcoreaddons_export.h"
 #include "ktexttohtmlemoticonsinterface.h"
 
