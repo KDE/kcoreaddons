@@ -103,10 +103,6 @@ KPluginFactory *KPluginLoader::factory()
 {
     Q_D(KPluginLoader);
 
-    if (!load()) {
-        return 0;
-    }
-
     QObject *obj = instance();
 
     if (!obj) {
@@ -180,6 +176,7 @@ bool KPluginLoader::load()
 {
     Q_D(KPluginLoader);
 
+    qDebug() << "guy" << d->loader->fileName();
     if (!d->loader->load()) {
         return false;
     }
