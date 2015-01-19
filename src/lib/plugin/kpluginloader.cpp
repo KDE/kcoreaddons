@@ -176,7 +176,6 @@ bool KPluginLoader::load()
 {
     Q_D(KPluginLoader);
 
-    qDebug() << "guy" << d->loader->fileName();
     if (!d->loader->load()) {
         return false;
     }
