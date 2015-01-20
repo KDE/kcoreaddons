@@ -55,11 +55,11 @@ class KPluginName;
  *  KPluginLoader loader( ...library or kservice... );
  *  KPluginFactory* factory = loader.factory();
  *  if (!factory) {
- *      kWarning() << "Error loading plugin:" << loader.errorString();
+ *      qWarning() << "Error loading plugin:" << loader.errorString();
  *  } else {
  *      MyInterface* obj = factory->create<MyInterface>();
  *      if (!obj) {
- *          kWarning() << "Error creating object";
+ *          qWarning() << "Error creating object";
  *      }
  *  }
  * \endcode
