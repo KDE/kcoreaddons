@@ -51,7 +51,7 @@ static QStringList findAllStales(const QString &appName)
     QStringList files;
 
     Q_FOREACH (const QString &dir, dirs) {
-        QDir appDir(dir + QString::fromLatin1("/stalefiles/") + appName);
+        QDir appDir(dir + QStringLiteral("/stalefiles/") + appName);
         //qDebug() << "Looking in" << appDir.absolutePath();
         Q_FOREACH (const QString &file, appDir.entryList(QDir::Files)) {
             files << (appDir.absolutePath() + QLatin1Char('/') + file);
@@ -209,19 +209,17 @@ QList<KAutoSaveFile *> KAutoSaveFile::allStaleFiles(const QString &applicationNa
     QList<KAutoSaveFile *> list;
 
     // contruct a KAutoSaveFile for each stale file
-    Q_FOREACH (QString file, files) { // krazy:exclude=foreach (no const& because modified below)
+    Q_FOREACH (const QString& file, files) {
         if (file.endsWith(QLatin1String(".lock"))) {
             continue;
         }
         const QString sep = file.right(3);
-        file.chop(KAutoSaveFilePrivate::padding);
-
         int sepPos = file.indexOf(sep);
         int pathPos = file.indexOf(QChar::fromLatin1('_'), sepPos);
         QUrl name;
-        name.setScheme(file.mid(sepPos + 3, pathPos - sep.size() - 3));
-        QByteArray encodedPath = file.right(pathPos - 1).toLatin1() + '/' + file.left(sepPos).toLatin1();
-        name.setPath(QUrl::fromPercentEncoding(encodedPath));
+        //name.setScheme(file.mid(sepPos + 3, pathPos - sep.size() - 3));
+        QByteArray encodedPath = file.mid(pathPos+1, file.length()-pathPos-1-KAutoSaveFilePrivate::padding).toLatin1();
+        name.setPath(QUrl::fromPercentEncoding(encodedPath) + QLatin1Char('/') + QFileInfo(file.left(sepPos)).fileName());
 
         // sets managedFile
         KAutoSaveFile *asFile = new KAutoSaveFile(name);
