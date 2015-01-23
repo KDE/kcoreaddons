@@ -175,7 +175,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
 
 QUrl extractManagedFilePath(const QString& staleFileName)
 {
-    const QString sep = staleFileName.right(3);
+    const QStringRef sep = staleFileName.rightRef(3);
     int sepPos = staleFileName.indexOf(sep);
     int pathPos = staleFileName.indexOf(QChar::fromLatin1('_'), sepPos);
     QUrl managedFileName;
@@ -199,12 +199,12 @@ QList<KAutoSaveFile *> KAutoSaveFile::staleFiles(const QUrl &filename, const QSt
 
     // contruct a KAutoSaveFile for stale files corresponding given filename
     Q_FOREACH (const QString &file, files) {
-        if (file.endsWith(DOT_LOCK) || extractManagedFilePath(file).path()!=filename.path()) {
+        if (file.endsWith(DOT_LOCK) || (!filename.isEmpty() && extractManagedFilePath(file).path()!=filename.path())) {
             continue;
         }
 
         // sets managedFile
-        KAutoSaveFile *asFile = new KAutoSaveFile(filename);
+        KAutoSaveFile *asFile = new KAutoSaveFile(filename.isEmpty()?extractManagedFilePath(file):filename);
         asFile->setFileName(file);
         asFile->d->managedFileNameChanged = false; // do not regenerate tempfile name
         list.append(asFile);
@@ -215,29 +215,7 @@ QList<KAutoSaveFile *> KAutoSaveFile::staleFiles(const QUrl &filename, const QSt
 
 QList<KAutoSaveFile *> KAutoSaveFile::allStaleFiles(const QString &applicationName)
 {
-    QString appName(applicationName);
-    if (appName.isEmpty()) {
-        appName = QCoreApplication::instance()->applicationName();
-    }
-
-    // get stale files
-    const QStringList files = findAllStales(appName);
-
-    QList<KAutoSaveFile *> list;
-
-    // contruct a KAutoSaveFile for each stale file
-    Q_FOREACH (const QString& file, files) {
-        if (file.endsWith(DOT_LOCK)) {
-            continue;
-        }
-        // sets managedFile
-        KAutoSaveFile *asFile = new KAutoSaveFile(extractManagedFilePath(file));
-        asFile->setFileName(file);
-        asFile->d->managedFileNameChanged = false; // do not regenerate tempfile name
-        list.append(asFile);
-    }
-
-    return list;
+    return staleFiles(QUrl(), applicationName);
 }
 
 #include "moc_kautosavefile.cpp"
