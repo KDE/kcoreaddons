@@ -26,13 +26,19 @@
 #include <QtCore/QCoreApplication>
 #include <QtCore/QDir>
 #include <QtCore/QDebug>
-#include "qlockfile.h"
+#include <QtCore/QFile>
+#include <QtCore/QLockFile>
+#include <QtCore/QStandardPaths>
 #include "krandom.h"
-#include "qstandardpaths.h"
+
+static const QString DOT_LOCK=QStringLiteral(".lock");
+static const QString SLASH_STALEFILES_SLASH=QStringLiteral("/stalefiles/");
 
 class KAutoSaveFilePrivate
 {
 public:
+    enum {NamePadding=8};
+
     KAutoSaveFilePrivate()
         : lock(0),
           managedFileNameChanged(false)
@@ -41,12 +47,8 @@ public:
     QString tempFileName();
     QUrl managedFile;
     QLockFile *lock;
-    static const int padding;
     bool managedFileNameChanged;
 };
-
-const int KAutoSaveFilePrivate::padding = 8;
-static const QString SLASH_STALEFILES_SLASH=QStringLiteral("/stalefiles/");
 
 static QStringList findAllStales(const QString &appName)
 {
@@ -75,9 +77,9 @@ QString KAutoSaveFilePrivate::tempFileName()
     // Remove any part of the path to the right if it is longer than the max file size and
     // ensure that the max filesize takes into account the other parts of the tempFileName
     // Subtract 1 for the _ char, 3 for the padding separator, 5 is for the .lock
-    int pathLengthLimit = maxNameLength - padding - name.size() - protocol.size() - 9;
+    int pathLengthLimit = maxNameLength - NamePadding - name.size() - protocol.size() - 9;
 
-    QString junk = KRandom::randomString(padding);
+    QString junk = KRandom::randomString(NamePadding);
     // tempName = fileName + junk.trunicated + protocol + _ + path.truncated + junk
     // This is done so that the separation between the filename and path can be determined
     name += junk.rightRef(3) + protocol + QLatin1Char('_') + path.leftRef(pathLengthLimit) + junk;
@@ -154,12 +156,16 @@ bool KAutoSaveFile::open(OpenMode openmode)
 
     if (QFile::open(openmode)) {
 
-        d->lock = new QLockFile(tempFile + QLatin1String(".lock"));
-        d->lock->setStaleLockTime(60 * 1000); // HARDCODE, 1 minute
+        if (!d->lock)
+        {
+            d->lock = new QLockFile(tempFile + DOT_LOCK);
+            d->lock->setStaleLockTime(60 * 1000); // HARDCODE, 1 minute
+        }
 
-        if (d->lock->tryLock()) {
+        if (d->lock->isLocked() || d->lock->tryLock()) {
             return true;
         } else {
+            qWarning()<<"Could not lock file:"<<tempFile;
             close();
         }
     }
@@ -174,7 +180,7 @@ QUrl extractManagedFilePath(const QString& staleFileName)
     int pathPos = staleFileName.indexOf(QChar::fromLatin1('_'), sepPos);
     QUrl managedFileName;
     //name.setScheme(file.mid(sepPos + 3, pathPos - sep.size() - 3));
-    QByteArray encodedPath = staleFileName.midRef(pathPos+1, staleFileName.length()-pathPos-1-KAutoSaveFilePrivate::padding).toLatin1();
+    QByteArray encodedPath = staleFileName.midRef(pathPos+1, staleFileName.length()-pathPos-1-KAutoSaveFilePrivate::NamePadding).toLatin1();
     managedFileName.setPath(QUrl::fromPercentEncoding(encodedPath) + QLatin1Char('/') + QFileInfo(staleFileName.left(sepPos)).fileName());
     return managedFileName;
 }
@@ -193,16 +199,14 @@ QList<KAutoSaveFile *> KAutoSaveFile::staleFiles(const QUrl &filename, const QSt
 
     // contruct a KAutoSaveFile for stale files corresponding given filename
     Q_FOREACH (const QString &file, files) {
-        qDebug()<<"stale"<<extractManagedFilePath(file)<<filename;
-        if (file.endsWith(QLatin1String(".lock")) || extractManagedFilePath(file).path()!=filename.path()) {
+        if (file.endsWith(DOT_LOCK) || extractManagedFilePath(file).path()!=filename.path()) {
             continue;
         }
 
         // sets managedFile
         KAutoSaveFile *asFile = new KAutoSaveFile(filename);
         asFile->setFileName(file);
-        // flags the name, so it isn't regenerated
-        asFile->d->managedFileNameChanged = false;
+        asFile->d->managedFileNameChanged = false; // do not regenerate tempfile name
         list.append(asFile);
     }
 
@@ -223,14 +227,13 @@ QList<KAutoSaveFile *> KAutoSaveFile::allStaleFiles(const QString &applicationNa
 
     // contruct a KAutoSaveFile for each stale file
     Q_FOREACH (const QString& file, files) {
-        if (file.endsWith(QLatin1String(".lock"))) {
+        if (file.endsWith(DOT_LOCK)) {
             continue;
         }
         // sets managedFile
         KAutoSaveFile *asFile = new KAutoSaveFile(extractManagedFilePath(file));
         asFile->setFileName(file);
-        // flags the name, so it isn't regenerated
-        asFile->d->managedFileNameChanged = false;
+        asFile->d->managedFileNameChanged = false; // do not regenerate tempfile name
         list.append(asFile);
     }
 
