@@ -67,8 +67,6 @@ static QStringList findAllStales(const QString &appName)
 
 QString KAutoSaveFilePrivate::tempFileName()
 {
-    static const int maxNameLength = FILENAME_MAX;
-
     // Note: we drop any query string and user/pass info
     const QString protocol(managedFile.scheme());
     const QString path(managedFile.adjusted(QUrl::RemoveFilename | QUrl::StripTrailingSlash).path());
@@ -77,7 +75,7 @@ QString KAutoSaveFilePrivate::tempFileName()
     // Remove any part of the path to the right if it is longer than the max file size and
     // ensure that the max filesize takes into account the other parts of the tempFileName
     // Subtract 1 for the _ char, 3 for the padding separator, 5 is for the .lock
-    int pathLengthLimit = maxNameLength - NamePadding - name.size() - protocol.size() - 9;
+    int pathLengthLimit = FILENAME_MAX - NamePadding - name.size() - protocol.size() - 9;
 
     QString junk = KRandom::randomString(NamePadding);
     // tempName = fileName + junk.trunicated + protocol + _ + path.truncated + junk

@@ -52,6 +52,8 @@ public:
      * @param lngSeed Seed to initialize the sequence with.
      * If lngSeed is 0, the sequence is initialized with a value from
      * KRandom::random().
+     *
+     * TODO KF6: change to int for 64-bit unambiguity
      */
     explicit KRandomSequence(long lngSeed = 0);
 
@@ -75,6 +77,8 @@ public:
      * @param lngSeed Seed to initialize the sequence with.
      * If lngSeed is 0, the sequence is initialized with a value from
      * KRandom::random().
+     *
+     * TODO KF6: change to int for 64-bit unambiguity
      */
     void setSeed(long lngSeed = 0);
 
@@ -90,6 +94,8 @@ public:
      *
      * @return a pseudo-random integer value between [0, max)
      * with 0 <= max < 1.000.000
+     *
+     * TODO KF6: change to uint for 64-bit unambiguity
      */
     unsigned long getLong(unsigned long max);
 
