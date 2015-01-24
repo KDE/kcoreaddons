@@ -21,18 +21,17 @@
 #include "krandomsequence.h"
 #include "krandom.h"
 
-static const int s_nShuffleTableSize = 32;
-
 class KRandomSequence::Private
 {
 public:
-    // Generate the random number
-    void draw();
+    enum {SHUFFLE_TABLE_SIZE = 32};
 
-    long lngSeed1;
-    long lngSeed2;
-    long lngShufflePos;
-    long shuffleArray[s_nShuffleTableSize];
+    void draw(); // Generate the random number
+
+    int lngSeed1;
+    int lngSeed2;
+    int lngShufflePos;
+    int shuffleArray[SHUFFLE_TABLE_SIZE];
 };
 
 //////////////////////////////////////////////////////////////////////////////
@@ -40,6 +39,12 @@ public:
 //////////////////////////////////////////////////////////////////////////////
 
 KRandomSequence::KRandomSequence(long lngSeed1) : d(new Private)
+{
+    // Seed the generator
+    setSeed(lngSeed1);
+}
+
+KRandomSequence::KRandomSequence(int lngSeed1) : d(new Private)
 {
     // Seed the generator
     setSeed(lngSeed1);
@@ -66,8 +71,12 @@ KRandomSequence &KRandomSequence::operator=(const KRandomSequence &a)
 //////////////////////////////////////////////////////////////////////////////
 //  Member Functions
 //////////////////////////////////////////////////////////////////////////////
-
 void KRandomSequence::setSeed(long lngSeed1)
+{
+    setSeed((int)lngSeed1);
+}
+
+void KRandomSequence::setSeed(int lngSeed1)
 {
     // Convert the positive seed number to a negative one so that the draw()
     // function can intialise itself the first time it is called. We just have
@@ -82,19 +91,19 @@ void KRandomSequence::setSeed(long lngSeed1)
     }
 }
 
-static const long sMod1           = 2147483563;
-static const long sMod2           = 2147483399;
+static const int sMod1           = 2147483563;
+static const int sMod2           = 2147483399;
 
 void KRandomSequence::Private::draw()
 {
-    static const long sMM1            = sMod1 - 1;
-    static const long sA1             = 40014;
-    static const long sA2             = 40692;
-    static const long sQ1             = 53668;
-    static const long sQ2             = 52774;
-    static const long sR1             = 12211;
-    static const long sR2             = 3791;
-    static const long sDiv            = 1 + sMM1 / s_nShuffleTableSize;
+    static const int sMM1            = sMod1 - 1;
+    static const int sA1             = 40014;
+    static const int sA2             = 40692;
+    static const int sQ1             = 53668;
+    static const int sQ2             = 52774;
+    static const int sR1             = 12211;
+    static const int sR2             = 3791;
+    static const int sDiv            = 1 + sMM1 / SHUFFLE_TABLE_SIZE;
 
     // Long period (>2 * 10^18) random number generator of L'Ecuyer with
     // Bayes-Durham shuffle and added safeguards. Returns a uniform random
@@ -104,21 +113,21 @@ void KRandomSequence::Private::draw()
     // the largest floating point value that is less than 1.
 
     int j; // Index for the shuffle table
-    long k;
+    int k;
 
     // Initialise
     if (lngSeed1 <= 0) {
         lngSeed2 = lngSeed1;
 
         // Load the shuffle table after 8 warm-ups
-        for (j = s_nShuffleTableSize + 7; j >= 0; --j) {
+        for (j = SHUFFLE_TABLE_SIZE + 7; j >= 0; --j) {
             k = lngSeed1 / sQ1;
             lngSeed1 = sA1 * (lngSeed1 - k * sQ1) - k * sR1;
             if (lngSeed1 < 0) {
                 lngSeed1 += sMod1;
             }
 
-            if (j < s_nShuffleTableSize) {
+            if (j < SHUFFLE_TABLE_SIZE) {
                 shuffleArray[j] = lngSeed1;
             }
         }
@@ -188,9 +197,15 @@ KRandomSequence::getDouble()
 unsigned long
 KRandomSequence::getLong(unsigned long max)
 {
+    return (unsigned long) getInt((int)max);
+}
+
+unsigned int
+KRandomSequence::getInt(unsigned int max)
+{
     d->draw();
 
-    return max ? (((unsigned long) d->lngShufflePos) % max) : 0;
+    return max ? (((unsigned int) d->lngShufflePos) % max) : 0;
 }
 
 bool
@@ -198,5 +213,5 @@ KRandomSequence::getBool()
 {
     d->draw();
 
-    return (((unsigned long) d->lngShufflePos) & 1);
+    return (((unsigned int) d->lngShufflePos) & 1);
 }

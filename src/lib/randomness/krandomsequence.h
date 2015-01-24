@@ -49,13 +49,15 @@ public:
      * If you need a single value which needs to be unpredictable,
      * you need to use KRandom::random() instead.
      *
-     * @param lngSeed Seed to initialize the sequence with.
+     * @param intSeed Seed to initialize the sequence with.
      * If lngSeed is 0, the sequence is initialized with a value from
      * KRandom::random().
      *
-     * TODO KF6: change to int for 64-bit unambiguity
+     * Do not use methods working with long type because on 64-bit
+     * their size is different.
      */
-    explicit KRandomSequence(long lngSeed = 0);
+    explicit KRandomSequence(int intSeed = 0);
+    explicit KRandomSequence(long lngSeed);
 
     /**
      * Standard destructor
@@ -74,12 +76,11 @@ public:
 
     /**
      * Restart the sequence based on lngSeed.
-     * @param lngSeed Seed to initialize the sequence with.
+     * @param intSeed Seed to initialize the sequence with.
      * If lngSeed is 0, the sequence is initialized with a value from
      * KRandom::random().
-     *
-     * TODO KF6: change to int for 64-bit unambiguity
      */
+    void setSeed(int intSeed = 0);
     void setSeed(long lngSeed = 0);
 
     /**
@@ -94,9 +95,8 @@ public:
      *
      * @return a pseudo-random integer value between [0, max)
      * with 0 <= max < 1.000.000
-     *
-     * TODO KF6: change to uint for 64-bit unambiguity
      */
+    unsigned int getInt(unsigned int max);
     unsigned long getLong(unsigned long max);
 
     /**
@@ -122,7 +122,7 @@ public:
     {
         // Fisher-Yates algorithm
         for (int index = list.count() - 1; index > 0; --index) {
-            const int swapIndex = getLong(index + 1);
+            const int swapIndex = getInt(index + 1);
             qSwap(list[index], list[swapIndex]);
         }
     }
