@@ -49,7 +49,7 @@ QStringList KStringHandler::capwords(const QStringList &list)
 {
     QStringList tmp = list;
     for (QStringList::Iterator it = tmp.begin(); it != tmp.end(); ++it) {
-        *it = (*it)[ 0 ].toUpper() + (*it).mid(1);
+        *it = (*it)[ 0 ].toUpper() + (*it).midRef(1);
     }
     return tmp;
 }
@@ -58,7 +58,7 @@ QString KStringHandler::lsqueeze(const QString &str, int maxlen)
 {
     if (str.length() > maxlen) {
         int part = maxlen - 3;
-        return QString::fromLatin1("...") + str.right(part);
+        return QStringLiteral("...") + str.rightRef(part);
     } else {
         return str;
     }
@@ -68,7 +68,7 @@ QString KStringHandler::csqueeze(const QString &str, int maxlen)
 {
     if (str.length() > maxlen && maxlen > 3) {
         const int part = (maxlen - 3) / 2;
-        return str.left(part) + QLatin1String("...") + str.right(part);
+        return str.leftRef(part) + QStringLiteral("...") + str.rightRef(part);
     } else {
         return str;
     }
@@ -78,7 +78,7 @@ QString KStringHandler::rsqueeze(const QString &str, int maxlen)
 {
     if (str.length() > maxlen) {
         int part = maxlen - 3;
-        return str.left(part) + QLatin1String("...");
+        return str.leftRef(part) + QStringLiteral("...");
     } else {
         return str;
     }
@@ -165,7 +165,7 @@ QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int 
 
 QString KStringHandler::tagUrls(const QString &text)
 {
-    /*static*/ QRegExp urlEx(QLatin1String("(www\\.(?!\\.)|(fish|(f|ht)tp(|s))://)[\\d\\w\\./,:_~\\?=&;#@\\-\\+\\%\\$]+[\\d\\w/]"));
+    /*static*/ QRegExp urlEx(QStringLiteral("(www\\.(?!\\.)|(fish|(f|ht)tp(|s))://)[\\d\\w\\./,:_~\\?=&;#@\\-\\+\\%\\$]+[\\d\\w/]"));
 
     QString richText(text);
     int urlPos = 0, urlLen;
@@ -178,7 +178,7 @@ QString KStringHandler::tagUrls(const QString &text)
             continue;
         }
         // Don't use QString::arg since %01, %20, etc could be in the string
-        QString anchor = QString::fromLatin1("<a href=\"") + href + QLatin1String("\">") + href + QLatin1String("</a>");
+        QString anchor = QStringLiteral("<a href=\"") + href + QStringLiteral("\">") + href + QStringLiteral("</a>");
         richText.replace(urlPos, urlLen, anchor);
 
         urlPos += anchor.length();

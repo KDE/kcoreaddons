@@ -31,9 +31,6 @@
 #include <QtCore/QStandardPaths>
 #include "krandom.h"
 
-static const QString DOT_LOCK=QStringLiteral(".lock");
-static const QString SLASH_STALEFILES_SLASH=QStringLiteral("/stalefiles/");
-
 class KAutoSaveFilePrivate
 {
 public:
@@ -56,7 +53,7 @@ static QStringList findAllStales(const QString &appName)
     QStringList files;
 
     Q_FOREACH (const QString &dir, dirs) {
-        QDir appDir(dir + SLASH_STALEFILES_SLASH + appName);
+        QDir appDir(dir + QStringLiteral("/stalefiles/") + appName);
         //qDebug() << "Looking in" << appDir.absolutePath();
         Q_FOREACH (const QString &file, appDir.entryList(QDir::Files)) {
             files << (appDir.absolutePath() + QLatin1Char('/') + file);
@@ -139,7 +136,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
     QString tempFile;
     if (d->managedFileNameChanged) {
         QString staleFilesDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
-                                SLASH_STALEFILES_SLASH + QCoreApplication::instance()->applicationName();
+                                QStringLiteral("/stalefiles/") + QCoreApplication::instance()->applicationName();
         if (!QDir().mkpath(staleFilesDir)) {
             return false;
         }
@@ -156,7 +153,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
 
         if (!d->lock)
         {
-            d->lock = new QLockFile(tempFile + DOT_LOCK);
+            d->lock = new QLockFile(tempFile + QStringLiteral(".lock"));
             d->lock->setStaleLockTime(60 * 1000); // HARDCODE, 1 minute
         }
 
@@ -197,7 +194,7 @@ QList<KAutoSaveFile *> KAutoSaveFile::staleFiles(const QUrl &filename, const QSt
 
     // contruct a KAutoSaveFile for stale files corresponding given filename
     Q_FOREACH (const QString &file, files) {
-        if (file.endsWith(DOT_LOCK) || (!filename.isEmpty() && extractManagedFilePath(file).path()!=filename.path())) {
+        if (file.endsWith(QLatin1String(".lock")) || (!filename.isEmpty() && extractManagedFilePath(file).path()!=filename.path())) {
             continue;
         }
 
