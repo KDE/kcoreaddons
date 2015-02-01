@@ -3575,6 +3575,8 @@ Notes:
       <match type="string" value="import Qt " offset="0:256"/>
     </magic>
     <glob pattern="*.qml"/>
+    <glob pattern="*.qmltypes"/>
+    <glob pattern="*.qmlproject"/>
   </mime-type>
   <mime-type type="application/x-mobipocket-ebook">
     <comment>Mobipocket e-book</comment>
