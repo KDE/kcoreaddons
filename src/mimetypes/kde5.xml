@@ -3521,7 +3521,7 @@ Notes:
     </magic>
     <glob pattern="*.pic"/>
   </mime-type>
-  <mime-type type="text/x-qml"> <!-- in fdo smi > 0.90 -->
+  <mime-type type="text/x-qml"> <!-- in fdo smi > 0.90; *.qmltypes and *.qmlproject added to fdo smi > 1.3 -->
     <comment>Qt Markup Language file</comment>
     <comment xml:lang="ar">ملف لغة الوصف Qt</comment>
     <comment xml:lang="bs">Datoteka Qt jezika za označavanje</comment>
