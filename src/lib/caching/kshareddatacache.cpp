@@ -1022,12 +1022,13 @@ public:
 
         // The m_cacheName is used to find the file to store the cache in.
         const QString cacheDir = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation);
-        if (!QDir().mkpath(cacheDir)) {
-            return;
-        }
         QString cacheName = cacheDir + QLatin1String("/") + m_cacheName + QLatin1String(".kcache");
         QFile file(cacheName);
-
+        QFileInfo fileInfo(file);
+        if (!QDir().mkpath(fileInfo.absolutePath())) {
+            return;
+        }
+ 
         // The basic idea is to open the file that we want to map into shared
         // memory, and then actually establish the mapping. Once we have mapped the
         // file into shared memory we can close the file handle, the mapping will
