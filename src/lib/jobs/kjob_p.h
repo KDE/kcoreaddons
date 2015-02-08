@@ -42,20 +42,20 @@ public:
     KJob *q_ptr;
 
     KJobUiDelegate *uiDelegate;
-    int error;
     QString errorText;
+    int error;
     KJob::Unit progressUnit;
     QMap<KJob::Unit, qulonglong> processedAmount;
     QMap<KJob::Unit, qulonglong> totalAmount;
     unsigned long percentage;
-    bool suspended;
-    KJob::Capabilities capabilities;
     QTimer *speedTimer;
-    bool isAutoDelete;
     QEventLoop *eventLoop;
     // evenLoopLocker prevents QCoreApplication from exiting when last window is
     // closed until the job has finished running
     QEventLoopLocker eventLoopLocker;
+    KJob::Capabilities capabilities;
+    bool suspended;
+    bool isAutoDelete;
 
     void _k_speedTimeout();
 

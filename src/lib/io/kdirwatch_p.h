@@ -83,22 +83,22 @@ public:
     class Entry
     {
     public:
-        // the last observed modification time
-        time_t m_ctime;
-        // the last observed link count
-        int m_nlink;
-        // last observed inode
-        ino_t m_ino;
-        entryStatus m_status;
-        entryMode m_mode;
-        bool isDir;
         // instances interested in events
         QList<Client *> m_clients;
         // nonexistent entries of this directory
         QList<Entry *> m_entries;
         QString path;
 
+        // the last observed modification time
+        time_t m_ctime;
+        // last observed inode
+        ino_t m_ino;
+        // the last observed link count
+        int m_nlink;
+        entryStatus m_status;
+        entryMode m_mode;
         int msecLeft, freq;
+        bool isDir;
 
         QString parentDirectory() const;
         void addClient(KDirWatch *, KDirWatch::WatchModes);

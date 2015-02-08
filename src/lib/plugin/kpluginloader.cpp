@@ -40,19 +40,19 @@ class KPluginLoaderPrivate
 protected:
     KPluginLoaderPrivate(const QString &libname)
         : name(libname),
+          loader(0),
           pluginVersion(~0U),
-          pluginVersionResolved(false),
-          loader(0)
+          pluginVersionResolved(false)
     {}
     ~KPluginLoaderPrivate()
     {}
 
     KPluginLoader *q_ptr;
     const QString name;
-    quint32 pluginVersion;
     QString errorString;
-    bool pluginVersionResolved;
     QPluginLoader *loader;
+    quint32 pluginVersion;
+    bool pluginVersionResolved;
 };
 
 QString KPluginLoader::findPlugin(const QString &name)
