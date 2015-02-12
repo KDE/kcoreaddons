@@ -128,7 +128,7 @@ public:
     {
     }
 
-    virtual bool initialize(bool &processSharingSupported)
+    virtual bool initialize(bool &processSharingSupported) Q_DECL_OVERRIDE
     {
         // Clear the spinlock
         m_spinlock.store(0);
@@ -136,7 +136,7 @@ public:
         return true;
     }
 
-    virtual bool lock()
+    virtual bool lock() Q_DECL_OVERRIDE
     {
         // Spin a few times attempting to gain the lock, as upper-level code won't
         // attempt again without assuming the cache is corrupt.
@@ -153,7 +153,7 @@ public:
         return false;
     }
 
-    virtual void unlock()
+    virtual void unlock() Q_DECL_OVERRIDE
     {
         m_spinlock.testAndSetRelease(1, 0);
     }
@@ -187,7 +187,7 @@ public:
     {
     }
 
-    virtual bool initialize(bool &processSharingSupported)
+    virtual bool initialize(bool &processSharingSupported) Q_DECL_OVERRIDE
     {
         // Setup process-sharing.
         pthread_mutexattr_t mutexAttr;
@@ -211,12 +211,12 @@ public:
         return true;
     }
 
-    virtual bool lock()
+    virtual bool lock() Q_DECL_OVERRIDE
     {
         return pthread_mutex_lock(&m_mutex) == 0;
     }
 
-    virtual void unlock()
+    virtual void unlock() Q_DECL_OVERRIDE
     {
         pthread_mutex_unlock(&m_mutex);
     }
@@ -235,7 +235,7 @@ public:
     {
     }
 
-    virtual bool lock()
+    virtual bool lock() Q_DECL_OVERRIDE
     {
         struct timespec timeout;
 
@@ -259,7 +259,7 @@ public:
     {
     }
 
-    virtual bool initialize(bool &processSharingSupported)
+    virtual bool initialize(bool &processSharingSupported) Q_DECL_OVERRIDE
     {
         processSharingSupported = false;
         if (::sysconf(_SC_SEMAPHORES) < 200112L) {
@@ -278,12 +278,12 @@ public:
         return true;
     }
 
-    virtual bool lock()
+    virtual bool lock() Q_DECL_OVERRIDE
     {
         return sem_wait(&m_semaphore) == 0;
     }
 
-    virtual void unlock()
+    virtual void unlock() Q_DECL_OVERRIDE
     {
         sem_post(&m_semaphore);
     }
@@ -302,7 +302,7 @@ public:
     {
     }
 
-    virtual bool lock()
+    virtual bool lock() Q_DECL_OVERRIDE
     {
         struct timespec timeout;
 

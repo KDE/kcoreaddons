@@ -33,7 +33,7 @@ public:
     explicit TestJob(QObject *parent = 0);
 
     /// Takes 1 second to finish
-    virtual void start();
+    virtual void start() Q_DECL_OVERRIDE;
 
 private Q_SLOTS:
     void doEmit();
@@ -46,11 +46,11 @@ class CompositeJob : public KCompositeJob
 public:
     explicit CompositeJob(QObject *parent = 0) : KCompositeJob(parent) {}
 
-    virtual void start();
-    virtual bool addSubjob(KJob *job);
+    virtual void start() Q_DECL_OVERRIDE;
+    virtual bool addSubjob(KJob *job) Q_DECL_OVERRIDE;
 
 protected Q_SLOTS:
-    virtual void slotResult(KJob *job);
+    virtual void slotResult(KJob *job) Q_DECL_OVERRIDE;
 };
 
 class KCompositeJobTest : public QObject
