@@ -12,6 +12,14 @@ Notes:
 - the "fdo #xxxxx" are the wish in the freedesktop.org bug database to include
   the mime type there.
 -->
+
+<!-- IMPORTANT: before you add anything here, please consider submitting
+     it upstream to shared-mime-info instead.
+     This file is only for things that are either urgently needed, or
+     which have been refused upstream.
+     It also has KDE-specific mimetypes, but remember that having such things
+     in s-m-i means that someone receiving such a file by email or from a website
+     will at least get a description of what it is, even without kcoreaddons installed.-->
 <mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
   <mime-type type="application/metalink+xml">
     <sub-class-of type="application/xml"/>
@@ -662,7 +670,7 @@ Notes:
     <glob pattern="*.mhtml"/>
     <glob pattern="*.mht"/>
   </mime-type>
-  <mime-type type="application/x-nzb"> <!-- fdo #10029 -->
+  <mime-type type="application/x-nzb"> <!-- fdo #10029, released in s-m-i 0.91 -->
     <comment>NewzBin usenet index</comment>
     <comment xml:lang="ar">فهرس يوزنت NewzBin</comment>
     <comment xml:lang="ast">Índiz usenet de NewzBin</comment>
@@ -1179,7 +1187,7 @@ Notes:
     <comment xml:lang="zh_TW">網頁歸檔</comment>
     <glob pattern="*.war"/>
   </mime-type>
-  <mime-type type="application/xsd">
+  <mime-type type="application/xsd"> <!-- fdo s-m-i adds *.xsd to application/xml, i.e. no subclass. Good enough? This here creates a glob conflict... -->
     <sub-class-of type="application/xml"/>
     <comment>W3C XML schema</comment>
     <comment xml:lang="ar">مخطط W3C XML</comment>
@@ -1237,7 +1245,7 @@ Notes:
     <comment xml:lang="zh_TW">W3C XML 機制</comment>
     <glob pattern="*.xsd"/>
   </mime-type>
-  <mime-type type="audio/aac">
+  <mime-type type="audio/aac"> <!-- in fdo s-m-i since 1.1 -->
     <comment>AAC sound</comment>
     <comment xml:lang="ar">صوت AAC</comment>
     <comment xml:lang="ast">Soníu AAC</comment>
@@ -1723,7 +1731,7 @@ Notes:
     <comment xml:lang="zh_CN">Objective-C 头文件</comment>
     <comment xml:lang="zh_TW">Objective-C 標頭檔</comment>
   </mime-type>
-  <mime-type type="text/vnd.abc"> <!-- fdo #6578 -->
+  <mime-type type="text/vnd.abc"> <!-- fdo #6578, needs update -->
     <sub-class-of type="text/plain"/>
     <comment>abc musical notation file</comment>
     <comment xml:lang="ar">ملف كراسة موسيقية abc</comment>
@@ -3344,7 +3352,7 @@ Notes:
 
   <!-- http://www4.wiwiss.fu-berlin.de/bizer/TriG/ -->
   <!-- Used in Nepomuk to encode almost all ontologies -->
-  <mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-trig"> <!-- fdo #18089 -->
+  <mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-trig"> <!-- fdo #32182, released in s-m-i 1.1 -->
     <comment>TriG RDF document</comment>
     <comment xml:lang="ar">وثيقة TriG RDF</comment>
     <comment xml:lang="ast">Documentu RDF TriG</comment>
@@ -3405,7 +3413,7 @@ Notes:
   </mime-type>
   <!-- http://www.dajobe.org/2004/01/turtle/#sec-mime -->
   <!-- Important: the SPARQL RDF query lanaguge uses turtle encoding for graph patterns. -->
-  <mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-turtle"> <!-- fdo #18089 -->
+  <mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-turtle"> <!-- fdo #18089, but not in followup #32812 -->
     <comment>Turtle RDF document</comment>
     <comment xml:lang="ar">وثيقة Turtle RDF</comment>
     <comment xml:lang="ast">Documentu RDF Turtle</comment>
@@ -3463,7 +3471,7 @@ Notes:
     <comment xml:lang="zh_TW">Turtle RDF 文件</comment>
     <sub-class-of type="text/plain" />
   </mime-type>
-  <mime-type type="image/x-pic"> <!-- fdo #26038 -->
+  <mime-type type="image/x-pic"> <!-- fdo #26038, needs update -->
     <comment>Softimage PIC image</comment>
     <comment xml:lang="ar">صورة PIC</comment>
     <comment xml:lang="bs">Softimidžova PIC slika</comment>
@@ -3578,7 +3586,7 @@ Notes:
     <glob pattern="*.qmltypes"/>
     <glob pattern="*.qmlproject"/>
   </mime-type>
-  <mime-type type="application/x-mobipocket-ebook">
+  <mime-type type="application/x-mobipocket-ebook"> <!-- in fdo s-m-i since 0.91 -->
     <comment>Mobipocket e-book</comment>
     <comment xml:lang="ar">كتاب إلكتروني Mobipocket</comment>
     <comment xml:lang="bs">Mobipocket e-book</comment>
