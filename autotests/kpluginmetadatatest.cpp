@@ -207,7 +207,13 @@ private Q_SLOTS:
         QCOMPARE(md.category(), QStringLiteral("Examples"));
         QCOMPARE(md.version(), QStringLiteral("1.0"));
         QCOMPARE(md.dependencies(), QStringList());
+        QCOMPARE(md.isHidden(), false);
         QCOMPARE(md.serviceTypes(), QStringList("KService/NSA"));
+
+        dfile = QFINDTESTDATA("data/fakeplugin.desktop");
+        KPluginMetaData mdhidden(dfile);
+        QVERIFY(md.isValid());
+        QCOMPARE(md.isHidden(), true);
     }
 };
 

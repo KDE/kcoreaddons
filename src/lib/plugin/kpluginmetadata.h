@@ -166,6 +166,15 @@ public:
     bool isValid() const;
 
     /**
+     * @return whether this object should be hidden, this is usually not used for binary
+     * plugins, when loading a KPluginMetaData from a .desktop file, this will reflect
+     * the value of the "Hidden" key.
+     *
+     * @since 5.8
+     */
+    bool isHidden() const;
+
+    /**
      * @return the path to the plugin. This string can be passed to the KPluginLoader
      * or QPluginLoader constructors in order to attempt to load this plugin.
      * @note It is not guaranteed that this is a valid path to a shared library (i.e. loadable

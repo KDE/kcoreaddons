@@ -128,6 +128,11 @@ bool KPluginMetaData::isValid() const
     return !pluginId().isEmpty() && !m_metaData.isEmpty();
 }
 
+bool KPluginMetaData::isHidden() const
+{
+    return rootObject()[QStringLiteral("Hidden")].toBool();
+}
+
 QJsonObject KPluginMetaData::rootObject() const
 {
     return m_metaData[QStringLiteral("KPlugin")].toObject();
