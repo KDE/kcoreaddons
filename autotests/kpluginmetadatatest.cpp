@@ -210,10 +210,10 @@ private Q_SLOTS:
         QCOMPARE(md.isHidden(), false);
         QCOMPARE(md.serviceTypes(), QStringList("KService/NSA"));
 
-        const QString dfilehidden = QFINDTESTDATA("data/fakeplugin.desktop");
+        const QString dfilehidden = QFINDTESTDATA("data/hiddenplugin.desktop");
         KPluginMetaData mdhidden(dfilehidden);
-        QVERIFY(md.isValid());
-        QCOMPARE(md.isHidden(), true);
+        QVERIFY(mdhidden.isValid());
+        QCOMPARE(mdhidden.isHidden(), true);
     }
 };
 
