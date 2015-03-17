@@ -89,6 +89,11 @@ KPluginLoader::KPluginLoader(const KPluginName &pluginName, QObject *parent)
 
     if (pluginName.isValid()) {
         d->loader->setFileName(pluginName.name());
+        if (d->loader->fileName().isEmpty()) {
+            qWarning() << "Error loading plugin" << pluginName.name() << d->loader->errorString() << endl
+                       << "Plugin search paths are" << QCoreApplication::libraryPaths() << endl
+                       << "The environment variable QT_PLUGIN_PATH might be not correctly set";
+        }
     } else {
         d->errorString = pluginName.errorString();
     }
