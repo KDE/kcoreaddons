@@ -26,6 +26,7 @@
 #include <QFileInfo>
 #include <QDir>
 #include <QDebug>
+#include <QPluginLoader>
 
 class Kdelibs4ConfigMigrator::Private
 {
@@ -107,6 +108,13 @@ bool Kdelibs4ConfigMigrator::migrate()
                 qDebug()<<"old config "<<oldConfigFile << " was migrated to "<<newConfigLocation;
             }
         }
+    }
+
+    // Trigger KSharedConfig::openConfig()->reparseConfiguration() via the framework integration plugin
+    QPluginLoader lib(QStringLiteral("kf5/FrameworkIntegrationPlugin"));
+    QObject *rootObj = lib.instance();
+    if (rootObj) {
+        QMetaObject::invokeMethod(rootObj, "reparseConfiguration");
     }
     return true;
 }
