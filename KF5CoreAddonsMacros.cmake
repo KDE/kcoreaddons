@@ -78,3 +78,50 @@ function(_desktop_to_json_cmake28 desktop json compat)
         message(FATAL_ERROR "Generating ${json} failed")
     endif()
 endfunction()
+
+#
+# kcoreaddons_add_plugin(plugin_name SOURCES... [JSON "pluginname.json"] [INSTALL_NAMESPACE "servicename"])
+#
+# This macro helps simplifying the creation of plugins for KPluginFactory
+# based systems.
+# It will create a plugin given the SOURCES list, the name of the JSON file
+# that will define the plugin's metadata and the INSTALL_NAMESPACE so that
+# the plugin is installed with the rest of the plugins from the same sub-system,
+# within ${PLUGIN_INSTALL_DIR}.
+#
+# Example:
+#   kcoreaddons_add_plugin(kdeconnect_share JSON kdeconnect_share.json SOURCES ${kdeconnect_share_SRCS})
+
+function(kcoreaddons_add_plugin plugin)
+    set(options)
+    set(oneValueArgs JSON INSTALL_NAMESPACE)
+    set(multiValueArgs SOURCES)
+    cmake_parse_arguments(KCA_ADD_PLUGIN "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+
+    get_filename_component(json "${KCA_ADD_PLUGIN_JSON}" REALPATH)
+
+    # ensure we recompile the corresponding object files when the json file changes
+    set(dependent_sources )
+    foreach(source ${KCA_ADD_PLUGIN_SOURCES})
+        get_filename_component(source "${source}" REALPATH)
+        if(EXISTS "${source}")
+            file(STRINGS "${source}" match REGEX "K_PLUGIN_FACTORY_WITH_JSON")
+            if(match)
+                list(APPEND dependent_sources "${source}")
+            endif()
+        endif()
+    endforeach()
+    if(NOT dependent_sources)
+        # fallback to all sources - better safe than sorry...
+        set(dependent_sources ${KCA_ADD_PLUGIN_SOURCES})
+    endif()
+    set_property(SOURCE ${dependent_sources} APPEND PROPERTY OBJECT_DEPENDS ${json})
+
+    add_library(${plugin} MODULE ${KCA_ADD_PLUGIN_SOURCES})
+    set_property(TARGET ${plugin} APPEND PROPERTY AUTOGEN_TARGET_DEPENDS ${json})
+
+    if (NOT KCA_ADD_PLUGIN_INSTALL_NAMESPACE)
+        message(FATAL_ERROR "Must specify INSTALL_NAMESPACE for ${plugin}")
+    endif()
+    install(TARGETS ${plugin} DESTINATION ${PLUGIN_INSTALL_DIR}/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE})
+endfunction()
