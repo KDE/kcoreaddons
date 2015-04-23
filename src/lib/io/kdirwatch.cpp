@@ -298,8 +298,14 @@ void KDirWatchPrivate::inotifyEventReceived()
             offsetCurrent += eventSize;
 
             QString path;
-            QByteArray cpath(event->name, event->len);
-            if (event->len) {
+            // strip trailing null chars, see inotify_event documentation
+            // these must not end up in the final QString version of path
+            int len = event->len;
+            while (len > 1 && !event->name[len - 1]) {
+                --len;
+            }
+            QByteArray cpath(event->name, len);
+            if (len) {
                 path = QFile::decodeName(cpath);
             }
 

@@ -564,12 +564,16 @@ void KDirWatch_UnitTest::testMoveTo()
     qDebug() << "Overwrite file1 with tempfile";
 
     QSignalSpy spyCreated(&watch, SIGNAL(created(QString)));
+    QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
 
     // Getting created() on an unwatched file is an inotify bonus, it's not part of the requirements.
     if (watch.internalMethod() == KDirWatch::INotify) {
         QCOMPARE(spyCreated.count(), 1);
         QCOMPARE(spyCreated[0][0].toString(), file1);
+
+        QCOMPARE(spyDirty.size(), 2);
+        QCOMPARE(spyDirty[1][0].toString(), filetemp);
     }
 
     // make sure we're still watching it
