@@ -24,17 +24,28 @@
 #include <QTemporaryDir>
 #include <QTest>
 #include <QDebug>
+#include <QStandardPaths>
 
 class Kdelibs4ConfigMigratorTest : public QObject
 {
     Q_OBJECT
 
 private Q_SLOTS:
+    void initTestCase();
     void shouldNotMigrateIfKde4HomeDirDoesntExist();
     void shouldMigrateIfKde4HomeDirExist();
     void shouldMigrateConfigFiles();
     void shouldMigrateUiFiles();
 };
+
+void Kdelibs4ConfigMigratorTest::initTestCase()
+{
+    QStandardPaths::setTestModeEnabled(true);
+    const QString configHome = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    QDir(configHome).removeRecursively();
+    const QString dataHome = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+    QDir(dataHome).removeRecursively();
+}
 
 void Kdelibs4ConfigMigratorTest::shouldNotMigrateIfKde4HomeDirDoesntExist()
 {
@@ -71,20 +82,18 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateConfigFiles()
         QVERIFY(fooConfigFile.exists());
         const QString storedConfigFilePath = configPath + QLatin1Char('/') + config;
         QVERIFY(QFile::copy(fooConfigFile.fileName(), storedConfigFilePath));
+        QCOMPARE(QStandardPaths::locate(QStandardPaths::ConfigLocation, config), QString());
     }
-
-    QTemporaryDir xdgConfigDir;
-    const QString xdgConfighome = xdgConfigDir.path();
-    QVERIFY(xdgConfigDir.isValid());
-    qputenv("XDG_CONFIG_HOME", QFile::encodeName(xdgConfighome));
 
     Kdelibs4ConfigMigrator migration(QLatin1String("foo"));
     migration.setConfigFiles(QStringList() << listConfig);
     QVERIFY(migration.migrate());
 
     Q_FOREACH (const QString &config, listConfig) {
-        const QString xdgConfigFile = xdgConfighome + QLatin1Char('/') + config;
-        QVERIFY(QFile(xdgConfigFile).exists());
+        const QString migratedConfigFile = QStandardPaths::locate(QStandardPaths::ConfigLocation, config);
+        QVERIFY(!migratedConfigFile.isEmpty());
+        QVERIFY(QFile(migratedConfigFile).exists());
+        QFile::remove(migratedConfigFile);
     }
 }
 
@@ -101,20 +110,20 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateUiFiles()
     QDir().mkpath(dataPath);
     QVERIFY(QDir(dataPath).exists());
 
+    const QString xdgDatahome = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
+
     QStringList listUi;
     listUi << QLatin1String("appuirc") << QLatin1String("appui1rc");
-    Q_FOREACH (const QString &config, listUi) {
-        QFile fooConfigFile(QLatin1String(KDELIBS4CONFIGMIGRATOR_DATA_DIR) + QLatin1Char('/') + config);
+    Q_FOREACH (const QString &uifile, listUi) {
+        QFile fooConfigFile(QLatin1String(KDELIBS4CONFIGMIGRATOR_DATA_DIR) + QLatin1Char('/') + uifile);
         QVERIFY(fooConfigFile.exists());
         QDir().mkpath(dataPath + QLatin1Char('/') + appName);
-        const QString storedConfigFilePath = dataPath + QLatin1Char('/') + appName + QLatin1Char('/') + config;
+        const QString storedConfigFilePath = dataPath + QLatin1Char('/') + appName + QLatin1Char('/') + uifile;
         QVERIFY(QFile::copy(fooConfigFile.fileName(), storedConfigFilePath));
-    }
 
-    QTemporaryDir xdgDataDir;
-    const QString xdgDatahome = xdgDataDir.path();
-    QVERIFY(xdgDataDir.isValid());
-    qputenv("XDG_DATA_HOME", QFile::encodeName(xdgDatahome));
+        const QString xdgUiFile = xdgDatahome + QLatin1String("/kxmlgui5/") + appName + QLatin1Char('/') + uifile;
+        QVERIFY(!QFile::exists(xdgUiFile));
+    }
 
     Kdelibs4ConfigMigrator migration(appName);
     migration.setUiFiles(QStringList() << listUi);
@@ -123,8 +132,8 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateUiFiles()
     Q_FOREACH (const QString &uifile, listUi) {
         const QString xdgUiFile = xdgDatahome + QLatin1String("/kxmlgui5/") + appName + QLatin1Char('/') + uifile;
         QVERIFY(QFile(xdgUiFile).exists());
+        QFile::remove(xdgUiFile);
     }
-
 }
 
 QTEST_MAIN(Kdelibs4ConfigMigratorTest)
