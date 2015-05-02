@@ -100,12 +100,12 @@ void KUserTest::testKUser()
     QVERIFY(user != invalidKUser);    // now test the other way around
     QCOMPARE(user, user);
 
-    // make sure we don't crash when accessing properties of an invalid instace
+    // make sure we don't crash when accessing properties of an invalid instance
     QCOMPARE(invalidKUser.faceIconPath(), QString());
     QCOMPARE(invalidKUser.fullName(), QString());
     QCOMPARE(invalidKUser.groupId(), KGroupId());
-    QCOMPARE(invalidKUser.groupNames(), QStringList());
-    QCOMPARE(invalidKUser.groups(), QList<KUserGroup>());
+    invalidKUser.groupNames(); // could be empty, or "nogroup", so no checks here
+    invalidKUser.groups(); // same as above
     QCOMPARE(invalidKUser.homeDir(), QString());
     QCOMPARE(invalidKUser.isSuperUser(), false);
     QCOMPARE(invalidKUser.loginName(), QString());
@@ -166,7 +166,7 @@ void KUserTest::testKUserGroup()
 
     // make sure we don't crash when accessing an invalid KUserGroup
     QCOMPARE(invalidKUserGroup.groupId(), KGroupId());
-    QCOMPARE(invalidKUserGroup.name(), QString());
+    invalidKUserGroup.name(); // could be empty, or "nogroup", so no checks here
     QCOMPARE(invalidKUserGroup.userNames(), QStringList());
     QCOMPARE(invalidKUserGroup.users(), QList<KUser>());
 
