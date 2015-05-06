@@ -348,6 +348,15 @@ private Q_SLOTS:
         QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
         QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
 
+        // by plugin id
+        plugins = KPluginLoader::findPluginsById(dir.absolutePath(), "foobar");
+        QCOMPARE(plugins.size(), 1);
+        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
+
+        // by plugin invalid id
+        plugins = KPluginLoader::findPluginsById(dir.absolutePath(), "invalidid");
+        QCOMPARE(plugins.size(), 0);
+
         // absolute path, no filter
         plugins = KPluginLoader::findPlugins(dir.absolutePath());
         std::sort(plugins.begin(), plugins.end(), sortPlugins);

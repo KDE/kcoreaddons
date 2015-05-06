@@ -330,6 +330,23 @@ public:
             std::function<bool(const KPluginMetaData &)> filter = std::function<bool(const KPluginMetaData &)>());
 
     /**
+     * Find all plugins inside @p directory with a given pluginId. Only plugins which have JSON metadata will be considered.
+     *
+     * @param directory The directory to search for plugins. If a relative path is given for @p directory,
+     * all entries of QCoreApplication::libraryPaths() will be checked with @p directory appended as a
+     * subdirectory. If an absolute path is given only that directory will be searched.
+     *
+     * @param pluginId The Id of the plugin, for example KPluginMetaData.pluginId().
+     *
+     * @return all plugins found in @p directory with the given pluginId.
+     *
+     * @see KPluginLoader::instantiatePlugins()
+     *
+     * @since 5.11
+     */
+    static QVector<KPluginMetaData> findPluginsById(const QString &directory, const QString &pluginId);
+
+    /**
      * Invokes @p callback for each valid plugin found inside @p directory. This is useful if
      * your application needs to customize the behaviour of KPluginLoader::findPlugins() or
      * KPluginLoader::instantiatePlugins().

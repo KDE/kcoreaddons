@@ -275,6 +275,15 @@ QVector<KPluginMetaData> KPluginLoader::findPlugins(const QString &directory, st
     return ret;
 }
 
+QVector< KPluginMetaData > KPluginLoader::findPluginsById(const QString& directory, const QString& pluginId)
+{
+    auto filter = [&pluginId](const KPluginMetaData &md) -> bool
+    {
+        return md.pluginId() == pluginId;
+    };
+    return KPluginLoader::findPlugins(directory, filter);
+}
+
 QList<QObject *> KPluginLoader::instantiatePlugins(const QString &directory,
         std::function<bool(const KPluginMetaData &)> filter, QObject* parent)
 {
