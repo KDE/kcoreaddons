@@ -69,7 +69,7 @@ Icon=preferences-system-time
 
 X-KDE-ServiceTypes=KService/NSA
 X-KDE-Library=fakeplugin
-
+X-KDE-FormFactors=mediacenter,desktop
 X-KDE-PluginInfo-Author=Sebastian Kügler
 X-KDE-PluginInfo-Email=sebas@kde.org
 X-KDE-PluginInfo-Name=fakeplugin

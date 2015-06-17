@@ -210,6 +210,11 @@ private Q_SLOTS:
         QCOMPARE(md.isHidden(), false);
         QCOMPARE(md.serviceTypes(), QStringList("KService/NSA"));
 
+        auto kp = md.rawData()["KPlugin"].toObject();
+        QStringList formFactors = KPluginMetaData::readStringList(kp, QStringLiteral("FormFactors"));
+        QCOMPARE(formFactors, QStringList() << "mediacenter" << "desktop");
+        QCOMPARE(md.formFactors(), QStringList() << "mediacenter" << "desktop");
+
         const QString dfilehidden = QFINDTESTDATA("data/hiddenplugin.desktop");
         KPluginMetaData mdhidden(dfilehidden);
         QVERIFY(mdhidden.isValid());

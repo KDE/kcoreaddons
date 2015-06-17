@@ -268,6 +268,15 @@ public:
     QStringList serviceTypes() const;
 
     /**
+     * @return A string list of formfactors this plugin is useful for, e.g. desktop, tablet,
+     * handset, mediacenter, etc.
+     * The keys for this are not formally defined.
+     *
+     * @since 5.12
+     */
+    QStringList formFactors() const;
+
+    /**
      * @return whether the plugin should be enabled by default.
      * This is only a recommendation, applications can ignore this value if they want to.
      */

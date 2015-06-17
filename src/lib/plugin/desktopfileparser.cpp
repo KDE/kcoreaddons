@@ -144,6 +144,8 @@ void DesktopFileParser::convertToJson(const QString &key, const QString &value, 
     } else if (key == QLatin1String("X-KDE-ServiceTypes") || key == QLatin1String("ServiceTypes")) {
         // some .desktop files still use the legacy ServiceTypes= key
         kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(deserializeList(value));
+    } else if (key == QLatin1String("X-KDE-FormFactors")) {
+        kplugin[QStringLiteral("FormFactors")] = QJsonArray::fromStringList(deserializeList(value));
     } else if (key == QLatin1String("X-KDE-PluginInfo-EnabledByDefault")) {
         bool boolValue = false;
         // should only be lower case, but be tolerant here

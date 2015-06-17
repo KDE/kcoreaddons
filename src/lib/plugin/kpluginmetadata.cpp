@@ -270,6 +270,11 @@ QStringList KPluginMetaData::serviceTypes() const
     return readStringList(rootObject(), QStringLiteral("ServiceTypes"));
 }
 
+QStringList KPluginMetaData::formFactors() const
+{
+    return readStringList(rootObject(), QStringLiteral("FormFactors"));
+}
+
 bool KPluginMetaData::isEnabledByDefault() const
 {
     QJsonValue val = rootObject()[QStringLiteral("EnabledByDefault")];
