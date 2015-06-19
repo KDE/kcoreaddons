@@ -280,7 +280,7 @@ public:
      * plugin name as the key and true/false as the value to indicate whether the plugin should
      * be loaded. In order to easily load all the enable plugins you could use the following code:
      * @code
-     * KConfigGroup pluginGroup = KSharedConfig::openConfig().group("Plugins");
+     * KConfigGroup pluginGroup = KSharedConfig::openConfig()->group("Plugins");
      * auto filter = [&](const KPluginMetaData &md) {
      *     if (!pluginGroup.hasKey(md.pluginName())) {
      *         return md.isEnabledByDefault();
