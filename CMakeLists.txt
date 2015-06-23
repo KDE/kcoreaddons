@@ -74,6 +74,7 @@ install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/KF5CoreAddonsConfig.cmake"
         COMPONENT Devel )
 
 install(EXPORT KF5CoreAddonsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5CoreAddonsTargets.cmake NAMESPACE KF5:: )
+install(EXPORT KF5CoreAddonsToolingTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5CoreAddonsToolingTargets.cmake NAMESPACE KF5:: )
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_version.h
         DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel )

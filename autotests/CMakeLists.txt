@@ -42,10 +42,16 @@ ecm_add_tests(
     kstringhandlertest.cpp
     kusertest.cpp
     kdelibs4migrationtest.cpp
-    desktoptojsontest.cpp
     kdelibs4configmigratortest.cpp
     LINK_LIBRARIES Qt5::Test KF5::CoreAddons
 )
+
+if(NOT CMAKE_CROSSCOMPILING)
+    ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt5::Test KF5::CoreAddons)
+    target_compile_definitions(desktoptojsontest PRIVATE
+        DESKTOP_TO_JSON_EXE="$<TARGET_FILE:desktoptojson>"
+    )
+endif()
 
 set(ktexttohtmltest_SRCS ktexttohtmltest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp)
 ecm_add_test(${ktexttohtmltest_SRCS} TEST_NAME ktexttohtmltest LINK_LIBRARIES Qt5::Test)
@@ -60,10 +66,6 @@ target_compile_definitions(kpluginloadertest PRIVATE
     UNVERSIONEDPLUGIN_FILE="$<TARGET_FILE:unversionedplugin>"
     MULTIPLUGIN_FILE="$<TARGET_FILE:multiplugin>"
     ALWAYSUNLOADPLUGIN_FILE="$<TARGET_FILE:alwaysunloadplugin>"
-)
-
-target_compile_definitions(desktoptojsontest PRIVATE
-    DESKTOP_TO_JSON_EXE="$<TARGET_FILE:desktoptojson>"
 )
 
 set(KDIRWATCH_BACKENDS_TO_TEST Stat)#Stat is always compiled
