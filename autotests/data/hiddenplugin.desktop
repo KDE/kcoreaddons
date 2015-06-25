@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=NSA Plugin
+Name[ast]=Complementu NSA
 Name[bs]=NSA dodatak
 Name[ca]=Connector de la NSA
 Name[cs]=Modul NSA
@@ -32,6 +33,7 @@ Name[x-test]=xxNSA Pluginxx
 Name[zh_CN]=NSA 插件
 Name[zh_TW]=NSA 外掛程式
 Comment=Test Plugin Spy
+Comment[ast]=Complementu de prueba qu'escluca
 Comment[bs]=Špijun provjere dodataka
 Comment[ca]=Connector de proves espia
 Comment[cs]=Testovací modul Spy
