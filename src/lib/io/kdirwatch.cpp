@@ -194,20 +194,9 @@ KDirWatchPrivate::KDirWatchPrivate()
     connect(&rescan_timer, SIGNAL(timeout()), this, SLOT(slotRescan()));
 
 #if HAVE_FAM
-    // It's possible that FAM server can't be started
-    if (FAMOpen(&fc) == 0) {
-        availableMethods << "FAM";
-        use_fam = true;
-        sn = new QSocketNotifier(FAMCONNECTION_GETFD(&fc),
-                                 QSocketNotifier::Read, this);
-        connect(sn, SIGNAL(activated(int)),
-                this, SLOT(famEventReceived()));
-    } else {
-        if (m_preferredMethod == KDirWatch::FAM) {
-            qCDebug(KDIRWATCH) << "Can't use FAM (fam daemon not running?)";
-        }
-        use_fam = false;
-    }
+    availableMethods << "FAM";
+    use_fam = true;
+    sn = 0;
 #endif
 
 #if HAVE_SYS_INOTIFY_H
@@ -249,7 +238,7 @@ KDirWatchPrivate::~KDirWatchPrivate()
     removeEntries(0);
 
 #if HAVE_FAM
-    if (use_fam) {
+    if (use_fam && sn) {
         FAMClose(&fc);
     }
 #endif
@@ -632,6 +621,18 @@ bool KDirWatchPrivate::useFAM(Entry *e)
 {
     if (!use_fam) {
         return false;
+    }
+
+    if (!sn) {
+        if (FAMOpen(&fc) == 0) {
+            sn = new QSocketNotifier(FAMCONNECTION_GETFD(&fc),
+                                    QSocketNotifier::Read, this);
+            connect(sn, SIGNAL(activated(int)),
+                    this, SLOT(famEventReceived()));
+        } else {
+            use_fam = false;
+            return false;
+        }
     }
 
     // handle FAM events to avoid deadlock
