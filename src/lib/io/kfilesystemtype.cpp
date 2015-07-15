@@ -99,7 +99,7 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
         //qDebug() << path << errno << strerror(errno);
         return KFileSystemType::Unknown;
     }
-    switch (buf.f_type) {
+    switch (static_cast<unsigned long>(buf.f_type)) {
     case NFS_SUPER_MAGIC:
     case AUTOFS_SUPER_MAGIC:
     case AUTOFSNG_SUPER_MAGIC:
