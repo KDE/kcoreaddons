@@ -280,7 +280,7 @@ QString KFormatPrivate::formatDecimalDuration(quint64 msecs, int decimalPlaces) 
     //: @item:intext %1 is a whole number
     //~ singular %n millisecond
     //~ plural %n milliseconds
-    return tr("%n millisecond(s)", 0, msecs).arg(msecs);
+    return tr("%n millisecond(s)", 0, msecs);
 }
 
 enum DurationUnits {
