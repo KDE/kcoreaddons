@@ -50,8 +50,8 @@ public:
     unsigned long percentage;
     QTimer *speedTimer;
     QEventLoop *eventLoop;
-    // evenLoopLocker prevents QCoreApplication from exiting when last window is
-    // closed until the job has finished running
+    // eventLoopLocker prevents QCoreApplication from exiting when the last
+    // window is closed until the job has finished running
     QEventLoopLocker eventLoopLocker;
     KJob::Capabilities capabilities;
     bool suspended;
