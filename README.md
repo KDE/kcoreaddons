@@ -1,5 +1,7 @@
 # KCoreAddons
 
+Qt addon library with a collection of non-GUI utilities
+
 ## Introduction
 
 KCoreAddons provides classes built on top of QtCore to perform various tasks
