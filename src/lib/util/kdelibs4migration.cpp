@@ -68,6 +68,11 @@ bool Kdelibs4Migration::kdeHomeFound() const
     return !d->m_kdeHome.isEmpty() && QDir(d->m_kdeHome).exists();
 }
 
+QString Kdelibs4Migration::kdeHome() const
+{
+    return d->m_kdeHome;
+}
+
 QString Kdelibs4Migration::locateLocal(const char *type, const QString &filename) const
 {
     if (d->m_kdeHome.isEmpty()) {

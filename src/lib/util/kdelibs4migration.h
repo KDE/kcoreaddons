@@ -36,8 +36,8 @@ class Kdelibs4MigrationPrivate;
   * Kdelibs4Migration provides support for locating config files
   * and application data files saved by kdelibs 4 in the user's home directory
   * ($KDEHOME, i.e. typically ~/.kde).
-  * 
-  * distributions that built kdelibs4 with a custom KDE home with
+  *
+  * Distributions that built kdelibs4 with a custom KDE home with
   * the CMake option _KDE_DEFAULT_HOME_POSTFIX should use the same option
   * here with _KDE4_DEFAULT_HOME_POSTFIX
   *
@@ -49,6 +49,18 @@ class Kdelibs4MigrationPrivate;
   *
   * Files from the "data" resource should be migrated to a subdirectory of
   * QStandardPaths::writableLocation(QStandardPaths::DataLocation)
+  *
+  * The following resources are supported:
+   <ul>
+   <li>config</li>
+   <li>data</li>
+   <li>services</li>
+   <li>servicetypes</li>
+   <li>wallpaper</li>
+   <li>emoticons</li>
+   <li>templates</li>
+   </ul>
+  * Use kdeHome() for anything else.
   *
   * @short Class for migration of config files from kdelibs4
   * @since 5.0
@@ -72,6 +84,13 @@ public:
      * Otherwise, there is nothing to migrate.
      */
     bool kdeHomeFound() const;
+
+    /**
+     * Returns the kdehome that was found.
+     * Don't use this method if you can use locateLocal or saveLocation
+     * @since 5.13
+     */
+    QString kdeHome() const;
 
     /**
      * Finds a local file in a resource.
