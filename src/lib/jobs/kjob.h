@@ -436,9 +436,8 @@ Q_SIGNALS:
      * @param field2 second field (localized name and value)
      */
     void description(KJob *job, const QString &title,
-                     const QPair<QString, QString> &field1 = qMakePair(QString(), QString()),
-                     const QPair<QString, QString> &field2 = qMakePair(QString(), QString()));
-
+                     const QPair<QString, QString> &field1 = QPair<QString, QString>(),
+                     const QPair<QString, QString> &field2 = QPair<QString, QString>());
     /**
      * Emitted to display state information about this job.
      * Examples of message are "Resolving host", "Connecting to host...", etc.
