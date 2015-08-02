@@ -82,7 +82,12 @@
 
 #endif // HAVE_SYS_INOTIFY_H
 
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+// logging category for this framework, default: log stuff >= warning
+Q_LOGGING_CATEGORY(KDIRWATCH, "kf5.kcoreaddons.kdirwatch", QtWarningMsg)
+#else
 Q_LOGGING_CATEGORY(KDIRWATCH, "kf5.kcoreaddons.kdirwatch")
+#endif
 
 // set this to true for much more verbose debug output
 static const bool s_verboseDebug = false;
@@ -223,7 +228,7 @@ KDirWatchPrivate::KDirWatchPrivate()
     availableMethods << "QFileSystemWatcher";
     fsWatcher = 0;
 #endif
-    
+
     if (s_verboseDebug) {
         qCDebug(KDIRWATCH) << "Available methods: " << availableMethods << "preferred=" << methodToString(m_preferredMethod);
     }
