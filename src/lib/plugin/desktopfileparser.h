@@ -35,7 +35,7 @@ namespace DesktopFileParser
     bool convert(const QString &src, QJsonObject &json, QString *libraryPath);
     void convertToJson(const QString& key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
 
-};
+}
 
 
 #endif // DESKTOPFILEPARSER_H

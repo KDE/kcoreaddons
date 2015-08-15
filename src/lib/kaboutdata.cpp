@@ -880,7 +880,7 @@ public:
     QHash<QString, KAboutData *> m_pluginData;
 };
 
-Q_GLOBAL_STATIC(KAboutDataRegistry, s_registry);
+Q_GLOBAL_STATIC(KAboutDataRegistry, s_registry)
 
 KAboutData KAboutData::applicationData()
 {

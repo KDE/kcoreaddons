@@ -102,5 +102,5 @@ void KCompositeJobTest::testDeletionDuringExecution()
     QCOMPARE(destroyed_spy.size(), 1);
 }
 
-QTEST_GUILESS_MAIN(KCompositeJobTest);
+QTEST_GUILESS_MAIN(KCompositeJobTest)
 

@@ -90,6 +90,6 @@ KCOREADDONS_EXPORT QString convertToHtml(const QString &plainText,
 
 }
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(KTextToHTML::Options);
+Q_DECLARE_OPERATORS_FOR_FLAGS(KTextToHTML::Options)
 
 #endif
