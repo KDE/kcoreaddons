@@ -69,7 +69,7 @@ Comment[zh_CN]=Test Plugin Spy
 Comment[zh_TW]=測試外掛程式
 Type=Service
 Icon=preferences-system-time
-MimeType=image/png;application/pdf
+MimeType=image/png;application/pdf;
 
 X-KDE-ServiceTypes=KService/NSA
 X-KDE-Library=fakeplugin

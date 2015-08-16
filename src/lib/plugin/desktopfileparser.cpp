@@ -54,6 +54,10 @@ QStringList DesktopFileParser::deserializeList(const QString &data, char separat
         } else if (data[p].unicode() == separator) {
             val.squeeze(); // release any unused memory
             value.append(val);
+            if (p == data.length() - 1) {
+                // don't add an empty entry to the end if the last character is a separator
+                return value;
+            }
             val.clear();
             val.reserve(data.size() - p);
         } else {
