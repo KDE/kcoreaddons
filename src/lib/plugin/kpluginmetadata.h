@@ -59,6 +59,7 @@ class QObject;
  * EnabledByDefault   | isEnabledByDefault() | bool
  * ServiceTypes       | serviceTypes()       | string / string array
  * MimeTypes          | mimeTypes()          | string / string array
+ * FormFactors        | formFactors()        | string / string array
  *
  * The Authors key is a single object or a list of objects that have the following keys that
  * correspond to KAboutPerson properties:
