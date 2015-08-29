@@ -109,7 +109,7 @@ QByteArray DesktopFileParser::escapeValue(const QByteArray& input)
     return result;
 }
 
-void DesktopFileParser::convertToJson(const QString &key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr)
+void DesktopFileParser::convertToJson(const QByteArray &key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr)
 {
     bool m_verbose = false; // FIXME remove
     /* The following keys are recognized (and added to a "KPlugin" object):
@@ -131,29 +131,29 @@ void DesktopFileParser::convertToJson(const QString &key, const QString &value, 
         X-KDE-PluginInfo-License=GPL
         X-KDE-PluginInfo-EnabledByDefault=true
     */
-    if (key == QLatin1String("Icon")) {
+    if (key == QByteArrayLiteral("Icon")) {
         kplugin[QStringLiteral("Icon")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Name")) {
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Name")) {
         kplugin[QStringLiteral("Id")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Category")) {
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Category")) {
         kplugin[QStringLiteral("Category")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-License")) {
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-License")) {
         kplugin[QStringLiteral("License")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Version")) {
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Version")) {
         kplugin[QStringLiteral("Version")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Website")) {
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Website")) {
         kplugin[QStringLiteral("Website")] = value;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Depends")) {
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Depends")) {
         kplugin[QStringLiteral("Dependencies")] = QJsonArray::fromStringList(deserializeList(value));
-    } else if (key == QLatin1String("X-KDE-ServiceTypes") || key == QLatin1String("ServiceTypes")) {
+    } else if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
         // some .desktop files still use the legacy ServiceTypes= key
         kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(deserializeList(value));
-    } else if (key == QLatin1String("MimeType")) {
+    } else if (key == QByteArrayLiteral("MimeType")) {
         // MimeType is a XDG string list and not a KConfig list so we need to use ';' as the separator
         kplugin[QStringLiteral("MimeTypes")] = QJsonArray::fromStringList(deserializeList(value, ';'));
-    } else if (key == QLatin1String("X-KDE-FormFactors")) {
+    } else if (key == QByteArrayLiteral("X-KDE-FormFactors")) {
         kplugin[QStringLiteral("FormFactors")] = QJsonArray::fromStringList(deserializeList(value));
-    } else if (key == QLatin1String("X-KDE-PluginInfo-EnabledByDefault")) {
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-EnabledByDefault")) {
         bool boolValue = false;
         // should only be lower case, but be tolerant here
         if (value.toLower() == QLatin1String("true")) {
@@ -165,34 +165,34 @@ void DesktopFileParser::convertToJson(const QString &key, const QString &value, 
             }
         }
         kplugin[QStringLiteral("EnabledByDefault")] = boolValue;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Author")) {
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Author")) {
         QJsonObject authorsObject = kplugin.value(QStringLiteral("Authors")).toArray().at(0).toObject();
         // if the authors object doesn't exist yet this will create it
         authorsObject[QStringLiteral("Name")] = value;
         QJsonArray array;
         array.append(authorsObject);
         kplugin[QStringLiteral("Authors")] = array;
-    } else if (key == QLatin1String("X-KDE-PluginInfo-Email")) {
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Email")) {
         QJsonObject authorsObject = kplugin.value(QStringLiteral("Authors")).toArray().at(0).toObject();
         // if the authors object doesn't exist yet this will create it
         authorsObject[QStringLiteral("Email")] = value;
         QJsonArray array;
         array.append(authorsObject);
         kplugin[QStringLiteral("Authors")] = array;
-    } else if (key == QLatin1String("Name") || key.startsWith(QLatin1String("Name["))) {
+    } else if (key == QByteArrayLiteral("Name") || key.startsWith(QByteArrayLiteral("Name["))) {
         // TODO: also handle GenericName? does that make any sense, or is X-KDE-PluginInfo-Category enough?
-        kplugin[key] = value;
-    } else if (key == QLatin1String("Comment")) {
+        kplugin[QString::fromUtf8(key)] = value;
+    } else if (key == QByteArrayLiteral("Comment")) {
         kplugin[QStringLiteral("Description")] = value;
-    } else if (key.startsWith(QLatin1String("Comment["))) {
-        kplugin[QStringLiteral("Description") + key.mid(strlen("Comment"))] = value;
-    } else if (key == QLatin1String("Hidden")) {
+    } else if (key.startsWith(QByteArrayLiteral("Comment["))) {
+        kplugin[QStringLiteral("Description") + QString::fromUtf8(key.mid(strlen("Comment")))] = value;
+    } else if (key == QByteArrayLiteral("Hidden")) {
         if (m_verbose) {
             qWarning() << "Warning: Hidden= key found in desktop file, this makes no sense"
                 " with metadata inside the plugin." << endl;
         }
-        kplugin[key] = (value.toLower() == QLatin1String("true"));
-    } else if (key == QLatin1String("Exec") || key == QLatin1String("Type") || key == QLatin1String("X-KDE-Library")) {
+        kplugin[QString::fromUtf8(key)] = (value.toLower() == QLatin1String("true"));
+    } else if (key == QByteArrayLiteral("Exec") || key == QByteArrayLiteral("Type") || key == QByteArrayLiteral("X-KDE-Library")) {
         // Exec= doesn't make sense here, however some .desktop files (like e.g. in kdevelop) have a dummy value here
         // also the Type=Service entry is no longer needed
         // X-KDE-Library is also not needed since we already have the library to read this metadata
@@ -201,7 +201,7 @@ void DesktopFileParser::convertToJson(const QString &key, const QString &value, 
         }
     } else {
         // unknown key, just add it to the root object
-        json[key] = value;
+        json[QString::fromUtf8(key)] = value;
     }
 }
 
@@ -263,7 +263,7 @@ bool DesktopFileParser::convert(const QString& src, QJsonObject &json, QString *
             continue;
         }
         // trim key and value to remove spaces around the '=' char
-        const QString key = QString::fromLatin1(line.mid(0, equalsIndex).trimmed());
+        const QByteArray key = line.mid(0, equalsIndex).trimmed();
         const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
         const QByteArray valueEscaped = escapeValue(valueRaw);
         const QString value = QString::fromUtf8(valueEscaped);
@@ -274,7 +274,7 @@ bool DesktopFileParser::convert(const QString& src, QJsonObject &json, QString *
             }
         }
         convertToJson(key, value, json, kplugin, lineNr);
-        if (key == QLatin1String("X-KDE-Library")) {
+        if (key == QByteArrayLiteral("X-KDE-Library")) {
             *libraryPath = value;
         }
     }

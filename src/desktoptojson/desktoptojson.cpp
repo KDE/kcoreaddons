@@ -177,7 +177,7 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
             continue;
         }
         // trim key and value to remove spaces around the '=' char
-        const QString key = QString::fromLatin1(line.mid(0, equalsIndex).trimmed());
+        const QByteArray key = line.mid(0, equalsIndex).trimmed();
         const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
         const QByteArray valueEscaped = DesktopFileParser::escapeValue(valueRaw);
         const QString value = QString::fromUtf8(valueEscaped);
@@ -188,7 +188,7 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
             }
         }
         if (m_compatibilityMode) {
-            convertToCompatibilityJson(key, value, json, lineNr);
+            convertToCompatibilityJson(QString::fromUtf8(key), value, json, lineNr);
         } else {
             DesktopFileParser::convertToJson(key, value, json, kplugin, lineNr);
         }
