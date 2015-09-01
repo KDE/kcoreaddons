@@ -28,9 +28,12 @@
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonObject>
+#include <QMutex>
+#include <QCache>
 
 #include <QDebug>
 
+using namespace DesktopFileParser;
 
 // This code was taken from KConfigGroupPrivate::deserializeList
 QStringList DesktopFileParser::deserializeList(const QString &data, char separator)
@@ -108,7 +111,209 @@ QByteArray DesktopFileParser::escapeValue(const QByteArray& input)
     return result;
 }
 
-void DesktopFileParser::convertToJson(const QByteArray &key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr)
+struct CustomPropertyDefiniton {
+    // default ctor needed for QVector
+    CustomPropertyDefiniton() : type(QVariant::String) {}
+    CustomPropertyDefiniton(const QByteArray& key, QVariant::Type type)
+        : key(key) , type(type) {}
+    QJsonValue fromString(const QString& str) const
+    {
+        switch (type) {
+        case QVariant::String:
+            return str;
+        case QVariant::StringList:
+            return QJsonArray::fromStringList(deserializeList(str));
+        case QVariant::Int: {
+            bool ok = false;
+            int result = str.toInt(&ok);
+            if (!ok) {
+                qWarning() << "Invalid integer value for key" << key << "-" << str;
+                return QJsonValue();
+            }
+            return QJsonValue(result);
+        }
+        case QVariant::Double: {
+            bool ok = false;
+            int result = str.toDouble(&ok);
+            if (!ok) {
+                qWarning() << "Invalid integer value for key" << key << "-" << str;
+                return QJsonValue();
+            }
+            return QJsonValue(result);
+        }
+        case QVariant::Bool: {
+            bool result = str.compare(QLatin1String("true"), Qt::CaseInsensitive);
+            if (!result && !str.compare(QLatin1String("false"), Qt::CaseInsensitive)) {
+                qWarning() << "Invalid boolean value for key" << key << "-" << str;
+                return QJsonValue();
+            }
+            return QJsonValue(result);
+        }
+        default:
+            // This was checked when parsing the file, no other QVariant::Type values are possible
+            Q_UNREACHABLE();
+        }
+    }
+    QByteArray key;
+    QVariant::Type type;
+};
+
+namespace {
+
+bool readUntilDesktopEntryGroup(QFile &file, const QString &path, int &lineNr)
+{
+    if (!file.open(QFile::ReadOnly)) {
+        qWarning() << "Error: Failed to open " << path << endl;
+        return false;
+    }
+    // we only convert data inside the [Desktop Entry] group
+    while (!file.atEnd()) {
+        QByteArray line = file.readLine().trimmed();
+        lineNr++;
+        if (line == "[Desktop Entry]") {
+            return true;
+        }
+    }
+    qWarning() << "Error: Could not find [Desktop Entry] group in " << path << endl;
+    return false;
+}
+
+
+QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
+{
+    QByteArray group = *nextGroup;
+    QByteArray type;
+    if (group.isEmpty()) {
+        qWarning("Read empty .desktop file group name! Invalid file?");
+    }
+    while (!df.atEnd()) {
+        QByteArray line = df.readLine().trimmed();
+        // skip empty lines and comments
+        if (line.isEmpty() || line.startsWith('#')) {
+            continue;
+        }
+        if (line.startsWith('[')) {
+            if (!line.endsWith(']')) {
+                qWarning() << ".desktop file group line is invalid (trailing chars):" << line;
+            }
+            QByteArray name = line.mid(1, line.lastIndexOf(']') - 1);
+            // we have reached the next group -> return current group and Type= value
+            *nextGroup = name;
+            break;
+        }
+        if (line.startsWith(QByteArrayLiteral("Type="))) {
+            // TODO: should we also have to accept spaces around equals here?
+            type = line.mid(strlen("Type="));
+        }
+    }
+    return type;
+}
+
+QVector<CustomPropertyDefiniton>* parseServiceTypesFile(const QString& path)
+{
+    QVector<CustomPropertyDefiniton> result;
+    int lineNr = 0;
+    QFile df(path);
+    if (!readUntilDesktopEntryGroup(df, path, lineNr)) {
+        return nullptr;
+    }
+    // TODO: passing nextGroup by pointer is inefficient as it will make deep copies every time
+    // Not exactly performance critical code though so low priority
+    QByteArray nextGroup = "Desktop Entry";
+    // Type must be ServiceType now
+    QByteArray typeStr = readTypeEntryForCurrentGroup(df, &nextGroup);
+    if (typeStr != QByteArrayLiteral("ServiceType")) {
+        qWarning() << path << "is not a valid service type: Type entry should be 'ServiceType', got"
+            << typeStr << "instead.";
+        return nullptr;
+    }
+    while (!df.atEnd()) {
+        QByteArray currentGroup = nextGroup;
+        typeStr = readTypeEntryForCurrentGroup(df, &nextGroup);
+        if (!currentGroup.startsWith(QByteArrayLiteral("PropertyDef::"))) {
+            qWarning() << "Skipping invalid group" << currentGroup << "in service type" << path;
+            continue;
+        }
+        QByteArray propertyName = currentGroup.mid(strlen("PropertyDef::"));
+        // qDebug() << "Found property definition" << propertyName << "has type" << type;
+        QVariant::Type type = QVariant::nameToType(typeStr.constData());
+        switch (type) {
+            case QVariant::String:
+            case QVariant::StringList:
+            case QVariant::Int:
+            case QVariant::Double:
+            case QVariant::Bool:
+                result.push_back(CustomPropertyDefiniton(propertyName, type));
+                break;
+            case QVariant::Invalid:
+                qWarning() << "Property type" << typeStr << "is not a known QVariant type."
+                        " Found while parsing property defintion for" << propertyName << "in" << path;
+                break;
+            default:
+                qWarning() << "Unsupported property type" << typeStr << "for property" << propertyName
+                        << "found in" << path << "/nOnly QString, QStringList, int, double and bool are supported.";
+        }
+    }
+    return new QVector<CustomPropertyDefiniton>(result);
+}
+
+// a lazy map of service type definitions
+typedef QCache<QString, QVector<CustomPropertyDefiniton>> ServiceTypesHash;
+Q_GLOBAL_STATIC(ServiceTypesHash, s_serviceTypes);
+// access must be guarded by serviceTypesMutex as this code could be executed by multiple threads
+QBasicMutex s_serviceTypesMutex;
+} // end of anonymous namespace
+
+
+ServiceTypeDefinition::ServiceTypeDefinition(const QVector< CustomPropertyDefiniton >& defs)
+    : m_definitions(defs)
+{
+}
+
+ServiceTypeDefinition::~ServiceTypeDefinition()
+{
+}
+
+ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList& paths)
+{
+    QVector<CustomPropertyDefiniton> defs;
+
+    // as we might modify the cache we need to acquire a mutex here
+    foreach (const QString &serviceType, paths) {
+        QMutexLocker lock(&s_serviceTypesMutex);
+        QVector<CustomPropertyDefiniton>* def = s_serviceTypes->object(serviceType);
+        if (!def) {
+            // we need to parse the file
+            // FIXME: we need to handle plain filenames such as "kdedmodule.desktop" as well
+            // qDebug() << "About to parse" << serviceType;
+            def = parseServiceTypesFile(serviceType);
+            if (!def) {
+                continue;
+            }
+            s_serviceTypes->insert(serviceType, def);
+        }
+        // We always have to make a copy of the QVector as it may be deleted from the cache
+        // at any time and could therefore cause dangling pointers
+        defs.append(*def);
+
+    }
+    return ServiceTypeDefinition(defs);
+}
+
+QJsonValue ServiceTypeDefinition::parseValue(const QByteArray& key, const QString& value) const
+{
+    // check whether the key has a special type associated with it
+    foreach (const CustomPropertyDefiniton& propertyDef, m_definitions) {
+        if (propertyDef.key == key) {
+            return propertyDef.fromString(value);
+        }
+    }
+    // qDebug() << "Unknown property type for key" << key << "-> falling back to string";
+    return QJsonValue(value);
+}
+
+void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDefinition &serviceTypes, const QString &value,
+                                      QJsonObject &json, QJsonObject &kplugin, int lineNr)
 {
     bool m_verbose = false; // FIXME remove
     /* The following keys are recognized (and added to a "KPlugin" object):
@@ -199,35 +404,18 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const QString &valu
             qDebug() << "Not converting key " << key << "=" << value << endl;
         }
     } else {
-        // unknown key, just add it to the root object
-        json[QString::fromUtf8(key)] = value;
+        // check service type definitions or fall back to QString
+        json[QString::fromUtf8(key)] = serviceTypes.parseValue(key, value);
     }
 }
 
-bool DesktopFileParser::convert(const QString& src, QJsonObject &json, QString *libraryPath)
+bool DesktopFileParser::convert(const QString& src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath)
 {
     bool m_verbose = false; // FIXME remove
     QFile df(src);
-    if (!df.open(QFile::ReadOnly)) {
-        qWarning() << "Error: Failed to open " << src << endl;
-        return false;
-    }
     int lineNr = 0;
-    // we only convert data inside the [Desktop Entry] group
-    while (!df.atEnd()) {
-        QByteArray line = df.readLine().trimmed();
-        lineNr++;
-        if (line == "[Desktop Entry]") {
-            if (m_verbose) {
-                qDebug() << "Found desktop group in line " << lineNr << endl;
-            }
-            break;
-        }
-    }
-    if (df.atEnd()) {
-        qWarning() << "Error: Could not find [Desktop Entry] group in " << src << endl;
-        return false;
-    }
+    ServiceTypeDefinition serviceTypeDef = ServiceTypeDefinition::fromFiles(serviceTypes);
+    readUntilDesktopEntryGroup(df, src, lineNr);
 
 
     //QJsonObject json;
@@ -272,7 +460,7 @@ bool DesktopFileParser::convert(const QString& src, QJsonObject &json, QString *
                 qDebug() << "Line " << lineNr << " contained escape sequences" << endl;
             }
         }
-        convertToJson(key, value, json, kplugin, lineNr);
+        convertToJson(key, serviceTypeDef, value, json, kplugin, lineNr);
         if (key == QByteArrayLiteral("X-KDE-Library")) {
             *libraryPath = value;
         }

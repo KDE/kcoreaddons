@@ -63,7 +63,7 @@ KPluginMetaData::KPluginMetaData(const QString &file)
         d = new KPluginMetaDataPrivate;
         d->metaDataFileName = QFileInfo(file).absoluteFilePath();
         QString libraryPath;
-        DesktopFileParser::convert(file, m_metaData, &libraryPath);
+        DesktopFileParser::convert(file, QStringList(), m_metaData, &libraryPath);
         if (!libraryPath.isEmpty()) {
             // this was a plugin with a shared library
             m_fileName = libraryPath;

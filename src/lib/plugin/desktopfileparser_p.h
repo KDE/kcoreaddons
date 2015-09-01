@@ -26,15 +26,38 @@
 #define DESKTOPFILEPARSER_H
 
 #include <QByteArray>
+#include <QVector>
 class QJsonObject;
+class QJsonValue;
+
+
+struct CustomPropertyDefiniton;
+struct ServiceTypeDefinition
+{
+    ServiceTypeDefinition(const QVector<CustomPropertyDefiniton>& defs);
+    ~ServiceTypeDefinition();
+
+    static ServiceTypeDefinition fromFiles(const QStringList &paths);
+    /**
+        * @return @p value conveted to the correct JSON type.
+        * If there is no custom property defintion for @p key this will simply return the string value
+        *
+        * @note this method is not marked as @c const to ensure that we make a copy of the
+        * value from the global cache (which stores a const T*). Copying a QVector is cheap
+        * and allows us to avoid acquiring a global lock on every parsed property.
+        */
+    QJsonValue parseValue(const QByteArray &key, const QString &value) const;
+private:
+    QVector<CustomPropertyDefiniton> m_definitions;
+};
 
 namespace DesktopFileParser
 {
     QByteArray escapeValue(const QByteArray& input);
     QStringList deserializeList(const QString &data, char separator = ',');
-    bool convert(const QString &src, QJsonObject &json, QString *libraryPath);
-    void convertToJson(const QByteArray& key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
-
+    bool convert(const QString &src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath);
+    void convertToJson(const QByteArray& key, const ServiceTypeDefinition &serviceTypes, const QString &value,
+                       QJsonObject &json, QJsonObject &kplugin, int lineNr);
 }
 
 

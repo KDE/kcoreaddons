@@ -39,12 +39,13 @@ static QTextStream cerr(stderr);
 
 DesktopToJson::DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i,
                              const QCommandLineOption &o, const QCommandLineOption &v,
-                             const QCommandLineOption &c)
+                             const QCommandLineOption &c, const QCommandLineOption &s)
     : m_parser(parser),
       input(i),
       output(o),
       verbose(v),
       compat(c),
+      serviceTypesOption(s),
       m_verbose(false),
       m_compatibilityMode(false)
 {
@@ -67,7 +68,9 @@ int DesktopToJson::runMain()
         return 1;
     }
 
-    return convert(m_inFile, m_outFile) ? 0 : 1;
+#warning make it an error if one of the files is invalid or not found
+    QStringList serviceTypes = m_parser->values(serviceTypesOption);
+    return convert(m_inFile, m_outFile, serviceTypes) ? 0 : 1;
 }
 
 bool DesktopToJson::resolveFiles()
@@ -120,7 +123,7 @@ void DesktopToJson::convertToCompatibilityJson(const QString &key, const QString
     }
 }
 
-bool DesktopToJson::convert(const QString &src, const QString &dest)
+bool DesktopToJson::convert(const QString &src, const QString &dest, const QStringList& serviceTypes)
 {
     QFile df(src);
     if (!df.open(QFile::ReadOnly)) {
@@ -190,7 +193,8 @@ bool DesktopToJson::convert(const QString &src, const QString &dest)
         if (m_compatibilityMode) {
             convertToCompatibilityJson(QString::fromUtf8(key), value, json, lineNr);
         } else {
-            DesktopFileParser::convertToJson(key, value, json, kplugin, lineNr);
+            DesktopFileParser::convertToJson(key, ServiceTypeDefinition::fromFiles(serviceTypes),
+                                             value, json, kplugin, lineNr);
         }
     }
     if (!m_compatibilityMode) {

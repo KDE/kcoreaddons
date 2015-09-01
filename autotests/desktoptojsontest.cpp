@@ -76,6 +76,7 @@ private Q_SLOTS:
         QTest::addColumn<QByteArray>("input");
         QTest::addColumn<QJsonObject>("expectedResult");
         QTest::addColumn<bool>("compatibilityMode");
+        QTest::addColumn<QStringList>("serviceTypes");
 
         QJsonObject expectedResult;
         QJsonObject kpluginObj;
@@ -155,8 +156,8 @@ private Q_SLOTS:
 
         expectedResult["KPlugin"] = kpluginObj;
 
-        QTest::newRow("newFormat") << input << expectedResult << false;
-        QTest::newRow("compatFormat") << input << compatResult << true;
+        QTest::newRow("newFormat") << input << expectedResult << false << QStringList();
+        QTest::newRow("compatFormat") << input << compatResult << true << QStringList();
 
 
         // test conversion of a currently existing .desktop file (excluding most of the translations):
@@ -210,8 +211,36 @@ private Q_SLOTS:
             " \"X-KDevelop-Version\": \"1\"\n"
             "}\n", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
-        QTest::newRow("kdevcpplanguagesupport") << kdevInput << kdevExpected << false;
+        QTest::newRow("kdevcpplanguagesupport no servicetype") << kdevInput << kdevExpected << false << QStringList();
 
+        QJsonObject kdevExpectedWithServiceType = QJsonDocument::fromJson("{\n"
+            " \"GenericName\": \"Language Support\",\n"
+            " \"GenericName[sl]\": \"Podpora jeziku\",\n"
+            " \"KPlugin\": {\n"
+            "     \"Category\": \"Language Support\",\n"
+            "     \"Description\": \"C/C++ Language Support\",\n"
+            "     \"Description[fr]\": \"Prise en charge du langage C/C++\",\n"
+            "     \"Description[it]\": \"Supporto al linguaggio C/C++\",\n"
+            "     \"Icon\": \"text-x-c++src\",\n"
+            "     \"Id\": \"kdevcppsupport\",\n"
+            "     \"Name\": \"C++ Support\",\n"
+            "     \"Name[fi]\": \"C++-tuki\",\n"
+            "     \"Name[fr]\": \"Prise en charge du C++\",\n"
+            "     \"ServiceTypes\": [ \"KDevelop/Plugin\" ]\n"
+            " },\n"
+            " \"X-KDevelop-Args\": \"CPP\",\n"
+            " \"X-KDevelop-Interfaces\": [\"ILanguageSupport\"],\n"
+            " \"X-KDevelop-Language\": \"C++\",\n"
+            " \"X-KDevelop-LoadMode\": \"AlwaysOn\",\n"
+            " \"X-KDevelop-Mode\": \"NoGUI\",\n"
+            " \"X-KDevelop-SupportedMimeTypes\": [\"text/x-chdr\", \"text/x-c++hdr\", \"text/x-csrc\", \"text/x-c++src\"],\n"
+            " \"X-KDevelop-Version\": 1\n"
+            "}\n", &e).object();
+        QCOMPARE(e.error, QJsonParseError::NoError);
+        const QString kdevServiceTypePath = QFINDTESTDATA("data/servicetypes/fake-kdevelopplugin.desktop");
+        QVERIFY(!kdevServiceTypePath.isEmpty());
+        QTest::newRow("kdevcpplanguagesupport with servicetype") << kdevInput << kdevExpectedWithServiceType
+                << false << QStringList(kdevServiceTypePath);
         // test conversion of the X-KDE-PluginInfo-Author + X-KDE-PluginInfo-Email key:
         QByteArray authorInput =
             "[Desktop Entry]\n"
@@ -224,7 +253,7 @@ private Q_SLOTS:
             "     \"Authors\": [ { \"Name\": \"Foo Bar\", \"Email\": \"foo.bar@baz.com\" } ]\n"
             " }\n }\n", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
-        QTest::newRow("authors") << authorInput << authorsExpected << false;
+        QTest::newRow("authors") << authorInput << authorsExpected << false << QStringList();
 
 
     }
@@ -237,6 +266,7 @@ private Q_SLOTS:
         QFETCH(QByteArray, input);
         QFETCH(QJsonObject, expectedResult);
         QFETCH(bool, compatibilityMode);
+        QFETCH(QStringList, serviceTypes);
         output.close();
         inputFile.write(input);
         inputFile.flush();
@@ -250,13 +280,16 @@ private Q_SLOTS:
         if (compatibilityMode) {
             arguments << "-c";
         }
+        foreach(const QString &s, serviceTypes) {
+            arguments << "-s" << s;
+        }
         proc.setArguments(arguments);
         proc.start();
         QVERIFY(proc.waitForFinished(10000));
         qDebug() << "desktoptojson STDOUT: " <<  proc.readAllStandardOutput().data();
         QByteArray errorOut = proc.readAllStandardError();
         if (!errorOut.isEmpty()) {
-            qWarning() << "desktoptojson STDERR:" <<  errorOut;
+            qWarning().nospace() << "desktoptojson STDERR:\n\n" <<  errorOut.constData() << "\n";
             QFAIL("desktoptojson had errors");
         }
         QCOMPARE(proc.exitCode(), 0);
