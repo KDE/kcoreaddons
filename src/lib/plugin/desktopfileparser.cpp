@@ -25,11 +25,13 @@
 
 #include "desktopfileparser_p.h"
 
+#include <QCache>
+#include <QDir>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QMutex>
-#include <QCache>
+#include <QStandardPaths>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
 // in the desktoptojson binary enable debug messages by default, in the library only warning messages
@@ -229,14 +231,26 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
     return type;
 }
 
-QVector<CustomPropertyDefiniton>* parseServiceTypesFile(const QString& path)
+QVector<CustomPropertyDefiniton>* parseServiceTypesFile(QString path)
 {
-    QVector<CustomPropertyDefiniton> result;
     int lineNr = 0;
+    if (QDir::isRelativePath(path)) {
+        path = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                               QStringLiteral("kservicetypes5/") + path);
+        if (path.isEmpty()) {
+            qCCritical(DESKTOPPARSER) << "Could not locate service type file" << path;
+            return nullptr;
+        }
+    }
     QFile df(path);
+    if (!df.exists()) {
+        qCCritical(DESKTOPPARSER) << "Service type file" << path << "does not exist";
+        return nullptr;
+    }
     if (!readUntilDesktopEntryGroup(df, path, lineNr)) {
         return nullptr;
     }
+    QVector<CustomPropertyDefiniton> result;
     // TODO: passing nextGroup by pointer is inefficient as it will make deep copies every time
     // Not exactly performance critical code though so low priority
     QByteArray nextGroup = "Desktop Entry";
