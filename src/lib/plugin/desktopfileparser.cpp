@@ -147,7 +147,7 @@ struct CustomPropertyDefiniton {
             bool ok = false;
             int result = str.toInt(&ok);
             if (!ok) {
-                qWarning() << "Invalid integer value for key" << key << "-" << str;
+                qCWarning(DESKTOPPARSER) << "Invalid integer value for key" << key << "-" << str;
                 return QJsonValue();
             }
             return QJsonValue(result);
@@ -156,7 +156,7 @@ struct CustomPropertyDefiniton {
             bool ok = false;
             int result = str.toDouble(&ok);
             if (!ok) {
-                qWarning() << "Invalid integer value for key" << key << "-" << str;
+                qCWarning(DESKTOPPARSER) << "Invalid integer value for key" << key << "-" << str;
                 return QJsonValue();
             }
             return QJsonValue(result);
@@ -164,7 +164,7 @@ struct CustomPropertyDefiniton {
         case QVariant::Bool: {
             bool result = str.compare(QLatin1String("true"), Qt::CaseInsensitive);
             if (!result && !str.compare(QLatin1String("false"), Qt::CaseInsensitive)) {
-                qWarning() << "Invalid boolean value for key" << key << "-" << str;
+                qCWarning(DESKTOPPARSER) << "Invalid boolean value for key" << key << "-" << str;
                 return QJsonValue();
             }
             return QJsonValue(result);
@@ -183,7 +183,7 @@ namespace {
 bool readUntilDesktopEntryGroup(QFile &file, const QString &path, int &lineNr)
 {
     if (!file.open(QFile::ReadOnly)) {
-        qWarning() << "Error: Failed to open " << path;
+        qCWarning(DESKTOPPARSER) << "Error: Failed to open " << path;
         return false;
     }
     // we only convert data inside the [Desktop Entry] group
@@ -194,7 +194,7 @@ bool readUntilDesktopEntryGroup(QFile &file, const QString &path, int &lineNr)
             return true;
         }
     }
-    qWarning() << "Error: Could not find [Desktop Entry] group in " << path;
+    qCWarning(DESKTOPPARSER) << "Error: Could not find [Desktop Entry] group in " << path;
     return false;
 }
 
@@ -204,7 +204,7 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
     QByteArray group = *nextGroup;
     QByteArray type;
     if (group.isEmpty()) {
-        qWarning("Read empty .desktop file group name! Invalid file?");
+        qCWarning(DESKTOPPARSER, "Read empty .desktop file group name! Invalid file?");
     }
     while (!df.atEnd()) {
         QByteArray line = df.readLine().trimmed();
@@ -214,7 +214,7 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
         }
         if (line.startsWith('[')) {
             if (!line.endsWith(']')) {
-                qWarning() << ".desktop file group line is invalid (trailing chars):" << line;
+                qCWarning(DESKTOPPARSER) << ".desktop file group line is invalid (trailing chars):" << line;
             }
             QByteArray name = line.mid(1, line.lastIndexOf(']') - 1);
             // we have reached the next group -> return current group and Type= value
@@ -243,7 +243,7 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(const QString& path)
     // Type must be ServiceType now
     QByteArray typeStr = readTypeEntryForCurrentGroup(df, &nextGroup);
     if (typeStr != QByteArrayLiteral("ServiceType")) {
-        qWarning() << path << "is not a valid service type: Type entry should be 'ServiceType', got"
+        qCWarning(DESKTOPPARSER) << path << "is not a valid service type: Type entry should be 'ServiceType', got"
             << typeStr << "instead.";
         return nullptr;
     }
@@ -251,7 +251,7 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(const QString& path)
         QByteArray currentGroup = nextGroup;
         typeStr = readTypeEntryForCurrentGroup(df, &nextGroup);
         if (!currentGroup.startsWith(QByteArrayLiteral("PropertyDef::"))) {
-            qWarning() << "Skipping invalid group" << currentGroup << "in service type" << path;
+            qCWarning(DESKTOPPARSER) << "Skipping invalid group" << currentGroup << "in service type" << path;
             continue;
         }
         QByteArray propertyName = currentGroup.mid(strlen("PropertyDef::"));
@@ -305,7 +305,7 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList& paths)
         if (!def) {
             // we need to parse the file
             // FIXME: we need to handle plain filenames such as "kdedmodule.desktop" as well
-            qDebug() << "About to parse" << serviceType;
+            qCDebug(DESKTOPPARSER) << "About to parse service type file" << serviceType;
             def = parseServiceTypesFile(serviceType);
             if (!def) {
                 continue;
