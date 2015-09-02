@@ -58,7 +58,6 @@ int main(int argc, char** argv) {
     const static auto _i = QStringLiteral("input");
     const static auto _o = QStringLiteral("output");
     const static auto _n = QStringLiteral("name");
-    const static auto _v = QStringLiteral("verbose");
     const static auto _c = QStringLiteral("compat");
     const static auto _s = QStringLiteral("serviceType");
 
@@ -66,7 +65,7 @@ int main(int argc, char** argv) {
                                QStringLiteral("Read input from file"), _n);
     QCommandLineOption output = QCommandLineOption(QStringList() << QStringLiteral("o") << _o,
                                 QStringLiteral("Write output to file"), _n);
-    QCommandLineOption verbose = QCommandLineOption(QStringList() << QStringLiteral("v") << _v,
+    QCommandLineOption verbose = QCommandLineOption(QStringList() << QStringLiteral("verbose"),
                                 QStringLiteral("Enable verbose (debug) output"));
     QCommandLineOption compat = QCommandLineOption(QStringList() << QStringLiteral("c") << _c,
                                 QStringLiteral("Generate JSON that is compatible with KPluginInfo instead of the new KPluginMetaData"));
