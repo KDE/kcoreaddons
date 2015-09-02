@@ -10,5 +10,6 @@ endif()
 ecm_mark_nongui_executable(desktoptojson)
 
 target_link_libraries(desktoptojson Qt5::Core)
+target_compile_definitions(desktoptojson PRIVATE BUILDING_DESKTOPTOJSON_TOOL=1)
 
 install(TARGETS desktoptojson EXPORT KF5CoreAddonsToolingTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

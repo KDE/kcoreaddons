@@ -52,8 +52,6 @@ private:
     QCommandLineOption serviceTypesOption;
     QString m_inFile;
     QString m_outFile;
-    bool m_verbose;
-    bool m_compatibilityMode;
 };
 
 #endif

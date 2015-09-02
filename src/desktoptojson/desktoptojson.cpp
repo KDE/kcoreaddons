@@ -34,9 +34,6 @@
 #include <QTextStream>
 #include <QJsonArray>
 
-static QTextStream cout(stdout);
-static QTextStream cerr(stderr);
-
 DesktopToJson::DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i,
                              const QCommandLineOption &o, const QCommandLineOption &v,
                              const QCommandLineOption &c, const QCommandLineOption &s)
@@ -45,32 +42,34 @@ DesktopToJson::DesktopToJson(QCommandLineParser *parser, const QCommandLineOptio
       output(o),
       verbose(v),
       compat(c),
-      serviceTypesOption(s),
-      m_verbose(false),
-      m_compatibilityMode(false)
+      serviceTypesOption(s)
 {
 }
+
+bool DesktopFileParser::s_verbose = false;
+bool DesktopFileParser::s_compatibilityMode = false;
+
 
 int DesktopToJson::runMain()
 {
     if (!m_parser->isSet(input)) {
-        cout << "Usage --help. In short: desktoptojson -i inputfile.desktop -o outputfile.json" << endl;
+        m_parser->showHelp(1);
         return 1;
     }
     if (m_parser->isSet(verbose)) {
-        m_verbose = true;
+        DesktopFileParser::s_verbose = true;
     }
     if (m_parser->isSet(compat)) {
-        m_compatibilityMode = true;
+        DesktopFileParser::s_compatibilityMode = true;
     }
     if (!resolveFiles()) {
-        cerr << "Failed to resolve filenames" << m_inFile << m_outFile << endl;
+        qCCritical(DESKTOPPARSER) << "Failed to resolve filenames" << m_inFile << m_outFile << endl;
         return 1;
     }
 
-#warning make it an error if one of the files is invalid or not found
+#pragma message("TODO: make it an error if one of the service type files is invalid or not found")
     QStringList serviceTypes = m_parser->values(serviceTypesOption);
-    return convert(m_inFile, m_outFile, serviceTypes) ? 0 : 1;
+    return convert(m_inFile, m_outFile, serviceTypes) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
 bool DesktopToJson::resolveFiles()
@@ -79,7 +78,7 @@ bool DesktopToJson::resolveFiles()
         m_inFile = m_parser->value(input);
         const QFileInfo fi(m_inFile);
         if (!fi.exists()) {
-            cerr << "File not found: " << m_inFile << endl;
+            qCCritical(DESKTOPPARSER) << "File not found: " << m_inFile << endl;
             return false;
         }
         if (!fi.isAbsolute()) {
@@ -97,7 +96,7 @@ bool DesktopToJson::resolveFiles()
     return m_inFile != m_outFile && !m_inFile.isEmpty() && !m_outFile.isEmpty();
 }
 
-void DesktopToJson::convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr)
+void DesktopFileParser::convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr)
 {
     // XXX: Hidden=true doesn't make sense with json plugins since the metadata is inside the .so
     static const QStringList boolkeys = QStringList()
@@ -110,106 +109,38 @@ void DesktopToJson::convertToCompatibilityJson(const QString &key, const QString
             json[key] = true;
         } else {
             if (value.toLower() != QLatin1String("false")) {
-                cerr << "Warning: " << m_inFile << ':' << lineNr << ": Expected boolean value for key \""
-                    << key << "\" but got \"" << value << "\" instead.";
+                qCWarning(DESKTOPPARSER).nospace() << "Expected boolean value for key \"" << key
+                    << "\" at line " << lineNr << "but got \"" << value << "\" instead.";
             }
             json[key] = false;
         }
     } else if (stringlistkeys.contains(key)) {
         json[key] = QJsonArray::fromStringList(DesktopFileParser::deserializeList(value));
     } else {
-
         json[key] = value;
     }
 }
 
 bool DesktopToJson::convert(const QString &src, const QString &dest, const QStringList& serviceTypes)
 {
-    QFile df(src);
-    if (!df.open(QFile::ReadOnly)) {
-        cerr << "Error: Failed to open " << src << endl;
-        return false;
-    }
-    int lineNr = 0;
-    // we only convert data inside the [Desktop Entry] group
-    while (!df.atEnd()) {
-        QByteArray line = df.readLine().trimmed();
-        lineNr++;
-        if (line == "[Desktop Entry]") {
-            if (m_verbose) {
-                cout << "Found desktop group in line " << lineNr << endl;
-            }
-            break;
-        }
-    }
-    if (df.atEnd()) {
-        cerr << "Error: Could not find [Desktop Entry] group in " << src << endl;
-        return false;
-    }
-
 
     QJsonObject json;
-    QJsonObject kplugin; // the "KPlugin" key of the metadata
-    while (!df.atEnd()) {
-        const QByteArray line = df.readLine().trimmed();
-        lineNr++;
-        if (line.isEmpty()) {
-            if (m_verbose) {
-                cout << "Line " << lineNr << ": empty" << endl;
-            }
-            continue;
-        }
-        if (line.startsWith('#')) {
-            if (m_verbose) {
-                cout << "Line " << lineNr << ": comment" << endl;
-            }
-            continue; // skip comments
-        }
-        if (line.startsWith('[')) {
-            // start of new group -> doesn't interest us anymore
-            if (m_verbose) {
-                cout << "Line " << lineNr << ": start of new group " << line << endl;
-            }
-            break;
-        }
-        // must have form key=value now
-        const int equalsIndex = line.indexOf('=');
-        if (equalsIndex == -1) {
-            cerr << "Warning: " << src << ':' << lineNr << ": Line is neither comment nor group "
-                "and doesn't contain an '=' character: \"" << line << '\"' << endl;
-            continue;
-        }
-        // trim key and value to remove spaces around the '=' char
-        const QByteArray key = line.mid(0, equalsIndex).trimmed();
-        const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
-        const QByteArray valueEscaped = DesktopFileParser::escapeValue(valueRaw);
-        const QString value = QString::fromUtf8(valueEscaped);
-        if (m_verbose) {
-            cout << "Line " << lineNr << ": key=\"" << key << "\", value=\"" << value << '"' << endl;
-            if (valueEscaped != valueRaw) {
-                cout << "Line " << lineNr << " contained escape sequences" << endl;
-            }
-        }
-        if (m_compatibilityMode) {
-            convertToCompatibilityJson(QString::fromUtf8(key), value, json, lineNr);
-        } else {
-            DesktopFileParser::convertToJson(key, ServiceTypeDefinition::fromFiles(serviceTypes),
-                                             value, json, kplugin, lineNr);
-        }
-    }
-    if (!m_compatibilityMode) {
-        json[QStringLiteral("KPlugin")] = kplugin;
+    DesktopFileParser::convert(src, serviceTypes, json, nullptr);
+
+    if (DesktopFileParser::s_compatibilityMode) {
+        Q_ASSERT(json.value(QStringLiteral("KPlugin")).toObject().isEmpty());
+        json.remove(QStringLiteral("KPlugin"));
     }
     QJsonDocument jdoc;
     jdoc.setObject(json);
 
     QFile file(dest);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        cerr << "Failed to open " << dest << endl;
+        qCCritical(DESKTOPPARSER) << "Failed to open " << dest << endl;
         return false;
     }
 
     file.write(jdoc.toJson());
-    cout << "Generated " << dest << endl;
+    qCDebug(DESKTOPPARSER) << "Generated " << dest << endl;
     return true;
 }

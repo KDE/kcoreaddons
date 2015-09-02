@@ -31,7 +31,27 @@
 #include <QMutex>
 #include <QCache>
 
-#include <QDebug>
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+// in the desktoptojson binary enable debug messages by default, in the library only warning messages
+#ifdef BUILDING_DESKTOPTOJSON_TOOL
+Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf5.kcoreaddons.desktopparser", QtDebugMsg)
+#else
+Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf5.kcoreaddons.desktopparser", QtWarningMsg)
+#endif
+#else
+Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf5.kcoreaddons.desktopparser")
+#endif
+
+
+#ifdef BUILDING_DESKTOPTOJSON_TOOL
+// use if not else to prevent wrong scoping
+#define DESKTOPTOJSON_VERBOSE_DEBUG if (!DesktopFileParser::s_verbose) {} else qCDebug(DESKTOPPARSER)
+#define DESKTOPTOJSON_VERBOSE_WARNING if (!DesktopFileParser::s_verbose) {} else qCWarning(DESKTOPPARSER)
+#else
+#define DESKTOPTOJSON_VERBOSE_DEBUG QT_NO_QDEBUG_MACRO()
+#define DESKTOPTOJSON_VERBOSE_WARNING QT_NO_QDEBUG_MACRO()
+#endif
+
 
 using namespace DesktopFileParser;
 
@@ -163,7 +183,7 @@ namespace {
 bool readUntilDesktopEntryGroup(QFile &file, const QString &path, int &lineNr)
 {
     if (!file.open(QFile::ReadOnly)) {
-        qWarning() << "Error: Failed to open " << path << endl;
+        qWarning() << "Error: Failed to open " << path;
         return false;
     }
     // we only convert data inside the [Desktop Entry] group
@@ -174,7 +194,7 @@ bool readUntilDesktopEntryGroup(QFile &file, const QString &path, int &lineNr)
             return true;
         }
     }
-    qWarning() << "Error: Could not find [Desktop Entry] group in " << path << endl;
+    qWarning() << "Error: Could not find [Desktop Entry] group in " << path;
     return false;
 }
 
@@ -235,7 +255,6 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(const QString& path)
             continue;
         }
         QByteArray propertyName = currentGroup.mid(strlen("PropertyDef::"));
-        // qDebug() << "Found property definition" << propertyName << "has type" << type;
         QVariant::Type type = QVariant::nameToType(typeStr.constData());
         switch (type) {
             case QVariant::String:
@@ -243,14 +262,15 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(const QString& path)
             case QVariant::Int:
             case QVariant::Double:
             case QVariant::Bool:
+                qCDebug(DESKTOPPARSER) << "Found property definition" << propertyName << "with type" << typeStr;
                 result.push_back(CustomPropertyDefiniton(propertyName, type));
                 break;
             case QVariant::Invalid:
-                qWarning() << "Property type" << typeStr << "is not a known QVariant type."
+                qCWarning(DESKTOPPARSER) << "Property type" << typeStr << "is not a known QVariant type."
                         " Found while parsing property defintion for" << propertyName << "in" << path;
                 break;
             default:
-                qWarning() << "Unsupported property type" << typeStr << "for property" << propertyName
+                qCWarning(DESKTOPPARSER) << "Unsupported property type" << typeStr << "for property" << propertyName
                         << "found in" << path << "/nOnly QString, QStringList, int, double and bool are supported.";
         }
     }
@@ -285,7 +305,7 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList& paths)
         if (!def) {
             // we need to parse the file
             // FIXME: we need to handle plain filenames such as "kdedmodule.desktop" as well
-            // qDebug() << "About to parse" << serviceType;
+            qDebug() << "About to parse" << serviceType;
             def = parseServiceTypesFile(serviceType);
             if (!def) {
                 continue;
@@ -308,19 +328,19 @@ QJsonValue ServiceTypeDefinition::parseValue(const QByteArray& key, const QStrin
             return propertyDef.fromString(value);
         }
     }
-    // qDebug() << "Unknown property type for key" << key << "-> falling back to string";
+    qCDebug(DESKTOPPARSER) << "Unknown property type for key" << key << "-> falling back to string";
     return QJsonValue(value);
 }
 
 void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDefinition &serviceTypes, const QString &value,
                                       QJsonObject &json, QJsonObject &kplugin, int lineNr)
 {
-    bool m_verbose = false; // FIXME remove
     /* The following keys are recognized (and added to a "KPlugin" object):
 
         Icon=mypluginicon
         Type=Service
         ServiceTypes=KPluginInfo
+        MimeType=text/plain;image/png
 
         Name=User Visible Name (translatable)
         Comment=Description of what the plugin does (translatable)
@@ -334,6 +354,7 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDe
         X-KDE-PluginInfo-Depends=plugin1,plugin3
         X-KDE-PluginInfo-License=GPL
         X-KDE-PluginInfo-EnabledByDefault=true
+        X-KDE-FormFactors=desktop
     */
     if (key == QByteArrayLiteral("Icon")) {
         kplugin[QStringLiteral("Icon")] = value;
@@ -364,8 +385,8 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDe
             boolValue = true;
         } else {
             if (value.toLower() != QLatin1String("false")) {
-                //qWarning() << "Warning: " << m_inFile << ':' << lineNr << ": Expected boolean value for key \""
-                //    << key << "\" but got \"" << value << "\" instead." << endl;
+                qCWarning(DESKTOPPARSER).nospace() << "Expected boolean value for key \"" << key
+                    << "\" at line " << lineNr << "but got \"" << value << "\" instead.";
             }
         }
         kplugin[QStringLiteral("EnabledByDefault")] = boolValue;
@@ -391,18 +412,14 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDe
     } else if (key.startsWith(QByteArrayLiteral("Comment["))) {
         kplugin[QStringLiteral("Description") + QString::fromUtf8(key.mid(strlen("Comment")))] = value;
     } else if (key == QByteArrayLiteral("Hidden")) {
-        if (m_verbose) {
-            qWarning() << "Warning: Hidden= key found in desktop file, this makes no sense"
-                " with metadata inside the plugin." << endl;
-        }
+        DESKTOPTOJSON_VERBOSE_WARNING << "Hidden= key found in desktop file, this makes no sense"
+                " with metadata inside the plugin.";
         kplugin[QString::fromUtf8(key)] = (value.toLower() == QLatin1String("true"));
     } else if (key == QByteArrayLiteral("Exec") || key == QByteArrayLiteral("Type") || key == QByteArrayLiteral("X-KDE-Library")) {
         // Exec= doesn't make sense here, however some .desktop files (like e.g. in kdevelop) have a dummy value here
         // also the Type=Service entry is no longer needed
         // X-KDE-Library is also not needed since we already have the library to read this metadata
-        if (m_verbose) {
-            qDebug() << "Not converting key " << key << "=" << value << endl;
-        }
+        DESKTOPTOJSON_VERBOSE_DEBUG << "Not converting key " << key << "=" << value;
     } else {
         // check service type definitions or fall back to QString
         json[QString::fromUtf8(key)] = serviceTypes.parseValue(key, value);
@@ -411,12 +428,11 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDe
 
 bool DesktopFileParser::convert(const QString& src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath)
 {
-    bool m_verbose = false; // FIXME remove
     QFile df(src);
     int lineNr = 0;
     ServiceTypeDefinition serviceTypeDef = ServiceTypeDefinition::fromFiles(serviceTypes);
     readUntilDesktopEntryGroup(df, src, lineNr);
-
+    DESKTOPTOJSON_VERBOSE_DEBUG << "Found [Desktop Entry] group in line" << lineNr;
 
     //QJsonObject json;
     QJsonObject kplugin; // the "KPlugin" key of the metadata
@@ -424,29 +440,23 @@ bool DesktopFileParser::convert(const QString& src, const QStringList &serviceTy
         const QByteArray line = df.readLine().trimmed();
         lineNr++;
         if (line.isEmpty()) {
-            if (m_verbose) {
-                qDebug() << "Line " << lineNr << ": empty" << endl;
-            }
+            DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << ": empty";
             continue;
         }
         if (line.startsWith('#')) {
-            if (m_verbose) {
-                qDebug() << "Line " << lineNr << ": comment" << endl;
-            }
+            DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << ": comment";
             continue; // skip comments
         }
         if (line.startsWith('[')) {
             // start of new group -> doesn't interest us anymore
-            if (m_verbose) {
-                qDebug() << "Line " << lineNr << ": start of new group " << line << endl;
-            }
+            DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << ": start of new group " << line;
             break;
         }
         // must have form key=value now
         const int equalsIndex = line.indexOf('=');
         if (equalsIndex == -1) {
-            qWarning() << "Warning: " << src << ':' << lineNr << ": Line is neither comment nor group "
-                "and doesn't contain an '=' character: \"" << line << '\"' << endl;
+            qCWarning(DESKTOPPARSER) << "Warning: " << src << ':' << lineNr << ": Line is neither comment nor group "
+                "and doesn't contain an '=' character: \"" << line << '\"';
             continue;
         }
         // trim key and value to remove spaces around the '=' char
@@ -454,30 +464,24 @@ bool DesktopFileParser::convert(const QString& src, const QStringList &serviceTy
         const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
         const QByteArray valueEscaped = escapeValue(valueRaw);
         const QString value = QString::fromUtf8(valueEscaped);
-        if (m_verbose) {
-            qDebug() << "Line " << lineNr << ": key=\"" << key << "\", value=\"" << value << '"' << endl;
-            if (valueEscaped != valueRaw) {
-                qDebug() << "Line " << lineNr << " contained escape sequences" << endl;
-            }
+#ifdef BUILDING_DESKTOPTOJSON_TOOL
+        DESKTOPTOJSON_VERBOSE_DEBUG.nospace() << "Line " << lineNr << ": key=" << key << ", value=" << value;
+        if (valueEscaped != valueRaw) {
+            DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << " contained escape sequences";
         }
+        if (s_compatibilityMode) {
+            convertToCompatibilityJson(QString::fromUtf8(key), value, json, lineNr);
+        } else {
+            convertToJson(key, serviceTypeDef, value, json, kplugin, lineNr);
+        }
+#else
         convertToJson(key, serviceTypeDef, value, json, kplugin, lineNr);
-        if (key == QByteArrayLiteral("X-KDE-Library")) {
+#endif
+        if (libraryPath && key == QByteArrayLiteral("X-KDE-Library")) {
             *libraryPath = value;
         }
     }
     json[QStringLiteral("KPlugin")] = kplugin;
-    /*
-    QJsonDocument jdoc;
-    jdoc.setObject(json);
-    QFile file(dest);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qWarning() << "Failed to open " << dest << endl;
-        return false;
-    }
-
-    file.write(jdoc.toJson());
-    qDebug() << "Generated " << dest << endl;
-    */
     return true;
 }
 
