@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 
-#include "desktopfileparser.h"
+#include "desktopfileparser_p.h"
 
 #include <QFile>
 #include <QJsonArray>

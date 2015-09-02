@@ -17,7 +17,7 @@
 */
 
 #include "kpluginmetadata.h"
-#include "desktopfileparser.h"
+#include "desktopfileparser_p.h"
 
 #include <QCoreApplication>
 #include <QFileInfo>

@@ -23,7 +23,7 @@
  ******************************************************************************/
 
 #include "desktoptojson.h"
-#include "../lib/plugin/desktopfileparser.h"
+#include "../lib/plugin/desktopfileparser_p.h"
 
 
 #include <QDir>
