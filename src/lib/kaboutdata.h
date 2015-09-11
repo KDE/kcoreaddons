@@ -331,12 +331,12 @@ public:
      * consider using componentName() instead.
      *
      * @param componentName The program name or plugin name used internally.
-     * Example: "kwrite".
+     * Example: QStringLiteral("kwrite"). This should never be translated.
      *
      * @param displayName A displayable name for the program or plugin. This string
      *        should be translated. Example: i18n("KWrite")
      *
-     * @param version The component version string.
+     * @param version The component version string. Example: QStringLiteral("1.0").
      *
      * @param shortDescription A short description of what the component does.
      *        This string should be translated.
