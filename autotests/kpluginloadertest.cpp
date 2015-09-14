@@ -272,7 +272,7 @@ private Q_SLOTS:
         qDeleteAll(plugins);
 
         // check that parent gets set
-        plugins = KPluginLoader::instantiatePlugins(temp.path(), [](const KPluginMetaData& md) { return true; }, this);
+        plugins = KPluginLoader::instantiatePlugins(temp.path(), [](const KPluginMetaData&) { return true; }, this);
         QCOMPARE(plugins.size(), 2);
         QCOMPARE(plugins[0]->parent(), this);
         QCOMPARE(plugins[1]->parent(), this);
