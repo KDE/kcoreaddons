@@ -166,16 +166,6 @@ public:
     int scanEntry(Entry *e);
     void emitEvent(const Entry *e, int event, const QString &fileName = QString());
 
-    // Memory management - delete when last KDirWatch gets deleted
-    void ref()
-    {
-        m_ref++;
-    }
-    bool deref()
-    {
-        return (--m_ref == 0);
-    }
-
     static bool isNoisyFile(const char *filename);
 
 public Q_SLOTS:
@@ -193,7 +183,6 @@ public:
     int freq;
     int statEntries;
     int m_nfsPollInterval, m_PollInterval;
-    int m_ref;
     bool useStat(Entry *e);
 
     // removeList is allowed to contain any entry at most once

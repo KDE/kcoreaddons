@@ -55,6 +55,7 @@
 #include <QtCore/QSocketNotifier>
 #include <QtCore/QTimer>
 #include <QtCore/QThread>
+#include <QtCore/QThreadStorage>
 #include <QtCore/QCoreApplication>
 
 #include <qplatformdefs.h> // QT_LSTAT, QT_STAT, QT_STATBUF
@@ -92,14 +93,13 @@ Q_LOGGING_CATEGORY(KDIRWATCH, "kf5.kcoreaddons.kdirwatch")
 // set this to true for much more verbose debug output
 static const bool s_verboseDebug = false;
 
-// The KDirWatchPrivate instance is refcounted, and deleted by the last KDirWatch instance
-static KDirWatchPrivate *dwp_self = 0;
+static QThreadStorage<KDirWatchPrivate *> dwp_self;
 static KDirWatchPrivate *createPrivate()
 {
-    if (!dwp_self) {
-        dwp_self = new KDirWatchPrivate;
+    if (!dwp_self.hasLocalData()) {
+        dwp_self.setLocalData(new KDirWatchPrivate);
     }
-    return dwp_self;
+    return dwp_self.localData();
 }
 
 // Convert a string into a watch Method
@@ -174,7 +174,6 @@ KDirWatchPrivate::KDirWatchPrivate()
     : timer(),
       freq(3600000), // 1 hour as upper bound
       statEntries(0),
-      m_ref(0),
       delayRemove(false),
       rescan_all(false),
       rescan_timer()
@@ -1868,38 +1867,32 @@ bool KDirWatch::exists()
     return s_pKDirWatchSelf.exists();
 }
 
-static void cleanupQFSWatcher()
+static void postRoutine_KDirWatch()
 {
-    s_pKDirWatchSelf()->deleteQFSWatcher();
+    if (s_pKDirWatchSelf.exists()) {
+        s_pKDirWatchSelf()->deleteQFSWatcher();
+    }
 }
 
 KDirWatch::KDirWatch(QObject *parent)
     : QObject(parent), d(createPrivate())
 {
-    static int nameCounter = 0;
-
-    nameCounter++;
-    setObjectName(QString::fromLatin1("KDirWatch-%1").arg(nameCounter));
-
-    d->ref();
+    static QBasicAtomicInt nameCounter = Q_BASIC_ATOMIC_INITIALIZER(1);
+    const int counter = nameCounter.fetchAndAddRelaxed(1); // returns the old value
+    setObjectName(QString::fromLatin1("KDirWatch-%1").arg(counter));
 
     d->_isStopped = false;
 
-    static bool cleanupRegistered = false;
-    if (!cleanupRegistered) {
-        cleanupRegistered = true;
+    if (counter == 1) { // very first KDirWatch instance
         // Must delete QFileSystemWatcher before qApp is gone - bug 261541
-        qAddPostRoutine(cleanupQFSWatcher);
+        qAddPostRoutine(postRoutine_KDirWatch);
     }
 }
 
 KDirWatch::~KDirWatch()
 {
-    d->removeEntries(this);
-    if (d->deref()) {
-        // delete it if it's the last one
-        delete d;
-        dwp_self = 0;
+    if (d) {
+        d->removeEntries(this);
     }
 }
 
@@ -2013,15 +2006,16 @@ void KDirWatch::deleteQFSWatcher()
 {
     delete d->fsWatcher;
     d->fsWatcher = 0;
+    d = 0;
 }
 
 void KDirWatch::statistics()
 {
-    if (!dwp_self) {
+    if (!dwp_self.hasLocalData()) {
         qCDebug(KDIRWATCH) << "KDirWatch not used";
         return;
     }
-    dwp_self->statistics();
+    dwp_self.localData()->statistics();
 }
 
 void KDirWatch::setCreated(const QString &_file)

@@ -300,7 +300,7 @@ Q_SIGNALS:
     void deleted(const QString &path);
 
 private:
-    KDirWatchPrivate *const d;
+    KDirWatchPrivate *d;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KDirWatch::WatchModes)
