@@ -253,7 +253,7 @@ private Q_SLOTS:
         proc.setArguments(arguments);
         proc.start();
         QVERIFY(proc.waitForFinished(10000));
-        qDebug() << "desktoptojson STDOUT:" <<  proc.readAllStandardOutput();
+        qDebug() << "desktoptojson STDOUT: " <<  proc.readAllStandardOutput().data();
         QByteArray errorOut = proc.readAllStandardError();
         if (!errorOut.isEmpty()) {
             qWarning() << "desktoptojson STDERR:" <<  errorOut;
