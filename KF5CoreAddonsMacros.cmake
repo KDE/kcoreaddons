@@ -1,24 +1,35 @@
 #
-# kcoreaddons_desktop_to_json(target desktopfile [OUTPUT_DIR dir] [COMPAT_MODE])
+# kcoreaddons_desktop_to_json(target desktopfile
+#                             DEFAULT_SERIVCE_TYPE | SERVICE_TYPES <file> [<file> [...]]
+#                             [OUTPUT_DIR dir] [COMPAT_MODE])
 #
 # This macro uses desktoptojson to generate a json file from a plugin
 # description in a .desktop file. The generated file can be compiled
 # into the plugin using the K_PLUGIN_FACTORY_WITH_JSON (cpp) macro.
 #
+# All files in SERVICE_TYPES will be parsed by desktoptojson to ensure that the generated
+# json uses the right data type (string, string list, int, double or bool) for all of the
+# properties. If your application does not have any custom properties defined you should pass
+# DEFAULT_SERVICE_TYPE instead. It is an error if neither of these arguments is given.
+# This is done in order to ensure that all applications explicitly choose the right service
+# type and don't have runtime errors because of the data being wrong (QJsonValue does not
+# perform any type conversions).
+#
 # If COMPAT_MODE is passed as an argument the generated JSON file will be compatible with
 # the metadata format used by KPluginInfo (from KService), otherwise it will default to
-# the new format that is used by KPluginMetaData (from KCoreAddons)
+# the new format that is used by KPluginMetaData (from KCoreAddons).
 #
 # If OUTPUT_DIR is set the generated file will be created inside <dir> instead of in
 # ${CMAKE_CURRENT_BINARY_DIR}
 #
 # Example:
 #
-#  kcoreaddons_desktop_to_json(plasma_engine_time plasma-dataengine-time.desktop)
+#  kcoreaddons_desktop_to_json(plasma_engine_time plasma-dataengine-time.desktop
+#                              SERVICE_TYPES plasma-dataengine.desktop)
 
 function(kcoreaddons_desktop_to_json target desktop)
     get_filename_component(desktop_basename ${desktop} NAME_WE) # allow passing an absolute path to the .desktop
-    cmake_parse_arguments(DESKTOP_TO_JSON "COMPAT_MODE" "OUTPUT_DIR" "" ${ARGN} )
+    cmake_parse_arguments(DESKTOP_TO_JSON "COMPAT_MODE;DEFAULT_SERVICE_TYPE" "OUTPUT_DIR" "SERVICE_TYPES" ${ARGN})
 
     if(DESKTOP_TO_JSON_OUTPUT_DIR)
         set(json "${DESKTOP_TO_JSON_OUTPUT_DIR}/${desktop_basename}.json")
@@ -34,22 +45,24 @@ function(kcoreaddons_desktop_to_json target desktop)
         _desktop_to_json_cmake28(${desktop} ${json} ${DESKTOP_TO_JSON_COMPAT_MODE})
         return()
     endif()
-
+    set(command KF5::desktoptojson -i ${desktop} -o ${json})
     if(DESKTOP_TO_JSON_COMPAT_MODE)
-        add_custom_command(
-            OUTPUT ${json}
-            COMMAND KF5::desktoptojson -i ${desktop} -o ${json} -c
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            DEPENDS ${desktop}
-        )
-    else()
-        add_custom_command(
-            OUTPUT ${json}
-            COMMAND KF5::desktoptojson -i ${desktop} -o ${json}
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-            DEPENDS ${desktop}
-        )
+      list(APPEND command -c)
     endif()
+    if(DESKTOP_TO_JSON_SERVICE_TYPES)
+      foreach(type ${DESKTOP_TO_JSON_SERVICE_TYPES})
+        list(APPEND command -s ${type})
+      endforeach()
+    elseif(NOT DESKTOP_TO_JSON_DEFAULT_SERVICE_TYPE)
+      message(DEPRECATION "Calling kcoreaddons_desktop_to_json() without DEFAULT_SERVICE_TYPE or SERVICE_TYPES is deprecated!")
+    endif()
+
+    add_custom_command(
+        OUTPUT ${json}
+        COMMAND ${command}
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+        DEPENDS ${desktop}
+    )
     set_property(TARGET ${target} APPEND PROPERTY AUTOGEN_TARGET_DEPENDS ${json})
 endfunction()
 
