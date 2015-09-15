@@ -233,7 +233,7 @@ KDirWatchPrivate::KDirWatchPrivate()
     }
 }
 
-// This is called on app exit (when K_GLOBAL_STATIC deletes KDirWatch::self)
+// This is called on app exit (deleted by QThreadStorage)
 KDirWatchPrivate::~KDirWatchPrivate()
 {
     timer.stop();
@@ -1891,7 +1891,7 @@ KDirWatch::KDirWatch(QObject *parent)
 
 KDirWatch::~KDirWatch()
 {
-    if (d) {
+    if (dwp_self.hasLocalData()) { // skip this after app destruction
         d->removeEntries(this);
     }
 }

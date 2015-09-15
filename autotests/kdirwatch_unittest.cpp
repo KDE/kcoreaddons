@@ -51,6 +51,13 @@ static const char *methodToString(KDirWatch::Method method)
     }
 }
 
+class StaticObject
+{
+public:
+    KDirWatch m_dirWatch;
+};
+Q_GLOBAL_STATIC(StaticObject, s_staticObject)
+
 class KDirWatch_UnitTest : public QObject
 {
     Q_OBJECT
@@ -61,9 +68,9 @@ public:
         // Speed up the test by making the kdirwatch timer (to compress changes) faster
         qputenv("KDIRWATCH_POLLINTERVAL", "50");
         qputenv("KDIRWATCH_METHOD", KDIRWATCH_TEST_METHOD);
-        KDirWatch foo;
-        m_slow = (foo.internalMethod() == KDirWatch::FAM || foo.internalMethod() == KDirWatch::Stat);
-        qDebug() << "Using method" << methodToString(foo.internalMethod());
+        KDirWatch *dirW = &s_staticObject()->m_dirWatch;
+        m_slow = (dirW->internalMethod() == KDirWatch::FAM || dirW->internalMethod() == KDirWatch::Stat);
+        qDebug() << "Using method" << methodToString(dirW->internalMethod());
     }
 
 private Q_SLOTS: // test methods
@@ -74,6 +81,8 @@ private Q_SLOTS: // test methods
         createFile(m_path + QLatin1String("TestFile"));
         createFile(m_path + QLatin1String("nested_0"));
         createFile(m_path + QLatin1String("nested_1"));
+
+        s_staticObject()->m_dirWatch.addFile(m_path + QLatin1String("ExistingFile"));
     }
     void touchOneFile();
     void touch1000Files();
