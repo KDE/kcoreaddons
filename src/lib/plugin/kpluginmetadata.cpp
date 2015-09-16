@@ -45,7 +45,7 @@ KPluginMetaData::KPluginMetaData(const KPluginMetaData &other)
 {
 }
 
-KPluginMetaData& KPluginMetaData::operator=(const KPluginMetaData& other)
+KPluginMetaData &KPluginMetaData::operator=(const KPluginMetaData &other)
 {
     m_metaData = other.m_metaData;
     m_fileName = other.m_fileName;
@@ -86,7 +86,7 @@ KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &fil
     m_metaData = metaData;
 }
 
-KPluginMetaData::KPluginMetaData(const QJsonObject& metaData, const QString& pluginFile, const QString& metaDataFile)
+KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile, const QString &metaDataFile)
 {
     m_fileName = pluginFile;
     m_metaData = metaData;
@@ -96,14 +96,14 @@ KPluginMetaData::KPluginMetaData(const QJsonObject& metaData, const QString& plu
     }
 }
 
-KPluginMetaData KPluginMetaData::fromDesktopFile(const QString &file, const QStringList& serviceTypes)
+KPluginMetaData KPluginMetaData::fromDesktopFile(const QString &file, const QStringList &serviceTypes)
 {
     KPluginMetaData result;
     result.loadFromDesktopFile(file, serviceTypes);
     return result;
 }
 
-void KPluginMetaData::loadFromDesktopFile(const QString &file, const QStringList& serviceTypes)
+void KPluginMetaData::loadFromDesktopFile(const QString &file, const QStringList &serviceTypes)
 {
     QString libraryPath;
     if (!DesktopFileParser::convert(file, serviceTypes, m_metaData, &libraryPath)) {
@@ -193,7 +193,7 @@ QString KPluginMetaData::readTranslatedString(const QJsonObject &jo, const QStri
     return readTranslatedValue(jo, key, defaultValue).toString(defaultValue);
 }
 
-static inline void addPersonFromJson(const QJsonObject& obj, QList<KAboutPerson>* out) {
+static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson>* out) {
     const QString name = obj[QStringLiteral("Name")].toString();
     const QString task = obj[QStringLiteral("Task")].toString();
     const QString email = obj[QStringLiteral("Email")].toString();
@@ -307,12 +307,12 @@ bool KPluginMetaData::isEnabledByDefault() const
     return false;
 }
 
-QString KPluginMetaData::value(const QString& key, const QString& defaultValue) const
+QString KPluginMetaData::value(const QString &key, const QString &defaultValue) const
 {
     return m_metaData.value(key).toString(defaultValue);
 }
 
-bool KPluginMetaData::operator==(const KPluginMetaData& other) const
+bool KPluginMetaData::operator==(const KPluginMetaData &other) const
 {
     return m_fileName == other.m_fileName && m_metaData == other.m_metaData;
 }

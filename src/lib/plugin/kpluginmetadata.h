@@ -166,11 +166,11 @@ public:
     /**
      * Load a KPluginMetaData instace from a .desktop file. Unlike the constructor which takes
      * a single file parameter this method allows you to specify which service type files should
-     * be parsed to determine the correct type for a give .desktop property.
+     * be parsed to determine the correct type for a given .desktop property.
      * This ensures that a e.g. comma-separated string list field in the .desktop file will correctly
      * be converted to a JSON string array.
      *
-     * @note This function is intended mostly exists for backwards-compatibility. It is recommended
+     * @note This function mostly exists for backwards-compatibility. It is recommended
      * that new applications load JSON files directly instead of using .desktop files for plugin metadata.
      *
      * @param file the .desktop file to load

@@ -33,32 +33,28 @@ class QJsonValue;
 
 Q_DECLARE_LOGGING_CATEGORY(DESKTOPPARSER)
 
-struct CustomPropertyDefiniton;
+struct CustomPropertyDefinition;
 struct ServiceTypeDefinition
 {
-    ServiceTypeDefinition(const QVector<CustomPropertyDefiniton>& defs);
+    ServiceTypeDefinition(const QVector<CustomPropertyDefinition> &defs);
     ~ServiceTypeDefinition();
 
     static ServiceTypeDefinition fromFiles(const QStringList &paths);
     /**
-        * @return @p value conveted to the correct JSON type.
-        * If there is no custom property defintion for @p key this will simply return the string value
-        *
-        * @note this method is not marked as @c const to ensure that we make a copy of the
-        * value from the global cache (which stores a const T*). Copying a QVector is cheap
-        * and allows us to avoid acquiring a global lock on every parsed property.
-        */
+     * @return @p value converted to the correct JSON type.
+     * If there is no custom property definition for @p key this will simply return the string value
+     */
     QJsonValue parseValue(const QByteArray &key, const QString &value) const;
 private:
-    QVector<CustomPropertyDefiniton> m_definitions;
+    QVector<CustomPropertyDefinition> m_definitions;
 };
 
 namespace DesktopFileParser
 {
-    QByteArray escapeValue(const QByteArray& input);
+    QByteArray escapeValue(const QByteArray &input);
     QStringList deserializeList(const QString &data, char separator = ',');
     bool convert(const QString &src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath);
-    void convertToJson(const QByteArray& key, const ServiceTypeDefinition &serviceTypes, const QString &value,
+    void convertToJson(const QByteArray &key, const ServiceTypeDefinition &serviceTypes, const QString &value,
                        QJsonObject &json, QJsonObject &kplugin, int lineNr);
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
     void convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr);

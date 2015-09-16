@@ -1,6 +1,6 @@
 #
 # kcoreaddons_desktop_to_json(target desktopfile
-#                             DEFAULT_SERIVCE_TYPE | SERVICE_TYPES <file> [<file> [...]]
+#                             DEFAULT_SERVICE_TYPE | SERVICE_TYPES <file> [<file> [...]]
 #                             [OUTPUT_DIR dir] [COMPAT_MODE])
 #
 # This macro uses desktoptojson to generate a json file from a plugin

@@ -92,7 +92,7 @@ QStringList DesktopFileParser::deserializeList(const QString &data, char separat
     return value;
 }
 
-QByteArray DesktopFileParser::escapeValue(const QByteArray& input)
+QByteArray DesktopFileParser::escapeValue(const QByteArray &input)
 {
     // we could do this in place, but this code is simpler
     // this tool is probably only transitional, so no need to optimize
@@ -133,12 +133,12 @@ QByteArray DesktopFileParser::escapeValue(const QByteArray& input)
     return result;
 }
 
-struct CustomPropertyDefiniton {
+struct CustomPropertyDefinition {
     // default ctor needed for QVector
-    CustomPropertyDefiniton() : type(QVariant::String) {}
-    CustomPropertyDefiniton(const QByteArray& key, QVariant::Type type)
+    CustomPropertyDefinition() : type(QVariant::String) {}
+    CustomPropertyDefinition(const QByteArray &key, QVariant::Type type)
         : key(key) , type(type) {}
-    QJsonValue fromString(const QString& str) const
+    QJsonValue fromString(const QString &str) const
     {
         switch (type) {
         case QVariant::String:
@@ -231,7 +231,7 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
     return type;
 }
 
-QVector<CustomPropertyDefiniton>* parseServiceTypesFile(QString path)
+QVector<CustomPropertyDefinition>* parseServiceTypesFile(QString path)
 {
     int lineNr = 0;
     if (QDir::isRelativePath(path)) {
@@ -250,7 +250,7 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(QString path)
     if (!readUntilDesktopEntryGroup(df, path, lineNr)) {
         return nullptr;
     }
-    QVector<CustomPropertyDefiniton> result;
+    QVector<CustomPropertyDefinition> result;
     // TODO: passing nextGroup by pointer is inefficient as it will make deep copies every time
     // Not exactly performance critical code though so low priority
     QByteArray nextGroup = "Desktop Entry";
@@ -268,7 +268,7 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(QString path)
             qCWarning(DESKTOPPARSER) << "Skipping invalid group" << currentGroup << "in service type" << path;
             continue;
         }
-        if (typeStr.isNull()) {
+        if (typeStr.isEmpty()) {
             qCWarning(DESKTOPPARSER) << "Could not find Type= key in group" << currentGroup;
             continue;
         }
@@ -281,7 +281,7 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(QString path)
             case QVariant::Double:
             case QVariant::Bool:
                 qCDebug(DESKTOPPARSER) << "Found property definition" << propertyName << "with type" << typeStr;
-                result.push_back(CustomPropertyDefiniton(propertyName, type));
+                result.push_back(CustomPropertyDefinition(propertyName, type));
                 break;
             case QVariant::Invalid:
                 qCWarning(DESKTOPPARSER) << "Property type" << typeStr << "is not a known QVariant type."
@@ -289,21 +289,21 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(QString path)
                 break;
             default:
                 qCWarning(DESKTOPPARSER) << "Unsupported property type" << typeStr << "for property" << propertyName
-                        << "found in" << path << "/nOnly QString, QStringList, int, double and bool are supported.";
+                        << "found in" << path << "\nOnly QString, QStringList, int, double and bool are supported.";
         }
     }
-    return new QVector<CustomPropertyDefiniton>(result);
+    return new QVector<CustomPropertyDefinition>(result);
 }
 
 // a lazy map of service type definitions
-typedef QCache<QString, QVector<CustomPropertyDefiniton>> ServiceTypesHash;
+typedef QCache<QString, QVector<CustomPropertyDefinition>> ServiceTypesHash;
 Q_GLOBAL_STATIC(ServiceTypesHash, s_serviceTypes);
 // access must be guarded by serviceTypesMutex as this code could be executed by multiple threads
 QBasicMutex s_serviceTypesMutex;
 } // end of anonymous namespace
 
 
-ServiceTypeDefinition::ServiceTypeDefinition(const QVector< CustomPropertyDefiniton >& defs)
+ServiceTypeDefinition::ServiceTypeDefinition(const QVector< CustomPropertyDefinition >& defs)
     : m_definitions(defs)
 {
 }
@@ -312,14 +312,15 @@ ServiceTypeDefinition::~ServiceTypeDefinition()
 {
 }
 
-ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList& paths)
+ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
 {
-    QVector<CustomPropertyDefiniton> defs;
+    QVector<CustomPropertyDefinition> defs;
+    defs.reserve(paths.size());
 
     // as we might modify the cache we need to acquire a mutex here
     foreach (const QString &serviceType, paths) {
         QMutexLocker lock(&s_serviceTypesMutex);
-        QVector<CustomPropertyDefiniton>* def = s_serviceTypes->object(serviceType);
+        QVector<CustomPropertyDefinition>* def = s_serviceTypes->object(serviceType);
         // not found in cache -> we need to parse the file
         if (!def) {
             qCDebug(DESKTOPPARSER) << "About to parse service type file" << serviceType;
@@ -337,10 +338,10 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList& paths)
     return ServiceTypeDefinition(defs);
 }
 
-QJsonValue ServiceTypeDefinition::parseValue(const QByteArray& key, const QString& value) const
+QJsonValue ServiceTypeDefinition::parseValue(const QByteArray &key, const QString &value) const
 {
     // check whether the key has a special type associated with it
-    foreach (const CustomPropertyDefiniton& propertyDef, m_definitions) {
+    foreach (const CustomPropertyDefinition &propertyDef, m_definitions) {
         if (propertyDef.key == key) {
             return propertyDef.fromString(value);
         }
@@ -443,7 +444,7 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDe
     }
 }
 
-bool DesktopFileParser::convert(const QString& src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath)
+bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath)
 {
     QFile df(src);
     int lineNr = 0;
