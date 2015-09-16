@@ -156,16 +156,16 @@ struct CustomPropertyDefiniton {
         }
         case QVariant::Double: {
             bool ok = false;
-            int result = str.toDouble(&ok);
+            double result = str.toDouble(&ok);
             if (!ok) {
-                qCWarning(DESKTOPPARSER) << "Invalid integer value for key" << key << "-" << str;
+                qCWarning(DESKTOPPARSER) << "Invalid double value for key" << key << "-" << str;
                 return QJsonValue();
             }
             return QJsonValue(result);
         }
         case QVariant::Bool: {
-            bool result = str.compare(QLatin1String("true"), Qt::CaseInsensitive);
-            if (!result && !str.compare(QLatin1String("false"), Qt::CaseInsensitive)) {
+            bool result = str.compare(QLatin1String("true"), Qt::CaseInsensitive) == 0;
+            if (!result && str.compare(QLatin1String("false"), Qt::CaseInsensitive) != 0) {
                 qCWarning(DESKTOPPARSER) << "Invalid boolean value for key" << key << "-" << str;
                 return QJsonValue();
             }
