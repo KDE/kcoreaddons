@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Example
+Type=Service
+X-KDE-ServiceTypes=foo/bar,bar/foo
+X-Test-Integer=42
+X-Test-Double=42.42
+X-Test-List=a,b,c,def
+X-Test-String=foobar
+X-Test-Bool=true
+# not defined -> string
+X-Test-Unknown=true
+# QSize not supported -> string
+X-Test-Size=10,20

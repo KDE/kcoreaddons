@@ -252,6 +252,29 @@ private Q_SLOTS:
         QVERIFY(!exampleServiceTypePath.isEmpty());
     }
 
+    void testServiceType()
+    {
+        const QString typesPath = QFINDTESTDATA("data/servicetypes/example-servicetype.desktop");
+        QVERIFY(!typesPath.isEmpty());
+        const QString inputPath = QFINDTESTDATA("data/servicetypes/example-input.desktop");
+        QVERIFY(!inputPath.isEmpty());
+        KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
+        QVERIFY(md.isValid());
+        QCOMPARE(md.name(), QStringLiteral("Example"));
+        QCOMPARE(md.serviceTypes(), QStringList() << "foo/bar" << "bar/foo");
+        // qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
+        QCOMPARE(md.rawData().size(), 8);
+        QVERIFY(md.rawData().value("KPlugin").isObject());
+        QCOMPARE(md.rawData().value("X-Test-Integer"), QJsonValue(42));
+        QCOMPARE(md.rawData().value("X-Test-Bool"), QJsonValue(true));
+        QCOMPARE(md.rawData().value("X-Test-Double"), QJsonValue(42.42));
+        QCOMPARE(md.rawData().value("X-Test-String"), QJsonValue("foobar"));
+        QCOMPARE(md.rawData().value("X-Test-List"), QJsonValue(QJsonArray::fromStringList(QStringList() << "a" << "b" << "c" << "def")));
+        QCOMPARE(md.rawData().value("X-Test-Size"), QJsonValue("10,20")); // QSize no longer supported (and also no longer used)
+        QCOMPARE(md.rawData().value("X-Test-Unknown"), QJsonValue("true")); // unknown property -> string
+
+    }
+
     void testBadGroupsInServiceType()
     {
         const QString typesPath = QFINDTESTDATA("data/servicetypes/bad-groups-servicetype.desktop");
@@ -273,7 +296,7 @@ private Q_SLOTS:
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Bad Groups"));
-        qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
+        // qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
         QCOMPARE(md.rawData().size(), 8);
         QCOMPARE(md.rawData().value("ThisIsOkay"), QJsonValue(10)); // integer
         // 11 is empty group
@@ -285,7 +308,6 @@ private Q_SLOTS:
         QCOMPARE(md.rawData().value("MissingType"), QJsonValue("17")); // Type= missing -> fall back to string
         QCOMPARE(md.rawData().value("InvalidType"), QJsonValue("18")); // Type= is invalid -> fall back to string
         QCOMPARE(md.rawData().value("ThisIsOkayAgain"), QJsonValue(19)); // valid defintion after invalid ones should still work -> integer
-
     }
 
 
