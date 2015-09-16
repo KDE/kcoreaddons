@@ -27,6 +27,18 @@
 
 #include <QLocale>
 
+
+namespace QTest
+{
+template<> inline char *toString(const QJsonValue &val)
+{
+    // simply reuse the QDebug representation
+    QString result;
+    QDebug(&result) << val;
+    return QTest::toString(result);
+}
+}
+
 class KPluginMetaDataTest : public QObject
 {
     Q_OBJECT
@@ -229,6 +241,54 @@ private Q_SLOTS:
         QVERIFY(mdhidden.isValid());
         QCOMPARE(mdhidden.isHidden(), true);
     }
+
+    void testServiceTypes_data()
+    {
+        const QString kdevServiceTypePath = QFINDTESTDATA("data/servicetypes/fake-kdevelopplugin.desktop");
+        const QString invalidServiceTypePath = QFINDTESTDATA("data/servicetypes/invalid-servicetype.desktop");
+        const QString exampleServiceTypePath = QFINDTESTDATA("data/servicetypes/example-servicetype.desktop");
+        QVERIFY(!kdevServiceTypePath.isEmpty());
+        QVERIFY(!invalidServiceTypePath.isEmpty());
+        QVERIFY(!exampleServiceTypePath.isEmpty());
+    }
+
+    void testBadGroupsInServiceType()
+    {
+        const QString typesPath = QFINDTESTDATA("data/servicetypes/bad-groups-servicetype.desktop");
+        QVERIFY(!typesPath.isEmpty());
+        const QString inputPath = QFINDTESTDATA("data/servicetypes/bad-groups-input.desktop");
+        QVERIFY(!inputPath.isEmpty());
+        QTest::ignoreMessage(QtWarningMsg, "Illegal .desktop group definition (does not end with ']'): \"[PropertyDef::MissingTerminator\"");
+        QTest::ignoreMessage(QtWarningMsg, "Illegal .desktop group definition (does not end with ']'): \"[PropertyDef::\"");
+        QTest::ignoreMessage(QtWarningMsg, "Illegal .desktop group definition (does not end with ']'): \"[\"");
+        QTest::ignoreMessage(QtWarningMsg, "Read empty .desktop file group name! Invalid file?");
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression("Skipping invalid group \"\" in service type \".*/bad-groups-servicetype.desktop\""));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression("Skipping invalid group \"DoesNotStartWithPropertyDef::SomeOtherProperty\" in service type \".+/data/servicetypes/bad-groups-servicetype.desktop\""));
+        QTest::ignoreMessage(QtWarningMsg, "Could not find Type= key in group \"PropertyDef::MissingType\"");
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression("Property type \"integer\" is not a known QVariant type. Found while parsing property definition for \"InvalidType\" in \".+/data/servicetypes/bad-groups-servicetype.desktop\""));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:7: Key name is missing: \"=11\""));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:11: Key name is missing: \"=13\""));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:13: Key name is missing: \"=14\""));
+
+        KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
+        QVERIFY(md.isValid());
+        QCOMPARE(md.name(), QStringLiteral("Bad Groups"));
+        qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
+        QCOMPARE(md.rawData().size(), 8);
+        QCOMPARE(md.rawData().value("ThisIsOkay"), QJsonValue(10)); // integer
+        // 11 is empty group
+        QCOMPARE(md.rawData().value("MissingTerminator"), QJsonValue(12)); // accept missing group terminator (for now) -> integer
+        // 13 is empty group name
+        // 14 is empty group name
+        QCOMPARE(md.rawData().value("SomeOtherProperty"), QJsonValue("15")); // does not start with PropertyDef:: -> fall back to string
+        QCOMPARE(md.rawData().value("TrailingSpacesAreOkay"), QJsonValue(16)); // accept trailing spaces in group name -> integer
+        QCOMPARE(md.rawData().value("MissingType"), QJsonValue("17")); // Type= missing -> fall back to string
+        QCOMPARE(md.rawData().value("InvalidType"), QJsonValue("18")); // Type= is invalid -> fall back to string
+        QCOMPARE(md.rawData().value("ThisIsOkayAgain"), QJsonValue(19)); // valid defintion after invalid ones should still work -> integer
+
+    }
+
+
 };
 
 QTEST_MAIN(KPluginMetaDataTest)

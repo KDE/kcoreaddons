@@ -216,9 +216,9 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
         }
         if (line.startsWith('[')) {
             if (!line.endsWith(']')) {
-                qCWarning(DESKTOPPARSER) << ".desktop file group line is invalid (trailing chars):" << line;
+                qCWarning(DESKTOPPARSER) << "Illegal .desktop group definition (does not end with ']'):" << line;
             }
-            QByteArray name = line.mid(1, line.lastIndexOf(']') - 1);
+            QByteArray name = line.mid(1, line.lastIndexOf(']') - 1).trimmed();
             // we have reached the next group -> return current group and Type= value
             *nextGroup = name;
             break;
@@ -268,6 +268,10 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(QString path)
             qCWarning(DESKTOPPARSER) << "Skipping invalid group" << currentGroup << "in service type" << path;
             continue;
         }
+        if (typeStr.isNull()) {
+            qCWarning(DESKTOPPARSER) << "Could not find Type= key in group" << currentGroup;
+            continue;
+        }
         QByteArray propertyName = currentGroup.mid(strlen("PropertyDef::"));
         QVariant::Type type = QVariant::nameToType(typeStr.constData());
         switch (type) {
@@ -281,7 +285,7 @@ QVector<CustomPropertyDefiniton>* parseServiceTypesFile(QString path)
                 break;
             case QVariant::Invalid:
                 qCWarning(DESKTOPPARSER) << "Property type" << typeStr << "is not a known QVariant type."
-                        " Found while parsing property defintion for" << propertyName << "in" << path;
+                        " Found while parsing property definition for" << propertyName << "in" << path;
                 break;
             default:
                 qCWarning(DESKTOPPARSER) << "Unsupported property type" << typeStr << "for property" << propertyName
@@ -316,9 +320,8 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList& paths)
     foreach (const QString &serviceType, paths) {
         QMutexLocker lock(&s_serviceTypesMutex);
         QVector<CustomPropertyDefiniton>* def = s_serviceTypes->object(serviceType);
+        // not found in cache -> we need to parse the file
         if (!def) {
-            // we need to parse the file
-            // FIXME: we need to handle plain filenames such as "kdedmodule.desktop" as well
             qCDebug(DESKTOPPARSER) << "About to parse service type file" << serviceType;
             def = parseServiceTypesFile(serviceType);
             if (!def) {
@@ -469,12 +472,16 @@ bool DesktopFileParser::convert(const QString& src, const QStringList &serviceTy
         // must have form key=value now
         const int equalsIndex = line.indexOf('=');
         if (equalsIndex == -1) {
-            qCWarning(DESKTOPPARSER) << "Warning: " << src << ':' << lineNr << ": Line is neither comment nor group "
+            qCWarning(DESKTOPPARSER).nospace().noquote() << src << ':' << lineNr << ": Line is neither comment nor group "
                 "and doesn't contain an '=' character: \"" << line << '\"';
             continue;
         }
         // trim key and value to remove spaces around the '=' char
         const QByteArray key = line.mid(0, equalsIndex).trimmed();
+        if (key.isEmpty()) {
+            qCWarning(DESKTOPPARSER).nospace().noquote() << src << ':' << lineNr << ": Key name is missing: \"" << line << '\"';
+            continue;
+        }
         const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
         const QByteArray valueEscaped = escapeValue(valueRaw);
         const QString value = QString::fromUtf8(valueEscaped);

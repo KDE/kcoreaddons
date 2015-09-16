@@ -1,0 +1,34 @@
+[Desktop Entry]
+Type=ServiceType
+
+[PropertyDef::ThisIsOkay]
+Type=int
+# missing name
+[PropertyDef::]
+Type=int
+# missing terminator
+[PropertyDef::MissingTerminator
+Type=int
+# empty and missing terminator
+[PropertyDef::
+Type=int
+# completely empty group
+[
+Type=int
+# completely empty group
+[DoesNotStartWithPropertyDef::SomeOtherProperty]
+Type=int
+# extra spaces
+[PropertyDef::TrailingSpacesAreOkay    ]
+Type=int
+
+# missing Type=key
+[PropertyDef::MissingType]
+NoType=int
+
+# invalid Type=key
+[PropertyDef::InvalidType]
+Type=integer
+
+[PropertyDef::ThisIsOkayAgain]
+Type=int

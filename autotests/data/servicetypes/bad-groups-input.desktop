@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Bad Groups
+Type=Service
+# one value for every property defintion in bad-groups-servicetype.desktop
+ThisIsOkay=10
+#empty
+=11
+#missing terminator
+MissingTerminator=12
+# empty and missing terminator
+=13
+# completely empty
+=14
+SomeOtherProperty=15
+# extra spaces in group name (should be okay)
+TrailingSpacesAreOkay=16
+#missing type
+MissingType=17
+InvalidType=18
+# ok again after invalid ones
+ThisIsOkayAgain=19
