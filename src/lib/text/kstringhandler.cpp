@@ -202,7 +202,7 @@ QString KStringHandler::obscure(const QString &str)
 bool KStringHandler::isUtf8(const char *buf)
 {
     int i, n;
-    register unsigned char c;
+    unsigned char c;
     bool gotone = false;
 
     if (!buf) {
