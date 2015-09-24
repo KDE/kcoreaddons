@@ -47,6 +47,7 @@ static const char *methodToString(KDirWatch::Method method)
     case KDirWatch::QFSWatch:
         return "QFSWatch";
     }
+    return "ERROR!";
 }
 
 class StaticObject
