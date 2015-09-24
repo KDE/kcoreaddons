@@ -46,8 +46,6 @@ static const char *methodToString(KDirWatch::Method method)
         return "Stat";
     case KDirWatch::QFSWatch:
         return "QFSWatch";
-    default:
-        return "ERROR!";
     }
 }
 
@@ -205,13 +203,13 @@ void KDirWatch_UnitTest::appendToFile(const QString &path)
     QVERIFY(file.open(QIODevice::Append | QIODevice::WriteOnly));
     file.write(QByteArray("foobar"));
     file.close();
-    if (0) {
+#if 0
         QFileInfo fi(path);
         QVERIFY(fi.exists());
         qDebug() << "After append: file ctime=" << fi.lastModified().toString(Qt::ISODate);
         QVERIFY(fi.exists());
         qDebug() << "After append: directory mtime=" << fi.created().toString(Qt::ISODate);
-    }
+#endif
 }
 
 // helper method: modifies a file (identified by number)
