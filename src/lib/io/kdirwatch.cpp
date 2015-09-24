@@ -1864,7 +1864,7 @@ KDirWatch *KDirWatch::self()
 // <dfaure> yes, see kio/src/core/kcoredirlister_p.h:328
 bool KDirWatch::exists()
 {
-    return s_pKDirWatchSelf.exists();
+    return s_pKDirWatchSelf.exists() && dwp_self.hasLocalData();
 }
 
 static void postRoutine_KDirWatch()

@@ -56,12 +56,28 @@ public:
 };
 Q_GLOBAL_STATIC(StaticObject, s_staticObject)
 
+class StaticObjectUsingSelf // like KSambaShare does, bug 353080
+{
+public:
+    StaticObjectUsingSelf() {
+        KDirWatch::self();
+    }
+    ~StaticObjectUsingSelf() {
+        if (KDirWatch::exists() && KDirWatch::self()->contains(QDir::homePath())) {
+            KDirWatch::self()->removeDir(QDir::homePath());
+        }
+    }
+};
+Q_GLOBAL_STATIC(StaticObjectUsingSelf, s_staticObjectUsingSelf)
+
 class KDirWatch_UnitTest : public QObject
 {
     Q_OBJECT
 public:
     KDirWatch_UnitTest()
     {
+        s_staticObjectUsingSelf();
+
         m_path = m_tempDir.path() + QLatin1Char('/');
         // Speed up the test by making the kdirwatch timer (to compress changes) faster
         qputenv("KDIRWATCH_POLLINTERVAL", "50");
