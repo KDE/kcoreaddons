@@ -891,7 +891,9 @@ public:
      *
      * Additionally, it will set the description to the command line parser, will add the help
      * option and if the QApplication has a version set (e.g. via KAboutData::setApplicationData)
-     * it will also add the version option
+     * it will also add the version option.
+     *
+     * Since 5.16 it also adds an option to set the desktop file name.
      *
      * @returns true if adding the options was successful; otherwise returns false.
      *
@@ -906,6 +908,38 @@ public:
      * @sa setupCommandLine()
      */
     void processCommandLine(QCommandLineParser *parser);
+
+    /**
+     * Sets the base name of the desktop entry for this application.
+     *
+     * This is the file name, without the full path and without extension,
+     * of the desktop entry that represents this application according to
+     * the freedesktop desktop entry specification (e.g. "org.kde.foo").
+     *
+     * By default the desktop file name is constructed from the reverse domain
+     * name of the organizationDomain() and the componentName().
+     *
+     * The desktop file name can also be passed to the application at runtime through
+     * the @c desktopfile command line option which is added by setupCommandLine(QCommandLineParser*).
+     * This is useful if an application supports multiple desktop files with different runtime
+     * settings.
+     *
+     * @param desktopFileName The desktop file name of this application
+     *
+     * @sa desktopFileName()
+     * @sa organizationDomain()
+     * @sa componentName()
+     * @sa setupCommandLine(QCommandLineParser*)
+     * @since 5.16
+     **/
+    KAboutData &setDesktopFileName(const QString &desktopFileName);
+
+    /**
+     * @returns The desktop file name of this application (e.g. "org.kde.foo")
+     * @sa setDesktopFileName(const QString&)
+     * @since 5.16
+     **/
+    QString desktopFileName() const;
 
 private:
 

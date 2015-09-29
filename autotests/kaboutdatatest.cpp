@@ -34,6 +34,7 @@ private Q_SLOTS:
     void testShortFormConstructor();
     void testSetAddLicense();
     void testSetProgramIconName();
+    void testSetDesktopFileName();
     void testCopying();
 
     void testKAboutDataOrganizationDomain();
@@ -84,6 +85,7 @@ void KAboutDataTest::testLongFormConstructorWithDefaults()
     QCOMPARE(aboutData.customAuthorPlainText(), QString());
     QCOMPARE(aboutData.customAuthorRichText(), QString());
     QVERIFY(!aboutData.customAuthorTextEnabled());
+    QCOMPARE(aboutData.desktopFileName(), QStringLiteral("org.kde.app"));
     //TODO: test internalVersion, internalProgramName, internalBugAddress
 }
 
@@ -120,6 +122,7 @@ void KAboutDataTest::testLongFormConstructor()
     QCOMPARE(aboutData.customAuthorPlainText(), QString());
     QCOMPARE(aboutData.customAuthorRichText(), QString());
     QVERIFY(!aboutData.customAuthorTextEnabled());
+    QCOMPARE(aboutData.desktopFileName(), QStringLiteral("where.no.app"));
     //TODO: test internalVersion, internalProgramName, internalBugAddress
 }
 
@@ -153,6 +156,7 @@ void KAboutDataTest::testShortFormConstructor()
     QCOMPARE(aboutData.customAuthorPlainText(), QString());
     QCOMPARE(aboutData.customAuthorRichText(), QString());
     QVERIFY(!aboutData.customAuthorTextEnabled());
+    QCOMPARE(aboutData.desktopFileName(), QStringLiteral("org.kde.app"));
     //TODO: test internalVersion, internalProgramName, internalBugAddress
 }
 
@@ -163,12 +167,14 @@ void KAboutDataTest::testKAboutDataOrganizationDomain()
                     QLatin1String("copyright"), QLatin1String("hello world"),
                     "http://www.koffice.org");
     QCOMPARE(data.organizationDomain(), QString::fromLatin1("koffice.org"));
+    QCOMPARE(data.desktopFileName(), QStringLiteral("org.koffice.app"));
 
     KAboutData data2("app", QLatin1String("program"), "version",
                      QLatin1String("description"), KAboutLicense::LGPL,
                      QLatin1String("copyright"), QLatin1String("hello world"),
                      "http://edu.kde.org/kig");
     QCOMPARE(data2.organizationDomain(), QString::fromLatin1("kde.org"));
+    QCOMPARE(data2.desktopFileName(), QStringLiteral("org.kde.app"));
 }
 
 void KAboutDataTest::testSetAddLicense()
@@ -273,6 +279,17 @@ void KAboutDataTest::testCopying()
     QCOMPARE(licenses.at(1).key(), KAboutLicense::GPL_V2);
     // check it doesn't crash
     QVERIFY(!licenses.at(1).text().isEmpty());
+}
+
+void KAboutDataTest::testSetDesktopFileName()
+{
+    KAboutData aboutData(AppName, QLatin1String(ProgramName), Version,
+                         QLatin1String(ShortDescription), KAboutLicense::Unknown);
+    QCOMPARE(aboutData.desktopFileName(), QStringLiteral("org.kde.app"));
+
+    // set different desktopFileName
+    aboutData.setDesktopFileName(QStringLiteral("foo.bar.application"));
+    QCOMPARE(aboutData.desktopFileName(), QStringLiteral("foo.bar.application"));
 }
 
 QTEST_MAIN(KAboutDataTest)

@@ -370,6 +370,7 @@ public:
 
     QString organizationDomain;
     QString _ocsProviderUrl;
+    QString desktopFileName;
 
     // Everything dr.konqi needs, we store as utf-8, so we
     // can just give it a pointer, w/o any allocations.
@@ -422,6 +423,13 @@ KAboutData::KAboutData(const QString &_componentName,
     } else {
         d->organizationDomain = QString::fromLatin1("kde.org");
     }
+    // desktop file name is reverse domain name
+    const QStringList domainParts = d->organizationDomain.split(QStringLiteral("."));
+    for (int i = domainParts.count() - 1; i >= 0; i--) {
+        d->desktopFileName.append(domainParts.at(i));
+        d->desktopFileName.append(QLatin1String("."));
+    }
+    d->desktopFileName.append(d->_componentName);
 }
 
 KAboutData::KAboutData(const QString &_componentName,
@@ -446,6 +454,7 @@ KAboutData::KAboutData(const QString &_componentName,
     d->_licenseList.append(KAboutLicense(KAboutLicense::Unknown, this));
     d->_bugEmailAddress = "submit@bugs.kde.org";
     d->organizationDomain = QString::fromLatin1("kde.org");
+    d->desktopFileName = QStringLiteral("org.kde.%1").arg(d->_componentName);
 }
 
 KAboutData::~KAboutData()
@@ -837,6 +846,18 @@ KAboutData &KAboutData::unsetCustomAuthorText()
     return *this;
 }
 
+KAboutData &KAboutData::setDesktopFileName(const QString &desktopFileName)
+{
+    d->desktopFileName = desktopFileName;
+
+    return *this;
+}
+
+QString KAboutData::desktopFileName() const
+{
+    return d->desktopFileName;
+}
+
 class KAboutDataRegistry
 {
 public:
@@ -880,6 +901,7 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
         app->setApplicationName(aboutData.componentName());
         app->setOrganizationDomain(aboutData.organizationDomain());
         app->setProperty("applicationDisplayName", aboutData.displayName());
+        app->setProperty("desktopFileName", aboutData.desktopFileName());
     }
 }
 
@@ -917,7 +939,10 @@ bool KAboutData::setupCommandLine(QCommandLineParser *parser)
     }
 
     return parser->addOption(QCommandLineOption(QStringLiteral("author"), QCoreApplication::translate("KAboutData CLI", "Show author information.")))
-           && parser->addOption(QCommandLineOption(QStringLiteral("license"), QCoreApplication::translate("KAboutData CLI", "Show license information.")));
+           && parser->addOption(QCommandLineOption(QStringLiteral("license"), QCoreApplication::translate("KAboutData CLI", "Show license information.")))
+           && parser->addOption(QCommandLineOption(QStringLiteral("desktopfile"),
+                                                   QCoreApplication::translate("KAboutData CLI", "The base file name of the desktop entry for this application."),
+                                                   QCoreApplication::translate("KAboutData CLI", "file name")));
 }
 
 void KAboutData::processCommandLine(QCommandLineParser *parser)
@@ -951,6 +976,11 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         Q_FOREACH (const KAboutLicense &license, d->_licenseList) {
             printf("%s\n", qPrintable(license.text()));
         }
+    }
+
+    const QString desktopFileName = parser->value(QStringLiteral("desktopfile"));
+    if (!desktopFileName.isEmpty()) {
+        d->desktopFileName = desktopFileName;
     }
 
     if (foundArgument) {
