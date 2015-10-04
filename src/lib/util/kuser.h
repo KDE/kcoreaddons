@@ -129,7 +129,7 @@ struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<K_UID> {
     /** Creates an KUserId from the native user ID type */
     explicit KUserId(K_UID uid) : KUserOrGroupId(uid) {}
     KUserId(const KUserId &other) : KUserOrGroupId(other) {}
-    ~KUserId() {};
+    ~KUserId() {}
     /** @return a KUserId for the user with name @p name, or an invalid KUserId if no
      * user with this name was found on the system
      */
@@ -154,7 +154,7 @@ struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
     /** Creates an KGroupId from the native group ID type */
     explicit KGroupId(K_GID gid) : KUserOrGroupId(gid) {}
     KGroupId(const KGroupId &other) : KUserOrGroupId(other) {}
-    ~KGroupId() {};
+    ~KGroupId() {}
     /** @return A KGroupId for the user with name @p name, or an invalid KGroupId if no
      * user with this name was found on the system
      */
