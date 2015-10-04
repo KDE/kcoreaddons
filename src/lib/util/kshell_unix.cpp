@@ -80,7 +80,7 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                 goto okret;
             }
             c = args.unicode()[pos++];
-        } while (c.isSpace());
+        } while (c == QLatin1Char(' '));
         QString cret;
         if ((flags & TildeExpand) && c == QLatin1Char('~')) {
             int opos = pos;
@@ -89,7 +89,7 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                     break;
                 }
                 c = args.unicode()[pos];
-                if (c == QLatin1Char('/') || c.isSpace()) {
+                if (c == QLatin1Char('/') || c == QLatin1Char(' ')) {
                     break;
                 }
                 if (isQuoteMeta(c)) {
@@ -112,7 +112,7 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                 goto okret;
             }
             pos++;
-            if (c.isSpace()) {
+            if (c == QLatin1Char(' ')) {
                 ret += ccret;
                 firstword = false;
                 continue;
@@ -272,7 +272,7 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                 break;
             }
             c = args.unicode()[pos++];
-        } while (!c.isSpace());
+        } while (c != QLatin1Char(' '));
         ret += cret;
         firstword = false;
     }
@@ -304,7 +304,7 @@ inline static bool isSpecial(QChar cUnicode)
     }; // 0-32 \'"$`<>|;&(){}*?#!~[]
 
     uint c = cUnicode.unicode();
-    return ((c < sizeof(iqm) * 8) && (iqm[c / 8] & (1 << (c & 7)))) || cUnicode.isSpace();
+    return ((c < sizeof(iqm) * 8) && (iqm[c / 8] & (1 << (c & 7))));
 }
 
 QString KShell::quoteArg(const QString &arg)

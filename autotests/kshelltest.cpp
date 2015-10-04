@@ -153,6 +153,11 @@ KShellTest::splitJoin()
     QCOMPARE(sj("~qU4rK ~" + KUser().loginName(), KShell::TildeExpand, &err),
              QString("'~qU4rK' " + QDir::homePath()));
     QVERIFY(err == KShell::NoError);
+
+    const QString unicodeSpaceFileName = "test　テスト.txt"; // #345140
+    QCOMPARE(sj(unicodeSpaceFileName, KShell::AbortOnMeta | KShell::TildeExpand, &err),
+              unicodeSpaceFileName);
+    QVERIFY(err == KShell::NoError);
 #endif
 }
 
