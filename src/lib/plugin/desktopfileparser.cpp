@@ -32,8 +32,8 @@
 #include <QDebug>
 
 
-    // This code was taken from KConfigGroupPrivate::deserializeList
-QStringList DesktopFileParser::deserializeList(const QString &data)
+// This code was taken from KConfigGroupPrivate::deserializeList
+QStringList DesktopFileParser::deserializeList(const QString &data, char separator)
 {
     if (data.isEmpty()) {
         return QStringList();
@@ -51,7 +51,7 @@ QStringList DesktopFileParser::deserializeList(const QString &data)
             quoted = false;
         } else if (data[p].unicode() == '\\') {
             quoted = true;
-        } else if (data[p].unicode() == ',') {
+        } else if (data[p].unicode() == separator) {
             val.squeeze(); // release any unused memory
             value.append(val);
             val.clear();
@@ -144,6 +144,9 @@ void DesktopFileParser::convertToJson(const QString &key, const QString &value, 
     } else if (key == QLatin1String("X-KDE-ServiceTypes") || key == QLatin1String("ServiceTypes")) {
         // some .desktop files still use the legacy ServiceTypes= key
         kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(deserializeList(value));
+    } else if (key == QLatin1String("MimeType")) {
+        // MimeType is a XDG string list and not a KConfig list so we need to use ';' as the separator
+        kplugin[QStringLiteral("MimeTypes")] = QJsonArray::fromStringList(deserializeList(value, ';'));
     } else if (key == QLatin1String("X-KDE-FormFactors")) {
         kplugin[QStringLiteral("FormFactors")] = QJsonArray::fromStringList(deserializeList(value));
     } else if (key == QLatin1String("X-KDE-PluginInfo-EnabledByDefault")) {

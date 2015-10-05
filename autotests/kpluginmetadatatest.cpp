@@ -107,6 +107,7 @@ private Q_SLOTS:
                 " \"Id\": \"time\",\n"
                 " \"Version\": \"1.0\",\n"
                 " \"Website\": \"http://plasma.kde.org/\",\n"
+                " \"MimeTypes\": \"image/png\",\n"
                 " \"ServiceTypes\": [\"Plasma/DataEngine\"]\n"
             " }\n}\n", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
@@ -126,6 +127,7 @@ private Q_SLOTS:
         QCOMPARE(m.version(), QStringLiteral("1.0"));
         QCOMPARE(m.website(), QStringLiteral("http://plasma.kde.org/"));
         QCOMPARE(m.serviceTypes(), QStringList() << QStringLiteral("Plasma/DataEngine"));
+        QCOMPARE(m.mimeTypes(), QStringList() << QStringLiteral("image/png"));
     }
 
     void testTranslations()
@@ -209,6 +211,7 @@ private Q_SLOTS:
         QCOMPARE(md.dependencies(), QStringList());
         QCOMPARE(md.isHidden(), false);
         QCOMPARE(md.serviceTypes(), QStringList("KService/NSA"));
+        QCOMPARE(md.mimeTypes(), QStringList() << "image/png" << "application/pdf");
 
         auto kp = md.rawData()["KPlugin"].toObject();
         QStringList formFactors = KPluginMetaData::readStringList(kp, QStringLiteral("FormFactors"));

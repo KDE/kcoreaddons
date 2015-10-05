@@ -58,6 +58,7 @@ class QObject;
  * Websites           | websites()           | string
  * EnabledByDefault   | isEnabledByDefault() | bool
  * ServiceTypes       | serviceTypes()       | string / string array
+ * MimeTypes          | mimeTypes()          | string / string array
  *
  * The Authors key is a single object or a list of objects that have the following keys that
  * correspond to KAboutPerson properties:
@@ -263,9 +264,17 @@ public:
     QStringList dependencies() const;
 
     /**
+     * @note Unlike KService this does not contain the MIME types. To get the handled MIME types
+     * use the KPluginMetaData::mimeTypes() function.
      * @return a list of service types this plugin implements (e.g. "Plasma/DataEngine")
      */
     QStringList serviceTypes() const;
+
+    /**
+     * @return a list of MIME types this plugin can handle (e.g. "application/pdf", "image/png", etc.)
+     * @since 5.16
+     */
+    QStringList mimeTypes() const;
 
     /**
      * @return A string list of formfactors this plugin is useful for, e.g. desktop, tablet,

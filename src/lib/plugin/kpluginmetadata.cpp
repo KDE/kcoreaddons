@@ -270,6 +270,11 @@ QStringList KPluginMetaData::serviceTypes() const
     return readStringList(rootObject(), QStringLiteral("ServiceTypes"));
 }
 
+QStringList KPluginMetaData::mimeTypes() const
+{
+    return readStringList(rootObject(), QStringLiteral("MimeTypes"));
+}
+
 QStringList KPluginMetaData::formFactors() const
 {
     return readStringList(rootObject(), QStringLiteral("FormFactors"));
