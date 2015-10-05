@@ -107,7 +107,7 @@ private Q_SLOTS:
                 " \"Id\": \"time\",\n"
                 " \"Version\": \"1.0\",\n"
                 " \"Website\": \"http://plasma.kde.org/\",\n"
-                " \"MimeTypes\": \"image/png\",\n"
+                " \"MimeTypes\": [ \"image/png\" ],\n"
                 " \"ServiceTypes\": [\"Plasma/DataEngine\"]\n"
             " }\n}\n", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
@@ -179,18 +179,24 @@ private Q_SLOTS:
             "\"Object\": { \"foo\": \"bar\" }\n" // should return empty list
             "}", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
-        QCOMPARE(KPluginMetaData::readStringList(jo, "String"), QStringList() << "foo");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "OneArrayEntry"), QStringList() << "foo");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "Bool"), QStringList() << "true");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "QuotedBool"), QStringList() << "true");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "Number"), QStringList() << "12345");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "QuotedNumber"), QStringList() << "12345");
+        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"String\" to be a string list. Treating it as a list with a single entry: \"foo\"");
+        QCOMPARE(KPluginMetaData::readStringList(jo, "String"), QStringList("foo"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, "OneArrayEntry"), QStringList("foo"));
+        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"Bool\" to be a string list. Treating it as a list with a single entry: \"true\"");
+        QCOMPARE(KPluginMetaData::readStringList(jo, "Bool"), QStringList("true"));
+        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"QuotedBool\" to be a string list. Treating it as a list with a single entry: \"true\"");
+        QCOMPARE(KPluginMetaData::readStringList(jo, "QuotedBool"), QStringList("true"));
+        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"Number\" to be a string list. Treating it as a list with a single entry: \"12345\"");
+        QCOMPARE(KPluginMetaData::readStringList(jo, "Number"), QStringList("12345"));
+        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"QuotedNumber\" to be a string list. Treating it as a list with a single entry: \"12345\"");
+        QCOMPARE(KPluginMetaData::readStringList(jo, "QuotedNumber"), QStringList("12345"));
         QCOMPARE(KPluginMetaData::readStringList(jo, "EmptyArray"), QStringList());
         QCOMPARE(KPluginMetaData::readStringList(jo, "NumberArray"), QStringList() << "1" << "2" << "3");
         QCOMPARE(KPluginMetaData::readStringList(jo, "BoolArray"), QStringList() << "true" << "false" << "true");
         QCOMPARE(KPluginMetaData::readStringList(jo, "StringArray"), QStringList() << "foo" << "bar");
         QCOMPARE(KPluginMetaData::readStringList(jo, "Null"), QStringList());
-        QCOMPARE(KPluginMetaData::readStringList(jo, "QuotedNull"), QStringList() << "null");
+        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"QuotedNull\" to be a string list. Treating it as a list with a single entry: \"null\"");
+        QCOMPARE(KPluginMetaData::readStringList(jo, "QuotedNull"), QStringList("null"));
         QCOMPARE(KPluginMetaData::readStringList(jo, "ArrayWithNull"), QStringList() << "foo" << "" << "bar");
         QCOMPARE(KPluginMetaData::readStringList(jo, "Object"), QStringList());
     }

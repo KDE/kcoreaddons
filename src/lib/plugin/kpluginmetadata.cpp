@@ -145,10 +145,11 @@ QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QStrin
         return QStringList();
     } else if (value.isArray()) {
         return value.toVariant().toStringList();
-    } else if (value.isString()) {
-        return QStringList(value.toString());
     } else {
-        return QStringList(value.toVariant().toString());
+        QString asString = value.isString() ? value.toString() : value.toVariant().toString();
+        qWarning() << "Expected JSON property" << key << "to be a string list."
+            " Treating it as a list with a single entry:" << asString;
+        return QStringList(asString);
     }
 }
 
