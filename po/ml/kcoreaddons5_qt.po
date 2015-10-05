@@ -1,0 +1,714 @@
+# translation of kdelibs4.po to
+# Malayalam translation of kdelibs4.
+# Copyright (C) 2007-2010 This_file_is_part_of_KDE
+# This file is distributed under the same license as the kdelibs package.
+# Anoop | അനൂപ് Panavalappil | പനവളപ്പില്‍ <gnuanu@gmail.com>, 2008.
+# ANI PETER|അനി പീറ്റര്‍ <peter.ani@gmail.com>, 2008.
+# Maxin B. John <maxinbjohn@gmail.com>, 2007.
+# Manu S Madhav | മനു എസ് മാധവ് <manusmad@gmail.com>, 2008.
+# Praveen Arimbrathodiyil <pravi.a@gmail.com>, 2007, 2008, 2009, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2014-03-23 01:50+0000\n"
+"PO-Revision-Date: 2010-12-29 15:32+0530\n"
+"Last-Translator: \n"
+"Language-Team:  <en@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: KBabel 1.11.4\n"
+"X-Poedit-Country: INDIA\n"
+"X-Qt-Contexts: true\n"
+
+#: lib/kaboutdata.cpp:226
+#, fuzzy
+#| msgid ""
+#| "No licensing terms for this program have been specified.\n"
+#| "Please check the documentation or the source for any\n"
+#| "licensing terms.\n"
+msgctxt "KAboutLicense|"
+msgid ""
+"No licensing terms for this program have been specified.\n"
+"Please check the documentation or the source for any\n"
+"licensing terms.\n"
+msgstr ""
+"ഈ പ്രോഗ്രാമിനു് അനുമതികളൊന്നും പ്രസ്താപിച്ചിട്ടില്ല.\n"
+"അനുമതി ഉടമ്പടികളെക്കുറിച്ചറിയാന്‍ ദയവായി സഹായകക്കുറിപ്പോ\n"
+" ഉറവിടമോ പരിശോധിയ്ക്കുക.\n"
+
+#: lib/kaboutdata.cpp:234
+#, fuzzy, qt-format
+#| msgid "This program is distributed under the terms of the %1."
+msgctxt "KAboutLicense|"
+msgid "This program is distributed under the terms of the %1."
+msgstr "ഈ പ്രോഗ്രാം %1 പ്രകാരമുള്ള നിബന്ധനകള്‍ക്കനുസരിച്ചാണ് വിതരണം ചെയ്തിട്ടുള്ളത്."
+
+#: lib/kaboutdata.cpp:260
+#, fuzzy
+#| msgctxt "@item license (short name)"
+#| msgid "GPL v2"
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v2"
+msgstr "ജിപിഎല്‍ വി2"
+
+#: lib/kaboutdata.cpp:261
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "GNU General Public License Version 2"
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 2"
+msgstr "ഗ്നു ജനറല്‍ പബ്ലിക് ലൈസന്‍സ് ലക്കം 2"
+
+#: lib/kaboutdata.cpp:264
+#, fuzzy
+#| msgctxt "@item license (short name)"
+#| msgid "LGPL v2"
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v2"
+msgstr "എല്‍ജിപിഎല്‍ വി2"
+
+#: lib/kaboutdata.cpp:265
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "GNU Lesser General Public License Version 2"
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 2"
+msgstr "ഗ്നു ലസ്സര്‍ ജനറല്‍ പബ്ലിക് ലൈസന്‍സ് ലക്കം 2"
+
+#: lib/kaboutdata.cpp:268
+#, fuzzy
+#| msgctxt "@item license (short name)"
+#| msgid "BSD License"
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "BSD License"
+msgstr "ബിഎസ്ഡി ലൈസന്‍സ്"
+
+#: lib/kaboutdata.cpp:269
+#, fuzzy
+#| msgctxt "@item license (short name)"
+#| msgid "BSD License"
+msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "ബിഎസ്ഡി ലൈസന്‍സ്"
+
+#: lib/kaboutdata.cpp:272
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "Artistic License"
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "Artistic License"
+msgstr "ആര്‍ട്ടിസ്റ്റിക് ലൈസന്‍സ്"
+
+#: lib/kaboutdata.cpp:273
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "Artistic License"
+msgctxt "KAboutLicense|@item license"
+msgid "Artistic License"
+msgstr "ആര്‍ട്ടിസ്റ്റിക് ലൈസന്‍സ്"
+
+#: lib/kaboutdata.cpp:276
+#, fuzzy
+#| msgctxt "@item license (short name)"
+#| msgid "QPL v1.0"
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "QPL v1.0"
+msgstr "ക്യുപിഎല്‍ v1.0"
+
+#: lib/kaboutdata.cpp:277
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "Q Public License"
+msgctxt "KAboutLicense|@item license"
+msgid "Q Public License"
+msgstr "ക്യു പബ്ലിക് ലൈസന്‍സ്"
+
+#: lib/kaboutdata.cpp:280
+#, fuzzy
+#| msgctxt "@item license (short name)"
+#| msgid "GPL v3"
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v3"
+msgstr "ജിപിഎല്‍ വി3"
+
+#: lib/kaboutdata.cpp:281
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "GNU General Public License Version 3"
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 3"
+msgstr "ഗ്നു ജനറല്‍ പബ്ലിക് ലൈസന്‍സ് ലക്കം 3"
+
+#: lib/kaboutdata.cpp:284
+#, fuzzy
+#| msgctxt "@item license (short name)"
+#| msgid "LGPL v3"
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v3"
+msgstr "എല്‍ജിപിഎല്‍ വി3"
+
+#: lib/kaboutdata.cpp:285
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "GNU Lesser General Public License Version 3"
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 3"
+msgstr "ഗ്നു ലെസ്സര്‍ ജനറല്‍ പബ്ലിക് ലൈസന്‍സ് ലക്കം 3"
+
+#: lib/kaboutdata.cpp:289
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "Custom"
+msgctxt "KAboutLicense|@item license"
+msgid "Custom"
+msgstr "സ്വന്തമായുള്ള"
+
+#: lib/kaboutdata.cpp:292
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "Not specified"
+msgctxt "KAboutLicense|@item license"
+msgid "Not specified"
+msgstr "വ്യക്തമാക്കിയിട്ടില്ല"
+
+#: lib/kaboutdata.cpp:809
+#, fuzzy
+#| msgctxt "replace this with information about your translation team"
+#| msgid ""
+#| "<p>KDE is translated into many languages thanks to the work of the "
+#| "translation teams all over the world.</p><p>For more information on KDE "
+#| "internationalization visit <a href=\"http://l10n.kde.org\">http://l10n."
+#| "kde.org</a></p>"
+msgctxt "KAboutData|replace this with information about your translation team"
+msgid ""
+"<p>KDE is translated into many languages thanks to the work of the "
+"translation teams all over the world.</p><p>For more information on KDE "
+"internationalization visit <a href=\"http://l10n.kde.org\">http://l10n.kde."
+"org</a></p>"
+msgstr ""
+"<p>കെഡിഇ മലയാളം നിങ്ങള്‍ക്കായി അവതരിപ്പിക്കുന്നതു് സ്വതന്ത്ര മലയാളം കമ്പ്യൂട്ടിങ്ങ്പ്രവര്‍ത്തകരാണു്.</"
+"p><p>സ്വതന്ത്ര മലയാളം കമ്പ്യൂട്ടിങ്ങ് കൂട്ടായ്മയെപ്പറ്റി കൂടുതലറിയാനും മലയാളം കമ്പ്യൂട്ടിങ്ങ് "
+"പ്രവര്‍ത്തനങ്ങളില്‍ പങ്കുചേരാനും <a href=\"http://smc.org.in\">http://smc.org.in </a> "
+"എന്ന വെബ്സൈറ്റ് സന്ദര്‍ശിയ്ക്കുക</p>"
+
+#: lib/kaboutdata.cpp:949
+#, fuzzy
+#| msgid "Show author information"
+msgctxt "KAboutData CLI|"
+msgid "Show author information."
+msgstr "രചയിതാവിനെക്കുറിച്ചുള്ള വിവരം കാണിയ്ക്കുക"
+
+#: lib/kaboutdata.cpp:950
+#, fuzzy
+#| msgid "Show license information"
+msgctxt "KAboutData CLI|"
+msgid "Show license information."
+msgstr "അനുമതി പത്രത്തെക്കുറിച്ചുള്ള വിവരം കാണിയ്ക്കുക"
+
+#: lib/kaboutdata.cpp:959
+#, fuzzy
+#| msgid ""
+#| "This application was written by somebody who wants to remain anonymous."
+msgctxt "KAboutData CLI|"
+msgid "This application was written by somebody who wants to remain anonymous."
+msgstr "പേര് വെളിപ്പെടുത്താനാഗ്രഹിയ്ക്കാത്തോരാളാണ് ഈ പ്രയോഗമെഴുതിയിട്ടുള്ളത്."
+
+#: lib/kaboutdata.cpp:961
+#, fuzzy
+#| msgctxt "the 2nd argument is a list of name+address, one on each line"
+#| msgid ""
+#| "%1 was written by\n"
+#| "%2"
+msgctxt "KAboutData CLI|"
+msgid "%s was written by:\n"
+msgstr ""
+"%2 ആണു് %1\n"
+"എഴുതിയതു്"
+
+#: lib/kaboutdata.cpp:972
+#, fuzzy
+#| msgid "Please use http://bugs.kde.org to report bugs.\n"
+msgctxt "KAboutData CLI|"
+msgid "Please use http://bugs.kde.org to report bugs."
+msgstr "ദയവായി പിഴവുകളറിയിയ്ക്കാനായി http://bugs.kde.org ഉപയോഗിയ്ക്കുക.\n"
+
+#: lib/kaboutdata.cpp:974
+#, fuzzy
+#| msgid "Please report bugs to %1.\n"
+msgctxt "KAboutData CLI|"
+msgid "Please report bugs to %s.\n"
+msgstr "%1-ലേക്കു് പിശകുകള്‍ രേഖപ്പെടുത്തുക.\n"
+
+#: lib/plugin/kpluginloader.cpp:122
+#, fuzzy, qt-format
+#| msgid "The library %1 does not offer a KDE 4 compatible factory."
+msgctxt "KPluginLoader|"
+msgid "The library %1 does not offer a KPluginFactory."
+msgstr "'%1' എന്ന ലൈബ്രറി കെഡിഇ നാലിനോട് ചേര്‍ന്നുപോകുന്ന ഒരു ഫാക്ടറി നല്‍കുന്നില്ല."
+
+#. MetricBinaryDialect size in bytes
+#: lib/util/kformatprivate.cpp:88
+#, fuzzy, qt-format
+#| msgctxt "size in bytes"
+#| msgid "%1 B"
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 B"
+msgstr "%1 ബി"
+
+#. MetricBinaryDialect size in 1000 bytes
+#: lib/util/kformatprivate.cpp:91
+#, fuzzy, qt-format
+#| msgctxt "size in 1000 bytes"
+#| msgid "%1 kB"
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 kB"
+msgstr "%1 കെബി"
+
+#. MetricBinaryDialect size in 10^6 bytes
+#: lib/util/kformatprivate.cpp:94
+#, fuzzy, qt-format
+#| msgctxt "size in 10^6 bytes"
+#| msgid "%1 MB"
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 MB"
+msgstr "%1 എംബി"
+
+#. MetricBinaryDialect size in 10^9 bytes
+#: lib/util/kformatprivate.cpp:97
+#, fuzzy, qt-format
+#| msgctxt "size in 10^9 bytes"
+#| msgid "%1 GB"
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 GB"
+msgstr "%1 ജിബി"
+
+#. MetricBinaryDialect size in 10^12 bytes
+#: lib/util/kformatprivate.cpp:100
+#, fuzzy, qt-format
+#| msgctxt "size in 10^12 bytes"
+#| msgid "%1 TB"
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 TB"
+msgstr "%1 ടിബി"
+
+#. MetricBinaryDialect size in 10^15 bytes
+#: lib/util/kformatprivate.cpp:103
+#, fuzzy, qt-format
+#| msgctxt "size in 10^15 bytes"
+#| msgid "%1 PB"
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 PB"
+msgstr "%1 പീബി"
+
+#. MetricBinaryDialect size in 10^18 byte
+#: lib/util/kformatprivate.cpp:106
+#, fuzzy, qt-format
+#| msgctxt "size in 10^18 bytes"
+#| msgid "%1 EB"
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 EB"
+msgstr "%1 ഇബി"
+
+#. MetricBinaryDialect size in 10^21 bytes
+#: lib/util/kformatprivate.cpp:109
+#, fuzzy, qt-format
+#| msgctxt "size in 10^21 bytes"
+#| msgid "%1 ZB"
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 ZB"
+msgstr "%1 ഇസഡ്ബി"
+
+#. MetricBinaryDialect size in 10^24 bytes
+#: lib/util/kformatprivate.cpp:112
+#, fuzzy, qt-format
+#| msgctxt "size in 10^24 bytes"
+#| msgid "%1 YB"
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 YB"
+msgstr "%1 വൈബി"
+
+#. JEDECBinaryDialect memory size in bytes
+#: lib/util/kformatprivate.cpp:118
+#, fuzzy, qt-format
+#| msgctxt "size in bytes"
+#| msgid "%1 B"
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 B"
+msgstr "%1 ബി"
+
+#. JEDECBinaryDialect memory size in 1024 bytes
+#: lib/util/kformatprivate.cpp:121
+#, fuzzy, qt-format
+#| msgctxt "memory size in 1024 bytes"
+#| msgid "%1 KB"
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 KB"
+msgstr "%1 കെബി"
+
+#. JEDECBinaryDialect memory size in 10^20 bytes
+#: lib/util/kformatprivate.cpp:124
+#, fuzzy, qt-format
+#| msgctxt "size in 10^6 bytes"
+#| msgid "%1 MB"
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 MB"
+msgstr "%1 എംബി"
+
+#. JEDECBinaryDialect memory size in 10^30 bytes
+#: lib/util/kformatprivate.cpp:127
+#, fuzzy, qt-format
+#| msgctxt "size in 10^9 bytes"
+#| msgid "%1 GB"
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 GB"
+msgstr "%1 ജിബി"
+
+#. JEDECBinaryDialect memory size in 10^40 bytes
+#: lib/util/kformatprivate.cpp:130
+#, fuzzy, qt-format
+#| msgctxt "size in 10^12 bytes"
+#| msgid "%1 TB"
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 TB"
+msgstr "%1 ടിബി"
+
+#. JEDECBinaryDialect memory size in 10^50 bytes
+#: lib/util/kformatprivate.cpp:133
+#, fuzzy, qt-format
+#| msgctxt "size in 10^15 bytes"
+#| msgid "%1 PB"
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 PB"
+msgstr "%1 പീബി"
+
+#. JEDECBinaryDialect memory size in 10^60 bytes
+#: lib/util/kformatprivate.cpp:136
+#, fuzzy, qt-format
+#| msgctxt "size in 10^18 bytes"
+#| msgid "%1 EB"
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 EB"
+msgstr "%1 ഇബി"
+
+#. JEDECBinaryDialect memory size in 10^70 bytes
+#: lib/util/kformatprivate.cpp:139
+#, fuzzy, qt-format
+#| msgctxt "size in 10^21 bytes"
+#| msgid "%1 ZB"
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 ZB"
+msgstr "%1 ഇസഡ്ബി"
+
+#. JEDECBinaryDialect memory size in 10^80 bytes
+#: lib/util/kformatprivate.cpp:142
+#, fuzzy, qt-format
+#| msgctxt "size in 10^24 bytes"
+#| msgid "%1 YB"
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 YB"
+msgstr "%1 വൈബി"
+
+#. IECBinaryDialect size in bytes
+#: lib/util/kformatprivate.cpp:148
+#, fuzzy, qt-format
+#| msgctxt "size in bytes"
+#| msgid "%1 B"
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 B"
+msgstr "%1 ബി"
+
+#. IECBinaryDialect size in 1024 bytes
+#: lib/util/kformatprivate.cpp:151
+#, fuzzy, qt-format
+#| msgctxt "size in 1024 bytes"
+#| msgid "%1 KiB"
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 KiB"
+msgstr "%1 കെഐബി"
+
+#. IECBinaryDialect size in 10^20 bytes
+#: lib/util/kformatprivate.cpp:154
+#, fuzzy, qt-format
+#| msgctxt "size in 2^20 bytes"
+#| msgid "%1 MiB"
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 MiB"
+msgstr "%1 എംഐബി"
+
+#. IECBinaryDialect size in 10^30 bytes
+#: lib/util/kformatprivate.cpp:157
+#, fuzzy, qt-format
+#| msgctxt "size in 2^30 bytes"
+#| msgid "%1 GiB"
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 GiB"
+msgstr "%1 ജിഐബി"
+
+#. IECBinaryDialect size in 10^40 bytes
+#: lib/util/kformatprivate.cpp:160
+#, fuzzy, qt-format
+#| msgctxt "size in 2^40 bytes"
+#| msgid "%1 TiB"
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 TiB"
+msgstr "%1 ടിഐബി"
+
+#. IECBinaryDialect size in 10^50 bytes
+#: lib/util/kformatprivate.cpp:163
+#, fuzzy, qt-format
+#| msgctxt "size in 2^50 bytes"
+#| msgid "%1 PiB"
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 PiB"
+msgstr "%1 പിഐബി"
+
+#. IECBinaryDialect size in 10^60 bytes
+#: lib/util/kformatprivate.cpp:166
+#, fuzzy, qt-format
+#| msgctxt "size in 2^60 bytes"
+#| msgid "%1 EiB"
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 EiB"
+msgstr "%1 ഇഐബി"
+
+#. IECBinaryDialect size in 10^70 bytes
+#: lib/util/kformatprivate.cpp:169
+#, fuzzy, qt-format
+#| msgctxt "size in 2^70 bytes"
+#| msgid "%1 ZiB"
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 ZiB"
+msgstr "%1 ഇസഡ്ഐബി"
+
+#. IECBinaryDialect size in 10^80 bytes
+#: lib/util/kformatprivate.cpp:172
+#, fuzzy, qt-format
+#| msgctxt "size in 2^80 bytes"
+#| msgid "%1 YiB"
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 YiB"
+msgstr "%1 വൈഐബി"
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: lib/util/kformatprivate.cpp:205
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2.%3s"
+msgstr ""
+
+#. @item:intext Duration format minutes and seconds
+#: lib/util/kformatprivate.cpp:210
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2s"
+msgstr ""
+
+#. @item:intext Duration format hours and minutes
+#: lib/util/kformatprivate.cpp:214
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m"
+msgstr ""
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: lib/util/kformatprivate.cpp:218
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3.%4s"
+msgstr ""
+
+#. @item:intext Duration format hours, minutes, seconds
+#: lib/util/kformatprivate.cpp:224
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3s"
+msgstr ""
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: lib/util/kformatprivate.cpp:234
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2.%3"
+msgstr ""
+
+#. @item:intext Duration format minutes and seconds
+#. ----------
+#. @item:intext Duration format hours and minutes
+#: lib/util/kformatprivate.cpp:239 lib/util/kformatprivate.cpp:243
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2"
+msgstr ""
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: lib/util/kformatprivate.cpp:247
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3.%4"
+msgstr ""
+
+#. @item:intext Duration format hours, minutes, seconds
+#: lib/util/kformatprivate.cpp:253
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3"
+msgstr ""
+
+#. @item:intext %1 is a real number, e.g. 1.23 days
+#: lib/util/kformatprivate.cpp:269
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 days"
+#| msgid "%1 days"
+msgctxt "KFormat|"
+msgid "%1 days"
+msgstr "%1 ദിവസങ്ങള്‍"
+
+#. @item:intext %1 is a real number, e.g. 1.23 hours
+#: lib/util/kformatprivate.cpp:272
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 hours"
+#| msgid "%1 hours"
+msgctxt "KFormat|"
+msgid "%1 hours"
+msgstr "%1 മണിക്കൂറുകള്‍"
+
+#. @item:intext %1 is a real number, e.g. 1.23 minutes
+#: lib/util/kformatprivate.cpp:275
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
+#| msgid "%1 minutes"
+msgctxt "KFormat|"
+msgid "%1 minutes"
+msgstr "%1 മിനിറ്റുകള്‍"
+
+#. @item:intext %1 is a real number, e.g. 1.23 seconds
+#: lib/util/kformatprivate.cpp:278
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 seconds"
+#| msgid "%1 seconds"
+msgctxt "KFormat|"
+msgid "%1 seconds"
+msgstr "%1 സെക്കന്റുകള്‍"
+
+#. @item:intext %1 is a whole number
+#: lib/util/kformatprivate.cpp:283
+#, fuzzy, qt-format
+#| msgctxt "@item:intext"
+#| msgid "%1 millisecond"
+#| msgid_plural "%1 milliseconds"
+msgctxt "KFormat|"
+msgid "%n millisecond(s)"
+msgid_plural "%n millisecond(s)"
+msgstr[0] "%1 മില്ലിസെക്കന്റുകള്‍"
+msgstr[1] "%1 മില്ലിസെക്കന്റുകള്‍"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:301
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 days"
+#| msgid "%1 days"
+msgctxt "KFormat|"
+msgid "%n day(s)"
+msgid_plural "%n day(s)"
+msgstr[0] "%1 ദിവസങ്ങള്‍"
+msgstr[1] "%1 ദിവസങ്ങള്‍"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:306
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 hours"
+#| msgid "%1 hours"
+msgctxt "KFormat|"
+msgid "%n hour(s)"
+msgid_plural "%n hour(s)"
+msgstr[0] "%1 മണിക്കൂറുകള്‍"
+msgstr[1] "%1 മണിക്കൂറുകള്‍"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:311
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
+#| msgid "%1 minutes"
+msgctxt "KFormat|"
+msgid "%n minute(s)"
+msgid_plural "%n minute(s)"
+msgstr[0] "%1 മിനിറ്റുകള്‍"
+msgstr[1] "%1 മിനിറ്റുകള്‍"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:316
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 seconds"
+#| msgid "%1 seconds"
+msgctxt "KFormat|"
+msgid "%n second(s)"
+msgid_plural "%n second(s)"
+msgstr[0] "%1 സെക്കന്റുകള്‍"
+msgstr[1] "%1 സെക്കന്റുകള്‍"
+
+#. @item:intext days and hours. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext hours and minutes. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext minutes and seconds. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: lib/util/kformatprivate.cpp:341 lib/util/kformatprivate.cpp:348
+#: lib/util/kformatprivate.cpp:355
+#, fuzzy, qt-format
+#| msgctxt ""
+#| "@item:intext days and hours. This uses the previous item:intext messages. "
+#| "If this does not fit the grammar of your language please contact the i18n "
+#| "team to solve the problem"
+#| msgid "%1 and %2"
+msgctxt "KFormat|"
+msgid "%1 and %2"
+msgstr "%1 ഉം %2 ഉം"
+
+#: lib/util/kformatprivate.cpp:373
+msgctxt "KFormat|"
+msgid "Tomorrow"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:375
+#, fuzzy
+#| msgid "Today"
+msgctxt "KFormat|"
+msgid "Today"
+msgstr "ഇന്ന്"
+
+#: lib/util/kformatprivate.cpp:377
+#, fuzzy
+#| msgid "Yesterday"
+msgctxt "KFormat|"
+msgid "Yesterday"
+msgstr "ഇന്നലെ"
+
+#: lib/util/kformatprivate.cpp:384
+#, fuzzy, qt-format
+#| msgctxt ""
+#| "referring to a filter on the modification and usage date of files/"
+#| "resources"
+#| msgid "Last Week"
+msgctxt "KFormat|"
+msgid "Last %1"
+msgstr "അവസാന ആഴ്ച"
+
+#: lib/util/kformatprivate.cpp:389
+#, fuzzy, qt-format
+#| msgctxt "Opposite to Back"
+#| msgid "Next"
+msgctxt "KFormat|"
+msgid "Next %1"
+msgstr "അടുത്തതു്"
+
+#. relative datetime with %1 result of formatReleativeDate() and %2 the formatted time If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: lib/util/kformatprivate.cpp:404
+#, fuzzy, qt-format
+#| msgctxt "City, Country"
+#| msgid "%1, %2"
+msgctxt "KFormat|"
+msgid "%1, %2"
+msgstr "%1, %2"
