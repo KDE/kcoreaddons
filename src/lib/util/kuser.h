@@ -274,13 +274,13 @@ public:
     KUser &operator =(const KUser &user);
 
     /**
-     * Two KUser objects are equal if the uid() are identical.
+     * Two KUser objects are equal if the userId() are identical.
      * Invalid users never compare equal.
      */
     bool operator ==(const KUser &user) const;
 
     /**
-     * Two KUser objects are not equal if uid() are not identical.
+     * Two KUser objects are not equal if userId() are not identical.
      * Invalid users always compare unequal.
      */
     bool operator !=(const KUser &user) const;
@@ -335,7 +335,7 @@ public:
     /**
      * Returns the user id of the user.
      * @return the id of the user or -1 (UNIX)/ null(Windows) if user is invalid
-     * @deprecated since 5.0 use KUser::groupId()
+     * @deprecated since 5.0 use KUser::userId()
      */
     KCOREADDONS_DEPRECATED K_UID uid() const
     {
