@@ -332,7 +332,7 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
         }
         // We always have to make a copy of the QVector as it may be deleted from the cache
         // at any time and could therefore cause dangling pointers
-        defs.append(*def);
+        defs << *def;
 
     }
     return ServiceTypeDefinition(defs);
