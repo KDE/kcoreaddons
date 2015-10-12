@@ -32,9 +32,11 @@ void messageOutput(QtMsgType type, const QMessageLogContext &context, const QStr
     case QtDebugMsg:
         fprintf(stdout, "%s\n", localMsg.constData());
         break;
+#if QT_VERSION >= QT_VERSION_CHECK(5, 5, 0)
     case QtInfoMsg:
         fprintf(stdout, "Info: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
         break;
+#endif
     case QtWarningMsg:
         fprintf(stderr, "Warning: %s (%s:%u, %s)\n", localMsg.constData(), context.file, context.line, context.function);
         break;
