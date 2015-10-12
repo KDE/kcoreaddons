@@ -24,6 +24,7 @@
 #include <QExplicitlySharedDataPointer>
 #include <QJsonObject>
 #include <QString>
+#include <QStringList>
 #include <QVector>
 
 #include <functional>
