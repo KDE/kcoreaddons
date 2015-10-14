@@ -433,10 +433,12 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDe
         DESKTOPTOJSON_VERBOSE_WARNING << "Hidden= key found in desktop file, this makes no sense"
                 " with metadata inside the plugin.";
         kplugin[QString::fromUtf8(key)] = (value.toLower() == QLatin1String("true"));
-    } else if (key == QByteArrayLiteral("Exec") || key == QByteArrayLiteral("Type") || key == QByteArrayLiteral("X-KDE-Library")) {
+    } else if (key == QByteArrayLiteral("Exec") || key == QByteArrayLiteral("Type")
+            || key == QByteArrayLiteral("X-KDE-Library") || key == QByteArrayLiteral("Encoding")) {
         // Exec= doesn't make sense here, however some .desktop files (like e.g. in kdevelop) have a dummy value here
         // also the Type=Service entry is no longer needed
         // X-KDE-Library is also not needed since we already have the library to read this metadata
+        // Encoding= is also not converted as we always use utf-8 for reading
         DESKTOPTOJSON_VERBOSE_DEBUG << "Not converting key " << key << "=" << value;
     } else {
         // check service type definitions or fall back to QString
