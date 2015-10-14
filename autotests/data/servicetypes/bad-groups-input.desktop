@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=Bad Groups
+Name[nl]=Foute groepen
+Name[pt]=Grupos Inválidos
+Name[pt_BR]=Grupos inválidos
+Name[sk]=Zlé skupiny
+Name[sv]=Felaktiga grupper
+Name[uk]=Погані групи
+Name[x-test]=xxBad Groupsxx
 Type=Service
 # one value for every property defintion in bad-groups-servicetype.desktop
 ThisIsOkay=10

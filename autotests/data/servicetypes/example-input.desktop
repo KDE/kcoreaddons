@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=Example
+Name[nl]=Voorbeeld
+Name[pt]=Exemplo
+Name[pt_BR]=Exemplo
+Name[sk]=Príklad
+Name[sv]=Exempel
+Name[uk]=Приклад
+Name[x-test]=xxExamplexx
 Type=Service
 X-KDE-ServiceTypes=foo/bar,bar/foo
 X-Test-Integer=42
