@@ -289,9 +289,9 @@ private Q_SLOTS:
         QTest::ignoreMessage(QtWarningMsg, QRegularExpression("Skipping invalid group \"DoesNotStartWithPropertyDef::SomeOtherProperty\" in service type \".+/data/servicetypes/bad-groups-servicetype.desktop\""));
         QTest::ignoreMessage(QtWarningMsg, "Could not find Type= key in group \"PropertyDef::MissingType\"");
         QTest::ignoreMessage(QtWarningMsg, QRegularExpression("Property type \"integer\" is not a known QVariant type. Found while parsing property definition for \"InvalidType\" in \".+/data/servicetypes/bad-groups-servicetype.desktop\""));
-        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:7: Key name is missing: \"=11\""));
-        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:11: Key name is missing: \"=13\""));
-        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:13: Key name is missing: \"=14\""));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=11\""));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=13\""));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=14\""));
 
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
         QVERIFY(md.isValid());
