@@ -1,10 +1,16 @@
 [Desktop Entry]
 Name=Example
+Name[ca]=Exemple
 Name[nb]=Eksempel
 Name[nl]=Voorbeeld
+Name[pl]=Przykład
 Name[pt]=Exemplo
 Name[pt_BR]=Exemplo
 Name[sk]=Príklad
+Name[sr]=Пример
+Name[sr@ijekavian]=Пример
+Name[sr@ijekavianlatin]=Primer
+Name[sr@latin]=Primer
 Name[sv]=Exempel
 Name[uk]=Приклад
 Name[x-test]=xxExamplexx
