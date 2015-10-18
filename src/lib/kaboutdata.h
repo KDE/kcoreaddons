@@ -475,8 +475,8 @@ public:
      * The canonical use is:
      *
      * \code
-     * setTranslator(ki18nc("NAME OF TRANSLATORS", "Your names"),
-     *               ki18nc("EMAIL OF TRANSLATORS", "Your emails"));
+     * setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"),
+     *               i18nc("EMAIL OF TRANSLATORS", "Your emails"));
      * \endcode
      *
      * The translator can then translate this dummy text with his name
