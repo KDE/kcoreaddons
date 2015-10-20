@@ -469,20 +469,19 @@ public:
     /**
      * @brief Sets the name(s) of the translator(s) of the GUI.
      *
-     * Since this depends on the language, just use a dummy text marked for
-     * translation.
-     *
-     * The canonical use is:
+     * The canonical use with the ki18n framework is:
      *
      * \code
      * setTranslator(i18nc("NAME OF TRANSLATORS", "Your names"),
      *               i18nc("EMAIL OF TRANSLATORS", "Your emails"));
      * \endcode
      *
-     * The translator can then translate this dummy text with his name
-     * or with a list of names separated with ",".
-     * If there is no translation or the application is used with the
-     * default language, this function call is ignored.
+     * If you are using a KMainWindow this is done for you automatically.
+     *
+     * The name and emailAddress are treated as lists separated with ",".
+     *
+     * If the strings are empty or "Your names"/"Your emails"
+     * respectively they will be ignored.
      *
      * @param name the name(s) of the translator(s)
      * @param emailAddress the email address(es) of the translator(s)

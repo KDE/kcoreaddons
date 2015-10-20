@@ -744,48 +744,18 @@ QList<KAboutPerson> KAboutData::credits() const
     return d->_creditList;
 }
 
-#define NAME_OF_TRANSLATORS "Your names"
-#define EMAIL_OF_TRANSLATORS "Your emails"
 QList<KAboutPerson> KAboutData::translators() const
 {
     QList<KAboutPerson> personList;
-#pragma message("KDE5 TODO: What about this code ?")
-#if 0
-    KLocale *tmpLocale = NULL;
-    if (KLocale::global()) {
-        // There could be many catalogs loaded into the global locale,
-        // e.g. in systemsettings. The tmp locale is needed to make sure we
-        // use the translators name from this aboutdata's catalog, rather than
-        // from any other loaded catalog.
-        tmpLocale = new KLocale(*KLocale::global());
-        tmpLocale->setActiveCatalog(catalogName());
-    }
-#endif
-    QString translatorName;
-    if (!d->translatorName.isEmpty()) {
-        translatorName = d->translatorName;
-    } else {
-        translatorName = QCoreApplication::translate("KAboutPerson", NAME_OF_TRANSLATORS, "NAME OF TRANSLATORS"); //toString(tmpLocale);
-    }
-
-    QString translatorEmail;
-    if (!d->translatorEmail.isEmpty()) {
-        translatorEmail = d->translatorEmail;
-    } else {
-        translatorEmail = QCoreApplication::translate("KAboutPerson", EMAIL_OF_TRANSLATORS, "EMAIL OF TRANSLATORS"); //toString(tmpLocale);
-    }
-#if 0
-    delete tmpLocale;
-#endif
-    if (translatorName.isEmpty() || translatorName == QString::fromUtf8(NAME_OF_TRANSLATORS)) {
+    if (d->translatorName.isEmpty() || d->translatorName == QStringLiteral("Your names")) {
         return personList;
     }
 
-    const QStringList nameList(translatorName.split(QString(QLatin1Char(','))));
+    const QStringList nameList(d->translatorName.split(QLatin1Char(',')));
 
     QStringList emailList;
-    if (!translatorEmail.isEmpty() && translatorEmail != QString::fromUtf8(EMAIL_OF_TRANSLATORS)) {
-        emailList = translatorEmail.split(QString(QLatin1Char(',')), QString::KeepEmptyParts);
+    if (!d->translatorEmail.isEmpty() && d->translatorEmail != QStringLiteral("Your emails")) {
+        emailList = d->translatorEmail.split(QLatin1Char(','), QString::KeepEmptyParts);
     }
 
     QStringList::const_iterator nit;
