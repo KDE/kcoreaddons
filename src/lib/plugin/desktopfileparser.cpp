@@ -95,13 +95,15 @@ QStringList DesktopFileParser::deserializeList(const QString &data, char separat
 QByteArray DesktopFileParser::escapeValue(const QByteArray &input)
 {
     const int start = input.indexOf('\\');
-    if (start<0)
+    if (start < 0) {
         return input;
+    }
 
     // we could do this in place, but this code is simpler
     // this tool is probably only transitional, so no need to optimize
     QByteArray result;
     result.reserve(input.size());
+    result.append(input.data(), start);
     for (int i = start; i < input.length(); ++i) {
         if (input[i] != '\\') {
             result.append(input[i]);
