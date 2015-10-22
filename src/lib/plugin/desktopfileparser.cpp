@@ -302,7 +302,7 @@ QVector<CustomPropertyDefinition>* parseServiceTypesFile(QString path)
 
 // a lazy map of service type definitions
 typedef QCache<QString, QVector<CustomPropertyDefinition>> ServiceTypesHash;
-Q_GLOBAL_STATIC(ServiceTypesHash, s_serviceTypes);
+Q_GLOBAL_STATIC(ServiceTypesHash, s_serviceTypes)
 // access must be guarded by serviceTypesMutex as this code could be executed by multiple threads
 QBasicMutex s_serviceTypesMutex;
 } // end of anonymous namespace
