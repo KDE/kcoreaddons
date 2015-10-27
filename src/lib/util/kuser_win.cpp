@@ -29,10 +29,10 @@
 #include <type_traits>
 
 #include <qt_windows.h>
-#include <LM.h> //Net*
-#include <Userenv.h> //GetProfilesDirectoryW
+#include <lm.h> //Net*
+#include <userenv.h> //GetProfilesDirectoryW
 #include <sddl.h> //ConvertSidToStringSidW
-#include <Shlobj.h>
+#include <shlobj.h>
 
 // this can't be a lambda due to a MSVC2012 bug
 // (works fine in 2010 and 2013)
