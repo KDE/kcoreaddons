@@ -93,24 +93,34 @@ bool KJob::isSuspended() const
     return d_func()->suspended;
 }
 
+void KJob::finishJob(bool emitResult)
+{
+    Q_D(KJob);
+    d->isFinished = true;
+
+    if (d->eventLoop) {
+        d->eventLoop->quit();
+    }
+
+    // If we are displaying a progress dialog, remove it first.
+    emit finished(this, QPrivateSignal());
+
+    if (emitResult) {
+        emit result(this, QPrivateSignal());
+    }
+
+    if (isAutoDelete()) {
+        deleteLater();
+    }
+}
+
 bool KJob::kill(KillVerbosity verbosity)
 {
     Q_D(KJob);
     if (doKill()) {
         setError(KilledJobError);
 
-        if (verbosity != Quietly) {
-            emitResult();
-        } else {
-            // If we are displaying a progress dialog, remove it first.
-            d->isFinished = true;
-            emit finished(this, QPrivateSignal());
-
-            if (isAutoDelete()) {
-                deleteLater();
-            }
-        }
-
+        finishJob(verbosity != Quietly);
         return true;
     } else {
         return false;
@@ -282,20 +292,7 @@ void KJob::setPercent(unsigned long percentage)
 void KJob::emitResult()
 {
     Q_D(KJob);
-    d->isFinished = true;
-
-    if (d->eventLoop) {
-        d->eventLoop->quit();
-    }
-
-    // If we are displaying a progress dialog, remove it first.
-    emit finished(this, QPrivateSignal());
-
-    emit result(this, QPrivateSignal());
-
-    if (isAutoDelete()) {
-        deleteLater();
-    }
+    finishJob(true);
 }
 
 void KJob::emitPercent(qulonglong processedAmount, qulonglong totalAmount)
