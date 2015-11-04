@@ -324,7 +324,7 @@ Notes:
     <comment xml:lang="ast">Adautador d'estensión KHTML</comment>
     <comment xml:lang="bs">KHTML‑ov adapter proširenja</comment>
     <comment xml:lang="ca">adaptador de l'extensió KHTML</comment>
-    <comment xml:lang="ca@valencia">adaptador d'extensió KHTML</comment>
+    <comment xml:lang="ca@valencia">adaptador de l'extensió KHTML</comment>
     <comment xml:lang="cs">Adaptér pro KHTML rozšíření</comment>
     <comment xml:lang="da">KHTML udvidelsesadapter</comment>
     <comment xml:lang="de">Adapter für KHTML-Erweiterungen</comment>
@@ -1494,7 +1494,7 @@ Notes:
     <comment xml:lang="ast">Formatos d'imaxe en brutu de KDE</comment>
     <comment xml:lang="bs">KDE formati sirovih slika</comment>
     <comment xml:lang="ca">formats d'imatge RAW del KDE</comment>
-    <comment xml:lang="ca@valencia">formats d'imatge en brut del KDE</comment>
+    <comment xml:lang="ca@valencia">formats d'imatge RAW del KDE</comment>
     <comment xml:lang="cs">Formáty obrázků raw v KDE</comment>
     <comment xml:lang="da">KDE raw-billedformater</comment>
     <comment xml:lang="de">KDE-Roh-Bildformate</comment>
@@ -2935,7 +2935,7 @@ Notes:
     <comment xml:lang="ar">تشكيلة تفريغ Cachegrind/Callgrind </comment>
     <comment xml:lang="bs">Cachegrindov/Callgrindov profilni popis</comment>
     <comment xml:lang="ca">bolcat d'anàlisi de rendiment del Cachegrind/Callgrind</comment>
-    <comment xml:lang="ca@valencia">bolcat de perfil Cachegrind/Callgrind</comment>
+    <comment xml:lang="ca@valencia">bolcat d'anàlisi de rendiment del Cachegrind/Callgrind</comment>
     <comment xml:lang="cs">Výpis profilu Cachegrind/Callgrind</comment>
     <comment xml:lang="da">Cachegrind/Callgrind profil-dump</comment>
     <comment xml:lang="de">Cachegrind/Callgrind-Profil-Ausgabe</comment>
