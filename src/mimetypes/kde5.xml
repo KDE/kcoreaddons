@@ -40,6 +40,7 @@ Notes:
     <comment xml:lang="fi">Metalink-lataus</comment>
     <comment xml:lang="fr">Téléchargement par méta-liens</comment>
     <comment xml:lang="ga">Íosluchtú Metalink</comment>
+    <comment xml:lang="gd">luchdadh a-nuas meata-cheangail</comment>
     <comment xml:lang="gl">Descarga de Metalink</comment>
     <comment xml:lang="hr">Metalink preuzimanje</comment>
     <comment xml:lang="hu">Metalinkletöltés</comment>
@@ -99,6 +100,7 @@ Notes:
     <comment xml:lang="fi">RELAX NG</comment>
     <comment xml:lang="fr">RELAX NG</comment>
     <comment xml:lang="ga">RELAX NG</comment>
+    <comment xml:lang="gd">RELAX NG</comment>
     <comment xml:lang="gl">RELAX NG</comment>
     <comment xml:lang="hr">RELAX NG</comment>
     <comment xml:lang="hu">RELAX NG</comment>
@@ -157,6 +159,7 @@ Notes:
     <comment xml:lang="fi">CD-ääni</comment>
     <comment xml:lang="fr">CD audio</comment>
     <comment xml:lang="ga">Fuaim dhlúthdhiosca</comment>
+    <comment xml:lang="gd">CD fuaime</comment>
     <comment xml:lang="gl">CD de son</comment>
     <comment xml:lang="hr">CD audio</comment>
     <comment xml:lang="hu">CD-hang</comment>
@@ -217,6 +220,7 @@ Notes:
     <comment xml:lang="fi">SNF-bittikarttafontti</comment>
     <comment xml:lang="fr">Police bitmap SNF</comment>
     <comment xml:lang="ga">Cló Giotánmhapach SNF</comment>
+    <comment xml:lang="gd">cruth-clò bitmap SNF</comment>
     <comment xml:lang="gl">Tipo de letra SNF bitmap</comment>
     <comment xml:lang="hr">SNF bitmap pismo</comment>
     <comment xml:lang="hu">SNF-betűtípus</comment>
@@ -278,6 +282,7 @@ Notes:
     <comment xml:lang="fi">Java-sovelma</comment>
     <comment xml:lang="fr">Applet Java</comment>
     <comment xml:lang="ga">Feidhmchláirín Java</comment>
+    <comment xml:lang="gd">aplaid Java</comment>
     <comment xml:lang="gl">Applet de Java</comment>
     <comment xml:lang="hr">Java applet</comment>
     <comment xml:lang="hu">Java-kisalkalmazás</comment>
@@ -336,6 +341,7 @@ Notes:
     <comment xml:lang="fi">KHTML-laajennussovitin</comment>
     <comment xml:lang="fr">Adaptateur d'extension KHTML</comment>
     <comment xml:lang="ga">Cuibheoir Eisínteacht KHTML</comment>
+    <comment xml:lang="gd">adaptar leudachain KHTML</comment>
     <comment xml:lang="gl">Adaptador de extensión de KHTML</comment>
     <comment xml:lang="hr">KHTML adapter proširenja</comment>
     <comment xml:lang="hu">KHTML-es kiterjesztéskezelő</comment>
@@ -393,6 +399,7 @@ Notes:
     <comment xml:lang="fi">KDE-värimalli</comment>
     <comment xml:lang="fr">Schéma de couleurs KDE</comment>
     <comment xml:lang="ga">Téama dathanna de chuid KDE</comment>
+    <comment xml:lang="gd">sgeama dathan KDE</comment>
     <comment xml:lang="gl">Esquema de cores de KDE</comment>
     <comment xml:lang="hr">KDE-ova paleta boja</comment>
     <comment xml:lang="hu">KDE-színséma</comment>
@@ -454,6 +461,7 @@ Notes:
     <comment xml:lang="fi">KNewStuff-paketti</comment>
     <comment xml:lang="fr">Paquet « KNewStuff »</comment>
     <comment xml:lang="ga">Pacáiste KNewStuff</comment>
+    <comment xml:lang="gd">pacaid KNewStuff</comment>
     <comment xml:lang="gl">Paquete de KNewStuff</comment>
     <comment xml:lang="hr">KNewStuff paket</comment>
     <comment xml:lang="hu">KNewStuff-csomag</comment>
@@ -513,6 +521,7 @@ Notes:
     <comment xml:lang="fi">KWallet-lompakko</comment>
     <comment xml:lang="fr">Portefeuille KWallet</comment>
     <comment xml:lang="ga">Sparán KWallet</comment>
+    <comment xml:lang="gd">sporan KWallet</comment>
     <comment xml:lang="gl">Carteira de KWallet</comment>
     <comment xml:lang="hr">KWallet lisnica</comment>
     <comment xml:lang="hu">KWallet-jelszófájl</comment>
@@ -574,6 +583,7 @@ Notes:
     <comment xml:lang="fi">Kugar-raporttipohja</comment>
     <comment xml:lang="fr">Modèle de rapport Kugar</comment>
     <comment xml:lang="ga">Teimpléad tuarascála Kugar</comment>
+    <comment xml:lang="gd">teamplaid aithisg Kugar</comment>
     <comment xml:lang="gl">Modelo de informe de Kugar</comment>
     <comment xml:lang="hr">Kugar predložak izvještaja</comment>
     <comment xml:lang="hu">Kugar-jelentéssablon</comment>
@@ -632,6 +642,7 @@ Notes:
     <comment xml:lang="fi">MIME-kapseloitu web-arkisto</comment>
     <comment xml:lang="fr">Archive Web encapsulée MIME</comment>
     <comment xml:lang="ga">cartlann Ghréasáin cuachta mar MIME</comment>
+    <comment xml:lang="gd">tasglann-lìn capslaichte mime</comment>
     <comment xml:lang="gl">arquivo web mime encapsulado</comment>
     <comment xml:lang="hr">mime enkapsulirana mrežna arhiva</comment>
     <comment xml:lang="hu">MIME formátumú webes archívum</comment>
@@ -687,6 +698,7 @@ Notes:
     <comment xml:lang="fi">NewzBin-keskusteluryhmäindeksi</comment>
     <comment xml:lang="fr">Index Usenet de NewzBin</comment>
     <comment xml:lang="ga">Innéacs usenet NewzBin</comment>
+    <comment xml:lang="gd">clàr-innse usenet NewzBin</comment>
     <comment xml:lang="gl">Índice da usenet de NewsBin</comment>
     <comment xml:lang="hr">NewzBin usenet indeks</comment>
     <comment xml:lang="hu">NewzBin Usenet-index</comment>
@@ -748,6 +760,7 @@ Notes:
     <comment xml:lang="fi">plasmoidi</comment>
     <comment xml:lang="fr">composant graphique</comment>
     <comment xml:lang="ga">plasmóid</comment>
+    <comment xml:lang="gd">plasmoid</comment>
     <comment xml:lang="gl">plasmoide</comment>
     <comment xml:lang="hr">plasmoid</comment>
     <comment xml:lang="hu">plazmoid</comment>
@@ -809,6 +822,7 @@ Notes:
     <comment xml:lang="fi">SuperKaramba-teema</comment>
     <comment xml:lang="fr">Thème SuperKaramba</comment>
     <comment xml:lang="ga">Téama SuperKaramba</comment>
+    <comment xml:lang="gd">ùrlar SuperKaramba</comment>
     <comment xml:lang="gl">Tema de SuperKaramba</comment>
     <comment xml:lang="hr">tema za SuperKarambu</comment>
     <comment xml:lang="hu">SuperKaramba-téma</comment>
@@ -866,6 +880,7 @@ Notes:
     <comment xml:lang="fi">Calligra Plan -projektinhallintatiedosto</comment>
     <comment xml:lang="fr">Document de gestion de projets « Calligra Plan »</comment>
     <comment xml:lang="ga">Cáipéis Bhainisteoireachta Tionscadail Calligra Plan</comment>
+    <comment xml:lang="gd">sgrìobhainn stiùireadh pròiseict Calligra Plan</comment>
     <comment xml:lang="gl">Proxecto do Calligra Plan</comment>
     <comment xml:lang="hr">Calligra Plan, dokument za upravljanje projektom</comment>
     <comment xml:lang="hu">Calligra Plan projektkezelő dokumentum</comment>
@@ -922,6 +937,7 @@ Notes:
     <comment xml:lang="fi">Calligra Plan -työpakettitiedosto</comment>
     <comment xml:lang="fr">Document de lots de travaux pour « Calligra Plan »</comment>
     <comment xml:lang="ga">Cáipéis phacáiste oibre Calligra Plan</comment>
+    <comment xml:lang="gd">sgrìobhainn pacaid obrach Calligra Plan</comment>
     <comment xml:lang="gl">Paquete de traballo do Calligra Plan</comment>
     <comment xml:lang="hr">Calligra Plan, dokument za radni paket</comment>
     <comment xml:lang="hu">Calligra Plan munkacsomag dokumentum</comment>
@@ -977,6 +993,7 @@ Notes:
     <comment xml:lang="fi">KPLato-projektinhallintatiedosto</comment>
     <comment xml:lang="fr">Document de gestion de projets KPlato</comment>
     <comment xml:lang="ga">Cáipéis Bhainisteoireachta Tionscadail KPlato</comment>
+    <comment xml:lang="gd">sgrìobhainn stiùireadh pròiseict KPlato</comment>
     <comment xml:lang="gl">Proxecto de KPlato</comment>
     <comment xml:lang="hr">KPlato dokument upravljanja projektom</comment>
     <comment xml:lang="hu">KPlato projektkezelő dokumentum</comment>
@@ -1034,6 +1051,7 @@ Notes:
     <comment xml:lang="fi">KPlato-projektinhallinnan työpaketti</comment>
     <comment xml:lang="fr">Lots de travaux pour le logiciel de gestion de projets KPlato</comment>
     <comment xml:lang="ga">Pacáiste oibre bainisteoireachta tionscadail KPlato</comment>
+    <comment xml:lang="gd">sgrìobhainn pacaid obrach KPlato</comment>
     <comment xml:lang="gl">Paquete de traballo de KPlato</comment>
     <comment xml:lang="hr">KPlato radni paket upravljanja projektom</comment>
     <comment xml:lang="hu">KPlato projektkezelő munkacsomag</comment>
@@ -1091,6 +1109,7 @@ Notes:
     <comment xml:lang="fi">Kugar-arkisto</comment>
     <comment xml:lang="fr">Archive Kugar</comment>
     <comment xml:lang="ga">Cartlann Kugar</comment>
+    <comment xml:lang="gd">tasglann Kugar</comment>
     <comment xml:lang="gl">Arquivo de Kugar</comment>
     <comment xml:lang="hr">Kugar arhiva</comment>
     <comment xml:lang="hu">Kugar-archívum</comment>
@@ -1150,6 +1169,7 @@ Notes:
     <comment xml:lang="fi">web-arkisto</comment>
     <comment xml:lang="fr">Archive Web</comment>
     <comment xml:lang="ga">cartlann ghréasáin</comment>
+    <comment xml:lang="gd">tasglann-lìn</comment>
     <comment xml:lang="gl">arquivo web</comment>
     <comment xml:lang="hr">web arhiva</comment>
     <comment xml:lang="hu">webes archívum</comment>
@@ -1209,6 +1229,7 @@ Notes:
     <comment xml:lang="fi">W3C XML -skeema</comment>
     <comment xml:lang="fr">Schéma XML W3C</comment>
     <comment xml:lang="ga">Scéimre XML W3C</comment>
+    <comment xml:lang="gd">sgeama XML W3C</comment>
     <comment xml:lang="gl">Esquema XML do W3C</comment>
     <comment xml:lang="hr">W3C XML shema</comment>
     <comment xml:lang="hu">W3C XML-séma</comment>
@@ -1266,6 +1287,7 @@ Notes:
     <comment xml:lang="fi">AAC-ääni</comment>
     <comment xml:lang="fr">Son AAC</comment>
     <comment xml:lang="ga">Fuaim AAC</comment>
+    <comment xml:lang="gd">fuaim AAC</comment>
     <comment xml:lang="gl">Son AAC</comment>
     <comment xml:lang="hr">AAC zvuk</comment>
     <comment xml:lang="hu">AAC-hang</comment>
@@ -1326,6 +1348,7 @@ Notes:
     <comment xml:lang="fi">RealAudio-liitännäistiedosto</comment>
     <comment xml:lang="fr">Fichier de module externe « Real-Audio »</comment>
     <comment xml:lang="ga">Comhad breiseáin RealAudio</comment>
+    <comment xml:lang="gd">faidhle plugan RealAudio</comment>
     <comment xml:lang="gl">Ficheiro de complemento de RealAudio</comment>
     <comment xml:lang="hr">priključna datoteka za RealAudio</comment>
     <comment xml:lang="hu">RealAudio-bővítményfájl</comment>
@@ -1383,6 +1406,7 @@ Notes:
     <comment xml:lang="fi">KPhotoAlbum-tuonti</comment>
     <comment xml:lang="fr">Importation de KPhotoAlbum</comment>
     <comment xml:lang="ga">Iompórtáil KPhotoAlbum</comment>
+    <comment xml:lang="gd">ion-phortadh KPhotoAlbum</comment>
     <comment xml:lang="gl">Importación de KPhotoAlbum</comment>
     <comment xml:lang="hr">KPhotoAlbum uvoz</comment>
     <comment xml:lang="hu">KPhotoAlbum-import</comment>
@@ -1442,6 +1466,7 @@ Notes:
     <comment xml:lang="fi">HDR-kuva</comment>
     <comment xml:lang="fr">Image HDR</comment>
     <comment xml:lang="ga">Íomhá HDR</comment>
+    <comment xml:lang="gd">dealbh HDR</comment>
     <comment xml:lang="gl">Imaxe de HDR</comment>
     <comment xml:lang="hr">HDR slika</comment>
     <comment xml:lang="hu">HDR-kép</comment>
@@ -1506,6 +1531,7 @@ Notes:
     <comment xml:lang="fi">KDE-raakakuvamuoto</comment>
     <comment xml:lang="fr">Format d'image brute KDE</comment>
     <comment xml:lang="ga">Formáidí amha íomhánna de chuid KDE</comment>
+    <comment xml:lang="gd">fòrmatan deilbh amh KDE</comment>
     <comment xml:lang="gl">Formatos de imaxe raw de KDE</comment>
     <comment xml:lang="hr">KDE-ovi sirovi slikovni podaci</comment>
     <comment xml:lang="hu">KDE-s nyers képformátumok</comment>
@@ -1577,6 +1603,7 @@ Notes:
     <comment xml:lang="fi">Intel®-heksadesimaaliobjektitiedosto</comment>
     <comment xml:lang="fr">Fichier objet hexadécimal « Intel® »</comment>
     <comment xml:lang="ga">Comhad oibiachta heicsidheachúlach Intel®</comment>
+    <comment xml:lang="gd">faidhle oibseact sia-dheicheach Intel®</comment>
     <comment xml:lang="gl">Ficheiro de obxecto hexadecimal de Intel®</comment>
     <comment xml:lang="hr">Intelova® heksadecimalna objektna datoteka</comment>
     <comment xml:lang="hu">Intel®-féle hexadecimális objektumfájl</comment>
@@ -1637,6 +1664,7 @@ Notes:
     <comment xml:lang="fi">Kate-tiedostoluettelolataajaliitännäisluettelo</comment>
     <comment xml:lang="fr">Liste de modules externes pour le chargeur de liste de fichiers de Kate</comment>
     <comment xml:lang="ga">Liosta de bhreiseáin luchtaithe liostaí comhad do Kate</comment>
+    <comment xml:lang="gd">liosta de phlugan Kate a luchdaicheas liostaichean fhaidhlichean</comment>
     <comment xml:lang="gl">Lista de complementos do cargador de lista de ficheiros de Kate</comment>
     <comment xml:lang="hr">Kate lista od priključka učitavača liste datoteka</comment>
     <comment xml:lang="hu">Kate-listafájl (fájllista vagy bővítménylista)</comment>
@@ -1695,6 +1723,7 @@ Notes:
     <comment xml:lang="fi">Objective C -otsake</comment>
     <comment xml:lang="fr">En-tête « Objective-C »</comment>
     <comment xml:lang="ga">Ceanntásc Objective-C</comment>
+    <comment xml:lang="gd">bann-cinn Objective-C</comment>
     <comment xml:lang="gl">Cabeceira de Objective-C</comment>
     <comment xml:lang="hr">Objective-C zaglavlje</comment>
     <comment xml:lang="hu">Objective-C-fejlécfájl</comment>
@@ -1753,6 +1782,7 @@ Notes:
     <comment xml:lang="fi">abc-musiikkinuottikirjoitustiedosto</comment>
     <comment xml:lang="fr">Fichier de notation musicale « ABC »</comment>
     <comment xml:lang="ga">Comhad nodaireachta ceoil abc</comment>
+    <comment xml:lang="gd">faidhle nòtachadh ciùil abc</comment>
     <comment xml:lang="gl">ficheiro de notación musical abc</comment>
     <comment xml:lang="hr">abc muzičko notacijska datoteka</comment>
     <comment xml:lang="hu">Abc-kottafájl</comment>
@@ -1814,6 +1844,7 @@ Notes:
     <comment xml:lang="fi">fonttipaketti</comment>
     <comment xml:lang="fr">Paquet de polices</comment>
     <comment xml:lang="ga">pacáiste clónna</comment>
+    <comment xml:lang="gd">pacaid chruthan-clò</comment>
     <comment xml:lang="gl">paquete de tipos de letra</comment>
     <comment xml:lang="hr">paket pisama</comment>
     <comment xml:lang="hu">betűtípuscsomag</comment>
@@ -1874,6 +1905,7 @@ Notes:
     <comment xml:lang="fi">Windows-palvelin</comment>
     <comment xml:lang="fr">Serveur Windows</comment>
     <comment xml:lang="ga">Freastalaí Windows</comment>
+    <comment xml:lang="gd">frithealaiche Windows</comment>
     <comment xml:lang="gl">Servidor de Windows</comment>
     <comment xml:lang="hr">Windows poslužitelj</comment>
     <comment xml:lang="hu">Windows-kiszolgáló</comment>
@@ -1933,6 +1965,7 @@ Notes:
     <comment xml:lang="fi">Windows-työryhmä</comment>
     <comment xml:lang="fr">Groupe de travail Windows</comment>
     <comment xml:lang="ga">Grúpa oibre Windows</comment>
+    <comment xml:lang="gd">buidheann-obrach Windows</comment>
     <comment xml:lang="gl">Grupo de traballo de Windows</comment>
     <comment xml:lang="hr">Windows radna grupa</comment>
     <comment xml:lang="hu">Windows munkacsoport</comment>
@@ -1993,6 +2026,7 @@ Notes:
     <comment xml:lang="fi">KDE:n järjestelmänvalvonta</comment>
     <comment xml:lang="fr">Moniteur système KDE</comment>
     <comment xml:lang="ga">Monatóir an chórais KDE</comment>
+    <comment xml:lang="gd">monatair siostaim KDE</comment>
     <comment xml:lang="gl">Vixiante do sistema de KDE</comment>
     <comment xml:lang="hr">KDE-ov monitor sustava</comment>
     <comment xml:lang="hu">KDE rendszermonitor</comment>
@@ -2053,6 +2087,7 @@ Notes:
     <comment xml:lang="fi">KDE-teema</comment>
     <comment xml:lang="fr">Thème KDE</comment>
     <comment xml:lang="ga">Téama KDE</comment>
+    <comment xml:lang="gd">ùrlar KDE</comment>
     <comment xml:lang="gl">Tema de KDE</comment>
     <comment xml:lang="hr">KDE-ova tema</comment>
     <comment xml:lang="hu">KDE-téma</comment>
@@ -2114,6 +2149,7 @@ Notes:
     <comment xml:lang="fi">Quanta-projekti</comment>
     <comment xml:lang="fr">Projet Quanta</comment>
     <comment xml:lang="ga">Tionscadal Quanta</comment>
+    <comment xml:lang="gd">pròiseact Quanta</comment>
     <comment xml:lang="gl">Proxecto de Quanta</comment>
     <comment xml:lang="hr">Quanta projekt</comment>
     <comment xml:lang="hu">Quanta-projekt</comment>
@@ -2174,6 +2210,7 @@ Notes:
     <comment xml:lang="fi">Kommander-tiedosto</comment>
     <comment xml:lang="fr">Fichier Kommander</comment>
     <comment xml:lang="ga">Comhad Kommander</comment>
+    <comment xml:lang="gd">faidhle Kommander</comment>
     <comment xml:lang="gl">Ficheiro do Kommander</comment>
     <comment xml:lang="hr">Kommander datoteka</comment>
     <comment xml:lang="hu">Kommander-fájl</comment>
@@ -2231,6 +2268,7 @@ Notes:
     <comment xml:lang="fi">peruna</comment>
     <comment xml:lang="fr">patate</comment>
     <comment xml:lang="ga">práta</comment>
+    <comment xml:lang="gd">buntàta</comment>
     <comment xml:lang="gl">potato</comment>
     <comment xml:lang="hr">potato</comment>
     <comment xml:lang="hu">potato</comment>
@@ -2290,6 +2328,7 @@ Notes:
     <comment xml:lang="fi">Tallennettu Kolf-peli</comment>
     <comment xml:lang="fr">Partie enregistrée de Kolf </comment>
     <comment xml:lang="ga">Cluiche sábháilte Kolf</comment>
+    <comment xml:lang="gd">geama Kolf air a shàbhaladh</comment>
     <comment xml:lang="gl">Partida de Kolf</comment>
     <comment xml:lang="hr">Kolf spremljena igra</comment>
     <comment xml:lang="hu">Kolf mentett állás</comment>
@@ -2350,6 +2389,7 @@ Notes:
     <comment xml:lang="fi">Kolf-rata</comment>
     <comment xml:lang="fr">Parcours Kolf</comment>
     <comment xml:lang="ga">Cúrsa Kolf</comment>
+    <comment xml:lang="gd">raon Kolf</comment>
     <comment xml:lang="gl">Campo de Kolf</comment>
     <comment xml:lang="hr">Kolf staza</comment>
     <comment xml:lang="hu">Kolf-pálya</comment>
@@ -2414,6 +2454,7 @@ Notes:
     <comment xml:lang="fi">Okular-tiedostoarkisto</comment>
     <comment xml:lang="fr">Archive de documents Okular</comment>
     <comment xml:lang="ga">Cartlann cáipéisí Okular</comment>
+    <comment xml:lang="gd">tasglann sgrìobhainnean Okular</comment>
     <comment xml:lang="gl">Arquivo de documento de Okular</comment>
     <comment xml:lang="hr">arhiva dokumenta za Okular</comment>
     <comment xml:lang="hu">Okular-archívum</comment>
@@ -2473,6 +2514,7 @@ Notes:
     <comment xml:lang="fi">Cabri-kuvio</comment>
     <comment xml:lang="fr">Figure Cabri</comment>
     <comment xml:lang="ga">Léaráid Cabri</comment>
+    <comment xml:lang="gd">figear Cabri</comment>
     <comment xml:lang="gl">Figura de Cabri</comment>
     <comment xml:lang="hr">Cabri figura</comment>
     <comment xml:lang="hu">Cabri-alakzat</comment>
@@ -2536,6 +2578,7 @@ Notes:
     <comment xml:lang="fi">Dr. Geo -kuvio</comment>
     <comment xml:lang="fr">Figure « Dr. Geo »</comment>
     <comment xml:lang="ga">Léaráid Dr. Geo</comment>
+    <comment xml:lang="gd">figear Dr. Geo</comment>
     <comment xml:lang="gl">Figura de Dr. Geo</comment>
     <comment xml:lang="hr">Dr. Geo figura</comment>
     <comment xml:lang="hu">Dr. Geo-alakzat</comment>
@@ -2599,6 +2642,7 @@ Notes:
     <comment xml:lang="fi">KGeo-kuvio</comment>
     <comment xml:lang="fr">Figure KGeo</comment>
     <comment xml:lang="ga">Léaráid KGeo</comment>
+    <comment xml:lang="gd">figear KGeo</comment>
     <comment xml:lang="gl">Figura de KGeo</comment>
     <comment xml:lang="hr">KGeo skica</comment>
     <comment xml:lang="hu">KGeo-alakzat</comment>
@@ -2657,6 +2701,7 @@ Notes:
     <comment xml:lang="fi">Kig-kuvio</comment>
     <comment xml:lang="fr">Dessin Kig</comment>
     <comment xml:lang="ga">Léaráid Kig</comment>
+    <comment xml:lang="gd">figear Kig</comment>
     <comment xml:lang="gl">Figura de Kig</comment>
     <comment xml:lang="hr">Kig figura</comment>
     <comment xml:lang="hu">Kig-alakzat</comment>
@@ -2716,6 +2761,7 @@ Notes:
     <comment xml:lang="fi">KSeg-tiedosto</comment>
     <comment xml:lang="fr">Document KSeg</comment>
     <comment xml:lang="ga">Cáipéis KSeg</comment>
+    <comment xml:lang="gd">sgrìobhainn KSeg</comment>
     <comment xml:lang="gl">Documento de KSeg</comment>
     <comment xml:lang="hr">KSeg dokument</comment>
     <comment xml:lang="hu">KSeg-dokumentum</comment>
@@ -2775,6 +2821,7 @@ Notes:
     <comment xml:lang="fi">sanavarastokouluttajatiedosto</comment>
     <comment xml:lang="fr">Document d'apprentissage du vocabulaire</comment>
     <comment xml:lang="ga">cáipéis traenálaí stóir focal</comment>
+    <comment xml:lang="gd">sgrìobhainn trèanair briathrachais</comment>
     <comment xml:lang="gl">documento de práctica de vocabulario</comment>
     <comment xml:lang="hr">dokument vokabularskog trenera</comment>
     <comment xml:lang="hu">szógyűjtemény</comment>
@@ -2833,6 +2880,7 @@ Notes:
     <comment xml:lang="fi">KmPlot-tiedosto</comment>
     <comment xml:lang="fr">Fichier KmPlot</comment>
     <comment xml:lang="ga">Comhad KmPlot</comment>
+    <comment xml:lang="gd">faidhle KmPlot</comment>
     <comment xml:lang="gl">Ficheiro de KmPlot</comment>
     <comment xml:lang="hr">KmPlot datoteka</comment>
     <comment xml:lang="hu">KmPlot-fájl</comment>
@@ -2891,6 +2939,7 @@ Notes:
     <comment xml:lang="fi">KWordQuiz-sanasto</comment>
     <comment xml:lang="fr">Vocabulaire KWordQuiz</comment>
     <comment xml:lang="ga">Stór Focal KWordQuiz</comment>
+    <comment xml:lang="gd">briathrachas KWordQuiz</comment>
     <comment xml:lang="gl">Vocabulario de KWordQuiz</comment>
     <comment xml:lang="hr">KWordQuiz vokabular</comment>
     <comment xml:lang="hu">KWordQuiz-szótár</comment>
@@ -2947,6 +2996,7 @@ Notes:
     <comment xml:lang="fi">Cachegrind/Callgrind-profiilivedos</comment>
     <comment xml:lang="fr">Vidage de profil Cachegrind / Callgrind</comment>
     <comment xml:lang="ga">Próifíl dhumpáilte Cachegrind/Callgrind</comment>
+    <comment xml:lang="gd">dump pròifil Cachegrind/Callgrind</comment>
     <comment xml:lang="gl">Envorcado de perfil de Cachegrind/Callgrind</comment>
     <comment xml:lang="hr">Cachegrind/Callgrind odbačeni profil</comment>
     <comment xml:lang="hu">Cachegrind/Callgrind-képfájl</comment>
@@ -3005,6 +3055,7 @@ Notes:
     <comment xml:lang="fi">Umbrello UML Modeller -tiedosto</comment>
     <comment xml:lang="fr">Fichier de modélisation UML Umbrello</comment>
     <comment xml:lang="ga">Samhaltóir UML Umbrello</comment>
+    <comment xml:lang="gd">faidhle Umbrello UML Modeller</comment>
     <comment xml:lang="gl">Ficheiro de modelo UML de Umbrello</comment>
     <comment xml:lang="hr">Umbrello UML Modeller datoteka</comment>
     <comment xml:lang="hu">Umbrello UML-fájl</comment>
@@ -3064,6 +3115,7 @@ Notes:
     <comment xml:lang="fi">Windows-linkki</comment>
     <comment xml:lang="fr">Liens Windows</comment>
     <comment xml:lang="ga">Nasc Windows</comment>
+    <comment xml:lang="gd">ceangal Windows</comment>
     <comment xml:lang="gl">Ligazón de Windows</comment>
     <comment xml:lang="hr">Windows veza</comment>
     <comment xml:lang="hu">Windows-link</comment>
@@ -3126,6 +3178,7 @@ Notes:
     <comment xml:lang="fi">KGet-latausluettelo</comment>
     <comment xml:lang="fr">Liste de téléchargement pour KGet</comment>
     <comment xml:lang="ga">Liosta íosluchtuithe KGet</comment>
+    <comment xml:lang="gd">liosta luchdaidhean a-nuas KGet</comment>
     <comment xml:lang="gl">Lista de descargas de KGet</comment>
     <comment xml:lang="hr">KGet lista preuzimanja</comment>
     <comment xml:lang="hu">KGet letöltési lista</comment>
@@ -3184,6 +3237,7 @@ Notes:
     <comment xml:lang="fi">Kopete-hymiöarkisto</comment>
     <comment xml:lang="fr">Archive d'émoticônes Kopete</comment>
     <comment xml:lang="ga">Cartlann straoiseog Kopete</comment>
+    <comment xml:lang="gd">tasglann shamhlaidhean-ghnùis Kopete</comment>
     <comment xml:lang="gl">Arquivo de emoticonas de Kopete</comment>
     <comment xml:lang="hr">Kopete arhiva emotikona</comment>
     <comment xml:lang="hu">Kopete-emotikoncsomag</comment>
@@ -3242,6 +3296,7 @@ Notes:
     <comment xml:lang="fi">ICQ-yhteystieto</comment>
     <comment xml:lang="fr">Contact ICQ</comment>
     <comment xml:lang="ga">Teagmháil ICQ</comment>
+    <comment xml:lang="gd">neach-aithne ICQ</comment>
     <comment xml:lang="gl">Contacto do ICQ</comment>
     <comment xml:lang="hr">ICQ kontakt</comment>
     <comment xml:lang="hu">ICQ-névjegy</comment>
@@ -3305,6 +3360,7 @@ Notes:
     <comment xml:lang="fi">Microsoft Media -muoto</comment>
     <comment xml:lang="fr">Format « Microsoft Média »</comment>
     <comment xml:lang="ga">Formáid Mheán Microsoft</comment>
+    <comment xml:lang="gd">Microsoft Media Format</comment>
     <comment xml:lang="gl">Formato de medios de Microsoft</comment>
     <comment xml:lang="hr">Microsoft Media Format</comment>
     <comment xml:lang="hu">Microsoft-médiafájl</comment>
@@ -3369,6 +3425,7 @@ Notes:
     <comment xml:lang="fi">TriG RDF -tiedosto</comment>
     <comment xml:lang="fr">Document « RDF TriG »</comment>
     <comment xml:lang="ga">Cáipéis RDF TriG</comment>
+    <comment xml:lang="gd">sgrìobhainn TriG RDF</comment>
     <comment xml:lang="gl">Documento RDF de TriG</comment>
     <comment xml:lang="hr">TriG RDF dokument</comment>
     <comment xml:lang="hu">TriG RDF-dokumentum</comment>
@@ -3430,6 +3487,7 @@ Notes:
     <comment xml:lang="fi">Turtle RDF -tiedosto</comment>
     <comment xml:lang="fr">Document « RDF Turtle »</comment>
     <comment xml:lang="ga">Cáipéis RDF Turtle</comment>
+    <comment xml:lang="gd">sgrìobhainn Turtle RDF</comment>
     <comment xml:lang="gl">Documento RDF de Turtle</comment>
     <comment xml:lang="hr">Turtle RDF dokument</comment>
     <comment xml:lang="hu">Turtle RDF-dokumentum</comment>
@@ -3488,6 +3546,7 @@ Notes:
     <comment xml:lang="fi">Softimage PIC -kuva</comment>
     <comment xml:lang="fr">Image PIC de Softimage</comment>
     <comment xml:lang="ga">Íomhá PIC Softimage</comment>
+    <comment xml:lang="gd">dealbh Softimage PIC</comment>
     <comment xml:lang="gl">Imaxe PIC de Softimage</comment>
     <comment xml:lang="hr">Softimage PIC slika</comment>
     <comment xml:lang="hu">Softimage PIC-kép</comment>
@@ -3548,6 +3607,7 @@ Notes:
     <comment xml:lang="fi">Qt-merkintäkielitiedosto</comment>
     <comment xml:lang="fr">Fichier de langage à balises Qt</comment>
     <comment xml:lang="ga">Comhad Teanga Mharcála Qt</comment>
+    <comment xml:lang="gd">faidhle Qt Markup Language</comment>
     <comment xml:lang="gl">Ficheiro na lingua de etiquetas de Qt</comment>
     <comment xml:lang="hr">Datoteka Qt-ovog označnog jezika</comment>
     <comment xml:lang="hu">Qt Markup Language fájl</comment>
@@ -3607,6 +3667,7 @@ Notes:
     <comment xml:lang="fi">Mobipocket-e-kirja</comment>
     <comment xml:lang="fr">Livre électronique « Mobipocket »</comment>
     <comment xml:lang="ga">Ríomhleabhar Mobipocket</comment>
+    <comment xml:lang="gd">leabhar-d Mobipocket</comment>
     <comment xml:lang="gl">Libro electrónico Mobipocket</comment>
     <comment xml:lang="hr">E-knjiga u Mobipocketu</comment>
     <comment xml:lang="hu">Mobipocket e-book</comment>
@@ -3667,6 +3728,7 @@ Notes:
     <comment xml:lang="es">Imagen WebP</comment>
     <comment xml:lang="fi">WebP-kuva</comment>
     <comment xml:lang="fr">Image WebP</comment>
+    <comment xml:lang="gd">dealbh WebP</comment>
     <comment xml:lang="gl">Imaxe WebP</comment>
     <comment xml:lang="hu">WebP-kép</comment>
     <comment xml:lang="ia">Imagine de WebP</comment>
