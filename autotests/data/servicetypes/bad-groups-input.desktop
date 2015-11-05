@@ -20,6 +20,7 @@ Name[sr@latin]=Loše grupe
 Name[sv]=Felaktiga grupper
 Name[uk]=Погані групи
 Name[x-test]=xxBad Groupsxx
+Name[zh_CN]=坏分组
 Type=Service
 # one value for every property defintion in bad-groups-servicetype.desktop
 ThisIsOkay=10

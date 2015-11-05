@@ -21,6 +21,7 @@ Name[sr@latin]=Primer
 Name[sv]=Exempel
 Name[uk]=Приклад
 Name[x-test]=xxExamplexx
+Name[zh_CN]=例子
 Type=Service
 X-KDE-ServiceTypes=foo/bar,bar/foo
 X-Test-Integer=42
