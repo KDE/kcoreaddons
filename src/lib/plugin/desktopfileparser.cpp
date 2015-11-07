@@ -482,14 +482,14 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
         // must have form key=value now
         const int equalsIndex = line.indexOf('=');
         if (equalsIndex == -1) {
-            qCWarning(DESKTOPPARSER).nospace().noquote() << src << ':' << lineNr << ": Line is neither comment nor group "
-                "and doesn't contain an '=' character: \"" << line << '\"';
+            qCWarning(DESKTOPPARSER).nospace() << qPrintable(src) << ':' << lineNr << ": Line is neither comment nor group "
+                "and doesn't contain an '=' character: \"" << line.constData() << '\"';
             continue;
         }
         // trim key and value to remove spaces around the '=' char
         const QByteArray key = line.mid(0, equalsIndex).trimmed();
         if (key.isEmpty()) {
-            qCWarning(DESKTOPPARSER).nospace().noquote() << src << ':' << lineNr << ": Key name is missing: \"" << line << '\"';
+            qCWarning(DESKTOPPARSER).nospace() << qPrintable(src) << ':' << lineNr << ": Key name is missing: \"" << line.constData() << '\"';
             continue;
         }
         const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
