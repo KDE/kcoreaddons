@@ -355,7 +355,7 @@ public:
      *
      * @param homePageAddress The component's homepage string.
      *        Start the address with "http://". "http://some.domain" is
-     *        is correct, "some.domain" is not.
+     *        correct, "some.domain" is not.
      * IMPORTANT: if you set a home page address, this will change the "organization domain"
      * of the application, which is used for automatic D-Bus registration.
      * @see setOrganizationDomain
@@ -464,7 +464,7 @@ public:
                           const QString &task = QString(),
                           const QString &emailAddress = QString(),
                           const QString &webAddress = QString(),
-                          const QString &ocsUserName = QString());
+                          const QString &ocsUsername = QString());
 
     /**
      * @brief Sets the name(s) of the translator(s) of the GUI.
