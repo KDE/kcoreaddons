@@ -401,6 +401,9 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDe
     } else if (key == QByteArrayLiteral("MimeType")) {
         // MimeType is a XDG string list and not a KConfig list so we need to use ';' as the separator
         kplugin[QStringLiteral("MimeTypes")] = QJsonArray::fromStringList(deserializeList(value, ';'));
+        // make sure that applications using kcoreaddons_desktop_to_json() that depend on reading
+        // the MimeType property still work (see https://git.reviewboard.kde.org/r/125527/)
+        json[QStringLiteral("MimeType")] = value; // TODO KF6 remove this compatibility code
     } else if (key == QByteArrayLiteral("X-KDE-FormFactors")) {
         kplugin[QStringLiteral("FormFactors")] = QJsonArray::fromStringList(deserializeList(value));
     } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-EnabledByDefault")) {
