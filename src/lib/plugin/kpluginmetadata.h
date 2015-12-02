@@ -51,16 +51,16 @@ class QObject;
  * Name               | name()               | string
  * Description        | description()        | string
  * Icon               | iconName()           | string
- * Authors            | authors()            | object / object array
+ * Authors            | authors()            | object array
  * Category           | category()           | string
  * License            | license()            | string
  * Id                 | pluginId()           | string
  * Version            | version()            | string
- * Websites           | websites()           | string
+ * Website            | website()            | string
  * EnabledByDefault   | isEnabledByDefault() | bool
- * ServiceTypes       | serviceTypes()       | string / string array
- * MimeTypes          | mimeTypes()          | string / string array
- * FormFactors        | formFactors()        | string / string array
+ * ServiceTypes       | serviceTypes()       | string array
+ * MimeTypes          | mimeTypes()          | string array
+ * FormFactors        | formFactors()        | string array
  *
  * The Authors key is a single object or a list of objects that have the following keys that
  * correspond to KAboutPerson properties:
