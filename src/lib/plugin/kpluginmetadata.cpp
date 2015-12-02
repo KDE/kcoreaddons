@@ -240,6 +240,11 @@ QList<KAboutPerson> KPluginMetaData::translators() const
     return aboutPersonFromJSON(rootObject()[QStringLiteral("Translators")]);
 }
 
+QList<KAboutPerson> KPluginMetaData::otherContributors() const
+{
+    return aboutPersonFromJSON(rootObject()[QStringLiteral("OtherContributors")]);
+}
+
 QString KPluginMetaData::category() const
 {
     return rootObject()[QStringLiteral("Category")].toString();
@@ -263,6 +268,16 @@ QString KPluginMetaData::license() const
 QString KPluginMetaData::name() const
 {
     return readTranslatedString(rootObject(), QStringLiteral("Name"));
+}
+
+QString KPluginMetaData::copyrightText() const
+{
+    return readTranslatedString(rootObject(), QStringLiteral("Copyright"));
+}
+
+QString KPluginMetaData::extraInformation() const
+{
+    return readTranslatedString(rootObject(), QStringLiteral("ExtraInformation"));
 }
 
 QString KPluginMetaData::pluginId() const

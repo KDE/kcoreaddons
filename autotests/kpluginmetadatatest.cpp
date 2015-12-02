@@ -113,10 +113,13 @@ private Q_SLOTS:
                 " \"Icon\": \"preferences-system-time\",\n"
                 " \"Authors\": { \"Name\": \"Aaron Seigo\", \"Email\": \"aseigo@kde.org\" },\n"
                 " \"Translators\": { \"Name\": \"No One\", \"Email\": \"no.one@kde.org\" },\n"
+                " \"OtherContributors\": { \"Name\": \"No One\", \"Email\": \"no.one@kde.org\" },\n"
                 " \"Category\": \"Date and Time\",\n"
                 " \"Dependencies\": [ \"foo\", \"bar\"],\n"
                 " \"EnabledByDefault\": \"true\",\n"
+                " \"ExtraInformation\": \"Something else\",\n"
                 " \"License\": \"LGPL\",\n"
+                " \"Copyright\": \"(c) Alex Richardson 2015\",\n"
                 " \"Id\": \"time\",\n"
                 " \"Version\": \"1.0\",\n"
                 " \"Website\": \"http://plasma.kde.org/\",\n"
@@ -129,6 +132,7 @@ private Q_SLOTS:
         QCOMPARE(m.pluginId(), QStringLiteral("time"));
         QCOMPARE(m.name(), QStringLiteral("Date and Time"));
         QCOMPARE(m.description(), QStringLiteral("Date and time by timezone"));
+        QCOMPARE(m.extraInformation(), QStringLiteral("Something else"));
         QCOMPARE(m.iconName(), QStringLiteral("preferences-system-time"));
         QCOMPARE(m.category(), QStringLiteral("Date and Time"));
         QCOMPARE(m.dependencies(), QStringList() << "foo" << "bar");
@@ -138,8 +142,12 @@ private Q_SLOTS:
         QCOMPARE(m.translators().size(), 1);
         QCOMPARE(m.translators()[0].name(), QStringLiteral("No One"));
         QCOMPARE(m.translators()[0].emailAddress(), QStringLiteral("no.one@kde.org"));
+        QCOMPARE(m.otherContributors().size(), 1);
+        QCOMPARE(m.otherContributors()[0].name(), QStringLiteral("No One"));
+        QCOMPARE(m.otherContributors()[0].emailAddress(), QStringLiteral("no.one@kde.org"));
         QVERIFY(m.isEnabledByDefault());
         QCOMPARE(m.license(), QStringLiteral("LGPL"));
+        QCOMPARE(m.copyrightText(), QStringLiteral("(c) Alex Richardson 2015"));
         QCOMPARE(m.version(), QStringLiteral("1.0"));
         QCOMPARE(m.website(), QStringLiteral("http://plasma.kde.org/"));
         QCOMPARE(m.serviceTypes(), QStringList() << QStringLiteral("Plasma/DataEngine"));

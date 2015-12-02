@@ -50,10 +50,12 @@ class QObject;
  * -------------------| -------------------- | ---------------------
  * Name               | name()               | string
  * Description        | description()        | string
+ * ExtraInformation   | extraInformation()   | string
  * Icon               | iconName()           | string
- * Authors            | authors()            | object array
+ * Authors            | authors()            | object array (KAboutPerson)
  * Category           | category()           | string
  * License            | license()            | string
+ * Copyright          | copyrightText()      | string
  * Id                 | pluginId()           | string
  * Version            | version()            | string
  * Website            | website()            | string
@@ -61,7 +63,8 @@ class QObject;
  * ServiceTypes       | serviceTypes()       | string array
  * MimeTypes          | mimeTypes()          | string array
  * FormFactors        | formFactors()        | string array
- * Translators        | translators()        | object array
+ * Translators        | translators()        | object array (KAboutPerson)
+ * OtherContributors  | otherContributors()  | object array (KAboutPerson)
  *
  * The Authors and Translators keys are expected to be list of objects that
  * match those expected by KAboutPerson::fromJSON().
@@ -246,6 +249,13 @@ public:
     QString description() const;
 
     /**
+     * @return additional information about this plugin (e.g. for use in an "about plugin" dialog)
+     *
+     * @since 5.18
+     */
+    QString extraInformation() const;
+
+    /**
      * @return the author(s) of this plugin.
      */
     QList<KAboutPerson> authors() const;
@@ -256,6 +266,13 @@ public:
      * @since 5.18
      */
     QList<KAboutPerson> translators() const;
+
+    /**
+     * @return a list of people that contributed to this plugin (other than the authors and translators).
+     *
+     * @since 5.18
+     */
+    QList<KAboutPerson> otherContributors() const;
 
     /**
      * @return the categories of this plugin (e.g. "playlist/skin").
@@ -273,6 +290,13 @@ public:
      * @see KAboutLicense::byKeyword() for retrieving the full license information
      */
     QString license() const;
+
+    /**
+     * @return a short copyright statement
+     *
+     * @since 5.18
+     */
+    QString copyrightText() const;
 
     /**
      * @return the internal name of the plugin (for KParts Plugins this is
