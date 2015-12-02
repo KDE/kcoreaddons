@@ -112,6 +112,7 @@ private Q_SLOTS:
                 " \"Description\": \"Date and time by timezone\",\n"
                 " \"Icon\": \"preferences-system-time\",\n"
                 " \"Authors\": { \"Name\": \"Aaron Seigo\", \"Email\": \"aseigo@kde.org\" },\n"
+                " \"Translators\": { \"Name\": \"No One\", \"Email\": \"no.one@kde.org\" },\n"
                 " \"Category\": \"Date and Time\",\n"
                 " \"Dependencies\": [ \"foo\", \"bar\"],\n"
                 " \"EnabledByDefault\": \"true\",\n"
@@ -134,6 +135,9 @@ private Q_SLOTS:
         QCOMPARE(m.authors().size(), 1);
         QCOMPARE(m.authors()[0].name(), QStringLiteral("Aaron Seigo"));
         QCOMPARE(m.authors()[0].emailAddress(), QStringLiteral("aseigo@kde.org"));
+        QCOMPARE(m.translators().size(), 1);
+        QCOMPARE(m.translators()[0].name(), QStringLiteral("No One"));
+        QCOMPARE(m.translators()[0].emailAddress(), QStringLiteral("no.one@kde.org"));
         QVERIFY(m.isEnabledByDefault());
         QCOMPARE(m.license(), QStringLiteral("LGPL"));
         QCOMPARE(m.version(), QStringLiteral("1.0"));

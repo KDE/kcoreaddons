@@ -206,34 +206,38 @@ QString KPluginMetaData::readTranslatedString(const QJsonObject &jo, const QStri
 }
 
 static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson>* out) {
-    const QString name = obj[QStringLiteral("Name")].toString();
-    const QString task = obj[QStringLiteral("Task")].toString();
-    const QString email = obj[QStringLiteral("Email")].toString();
-    const QString website = obj[QStringLiteral("Website")].toString();
-    const QString userName = obj[QStringLiteral("UserName")].toString();
-    if (name.isEmpty()) {
+    KAboutPerson person = KAboutPerson::fromJSON(obj);
+    if (person.name().isEmpty()) {
         qWarning() << "Invalid plugin metadata: Attempting to create a KAboutPerson from json without 'Name' property:" << obj;
         return;
     }
-    out->append(KAboutPerson(name, task, email, website, userName));
-
+    out->append(person);
 }
 
-QList<KAboutPerson> KPluginMetaData::authors() const
+static QList<KAboutPerson> aboutPersonFromJSON(const QJsonValue &people)
 {
     QList<KAboutPerson> ret;
-    QJsonValue authorsValue = rootObject()[QStringLiteral("Authors")];
-    if (authorsValue.isObject()) {
+    if (people.isObject()) {
         // single author
-        addPersonFromJson(authorsValue.toObject(), &ret);
-    } else if (authorsValue.isArray()) {
-        foreach (const QJsonValue &val, authorsValue.toArray()) {
+        addPersonFromJson(people.toObject(), &ret);
+    } else if (people.isArray()) {
+        foreach (const QJsonValue &val, people.toArray()) {
             if (val.isObject()) {
                 addPersonFromJson(val.toObject(), &ret);
             }
         }
     }
     return ret;
+}
+
+QList<KAboutPerson> KPluginMetaData::authors() const
+{
+    return aboutPersonFromJSON(rootObject()[QStringLiteral("Authors")]);
+}
+
+QList<KAboutPerson> KPluginMetaData::translators() const
+{
+    return aboutPersonFromJSON(rootObject()[QStringLiteral("Translators")]);
 }
 
 QString KPluginMetaData::category() const

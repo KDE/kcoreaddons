@@ -61,9 +61,10 @@ class QObject;
  * ServiceTypes       | serviceTypes()       | string array
  * MimeTypes          | mimeTypes()          | string array
  * FormFactors        | formFactors()        | string array
+ * Translators        | translators()        | object array
  *
- * The Authors key is a single object or a list of objects that have the following keys that
- * correspond to KAboutPerson properties:
+ * The Authors and Translators keys are expected to be list of objects that
+ * match those expected by KAboutPerson::fromJSON().
  *
  * Key                | Accessor
  * -------------------| ----------------------------
@@ -248,6 +249,13 @@ public:
      * @return the author(s) of this plugin.
      */
     QList<KAboutPerson> authors() const;
+
+    /**
+     * @return the translator(s) of this plugin.
+     *
+     * @since 5.18
+     */
+    QList<KAboutPerson> translators() const;
 
     /**
      * @return the categories of this plugin (e.g. "playlist/skin").

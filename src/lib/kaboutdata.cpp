@@ -23,6 +23,7 @@
  */
 
 #include "kaboutdata.h"
+#include <kpluginmetadata.h>
 
 #include <QCoreApplication>
 #include "qstandardpaths.h"
@@ -35,6 +36,7 @@
 #include <QHash>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QJsonObject>
 
 #include <algorithm>
 
@@ -109,6 +111,17 @@ KAboutPerson &KAboutPerson::operator=(const KAboutPerson &other)
     *d = *other.d;
     return *this;
 }
+
+KAboutPerson KAboutPerson::fromJSON(const QJsonObject &obj)
+{
+    const QString name = KPluginMetaData::readTranslatedString(obj, QStringLiteral("Name"));
+    const QString task = KPluginMetaData::readTranslatedString(obj, QStringLiteral("Task"));
+    const QString email = obj[QStringLiteral("Email")].toString();
+    const QString website = obj[QStringLiteral("Website")].toString();
+    const QString userName = obj[QStringLiteral("UserName")].toString();
+    return KAboutPerson(name, task, email, website, userName);
+}
+
 
 class KAboutLicense::Private : public QSharedData
 {

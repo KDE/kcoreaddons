@@ -31,6 +31,7 @@
 
 template <class T> class QList;
 class QCommandLineParser;
+class QJsonObject;
 class QVariant;
 class KAboutData;
 namespace KCrash
@@ -133,6 +134,23 @@ public:
      *           constructed with an empty username)
      */
     QString ocsUsername() const;
+
+    /**
+     * Creates a @c KAboutPerson from a JSON object with the following structure:
+     *
+     * Key        | Accessor
+     * -----------| ----------------------------
+     * Name       | name()
+     * Email      | emailAddress()
+     * Task       | task()
+     * Website    | webAddress()
+     * UserName   | ocsUsername()
+     *
+     * The @c Name and @c Task key are translatable (by using e.g. a "Task[de_DE]" key)
+     *
+     * @since 5.18
+     */
+    static KAboutPerson fromJSON(const QJsonObject &obj);
 
 private:
     /**
