@@ -31,9 +31,12 @@
 #include <QtCore/QSharedData>
 #include <QtCore/QVariant>
 #include <QtCore/QList>
+#include <QUrl>
 #include <QHash>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
+
+#include <algorithm>
 
 class KAboutPerson::Private
 {
@@ -409,27 +412,27 @@ KAboutData::KAboutData(const QString &_componentName,
     d->_homepageAddress = homePageAddress;
     d->_bugEmailAddress = bugsEmailAddress.toUtf8();
 
-    if (d->_homepageAddress.contains(QLatin1String("http://"))) {
-        const int dot = d->_homepageAddress.indexOf(QLatin1Char('.'));
-        if (dot >= 0) {
-            d->organizationDomain = d->_homepageAddress.mid(dot + 1);
-            const int slash = d->organizationDomain.indexOf(QLatin1Char('/'));
-            if (slash >= 0) {
-                d->organizationDomain.truncate(slash);
-            }
-        } else {
-            d->organizationDomain = QString::fromLatin1("kde.org");
-        }
-    } else {
-        d->organizationDomain = QString::fromLatin1("kde.org");
+    QUrl homePageUrl(homePageAddress);
+    if (!homePageUrl.isValid() || homePageUrl.scheme().isEmpty()) {
+        // Default domain if nothing else is better
+        homePageUrl.setUrl(QStringLiteral("https://kde.org/"));
     }
+
+    const QChar dotChar(QLatin1Char('.'));
+    QStringList hostComponents = homePageUrl.host().split(dotChar);
+
+    // Remove leading component unless 2 (or less) components are present
+    if (hostComponents.size() > 2) {
+        hostComponents.removeFirst();
+    }
+
+    d->organizationDomain = hostComponents.join(dotChar);
+
     // desktop file name is reverse domain name
-    const QStringList domainParts = d->organizationDomain.split(QStringLiteral("."));
-    for (int i = domainParts.count() - 1; i >= 0; i--) {
-        d->desktopFileName.append(domainParts.at(i));
-        d->desktopFileName.append(QLatin1String("."));
-    }
-    d->desktopFileName.append(d->_componentName);
+    std::reverse(hostComponents.begin(), hostComponents.end());
+    hostComponents.append(_componentName);
+
+    d->desktopFileName = hostComponents.join(dotChar);
 }
 
 KAboutData::KAboutData(const QString &_componentName,

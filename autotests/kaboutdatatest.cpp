@@ -48,6 +48,7 @@ static const char ShortDescription[] =   "ShortDescription";
 static const char CopyrightStatement[] = "CopyrightStatement";
 static const char Text[] =               "Text";
 static const char HomePageAddress[] =    "http://test.no.where/";
+static const char HomePageSecure[] =     "https://test.no.where/";
 static const char OrganizationDomain[] = "no.where";
 static const char BugsEmailAddress[] =   "bugs@no.else";
 static const char LicenseText[] =        "free to write, reading forbidden";
@@ -124,6 +125,17 @@ void KAboutDataTest::testLongFormConstructor()
     QVERIFY(!aboutData.customAuthorTextEnabled());
     QCOMPARE(aboutData.desktopFileName(), QStringLiteral("where.no.app"));
     //TODO: test internalVersion, internalProgramName, internalBugAddress
+
+    // We support http and https protocols on the homepage address, ensure they
+    // give the same org. domain and desktop file name.
+    KAboutData aboutDataSecure(AppName, QLatin1String(ProgramName), Version,
+                         QLatin1String(ShortDescription), KAboutLicense::Unknown,
+                         QLatin1String(CopyrightStatement), QLatin1String(Text),
+                         HomePageSecure, BugsEmailAddress);
+    QCOMPARE(aboutDataSecure.componentName(), QLatin1String(AppName));
+    QCOMPARE(aboutDataSecure.productName(), QLatin1String(AppName));
+    QCOMPARE(aboutDataSecure.organizationDomain(), QString::fromLatin1(OrganizationDomain));
+    QCOMPARE(aboutDataSecure.desktopFileName(), QStringLiteral("where.no.app"));
 }
 
 void KAboutDataTest::testShortFormConstructor()

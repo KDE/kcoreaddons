@@ -353,16 +353,19 @@ public:
      *        information. The text can contain newlines. This string
      *        should be translated.
      *
-     * @param homePageAddress The component's homepage string.
-     *        Start the address with "http://". "http://some.domain" is
-     *        correct, "some.domain" is not.
-     * IMPORTANT: if you set a home page address, this will change the "organization domain"
-     * of the application, which is used for automatic D-Bus registration.
+     * @param homePageAddress The URL to the component's homepage, including
+     *        URL scheme. "http://some.domain" is correct, "some.domain" is
+     *        not. Since KDE Frameworks 5.17, https and other valid URL schemes
+     *        are also valid.
+     *
+     * IMPORTANT: This argument is used to provide a default organization
+     * domain for the application (which is used to automatically register on
+     * the session D-Bus, locate the appropriate desktop file, etc.). Use
+     * setOrganizationDomain() if you want to control this value yourself.
      * @see setOrganizationDomain
      *
      * @param bugsEmailAddress The bug report email address string.
      *        This defaults to the kde.org bug system.
-     *
      */
     // KF6: remove constructor that includes catalogName, and put default
     //      values back in for shortDescription and licenseType
@@ -916,8 +919,11 @@ public:
      * of the desktop entry that represents this application according to
      * the freedesktop desktop entry specification (e.g. "org.kde.foo").
      *
-     * By default the desktop file name is constructed from the reverse domain
-     * name of the organizationDomain() and the componentName().
+     * A default desktop file name is constructed when the KAboutData
+     * object is created, using the reverse domain name of the
+     * organizationDomain() and the componentName(). Call this method to
+     * override the default name, or if you call setOrganizationDomain() or
+     * setComponentName().
      *
      * The desktop file name can also be passed to the application at runtime through
      * the @c desktopfile command line option which is added by setupCommandLine(QCommandLineParser*).
