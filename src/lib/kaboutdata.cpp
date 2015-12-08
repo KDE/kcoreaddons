@@ -23,10 +23,10 @@
  */
 
 #include "kaboutdata.h"
-#include <kpluginmetadata.h>
+#include "kpluginmetadata.h"
 
 #include <QCoreApplication>
-#include "qstandardpaths.h"
+#include <QStandardPaths>
 #include <QtCore/QFile>
 #include <QtCore/QTextStream>
 #include <QtCore/QSharedData>
@@ -375,9 +375,8 @@ public:
     QString _homepageAddress;
     QList<KAboutPerson> _authorList;
     QList<KAboutPerson> _creditList;
+    QList<KAboutPerson> _translatorList;
     QList<KAboutLicense> _licenseList;
-    QString translatorName;
-    QString translatorEmail;
     QString productName;
     QString programIconName;
     QVariant programLogo;
@@ -503,6 +502,19 @@ KAboutData &KAboutData::operator=(const KAboutData &other)
     return *this;
 }
 
+KAboutData KAboutData::fromPluginMetaData(const KPluginMetaData &plugin)
+{
+    KAboutData ret(plugin.pluginId(), plugin.name(), plugin.version(), plugin.description(),
+                   KAboutLicense::byKeyword(plugin.license()).key(), plugin.copyrightText(),
+                   plugin.extraInformation(), plugin.website());
+    ret.setProgramIconName(plugin.iconName());
+    ret.d->_authorList = plugin.authors();
+    ret.d->_translatorList = plugin.translators();
+    ret.d->_creditList = plugin.otherContributors();
+    return ret;
+}
+
+
 KAboutData &KAboutData::addAuthor(const QString &name,
                                   const QString &task,
                                   const QString &emailAddress,
@@ -526,8 +538,7 @@ KAboutData &KAboutData::addCredit(const QString &name,
 KAboutData &KAboutData::setTranslator(const QString &name,
                                       const QString &emailAddress)
 {
-    d->translatorName = name;
-    d->translatorEmail = emailAddress;
+    d->_translatorList = parseTranslators(name, emailAddress);
     return *this;
 }
 
@@ -769,18 +780,18 @@ QList<KAboutPerson> KAboutData::credits() const
     return d->_creditList;
 }
 
-QList<KAboutPerson> KAboutData::translators() const
+QList<KAboutPerson> KAboutData::parseTranslators(const QString &translatorName, const QString &translatorEmail)
 {
     QList<KAboutPerson> personList;
-    if (d->translatorName.isEmpty() || d->translatorName == QStringLiteral("Your names")) {
+    if (translatorName.isEmpty() || translatorName == QStringLiteral("Your names")) {
         return personList;
     }
 
-    const QStringList nameList(d->translatorName.split(QLatin1Char(',')));
+    const QStringList nameList(translatorName.split(QLatin1Char(',')));
 
     QStringList emailList;
-    if (!d->translatorEmail.isEmpty() && d->translatorEmail != QStringLiteral("Your emails")) {
-        emailList = d->translatorEmail.split(QLatin1Char(','), QString::KeepEmptyParts);
+    if (!translatorEmail.isEmpty() && translatorEmail != QStringLiteral("Your emails")) {
+        emailList = translatorEmail.split(QLatin1Char(','), QString::KeepEmptyParts);
     }
 
     QStringList::const_iterator nit;
@@ -798,6 +809,12 @@ QList<KAboutPerson> KAboutData::translators() const
 
     return personList;
 }
+
+QList<KAboutPerson> KAboutData::translators() const
+{
+    return d->_translatorList;
+}
+
 
 QString KAboutData::aboutTranslationTeam()
 {

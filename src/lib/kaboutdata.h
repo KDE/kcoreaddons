@@ -34,6 +34,7 @@ class QCommandLineParser;
 class QJsonObject;
 class QVariant;
 class KAboutData;
+class KPluginMetaData;
 namespace KCrash
 {
 Q_DECL_IMPORT void defaultCrashHandler(int sig);
@@ -334,10 +335,18 @@ public:
      * that was set in @p aboutData.
      */
     static void registerPluginData(const KAboutData &aboutData);
+
     /**
      * Return the KAboutData for the given plugin identified by @p componentName.
      */
     static KAboutData *pluginData(const QString &componentName);
+
+    /**
+     * Creates a @c KAboutData from the given @p plugin metadata
+     *
+     * @since 5.18
+     */
+    static KAboutData fromPluginMetaData(const KPluginMetaData &plugin);
 
 public:
     /**
@@ -966,6 +975,8 @@ public:
     QString desktopFileName() const;
 
 private:
+
+    static QList<KAboutPerson> parseTranslators(const QString &translatorName, const QString &translatorEmail);
 
     friend void KCrash::defaultCrashHandler(int sig);
     static const KAboutData *applicationDataPointer();
