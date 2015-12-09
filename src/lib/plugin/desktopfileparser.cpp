@@ -242,10 +242,11 @@ QVector<CustomPropertyDefinition>* parseServiceTypesFile(QString path)
 {
     int lineNr = 0;
     if (QDir::isRelativePath(path)) {
+        const QString originalPath = path;
         path = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                QStringLiteral("kservicetypes5/") + path);
         if (path.isEmpty()) {
-            qCCritical(DESKTOPPARSER) << "Could not locate service type file" << path;
+            qCCritical(DESKTOPPARSER) << "Could not locate service type file" << originalPath;
             return nullptr;
         }
     }
@@ -333,7 +334,11 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
             qCDebug(DESKTOPPARSER) << "About to parse service type file" << serviceType;
             def = parseServiceTypesFile(serviceType);
             if (!def) {
+#ifdef BUILDING_DESKTOPTOJSON_TOOL
+                exit(1); // this is a fatal error when using kcoreaddons_desktop_to_json()
+#else
                 continue;
+#endif
             }
             s_serviceTypes->insert(serviceType, def);
         }
