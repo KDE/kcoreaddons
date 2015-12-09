@@ -193,6 +193,7 @@ bool KPluginLoader::load()
     QLibrary lib(fileName());
     Q_ASSERT(lib.isLoaded()); // already loaded by QPluginLoader::load()
 
+    // TODO: this messes up KPluginLoader::errorString(): it will change from unknown error to could not resolve kde_plugin_version
     quint32 *version = (quint32 *) lib.resolve("kde_plugin_version");
     if (version) {
         d->pluginVersion = *version;
