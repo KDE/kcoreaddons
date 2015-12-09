@@ -111,6 +111,9 @@ function(kcoreaddons_add_plugin plugin)
     set(multiValueArgs SOURCES)
     cmake_parse_arguments(KCA_ADD_PLUGIN "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
+    if(NOT KCA_ADD_PLUGIN_SOURCES)
+      message(FATAL_ERROR "kcoreaddons_add_plugin called without SOURCES parameter")
+    endif()
     get_filename_component(json "${KCA_ADD_PLUGIN_JSON}" REALPATH)
 
     # ensure we recompile the corresponding object files when the json file changes
