@@ -684,6 +684,7 @@ Notes:
   <mime-type type="application/x-nzb"> <!-- fdo #10029, released in s-m-i 0.91 -->
     <comment>NewzBin usenet index</comment>
     <comment xml:lang="ar">فهرس يوزنت NewzBin</comment>
+    <comment xml:lang="ast">Índiz usenet de NewzBin</comment>
     <comment xml:lang="bs">NewzBinov indeks Useneta</comment>
     <comment xml:lang="ca">Índex usenet NewzBin</comment>
     <comment xml:lang="ca@valencia">Índex usenet NewzBin</comment>
