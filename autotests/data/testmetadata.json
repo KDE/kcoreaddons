@@ -1,0 +1,15 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Aleix Pol"
+            }
+        ], 
+        "Description": "Test stuff.",
+        "Icon": "kdevelop",
+        "License": "GPL", 
+        "Name": "Test"
+    },
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Purpose-PluginTypes": [ "Export" ]
+}

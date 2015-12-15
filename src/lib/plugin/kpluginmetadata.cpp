@@ -17,6 +17,7 @@
 */
 
 #include "kpluginmetadata.h"
+#include <QJsonDocument>
 #include "desktopfileparser_p.h"
 
 #include <QCoreApplication>
@@ -61,6 +62,17 @@ KPluginMetaData::KPluginMetaData(const QString &file)
 {
     if (file.endsWith(QStringLiteral(".desktop"))) {
         loadFromDesktopFile(file, QStringList());
+    } else if (file.endsWith(QStringLiteral(".json"))) {
+        d = new KPluginMetaDataPrivate;
+        QFile f(file);
+        bool b = f.open(QIODevice::ReadOnly);
+        if (!b) {
+            qWarning() << "Couldn't open" << file;
+            return;
+        }
+        m_metaData = QJsonDocument::fromJson(f.readAll()).object();
+        m_fileName = file;
+        d->metaDataFileName = file;
     } else {
         QPluginLoader loader(file);
         m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();

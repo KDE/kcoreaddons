@@ -124,6 +124,8 @@ public:
      * reading the metadata from the QPluginLoader. This is the same as calling
      * KPluginMetaData::fromDesktopFile() without the serviceTypes parameter.
      *
+     * If @p file ends with .json, the file will be loaded as the QJsonObject metadata.
+     *
      * @see QPluginLoader::setFileName()
      * @see KPluginMetaData::fromDesktopFile()
      */

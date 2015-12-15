@@ -310,7 +310,16 @@ private Q_SLOTS:
         QCOMPARE(md.rawData().value("ThisIsOkayAgain"), QJsonValue(19)); // valid defintion after invalid ones should still work -> integer
     }
 
+    void testJSONMetadata()
+    {
+        const QString inputPath = QFINDTESTDATA("data/testmetadata.json");
+        KPluginMetaData md(inputPath);
+        QVERIFY(md.isValid());
+        QCOMPARE(md.name(), QStringLiteral("Test"));
 
+        QCOMPARE(md.value("X-Plasma-MainScript"), QStringLiteral("ui/main.qml"));
+        QCOMPARE(md.rawData().value("X-Purpose-PluginTypes").toArray(), QJsonArray( { QStringLiteral("Export") } ));
+    }
 };
 
 QTEST_MAIN(KPluginMetaDataTest)
