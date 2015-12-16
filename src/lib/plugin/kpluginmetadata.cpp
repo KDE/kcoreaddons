@@ -17,12 +17,12 @@
 */
 
 #include "kpluginmetadata.h"
-#include <QJsonDocument>
 #include "desktopfileparser_p.h"
 
 #include <QCoreApplication>
 #include <QFileInfo>
 #include <QJsonArray>
+#include <QJsonDocument>
 #include <QLocale>
 #include <QPluginLoader>
 #include <QStringList>
