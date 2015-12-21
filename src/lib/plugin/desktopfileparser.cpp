@@ -328,9 +328,15 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
     // as we might modify the cache we need to acquire a mutex here
     foreach (const QString &serviceType, paths) {
         QMutexLocker lock(&s_serviceTypesMutex);
+
         QVector<CustomPropertyDefinition>* def = s_serviceTypes->object(serviceType);
-        // not found in cache -> we need to parse the file
-        if (!def) {
+
+        if (def) {
+            // in cache but we still must make our own copy
+            defs << *def;
+        }
+        else {
+            // not found in cache -> we need to parse the file
             qCDebug(DESKTOPPARSER) << "About to parse service type file" << serviceType;
             def = parseServiceTypesFile(serviceType);
             if (!def) {
@@ -340,12 +346,10 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
                 continue;
 #endif
             }
+
+            defs << *def; // This must *precede* insert call, insert might delete
             s_serviceTypes->insert(serviceType, def);
         }
-        // We always have to make a copy of the QVector as it may be deleted from the cache
-        // at any time and could therefore cause dangling pointers
-        defs << *def;
-
     }
     return ServiceTypeDefinition(defs);
 }
