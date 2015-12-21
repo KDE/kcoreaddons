@@ -392,6 +392,9 @@ public:
     QByteArray _internalProgramName;
     QByteArray _version;
     QByteArray _bugEmailAddress;
+
+    static QList<KAboutPerson> parseTranslators(const QString &translatorName, const QString &translatorEmail);
+
 };
 
 KAboutData::KAboutData(const QString &_componentName,
@@ -538,7 +541,7 @@ KAboutData &KAboutData::addCredit(const QString &name,
 KAboutData &KAboutData::setTranslator(const QString &name,
                                       const QString &emailAddress)
 {
-    d->_translatorList = parseTranslators(name, emailAddress);
+    d->_translatorList = Private::parseTranslators(name, emailAddress);
     return *this;
 }
 
@@ -780,7 +783,7 @@ QList<KAboutPerson> KAboutData::credits() const
     return d->_creditList;
 }
 
-QList<KAboutPerson> KAboutData::parseTranslators(const QString &translatorName, const QString &translatorEmail)
+QList<KAboutPerson> KAboutData::Private::parseTranslators(const QString &translatorName, const QString &translatorEmail)
 {
     QList<KAboutPerson> personList;
     if (translatorName.isEmpty() || translatorName == QStringLiteral("Your names")) {

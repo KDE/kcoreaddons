@@ -976,8 +976,6 @@ public:
 
 private:
 
-    static QList<KAboutPerson> parseTranslators(const QString &translatorName, const QString &translatorEmail);
-
     friend void KCrash::defaultCrashHandler(int sig);
     static const KAboutData *applicationDataPointer();
 

@@ -66,16 +66,8 @@ class QObject;
  * Translators        | translators()        | object array (KAboutPerson)
  * OtherContributors  | otherContributors()  | object array (KAboutPerson)
  *
- * The Authors and Translators keys are expected to be list of objects that
- * match those expected by KAboutPerson::fromJSON().
- *
- * Key                | Accessor
- * -------------------| ----------------------------
- * Name               | KAboutPerson::name()
- * Email              | KAboutPerson::emailAddress()
- * Task               | KAboutPerson::task()
- * Website            | KAboutPerson::webAddress()
- * UserName           | KAboutPerson::ocsUsername()
+ * The Authors, Translators and OtherContributors keys are expected to be
+ * list of objects that match the structure expected by KAboutPerson::fromJSON().
  *
  * An example metadata json file could look like this:
  * @verbatim
@@ -97,6 +89,7 @@ class QObject;
    }
    @endverbatim
  *
+ * @sa KAboutPerson::fromJSON()
  * @since 5.1
  */
 class KCOREADDONS_EXPORT KPluginMetaData
