@@ -106,7 +106,7 @@ public:
         int clientCount() const;
         bool isValid()
         {
-            return m_clients.count() || m_entries.count();
+            return !m_clients.empty() || !m_entries.empty();
         }
 
         Entry *findSubEntry(const QString &path) const

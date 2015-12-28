@@ -51,19 +51,19 @@ static void internalMessageFallback(KMessage::MessageType messageType, const QSt
     QString prefix;
     switch (messageType) {
     case KMessage::Error:
-        prefix = QLatin1String("ERROR: ");
+        prefix = QStringLiteral("ERROR: ");
         break;
     case KMessage::Fatal:
-        prefix = QLatin1String("FATAL: ");
+        prefix = QStringLiteral("FATAL: ");
         break;
     case KMessage::Information:
-        prefix = QLatin1String("INFORMATION: ");
+        prefix = QStringLiteral("INFORMATION: ");
         break;
     case KMessage::Sorry:
-        prefix = QLatin1String("SORRY: ");
+        prefix = QStringLiteral("SORRY: ");
         break;
     case KMessage::Warning:
-        prefix = QLatin1String("WARNING: ");
+        prefix = QStringLiteral("WARNING: ");
         break;
     }
 

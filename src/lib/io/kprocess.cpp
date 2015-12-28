@@ -77,7 +77,7 @@ void KProcess::setNextOpenMode(QIODevice::OpenMode mode)
 
 void KProcess::clearEnvironment()
 {
-    setEnvironment(QStringList() << QString::fromLatin1(DUMMYENV));
+    setEnvironment(QStringList() << QStringLiteral(DUMMYENV));
 }
 
 void KProcess::setEnv(const QString &name, const QString &value, bool overwrite)
@@ -85,7 +85,7 @@ void KProcess::setEnv(const QString &name, const QString &value, bool overwrite)
     QStringList env = environment();
     if (env.isEmpty()) {
         env = systemEnvironment();
-        env.removeAll(QString::fromLatin1(DUMMYENV));
+        env.removeAll(QStringLiteral(DUMMYENV));
     }
     QString fname(name);
     fname.append(QLatin1Char('='));
@@ -106,7 +106,7 @@ void KProcess::unsetEnv(const QString &name)
     QStringList env = environment();
     if (env.isEmpty()) {
         env = systemEnvironment();
-        env.removeAll(QString::fromLatin1(DUMMYENV));
+        env.removeAll(QStringLiteral(DUMMYENV));
     }
     QString fname(name);
     fname.append(QLatin1Char('='));
@@ -114,7 +114,7 @@ void KProcess::unsetEnv(const QString &name)
         if ((*it).startsWith(fname)) {
             env.erase(it);
             if (env.isEmpty()) {
-                env.append(QString::fromLatin1(DUMMYENV));
+                env.append(QStringLiteral(DUMMYENV));
             }
             setEnvironment(env);
             return;
@@ -205,44 +205,44 @@ void KProcess::setShellCommand(const QString &cmd)
     // If /bin/sh is a symlink, we can be pretty sure that it points to a
     // POSIX shell - the original bourne shell is about the only non-POSIX
     // shell still in use and it is always installed natively as /bin/sh.
-    d->prog = QFile::symLinkTarget(QString::fromLatin1("/bin/sh"));
+    d->prog = QFile::symLinkTarget(QStringLiteral("/bin/sh"));
     if (d->prog.isEmpty()) {
         // Try some known POSIX shells.
-        d->prog = QStandardPaths::findExecutable(QString::fromLatin1("ksh"));
+        d->prog = QStandardPaths::findExecutable(QStringLiteral("ksh"));
         if (d->prog.isEmpty()) {
-            d->prog = QStandardPaths::findExecutable(QString::fromLatin1("ash"));
+            d->prog = QStandardPaths::findExecutable(QStringLiteral("ash"));
             if (d->prog.isEmpty()) {
-                d->prog = QStandardPaths::findExecutable(QString::fromLatin1("bash"));
+                d->prog = QStandardPaths::findExecutable(QStringLiteral("bash"));
                 if (d->prog.isEmpty()) {
-                    d->prog = QStandardPaths::findExecutable(QString::fromLatin1("zsh"));
+                    d->prog = QStandardPaths::findExecutable(QStringLiteral("zsh"));
                     if (d->prog.isEmpty())
                         // We're pretty much screwed, to be honest ...
                     {
-                        d->prog = QString::fromLatin1("/bin/sh");
+                        d->prog = QStringLiteral("/bin/sh");
                     }
                 }
             }
         }
     }
 # else
-    d->prog = QString::fromLatin1("/bin/sh");
+    d->prog = QStringLiteral("/bin/sh");
 # endif
 
-    d->args << QString::fromLatin1("-c") << cmd;
+    d->args << QStringLiteral("-c") << cmd;
 #else // Q_OS_UNIX
     // KMacroExpander::expandMacrosShellQuote(), KShell::quoteArg() and
     // KShell::joinArgs() may generate these for security reasons.
-    setEnv(PERCENT_VARIABLE, QLatin1String("%"));
+    setEnv(PERCENT_VARIABLE, QStringLiteral("%"));
 
 #ifndef _WIN32_WCE
     WCHAR sysdir[MAX_PATH + 1];
     UINT size = GetSystemDirectoryW(sysdir, MAX_PATH + 1);
     d->prog = QString::fromUtf16((const ushort *) sysdir, size);
     d->prog += QLatin1String("\\cmd.exe");
-    setNativeArguments(QLatin1String("/V:OFF /S /C \"") + cmd + QLatin1Char('"'));
+    setNativeArguments(QStringLiteral("/V:OFF /S /C \"") + cmd + QLatin1Char('"'));
 #else
-    d->prog = QLatin1String("\\windows\\cmd.exe");
-    setNativeArguments(QLatin1String("/S /C \"") + cmd + QLatin1Char('"'));
+    d->prog = QStringLiteral("\\windows\\cmd.exe");
+    setNativeArguments(QStringLiteral("/S /C \"") + cmd + QLatin1Char('"'));
 #endif
 #endif
 }

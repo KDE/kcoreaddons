@@ -84,7 +84,7 @@ QString KTextToHTMLHelper::getEmailAddress()
     if (mText[mPos] == QLatin1Char('@')) {
         // the following characters are allowed in a dot-atom (RFC 2822):
         // a-z A-Z 0-9 . ! # $ % & ' * + - / = ? ^ _ ` { | } ~
-        static const QString allowedSpecialChars = QLatin1String(".!#$%&'*+-/=?^_`{|}~");
+        static const QString allowedSpecialChars = QStringLiteral(".!#$%&'*+-/=?^_`{|}~");
 
         // determine the local part of the email address
         int start = mPos - 1;
@@ -147,7 +147,7 @@ bool KTextToHTMLHelper::atUrl()
 {
     // the following characters are allowed in a dot-atom (RFC 2822):
     // a-z A-Z 0-9 . ! # $ % & ' * + - / = ? ^ _ ` { | } ~
-    static const QString allowedSpecialChars = QLatin1String(".!#$%&'*+-/=?^_`{|}~");
+    static const QString allowedSpecialChars = QStringLiteral(".!#$%&'*+-/=?^_`{|}~");
 
     // the character directly before the URL must not be a letter, a number or
     // any other character allowed in a dot-atom (RFC 2822).
@@ -447,11 +447,11 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
 
     if (flags & ReplaceSmileys) {
         QStringList exclude;
-        exclude << QLatin1String("(c)") << QLatin1String("(C)") << QLatin1String("&gt;:-(") << QLatin1String("&gt;:(") << QLatin1String("(B)") << QLatin1String("(b)") << QLatin1String("(P)") << QLatin1String("(p)");
-        exclude << QLatin1String("(O)") << QLatin1String("(o)") << QLatin1String("(D)") << QLatin1String("(d)") << QLatin1String("(E)") << QLatin1String("(e)") << QLatin1String("(K)") << QLatin1String("(k)");
-        exclude << QLatin1String("(I)") << QLatin1String("(i)") << QLatin1String("(L)") << QLatin1String("(l)") << QLatin1String("(8)") << QLatin1String("(T)") << QLatin1String("(t)") << QLatin1String("(G)");
-        exclude << QLatin1String("(g)") << QLatin1String("(F)") << QLatin1String("(f)") << QLatin1String("(H)");
-        exclude << QLatin1String("8)") << QLatin1String("(N)") << QLatin1String("(n)") << QLatin1String("(Y)") << QLatin1String("(y)") << QLatin1String("(U)") << QLatin1String("(u)") << QLatin1String("(W)") << QLatin1String("(w)");
+        exclude << QStringLiteral("(c)") << QStringLiteral("(C)") << QStringLiteral("&gt;:-(") << QStringLiteral("&gt;:(") << QStringLiteral("(B)") << QStringLiteral("(b)") << QStringLiteral("(P)") << QStringLiteral("(p)");
+        exclude << QStringLiteral("(O)") << QStringLiteral("(o)") << QStringLiteral("(D)") << QStringLiteral("(d)") << QStringLiteral("(E)") << QStringLiteral("(e)") << QStringLiteral("(K)") << QStringLiteral("(k)");
+        exclude << QStringLiteral("(I)") << QStringLiteral("(i)") << QStringLiteral("(L)") << QStringLiteral("(l)") << QStringLiteral("(8)") << QStringLiteral("(T)") << QStringLiteral("(t)") << QStringLiteral("(G)");
+        exclude << QStringLiteral("(g)") << QStringLiteral("(F)") << QStringLiteral("(f)") << QStringLiteral("(H)");
+        exclude << QStringLiteral("8)") << QStringLiteral("(N)") << QStringLiteral("(n)") << QStringLiteral("(Y)") << QStringLiteral("(y)") << QStringLiteral("(U)") << QStringLiteral("(u)") << QStringLiteral("(W)") << QStringLiteral("(w)");
 
         result = helper.emoticonsInterface()->parseEmoticons(result, true, exclude);
     }

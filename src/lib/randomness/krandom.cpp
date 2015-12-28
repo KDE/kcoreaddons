@@ -42,7 +42,7 @@ int KRandom::random()
     if (!init) {
         unsigned int seed;
         init = true;
-        QFile urandom(QString::fromLatin1("/dev/urandom"));
+        QFile urandom(QStringLiteral("/dev/urandom"));
         bool opened = urandom.open(QIODevice::ReadOnly);
         if (!opened || urandom.read((char *)&seed, sizeof(seed)) != sizeof(seed)) {
             // No /dev/urandom... try something else.

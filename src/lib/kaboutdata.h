@@ -377,7 +377,7 @@ public:
                const QString &copyrightStatement = QString(),
                const QString &otherText = QString(),
                const QString &homePageAddress = QString(),
-               const QString &bugsEmailAddress = QLatin1String("submit@bugs.kde.org")
+               const QString &bugsEmailAddress = QStringLiteral("submit@bugs.kde.org")
               );
 
     /**

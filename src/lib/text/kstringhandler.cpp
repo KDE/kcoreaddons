@@ -95,7 +95,7 @@ QStringList KStringHandler::perlSplit(const QString &sep, const QString &s, int 
     int tokenStart = s.indexOf(sep, searchStart);
 
     while (-1 != tokenStart && (ignoreMax || l.count() < max - 1)) {
-        if (!s.mid(searchStart, tokenStart - searchStart).isEmpty()) {
+        if (!s.midRef(searchStart, tokenStart - searchStart).isEmpty()) {
             l << s.mid(searchStart, tokenStart - searchStart);
         }
 
@@ -103,7 +103,7 @@ QStringList KStringHandler::perlSplit(const QString &sep, const QString &s, int 
         tokenStart = s.indexOf(sep, searchStart);
     }
 
-    if (!s.mid(searchStart, s.length() - searchStart).isEmpty()) {
+    if (!s.midRef(searchStart, s.length() - searchStart).isEmpty()) {
         l << s.mid(searchStart, s.length() - searchStart);
     }
 
@@ -121,7 +121,7 @@ QStringList KStringHandler::perlSplit(const QChar &sep, const QString &s, int ma
     int tokenStart = s.indexOf(sep, searchStart);
 
     while (-1 != tokenStart && (ignoreMax || l.count() < max - 1)) {
-        if (!s.mid(searchStart, tokenStart - searchStart).isEmpty()) {
+        if (!s.midRef(searchStart, tokenStart - searchStart).isEmpty()) {
             l << s.mid(searchStart, tokenStart - searchStart);
         }
 
@@ -129,7 +129,7 @@ QStringList KStringHandler::perlSplit(const QChar &sep, const QString &s, int ma
         tokenStart = s.indexOf(sep, searchStart);
     }
 
-    if (!s.mid(searchStart, s.length() - searchStart).isEmpty()) {
+    if (!s.midRef(searchStart, s.length() - searchStart).isEmpty()) {
         l << s.mid(searchStart, s.length() - searchStart);
     }
 
@@ -147,7 +147,7 @@ QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int 
     int len = sep.matchedLength();
 
     while (-1 != tokenStart && (ignoreMax || l.count() < max - 1)) {
-        if (!s.mid(searchStart, tokenStart - searchStart).isEmpty()) {
+        if (!s.midRef(searchStart, tokenStart - searchStart).isEmpty()) {
             l << s.mid(searchStart, tokenStart - searchStart);
         }
 
@@ -156,7 +156,7 @@ QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int 
         len = sep.matchedLength();
     }
 
-    if (!s.mid(searchStart, s.length() - searchStart).isEmpty()) {
+    if (!s.midRef(searchStart, s.length() - searchStart).isEmpty()) {
         l << s.mid(searchStart, s.length() - searchStart);
     }
 

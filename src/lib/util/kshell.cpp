@@ -57,14 +57,14 @@ QString KShell::joinArgs(const QStringList &args)
 
 QString KShell::tildeExpand(const QString &fname)
 {
-    if (fname.length() && fname[0] == QLatin1Char('~')) {
+    if (!fname.isEmpty() && fname[0] == QLatin1Char('~')) {
         int pos = fname.indexOf(QLatin1Char('/'));
         if (pos < 0) {
             return homeDir(fname.mid(1));
         }
         QString ret = homeDir(fname.mid(1, pos - 1));
         if (!ret.isNull()) {
-            ret += fname.mid(pos);
+            ret += fname.midRef(pos);
         }
         return ret;
     } else if (fname.length() > 1 && fname[0] == QLatin1Char(ESCAPE) && fname[1] == QLatin1Char('~')) {

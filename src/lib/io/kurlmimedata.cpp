@@ -53,12 +53,12 @@ void KUrlMimeData::setMetaData(const MetaDataMap &metaData, QMimeData *mimeData)
         metaDataData += it.value().toUtf8();
         metaDataData += "$@@$";
     }
-    mimeData->setData(QString::fromLatin1("application/x-kio-metadata"), metaDataData);
+    mimeData->setData(QStringLiteral("application/x-kio-metadata"), metaDataData);
 }
 
 QStringList KUrlMimeData::mimeDataTypes()
 {
-    return QStringList() << QString::fromLatin1(s_kdeUriListMime) << QString::fromLatin1("text/uri-list");
+    return QStringList() << QString::fromLatin1(s_kdeUriListMime) << QStringLiteral("text/uri-list");
 }
 
 QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
@@ -86,12 +86,12 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
         }
     }
     if (metaData) {
-        const QByteArray metaDataPayload = mimeData->data(QLatin1String("application/x-kio-metadata"));
+        const QByteArray metaDataPayload = mimeData->data(QStringLiteral("application/x-kio-metadata"));
         if (!metaDataPayload.isEmpty()) {
             QString str = QString::fromUtf8(metaDataPayload.constData());
             Q_ASSERT(str.endsWith(QLatin1String("$@@$")));
             str.truncate(str.length() - 4);
-            const QStringList lst = str.split(QLatin1String("$@@$"));
+            const QStringList lst = str.split(QStringLiteral("$@@$"));
             bool readingKey = true; // true, then false, then true, etc.
             QString key;
             for (QStringList::const_iterator it = lst.begin(); it != lst.end(); ++it) {

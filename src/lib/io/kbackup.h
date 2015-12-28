@@ -56,7 +56,7 @@ KCOREADDONS_EXPORT bool backupFile(const QString &filename,
 */
 KCOREADDONS_EXPORT bool simpleBackupFile(const QString &filename,
         const QString &backupDir = QString(),
-        const QString &backupExtension = QLatin1String("~"));
+        const QString &backupExtension = QStringLiteral("~"));
 
 /**
  * @brief Function to create a backup file for a given filename.
@@ -87,7 +87,7 @@ KCOREADDONS_EXPORT bool simpleBackupFile(const QString &filename,
  */
 KCOREADDONS_EXPORT bool numberedBackupFile(const QString &filename,
         const QString &backupDir = QString(),
-        const QString &backupExtension = QString::fromLatin1("~"),
+        const QString &backupExtension = QStringLiteral("~"),
         const uint maxBackups = 10
                                           );
 

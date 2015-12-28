@@ -178,7 +178,7 @@ KDirWatchPrivate::KDirWatchPrivate()
       rescan_all(false),
       rescan_timer()
 {
-    timer.setObjectName(QLatin1String("KDirWatchPrivate::timer"));
+    timer.setObjectName(QStringLiteral("KDirWatchPrivate::timer"));
     connect(&timer, SIGNAL(timeout()), this, SLOT(slotRescan()));
 
     m_nfsPollInterval = qEnvironmentVariableIsSet(s_envNfsPoll) ? qgetenv(s_envNfsPoll).toInt() : 5000;
@@ -193,7 +193,7 @@ KDirWatchPrivate::KDirWatchPrivate()
     availableMethods << "Stat";
 
     // used for FAM and inotify
-    rescan_timer.setObjectName(QString::fromLatin1("KDirWatchPrivate::rescan_timer"));
+    rescan_timer.setObjectName(QStringLiteral("KDirWatchPrivate::rescan_timer"));
     rescan_timer.setSingleShot(true);
     connect(&rescan_timer, SIGNAL(timeout()), this, SLOT(slotRescan()));
 
@@ -302,7 +302,7 @@ void KDirWatchPrivate::inotifyEventReceived()
                 path = QFile::decodeName(cpath);
             }
 
-            if (path.length() && isNoisyFile(cpath.data())) {
+            if (!path.isEmpty() && isNoisyFile(cpath.data())) {
                 continue;
             }
 
@@ -836,7 +836,7 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path,
             if (s_verboseDebug) {
                 qCDebug(KDIRWATCH) << "Added already watched Entry" << path
                          << "(now" << (*it).clientCount() << "clients)"
-                         << QString::fromLatin1("[%1]").arg(instance->objectName());
+                         << QStringLiteral("[%1]").arg(instance->objectName());
             }
         }
         return;
@@ -1064,7 +1064,7 @@ void KDirWatchPrivate::removeEntry(KDirWatch *instance,
         e->removeClient(instance);
     }
 
-    if (e->m_clients.count() || e->m_entries.count()) {
+    if (!e->m_clients.empty() || !e->m_entries.empty()) {
         return;
     }
 
@@ -1154,7 +1154,7 @@ bool KDirWatchPrivate::stopEntryScan(KDirWatch *instance, Entry *e)
         }
     }
 
-    qCDebug(KDIRWATCH) << (instance ? instance->objectName() : QString::fromLatin1("all"))
+    qCDebug(KDIRWATCH) << (instance ? instance->objectName() : QStringLiteral("all"))
              << "stopped scanning" << e->path << "(now"
              << stillWatching << "watchers)";
 
@@ -1187,7 +1187,7 @@ bool KDirWatchPrivate::restartEntryScan(KDirWatch *instance, Entry *e,
         return false;
     }
 
-    qCDebug(KDIRWATCH) << (instance ? instance->objectName() : QString::fromLatin1("all"))
+    qCDebug(KDIRWATCH) << (instance ? instance->objectName() : QStringLiteral("all"))
              << "restarted scanning" << e->path
              << "(now" << wasWatching + newWatching << "watchers)";
 
@@ -1879,7 +1879,7 @@ KDirWatch::KDirWatch(QObject *parent)
 {
     static QBasicAtomicInt nameCounter = Q_BASIC_ATOMIC_INITIALIZER(1);
     const int counter = nameCounter.fetchAndAddRelaxed(1); // returns the old value
-    setObjectName(QString::fromLatin1("KDirWatch-%1").arg(counter));
+    setObjectName(QStringLiteral("KDirWatch-%1").arg(counter));
 
     d->_isStopped = false;
 

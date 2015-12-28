@@ -179,7 +179,7 @@ QString KAboutLicense::text() const
 {
     QString result;
 
-    const QString lineFeed = QString::fromLatin1("\n\n");
+    const QString lineFeed = QStringLiteral("\n\n");
 
     if (d->_aboutData && !d->_aboutData->copyrightStatement().isEmpty()) {
         result = d->_aboutData->copyrightStatement() + lineFeed;
@@ -193,31 +193,31 @@ QString KAboutLicense::text() const
         break;
     case KAboutLicense::GPL_V2:
         knownLicense = true;
-        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("LICENSES/GPL_V2"));
+        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("LICENSES/GPL_V2"));
         break;
     case KAboutLicense::LGPL_V2:
         knownLicense = true;
-        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("LICENSES/LGPL_V2"));
+        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("LICENSES/LGPL_V2"));
         break;
     case KAboutLicense::BSDL:
         knownLicense = true;
-        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("LICENSES/BSD"));
+        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("LICENSES/BSD"));
         break;
     case KAboutLicense::Artistic:
         knownLicense = true;
-        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("LICENSES/ARTISTIC"));
+        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("LICENSES/ARTISTIC"));
         break;
     case KAboutLicense::QPL_V1_0:
         knownLicense = true;
-        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("LICENSES/QPL_V1.0"));
+        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("LICENSES/QPL_V1.0"));
         break;
     case KAboutLicense::GPL_V3:
         knownLicense = true;
-        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("LICENSES/GPL_V3"));
+        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("LICENSES/GPL_V3"));
         break;
     case KAboutLicense::LGPL_V3:
         knownLicense = true;
-        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QString::fromLatin1("LICENSES/LGPL_V3"));
+        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("LICENSES/LGPL_V3"));
         break;
     case KAboutLicense::Custom:
         if (!d->_licenseText.isEmpty()) {
@@ -456,7 +456,7 @@ KAboutData::KAboutData(const QString &_componentName,
     // match behaviour of other constructors
     d->_licenseList.append(KAboutLicense(KAboutLicense::Unknown, this));
     d->_bugEmailAddress = "submit@bugs.kde.org";
-    d->organizationDomain = QString::fromLatin1("kde.org");
+    d->organizationDomain = QStringLiteral("kde.org");
     d->desktopFileName = QStringLiteral("org.kde.%1").arg(d->_componentName);
 }
 

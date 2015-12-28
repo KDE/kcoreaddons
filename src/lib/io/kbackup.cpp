@@ -52,7 +52,7 @@ bool backupFile(const QString &qFilename, const QString &backupDir)
         return (simpleBackupFile(qFilename, backupDir, extension));
     }
 #endif
-    return (simpleBackupFile(qFilename, backupDir, QLatin1String("~")));
+    return (simpleBackupFile(qFilename, backupDir, QStringLiteral("~")));
 }
 
 bool simpleBackupFile(const QString &qFilename,
@@ -95,9 +95,9 @@ bool rcsBackupFile(const QString &qFilename,
         fileInfo.setFile(backupDir + QLatin1Char('/') + fileInfo.fileName());
     }
 
-    const QString cipath = QStandardPaths::findExecutable(QString::fromLatin1("ci"));
-    const QString copath = QStandardPaths::findExecutable(QString::fromLatin1("co"));
-    const QString rcspath = QStandardPaths::findExecutable(QString::fromLatin1("rcs"));
+    const QString cipath = QStandardPaths::findExecutable(QStringLiteral("ci"));
+    const QString copath = QStandardPaths::findExecutable(QStringLiteral("co"));
+    const QString rcspath = QStandardPaths::findExecutable(QStringLiteral("rcs"));
     if (cipath.isEmpty() || copath.isEmpty() || rcspath.isEmpty()) {
         return false;
     }
@@ -107,11 +107,11 @@ bool rcsBackupFile(const QString &qFilename,
     if (!backupDir.isEmpty()) {
         ci.setWorkingDirectory(backupDir);
     }
-    ci.start(cipath, QStringList() << QString::fromLatin1("-u") << fileInfo.filePath());
+    ci.start(cipath, QStringList() << QStringLiteral("-u") << fileInfo.filePath());
     if (!ci.waitForStarted()) {
         return false;
     }
-    ci.write(backupMessage.toLatin1());
+    ci.write(backupMessage.toLocal8Bit());
     ci.write(".");
     ci.closeWriteChannel();
     if (!ci.waitForFinished()) {
@@ -123,7 +123,7 @@ bool rcsBackupFile(const QString &qFilename,
     if (!backupDir.isEmpty()) {
         rcs.setWorkingDirectory(backupDir);
     }
-    rcs.start(rcspath, QStringList() << QString::fromLatin1("-U") << qBackupFilename);
+    rcs.start(rcspath, QStringList() << QStringLiteral("-U") << qBackupFilename);
     if (!rcs.waitForFinished()) {
         return false;
     }
@@ -178,7 +178,7 @@ bool numberedBackupFile(const QString &qFilename,
             int idex = sTemp.lastIndexOf(QLatin1Char('.'));
             if (idex > 0) {
                 bool ok;
-                uint num = sTemp.mid(idex + 1).toUInt(&ok);
+                uint num = sTemp.midRef(idex + 1).toUInt(&ok);
                 if (ok) {
                     if (num >= maxBackups) {
                         QFile::remove(fi.filePath());

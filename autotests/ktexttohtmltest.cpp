@@ -38,82 +38,82 @@ void KTextToHTMLTest::testGetEmailAddress()
     QVERIFY(ll1.getEmailAddress().isEmpty());
 
     // no '@' at scan position
-    KTextToHTMLHelper ll2(QLatin1String("foo@bar.baz"), 0);
+    KTextToHTMLHelper ll2(QStringLiteral("foo@bar.baz"), 0);
     QVERIFY(ll2.getEmailAddress().isEmpty());
 
     // '@' in local part
-    KTextToHTMLHelper ll3(QLatin1String("foo@bar@bar.baz"), 7);
+    KTextToHTMLHelper ll3(QStringLiteral("foo@bar@bar.baz"), 7);
     QVERIFY(ll3.getEmailAddress().isEmpty());
 
     // empty local part
-    KTextToHTMLHelper ll4(QLatin1String("@bar.baz"), 0);
+    KTextToHTMLHelper ll4(QStringLiteral("@bar.baz"), 0);
     QVERIFY(ll4.getEmailAddress().isEmpty());
-    KTextToHTMLHelper ll5(QLatin1String(".@bar.baz"), 1);
+    KTextToHTMLHelper ll5(QStringLiteral(".@bar.baz"), 1);
     QVERIFY(ll5.getEmailAddress().isEmpty());
-    KTextToHTMLHelper ll6(QLatin1String(" @bar.baz"), 1);
+    KTextToHTMLHelper ll6(QStringLiteral(" @bar.baz"), 1);
     QVERIFY(ll6.getEmailAddress().isEmpty());
-    KTextToHTMLHelper ll7(QLatin1String(".!#$%&'*+-/=?^_`{|}~@bar.baz"),
+    KTextToHTMLHelper ll7(QStringLiteral(".!#$%&'*+-/=?^_`{|}~@bar.baz"),
                     strlen(".!#$%&'*+-/=?^_`{|}~"));
     QVERIFY(ll7.getEmailAddress().isEmpty());
 
     // allowed special chars in local part of address
-    KTextToHTMLHelper ll8(QLatin1String("a.!#$%&'*+-/=?^_`{|}~@bar.baz"),
+    KTextToHTMLHelper ll8(QStringLiteral("a.!#$%&'*+-/=?^_`{|}~@bar.baz"),
                     strlen("a.!#$%&'*+-/=?^_`{|}~"));
-    QCOMPARE(ll8.getEmailAddress(), QLatin1String("a.!#$%&'*+-/=?^_`{|}~@bar.baz"));
+    QCOMPARE(ll8.getEmailAddress(), QStringLiteral("a.!#$%&'*+-/=?^_`{|}~@bar.baz"));
 
     // '@' in domain part
-    KTextToHTMLHelper ll9(QLatin1String("foo@bar@bar.baz"), 3);
+    KTextToHTMLHelper ll9(QStringLiteral("foo@bar@bar.baz"), 3);
     QVERIFY(ll9.getEmailAddress().isEmpty());
 
     // domain part without dot
-    KTextToHTMLHelper lla(QLatin1String("foo@bar"), 3);
+    KTextToHTMLHelper lla(QStringLiteral("foo@bar"), 3);
     QVERIFY(lla.getEmailAddress().isEmpty());
-    KTextToHTMLHelper llb(QLatin1String("foo@bar."), 3);
+    KTextToHTMLHelper llb(QStringLiteral("foo@bar."), 3);
     QVERIFY(llb.getEmailAddress().isEmpty());
-    KTextToHTMLHelper llc(QLatin1String(".foo@bar"), 4);
+    KTextToHTMLHelper llc(QStringLiteral(".foo@bar"), 4);
     QVERIFY(llc.getEmailAddress().isEmpty());
-    KTextToHTMLHelper lld(QLatin1String("foo@bar "), 3);
+    KTextToHTMLHelper lld(QStringLiteral("foo@bar "), 3);
     QVERIFY(lld.getEmailAddress().isEmpty());
-    KTextToHTMLHelper lle(QLatin1String(" foo@bar"), 4);
+    KTextToHTMLHelper lle(QStringLiteral(" foo@bar"), 4);
     QVERIFY(lle.getEmailAddress().isEmpty());
-    KTextToHTMLHelper llf(QLatin1String("foo@bar-bar"), 3);
+    KTextToHTMLHelper llf(QStringLiteral("foo@bar-bar"), 3);
     QVERIFY(llf.getEmailAddress().isEmpty());
 
     // empty domain part
-    KTextToHTMLHelper llg(QLatin1String("foo@"), 3);
+    KTextToHTMLHelper llg(QStringLiteral("foo@"), 3);
     QVERIFY(llg.getEmailAddress().isEmpty());
-    KTextToHTMLHelper llh(QLatin1String("foo@."), 3);
+    KTextToHTMLHelper llh(QStringLiteral("foo@."), 3);
     QVERIFY(llh.getEmailAddress().isEmpty());
-    KTextToHTMLHelper lli(QLatin1String("foo@-"), 3);
+    KTextToHTMLHelper lli(QStringLiteral("foo@-"), 3);
     QVERIFY(lli.getEmailAddress().isEmpty());
 
     // simple address
-    KTextToHTMLHelper llj(QLatin1String("foo@bar.baz"), 3);
-    QCOMPARE(llj.getEmailAddress(), QLatin1String("foo@bar.baz"));
-    KTextToHTMLHelper llk(QLatin1String("foo@bar.baz."), 3);
-    QCOMPARE(llk.getEmailAddress(), QLatin1String("foo@bar.baz"));
-    KTextToHTMLHelper lll(QLatin1String(".foo@bar.baz"), 4);
-    QCOMPARE(lll.getEmailAddress(), QLatin1String("foo@bar.baz"));
-    KTextToHTMLHelper llm(QLatin1String("foo@bar.baz-"), 3);
-    QCOMPARE(llm.getEmailAddress(), QLatin1String("foo@bar.baz"));
-    KTextToHTMLHelper lln(QLatin1String("-foo@bar.baz"), 4);
-    QCOMPARE(lln.getEmailAddress(), QLatin1String("foo@bar.baz"));
-    KTextToHTMLHelper llo(QLatin1String("foo@bar.baz "), 3);
-    QCOMPARE(llo.getEmailAddress(), QLatin1String("foo@bar.baz"));
-    KTextToHTMLHelper llp(QLatin1String(" foo@bar.baz"), 4);
-    QCOMPARE(llp.getEmailAddress(), QLatin1String("foo@bar.baz"));
-    KTextToHTMLHelper llq(QLatin1String("foo@bar-bar.baz"), 3);
-    QCOMPARE(llq.getEmailAddress(), QLatin1String("foo@bar-bar.baz"));
+    KTextToHTMLHelper llj(QStringLiteral("foo@bar.baz"), 3);
+    QCOMPARE(llj.getEmailAddress(), QStringLiteral("foo@bar.baz"));
+    KTextToHTMLHelper llk(QStringLiteral("foo@bar.baz."), 3);
+    QCOMPARE(llk.getEmailAddress(), QStringLiteral("foo@bar.baz"));
+    KTextToHTMLHelper lll(QStringLiteral(".foo@bar.baz"), 4);
+    QCOMPARE(lll.getEmailAddress(), QStringLiteral("foo@bar.baz"));
+    KTextToHTMLHelper llm(QStringLiteral("foo@bar.baz-"), 3);
+    QCOMPARE(llm.getEmailAddress(), QStringLiteral("foo@bar.baz"));
+    KTextToHTMLHelper lln(QStringLiteral("-foo@bar.baz"), 4);
+    QCOMPARE(lln.getEmailAddress(), QStringLiteral("foo@bar.baz"));
+    KTextToHTMLHelper llo(QStringLiteral("foo@bar.baz "), 3);
+    QCOMPARE(llo.getEmailAddress(), QStringLiteral("foo@bar.baz"));
+    KTextToHTMLHelper llp(QStringLiteral(" foo@bar.baz"), 4);
+    QCOMPARE(llp.getEmailAddress(), QStringLiteral("foo@bar.baz"));
+    KTextToHTMLHelper llq(QStringLiteral("foo@bar-bar.baz"), 3);
+    QCOMPARE(llq.getEmailAddress(), QStringLiteral("foo@bar-bar.baz"));
 }
 
 void KTextToHTMLTest::testGetUrl()
 {
     QStringList brackets;
-    brackets << QLatin1String("") << QLatin1String("");   // no brackets
-    brackets << QLatin1String("<") << QLatin1String(">");
-    brackets << QLatin1String("[") << QLatin1String("]");
-    brackets << QLatin1String("\"") << QLatin1String("\"");
-    brackets << QLatin1String("<link>") << QLatin1String("</link>");
+    brackets << QStringLiteral("") << QStringLiteral("");   // no brackets
+    brackets << QStringLiteral("<") << QStringLiteral(">");
+    brackets << QStringLiteral("[") << QStringLiteral("]");
+    brackets << QStringLiteral("\"") << QStringLiteral("\"");
+    brackets << QStringLiteral("<link>") << QStringLiteral("</link>");
 
     for (int i = 0; i < brackets.count(); i += 2) {
         testGetUrl2(brackets[ i ], brackets[ i + 1 ]);
@@ -123,31 +123,31 @@ void KTextToHTMLTest::testGetUrl()
 void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
 {
     QStringList schemas;
-    schemas << QLatin1String("http://");
-    schemas << QLatin1String("https://");
-    schemas << QLatin1String("vnc://");
-    schemas << QLatin1String("fish://");
-    schemas << QLatin1String("ftp://");
-    schemas << QLatin1String("ftps://");
-    schemas << QLatin1String("sftp://");
-    schemas << QLatin1String("smb://");
-    schemas << QLatin1String("file://");
+    schemas << QStringLiteral("http://");
+    schemas << QStringLiteral("https://");
+    schemas << QStringLiteral("vnc://");
+    schemas << QStringLiteral("fish://");
+    schemas << QStringLiteral("ftp://");
+    schemas << QStringLiteral("ftps://");
+    schemas << QStringLiteral("sftp://");
+    schemas << QStringLiteral("smb://");
+    schemas << QStringLiteral("file://");
 
     QStringList urls;
-    urls << QLatin1String("www.kde.org");
-    urls << QLatin1String("user@www.kde.org");
-    urls << QLatin1String("user:pass@www.kde.org");
-    urls << QLatin1String("user:pass@www.kde.org:1234");
-    urls << QLatin1String("user:pass@www.kde.org:1234/sub/path");
-    urls << QLatin1String("user:pass@www.kde.org:1234/sub/path?a=1");
-    urls << QLatin1String("user:pass@www.kde.org:1234/sub/path?a=1#anchor");
-    urls << QLatin1String("user:pass@www.kde.org:1234/sub/\npath  \n /long/  path \t  ?a=1#anchor");
-    urls << QLatin1String("user:pass@www.kde.org:1234/sub/path/special(123)?a=1#anchor");
-    urls << QLatin1String("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor");
-    urls << QLatin1String("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla");
-    urls << QLatin1String("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla]");
-    urls << QLatin1String("user:pass@www.kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
-    urls << QLatin1String("user:pass@www.kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?"
+    urls << QStringLiteral("www.kde.org");
+    urls << QStringLiteral("user@www.kde.org");
+    urls << QStringLiteral("user:pass@www.kde.org");
+    urls << QStringLiteral("user:pass@www.kde.org:1234");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path?a=1");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path?a=1#anchor");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/sub/\npath  \n /long/  path \t  ?a=1#anchor");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path/special(123)?a=1#anchor");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla]");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?"
                           "\n\t  \n\t   a=1#anchor[bla]");
 
     foreach (const QString &schema, schemas) {
@@ -183,20 +183,20 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     }
 
     QStringList urlsWithoutSchema;
-    urlsWithoutSchema << QLatin1String(".kde.org");
-    urlsWithoutSchema << QLatin1String(".kde.org:1234/sub/path");
-    urlsWithoutSchema << QLatin1String(".kde.org:1234/sub/path?a=1");
-    urlsWithoutSchema << QLatin1String(".kde.org:1234/sub/path?a=1#anchor");
-    urlsWithoutSchema << QLatin1String(".kde.org:1234/sub/path/special(123)?a=1#anchor");
-    urlsWithoutSchema << QLatin1String(".kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor");
-    urlsWithoutSchema << QLatin1String(".kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla");
-    urlsWithoutSchema << QLatin1String(".kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla]");
-    urlsWithoutSchema << QLatin1String(".kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
-    urlsWithoutSchema << QLatin1String(".kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?"
+    urlsWithoutSchema << QStringLiteral(".kde.org");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path?a=1");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path?a=1#anchor");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path/special(123)?a=1#anchor");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla]");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?"
                                        "\n\t  \n\t   a=1#anchor[bla]");
 
     QStringList starts;
-    starts << QLatin1String("www") << QLatin1String("ftp") << QLatin1String("news:www");
+    starts << QStringLiteral("www") << QStringLiteral("ftp") << QStringLiteral("news:www");
 
     foreach (const QString &start, starts) {
         foreach (QString url, urlsWithoutSchema) {   //krazy:exclude=foreach
@@ -231,7 +231,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     }
 
     // test max url length
-    QString url = QLatin1String("http://www.kde.org/this/is/a_very_loooooong_url/test/test/test");
+    QString url = QStringLiteral("http://www.kde.org/this/is/a_very_loooooong_url/test/test/test");
     {
         KTextToHTMLHelper ll(url, 0, 10);
         QVERIFY(ll.getUrl().isEmpty());    // url too long
@@ -251,7 +251,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
 
     // mailto
     {
-        QString addr = QLatin1String("mailto:test@kde.org");
+        QString addr = QStringLiteral("mailto:test@kde.org");
         QString test(left + addr + right);
         KTextToHTMLHelper ll(test, left.length());
 

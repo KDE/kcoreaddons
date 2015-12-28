@@ -71,7 +71,7 @@ void KMacroExpanderBase::expandMacros(QString &str)
             pos -= len;
             continue;
         }
-        rsts = rst.join(QLatin1String(" "));
+        rsts = rst.join(QLatin1Char(' '));
         rst.clear();
         str.replace(pos, len, rsts);
         pos += rsts.length();
