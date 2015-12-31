@@ -147,8 +147,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla");
     urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla]");
     urls << QStringLiteral("user:pass@www.kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
-    urls << QStringLiteral("user:pass@www.kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?"
-                          "\n\t  \n\t   a=1#anchor[bla]");
+    urls << QStringLiteral("user:pass@www.kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?") +
+                          QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
 
     foreach (const QString &schema, schemas) {
         foreach (QString url, urls) {   //krazy:exclude=foreach
@@ -192,8 +192,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla");
     urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla]");
     urlsWithoutSchema << QStringLiteral(".kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
-    urlsWithoutSchema << QStringLiteral(".kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?"
-                                       "\n\t  \n\t   a=1#anchor[bla]");
+    urlsWithoutSchema << QStringLiteral(".kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?") +
+                                       QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
 
     QStringList starts;
     starts << QStringLiteral("www") << QStringLiteral("ftp") << QStringLiteral("news:www");
