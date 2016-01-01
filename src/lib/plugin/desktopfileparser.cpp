@@ -246,7 +246,7 @@ QVector<CustomPropertyDefinition>* parseServiceTypesFile(QString path)
         path = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                QStringLiteral("kservicetypes5/") + path);
         if (path.isEmpty()) {
-            qCCritical(DESKTOPPARSER) << "Could not locate service type file" << originalPath;
+            qCCritical(DESKTOPPARSER) << "Could not locate service type file kservicetypes5/" << originalPath << ", tried" << QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
             return nullptr;
         }
     }
