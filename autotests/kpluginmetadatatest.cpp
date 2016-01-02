@@ -330,7 +330,9 @@ private Q_SLOTS:
         QCOMPARE(md.name(), QStringLiteral("Test"));
 
         QCOMPARE(md.value("X-Plasma-MainScript"), QStringLiteral("ui/main.qml"));
-        QCOMPARE(md.rawData().value("X-Purpose-PluginTypes").toArray(), QJsonArray( { QStringLiteral("Export") } ));
+        QJsonArray expected;
+        expected.append(QStringLiteral("Export"));
+        QCOMPARE(md.rawData().value("X-Purpose-PluginTypes").toArray(), expected);
     }
 };
 
