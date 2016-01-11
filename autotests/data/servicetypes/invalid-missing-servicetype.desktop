@@ -1,0 +1,7 @@
+[Desktop Entry]
+# Type must be ServiceType otherwise this file is invalid
+Type=Service
+
+# as this file is invalid check that this property is not converted
+[PropertyDef::ShouldNotBeConvertedToInt]
+Type=int

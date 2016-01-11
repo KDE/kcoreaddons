@@ -255,8 +255,55 @@ private Q_SLOTS:
         QCOMPARE(e.error, QJsonParseError::NoError);
         QTest::newRow("authors") << authorInput << authorsExpected << false << QStringList();
 
+        // test case-insensitive conversion of boolean keys
+        const QString boolServiceType = QFINDTESTDATA("data/servicetypes/bool-servicetype.desktop");
+        QVERIFY(!boolServiceType.isEmpty());
+
+        QByteArray boolInput1 = "[Desktop Entry]\nType=Service\nX-Test-Bool=true\n";
+        QByteArray boolInput2 = "[Desktop Entry]\nType=Service\nX-Test-Bool=TRue\n";
+        QByteArray boolInput3 = "[Desktop Entry]\nType=Service\nX-Test-Bool=false\n";
+        QByteArray boolInput4 = "[Desktop Entry]\nType=Service\nX-Test-Bool=FALse\n";
+
+        auto boolResultTrue = QJsonDocument::fromJson("{\"KPlugin\":{},\"X-Test-Bool\": true}", &e).object();
+        QCOMPARE(e.error, QJsonParseError::NoError);
+        auto boolResultFalse = QJsonDocument::fromJson("{\"KPlugin\":{},\"X-Test-Bool\": false}", &e).object();
+        QCOMPARE(e.error, QJsonParseError::NoError);
+        QTest::newRow("bool true") << boolInput1 << boolResultTrue << false << QStringList(boolServiceType);
+        QTest::newRow("bool TRue") << boolInput2 << boolResultTrue << false << QStringList(boolServiceType);
+        QTest::newRow("bool false") << boolInput3 << boolResultFalse << false << QStringList(boolServiceType);
+        QTest::newRow("bool FALse") << boolInput4 << boolResultFalse << false << QStringList(boolServiceType);
+
+        // test conversion of kcookiejar.desktop (for some reason the wrong boolean values were committed)
+        QByteArray kcookiejarInput =
+        "[Desktop Entry]\n"
+        "Type=Service\n"
+        "Name=Cookie Jar\n"
+        "Comment=Stores network cookies\n"
+        "X-KDE-ServiceTypes=KDEDModule\n"
+        "X-KDE-Library=kf5/kded/kcookiejar\n"
+        "X-KDE-DBus-ModuleName=kcookiejar\n"
+        "X-KDE-Kded-autoload=false\n"
+        "X-KDE-Kded-load-on-demand=true\n";
+        auto kcookiejarResult = QJsonDocument::fromJson(
+        "{\n"
+        "  \"KPlugin\": {\n"
+        "    \"Description\": \"Stores network cookies\",\n"
+        "    \"Name\": \"Cookie Jar\",\n"
+        "    \"ServiceTypes\": [\n"
+        "      \"KDEDModule\"\n"
+        "    ]\n"
+        "  },\n"
+        "\"X-KDE-DBus-ModuleName\": \"kcookiejar\",\n"
+        "\"X-KDE-Kded-autoload\": false,\n"
+        "\"X-KDE-Kded-load-on-demand\": true\n"
+        "}\n", &e).object();
+        const QString kdedmoduleServiceType = QFINDTESTDATA("data/servicetypes/fake-kdedmodule.desktop");
+        QVERIFY(!kdedmoduleServiceType.isEmpty());
+        QTest::newRow("kcookiejar") << kcookiejarInput << kcookiejarResult << false << QStringList(kdedmoduleServiceType);
+
 
     }
+
     void testDesktopToJson()
     {
         QTemporaryFile output;
