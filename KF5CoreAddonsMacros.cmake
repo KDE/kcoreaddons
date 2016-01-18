@@ -104,6 +104,8 @@ endfunction()
 #
 # Example:
 #   kcoreaddons_add_plugin(kdeconnect_share JSON kdeconnect_share.json SOURCES ${kdeconnect_share_SRCS})
+#
+# Since 5.10.0
 
 function(kcoreaddons_add_plugin plugin)
     set(options)
