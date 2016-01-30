@@ -2376,6 +2376,7 @@ Notes:
   <mime-type type="application/x-kourse">
     <comment>Kolf course</comment>
     <comment xml:lang="ar">دورة Kolf</comment>
+    <comment xml:lang="ast">Campu de Kolf</comment>
     <comment xml:lang="bs">Kolfov teren</comment>
     <comment xml:lang="ca">Camp del Kolf</comment>
     <comment xml:lang="ca@valencia">Camp del Kolf</comment>
@@ -2983,6 +2984,7 @@ Notes:
   <mime-type type="application/x-kcachegrind">
     <comment>Cachegrind/Callgrind profile dump</comment>
     <comment xml:lang="ar">تشكيلة تفريغ Cachegrind/Callgrind </comment>
+    <comment xml:lang="ast">Volquiáu de perfiles de Cachegrind/Callgrind</comment>
     <comment xml:lang="bs">Cachegrindov/Callgrindov profilni popis</comment>
     <comment xml:lang="ca">Bolcat de l'anàlisi de rendiment del Cachegrind/Callgrind</comment>
     <comment xml:lang="ca@valencia">Bolcat de l'anàlisi de rendiment del Cachegrind/Callgrind</comment>
@@ -3042,6 +3044,7 @@ Notes:
   <mime-type type="application/x-uml">
     <comment>Umbrello UML Modeller file</comment>
     <comment xml:lang="ar">ملف Umbrello UML Modeller </comment>
+    <comment xml:lang="ast">Ficheru del modelador UML Umbrello</comment>
     <comment xml:lang="bs">Umbrello UML datoteka</comment>
     <comment xml:lang="ca">Fitxer del modelador UML Umbrello</comment>
     <comment xml:lang="ca@valencia">Fitxer del modelador UML Umbrello</comment>
