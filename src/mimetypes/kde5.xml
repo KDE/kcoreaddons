@@ -2255,6 +2255,7 @@ Notes:
   <mime-type type="application/x-tuberling">
     <comment>potato</comment>
     <comment xml:lang="ar">بطاطا</comment>
+    <comment xml:lang="ast">potato</comment>
     <comment xml:lang="bs">Krompirkova datoteka</comment>
     <comment xml:lang="ca">Patata</comment>
     <comment xml:lang="ca@valencia">Patata</comment>
