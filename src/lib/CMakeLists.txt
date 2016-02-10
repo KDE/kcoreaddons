@@ -53,6 +53,7 @@ endif ()
 
 set(libkcoreaddons_SRCS
     kaboutdata.cpp
+    kcoreaddons.cpp
     io/kautosavefile.cpp
     io/kdirwatch.cpp
     io/kfilesystemtype.cpp
@@ -123,7 +124,9 @@ set_target_properties(KF5CoreAddons PROPERTIES VERSION   ${KCOREADDONS_VERSION_S
 )
 
 ecm_generate_headers(KCoreAddons_HEADERS
-    HEADER_NAMES KAboutData
+    HEADER_NAMES
+        KAboutData
+        KCoreAddons
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
 ecm_generate_headers(KCoreAddons_HEADERS
