@@ -34,6 +34,15 @@
 #include <algorithm>  // std::find
 #include <functional> // std::function
 
+#if defined(__BIONIC__)
+static inline struct passwd * getpwent() { return nullptr; }
+inline void setpwent() { }
+static inline void setgrent() { }
+static inline struct group * getgrent() { return nullptr; }
+inline void endpwent() { }
+static inline void endgrent() { }
+#endif
+
 class KUser::Private : public QSharedData
 {
 public:
@@ -56,7 +65,11 @@ public:
     void fillPasswd(const passwd *p)
     {
         if (p) {
+#ifndef __BIONIC__
             QString gecos = QString::fromLocal8Bit(p->pw_gecos);
+#else
+            QString gecos = QString();
+#endif
             QStringList gecosList = gecos.split(QLatin1Char(','));
             // fill up the list, should be at least 4 entries
             while (gecosList.size() < 4) {

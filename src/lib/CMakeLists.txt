@@ -108,9 +108,10 @@ target_link_libraries(KF5CoreAddons
   PRIVATE
     ${kcoreaddons_OPTIONAL_LIBS}
 )
-if(NOT WIN32)
-    target_link_libraries(KF5CoreAddons PRIVATE pthread)
-else()
+
+target_link_libraries(KF5CoreAddons PRIVATE Threads::Threads)
+
+if(WIN32)
     target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv)
 endif()
 
