@@ -36,7 +36,7 @@ void KJobTest::testEmitResult_data()
     QTest::addColumn<int>("errorCode");
     QTest::addColumn<QString>("errorText");
 
-    QTest::newRow("no error") << (int)KJob::NoError << QString();
+    QTest::newRow("no error") << int(KJob::NoError) << QString();
     QTest::newRow("error no text") << 2 << QString();
     QTest::newRow("error with text") << 6 << "oops! an error? naaah, really?";
 }
@@ -89,7 +89,7 @@ void KJobTest::testProgressTracking()
 
     QCOMPARE(processed_spy.size(), 1);
     QCOMPARE(processed_spy.at(0).at(0).value<KJob *>(), static_cast<KJob *>(job));
-    QCOMPARE(processed_spy.at(0).at(2).value<qulonglong>(), (qulonglong)1);
+    QCOMPARE(processed_spy.at(0).at(2).value<qulonglong>(), qulonglong(1));
     QCOMPARE(total_spy.size(), 0);
     QCOMPARE(percent_spy.size(), 0);
 
@@ -101,10 +101,10 @@ void KJobTest::testProgressTracking()
     QCOMPARE(processed_spy.size(), 1);
     QCOMPARE(total_spy.size(), 1);
     QCOMPARE(total_spy.at(0).at(0).value<KJob *>(), job);
-    QCOMPARE(total_spy.at(0).at(2).value<qulonglong>(), (qulonglong)10);
+    QCOMPARE(total_spy.at(0).at(2).value<qulonglong>(), qulonglong(10));
     QCOMPARE(percent_spy.size(), 1);
     QCOMPARE(percent_spy.at(0).at(0).value<KJob *>(), job);
-    QCOMPARE(percent_spy.at(0).at(1).value<unsigned long>(), (unsigned long)10);
+    QCOMPARE(percent_spy.at(0).at(1).value<unsigned long>(), static_cast<unsigned long>(10));
 
     /* We announce a new percentage by hand.
      * Total, and processed didn't change, so no signal is emitted for them.
@@ -115,7 +115,7 @@ void KJobTest::testProgressTracking()
     QCOMPARE(total_spy.size(), 1);
     QCOMPARE(percent_spy.size(), 2);
     QCOMPARE(percent_spy.at(1).at(0).value<KJob *>(), job);
-    QCOMPARE(percent_spy.at(1).at(1).value<unsigned long>(), (unsigned long)15);
+    QCOMPARE(percent_spy.at(1).at(1).value<unsigned long>(), static_cast<unsigned long>(15));
 
     /* We make some progress.
      * Processed size and percent are signaled.
@@ -124,11 +124,11 @@ void KJobTest::testProgressTracking()
 
     QCOMPARE(processed_spy.size(), 2);
     QCOMPARE(processed_spy.at(1).at(0).value<KJob *>(), job);
-    QCOMPARE(processed_spy.at(1).at(2).value<qulonglong>(), (qulonglong)3);
+    QCOMPARE(processed_spy.at(1).at(2).value<qulonglong>(), qulonglong(3));
     QCOMPARE(total_spy.size(), 1);
     QCOMPARE(percent_spy.size(), 3);
     QCOMPARE(percent_spy.at(2).at(0).value<KJob *>(), job);
-    QCOMPARE(percent_spy.at(2).at(1).value<unsigned long>(), (unsigned long)30);
+    QCOMPARE(percent_spy.at(2).at(1).value<unsigned long>(), static_cast<unsigned long>(30));
 
     /* We set a new total size, but equals to the previous one.
      * No signal is emitted.
@@ -146,11 +146,11 @@ void KJobTest::testProgressTracking()
 
     QCOMPARE(processed_spy.size(), 3);
     QCOMPARE(processed_spy.at(2).at(0).value<KJob *>(), job);
-    QCOMPARE(processed_spy.at(2).at(2).value<qulonglong>(), (qulonglong)0);
+    QCOMPARE(processed_spy.at(2).at(2).value<qulonglong>(), qulonglong(0));
     QCOMPARE(total_spy.size(), 1);
     QCOMPARE(percent_spy.size(), 4);
     QCOMPARE(percent_spy.at(3).at(0).value<KJob *>(), job);
-    QCOMPARE(percent_spy.at(3).at(1).value<unsigned long>(), (unsigned long)0);
+    QCOMPARE(percent_spy.at(3).at(1).value<unsigned long>(), static_cast<unsigned long>(0));
 
     /* We process more than the total size!?
      * Signals both percentage and new processed size.
@@ -162,11 +162,11 @@ void KJobTest::testProgressTracking()
 
     QCOMPARE(processed_spy.size(), 4);
     QCOMPARE(processed_spy.at(3).at(0).value<KJob *>(), job);
-    QCOMPARE(processed_spy.at(3).at(2).value<qulonglong>(), (qulonglong)15);
+    QCOMPARE(processed_spy.at(3).at(2).value<qulonglong>(), qulonglong(15));
     QCOMPARE(total_spy.size(), 1);
     QCOMPARE(percent_spy.size(), 5);
     QCOMPARE(percent_spy.at(4).at(0).value<KJob *>(), job);
-    QCOMPARE(percent_spy.at(4).at(1).value<unsigned long>(), (unsigned long)150);
+    QCOMPARE(percent_spy.at(4).at(1).value<unsigned long>(), static_cast<unsigned long>(150));
 
     delete job;
 }
@@ -176,7 +176,7 @@ void KJobTest::testExec_data()
     QTest::addColumn<int>("errorCode");
     QTest::addColumn<QString>("errorText");
 
-    QTest::newRow("no error") << (int)KJob::NoError << QString();
+    QTest::newRow("no error") << int(KJob::NoError) << QString();
     QTest::newRow("error no text") << 2 << QString();
     QTest::newRow("error with text") << 6 << "oops! an error? naaah, really?";
 }
@@ -215,13 +215,13 @@ void KJobTest::testKill_data()
     QTest::addColumn<int>("resultEmitCount");
     QTest::addColumn<int>("finishedEmitCount");
 
-    QTest::newRow("killed with result") << (int)KJob::EmitResult
-                                        << (int)KJob::KilledJobError
+    QTest::newRow("killed with result") << int(KJob::EmitResult)
+                                        << int(KJob::KilledJobError)
                                         << QString()
                                         << 1
                                         << 1;
-    QTest::newRow("killed quietly") << (int)KJob::Quietly
-                                    << (int)KJob::KilledJobError
+    QTest::newRow("killed quietly") << int(KJob::Quietly)
+                                    << int(KJob::KilledJobError)
                                     << QString()
                                     << 0
                                     << 1;
@@ -249,7 +249,7 @@ void KJobTest::testKill()
 
     QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject*)));
 
-    job->kill((KJob::KillVerbosity)killVerbosity);
+    job->kill(static_cast<KJob::KillVerbosity>(killVerbosity));
     loop.processEvents(QEventLoop::AllEvents, 2000);
 
     QCOMPARE(m_lastError, errorCode);

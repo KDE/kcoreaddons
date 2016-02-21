@@ -30,7 +30,7 @@ class KTextToHTMLEmoticonsInterface
 {
 public:
     KTextToHTMLEmoticonsInterface() {}
-    virtual ~KTextToHTMLEmoticonsInterface() {}
+    virtual ~KTextToHTMLEmoticonsInterface() {} // KF6 TODO: de-inline (-Wweak-vtables)
 
     virtual QString parseEmoticons(const QString &text,
                                    bool strictParse = false,

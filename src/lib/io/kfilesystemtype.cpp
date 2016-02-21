@@ -92,7 +92,7 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 // Reverse-engineering without C++ code:
 // strace stat -f /mnt 2>&1|grep statfs|grep mnt, and look for f_type
 
-KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
+static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
     struct statfs buf;
     if (statfs(path.constData(), &buf) != 0) {

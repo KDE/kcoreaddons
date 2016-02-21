@@ -37,7 +37,6 @@ struct CustomPropertyDefinition;
 struct ServiceTypeDefinition
 {
     ServiceTypeDefinition(const QVector<CustomPropertyDefinition> &defs);
-    ~ServiceTypeDefinition();
 
     static ServiceTypeDefinition fromFiles(const QStringList &paths);
     /**

@@ -109,7 +109,7 @@ QString KTextToHTMLHelper::getEmailAddress()
         // determine the domain part of the email address
         int dotPos = INT_MAX;
         int end = mPos + 1;
-        while (end < (int)mText.length() &&
+        while (end < mText.length() &&
                 (mText[end].isLetterOrNumber() ||
                  mText[end] == QLatin1Char('@') || // allow @ to find invalid email addresses
                  mText[end] == QLatin1Char('.') ||
@@ -228,7 +228,7 @@ QString KTextToHTMLHelper::getUrl()
 
         url.reserve(mMaxUrlLen);    // avoid allocs
         int start = mPos;
-        while ((mPos < (int)mText.length()) &&
+        while ((mPos < mText.length()) &&
                 (mText[mPos].isPrint() || mText[mPos].isSpace()) &&
                 ((afterUrl.isNull() && !mText[mPos].isSpace()) ||
                  (!afterUrl.isNull() && mText[mPos] != afterUrl))) {
@@ -330,12 +330,12 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
     KTextToHTMLHelper helper(plainText, maxUrlLen, maxAddressLen);
 
     QString str;
-    QString result((QChar *)0, (int)helper.mText.length() * 2);
+    QString result(static_cast<QChar *>(Q_NULLPTR), helper.mText.length() * 2);
     QChar ch;
     int x;
     bool startOfLine = true;
 
-    for (helper.mPos = 0, x = 0; helper.mPos < (int)helper.mText.length();
+    for (helper.mPos = 0, x = 0; helper.mPos < helper.mText.length();
             ++helper.mPos, ++x) {
         ch = helper.mText[helper.mPos];
         if (flags & PreserveSpaces) {

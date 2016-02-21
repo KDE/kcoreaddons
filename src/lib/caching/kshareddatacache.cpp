@@ -856,18 +856,18 @@ struct SharedMemory {
         // Declare the comparison function that we'll use to pass to qSort,
         // based on our cache eviction policy.
         bool (*compareFunction)(const IndexTableEntry &, const IndexTableEntry &);
-        switch ((int) evictionPolicy.load()) {
-        case (int) KSharedDataCache::EvictLeastOftenUsed:
-        case (int) KSharedDataCache::NoEvictionPreference:
+        switch (evictionPolicy.load()) {
+        case KSharedDataCache::EvictLeastOftenUsed:
+        case KSharedDataCache::NoEvictionPreference:
         default:
             compareFunction = seldomUsedCompare;
             break;
 
-        case (int) KSharedDataCache::EvictLeastRecentlyUsed:
+        case KSharedDataCache::EvictLeastRecentlyUsed:
             compareFunction = lruCompare;
             break;
 
-        case (int) KSharedDataCache::EvictOldest:
+        case KSharedDataCache::EvictOldest:
             compareFunction = ageCompare;
             break;
         }
@@ -1340,7 +1340,7 @@ void SharedMemory::removeEntry(uint index)
     uint entriesToRemove = intCeil(entriesIndex[index].totalItemSize, cachePageSize());
     uint savedCacheSize = cacheAvail;
     for (uint i = firstPage; i < pageTableSize() &&
-            (uint) pageTableEntries[i].index == index; ++i) {
+            static_cast<uint>(pageTableEntries[i].index) == index; ++i) {
         pageTableEntries[i].index = -1;
         cacheAvail++;
     }
@@ -1497,7 +1497,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
         uint fileNameLength = 1 + encodedKey.length();
         uint requiredSize = fileNameLength + data.size();
         uint pagesNeeded = intCeil(requiredSize, d->shm->cachePageSize());
-        uint firstPage = (uint) - 1;
+        uint firstPage(-1);
 
         if (pagesNeeded >= d->shm->pageTableSize()) {
             qWarning() << key << "is too large to be cached.";

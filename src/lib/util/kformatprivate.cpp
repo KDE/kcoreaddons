@@ -60,7 +60,7 @@ QString KFormatPrivate::formatByteSize(double size, int precision,
     // If a specific unit conversion is given, use it directly.  Otherwise
     // search until the result is in [0, multiplier] (or out of our range).
     if (units == KFormat::DefaultBinaryUnits) {
-        while (qAbs(size) >= multiplier && unit < (int) KFormat::UnitYottaByte) {
+        while (qAbs(size) >= multiplier && unit < int(KFormat::UnitYottaByte)) {
             size /= multiplier;
             ++unit;
         }

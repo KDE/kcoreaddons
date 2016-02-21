@@ -52,7 +52,7 @@ class QSocketNotifier;
 #include <sys/types.h> // time_t, ino_t
 #include <ctime>
 
-#define invalid_ctime ((time_t)-1)
+#define invalid_ctime (static_cast<time_t>(-1))
 
 #if HAVE_QFILESYSTEMWATCHER
 #include <QtCore/QFileSystemWatcher>

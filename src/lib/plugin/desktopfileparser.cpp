@@ -316,10 +316,6 @@ ServiceTypeDefinition::ServiceTypeDefinition(const QVector< CustomPropertyDefini
 {
 }
 
-ServiceTypeDefinition::~ServiceTypeDefinition()
-{
-}
-
 ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
 {
     QVector<CustomPropertyDefinition> defs;

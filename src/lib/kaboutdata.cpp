@@ -510,7 +510,7 @@ KAboutData KAboutData::fromPluginMetaData(const KPluginMetaData &plugin)
     KAboutData ret(plugin.pluginId(), plugin.name(), plugin.version(), plugin.description(),
                    KAboutLicense::byKeyword(plugin.license()).key(), plugin.copyrightText(),
                    plugin.extraInformation(), plugin.website());
-    ret.setProgramIconName(plugin.iconName());
+    ret.d->programIconName = plugin.iconName();
     ret.d->_authorList = plugin.authors();
     ret.d->_translatorList = plugin.translators();
     ret.d->_creditList = plugin.otherContributors();
@@ -989,7 +989,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         if (d->_authorList.isEmpty()) {
             printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "This application was written by somebody who wants to remain anonymous.")));
         } else {
-            printf(qPrintable(QCoreApplication::translate("KAboutData CLI", "%s was written by:\n")), qPrintable(qAppName()));
+            printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "%s was written by:")), qPrintable(qAppName()));
             Q_FOREACH (const KAboutPerson &person, d->_authorList) {
                 QString authorData = QStringLiteral("    ") + person.name();
                 if (!person.emailAddress().isEmpty()) {
@@ -1002,7 +1002,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
             if (bugAddress() == QLatin1String("submit@bugs.kde.org") ) {
                 printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please use http://bugs.kde.org to report bugs.")));
             } else if (!bugAddress().isEmpty()) {
-                printf(qPrintable(QCoreApplication::translate("KAboutData CLI", "Please report bugs to %s.\n")), qPrintable(bugAddress()));
+                printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please report bugs to %s.")), qPrintable(bugAddress()));
             }
         } else {
             printf("%s\n", qPrintable(customAuthorPlainText()));

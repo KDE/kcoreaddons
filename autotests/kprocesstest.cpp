@@ -44,7 +44,7 @@ static QString recurse(KProcess::OutputChannelMode how)
 {
     QProcess p;
     p.setProcessChannelMode(QProcess::MergedChannels);
-    p.start(gargv[0], QStringList() << QString::number((int)how) << QStringLiteral("--nocrashhandler"));
+    p.start(gargv[0], QStringList() << QString::number(how) << QStringLiteral("--nocrashhandler"));
     p.waitForFinished();
     return p.readAllStandardOutput();
 }
@@ -99,7 +99,7 @@ static void recursor(char **argv)
     if (argv[1]) {
         KProcess p;
         p.setShellCommand("echo " EOUT "; echo " EERR " >&2");
-        p.setOutputChannelMode((KProcess::OutputChannelMode)atoi(argv[1]));
+        p.setOutputChannelMode(static_cast<KProcess::OutputChannelMode>(atoi(argv[1])));
         fputs(POUT, stdout);
         fflush(stdout);
         p.execute();

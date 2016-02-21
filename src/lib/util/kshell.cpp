@@ -20,21 +20,17 @@
 */
 
 #include "kshell.h"
+#include "kshell_p.h"
 #include "kuser.h"
 
 #include <QtCore/QDir>
 
-namespace KShell
-{
-
-QString homeDir(const QString &user)
+QString KShell::homeDir(const QString &user)
 {
     if (user.isEmpty()) {
         return QDir::homePath();
     }
     return KUser(user).homeDir();
-}
-
 }
 
 QString KShell::joinArgs(const QStringList &args)

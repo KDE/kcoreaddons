@@ -73,7 +73,7 @@ KRandomSequence &KRandomSequence::operator=(const KRandomSequence &a)
 //////////////////////////////////////////////////////////////////////////////
 void KRandomSequence::setSeed(long lngSeed1)
 {
-    setSeed((int)lngSeed1);
+    setSeed(static_cast<int>(lngSeed1));
 }
 
 void KRandomSequence::setSeed(int lngSeed1)
@@ -197,7 +197,7 @@ KRandomSequence::getDouble()
 unsigned long
 KRandomSequence::getLong(unsigned long max)
 {
-    return (unsigned long) getInt((int)max);
+    return getInt(static_cast<int>(max));
 }
 
 unsigned int
@@ -205,7 +205,7 @@ KRandomSequence::getInt(unsigned int max)
 {
     d->draw();
 
-    return max ? (((unsigned int) d->lngShufflePos) % max) : 0;
+    return max ? ((static_cast<unsigned int>(d->lngShufflePos)) % max) : 0;
 }
 
 bool
@@ -213,5 +213,5 @@ KRandomSequence::getBool()
 {
     d->draw();
 
-    return (((unsigned int) d->lngShufflePos) & 1);
+    return ((static_cast<unsigned int>(d->lngShufflePos)) & 1);
 }

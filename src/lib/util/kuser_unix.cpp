@@ -399,7 +399,7 @@ QString KUserGroup::name() const
     return d->name;
 }
 
-void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd *)> handleNextGroupUser)
+static void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd *)> handleNextGroupUser)
 {
     if (maxCount == 0) {
         return;

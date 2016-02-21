@@ -116,7 +116,6 @@ void KJob::finishJob(bool emitResult)
 
 bool KJob::kill(KillVerbosity verbosity)
 {
-    Q_D(KJob);
     if (doKill()) {
         setError(KilledJobError);
 
@@ -291,7 +290,6 @@ void KJob::setPercent(unsigned long percentage)
 
 void KJob::emitResult()
 {
-    Q_D(KJob);
     finishJob(true);
 }
 
@@ -301,7 +299,7 @@ void KJob::emitPercent(qulonglong processedAmount, qulonglong totalAmount)
     // calculate percents
     if (totalAmount) {
         unsigned long oldPercentage = d->percentage;
-        d->percentage = (unsigned long)(((float)(processedAmount) / (float)(totalAmount)) * 100.0);
+        d->percentage = 100.0 * processedAmount / totalAmount;
         if (d->percentage != oldPercentage) {
             emit percent(this, d->percentage);
         }

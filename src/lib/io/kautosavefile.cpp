@@ -168,7 +168,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
     return false;
 }
 
-QUrl extractManagedFilePath(const QString& staleFileName)
+static QUrl extractManagedFilePath(const QString& staleFileName)
 {
     const QStringRef sep = staleFileName.rightRef(3);
     int sepPos = staleFileName.indexOf(sep);

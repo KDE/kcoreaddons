@@ -83,6 +83,7 @@
 
 #endif // HAVE_SYS_INOTIFY_H
 
+Q_DECLARE_LOGGING_CATEGORY(KDIRWATCH)
 #if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
 // logging category for this framework, default: log stuff >= warning
 Q_LOGGING_CATEGORY(KDIRWATCH, "kf5.kcoreaddons.kdirwatch", QtWarningMsg)
@@ -132,8 +133,6 @@ static const char *methodToString(KDirWatch::Method method)
         return "Stat";
     case KDirWatch::QFSWatch:
         return "QFSWatch";
-    default:
-        return "ERROR!";
     }
 }
 
@@ -272,7 +271,7 @@ void KDirWatchPrivate::inotifyEventReceived()
 
     while (pending > 0) {
 
-        const int bytesToRead = qMin(pending, (int)sizeof(buf) - offsetStartRead);
+        const int bytesToRead = qMin<int>(pending, sizeof(buf) - offsetStartRead);
 
         int bytesAvailable = read(m_inotify_fd, &buf[offsetStartRead], bytesToRead);
         pending -= bytesAvailable;
@@ -280,7 +279,7 @@ void KDirWatchPrivate::inotifyEventReceived()
         offsetStartRead = 0;
 
         int offsetCurrent = 0;
-        while (bytesAvailable >= (int)sizeof(struct inotify_event)) {
+        while (bytesAvailable >= int(sizeof(struct inotify_event))) {
             const struct inotify_event *const event = reinterpret_cast<inotify_event *>(&buf[offsetCurrent]);
             const int eventSize = sizeof(struct inotify_event) + event->len;
             if (bytesAvailable < eventSize) {
@@ -984,7 +983,6 @@ void KDirWatchPrivate::addWatch(Entry *e)
     case KDirWatch::QFSWatch: entryAdded = useQFSWatch(e); break;
 #endif
     case KDirWatch::Stat: entryAdded = useStat(e); break;
-    default: break;
     }
 
     // Failing that try in order INotify, FAM, QFSWatch, Stat
@@ -2044,17 +2042,18 @@ KDirWatch::Method KDirWatch::internalMethod() const
     case KDirWatch::FAM: if (d->use_fam) {
             return KDirWatch::FAM;
         }
+        break;
 #endif
 #if HAVE_SYS_INOTIFY_H
     case KDirWatch::INotify: if (d->supports_inotify) {
             return KDirWatch::INotify;
         }
+        break;
 #endif
 #if HAVE_QFILESYSTEMWATCHER
     case KDirWatch::QFSWatch: return KDirWatch::QFSWatch;
 #endif
     case KDirWatch::Stat: return KDirWatch::Stat;
-    default: break;
     }
 
 #if HAVE_SYS_INOTIFY_H
@@ -2069,8 +2068,9 @@ KDirWatch::Method KDirWatch::internalMethod() const
 #endif
 #if HAVE_QFILESYSTEMWATCHER
     return KDirWatch::QFSWatch;
-#endif
+#else
     return KDirWatch::Stat;
+#endif
 }
 
 #include "moc_kdirwatch.cpp"

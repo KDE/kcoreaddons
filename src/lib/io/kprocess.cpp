@@ -58,12 +58,12 @@ KProcess::~KProcess()
 
 void KProcess::setOutputChannelMode(OutputChannelMode mode)
 {
-    QProcess::setProcessChannelMode((ProcessChannelMode)mode);
+    QProcess::setProcessChannelMode(static_cast<ProcessChannelMode>(mode));
 }
 
 KProcess::OutputChannelMode KProcess::outputChannelMode() const
 {
-    return (OutputChannelMode)QProcess::processChannelMode();
+    return static_cast<OutputChannelMode>(QProcess::processChannelMode());
 }
 
 void KProcess::setNextOpenMode(QIODevice::OpenMode mode)
@@ -298,7 +298,7 @@ int KProcess::startDetached()
     if (!QProcess::startDetached(d->prog, d->args, workingDirectory(), &pid)) {
         return 0;
     }
-    return (int) pid;
+    return static_cast<int>(pid);
 }
 
 // static
@@ -308,7 +308,7 @@ int KProcess::startDetached(const QString &exe, const QStringList &args)
     if (!QProcess::startDetached(exe, args, QString(), &pid)) {
         return 0;
     }
-    return (int) pid;
+    return static_cast<int>(pid);
 }
 
 // static
@@ -322,7 +322,7 @@ int KProcess::startDetached(const QStringList &argv)
 int KProcess::pid() const
 {
 #ifdef Q_OS_UNIX
-    return (int) QProcess::pid();
+    return static_cast<int>(QProcess::pid());
 #else
     return QProcess::pid() ? QProcess::pid()->dwProcessId : 0;
 #endif
