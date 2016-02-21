@@ -75,7 +75,7 @@ QString KAutoSaveFilePrivate::tempFileName()
     int pathLengthLimit = FILENAME_MAX - NamePadding - name.size() - protocol.size() - 9;
 
     QString junk = KRandom::randomString(NamePadding);
-    // tempName = fileName + junk.trunicated + protocol + _ + path.truncated + junk
+    // tempName = fileName + junk.truncated + protocol + _ + path.truncated + junk
     // This is done so that the separation between the filename and path can be determined
     name += junk.rightRef(3) + protocol + QLatin1Char('_') + path.leftRef(pathLengthLimit) + junk;
 

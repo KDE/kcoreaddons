@@ -47,7 +47,7 @@ void KAutoSaveFileTest::test_readWrite()
 
     QVERIFY(file.open());
 
-    QUrl normalFile(QFileInfo(file).absoluteFilePath());
+    QUrl normalFile = QUrl::fromLocalFile(QFileInfo(file).absoluteFilePath());
 
     //Test basic functionality
     KAutoSaveFile saveFile(normalFile);
