@@ -134,6 +134,8 @@ static const char *methodToString(KDirWatch::Method method)
     case KDirWatch::QFSWatch:
         return "QFSWatch";
     }
+    // not reached
+    return 0;
 }
 
 static const char s_envNfsPoll[] = "KDIRWATCH_NFSPOLLINTERVAL";
