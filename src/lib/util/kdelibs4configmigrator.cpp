@@ -72,7 +72,7 @@ bool Kdelibs4ConfigMigrator::migrate()
 
     Q_FOREACH (const QString &configFileName, d->configFiles) {
         const QString newConfigLocation
-            = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)
+            = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation)
               + QLatin1Char('/') + configFileName;
 
         if (QFile(newConfigLocation).exists()) {

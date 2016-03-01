@@ -25,6 +25,10 @@
 #include <QDebug>
 #include <QVector>
 
+#ifdef Q_OS_WIN
+# include <shlobj.h>
+#endif
+
 class Kdelibs4MigrationPrivate
 {
 public:
@@ -41,6 +45,13 @@ Kdelibs4Migration::Kdelibs4Migration()
         QDir homeDir = QDir::home();
         QVector<QString> testSubdirs;
         testSubdirs << QStringLiteral(KDE4_DEFAULT_HOME) << QStringLiteral(".kde4") << QStringLiteral(".kde");
+#ifdef Q_OS_WIN
+        WCHAR wPath[MAX_PATH + 1];
+        if (SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, wPath) == S_OK) {
+            testSubdirs << QDir::fromNativeSeparators(QString::fromUtf16((const ushort *) wPath)) +
+                           QStringLiteral("/" KDE4_DEFAULT_HOME);
+        }
+#endif
         Q_FOREACH (const QString &testSubdir, testSubdirs) {
             if (homeDir.exists(testSubdir)) {
                 //qDebug() << "Using" << testSubdir << "as the location of the old config file";
