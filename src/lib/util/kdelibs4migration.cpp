@@ -49,7 +49,7 @@ Kdelibs4Migration::Kdelibs4Migration()
         WCHAR wPath[MAX_PATH + 1];
         if (SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, wPath) == S_OK) {
             testSubdirs << QDir::fromNativeSeparators(QString::fromUtf16((const ushort *) wPath)) +
-                           QStringLiteral("/" KDE4_DEFAULT_HOME);
+                           QLatin1String("/" KDE4_DEFAULT_HOME);
         }
 #endif
         Q_FOREACH (const QString &testSubdir, testSubdirs) {
