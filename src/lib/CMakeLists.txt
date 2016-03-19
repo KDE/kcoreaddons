@@ -109,7 +109,7 @@ target_link_libraries(KF5CoreAddons
     ${kcoreaddons_OPTIONAL_LIBS}
 )
 
-target_link_libraries(KF5CoreAddons PRIVATE Threads::Threads)
+target_link_libraries(KF5CoreAddons PRIVATE ${CMAKE_THREAD_LIBS_INIT})
 
 if(WIN32)
     target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv)
