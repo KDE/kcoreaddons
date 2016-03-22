@@ -146,6 +146,7 @@ KAboutLicense::Private::Private(LicenseKey licenseType, const KAboutData *aboutD
 
 KAboutLicense::Private::Private(const KAboutData *aboutData)
     : QSharedData(),
+      _licenseKey(Unknown),
       _aboutData(aboutData)
 {
 }
@@ -989,7 +990,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         if (d->_authorList.isEmpty()) {
             printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "This application was written by somebody who wants to remain anonymous.")));
         } else {
-            printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "%s was written by:")), qPrintable(qAppName()));
+            printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "%1 was written by:").arg(qAppName())));
             Q_FOREACH (const KAboutPerson &person, d->_authorList) {
                 QString authorData = QStringLiteral("    ") + person.name();
                 if (!person.emailAddress().isEmpty()) {
@@ -1002,7 +1003,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
             if (bugAddress() == QLatin1String("submit@bugs.kde.org") ) {
                 printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please use http://bugs.kde.org to report bugs.")));
             } else if (!bugAddress().isEmpty()) {
-                printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please report bugs to %s.")), qPrintable(bugAddress()));
+                printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please report bugs to %1.").arg(bugAddress())));
             }
         } else {
             printf("%s\n", qPrintable(customAuthorPlainText()));

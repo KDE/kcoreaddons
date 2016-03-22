@@ -177,7 +177,11 @@ KDirWatchPrivate::KDirWatchPrivate()
       statEntries(0),
       delayRemove(false),
       rescan_all(false),
-      rescan_timer()
+      rescan_timer(),
+#if HAVE_SYS_INOTIFY_H
+      mSn(Q_NULLPTR),
+#endif
+      _isStopped(false)
 {
     timer.setObjectName(QStringLiteral("KDirWatchPrivate::timer"));
     connect(&timer, SIGNAL(timeout()), this, SLOT(slotRescan()));
@@ -1880,8 +1884,6 @@ KDirWatch::KDirWatch(QObject *parent)
     static QBasicAtomicInt nameCounter = Q_BASIC_ATOMIC_INITIALIZER(1);
     const int counter = nameCounter.fetchAndAddRelaxed(1); // returns the old value
     setObjectName(QStringLiteral("KDirWatch-%1").arg(counter));
-
-    d->_isStopped = false;
 
     if (counter == 1) { // very first KDirWatch instance
         // Must delete QFileSystemWatcher before qApp is gone - bug 261541

@@ -46,10 +46,10 @@ int KRandom::random()
         bool opened = urandom.open(QIODevice::ReadOnly | QIODevice::Unbuffered);
         if (!opened || urandom.read(reinterpret_cast<char *>(&seed), sizeof(seed)) != sizeof(seed)) {
             // No /dev/urandom... try something else.
-            srand(getpid());
-            seed = rand() + time(0);
+            qsrand(getpid());
+            seed = qrand() + time(0);
         }
-        srand(seed);
+        qsrand(seed);
     }
     return rand();
 }

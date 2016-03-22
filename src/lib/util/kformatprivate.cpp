@@ -257,8 +257,7 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
 
     }
 
-    // Should never reach here
-    Q_ASSERT(false);
+    Q_UNREACHABLE();
     return QString();
 }
 
@@ -363,7 +362,7 @@ QString KFormatPrivate::formatSpelloutDuration(quint64 msecs) const
 
 QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatType format) const
 {
-    int daysTo = QDate::currentDate().daysTo(date);
+    const int daysTo = QDate::currentDate().daysTo(date);
     if (daysTo > 7 || daysTo < -7) {
         return m_locale.toString(date, format);
     }
@@ -388,8 +387,7 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
     {
         return tr("Next %1").arg(m_locale.dayName(date.dayOfWeek(), format));
     }
-
-    return m_locale.toString(date, format);
+    Q_UNREACHABLE();
 }
 
 QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const
