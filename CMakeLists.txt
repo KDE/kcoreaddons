@@ -33,10 +33,12 @@ set_package_properties(FAM PROPERTIES
 
 set(HAVE_FAM ${FAM_FOUND})
 
-include(CheckIncludeFiles)
-check_include_files(sys/inotify.h SYS_INOTIFY_H_FOUND)
-set(HAVE_SYS_INOTIFY_H ${SYS_INOTIFY_H_FOUND})
-
+option(ENABLE_INOTIFY "Try to use inotify for directory monitoring" ON)
+if(ENABLE_INOTIFY)
+    include(CheckIncludeFiles)
+    check_include_files(sys/inotify.h SYS_INOTIFY_H_FOUND)
+    set(HAVE_SYS_INOTIFY_H ${SYS_INOTIFY_H_FOUND})
+endif()
 
 # Generate io/config-kdirwatch.h
 configure_file(src/lib/io/config-kdirwatch.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/lib/io/config-kdirwatch.h)
