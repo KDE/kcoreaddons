@@ -45,6 +45,12 @@ struct passwd;
 struct group;
 #endif
 
+// The following is to avoid compile errors using msvc, and it is done
+// using a constant to avoid helpful people accidentally cleaning this
+// not quite pretty thing and breaking it for people on windows.
+// See https://git.reviewboard.kde.org/r/127598/ for details
+#define KCOREADDONS_UINT_MAX (std::numeric_limits<uint>::max)()
+
 /** A platform independent user or group ID.
  *
  *
@@ -368,13 +374,13 @@ public:
      * @param maxCount the maximum number of groups to return
      * @return all groups of the user
      */
-    QList<KUserGroup> groups(uint maxCount = std::numeric_limits<uint>::max()) const;
+    QList<KUserGroup> groups(uint maxCount = KCOREADDONS_UINT_MAX) const;
 
     /**
      * @param maxCount the maximum number of groups to return
      * @return all group names of the user
      */
-    QStringList groupNames(uint maxCount = std::numeric_limits<uint>::max()) const;
+    QStringList groupNames(uint maxCount = KCOREADDONS_UINT_MAX) const;
 
     enum UserProperty { FullName, RoomNumber, WorkPhone, HomePhone };
 
@@ -397,13 +403,13 @@ public:
      * @param maxCount the maximum number of users to return
      * @return all users of the system.
      */
-    static QList<KUser> allUsers(uint maxCount = std::numeric_limits<uint>::max());
+    static QList<KUser> allUsers(uint maxCount = KCOREADDONS_UINT_MAX);
 
     /**
     * @param maxCount the maximum number of users to return
     * @return all user names of the system.
     */
-    static QStringList allUserNames(uint maxCount = std::numeric_limits<uint>::max());
+    static QStringList allUserNames(uint maxCount = KCOREADDONS_UINT_MAX);
 
 private:
     class Private;
@@ -536,13 +542,13 @@ public:
      * @param maxCount the maximum number of users to return
      * @return a list of all users of the group
      */
-    QList<KUser> users(uint maxCount = std::numeric_limits<uint>::max()) const;
+    QList<KUser> users(uint maxCount = KCOREADDONS_UINT_MAX) const;
 
     /**
      * @param maxCount the maximum number of groups to return
      * @return a list of all user login names of the group
      */
-    QStringList userNames(uint maxCount = std::numeric_limits<uint>::max()) const;
+    QStringList userNames(uint maxCount = KCOREADDONS_UINT_MAX) const;
 
     /**
      * Destructor.
@@ -553,13 +559,13 @@ public:
      * @param maxCount the maximum number of groups to return
      * @return a list of all groups on this system
      */
-    static QList<KUserGroup> allGroups(uint maxCount = std::numeric_limits<uint>::max());
+    static QList<KUserGroup> allGroups(uint maxCount = KCOREADDONS_UINT_MAX);
 
     /**
      * @param maxCount the maximum number of groups to return
      * @return a list of all group names on this system
      */
-    static QStringList allGroupNames(uint maxCount = std::numeric_limits<uint>::max());
+    static QStringList allGroupNames(uint maxCount = KCOREADDONS_UINT_MAX);
 
 private:
     class Private;
