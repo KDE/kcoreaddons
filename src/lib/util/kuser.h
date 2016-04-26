@@ -46,7 +46,7 @@ struct group;
 #endif
 
 // The following is to avoid compile errors using msvc, and it is done
-// using a constant to avoid helpful people accidentally cleaning this
+// using a common #define to avoid helpful people accidentally cleaning this
 // not quite pretty thing and breaking it for people on windows.
 // See https://git.reviewboard.kde.org/r/127598/ for details
 #define KCOREADDONS_UINT_MAX (std::numeric_limits<uint>::max)()
