@@ -51,7 +51,7 @@ int KRandom::random()
         }
         qsrand(seed);
     }
-    return rand();
+    return qrand();
 }
 
 QString KRandom::randomString(int length)
