@@ -36,6 +36,7 @@ ecm_add_tests(
     kpluginloadertest.cpp
     kpluginmetadatatest.cpp
     kprocesstest.cpp
+    krandomtest.cpp
     kshareddatacachetest.cpp
     kshelltest.cpp
     kurlmimedatatest.cpp
