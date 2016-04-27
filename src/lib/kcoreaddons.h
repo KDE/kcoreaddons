@@ -23,6 +23,7 @@
 #define KCOREADDONS_H
 
 #include <kcoreaddons_export.h>
+#include <QString>
 
 namespace KCoreAddons
 {
@@ -46,7 +47,7 @@ namespace KCoreAddons
      * This may be a different version than the version the application was compiled against.
      * @since 5.20
      */
-    KCOREADDONS_EXPORT uint version();
+    KCOREADDONS_EXPORT unsigned int version();
 }
 
 #endif
