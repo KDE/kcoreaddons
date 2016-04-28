@@ -32,6 +32,8 @@
  * @short Helper class to create random data
  *
  * This namespace provides methods which generate random data.
+ * KRandom is not recommended for serious random-number generation needs,
+ * like cryptography.
  */
 namespace KRandom
 {
