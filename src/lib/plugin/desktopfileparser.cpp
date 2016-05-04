@@ -33,15 +33,11 @@
 #include <QMutex>
 #include <QStandardPaths>
 
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
 // in the desktoptojson binary enable debug messages by default, in the library only warning messages
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
 Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf5.kcoreaddons.desktopparser", QtDebugMsg)
 #else
 Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf5.kcoreaddons.desktopparser", QtWarningMsg)
-#endif
-#else
-Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf5.kcoreaddons.desktopparser")
 #endif
 
 

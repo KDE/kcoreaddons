@@ -43,12 +43,8 @@
 
 
 Q_DECLARE_LOGGING_CATEGORY(KABOUTDATA)
-#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
 // logging category for this framework, default: log stuff >= warning
 Q_LOGGING_CATEGORY(KABOUTDATA, "kf5.kcoreaddons.kaboutdata", QtWarningMsg)
-#else
-Q_LOGGING_CATEGORY(KABOUTDATA, "kf5.kcoreaddons.kaboutdata")
-#endif
 
 
 class KAboutPerson::Private
