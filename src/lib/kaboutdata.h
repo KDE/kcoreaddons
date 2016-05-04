@@ -314,8 +314,15 @@ public:
 
     /**
      * Returns the KAboutData for the application.
-     * This contains information such as authors, license, etc.
-     * provided that the main() called setApplicationData.
+     *
+     * This contains information such as authors, license, etc.,
+     * provided that setApplicationData has been called before.
+     * If not called before, the returned KAboutData will be initialized from the
+     * equivalent properties of QCoreApplication (and its subclasses),
+     * if an instance of that already exists.
+     * For the list of such properties see setApplicationData
+     * (before 5.22: limited to QCoreApplication::applicationName).
+     * @see setApplicationData
      */
     static KAboutData applicationData();
 
@@ -323,8 +330,17 @@ public:
      * Sets the application data for this application.
      *
      * In addition to changing the result of applicationData(), this initializes
-     * the relevant properties of QCoreApplication (and its subclasses) with
-     * information from @p aboutData.
+     * the equivalent properties of QCoreApplication (and its subclasses) with
+     * information from @p aboutData, if an instance of that already exists.
+     * Those properties are:
+       <ul>
+       <li>QCoreApplication::applicationName</li>
+       <li>QCoreApplication::applicationVersion</li>
+       <li>QCoreApplication::organizationDomain</li>
+       <li>QGuiApplication::applicationDisplayName</li>
+       <li>QGuiApplication::desktopFileName (since 5.16)</li>
+       </ul>
+     * @see applicationData
      */
     static void setApplicationData(const KAboutData &aboutData);
 

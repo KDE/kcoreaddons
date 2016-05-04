@@ -28,6 +28,7 @@ add_definitions( -DKDELIBS4CONFIGMIGRATOR_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/
 
 ecm_add_tests(
     kaboutdatatest.cpp
+    kaboutdataapplicationdatatest.cpp
     kautosavefiletest.cpp
     kcompositejobtest.cpp
     kformattest.cpp

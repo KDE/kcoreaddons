@@ -37,8 +37,19 @@
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QJsonObject>
+#include <QLoggingCategory>
 
 #include <algorithm>
+
+
+Q_DECLARE_LOGGING_CATEGORY(KABOUTDATA)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 4, 0)
+// logging category for this framework, default: log stuff >= warning
+Q_LOGGING_CATEGORY(KABOUTDATA, "kf5.kcoreaddons.kaboutdata", QtWarningMsg)
+#else
+Q_LOGGING_CATEGORY(KABOUTDATA, "kf5.kcoreaddons.kaboutdata")
+#endif
+
 
 class KAboutPerson::Private
 {
@@ -910,18 +921,62 @@ public:
 
 Q_GLOBAL_STATIC(KAboutDataRegistry, s_registry)
 
+namespace {
+
+void warnIfOutOfSync(const char *aboutDataString, const QString &aboutDataValue,
+                     const char *appDataString, const QString &appDataValue)
+{
+    if (aboutDataValue != appDataValue) {
+        qCWarning(KABOUTDATA) << appDataString <<appDataValue << "is out-of-sync with" << aboutDataString << aboutDataValue;
+    }
+}
+
+}
+
 KAboutData KAboutData::applicationData()
 {
-    if (!s_registry->m_appData) {
-        s_registry->m_appData = new KAboutData(QCoreApplication::applicationName(),
-                                               QString(),
-                                               QString());
+    QCoreApplication *app = QCoreApplication::instance();
+
+    KAboutData *aboutData = s_registry->m_appData;
+
+    // not yet existing
+    if (!aboutData) {
+        // init from current Q*Application data
+        aboutData = new KAboutData(QCoreApplication::applicationName(),
+                                   QString(),
+                                   QString());
+        // For applicationDisplayName & desktopFileName, which are only properties of QGuiApplication,
+        // we have to try to get them via the property system, as the static getter methods are
+        // part of QtGui only. Disadvantage: requires an app instance.
+        // Either get all or none of the properties & warn about it
+        if (app) {
+            aboutData->setOrganizationDomain(QCoreApplication::organizationDomain().toUtf8());
+            aboutData->setVersion(QCoreApplication::applicationVersion().toUtf8());
+            aboutData->setDisplayName(app->property("applicationDisplayName").toString());
+            aboutData->setDesktopFileName(app->property("desktopFileName").toString());
+        } else {
+            qCWarning(KABOUTDATA) << "Could not initialize the properties of KAboutData::applicationData by the equivalent properties from Q*Application: no app instance (yet) existing.";
+        }
+
+        s_registry->m_appData = aboutData;
+    } else {
+        // check if in-sync with Q*Application metadata, as their setters could have been called
+        // after the last KAboutData::setApplicationData, with different values
+        warnIfOutOfSync("KAboutData::applicationData().componentName", aboutData->componentName(),
+                        "QCoreApplication::applicationName", QCoreApplication::applicationName());
+        warnIfOutOfSync("KAboutData::applicationData().version", aboutData->version(),
+                        "QCoreApplication::applicationVersion", QCoreApplication::applicationVersion());
+        warnIfOutOfSync("KAboutData::applicationData().organizationDomain", aboutData->organizationDomain(),
+                        "QCoreApplication::organizationDomain", QCoreApplication::organizationDomain());
+        if (app) {
+            warnIfOutOfSync("KAboutData::applicationData().displayName", aboutData->displayName(),
+                            "QGuiApplication::applicationDisplayName", app->property("applicationDisplayName").toString());
+            warnIfOutOfSync("KAboutData::applicationData().desktopFileName", aboutData->desktopFileName(),
+                            "QGuiApplication::desktopFileName", app->property("desktopFileName").toString());
+        }
     }
-    if (s_registry->m_appData->displayName().isEmpty() && QCoreApplication::instance()) {
-        // ## add a bool to avoid doing this too often?
-        s_registry->m_appData->setDisplayName(QCoreApplication::instance()->property("applicationDisplayName").toString());
-    }
-    return *s_registry->m_appData;
+
+    return *aboutData;
 }
 
 void KAboutData::setApplicationData(const KAboutData &aboutData)
@@ -932,6 +987,10 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
         s_registry->m_appData = new KAboutData(aboutData);
     }
 
+    // For applicationDisplayName & desktopFileName, which are only properties of QGuiApplication,
+    // we have to try to set them via the property system, as the static getter methods are
+    // part of QtGui only. Disadvantage: requires an app instance.
+    // So set either all or none of the properties & warn about it
     QCoreApplication *app = QCoreApplication::instance();
     if (app) {
         app->setApplicationVersion(aboutData.version());
@@ -939,7 +998,16 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
         app->setOrganizationDomain(aboutData.organizationDomain());
         app->setProperty("applicationDisplayName", aboutData.displayName());
         app->setProperty("desktopFileName", aboutData.desktopFileName());
+    } else {
+        qCWarning(KABOUTDATA) << "Could not initialize the equivalent properties of Q*Application: no instance (yet) existing.";
     }
+    // KF6: Rethink the current relation between KAboutData::applicationData and the Q*Application metadata
+    // Always overwriting the Q*Application metadata here, but not updating back the KAboutData
+    // in applicationData() is unbalanced and can result in out-of-sync data if the Q*Application
+    // setters have been called meanwhile
+    // Options are to remove the overlapping properties of KAboutData for cleancode, or making the
+    // overlapping properties official shadow properties of their Q*Application countparts, though
+    // that increases behavioural complexity a little.
 }
 
 void KAboutData::registerPluginData(const KAboutData &aboutData)
