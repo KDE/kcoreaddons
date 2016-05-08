@@ -1,5 +1,6 @@
 /* This file is part of the KDE libraries
     Copyright (c) 2016 Michael Pyne <mpyne@kde.org>
+    Copyright (c) 2016 Arne Spiegelhauer <gm2.asp@gmail.com>
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Library General Public
@@ -26,10 +27,15 @@
 #include <QString>
 #include <QRegExp>
 #include <QVarLengthArray>
+#include <QTextStream>
+#include <QProcess>
 
+#include <iostream>
 #include <algorithm>
 
 typedef QVarLengthArray<int> intSequenceType;
+
+static const char *binpath;
 
 static bool seqsAreEqual(const intSequenceType &l, const intSequenceType &r)
 {
@@ -48,6 +54,28 @@ static bool seqsAreEqual(const intSequenceType &l, const intSequenceType &r)
     return l_first == last;
 }
 
+// Fills seq with random bytes produced by a new process. Seq should already
+// be sized to the needed amount of random numbers.
+static bool getChildRandSeq(intSequenceType &seq)
+{
+    QProcess subtestProcess;
+
+    // Launch a separate process to generate random numbers to test first-time
+    // seeding.
+    subtestProcess.start(binpath, QStringList() << QString::number(seq.count()));
+    subtestProcess.waitForFinished();
+
+    QTextStream childStream(subtestProcess.readAllStandardOutput());
+
+    std::generate(seq.begin(), seq.end(), [&]() {
+            int temp; childStream >> temp; return temp;
+            });
+
+    char c;
+    childStream >> c;
+    return c == '\n' && childStream.status() == QTextStream::Ok;
+}
+
 class KRandomTest : public QObject
 {
     Q_OBJECT
@@ -64,6 +92,15 @@ void KRandomTest::test_random()
 
     QVERIFY(testValue >= 0);
     QVERIFY(testValue < RAND_MAX);
+
+    // Verify seeding results in different numbers across different procs
+    // See bug 362161
+    intSequenceType out1(10), out2(10);
+
+    QVERIFY(getChildRandSeq(out1));
+    QVERIFY(getChildRandSeq(out2));
+
+    QVERIFY(!seqsAreEqual(out1, out2));
 }
 
 void KRandomTest::test_randomString()
@@ -113,6 +150,35 @@ void KRandomTest::test_KRS()
     QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) { return x < maxInt; }));
 }
 
-QTEST_MAIN(KRandomTest)
+// Used by getChildRandSeq... outputs random numbers to stdout and then
+// exits the process.
+static void childGenRandom(int count)
+{
+    // No logic to 300, just wanted to avoid it accidentally being 2.4B...
+    if (count <= 0 || count > 300) {
+        exit(-1);
+    }
+
+    while (--count > 0) {
+        std::cout << KRandom::random() << ' ';
+    }
+
+    std::cout << KRandom::random() << '\n';
+    exit(0);
+}
+
+// Manually implemented to dispatch to child process if needed to support
+// subtests
+int main(int argc, char *argv[])
+{
+    if (argc > 1) {
+        childGenRandom(std::atoi(argv[1]));
+        Q_UNREACHABLE();
+    }
+
+    binpath = argv[0];
+    KRandomTest randomTest;
+    return QTest::qExec(&randomTest);
+}
 
 #include "krandomtest.moc"
