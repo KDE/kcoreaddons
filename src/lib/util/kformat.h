@@ -159,6 +159,8 @@ public:
      */
     KFormat(const KFormat &other);
 
+    KFormat& operator=(const KFormat &other);
+
     /**
      * Destructor
      */

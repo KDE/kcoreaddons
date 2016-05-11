@@ -34,6 +34,12 @@ KFormat::KFormat(const KFormat &other)
 {
 }
 
+KFormat& KFormat::operator=(const KFormat &other)
+{
+    d = other.d;
+    return *this;
+}
+
 KFormat::~KFormat()
 {
 }
