@@ -70,6 +70,8 @@ bool Kdelibs4ConfigMigrator::migrate()
         return false;
     }
 
+    bool didSomething = false;
+
     Q_FOREACH (const QString &configFileName, d->configFiles) {
         const QString newConfigLocation
             = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation)
@@ -84,8 +86,10 @@ bool Kdelibs4ConfigMigrator::migrate()
 
         const QString oldConfigFile(migration.locateLocal("config", configFileName));
         if (!oldConfigFile.isEmpty()) {
-            QFile(oldConfigFile).copy(newConfigLocation);
-            qDebug()<<"old config "<<oldConfigFile << " was migrated to "<<newConfigLocation;
+            if (QFile(oldConfigFile).copy(newConfigLocation)) {
+                didSomething = true;
+                qDebug() << "config file" << oldConfigFile << "was migrated to" << newConfigLocation;
+            }
         }
     }
 
@@ -104,17 +108,22 @@ bool Kdelibs4ConfigMigrator::migrate()
 
             const QString oldConfigFile(migration.locateLocal("data", d->appName + QLatin1Char('/') + uiFileName));
             if (!oldConfigFile.isEmpty()) {
-                QFile(oldConfigFile).copy(newConfigLocation);
-                qDebug()<<"old config "<<oldConfigFile << " was migrated to "<<newConfigLocation;
+                if (QFile(oldConfigFile).copy(newConfigLocation)) {
+                    didSomething = true;
+                    qDebug() << "ui file" << oldConfigFile << "was migrated to" << newConfigLocation;
+                }
             }
         }
     }
 
     // Trigger KSharedConfig::openConfig()->reparseConfiguration() via the framework integration plugin
-    QPluginLoader lib(QStringLiteral("kf5/FrameworkIntegrationPlugin"));
-    QObject *rootObj = lib.instance();
-    if (rootObj) {
-        QMetaObject::invokeMethod(rootObj, "reparseConfiguration");
+    if (didSomething) {
+        QPluginLoader lib(QStringLiteral("kf5/FrameworkIntegrationPlugin"));
+        QObject *rootObj = lib.instance();
+        if (rootObj) {
+            QMetaObject::invokeMethod(rootObj, "reparseConfiguration");
+        }
     }
+
     return true;
 }
