@@ -25,8 +25,12 @@
 #include <QFile>
 #include <QFileInfo>
 #include <QDir>
-#include <QDebug>
+#include <QLoggingCategory>
 #include <QPluginLoader>
+
+Q_DECLARE_LOGGING_CATEGORY(MIGRATOR)
+// logging category for this framework, default: log stuff >= warning
+Q_LOGGING_CATEGORY(MIGRATOR, "kf5.kcoreaddons.kdelibs4configmigrator", QtWarningMsg)
 
 class Kdelibs4ConfigMigrator::Private
 {
@@ -88,7 +92,7 @@ bool Kdelibs4ConfigMigrator::migrate()
         if (!oldConfigFile.isEmpty()) {
             if (QFile(oldConfigFile).copy(newConfigLocation)) {
                 didSomething = true;
-                qDebug() << "config file" << oldConfigFile << "was migrated to" << newConfigLocation;
+                qCDebug(MIGRATOR) << "config file" << oldConfigFile << "was migrated to" << newConfigLocation;
             }
         }
     }
@@ -110,7 +114,7 @@ bool Kdelibs4ConfigMigrator::migrate()
             if (!oldConfigFile.isEmpty()) {
                 if (QFile(oldConfigFile).copy(newConfigLocation)) {
                     didSomething = true;
-                    qDebug() << "ui file" << oldConfigFile << "was migrated to" << newConfigLocation;
+                    qCDebug(MIGRATOR) << "ui file" << oldConfigFile << "was migrated to" << newConfigLocation;
                 }
             }
         }
