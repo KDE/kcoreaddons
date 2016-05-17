@@ -287,7 +287,7 @@ public:
      *     } else {
      *         return pluginGroup.readEntry(md.pluginName(), false);
      *     }
-     * }
+     * };
      * QList<QObject*> plugins = KPluginLoader::instantiatePlugins("myapp", filter);
      * @endcode
      *
@@ -298,7 +298,14 @@ public:
      * @param filter a callback function that returns @c true if the found plugin should be loaded
      * and @c false if it should be skipped. If this argument is omitted all plugins will be loaded.
      *
-     * @param parent the parent to set for the instantiated plugins
+     * @param parent the parent to set for the instantiated plugins, if the
+     * plugins were not already loaded.
+     *
+     * @note If the plugins have been previously loaded (via QPluginLoader,
+     * directly or due to this class) without being deleted in the meantime
+     * then they are not re-created or re-parented and will be returned using
+     * the parent they were originally created with. @sa
+     * QPluginLoader::instance().
      *
      * @return a list containing an instantiation of each plugin that met the filter criteria
      *
