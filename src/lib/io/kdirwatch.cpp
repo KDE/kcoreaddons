@@ -180,7 +180,7 @@ KDirWatchPrivate::KDirWatchPrivate()
       _isStopped(false)
 {
     // Debug unittest on CI
-    if (qAppName() == QLatin1String("kservicetest")) {
+    if (qAppName() == QLatin1String("kservicetest") || qAppName() == QLatin1String("filetypestest")) {
         s_verboseDebug = true;
     }
     timer.setObjectName(QStringLiteral("KDirWatchPrivate::timer"));
