@@ -88,7 +88,7 @@ Q_DECLARE_LOGGING_CATEGORY(KDIRWATCH)
 Q_LOGGING_CATEGORY(KDIRWATCH, "kf5.kcoreaddons.kdirwatch", QtWarningMsg)
 
 // set this to true for much more verbose debug output
-static const bool s_verboseDebug = false;
+static bool s_verboseDebug = false;
 
 static QThreadStorage<KDirWatchPrivate *> dwp_self;
 static KDirWatchPrivate *createPrivate()
@@ -179,6 +179,10 @@ KDirWatchPrivate::KDirWatchPrivate()
 #endif
       _isStopped(false)
 {
+    // Debug unittest on CI
+    if (qAppName() == QLatin1String("kservicetest")) {
+        s_verboseDebug = true;
+    }
     timer.setObjectName(QStringLiteral("KDirWatchPrivate::timer"));
     connect(&timer, SIGNAL(timeout()), this, SLOT(slotRescan()));
 
@@ -324,9 +328,9 @@ void KDirWatchPrivate::inotifyEventReceived()
 
                     const QString tpath = e->path + QLatin1Char('/') + path;
 
-                    //if (s_verboseDebug) {
-                    //  qCDebug(KDIRWATCH) << "got event" << "0x"+QString::number(event->mask, 16) << "for" << e->path;
-                    //}
+                    if (s_verboseDebug) {
+                      qCDebug(KDIRWATCH).nospace() << "got event 0x" << qPrintable(QString::number(event->mask, 16)) << " for " << e->path;
+                    }
 
                     if (event->mask & IN_DELETE_SELF) {
                         if (s_verboseDebug) {
