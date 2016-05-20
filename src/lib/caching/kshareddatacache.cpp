@@ -84,7 +84,7 @@ static unsigned int MurmurHashAligned(const void *key, int len, unsigned int see
 
     int align = reinterpret_cast<quintptr>(data) & 3;
 
-    if (align & (len >= 4)) {
+    if (align && len >= 4) {
         // Pre-load the temp registers
 
         unsigned int t = 0, d = 0;
