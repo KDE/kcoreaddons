@@ -11,3 +11,7 @@ libraries:
  - qmake: KCoreAddons
    cmake: "KF5::CoreAddons"
 cmakename: KF5CoreAddons
+
+public_lib: true
+group: Frameworks
+subgroup: Tier 1
