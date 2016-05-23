@@ -174,9 +174,9 @@ QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QStrin
         return value.toVariant().toStringList();
     } else {
         QString asString = value.isString() ? value.toString() : value.toVariant().toString();
+        const QString id = obj.value(QStringLiteral("KPlugin")).toObject().value(QStringLiteral("Id")).toString();
         qWarning() << "Expected JSON property" << key << "to be a string list."
-            " Treating it as a list with a single entry:" << asString << "in"
-            << obj.value(QStringLiteral("KPlugin")).toObject().value(QStringLiteral("Id")).toString();
+            " Treating it as a list with a single entry:" << asString << id.toLatin1().constData();
         return QStringList(asString);
     }
 }
@@ -188,7 +188,7 @@ QJsonValue KPluginMetaData::readTranslatedValue(const QJsonObject &jo, const QSt
     if (it != jo.constEnd()) {
         return it.value();
     }
-    const QString language = languageWithCountry.mid(0, languageWithCountry.indexOf(QLatin1Char('_')));
+    const QStringRef language = languageWithCountry.midRef(0, languageWithCountry.indexOf(QLatin1Char('_')));
     it = jo.constFind(key + QLatin1Char('[') + language + QLatin1Char(']'));
     if (it != jo.constEnd()) {
         return it.value();
