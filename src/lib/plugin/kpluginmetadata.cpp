@@ -175,7 +175,8 @@ QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QStrin
     } else {
         QString asString = value.isString() ? value.toString() : value.toVariant().toString();
         qWarning() << "Expected JSON property" << key << "to be a string list."
-            " Treating it as a list with a single entry:" << asString;
+            " Treating it as a list with a single entry:" << asString << "in"
+            << obj.value(QStringLiteral("KPlugin")).toObject().value(QStringLiteral("Id")).toString();
         return QStringList(asString);
     }
 }
