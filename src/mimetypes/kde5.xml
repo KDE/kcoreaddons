@@ -3707,7 +3707,7 @@ Notes:
     <comment xml:lang="uk">електронна книга Mobipocket</comment>
     <comment xml:lang="zh_CN">Mobipocket 电子书</comment>
     <comment xml:lang="zh_TW">Mobipocket e-book</comment>
-    <sub-class-of type="application/x-palm-database"/>
+    <sub-class-of type="application/vnd.palm"/>
     <generic-icon name="x-office-document"/>
     <glob pattern="*.mobi"/>
     <glob pattern="*.prc" />
