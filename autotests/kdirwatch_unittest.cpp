@@ -512,20 +512,24 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
     //QCOMPARE(KDE::stat(QFile::encodeName(file1), &stat_buf), 0);
     //qDebug() << "initial inode" << stat_buf.st_ino;
 
-    QFile::remove(file1);
-    // And recreate immediately, to try and fool KDirWatch with unchanged ctime/mtime ;)
-    // (This emulates the /etc/localtime case)
-    createFile(file1);
+    // Make sure this even works multiple times, as needed for ksycoca
+    for (int i = 0; i < 5; ++i) {
 
-    //QCOMPARE(KDE::stat(QFile::encodeName(file1), &stat_buf), 0);
-    //qDebug() << "new inode" << stat_buf.st_ino; // same!
+        QFile::remove(file1);
+        // And recreate immediately, to try and fool KDirWatch with unchanged ctime/mtime ;)
+        // (This emulates the /etc/localtime case)
+        createFile(file1);
 
-    {
-        QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
-        if(!waitForRecreationSignal(watch, file1)) {
-            // We may get a dirty signal here instead of a deleted/created set.
-            if (spyDirty.isEmpty() || !verifySignalPath(spyDirty, SIGNAL(dirty(QString)), file1)) {
-                QFAIL("Failed to detect file deletion and recreation through either a deleted/created signal pair or through a dirty signal!");
+        //QCOMPARE(KDE::stat(QFile::encodeName(file1), &stat_buf), 0);
+        //qDebug() << "new inode" << stat_buf.st_ino; // same!
+
+        {
+            QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
+            if(!waitForRecreationSignal(watch, file1)) {
+                // We may get a dirty signal here instead of a deleted/created set.
+                if (spyDirty.isEmpty() || !verifySignalPath(spyDirty, SIGNAL(dirty(QString)), file1)) {
+                    QFAIL("Failed to detect file deletion and recreation through either a deleted/created signal pair or through a dirty signal!");
+                }
             }
         }
     }
