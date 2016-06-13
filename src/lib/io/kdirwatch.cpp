@@ -820,22 +820,6 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path,
                 qCDebug(KDIRWATCH) << "Added already watched Entry" << path
                          << "(for" << sub_entry->path << ")";
             }
-#if HAVE_SYS_INOTIFY_H
-            Entry *e = &(*it);
-            if ((e->m_mode == INotifyMode) && (e->wd >= 0)) {
-                int mask = IN_DELETE | IN_DELETE_SELF | IN_CREATE | IN_MOVE | IN_MOVE_SELF | IN_DONT_FOLLOW;
-                if (!e->isDir) {
-                    mask |= IN_MODIFY | IN_ATTRIB;
-                } else {
-                    mask |= IN_ONLYDIR;
-                }
-
-                inotify_rm_watch(m_inotify_fd, e->wd);
-                e->wd = inotify_add_watch(m_inotify_fd, QFile::encodeName(e->path).data(),
-                                          mask);
-                //Q_ASSERT(e->wd >= 0); // fails in KDirListerTest::testDeleteCurrentDir
-            }
-#endif
         } else {
             (*it).addClient(instance, watchModes);
             if (s_verboseDebug) {
