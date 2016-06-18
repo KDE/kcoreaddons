@@ -45,8 +45,7 @@ void KJobTest::testEmitResult()
 {
     TestJob *job = new TestJob;
 
-    connect(job, SIGNAL(result(KJob*)),
-            this, SLOT(slotResult(KJob*)));
+    connect(job, &KJob::result, this, &KJobTest::slotResult);
 
     QFETCH(int, errorCode);
     QFETCH(QString, errorText);
@@ -191,10 +190,15 @@ void KJobTest::testExec()
     job->setError(errorCode);
     job->setErrorText(errorText);
 
+    int resultEmitted = 0;
+    // Prove to Kai Uwe that one can connect a job to a lambdas, despite the "private" signal
+    connect(job, &KJob::result, this, [&resultEmitted](KJob *) { ++resultEmitted; });
+
     QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject*)));
 
     bool status = job->exec();
 
+    QCOMPARE(resultEmitted, 1);
     QCOMPARE(status, (errorCode == KJob::NoError));
     QCOMPARE(job->error(),  errorCode);
     QCOMPARE(job->errorText(),  errorText);
@@ -231,10 +235,8 @@ void KJobTest::testKill()
 {
     TestJob *job = new TestJob;
 
-    connect(job, SIGNAL(result(KJob*)),
-            this, SLOT(slotResult(KJob*)));
-    connect(job, SIGNAL(finished(KJob*)),
-            this, SLOT(slotFinished(KJob*)));
+    connect(job, &KJob::result, this, &KJobTest::slotResult);
+    connect(job, &KJob::finished, this, &KJobTest::slotFinished);
 
     m_lastError = KJob::NoError;
     m_lastErrorText.clear();
