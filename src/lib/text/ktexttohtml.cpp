@@ -32,7 +32,7 @@
 
 #include <limits.h>
 
-#include <QDebug>
+#include "kcoreaddons_debug.h"
 
 static KTextToHTMLEmoticonsInterface *s_emoticonsInterface = 0;
 

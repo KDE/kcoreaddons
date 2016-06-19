@@ -19,7 +19,7 @@
 
 #include "kfilesystemtype.h"
 #include <QFile>
-#include <QDebug>
+#include "kcoreaddons_debug.h"
 //#include <errno.h>
 
 #ifndef Q_OS_WIN
@@ -96,7 +96,7 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
     struct statfs buf;
     if (statfs(path.constData(), &buf) != 0) {
-        //qDebug() << path << errno << strerror(errno);
+        //qCDebug(KCOREADDONS_DEBUG) << path << errno << strerror(errno);
         return KFileSystemType::Unknown;
     }
     switch (static_cast<unsigned long>(buf.f_type)) {

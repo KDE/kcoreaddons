@@ -23,6 +23,7 @@
 
 #include "kshareddatacache.h"
 #include "kshareddatacache_p.h" // Various auxiliary support code
+#include "kcoreaddons_debug.h"
 
 #include "qstandardpaths.h"
 #include <qplatformdefs.h>
@@ -443,7 +444,7 @@ struct SharedMemory {
         }
 
         if (!isProcessShared) {
-            qWarning() << "Cache initialized, but does not support being"
+            qCWarning(KCOREADDONS_DEBUG) << "Cache initialized, but does not support being"
                        << "shared across processes.";
         }
 
@@ -650,7 +651,7 @@ struct SharedMemory {
             return; // That was easy
         }
 
-        qDebug() << "Defragmenting the shared cache";
+        qCDebug(KCOREADDONS_DEBUG) << "Defragmenting the shared cache";
 
         // Just do a linear scan, and anytime there is free space, swap it
         // with the pages to its right. In order to meet the precondition
@@ -811,7 +812,7 @@ struct SharedMemory {
         // eviction order set for the cache until there is enough room
         // available to hold the number of pages we need.
 
-        qDebug() << "Removing old entries to free up" << numberNeeded << "pages,"
+        qCDebug(KCOREADDONS_DEBUG) << "Removing old entries to free up" << numberNeeded << "pages,"
                  << cacheAvail << "are already theoretically available.";
 
         if (cacheAvail > 3 * numberNeeded) {
@@ -893,7 +894,7 @@ struct SharedMemory {
                 throw KSDCCorrupted();
             }
 
-            qDebug() << "Removing entry of" << indexTable()[curIndex].totalItemSize
+            qCDebug(KCOREADDONS_DEBUG) << "Removing entry of" << indexTable()[curIndex].totalItemSize
                      << "size";
             removeEntry(curIndex);
         }
@@ -1066,7 +1067,7 @@ public:
                 // disambiguate against an uninitialized cache.
                 if (mapped->version != SharedMemory::PIXMAP_CACHE_VERSION &&
                         mapped->version > 0) {
-                    qWarning() << "Deleting wrong version of cache" << cacheName;
+                    qCWarning(KCOREADDONS_DEBUG) << "Deleting wrong version of cache" << cacheName;
 
                     // CAUTION: Potentially recursive since the recovery
                     // involves calling this function again.
@@ -1103,7 +1104,7 @@ public:
         // shared memory. If we don't get shared memory the disk info is ignored,
         // if we do get shared memory we never look at disk again.
         if (mapAddress == MAP_FAILED) {
-            qWarning() << "Failed to establish shared memory mapping, will fallback"
+            qCWarning(KCOREADDONS_DEBUG) << "Failed to establish shared memory mapping, will fallback"
                        << "to private memory -- memory usage will increase";
 
             mapAddress = QT_MMAP(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
@@ -1240,7 +1241,7 @@ public:
                 d->recoverCorruptedCache();
 
                 if (!d->shm) {
-                    qWarning() << "Lost the connection to shared memory for cache"
+                    qCWarning(KCOREADDONS_DEBUG) << "Lost the connection to shared memory for cache"
                                << d->m_cacheName;
                     return false;
                 }
@@ -1326,7 +1327,7 @@ void SharedMemory::removeEntry(uint index)
     // Update page table first
     pageID firstPage = entriesIndex[index].firstPage;
     if (firstPage < 0 || static_cast<quint32>(firstPage) >= pageTableSize()) {
-        qDebug() << "Trying to remove an entry which is already invalid. This "
+        qCDebug(KCOREADDONS_DEBUG) << "Trying to remove an entry which is already invalid. This "
                  << "cache is likely corrupt.";
         throw KSDCCorrupted();
     }
@@ -1475,7 +1476,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
             if (cullCollisions && (::time(0) - indices[position].lastUsedTime) > 60) {
                 indices[position].useCount >>= 1;
                 if (indices[position].useCount == 0) {
-                    qDebug() << "Overwriting existing old cached entry due to collision.";
+                    qCDebug(KCOREADDONS_DEBUG) << "Overwriting existing old cached entry due to collision.";
                     d->shm->removeEntry(position); // Remove it first
                     break;
                 }
@@ -1487,7 +1488,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
         }
 
         if (indices[position].useCount > 0 && indices[position].firstPage >= 0) {
-            //qDebug() << "Overwriting existing cached entry due to collision.";
+            //qCDebug(KCOREADDONS_DEBUG) << "Overwriting existing cached entry due to collision.";
             d->shm->removeEntry(position); // Remove it first
         }
 
@@ -1500,7 +1501,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
         uint firstPage(-1);
 
         if (pagesNeeded >= d->shm->pageTableSize()) {
-            qWarning() << key << "is too large to be cached.";
+            qCWarning(KCOREADDONS_DEBUG) << key << "is too large to be cached.";
             return false;
         }
 
@@ -1649,7 +1650,7 @@ void KSharedDataCache::deleteCache(const QString &cacheName)
     // Note that it is important to simply unlink the file, and not truncate it
     // smaller first to avoid SIGBUS errors and similar with shared memory
     // attached to the underlying inode.
-    qDebug() << "Removing cache at" << cachePath;
+    qCDebug(KCOREADDONS_DEBUG) << "Removing cache at" << cachePath;
     QFile::remove(cachePath);
 }
 

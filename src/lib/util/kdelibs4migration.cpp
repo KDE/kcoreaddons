@@ -22,7 +22,7 @@
 #include "kdelibs4migration.h"
 #include "config-kde4home.h"
 #include <QDir>
-#include <QDebug>
+#include "kcoreaddons_debug.h"
 #include <QVector>
 
 #ifdef Q_OS_WIN
@@ -39,7 +39,7 @@ Kdelibs4Migration::Kdelibs4Migration()
     : d(new Kdelibs4MigrationPrivate)
 {
     if (qEnvironmentVariableIsSet("KDEHOME")) {
-        //qDebug() << "Using KDEHOME as the location of the old config file";
+        //qCDebug(KCOREADDONS_DEBUG) << "Using KDEHOME as the location of the old config file";
         d->m_kdeHome = QString::fromLocal8Bit(qgetenv("KDEHOME"));
     } else {
         QDir homeDir = QDir::home();
@@ -54,7 +54,7 @@ Kdelibs4Migration::Kdelibs4Migration()
 #endif
         Q_FOREACH (const QString &testSubdir, testSubdirs) {
             if (homeDir.exists(testSubdir)) {
-                //qDebug() << "Using" << testSubdir << "as the location of the old config file";
+                //qCDebug(KCOREADDONS_DEBUG) << "Using" << testSubdir << "as the location of the old config file";
                 d->m_kdeHome = homeDir.filePath(testSubdir);
                 break;
             }
@@ -128,7 +128,7 @@ QString Kdelibs4Migration::saveLocation(const char *type, const QString &suffix)
             return dir;
         }
     }
-    qWarning() << "No such resource" << type;
+    qCWarning(KCOREADDONS_DEBUG) << "No such resource" << type;
     return QString();
 }
 

@@ -26,7 +26,7 @@
 #include <QLocale>
 #include <QPluginLoader>
 #include <QStringList>
-#include <QDebug>
+#include "kcoreaddons_debug.h"
 
 #include "kpluginloader.h"
 #include "kaboutdata.h"
@@ -67,7 +67,7 @@ KPluginMetaData::KPluginMetaData(const QString &file)
         QFile f(file);
         bool b = f.open(QIODevice::ReadOnly);
         if (!b) {
-            qWarning() << "Couldn't open" << file;
+            qCWarning(KCOREADDONS_DEBUG) << "Couldn't open" << file;
             return;
         }
         m_metaData = QJsonDocument::fromJson(f.readAll()).object();
@@ -175,7 +175,7 @@ QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QStrin
     } else {
         QString asString = value.isString() ? value.toString() : value.toVariant().toString();
         const QString id = obj.value(QStringLiteral("KPlugin")).toObject().value(QStringLiteral("Id")).toString();
-        qWarning() << "Expected JSON property" << key << "to be a string list."
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a string list."
             " Treating it as a list with a single entry:" << asString << id.toLatin1().constData();
         return QStringList(asString);
     }
@@ -209,7 +209,7 @@ QString KPluginMetaData::readTranslatedString(const QJsonObject &jo, const QStri
 static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson>* out) {
     KAboutPerson person = KAboutPerson::fromJSON(obj);
     if (person.name().isEmpty()) {
-        qWarning() << "Invalid plugin metadata: Attempting to create a KAboutPerson from json without 'Name' property:" << obj;
+        qCWarning(KCOREADDONS_DEBUG) << "Invalid plugin metadata: Attempting to create a KAboutPerson from json without 'Name' property:" << obj;
         return;
     }
     out->append(person);

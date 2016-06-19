@@ -30,6 +30,7 @@
 #include <QtCore/QLockFile>
 #include <QtCore/QStandardPaths>
 #include "krandom.h"
+#include "kcoreaddons_debug.h"
 
 class KAutoSaveFilePrivate
 {
@@ -54,7 +55,7 @@ static QStringList findAllStales(const QString &appName)
 
     Q_FOREACH (const QString &dir, dirs) {
         QDir appDir(dir + QStringLiteral("/stalefiles/") + appName);
-        //qDebug() << "Looking in" << appDir.absolutePath();
+        //qCDebug(KCOREADDONS_DEBUG) << "Looking in" << appDir.absolutePath();
         Q_FOREACH (const QString &file, appDir.entryList(QDir::Files)) {
             files << (appDir.absolutePath() + QLatin1Char('/') + file);
         }
@@ -160,7 +161,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
         if (d->lock->isLocked() || d->lock->tryLock()) {
             return true;
         } else {
-            qWarning()<<"Could not lock file:"<<tempFile;
+            qCWarning(KCOREADDONS_DEBUG)<<"Could not lock file:"<<tempFile;
             close();
         }
     }

@@ -25,7 +25,7 @@
 #include <QtCore/QDir>
 #include <QDirIterator>
 #include <QtCore/QFileInfo>
-#include <QDebug>
+#include "kcoreaddons_debug.h"
 #include <QCoreApplication>
 #include <QMutex>
 
@@ -90,7 +90,7 @@ KPluginLoader::KPluginLoader(const KPluginName &pluginName, QObject *parent)
     if (pluginName.isValid()) {
         d->loader->setFileName(pluginName.name());
         if (d->loader->fileName().isEmpty()) {
-            qWarning() << "Error loading plugin" << pluginName.name() << d->loader->errorString() << endl
+            qCWarning(KCOREADDONS_DEBUG) << "Error loading plugin" << pluginName.name() << d->loader->errorString() << endl
                        << "Plugin search paths are" << QCoreApplication::libraryPaths() << endl
                        << "The environment variable QT_PLUGIN_PATH might be not correctly set";
         }
@@ -117,7 +117,7 @@ KPluginFactory *KPluginLoader::factory()
     KPluginFactory *factory = qobject_cast<KPluginFactory *>(obj);
 
     if (factory == 0) {
-        qDebug() << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
+        qCDebug(KCOREADDONS_DEBUG) << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
         delete obj;
         d->errorString = tr("The library %1 does not offer a KPluginFactory.").arg(d->name);
     }
@@ -294,7 +294,7 @@ QList<QObject *> KPluginLoader::instantiatePlugins(const QString &directory,
         loader.setFileName(metadata.fileName());
         QObject* obj = loader.instance();
         if (!obj) {
-            qWarning().nospace() << "Could not instantiate plugin \"" << metadata.fileName() << "\": "
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "Could not instantiate plugin \"" << metadata.fileName() << "\": "
                 << loader.errorString();
             continue;
         }

@@ -476,7 +476,7 @@ static bool ensureFileAllocated(int fd, size_t fileSize)
 #ifdef __GNUC__
 #warning "This system does not seem to support posix_fallocate, which is needed to ensure KSharedDataCache's underlying files are fully committed to disk to avoid crashes with low disk space."
 #endif
-    qWarning() << "This system misses support for posix_fallocate()"
+    qCWarning(KCOREADDONS_DEBUG) << "This system misses support for posix_fallocate()"
                " -- ensure this partition has room for at least"
                << fileSize << "bytes.";
 

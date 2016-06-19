@@ -152,7 +152,7 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                     }
                     c = args.unicode()[pos++];
                 } while (c != QLatin1Char('\''));
-                cret += args.mid(spos, pos - spos - 1);
+                cret += args.midRef(spos, pos - spos - 1);
             } else if (c == QLatin1Char('"')) {
                 for (;;) {
                     if (pos >= args.length()) {

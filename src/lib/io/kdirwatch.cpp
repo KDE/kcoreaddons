@@ -43,6 +43,7 @@
 #include "kdirwatch.h"
 #include "kdirwatch_p.h"
 #include "kfilesystemtype.h"
+#include "kcoreaddons_debug.h"
 
 #include <io/config-kdirwatch.h>
 
@@ -855,13 +856,13 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path,
 #endif
 
         if (e->isDir && !isDir) {
-            qWarning() << "KDirWatch:" << path << "is a directory. Use addDir!";
+            qCWarning(KCOREADDONS_DEBUG) << "KDirWatch:" << path << "is a directory. Use addDir!";
         } else if (!e->isDir && isDir) {
             qWarning("KDirWatch: %s is a file. Use addFile!", qPrintable(path));
         }
 
         if (!e->isDir && (watchModes != KDirWatch::WatchDirOnly)) {
-            qWarning() << "KDirWatch:" << path << "is a file. You can't use recursive or "
+            qCWarning(KCOREADDONS_DEBUG) << "KDirWatch:" << path << "is a file. You can't use recursive or "
                        "watchFiles options";
             watchModes = KDirWatch::WatchDirOnly;
         }
@@ -1594,7 +1595,7 @@ void KDirWatchPrivate::famEventReceived()
 
     while (use_fam && FAMPending(&fc)) {
         if (FAMNextEvent(&fc, &fe) == -1) {
-            qWarning() << "FAM connection problem, switching to polling.";
+            qCWarning(KCOREADDONS_DEBUG) << "FAM connection problem, switching to polling.";
             use_fam = false;
             delete sn; sn = 0;
 
@@ -1737,7 +1738,7 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
 #else
 void KDirWatchPrivate::famEventReceived()
 {
-    qWarning() << "Fam event received but FAM is not supported";
+    qCWarning(KCOREADDONS_DEBUG) << "Fam event received but FAM is not supported";
 }
 #endif
 
@@ -1834,7 +1835,7 @@ void KDirWatchPrivate::fswEventReceived(const QString &path)
 void KDirWatchPrivate::fswEventReceived(const QString &path)
 {
     Q_UNUSED(path);
-    qWarning() << "QFileSystemWatcher event received but QFileSystemWatcher is not supported";
+    qCWarning(KCOREADDONS_DEBUG) << "QFileSystemWatcher event received but QFileSystemWatcher is not supported";
 }
 #endif    // HAVE_QFILESYSTEMWATCHER
 
@@ -1913,7 +1914,7 @@ void KDirWatch::removeDir(const QString &_path)
 {
     if (d) {
         if (!d->removeEntry(this, _path, 0)) {
-            qWarning() << "doesn't know" << _path;
+            qCWarning(KCOREADDONS_DEBUG) << "doesn't know" << _path;
         }
     }
 }
@@ -1922,7 +1923,7 @@ void KDirWatch::removeFile(const QString &_path)
 {
     if (d) {
         if (!d->removeEntry(this, _path, 0)) {
-            qWarning() << "doesn't know" << _path;
+            qCWarning(KCOREADDONS_DEBUG) << "doesn't know" << _path;
         }
     }
 }

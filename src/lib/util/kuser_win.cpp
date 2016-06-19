@@ -21,7 +21,7 @@
 
 #include "kuser.h"
 
-#include <QDebug>
+#include "kcoreaddons_debug.h"
 #include <QDir>
 #include <QStandardPaths>
 
@@ -156,7 +156,7 @@ void enumerateGroupsForUser(uint maxCount, const QString &name, Callback callbac
         NET_API_STATUS ret = NetUserGetGroups(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total);
         // if we return ERROR_MORE_DATA here it will result in an enless loop
         if (ret == ERROR_MORE_DATA) {
-            qWarning() << "NetUserGetGroups for user" << name << "returned ERROR_MORE_DATA. This should not happen!";
+            qCWarning(KCOREADDONS_DEBUG) << "NetUserGetGroups for user" << name << "returned ERROR_MORE_DATA. This should not happen!";
             ret = NERR_Success;
         }
         return ret;
@@ -226,13 +226,13 @@ public:
         WCHAR domainBuffer[UNLEN + 1];
         SID_NAME_USE use;
         if (!LookupAccountSidW(nullptr, uid.nativeId(), nameBuffer, &nameBufferLen, domainBuffer, &domainBufferLen, &use)) {
-            qWarning() << "Could not lookup user " << uid.toString() << "error =" << GetLastError();
+            qCWarning(KCOREADDONS_DEBUG) << "Could not lookup user " << uid.toString() << "error =" << GetLastError();
             return sharedNull;
         }
         QString loginName = QString::fromWCharArray(nameBuffer);
         QString domainName = QString::fromWCharArray(domainBuffer);
         if (use != SidTypeUser && use != SidTypeDeletedAccount) {
-            qWarning().nospace()
+            qCWarning(KCOREADDONS_DEBUG).nospace()
                 << "SID for " << domainName << "\\" << loginName << " (" << uid.toString()
                 << ") is not of type user (" << SidTypeUser << " or " << SidTypeDeletedAccount
                 << "). Got type " << use << " instead.";
@@ -273,7 +273,7 @@ public:
             homeDir = QString::fromWCharArray(userInfo11->usri11_home_dir);
             isAdmin = userInfo11->usri11_priv == USER_PRIV_ADMIN;
         } else {
-            qWarning().nospace() << "Could not get information for user " << domainName << "\\" << loginName
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "Could not get information for user " << domainName << "\\" << loginName
                                  << ": error code = " << status;
             return sharedNull;
         }
@@ -501,7 +501,7 @@ public:
             // must always be freed, even on error
             ScopedNetApiBuffer<GROUP_INFO_0> groupInfo((GROUP_INFO_0 *)groupInfoTmp);
             if (status != NERR_Success) {
-                qWarning() << "Failed to find group with name" << name << "error =" << status;
+                qCWarning(KCOREADDONS_DEBUG) << "Failed to find group with name" << name << "error =" << status;
                 groupInfo.reset();
             }
             if (!id.isValid()) {
@@ -537,7 +537,7 @@ static QString nameFromGroupId(KGroupId gid)
         if (eUse == SidTypeGroup || eUse == SidTypeWellKnownGroup) {
             name = QString::fromWCharArray(buffer);
         } else {
-            qWarning() << QString::fromWCharArray(buffer) << "is not a group, SID type is" << eUse;
+            qCWarning(KCOREADDONS_DEBUG) << QString::fromWCharArray(buffer) << "is not a group, SID type is" << eUse;
         }
     }
     return name;
@@ -814,7 +814,7 @@ static T sidFromName(const QString &name, Callback callback)
     SID_NAME_USE sidType;
     bool ok = LookupAccountNameW(nullptr, (LPCWSTR)name.utf16(), buffer, &sidLength, domainBuffer, &domainBufferSize, &sidType);
     if (!ok) {
-        qWarning() << "Failed to lookup account" << name << "error code =" << GetLastError();
+        qCWarning(KCOREADDONS_DEBUG) << "Failed to lookup account" << name << "error code =" << GetLastError();
         return T();
     }
     return callback(buffer, sidType);
@@ -825,7 +825,7 @@ KUserId KUserId::fromName(const QString &name)
     return sidFromName<KUserId>(name, [&](PSID sid, SID_NAME_USE sidType) -> KUserId {
         if (sidType != SidTypeUser && sidType != SidTypeDeletedAccount)
         {
-            qWarning().nospace() << "Failed to lookup user name " << name
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "Failed to lookup user name " << name
                 << ": resulting SID " << sidToString(sid) << " is not a user."
                 " Got SID type " << sidType << " instead.";
             return KUserId();
@@ -839,7 +839,7 @@ KGroupId KGroupId::fromName(const QString &name)
     return sidFromName<KGroupId>(name, [&](PSID sid, SID_NAME_USE sidType) -> KGroupId {
         if (sidType != SidTypeGroup && sidType != SidTypeWellKnownGroup)
         {
-            qWarning().nospace() << "Failed to lookup user name " << name
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "Failed to lookup user name " << name
                 << ": resulting SID " << sidToString(sid) << " is not a group."
                 " Got SID type " << sidType << " instead.";
             return KGroupId();

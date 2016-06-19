@@ -96,6 +96,11 @@ set(kcoreaddons_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/util/
 )
 
+ecm_qt_declare_logging_category(libkcoreaddons_SRCS
+                                HEADER kcoreaddons_debug.h
+                                IDENTIFIER KCOREADDONS_DEBUG
+                                CATEGORY_NAME org.kde.kcoreaddons)
+
 add_library(KF5CoreAddons ${libkcoreaddons_SRCS})
 generate_export_header(KF5CoreAddons BASE_NAME KCoreAddons)
 add_library(KF5::CoreAddons ALIAS KF5CoreAddons)
