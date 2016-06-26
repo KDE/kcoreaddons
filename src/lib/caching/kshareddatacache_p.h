@@ -26,6 +26,8 @@
 #include <QtCore/QSharedPointer>
 #include <qbasicatomic.h>
 
+#include "kcoreaddons_debug.h"
+
 #include <unistd.h> // Check for sched_yield
 #include <sched.h>  // sched_yield
 #include <errno.h>
