@@ -193,7 +193,8 @@ public:
         QPL = 5,
         QPL_V1_0 = 5,
         GPL_V3 = 6,
-        LGPL_V3 = 7
+        LGPL_V3 = 7,
+        LGPL_V2_1 = 8 ///< @since 5.25
     };
 
     /**
