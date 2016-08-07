@@ -1,0 +1,582 @@
+# translation of kdelibs4.po to Lithuanian
+# Ričardas Čepas <rch@richard.eu.org>, 2002-2004.
+# Donatas Glodenis <dgvirtual@akl.lt>, 2004-2009.
+# Gintautas Miselis <gintautas@miselis.lt>, 2008.
+# Andrius Štikonas <andrius@stikonas.eu>, 2009.
+# Tomas Straupis <tomasstraupis@gmail.com>, 2011.
+# Remigijus Jarmalavičius <remigijus@jarmalavicius.lt>, 2011.
+# Liudas Ališauskas <liudas.alisauskas@gmail.com>, 2011, 2012, 2013, 2014.
+# Liudas Alisauskas <liudas@akmc.lt>, 2013, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2014-03-23 01:50+0000\n"
+"PO-Revision-Date: 2015-01-28 10:19+0200\n"
+"Last-Translator: Liudas Ališauskas <liudas@akmc.lt>\n"
+"Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
+"%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Lokalize 1.5\n"
+"X-Qt-Contexts: true\n"
+
+#: lib/kaboutdata.cpp:254
+msgctxt "KAboutLicense|"
+msgid ""
+"No licensing terms for this program have been specified.\n"
+"Please check the documentation or the source for any\n"
+"licensing terms.\n"
+msgstr ""
+"Nėra nurodyta šios programos licencijavimo sąlygų.\n"
+"Pasitikrinkite šaltinio dokumentaciją dėl bet kokių\n"
+"licencijavimo sąlygų.\n"
+
+#: lib/kaboutdata.cpp:264
+#, qt-format
+msgctxt "KAboutLicense|"
+msgid "This program is distributed under the terms of the %1."
+msgstr "Ši programa platinama sąlygomis, nurodytomis %1."
+
+#: lib/kaboutdata.cpp:290
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v2"
+msgstr "GPL v2"
+
+#: lib/kaboutdata.cpp:291
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 2"
+msgstr "GNU bendroji viešoji licencija, 2 versija"
+
+#: lib/kaboutdata.cpp:294
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v2"
+msgstr "LGPL v2"
+
+#: lib/kaboutdata.cpp:295
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 2"
+msgstr "GNU mažesnioji bendroji viešoji licencija, 2 versija"
+
+#: lib/kaboutdata.cpp:298
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "BSD License"
+msgstr "BSD licencija"
+
+#: lib/kaboutdata.cpp:299
+msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "BSD licencija"
+
+#: lib/kaboutdata.cpp:302
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "Artistic License"
+msgstr "Kūrybinė licencija"
+
+#: lib/kaboutdata.cpp:303
+msgctxt "KAboutLicense|@item license"
+msgid "Artistic License"
+msgstr "Kūrybinė licencija"
+
+#: lib/kaboutdata.cpp:306
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "QPL v1.0"
+msgstr "QPL v1.0"
+
+#: lib/kaboutdata.cpp:307
+msgctxt "KAboutLicense|@item license"
+msgid "Q Public License"
+msgstr "Q viešoji licencija"
+
+#: lib/kaboutdata.cpp:310
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v3"
+msgstr "GPL v3"
+
+#: lib/kaboutdata.cpp:311
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 3"
+msgstr "GNU bendroji viešoji licencija, 3 versija"
+
+#: lib/kaboutdata.cpp:314
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v3"
+msgstr "LGPL v3"
+
+#: lib/kaboutdata.cpp:315
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 3"
+msgstr "GNU mažesnioji bendroji viešoji licencija, 3 versija"
+
+#: lib/kaboutdata.cpp:318
+#, fuzzy
+#| msgctxt "KAboutLicense|@item license (short name)"
+#| msgid "LGPL v2"
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v2.1"
+msgstr "LGPL v2"
+
+#: lib/kaboutdata.cpp:319
+#, fuzzy
+#| msgctxt "KAboutLicense|@item license"
+#| msgid "GNU Lesser General Public License Version 2"
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 2.1"
+msgstr "GNU mažesnioji bendroji viešoji licencija, 2 versija"
+
+#: lib/kaboutdata.cpp:323
+msgctxt "KAboutLicense|@item license"
+msgid "Custom"
+msgstr "Savitas"
+
+#: lib/kaboutdata.cpp:326
+msgctxt "KAboutLicense|@item license"
+msgid "Not specified"
+msgstr "Nenurodyta"
+
+#: lib/kaboutdata.cpp:844
+msgctxt "KAboutData|replace this with information about your translation team"
+msgid ""
+"<p>KDE is translated into many languages thanks to the work of the "
+"translation teams all over the world.</p><p>For more information on KDE "
+"internationalization visit <a href=\"http://l10n.kde.org\">http://l10n.kde."
+"org</a></p>"
+msgstr ""
+"<p>KDE yra verčiama į daugybę kalbų, įvairių vertimo komandų iš viso "
+"pasaulio dėka.</p><p>Norėdami apie KDE vertimą sužinoti daugiau, aplankykite "
+"KDE vertimui skirtą žiniatinklio svetainę <a href=\"http://l10n.kde.org"
+"\">http://l10n.kde.org</a></p>"
+
+#: lib/kaboutdata.cpp:1054
+msgctxt "KAboutData CLI|"
+msgid "Show author information."
+msgstr "Rodyti informaciją apie autorių."
+
+#: lib/kaboutdata.cpp:1055
+msgctxt "KAboutData CLI|"
+msgid "Show license information."
+msgstr "Rodyti licencijos informaciją."
+
+#: lib/kaboutdata.cpp:1057
+msgctxt "KAboutData CLI|"
+msgid "The base file name of the desktop entry for this application."
+msgstr ""
+
+#: lib/kaboutdata.cpp:1058
+msgctxt "KAboutData CLI|"
+msgid "file name"
+msgstr "failo pavadinimas"
+
+#: lib/kaboutdata.cpp:1067
+msgctxt "KAboutData CLI|"
+msgid "This application was written by somebody who wants to remain anonymous."
+msgstr "Ši programa buvo parašyta nežinomu norinčio likti asmens."
+
+#: lib/kaboutdata.cpp:1069
+#, qt-format
+msgctxt "KAboutData CLI|"
+msgid "%1 was written by:"
+msgstr "%1 autoriai:"
+
+#: lib/kaboutdata.cpp:1080
+msgctxt "KAboutData CLI|"
+msgid "Please use http://bugs.kde.org to report bugs."
+msgstr "Prašome naudoti http://bugs.kde.org, kad pranešti apie klaidas."
+
+#: lib/kaboutdata.cpp:1082
+#, qt-format
+msgctxt "KAboutData CLI|"
+msgid "Please report bugs to %1."
+msgstr "Prašome pranešti apie klaidas čia %1."
+
+#: lib/plugin/kpluginloader.cpp:122
+#, qt-format
+msgctxt "KPluginLoader|"
+msgid "The library %1 does not offer a KPluginFactory."
+msgstr "%1 biblioteka nesiūlo KPluginFactory."
+
+#. MetricBinaryDialect size in bytes
+#: lib/util/kformatprivate.cpp:88
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 B"
+msgstr "%1 B"
+
+#. MetricBinaryDialect size in 1000 bytes
+#: lib/util/kformatprivate.cpp:91
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 kB"
+msgstr "%1 kB"
+
+#. MetricBinaryDialect size in 10^6 bytes
+#: lib/util/kformatprivate.cpp:94
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 MB"
+msgstr "%1 MB"
+
+#. MetricBinaryDialect size in 10^9 bytes
+#: lib/util/kformatprivate.cpp:97
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 GB"
+msgstr "%1 GB"
+
+#. MetricBinaryDialect size in 10^12 bytes
+#: lib/util/kformatprivate.cpp:100
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 TB"
+msgstr "%1 TB"
+
+#. MetricBinaryDialect size in 10^15 bytes
+#: lib/util/kformatprivate.cpp:103
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 PB"
+msgstr "%1 PB"
+
+#. MetricBinaryDialect size in 10^18 byte
+#: lib/util/kformatprivate.cpp:106
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 EB"
+msgstr "%1 EB"
+
+#. MetricBinaryDialect size in 10^21 bytes
+#: lib/util/kformatprivate.cpp:109
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 ZB"
+msgstr "%1 ZB"
+
+#. MetricBinaryDialect size in 10^24 bytes
+#: lib/util/kformatprivate.cpp:112
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 YB"
+msgstr "%1 YB"
+
+#. JEDECBinaryDialect memory size in bytes
+#: lib/util/kformatprivate.cpp:118
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 B"
+msgstr "%1 B"
+
+#. JEDECBinaryDialect memory size in 1024 bytes
+#: lib/util/kformatprivate.cpp:121
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 KB"
+msgstr "%1 KB"
+
+#. JEDECBinaryDialect memory size in 10^20 bytes
+#: lib/util/kformatprivate.cpp:124
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 MB"
+msgstr "%1 MB"
+
+#. JEDECBinaryDialect memory size in 10^30 bytes
+#: lib/util/kformatprivate.cpp:127
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 GB"
+msgstr "%1 GB"
+
+#. JEDECBinaryDialect memory size in 10^40 bytes
+#: lib/util/kformatprivate.cpp:130
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 TB"
+msgstr "%1 TB"
+
+#. JEDECBinaryDialect memory size in 10^50 bytes
+#: lib/util/kformatprivate.cpp:133
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 PB"
+msgstr "%1 PB"
+
+#. JEDECBinaryDialect memory size in 10^60 bytes
+#: lib/util/kformatprivate.cpp:136
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 EB"
+msgstr "%1 EB"
+
+#. JEDECBinaryDialect memory size in 10^70 bytes
+#: lib/util/kformatprivate.cpp:139
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 ZB"
+msgstr "%1 ZB"
+
+#. JEDECBinaryDialect memory size in 10^80 bytes
+#: lib/util/kformatprivate.cpp:142
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 YB"
+msgstr "%1 YB"
+
+#. IECBinaryDialect size in bytes
+#: lib/util/kformatprivate.cpp:148
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 B"
+msgstr "%1 B"
+
+#. IECBinaryDialect size in 1024 bytes
+#: lib/util/kformatprivate.cpp:151
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 KiB"
+msgstr "%1 KiB"
+
+#. IECBinaryDialect size in 10^20 bytes
+#: lib/util/kformatprivate.cpp:154
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 MiB"
+msgstr "%1 MiB"
+
+#. IECBinaryDialect size in 10^30 bytes
+#: lib/util/kformatprivate.cpp:157
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 GiB"
+msgstr "%1 GiB"
+
+#. IECBinaryDialect size in 10^40 bytes
+#: lib/util/kformatprivate.cpp:160
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 TiB"
+msgstr "%1 TiB"
+
+#. IECBinaryDialect size in 10^50 bytes
+#: lib/util/kformatprivate.cpp:163
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 PiB"
+msgstr "%1 PiB"
+
+#. IECBinaryDialect size in 10^60 bytes
+#: lib/util/kformatprivate.cpp:166
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 EiB"
+msgstr "%1 EiB"
+
+#. IECBinaryDialect size in 10^70 bytes
+#: lib/util/kformatprivate.cpp:169
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 ZiB"
+msgstr "%1 ZiB"
+
+#. IECBinaryDialect size in 10^80 bytes
+#: lib/util/kformatprivate.cpp:172
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 YiB"
+msgstr "%1 YiB"
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: lib/util/kformatprivate.cpp:205
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2.%3s"
+msgstr "%1m%2.%3s"
+
+#. @item:intext Duration format minutes and seconds
+#: lib/util/kformatprivate.cpp:210
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2s"
+msgstr "%1m%2s"
+
+#. @item:intext Duration format hours and minutes
+#: lib/util/kformatprivate.cpp:214
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m"
+msgstr "%1val.:%2min."
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: lib/util/kformatprivate.cpp:218
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3.%4s"
+msgstr "%1val.%2min.%3.%4s."
+
+#. @item:intext Duration format hours, minutes, seconds
+#: lib/util/kformatprivate.cpp:224
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3s"
+msgstr "%1val.%2min.%3s."
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: lib/util/kformatprivate.cpp:234
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2.%3"
+msgstr "%1:%2.%3"
+
+#. @item:intext Duration format minutes and seconds
+#. ----------
+#. @item:intext Duration format hours and minutes
+#: lib/util/kformatprivate.cpp:239 lib/util/kformatprivate.cpp:243
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2"
+msgstr "%1:%2"
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: lib/util/kformatprivate.cpp:247
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3.%4"
+msgstr "%1:%2:%3.%4"
+
+#. @item:intext Duration format hours, minutes, seconds
+#: lib/util/kformatprivate.cpp:253
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3"
+msgstr "%1:%2:%3"
+
+#. @item:intext %1 is a real number, e.g. 1.23 days
+#: lib/util/kformatprivate.cpp:268
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 days"
+msgstr "%1 dienų"
+
+#. @item:intext %1 is a real number, e.g. 1.23 hours
+#: lib/util/kformatprivate.cpp:271
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 hours"
+msgstr "%1 valandų"
+
+#. @item:intext %1 is a real number, e.g. 1.23 minutes
+#: lib/util/kformatprivate.cpp:274
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 minutes"
+msgstr "%1 minučių"
+
+#. @item:intext %1 is a real number, e.g. 1.23 seconds
+#: lib/util/kformatprivate.cpp:277
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 seconds"
+msgstr "%1 sekundžių"
+
+#. @item:intext %1 is a whole number
+#: lib/util/kformatprivate.cpp:282
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n millisecond(s)"
+msgid_plural "%n millisecond(s)"
+msgstr[0] "%n milisek."
+msgstr[1] "%n milisek."
+msgstr[2] "%n milisek."
+msgstr[3] "%n milisek."
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:300
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n day(s)"
+msgid_plural "%n day(s)"
+msgstr[0] "%n d."
+msgstr[1] "%n d."
+msgstr[2] "%n d."
+msgstr[3] "%n d."
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:305
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n hour(s)"
+msgid_plural "%n hour(s)"
+msgstr[0] "%n val."
+msgstr[1] "%n val."
+msgstr[2] "%n val."
+msgstr[3] "%n val."
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:310
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n minute(s)"
+msgid_plural "%n minute(s)"
+msgstr[0] "%n min."
+msgstr[1] "%n min."
+msgstr[2] "%n min."
+msgstr[3] "%n min."
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:315
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n second(s)"
+msgid_plural "%n second(s)"
+msgstr[0] "%n sek."
+msgstr[1] "%n sek."
+msgstr[2] "%n sek."
+msgstr[3] "%n sek."
+
+#. @item:intext days and hours. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext hours and minutes. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext minutes and seconds. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: lib/util/kformatprivate.cpp:340 lib/util/kformatprivate.cpp:347
+#: lib/util/kformatprivate.cpp:354
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 and %2"
+msgstr "%1 ir %2"
+
+#: lib/util/kformatprivate.cpp:372
+msgctxt "KFormat|"
+msgid "Tomorrow"
+msgstr "Rytoj"
+
+#: lib/util/kformatprivate.cpp:374
+msgctxt "KFormat|"
+msgid "Today"
+msgstr "Šiandien"
+
+#: lib/util/kformatprivate.cpp:376
+msgctxt "KFormat|"
+msgid "Yesterday"
+msgstr "Vakar"
+
+#: lib/util/kformatprivate.cpp:383
+#, qt-format
+msgctxt "KFormat|"
+msgid "Last %1"
+msgstr "Paskutinis %1"
+
+#: lib/util/kformatprivate.cpp:388
+#, qt-format
+msgctxt "KFormat|"
+msgid "Next %1"
+msgstr "Kitas %1"
+
+#. relative datetime with %1 result of formatReleativeDate() and %2 the formatted time If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: lib/util/kformatprivate.cpp:402
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1, %2"
+msgstr "%1, %2"
