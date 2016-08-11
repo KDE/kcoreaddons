@@ -53,12 +53,12 @@ void KTextToHTMLTest::testGetEmailAddress()
     KTextToHTMLHelper ll6(QStringLiteral(" @bar.baz"), 1);
     QVERIFY(ll6.getEmailAddress().isEmpty());
     KTextToHTMLHelper ll7(QStringLiteral(".!#$%&'*+-/=?^_`{|}~@bar.baz"),
-                    strlen(".!#$%&'*+-/=?^_`{|}~"));
+                    qstrlen(".!#$%&'*+-/=?^_`{|}~"));
     QVERIFY(ll7.getEmailAddress().isEmpty());
 
     // allowed special chars in local part of address
     KTextToHTMLHelper ll8(QStringLiteral("a.!#$%&'*+-/=?^_`{|}~@bar.baz"),
-                    strlen("a.!#$%&'*+-/=?^_`{|}~"));
+                    qstrlen("a.!#$%&'*+-/=?^_`{|}~"));
     QCOMPARE(ll8.getEmailAddress(), QStringLiteral("a.!#$%&'*+-/=?^_`{|}~@bar.baz"));
 
     // '@' in domain part

@@ -228,7 +228,7 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
         }
         if (line.startsWith(QByteArrayLiteral("Type="))) {
             // TODO: should we also have to accept spaces around equals here?
-            type = line.mid(strlen("Type="));
+            type = line.mid(qstrlen("Type="));
         }
     }
     return type;
@@ -276,7 +276,7 @@ QVector<CustomPropertyDefinition>* parseServiceTypesFile(QString path)
             qCWarning(DESKTOPPARSER) << "Could not find Type= key in group" << currentGroup;
             continue;
         }
-        QByteArray propertyName = currentGroup.mid(strlen("PropertyDef::"));
+        QByteArray propertyName = currentGroup.mid(qstrlen("PropertyDef::"));
         QVariant::Type type = QVariant::nameToType(typeStr.constData());
         switch (type) {
             case QVariant::String:
@@ -439,7 +439,7 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDe
     } else if (key == QByteArrayLiteral("Comment")) {
         kplugin[QStringLiteral("Description")] = value;
     } else if (key.startsWith(QByteArrayLiteral("Comment["))) {
-        kplugin[QStringLiteral("Description") + QString::fromUtf8(key.mid(strlen("Comment")))] = value;
+        kplugin[QStringLiteral("Description") + QString::fromUtf8(key.mid(qstrlen("Comment")))] = value;
     } else if (key == QByteArrayLiteral("Hidden")) {
         DESKTOPTOJSON_VERBOSE_WARNING << "Hidden= key found in desktop file, this makes no sense"
                 " with metadata inside the plugin.";
