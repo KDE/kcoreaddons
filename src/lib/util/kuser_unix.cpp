@@ -21,6 +21,7 @@
 
 #include "kuser.h"
 #include "config-getgrouplist.h"
+#include "config-accountsservice.h"
 
 #include <QtCore/QMutableStringListIterator>
 #include <QtCore/QDir>
@@ -183,7 +184,13 @@ QString KUser::homeDir() const
 
 QString KUser::faceIconPath() const
 {
-    QString pathToFaceIcon(homeDir() + QDir::separator() + QStringLiteral(".face.icon"));
+    QString pathToFaceIcon(QStringLiteral(ACCOUNTS_SERVICE_ICON_DIR) + QLatin1Char('/') + d->loginName);
+
+    if (QFile::exists(pathToFaceIcon)) {
+        return pathToFaceIcon;
+    }
+
+    pathToFaceIcon = QString(homeDir() + QLatin1Char('/') + QStringLiteral(".face.icon"));
 
     if (QFile::exists(pathToFaceIcon)) {
         return pathToFaceIcon;

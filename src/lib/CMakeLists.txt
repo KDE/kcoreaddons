@@ -10,6 +10,9 @@ configure_file(util/config-getgrouplist.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/conf
 set (KDE4_DEFAULT_HOME ".kde${_KDE4_DEFAULT_HOME_POSTFIX}" CACHE STRING "The default KDE home directory" )
 configure_file(util/config-kde4home.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kde4home.h)
 
+set (ACCOUNTS_SERVICE_ICON_DIR "/var/lib/AccountsService/icons" CACHE STRING "Accounts Services icon storage directory")
+configure_file(util/config-accountsservice.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-accountsservice.h)
+
 ecm_create_qm_loader(kcoreaddons_QM_LOADER kcoreaddons5_qt)
 
 set(kcoreaddons_OPTIONAL_SRCS )
