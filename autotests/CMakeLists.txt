@@ -55,6 +55,20 @@ if(NOT CMAKE_CROSSCOMPILING)
     )
 endif()
 
+if(NOT CMAKE_CROSSCOMPILING)
+    set(kpluginindextest_SRCS kpluginindextest.cpp ${CMAKE_SOURCE_DIR}/src/kpluginindexer/kpluginindexer.cpp ${CMAKE_BINARY_DIR}/src/kpluginindexer/kpluginindexer_debug.cpp)
+    ecm_add_test(${kpluginindextest_SRCS} TEST_NAME kpluginindextest LINK_LIBRARIES Qt5::Test KF5::CoreAddons)
+    target_include_directories(kpluginindextest PRIVATE ${CMAKE_SOURCE_DIR}/src/kpluginindexer ${CMAKE_BINARY_DIR}/src/kpluginindexer)
+    target_compile_definitions(kpluginindextest PRIVATE
+        KPLUGININDEXER_EXE="$<TARGET_FILE:kpluginindexer>"
+        JSONPLUGIN_FILE="$<TARGET_FILE:jsonplugin>"
+        VERSIONEDPLUGIN_FILE="$<TARGET_FILE:versionedplugin>"
+        UNVERSIONEDPLUGIN_FILE="$<TARGET_FILE:unversionedplugin>"
+        MULTIPLUGIN_FILE="$<TARGET_FILE:multiplugin>"
+        ALWAYSUNLOADPLUGIN_FILE="$<TARGET_FILE:alwaysunloadplugin>"
+    )
+endif()
+
 set(ktexttohtmltest_SRCS ktexttohtmltest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp)
 ecm_add_test(${ktexttohtmltest_SRCS} TEST_NAME ktexttohtmltest LINK_LIBRARIES Qt5::Test)
 # include the binary dir in order to get kcoreaddons_export.h
