@@ -321,7 +321,7 @@ QString KTextToHTMLHelper::pngToDataUrl(const QString &iconPath)
 
     QByteArray ba = pngFile.readAll();
     pngFile.close();
-    return QString(QStringLiteral("data:image/png;base64,%1")).arg(QLatin1String(ba.toBase64().constData()));
+    return QStringLiteral("data:image/png;base64,%1").arg(QLatin1String(ba.toBase64().constData()));
 }
 
 
