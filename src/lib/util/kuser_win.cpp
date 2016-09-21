@@ -853,7 +853,7 @@ static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS t
     HANDLE _token;
     if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &_token)) {
         qWarning("Failed to get the token for the current process: %d", (int)GetLastError());
-        return false;
+        return nullptr;
     }
     ScopedHANDLE token(_token, handleCloser);
     // query required size
