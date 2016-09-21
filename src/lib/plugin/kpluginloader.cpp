@@ -24,6 +24,8 @@
 #include <QtCore/QLibrary>
 #include <QtCore/QDir>
 #include <QDirIterator>
+#include <QJsonArray>
+#include <QJsonDocument>
 #include <QtCore/QFileInfo>
 #include "kcoreaddons_debug.h"
 #include <QCoreApplication>
@@ -263,8 +265,32 @@ void KPluginLoader::forEachPlugin(const QString &directory, std::function<void(c
 QVector<KPluginMetaData> KPluginLoader::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)
 {
     QVector<KPluginMetaData> ret;
+    QMap<QString, QJsonObject> jsonObjects;
+    const auto indexName = QStringLiteral("kpluginindex.bjson");
+    QFile indexFile(directory + indexName);
+    //qCDebug(KCOREADDONS_DEBUG) << "INDEX:" << !qEnvironmentVariableIsSet("KPLUGIN_SKIP_INDEX") << directory + indexName;
+    if (indexFile.exists() && !qEnvironmentVariableIsSet("KPLUGIN_SKIP_INDEX")) {
+        indexFile.open(QIODevice::ReadOnly);
+        QJsonDocument jdoc = QJsonDocument::fromBinaryData(indexFile.readAll());
+        indexFile.close();
+
+        QSet<QString> uniqueIds;
+        QJsonArray plugins = jdoc.array();
+        qCDebug(KCOREADDONS_DEBUG) << "Found index!" << plugins.count();
+
+        for (QJsonArray::const_iterator iter = plugins.constBegin(); iter != plugins.constEnd(); ++iter) {
+            const QJsonObject &obj = QJsonValue(*iter).toObject();
+            const QString &pluginFileName = obj.value(QStringLiteral("FileName")).toString();
+            jsonObjects[pluginFileName] = obj.value(QStringLiteral("MetaData")).toObject();
+        }
+    }
     forEachPlugin(directory, [&](const QString &pluginPath) {
-        KPluginMetaData metadata(pluginPath);
+        KPluginMetaData metadata;
+        if (jsonObjects.contains(pluginPath)) {
+            metadata = KPluginMetaData(jsonObjects.value(pluginPath), pluginPath);
+        } else {
+            metadata = KPluginMetaData(pluginPath);
+        }
         if (!metadata.isValid()) {
             return;
         }
