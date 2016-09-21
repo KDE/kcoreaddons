@@ -30,6 +30,15 @@ QTEST_MAIN(KTextToHTMLTest)
 
 Q_DECLARE_METATYPE(KTextToHTML::Options)
 
+#ifndef Q_OS_WIN
+void initLocale()
+{
+    setenv("LC_ALL", "en_US.utf-8", 1);
+}
+Q_CONSTRUCTOR_FUNCTION(initLocale)
+#endif
+
+
 void KTextToHTMLTest::testGetEmailAddress()
 {
     // empty input
@@ -372,6 +381,11 @@ void KTextToHTMLTest::testHtmlConvert_data()
     QTest::newRow("url-in-parenthesis-3") << "bla (http://www.kde.org - section 5.2)"
                                           << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                           << "bla (<a href=\"http://www.kde.org\">http://www.kde.org</a> - section 5.2)";
+    
+   // Fix url as foo <<url> <url>> when we concatened them.
+   QTest::newRow("url-with-url") << "foo <http://www.kde.org/ <http://www.kde.org/>>"
+                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                               << "foo &lt;<a href=\"http://www.kde.org/ \">http://www.kde.org/ </a>&lt;<a href=\"http://www.kde.org/\">http://www.kde.org/</a>&gt;&gt;";
 }
 
 

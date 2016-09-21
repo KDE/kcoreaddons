@@ -228,11 +228,19 @@ QString KTextToHTMLHelper::getUrl()
 
         url.reserve(mMaxUrlLen);    // avoid allocs
         int start = mPos;
+        bool previousCharIsSpace = false;
         while ((mPos < mText.length()) &&
                 (mText[mPos].isPrint() || mText[mPos].isSpace()) &&
                 ((afterUrl.isNull() && !mText[mPos].isSpace()) ||
                  (!afterUrl.isNull() && mText[mPos] != afterUrl))) {
-            if (!mText[mPos].isSpace()) {     // skip whitespace
+            if (mText[mPos].isSpace()) {
+                previousCharIsSpace = true;
+            } else { // skip whitespace
+                if (previousCharIsSpace && mText[mPos] == QLatin1Char('<')) {
+                    url.append(QLatin1Char(' '));
+                    break;
+                }
+                previousCharIsSpace = false;
                 url.append(mText[mPos]);
                 if (url.length() > mMaxUrlLen) {
                     break;
@@ -267,7 +275,6 @@ QString KTextToHTMLHelper::getUrl()
             }
         } while (url.length() > 1);
     }
-
     return url;
 }
 
@@ -334,6 +341,7 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
     QChar ch;
     int x;
     bool startOfLine = true;
+    //qDebug()<<" plainText"<<plainText;
 
     for (helper.mPos = 0, x = 0; helper.mPos < helper.mText.length();
             ++helper.mPos, ++x) {
@@ -402,6 +410,7 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
             const int start = helper.mPos;
             if (!(flags & IgnoreUrls)) {
                 str = helper.getUrl();
+                //qDebug()<<" str"<<str;
                 if (!str.isEmpty()) {
                     QString hyperlink;
                     if (str.left(4) == QLatin1String("www.")) {
@@ -455,6 +464,7 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
 
         result = helper.emoticonsInterface()->parseEmoticons(result, true, exclude);
     }
+    //qDebug()<<" result "<<result;
 
     return result;
 }
