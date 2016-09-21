@@ -46,6 +46,14 @@ KPluginIndexer::KPluginIndexer(QCommandLineParser *parser, const QCommandLineOpt
 {
 }
 
+KPluginIndexer::KPluginIndexer()
+    : m_parser(nullptr)
+      , paths(QCommandLineOption(QStringLiteral("paths")))
+      , update(QCommandLineOption(QStringLiteral("update")))
+      , clean(QCommandLineOption(QStringLiteral("clean")))
+      , status(QCommandLineOption(QStringLiteral("status")))
+{
+}
 
 int KPluginIndexer::runMain()
 {
@@ -67,7 +75,7 @@ int KPluginIndexer::runMain()
 
 bool KPluginIndexer::resolveFiles()
 {
-    if (m_parser->isSet(paths)) {
+    if (m_parser && m_parser->isSet(paths)) {
         m_pluginDirectories = m_parser->values(paths);
     } else {
         foreach (const QString &libDir, QCoreApplication::libraryPaths()) {
@@ -87,7 +95,6 @@ bool KPluginIndexer::createDirectoryIndex(const QString& path, const QString &de
 {
     QJsonArray plugins;
 
-    int _ps = 0;
     QPluginLoader loader;
     QDirIterator it(path, QDir::Files);
     while (it.hasNext()) {
@@ -105,9 +112,9 @@ bool KPluginIndexer::createDirectoryIndex(const QString& path, const QString &de
         return true;
     }
 
-    QString destfile = dest;
+    QString destfile = !dest.isEmpty() ? dest : m_indexFileName;
     if (!QDir::isAbsolutePath(dest)) {
-        destfile = path + QLatin1Char('/') + dest;
+        destfile = path + QLatin1Char('/') + destfile;
     }
 
     QDir().mkpath(QFileInfo(destfile).dir().absolutePath());
@@ -119,7 +126,7 @@ bool KPluginIndexer::createDirectoryIndex(const QString& path, const QString &de
 
     QJsonDocument jdoc;
     jdoc.setArray(plugins);
-//     file.write(jdoc.toJson());
+    //file.write(jdoc.toJson());
     file.write(jdoc.toBinaryData());
     qCDebug(KPI) << "Generated " << destfile << " (" << plugins.count() << " plugins)";
 
@@ -129,8 +136,9 @@ bool KPluginIndexer::createDirectoryIndex(const QString& path, const QString &de
 bool KPluginIndexer::cleanDirectoryIndex(const QString& dest)
 {
     bool ok = true;
+    const QString indexFile = !dest.isEmpty() ? dest : m_indexFileName;
     foreach (const QString &dir, m_pluginDirectories) {
-        QFileInfo fileInfo(dir, dest);
+        QFileInfo fileInfo(dir, indexFile);
         if (fileInfo.exists()) {
             if (fileInfo.isWritable()) {
                 QFile f(fileInfo.absoluteFilePath());
@@ -147,4 +155,17 @@ bool KPluginIndexer::cleanDirectoryIndex(const QString& dest)
         }
     }
     return ok;
+}
+
+bool KPluginIndexer::isCacheUpToDate(const QString& path)
+{
+    const auto indexInfole = path + m_indexFileName;
+    QFileInfo indexInfo(indexInfole);
+    if (!indexInfo.exists()) {
+        //qCDebug(KPI) << "indexInfole doesn't exist" << indexInfole;
+        return false;
+    }
+    const QString pluginDir = indexInfo.absolutePath();
+    QFileInfo pluginDirInfo(pluginDir);
+    return pluginDirInfo.lastModified() <= indexInfo.lastModified();
 }

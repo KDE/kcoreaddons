@@ -39,9 +39,12 @@ public:
     int runMain();
 
 private:
+    explicit KPluginIndexer();
+    friend class KPluginIndexTest;
     bool resolveFiles();
-    bool createDirectoryIndex(const QString &path, const QString &dest = QStringLiteral("kpluginindex.json"));
-    bool cleanDirectoryIndex(const QString &dest = QStringLiteral("kpluginindex.json"));
+    bool createDirectoryIndex(const QString &path, const QString &dest = QString());
+    bool cleanDirectoryIndex(const QString &dest = QString());
+    bool isCacheUpToDate(const QString &path);
 
     QCommandLineParser *m_parser;
     QCommandLineOption paths;
@@ -49,6 +52,7 @@ private:
     QCommandLineOption clean;
     QCommandLineOption status;
 
+    const QString m_indexFileName = QStringLiteral("kpluginindex.bjson");
     QStringList m_pluginDirectories;
 };
 
