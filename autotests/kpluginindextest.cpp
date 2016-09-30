@@ -48,6 +48,8 @@ class KPluginIndexTest : public QObject
 private:
     QString m_pluginDir;
     QString m_jsonPlugin;
+    qint64 savings = 0;
+    qint64 duration = 0;
 
     void createPluginDir(const int number)
     {
@@ -56,7 +58,7 @@ private:
         auto pluginpath = jfi.absolutePath();
         m_pluginDir = pluginpath + QStringLiteral("/plugins/");
         m_jsonPlugin = jsonLocation.remove(jfi.absolutePath() + QLatin1Char('/'));
-        qCDebug(KPI) << "jfi:" << m_jsonPlugin;
+        //qCDebug(KPI) << "jfi:" << m_jsonPlugin;
 
         QStringList pluginFiles;
         pluginFiles << QFINDTESTDATA(JSONPLUGIN_FILE);
@@ -70,7 +72,7 @@ private:
         QVERIFY(dir.mkpath(m_pluginDir));
 
         int i = 0;
-        qCDebug(KPI) << "JSONPLUGIN_FILE" << JSONPLUGIN_FILE;
+        //qCDebug(KPI) << "JSONPLUGIN_FILE" << JSONPLUGIN_FILE;
         while (number > i) {
             foreach (const QString &filename, pluginFiles) {
                 const auto newname = QString("%1%2%3").arg(m_pluginDir, QString::number(i), m_jsonPlugin);
@@ -81,18 +83,21 @@ private:
                 }
             }
         }
-        qCDebug(KPI) << "Plugin directory with" << number << " plugins created.";
+        //qCDebug(KPI) << "Plugin directory with" << number << " plugins created.";
 
     }
 
 private Q_SLOTS:
     void init()
     {
-        createPluginDir(100);
+        createPluginDir(0);
     }
 
     void cleanup()
     {
+        qCWarning(KPI) << "Total savings:" << savings / 1000000 << "msec, Total time:" << duration / 1000000 << "msec; overall speedup" << qRound((savings / (qreal)(qMax((qint64)1, duration))) * 100) << "%";
+        //qCWarning(KPI) << "Total time:" << duration / 1000000;
+
         QDir dir(m_pluginDir);
         dir.removeRecursively();
     }
@@ -103,10 +108,12 @@ private Q_SLOTS:
 
     void cleanupTestCase()
     {
+        qunsetenv("KPLUGIN_SKIP_INDEX");
     }
 
     void testIndexer()
     {
+        createPluginDir(100);
         QElapsedTimer t1;
         auto kpi = KPluginIndexer();
         QVERIFY(kpi.resolveFiles());
@@ -157,7 +164,7 @@ private Q_SLOTS:
 
     void testFindPlugins()
     {
-        createPluginDir(20);
+        createPluginDir(6);
         auto kpi = KPluginIndexer();
         QVERIFY(!kpi.isCacheUpToDate(m_pluginDir));
         QVERIFY(kpi.createDirectoryIndex(m_pluginDir));
@@ -182,6 +189,53 @@ private Q_SLOTS:
         qunsetenv("KPLUGIN_SKIP_INDEX");
 
         qCDebug(KPI) << "Timing (with/without):" << t_with << t_without << "Good?" << (t_with < t_without) << ((qreal)t_with / (qreal)t_without) << (qreal)((t_without - t_with) / 1000000) << "msec faster!";
+    }
+
+    void testCommonScenarios_data()
+    {
+        QTest::addColumn<int>("iterations");
+        QTest::addColumn<QString>("pluginpath");
+
+        // This is roughly what Plasma does on startup
+        QElapsedTimer t;
+        t.start();
+        QTest::newRow("             empty") << 15 << QString();
+        QTest::newRow("           applets") << 18 << QStringLiteral("plasma/applets");
+        QTest::newRow("  packagestructure") << 24 << QStringLiteral("kpackage/packagestructure/");
+        QTest::newRow("     scriptengines") << 18 << QStringLiteral("plasma/scriptengines");
+        QTest::newRow("containmentactions") << 13 << QStringLiteral("plasma/containmentactions");
+        QTest::newRow("        dataengine") << 10 << QStringLiteral("plasma/dataengine");
+        QTest::newRow("               kio") << 10 << QStringLiteral("kf5/kio");
+        QTest::newRow("              kded") << 1 << QStringLiteral("kf5/kded");
+        QTest::newRow("     kfilemetadata") << 5 << QStringLiteral("kf5/kfilemetadata");
+        QTest::newRow("kwin/efects/config") << 1 << QStringLiteral("kf5/kfilemetadata");
+        QTest::newRow("           kscreen") << 3 << QStringLiteral("kf5/kscreen");
+        QTest::newRow("          kdevelop") << 3 << QStringLiteral("kdevplatform/25/");
+
+    }
+    void testCommonScenarios()
+    {
+        QFETCH(int, iterations);
+        QFETCH(QString, pluginpath);
+
+        qunsetenv("KPLUGIN_SKIP_INDEX");
+        QElapsedTimer t;
+        t.start();
+        for (int i = 0; i < iterations; i++) {
+            auto plugins = KPluginLoader::findPlugins(pluginpath);
+        }
+        auto t_cached = t.nsecsElapsed();
+
+        qputenv("KPLUGIN_SKIP_INDEX", "1");
+        t.start();
+        for (int i = 0; i < iterations; i++) {
+            auto plugins = KPluginLoader::findPlugins(pluginpath);
+        }
+        auto t_nocache = t.nsecsElapsed();
+        qCDebug(KPI) << "cached / nocache:" << /*t_cached << t_nocache << */ ((qreal)t_cached / (qreal)t_nocache) << "saved" << (t_nocache - t_cached) / 1000000 << "msec; spent msec: " << t_nocache / 1000000;
+        //qCDebug(KPI) << "TIME:" << (t.nsecsElapsed() / 1000000);
+        savings = savings + (t_nocache - t_cached);
+        duration = duration + t_nocache;
     }
 
 };
