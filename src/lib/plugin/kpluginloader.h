@@ -374,6 +374,8 @@ public:
      */
     static void forEachPlugin(const QString &directory,
             std::function<void(const QString &)> callback = std::function<void(const QString &)>());
+    static void forEachPluginMetaData(const QString &directory,
+            std::function<void(const KPluginMetaData &)> callback = std::function<void(const KPluginMetaData &)>());
 private:
     Q_DECLARE_PRIVATE(KPluginLoader)
     Q_DISABLE_COPY(KPluginLoader)
