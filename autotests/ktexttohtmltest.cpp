@@ -386,6 +386,12 @@ void KTextToHTMLTest::testHtmlConvert_data()
    QTest::newRow("url-with-url") << "foo <http://www.kde.org/ <http://www.kde.org/>>"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                << "foo &lt;<a href=\"http://www.kde.org/ \">http://www.kde.org/ </a>&lt;<a href=\"http://www.kde.org/\">http://www.kde.org/</a>&gt;&gt;";
+
+   //Fix url exploit
+   QTest::newRow("url-exec-html") << "https://\"><!--"
+                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                               << "https://\"><!--";
+
 }
 
 

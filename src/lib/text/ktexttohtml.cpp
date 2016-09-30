@@ -156,7 +156,6 @@ bool KTextToHTMLHelper::atUrl()
              (allowedSpecialChars.indexOf(mText[mPos - 1]) != -1))) {
         return false;
     }
-
     QChar ch = mText[mPos];
     return
         (ch == QLatin1Char('h') && (mText.mid(mPos, 7) == QLatin1String("http://") ||
@@ -192,7 +191,7 @@ bool KTextToHTMLHelper::isEmptyUrl(const QString &url)
            url == QLatin1String("news://");
 }
 
-QString KTextToHTMLHelper::getUrl()
+QString KTextToHTMLHelper::getUrl(bool *badurl)
 {
     QString url;
     if (atUrl()) {
@@ -229,6 +228,7 @@ QString KTextToHTMLHelper::getUrl()
         url.reserve(mMaxUrlLen);    // avoid allocs
         int start = mPos;
         bool previousCharIsSpace = false;
+        bool previousCharIsADoubleQuote = false;
         while ((mPos < mText.length()) &&
                 (mText[mPos].isPrint() || mText[mPos].isSpace()) &&
                 ((afterUrl.isNull() && !mText[mPos].isSpace()) ||
@@ -241,6 +241,18 @@ QString KTextToHTMLHelper::getUrl()
                     break;
                 }
                 previousCharIsSpace = false;
+                if (mText[mPos] == QLatin1Char('>') && previousCharIsADoubleQuote) {
+                    //it's an invalid url
+                    if (badurl) {
+                        *badurl = true;
+                    }
+                    return QString();
+                }
+                if (mText[mPos] == QLatin1Char('"')) {
+                    previousCharIsADoubleQuote = true;
+                } else {
+                    previousCharIsADoubleQuote = false;
+                }
                 url.append(mText[mPos]);
                 if (url.length() > mMaxUrlLen) {
                     break;
@@ -341,7 +353,6 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
     QChar ch;
     int x;
     bool startOfLine = true;
-    //qDebug()<<" plainText"<<plainText;
 
     for (helper.mPos = 0, x = 0; helper.mPos < helper.mText.length();
             ++helper.mPos, ++x) {
@@ -409,8 +420,11 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
         } else {
             const int start = helper.mPos;
             if (!(flags & IgnoreUrls)) {
-                str = helper.getUrl();
-                //qDebug()<<" str"<<str;
+                bool badUrl = false;
+                str = helper.getUrl(&badUrl);
+                if (badUrl) {
+                    return helper.mText;
+                }
                 if (!str.isEmpty()) {
                     QString hyperlink;
                     if (str.left(4) == QLatin1String("www.")) {
@@ -464,7 +478,6 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
 
         result = helper.emoticonsInterface()->parseEmoticons(result, true, exclude);
     }
-    //qDebug()<<" result "<<result;
 
     return result;
 }
