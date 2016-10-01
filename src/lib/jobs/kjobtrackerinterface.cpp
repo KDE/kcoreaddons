@@ -35,7 +35,7 @@ public:
 KJobTrackerInterface::KJobTrackerInterface(QObject *parent)
     : QObject(parent), d(new Private(this))
 {
-
+    qRegisterMetaType<QPair<QString,QString>>();
 }
 
 KJobTrackerInterface::~KJobTrackerInterface()
