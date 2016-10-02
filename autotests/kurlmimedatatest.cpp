@@ -135,4 +135,5 @@ void KUrlMimeDataTest::testMostLocalUrlList()
         QCOMPARE(qurls[i], static_cast<QUrl>(localUrls[i]));
     }
 
+    delete mimeData;
 }
