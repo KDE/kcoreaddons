@@ -276,6 +276,7 @@ void KJobTest::testDelegateUsage()
     TestJob *job1 = new TestJob;
     TestJob *job2 = new TestJob;
     TestJobUiDelegate *delegate = new TestJobUiDelegate;
+    QPointer<TestJobUiDelegate> guard(delegate);
 
     QVERIFY(job1->uiDelegate() == 0);
     job1->setUiDelegate(delegate);
@@ -284,6 +285,10 @@ void KJobTest::testDelegateUsage()
     QVERIFY(job2->uiDelegate() == 0);
     job2->setUiDelegate(delegate);
     QVERIFY(job2->uiDelegate() == 0);
+
+    delete job1;
+    delete job2;
+    QVERIFY(guard.isNull()); // deleted by job1
 }
 
 void KJobTest::testNestedExec()
