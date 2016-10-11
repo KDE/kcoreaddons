@@ -423,7 +423,23 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
                 bool badUrl = false;
                 str = helper.getUrl(&badUrl);
                 if (badUrl) {
-                    return helper.mText;
+                    QString resultBadUrl;
+                    const int helperTextSize(helper.mText.count());
+                    for (int i = 0; i < helperTextSize; ++i) {
+                        const QChar chBadUrl = helper.mText[i];
+                        if (chBadUrl == QLatin1Char('&')) {
+                            resultBadUrl += QLatin1String("&amp;");
+                        } else if (chBadUrl == QLatin1Char('"')) {
+                            resultBadUrl += QLatin1String("&quot;");
+                        } else if (chBadUrl == QLatin1Char('<')) {
+                            resultBadUrl += QLatin1String("&lt;");
+                        } else if (chBadUrl == QLatin1Char('>')) {
+                            resultBadUrl += QLatin1String("&gt;");
+                        } else {
+                            resultBadUrl += chBadUrl;
+                        }
+                    }
+                    return resultBadUrl;
                 }
                 if (!str.isEmpty()) {
                     QString hyperlink;

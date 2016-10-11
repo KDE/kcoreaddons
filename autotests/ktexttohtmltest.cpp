@@ -390,23 +390,27 @@ void KTextToHTMLTest::testHtmlConvert_data()
    //Fix url exploit
    QTest::newRow("url-exec-html") << "https://\"><!--"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://\"><!--";
+                               << "https://&quot;&gt;&lt;!--";
 
    QTest::newRow("url-exec-html-2") << "https://192.168.1.1:\"><!--"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://192.168.1.1:\"><!--";
+                               << "https://192.168.1.1:&quot;&gt;&lt;!--";
 
    QTest::newRow("url-exec-html-3") << "https://<IP>:\"><!--"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://<IP>:\"><!--";
+                               << "https://&lt;IP&gt;:&quot;&gt;&lt;!--";
 
    QTest::newRow("url-exec-html-4") << "https://<IP>:/\"><!--"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://<IP>:/\"><!--";
+                               << "https://&lt;IP&gt;:/&quot;&gt;&lt;!--";
 
    QTest::newRow("url-exec-html-5") << "https://<IP>:/\"><script>alert(1);</script><!--"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://<IP>:/\"><script>alert(1);</script><!--";
+                               << "https://&lt;IP&gt;:/&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;!--";
+
+   QTest::newRow("url-exec-html-6") << "https://<IP>:/\"><script>alert(1);</script><!--\nTest2"
+                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                               << "https://&lt;IP&gt;:/&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;!--\nTest2";
 }
 
 
