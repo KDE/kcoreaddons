@@ -392,6 +392,21 @@ void KTextToHTMLTest::testHtmlConvert_data()
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                << "https://\"><!--";
 
+   QTest::newRow("url-exec-html-2") << "https://192.168.1.1:\"><!--"
+                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                               << "https://192.168.1.1:\"><!--";
+
+   QTest::newRow("url-exec-html-3") << "https://<IP>:\"><!--"
+                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                               << "https://<IP>:\"><!--";
+
+   QTest::newRow("url-exec-html-4") << "https://<IP>:/\"><!--"
+                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                               << "https://<IP>:/\"><!--";
+
+   QTest::newRow("url-exec-html-5") << "https://<IP>:/\"><script>alert(1);</script><!--"
+                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                               << "https://<IP>:/\"><script>alert(1);</script><!--";
 }
 
 
