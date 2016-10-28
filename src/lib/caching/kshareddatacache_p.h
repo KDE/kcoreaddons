@@ -78,6 +78,10 @@
 #if defined(_POSIX_ADVISORY_INFO) && ((_POSIX_ADVISORY_INFO == 0) || (_POSIX_ADVISORY_INFO >= 200112L))
 #define KSDC_POSIX_FALLOCATE_SUPPORTED 1
 #endif
+#ifdef Q_OS_OSX
+#include "posix_fallocate_mac.h"
+#define KSDC_POSIX_FALLOCATE_SUPPORTED 1
+#endif
 
 // BSD/Mac OS X compat
 #if HAVE_SYS_MMAN_H
