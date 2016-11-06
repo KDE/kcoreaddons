@@ -184,7 +184,10 @@ QString KUser::homeDir() const
 
 QString KUser::faceIconPath() const
 {
-    QString pathToFaceIcon(QStringLiteral(ACCOUNTS_SERVICE_ICON_DIR) + QLatin1Char('/') + d->loginName);
+    QString  pathToFaceIcon;
+    if (!d->loginName.isEmpty()) {
+        pathToFaceIcon = QStringLiteral(ACCOUNTS_SERVICE_ICON_DIR) + QLatin1Char('/') + d->loginName;
+    }
 
     if (QFile::exists(pathToFaceIcon)) {
         return pathToFaceIcon;
