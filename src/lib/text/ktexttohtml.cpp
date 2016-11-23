@@ -229,12 +229,15 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
         int start = mPos;
         bool previousCharIsSpace = false;
         bool previousCharIsADoubleQuote = false;
+        bool previousIsAnAnchor = false;
         while ((mPos < mText.length()) &&
                 (mText[mPos].isPrint() || mText[mPos].isSpace()) &&
                 ((afterUrl.isNull() && !mText[mPos].isSpace()) ||
                  (!afterUrl.isNull() && mText[mPos] != afterUrl))) {
             if (mText[mPos].isSpace()) {
                 previousCharIsSpace = true;
+            } else if (!previousIsAnAnchor && mText[mPos] == QLatin1Char('[')) {
+                break;
             } else { // skip whitespace
                 if (previousCharIsSpace && mText[mPos] == QLatin1Char('<')) {
                     url.append(QLatin1Char(' '));
@@ -252,6 +255,9 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
                     previousCharIsADoubleQuote = true;
                 } else {
                     previousCharIsADoubleQuote = false;
+                }
+                if (mText[mPos] == QLatin1Char('#')) {
+                    previousIsAnAnchor = true;
                 }
                 url.append(mText[mPos]);
                 if (url.length() > mMaxUrlLen) {

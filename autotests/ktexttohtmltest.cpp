@@ -411,6 +411,11 @@ void KTextToHTMLTest::testHtmlConvert_data()
    QTest::newRow("url-exec-html-6") << "https://<IP>:/\"><script>alert(1);</script><!--\nTest2"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                << "https://&lt;IP&gt;:/&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;!--\nTest2";
+
+
+   QTest::newRow("url-with-ref-in-[") << "https://www.kde.org[1]"
+                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                               << "<a href=\"https://www.kde.org\">https://www.kde.org</a>[1]";
 }
 
 
