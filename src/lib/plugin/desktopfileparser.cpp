@@ -242,7 +242,7 @@ QVector<CustomPropertyDefinition>* parseServiceTypesFile(QString path)
         path = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                QStringLiteral("kservicetypes5/") + path);
         if (path.isEmpty()) {
-            qCCritical(DESKTOPPARSER) << "Could not locate service type file kservicetypes5/" << originalPath << ", tried" << QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+            qCWarning(DESKTOPPARSER).nospace() << "Could not locate service type file kservicetypes5/" << qPrintable(originalPath) << ", tried " << QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
             return nullptr;
         }
     }
@@ -307,43 +307,47 @@ QBasicMutex s_serviceTypesMutex;
 } // end of anonymous namespace
 
 
-ServiceTypeDefinition::ServiceTypeDefinition(const QVector< CustomPropertyDefinition >& defs)
-    : m_definitions(defs)
+ServiceTypeDefinition::ServiceTypeDefinition()
 {
 }
 
 ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
 {
-    QVector<CustomPropertyDefinition> defs;
-    defs.reserve(paths.size());
-
+    ServiceTypeDefinition ret;
+    ret.m_definitions.reserve(paths.size());
     // as we might modify the cache we need to acquire a mutex here
-    foreach (const QString &serviceType, paths) {
-        QMutexLocker lock(&s_serviceTypesMutex);
-
-        QVector<CustomPropertyDefinition>* def = s_serviceTypes->object(serviceType);
-
-        if (def) {
-            // in cache but we still must make our own copy
-            defs << *def;
-        }
-        else {
-            // not found in cache -> we need to parse the file
-            qCDebug(DESKTOPPARSER) << "About to parse service type file" << serviceType;
-            def = parseServiceTypesFile(serviceType);
-            if (!def) {
+    foreach (const QString &serviceTypePath, paths) {
+        bool added = ret.addFile(serviceTypePath);
+        if (!added) {
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
-                exit(1); // this is a fatal error when using kcoreaddons_desktop_to_json()
-#else
-                continue;
+            exit(1); // this is a fatal error when using kcoreaddons_desktop_to_json()
 #endif
-            }
-
-            defs << *def; // This must *precede* insert call, insert might delete
-            s_serviceTypes->insert(serviceType, def);
         }
     }
-    return ServiceTypeDefinition(defs);
+    return ret;
+}
+
+bool ServiceTypeDefinition::addFile(const QString& path)
+{
+    QMutexLocker lock(&s_serviceTypesMutex);
+    QVector<CustomPropertyDefinition>* def = s_serviceTypes->object(path);
+
+    if (def) {
+        // in cache but we still must make our own copy
+        m_definitions << *def;
+    }
+    else {
+        // not found in cache -> we need to parse the file
+        qCDebug(DESKTOPPARSER) << "About to parse service type file" << path;
+        def = parseServiceTypesFile(path);
+        if (!def) {
+            return false;
+        }
+
+        m_definitions << *def; // This must *precede* insert call, insert might delete
+        s_serviceTypes->insert(path, def);
+    }
+    return true;
 }
 
 QJsonValue ServiceTypeDefinition::parseValue(const QByteArray &key, const QString &value) const
@@ -358,7 +362,7 @@ QJsonValue ServiceTypeDefinition::parseValue(const QByteArray &key, const QStrin
     return QJsonValue(value);
 }
 
-void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDefinition &serviceTypes, const QString &value,
+void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefinition &serviceTypes, const QString &value,
                                       QJsonObject &json, QJsonObject &kplugin, int lineNr)
 {
     /* The following keys are recognized (and added to a "KPlugin" object):
@@ -397,8 +401,14 @@ void DesktopFileParser::convertToJson(const QByteArray &key, const ServiceTypeDe
     } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Depends")) {
         kplugin[QStringLiteral("Dependencies")] = QJsonArray::fromStringList(deserializeList(value));
     } else if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
-        // some .desktop files still use the legacy ServiceTypes= key
-        kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(deserializeList(value));
+        const auto services = deserializeList(value);
+        for(const auto &service : services) {
+            // some .desktop files still use the legacy ServiceTypes= key
+            QString fileName = service.toLower().replace(QLatin1Char('/'), QLatin1Char('-'))+QStringLiteral(".desktop");
+            serviceTypes.addFile(fileName);
+        }
+
+        kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(services);
     } else if (key == QByteArrayLiteral("MimeType")) {
         // MimeType is a XDG string list and not a KConfig list so we need to use ';' as the separator
         kplugin[QStringLiteral("MimeTypes")] = QJsonArray::fromStringList(deserializeList(value, ';'));

@@ -337,7 +337,6 @@ private Q_SLOTS:
         QByteArray errorOut = proc.readAllStandardError();
         if (!errorOut.isEmpty()) {
             qWarning().nospace() << "desktoptojson STDERR:\n\n" <<  errorOut.constData() << "\n";
-            QFAIL("desktoptojson had errors");
         }
         QCOMPARE(proc.exitCode(), 0);
         QVERIFY(output.open());

@@ -56,8 +56,6 @@ function(kcoreaddons_desktop_to_json target desktop)
         endif()
         list(APPEND command -s ${type})
       endforeach()
-    elseif(NOT DESKTOP_TO_JSON_DEFAULT_SERVICE_TYPE)
-      message(DEPRECATION "Calling kcoreaddons_desktop_to_json() without DEFAULT_SERVICE_TYPE or SERVICE_TYPES is deprecated!")
     endif()
 
     add_custom_command(
