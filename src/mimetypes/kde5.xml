@@ -25,7 +25,6 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>Metalink download</comment>
     <comment xml:lang="ar">تنزيل Metalink</comment>
-    <comment xml:lang="ast">Descarga d'enllaz meta</comment>
     <comment xml:lang="bs">metalink preuzimanje</comment>
     <comment xml:lang="ca">Baixada de «Metalink»</comment>
     <comment xml:lang="ca@valencia">Baixada de «Metalink»</comment>
@@ -84,7 +83,6 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>RELAX NG</comment>
     <comment xml:lang="ar">RELAX NG</comment>
-    <comment xml:lang="ast">RELAX NG</comment>
     <comment xml:lang="bs">Relax NG</comment>
     <comment xml:lang="ca">RELAX NG</comment>
     <comment xml:lang="ca@valencia">RELAX NG</comment>
@@ -144,7 +142,6 @@ Notes:
   <mime-type type="application/x-cda">
     <comment>CD audio</comment>
     <comment xml:lang="ar">صوت CD</comment>
-    <comment xml:lang="ast">CD d'audiu</comment>
     <comment xml:lang="bs">CD audio</comment>
     <comment xml:lang="ca">CD àudio</comment>
     <comment xml:lang="ca@valencia">CD àudio</comment>
@@ -205,7 +202,6 @@ Notes:
   <mime-type type="application/x-font-snf">
     <comment>SNF bitmap font</comment>
     <comment xml:lang="ar">خط SNF bitmap</comment>
-    <comment xml:lang="ast">Fonte mapa de bits SNF</comment>
     <comment xml:lang="bs">SNF bitmapski font</comment>
     <comment xml:lang="ca">Tipus de lletra de mapa de bits SNF</comment>
     <comment xml:lang="ca@valencia">Tipus de lletra de mapa de bits SNF</comment>
@@ -266,7 +262,6 @@ Notes:
   <mime-type type="application/x-java-applet">
     <comment>Java applet</comment>
     <comment xml:lang="ar">بريمج جافا</comment>
-    <comment xml:lang="ast">Applet Java</comment>
     <comment xml:lang="bg">Аплет на Java</comment>
     <comment xml:lang="bs">JAVA aplet</comment>
     <comment xml:lang="ca">Miniaplicació Java</comment>
@@ -326,7 +321,6 @@ Notes:
   <mime-type type="application/x-khtml-adaptor">
     <comment>KHTML Extension Adaptor</comment>
     <comment xml:lang="ar">مكيف الامتدادات KHTML</comment>
-    <comment xml:lang="ast">Adautador d'estensión KHTML</comment>
     <comment xml:lang="bs">KHTML‑ov adapter proširenja</comment>
     <comment xml:lang="ca">Adaptador de l'extensió KHTML</comment>
     <comment xml:lang="ca@valencia">Adaptador de l'extensió KHTML</comment>
@@ -383,7 +377,6 @@ Notes:
   <mime-type type="application/x-kcsrc">
     <comment>KDE color scheme</comment>
     <comment xml:lang="ar">مخطط ألوان كدي</comment>
-    <comment xml:lang="ast">Esquema de color KDE</comment>
     <comment xml:lang="bg">Цветова схема за KDE</comment>
     <comment xml:lang="bs">KDE šema boja</comment>
     <comment xml:lang="ca">Esquema de color del KDE</comment>
@@ -446,7 +439,6 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>KNewStuff package</comment>
     <comment xml:lang="ar">حزمة KNewStuff</comment>
-    <comment xml:lang="ast">Paquete KNewStuff</comment>
     <comment xml:lang="bs">paket K‑svežih-novotarija</comment>
     <comment xml:lang="ca">Paquet del KNewStuff</comment>
     <comment xml:lang="ca@valencia">Paquet del KNewStuff</comment>
@@ -505,7 +497,6 @@ Notes:
   <mime-type type="application/x-kwallet"> <!-- fdo #6326 rejected, will stay KDE-specific -->
     <comment>KWallet wallet</comment>
     <comment xml:lang="ar">حافظة KWallet</comment>
-    <comment xml:lang="ast">Cartera KWallet</comment>
     <comment xml:lang="bg">Портфейл KWallet</comment>
     <comment xml:lang="bs">K‑novčanikov novčanik</comment>
     <comment xml:lang="ca">Cartera del KWallet</comment>
@@ -568,7 +559,6 @@ Notes:
   <mime-type type="application/x-kudesigner">
     <comment>Kugar report template</comment>
     <comment xml:lang="ar">قالب تقرير Kugar</comment>
-    <comment xml:lang="ast">Plantía d'informe Kugar</comment>
     <comment xml:lang="bs">Kugarov šablon izvještaja</comment>
     <comment xml:lang="ca">Plantilla d'informe del Kugar</comment>
     <comment xml:lang="ca@valencia">Plantilla d'informe del Kugar</comment>
@@ -627,7 +617,6 @@ Notes:
   <mime-type type="application/x-mimearchive">
     <comment>mime encapsulated web archive</comment>
     <comment xml:lang="ar">نوع ملفات يغلف أرشف ويب</comment>
-    <comment xml:lang="ast">archivu web encapsuláu mime</comment>
     <comment xml:lang="bs">MIME učaurena veb arhiva</comment>
     <comment xml:lang="ca">Arxiu web encapsulat en MIME</comment>
     <comment xml:lang="ca@valencia">Arxiu web encapsulat en MIME</comment>
@@ -684,7 +673,6 @@ Notes:
   <mime-type type="application/x-nzb"> <!-- fdo #10029, released in s-m-i 0.91 -->
     <comment>NewzBin usenet index</comment>
     <comment xml:lang="ar">فهرس يوزنت NewzBin</comment>
-    <comment xml:lang="ast">Índiz usenet de NewzBin</comment>
     <comment xml:lang="bs">NewzBinov indeks Useneta</comment>
     <comment xml:lang="ca">Índex usenet NewzBin</comment>
     <comment xml:lang="ca@valencia">Índex usenet NewzBin</comment>
@@ -746,7 +734,6 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>plasmoid</comment>
     <comment xml:lang="ar">بلازمود</comment>
-    <comment xml:lang="ast">plasmoide</comment>
     <comment xml:lang="bs">plazmoid</comment>
     <comment xml:lang="ca">Plasmoide</comment>
     <comment xml:lang="ca@valencia">Plasmoide</comment>
@@ -807,7 +794,6 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>SuperKaramba theme</comment>
     <comment xml:lang="ar">سمة SuperKaramba</comment>
-    <comment xml:lang="ast">Tema SuperKaramba</comment>
     <comment xml:lang="bg">Тема за SuperKaramba</comment>
     <comment xml:lang="bs">superkaramba tema</comment>
     <comment xml:lang="ca">Tema del SuperKaramba</comment>
@@ -867,7 +853,6 @@ Notes:
   <mime-type type="application/x-vnd.kde.plan">
     <comment>Calligra Plan project management document</comment>
     <comment xml:lang="ar">وثيقة إدارة مشاريع Calligra Plan</comment>
-    <comment xml:lang="ast">Documentu de xestión de proyeutu Calligra Plan</comment>
     <comment xml:lang="bs">Calligra Plan dokument upravljanja projektima</comment>
     <comment xml:lang="ca">Document per a la gestió de projectes del Calligra Plan</comment>
     <comment xml:lang="ca@valencia">Document per a la gestió de projectes del Calligra Plan</comment>
@@ -924,7 +909,6 @@ Notes:
   <mime-type type="application/x-vnd.kde.plan.work">
     <comment>Calligra Plan work package document</comment>
     <comment xml:lang="ar">وثيقة حزمة عمل Calligra Plan</comment>
-    <comment xml:lang="ast">Documentu de paquete de trabayu Calligra Plan</comment>
     <comment xml:lang="bs">Calligra Plan dokument radnog paketa</comment>
     <comment xml:lang="ca">Document de paquet de treball del Calligra Plan</comment>
     <comment xml:lang="ca@valencia">Document de paquet de treball del Calligra Plan</comment>
@@ -979,7 +963,6 @@ Notes:
   <mime-type type="application/x-vnd.kde.kplato">
     <comment>KPlato project management document</comment>
     <comment xml:lang="ar">وثيقة إدارة مشاريع KPlato</comment>
-    <comment xml:lang="ast">Documentu de xestión de proyeutu KPlato</comment>
     <comment xml:lang="bs">KPlatoov dokument upravljanja projektom</comment>
     <comment xml:lang="ca">Document per a la gestió de projectes del KPlato</comment>
     <comment xml:lang="ca@valencia">Document per a la gestió de projectes del KPlato</comment>
@@ -1037,7 +1020,6 @@ Notes:
   <mime-type type="application/x-vnd.kde.kplato.work">
     <comment>KPlato project management work package</comment>
     <comment xml:lang="ar">حزمة عمل إدارة مشاريع KPlato</comment>
-    <comment xml:lang="ast">Paquete de trabayu de xestión de proyeutu KPlato</comment>
     <comment xml:lang="bs">KPlatoov radni paket upravljanja projektom</comment>
     <comment xml:lang="ca">Paquet de treball per a la gestió de projectes del KPlato</comment>
     <comment xml:lang="ca@valencia">Paquet de treball per a la gestió de projectes del KPlato</comment>
@@ -1095,7 +1077,6 @@ Notes:
   <mime-type type="application/x-vnd.kde.kugar.mixed">
     <comment>Kugar archive</comment>
     <comment xml:lang="ar">أرشيف Kugar</comment>
-    <comment xml:lang="ast">Archivu Kugar</comment>
     <comment xml:lang="bs">Kugarova arhiva</comment>
     <comment xml:lang="ca">Arxiu del Kugar</comment>
     <comment xml:lang="ca@valencia">Arxiu del Kugar</comment>
@@ -1155,7 +1136,6 @@ Notes:
     <sub-class-of type="application/x-gzip"/> <!-- only necessary because x-compressed-tar is not specifying this sub-class-of (shared-mime-info 0.8) -->
     <comment>web archive</comment>
     <comment xml:lang="ar">أرشيف ويب</comment>
-    <comment xml:lang="ast">archivu web</comment>
     <comment xml:lang="bs">veb arhiva</comment>
     <comment xml:lang="ca">Arxiu web</comment>
     <comment xml:lang="ca@valencia">Arxiu web</comment>
@@ -1215,7 +1195,6 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>W3C XML schema</comment>
     <comment xml:lang="ar">مخطط W3C XML</comment>
-    <comment xml:lang="ast">Esquema XML W3C</comment>
     <comment xml:lang="bs">W3C‑ova XML šema</comment>
     <comment xml:lang="ca">Esquema XML de la W3C</comment>
     <comment xml:lang="ca@valencia">Esquema XML de la W3C</comment>
@@ -1273,7 +1252,6 @@ Notes:
   <mime-type type="audio/aac"> <!-- in fdo s-m-i since 1.1 -->
     <comment>AAC sound</comment>
     <comment xml:lang="ar">صوت AAC</comment>
-    <comment xml:lang="ast">Soníu AAC</comment>
     <comment xml:lang="bs">AAC zvuk</comment>
     <comment xml:lang="ca">So AAC</comment>
     <comment xml:lang="ca@valencia">So AAC</comment>
@@ -1334,7 +1312,6 @@ Notes:
   <mime-type type="audio/x-pn-realaudio-plugin"> <!-- Not a type of file, so will not go to shared-mime-info -->
     <comment>RealAudio plugin file</comment>
     <comment xml:lang="ar">ملف ملحق RealAudio</comment>
-    <comment xml:lang="ast">Ficheru de complementu RealAudio</comment>
     <comment xml:lang="bs">RealAudio priključak</comment>
     <comment xml:lang="ca">Fitxer del connector RealAudio</comment>
     <comment xml:lang="ca@valencia">Fitxer del connector RealAudio</comment>
@@ -1392,7 +1369,6 @@ Notes:
   <mime-type type="application/vnd.kde.kphotoalbum-import"> <!-- fdo #12732 rejected, will stay KDE-specific -->
     <comment>KPhotoAlbum import</comment>
     <comment xml:lang="ar">استيراد KPhotoAlbum</comment>
-    <comment xml:lang="ast">Importación de KPhotoAlbum</comment>
     <comment xml:lang="bs">KPhotoAlbumov uvoz</comment>
     <comment xml:lang="ca">Importació del KPhotoAlbum</comment>
     <comment xml:lang="ca@valencia">Importació del KPhotoAlbum</comment>
@@ -1451,7 +1427,6 @@ Notes:
   <mime-type type="image/x-hdr"> <!-- TODO fdo report -->
     <comment>HDR image</comment>
     <comment xml:lang="ar">صورة HDR</comment>
-    <comment xml:lang="ast">Imaxe HDR</comment>
     <comment xml:lang="bg">Изображение HDR</comment>
     <comment xml:lang="bs">HDR slika</comment>
     <comment xml:lang="ca">Imatge HDR</comment>
@@ -1517,7 +1492,6 @@ Notes:
     <sub-class-of type="image/x-dcraw"/>
     <comment>KDE raw image formats</comment>
     <comment xml:lang="ar">تنسيقات صور خام لكدي</comment>
-    <comment xml:lang="ast">Formatos d'imaxe en brutu de KDE</comment>
     <comment xml:lang="bs">KDE formati sirovih slika</comment>
     <comment xml:lang="ca">Formats d'imatge RAW del KDE</comment>
     <comment xml:lang="ca@valencia">Formats d'imatge RAW del KDE</comment>
@@ -1589,7 +1563,6 @@ Notes:
     <sub-class-of type="text/plain"/>
     <comment>Intel® hexadecimal object file</comment>
     <comment xml:lang="ar">ملف كائن سداسي عشر Intel®</comment>
-    <comment xml:lang="ast">Ficheru d'oxetu hexadecimal Intel®</comment>
     <comment xml:lang="bs">Intelova heksadekadna objektna datoteka</comment>
     <comment xml:lang="ca">Fitxer objecte hexadecimal d'Intel®</comment>
     <comment xml:lang="ca@valencia">Fitxer objecte hexadecimal d'Intel®</comment>
@@ -1651,7 +1624,6 @@ Notes:
     <sub-class-of type="text/plain"/>
     <comment>Kate file list loader plugin list</comment>
     <comment xml:lang="ar">قائمة ملحقات محملات قائمة ملفات لكيت</comment>
-    <comment xml:lang="ast">Llista de complementos del cargador de llistes de ficheros Kate</comment>
     <comment xml:lang="bs">spisak Kateinog priključka za učitavanje datoteka</comment>
     <comment xml:lang="ca">Llista del connector carregador de llista de fitxers del Kate</comment>
     <comment xml:lang="ca@valencia">Llista del connector carregador de llista de fitxers del Kate</comment>
@@ -1709,7 +1681,6 @@ Notes:
     <sub-class-of type="text/x-csrc"/>
     <comment>Objective-C header</comment>
     <comment xml:lang="ar">ترويسة Objective-C</comment>
-    <comment xml:lang="ast">Testera Objective-C</comment>
     <comment xml:lang="bs">Objective‑c zaglavlje</comment>
     <comment xml:lang="ca">Capçalera Objective-C</comment>
     <comment xml:lang="ca@valencia">Capçalera Objective-C</comment>
@@ -1768,7 +1739,6 @@ Notes:
     <sub-class-of type="text/plain"/>
     <comment>abc musical notation file</comment>
     <comment xml:lang="ar">ملف كراسة موسيقية abc</comment>
-    <comment xml:lang="ast">ficheru de notación musical abc</comment>
     <comment xml:lang="bs">muzička notacija ABC</comment>
     <comment xml:lang="ca">Fitxer de notació musical abc</comment>
     <comment xml:lang="ca@valencia">Fitxer de notació musical abc</comment>
@@ -1830,7 +1800,6 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>fonts package</comment>
     <comment xml:lang="ar">حزمة خطوط</comment>
-    <comment xml:lang="ast">paquete de fontes</comment>
     <comment xml:lang="bs">paket fontova</comment>
     <comment xml:lang="ca">Paquet de tipus de lletres</comment>
     <comment xml:lang="ca@valencia">Paquet de tipus de lletres</comment>
@@ -1891,7 +1860,6 @@ Notes:
     <sub-class-of type="inode/directory"/>
     <comment>Windows server</comment>
     <comment xml:lang="ar">خادم ويندوز</comment>
-    <comment xml:lang="ast">Sirvidor Windows</comment>
     <comment xml:lang="bs">windows server</comment>
     <comment xml:lang="ca">Servidor Windows</comment>
     <comment xml:lang="ca@valencia">Servidor Windows</comment>
@@ -1951,7 +1919,6 @@ Notes:
     <sub-class-of type="inode/directory"/>
     <comment>Windows workgroup</comment>
     <comment xml:lang="ar">مجموعة عمل ويندوز</comment>
-    <comment xml:lang="ast">Grupu de trabayu Windows</comment>
     <comment xml:lang="bs">windows radna grupa</comment>
     <comment xml:lang="ca">Treball en grup de Windows</comment>
     <comment xml:lang="ca@valencia">Treball en grup de Windows</comment>
@@ -2011,7 +1978,6 @@ Notes:
     <!-- <sub-class-of type="application/xml"/> -->
     <comment>KDE system monitor</comment>
     <comment xml:lang="ar">نظام مراقبة كدي</comment>
-    <comment xml:lang="ast">Monitor del sistema KDE</comment>
     <comment xml:lang="bg">Системен монитор за KDE</comment>
     <comment xml:lang="bs">KDE sistemski monitor</comment>
     <comment xml:lang="ca">Controlador del sistema del KDE</comment>
@@ -2072,7 +2038,6 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>KDE theme</comment>
     <comment xml:lang="ar">سمة كدي</comment>
-    <comment xml:lang="ast">Tema KDE</comment>
     <comment xml:lang="bg">Тема за KDE</comment>
     <comment xml:lang="bs">KDE tema</comment>
     <comment xml:lang="ca">Tema del KDE</comment>
@@ -2134,7 +2099,6 @@ Notes:
     <sub-class-of type="text/plain"/>
     <comment>Quanta project</comment>
     <comment xml:lang="ar">مشروع  Quanta</comment>
-    <comment xml:lang="ast">Proyeutu Quanta</comment>
     <comment xml:lang="bg">Проект на Quanta</comment>
     <comment xml:lang="bs">Quantin projekat</comment>
     <comment xml:lang="ca">Projecte del Quanta</comment>
@@ -2195,7 +2159,6 @@ Notes:
     <sub-class-of type="text/plain"/>
     <comment>Kommander file</comment>
     <comment xml:lang="ar">ملف Kommander</comment>
-    <comment xml:lang="ast">Ficheru Kommander</comment>
     <comment xml:lang="bg">Файл на Kommander</comment>
     <comment xml:lang="bs">Kommanderov fajl</comment>
     <comment xml:lang="ca">Fitxer del Kommander</comment>
@@ -2255,7 +2218,6 @@ Notes:
   <mime-type type="application/x-tuberling">
     <comment>potato</comment>
     <comment xml:lang="ar">بطاطا</comment>
-    <comment xml:lang="ast">potato</comment>
     <comment xml:lang="bs">Krompirkova datoteka</comment>
     <comment xml:lang="ca">Patata</comment>
     <comment xml:lang="ca@valencia">Patata</comment>
@@ -2314,7 +2276,6 @@ Notes:
   <mime-type type="application/x-kolf">
     <comment>Kolf saved game</comment>
     <comment xml:lang="ar">لعبة Kolf محفوظة</comment>
-    <comment xml:lang="ast">Xuegu guardáu Kolf</comment>
     <comment xml:lang="bg">Запазена игра на Kolf</comment>
     <comment xml:lang="bs">Kolfova sačuvana igra</comment>
     <comment xml:lang="ca">Joc desat del Kolf</comment>
@@ -2377,7 +2338,6 @@ Notes:
   <mime-type type="application/x-kourse">
     <comment>Kolf course</comment>
     <comment xml:lang="ar">دورة Kolf</comment>
-    <comment xml:lang="ast">Campu de Kolf</comment>
     <comment xml:lang="bs">Kolfov teren</comment>
     <comment xml:lang="ca">Camp del Kolf</comment>
     <comment xml:lang="ca@valencia">Camp del Kolf</comment>
@@ -2442,7 +2402,6 @@ Notes:
   <mime-type type="application/vnd.kde.okular-archive">
     <comment>Okular document archive</comment>
     <comment xml:lang="ar">أرشيف مستند أوكلار</comment>
-    <comment xml:lang="ast">Archivu de documentu Okular</comment>
     <comment xml:lang="bs">Okularova arhiva dokumenata</comment>
     <comment xml:lang="ca">Arxiu de document de l'Okular</comment>
     <comment xml:lang="ca@valencia">Arxiu de document de l'Okular</comment>
@@ -2502,7 +2461,6 @@ Notes:
   <mime-type type="application/x-cabri">
     <comment>Cabri figure</comment>
     <comment xml:lang="ar">صورة Cabri</comment>
-    <comment xml:lang="ast">Figura Cabri</comment>
     <comment xml:lang="bs">Cabrijev crtež</comment>
     <comment xml:lang="ca">Figura del Cabri</comment>
     <comment xml:lang="ca@valencia">Figura del Cabri</comment>
@@ -2566,7 +2524,6 @@ Notes:
   <mime-type type="application/x-drgeo">
     <comment>Dr. Geo figure</comment>
     <comment xml:lang="ar">صورة Dr. Geo</comment>
-    <comment xml:lang="ast">Figura Dr. Geo</comment>
     <comment xml:lang="bs">Dr Geov crtež</comment>
     <comment xml:lang="ca">Figura del Dr. Geo</comment>
     <comment xml:lang="ca@valencia">Figura del Dr. Geo</comment>
@@ -2629,7 +2586,6 @@ Notes:
   <mime-type type="application/x-kgeo">
     <comment>KGeo figure</comment>
     <comment xml:lang="ar">صورة KGeo</comment>
-    <comment xml:lang="ast">Figura KGeo</comment>
     <comment xml:lang="bg">Фигура за KGeo</comment>
     <comment xml:lang="bs">KGeov crtež</comment>
     <comment xml:lang="ca">Figura del KGeo</comment>
@@ -2688,7 +2644,6 @@ Notes:
   <mime-type type="application/x-kig">
     <comment>Kig figure</comment>
     <comment xml:lang="ar">صورة Kig</comment>
-    <comment xml:lang="ast">Figura Kig</comment>
     <comment xml:lang="bg">Фигура за Kig</comment>
     <comment xml:lang="bs">KIG‑ov crtež</comment>
     <comment xml:lang="ca">Figura del Kig</comment>
@@ -2748,7 +2703,6 @@ Notes:
   <mime-type type="application/x-kseg">
     <comment>KSeg document</comment>
     <comment xml:lang="ar">وثيقة KSeg</comment>
-    <comment xml:lang="ast">Documentu KSeg</comment>
     <comment xml:lang="bg">Документ KSeg</comment>
     <comment xml:lang="bs">KSegov dokument</comment>
     <comment xml:lang="ca">Document del KSeg</comment>
@@ -2809,7 +2763,6 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>vocabulary trainer document</comment>
     <comment xml:lang="ar">وثيقة مدرب المفردات</comment>
-    <comment xml:lang="ast">documentu d'entrenador de vocabulariu</comment>
     <comment xml:lang="bs">dokument za uvježbavanje rječnika</comment>
     <comment xml:lang="ca">Document de l'entrenador de vocabulari</comment>
     <comment xml:lang="ca@valencia">Document de l'entrenador de vocabulari</comment>
@@ -2867,7 +2820,6 @@ Notes:
   <mime-type type="application/x-kmplot">
     <comment>KmPlot file</comment>
     <comment xml:lang="ar">ملف KmPlot</comment>
-    <comment xml:lang="ast">Ficheru KmPlot</comment>
     <comment xml:lang="bg">Файл на KmPlot</comment>
     <comment xml:lang="bs">KmPlot datoteka</comment>
     <comment xml:lang="ca">Fitxer del KmPlot</comment>
@@ -2926,7 +2878,6 @@ Notes:
   <mime-type type="application/x-kwordquiz">
     <comment>KWordQuiz vocabulary</comment>
     <comment xml:lang="ar">مفردات KWordQuiz</comment>
-    <comment xml:lang="ast">Vocabulariu KWordQuiz</comment>
     <comment xml:lang="bg">Речник KWordQuiz</comment>
     <comment xml:lang="bs">rječnik K‑kviza-riječi</comment>
     <comment xml:lang="ca">Vocabulari del KWordQuiz</comment>
@@ -2985,7 +2936,6 @@ Notes:
   <mime-type type="application/x-kcachegrind">
     <comment>Cachegrind/Callgrind profile dump</comment>
     <comment xml:lang="ar">تشكيلة تفريغ Cachegrind/Callgrind </comment>
-    <comment xml:lang="ast">Volquiáu de perfiles de Cachegrind/Callgrind</comment>
     <comment xml:lang="bs">Cachegrindov/Callgrindov profilni popis</comment>
     <comment xml:lang="ca">Bolcat de l'anàlisi de rendiment del Cachegrind/Callgrind</comment>
     <comment xml:lang="ca@valencia">Bolcat de l'anàlisi de rendiment del Cachegrind/Callgrind</comment>
@@ -3045,7 +2995,6 @@ Notes:
   <mime-type type="application/x-uml">
     <comment>Umbrello UML Modeller file</comment>
     <comment xml:lang="ar">ملف Umbrello UML Modeller </comment>
-    <comment xml:lang="ast">Ficheru del modelador UML Umbrello</comment>
     <comment xml:lang="bs">Umbrello UML datoteka</comment>
     <comment xml:lang="ca">Fitxer del modelador UML Umbrello</comment>
     <comment xml:lang="ca@valencia">Fitxer del modelador UML Umbrello</comment>
@@ -3105,7 +3054,6 @@ Notes:
   <mime-type type="application/x-ms-shortcut">
     <comment>Windows link</comment>
     <comment xml:lang="ar">وصلة ويندوز</comment>
-    <comment xml:lang="ast">Enllaz Windows</comment>
     <comment xml:lang="bs">windows veza</comment>
     <comment xml:lang="ca">Enllaç del Windows</comment>
     <comment xml:lang="ca@valencia">Enllaç del Windows</comment>
@@ -3167,7 +3115,6 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>KGet download list</comment>
     <comment xml:lang="ar">قائمة تنزيل KGet</comment>
-    <comment xml:lang="ast">Llistáu de descarga KGet</comment>
     <comment xml:lang="bg">Списък за изтегляне на KGet</comment>
     <comment xml:lang="bs">KGetova spisak preuzimanja</comment>
     <comment xml:lang="ca">Llista de baixades del KGet</comment>
@@ -3227,7 +3174,6 @@ Notes:
   <mime-type type="application/x-kopete-emoticons">
     <comment>Kopete emoticons archive</comment>
     <comment xml:lang="ar">أرشف إبتسامات Kopete</comment>
-    <comment xml:lang="ast">Archivu de fustaxes Kopete</comment>
     <comment xml:lang="bs">Kopeteova arhiva emotikona</comment>
     <comment xml:lang="ca">Arxiu de les emoticones del Kopete</comment>
     <comment xml:lang="ca@valencia">Arxiu de les emoticones del Kopete</comment>
@@ -3285,7 +3231,6 @@ Notes:
   <mime-type type="application/x-icq">
     <comment>ICQ contact</comment>
     <comment xml:lang="ar">جهة اتصال ICQ</comment>
-    <comment xml:lang="ast">Contautu ICQ</comment>
     <comment xml:lang="bg">Контакт в ICQ</comment>
     <comment xml:lang="bs">ICQ kontakt</comment>
     <comment xml:lang="ca">Contacte de l'ICQ</comment>
@@ -3349,7 +3294,6 @@ Notes:
   <mime-type type="video/x-ms-wmp"> <!-- fdo #19671, rejected because "not a file type, only a plugin type" -->
     <comment>Microsoft Media Format</comment>
     <comment xml:lang="ar">تنسيق وسائط مايكروسوفت</comment>
-    <comment xml:lang="ast">Formatu de medios Microsoft</comment>
     <comment xml:lang="bg">Формат Microsoft Media</comment>
     <comment xml:lang="bs">Microsoftov medija format</comment>
     <comment xml:lang="ca">Format de suports de Microsoft</comment>
@@ -3415,7 +3359,6 @@ Notes:
   <mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-trig"> <!-- fdo #32182, released in s-m-i 1.1 -->
     <comment>TriG RDF document</comment>
     <comment xml:lang="ar">وثيقة TriG RDF</comment>
-    <comment xml:lang="ast">Documentu RDF TriG</comment>
     <comment xml:lang="bs">TriG RDF dokument</comment>
     <comment xml:lang="ca">Document RDF del TriG</comment>
     <comment xml:lang="ca@valencia">Document RDF del TriG</comment>
@@ -3477,7 +3420,6 @@ Notes:
   <mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-turtle"> <!-- fdo #18089, but not in followup #32812 -->
     <comment>Turtle RDF document</comment>
     <comment xml:lang="ar">وثيقة Turtle RDF</comment>
-    <comment xml:lang="ast">Documentu RDF Turtle</comment>
     <comment xml:lang="bs">Turtle RDF dokument</comment>
     <comment xml:lang="ca">Document RDF del Turtle</comment>
     <comment xml:lang="ca@valencia">Document RDF del Turtle</comment>
@@ -3536,7 +3478,6 @@ Notes:
   <mime-type type="image/x-pic"> <!-- fdo #26038, needs update -->
     <comment>Softimage PIC image</comment>
     <comment xml:lang="ar">صورة PIC</comment>
-    <comment xml:lang="ast">Imaxe Softimage PIC</comment>
     <comment xml:lang="bs">Softimidžova PIC slika</comment>
     <comment xml:lang="ca">Imatge PIC de Softimage</comment>
     <comment xml:lang="ca@valencia">Imatge PIC de Softimage</comment>
@@ -3597,7 +3538,6 @@ Notes:
   <mime-type type="text/x-qml"> <!-- in fdo smi > 0.90; *.qmltypes and *.qmlproject added to fdo smi > 1.3 -->
     <comment>Qt Markup Language file</comment>
     <comment xml:lang="ar">ملف لغة الوصف Qt</comment>
-    <comment xml:lang="ast">Ficheru de llinguax d'etiquetes Qt</comment>
     <comment xml:lang="bs">Datoteka Qt jezika za označavanje</comment>
     <comment xml:lang="ca">Fitxer de llenguatge de marques de les Qt</comment>
     <comment xml:lang="ca@valencia">Fitxer de llenguatge de marques de les Qt</comment>
@@ -3657,7 +3597,6 @@ Notes:
   <mime-type type="application/x-mobipocket-ebook"> <!-- in fdo s-m-i since 0.91 -->
     <comment>Mobipocket e-book</comment>
     <comment xml:lang="ar">كتاب إلكتروني Mobipocket</comment>
-    <comment xml:lang="ast">Llibru electrónicu Mobipocket</comment>
     <comment xml:lang="bs">Mobipocket e-book</comment>
     <comment xml:lang="ca">Llibre electrònic Mobipocket</comment>
     <comment xml:lang="ca@valencia">Llibre electrònic Mobipocket</comment>
