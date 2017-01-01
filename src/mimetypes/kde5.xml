@@ -143,6 +143,7 @@ Notes:
   <mime-type type="application/x-cda">
     <comment>CD audio</comment>
     <comment xml:lang="ar">صوت CD</comment>
+    <comment xml:lang="ast">Audiu CD</comment>
     <comment xml:lang="bs">CD audio</comment>
     <comment xml:lang="ca">CD àudio</comment>
     <comment xml:lang="ca@valencia">CD àudio</comment>
