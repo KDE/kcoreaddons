@@ -145,7 +145,7 @@ public:
         FoldHours           = 0x8    ///< Fold the hours into the minutes, e.g. 83:45 or 83m45s, overrides HideSeconds
     };
     Q_DECLARE_FLAGS(DurationFormatOptions, DurationFormatOption)
-    Q_FLAGS(DurationFormatOption)
+    Q_FLAG(DurationFormatOption)
 
     /**
      * Constructs a KFormat.

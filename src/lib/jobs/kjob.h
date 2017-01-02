@@ -84,8 +84,6 @@ class KJobPrivate;
 class KCOREADDONS_EXPORT KJob : public QObject
 {
     Q_OBJECT
-    Q_ENUMS(KillVerbosity Capability Unit)
-    Q_FLAGS(Capabilities)
     Q_PROPERTY(int error READ error NOTIFY result)
     Q_PROPERTY(QString errorText READ errorText NOTIFY result)
     Q_PROPERTY(QString errorString READ errorString NOTIFY result)
@@ -94,13 +92,16 @@ class KCOREADDONS_EXPORT KJob : public QObject
 
 public:
     enum Unit { Bytes, Files, Directories };
+    Q_ENUM(Unit)
 
     enum Capability { NoCapabilities = 0x0000,
                       Killable       = 0x0001,
                       Suspendable    = 0x0002
                     };
+    Q_ENUM(Capability)
 
     Q_DECLARE_FLAGS(Capabilities, Capability)
+    Q_FLAG(Capabilities)
 
     /**
      * Creates a new KJob object.
@@ -172,6 +173,7 @@ public:
     Q_SCRIPTABLE virtual void start() = 0;
 
     enum KillVerbosity { Quietly, EmitResult };
+    Q_ENUM(KillVerbosity)
 
 public Q_SLOTS:
     /**
