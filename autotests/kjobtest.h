@@ -32,10 +32,10 @@ public:
     TestJob();
     virtual ~TestJob();
 
-    virtual void start();
+    void start() Q_DECL_OVERRIDE;
 
 protected:
-    virtual bool doKill();
+    bool doKill() Q_DECL_OVERRIDE;
 
 public:
     void setError(int errorCode);
@@ -100,7 +100,7 @@ class WaitJob : public KJob
     Q_OBJECT
 public:
 
-    virtual void start();
+    void start() Q_DECL_OVERRIDE;
     void makeItFinish();
 };
 
