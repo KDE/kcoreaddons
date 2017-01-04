@@ -341,7 +341,23 @@ bool KPluginMetaData::isEnabledByDefault() const
 
 QString KPluginMetaData::value(const QString &key, const QString &defaultValue) const
 {
-    return m_metaData.value(key).toString(defaultValue);
+    const QJsonValue value = m_metaData.value(key);
+    if (value.isString()) {
+        return value.toString(defaultValue);
+    } else if (value.isArray()) {
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a single string."
+            " but it is a stringlist";
+        const QStringList list = value.toVariant().toStringList();
+        if (list.isEmpty()) {
+            return defaultValue;
+        }
+        return list.join(QChar::fromLatin1(','));
+    } else if (value.isBool()) {
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a single string."
+            " but it is a bool";
+        return value.toBool() ? QStringLiteral("true") : QStringLiteral("false");
+    }
+    return defaultValue;
 }
 
 bool KPluginMetaData::operator==(const KPluginMetaData &other) const
