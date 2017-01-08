@@ -182,7 +182,7 @@ public:
      * @param dialect binary unit standard to use.  Use DefaultBinaryDialect to
      *        use the localized user selection unless you need to use a specific
      *        unit type (such as displaying a flash memory size in JEDEC).
-     * @param specificUnit specific unit size to use in result.  Use
+     * @param units specific unit size to use in result.  Use
      *        DefaultBinaryUnits to automatically select a unit that will return
      *        a sanely-sized number.
      * @return converted size as a translated string including the units.

@@ -69,7 +69,7 @@ Q_DECLARE_FLAGS(Options, Option)
  * to HTML entities: & " < >. Newlines are also preserved.
  *
  * @param  plainText  The text to be converted into HTML.
- * @param  flags      The flags to consider when processing @p plainText.
+ * @param  options    The options to use when processing @p plainText.
  * @param  maxUrlLen  The maximum length of permitted URLs. The reason for
  *                    this limit is that there may be possible security
  *                    implications in handling URLs of unlimited length.

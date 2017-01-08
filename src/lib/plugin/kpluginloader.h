@@ -436,7 +436,7 @@ public:
     /**
      * Construct an invalid plugin name with an error message.
      *
-     * When this object is passed to KPluginLoader, @param errorString
+     * When this object is passed to KPluginLoader, @p errorString
      * will be used for KPluginLoader::errorString().
      *
      * @param errorString  The (translated) error string.
