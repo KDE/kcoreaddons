@@ -234,6 +234,51 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
     return type;
 }
 
+bool tokenizeKeyValue(QFile &df, const QString &src, QByteArray &key, QString &value, int &lineNr)
+{
+    const QByteArray line = df.readLine().trimmed();
+    lineNr++;
+    if (line.isEmpty()) {
+        DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << ": empty";
+        return true;
+    }
+    if (line.startsWith('#')) {
+        DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << ": comment";
+        return true; // skip comments
+    }
+    if (line.startsWith('[')) {
+        // start of new group -> doesn't interest us anymore
+        DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << ": start of new group " << line;
+        return false;
+    }
+    // must have form key=value now
+    const int equalsIndex = line.indexOf('=');
+    if (equalsIndex == -1) {
+        qCWarning(DESKTOPPARSER).nospace() << qPrintable(src) << ':' << lineNr << ": Line is neither comment nor group "
+            "and doesn't contain an '=' character: \"" << line.constData() << '\"';
+        return true;
+    }
+    // trim key and value to remove spaces around the '=' char
+    key = line.mid(0, equalsIndex).trimmed();
+    if (key.isEmpty()) {
+        qCWarning(DESKTOPPARSER).nospace() << qPrintable(src) << ':' << lineNr << ": Key name is missing: \"" << line.constData() << '\"';
+        return true;
+    }
+
+    const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
+    const QByteArray valueEscaped = escapeValue(valueRaw);
+    value = QString::fromUtf8(valueEscaped);
+
+#ifdef BUILDING_DESKTOPTOJSON_TOOL
+    DESKTOPTOJSON_VERBOSE_DEBUG.nospace() << "Line " << lineNr << ": key=" << key << ", value=" << value;
+    if (valueEscaped != valueRaw) {
+        DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << " contained escape sequences";
+    }
+#endif
+
+    return true;
+}
+
 QVector<CustomPropertyDefinition>* parseServiceTypesFile(QString path)
 {
     int lineNr = 0;
@@ -401,13 +446,8 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
     } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Depends")) {
         kplugin[QStringLiteral("Dependencies")] = QJsonArray::fromStringList(deserializeList(value));
     } else if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
+        //NOTE: "X-KDE-ServiceTypes" and "ServiceTypes" were already managed in the first parse step, so this second one is almost a noop
         const auto services = deserializeList(value);
-        for(const auto &service : services) {
-            // some .desktop files still use the legacy ServiceTypes= key
-            QString fileName = service.toLower().replace(QLatin1Char('/'), QLatin1Char('-'))+QStringLiteral(".desktop");
-            serviceTypes.addFile(fileName);
-        }
-
         kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(services);
     } else if (key == QByteArrayLiteral("MimeType")) {
         // MimeType is a XDG string list and not a KConfig list so we need to use ';' as the separator
@@ -474,46 +514,39 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
     ServiceTypeDefinition serviceTypeDef = ServiceTypeDefinition::fromFiles(serviceTypes);
     readUntilDesktopEntryGroup(df, src, lineNr);
     DESKTOPTOJSON_VERBOSE_DEBUG << "Found [Desktop Entry] group in line" << lineNr;
+    auto startPos = df.pos();
 
-    //QJsonObject json;
-    QJsonObject kplugin; // the "KPlugin" key of the metadata
+    //parse it a first time to know servicetype
     while (!df.atEnd()) {
-        const QByteArray line = df.readLine().trimmed();
-        lineNr++;
-        if (line.isEmpty()) {
-            DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << ": empty";
-            continue;
-        }
-        if (line.startsWith('#')) {
-            DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << ": comment";
-            continue; // skip comments
-        }
-        if (line.startsWith('[')) {
-            // start of new group -> doesn't interest us anymore
-            DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << ": start of new group " << line;
+        QByteArray key;
+        QString value;
+        if (!tokenizeKeyValue(df, src, key, value, lineNr)) {
             break;
         }
-        // must have form key=value now
-        const int equalsIndex = line.indexOf('=');
-        if (equalsIndex == -1) {
-            qCWarning(DESKTOPPARSER).nospace() << qPrintable(src) << ':' << lineNr << ": Line is neither comment nor group "
-                "and doesn't contain an '=' character: \"" << line.constData() << '\"';
+        if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
+            const auto services = deserializeList(value);
+            for(const auto &service : services) {
+                // some .desktop files still use the legacy ServiceTypes= key
+                QString fileName = service.toLower().replace(QLatin1Char('/'), QLatin1Char('-'))+QStringLiteral(".desktop");
+                serviceTypeDef.addFile(fileName);
+            }
+            break;
+        }
+    }
+    lineNr=0;
+    df.seek(startPos);
+
+    QJsonObject kplugin; // the "KPlugin" key of the metadata
+    //QJsonObject json;
+    while (!df.atEnd()) {
+        QByteArray key;
+        QString value;
+        if (!tokenizeKeyValue(df, src, key, value, lineNr)) {
+            break;
+        } else if (key.isEmpty()) {
             continue;
         }
-        // trim key and value to remove spaces around the '=' char
-        const QByteArray key = line.mid(0, equalsIndex).trimmed();
-        if (key.isEmpty()) {
-            qCWarning(DESKTOPPARSER).nospace() << qPrintable(src) << ':' << lineNr << ": Key name is missing: \"" << line.constData() << '\"';
-            continue;
-        }
-        const QByteArray valueRaw = line.mid(equalsIndex + 1).trimmed();
-        const QByteArray valueEscaped = escapeValue(valueRaw);
-        const QString value = QString::fromUtf8(valueEscaped);
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
-        DESKTOPTOJSON_VERBOSE_DEBUG.nospace() << "Line " << lineNr << ": key=" << key << ", value=" << value;
-        if (valueEscaped != valueRaw) {
-            DESKTOPTOJSON_VERBOSE_DEBUG << "Line " << lineNr << " contained escape sequences";
-        }
         if (s_compatibilityMode) {
             convertToCompatibilityJson(QString::fromUtf8(key), value, json, lineNr);
         } else {

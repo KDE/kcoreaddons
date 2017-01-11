@@ -1,0 +1,20 @@
+[Desktop Entry]
+Name=Parse Test
+Comment=Two Steps Parsing Test
+Type=Service
+Icon=preferences-system-time
+MimeType=image/png;application/pdf;
+
+X-Test-List=first,second
+X-KDE-ServiceTypes=example/servicetype
+X-KDE-Library=fakeplugin
+X-KDE-FormFactors=mediacenter,desktop
+X-KDE-PluginInfo-Author=Sebastian Kügler
+X-KDE-PluginInfo-Email=sebas@kde.org
+X-KDE-PluginInfo-Name=fakeplugin
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=http://kde.org/
+X-KDE-PluginInfo-Category=Examples
+X-KDE-PluginInfo-Depends=
+X-KDE-PluginInfo-License=LGPL
+X-KDE-PluginInfo-EnabledByDefault=true
