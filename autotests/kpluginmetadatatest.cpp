@@ -254,6 +254,17 @@ private Q_SLOTS:
         QCOMPARE(mdhidden.isHidden(), true);
     }
 
+    void twoStepsParseTest()
+    {
+        QStandardPaths::setTestModeEnabled(true);
+        const QString dfile = QFINDTESTDATA("data/twostepsparsetest.desktop");
+        const QString typesPath = QFINDTESTDATA("data/servicetypes/example-servicetype.desktop");
+        KPluginMetaData md = KPluginMetaData::fromDesktopFile(dfile, QStringList() << typesPath);
+        QVERIFY(md.isValid());
+        QStringList list = KPluginMetaData::readStringList(md.rawData(), QStringLiteral("X-Test-List"));
+        QCOMPARE(list, QStringList({QStringLiteral("first"), QStringLiteral("second")}));
+    }
+
     void testServiceTypes_data()
     {
         const QString kdevServiceTypePath = QFINDTESTDATA("data/servicetypes/fake-kdevelopplugin.desktop");
