@@ -362,6 +362,10 @@ QString KFormatPrivate::formatSpelloutDuration(quint64 msecs) const
 
 QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatType format) const
 {
+    if (!date.isValid()) {
+        return tr("Invalid date", "used when a relative date string can't be generated because the date is invalid");
+    }
+
     const int daysTo = QDate::currentDate().daysTo(date);
     if (daysTo > 7 || daysTo < -7) {
         return m_locale.toString(date, format);
@@ -376,16 +380,40 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
         return tr("Yesterday");
     }
 
-    if (daysTo < -1)
-        /*: a day of the week, eg "Monday" (but translated). Refers to the most recent such day that
-            has already happened. */
-    {
-        return tr("Last %1").arg(m_locale.dayName(date.dayOfWeek(), format));
-    } else if (daysTo > 1)
-        /*: a day of the week, eg "Monday" (but translated). Refers to the soonest such day that
-            has not already happened. */
-    {
-        return tr("Next %1").arg(m_locale.dayName(date.dayOfWeek(), format));
+    if (daysTo < -1) {
+        switch (date.dayOfWeek()) {
+        case 1:
+            return tr("Last Monday",    "most recent such day before today");
+        case 2:
+            return tr("Last Tuesday",   "most recent such day before today");
+        case 3:
+            return tr("Last Wednesday", "most recent such day before today");
+        case 4:
+            return tr("Last Thursday",  "most recent such day before today");
+        case 5:
+            return tr("Last Friday",    "most recent such day before today");
+        case 6:
+            return tr("Last Saturday",  "most recent such day before today");
+        case 7:
+            return tr("Last Sunday",    "most recent such day before today");
+        }
+    } else if (daysTo > 1) {
+        switch (date.dayOfWeek()) {
+        case 1:
+            return tr("Next Monday",    "the next such day after today");
+        case 2:
+            return tr("Next Tuesday",   "the next such day after today");
+        case 3:
+            return tr("Next Wednesday", "the next such day after today");
+        case 4:
+            return tr("Next Thursday",  "the next such day after today");
+        case 5:
+            return tr("Next Friday",    "the next such day after today");
+        case 6:
+            return tr("Next Saturday",  "the next such day after today");
+        case 7:
+            return tr("Next Sunday",    "the next such day after today");
+        }
     }
     Q_UNREACHABLE();
 }

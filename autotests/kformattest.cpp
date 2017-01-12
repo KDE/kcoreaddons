@@ -281,21 +281,24 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::ShortFormat), QString("Yesterday"));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat), QString("Yesterday"));
 
+    // Relative dates within a week are up to translators but there's no
+    // expectation that day names are shortened -- per the API docs, the date
+    // format is only used when the date is outside the relative window
     testDate = QDate::currentDate().addDays(-7);
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat),
              QString("Last %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::LongFormat)));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::ShortFormat),
-             QString("Last %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::ShortFormat)));
+             QString("Last %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::LongFormat)));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat),
-             QString("Last %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::NarrowFormat)));
+             QString("Last %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::LongFormat)));
 
     testDate = QDate::currentDate().addDays(7);
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat),
              QString("Next %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::LongFormat)));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::ShortFormat),
-             QString("Next %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::ShortFormat)));
+             QString("Next %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::LongFormat)));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat),
-             QString("Next %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::NarrowFormat)));
+             QString("Next %1").arg(QLocale::c().dayName(testDate.dayOfWeek(), QLocale::LongFormat)));
 
     testDate = QDate::currentDate().addDays(-8);
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat),
@@ -312,6 +315,9 @@ void KFormatTest::formatRelativeDate()
              QLocale::c().toString(testDate, QLocale::ShortFormat));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat),
              QLocale::c().toString(testDate, QLocale::NarrowFormat));
+
+    testDate = QDate(); // invalid date
+    QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat), QString("Invalid date"));
 
     QDateTime testDateTime = QDateTime(QDate::currentDate(), QTime(3, 0, 0));
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QString("Today, 03:00:00"));
