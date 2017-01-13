@@ -411,7 +411,7 @@ public:
     // can just give it a pointer, w/o any allocations.
     QByteArray _internalProgramName;
     QByteArray _version;
-    QByteArray _bugEmailAddress;
+    QByteArray _bugAddress;
 
     static QList<KAboutPerson> parseTranslators(const QString &translatorName, const QString &translatorEmail);
 
@@ -425,7 +425,7 @@ KAboutData::KAboutData(const QString &_componentName,
                        const QString &_copyrightStatement,
                        const QString &text,
                        const QString &homePageAddress,
-                       const QString &bugsEmailAddress
+                       const QString &bugAddress
                       )
     : d(new Private)
 {
@@ -445,7 +445,7 @@ KAboutData::KAboutData(const QString &_componentName,
     d->_copyrightStatement = _copyrightStatement;
     d->_otherText = text;
     d->_homepageAddress = homePageAddress;
-    d->_bugEmailAddress = bugsEmailAddress.toUtf8();
+    d->_bugAddress = bugAddress.toUtf8();
 
     QUrl homePageUrl(homePageAddress);
     if (!homePageUrl.isValid() || homePageUrl.scheme().isEmpty()) {
@@ -490,7 +490,7 @@ KAboutData::KAboutData(const QString &_componentName,
 
     // match behaviour of other constructors
     d->_licenseList.append(KAboutLicense(KAboutLicense::Unknown, this));
-    d->_bugEmailAddress = "submit@bugs.kde.org";
+    d->_bugAddress = "submit@bugs.kde.org";
     d->organizationDomain = QStringLiteral("kde.org");
     d->desktopFileName = QStringLiteral("org.kde.%1").arg(d->_componentName);
 }
@@ -677,7 +677,7 @@ KAboutData &KAboutData::setHomepage(const QString &homepage)
 
 KAboutData &KAboutData::setBugAddress(const QByteArray &_bugAddress)
 {
-    d->_bugEmailAddress = _bugAddress;
+    d->_bugAddress = _bugAddress;
     return *this;
 }
 
@@ -774,7 +774,7 @@ QString KAboutData::homepage() const
 
 QString KAboutData::bugAddress() const
 {
-    return QString::fromUtf8(d->_bugEmailAddress.constData());
+    return QString::fromUtf8(d->_bugAddress.constData());
 }
 
 QString KAboutData::organizationDomain() const
@@ -787,10 +787,10 @@ QString KAboutData::organizationDomain() const
 /// for the bug mail address. Used in particular for KCrash.
 const char *KAboutData::internalBugAddress() const
 {
-    if (d->_bugEmailAddress.isEmpty()) {
+    if (d->_bugAddress.isEmpty()) {
         return 0;
     }
-    return d->_bugEmailAddress.constData();
+    return d->_bugAddress.constData();
 }
 
 QList<KAboutPerson> KAboutData::authors() const

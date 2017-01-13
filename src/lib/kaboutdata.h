@@ -289,7 +289,7 @@ private:
 
 /**
  * This class is used to store information about a program or plugin.
- * It can store such values as version number, program name, home page, email address
+ * It can store such values as version number, program name, home page, address
  * for bug reporting, multiple authors and contributors
  * (using KAboutPerson), license and copyright information.
  *
@@ -408,7 +408,7 @@ public:
      * setOrganizationDomain() if you want to control this value yourself.
      * @see setOrganizationDomain
      *
-     * @param bugsEmailAddress The bug report email address string.
+     * @param bugAddress The bug report address string, an email address or a URL.
      *        This defaults to the kde.org bug system.
      */
     // KF6: remove constructor that includes catalogName, and put default
@@ -421,7 +421,7 @@ public:
                const QString &copyrightStatement = QString(),
                const QString &otherText = QString(),
                const QString &homePageAddress = QString(),
-               const QString &bugsEmailAddress = QStringLiteral("submit@bugs.kde.org")
+               const QString &bugAddress = QStringLiteral("submit@bugs.kde.org")
               );
 
     /**
@@ -708,7 +708,7 @@ public:
     /**
      * Defines the address where bug reports should be sent.
      *
-     * @param bugAddress The bug report email address string.
+     * @param bugAddress The bug report email address or URL.
      *        This defaults to the kde.org bug system.
      */
     KAboutData &setBugAddress(const QByteArray &bugAddress);
@@ -830,8 +830,8 @@ public:
     QString homepage() const;
 
     /**
-     * Returns the email address for bugs.
-     * @return the email address where to report bugs.
+     * Returns the email address or URL for bugs.
+     * @return the address where to report bugs.
      */
     QString bugAddress() const;
 
