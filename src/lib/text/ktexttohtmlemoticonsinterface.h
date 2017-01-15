@@ -21,6 +21,7 @@
 #define KTEXTTOHTMLEMOTICONSINTERFACE_H
 
 #include <QStringList>
+#include <QMetaType>
 
 /**
  * @internal
