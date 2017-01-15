@@ -29,6 +29,8 @@
 #include <QtCore/QStringList>
 #include <kexportplugin.h> // for source compat
 
+class QWidget;
+
 class KPluginFactoryPrivate;
 namespace KParts
 {
