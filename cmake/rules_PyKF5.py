@@ -45,7 +45,7 @@ def local_container_rules():
 
 def local_forward_declaration_rules():
     return [
-        [".*", "QWidget", ".*", rules_engine.mark_forward_declaration_external]
+        # [".*", "QWidget", ".*", rules_engine.mark_forward_declaration_external]
     ]
 
 def local_function_rules():
@@ -55,6 +55,8 @@ def local_function_rules():
         ["KUserGroup", "KUserGroup", ".*", ".*", ".*group.*", rules_engine.function_discard],
 
         ["KCrash", "defaultCrashHandler", ".*", ".*", ".*", rules_engine.function_discard],
+
+        ["KPluginFactory", "create", ".*", ".*", ".*QWidget.*", rules_engine.function_discard],
 
         # Deprecated
         ["KPluginFactory", "createPartObject", ".*", ".*", ".*", rules_engine.function_discard],
