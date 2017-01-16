@@ -49,7 +49,7 @@ public:
     QString getEmailAddress();
     bool atUrl();
     bool isEmptyUrl(const QString &url);
-    QString getUrl(bool *badurl = Q_NULLPTR);
+    QString getUrl(bool *badurl = nullptr);
     QString pngToDataUrl(const QString &pngPath);
     QString highlightedText();
 

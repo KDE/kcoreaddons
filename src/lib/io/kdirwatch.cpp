@@ -176,7 +176,7 @@ KDirWatchPrivate::KDirWatchPrivate()
       rescan_all(false),
       rescan_timer(),
 #if HAVE_SYS_INOTIFY_H
-      mSn(Q_NULLPTR),
+      mSn(nullptr),
 #endif
       _isStopped(false)
 {

@@ -315,7 +315,7 @@ public:
      */
     static QList<QObject *> instantiatePlugins(const QString &directory,
             std::function<bool(const KPluginMetaData &)> filter = std::function<bool(const KPluginMetaData &)>(),
-            QObject* parent = Q_NULLPTR);
+            QObject* parent = nullptr);
 
     /**
      * Find all plugins inside @p directory. Only plugins which have JSON metadata will be considered.

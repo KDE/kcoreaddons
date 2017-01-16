@@ -355,7 +355,7 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
     KTextToHTMLHelper helper(plainText, maxUrlLen, maxAddressLen);
 
     QString str;
-    QString result(static_cast<QChar *>(Q_NULLPTR), helper.mText.length() * 2);
+    QString result(static_cast<QChar *>(nullptr), helper.mText.length() * 2);
     QChar ch;
     int x;
     bool startOfLine = true;
