@@ -378,7 +378,7 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
 
     LicenseKey license = ldict.value(keyword.toLatin1(),
                                      KAboutLicense::Custom);
-    return KAboutLicense(license, 0);
+    return KAboutLicense(license, nullptr);
 }
 
 class KAboutData::Private
@@ -788,7 +788,7 @@ QString KAboutData::organizationDomain() const
 const char *KAboutData::internalBugAddress() const
 {
     if (d->_bugAddress.isEmpty()) {
-        return 0;
+        return nullptr;
     }
     return d->_bugAddress.constData();
 }
@@ -917,7 +917,7 @@ QString KAboutData::desktopFileName() const
 class KAboutDataRegistry
 {
 public:
-    KAboutDataRegistry() : m_appData(0) {}
+    KAboutDataRegistry() : m_appData(nullptr) {}
     ~KAboutDataRegistry()
     {
         delete m_appData;
@@ -1035,7 +1035,7 @@ const KAboutData *KAboutData::applicationDataPointer()
     if (s_registry.exists()) {
         return s_registry->m_appData;
     }
-    return 0;
+    return nullptr;
 }
 
 bool KAboutData::setupCommandLine(QCommandLineParser *parser)

@@ -38,7 +38,7 @@ public:
     enum {NamePadding=8};
 
     KAutoSaveFilePrivate()
-        : lock(0),
+        : lock(nullptr),
           managedFileNameChanged(false)
     {}
 
@@ -121,7 +121,7 @@ void KAutoSaveFile::releaseLock()
 {
     if (d->lock && d->lock->isLocked()) {
         delete d->lock;
-        d->lock = NULL;
+        d->lock = nullptr;
         if (!fileName().isEmpty()) {
             remove();
         }

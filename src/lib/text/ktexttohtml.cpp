@@ -34,7 +34,7 @@
 
 #include "kcoreaddons_debug.h"
 
-static KTextToHTMLEmoticonsInterface *s_emoticonsInterface = 0;
+static KTextToHTMLEmoticonsInterface *s_emoticonsInterface = nullptr;
 
 static void loadEmoticonsPlugin()
 {

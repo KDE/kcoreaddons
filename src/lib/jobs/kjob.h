@@ -108,7 +108,7 @@ public:
      *
      * @param parent the parent QObject
      */
-    explicit KJob(QObject *parent = 0);
+    explicit KJob(QObject *parent = nullptr);
 
     /**
      * Destroys a KJob object.

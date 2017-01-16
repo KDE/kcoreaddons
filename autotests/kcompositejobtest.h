@@ -30,7 +30,7 @@ class TestJob : public KJob
     Q_OBJECT
 
 public:
-    explicit TestJob(QObject *parent = 0);
+    explicit TestJob(QObject *parent = nullptr);
 
     /// Takes 1 second to finish
     void start() Q_DECL_OVERRIDE;
@@ -44,7 +44,7 @@ class CompositeJob : public KCompositeJob
     Q_OBJECT
 
 public:
-    explicit CompositeJob(QObject *parent = 0) : KCompositeJob(parent) {}
+    explicit CompositeJob(QObject *parent = nullptr) : KCompositeJob(parent) {}
 
     void start() Q_DECL_OVERRIDE;
     bool addSubjob(KJob *job) Q_DECL_OVERRIDE;

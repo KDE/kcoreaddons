@@ -30,9 +30,9 @@
 #include <QTimer>
 
 KJobPrivate::KJobPrivate()
-    : q_ptr(0), uiDelegate(0), error(KJob::NoError),
+    : q_ptr(nullptr), uiDelegate(nullptr), error(KJob::NoError),
       progressUnit(KJob::Bytes), percentage(0),
-      speedTimer(0), eventLoop(0),
+      speedTimer(nullptr), eventLoop(nullptr),
       capabilities(KJob::NoCapabilities),
       suspended(false), isAutoDelete(true), isFinished(false)
 {
@@ -68,7 +68,7 @@ KJob::~KJob()
 void KJob::setUiDelegate(KJobUiDelegate *delegate)
 {
     Q_D(KJob);
-    if (delegate == 0 || delegate->setJob(this)) {
+    if (delegate == nullptr || delegate->setJob(this)) {
         delete d->uiDelegate;
         d->uiDelegate = delegate;
 
@@ -197,7 +197,7 @@ bool KJob::exec()
     if (!d->isFinished) {
         d->eventLoop->exec(QEventLoop::ExcludeUserInputEvents);
     }
-    d->eventLoop = 0;
+    d->eventLoop = nullptr;
 
     if (wasAutoDelete) {
         deleteLater();

@@ -453,7 +453,7 @@ struct SharedMemory {
         cacheSize = _cacheSize;
         pageSize = _pageSize;
         version = PIXMAP_CACHE_VERSION;
-        cacheTimestamp = static_cast<unsigned>(::time(0));
+        cacheTimestamp = static_cast<unsigned>(::time(nullptr));
 
         clearInternalTables();
 
@@ -515,7 +515,7 @@ struct SharedMemory {
     const void *page(pageID at) const
     {
         if (static_cast<uint>(at) >= pageTableSize()) {
-            return 0;
+            return nullptr;
         }
 
         // We must manually calculate this one since pageSize varies.
@@ -935,7 +935,7 @@ struct SharedMemory {
         // using (properly aligned), and from there determine how much memory
         // we'd use.
         IndexTableEntry *indexTableStart =
-            offsetAs<IndexTableEntry>(static_cast<void *>(0), sizeof(SharedMemory));
+            offsetAs<IndexTableEntry>(static_cast<void *>(nullptr), sizeof(SharedMemory));
 
         indexTableStart += indexTableSize;
 
@@ -978,8 +978,8 @@ public:
             unsigned expectedItemSize
            )
         : m_cacheName(name)
-        , shm(0)
-        , m_lock(0)
+        , shm(nullptr)
+        , m_lock(nullptr)
         , m_mapSize(0)
         , m_defaultCacheSize(defaultCacheSize)
         , m_expectedItemSize(expectedItemSize)
@@ -1003,7 +1003,7 @@ public:
                         << static_cast<void *>(shm) << ":" << ::strerror(errno);
         }
 
-        shm = 0;
+        shm = nullptr;
         m_mapSize = 0;
     }
 
@@ -1054,7 +1054,7 @@ public:
             // Use mmap directly instead of QFile::map since the QFile (and its
             // shared mapping) will disappear unless we hang onto the QFile for no
             // reason (see the note below, we don't care about the file per se...)
-            mapAddress = QT_MMAP(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, file.handle(), 0);
+            mapAddress = QT_MMAP(nullptr, size, PROT_READ | PROT_WRITE, MAP_SHARED, file.handle(), 0);
 
             // So... it is possible that someone else has mapped this cache already
             // with a larger size. If that's the case we need to at least match
@@ -1083,7 +1083,7 @@ public:
                     unsigned actualPageSize = mapped->cachePageSize();
                     ::munmap(mapAddress, size);
                     size = SharedMemory::totalSize(cacheSize, actualPageSize);
-                    mapAddress = QT_MMAP(NULL, size, PROT_READ | PROT_WRITE, MAP_SHARED, file.handle(), 0);
+                    mapAddress = QT_MMAP(nullptr, size, PROT_READ | PROT_WRITE, MAP_SHARED, file.handle(), 0);
                 }
             }
         }
@@ -1107,7 +1107,7 @@ public:
             qCWarning(KCOREADDONS_DEBUG) << "Failed to establish shared memory mapping, will fallback"
                        << "to private memory -- memory usage will increase";
 
-            mapAddress = QT_MMAP(NULL, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+            mapAddress = QT_MMAP(nullptr, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
         }
 
         // Well now we're really hosed. We can still work, but we can't even cache
@@ -1288,7 +1288,7 @@ public:
         CacheLocker(const Private *_d) : d(const_cast<Private *>(_d))
         {
             if (Q_UNLIKELY(!d || !d->shm || !cautiousLock())) {
-                d = 0;
+                d = nullptr;
             }
         }
 
@@ -1301,7 +1301,7 @@ public:
 
         bool failed() const
         {
-            return !d || d->shm == 0;
+            return !d || d->shm == nullptr;
         }
     };
 
@@ -1378,7 +1378,7 @@ void SharedMemory::removeEntry(uint index)
 KSharedDataCache::KSharedDataCache(const QString &cacheName,
                                    unsigned defaultCacheSize,
                                    unsigned expectedItemSize)
-    : d(0)
+    : d(nullptr)
 {
     try {
         d = new Private(cacheName, defaultCacheSize, expectedItemSize);
@@ -1392,7 +1392,7 @@ KSharedDataCache::KSharedDataCache(const QString &cacheName,
             qCritical()
                     << "Even a brand-new cache starts off corrupted, something is"
                     << "seriously wrong. :-(";
-            d = 0; // Just in case
+            d = nullptr; // Just in case
         }
     }
 }
@@ -1414,7 +1414,7 @@ KSharedDataCache::~KSharedDataCache()
     }
 
     // Do not delete d->shm, it was never constructed, it's just an alias.
-    d->shm = 0;
+    d->shm = nullptr;
 
     delete d;
 }
@@ -1473,7 +1473,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
             // reduce its use count. If it reduces to zero then eliminate it and
             // use its old spot.
 
-            if (cullCollisions && (::time(0) - indices[position].lastUsedTime) > 60) {
+            if (cullCollisions && (::time(nullptr) - indices[position].lastUsedTime) > 60) {
                 indices[position].useCount >>= 1;
                 if (indices[position].useCount == 0) {
                     qCDebug(KCOREADDONS_DEBUG) << "Overwriting existing old cached entry due to collision.";
@@ -1544,7 +1544,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
         indices[position].fileNameHash = keyHash;
         indices[position].totalItemSize = requiredSize;
         indices[position].useCount = 1;
-        indices[position].addTime = ::time(0);
+        indices[position].addTime = ::time(nullptr);
         indices[position].lastUsedTime = indices[position].addTime;
         indices[position].firstPage = firstPage;
 
@@ -1594,7 +1594,7 @@ bool KSharedDataCache::find(const QString &key, QByteArray *destination) const
             d->verifyProposedMemoryAccess(resultPage, header->totalItemSize);
 
             header->useCount++;
-            header->lastUsedTime = ::time(0);
+            header->lastUsedTime = ::time(nullptr);
 
             // Our item is the key followed immediately by the data, so skip
             // past the key.

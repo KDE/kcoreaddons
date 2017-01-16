@@ -47,7 +47,7 @@ int KRandom::random()
         if (!opened || urandom.read(reinterpret_cast<char *>(&seed), sizeof(seed)) != sizeof(seed)) {
             // No /dev/urandom... try something else.
             qsrand(getpid());
-            seed = qrand() + time(0);
+            seed = qrand() + time(nullptr);
         }
         qsrand(seed);
     }

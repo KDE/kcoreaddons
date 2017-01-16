@@ -144,7 +144,7 @@ enum Errors {
  *  target, see \ref Errors
  * @return a list of unquoted words or an empty list if an error occurred
  */
-KCOREADDONS_EXPORT QStringList splitArgs(const QString &cmd, Options flags = NoOptions, Errors *err = 0);
+KCOREADDONS_EXPORT QStringList splitArgs(const QString &cmd, Options flags = NoOptions, Errors *err = nullptr);
 
 /**
  * Quotes and joins @p args together according to system shell rules.

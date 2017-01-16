@@ -95,7 +95,7 @@ QObject *KPluginFactory::createObject(QObject *parent, const char *className, co
     Q_UNUSED(parent);
     Q_UNUSED(className);
     Q_UNUSED(args);
-    return 0;
+    return nullptr;
 }
 #endif
 
@@ -106,7 +106,7 @@ KParts::Part *KPluginFactory::createPartObject(QWidget *parentWidget, QObject *p
     Q_UNUSED(parentWidget);
     Q_UNUSED(classname);
     Q_UNUSED(args);
-    return 0;
+    return nullptr;
 }
 #endif
 
@@ -114,7 +114,7 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
 {
     Q_D(KPluginFactory);
 
-    QObject *obj = 0;
+    QObject *obj = nullptr;
 
 #ifndef KCOREADDONS_NO_DEPRECATED
     if (keyword.isEmpty()) {

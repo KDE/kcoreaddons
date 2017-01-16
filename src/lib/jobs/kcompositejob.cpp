@@ -45,7 +45,7 @@ KCompositeJob::~KCompositeJob()
 bool KCompositeJob::addSubjob(KJob *job)
 {
     Q_D(KCompositeJob);
-    if (job == 0 || d->subjobs.contains(job)) {
+    if (job == nullptr || d->subjobs.contains(job)) {
         return false;
     }
 
@@ -64,11 +64,11 @@ bool KCompositeJob::addSubjob(KJob *job)
 bool KCompositeJob::removeSubjob(KJob *job)
 {
     Q_D(KCompositeJob);
-    if (job == 0) {
+    if (job == nullptr) {
         return false;
     }
 
-    job->setParent(0);
+    job->setParent(nullptr);
     d->subjobs.removeAll(job);
 
     return true;
@@ -88,7 +88,7 @@ void KCompositeJob::clearSubjobs()
 {
     Q_D(KCompositeJob);
     Q_FOREACH (KJob *job, d->subjobs) {
-        job->setParent(0);
+        job->setParent(nullptr);
     }
     d->subjobs.clear();
 }

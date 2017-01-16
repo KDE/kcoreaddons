@@ -116,7 +116,7 @@ public:
                     return sub_entry;
                 }
             }
-            return 0;
+            return nullptr;
         }
 
         bool dirty;

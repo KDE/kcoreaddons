@@ -210,7 +210,7 @@ public:
         }
 
         // Attempt to setup for thread-only synchronization.
-        if (!processSharingSupported && pthread_mutex_init(&m_mutex, NULL) != 0) {
+        if (!processSharingSupported && pthread_mutex_init(&m_mutex, nullptr) != 0) {
             return false;
         }
 
@@ -248,7 +248,7 @@ public:
         // Long timeout, but if we fail to meet this timeout it's probably a cache
         // corruption (and if we take 8 seconds then it should be much much quicker
         // the next time anyways since we'd be paged back in from disk)
-        timeout.tv_sec = 10 + ::time(NULL); // Absolute time, so 10 seconds from now
+        timeout.tv_sec = 10 + ::time(nullptr); // Absolute time, so 10 seconds from now
         timeout.tv_nsec = 0;
 
         return pthread_mutex_timedlock(&m_mutex, &timeout) == 0;
@@ -315,7 +315,7 @@ public:
         // Long timeout, but if we fail to meet this timeout it's probably a cache
         // corruption (and if we take 8 seconds then it should be much much quicker
         // the next time anyways since we'd be paged back in from disk)
-        timeout.tv_sec = 10 + ::time(NULL); // Absolute time, so 10 seconds from now
+        timeout.tv_sec = 10 + ::time(nullptr); // Absolute time, so 10 seconds from now
         timeout.tv_nsec = 0;
 
         return sem_timedwait(&m_semaphore, &timeout) == 0;
@@ -379,7 +379,7 @@ static SharedLockId findBestSharedLock()
 #ifdef KSDC_THREAD_PROCESS_SHARED_SUPPORTED
     {
         pthread_mutex_t tempMutex;
-        QSharedPointer<KSDCLock> tempLock(0);
+        QSharedPointer<KSDCLock> tempLock(nullptr);
         if (timeoutsSupported) {
 #ifdef KSDC_TIMEOUTS_SUPPORTED
             tempLock = QSharedPointer<KSDCLock>(new pthreadTimedLock(tempMutex));
@@ -400,7 +400,7 @@ static SharedLockId findBestSharedLock()
 #ifdef KSDC_SEMAPHORES_SUPPORTED
     {
         sem_t tempSemaphore;
-        QSharedPointer<KSDCLock> tempLock(0);
+        QSharedPointer<KSDCLock> tempLock(nullptr);
         if (timeoutsSupported) {
             tempLock = QSharedPointer<KSDCLock>(new semaphoreTimedLock(tempSemaphore));
         } else {

@@ -87,7 +87,7 @@ public:
      * \param plugin The name of the plugin.
      * \param parent A parent object.
      */
-    explicit KPluginLoader(const QString &plugin, QObject *parent = 0);
+    explicit KPluginLoader(const QString &plugin, QObject *parent = nullptr);
 
     /**
      * Load a plugin by name.
@@ -99,7 +99,7 @@ public:
      * \param name   The name of the plugin.
      * \param parent A parent object.
      */
-    explicit KPluginLoader(const KPluginName &name, QObject *parent = 0);
+    explicit KPluginLoader(const KPluginName &name, QObject *parent = nullptr);
 
     /**
      * Destroys the plugin loader.

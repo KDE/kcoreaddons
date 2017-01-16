@@ -99,7 +99,7 @@ enum DecodeOptions {
  */
 KCOREADDONS_EXPORT QList<QUrl> urlsFromMimeData(const QMimeData *mimeData,
         DecodeOptions decodeOptions = PreferKdeUrls,
-        MetaDataMap *metaData = 0);
+        MetaDataMap *metaData = nullptr);
 
 }
 

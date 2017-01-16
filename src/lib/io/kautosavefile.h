@@ -139,7 +139,7 @@ public:
      * @param filename the filename that this KAutoSaveFile refers to
      * @param parent the parent object
      */
-    explicit KAutoSaveFile(const QUrl &filename, QObject *parent = 0);
+    explicit KAutoSaveFile(const QUrl &filename, QObject *parent = nullptr);
 
     /**
      * @overload
@@ -148,7 +148,7 @@ public:
      *
      * @param parent the parent object
      */
-    explicit KAutoSaveFile(QObject *parent = 0);
+    explicit KAutoSaveFile(QObject *parent = nullptr);
 
     /**
      * Destroys the KAutoSaveFile object, removes the autosave

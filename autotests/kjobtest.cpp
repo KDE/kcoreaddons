@@ -278,13 +278,13 @@ void KJobTest::testDelegateUsage()
     TestJobUiDelegate *delegate = new TestJobUiDelegate;
     QPointer<TestJobUiDelegate> guard(delegate);
 
-    QVERIFY(job1->uiDelegate() == 0);
+    QVERIFY(job1->uiDelegate() == nullptr);
     job1->setUiDelegate(delegate);
     QVERIFY(job1->uiDelegate() == delegate);
 
-    QVERIFY(job2->uiDelegate() == 0);
+    QVERIFY(job2->uiDelegate() == nullptr);
     job2->setUiDelegate(delegate);
-    QVERIFY(job2->uiDelegate() == 0);
+    QVERIFY(job2->uiDelegate() == nullptr);
 
     delete job1;
     delete job2;
@@ -293,7 +293,7 @@ void KJobTest::testDelegateUsage()
 
 void KJobTest::testNestedExec()
 {
-    m_innerJob = 0;
+    m_innerJob = nullptr;
     QTimer::singleShot(100, this, SLOT(slotStartInnerJob()));
     m_outerJob = new WaitJob();
     m_outerJob->exec();
@@ -405,7 +405,7 @@ void WaitJob::makeItFinish()
 
 void TestJobUiDelegate::connectJob(KJob *job)
 {
-    QVERIFY(job->uiDelegate() != 0);
+    QVERIFY(job->uiDelegate() != nullptr);
 }
 
 #include "moc_kjobtest.cpp"

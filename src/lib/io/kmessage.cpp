@@ -25,7 +25,7 @@
 class StaticMessageHandler
 {
 public:
-    StaticMessageHandler() : m_handler(0) {}
+    StaticMessageHandler() : m_handler(nullptr) {}
     ~StaticMessageHandler()
     {
         delete m_handler;

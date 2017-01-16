@@ -56,7 +56,7 @@ public:
     Private() : uid(uid_t(-1)), gid(gid_t(-1)) {}
     Private(const char *name) : uid(uid_t(-1)), gid(gid_t(-1))
     {
-        fillPasswd(name ? ::getpwnam(name) : 0);
+        fillPasswd(name ? ::getpwnam(name) : nullptr);
     }
     Private(const passwd *p) : uid(uid_t(-1)), gid(gid_t(-1))
     {
@@ -345,7 +345,7 @@ public:
     Private() : gid(gid_t(-1)) {}
     Private(const char *_name) : gid(gid_t(-1))
     {
-        fillGroup(_name ? ::getgrnam(_name) : 0);
+        fillGroup(_name ? ::getgrnam(_name) : nullptr);
     }
     Private(const ::group *p) : gid(gid_t(-1))
     {
@@ -433,7 +433,7 @@ static void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd
     }
     uint found = 0;
     QVarLengthArray<uid_t> addedUsers;
-    struct passwd *p = 0;
+    struct passwd *p = nullptr;
     for (char **user = g->gr_mem; *user; user++) {
         if ((p = getpwnam(*user))) {
             addedUsers.append(p->pw_uid);

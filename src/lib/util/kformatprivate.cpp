@@ -279,7 +279,7 @@ QString KFormatPrivate::formatDecimalDuration(quint64 msecs, int decimalPlaces) 
     //: @item:intext %1 is a whole number
     //~ singular %n millisecond
     //~ plural %n milliseconds
-    return tr("%n millisecond(s)", 0, msecs);
+    return tr("%n millisecond(s)", nullptr, msecs);
 }
 
 enum DurationUnits {
@@ -297,22 +297,22 @@ static QString formatSingleDuration(DurationUnits units, int n)
         //: @item:intext %n is a whole number
         //~ singular %n day
         //~ plural %n days
-        return KFormatPrivate::tr("%n day(s)", 0, n);
+        return KFormatPrivate::tr("%n day(s)", nullptr, n);
     case Hours:
         //: @item:intext %n is a whole number
         //~ singular %n hour
         //~ plural %n hours
-        return KFormatPrivate::tr("%n hour(s)", 0, n);
+        return KFormatPrivate::tr("%n hour(s)", nullptr, n);
     case Minutes:
         //: @item:intext %n is a whole number
         //~ singular %n minute
         //~ plural %n minutes
-        return KFormatPrivate::tr("%n minute(s)", 0, n);
+        return KFormatPrivate::tr("%n minute(s)", nullptr, n);
     case Seconds:
         //: @item:intext %n is a whole number
         //~ singular %n second
         //~ plural %n seconds
-        return KFormatPrivate::tr("%n second(s)", 0, n);
+        return KFormatPrivate::tr("%n second(s)", nullptr, n);
     }
     Q_ASSERT(false);
     return QString();

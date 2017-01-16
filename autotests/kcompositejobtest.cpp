@@ -89,7 +89,7 @@ void KCompositeJobTest::testDeletionDuringExecution()
 
     QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject*)));
     // check if job got reparented properly
-    delete someParent; someParent = 0;
+    delete someParent; someParent = nullptr;
     // the job should still exist, because it is a child of KCompositeJob now
     QCOMPARE(destroyed_spy.size(), 0);
 
@@ -97,7 +97,7 @@ void KCompositeJobTest::testDeletionDuringExecution()
     compositeJob->start();
 
     // delete the job during the execution
-    delete compositeJob; compositeJob = 0;
+    delete compositeJob; compositeJob = nullptr;
     // at this point, the subjob should be deleted, too
     QCOMPARE(destroyed_spy.size(), 1);
 }

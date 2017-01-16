@@ -40,7 +40,7 @@ class KPluginLoaderPrivate
 protected:
     KPluginLoaderPrivate(const QString &libname)
         : name(libname),
-          loader(0),
+          loader(nullptr),
           pluginVersion(~0U),
           pluginVersionResolved(false)
     {}
@@ -111,12 +111,12 @@ KPluginFactory *KPluginLoader::factory()
     QObject *obj = instance();
 
     if (!obj) {
-        return 0;
+        return nullptr;
     }
 
     KPluginFactory *factory = qobject_cast<KPluginFactory *>(obj);
 
-    if (factory == 0) {
+    if (factory == nullptr) {
         qCDebug(KCOREADDONS_DEBUG) << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
         delete obj;
         d->errorString = tr("The library %1 does not offer a KPluginFactory.").arg(d->name);
@@ -164,7 +164,7 @@ QObject *KPluginLoader::instance()
     Q_D(const KPluginLoader);
 
     if (!load()) {
-        return 0;
+        return nullptr;
     }
 
     return d->loader->instance();

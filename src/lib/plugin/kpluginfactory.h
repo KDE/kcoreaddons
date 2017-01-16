@@ -300,7 +300,7 @@ public:
      * \returns A pointer to the created object is returned, or 0 if an error occurred.
      */
     template<typename T>
-    T *create(QObject *parent = 0, const QVariantList &args = QVariantList());
+    T *create(QObject *parent = nullptr, const QVariantList &args = QVariantList());
 
     /**
      * Use this method to create an object. It will try to create an object which inherits
@@ -314,7 +314,7 @@ public:
      * \returns A pointer to the created object is returned, or 0 if an error occurred.
      */
     template<typename T>
-    T *create(const QString &keyword, QObject *parent = 0, const QVariantList &args = QVariantList());
+    T *create(const QString &keyword, QObject *parent = nullptr, const QVariantList &args = QVariantList());
 
     /**
      * Use this method to create an object. It will try to create an object which inherits
@@ -348,9 +348,9 @@ public:
      * @deprecated
      */
 #ifndef KCOREADDONS_NO_DEPRECATED
-    KCOREADDONS_DEPRECATED QObject *create(QObject *parent = 0, const char *classname = "QObject", const QStringList &args = QStringList())
+    KCOREADDONS_DEPRECATED QObject *create(QObject *parent = nullptr, const char *classname = "QObject", const QStringList &args = QStringList())
     {
-        return create(classname, 0, parent, stringListToVariantList(args), QString());
+        return create(classname, nullptr, parent, stringListToVariantList(args), QString());
     }
 #endif
 
@@ -471,7 +471,7 @@ protected:
     static QObject *createInstance(QWidget *parentWidget, QObject *parent, const QVariantList &args)
     {
         Q_UNUSED(parentWidget);
-        ParentType *p = 0;
+        ParentType *p = nullptr;
         if (parent) {
             p = qobject_cast<ParentType *>(parent);
             Q_ASSERT(p);
@@ -494,7 +494,7 @@ typedef KPluginFactory KLibFactory;
 template<typename T>
 inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
 {
-    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : 0, parent, args, QString());
+    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : nullptr, parent, args, QString());
 
     T *t = qobject_cast<T *>(o);
     if (!t) {
@@ -506,7 +506,7 @@ inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
 template<typename T>
 inline T *KPluginFactory::create(const QString &keyword, QObject *parent, const QVariantList &args)
 {
-    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : 0, parent, args, keyword);
+    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : nullptr, parent, args, keyword);
 
     T *t = qobject_cast<T *>(o);
     if (!t) {

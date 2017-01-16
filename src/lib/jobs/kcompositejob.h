@@ -40,7 +40,7 @@ public:
      *
      * @param parent the parent QObject
      */
-    explicit KCompositeJob(QObject *parent = 0);
+    explicit KCompositeJob(QObject *parent = nullptr);
 
     /**
      * Destroys a KCompositeJob object.

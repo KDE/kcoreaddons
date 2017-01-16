@@ -26,7 +26,7 @@ class KJobUiDelegate::Private
 {
 public:
     Private(KJobUiDelegate *delegate)
-        : q(delegate), job(0),
+        : q(delegate), job(nullptr),
           autoErrorHandling(false),
           autoWarningHandling(true) { }
 
@@ -53,7 +53,7 @@ KJobUiDelegate::~KJobUiDelegate()
 
 bool KJobUiDelegate::setJob(KJob *job)
 {
-    if (d->job != 0) {
+    if (d->job != nullptr) {
         return false;
     }
 
