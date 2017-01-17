@@ -41,7 +41,7 @@ namespace KCoreAddons
      *
      * For example:
      * \code
-     * if (KCoreAddons::version() < QT_VERSION_CHECK(5,19,0) )
+     * if (KCoreAddons::version() < QT_VERSION_CHECK(5,19,0))
      * \endcode
      *
      * This may be a different version than the version the application was compiled against.
