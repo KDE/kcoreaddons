@@ -424,6 +424,10 @@ void KTextToHTMLTest::testHtmlConvert_data()
    QTest::newRow("url-with-ref-in-<") << "http://www.foo.bar<http://foo.bar/>"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                << "<a href=\"http://www.foo.bar\">http://www.foo.bar</a>[1]";
+
+   QTest::newRow("url-with-ref-in-]") << "[Please visit our booth 24-25 http://example.com/]"
+                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                               << "[Please visit our booth 24-25 <a href=\"http://example.com/\">http://example.com/</a>]";
 }
 
 

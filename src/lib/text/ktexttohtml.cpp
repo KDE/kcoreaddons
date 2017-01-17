@@ -238,6 +238,8 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
                 previousCharIsSpace = true;
             } else if (!previousIsAnAnchor && mText[mPos] == QLatin1Char('[')) {
                 break;
+            } else if (!previousIsAnAnchor && mText[mPos] == QLatin1Char(']')) {
+                break;
             } else { // skip whitespace
                 if (previousCharIsSpace && mText[mPos] == QLatin1Char('<')) {
                     url.append(QLatin1Char(' '));
