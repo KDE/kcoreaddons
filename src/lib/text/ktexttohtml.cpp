@@ -283,8 +283,7 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
     //       a dot to finish the sentence. That would lead the parser to include the dot in the url,
     //       even though that is not wanted. So work around that here.
     //       Most real-life URLs hopefully don't end with dots or commas.
-    QList<QChar> wordBoundaries;
-    wordBoundaries << QLatin1Char('.') << QLatin1Char(',') << QLatin1Char(':') << QLatin1Char('!') << QLatin1Char('?') << QLatin1Char(')') << QLatin1Char('>');
+    static const QString wordBoundaries = QStringLiteral(".,:!?)>");
     if (url.length() > 1) {
         do {
             if (wordBoundaries.contains(url.at(url.length() - 1))) {
