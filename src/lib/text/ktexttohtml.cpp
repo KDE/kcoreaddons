@@ -158,19 +158,19 @@ bool KTextToHTMLHelper::atUrl()
     }
     QChar ch = mText[mPos];
     return
-        (ch == QLatin1Char('h') && (mText.mid(mPos, 7) == QLatin1String("http://") ||
-                                    mText.mid(mPos, 8) == QLatin1String("https://"))) ||
-        (ch == QLatin1Char('v') && mText.mid(mPos, 6) == QLatin1String("vnc://")) ||
-        (ch == QLatin1Char('f') && (mText.mid(mPos, 7) == QLatin1String("fish://") ||
-                                    mText.mid(mPos, 6) == QLatin1String("ftp://") ||
-                                    mText.mid(mPos, 7) == QLatin1String("ftps://"))) ||
-        (ch == QLatin1Char('s') && (mText.mid(mPos, 7) == QLatin1String("sftp://") ||
-                                    mText.mid(mPos, 6) == QLatin1String("smb://"))) ||
-        (ch == QLatin1Char('m') && mText.mid(mPos, 7) == QLatin1String("mailto:")) ||
-        (ch == QLatin1Char('w') && mText.mid(mPos, 4) == QLatin1String("www.")) ||
-        (ch == QLatin1Char('f') && (mText.mid(mPos, 4) == QLatin1String("ftp.") ||
-                                    mText.mid(mPos, 7) == QLatin1String("file://"))) ||
-        (ch == QLatin1Char('n') && mText.mid(mPos, 5) == QLatin1String("news:"));
+        (ch == QLatin1Char('h') && (mText.midRef(mPos, 7) == QLatin1String("http://") ||
+                                    mText.midRef(mPos, 8) == QLatin1String("https://"))) ||
+        (ch == QLatin1Char('v') && mText.midRef(mPos, 6) == QLatin1String("vnc://")) ||
+        (ch == QLatin1Char('f') && (mText.midRef(mPos, 7) == QLatin1String("fish://") ||
+                                    mText.midRef(mPos, 6) == QLatin1String("ftp://") ||
+                                    mText.midRef(mPos, 7) == QLatin1String("ftps://"))) ||
+        (ch == QLatin1Char('s') && (mText.midRef(mPos, 7) == QLatin1String("sftp://") ||
+                                    mText.midRef(mPos, 6) == QLatin1String("smb://"))) ||
+        (ch == QLatin1Char('m') && mText.midRef(mPos, 7) == QLatin1String("mailto:")) ||
+        (ch == QLatin1Char('w') && mText.midRef(mPos, 4) == QLatin1String("www.")) ||
+        (ch == QLatin1Char('f') && (mText.midRef(mPos, 4) == QLatin1String("ftp.") ||
+                                    mText.midRef(mPos, 7) == QLatin1String("file://"))) ||
+        (ch == QLatin1Char('n') && mText.midRef(mPos, 5) == QLatin1String("news:"));
 }
 
 bool KTextToHTMLHelper::isEmptyUrl(const QString &url)
