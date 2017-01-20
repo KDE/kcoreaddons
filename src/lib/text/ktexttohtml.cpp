@@ -69,7 +69,7 @@ KTextToHTMLHelper::KTextToHTMLHelper(const QString &plainText, int pos, int maxU
 {
 }
 
-KTextToHTMLEmoticonsInterface* KTextToHTMLHelper::emoticonsInterface()
+KTextToHTMLEmoticonsInterface* KTextToHTMLHelper::emoticonsInterface() const
 {
     if (!s_emoticonsInterface) {
         loadEmoticonsPlugin();
@@ -143,7 +143,7 @@ QString KTextToHTMLHelper::getEmailAddress()
     return address;
 }
 
-bool KTextToHTMLHelper::atUrl()
+bool KTextToHTMLHelper::atUrl() const
 {
     // the following characters are allowed in a dot-atom (RFC 2822):
     // a-z A-Z 0-9 . ! # $ % & ' * + - / = ? ^ _ ` { | } ~
@@ -173,7 +173,7 @@ bool KTextToHTMLHelper::atUrl()
         (ch == QLatin1Char('n') && mText.midRef(mPos, 5) == QLatin1String("news:"));
 }
 
-bool KTextToHTMLHelper::isEmptyUrl(const QString &url)
+bool KTextToHTMLHelper::isEmptyUrl(const QString &url) const
 {
     return url.isEmpty() ||
            url == QLatin1String("http://") ||
@@ -334,7 +334,7 @@ QString KTextToHTMLHelper::highlightedText()
 }
 
 
-QString KTextToHTMLHelper::pngToDataUrl(const QString &iconPath)
+QString KTextToHTMLHelper::pngToDataUrl(const QString &iconPath) const
 {
     if (iconPath.isEmpty()) {
         return QString();

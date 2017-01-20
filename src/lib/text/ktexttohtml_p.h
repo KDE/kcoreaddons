@@ -44,13 +44,13 @@ class KTextToHTMLHelper
 public:
     KTextToHTMLHelper(const QString &plainText, int pos = 0, int maxUrlLen = 4096, int maxAddressLen = 255);
 
-    KTextToHTMLEmoticonsInterface *emoticonsInterface();
+    KTextToHTMLEmoticonsInterface *emoticonsInterface() const;
 
     QString getEmailAddress();
-    bool atUrl();
-    bool isEmptyUrl(const QString &url);
+    bool atUrl() const;
+    bool isEmptyUrl(const QString &url) const;
     QString getUrl(bool *badurl = nullptr);
-    QString pngToDataUrl(const QString &pngPath);
+    QString pngToDataUrl(const QString &pngPath) const;
     QString highlightedText();
 
     QString mText;
