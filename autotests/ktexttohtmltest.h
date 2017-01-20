@@ -31,6 +31,9 @@ private Q_SLOTS:
     void testHtmlConvert();
     void testHtmlConvert_data();
 
+    void benchHtmlConvert();
+    void benchHtmlConvert_data();
+
 private:
     void testGetUrl2(const QString &left, const QString &right);
 };
