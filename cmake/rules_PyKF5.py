@@ -62,7 +62,7 @@ def local_function_rules():
         ["KPluginFactory", "createPartObject", ".*", ".*", ".*", rules_engine.function_discard],
 
         # Multiple overloads with same python signature
-        ["KMacroExpanderBase", "expandMacrosShellQuote", ".*", ".*", ".*, int ", rules_engine.function_discard],
+        ["KMacroExpanderBase", "expandMacrosShellQuote", ".*", ".*", ".*int.*", rules_engine.function_discard],
         ["KRandomSequence", "setSeed", ".*", ".*", "int.*", rules_engine.function_discard],
 
         [".*", "qobject_cast", ".*", ".*", ".*", rules_engine.function_discard],
