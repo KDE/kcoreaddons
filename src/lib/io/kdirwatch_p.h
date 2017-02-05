@@ -83,8 +83,9 @@ public:
     class Entry
     {
     public:
+        ~Entry();
         // instances interested in events
-        QList<Client *> m_clients;
+        QList<Client *> m_clients; // owned by Entry
         // nonexistent entries of this directory
         QList<Entry *> m_entries;
         QString path;

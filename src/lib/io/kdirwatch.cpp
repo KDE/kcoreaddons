@@ -244,9 +244,6 @@ KDirWatchPrivate::~KDirWatchPrivate()
 {
     timer.stop();
 
-    /* remove all entries being watched */
-    removeEntries(nullptr);
-
 #if HAVE_FAM
     if (use_fam && sn) {
         FAMClose(&fc);
@@ -450,6 +447,11 @@ void KDirWatchPrivate::inotifyEventReceived()
         }
     }
 #endif
+}
+
+KDirWatchPrivate::Entry::~Entry()
+{
+    qDeleteAll(m_clients);
 }
 
 /* In FAM mode, only entries which are marked dirty are scanned.
