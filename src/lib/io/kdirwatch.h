@@ -212,7 +212,7 @@ public:
      */
     bool contains(const QString &path) const;
 
-    void deleteQFSWatcher();
+    void deleteQFSWatcher(); // KF6 TODO: remove from public API
 
     /**
      * Dump statistic information about the KDirWatch::self() instance.
