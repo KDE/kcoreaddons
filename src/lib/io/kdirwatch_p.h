@@ -71,6 +71,21 @@ public:
     enum { NoChange = 0, Changed = 1, Created = 2, Deleted = 4 };
 
     struct Client {
+        Client(KDirWatch *inst, KDirWatch::WatchModes watchModes)
+            : instance(inst),
+            count(1),
+            watchingStopped(inst->isStopped()),
+            pending(NoChange),
+            m_watchModes(watchModes)
+        {}
+
+        // The compiler needs a copy ctor for Client when Entry is inserted into m_mapEntries
+        // (even though the vector of clients is empty at that point, so no performance penalty there)
+        //Client(const Client &) = delete;
+        //Client &operator=(const Client &) = delete;
+        //Client(Client &&) = default;
+        //Client &operator=(Client &&) = default;
+
         KDirWatch *instance;
         int count;
         // did the instance stop watching
@@ -85,7 +100,7 @@ public:
     public:
         ~Entry();
         // instances interested in events
-        QList<Client *> m_clients; // owned by Entry
+        std::vector<Client> m_clients;
         // nonexistent entries of this directory
         QList<Entry *> m_entries;
         QString path;
@@ -123,8 +138,8 @@ public:
         bool dirty;
         void propagate_dirty();
 
-        QList<Client *> clientsForFileOrDir(const QString &tpath, bool *isDir) const;
-        QList<Client *> inotifyClientsForFileOrDir(bool isDir) const;
+        QList<const Client *> clientsForFileOrDir(const QString &tpath, bool *isDir) const;
+        QList<const Client *> inotifyClientsForFileOrDir(bool isDir) const;
 
 #if HAVE_FAM
         FAMRequest fr;
@@ -165,7 +180,7 @@ public:
     void removeWatch(Entry *entry);
     Entry *entry(const QString &_path);
     int scanEntry(Entry *e);
-    void emitEvent(const Entry *e, int event, const QString &fileName = QString());
+    void emitEvent(Entry *e, int event, const QString &fileName = QString());
 
     static bool isNoisyFile(const char *filename);
 

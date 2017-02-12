@@ -364,8 +364,8 @@ void KDirWatchPrivate::inotifyEventReceived()
                             sub_entry->dirty = true;
                             rescan_timer.start(0); // process this asap, to start watching that dir
                         } else if (e->isDir && !e->m_clients.empty()) {
-                            const QList<Client *> clients = e->inotifyClientsForFileOrDir(isDir);
-                            Q_FOREACH (Client *client, clients) {
+                            const QList<const Client *> clients = e->inotifyClientsForFileOrDir(isDir);
+                            Q_FOREACH (const Client *client, clients) {
                                 // See discussion in addEntry for why we don't addEntry for individual
                                 // files in WatchFiles mode with inotify.
                                 if (isDir) {
@@ -389,15 +389,14 @@ void KDirWatchPrivate::inotifyEventReceived()
                             qCDebug(KDIRWATCH) << "-->got DELETE signal for" << tpath;
                         }
                         if ((e->isDir) && (!e->m_clients.empty())) {
-                            Client *client = nullptr;
                             // A file in this directory has been removed.  It wasn't an explicitly
                             // watched file as it would have its own watch descriptor, so
                             // no addEntry/ removeEntry bookkeeping should be required.  Emit
                             // the event immediately if any clients are interested.
                             KDirWatch::WatchModes flag = isDir ? KDirWatch::WatchSubDirs : KDirWatch::WatchFiles;
                             int counter = 0;
-                            Q_FOREACH (client, e->m_clients) { // krazy:exclude=Q_FOREACH
-                                if (client->m_watchModes & flag) {
+                            for (const Client &client : e->m_clients) {
+                                if (client.m_watchModes & flag) {
                                     counter++;
                                 }
                             }
@@ -451,7 +450,6 @@ void KDirWatchPrivate::inotifyEventReceived()
 
 KDirWatchPrivate::Entry::~Entry()
 {
-    qDeleteAll(m_clients);
 }
 
 /* In FAM mode, only entries which are marked dirty are scanned.
@@ -478,35 +476,27 @@ void KDirWatchPrivate::Entry::addClient(KDirWatch *instance,
         return;
     }
 
-    Q_FOREACH (Client *client, m_clients) {
-        if (client->instance == instance) {
-            client->count++;
-            client->m_watchModes = watchModes;
+    for (Client &client : m_clients) {
+        if (client.instance == instance) {
+            client.count++;
+            client.m_watchModes = watchModes;
             return;
         }
     }
 
-    Client *client = new Client;
-    client->instance = instance;
-    client->count = 1;
-    client->watchingStopped = instance->isStopped();
-    client->pending = NoChange;
-    client->m_watchModes = watchModes;
-
-    m_clients.append(client);
+    m_clients.emplace_back(instance, watchModes);
 }
 
 void KDirWatchPrivate::Entry::removeClient(KDirWatch *instance)
 {
-    QList<Client *>::iterator it = m_clients.begin();
-    const QList<Client *>::iterator end = m_clients.end();
+    auto it = m_clients.begin();
+    const auto end = m_clients.end();
     for (; it != end; ++it) {
-        Client *client = *it;
-        if (client->instance == instance) {
-            client->count--;
-            if (client->count == 0) {
+        Client &client = *it;
+        if (client.instance == instance) {
+            client.count--;
+            if (client.count == 0) {
                 m_clients.erase(it);
-                delete client;
             }
             return;
         }
@@ -517,8 +507,8 @@ void KDirWatchPrivate::Entry::removeClient(KDirWatch *instance)
 int KDirWatchPrivate::Entry::clientCount() const
 {
     int clients = 0;
-    Q_FOREACH (Client *client, m_clients) {
-        clients += client->count;
+    for (const Client &client : m_clients) {
+        clients += client.count;
     }
 
     return clients;
@@ -529,16 +519,16 @@ QString KDirWatchPrivate::Entry::parentDirectory() const
     return QDir::cleanPath(path + QLatin1String("/.."));
 }
 
-QList<KDirWatchPrivate::Client *> KDirWatchPrivate::Entry::clientsForFileOrDir(const QString &tpath, bool *isDir) const
+QList<const KDirWatchPrivate::Client *> KDirWatchPrivate::Entry::clientsForFileOrDir(const QString &tpath, bool *isDir) const
 {
-    QList<Client *> ret;
+    QList<const Client *> ret;
     QFileInfo fi(tpath);
     if (fi.exists()) {
         *isDir = fi.isDir();
         const KDirWatch::WatchModes flag = *isDir ? KDirWatch::WatchSubDirs : KDirWatch::WatchFiles;
-        Q_FOREACH (Client *client, this->m_clients) {
-            if (client->m_watchModes & flag) {
-                ret.append(client);
+        for (const Client &client : m_clients) {
+            if (client.m_watchModes & flag) {
+                ret.append(&client);
             }
         }
     } else {
@@ -552,13 +542,13 @@ QList<KDirWatchPrivate::Client *> KDirWatchPrivate::Entry::clientsForFileOrDir(c
 
 // inotify specific function that doesn't call KDE::stat to figure out if we have a file or folder.
 // isDir is determined through inotify's "IN_ISDIR" flag in KDirWatchPrivate::inotifyEventReceived
-QList<KDirWatchPrivate::Client *> KDirWatchPrivate::Entry::inotifyClientsForFileOrDir(bool isDir) const
+QList<const KDirWatchPrivate::Client *> KDirWatchPrivate::Entry::inotifyClientsForFileOrDir(bool isDir) const
 {
-    QList<Client *> ret;
+    QList<const Client *> ret;
     const KDirWatch::WatchModes flag = isDir ? KDirWatch::WatchSubDirs : KDirWatch::WatchFiles;
-    Q_FOREACH (Client *client, this->m_clients) {
-        if (client->m_watchModes & flag) {
-            ret.append(client);
+    for (const Client &client : m_clients) {
+        if (client.m_watchModes & flag) {
+            ret.append(&client);
         }
     }
     return ret;
@@ -579,7 +569,7 @@ QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry)
         debug << " inotify_wd=" << entry.wd;
     }
 #endif
-    debug << ", has " << entry.m_clients.count() << " clients";
+    debug << ", has " << entry.m_clients.size() << " clients";
     debug.space();
     if (!entry.m_entries.isEmpty()) {
         debug << ", nonexistent subentries:";
@@ -1105,9 +1095,9 @@ void KDirWatchPrivate::removeEntries(KDirWatch *instance)
     EntryMap::Iterator it = m_mapEntries.begin();
     for (; it != m_mapEntries.end(); ++it) {
         Client *c = nullptr;
-        Q_FOREACH (Client *client, (*it).m_clients) {
-            if (client->instance == instance) {
-                c = client;
+        for (Client &client : (*it).m_clients) {
+            if (client.instance == instance) {
+                c = &client;
                 break;
             }
         }
@@ -1137,11 +1127,11 @@ void KDirWatchPrivate::removeEntries(KDirWatch *instance)
 bool KDirWatchPrivate::stopEntryScan(KDirWatch *instance, Entry *e)
 {
     int stillWatching = 0;
-    Q_FOREACH (Client *client, e->m_clients) {
-        if (!instance || instance == client->instance) {
-            client->watchingStopped = true;
-        } else if (!client->watchingStopped) {
-            stillWatching += client->count;
+    for (Client &client : e->m_clients) {
+        if (!instance || instance == client.instance) {
+            client.watchingStopped = true;
+        } else if (!client.watchingStopped) {
+            stillWatching += client.count;
         }
     }
 
@@ -1166,12 +1156,12 @@ bool KDirWatchPrivate::restartEntryScan(KDirWatch *instance, Entry *e,
                                         bool notify)
 {
     int wasWatching = 0, newWatching = 0;
-    Q_FOREACH (Client *client, e->m_clients) {
-        if (!client->watchingStopped) {
-            wasWatching += client->count;
-        } else if (!instance || instance == client->instance) {
-            client->watchingStopped = false;
-            newWatching += client->count;
+    for (Client &client : e->m_clients) {
+        if (!client.watchingStopped) {
+            wasWatching += client.count;
+        } else if (!instance || instance == client.instance) {
+            client.watchingStopped = false;
+            newWatching += client.count;
         }
     }
     if (newWatching == 0) {
@@ -1250,9 +1240,9 @@ void KDirWatchPrivate::resetList(KDirWatch *instance, bool skippedToo)
     EntryMap::Iterator it = m_mapEntries.begin();
     for (; it != m_mapEntries.end(); ++it) {
 
-        Q_FOREACH (Client *client, (*it).m_clients) {
-            if (!client->watchingStopped || skippedToo) {
-                client->pending = NoChange;
+        for (Client &client : (*it).m_clients) {
+            if (!client.watchingStopped || skippedToo) {
+                client.pending = NoChange;
             }
         }
     }
@@ -1366,7 +1356,7 @@ int KDirWatchPrivate::scanEntry(Entry *e)
  * and stored pending events. When watching is stopped, the event is
  * added to the pending events.
  */
-void KDirWatchPrivate::emitEvent(const Entry *e, int event, const QString &fileName)
+void KDirWatchPrivate::emitEvent(Entry *e, int event, const QString &fileName)
 {
     QString path(e->path);
     if (!fileName.isEmpty()) {
@@ -1383,30 +1373,30 @@ void KDirWatchPrivate::emitEvent(const Entry *e, int event, const QString &fileN
     }
 
     if (s_verboseDebug) {
-        qCDebug(KDIRWATCH) << event << path << e->m_clients.count() << "clients";
+        qCDebug(KDIRWATCH) << event << path << e->m_clients.size() << "clients";
     }
 
-    Q_FOREACH (Client *c, e->m_clients) {
-        if (c->instance == nullptr || c->count == 0) {
+    for (Client &c : e->m_clients) {
+        if (c.instance == nullptr || c.count == 0) {
             continue;
         }
 
-        if (c->watchingStopped) {
+        if (c.watchingStopped) {
             // Do not add event to a list of pending events, the docs say restartDirScan won't emit!
 #if 0
             if (event == Changed) {
-                c->pending |= event;
+                c.pending |= event;
             } else if (event == Created || event == Deleted) {
-                c->pending = event;
+                c.pending = event;
             }
 #endif
             continue;
         }
         // not stopped
         if (event == NoChange || event == Changed) {
-            event |= c->pending;
+            event |= c.pending;
         }
-        c->pending = NoChange;
+        c.pending = NoChange;
         if (event == NoChange) {
             continue;
         }
@@ -1414,16 +1404,16 @@ void KDirWatchPrivate::emitEvent(const Entry *e, int event, const QString &fileN
         // Emit the signals delayed, to avoid unexpected re-entrancy from the slots (#220153)
 
         if (event & Deleted) {
-            QMetaObject::invokeMethod(c->instance, "setDeleted", Qt::QueuedConnection, Q_ARG(QString, path));
+            QMetaObject::invokeMethod(c.instance, "setDeleted", Qt::QueuedConnection, Q_ARG(QString, path));
         }
 
         if (event & Created) {
-            QMetaObject::invokeMethod(c->instance, "setCreated", Qt::QueuedConnection, Q_ARG(QString, path));
+            QMetaObject::invokeMethod(c.instance, "setCreated", Qt::QueuedConnection, Q_ARG(QString, path));
             // possible emit Change event after creation
         }
 
         if (event & Changed) {
-            QMetaObject::invokeMethod(c->instance, "setDirty", Qt::QueuedConnection, Q_ARG(QString, path));
+            QMetaObject::invokeMethod(c.instance, "setDirty", Qt::QueuedConnection, Q_ARG(QString, path));
         }
     }
 }
@@ -1718,8 +1708,8 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
             rescan_timer.start(0); // process this asap, to start watching that dir
         } else if (e->isDir && !e->m_clients.empty()) {
             bool isDir = false;
-            const QList<Client *> clients = e->clientsForFileOrDir(tpath, &isDir);
-            Q_FOREACH (Client *client, clients) {
+            const QList<const Client *> clients = e->clientsForFileOrDir(tpath, &isDir);
+            Q_FOREACH (const Client *client, clients) {
                 addEntry(client->instance, tpath, 0, isDir,
                          isDir ? client->m_watchModes : KDirWatch::WatchDirOnly);
             }
@@ -1757,16 +1747,16 @@ void KDirWatchPrivate::statistics()
             Entry *e = &(*it);
             qCDebug(KDIRWATCH) << "  " << *e;
 
-            Q_FOREACH (Client *c, e->m_clients) {
+            for (const Client &c : e->m_clients) {
                 QByteArray pending;
-                if (c->watchingStopped) {
-                    if (c->pending & Deleted) {
+                if (c.watchingStopped) {
+                    if (c.pending & Deleted) {
                         pending += "deleted ";
                     }
-                    if (c->pending & Created) {
+                    if (c.pending & Created) {
                         pending += "created ";
                     }
-                    if (c->pending & Changed) {
+                    if (c.pending & Changed) {
                         pending += "changed ";
                     }
                     if (!pending.isEmpty()) {
@@ -1774,8 +1764,8 @@ void KDirWatchPrivate::statistics()
                     }
                     pending = ", stopped" + pending;
                 }
-                qCDebug(KDIRWATCH)  << "    by " << c->instance->objectName()
-                          << " (" << c->count << " times)" << pending;
+                qCDebug(KDIRWATCH)  << "    by " << c.instance->objectName()
+                          << " (" << c.count << " times)" << pending;
             }
             if (e->m_entries.count() > 0) {
                 qCDebug(KDIRWATCH) << "    dependent entries:";
@@ -1982,8 +1972,8 @@ bool KDirWatch::contains(const QString &_path) const
         return false;
     }
 
-    Q_FOREACH (KDirWatchPrivate::Client *client, e->m_clients) {
-        if (client->instance == this) {
+    for (const KDirWatchPrivate::Client &client : e->m_clients) {
+        if (client.instance == this) {
             return true;
         }
     }
