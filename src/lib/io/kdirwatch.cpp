@@ -1594,7 +1594,7 @@ void KDirWatchPrivate::famEventReceived()
             // Replace all FAMMode entries with INotify/Stat
             EntryMap::Iterator it = m_mapEntries.begin();
             for (; it != m_mapEntries.end(); ++it)
-                if ((*it).m_mode == FAMMode && (*it).m_clients.count() > 0) {
+                if ((*it).m_mode == FAMMode && !(*it).m_clients.empty()) {
                     Entry *e = &(*it);
                     addWatch(e);
                 }
