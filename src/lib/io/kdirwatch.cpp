@@ -365,10 +365,10 @@ void KDirWatchPrivate::inotifyEventReceived()
                             rescan_timer.start(0); // process this asap, to start watching that dir
                         } else if (e->isDir && !e->m_clients.empty()) {
                             const QList<const Client *> clients = e->inotifyClientsForFileOrDir(isDir);
-                            Q_FOREACH (const Client *client, clients) {
-                                // See discussion in addEntry for why we don't addEntry for individual
-                                // files in WatchFiles mode with inotify.
-                                if (isDir) {
+                            // See discussion in addEntry for why we don't addEntry for individual
+                            // files in WatchFiles mode with inotify.
+                            if (isDir) {
+                                for (const Client *client : clients) {
                                     addEntry(client->instance, tpath, nullptr, isDir,
                                              isDir ? client->m_watchModes : KDirWatch::WatchDirOnly);
                                 }
