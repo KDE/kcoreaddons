@@ -492,12 +492,12 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
     }
 
     if (flags & ReplaceSmileys) {
-        QStringList exclude;
-        exclude << QStringLiteral("(c)") << QStringLiteral("(C)") << QStringLiteral("&gt;:-(") << QStringLiteral("&gt;:(") << QStringLiteral("(B)") << QStringLiteral("(b)") << QStringLiteral("(P)") << QStringLiteral("(p)");
-        exclude << QStringLiteral("(O)") << QStringLiteral("(o)") << QStringLiteral("(D)") << QStringLiteral("(d)") << QStringLiteral("(E)") << QStringLiteral("(e)") << QStringLiteral("(K)") << QStringLiteral("(k)");
-        exclude << QStringLiteral("(I)") << QStringLiteral("(i)") << QStringLiteral("(L)") << QStringLiteral("(l)") << QStringLiteral("(8)") << QStringLiteral("(T)") << QStringLiteral("(t)") << QStringLiteral("(G)");
-        exclude << QStringLiteral("(g)") << QStringLiteral("(F)") << QStringLiteral("(f)") << QStringLiteral("(H)");
-        exclude << QStringLiteral("8)") << QStringLiteral("(N)") << QStringLiteral("(n)") << QStringLiteral("(Y)") << QStringLiteral("(y)") << QStringLiteral("(U)") << QStringLiteral("(u)") << QStringLiteral("(W)") << QStringLiteral("(w)");
+        const QStringList exclude = { QStringLiteral("(c)"), QStringLiteral("(C)"), QStringLiteral("&gt;:-("), QStringLiteral("&gt;:("), QStringLiteral("(B)"), QStringLiteral("(b)"), QStringLiteral("(P)"), QStringLiteral("(p)")
+                                      , QStringLiteral("(O)"), QStringLiteral("(o)"), QStringLiteral("(D)"), QStringLiteral("(d)"), QStringLiteral("(E)"), QStringLiteral("(e)"), QStringLiteral("(K)"), QStringLiteral("(k)")
+                                      , QStringLiteral("(I)"), QStringLiteral("(i)"), QStringLiteral("(L)"), QStringLiteral("(l)"), QStringLiteral("(8)"), QStringLiteral("(T)"), QStringLiteral("(t)"), QStringLiteral("(G)")
+                                      , QStringLiteral("(g)"), QStringLiteral("(F)"), QStringLiteral("(f)"), QStringLiteral("(H)")
+                                      , QStringLiteral("8)"), QStringLiteral("(N)"), QStringLiteral("(n)"), QStringLiteral("(Y)"), QStringLiteral("(y)"), QStringLiteral("(U)"), QStringLiteral("(u)"), QStringLiteral("(W)"), QStringLiteral("(w)")
+                                      , QStringLiteral("(6)")};
 
         result = helper.emoticonsInterface()->parseEmoticons(result, true, exclude);
     }
