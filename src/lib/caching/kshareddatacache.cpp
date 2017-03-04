@@ -979,7 +979,7 @@ public:
            )
         : m_cacheName(name)
         , shm(nullptr)
-        , m_lock(nullptr)
+        , m_lock()
         , m_mapSize(0)
         , m_defaultCacheSize(defaultCacheSize)
         , m_expectedItemSize(expectedItemSize)

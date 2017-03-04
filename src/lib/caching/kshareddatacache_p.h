@@ -379,7 +379,7 @@ static SharedLockId findBestSharedLock()
 #ifdef KSDC_THREAD_PROCESS_SHARED_SUPPORTED
     {
         pthread_mutex_t tempMutex;
-        QSharedPointer<KSDCLock> tempLock(nullptr);
+        QSharedPointer<KSDCLock> tempLock;
         if (timeoutsSupported) {
 #ifdef KSDC_TIMEOUTS_SUPPORTED
             tempLock = QSharedPointer<KSDCLock>(new pthreadTimedLock(tempMutex));
@@ -400,7 +400,7 @@ static SharedLockId findBestSharedLock()
 #ifdef KSDC_SEMAPHORES_SUPPORTED
     {
         sem_t tempSemaphore;
-        QSharedPointer<KSDCLock> tempLock(nullptr);
+        QSharedPointer<KSDCLock> tempLock;
         if (timeoutsSupported) {
             tempLock = QSharedPointer<KSDCLock>(new semaphoreTimedLock(tempSemaphore));
         } else {
