@@ -200,7 +200,7 @@ void KProcess::setShellCommand(const QString &cmd)
 
 #ifdef Q_OS_UNIX
 // #ifdef NON_FREE // ... as they ship non-POSIX /bin/sh
-# if !defined(__linux__) && !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__) && !defined(__GNU__)
+# if !defined(__linux__) && !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__) && !defined(__GNU__) && !defined(__APPLE__)
     // If /bin/sh is a symlink, we can be pretty sure that it points to a
     // POSIX shell - the original bourne shell is about the only non-POSIX
     // shell still in use and it is always installed natively as /bin/sh.
