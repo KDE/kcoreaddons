@@ -463,6 +463,9 @@ KAboutData::KAboutData(const QString &_componentName,
 
     d->organizationDomain = hostComponents.join(dotChar);
 
+    // KF6: do not set a default desktopFileName value here, but remove this code and leave it empty
+    // see KAboutData::desktopFileName() for detals
+
     // desktop file name is reverse domain name
     std::reverse(hostComponents.begin(), hostComponents.end());
     hostComponents.append(_componentName);
@@ -492,6 +495,8 @@ KAboutData::KAboutData(const QString &_componentName,
     d->_licenseList.append(KAboutLicense(KAboutLicense::Unknown, this));
     d->_bugAddress = "submit@bugs.kde.org";
     d->organizationDomain = QStringLiteral("kde.org");
+    // KF6: do not set a default desktopFileName value here, but remove this code and leave it empty
+    // see KAboutData::desktopFileName() for detals
     d->desktopFileName = QStringLiteral("org.kde.%1").arg(d->_componentName);
 }
 
@@ -912,6 +917,23 @@ KAboutData &KAboutData::setDesktopFileName(const QString &desktopFileName)
 QString KAboutData::desktopFileName() const
 {
     return d->desktopFileName;
+    // KF6: switch to this code and adapt API dox
+#if 0
+    // if desktopFileName has been explicitely set, use that value
+    f (!d->desktopFileName.isEmpty()) {
+​        return d->desktopFileName;
+​    }
+
+    // return a string calculated on-the-fly from the current org domain & component name
+​    const QChar dotChar(QLatin1Char('.'));
+​    QStringList hostComponents = d->organizationDomain.split(dotChar);
+​
+​    // desktop file name is reverse domain name
+​    std::reverse(hostComponents.begin(), hostComponents.end());
+​    hostComponents.append(componentName());
+​
+​    return hostComponents.join(dotChar);
+#endif
 }
 
 class KAboutDataRegistry

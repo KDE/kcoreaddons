@@ -304,6 +304,42 @@ private:
  * applies to the old setCatalogName() and catalogName() members. But see also
  * K4AboutData in kde4support as a compatibility class.
  *
+ * Example:
+ * Setting the metadata of an application using KAboutData in code also relying
+ * on the KDE Framework modules KI18n and KDBusAddons:
+ * @code
+ * // create QApplication instance
+ * QApplication app(argc, argv);
+ * // setup translation string domain for the i18n calls
+ * KLocalizedString::setApplicationDomain("foo");
+ * // create a KAboutData object to use for setting the application metadata
+ * KAboutData aboutData("foo", i18n("Foo"), "0.1",
+ *                      i18n("To Foo or not To Foo"),
+ *                      KAboutLicense::LGPL,
+ *                      i18n("Copyright 2017 Bar Foundation"), QString(),
+ *                      "https://www.foo-the-app.net");
+ * // overwrite default-generated values of organizationDomain & desktopFileName
+ * aboutData.setOrganizationDomain("barfoundation.org");
+ * aboutData.setDesktopFileName("org.barfoundation.foo");
+ *
+ * // set the application metadata
+ * KAboutData::setApplicationData(aboutData);
+ * // in GUI apps set the window icon manually, not covered by KAboutData
+ * // needed for environments where the icon name is not extracted from
+ * // the information in the application's desktop file
+ * QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("foo")));
+ * // with the application metadata set, register to the D-Bus session
+ * KDBusService programDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
+ *
+ * // integrate with commandline argument handling
+ * QCommandLineParser parser;
+ * aboutData.setupCommandLine(&parser);
+ * // setup of app specific commandline args
+ * [...]
+ * parser.process(app);
+ * aboutData.processCommandLine(&parser);
+ * @endcode
+ *
  * @short Holds information needed by the "About" box and other
  * classes.
  * @author Espen Sand (espen@kde.org), David Faure (faure@kde.org)
@@ -400,16 +436,19 @@ public:
      * @param homePageAddress The URL to the component's homepage, including
      *        URL scheme. "http://some.domain" is correct, "some.domain" is
      *        not. Since KDE Frameworks 5.17, https and other valid URL schemes
-     *        are also valid.
-     *
-     * IMPORTANT: This argument is used to provide a default organization
-     * domain for the application (which is used to automatically register on
-     * the session D-Bus, locate the appropriate desktop file, etc.). Use
-     * setOrganizationDomain() if you want to control this value yourself.
-     * @see setOrganizationDomain
+     *        are also valid. See also the note below.
      *
      * @param bugAddress The bug report address string, an email address or a URL.
      *        This defaults to the kde.org bug system.
+     *
+     * @note The @arg homePageAddress argument is used to derive a default organization
+     * domain for the application (which is used to register on the session D-Bus,
+     * locate the appropriate desktop file, etc.), by taking the host name and dropping
+     * the first component, unless there are less than three (e.g. "www.kde.org" -> "kde.org").
+     * Use both setOrganizationDomain(const QByteArray&) and setDesktopFileName() if their default values
+     * do not have proper values.
+     *
+     * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
      */
     // KF6: remove constructor that includes catalogName, and put default
     //      values back in for shortDescription and licenseType
@@ -434,6 +473,11 @@ public:
      *        should be translated. Example: i18n("KWrite")
      *
      * @param version The component version string.
+     *
+     * Sets the property desktopFileName to "org.kde."+componentName and
+     * the property organizationDomain to "kde.org".
+     *
+     * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
      */
     KAboutData(const QString &componentName,
                const QString &displayName,
@@ -714,21 +758,34 @@ public:
     KAboutData &setBugAddress(const QByteArray &bugAddress);
 
     /**
-     * Defines the Internet domain of the organization that wrote this application.
+     * Defines the domain of the organization that wrote this application.
      * The domain is set to kde.org by default, or the domain of the homePageAddress constructor argument,
      * if set.
      *
-     * Make sure to call setOrganizationDomain if your product is developed out of the
-     * kde.org version-control system.
+     * Make sure to call setOrganizationDomain(const QByteArray&) if your product
+     * is not developed inside the KDE community.
      *
-     * Used by the automatic registration to D-Bus done by KApplication and KUniqueApplication.
+     * Used e.g. for the registration to D-Bus done by KDBusService
+     * from the KDE Frameworks KDBusAddons module.
      *
-     * IMPORTANT: if the organization domain is set, the .desktop file that describes your
-     * application should have an entry like X-DBUS-ServiceName=reversed_domain.kmyapp
-     * For instance kwrite passes "http://www.kate-editor.org" as the homePageAddress so it needs
-     * X-DBUS-ServiceName=org.kate-editor.kwrite in its kwrite.desktop file.
+     * Calling this method has no effect on the value of the desktopFileName property.
      *
-     * @param domain the domain name, for instance kde.org, koffice.org, kdevelop.org, etc.
+     * @note: If your program should work as a D-Bus activatable service, the base name
+     * of the D-Bus service description file or of the desktop file you install must match
+     * the D-Bus "well-known name" for which the program will register.
+     * For example, KDBusService will use a name created from the reversed organization domain
+     * with the component name attached, so for an organization domain "bar.org" and a
+     * component name "foo" the name of an installed D-Bus service file needs to be
+     * "org.bar.foo.service" or the the name of the installed desktop file "org.bar.foo.desktop"
+     * (and the desktopFileName property accordingly set to "org.bar.foo").
+     * For still supporting the deprecated start of services via KToolInvocation,
+     * the desktop file needs to have an entry with the key "X-DBUS-ServiceName"
+     * and a value which matches the used D-Bus "well-known name" as just described,
+     * so with the above used values it needs a line "X-DBUS-ServiceName=org.bar.foo"
+     *
+     * @param domain the domain name, for instance kde.org, koffice.org, etc.
+     *
+     * @see setDesktopFileName(const QString&)
      */
     KAboutData &setOrganizationDomain(const QByteArray &domain);
 
@@ -766,7 +823,7 @@ public:
     /**
      * Returns the domain name of the organization that wrote this application.
      *
-     * Used by the automatic registration to D-Bus done by KApplication and KUniqueApplication.
+     * @see setOrganizationDomain(const QByteArray&)
      */
     QString organizationDomain() const;
 
@@ -965,9 +1022,11 @@ public:
      *
      * A default desktop file name is constructed when the KAboutData
      * object is created, using the reverse domain name of the
-     * organizationDomain() and the componentName(). Call this method to
-     * override the default name, or if you call setOrganizationDomain() or
-     * setComponentName().
+     * organizationDomain() and the componentName() as they are at the time
+     * of the KAboutData object creation.
+     * Call this method to override that default name. Typically this is
+     * done when also setOrganizationDomain(const QByteArray&) or setComponentName(const QString&)
+     * need to be called to override the initial values.
      *
      * The desktop file name can also be passed to the application at runtime through
      * the @c desktopfile command line option which is added by setupCommandLine(QCommandLineParser*).
