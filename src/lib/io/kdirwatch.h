@@ -154,7 +154,7 @@ public:
      *
      * @param path the path to skip
      * @return true if the @p path is being watched, otherwise false
-     * @see restartDirScanning()
+     * @see restartDirScan()
      */
     bool stopDirScan(const QString &path);
 
@@ -169,7 +169,7 @@ public:
      *
      * @param path the path to restart scanning
      * @return true if the @p path is being watched, otherwise false
-     * @see stopDirScanning()
+     * @see stopDirScan()
      */
     bool restartDirScan(const QString &path);
 
