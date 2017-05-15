@@ -791,6 +791,10 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path,
                                 Entry *sub_entry, bool isDir, KDirWatch::WatchModes watchModes)
 {
     QString path(_path);
+    if (path.startsWith(QLatin1String(":/"))) {
+        qCWarning(KDIRWATCH) << "Cannot watch QRC-like path" << path;
+        return;
+    }
     if (path.isEmpty()
 #ifndef Q_OS_WIN
             || path == QLatin1String("/dev")
