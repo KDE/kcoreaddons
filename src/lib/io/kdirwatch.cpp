@@ -1021,7 +1021,7 @@ void KDirWatchPrivate::removeWatch(Entry *e)
 #endif
 }
 
-bool KDirWatchPrivate::removeEntry(KDirWatch *instance,
+void KDirWatchPrivate::removeEntry(KDirWatch *instance,
                                    const QString &_path,
                                    Entry *sub_entry)
 {
@@ -1029,12 +1029,9 @@ bool KDirWatchPrivate::removeEntry(KDirWatch *instance,
         qCDebug(KDIRWATCH) << "path=" << _path << "sub_entry:" << sub_entry;
     }
     Entry *e = entry(_path);
-    if (!e) {
-        return false;
+    if (e) {
+        removeEntry(instance, e, sub_entry);
     }
-
-    removeEntry(instance, e, sub_entry);
-    return true;
 }
 
 void KDirWatchPrivate::removeEntry(KDirWatch *instance,
@@ -1909,18 +1906,14 @@ QDateTime KDirWatch::ctime(const QString &_path) const
 void KDirWatch::removeDir(const QString &_path)
 {
     if (d) {
-        if (!d->removeEntry(this, _path, nullptr)) {
-            qCWarning(KCOREADDONS_DEBUG) << "doesn't know" << _path;
-        }
+        d->removeEntry(this, _path, nullptr);
     }
 }
 
 void KDirWatch::removeFile(const QString &_path)
 {
     if (d) {
-        if (!d->removeEntry(this, _path, nullptr)) {
-            qCWarning(KCOREADDONS_DEBUG) << "doesn't know" << _path;
-        }
+        d->removeEntry(this, _path, nullptr);
     }
 }
 
