@@ -31,11 +31,11 @@ namespace KFileSystemType
 {
 enum Type {
     Unknown,
-    Nfs, // NFS or other full-featured networked filesystems (autofs, subfs, cachefs, sshfs)
-    Smb, // SMB/CIFS mount (networked but with some FAT-like behavior)
-    Fat,  // FAT or similar (msdos, fat, vfat)
-    Ramfs,  // RAMDISK mount
-    Other // ext, reiser, and so on. "Normal" local filesystems.
+    Nfs, ///< NFS or other full-featured networked filesystems (autofs, subfs, cachefs, sshfs)
+    Smb, ///< SMB/CIFS mount (networked but with some FAT-like behavior)
+    Fat,  ///< FAT or similar (msdos, fat, vfat)
+    Ramfs,  ///< RAMDISK mount
+    Other ///< ext, reiser, and so on. "Normal" local filesystems.
 };
 
 /**
