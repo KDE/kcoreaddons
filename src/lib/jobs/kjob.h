@@ -30,6 +30,8 @@ class KJobUiDelegate;
 
 class KJobPrivate;
 /**
+ * @class KJob kjob.h KJob
+ *
  * The base class for all jobs.
  * For all jobs created in an application, the code looks like
  *

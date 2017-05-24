@@ -25,6 +25,8 @@
 #include <QStringList>
 
 /**
+ * @class Kdelibs4ConfigMigrator kdelibs4configmigrator.h Kdelibs4ConfigMigrator
+ *
  * Kdelibs4ConfigMigrator migrates selected config files and ui files
  * from the kdelibs 4.x location ($KDEHOME, as used by KStandardDirs)
  * to the Qt 5.x location ($XDG_*_HOME, as used by QStandardPaths).

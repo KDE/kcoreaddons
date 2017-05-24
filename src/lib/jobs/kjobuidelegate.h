@@ -28,6 +28,8 @@
 class KJob;
 
 /**
+ * @class KJobUiDelegate kjobuidelegate.h KJobUiDelegate
+ *
  * The base class for all KJob UI delegate.
  *
  * A UI delegate is responsible for the events of a

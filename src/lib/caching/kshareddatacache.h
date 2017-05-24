@@ -26,6 +26,8 @@ class QString;
 class QByteArray;
 
 /**
+ * @class KSharedDataCache kshareddatacache.h KSharedDataCache
+ *
  * @brief A simple data cache which uses shared memory to quickly access data
  * stored on disk.
  *

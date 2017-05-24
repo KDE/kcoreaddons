@@ -33,6 +33,8 @@ class Kdelibs4MigrationPrivate;
  */
 
 /**
+  * @class Kdelibs4Migration kdelibs4migration.h Kdelibs4Migration
+  *
   * Kdelibs4Migration provides support for locating config files
   * and application data files saved by kdelibs 4 in the user's home directory
   * ($KDEHOME, i.e. typically ~/.kde).

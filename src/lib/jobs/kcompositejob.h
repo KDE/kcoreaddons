@@ -27,6 +27,8 @@
 
 class KCompositeJobPrivate;
 /**
+ * @class KCompositeJob kcompositejob.h KCompositeJob
+ *
  * The base class for all jobs able to be composed of one
  * or more subjobs.
  */

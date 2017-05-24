@@ -27,6 +27,8 @@
 class KDirWatchPrivate;
 
 /**
+ * @class KDirWatch kdirwatch.h KDirWatch
+ *
  * @short Class for watching directory and file changes.
  *
  * Watch directories and files for changes.

@@ -288,6 +288,8 @@ private:
 };
 
 /**
+ * @class KAboutData kaboutdata.h KAboutData
+ *
  * This class is used to store information about a program or plugin.
  * It can store such values as version number, program name, home page, address
  * for bug reporting, multiple authors and contributors

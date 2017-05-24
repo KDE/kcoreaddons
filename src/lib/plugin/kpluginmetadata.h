@@ -37,7 +37,10 @@ class KAboutPerson;
 class QObject;
 
 
-/** This class allows easily accessing some standardized values from the JSON metadata that
+/**
+ * @class KPluginMetaData kpluginmetadata.h KPluginMetaData
+ *
+ * This class allows easily accessing some standardized values from the JSON metadata that
  * can be embedded into Qt plugins. Additional plugin-specific metadata can be retrieved by
  * directly reading from the QJsonObject returned by KPluginMetaData::rawData().
  *

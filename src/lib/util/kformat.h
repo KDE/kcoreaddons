@@ -55,6 +55,8 @@ class KFormatPrivate;
 */
 
 /**
+  * @class KFormat kformat.h KFormat
+  *
   * KFormat provides support for formatting numbers and datetimes in
   * formats that are not supported by QLocale.
   *

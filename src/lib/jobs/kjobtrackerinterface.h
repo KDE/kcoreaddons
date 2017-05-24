@@ -27,6 +27,8 @@
 #include <QtCore/QPair>
 
 /**
+ * @class KJobTrackerInterface kjobtrackerinterface.h KJobTrackerInterface
+ *
  * The interface to implement to track the progresses of a job.
  */
 class KCOREADDONS_EXPORT KJobTrackerInterface : public QObject
