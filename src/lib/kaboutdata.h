@@ -330,8 +330,6 @@ private:
  * // needed for environments where the icon name is not extracted from
  * // the information in the application's desktop file
  * QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("foo")));
- * // with the application metadata set, register to the D-Bus session
- * KDBusService programDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
  *
  * // integrate with commandline argument handling
  * QCommandLineParser parser;
@@ -340,6 +338,9 @@ private:
  * [...]
  * parser.process(app);
  * aboutData.processCommandLine(&parser);
+ *
+ * // with the application metadata set, register to the D-Bus session
+ * KDBusService programDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
  * @endcode
  *
  * @short Holds information needed by the "About" box and other
