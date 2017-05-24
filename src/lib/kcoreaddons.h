@@ -25,6 +25,10 @@
 #include <kcoreaddons_export.h>
 #include <QString>
 
+/**
+ * @namespace KCoreAddons
+ * Provides utility functions for metadata about the KCoreAddons library.
+ */
 namespace KCoreAddons
 {
     /*

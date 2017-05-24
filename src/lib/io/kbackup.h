@@ -25,6 +25,10 @@
 #include <kcoreaddons_export.h>
 #include <QtCore/QString>
 
+/**
+ * @namespace KBackup
+ * Provides utility functions for backup of files.
+ */
 namespace KBackup
 {
 /**

@@ -23,6 +23,10 @@
 #include <QtCore/QString>
 #include <kcoreaddons_export.h>
 
+/**
+ * @namespace KFileSystemType
+ * Provides utility functions for the type of file systems.
+ */
 namespace KFileSystemType
 {
 enum Type {
