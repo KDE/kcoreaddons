@@ -35,19 +35,21 @@
 #include <fcntl.h>
 
 #include <QtCore/QFile>
+#include <QThread>
+#include <QThreadStorage>
 
 int KRandom::random()
 {
-    static bool init = false;
-    if (!init) {
+    static QThreadStorage<bool> initialized_threads;
+    if (!initialized_threads.localData()) {
         unsigned int seed;
-        init = true;
+        initialized_threads.setLocalData(true);
         QFile urandom(QStringLiteral("/dev/urandom"));
         bool opened = urandom.open(QIODevice::ReadOnly | QIODevice::Unbuffered);
         if (!opened || urandom.read(reinterpret_cast<char *>(&seed), sizeof(seed)) != sizeof(seed)) {
             // No /dev/urandom... try something else.
             qsrand(getpid());
-            seed = qrand() + time(nullptr);
+            seed = qrand() ^ time(nullptr) ^ reinterpret_cast<quintptr>(QThread::currentThread());
         }
         qsrand(seed);
     }

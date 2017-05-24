@@ -83,6 +83,7 @@ class KRandomTest : public QObject
 private Q_SLOTS:
     void test_random();
     void test_randomString();
+    void test_randomStringThreaded();
     void test_KRS();
 };
 
@@ -148,6 +149,37 @@ void KRandomTest::test_KRS()
     QVERIFY(seqsAreEqual(out1, out2));
     QVERIFY(all_of(out1.begin(), out1.end(), [&](int x) { return x < maxInt; }));
     QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) { return x < maxInt; }));
+}
+
+class KRandomTestThread : public QThread
+{
+protected:
+    void run() override
+    {
+        result = KRandom::randomString(32);
+    };
+public:
+    QString result;
+};
+
+void KRandomTest::test_randomStringThreaded()
+{
+    const int size = 5;
+    KRandomTestThread* threads[size];
+    for (int i=0; i < size; ++i) {
+        threads[i] = new KRandomTestThread();
+        threads[i]->start();
+    }
+    QSet<QString> results;
+    for (int i=0; i < size; ++i) {
+        threads[i]->wait(2000);
+        results.insert(threads[i]->result);
+    }
+    // each thread should have returned a unique result
+    QVERIFY(results.size() == size);
+    for (int i=0; i < size; ++i) {
+        delete threads[i];
+    }
 }
 
 // Used by getChildRandSeq... outputs random numbers to stdout and then
