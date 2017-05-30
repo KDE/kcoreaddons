@@ -164,7 +164,7 @@ public:
 
 void KRandomTest::test_randomStringThreaded()
 {
-    const int size = 5;
+    static const int size = 5;
     KRandomTestThread* threads[size];
     for (int i=0; i < size; ++i) {
         threads[i] = new KRandomTestThread();
@@ -176,7 +176,7 @@ void KRandomTest::test_randomStringThreaded()
         results.insert(threads[i]->result);
     }
     // each thread should have returned a unique result
-    QVERIFY(results.size() == size);
+    QCOMPARE(results.size(), size);
     for (int i=0; i < size; ++i) {
         delete threads[i];
     }
