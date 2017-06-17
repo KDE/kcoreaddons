@@ -23,6 +23,11 @@ if (FAM_FOUND)
    set(kcoreaddons_OPTIONAL_LIBS ${kcoreaddons_OPTIONAL_LIBS} ${FAM_LIBRARIES})
 endif ()
 
+if (Inotify_FOUND)
+   include_directories(${Inotify_INCLUDE_DIRS})
+   set(kcoreaddons_OPTIONAL_LIBS ${kcoreaddons_OPTIONAL_LIBS} ${Inotify_LIBRARIES})
+endif ()
+
 if(NOT WIN32)
     set(kcoreaddons_OPTIONAL_SRCS caching/kshareddatacache.cpp)
     set(kcoreaddons_OPTIONAL_LIBS ${kcoreaddons_OPTIONAL_LIBS} ${CMAKE_THREAD_LIBS_INIT})
