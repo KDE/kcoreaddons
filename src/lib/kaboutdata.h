@@ -444,7 +444,7 @@ public:
      * @param bugAddress The bug report address string, an email address or a URL.
      *        This defaults to the kde.org bug system.
      *
-     * @note The @arg homePageAddress argument is used to derive a default organization
+     * @note The @p homePageAddress argument is used to derive a default organization
      * domain for the application (which is used to register on the session D-Bus,
      * locate the appropriate desktop file, etc.), by taking the host name and dropping
      * the first component, unless there are less than three (e.g. "www.kde.org" -> "kde.org").
