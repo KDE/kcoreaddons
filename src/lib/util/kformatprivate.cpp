@@ -188,13 +188,19 @@ enum TimeConstants {
 QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOptions options) const
 {
     quint64 ms = msecs;
+    if (options & KFormat::HideSeconds) {
+        //round to nearest minute
+        ms = qRound(ms / (qreal)MSecsInMinute) * MSecsInMinute ;
+    } else if (!(options & KFormat::ShowMilliseconds)) {
+        //round to nearest second
+        ms = qRound(ms / (qreal)MSecsInSecond) * MSecsInSecond ;
+    }
+
     int hours = ms / MSecsInHour;
     ms = ms % MSecsInHour;
     int minutes = ms / MSecsInMinute;
-    int roundMinutes = qRound(ms / 60000.0);
     ms = ms % MSecsInMinute;
     int seconds = ms / MSecsInSecond;
-    int roundSeconds = qRound(ms / 1000.0);
     ms = ms % MSecsInSecond;
 
     if ((options & KFormat::InitialDuration) == KFormat::InitialDuration) {
@@ -208,11 +214,11 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
         } else if ((options & KFormat::FoldHours) == KFormat::FoldHours) {
             //: @item:intext Duration format minutes and seconds
             return tr("%1m%2s").arg(hours * 60 + minutes, 1, 10, QLatin1Char('0'))
-                   .arg(roundSeconds, 2, 10, QLatin1Char('0'));
+                   .arg(seconds, 2, 10, QLatin1Char('0'));
         } else if ((options & KFormat::HideSeconds) == KFormat::HideSeconds) {
             //: @item:intext Duration format hours and minutes
             return tr("%1h%2m").arg(hours, 1, 10, QLatin1Char('0'))
-                   .arg(roundMinutes, 2, 10, QLatin1Char('0'));
+                   .arg(minutes, 2, 10, QLatin1Char('0'));
         } else if ((options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
             //: @item:intext Duration format hours, minutes, seconds, milliseconds
             return tr("%1h%2m%3.%4s").arg(hours, 1, 10, QLatin1Char('0'))
@@ -223,7 +229,7 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
             //: @item:intext Duration format hours, minutes, seconds
             return tr("%1h%2m%3s").arg(hours, 1, 10, QLatin1Char('0'))
                    .arg(minutes, 2, 10, QLatin1Char('0'))
-                   .arg(roundSeconds, 2, 10, QLatin1Char('0'));
+                   .arg(seconds, 2, 10, QLatin1Char('0'));
         }
 
     } else {
@@ -237,11 +243,11 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
         } else if ((options & KFormat::FoldHours) == KFormat::FoldHours) {
             //: @item:intext Duration format minutes and seconds
             return tr("%1:%2").arg(hours * 60 + minutes, 1, 10, QLatin1Char('0'))
-                   .arg(roundSeconds, 2, 10, QLatin1Char('0'));
+                   .arg(seconds, 2, 10, QLatin1Char('0'));
         } else if ((options & KFormat::HideSeconds) == KFormat::HideSeconds) {
             //: @item:intext Duration format hours and minutes
             return tr("%1:%2").arg(hours, 1, 10, QLatin1Char('0'))
-                   .arg(roundMinutes, 2, 10, QLatin1Char('0'));
+                   .arg(minutes, 2, 10, QLatin1Char('0'));
         } else if ((options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
             //: @item:intext Duration format hours, minutes, seconds, milliseconds
             return tr("%1:%2:%3.%4").arg(hours, 1, 10, QLatin1Char('0'))
@@ -252,7 +258,7 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
             //: @item:intext Duration format hours, minutes, seconds
             return tr("%1:%2:%3").arg(hours, 1, 10, QLatin1Char('0'))
                    .arg(minutes, 2, 10, QLatin1Char('0'))
-                   .arg(roundSeconds, 2, 10, QLatin1Char('0'));
+                   .arg(seconds, 2, 10, QLatin1Char('0'));
         }
 
     }
