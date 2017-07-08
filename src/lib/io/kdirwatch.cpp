@@ -1871,7 +1871,7 @@ KDirWatch::KDirWatch(QObject *parent)
 
 KDirWatch::~KDirWatch()
 {
-    if (dwp_self.hasLocalData()) { // skip this after app destruction
+    if (d && dwp_self.hasLocalData()) { // skip this after app destruction
         d->removeEntries(this);
     }
 }
