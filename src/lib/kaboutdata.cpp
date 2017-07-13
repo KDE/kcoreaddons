@@ -349,26 +349,25 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
 {
     // Setup keyword->enum dictionary on first call.
     // Use normalized keywords, by the algorithm below.
-    static QHash<QByteArray, KAboutLicense::LicenseKey> ldict;
-    if (ldict.isEmpty()) {
-        ldict.insert("gpl", KAboutLicense::GPL);
-        ldict.insert("gplv2", KAboutLicense::GPL_V2);
-        ldict.insert("gplv2+", KAboutLicense::GPL_V2);
-        ldict.insert("lgpl", KAboutLicense::LGPL);
-        ldict.insert("lgplv2", KAboutLicense::LGPL_V2);
-        ldict.insert("lgplv2+", KAboutLicense::LGPL_V2);
-        ldict.insert("bsd", KAboutLicense::BSDL);
-        ldict.insert("artistic", KAboutLicense::Artistic);
-        ldict.insert("qpl", KAboutLicense::QPL);
-        ldict.insert("qplv1", KAboutLicense::QPL_V1_0);
-        ldict.insert("qplv10", KAboutLicense::QPL_V1_0);
-        ldict.insert("gplv3", KAboutLicense::GPL_V3);
-        ldict.insert("gplv3+", KAboutLicense::GPL_V3);
-        ldict.insert("lgplv3", KAboutLicense::LGPL_V3);
-        ldict.insert("lgplv3+", KAboutLicense::LGPL_V3);
-        ldict.insert("lgplv21", KAboutLicense::LGPL_V2_1);
-        ldict.insert("lgplv21+", KAboutLicense::LGPL_V2_1);
-    }
+    static const QHash<QByteArray, KAboutLicense::LicenseKey> licenseDict {
+        { "gpl", KAboutLicense::GPL },
+        { "gplv2", KAboutLicense::GPL_V2 },
+        { "gplv2+", KAboutLicense::GPL_V2 },
+        { "lgpl", KAboutLicense::LGPL },
+        { "lgplv2", KAboutLicense::LGPL_V2 },
+        { "lgplv2+", KAboutLicense::LGPL_V2 },
+        { "bsd", KAboutLicense::BSDL },
+        { "artistic", KAboutLicense::Artistic },
+        { "qpl", KAboutLicense::QPL },
+        { "qplv1", KAboutLicense::QPL_V1_0 },
+        { "qplv10", KAboutLicense::QPL_V1_0 },
+        { "gplv3", KAboutLicense::GPL_V3 },
+        { "gplv3+", KAboutLicense::GPL_V3 },
+        { "lgplv3", KAboutLicense::LGPL_V3 },
+        { "lgplv3+", KAboutLicense::LGPL_V3 },
+        { "lgplv21", KAboutLicense::LGPL_V2_1 },
+        { "lgplv21+", KAboutLicense::LGPL_V2_1 }
+    };
 
     // Normalize keyword.
     QString keyword = rawKeyword;
@@ -376,8 +375,8 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
     keyword.remove(QLatin1Char(' '));
     keyword.remove(QLatin1Char('.'));
 
-    LicenseKey license = ldict.value(keyword.toLatin1(),
-                                     KAboutLicense::Custom);
+    LicenseKey license = licenseDict.value(keyword.toLatin1(),
+                                           KAboutLicense::Custom);
     return KAboutLicense(license, nullptr);
 }
 
