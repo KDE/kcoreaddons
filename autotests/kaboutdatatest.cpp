@@ -267,8 +267,12 @@ void KAboutDataTest::testSetProgramIconName()
                          QLatin1String(CopyrightStatement), QLatin1String(Text),
                          HomePageAddress, BugsEmailAddress);
 
+    // Deprecated, still want to test this though. Silence GCC warnings.
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     // set different iconname
     aboutData.setProgramIconName(programIconName);
+#pragma GCC diagnostic pop
     QCOMPARE(aboutData.programIconName(), programIconName);
 }
 
