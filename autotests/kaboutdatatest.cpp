@@ -1,5 +1,6 @@
 /*
  *  Copyright 2008 Friedrich W. H. Kossebau  <kossebau@kde.org>
+ *  Copyright 2017 Harald Sitter <sitter@kde.org>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public
@@ -38,6 +39,9 @@ private Q_SLOTS:
     void testCopying();
 
     void testKAboutDataOrganizationDomain();
+
+    void testLicenseSPDXID();
+    void testLicenseOrLater();
 };
 
 static const char AppName[] =            "app";
@@ -284,15 +288,17 @@ void KAboutDataTest::testCopying()
     {
         KAboutData aboutData2(AppName, QLatin1String(ProgramName), Version,
                               QLatin1String(ShortDescription), KAboutLicense::GPL_V3);
-        aboutData2.addLicense(KAboutLicense::GPL_V2);
+        aboutData2.addLicense(KAboutLicense::GPL_V2, KAboutLicense::OrLaterVersions);
         aboutData = aboutData2;
     }
     QList<KAboutLicense> licenses = aboutData.licenses();
     QCOMPARE(licenses.count(), 2);
     QCOMPARE(licenses.at(0).key(), KAboutLicense::GPL_V3);
+    QCOMPARE(aboutData.licenses().at(0).spdx(), QStringLiteral("GPL-3.0"));
     // check it doesn't crash
     QVERIFY(!licenses.at(0).text().isEmpty());
     QCOMPARE(licenses.at(1).key(), KAboutLicense::GPL_V2);
+    QCOMPARE(aboutData.licenses().at(1).spdx(), QStringLiteral("GPL-2.0+"));
     // check it doesn't crash
     QVERIFY(!licenses.at(1).text().isEmpty());
 }
@@ -306,6 +312,36 @@ void KAboutDataTest::testSetDesktopFileName()
     // set different desktopFileName
     aboutData.setDesktopFileName(QStringLiteral("foo.bar.application"));
     QCOMPARE(aboutData.desktopFileName(), QStringLiteral("foo.bar.application"));
+}
+
+void KAboutDataTest::testLicenseSPDXID()
+{
+    // Input with + should output with +.
+    auto license = KAboutLicense::byKeyword(QStringLiteral("GPLv2+"));
+    QCOMPARE(license.spdx(), QStringLiteral("GPL-2.0+"));
+    // Input without should output without.
+    license = KAboutLicense::byKeyword(QStringLiteral("GPLv2"));
+    QCOMPARE(license.spdx(), QStringLiteral("GPL-2.0"));
+}
+
+void KAboutDataTest::testLicenseOrLater()
+{
+    // For kaboutdata we can replace the license with an orLater version. Or add a second one.
+    KAboutData aboutData(AppName, QLatin1String(ProgramName), Version,
+                         QLatin1String(ShortDescription), KAboutLicense::GPL_V2);
+    QCOMPARE(aboutData.licenses().at(0).spdx(), QStringLiteral("GPL-2.0"));
+    aboutData.setLicense(KAboutLicense::GPL_V2, KAboutLicense::OrLaterVersions);
+    QCOMPARE(aboutData.licenses().at(0).spdx(), QStringLiteral("GPL-2.0+"));
+    aboutData.addLicense(KAboutLicense::LGPL_V3, KAboutLicense::OrLaterVersions);
+    bool foundLGPL = false;
+    for (auto license : aboutData.licenses()) {
+        if (license.key() == KAboutLicense::LGPL_V3) {
+            QCOMPARE(license.spdx(), QStringLiteral("LGPL-3.0+"));
+            foundLGPL = true;
+            break;
+        }
+    }
+    QCOMPARE(foundLGPL, true);
 }
 
 QTEST_MAIN(KAboutDataTest)

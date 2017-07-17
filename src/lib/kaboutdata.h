@@ -4,6 +4,7 @@
  * Copyright (C) 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
  * Copyright (C) 2010 Teo Mrnjavac <teo@kde.org>
  * Copyright (C) 2013 David Faure <faure+bluesystems@kde.org>
+ * Copyright (C) 2017 Harald Sitter <sitter@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -206,6 +207,14 @@ public:
     };
 
     /**
+     * Whether later versions of the license are allowed.
+     */
+    enum VersionRestriction {
+        OnlyThisVersion,
+        OrLaterVersions
+    };
+
+    /**
      * Copy constructor.  Performs a deep copy.
      * @param other object to copy
      */
@@ -243,6 +252,23 @@ public:
     KAboutLicense::LicenseKey key() const;
 
     /**
+     * Returns the SPDX license expression of this license.
+     * If the underlying license cannot be expressed as a SPDX expression a null string is returned.
+     *
+     * @note SPDX expression are expansive constructs. If you parse the return value, do it in a
+     *   SPDX specification compliant manner by splitting on whitespaces to discard unwanted
+     *   informationor or by using a complete SPDX license expression parser.
+     * @note SPDX identifiers are case-insensitive. Do not use case-senstivie checks on the return
+     *   value.
+     * @see https://spdx.org/licenses
+     * @return SPDX license expression or QString() if the license has no identifier. Compliant
+     *   with SPDX 2.1.
+     *
+     * @since 5.37
+     */
+    QString spdx() const;
+
+    /**
      * Fetch a known license by a keyword.
      *
      * Frequently the license data is provided by a terse keyword-like string,
@@ -266,6 +292,12 @@ public:
     static KAboutLicense byKeyword(const QString &keyword);
 
 private:
+    /**
+     * @internal Used by KAboutData to construct a predefined license.
+     */
+    explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType,
+                           enum KAboutLicense::VersionRestriction versionRestriction,
+                           const KAboutData *aboutData);
     /**
      * @internal Used by KAboutData to construct a predefined license.
      */
@@ -715,6 +747,19 @@ public:
     KAboutData &setLicense(KAboutLicense::LicenseKey licenseKey);
 
     /**
+     * Defines the license identifier.
+     *
+     * @param licenseKey The license identifier.
+     * @param versionRestriction Whether later versions of the license are also allowed.
+     *    e.g. licensed under "GPL 2.0 or at your option later versions" would be OrLaterVersions.
+     * @see addLicenseText, setLicenseText, setLicenseTextFile
+     *
+     * @since 5.37
+     */
+    KAboutData &setLicense(KAboutLicense::LicenseKey licenseKey,
+                           KAboutLicense::VersionRestriction versionRestriction);
+
+    /**
      * Adds a license identifier.
      *
      * If there is only one unknown license set, e.g. by using the default
@@ -724,6 +769,22 @@ public:
      * @see setLicenseText, addLicenseText, addLicenseTextFile
      */
     KAboutData &addLicense(KAboutLicense::LicenseKey licenseKey);
+
+    /**
+     * Adds a license identifier.
+     *
+     * If there is only one unknown license set, e.g. by using the default
+     * parameter in the constructor, that one is replaced.
+     *
+     * @param licenseKey The license identifier.
+     * @param versionRestriction Whether later versions of the license are also allowed.
+     *    e.g. licensed under "GPL 2.0 or at your option later versions" would be OrLaterVersions.
+     * @see setLicenseText, addLicenseText, addLicenseTextFile
+     *
+     * @since 5.37
+     */
+    KAboutData &addLicense(KAboutLicense::LicenseKey licenseKey,
+                           KAboutLicense::VersionRestriction versionRestriction);
 
     /**
      * Defines the copyright statement to show when displaying the license.

@@ -4,6 +4,7 @@
  * Copyright (C) 2006 Nicolas GOUTTE <goutte@kde.org>
  * Copyright (C) 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
  * Copyright (C) 2010 Teo Mrnjavac <teo@kde.org>
+ * Copyright (C) 2017 Harald Sitter <sitter@kde.org>
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Library General Public
@@ -133,27 +134,27 @@ KAboutPerson KAboutPerson::fromJSON(const QJsonObject &obj)
 class KAboutLicense::Private : public QSharedData
 {
 public:
-    Private(LicenseKey licenseType, const KAboutData *aboutData);
-    Private(const KAboutData *aboutData);
+    Private(LicenseKey licenseType,
+            VersionRestriction versionRestriction,
+            const KAboutData *aboutData);
     Private(const Private &other);
-public:
-    LicenseKey       _licenseKey;
-    QString          _licenseText;
-    QString          _pathToLicenseTextFile;
+
+    QString spdxID() const;
+
+    LicenseKey _licenseKey;
+    QString _licenseText;
+    QString _pathToLicenseTextFile;
+    VersionRestriction _versionRestriction;
     // needed for access to the possibly changing copyrightStatement()
     const KAboutData *_aboutData;
 };
 
-KAboutLicense::Private::Private(LicenseKey licenseType, const KAboutData *aboutData)
+KAboutLicense::Private::Private(LicenseKey licenseType,
+                                VersionRestriction versionRestriction,
+                                const KAboutData *aboutData)
     : QSharedData(),
       _licenseKey(licenseType),
-      _aboutData(aboutData)
-{
-}
-
-KAboutLicense::Private::Private(const KAboutData *aboutData)
-    : QSharedData(),
-      _licenseKey(Unknown),
+      _versionRestriction(versionRestriction),
       _aboutData(aboutData)
 {
 }
@@ -163,16 +164,52 @@ KAboutLicense::Private::Private(const KAboutLicense::Private &other)
       _licenseKey(other._licenseKey),
       _licenseText(other._licenseText),
       _pathToLicenseTextFile(other._pathToLicenseTextFile),
+      _versionRestriction(other._versionRestriction),
       _aboutData(other._aboutData)
 {}
 
+QString KAboutLicense::Private::spdxID() const
+{
+    switch (_licenseKey) {
+    case KAboutLicense::GPL_V2:
+        return QStringLiteral("GPL-2.0");
+    case KAboutLicense::LGPL_V2:
+        return QStringLiteral("LGPL-2.0");
+    case KAboutLicense::BSDL:
+        return QStringLiteral("BSD-2-Clause");
+    case KAboutLicense::Artistic:
+        return QStringLiteral("Artistic-1.0");
+    case KAboutLicense::QPL_V1_0:
+        return QStringLiteral("QPL-1.0");
+    case KAboutLicense::GPL_V3:
+        return QStringLiteral("GPL-3.0");
+    case KAboutLicense::LGPL_V3:
+        return QStringLiteral("LGPL-3.0");
+    case KAboutLicense::LGPL_V2_1:
+        return QStringLiteral("LGPL-2.1");
+    case KAboutLicense::Custom:
+    case KAboutLicense::File:
+    case KAboutLicense::Unknown:
+        return QString();
+    }
+    return QString();
+}
+
+KAboutLicense::KAboutLicense(LicenseKey licenseType,
+                             VersionRestriction versionRestriction,
+                             const KAboutData *aboutData)
+    : d(new Private(licenseType, versionRestriction, aboutData))
+{
+
+}
+
 KAboutLicense::KAboutLicense(LicenseKey licenseType, const KAboutData *aboutData)
-    : d(new Private(licenseType, aboutData))
+    : d(new Private(licenseType, OnlyThisVersion, aboutData))
 {
 }
 
 KAboutLicense::KAboutLicense(const KAboutData *aboutData)
-    : d(new Private(aboutData))
+    : d(new Private(Unknown, OnlyThisVersion, aboutData))
 {
 }
 
@@ -280,6 +317,26 @@ QString KAboutLicense::text() const
     return result;
 }
 
+QString KAboutLicense::spdx() const
+{
+    // SPDX licenses are comprised of an identifier (e.g. GPL-2.0), an optional + to denote 'or
+    // later versions' and optional ' WITH $exception' to denote standardized exceptions from the
+    // core license. As we do not offer exceptions we effectively only return GPL-2.0 or GPL-2.0+,
+    // this may change in the future. To that end the documentation makes no assertations about the
+    // actual content of the SPDX license expression we return.
+    // Expressions can in theory also contain AND, OR and () to build constructs involving more than
+    // one license. As this is outside the scope of a single license object we'll ignore this here
+    // for now.
+    // The expecation is that the return value is only run through spec-compliant parsers, so this
+    // can potentially be changed.
+
+    auto id = d->spdxID();
+    if (id.isNull()) { // Guard against potential future changes which would allow 'Foo+' as input.
+        return id;
+    }
+    return d->_versionRestriction == OrLaterVersions ? id.append(QLatin1Char('+')) : id;
+}
+
 QString KAboutLicense::name(KAboutLicense::NameFormat formatName) const
 {
     QString licenseShort;
@@ -377,7 +434,8 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
 
     LicenseKey license = licenseDict.value(keyword.toLatin1(),
                                            KAboutLicense::Custom);
-    return KAboutLicense(license, nullptr);
+    auto restriction = keyword.endsWith(QLatin1Char('+')) ? OrLaterVersions : OnlyThisVersion;
+    return KAboutLicense(license, restriction, nullptr);
 }
 
 class KAboutData::Private
@@ -645,18 +703,30 @@ KAboutData &KAboutData::setShortDescription(const QString &_shortDescription)
 
 KAboutData &KAboutData::setLicense(KAboutLicense::LicenseKey licenseKey)
 {
-    d->_licenseList[0] = KAboutLicense(licenseKey, this);
+    return setLicense(licenseKey, KAboutLicense::OnlyThisVersion);
+}
+
+KAboutData &KAboutData::setLicense(KAboutLicense::LicenseKey licenseKey,
+                                   KAboutLicense::VersionRestriction versionRestriction)
+{
+    d->_licenseList[0] = KAboutLicense(licenseKey, versionRestriction, this);
     return *this;
 }
 
 KAboutData &KAboutData::addLicense(KAboutLicense::LicenseKey licenseKey)
 {
+    return addLicense(licenseKey, KAboutLicense::OnlyThisVersion);
+}
+
+KAboutData &KAboutData::addLicense(KAboutLicense::LicenseKey licenseKey,
+                                   KAboutLicense::VersionRestriction versionRestriction)
+{
     // if the default license is unknown, overwrite instead of append
     KAboutLicense &firstLicense = d->_licenseList[0];
     if (d->_licenseList.count() == 1 && firstLicense.d->_licenseKey == KAboutLicense::Unknown) {
-        firstLicense = KAboutLicense(licenseKey, this);
+        firstLicense = KAboutLicense(licenseKey, versionRestriction, this);
     } else {
-        d->_licenseList.append(KAboutLicense(licenseKey, this));
+        d->_licenseList.append(KAboutLicense(licenseKey, versionRestriction, this));
     }
     return *this;
 }
