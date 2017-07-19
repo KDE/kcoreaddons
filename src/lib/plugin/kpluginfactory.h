@@ -48,8 +48,6 @@ class Part;
     public: \
         explicit name(); \
         ~name(); \
-    private: \
-        void init(); \
     };
 
 #define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, json) \
