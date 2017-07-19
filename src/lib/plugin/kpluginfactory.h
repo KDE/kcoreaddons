@@ -333,7 +333,7 @@ public:
     T *create(QWidget *parentWidget, QObject *parent, const QString &keyword = QString(), const QVariantList &args = QVariantList());
 
     /**
-     * @deprecated
+     * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
      */
 #ifndef KCOREADDONS_NO_DEPRECATED
     template<typename T>
@@ -345,7 +345,7 @@ public:
 #endif
 
     /**
-     * @deprecated
+     * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
      */
 #ifndef KCOREADDONS_NO_DEPRECATED
     KCOREADDONS_DEPRECATED QObject *create(QObject *parent = nullptr, const char *classname = "QObject", const QStringList &args = QStringList())
@@ -438,14 +438,14 @@ protected:
     KPluginFactoryPrivate *const d_ptr;
 
     /**
-     * @deprecated
+     * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
      */
 #ifndef KCOREADDONS_NO_DEPRECATED
     virtual KCOREADDONS_DEPRECATED QObject *createObject(QObject *parent, const char *className, const QStringList &args);
 #endif
 
     /**
-     * @deprecated
+     * @deprecated since 4.0 use create<T>(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)
      */
 #ifndef KCOREADDONS_NO_DEPRECATED
     virtual KCOREADDONS_DEPRECATED KParts::Part *createPartObject(QWidget *parentWidget, QObject *parent, const char *classname, const QStringList &args);
