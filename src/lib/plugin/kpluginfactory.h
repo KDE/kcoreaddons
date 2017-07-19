@@ -83,6 +83,15 @@ class Part;
  * \param pluginRegistrations Code to be inserted into the constructor of the
  * class. Usually a series of registerPlugin() calls.
  *
+ * @note K_PLUGIN_FACTORY declares the subclass including a Q_OBJECT macro.
+ * So you need to make sure to have Qt's moc run also for the source file
+ * where you use the macro. E.g. in projects using CMake and it's automoc feature,
+ * as usual you need to have a line
+ * @code
+ * #include <myplugin.moc>
+ * @endcode
+ * in the same source file when that one has the name "myplugin.cpp".
+ *
  * Example:
  * \code
  * #include <KPluginFactory>
@@ -126,6 +135,15 @@ class Part;
  * class. Usually a series of registerPlugin() calls.
  *
  * \param jsonFile Name of the json file to be compiled into the plugin as metadata
+ *
+ * @note K_PLUGIN_FACTORY_WITH_JSON declares the subclass including a Q_OBJECT macro.
+ * So you need to make sure to have Qt's moc run also for the source file
+ * where you use the macro. E.g. in projects using CMake and it's automoc feature,
+ * as usual you need to have a line
+ * @code
+ * #include <myplugin.moc>
+ * @endcode
+ * in the same source file when that one has the name "myplugin.cpp".
  *
  * Example:
  * \code
