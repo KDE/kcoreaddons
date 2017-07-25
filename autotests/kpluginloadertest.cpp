@@ -25,6 +25,14 @@
 #include <kpluginloader.h>
 #include <kpluginmetadata.h>
 
+class LibraryPathRestorer {
+public:
+    explicit LibraryPathRestorer(const QStringList &paths) : mPaths(paths) {}
+    ~LibraryPathRestorer() { QCoreApplication::setLibraryPaths(mPaths); }
+private:
+    QStringList mPaths;
+};
+
 class KPluginLoaderTest : public QObject
 {
     Q_OBJECT
@@ -280,6 +288,7 @@ private Q_SLOTS:
 
         const QString subDirName = dir.dirName();
         QVERIFY(dir.cdUp()); // should now point to /tmp on Linux
+        LibraryPathRestorer restorer(QCoreApplication::libraryPaths());
         // instantiate using relative path
         // make sure library path is set up correctly
         QCoreApplication::setLibraryPaths(QStringList() << dir.absolutePath());
@@ -314,6 +323,7 @@ private Q_SLOTS:
             qPrintable(dir.absoluteFilePath(QFileInfo(plugin2Path).fileName())));
         QVERIFY2(QFile::copy(plugin3Path, dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())),
             qPrintable(dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())));
+        LibraryPathRestorer restorer(QCoreApplication::libraryPaths());
         // we only want plugins from our temporary dir
         QCoreApplication::setLibraryPaths(QStringList() << temp.path());
 
@@ -416,6 +426,7 @@ private Q_SLOTS:
 
         // now test relative paths
 
+        LibraryPathRestorer restorer(QCoreApplication::libraryPaths());
         QCoreApplication::setLibraryPaths(QStringList() << temp.path());
         expectedPlugins = QStringList() << jsonPluginDest << unversionedPluginDest;
         expectedPlugins.sort();
