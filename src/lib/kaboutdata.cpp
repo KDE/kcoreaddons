@@ -989,19 +989,19 @@ QString KAboutData::desktopFileName() const
     // KF6: switch to this code and adapt API dox
 #if 0
     // if desktopFileName has been explicitely set, use that value
-    f (!d->desktopFileName.isEmpty()) {
-​        return d->desktopFileName;
-​    }
+    if (!d->desktopFileName.isEmpty()) {
+        return d->desktopFileName;
+    }
 
     // return a string calculated on-the-fly from the current org domain & component name
-​    const QChar dotChar(QLatin1Char('.'));
-​    QStringList hostComponents = d->organizationDomain.split(dotChar);
-​
-​    // desktop file name is reverse domain name
-​    std::reverse(hostComponents.begin(), hostComponents.end());
-​    hostComponents.append(componentName());
-​
-​    return hostComponents.join(dotChar);
+    const QChar dotChar(QLatin1Char('.'));
+    QStringList hostComponents = d->organizationDomain.split(dotChar);
+
+    // desktop file name is reverse domain name
+    std::reverse(hostComponents.begin(), hostComponents.end());
+    hostComponents.append(componentName());
+
+    return hostComponents.join(dotChar);
 #endif
 }
 
