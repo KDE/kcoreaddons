@@ -32,6 +32,8 @@
 #include <QJsonObject>
 #include <QMutex>
 #include <QStandardPaths>
+#include <QRegularExpression>
+#include <QRegularExpressionMatch>
 
 // in the desktoptojson binary enable debug messages by default, in the library only warning messages
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
@@ -226,9 +228,12 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
             *nextGroup = name;
             break;
         }
-        if (line.startsWith(QByteArrayLiteral("Type="))) {
-            // TODO: should we also have to accept spaces around equals here?
-            type = line.mid(qstrlen("Type="));
+
+        const static QRegularExpression typeEntryRegex(
+                QStringLiteral("^Type\\s*=\\s*(.*)$"));
+        const auto match = typeEntryRegex.match(QString::fromUtf8(line));
+        if (match.hasMatch()) {
+            type = match.captured(1).toUtf8();
         }
     }
     return type;

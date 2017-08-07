@@ -163,7 +163,7 @@ private Q_SLOTS:
         // test conversion of a currently existing .desktop file (excluding most of the translations):
         QByteArray kdevInput =
             "[Desktop Entry]\n"
-            "Type=Service\n"
+            "Type = Service\n"
             "Icon=text-x-c++src\n"
             "Exec=blubb\n"
             "Comment=C/C++ Language Support\n"
@@ -276,7 +276,7 @@ private Q_SLOTS:
         // test conversion of kcookiejar.desktop (for some reason the wrong boolean values were committed)
         QByteArray kcookiejarInput =
         "[Desktop Entry]\n"
-        "Type=Service\n"
+        "Type= Service\n"
         "Name=Cookie Jar\n"
         "Comment=Stores network cookies\n"
         "X-KDE-ServiceTypes=KDEDModule\n"
