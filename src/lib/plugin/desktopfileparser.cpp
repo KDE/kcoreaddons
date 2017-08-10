@@ -284,15 +284,22 @@ bool tokenizeKeyValue(QFile &df, const QString &src, QByteArray &key, QString &v
     return true;
 }
 
-QVector<CustomPropertyDefinition>* parseServiceTypesFile(QString path)
+static QVector<CustomPropertyDefinition>* parseServiceTypesFile(const QString &inputPath)
 {
     int lineNr = 0;
+    QString path = inputPath;
     if (QDir::isRelativePath(path)) {
-        const QString originalPath = path;
         path = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                               QStringLiteral("kservicetypes5/") + path);
+                               QStringLiteral("kservicetypes5/") + inputPath);
+        QString rcPath;
         if (path.isEmpty()) {
-            qCWarning(DESKTOPPARSER).nospace() << "Could not locate service type file kservicetypes5/" << qPrintable(originalPath) << ", tried " << QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+            rcPath = QStringLiteral(":/kservicetypes5/") + inputPath;
+            if (QFileInfo::exists(rcPath)) {
+                path = rcPath;
+            }
+        }
+        if (path.isEmpty()) {
+            qCWarning(DESKTOPPARSER).nospace() << "Could not locate service type file kservicetypes5/" << qPrintable(inputPath) << ", tried " << QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation) << " and " << rcPath;
             return nullptr;
         }
     }
