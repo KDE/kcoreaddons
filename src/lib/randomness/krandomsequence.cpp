@@ -21,7 +21,7 @@
 #include "krandomsequence.h"
 #include "krandom.h"
 
-class KRandomSequence::Private
+class Q_DECL_HIDDEN KRandomSequence::Private
 {
 public:
     enum {SHUFFLE_TABLE_SIZE = 32};

@@ -44,7 +44,7 @@ inline void endpwent() { }
 static inline void endgrent() { }
 #endif
 
-class KUser::Private : public QSharedData
+class Q_DECL_HIDDEN KUser::Private : public QSharedData
 {
 public:
     uid_t uid;
@@ -336,7 +336,7 @@ KUser::~KUser()
 {
 }
 
-class KUserGroup::Private : public QSharedData
+class Q_DECL_HIDDEN KUserGroup::Private : public QSharedData
 {
 public:
     gid_t gid;

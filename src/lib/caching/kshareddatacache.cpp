@@ -970,7 +970,7 @@ struct SharedMemory {
 
 // The per-instance private data, such as map size, whether
 // attached or not, pointer to shared memory, etc.
-class KSharedDataCache::Private
+class Q_DECL_HIDDEN KSharedDataCache::Private
 {
 public:
     Private(const QString &name,

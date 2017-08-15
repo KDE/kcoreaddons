@@ -48,7 +48,7 @@ Q_DECLARE_LOGGING_CATEGORY(KABOUTDATA)
 Q_LOGGING_CATEGORY(KABOUTDATA, "kf5.kcoreaddons.kaboutdata", QtWarningMsg)
 
 
-class KAboutPerson::Private
+class Q_DECL_HIDDEN KAboutPerson::Private
 {
 public:
     QString _name;
@@ -131,7 +131,7 @@ KAboutPerson KAboutPerson::fromJSON(const QJsonObject &obj)
 }
 
 
-class KAboutLicense::Private : public QSharedData
+class Q_DECL_HIDDEN KAboutLicense::Private : public QSharedData
 {
 public:
     Private(LicenseKey licenseType,
@@ -438,7 +438,7 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
     return KAboutLicense(license, restriction, nullptr);
 }
 
-class KAboutData::Private
+class Q_DECL_HIDDEN KAboutData::Private
 {
 public:
     Private()

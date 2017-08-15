@@ -172,7 +172,7 @@ void enumerateUsersForGroup(const QString &name, uint maxCount, Callback callbac
     });
 }
 
-class KUser::Private : public QSharedData
+class Q_DECL_HIDDEN KUser::Private : public QSharedData
 {
     typedef QExplicitlySharedDataPointer<Private> Ptr;
     Private() : isAdmin(false) {}
@@ -486,7 +486,7 @@ KUser::~KUser()
 {
 }
 
-class KUserGroup::Private : public QSharedData
+class Q_DECL_HIDDEN KUserGroup::Private : public QSharedData
 {
 public:
     QString name;

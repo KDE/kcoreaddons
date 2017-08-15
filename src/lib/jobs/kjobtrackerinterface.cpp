@@ -21,7 +21,7 @@
 
 #include "kjob.h"
 
-class KJobTrackerInterface::Private
+class Q_DECL_HIDDEN KJobTrackerInterface::Private
 {
 public:
     Private(KJobTrackerInterface *interface) : q(interface)

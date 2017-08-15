@@ -28,7 +28,7 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QCache>
 
-class KSharedDataCache::Private
+class Q_DECL_HIDDEN KSharedDataCache::Private
 {
 public:
     KSharedDataCache::EvictionPolicy evictionPolicy;

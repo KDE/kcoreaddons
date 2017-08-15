@@ -22,7 +22,7 @@
 #include "kjobuidelegate.h"
 #include "kjob.h"
 
-class KJobUiDelegate::Private
+class Q_DECL_HIDDEN KJobUiDelegate::Private
 {
 public:
     Private(KJobUiDelegate *delegate)
