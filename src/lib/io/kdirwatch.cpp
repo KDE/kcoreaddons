@@ -784,8 +784,8 @@ bool KDirWatchPrivate::useStat(Entry *e)
 
 /* If <instance> !=0, this KDirWatch instance wants to watch at <_path>,
  * providing in <isDir> the type of the entry to be watched.
- * Sometimes, entries are dependant on each other: if <sub_entry> !=0,
- * this entry needs another entry to watch himself (when notExistent).
+ * Sometimes, entries are dependent on each other: if <sub_entry> !=0,
+ * this entry needs another entry to watch itself (when notExistent).
  */
 void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path,
                                 Entry *sub_entry, bool isDir, KDirWatch::WatchModes watchModes)
@@ -854,7 +854,7 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path,
         if (e->isDir && !isDir) {
             qCWarning(KCOREADDONS_DEBUG) << "KDirWatch:" << path << "is a directory. Use addDir!";
         } else if (!e->isDir && isDir) {
-            qWarning("KDirWatch: %s is a file. Use addFile!", qPrintable(path));
+            qCWarning(KCOREADDONS_DEBUG) << "KDirWatch:" << path << "is a file. Use addFile!";
         }
 
         if (!e->isDir && (watchModes != KDirWatch::WatchDirOnly)) {
