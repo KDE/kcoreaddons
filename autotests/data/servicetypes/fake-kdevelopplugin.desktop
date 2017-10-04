@@ -2,7 +2,7 @@
 
 [Desktop Entry]
 Type=ServiceType
-X-KDE-ServiceType=KDevelop/Plugin
+X-KDE-ServiceType=KDevelop/NonExistentPlugin
 X-KDE-Derived=KPluginInfo
 #Name=KDevelop Plugin
 

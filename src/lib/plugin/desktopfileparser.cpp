@@ -284,13 +284,18 @@ bool tokenizeKeyValue(QFile &df, const QString &src, QByteArray &key, QString &v
     return true;
 }
 
+static QString locateRelativeServiceType(const QString &relPath)
+{
+    return QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                  QStringLiteral("kservicetypes5/") + relPath);
+}
+
 static QVector<CustomPropertyDefinition>* parseServiceTypesFile(const QString &inputPath)
 {
     int lineNr = 0;
     QString path = inputPath;
     if (QDir::isRelativePath(path)) {
-        path = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                               QStringLiteral("kservicetypes5/") + inputPath);
+        path = locateRelativeServiceType(path);
         QString rcPath;
         if (path.isEmpty()) {
             rcPath = QStringLiteral(":/kservicetypes5/") + inputPath;
@@ -536,11 +541,23 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
             break;
         }
         if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
-            const auto services = deserializeList(value);
-            for(const auto &service : services) {
+            const QString dotDesktop = QStringLiteral(".desktop");
+            const QChar slashChar(QLatin1Char('/'));
+            const auto serviceList = deserializeList(value);
+
+            for(const auto &service : serviceList) {
                 // some .desktop files still use the legacy ServiceTypes= key
-                QString fileName = service.toLower().replace(QLatin1Char('/'), QLatin1Char('-'))+QStringLiteral(".desktop");
-                serviceTypeDef.addFile(fileName);
+                QString absFileName = locateRelativeServiceType(
+                        service.toLower().replace(slashChar, QLatin1Char('-'))+dotDesktop);
+                if (absFileName.isEmpty()) {
+                    absFileName = locateRelativeServiceType(
+                        service.toLower().remove(slashChar)+dotDesktop);
+                }
+                if (absFileName.isEmpty()) {
+                    qCWarning(DESKTOPPARSER) << "Unable to find service type for service" << service;
+                }
+                else
+                    serviceTypeDef.addFile(absFileName);
             }
             break;
         }
