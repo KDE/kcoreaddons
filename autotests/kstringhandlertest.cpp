@@ -17,9 +17,9 @@ void KStringHandlerTest::capwords()
 
 void KStringHandlerTest::tagURLs()
 {
-    QString test = "Click on http://foo@bar:www.kde.org/yoyo/dyne.html#a1 for info.";
+    QString test = "Click on https://foo@bar:www.kde.org/yoyo/dyne.html#a1 for info.";
     QCOMPARE(KStringHandler::tagUrls(test),
-             QString("Click on <a href=\"http://foo@bar:www.kde.org/yoyo/dyne.html#a1\">http://foo@bar:www.kde.org/yoyo/dyne.html#a1</a> for info."));
+             QString("Click on <a href=\"https://foo@bar:www.kde.org/yoyo/dyne.html#a1\">https://foo@bar:www.kde.org/yoyo/dyne.html#a1</a> for info."));
 
     test = "http://www.foo.org/story$806";
     QCOMPARE(KStringHandler::tagUrls(test),

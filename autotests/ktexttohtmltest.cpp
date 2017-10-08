@@ -240,7 +240,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     }
 
     // test max url length
-    QString url = QStringLiteral("http://www.kde.org/this/is/a_very_loooooong_url/test/test/test");
+    QString url = QStringLiteral("https://www.kde.org/this/is/a_very_loooooong_url/test/test/test");
     {
         KTextToHTMLHelper ll(url, 0, 10);
         QVERIFY(ll.getUrl().isEmpty());    // url too long
@@ -372,20 +372,20 @@ void KTextToHTMLTest::testHtmlConvert_data()
                                  "www.example.com/test.cpp</a>.";
 
     // Bug 313719 - URL in parenthesis
-    QTest::newRow("url-in-parenthesis-1") << "KDE (website http://www.kde.org)"
+    QTest::newRow("url-in-parenthesis-1") << "KDE (website https://www.kde.org)"
                                           << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                                          << "KDE (website <a href=\"http://www.kde.org\">http://www.kde.org</a>)";
-    QTest::newRow("url-in-parenthesis-2") << "KDE website (http://www.kde.org)"
+                                          << "KDE (website <a href=\"https://www.kde.org\">https://www.kde.org</a>)";
+    QTest::newRow("url-in-parenthesis-2") << "KDE website (https://www.kde.org)"
                                           << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                                          << "KDE website (<a href=\"http://www.kde.org\">http://www.kde.org</a>)";
-    QTest::newRow("url-in-parenthesis-3") << "bla (http://www.kde.org - section 5.2)"
+                                          << "KDE website (<a href=\"https://www.kde.org\">https://www.kde.org</a>)";
+    QTest::newRow("url-in-parenthesis-3") << "bla (https://www.kde.org - section 5.2)"
                                           << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                                          << "bla (<a href=\"http://www.kde.org\">http://www.kde.org</a> - section 5.2)";
+                                          << "bla (<a href=\"https://www.kde.org\">https://www.kde.org</a> - section 5.2)";
     
    // Fix url as foo <<url> <url>> when we concatened them.
-   QTest::newRow("url-with-url") << "foo <http://www.kde.org/ <http://www.kde.org/>>"
+   QTest::newRow("url-with-url") << "foo <https://www.kde.org/ <https://www.kde.org/>>"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "foo &lt;<a href=\"http://www.kde.org/ \">http://www.kde.org/ </a>&lt;<a href=\"http://www.kde.org/\">http://www.kde.org/</a>&gt;&gt;";
+                               << "foo &lt;<a href=\"https://www.kde.org/ \">https://www.kde.org/ </a>&lt;<a href=\"https://www.kde.org/\">https://www.kde.org/</a>&gt;&gt;";
 
    //Fix url exploit
    QTest::newRow("url-exec-html") << "https://\"><!--"

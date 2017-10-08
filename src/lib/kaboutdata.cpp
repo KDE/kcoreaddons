@@ -920,7 +920,7 @@ QString KAboutData::aboutTranslationTeam()
                "<p>KDE is translated into many languages thanks to the work "
                "of the translation teams all over the world.</p>"
                "<p>For more information on KDE internationalization "
-               "visit <a href=\"http://l10n.kde.org\">http://l10n.kde.org</a></p>",
+               "visit <a href=\"https://l10n.kde.org\">https://l10n.kde.org</a></p>",
                "replace this with information about your translation team"
            );
 }
@@ -1168,7 +1168,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         }
         if (!customAuthorTextEnabled()) {
             if (bugAddress() == QLatin1String("submit@bugs.kde.org") ) {
-                printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please use http://bugs.kde.org to report bugs.")));
+                printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please use https://bugs.kde.org to report bugs.")));
             } else if (!bugAddress().isEmpty()) {
                 printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please report bugs to %1.").arg(bugAddress())));
             }

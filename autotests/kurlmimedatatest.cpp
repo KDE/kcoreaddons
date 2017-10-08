@@ -30,7 +30,7 @@ void KUrlMimeDataTest::testURLList()
     QVERIFY(!mimeData->hasUrls());
 
     QList<QUrl> urls;
-    urls.append(QUrl(QLatin1String("http://www.kde.org")));
+    urls.append(QUrl(QLatin1String("https://www.kde.org")));
     urls.append(QUrl(QLatin1String("http://wstephenson:secret@example.com/path")));
     urls.append(QUrl(QLatin1String("file:///home/dfaure/konqtests/Mat%C3%A9riel")));
     QMap<QString, QString> metaData;
@@ -85,7 +85,7 @@ void KUrlMimeDataTest::testOneURL()
 void KUrlMimeDataTest::testFromQUrl()
 {
     QList<QUrl> qurls;
-    qurls.append(QUrl(QLatin1String("http://www.kde.org")));
+    qurls.append(QUrl(QLatin1String("https://www.kde.org")));
     qurls.append(QUrl(QLatin1String("file:///home/dfaure/konqtests/Mat%C3%A9riel")));
     QMimeData *mimeData = new QMimeData();
     KUrlMimeData::setUrls(QList<QUrl>(), qurls, mimeData);

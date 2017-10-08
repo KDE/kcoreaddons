@@ -188,7 +188,7 @@ void KAboutDataTest::testKAboutDataOrganizationDomain()
     KAboutData data2("app", QLatin1String("program"), "version",
                      QLatin1String("description"), KAboutLicense::LGPL,
                      QLatin1String("copyright"), QLatin1String("hello world"),
-                     "http://edu.kde.org/kig");
+                     "https://edu.kde.org/kig");
     QCOMPARE(data2.organizationDomain(), QString::fromLatin1("kde.org"));
     QCOMPARE(data2.desktopFileName(), QStringLiteral("org.kde.app"));
 }

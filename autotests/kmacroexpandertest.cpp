@@ -89,35 +89,35 @@ KMacroExpanderTest::expandMacros()
     QHash<QChar, QString> map2;
     map2.insert('a', "%n");
     map2.insert('f', "filename.txt");
-    map2.insert('u', "http://www.kde.org/index.html");
+    map2.insert('u', "https://www.kde.org/index.html");
     map2.insert('n', "Restaurant \"Chew It\"");
     s = "Title: %a - %f - %u - %n - %%";
     QCOMPARE(KMacroExpander::expandMacros(s, map2),
-             QLatin1String("Title: %n - filename.txt - http://www.kde.org/index.html - Restaurant \"Chew It\" - %"));
+             QLatin1String("Title: %n - filename.txt - https://www.kde.org/index.html - Restaurant \"Chew It\" - %"));
 
     QHash<QString, QString> smap;
     smap.insert("foo", "%n");
     smap.insert("file", "filename.txt");
-    smap.insert("url", "http://www.kde.org/index.html");
+    smap.insert("url", "https://www.kde.org/index.html");
     smap.insert("name", "Restaurant \"Chew It\"");
 
     s = "Title: %foo - %file - %url - %name - %";
     QCOMPARE(KMacroExpander::expandMacros(s, smap),
-             QLatin1String("Title: %n - filename.txt - http://www.kde.org/index.html - Restaurant \"Chew It\" - %"));
+             QLatin1String("Title: %n - filename.txt - https://www.kde.org/index.html - Restaurant \"Chew It\" - %"));
     s = "%foo - %file - %url - %name";
     QCOMPARE(KMacroExpander::expandMacros(s, smap),
-             QLatin1String("%n - filename.txt - http://www.kde.org/index.html - Restaurant \"Chew It\""));
+             QLatin1String("%n - filename.txt - https://www.kde.org/index.html - Restaurant \"Chew It\""));
 
     s = "Title: %{foo} - %{file} - %{url} - %{name} - %";
     QCOMPARE(KMacroExpander::expandMacros(s, smap),
-             QLatin1String("Title: %n - filename.txt - http://www.kde.org/index.html - Restaurant \"Chew It\" - %"));
+             QLatin1String("Title: %n - filename.txt - https://www.kde.org/index.html - Restaurant \"Chew It\" - %"));
     s = "%{foo} - %{file} - %{url} - %{name}";
     QCOMPARE(KMacroExpander::expandMacros(s, smap),
-             QLatin1String("%n - filename.txt - http://www.kde.org/index.html - Restaurant \"Chew It\""));
+             QLatin1String("%n - filename.txt - https://www.kde.org/index.html - Restaurant \"Chew It\""));
 
     s = "Title: %foo-%file-%url-%name-%";
     QCOMPARE(KMacroExpander::expandMacros(s, smap),
-             QLatin1String("Title: %n-filename.txt-http://www.kde.org/index.html-Restaurant \"Chew It\"-%"));
+             QLatin1String("Title: %n-filename.txt-https://www.kde.org/index.html-Restaurant \"Chew It\"-%"));
 
     s = "Title: %{file} %{url";
     QCOMPARE(KMacroExpander::expandMacros(s, smap),
@@ -163,13 +163,13 @@ KMacroExpanderTest::expandMacrosShellQuote()
     QHash<QChar, QString> map2;
     map2.insert('a', "%n");
     map2.insert('f', "filename.txt");
-    map2.insert('u', "http://www.kde.org/index.html");
+    map2.insert('u', "https://www.kde.org/index.html");
     map2.insert('n', "Restaurant \"Chew It\"");
 
 #ifdef Q_OS_WIN
     s = "Title: %a - %f - %u - %n - %% - %VARIABLE% foo";
     QCOMPARE(KMacroExpander::expandMacrosShellQuote(s, map2),
-             QLatin1String("Title: %PERCENT_SIGN%n - filename.txt - http://www.kde.org/index.html - \"Restaurant \"\\^\"\"Chew It\"\\^\" - %PERCENT_SIGN% - %VARIABLE% foo"));
+             QLatin1String("Title: %PERCENT_SIGN%n - filename.txt - https://www.kde.org/index.html - \"Restaurant \"\\^\"\"Chew It\"\\^\" - %PERCENT_SIGN% - %VARIABLE% foo"));
 
     s = "kedit --caption %n %f";
     map2.insert('n', "Restaurant 'Chew It'");
@@ -206,7 +206,7 @@ KMacroExpanderTest::expandMacrosShellQuote()
 #else
     s = "Title: %a - %f - %u - %n - %%";
     QCOMPARE(KMacroExpander::expandMacrosShellQuote(s, map2),
-             QLatin1String("Title: %n - filename.txt - http://www.kde.org/index.html - 'Restaurant \"Chew It\"' - %"));
+             QLatin1String("Title: %n - filename.txt - https://www.kde.org/index.html - 'Restaurant \"Chew It\"' - %"));
 
     s = "kedit --caption %n %f";
     map2.insert('n', "Restaurant 'Chew It'");

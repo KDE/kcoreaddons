@@ -86,7 +86,7 @@ class QObject;
         "License": "LGPL",
         "Id": "time",
         "Version": "1.0",
-        "Website": "http://plasma.kde.org/",
+        "Website": "https://plasma.kde.org/",
         "ServiceTypes": ["Plasma/DataEngine"]
      }
    }

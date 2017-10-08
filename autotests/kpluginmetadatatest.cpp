@@ -122,7 +122,7 @@ private Q_SLOTS:
                 " \"Copyright\": \"(c) Alex Richardson 2015\",\n"
                 " \"Id\": \"time\",\n"
                 " \"Version\": \"1.0\",\n"
-                " \"Website\": \"http://plasma.kde.org/\",\n"
+                " \"Website\": \"https://plasma.kde.org/\",\n"
                 " \"MimeTypes\": [ \"image/png\" ],\n"
                 " \"ServiceTypes\": [\"Plasma/DataEngine\"]\n"
             " }\n}\n", &e).object();
@@ -149,7 +149,7 @@ private Q_SLOTS:
         QCOMPARE(m.license(), QStringLiteral("LGPL"));
         QCOMPARE(m.copyrightText(), QStringLiteral("(c) Alex Richardson 2015"));
         QCOMPARE(m.version(), QStringLiteral("1.0"));
-        QCOMPARE(m.website(), QStringLiteral("http://plasma.kde.org/"));
+        QCOMPARE(m.website(), QStringLiteral("https://plasma.kde.org/"));
         QCOMPARE(m.serviceTypes(), QStringList() << QStringLiteral("Plasma/DataEngine"));
         QCOMPARE(m.mimeTypes(), QStringList() << QStringLiteral("image/png"));
     }
@@ -235,7 +235,7 @@ private Q_SLOTS:
         QCOMPARE(md.metaDataFileName(), dfile);
         QCOMPARE(md.iconName(), QStringLiteral("preferences-system-time"));
         QCOMPARE(md.license(), QStringLiteral("LGPL"));
-        QCOMPARE(md.website(), QStringLiteral("http://kde.org/"));
+        QCOMPARE(md.website(), QStringLiteral("https://kde.org/"));
         QCOMPARE(md.category(), QStringLiteral("Examples"));
         QCOMPARE(md.version(), QStringLiteral("1.0"));
         QCOMPARE(md.dependencies(), QStringList());
