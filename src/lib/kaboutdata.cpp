@@ -1163,7 +1163,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
                 if (!person.emailAddress().isEmpty()) {
                     authorData.append(QStringLiteral(" <") + person.emailAddress() + QStringLiteral(">"));
                 }
-                printf("%s\n", qPrintable(authorData));;
+                printf("%s\n", qPrintable(authorData));
             }
         }
         if (!customAuthorTextEnabled()) {
