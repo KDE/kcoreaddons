@@ -540,24 +540,25 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
         if (!tokenizeKeyValue(df, src, key, value, lineNr)) {
             break;
         }
+        // some .desktop files still use the legacy ServiceTypes= key
         if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
             const QString dotDesktop = QStringLiteral(".desktop");
             const QChar slashChar(QLatin1Char('/'));
             const auto serviceList = deserializeList(value);
 
-            for(const auto &service : serviceList) {
-                // some .desktop files still use the legacy ServiceTypes= key
+            for (const auto &service : serviceList) {
+                // Make up the filename from the service type name. This assumes consistent naming...
                 QString absFileName = locateRelativeServiceType(
-                        service.toLower().replace(slashChar, QLatin1Char('-'))+dotDesktop);
+                        service.toLower().replace(slashChar, QLatin1Char('-')) + dotDesktop);
                 if (absFileName.isEmpty()) {
                     absFileName = locateRelativeServiceType(
-                        service.toLower().remove(slashChar)+dotDesktop);
+                        service.toLower().remove(slashChar) + dotDesktop);
                 }
                 if (absFileName.isEmpty()) {
-                    qCWarning(DESKTOPPARSER) << "Unable to find service type for service" << service;
-                }
-                else
+                    qCWarning(DESKTOPPARSER) << "Unable to find service type for service" << service << "listed in" << src;
+                } else {
                     serviceTypeDef.addFile(absFileName);
+                }
             }
             break;
         }
