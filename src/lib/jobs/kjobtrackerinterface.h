@@ -51,15 +51,39 @@ public:
 public Q_SLOTS:
     /**
      * Register a new job in this tracker.
+     * The default implementation connects the following KJob signals
+     * to the respective protected slots of this class:
+     *  - finished() (also connected to the unregisterJob() slot)
+     *  - suspended()
+     *  - resumed()
+     *  - description()
+     *  - infoMessage()
+     *  - totalAmount()
+     *  - processedAmount()
+     *  - percent()
+     *  - speed()
+     *
+     * If you re-implement this method, you may want to call the default
+     * implementation or add at least:
+     *
+     * @code
+     * connect(job, &KJob::finished, this, &MyJobTracker::unregisterJob);
+     * @endcode
+     *
+     * so that you won't have to manually call unregisterJob().
      *
      * @param job the job to register
+     * @see unregisterJob()
      */
     virtual void registerJob(KJob *job);
 
     /**
      * Unregister a job from this tracker.
+     * @note You need to manually call this method only if you re-implemented
+     * registerJob() without connecting KJob::finished to this slot.
      *
      * @param job the job to unregister
+     * @see registerJob()
      */
     virtual void unregisterJob(KJob *job);
 
