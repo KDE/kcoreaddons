@@ -423,7 +423,7 @@ void KTextToHTMLTest::testHtmlConvert_data()
    //Bug 346132
    QTest::newRow("url-with-ref-in-<") << "http://www.foo.bar<http://foo.bar/>"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "<a href=\"http://www.foo.bar\">http://www.foo.bar</a>[1]";
+                               << "<a href=\"http://www.foo.bar\">http://www.foo.bar</a>&lt;<a href=\"http://foo.bar/\">http://foo.bar/</a>&gt;";
 
    QTest::newRow("url-with-ref-in-]") << "[Please visit our booth 24-25 http://example.com/]"
                                << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
@@ -438,9 +438,6 @@ void KTextToHTMLTest::testHtmlConvert()
     QFETCH(QString, htmlText);
 
     QEXPECT_FAIL("punctation-bug", "Linklocator does not properly detect punctation as boundaries",
-                 Continue);
-
-    QEXPECT_FAIL("url-with-ref-in-<", "Linklocator does not properly parse url with <",
                  Continue);
 
     QString actualHtml = KTextToHTML::convertToHtml(plainText, flags);

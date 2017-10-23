@@ -234,6 +234,18 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
                 (mText[mPos].isPrint() || mText[mPos].isSpace()) &&
                 ((afterUrl.isNull() && !mText[mPos].isSpace()) ||
                  (!afterUrl.isNull() && mText[mPos] != afterUrl))) {
+            if (!previousCharIsSpace && (mText[mPos] == QLatin1Char('<')) && ((mPos + 1) < mText.length())) {
+                // Fix Bug #346132: allow "http://www.foo.bar<http://foo.bar/>"
+                // < inside a URL is not allowed, however there is a test which
+                // checks that "http://some<Host>/path" should be allowed
+                // Therefore: check if what follows is another URL and if so, stop here
+                mPos++;
+                if (atUrl()) {
+                    mPos--;
+                    break;
+                }
+                mPos--;
+            }
             if (mText[mPos].isSpace()) {
                 previousCharIsSpace = true;
             } else if (!previousIsAnAnchor && mText[mPos] == QLatin1Char('[')) {
