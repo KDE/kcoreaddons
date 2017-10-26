@@ -51,12 +51,10 @@ bool KCompositeJob::addSubjob(KJob *job)
 
     job->setParent(this);
     d->subjobs.append(job);
-    connect(job, SIGNAL(result(KJob*)),
-            SLOT(slotResult(KJob*)));
+    connect(job, &KJob::result, this, &KCompositeJob::slotResult);
 
     // Forward information from that subjob.
-    connect(job, SIGNAL(infoMessage(KJob*,QString,QString)),
-            SLOT(slotInfoMessage(KJob*,QString,QString)));
+    connect(job, &KJob::infoMessage, this, &KCompositeJob::slotInfoMessage);
 
     return true;
 }

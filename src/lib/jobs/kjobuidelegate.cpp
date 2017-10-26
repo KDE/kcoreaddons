@@ -105,8 +105,7 @@ void KJobUiDelegate::connectJob(KJob *job)
     connect(job, SIGNAL(result(KJob*)),
             this, SLOT(_k_result(KJob*)));
 
-    connect(job, SIGNAL(warning(KJob*,QString,QString)),
-            this, SLOT(slotWarning(KJob*,QString,QString)));
+    connect(job, &KJob::warning, this, &KJobUiDelegate::slotWarning);
 }
 
 void KJobUiDelegate::Private::_k_result(KJob *job2)
