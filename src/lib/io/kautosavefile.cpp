@@ -177,7 +177,7 @@ static QUrl extractManagedFilePath(const QString& staleFileName)
     QUrl managedFileName;
     //name.setScheme(file.mid(sepPos + 3, pathPos - sep.size() - 3));
     QByteArray encodedPath = staleFileName.midRef(pathPos+1, staleFileName.length()-pathPos-1-KAutoSaveFilePrivate::NamePadding).toLatin1();
-    managedFileName.setPath(QUrl::fromPercentEncoding(encodedPath) + QLatin1Char('/') + QFileInfo(staleFileName.left(sepPos)).fileName());
+    managedFileName.setPath(QUrl::fromPercentEncoding(encodedPath) + QLatin1Char('/') + QFileInfo(QUrl::fromPercentEncoding(staleFileName.left(sepPos).toLatin1())).fileName());
     return managedFileName;
 }
 

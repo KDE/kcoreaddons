@@ -80,7 +80,16 @@ void KAutoSaveFileTest::test_readWrite()
 
 void KAutoSaveFileTest::test_fileStaleFiles()
 {
-    // TODO
+    QUrl normalFile = QUrl::fromLocalFile(QDir::temp().absoluteFilePath("test directory/tîst me.txt"));
+
+    KAutoSaveFile saveFile(normalFile);
+    QVERIFY(saveFile.open(QIODevice::ReadWrite));
+    saveFile.write("testdata");
+    // Make sure the stale file is found
+    QVERIFY(saveFile.staleFiles(normalFile, QStringLiteral("qttest")).count() == 1);
+    saveFile.releaseLock();
+    // Make sure the stale file is deleted
+    QVERIFY(saveFile.staleFiles(normalFile, QStringLiteral("qttest")).isEmpty());
 }
 
 void KAutoSaveFileTest::test_applicationStaleFiles()
