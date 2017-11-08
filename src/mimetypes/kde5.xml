@@ -3761,4 +3761,37 @@ Notes:
     </magic>
     <glob pattern="*.webp"/>
   </mime-type>
+  <mime-type type="application/vnd.kde.kcfg">
+    <comment>KConfigXT Configuration Options</comment>
+    <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
+    <sub-class-of type="application/xml"/>
+    <magic priority="80">
+      <match type="string" value="&lt;!DOCTYPE kcfg" offset="0:256"/>
+    </magic>
+    <root-XML namespaceURI="http://www.kde.org/standards/kcfg/1.0" localName="kcfg"/>
+    <glob pattern="*.kcfg"/>
+  </mime-type>
+  <mime-type type="application/vnd.kde.kcfgc">
+    <comment>KConfigXT Code Generation Options</comment>
+    <generic-icon name="text-plain"/>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.kcfgc"/>
+  </mime-type>
+  <mime-type type="application/vnd.kde.kxmlguirc">
+    <comment>KXMLGUI UI Declaration</comment>
+    <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
+    <sub-class-of type="application/xml"/>
+    <magic priority="80">
+      <match type="string" value="&lt;!DOCTYPE gui" offset="0:256"/>
+      <match type="string" value="&lt;!DOCTYPE kpartgui" offset="0:256"/>
+    </magic>
+    <root-XML namespaceURI="https://www.kde.org/standards/kxmlgui/1.0" localName="gui"/>
+    <glob pattern="*.rc"/>
+  </mime-type>
+  <mime-type type="application/vnd.kde.knotificationrc">
+    <comment>KNotification Declaration</comment>
+    <generic-icon name="text-plain"/> <!-- placeholder until there is an own icon -->
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.notifyrc"/>
+  </mime-type>
 </mime-info>
