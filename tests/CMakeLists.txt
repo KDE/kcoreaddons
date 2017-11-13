@@ -6,15 +6,6 @@ if(NOT Qt5Widgets_FOUND)
     return()
 endif()
 
-macro(KCOREADDONS_EXAMPLES)
-    foreach(_testname ${ARGN})
-        add_executable(${_testname} ${_testname}.cpp) # TODO NOGUI
-        target_link_libraries(${_testname} Qt5::Test KF5::CoreAddons)
-    endforeach()
-endmacro()
-
-########### kdirwatchtest_gui ###############
-
 add_executable(kdirwatchtest_gui kdirwatchtest_gui.cpp)
 target_link_libraries(kdirwatchtest_gui Qt5::Widgets KF5::CoreAddons)
 
