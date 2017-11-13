@@ -1,6 +1,6 @@
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG QUIET COMPONENTS Widgets)
+find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG QUIET OPTIONAL_COMPONENTS Widgets)
 if(NOT Qt5Widgets_FOUND)
     message(STATUS "Qt5Widgets not found, examples will not be built.")
     return()
