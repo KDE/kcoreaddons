@@ -153,3 +153,22 @@ void KStringHandlerTest::preProcessWrap()
              replaceZwsp(expected));
 }
 
+void KStringHandlerTest::logicalLength_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<int>("expected");
+
+    QTest::newRow("Latin") << "foo bar baz" << 11;
+    QTest::newRow("Chinese") << QString::fromUtf8("\xe4\xbd\xa0\xe5\xa5\xbd") << 4;
+    QTest::newRow("Japanese") << QString::fromUtf8("\xe9\x9d\x92\xe3\x81\x84\xe7\xa9\xba") << 6;
+    QTest::newRow("Korean") << QString::fromUtf8("\xed\x95\x9c\xea\xb5\xad\xec\x96\xb4") << 6;
+    QTest::newRow("Mixed") << QString::fromUtf8("KDE\xe6\xa1\x8c\xe9\x9d\xa2") << 7;
+}
+
+void KStringHandlerTest::logicalLength()
+{
+    QFETCH(QString, string);
+    QFETCH(int, expected);
+    QCOMPARE(KStringHandler::logicalLength(string), expected);
+}
+

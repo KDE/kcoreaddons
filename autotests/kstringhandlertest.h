@@ -14,6 +14,8 @@ private Q_SLOTS:
     void obscure();
     void preProcessWrap_data();
     void preProcessWrap();
+    void logicalLength_data();
+    void logicalLength();
 
 private:
     static QString test;

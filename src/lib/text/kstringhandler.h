@@ -215,5 +215,15 @@ KCOREADDONS_EXPORT QString from8Bit(const char *str);
   @since 4.4
 */
 KCOREADDONS_EXPORT QString preProcessWrap(const QString &text);
+
+/**
+  Returns the length that reflects the density of information in the text. In
+  general the character from CJK languages are assigned with weight 2, while
+  other Latin characters are assigned with 1.
+
+  @since 5.41
+*/
+KCOREADDONS_EXPORT int logicalLength(const QString &text);
+
 }
 #endif

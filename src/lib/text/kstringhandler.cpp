@@ -26,6 +26,7 @@
 #include <QtCore/QRegExp>            // for the word ranges
 #include <QtCore/QCharRef>
 #include <QtCore/QMutableStringListIterator>
+#include <QtCore/QVector>
 
 //
 // Capitalization routines
@@ -339,3 +340,22 @@ QString KStringHandler::preProcessWrap(const QString &text)
     return result;
 }
 
+int KStringHandler::logicalLength(const QString& text)
+{
+    int length = 0;
+    auto chrs = text.toUcs4();
+    for (auto chr : chrs) {
+        auto script = QChar::script(chr);
+        if (script == QChar::Script_Han ||
+            script == QChar::Script_Hangul ||
+            script == QChar::Script_Hiragana ||
+            script == QChar::Script_Katakana ||
+            script == QChar::Script_Yi ||
+            QChar::isHighSurrogate(chr)) {
+            length += 2;
+        } else {
+            length += 1;
+        }
+    }
+    return length;
+}
