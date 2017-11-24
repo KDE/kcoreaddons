@@ -3763,6 +3763,10 @@ Notes:
   </mime-type>
   <mime-type type="application/vnd.kde.kcfg">
     <comment>KConfigXT Configuration Options</comment>
+    <comment xml:lang="ca">Opcions de configuració del KConfigXT</comment>
+    <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
+    <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
+    <comment xml:lang="uk">параметри налаштування KConfigXT</comment>
     <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
     <sub-class-of type="application/xml"/>
     <magic priority="80">
@@ -3773,12 +3777,20 @@ Notes:
   </mime-type>
   <mime-type type="application/vnd.kde.kcfgc">
     <comment>KConfigXT Code Generation Options</comment>
+    <comment xml:lang="ca">Opcions de generació de codi del KConfigXT</comment>
+    <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
+    <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
+    <comment xml:lang="uk">параметри створення коду KConfigXT</comment>
     <generic-icon name="text-plain"/>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.kcfgc"/>
   </mime-type>
   <mime-type type="application/vnd.kde.kxmlguirc">
     <comment>KXMLGUI UI Declaration</comment>
+    <comment xml:lang="ca">Declaració IU KXMLGUI</comment>
+    <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
+    <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
+    <comment xml:lang="uk">оголошення інтерфейсу KXMLGUI</comment>
     <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
     <sub-class-of type="application/xml"/>
     <magic priority="80">
@@ -3790,6 +3802,10 @@ Notes:
   </mime-type>
   <mime-type type="application/vnd.kde.knotificationrc">
     <comment>KNotification Declaration</comment>
+    <comment xml:lang="ca">Declaració del KNotification</comment>
+    <comment xml:lang="nl">Declaratie van KNotification</comment>
+    <comment xml:lang="pt">Declaração do KNotification</comment>
+    <comment xml:lang="uk">оголошення KNotification</comment>
     <generic-icon name="text-plain"/> <!-- placeholder until there is an own icon -->
     <sub-class-of type="text/plain"/>
     <glob pattern="*.notifyrc"/>
