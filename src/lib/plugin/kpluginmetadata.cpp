@@ -70,7 +70,12 @@ KPluginMetaData::KPluginMetaData(const QString &file)
             qCWarning(KCOREADDONS_DEBUG) << "Couldn't open" << file;
             return;
         }
-        m_metaData = QJsonDocument::fromJson(f.readAll()).object();
+
+        QJsonParseError error;
+        m_metaData = QJsonDocument::fromJson(f.readAll(), &error).object();
+        if (error.error) {
+            qCWarning(KCOREADDONS_DEBUG) << "error parsing" << file << error.errorString();
+        }
         m_fileName = file;
         d->metaDataFileName = file;
     } else {
