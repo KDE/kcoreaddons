@@ -3764,6 +3764,8 @@ Notes:
   <mime-type type="application/vnd.kde.kcfg">
     <comment>KConfigXT Configuration Options</comment>
     <comment xml:lang="ca">Opcions de configuració del KConfigXT</comment>
+    <comment xml:lang="ca@valencia">Opcions de configuració del KConfigXT</comment>
+    <comment xml:lang="es">Opciones de configuración de KConfigXT</comment>
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
     <comment xml:lang="uk">параметри налаштування KConfigXT</comment>
@@ -3778,6 +3780,8 @@ Notes:
   <mime-type type="application/vnd.kde.kcfgc">
     <comment>KConfigXT Code Generation Options</comment>
     <comment xml:lang="ca">Opcions de generació de codi del KConfigXT</comment>
+    <comment xml:lang="ca@valencia">Opcions de generació de codi del KConfigXT</comment>
+    <comment xml:lang="es">Opciones de generación de código de KConfigXT</comment>
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
     <comment xml:lang="uk">параметри створення коду KConfigXT</comment>
@@ -3788,6 +3792,8 @@ Notes:
   <mime-type type="application/vnd.kde.kxmlguirc">
     <comment>KXMLGUI UI Declaration</comment>
     <comment xml:lang="ca">Declaració IU KXMLGUI</comment>
+    <comment xml:lang="ca@valencia">Declaració IU KXMLGUI</comment>
+    <comment xml:lang="es">Declaración de interfaz de usuario de KXMLGUI</comment>
     <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
     <comment xml:lang="uk">оголошення інтерфейсу KXMLGUI</comment>
@@ -3803,6 +3809,8 @@ Notes:
   <mime-type type="application/vnd.kde.knotificationrc">
     <comment>KNotification Declaration</comment>
     <comment xml:lang="ca">Declaració del KNotification</comment>
+    <comment xml:lang="ca@valencia">Declaració del KNotification</comment>
+    <comment xml:lang="es">Declaración de KNotification</comment>
     <comment xml:lang="nl">Declaratie van KNotification</comment>
     <comment xml:lang="pt">Declaração do KNotification</comment>
     <comment xml:lang="uk">оголошення KNotification</comment>
