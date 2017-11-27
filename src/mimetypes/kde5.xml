@@ -3765,9 +3765,11 @@ Notes:
     <comment>KConfigXT Configuration Options</comment>
     <comment xml:lang="ca">Opcions de configuració del KConfigXT</comment>
     <comment xml:lang="ca@valencia">Opcions de configuració del KConfigXT</comment>
+    <comment xml:lang="en_GB">KConfigXT Configuration Options</comment>
     <comment xml:lang="es">Opciones de configuración de KConfigXT</comment>
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
+    <comment xml:lang="sv">KConfigXT-inställningsalternativ</comment>
     <comment xml:lang="uk">параметри налаштування KConfigXT</comment>
     <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
     <sub-class-of type="application/xml"/>
@@ -3781,9 +3783,11 @@ Notes:
     <comment>KConfigXT Code Generation Options</comment>
     <comment xml:lang="ca">Opcions de generació de codi del KConfigXT</comment>
     <comment xml:lang="ca@valencia">Opcions de generació de codi del KConfigXT</comment>
+    <comment xml:lang="en_GB">KConfigXT Code Generation Options</comment>
     <comment xml:lang="es">Opciones de generación de código de KConfigXT</comment>
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
+    <comment xml:lang="sv">KConfigXT-kodgenereringsalternativ</comment>
     <comment xml:lang="uk">параметри створення коду KConfigXT</comment>
     <generic-icon name="text-plain"/>
     <sub-class-of type="text/plain"/>
@@ -3793,9 +3797,11 @@ Notes:
     <comment>KXMLGUI UI Declaration</comment>
     <comment xml:lang="ca">Declaració IU KXMLGUI</comment>
     <comment xml:lang="ca@valencia">Declaració IU KXMLGUI</comment>
+    <comment xml:lang="en_GB">KXMLGUI UI Declaration</comment>
     <comment xml:lang="es">Declaración de interfaz de usuario de KXMLGUI</comment>
     <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
+    <comment xml:lang="sv">KXMLGUI-användargränssnittsdeklaration</comment>
     <comment xml:lang="uk">оголошення інтерфейсу KXMLGUI</comment>
     <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
     <sub-class-of type="application/xml"/>
@@ -3810,9 +3816,11 @@ Notes:
     <comment>KNotification Declaration</comment>
     <comment xml:lang="ca">Declaració del KNotification</comment>
     <comment xml:lang="ca@valencia">Declaració del KNotification</comment>
+    <comment xml:lang="en_GB">KNotification Declaration</comment>
     <comment xml:lang="es">Declaración de KNotification</comment>
     <comment xml:lang="nl">Declaratie van KNotification</comment>
     <comment xml:lang="pt">Declaração do KNotification</comment>
+    <comment xml:lang="sv">KNotification-deklaration</comment>
     <comment xml:lang="uk">оголошення KNotification</comment>
     <generic-icon name="text-plain"/> <!-- placeholder until there is an own icon -->
     <sub-class-of type="text/plain"/>
