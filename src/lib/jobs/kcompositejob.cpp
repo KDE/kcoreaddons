@@ -62,14 +62,14 @@ bool KCompositeJob::addSubjob(KJob *job)
 bool KCompositeJob::removeSubjob(KJob *job)
 {
     Q_D(KCompositeJob);
-    if (job == nullptr) {
-        return false;
+    // remove only Subjobs that are on the list
+    if (d->subjobs.removeAll(job) > 0) {
+        job->setParent(nullptr);
+        disconnect(job, &KJob::result, this, &KCompositeJob::slotResult);
+        disconnect(job, &KJob::infoMessage, this, &KCompositeJob::slotInfoMessage);
+        return true;
     }
-
-    job->setParent(nullptr);
-    d->subjobs.removeAll(job);
-
-    return true;
+    return false;
 }
 
 bool KCompositeJob::hasSubjobs() const
@@ -87,6 +87,8 @@ void KCompositeJob::clearSubjobs()
     Q_D(KCompositeJob);
     Q_FOREACH (KJob *job, d->subjobs) {
         job->setParent(nullptr);
+        disconnect(job, &KJob::result, this, &KCompositeJob::slotResult);
+        disconnect(job, &KJob::infoMessage, this, &KCompositeJob::slotInfoMessage);
     }
     d->subjobs.clear();
 }
@@ -98,9 +100,11 @@ void KCompositeJob::slotResult(KJob *job)
         // Store it in the parent only if first error
         setError(job->error());
         setErrorText(job->errorText());
+        // Finish this job
         emitResult();
     }
-
+    // After a subjob is done, we might want to start another one.
+    // Therefore do not emitResult
     removeSubjob(job);
 }
 
