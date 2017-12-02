@@ -41,14 +41,24 @@ private Q_SLOTS:
     void abortOnMeta();
 };
 
+// The expansion of ~me isn't exactly QDir::homePath(), in case $HOME has a trailing slash, it's kept.
+static QString myHomePath()
+{
+#ifdef Q_OS_WIN
+    return QDir::homePath();
+#else
+    return QString::fromLocal8Bit(qgetenv("HOME"));
+#endif
+}
+
 void
 KShellTest::tildeExpand()
 {
     QString me(KUser().loginName());
     QCOMPARE(KShell::tildeExpand("~"), QDir::homePath());
     QCOMPARE(KShell::tildeExpand("~/dir"), QString(QDir::homePath() + "/dir"));
-    QCOMPARE(KShell::tildeExpand('~' + me), QDir::homePath());
-    QCOMPARE(KShell::tildeExpand('~' + me + "/dir"), QString(QDir::homePath() + "/dir"));
+    QCOMPARE(KShell::tildeExpand('~' + me), myHomePath());
+    QCOMPARE(KShell::tildeExpand('~' + me + "/dir"), QString(myHomePath() + "/dir"));
 #ifdef Q_OS_WIN
     QCOMPARE(KShell::tildeExpand("^~" + me), QString('~' + me));
 #else
@@ -151,7 +161,7 @@ KShellTest::splitJoin()
     QVERIFY(err == KShell::NoError);
 
     QCOMPARE(sj("~qU4rK ~" + KUser().loginName(), KShell::TildeExpand, &err),
-             QString("'~qU4rK' " + QDir::homePath()));
+             QString("'~qU4rK' " + myHomePath()));
     QVERIFY(err == KShell::NoError);
 
     const QString unicodeSpaceFileName = "test　テスト.txt"; // #345140
