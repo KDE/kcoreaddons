@@ -3365,7 +3365,7 @@ Notes:
     <comment xml:lang="ja">Microsoft メディアフォーマット</comment>
     <comment xml:lang="kk">Microsoft Media Format</comment>
     <comment xml:lang="km">ទ្រង់ទ្រាយ​របស់ Microsoft Media</comment>
-    <comment xml:lang="ko">마이크로소프트 미디어 포맷</comment>
+    <comment xml:lang="ko">Microsoft 미디어 포맷</comment>
     <comment xml:lang="lt">Microsoft media formatas</comment>
     <comment xml:lang="lv">Microsoft Media formāts</comment>
     <comment xml:lang="ml">മൈക്രോസോഫ്റ്റ് മിഡിയ ഘടന</comment>
@@ -3768,7 +3768,10 @@ Notes:
     <comment xml:lang="da">Konfigurationsmuligheder til KConfigXT</comment>
     <comment xml:lang="en_GB">KConfigXT Configuration Options</comment>
     <comment xml:lang="es">Opciones de configuración de KConfigXT</comment>
+    <comment xml:lang="it">Opzioni di configurazione KConfigXT</comment>
+    <comment xml:lang="ko">KConfigXT 설정 옵션</comment>
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
+    <comment xml:lang="pl">Opcje KConfigXT</comment>
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
     <comment xml:lang="sv">KConfigXT-inställningsalternativ</comment>
     <comment xml:lang="uk">параметри налаштування KConfigXT</comment>
@@ -3787,7 +3790,10 @@ Notes:
     <comment xml:lang="da">Kodegenereringsmuligheder til KConfigXT</comment>
     <comment xml:lang="en_GB">KConfigXT Code Generation Options</comment>
     <comment xml:lang="es">Opciones de generación de código de KConfigXT</comment>
+    <comment xml:lang="it">Opzioni di generazione codice KConfigXT</comment>
+    <comment xml:lang="ko">KConfigXT 코드 생성 옵션</comment>
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
+    <comment xml:lang="pl">Opcje tworzenia kodu KConfigXT</comment>
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
     <comment xml:lang="sv">KConfigXT-kodgenereringsalternativ</comment>
     <comment xml:lang="uk">параметри створення коду KConfigXT</comment>
@@ -3802,7 +3808,10 @@ Notes:
     <comment xml:lang="da">KXMLGUI UI-erklæring</comment>
     <comment xml:lang="en_GB">KXMLGUI UI Declaration</comment>
     <comment xml:lang="es">Declaración de interfaz de usuario de KXMLGUI</comment>
+    <comment xml:lang="it">Dichiarazione UI KXMLGUI</comment>
+    <comment xml:lang="ko">KXMLGUI UI 선언</comment>
     <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
+    <comment xml:lang="pl">Dklaracja KXMLGUI UI</comment>
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
     <comment xml:lang="sv">KXMLGUI-användargränssnittsdeklaration</comment>
     <comment xml:lang="uk">оголошення інтерфейсу KXMLGUI</comment>
@@ -3822,7 +3831,10 @@ Notes:
     <comment xml:lang="da">KNotification-erklæring</comment>
     <comment xml:lang="en_GB">KNotification Declaration</comment>
     <comment xml:lang="es">Declaración de KNotification</comment>
+    <comment xml:lang="it">Dichiarazione KNotification</comment>
+    <comment xml:lang="ko">KNotification 선언</comment>
     <comment xml:lang="nl">Declaratie van KNotification</comment>
+    <comment xml:lang="pl">Deklaracja KNotification</comment>
     <comment xml:lang="pt">Declaração do KNotification</comment>
     <comment xml:lang="sv">KNotification-deklaration</comment>
     <comment xml:lang="uk">оголошення KNotification</comment>
