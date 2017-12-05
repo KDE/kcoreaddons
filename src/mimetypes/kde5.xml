@@ -3766,6 +3766,7 @@ Notes:
     <comment xml:lang="ca">Opcions de configuració del KConfigXT</comment>
     <comment xml:lang="ca@valencia">Opcions de configuració del KConfigXT</comment>
     <comment xml:lang="da">Konfigurationsmuligheder til KConfigXT</comment>
+    <comment xml:lang="de">KConfigXT-Einrichtungsoptionen</comment>
     <comment xml:lang="en_GB">KConfigXT Configuration Options</comment>
     <comment xml:lang="es">Opciones de configuración de KConfigXT</comment>
     <comment xml:lang="fi">KConfigXT Configuration Options</comment>
@@ -3789,6 +3790,7 @@ Notes:
     <comment xml:lang="ca">Opcions de generació de codi del KConfigXT</comment>
     <comment xml:lang="ca@valencia">Opcions de generació de codi del KConfigXT</comment>
     <comment xml:lang="da">Kodegenereringsmuligheder til KConfigXT</comment>
+    <comment xml:lang="de">KConfigXT-Optionen zur Quelltexterzeugung</comment>
     <comment xml:lang="en_GB">KConfigXT Code Generation Options</comment>
     <comment xml:lang="es">Opciones de generación de código de KConfigXT</comment>
     <comment xml:lang="fi">KConfigXT Code Generation Options</comment>
@@ -3808,6 +3810,7 @@ Notes:
     <comment xml:lang="ca">Declaració IU KXMLGUI</comment>
     <comment xml:lang="ca@valencia">Declaració IU KXMLGUI</comment>
     <comment xml:lang="da">KXMLGUI UI-erklæring</comment>
+    <comment xml:lang="de">KXMLGUI-UI-Deklaration</comment>
     <comment xml:lang="en_GB">KXMLGUI UI Declaration</comment>
     <comment xml:lang="es">Declaración de interfaz de usuario de KXMLGUI</comment>
     <comment xml:lang="fi">KXMLGUI UI Declaration</comment>
@@ -3832,6 +3835,7 @@ Notes:
     <comment xml:lang="ca">Declaració del KNotification</comment>
     <comment xml:lang="ca@valencia">Declaració del KNotification</comment>
     <comment xml:lang="da">KNotification-erklæring</comment>
+    <comment xml:lang="de">KNotification-Deklaration</comment>
     <comment xml:lang="en_GB">KNotification Declaration</comment>
     <comment xml:lang="es">Declaración de KNotification</comment>
     <comment xml:lang="fi">KNotification Declaration</comment>
