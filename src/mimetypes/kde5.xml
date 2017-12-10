@@ -3777,6 +3777,7 @@ Notes:
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
     <comment xml:lang="sv">KConfigXT-inställningsalternativ</comment>
     <comment xml:lang="uk">параметри налаштування KConfigXT</comment>
+    <comment xml:lang="zh_CN">KConfigXT 配置选项</comment>
     <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
     <sub-class-of type="application/xml"/>
     <magic priority="80">
@@ -3801,6 +3802,7 @@ Notes:
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
     <comment xml:lang="sv">KConfigXT-kodgenereringsalternativ</comment>
     <comment xml:lang="uk">параметри створення коду KConfigXT</comment>
+    <comment xml:lang="zh_CN">KConfigXT 代码生成选项</comment>
     <generic-icon name="text-plain"/>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.kcfgc"/>
@@ -3821,6 +3823,7 @@ Notes:
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
     <comment xml:lang="sv">KXMLGUI-användargränssnittsdeklaration</comment>
     <comment xml:lang="uk">оголошення інтерфейсу KXMLGUI</comment>
+    <comment xml:lang="zh_CN">KXMLGUI 用户界面声明</comment>
     <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
     <sub-class-of type="application/xml"/>
     <magic priority="80">
@@ -3846,6 +3849,7 @@ Notes:
     <comment xml:lang="pt">Declaração do KNotification</comment>
     <comment xml:lang="sv">KNotification-deklaration</comment>
     <comment xml:lang="uk">оголошення KNotification</comment>
+    <comment xml:lang="zh_CN">Knotification 声明</comment>
     <generic-icon name="text-plain"/> <!-- placeholder until there is an own icon -->
     <sub-class-of type="text/plain"/>
     <glob pattern="*.notifyrc"/>
