@@ -68,7 +68,7 @@ int DesktopToJson::runMain()
     }
 
 #pragma message("TODO: make it an error if one of the service type files is invalid or not found")
-    QStringList serviceTypes = m_parser->values(serviceTypesOption);
+    const QStringList serviceTypes = m_parser->values(serviceTypesOption);
     return convert(m_inFile, m_outFile, serviceTypes) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 

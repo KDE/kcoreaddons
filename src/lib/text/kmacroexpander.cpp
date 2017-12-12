@@ -34,14 +34,12 @@ KMacroExpanderBase::~KMacroExpanderBase()
     delete d;
 }
 
-void
-KMacroExpanderBase::setEscapeChar(QChar c)
+void KMacroExpanderBase::setEscapeChar(QChar c)
 {
     d->escapechar = c;
 }
 
-QChar
-KMacroExpanderBase::escapeChar() const
+QChar KMacroExpanderBase::escapeChar() const
 {
     return d->escapechar;
 }

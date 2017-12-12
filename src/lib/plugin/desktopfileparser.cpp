@@ -195,7 +195,7 @@ bool readUntilDesktopEntryGroup(QFile &file, const QString &path, int &lineNr)
     }
     // we only convert data inside the [Desktop Entry] group
     while (!file.atEnd()) {
-        QByteArray line = file.readLine().trimmed();
+        const QByteArray line = file.readLine().trimmed();
         lineNr++;
         if (line == "[Desktop Entry]") {
             return true;

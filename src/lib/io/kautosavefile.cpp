@@ -53,7 +53,7 @@ static QStringList findAllStales(const QString &appName)
     const QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
     QStringList files;
 
-    Q_FOREACH (const QString &dir, dirs) {
+    for (const QString &dir : dirs) {
         QDir appDir(dir + QStringLiteral("/stalefiles/") + appName);
         //qCDebug(KCOREADDONS_DEBUG) << "Looking in" << appDir.absolutePath();
         Q_FOREACH (const QString &file, appDir.entryList(QDir::Files)) {
@@ -194,7 +194,7 @@ QList<KAutoSaveFile *> KAutoSaveFile::staleFiles(const QUrl &filename, const QSt
     QList<KAutoSaveFile *> list;
 
     // contruct a KAutoSaveFile for stale files corresponding given filename
-    Q_FOREACH (const QString &file, files) {
+    for (const QString &file : files) {
         if (file.endsWith(QLatin1String(".lock")) || (!filename.isEmpty() && extractManagedFilePath(file).path()!=filename.path())) {
             continue;
         }
