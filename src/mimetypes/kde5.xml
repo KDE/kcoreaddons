@@ -61,7 +61,7 @@ Notes:
     <comment xml:lang="pa">ਮੇਟਾਲਿੰਕ ਡਾਊਨਲੋਡ</comment>
     <comment xml:lang="pl">Pobieranie Metalink</comment>
     <comment xml:lang="pt">Transferência do Metalink</comment>
-    <comment xml:lang="pt_BR">Transferência do Metalink</comment>
+    <comment xml:lang="pt_BR">Download do metalink</comment>
     <comment xml:lang="ro">Descărcare Metalink</comment>
     <comment xml:lang="ru">метассылка</comment>
     <comment xml:lang="se">Metalink-viežžan</comment>
@@ -3776,6 +3776,7 @@ Notes:
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
     <comment xml:lang="pl">Opcje KConfigXT</comment>
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
+    <comment xml:lang="pt_BR">Opções de configuração do KConfigXT</comment>
     <comment xml:lang="sv">KConfigXT-inställningsalternativ</comment>
     <comment xml:lang="uk">параметри налаштування KConfigXT</comment>
     <comment xml:lang="zh_CN">KConfigXT 配置选项</comment>
@@ -3802,6 +3803,7 @@ Notes:
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
     <comment xml:lang="pl">Opcje tworzenia kodu KConfigXT</comment>
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
+    <comment xml:lang="pt_BR">Opções de geração de código do KConfigXT</comment>
     <comment xml:lang="sv">KConfigXT-kodgenereringsalternativ</comment>
     <comment xml:lang="uk">параметри створення коду KConfigXT</comment>
     <comment xml:lang="zh_CN">KConfigXT 代码生成选项</comment>
@@ -3824,6 +3826,7 @@ Notes:
     <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
     <comment xml:lang="pl">Dklaracja KXMLGUI UI</comment>
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
+    <comment xml:lang="pt_BR">Declaração UI do KXMLGUI</comment>
     <comment xml:lang="sv">KXMLGUI-användargränssnittsdeklaration</comment>
     <comment xml:lang="uk">оголошення інтерфейсу KXMLGUI</comment>
     <comment xml:lang="zh_CN">KXMLGUI 用户界面声明</comment>
@@ -3851,6 +3854,7 @@ Notes:
     <comment xml:lang="nl">Declaratie van KNotification</comment>
     <comment xml:lang="pl">Deklaracja KNotification</comment>
     <comment xml:lang="pt">Declaração do KNotification</comment>
+    <comment xml:lang="pt_BR">Declaração do KNotification</comment>
     <comment xml:lang="sv">KNotification-deklaration</comment>
     <comment xml:lang="uk">оголошення KNotification</comment>
     <comment xml:lang="zh_CN">Knotification 声明</comment>
