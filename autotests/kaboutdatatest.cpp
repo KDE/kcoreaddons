@@ -322,6 +322,19 @@ void KAboutDataTest::testLicenseSPDXID()
     // Input without should output without.
     license = KAboutLicense::byKeyword(QStringLiteral("GPLv2"));
     QCOMPARE(license.spdx(), QStringLiteral("GPL-2.0"));
+
+    //we should be able to match by spdx too
+    //create a KAboutLicense from enum, then make sure going to spdx and back gives the same enum
+    for(int i = 1; i < KAboutLicense::LGPL_V2_1 ; i++) { /*current highest enum value*/
+        KAboutData aboutData(AppName, QLatin1String(ProgramName), Version,
+                                    QLatin1String(ShortDescription), KAboutLicense::GPL_V2);
+        aboutData.setLicense(KAboutLicense::LicenseKey(i));
+        QVERIFY(aboutData.licenses().count() == 1);
+        auto license = aboutData.licenses()[0];
+        auto licenseFromKeyword = KAboutLicense::byKeyword(license.spdx());
+
+        QCOMPARE(license.key(), licenseFromKeyword.key());
+    }
 }
 
 void KAboutDataTest::testLicenseOrLater()

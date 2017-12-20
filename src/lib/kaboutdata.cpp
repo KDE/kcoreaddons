@@ -410,18 +410,29 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
         { "gpl", KAboutLicense::GPL },
         { "gplv2", KAboutLicense::GPL_V2 },
         { "gplv2+", KAboutLicense::GPL_V2 },
+        { "gpl20", KAboutLicense::GPL_V2 },
+        { "gpl20+", KAboutLicense::GPL_V2 },
         { "lgpl", KAboutLicense::LGPL },
         { "lgplv2", KAboutLicense::LGPL_V2 },
         { "lgplv2+", KAboutLicense::LGPL_V2 },
+        { "lgpl20", KAboutLicense::LGPL_V2 },
+        { "lgpl20+", KAboutLicense::LGPL_V2 },
         { "bsd", KAboutLicense::BSDL },
+        { "bsd2clause", KAboutLicense::BSDL },
         { "artistic", KAboutLicense::Artistic },
+        { "artistic10", KAboutLicense::Artistic },
         { "qpl", KAboutLicense::QPL },
         { "qplv1", KAboutLicense::QPL_V1_0 },
         { "qplv10", KAboutLicense::QPL_V1_0 },
+        { "qpl10", KAboutLicense::QPL_V1_0 },
         { "gplv3", KAboutLicense::GPL_V3 },
         { "gplv3+", KAboutLicense::GPL_V3 },
+        { "gpl30", KAboutLicense::GPL_V3 },
+        { "gpl30+", KAboutLicense::GPL_V3 },
         { "lgplv3", KAboutLicense::LGPL_V3 },
         { "lgplv3+", KAboutLicense::LGPL_V3 },
+        { "lgpl30", KAboutLicense::LGPL_V3 },
+        { "lgpl30+", KAboutLicense::LGPL_V3 },
         { "lgplv21", KAboutLicense::LGPL_V2_1 },
         { "lgplv21+", KAboutLicense::LGPL_V2_1 }
     };
@@ -431,6 +442,7 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
     keyword = keyword.toLower();
     keyword.remove(QLatin1Char(' '));
     keyword.remove(QLatin1Char('.'));
+    keyword.remove(QLatin1Char('-'));
 
     LicenseKey license = licenseDict.value(keyword.toLatin1(),
                                            KAboutLicense::Custom);

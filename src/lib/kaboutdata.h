@@ -269,7 +269,7 @@ public:
     QString spdx() const;
 
     /**
-     * Fetch a known license by a keyword.
+     * Fetch a known license by a keyword/spdx ID
      *
      * Frequently the license data is provided by a terse keyword-like string,
      * e.g. by a field in a .desktop file. Using this method, an application
