@@ -151,9 +151,7 @@ static const int s_maxTries = 50;
 void KDirWatch_UnitTest::createFile(const QString &path)
 {
     QFile file(path);
-    bool ok = file.open(QIODevice::WriteOnly);
-    Q_UNUSED(ok) // silence warnings
-    Q_ASSERT(ok);
+    QVERIFY(file.open(QIODevice::WriteOnly));
     file.write(QByteArray("foo"));
     file.close();
     //qDebug() << path;
