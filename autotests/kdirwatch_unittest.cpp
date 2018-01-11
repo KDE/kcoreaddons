@@ -116,6 +116,9 @@ private Q_SLOTS: // test methods
     void testHardlinkChange();
     void stopAndRestart();
     void shouldIgnoreQrcPaths();
+    void benchCreateTree();
+    void benchCreateWatcher();
+    void benchNotifyWatcher();
 
 protected Q_SLOTS: // internal slots
     void nestedEventLoopSlot();
@@ -134,6 +137,7 @@ private:
     void removeFile(int num);
     void appendToFile(const QString &path);
     void appendToFile(int num);
+    int createDirectoryTree(const QString &path, int depth = 4);
 
     QTemporaryDir m_tempDir;
     QString m_path;
@@ -170,6 +174,30 @@ void KDirWatch_UnitTest::removeFile(int num)
 {
     const QString fileName = QLatin1String(s_filePrefix) + QString::number(num);
     QFile::remove(m_path + fileName);
+}
+
+int KDirWatch_UnitTest::createDirectoryTree(const QString& basePath, int depth)
+{
+    int filesCreated = 0;
+
+    const int numFiles = 10;
+    for (int i = 0; i < numFiles; ++i) {
+        createFile(basePath + QLatin1Char('/') + s_filePrefix + QString::number(i));
+        ++filesCreated;
+    }
+
+    if (depth <= 0) {
+        return filesCreated;
+    }
+
+    const int numFolders = 5;
+    for (int i = 0; i < numFolders; ++i) {
+        const QString childPath = basePath + QLatin1String("/subdir") + QString::number(i);
+        QDir().mkdir(childPath);
+        filesCreated += createDirectoryTree(childPath, depth - 1);
+    }
+
+    return filesCreated;
 }
 
 void KDirWatch_UnitTest::waitUntilMTimeChange(const QString &path)
@@ -772,6 +800,45 @@ void KDirWatch_UnitTest::shouldIgnoreQrcPaths()
     QVERIFY(dirtySpy.count() > 0);
     QVERIFY(file.remove());
     QVERIFY(QDir::setCurrent(oldCwd));
+}
+
+void KDirWatch_UnitTest::benchCreateTree()
+{
+    QTemporaryDir dir;
+
+    QBENCHMARK {
+        createDirectoryTree(dir.path());
+    }
+}
+
+void KDirWatch_UnitTest::benchCreateWatcher()
+{
+    QTemporaryDir dir;
+    createDirectoryTree(dir.path());
+
+    QBENCHMARK {
+        KDirWatch watch;
+        watch.addDir(dir.path(), KDirWatch::WatchSubDirs | KDirWatch:: WatchFiles);
+    }
+}
+
+void KDirWatch_UnitTest::benchNotifyWatcher()
+{
+    QTemporaryDir dir;
+    // create the dir once upfront
+    auto numFiles = createDirectoryTree(dir.path());
+    waitUntilMTimeChange(dir.path());
+
+    KDirWatch watch;
+    watch.addDir(dir.path(), KDirWatch::WatchSubDirs | KDirWatch:: WatchFiles);
+
+    // now touch all the files repeatedly and wait for the dirty updates to come in
+    QSignalSpy spy(&watch, &KDirWatch::dirty);
+    QBENCHMARK {
+        createDirectoryTree(dir.path());
+        QTRY_COMPARE_WITH_TIMEOUT(spy.count(), numFiles, s_maxTries * 50);
+        spy.clear();
+    }
 }
 
 #include "kdirwatch_unittest.moc"
