@@ -221,6 +221,7 @@ public:
     QSocketNotifier *mSn;
     bool supports_inotify;
     int m_inotify_fd;
+    QHash<int, Entry *> m_inotify_wd_to_entry;
 
     bool useINotify(Entry *e);
 #endif
