@@ -91,6 +91,9 @@ public:
 private Q_SLOTS: // test methods
     void initTestCase()
     {
+        QFileInfo pathInfo(m_path);
+        QVERIFY(pathInfo.isDir() && pathInfo.isWritable());
+
         // By creating the files upfront, we save waiting a full second for an mtime change
         createFile(m_path + QLatin1String("ExistingFile"));
         createFile(m_path + QLatin1String("TestFile"));
