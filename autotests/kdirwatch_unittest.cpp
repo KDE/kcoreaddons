@@ -258,7 +258,7 @@ QList<QVariantList> KDirWatch_UnitTest::waitForDirtySignal(KDirWatch &watch, int
             qWarning() << "Timeout waiting for KDirWatch. Got" << spyDirty.count() << "dirty() signals, expected" << expected;
             return spyDirty;
         }
-        QTest::qWait(50);
+        spyDirty.wait(50);
     }
     return spyDirty;
 }
@@ -275,7 +275,7 @@ bool KDirWatch_UnitTest::waitForOneSignal(KDirWatch &watch, const char *sig, con
                 qWarning() << "Timeout waiting for KDirWatch signal" << QByteArray(sig).mid(1) << "(" << path << ")";
                 return false;
             }
-            QTest::qWait(50);
+            spyDirty.wait(50);
         }
         return verifySignalPath(spyDirty, sig, expectedPath);
     }
@@ -332,7 +332,7 @@ QList<QVariantList> KDirWatch_UnitTest::waitForDeletedSignal(KDirWatch &watch, i
             qWarning() << "Timeout waiting for KDirWatch. Got" << spyDeleted.count() << "deleted() signals, expected" << expected;
             return spyDeleted;
         }
-        QTest::qWait(50);
+        spyDeleted.wait(50);
     }
     return spyDeleted;
 }
