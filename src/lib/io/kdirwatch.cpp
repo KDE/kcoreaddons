@@ -1405,16 +1405,28 @@ void KDirWatchPrivate::emitEvent(Entry *e, int event, const QString &fileName)
         // Emit the signals delayed, to avoid unexpected re-entrancy from the slots (#220153)
 
         if (event & Deleted) {
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
             QMetaObject::invokeMethod(c.instance, "setDeleted", Qt::QueuedConnection, Q_ARG(QString, path));
+#else
+            QMetaObject::invokeMethod(c.instance, [c, path]() { c.instance->setDeleted(path); }, Qt::QueuedConnection);
+#endif
         }
 
         if (event & Created) {
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
             QMetaObject::invokeMethod(c.instance, "setCreated", Qt::QueuedConnection, Q_ARG(QString, path));
+#else
+            QMetaObject::invokeMethod(c.instance, [c, path]() { c.instance->setCreated(path); }, Qt::QueuedConnection);
+#endif
             // possible emit Change event after creation
         }
 
         if (event & Changed) {
+#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
             QMetaObject::invokeMethod(c.instance, "setDirty", Qt::QueuedConnection, Q_ARG(QString, path));
+#else
+            QMetaObject::invokeMethod(c.instance, [c, path]() { c.instance->setDirty(path); }, Qt::QueuedConnection);
+#endif
         }
     }
 }
