@@ -3771,6 +3771,7 @@ Notes:
     <comment xml:lang="es">Opciones de configuración de KConfigXT</comment>
     <comment xml:lang="fi">KConfigXT Configuration Options</comment>
     <comment xml:lang="fr">Options de configuration de KConfigXT</comment>
+    <comment xml:lang="gl">Opcións de configuración de KConfigXT</comment>
     <comment xml:lang="it">Opzioni di configurazione KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 설정 옵션</comment>
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
@@ -3802,6 +3803,7 @@ Notes:
     <comment xml:lang="es">Opciones de generación de código de KConfigXT</comment>
     <comment xml:lang="fi">KConfigXT Code Generation Options</comment>
     <comment xml:lang="fr">Options de génération de code de KConfigXT</comment>
+    <comment xml:lang="gl">Opcións de xeración de código de KConfigXT</comment>
     <comment xml:lang="it">Opzioni di generazione codice KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 코드 생성 옵션</comment>
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
@@ -3829,6 +3831,7 @@ Notes:
     <comment xml:lang="es">Declaración de interfaz de usuario de KXMLGUI</comment>
     <comment xml:lang="fi">KXMLGUI UI Declaration</comment>
     <comment xml:lang="fr">Déclaration d'interface KXMLGUI</comment>
+    <comment xml:lang="gl">Declaración de interface gráfica de KXMLGUI</comment>
     <comment xml:lang="it">Dichiarazione UI KXMLGUI</comment>
     <comment xml:lang="ko">KXMLGUI UI 선언</comment>
     <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
@@ -3861,6 +3864,7 @@ Notes:
     <comment xml:lang="es">Declaración de KNotification</comment>
     <comment xml:lang="fi">KNotification Declaration</comment>
     <comment xml:lang="fr">Déclaration de KNotification</comment>
+    <comment xml:lang="gl">Declaración de KNotification</comment>
     <comment xml:lang="it">Dichiarazione KNotification</comment>
     <comment xml:lang="ko">KNotification 선언</comment>
     <comment xml:lang="nl">Declaratie van KNotification</comment>
