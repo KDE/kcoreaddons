@@ -3778,6 +3778,7 @@ Notes:
     <comment xml:lang="pl">Opcje KConfigXT</comment>
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de configuração do KConfigXT</comment>
+    <comment xml:lang="sl">Nastavitvene možnosti KConfigXT</comment>
     <comment xml:lang="sr">поставне опције К‑конфиг‑ИксТ‑а</comment>
     <comment xml:lang="sr@ijekavian">поставне опције К‑конфиг‑ИксТ‑а</comment>
     <comment xml:lang="sr@ijekavianlatin">postavne opcije KConfigXT‑a</comment>
@@ -3810,6 +3811,7 @@ Notes:
     <comment xml:lang="pl">Opcje tworzenia kodu KConfigXT</comment>
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de geração de código do KConfigXT</comment>
+    <comment xml:lang="sl">Možnosti ustvarjanja kode KConfigXT</comment>
     <comment xml:lang="sr">опције генерисања кода К‑конфиг‑ИксТ‑а</comment>
     <comment xml:lang="sr@ijekavian">опције генерисања кода К‑конфиг‑ИксТ‑а</comment>
     <comment xml:lang="sr@ijekavianlatin">opcije generisanja koda KConfigXT‑a</comment>
@@ -3838,6 +3840,7 @@ Notes:
     <comment xml:lang="pl">Dklaracja KXMLGUI UI</comment>
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
     <comment xml:lang="pt_BR">Declaração UI do KXMLGUI</comment>
+    <comment xml:lang="sl">Deklaracija uporabniškega vmesnika KXMLGUI</comment>
     <comment xml:lang="sr">декларације за KXmlGui</comment>
     <comment xml:lang="sr@ijekavian">декларације за KXmlGui</comment>
     <comment xml:lang="sr@ijekavianlatin">deklaracije za KXmlGui</comment>
@@ -3871,6 +3874,7 @@ Notes:
     <comment xml:lang="pl">Deklaracja KNotification</comment>
     <comment xml:lang="pt">Declaração do KNotification</comment>
     <comment xml:lang="pt_BR">Declaração do KNotification</comment>
+    <comment xml:lang="sl">Deklaracija KNotification</comment>
     <comment xml:lang="sr">декларације за KNotification</comment>
     <comment xml:lang="sr@ijekavian">декларације за KNotification</comment>
     <comment xml:lang="sr@ijekavianlatin">deklaracije za KNotification</comment>
