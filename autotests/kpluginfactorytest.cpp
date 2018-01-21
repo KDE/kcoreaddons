@@ -31,11 +31,11 @@ class KPluginFactoryTest : public QObject
 private Q_SLOTS:
     void testCreate()
     {
-        KPluginLoader multiplugin("multiplugin");
+        KPluginLoader multiplugin(QStringLiteral("multiplugin"));
         KPluginFactory *factory = multiplugin.factory();
         QVERIFY(factory);
         QVariantList args;
-        args << "Some" << "args" << 5;
+        args << QStringLiteral("Some") << QStringLiteral("args") << 5;
 
         QObject *obj = factory->create<QObject>(this, args);
         QVERIFY(obj);
@@ -48,11 +48,11 @@ private Q_SLOTS:
         delete obj;
         delete obj2;
 
-        obj = factory->create<QObject>("secondary", this, args);
+        obj = factory->create<QObject>(QStringLiteral("secondary"), this, args);
         QVERIFY(obj);
         QCOMPARE(obj->objectName(), QString::fromLatin1("MultiPlugin2"));
 
-        obj2 = factory->create<QObject>("secondary", this, args);
+        obj2 = factory->create<QObject>(QStringLiteral("secondary"), this, args);
         QVERIFY(obj2);
         QCOMPARE(obj2->objectName(), QString::fromLatin1("MultiPlugin2"));
         QVERIFY(obj != obj2);

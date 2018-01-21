@@ -46,7 +46,7 @@ class KPluginMetaDataTest : public QObject
 private Q_SLOTS:
     void testFromPluginLoader()
     {
-        QString location = KPluginLoader::findPlugin("jsonplugin");
+        QString location = KPluginLoader::findPlugin(QStringLiteral("jsonplugin"));
         QVERIFY2(!location.isEmpty(),"Could not find jsonplugin");
 
         // now that this file is translated we need to read it instead of hardcoding the contents here
@@ -60,10 +60,10 @@ private Q_SLOTS:
 
         location = QFileInfo(location).absoluteFilePath();
 
-        KPluginMetaData fromQPluginLoader(QPluginLoader("jsonplugin"));
-        KPluginMetaData fromKPluginLoader(KPluginLoader("jsonplugin"));
+        KPluginMetaData fromQPluginLoader(QPluginLoader(QStringLiteral("jsonplugin")));
+        KPluginMetaData fromKPluginLoader(KPluginLoader(QStringLiteral("jsonplugin")));
         KPluginMetaData fromFullPath(location);
-        KPluginMetaData fromRelativePath("jsonplugin");
+        KPluginMetaData fromRelativePath(QStringLiteral("jsonplugin"));
         KPluginMetaData fromRawData(jsonDoc.object(), location);
 
         auto description = QStringLiteral("This is a plugin");
@@ -107,25 +107,25 @@ private Q_SLOTS:
     {
         QJsonParseError e;
         QJsonObject jo = QJsonDocument::fromJson("{\n"
-            " \"KPlugin\": {\n"
-                " \"Name\": \"Date and Time\",\n"
-                " \"Description\": \"Date and time by timezone\",\n"
-                " \"Icon\": \"preferences-system-time\",\n"
-                " \"Authors\": { \"Name\": \"Aaron Seigo\", \"Email\": \"aseigo@kde.org\" },\n"
-                " \"Translators\": { \"Name\": \"No One\", \"Email\": \"no.one@kde.org\" },\n"
-                " \"OtherContributors\": { \"Name\": \"No One\", \"Email\": \"no.one@kde.org\" },\n"
-                " \"Category\": \"Date and Time\",\n"
-                " \"Dependencies\": [ \"foo\", \"bar\"],\n"
-                " \"EnabledByDefault\": \"true\",\n"
-                " \"ExtraInformation\": \"Something else\",\n"
-                " \"License\": \"LGPL\",\n"
-                " \"Copyright\": \"(c) Alex Richardson 2015\",\n"
-                " \"Id\": \"time\",\n"
-                " \"Version\": \"1.0\",\n"
-                " \"Website\": \"https://plasma.kde.org/\",\n"
-                " \"MimeTypes\": [ \"image/png\" ],\n"
-                " \"ServiceTypes\": [\"Plasma/DataEngine\"]\n"
-            " }\n}\n", &e).object();
+                                                 " \"KPlugin\": {\n"
+                                                 " \"Name\": \"Date and Time\",\n"
+                                                 " \"Description\": \"Date and time by timezone\",\n"
+                                                 " \"Icon\": \"preferences-system-time\",\n"
+                                                 " \"Authors\": { \"Name\": \"Aaron Seigo\", \"Email\": \"aseigo@kde.org\" },\n"
+                                                 " \"Translators\": { \"Name\": \"No One\", \"Email\": \"no.one@kde.org\" },\n"
+                                                 " \"OtherContributors\": { \"Name\": \"No One\", \"Email\": \"no.one@kde.org\" },\n"
+                                                 " \"Category\": \"Date and Time\",\n"
+                                                 " \"Dependencies\": [ \"foo\", \"bar\"],\n"
+                                                 " \"EnabledByDefault\": \"true\",\n"
+                                                 " \"ExtraInformation\": \"Something else\",\n"
+                                                 " \"License\": \"LGPL\",\n"
+                                                 " \"Copyright\": \"(c) Alex Richardson 2015\",\n"
+                                                 " \"Id\": \"time\",\n"
+                                                 " \"Version\": \"1.0\",\n"
+                                                 " \"Website\": \"https://plasma.kde.org/\",\n"
+                                                 " \"MimeTypes\": [ \"image/png\" ],\n"
+                                                 " \"ServiceTypes\": [\"Plasma/DataEngine\"]\n"
+                                                 " }\n}\n", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
         KPluginMetaData m(jo, QString());
         QVERIFY(m.isValid());
@@ -135,7 +135,7 @@ private Q_SLOTS:
         QCOMPARE(m.extraInformation(), QStringLiteral("Something else"));
         QCOMPARE(m.iconName(), QStringLiteral("preferences-system-time"));
         QCOMPARE(m.category(), QStringLiteral("Date and Time"));
-        QCOMPARE(m.dependencies(), QStringList() << "foo" << "bar");
+        QCOMPARE(m.dependencies(), QStringList() << QStringLiteral("foo") << QStringLiteral("bar"));
         QCOMPARE(m.authors().size(), 1);
         QCOMPARE(m.authors()[0].name(), QStringLiteral("Aaron Seigo"));
         QCOMPARE(m.authors()[0].emailAddress(), QStringLiteral("aseigo@kde.org"));
@@ -158,27 +158,27 @@ private Q_SLOTS:
     {
         QJsonParseError e;
         QJsonObject jo = QJsonDocument::fromJson("{ \"KPlugin\": {\n"
-            "\"Name\": \"Name\",\n"
-            "\"Name[de]\": \"Name (de)\",\n"
-            "\"Name[de_DE]\": \"Name (de_DE)\",\n"
-            "\"Description\": \"Description\",\n"
-            "\"Description[de]\": \"Beschreibung (de)\",\n"
-            "\"Description[de_DE]\": \"Beschreibung (de_DE)\"\n"
-            "}\n}", &e).object();
+                                                 "\"Name\": \"Name\",\n"
+                                                 "\"Name[de]\": \"Name (de)\",\n"
+                                                 "\"Name[de_DE]\": \"Name (de_DE)\",\n"
+                                                 "\"Description\": \"Description\",\n"
+                                                 "\"Description[de]\": \"Beschreibung (de)\",\n"
+                                                 "\"Description[de_DE]\": \"Beschreibung (de_DE)\"\n"
+                                                 "}\n}", &e).object();
         KPluginMetaData m(jo, QString());
         QLocale::setDefault(QLocale::c());
         QCOMPARE(m.name(), QStringLiteral("Name"));
         QCOMPARE(m.description(), QStringLiteral("Description"));
 
-        QLocale::setDefault(QLocale("de_DE"));
+        QLocale::setDefault(QLocale(QStringLiteral("de_DE")));
         QCOMPARE(m.name(), QStringLiteral("Name (de_DE)"));
         QCOMPARE(m.description(), QStringLiteral("Beschreibung (de_DE)"));
 
-        QLocale::setDefault(QLocale("de_CH"));
+        QLocale::setDefault(QLocale(QStringLiteral("de_CH")));
         QCOMPARE(m.name(), QStringLiteral("Name (de)"));
         QCOMPARE(m.description(), QStringLiteral("Beschreibung (de)"));
 
-        QLocale::setDefault(QLocale("fr_FR"));
+        QLocale::setDefault(QLocale(QStringLiteral("fr_FR")));
         QCOMPARE(m.name(), QStringLiteral("Name"));
         QCOMPARE(m.description(), QStringLiteral("Description"));
     }
@@ -187,42 +187,42 @@ private Q_SLOTS:
     {
         QJsonParseError e;
         QJsonObject jo = QJsonDocument::fromJson("{\n"
-            "\"String\": \"foo\",\n"
-            "\"OneArrayEntry\": [ \"foo\" ],\n"
-            "\"Bool\": true,\n" // make sure booleans are accepted
-            "\"QuotedBool\": \"true\",\n" // make sure booleans are accepted
-            "\"Number\": 12345,\n" // number should also work
-            "\"QuotedNumber\": \"12345\",\n" // number should also work
-            "\"EmptyArray\": [],\n"
-            "\"NumberArray\": [1, 2, 3],\n"
-            "\"BoolArray\": [true, false, true],\n"
-            "\"StringArray\": [\"foo\", \"bar\"],\n"
-            "\"Null\": null,\n" // should return empty list
-            "\"QuotedNull\": \"null\",\n" // this is okay, it is a string
-            "\"ArrayWithNull\": [ \"foo\", null, \"bar\"],\n" // TODO: null is converted to empty string, is this okay?
-            "\"Object\": { \"foo\": \"bar\" }\n" // should return empty list
-            "}", &e).object();
+                                                 "\"String\": \"foo\",\n"
+                                                 "\"OneArrayEntry\": [ \"foo\" ],\n"
+                                                 "\"Bool\": true,\n" // make sure booleans are accepted
+                                                 "\"QuotedBool\": \"true\",\n" // make sure booleans are accepted
+                                                 "\"Number\": 12345,\n" // number should also work
+                                                 "\"QuotedNumber\": \"12345\",\n" // number should also work
+                                                 "\"EmptyArray\": [],\n"
+                                                 "\"NumberArray\": [1, 2, 3],\n"
+                                                 "\"BoolArray\": [true, false, true],\n"
+                                                 "\"StringArray\": [\"foo\", \"bar\"],\n"
+                                                 "\"Null\": null,\n" // should return empty list
+                                                 "\"QuotedNull\": \"null\",\n" // this is okay, it is a string
+                                                 "\"ArrayWithNull\": [ \"foo\", null, \"bar\"],\n" // TODO: null is converted to empty string, is this okay?
+                                                 "\"Object\": { \"foo\": \"bar\" }\n" // should return empty list
+                                                 "}", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
         QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"String\" to be a string list. Treating it as a list with a single entry: \"foo\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "String"), QStringList("foo"));
-        QCOMPARE(KPluginMetaData::readStringList(jo, "OneArrayEntry"), QStringList("foo"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("String")), QStringList(QStringLiteral("foo")));;
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("OneArrayEntry")), QStringList(QStringLiteral("foo")));
         QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"Bool\" to be a string list. Treating it as a list with a single entry: \"true\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "Bool"), QStringList("true"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Bool")), QStringList(QStringLiteral("true")));
         QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"QuotedBool\" to be a string list. Treating it as a list with a single entry: \"true\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "QuotedBool"), QStringList("true"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("QuotedBool")), QStringList(QStringLiteral("true")));
         QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"Number\" to be a string list. Treating it as a list with a single entry: \"12345\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "Number"), QStringList("12345"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Number")), QStringList(QStringLiteral("12345")));
         QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"QuotedNumber\" to be a string list. Treating it as a list with a single entry: \"12345\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "QuotedNumber"), QStringList("12345"));
-        QCOMPARE(KPluginMetaData::readStringList(jo, "EmptyArray"), QStringList());
-        QCOMPARE(KPluginMetaData::readStringList(jo, "NumberArray"), QStringList() << "1" << "2" << "3");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "BoolArray"), QStringList() << "true" << "false" << "true");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "StringArray"), QStringList() << "foo" << "bar");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "Null"), QStringList());
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("QuotedNumber")), QStringList(QStringLiteral("12345")));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("EmptyArray")), QStringList());
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("NumberArray")), QStringList() << QStringLiteral("1") << QStringLiteral("2") << QStringLiteral("3"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("BoolArray")), QStringList() << QStringLiteral("true") << QStringLiteral("false") << QStringLiteral("true"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("StringArray")), QStringList() << QStringLiteral("foo") << QStringLiteral("bar"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Null")), QStringList());
         QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"QuotedNull\" to be a string list. Treating it as a list with a single entry: \"null\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "QuotedNull"), QStringList("null"));
-        QCOMPARE(KPluginMetaData::readStringList(jo, "ArrayWithNull"), QStringList() << "foo" << "" << "bar");
-        QCOMPARE(KPluginMetaData::readStringList(jo, "Object"), QStringList());
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("QuotedNull")), QStringList(QStringLiteral("null")));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("ArrayWithNull")), QStringList() << QStringLiteral("foo") << QStringLiteral("") << QStringLiteral("bar"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Object")), QStringList());
     }
 
     void testFromDesktopFile()
@@ -240,13 +240,13 @@ private Q_SLOTS:
         QCOMPARE(md.version(), QStringLiteral("1.0"));
         QCOMPARE(md.dependencies(), QStringList());
         QCOMPARE(md.isHidden(), false);
-        QCOMPARE(md.serviceTypes(), QStringList("KService/NSA"));
-        QCOMPARE(md.mimeTypes(), QStringList() << "image/png" << "application/pdf");
+        QCOMPARE(md.serviceTypes(), QStringList(QStringLiteral("KService/NSA")));
+        QCOMPARE(md.mimeTypes(), QStringList() << QStringLiteral("image/png") << QStringLiteral("application/pdf"));
 
-        auto kp = md.rawData()["KPlugin"].toObject();
+        auto kp = md.rawData()[QStringLiteral("KPlugin")].toObject();
         QStringList formFactors = KPluginMetaData::readStringList(kp, QStringLiteral("FormFactors"));
-        QCOMPARE(formFactors, QStringList() << "mediacenter" << "desktop");
-        QCOMPARE(md.formFactors(), QStringList() << "mediacenter" << "desktop");
+        QCOMPARE(formFactors, QStringList() << QStringLiteral("mediacenter") << QStringLiteral("desktop"));
+        QCOMPARE(md.formFactors(), QStringList() << QStringLiteral("mediacenter") << QStringLiteral("desktop"));
 
         const QString dfilehidden = QFINDTESTDATA("data/hiddenplugin.desktop");
         KPluginMetaData mdhidden(dfilehidden);
@@ -284,17 +284,17 @@ private Q_SLOTS:
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Example"));
-        QCOMPARE(md.serviceTypes(), QStringList() << "foo/bar" << "bar/foo");
+        QCOMPARE(md.serviceTypes(), QStringList() << QStringLiteral("foo/bar") << QStringLiteral("bar/foo"));
         // qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
         QCOMPARE(md.rawData().size(), 8);
-        QVERIFY(md.rawData().value("KPlugin").isObject());
-        QCOMPARE(md.rawData().value("X-Test-Integer"), QJsonValue(42));
-        QCOMPARE(md.rawData().value("X-Test-Bool"), QJsonValue(true));
-        QCOMPARE(md.rawData().value("X-Test-Double"), QJsonValue(42.42));
-        QCOMPARE(md.rawData().value("X-Test-String"), QJsonValue("foobar"));
-        QCOMPARE(md.rawData().value("X-Test-List"), QJsonValue(QJsonArray::fromStringList(QStringList() << "a" << "b" << "c" << "def")));
-        QCOMPARE(md.rawData().value("X-Test-Size"), QJsonValue("10,20")); // QSize no longer supported (and also no longer used)
-        QCOMPARE(md.rawData().value("X-Test-Unknown"), QJsonValue("true")); // unknown property -> string
+        QVERIFY(md.rawData().value(QStringLiteral("KPlugin")).isObject());
+        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Integer")), QJsonValue(42));
+        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Bool")), QJsonValue(true));
+        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Double")), QJsonValue(42.42));
+        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-String")), QJsonValue(QStringLiteral("foobar")));
+        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-List")), QJsonValue(QJsonArray::fromStringList(QStringList() << QStringLiteral("a") << QStringLiteral("b") << QStringLiteral("c") << QStringLiteral("def"))));
+        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Size")), QJsonValue(QStringLiteral("10,20"))); // QSize no longer supported (and also no longer used)
+        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Unknown")), QJsonValue(QStringLiteral("true"))); // unknown property -> string
 
     }
 
@@ -308,29 +308,28 @@ private Q_SLOTS:
         QTest::ignoreMessage(QtWarningMsg, "Illegal .desktop group definition (does not end with ']'): \"[PropertyDef::\"");
         QTest::ignoreMessage(QtWarningMsg, "Illegal .desktop group definition (does not end with ']'): \"[\"");
         QTest::ignoreMessage(QtWarningMsg, "Read empty .desktop file group name! Invalid file?");
-        QTest::ignoreMessage(QtWarningMsg, QRegularExpression("Skipping invalid group \"\" in service type \".*/bad-groups-servicetype.desktop\""));
-        QTest::ignoreMessage(QtWarningMsg, QRegularExpression("Skipping invalid group \"DoesNotStartWithPropertyDef::SomeOtherProperty\" in service type \".+/data/servicetypes/bad-groups-servicetype.desktop\""));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(QStringLiteral("Skipping invalid group \"\" in service type \".*/bad-groups-servicetype.desktop\"")));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(QStringLiteral("Skipping invalid group \"DoesNotStartWithPropertyDef::SomeOtherProperty\" in service type \".+/data/servicetypes/bad-groups-servicetype.desktop\"")));
         QTest::ignoreMessage(QtWarningMsg, "Could not find Type= key in group \"PropertyDef::MissingType\"");
-        QTest::ignoreMessage(QtWarningMsg, QRegularExpression("Property type \"integer\" is not a known QVariant type. Found while parsing property definition for \"InvalidType\" in \".+/data/servicetypes/bad-groups-servicetype.desktop\""));
-        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=11\""));
-        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=13\""));
-        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=14\""));
-
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(QStringLiteral("Property type \"integer\" is not a known QVariant type. Found while parsing property definition for \"InvalidType\" in \".+/data/servicetypes/bad-groups-servicetype.desktop\"")));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(QStringLiteral(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=11\"")));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(QStringLiteral(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=13\"")));
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(QStringLiteral(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=14\"")));
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Bad Groups"));
         // qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
         QCOMPARE(md.rawData().size(), 8);
-        QCOMPARE(md.rawData().value("ThisIsOkay"), QJsonValue(10)); // integer
+        QCOMPARE(md.rawData().value(QStringLiteral("ThisIsOkay")), QJsonValue(10)); // integer
         // 11 is empty group
-        QCOMPARE(md.rawData().value("MissingTerminator"), QJsonValue(12)); // accept missing group terminator (for now) -> integer
+        QCOMPARE(md.rawData().value(QStringLiteral("MissingTerminator")), QJsonValue(12)); // accept missing group terminator (for now) -> integer
         // 13 is empty group name
         // 14 is empty group name
-        QCOMPARE(md.rawData().value("SomeOtherProperty"), QJsonValue("15")); // does not start with PropertyDef:: -> fall back to string
-        QCOMPARE(md.rawData().value("TrailingSpacesAreOkay"), QJsonValue(16)); // accept trailing spaces in group name -> integer
-        QCOMPARE(md.rawData().value("MissingType"), QJsonValue("17")); // Type= missing -> fall back to string
-        QCOMPARE(md.rawData().value("InvalidType"), QJsonValue("18")); // Type= is invalid -> fall back to string
-        QCOMPARE(md.rawData().value("ThisIsOkayAgain"), QJsonValue(19)); // valid defintion after invalid ones should still work -> integer
+        QCOMPARE(md.rawData().value(QStringLiteral("SomeOtherProperty")), QJsonValue(QStringLiteral("15"))); // does not start with PropertyDef:: -> fall back to string
+        QCOMPARE(md.rawData().value(QStringLiteral("TrailingSpacesAreOkay")), QJsonValue(16)); // accept trailing spaces in group name -> integer
+        QCOMPARE(md.rawData().value(QStringLiteral("MissingType")), QJsonValue(QStringLiteral("17"))); // Type= missing -> fall back to string
+        QCOMPARE(md.rawData().value(QStringLiteral("InvalidType")), QJsonValue(QStringLiteral("18"))); // Type= is invalid -> fall back to string
+        QCOMPARE(md.rawData().value(QStringLiteral("ThisIsOkayAgain")), QJsonValue(19)); // valid defintion after invalid ones should still work -> integer
     }
 
     void testJSONMetadata()
@@ -340,10 +339,10 @@ private Q_SLOTS:
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Test"));
 
-        QCOMPARE(md.value("X-Plasma-MainScript"), QStringLiteral("ui/main.qml"));
+        QCOMPARE(md.value(QStringLiteral("X-Plasma-MainScript")), QStringLiteral("ui/main.qml"));
         QJsonArray expected;
         expected.append(QStringLiteral("Export"));
-        QCOMPARE(md.rawData().value("X-Purpose-PluginTypes").toArray(), expected);
+        QCOMPARE(md.rawData().value(QStringLiteral("X-Purpose-PluginTypes")).toArray(), expected);
     }
 };
 

@@ -200,7 +200,7 @@ void KUserTest::testKUserId()
 #endif
     QVERIFY(!invalid2.isValid());
     // I guess it is safe to assume no user with this name exists
-    KUserId invalid3 = KUserId::fromName("This_user_does_not_exist");
+    KUserId invalid3 = KUserId::fromName(QStringLiteral("This_user_does_not_exist"));
     QVERIFY(!invalid3.isValid());
 
     //check comparison
@@ -249,7 +249,7 @@ void KUserTest::testKGroupId()
 #endif
     QVERIFY(!invalid2.isValid());
     // I guess it is safe to assume no Group with this name exists
-    KGroupId invalid3 = KGroupId::fromName("This_Group_does_not_exist");
+    KGroupId invalid3 = KGroupId::fromName(QStringLiteral("This_Group_does_not_exist"));
     QVERIFY(!invalid3.isValid());
 
     //check comparison

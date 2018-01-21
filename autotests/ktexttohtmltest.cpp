@@ -62,12 +62,12 @@ void KTextToHTMLTest::testGetEmailAddress()
     KTextToHTMLHelper ll6(QStringLiteral(" @bar.baz"), 1);
     QVERIFY(ll6.getEmailAddress().isEmpty());
     KTextToHTMLHelper ll7(QStringLiteral(".!#$%&'*+-/=?^_`{|}~@bar.baz"),
-                    qstrlen(".!#$%&'*+-/=?^_`{|}~"));
+                          qstrlen(".!#$%&'*+-/=?^_`{|}~"));
     QVERIFY(ll7.getEmailAddress().isEmpty());
 
     // allowed special chars in local part of address
     KTextToHTMLHelper ll8(QStringLiteral("a.!#$%&'*+-/=?^_`{|}~@bar.baz"),
-                    qstrlen("a.!#$%&'*+-/=?^_`{|}~"));
+                          qstrlen("a.!#$%&'*+-/=?^_`{|}~"));
     QCOMPARE(ll8.getEmailAddress(), QStringLiteral("a.!#$%&'*+-/=?^_`{|}~@bar.baz"));
 
     // '@' in domain part
@@ -157,7 +157,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla]");
     urls << QStringLiteral("user:pass@www.kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
     urls << QStringLiteral("user:pass@www.kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?") +
-                          QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
+            QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
 
     foreach (const QString &schema, schemas) {
         foreach (QString url, urls) {   //krazy:exclude=foreach
@@ -202,7 +202,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     urlsWithoutSchema << QStringLiteral(".kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla]");
     urlsWithoutSchema << QStringLiteral(".kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
     urlsWithoutSchema << QStringLiteral(".kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?") +
-                                       QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
+                         QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
 
     QStringList starts;
     starts << QStringLiteral("www") << QStringLiteral("ftp") << QStringLiteral("news:www");
@@ -382,52 +382,52 @@ void KTextToHTMLTest::testHtmlConvert_data()
                                           << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                           << "bla (<a href=\"https://www.kde.org\">https://www.kde.org</a> - section 5.2)";
     
-   // Fix url as foo <<url> <url>> when we concatened them.
-   QTest::newRow("url-with-url") << "foo <https://www.kde.org/ <https://www.kde.org/>>"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "foo &lt;<a href=\"https://www.kde.org/ \">https://www.kde.org/ </a>&lt;<a href=\"https://www.kde.org/\">https://www.kde.org/</a>&gt;&gt;";
+    // Fix url as foo <<url> <url>> when we concatened them.
+    QTest::newRow("url-with-url") << "foo <https://www.kde.org/ <https://www.kde.org/>>"
+                                  << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                  << "foo &lt;<a href=\"https://www.kde.org/ \">https://www.kde.org/ </a>&lt;<a href=\"https://www.kde.org/\">https://www.kde.org/</a>&gt;&gt;";
 
-   //Fix url exploit
-   QTest::newRow("url-exec-html") << "https://\"><!--"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://&quot;&gt;&lt;!--";
+    //Fix url exploit
+    QTest::newRow("url-exec-html") << "https://\"><!--"
+                                   << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                   << "https://&quot;&gt;&lt;!--";
 
-   QTest::newRow("url-exec-html-2") << "https://192.168.1.1:\"><!--"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://192.168.1.1:&quot;&gt;&lt;!--";
+    QTest::newRow("url-exec-html-2") << "https://192.168.1.1:\"><!--"
+                                     << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                     << "https://192.168.1.1:&quot;&gt;&lt;!--";
 
-   QTest::newRow("url-exec-html-3") << "https://<IP>:\"><!--"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://&lt;IP&gt;:&quot;&gt;&lt;!--";
+    QTest::newRow("url-exec-html-3") << "https://<IP>:\"><!--"
+                                     << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                     << "https://&lt;IP&gt;:&quot;&gt;&lt;!--";
 
-   QTest::newRow("url-exec-html-4") << "https://<IP>:/\"><!--"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://&lt;IP&gt;:/&quot;&gt;&lt;!--";
+    QTest::newRow("url-exec-html-4") << "https://<IP>:/\"><!--"
+                                     << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                     << "https://&lt;IP&gt;:/&quot;&gt;&lt;!--";
 
-   QTest::newRow("url-exec-html-5") << "https://<IP>:/\"><script>alert(1);</script><!--"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://&lt;IP&gt;:/&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;!--";
+    QTest::newRow("url-exec-html-5") << "https://<IP>:/\"><script>alert(1);</script><!--"
+                                     << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                     << "https://&lt;IP&gt;:/&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;!--";
 
-   QTest::newRow("url-exec-html-6") << "https://<IP>:/\"><script>alert(1);</script><!--\nTest2"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "https://&lt;IP&gt;:/&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;!--\nTest2";
+    QTest::newRow("url-exec-html-6") << "https://<IP>:/\"><script>alert(1);</script><!--\nTest2"
+                                     << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                     << "https://&lt;IP&gt;:/&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;&lt;!--\nTest2";
 
 
-   QTest::newRow("url-with-ref-in-[") << "https://www.kde.org[1]"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "<a href=\"https://www.kde.org\">https://www.kde.org</a>[1]";
+    QTest::newRow("url-with-ref-in-[") << "https://www.kde.org[1]"
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "<a href=\"https://www.kde.org\">https://www.kde.org</a>[1]";
 
-   QTest::newRow("url-with-ref-in-[2") << "[http://www.example.org/][whatever]"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "[<a href=\"http://www.example.org/\">http://www.example.org/</a>][whatever]";
-   //Bug 346132
-   QTest::newRow("url-with-ref-in-<") << "http://www.foo.bar<http://foo.bar/>"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "<a href=\"http://www.foo.bar\">http://www.foo.bar</a>&lt;<a href=\"http://foo.bar/\">http://foo.bar/</a>&gt;";
+    QTest::newRow("url-with-ref-in-[2") << "[http://www.example.org/][whatever]"
+                                        << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                        << "[<a href=\"http://www.example.org/\">http://www.example.org/</a>][whatever]";
+    //Bug 346132
+    QTest::newRow("url-with-ref-in-<") << "http://www.foo.bar<http://foo.bar/>"
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "<a href=\"http://www.foo.bar\">http://www.foo.bar</a>&lt;<a href=\"http://foo.bar/\">http://foo.bar/</a>&gt;";
 
-   QTest::newRow("url-with-ref-in-]") << "[Please visit our booth 24-25 http://example.com/]"
-                               << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                               << "[Please visit our booth 24-25 <a href=\"http://example.com/\">http://example.com/</a>]";
+    QTest::newRow("url-with-ref-in-]") << "[Please visit our booth 24-25 http://example.com/]"
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "[Please visit our booth 24-25 <a href=\"http://example.com/\">http://example.com/</a>]";
 }
 
 
@@ -449,7 +449,7 @@ void KTextToHTMLTest::benchHtmlConvert_data()
     QTest::addColumn<QString>("text");
     QTest::addColumn<KTextToHTML::Options>("options");
 
-    auto text = QString("foo bar asdf :)").repeated(1000);
+    auto text = QString(QStringLiteral("foo bar asdf :)")).repeated(1000);
     QTest::newRow("plain") << text << KTextToHTML::Options();
     QTest::newRow("preserve-spaces") << text << KTextToHTML::Options(KTextToHTML::PreserveSpaces);
     QTest::newRow("highlight-text") << text << KTextToHTML::Options(KTextToHTML::HighlightText);

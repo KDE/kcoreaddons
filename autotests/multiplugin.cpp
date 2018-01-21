@@ -29,19 +29,19 @@ MultiPlugin1::MultiPlugin1(QObject *parent, const QVariantList &args)
     : QObject(parent)
 {
     qDebug() << "MultiPlugin1" << args;
-    setObjectName("MultiPlugin1");
+    setObjectName(QLatin1String("MultiPlugin1"));
 }
 
 MultiPlugin2::MultiPlugin2(QObject *parent, const QVariantList &args)
     : QObject(parent)
 {
     qDebug() << "MultiPlugin2" << args;
-    setObjectName("MultiPlugin2");
+    setObjectName(QLatin1String("MultiPlugin2"));
 }
 
 K_PLUGIN_FACTORY(MultiPluginFactory,
                  registerPlugin<MultiPlugin1>();
-                 registerPlugin<MultiPlugin2>("secondary");
+                 registerPlugin<MultiPlugin2>(QLatin1String("secondary"));
                 )
 
 #include "multiplugin.moc"

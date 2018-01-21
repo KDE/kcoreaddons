@@ -182,7 +182,7 @@ int KDirWatch_UnitTest::createDirectoryTree(const QString& basePath, int depth)
 
     const int numFiles = 10;
     for (int i = 0; i < numFiles; ++i) {
-        createFile(basePath + QLatin1Char('/') + s_filePrefix + QString::number(i));
+        createFile(basePath + QLatin1Char('/') + QLatin1String(s_filePrefix) + QString::number(i));
         ++filesCreated;
     }
 

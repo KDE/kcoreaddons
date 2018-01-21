@@ -55,14 +55,14 @@ void
 KShellTest::tildeExpand()
 {
     QString me(KUser().loginName());
-    QCOMPARE(KShell::tildeExpand("~"), QDir::homePath());
-    QCOMPARE(KShell::tildeExpand("~/dir"), QString(QDir::homePath() + "/dir"));
-    QCOMPARE(KShell::tildeExpand('~' + me), myHomePath());
-    QCOMPARE(KShell::tildeExpand('~' + me + "/dir"), QString(myHomePath() + "/dir"));
+    QCOMPARE(KShell::tildeExpand(QStringLiteral("~")), QDir::homePath());
+    QCOMPARE(KShell::tildeExpand(QStringLiteral("~/dir")), QString(QDir::homePath() + QStringLiteral("/dir")));
+    QCOMPARE(KShell::tildeExpand(QLatin1Char('~') + me), myHomePath());
+    QCOMPARE(KShell::tildeExpand(QLatin1Char('~') + me + QStringLiteral("/dir")), QString(myHomePath() + QStringLiteral("/dir")));
 #ifdef Q_OS_WIN
     QCOMPARE(KShell::tildeExpand("^~" + me), QString('~' + me));
 #else
-    QCOMPARE(KShell::tildeExpand("\\~" + me), QString('~' + me));
+    QCOMPARE(KShell::tildeExpand(QStringLiteral("\\~") + me), QString(QStringLiteral("~") + me));
 #endif
 }
 
@@ -81,7 +81,7 @@ KShellTest::quoteArg()
     QCOMPARE(KShell::quoteArg("foo bar\"\\\"bla"), QString("\"foo bar\"\\^\"\\\\\\^\"\"bla\""));
     QCOMPARE(KShell::quoteArg("a % space"), QString("\"a %PERCENT_SIGN% space\""));
 #else
-    QCOMPARE(KShell::quoteArg("a space"), QString("'a space'"));
+    QCOMPARE(KShell::quoteArg(QStringLiteral("a space")), QStringLiteral("'a space'"));
 #endif
 }
 
@@ -89,8 +89,8 @@ void
 KShellTest::joinArgs()
 {
     QStringList list;
-    list << "this" << "is" << "a" << "test";
-    QCOMPARE(KShell::joinArgs(list), QString("this is a test"));
+    list << QStringLiteral("this") << QStringLiteral("is") << QStringLiteral("a") << QStringLiteral("test");
+    QCOMPARE(KShell::joinArgs(list), QStringLiteral("this is a test"));
 }
 
 static QString sj(const QString &str, KShell::Options flags, KShell::Errors *ret)
@@ -136,37 +136,37 @@ KShellTest::splitJoin()
              QString("\\^\"\"just \"\\^\"\" fine\"\\^\""));
     QVERIFY(err == KShell::NoError);
 #else
-    QCOMPARE(sj("\"~qU4rK\" 'text' 'jo'\"jo\" $'crap' $'\\\\\\'\\e\\x21' ha\\ lo \\a", KShell::NoOptions, &err),
-             QString("'~qU4rK' text jojo crap '\\'\\''\x1b!' 'ha lo' a"));
+    QCOMPARE(sj(QString::fromUtf8("\"~qU4rK\" 'text' 'jo'\"jo\" $'crap' $'\\\\\\'\\e\\x21' ha\\ lo \\a"), KShell::NoOptions, &err),
+             QString::fromUtf8("'~qU4rK' text jojo crap '\\'\\''\x1b!' 'ha lo' a"));
     QVERIFY(err == KShell::NoError);
 
-    QCOMPARE(sj("\"~qU4rK\" 'text'", KShell::TildeExpand, &err),
-             QString("'~qU4rK' text"));
+    QCOMPARE(sj(QStringLiteral("\"~qU4rK\" 'text'"), KShell::TildeExpand, &err),
+             QStringLiteral("'~qU4rK' text"));
     QVERIFY(err == KShell::NoError);
 
-    QCOMPARE(sj("~\"qU4rK\" 'text'", KShell::TildeExpand, &err),
-             QString("'~qU4rK' text"));
+    QCOMPARE(sj(QStringLiteral("~\"qU4rK\" 'text'"), KShell::TildeExpand, &err),
+             QStringLiteral("'~qU4rK' text"));
     QVERIFY(err == KShell::NoError);
 
-    QCOMPARE(sj("~/\"dir\" 'text'", KShell::TildeExpand, &err),
-             QString(QDir::homePath() + "/dir text"));
+    QCOMPARE(sj(QStringLiteral("~/\"dir\" 'text'"), KShell::TildeExpand, &err),
+             QString(QDir::homePath() + QStringLiteral("/dir text")));
     QVERIFY(err == KShell::NoError);
 
-    QCOMPARE(sj("~ 'text' ~", KShell::TildeExpand, &err),
-             QString(QDir::homePath() + " text " + QDir::homePath()));
+    QCOMPARE(sj(QStringLiteral("~ 'text' ~"), KShell::TildeExpand, &err),
+             QString(QDir::homePath() + QStringLiteral(" text ") + QDir::homePath()));
     QVERIFY(err == KShell::NoError);
 
-    QCOMPARE(sj("\\~ blah", KShell::TildeExpand, &err),
-             QString("'~' blah"));
+    QCOMPARE(sj(QStringLiteral("\\~ blah"), KShell::TildeExpand, &err),
+             QStringLiteral("'~' blah"));
     QVERIFY(err == KShell::NoError);
 
-    QCOMPARE(sj("~qU4rK ~" + KUser().loginName(), KShell::TildeExpand, &err),
-             QString("'~qU4rK' " + myHomePath()));
+    QCOMPARE(sj(QStringLiteral("~qU4rK ~") + KUser().loginName(), KShell::TildeExpand, &err),
+             QString(QStringLiteral("'~qU4rK' ") + myHomePath()));
     QVERIFY(err == KShell::NoError);
 
-    const QString unicodeSpaceFileName = "test　テスト.txt"; // #345140
+    const QString unicodeSpaceFileName = QStringLiteral("test　テスト.txt"); // #345140
     QCOMPARE(sj(unicodeSpaceFileName, KShell::AbortOnMeta | KShell::TildeExpand, &err),
-              unicodeSpaceFileName);
+             unicodeSpaceFileName);
     QVERIFY(err == KShell::NoError);
 #endif
 }
@@ -177,8 +177,8 @@ KShellTest::quoteSplit_data()
 {
     QTest::addColumn<QString>("string");
 
-    QTest::newRow("no space") << QString("hiho");
-    QTest::newRow("regular space") << QString("hi there");
+    QTest::newRow("no space") << QStringLiteral("hiho");
+    QTest::newRow("regular space") << QStringLiteral("hi there");
     QTest::newRow("special space") << QString::fromUtf8("如何定期清潔典型的電風扇　講義.pdf");
 }
 
@@ -197,8 +197,8 @@ KShellTest::abortOnMeta()
 {
     KShell::Errors err1 = KShell::NoError, err2 = KShell::NoError;
 
-    QCOMPARE(sj("text", KShell::AbortOnMeta, &err1),
-             QString("text"));
+    QCOMPARE(sj(QStringLiteral("text"), KShell::AbortOnMeta, &err1),
+             QStringLiteral("text"));
     QVERIFY(err1 == KShell::NoError);
 
 #ifdef Q_OS_WIN
@@ -207,7 +207,6 @@ KShellTest::abortOnMeta()
 
     QVERIFY(KShell::splitArgs("foo %PATH% bar", KShell::AbortOnMeta, &err1).isEmpty());
     QVERIFY(err1 == KShell::FoundMeta);
-
     QCOMPARE(sj("foo %PERCENT_SIGN% bar", KShell::AbortOnMeta, &err1),
              QString("foo %PERCENT_SIGN% bar"));
     QVERIFY(err1 == KShell::NoError);
@@ -228,25 +227,24 @@ KShellTest::abortOnMeta()
              QString("b-q me \"\\\\|\"\\\\\\^\""));
     QVERIFY(err1 == KShell::NoError);
 #else
-    QCOMPARE(sj("say \" error", KShell::NoOptions, &err1),
+    QCOMPARE(sj(QStringLiteral("say \" error"), KShell::NoOptions, &err1),
              QString());
     QVERIFY(err1 != KShell::NoError);
 
-    QCOMPARE(sj("say \" still error", KShell::AbortOnMeta, &err1),
+    QCOMPARE(sj(QStringLiteral("say \" still error"), KShell::AbortOnMeta, &err1),
              QString());
     QVERIFY(err1 != KShell::NoError);
 
-    QVERIFY(sj("say `echo no error`", KShell::NoOptions, &err1) !=
-            sj("say `echo no error`", KShell::AbortOnMeta, &err2));
+    QVERIFY(sj(QStringLiteral("say `echo no error`"), KShell::NoOptions, &err1) !=
+            sj(QStringLiteral("say `echo no error`"), KShell::AbortOnMeta, &err2));
     QVERIFY(err1 != err2);
 
-    QVERIFY(sj("BLA=say echo meta", KShell::NoOptions, &err1) !=
-            sj("BLA=say echo meta", KShell::AbortOnMeta, &err2));
+    QVERIFY(sj(QStringLiteral("BLA=say echo meta"), KShell::NoOptions, &err1) !=
+            sj(QStringLiteral("BLA=say echo meta"), KShell::AbortOnMeta, &err2));
     QVERIFY(err1 != err2);
 
-    QVERIFY(sj("B\"L\"A=say FOO=bar echo meta", KShell::NoOptions, &err1) ==
-            sj("B\"L\"A=say FOO=bar echo meta", KShell::AbortOnMeta, &err2));
-    QVERIFY(err1 == err2);
+    QVERIFY(sj(QStringLiteral("B\"L\"A=say FOO=bar echo meta"), KShell::NoOptions, &err1) ==
+            sj(QStringLiteral("B\"L\"A=say FOO=bar echo meta"), KShell::AbortOnMeta, &err2));
 #endif
 }
 

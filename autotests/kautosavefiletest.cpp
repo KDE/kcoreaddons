@@ -80,7 +80,7 @@ void KAutoSaveFileTest::test_readWrite()
 
 void KAutoSaveFileTest::test_fileStaleFiles()
 {
-    QUrl normalFile = QUrl::fromLocalFile(QDir::temp().absoluteFilePath("test directory/tîst me.txt"));
+    QUrl normalFile = QUrl::fromLocalFile(QDir::temp().absoluteFilePath(QStringLiteral("test directory/tîst me.txt")));
 
     KAutoSaveFile saveFile(normalFile);
     QVERIFY(saveFile.open(QIODevice::ReadWrite));

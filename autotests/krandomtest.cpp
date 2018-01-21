@@ -62,7 +62,7 @@ static bool getChildRandSeq(intSequenceType &seq)
 
     // Launch a separate process to generate random numbers to test first-time
     // seeding.
-    subtestProcess.start(binpath, QStringList() << QString::number(seq.count()));
+    subtestProcess.start(QLatin1String(binpath), QStringList() << QString::number(seq.count()));
     subtestProcess.waitForFinished();
 
     QTextStream childStream(subtestProcess.readAllStandardOutput());
@@ -107,7 +107,7 @@ void KRandomTest::test_random()
 void KRandomTest::test_randomString()
 {
     const int desiredLength = 12;
-    const QRegExp outputFormat("[A-Za-z0-9]+");
+    const QRegExp outputFormat(QStringLiteral("[A-Za-z0-9]+"));
     QString testString = KRandom::randomString(desiredLength);
 
     QCOMPARE(testString.length(), desiredLength);

@@ -68,7 +68,7 @@ void KAboutDataApplicationDataTest::testInteractionWithQApplicationData()
     QCOMPARE(applicationAboutData.desktopFileName(), QLatin1String(DesktopFileName));
 
     // now set some new KAboutData, with different values
-    KAboutData aboutData2(AppName2, QLatin1String(ProgramName2), Version2);
+    KAboutData aboutData2(QString::fromLatin1(AppName2), QString::fromLatin1(ProgramName2), QString::fromLatin1(Version2));
     aboutData2.setOrganizationDomain(OrganizationDomain2);
     aboutData2.setDesktopFileName(QLatin1String(DesktopFileName2));
 

@@ -40,11 +40,10 @@ void MigrationTest::testPaths()
     QString kdehome = kdehomeDir.path();
     qputenv("KDEHOME", QFile::encodeName(kdehome));
 
-    QString oldConfigDir = kdehome + "/share/config/";
+    QString oldConfigDir = kdehome + QStringLiteral("/share/config/");
     QVERIFY(QDir().mkpath(oldConfigDir));
-    QString oldAppsDir = kdehome + "/share/apps/";
+    QString oldAppsDir = kdehome + QStringLiteral("/share/apps/");
     QVERIFY(QDir().mkpath(oldAppsDir));
-
     // Test
     Kdelibs4Migration migration;
 

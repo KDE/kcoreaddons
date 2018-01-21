@@ -81,80 +81,82 @@ private Q_SLOTS:
         QJsonObject expectedResult;
         QJsonObject kpluginObj;
         QByteArray input =
-            // include an insignificant group
-            "[Some Group]\n"
-            "Foo=Bar\n"
-            "\n"
-            "[Desktop Entry]\n"
-        // only data inside [Desktop Entry] should be included
-            "Name=Example\n"
-        //empty lines
-            "\n"
-            " \n"
-            // make sure translations are included:
-            "Name[de_DE]=Beispiel\n"
-            // ignore comments:
-            "#Comment=Comment\n"
-            "  #Comment=Comment\n"
-            "Categories=foo;bar;a\\;b\n"
-        // As the case is significant, the keys Name and NAME are not equivalent:
-            "CaseSensitive=ABC\n"
-            "CASESENSITIVE=abc\n"
-        // Space before and after the equals sign should be ignored:
-            "SpacesBeforeEq   =foo\n"
-            "SpacesAfterEq=   foo\n"
-        //  Space before and after the equals sign should be ignored; the = sign is the actual delimiter.
-        // TODO: error in spec (spaces before and after the key??)
-            "   SpacesBeforeKey=foo\n"
-            "SpacesAfterKey   =foo\n"
-        // ignore trailing spaces
-            "TrailingSpaces=foo   \n"
-        // However spaces in the value are significant:
-            "SpacesInValue=Hello, World!\n"
-        //  The escape sequences \s, \n, \t, \r, and \\ are supported for values of
-        // type string and localestring, meaning ASCII space, newline, tab,
-        // carriage return, and backslash, respectively:
-            "EscapeSequences=So\\sme esc\\nap\\te se\\\\qu\\re\\\\nces\n" // make sure that the last n is a literal n not a newline!
-        // the standard keys that are used by plugins, make sure correct types are used:
-            "X-KDE-PluginInfo-Category=Examples\n" // string key
-            "X-KDE-PluginInfo-Version=1.0\n"
-        // The multiple values should be separated by a semicolon and the value of the key
-        // may be optionally terminated by a semicolon. Trailing empty strings must always
-        // be terminated with a semicolon. Semicolons in these values need to be escaped using \;.
-            "X-KDE-PluginInfo-Depends=foo,bar,esc\\,aped\n" // string list key
-            "X-KDE-ServiceTypes=\n" // empty string list
-            "X-KDE-PluginInfo-EnabledByDefault=true\n" // bool key
-        // now start a new group
-            "[New Group]\n"
-            "InWrongGroup=true\n";
+                // include an insignificant group
+                "[Some Group]\n"
+                "Foo=Bar\n"
+                "\n"
+                "[Desktop Entry]\n"
+                // only data inside [Desktop Entry] should be included
+                "Name=Example\n"
+                //empty lines
+                "\n"
+                " \n"
+                // make sure translations are included:
+                "Name[de_DE]=Beispiel\n"
+                // ignore comments:
+                "#Comment=Comment\n"
+                "  #Comment=Comment\n"
+                "Categories=foo;bar;a\\;b\n"
+                // As the case is significant, the keys Name and NAME are not equivalent:
+                "CaseSensitive=ABC\n"
+                "CASESENSITIVE=abc\n"
+                // Space before and after the equals sign should be ignored:
+                "SpacesBeforeEq   =foo\n"
+                "SpacesAfterEq=   foo\n"
+                //  Space before and after the equals sign should be ignored; the = sign is the actual delimiter.
+                // TODO: error in spec (spaces before and after the key??)
+                "   SpacesBeforeKey=foo\n"
+                "SpacesAfterKey   =foo\n"
+                // ignore trailing spaces
+                "TrailingSpaces=foo   \n"
+                // However spaces in the value are significant:
+                "SpacesInValue=Hello, World!\n"
+                //  The escape sequences \s, \n, \t, \r, and \\ are supported for values of
+                // type string and localestring, meaning ASCII space, newline, tab,
+                // carriage return, and backslash, respectively:
+                "EscapeSequences=So\\sme esc\\nap\\te se\\\\qu\\re\\\\nces\n" // make sure that the last n is a literal n not a newline!
+                // the standard keys that are used by plugins, make sure correct types are used:
+                "X-KDE-PluginInfo-Category=Examples\n" // string key
+                "X-KDE-PluginInfo-Version=1.0\n"
+                // The multiple values should be separated by a semicolon and the value of the key
+                // may be optionally terminated by a semicolon. Trailing empty strings must always
+                // be terminated with a semicolon. Semicolons in these values need to be escaped using \;.
+                "X-KDE-PluginInfo-Depends=foo,bar,esc\\,aped\n" // string list key
+                "X-KDE-ServiceTypes=\n" // empty string list
+                "X-KDE-PluginInfo-EnabledByDefault=true\n" // bool key
+                // now start a new group
+                "[New Group]\n"
+                "InWrongGroup=true\n";
 
-        expectedResult["Categories"] = QStringLiteral("foo;bar;a\\;b");
-        expectedResult["CaseSensitive"] = QStringLiteral("ABC");
-        expectedResult["CASESENSITIVE"] = QStringLiteral("abc");
-        expectedResult["SpacesBeforeEq"] = QStringLiteral("foo");
-        expectedResult["SpacesAfterEq"] = QStringLiteral("foo");
-        expectedResult["SpacesBeforeKey"] = QStringLiteral("foo");
-        expectedResult["SpacesAfterKey"] = QStringLiteral("foo");
-        expectedResult["TrailingSpaces"] = QStringLiteral("foo");
-        expectedResult["SpacesInValue"] = QStringLiteral("Hello, World!");
-        expectedResult["EscapeSequences"] = QStringLiteral("So me esc\nap\te se\\qu\re\\nces");
-        kpluginObj["Name"] = QStringLiteral("Example");
-        kpluginObj["Name[de_DE]"] = QStringLiteral("Beispiel");
-        kpluginObj["Category"] = QStringLiteral("Examples");
-        kpluginObj["Dependencies"] = QJsonArray::fromStringList(QStringList() << "foo" << "bar" << "esc,aped");
-        kpluginObj["ServiceTypes"] = QJsonArray::fromStringList(QStringList());
-        kpluginObj["EnabledByDefault"] = true;
-        kpluginObj["Version"] = QStringLiteral("1.0");
+        expectedResult[QStringLiteral("Categories")] = QStringLiteral("foo;bar;a\\;b");
+        expectedResult[QStringLiteral("CaseSensitive")] = QStringLiteral("ABC");
+        expectedResult[QStringLiteral("CASESENSITIVE")] = QStringLiteral("abc");
+        expectedResult[QStringLiteral("SpacesBeforeEq")] = QStringLiteral("foo");
+        expectedResult[QStringLiteral("SpacesAfterEq")] = QStringLiteral("foo");
+        expectedResult[QStringLiteral("SpacesBeforeKey")] = QStringLiteral("foo");
+        expectedResult[QStringLiteral("SpacesAfterKey")] = QStringLiteral("foo");
+        expectedResult[QStringLiteral("TrailingSpaces")] = QStringLiteral("foo");
+        expectedResult[QStringLiteral("SpacesInValue")] = QStringLiteral("Hello, World!");
+        expectedResult[QStringLiteral("EscapeSequences")] = QStringLiteral("So me esc\nap\te se\\qu\re\\nces");
+        kpluginObj[QStringLiteral("Name")] = QStringLiteral("Example");
+        kpluginObj[QStringLiteral("Name[de_DE]")] = QStringLiteral("Beispiel");
+        kpluginObj[QStringLiteral("Category")] = QStringLiteral("Examples");
+        kpluginObj[QStringLiteral("Dependencies")] = QJsonArray::fromStringList
+                (QStringList() << QStringLiteral("foo") << QStringLiteral("bar") << QStringLiteral("esc,aped"));
+        kpluginObj[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(QStringList());
+        kpluginObj[QStringLiteral("EnabledByDefault")] = true;
+        kpluginObj[QStringLiteral("Version")] = QStringLiteral("1.0");
         QJsonObject compatResult = expectedResult;
-        compatResult["Name"] = QStringLiteral("Example");
-        compatResult["Name[de_DE]"] = QStringLiteral("Beispiel");
-        compatResult["X-KDE-PluginInfo-Category"] = QStringLiteral("Examples");
-        compatResult["X-KDE-PluginInfo-Version"] = QStringLiteral("1.0");
-        compatResult["X-KDE-PluginInfo-Depends"] = QJsonArray::fromStringList(QStringList() << "foo" << "bar" << "esc,aped");
-        compatResult["X-KDE-ServiceTypes"] = QJsonArray::fromStringList(QStringList());
-        compatResult["X-KDE-PluginInfo-EnabledByDefault"] = true;
+        compatResult[QStringLiteral("Name")] = QStringLiteral("Example");
+        compatResult[QStringLiteral("Name[de_DE]")] = QStringLiteral("Beispiel");
+        compatResult[QStringLiteral("X-KDE-PluginInfo-Category")] = QStringLiteral("Examples");
+        compatResult[QStringLiteral("X-KDE-PluginInfo-Version")] = QStringLiteral("1.0");
+        compatResult[QStringLiteral("X-KDE-PluginInfo-Depends")] = QJsonArray::fromStringList
+                (QStringList() << QStringLiteral("foo") << QStringLiteral("bar") << QStringLiteral("esc,aped"));
+        compatResult[QStringLiteral("X-KDE-ServiceTypes")] = QJsonArray::fromStringList(QStringList());
+        compatResult[QStringLiteral("X-KDE-PluginInfo-EnabledByDefault")] = true;
 
-        expectedResult["KPlugin"] = kpluginObj;
+        expectedResult[QStringLiteral("KPlugin")] = kpluginObj;
 
         QTest::newRow("newFormat") << input << expectedResult << false << QStringList();
         QTest::newRow("compatFormat") << input << compatResult << true << QStringList();
@@ -162,96 +164,96 @@ private Q_SLOTS:
 
         // test conversion of a currently existing .desktop file (excluding most of the translations):
         QByteArray kdevInput =
-            "[Desktop Entry]\n"
-            "Type = Service\n"
-            "Icon=text-x-c++src\n"
-            "Exec=blubb\n"
-            "Comment=C/C++ Language Support\n"
-            "Comment[fr]=Prise en charge du langage C/C++\n"
-            "Comment[it]=Supporto al linguaggio C/C++\n"
-            "Name=C++ Support\n"
-            "Name[fi]=C++-tuki\n"
-            "Name[fr]=Prise en charge du C++\n"
-            "GenericName=Language Support\n"
-            "GenericName[sl]=Podpora jeziku\n"
-            "ServiceTypes=KDevelop/NonExistentPlugin\n"
-            "X-KDE-Library=kdevcpplanguagesupport\n"
-            "X-KDE-PluginInfo-Name=kdevcppsupport\n"
-            "X-KDE-PluginInfo-Category=Language Support\n"
-            "X-KDevelop-Version=1\n"
-            "X-KDevelop-Language=C++\n"
-            "X-KDevelop-Args=CPP\n"
-            "X-KDevelop-Interfaces=ILanguageSupport\n"
-            "X-KDevelop-SupportedMimeTypes=text/x-chdr,text/x-c++hdr,text/x-csrc,text/x-c++src\n"
-            "X-KDevelop-Mode=NoGUI\n"
-            "X-KDevelop-LoadMode=AlwaysOn";
+                "[Desktop Entry]\n"
+                "Type = Service\n"
+                "Icon=text-x-c++src\n"
+                "Exec=blubb\n"
+                "Comment=C/C++ Language Support\n"
+                "Comment[fr]=Prise en charge du langage C/C++\n"
+                "Comment[it]=Supporto al linguaggio C/C++\n"
+                "Name=C++ Support\n"
+                "Name[fi]=C++-tuki\n"
+                "Name[fr]=Prise en charge du C++\n"
+                "GenericName=Language Support\n"
+                "GenericName[sl]=Podpora jeziku\n"
+                "ServiceTypes=KDevelop/NonExistentPlugin\n"
+                "X-KDE-Library=kdevcpplanguagesupport\n"
+                "X-KDE-PluginInfo-Name=kdevcppsupport\n"
+                "X-KDE-PluginInfo-Category=Language Support\n"
+                "X-KDevelop-Version=1\n"
+                "X-KDevelop-Language=C++\n"
+                "X-KDevelop-Args=CPP\n"
+                "X-KDevelop-Interfaces=ILanguageSupport\n"
+                "X-KDevelop-SupportedMimeTypes=text/x-chdr,text/x-c++hdr,text/x-csrc,text/x-c++src\n"
+                "X-KDevelop-Mode=NoGUI\n"
+                "X-KDevelop-LoadMode=AlwaysOn";
 
         QJsonParseError e;
         QJsonObject kdevExpected = QJsonDocument::fromJson("{\n"
-            " \"GenericName\": \"Language Support\",\n"
-            " \"GenericName[sl]\": \"Podpora jeziku\",\n"
-            " \"KPlugin\": {\n"
-            "     \"Category\": \"Language Support\",\n"
-            "     \"Description\": \"C/C++ Language Support\",\n"
-            "     \"Description[fr]\": \"Prise en charge du langage C/C++\",\n"
-            "     \"Description[it]\": \"Supporto al linguaggio C/C++\",\n"
-            "     \"Icon\": \"text-x-c++src\",\n"
-            "     \"Id\": \"kdevcppsupport\",\n"
-            "     \"Name\": \"C++ Support\",\n"
-            "     \"Name[fi]\": \"C++-tuki\",\n"
-            "     \"Name[fr]\": \"Prise en charge du C++\",\n"
-            "     \"ServiceTypes\": [ \"KDevelop/NonExistentPlugin\" ]\n"
-            " },\n"
-            " \"X-KDevelop-Args\": \"CPP\",\n"
-            " \"X-KDevelop-Interfaces\": \"ILanguageSupport\",\n"
-            " \"X-KDevelop-Language\": \"C++\",\n"
-            " \"X-KDevelop-LoadMode\": \"AlwaysOn\",\n"
-            " \"X-KDevelop-Mode\": \"NoGUI\",\n"
-            " \"X-KDevelop-SupportedMimeTypes\": \"text/x-chdr,text/x-c++hdr,text/x-csrc,text/x-c++src\",\n"
-            " \"X-KDevelop-Version\": \"1\"\n"
-            "}\n", &e).object();
+                                                           " \"GenericName\": \"Language Support\",\n"
+                                                           " \"GenericName[sl]\": \"Podpora jeziku\",\n"
+                                                           " \"KPlugin\": {\n"
+                                                           "     \"Category\": \"Language Support\",\n"
+                                                           "     \"Description\": \"C/C++ Language Support\",\n"
+                                                           "     \"Description[fr]\": \"Prise en charge du langage C/C++\",\n"
+                                                           "     \"Description[it]\": \"Supporto al linguaggio C/C++\",\n"
+                                                           "     \"Icon\": \"text-x-c++src\",\n"
+                                                           "     \"Id\": \"kdevcppsupport\",\n"
+                                                           "     \"Name\": \"C++ Support\",\n"
+                                                           "     \"Name[fi]\": \"C++-tuki\",\n"
+                                                           "     \"Name[fr]\": \"Prise en charge du C++\",\n"
+                                                           "     \"ServiceTypes\": [ \"KDevelop/NonExistentPlugin\" ]\n"
+                                                           " },\n"
+                                                           " \"X-KDevelop-Args\": \"CPP\",\n"
+                                                           " \"X-KDevelop-Interfaces\": \"ILanguageSupport\",\n"
+                                                           " \"X-KDevelop-Language\": \"C++\",\n"
+                                                           " \"X-KDevelop-LoadMode\": \"AlwaysOn\",\n"
+                                                           " \"X-KDevelop-Mode\": \"NoGUI\",\n"
+                                                           " \"X-KDevelop-SupportedMimeTypes\": \"text/x-chdr,text/x-c++hdr,text/x-csrc,text/x-c++src\",\n"
+                                                           " \"X-KDevelop-Version\": \"1\"\n"
+                                                           "}\n", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
         QTest::newRow("kdevcpplanguagesupport no servicetype") << kdevInput << kdevExpected << false << QStringList();
 
         QJsonObject kdevExpectedWithServiceType = QJsonDocument::fromJson("{\n"
-            " \"GenericName\": \"Language Support\",\n"
-            " \"GenericName[sl]\": \"Podpora jeziku\",\n"
-            " \"KPlugin\": {\n"
-            "     \"Category\": \"Language Support\",\n"
-            "     \"Description\": \"C/C++ Language Support\",\n"
-            "     \"Description[fr]\": \"Prise en charge du langage C/C++\",\n"
-            "     \"Description[it]\": \"Supporto al linguaggio C/C++\",\n"
-            "     \"Icon\": \"text-x-c++src\",\n"
-            "     \"Id\": \"kdevcppsupport\",\n"
-            "     \"Name\": \"C++ Support\",\n"
-            "     \"Name[fi]\": \"C++-tuki\",\n"
-            "     \"Name[fr]\": \"Prise en charge du C++\",\n"
-            "     \"ServiceTypes\": [ \"KDevelop/NonExistentPlugin\" ]\n"
-            " },\n"
-            " \"X-KDevelop-Args\": \"CPP\",\n"
-            " \"X-KDevelop-Interfaces\": [\"ILanguageSupport\"],\n"
-            " \"X-KDevelop-Language\": \"C++\",\n"
-            " \"X-KDevelop-LoadMode\": \"AlwaysOn\",\n"
-            " \"X-KDevelop-Mode\": \"NoGUI\",\n"
-            " \"X-KDevelop-SupportedMimeTypes\": [\"text/x-chdr\", \"text/x-c++hdr\", \"text/x-csrc\", \"text/x-c++src\"],\n"
-            " \"X-KDevelop-Version\": 1\n"
-            "}\n", &e).object();
+                                                                          " \"GenericName\": \"Language Support\",\n"
+                                                                          " \"GenericName[sl]\": \"Podpora jeziku\",\n"
+                                                                          " \"KPlugin\": {\n"
+                                                                          "     \"Category\": \"Language Support\",\n"
+                                                                          "     \"Description\": \"C/C++ Language Support\",\n"
+                                                                          "     \"Description[fr]\": \"Prise en charge du langage C/C++\",\n"
+                                                                          "     \"Description[it]\": \"Supporto al linguaggio C/C++\",\n"
+                                                                          "     \"Icon\": \"text-x-c++src\",\n"
+                                                                          "     \"Id\": \"kdevcppsupport\",\n"
+                                                                          "     \"Name\": \"C++ Support\",\n"
+                                                                          "     \"Name[fi]\": \"C++-tuki\",\n"
+                                                                          "     \"Name[fr]\": \"Prise en charge du C++\",\n"
+                                                                          "     \"ServiceTypes\": [ \"KDevelop/NonExistentPlugin\" ]\n"
+                                                                          " },\n"
+                                                                          " \"X-KDevelop-Args\": \"CPP\",\n"
+                                                                          " \"X-KDevelop-Interfaces\": [\"ILanguageSupport\"],\n"
+                                                                          " \"X-KDevelop-Language\": \"C++\",\n"
+                                                                          " \"X-KDevelop-LoadMode\": \"AlwaysOn\",\n"
+                                                                          " \"X-KDevelop-Mode\": \"NoGUI\",\n"
+                                                                          " \"X-KDevelop-SupportedMimeTypes\": [\"text/x-chdr\", \"text/x-c++hdr\", \"text/x-csrc\", \"text/x-c++src\"],\n"
+                                                                          " \"X-KDevelop-Version\": 1\n"
+                                                                          "}\n", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
         const QString kdevServiceTypePath = QFINDTESTDATA("data/servicetypes/fake-kdevelopplugin.desktop");
         QVERIFY(!kdevServiceTypePath.isEmpty());
         QTest::newRow("kdevcpplanguagesupport with servicetype") << kdevInput << kdevExpectedWithServiceType
-                << false << QStringList(kdevServiceTypePath);
+                                                                 << false << QStringList(kdevServiceTypePath);
         // test conversion of the X-KDE-PluginInfo-Author + X-KDE-PluginInfo-Email key:
         QByteArray authorInput =
-            "[Desktop Entry]\n"
-            "Type=Service\n"
-            "X-KDE-PluginInfo-Author=Foo Bar\n"
-            "X-KDE-PluginInfo-Email=foo.bar@baz.com\n";
+                "[Desktop Entry]\n"
+                "Type=Service\n"
+                "X-KDE-PluginInfo-Author=Foo Bar\n"
+                "X-KDE-PluginInfo-Email=foo.bar@baz.com\n";
 
         QJsonObject authorsExpected = QJsonDocument::fromJson("{\n"
-            " \"KPlugin\": {\n"
-            "     \"Authors\": [ { \"Name\": \"Foo Bar\", \"Email\": \"foo.bar@baz.com\" } ]\n"
-            " }\n }\n", &e).object();
+                                                              " \"KPlugin\": {\n"
+                                                              "     \"Authors\": [ { \"Name\": \"Foo Bar\", \"Email\": \"foo.bar@baz.com\" } ]\n"
+                                                              " }\n }\n", &e).object();
         QCOMPARE(e.error, QJsonParseError::NoError);
         QTest::newRow("authors") << authorInput << authorsExpected << false << QStringList();
 
@@ -275,28 +277,28 @@ private Q_SLOTS:
 
         // test conversion of kcookiejar.desktop (for some reason the wrong boolean values were committed)
         QByteArray kcookiejarInput =
-        "[Desktop Entry]\n"
-        "Type= Service\n"
-        "Name=Cookie Jar\n"
-        "Comment=Stores network cookies\n"
-        "X-KDE-ServiceTypes=KDEDModule\n"
-        "X-KDE-Library=kf5/kded/kcookiejar\n"
-        "X-KDE-DBus-ModuleName=kcookiejar\n"
-        "X-KDE-Kded-autoload=false\n"
-        "X-KDE-Kded-load-on-demand=true\n";
+                "[Desktop Entry]\n"
+                "Type= Service\n"
+                "Name=Cookie Jar\n"
+                "Comment=Stores network cookies\n"
+                "X-KDE-ServiceTypes=KDEDModule\n"
+                "X-KDE-Library=kf5/kded/kcookiejar\n"
+                "X-KDE-DBus-ModuleName=kcookiejar\n"
+                "X-KDE-Kded-autoload=false\n"
+                "X-KDE-Kded-load-on-demand=true\n";
         auto kcookiejarResult = QJsonDocument::fromJson(
-        "{\n"
-        "  \"KPlugin\": {\n"
-        "    \"Description\": \"Stores network cookies\",\n"
-        "    \"Name\": \"Cookie Jar\",\n"
-        "    \"ServiceTypes\": [\n"
-        "      \"KDEDModule\"\n"
-        "    ]\n"
-        "  },\n"
-        "\"X-KDE-DBus-ModuleName\": \"kcookiejar\",\n"
-        "\"X-KDE-Kded-autoload\": false,\n"
-        "\"X-KDE-Kded-load-on-demand\": true\n"
-        "}\n", &e).object();
+                    "{\n"
+                    "  \"KPlugin\": {\n"
+                    "    \"Description\": \"Stores network cookies\",\n"
+                    "    \"Name\": \"Cookie Jar\",\n"
+                    "    \"ServiceTypes\": [\n"
+                    "      \"KDEDModule\"\n"
+                    "    ]\n"
+                    "  },\n"
+                    "\"X-KDE-DBus-ModuleName\": \"kcookiejar\",\n"
+                    "\"X-KDE-Kded-autoload\": false,\n"
+                    "\"X-KDE-Kded-load-on-demand\": true\n"
+                    "}\n", &e).object();
         const QString kdedmoduleServiceType = QFINDTESTDATA("data/servicetypes/fake-kdedmodule.desktop");
         QVERIFY(!kdedmoduleServiceType.isEmpty());
         QTest::newRow("kcookiejar") << kcookiejarInput << kcookiejarResult << false << QStringList(kdedmoduleServiceType);
@@ -322,13 +324,13 @@ private Q_SLOTS:
 
 
         QProcess proc;
-        proc.setProgram(DESKTOP_TO_JSON_EXE);
-        QStringList arguments = QStringList() << "-i" << inputFile.fileName() << "-o" << output.fileName();
+        proc.setProgram(QStringLiteral(DESKTOP_TO_JSON_EXE));
+        QStringList arguments = QStringList() << QStringLiteral("-i") << inputFile.fileName() << QStringLiteral("-o") << output.fileName();
         if (compatibilityMode) {
-            arguments << "-c";
+            arguments << QStringLiteral("-c");
         }
         foreach(const QString &s, serviceTypes) {
-            arguments << "-s" << s;
+            arguments << QStringLiteral("-s") << s;
         }
         proc.setArguments(arguments);
         proc.start();

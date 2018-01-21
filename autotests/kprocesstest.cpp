@@ -44,9 +44,9 @@ static QString recurse(KProcess::OutputChannelMode how)
 {
     QProcess p;
     p.setProcessChannelMode(QProcess::MergedChannels);
-    p.start(gargv[0], QStringList() << QString::number(how) << QStringLiteral("--nocrashhandler"));
+    p.start(QString::fromLatin1(gargv[0]), QStringList() << QString::number(how) << QStringLiteral("--nocrashhandler"));
     p.waitForFinished();
-    return p.readAllStandardOutput();
+    return QString::fromLatin1(p.readAllStandardOutput());
 }
 
 #define EOUT "foo - stdout"
@@ -58,8 +58,8 @@ static QString recurse(KProcess::OutputChannelMode how)
 #define EO EOUT "\n"
 #define EE EERR "\n"
 #define TESTCHAN(me,ms,pout,rout,rerr) \
-    e = "mode: " ms "\n" POUT pout ROUT rout RERR rerr; \
-    a = "mode: " ms "\n" + recurse(KProcess::me); \
+    e = QStringLiteral("mode: " ms "\n" POUT pout ROUT rout RERR rerr); \
+    a = QStringLiteral("mode: " ms "\n") + recurse(KProcess::me); \
     QCOMPARE(a, e)
 
 void KProcessTest::test_channels()
@@ -79,18 +79,19 @@ void KProcessTest::test_channels()
 
 void KProcessTest::test_setShellCommand()
 {
-// Condition copied from kprocess.cpp
+    // Condition copied from kprocess.cpp
 #if !defined(__linux__) && !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__) && !defined(__GNU__)
     QSKIP("This test needs a free UNIX system");
 #else
     KProcess p;
 
-    p.setShellCommand("cat");
+    p.setShellCommand(QStringLiteral("cat"));
     QCOMPARE(p.program().count(), 1);
-    QCOMPARE(p.program().at(0), QStandardPaths::findExecutable("cat"));
-    QVERIFY(p.program().at(0).endsWith("/bin/cat"));
-    p.setShellCommand("true || false");
-    QCOMPARE(p.program(), QStringList() << "/bin/sh" << "-c" << "true || false");
+    QCOMPARE(p.program().at(0), QStandardPaths::findExecutable(QStringLiteral("cat")));
+    QVERIFY(p.program().at(0).endsWith(QStringLiteral("/bin/cat")));
+    p.setShellCommand(QStringLiteral("true || false"));
+    QCOMPARE(p.program(), QStringList() << QStringLiteral("/bin/sh") << QStringLiteral("-c")
+             << QString::fromLatin1("true || false"));
 #endif
 }
 
@@ -98,7 +99,7 @@ static void recursor(char **argv)
 {
     if (argv[1]) {
         KProcess p;
-        p.setShellCommand("echo " EOUT "; echo " EERR " >&2");
+        p.setShellCommand(QString::fromLatin1("echo " EOUT "; echo " EERR " >&2"));
         p.setOutputChannelMode(static_cast<KProcess::OutputChannelMode>(atoi(argv[1])));
         fputs(POUT, stdout);
         fflush(stdout);
