@@ -327,7 +327,7 @@ void KAboutDataTest::testLicenseSPDXID()
 
     //we should be able to match by spdx too
     //create a KAboutLicense from enum, then make sure going to spdx and back gives the same enum
-    for(int i = 1; i < KAboutLicense::LGPL_V2_1 ; i++) { /*current highest enum value*/
+    for(int i = 1; i <= KAboutLicense::LGPL_V2_1 ; ++i) { /*current highest enum value*/
         KAboutData aboutData(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
                                     QLatin1String(ShortDescription), KAboutLicense::GPL_V2);
         aboutData.setLicense(KAboutLicense::LicenseKey(i));

@@ -434,7 +434,9 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
         { "lgpl30", KAboutLicense::LGPL_V3 },
         { "lgpl30+", KAboutLicense::LGPL_V3 },
         { "lgplv21", KAboutLicense::LGPL_V2_1 },
-        { "lgplv21+", KAboutLicense::LGPL_V2_1 }
+        { "lgplv21+", KAboutLicense::LGPL_V2_1 },
+        { "lgpl21", KAboutLicense::LGPL_V2_1 },
+        { "lgpl21+", KAboutLicense::LGPL_V2_1 },
     };
 
     // Normalize keyword.
