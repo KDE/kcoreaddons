@@ -73,9 +73,11 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
     }
     QByteArray ba = mimeData->data(QString::fromLatin1(firstMimeType));
     if (ba.isEmpty()) {
-        ba = mimeData->data(QString::fromLatin1(secondMimeType));
-    }
-    if (!ba.isEmpty()) {
+        // Extracting uris from text/uri-list, use the much faster QMimeData method urls()
+        if (mimeData->hasUrls()) {
+            uris = mimeData->urls();
+        }
+    } else {
         // Code from qmimedata.cpp
         QList<QByteArray> urls = ba.split('\n');
         for (int i = 0; i < urls.size(); ++i) {
@@ -85,6 +87,7 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
             }
         }
     }
+
     if (metaData) {
         const QByteArray metaDataPayload = mimeData->data(QStringLiteral("application/x-kio-metadata"));
         if (!metaDataPayload.isEmpty()) {
