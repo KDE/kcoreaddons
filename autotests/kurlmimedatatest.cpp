@@ -101,8 +101,23 @@ void KUrlMimeDataTest::testFromQUrl()
     delete mimeData;
 }
 
+void KUrlMimeDataTest::testMostLocalUrlList_data()
+{
+    QTest::addColumn<bool>("withKdeUrls");
+    QTest::addColumn<bool>("withLocalUrls");
+    QTest::addColumn<bool>("expectedLocalUrls");
+
+    QTest::newRow("both") << true << true << false;
+    QTest::newRow("local_only") << false << true << true;
+    QTest::newRow("kde_only") << true << false << false;
+}
+
 void KUrlMimeDataTest::testMostLocalUrlList()
 {
+    QFETCH(bool, withKdeUrls);
+    QFETCH(bool, withLocalUrls);
+    QFETCH(bool, expectedLocalUrls);
+
     QMimeData *mimeData = new QMimeData();
     QList<QUrl> urls;
     urls.append(QUrl(QLatin1String("desktop:/foo")));
@@ -111,28 +126,46 @@ void KUrlMimeDataTest::testMostLocalUrlList()
     localUrls.append(QUrl(QLatin1String("file:/home/dfaure/Desktop/foo")));
     localUrls.append(QUrl(QLatin1String("file:/home/dfaure/Desktop/bar")));
 
-    KUrlMimeData::setUrls(urls, localUrls, mimeData);
+    if (withKdeUrls && withLocalUrls) {
+        KUrlMimeData::setUrls(urls, localUrls, mimeData);
+    } else if (withKdeUrls) {
+        KUrlMimeData::setUrls(urls, {}, mimeData);
+    } else if (withLocalUrls) {
+        KUrlMimeData::setUrls({}, localUrls, mimeData);
+    }
 
     QVERIFY(mimeData->hasUrls());
     QVERIFY(mimeData->hasText());
     // The support for urls is done in hasText, a direct call to hasFormat will say false.
     //QVERIFY(mimeData->hasFormat(QLatin1String("text/plain")));
 
-    // urlsFromMimeData decodes the real "kde" urls by default
+    // urlsFromMimeData decodes the real "kde" urls by default, if any
     QList<QUrl> decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData);
     QVERIFY(!decodedURLs.isEmpty());
-    QCOMPARE(decodedURLs, urls);
+    if (expectedLocalUrls) {
+        QCOMPARE(decodedURLs, localUrls);
+    } else {
+        QCOMPARE(decodedURLs, urls);
+    }
 
     // urlsFromMimeData can also be told to decode the "most local" urls
     decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData, KUrlMimeData::PreferLocalUrls);
     QVERIFY(!decodedURLs.isEmpty());
-    QCOMPARE(decodedURLs, localUrls);
+    if (withLocalUrls) {
+        QCOMPARE(decodedURLs, localUrls);
+    } else {
+        QCOMPARE(decodedURLs, urls);
+    }
 
     // QMimeData decodes the "most local" urls
     const QList<QUrl> qurls = mimeData->urls();
-    QCOMPARE(qurls.count(), localUrls.count());
-    for (int i = 0; i < qurls.count(); ++i) {
-        QCOMPARE(qurls[i], static_cast<QUrl>(localUrls[i]));
+    if (withLocalUrls) {
+        QCOMPARE(qurls.count(), localUrls.count());
+        for (int i = 0; i < qurls.count(); ++i) {
+            QCOMPARE(qurls[i], static_cast<QUrl>(localUrls[i]));
+        }
+    } else {
+        QCOMPARE(qurls.count(), 0);
     }
 
     delete mimeData;

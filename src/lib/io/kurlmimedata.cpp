@@ -61,30 +61,37 @@ QStringList KUrlMimeData::mimeDataTypes()
     return QStringList() << QString::fromLatin1(s_kdeUriListMime) << QStringLiteral("text/uri-list");
 }
 
+static QList<QUrl> extractKdeUriList(const QMimeData *mimeData)
+{
+    QList<QUrl> uris;
+    const QByteArray ba = mimeData->data(QString::fromLatin1(s_kdeUriListMime));
+    // Code from qmimedata.cpp
+    QList<QByteArray> urls = ba.split('\n');
+    for (int i = 0; i < urls.size(); ++i) {
+        QByteArray data = urls.at(i).trimmed();
+        if (!data.isEmpty()) {
+            uris.append(QUrl::fromEncoded(data));
+        }
+    }
+    return uris;
+}
+
+
 QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
         DecodeOptions decodeOptions,
         MetaDataMap *metaData)
 {
     QList<QUrl> uris;
-    const char *firstMimeType = s_kdeUriListMime;
-    const char *secondMimeType = "text/uri-list";
     if (decodeOptions == PreferLocalUrls) {
-        qSwap(firstMimeType, secondMimeType);
-    }
-    QByteArray ba = mimeData->data(QString::fromLatin1(firstMimeType));
-    if (ba.isEmpty()) {
         // Extracting uris from text/uri-list, use the much faster QMimeData method urls()
-        if (mimeData->hasUrls()) {
-            uris = mimeData->urls();
+        uris = mimeData->urls();
+        if (uris.isEmpty()) {
+            uris = extractKdeUriList(mimeData);
         }
     } else {
-        // Code from qmimedata.cpp
-        QList<QByteArray> urls = ba.split('\n');
-        for (int i = 0; i < urls.size(); ++i) {
-            QByteArray data = urls.at(i).trimmed();
-            if (!data.isEmpty()) {
-                uris.append(QUrl::fromEncoded(data));
-            }
+        uris = extractKdeUriList(mimeData);
+        if (uris.isEmpty()) {
+            uris = mimeData->urls();
         }
     }
 

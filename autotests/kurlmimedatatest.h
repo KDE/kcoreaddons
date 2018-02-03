@@ -29,6 +29,7 @@ private Q_SLOTS:
     void testURLList();
     void testOneURL();
     void testFromQUrl();
+    void testMostLocalUrlList_data();
     void testMostLocalUrlList();
 };
 
