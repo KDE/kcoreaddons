@@ -836,7 +836,7 @@ void KDirWatch_UnitTest::benchNotifyWatcher()
     QSignalSpy spy(&watch, &KDirWatch::dirty);
     QBENCHMARK {
         createDirectoryTree(dir.path());
-        QTRY_COMPARE_WITH_TIMEOUT(spy.count(), numFiles, s_maxTries * 50);
+        QTRY_COMPARE_WITH_TIMEOUT(spy.count(), numFiles, s_maxTries * 50 * 2);
         spy.clear();
     }
 }
