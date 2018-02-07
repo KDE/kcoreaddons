@@ -175,6 +175,44 @@ class Part;
 /**
  * \relates KPluginFactory
  *
+ * Create a KPluginFactory subclass and export it as the root plugin object with
+ * JSON metadata.
+ *
+ * This macro does the same as K_PLUGIN_FACTORY_WITH_JSON, but you only have to pass the class name and the json file.
+ * The factory name and registerPlugin call are deduced from the class name.
+ *
+ * @code
+ * #include <myplugin.moc>
+ * @endcode
+ * in the same source file when that one has the name "myplugin.cpp".
+ *
+ * Example:
+ * \code
+ * #include <KPluginFactory>
+ * #include <plugininterface.h>
+ *
+ * class MyPlugin : public PluginInterface
+ * {
+ * public:
+ *     MyPlugin(QObject *parent, const QVariantList &args)
+ *         : PluginInterface(parent)
+ *     {}
+ * };
+ *
+ * K_PLUGIN_CLASS_WITH_JSON(MyPlugin, "metadata.json")
+ *
+ * #include <myplugin.moc>
+ * \endcode
+ *
+ * \see K_PLUGIN_FACTORY_WITH_JSON
+ *
+ * @since 5.44
+ */
+#define K_PLUGIN_CLASS_WITH_JSON(classname, jsonFile) K_PLUGIN_FACTORY_WITH_JSON(classname ## Factory, jsonFile, registerPlugin<classname >();)
+
+/**
+ * \relates KPluginFactory
+ *
  * K_PLUGIN_FACTORY_DECLARATION declares the KPluginFactory subclass. This macro
  * can be used in a header file.
  *
