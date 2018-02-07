@@ -21,7 +21,7 @@
 #include <QStringList>
 #include <QMimeData>
 
-static const char s_kdeUriListMime[] = "application/x-kde4-urilist"; // keep this name "kde4" for compat.
+static QString kdeUriListMime() { return QStringLiteral("application/x-kde4-urilist"); } // keep this name "kde4" for compat.
 
 static QByteArray uriListData(const QList<QUrl> &urls)
 {
@@ -41,7 +41,7 @@ void KUrlMimeData::setUrls(const QList<QUrl> &urls, const QList<QUrl> &mostLocal
     mimeData->setUrls(mostLocalUrls); // set text/uri-list and text/plain
 
     // Export the real KIO urls as a kde-specific mimetype
-    mimeData->setData(QString::fromLatin1(s_kdeUriListMime), uriListData(urls));
+    mimeData->setData(kdeUriListMime(), uriListData(urls));
 }
 
 void KUrlMimeData::setMetaData(const MetaDataMap &metaData, QMimeData *mimeData)
@@ -58,13 +58,13 @@ void KUrlMimeData::setMetaData(const MetaDataMap &metaData, QMimeData *mimeData)
 
 QStringList KUrlMimeData::mimeDataTypes()
 {
-    return QStringList() << QString::fromLatin1(s_kdeUriListMime) << QStringLiteral("text/uri-list");
+    return QStringList() << kdeUriListMime() << QStringLiteral("text/uri-list");
 }
 
 static QList<QUrl> extractKdeUriList(const QMimeData *mimeData)
 {
     QList<QUrl> uris;
-    const QByteArray ba = mimeData->data(QString::fromLatin1(s_kdeUriListMime));
+    const QByteArray ba = mimeData->data(kdeUriListMime());
     // Code from qmimedata.cpp
     QList<QByteArray> urls = ba.split('\n');
     for (int i = 0; i < urls.size(); ++i) {
