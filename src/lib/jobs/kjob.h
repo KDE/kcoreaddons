@@ -115,7 +115,7 @@ public:
     /**
      * Destroys a KJob object.
      */
-    virtual ~KJob();
+    ~KJob() override;
 
     /**
      * Attach a UI delegate to this job.

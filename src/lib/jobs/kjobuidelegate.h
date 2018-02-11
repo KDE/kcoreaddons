@@ -51,7 +51,7 @@ public:
     /**
      * Destroys a KJobUiDelegate.
      */
-    virtual ~KJobUiDelegate();
+    ~KJobUiDelegate() override;
 
 protected:
     /**

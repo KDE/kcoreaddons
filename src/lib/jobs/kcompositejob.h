@@ -47,7 +47,7 @@ public:
     /**
      * Destroys a KCompositeJob object.
      */
-    virtual ~KCompositeJob();
+    ~KCompositeJob() override;
 
 protected:
     /**

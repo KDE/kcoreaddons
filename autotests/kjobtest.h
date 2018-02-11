@@ -30,7 +30,7 @@ class TestJob : public KJob
     Q_OBJECT
 public:
     TestJob();
-    virtual ~TestJob();
+    ~TestJob() override;
 
     void start() Q_DECL_OVERRIDE;
 

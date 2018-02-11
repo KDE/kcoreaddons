@@ -340,7 +340,7 @@ public:
     /**
      * This destroys the PluginFactory.
      */
-    virtual ~KPluginFactory();
+    ~KPluginFactory() override;
 
     /**
      * Use this method to create an object. It will try to create an object which inherits

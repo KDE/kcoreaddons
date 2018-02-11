@@ -46,7 +46,7 @@ public:
     /**
      * Destroys a KJobTrackerInterface
      */
-    virtual ~KJobTrackerInterface();
+    ~KJobTrackerInterface() override;
 
 public Q_SLOTS:
     /**
