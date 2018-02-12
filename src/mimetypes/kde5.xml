@@ -3834,7 +3834,7 @@ Notes:
     <comment xml:lang="fi">KConfigXT Configuration Options</comment>
     <comment xml:lang="fr">Options de configuration de KConfigXT</comment>
     <comment xml:lang="gl">Opcións de configuración de KConfigXT</comment>
-    <comment xml:lang="id">Pilihan Konfigurasi KConfigXT</comment>
+    <comment xml:lang="id">Opsi Konfigurasi KConfigXT</comment>
     <comment xml:lang="it">Opzioni di configurazione KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 설정 옵션</comment>
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
@@ -3869,7 +3869,7 @@ Notes:
     <comment xml:lang="fi">KConfigXT Code Generation Options</comment>
     <comment xml:lang="fr">Options de génération de code de KConfigXT</comment>
     <comment xml:lang="gl">Opcións de xeración de código de KConfigXT</comment>
-    <comment xml:lang="id">Pilihan Penghasilan Kode KConfigXT</comment>
+    <comment xml:lang="id">Opsi Penghasilan Kode KConfigXT</comment>
     <comment xml:lang="it">Opzioni di generazione codice KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 코드 생성 옵션</comment>
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
