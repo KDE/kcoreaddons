@@ -3838,6 +3838,7 @@ Notes:
     <comment xml:lang="it">Opzioni di configurazione KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 설정 옵션</comment>
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
+    <comment xml:lang="nn">KConfigXT-oppsett</comment>
     <comment xml:lang="pl">Opcje KConfigXT</comment>
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de configuração do KConfigXT</comment>
@@ -3873,6 +3874,7 @@ Notes:
     <comment xml:lang="it">Opzioni di generazione codice KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 코드 생성 옵션</comment>
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
+    <comment xml:lang="nn">KConfigXT-kodegeneringsval</comment>
     <comment xml:lang="pl">Opcje tworzenia kodu KConfigXT</comment>
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de geração de código do KConfigXT</comment>
@@ -3904,6 +3906,7 @@ Notes:
     <comment xml:lang="it">Dichiarazione UI KXMLGUI</comment>
     <comment xml:lang="ko">KXMLGUI UI 선언</comment>
     <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
+    <comment xml:lang="nn">KXMLGUI UI-deklarasjon</comment>
     <comment xml:lang="pl">Dklaracja KXMLGUI UI</comment>
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
     <comment xml:lang="pt_BR">Declaração UI do KXMLGUI</comment>
@@ -3940,6 +3943,7 @@ Notes:
     <comment xml:lang="it">Dichiarazione KNotification</comment>
     <comment xml:lang="ko">KNotification 선언</comment>
     <comment xml:lang="nl">Declaratie van KNotification</comment>
+    <comment xml:lang="nn">KNotification-deklarasjon</comment>
     <comment xml:lang="pl">Deklaracja KNotification</comment>
     <comment xml:lang="pt">Declaração do KNotification</comment>
     <comment xml:lang="pt_BR">Declaração do KNotification</comment>
