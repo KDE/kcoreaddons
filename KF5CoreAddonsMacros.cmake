@@ -58,11 +58,13 @@ function(kcoreaddons_desktop_to_json target desktop)
       endforeach()
     endif()
 
+    file(RELATIVE_PATH relativejson ${CMAKE_CURRENT_BINARY_DIR} ${json})
     add_custom_command(
         OUTPUT ${json}
         COMMAND ${command}
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
         DEPENDS ${desktop}
+        COMMENT "Generating ${relativejson}"
     )
     set_property(TARGET ${target} APPEND PROPERTY AUTOGEN_TARGET_DEPENDS ${json})
 endfunction()
