@@ -121,23 +121,6 @@ function(kcoreaddons_add_plugin plugin)
     endif()
     get_filename_component(json "${KCA_ADD_PLUGIN_JSON}" REALPATH)
 
-    # ensure we recompile the corresponding object files when the json file changes
-    set(dependent_sources )
-    foreach(source ${KCA_ADD_PLUGIN_SOURCES})
-        get_filename_component(source "${source}" REALPATH)
-        if(EXISTS "${source}")
-            file(STRINGS "${source}" match REGEX "K_PLUGIN_FACTORY_WITH_JSON")
-            if(match)
-                list(APPEND dependent_sources "${source}")
-            endif()
-        endif()
-    endforeach()
-    if(NOT dependent_sources)
-        # fallback to all sources - better safe than sorry...
-        set(dependent_sources ${KCA_ADD_PLUGIN_SOURCES})
-    endif()
-    set_property(SOURCE ${dependent_sources} APPEND PROPERTY OBJECT_DEPENDS ${json})
-
     add_library(${plugin} MODULE ${KCA_ADD_PLUGIN_SOURCES})
     set_property(TARGET ${plugin} APPEND PROPERTY AUTOGEN_TARGET_DEPENDS ${json})
     # If find_package(ECM 5.38) or higher is called, output the plugin in a INSTALL_NAMESPACE subfolder.
