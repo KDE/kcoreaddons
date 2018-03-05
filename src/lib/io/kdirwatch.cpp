@@ -1075,6 +1075,9 @@ void KDirWatchPrivate::removeEntry(KDirWatch *instance,
                            << " [" << (instance ? instance->objectName() : QString()) << "]";
     }
     QString p = e->path; // take a copy, QMap::remove takes a reference and deletes, since e points into the map
+#if HAVE_SYS_INOTIFY_H
+    m_inotify_wd_to_entry.remove(e->wd);
+#endif
     m_mapEntries.remove(p); // <e> not valid any more
 }
 
