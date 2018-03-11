@@ -23,10 +23,10 @@
 
 #include <stdlib.h>     // random()
 
-#include <QtCore/QRegExp>            // for the word ranges
-#include <QtCore/QCharRef>
-#include <QtCore/QMutableStringListIterator>
-#include <QtCore/QVector>
+#include <QRegExp>            // for the word ranges
+#include <QCharRef>
+#include <QMutableStringListIterator>
+#include <QVector>
 
 //
 // Capitalization routines

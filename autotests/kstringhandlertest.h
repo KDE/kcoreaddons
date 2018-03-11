@@ -1,7 +1,7 @@
 #ifndef KSTRINGHANDLERTEST_H
 #define KSTRINGHANDLERTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class KStringHandlerTest : public QObject
 {

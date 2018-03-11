@@ -20,7 +20,7 @@
 #ifndef KURLMIMEDATATEST_H
 #define KURLMIMEDATATEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class KUrlMimeDataTest : public QObject
 {

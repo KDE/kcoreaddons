@@ -24,7 +24,7 @@
 
 #include <kcoreaddons_export.h>
 
-#include <QtCore/QString>
+#include <QString>
 
 /**
  * \headerfile krandom.h <KRandom>

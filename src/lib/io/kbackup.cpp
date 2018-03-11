@@ -21,9 +21,9 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QFileInfo>
-#include <QtCore/QDir>
-#include <QtCore/QProcess>
+#include <QFileInfo>
+#include <QDir>
+#include <QProcess>
 
 #include <qstandardpaths.h>
 

@@ -20,8 +20,8 @@
 
 #include <kexportplugin.h>
 
-#include <QtCore/QPluginLoader>
-#include <QtCore/QtPlugin>
+#include <QPluginLoader>
+#include <QtPlugin>
 
 #include <functional>
 

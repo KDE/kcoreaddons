@@ -22,9 +22,9 @@
 
 #include "kmacroexpander_p.h"
 
-#include <QtCore/QStringList>
-#include <QtCore/QStack>
-#include <QtCore/QRegExp>
+#include <QStringList>
+#include <QStack>
+#include <QRegExp>
 
 namespace KMacroExpander
 {

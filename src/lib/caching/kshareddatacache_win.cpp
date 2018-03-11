@@ -24,9 +24,9 @@
  */
 #include "kshareddatacache.h"
 
-#include <QtCore/QString>
-#include <QtCore/QByteArray>
-#include <QtCore/QCache>
+#include <QString>
+#include <QByteArray>
+#include <QCache>
 
 class Q_DECL_HIDDEN KSharedDataCache::Private
 {

@@ -18,8 +18,8 @@
 
 #include "kdirwatchtest.h"
 
-#include <QtCore/QCoreApplication>
-#include <QtCore/QFile>
+#include <QCoreApplication>
+#include <QFile>
 #include <QStringList>
 
 #include <QDebug>

@@ -23,7 +23,7 @@
 
 #include <kcoreaddons_export.h>
 
-#include <QtCore/qnamespace.h>
+#include <qnamespace.h>
 
 class QChar;
 class QRegExp;

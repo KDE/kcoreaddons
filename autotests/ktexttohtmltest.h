@@ -20,7 +20,7 @@
 #ifndef KTEXTTOHTMLTEST_H
 #define KTEXTTOHTMLTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class KTextToHTMLTest : public QObject
 {

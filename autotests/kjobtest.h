@@ -20,8 +20,8 @@
 #ifndef KJOBTEST_H
 #define KJOBTEST_H
 
-#include <QtCore/QObject>
-#include <QtCore/QEventLoop>
+#include <QObject>
+#include <QEventLoop>
 #include "kjob.h"
 #include "kjobuidelegate.h"
 

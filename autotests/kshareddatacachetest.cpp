@@ -20,12 +20,12 @@
 
 #include <kshareddatacache.h>
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QDir>
+#include <QObject>
+#include <QString>
+#include <QStringList>
+#include <QDir>
 #include <qstandardpaths.h>
 #include <string.h> // strcpy
 

@@ -23,7 +23,7 @@
 #define KBACKUP_H
 
 #include <kcoreaddons_export.h>
-#include <QtCore/QString>
+#include <QString>
 
 /**
  * @namespace KBackup

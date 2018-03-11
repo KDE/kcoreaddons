@@ -24,7 +24,7 @@
 #ifndef KFORMATTEST_H
 #define KFORMATTEST_H
 
-#include <QtCore/QObject>
+#include <QObject>
 
 class KFormatTest : public QObject
 {

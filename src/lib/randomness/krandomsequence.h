@@ -19,7 +19,7 @@
 #define K_RANDOM_SEQUENCE_H
 
 #include <kcoreaddons_export.h>
-#include <QtCore/QList>
+#include <QList>
 
 /**
  * \class KRandomSequence krandomsequence.h <KRandomSequence>

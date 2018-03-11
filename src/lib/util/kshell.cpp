@@ -23,7 +23,7 @@
 #include "kshell_p.h"
 #include "kuser.h"
 
-#include <QtCore/QDir>
+#include <QDir>
 
 QString KShell::homeDir(const QString &user)
 {

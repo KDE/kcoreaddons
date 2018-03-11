@@ -20,7 +20,7 @@
 #ifndef KFILESYSTEMTYPE_P_H
 #define KFILESYSTEMTYPE_P_H
 
-#include <QtCore/QString>
+#include <QString>
 #include <kcoreaddons_export.h>
 
 /**

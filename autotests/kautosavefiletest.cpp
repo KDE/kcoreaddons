@@ -19,13 +19,13 @@
 
 #include "kautosavefiletest.h"
 
-#include <QtCore/QFile>
-#include <QtCore/QTextStream>
+#include <QFile>
+#include <QTextStream>
 
 #include <qtemporaryfile.h>
 #include <kautosavefile.h>
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 QTEST_MAIN(KAutoSaveFileTest)
 

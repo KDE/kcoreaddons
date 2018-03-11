@@ -22,8 +22,8 @@
 
 #include "kmacroexpander_p.h"
 
-#include <QtCore/QHash>
-#include <QtCore/QStringList>
+#include <QHash>
+#include <QStringList>
 
 KMacroExpanderBase::KMacroExpanderBase(QChar c) : d(new KMacroExpanderBasePrivate(c))
 {

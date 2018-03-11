@@ -23,7 +23,7 @@
 #include <kcoreaddons_export.h>
 #include <kjob.h>
 
-#include <QtCore/QList>
+#include <QList>
 
 class KCompositeJobPrivate;
 /**

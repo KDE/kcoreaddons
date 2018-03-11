@@ -22,9 +22,9 @@
 
 #include <kcoreaddons_export.h>
 
-#include <QtCore/QFile>
-#include <QtCore/QList>
-#include <QtCore/QUrl>
+#include <QFile>
+#include <QList>
+#include <QUrl>
 
 class KAutoSaveFilePrivate;
 /**

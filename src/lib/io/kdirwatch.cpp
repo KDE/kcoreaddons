@@ -51,13 +51,13 @@
 #include <assert.h>
 #include <errno.h>
 #include <QLoggingCategory>
-#include <QtCore/QDir>
-#include <QtCore/QFile>
-#include <QtCore/QSocketNotifier>
-#include <QtCore/QTimer>
-#include <QtCore/QThread>
-#include <QtCore/QThreadStorage>
-#include <QtCore/QCoreApplication>
+#include <QDir>
+#include <QFile>
+#include <QSocketNotifier>
+#include <QTimer>
+#include <QThread>
+#include <QThreadStorage>
+#include <QCoreApplication>
 
 #include <qplatformdefs.h> // QT_LSTAT, QT_STAT, QT_STATBUF
 

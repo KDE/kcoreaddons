@@ -28,11 +28,11 @@
 
 #include <QCoreApplication>
 #include <QStandardPaths>
-#include <QtCore/QFile>
-#include <QtCore/QTextStream>
-#include <QtCore/QSharedData>
-#include <QtCore/QVariant>
-#include <QtCore/QList>
+#include <QFile>
+#include <QTextStream>
+#include <QSharedData>
+#include <QVariant>
+#include <QList>
 #include <QUrl>
 #include <QHash>
 #include <QCommandLineParser>

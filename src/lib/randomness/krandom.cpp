@@ -34,7 +34,7 @@
 #endif //  Q_OS_WIN
 #include <fcntl.h>
 
-#include <QtCore/QFile>
+#include <QFile>
 #include <QThread>
 #include <QThreadStorage>
 

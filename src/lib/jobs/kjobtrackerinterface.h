@@ -23,8 +23,8 @@
 #include <kcoreaddons_export.h>
 #include <kjob.h>
 
-#include <QtCore/QObject>
-#include <QtCore/QPair>
+#include <QObject>
+#include <QPair>
 
 /**
  * @class KJobTrackerInterface kjobtrackerinterface.h KJobTrackerInterface

@@ -26,7 +26,7 @@
 #include <kcoreaddons_export.h>
 
 #include <QSharedDataPointer>
-#include <QtCore/QVariant>
+#include <QVariant>
 
 class KUserGroup;
 class QString;

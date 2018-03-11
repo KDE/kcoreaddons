@@ -22,8 +22,8 @@
 
 #include <config-caching.h> // HAVE_SYS_MMAN_H
 
-#include <QtCore/QDebug>
-#include <QtCore/QSharedPointer>
+#include <QDebug>
+#include <QSharedPointer>
 #include <qbasicatomic.h>
 
 #include "kcoreaddons_debug.h"

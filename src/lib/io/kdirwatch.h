@@ -18,9 +18,9 @@
 #ifndef _KDIRWATCH_H
 #define _KDIRWATCH_H
 
-#include <QtCore/QDateTime>
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QDateTime>
+#include <QObject>
+#include <QString>
 
 #include <kcoreaddons_export.h>
 

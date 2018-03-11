@@ -19,9 +19,9 @@
 
 #include "kjobtest.h"
 
-#include <QtCore/QTimer>
-#include <QtTest/QSignalSpy>
-#include <QtTest/QTest>
+#include <QTimer>
+#include <QSignalSpy>
+#include <QTest>
 
 QTEST_MAIN(KJobTest)
 

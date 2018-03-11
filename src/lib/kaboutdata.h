@@ -27,8 +27,8 @@
 #define KABOUTDATA_H
 
 #include <kcoreaddons_export.h>
-#include <QtCore/QString>
-#include <QtCore/QSharedDataPointer>
+#include <QString>
+#include <QSharedDataPointer>
 
 template <class T> class QList;
 class QCommandLineParser;

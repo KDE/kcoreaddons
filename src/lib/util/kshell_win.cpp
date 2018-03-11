@@ -25,7 +25,7 @@
 
 #include <QString>
 #include <QStringList>
-#include <QtCore/QDir>
+#include <QDir>
 
 /*
  * A short introduction into cmd semantics:

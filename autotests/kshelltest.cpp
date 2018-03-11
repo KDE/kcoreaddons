@@ -20,12 +20,12 @@
 #include <kshell.h>
 #include <kuser.h>
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QStringList>
-#include <QtCore/QDir>
+#include <QObject>
+#include <QString>
+#include <QStringList>
+#include <QDir>
 
 class KShellTest : public QObject
 {

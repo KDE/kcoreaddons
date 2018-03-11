@@ -23,7 +23,7 @@
 
 #include "kformattest.h"
 
-#include <QtTest/QtTest>
+#include <QtTest>
 
 #include "kformat.h"
 

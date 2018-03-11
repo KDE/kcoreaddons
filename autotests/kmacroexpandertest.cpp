@@ -20,8 +20,8 @@
 #include <QTest>
 #include <kmacroexpander.h>
 
-#include <QtCore/QHash>
-#include <QtCore/QObject>
+#include <QHash>
+#include <QObject>
 
 class KMacroExpanderTest : public QObject
 {

@@ -20,8 +20,8 @@
 #ifndef kautosavefiletest_h
 #define kautosavefiletest_h
 
-#include <QtCore/QObject>
-#include <QtCore/QStringList>
+#include <QObject>
+#include <QStringList>
 
 class KAutoSaveFileTest : public QObject
 {

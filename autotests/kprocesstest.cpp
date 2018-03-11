@@ -20,7 +20,7 @@
 */
 
 #include <kprocess.h>
-#include <QtTest/QtTest>
+#include <QtTest>
 #include <qstandardpaths.h>
 
 #include <stdio.h>

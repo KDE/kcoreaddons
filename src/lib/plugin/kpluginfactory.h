@@ -24,9 +24,9 @@
 
 #include "kcoreaddons_export.h"
 
-#include <QtCore/QObject>
-#include <QtCore/QVariant>
-#include <QtCore/QStringList>
+#include <QObject>
+#include <QVariant>
+#include <QStringList>
 #include <kexportplugin.h> // for source compat
 
 class QWidget;

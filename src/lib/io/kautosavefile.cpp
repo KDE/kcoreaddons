@@ -22,13 +22,13 @@
 
 #include <stdio.h> // for FILENAME_MAX
 
-#include <QtCore/QLatin1Char>
-#include <QtCore/QCoreApplication>
-#include <QtCore/QDir>
-#include <QtCore/QDebug>
-#include <QtCore/QFile>
-#include <QtCore/QLockFile>
-#include <QtCore/QStandardPaths>
+#include <QLatin1Char>
+#include <QCoreApplication>
+#include <QDir>
+#include <QDebug>
+#include <QFile>
+#include <QLockFile>
+#include <QStandardPaths>
 #include "krandom.h"
 #include "kcoreaddons_debug.h"
 

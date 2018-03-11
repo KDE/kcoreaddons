@@ -21,10 +21,10 @@
 #include "kpluginfactory.h"
 #include "kpluginmetadata.h"
 
-#include <QtCore/QLibrary>
-#include <QtCore/QDir>
+#include <QLibrary>
+#include <QDir>
 #include <QDirIterator>
-#include <QtCore/QFileInfo>
+#include <QFileInfo>
 #include "kcoreaddons_debug.h"
 #include <QCoreApplication>
 #include <QMutex>

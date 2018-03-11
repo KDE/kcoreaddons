@@ -21,7 +21,7 @@
 
 #include <kcoreaddons_export.h>
 
-#include <QtCore/QString>
+#include <QString>
 
 class KMessageHandler;
 /**

@@ -24,8 +24,8 @@
 
 #include <kuser.h>
 
-#include <QtCore/QChar>
-#include <QtCore/QStringList>
+#include <QChar>
+#include <QStringList>
 
 static int fromHex(QChar cUnicode)
 {

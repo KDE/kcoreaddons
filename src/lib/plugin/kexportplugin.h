@@ -18,8 +18,8 @@
 #ifndef KEXPORTPLUGIN_H
 #define KEXPORTPLUGIN_H
 
-#include <QtCore/QPluginLoader>
-#include <QtCore/QtPlugin>
+#include <QPluginLoader>
+#include <QtPlugin>
 #include <kcoreaddons_export.h>
 
 /**

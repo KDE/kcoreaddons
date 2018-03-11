@@ -18,7 +18,7 @@
 */
 #include "kmessage.h"
 
-#include <QtCore/QLatin1String>
+#include <QLatin1String>
 
 #include <iostream>
 

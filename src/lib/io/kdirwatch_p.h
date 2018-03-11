@@ -36,12 +36,12 @@
 #define HAVE_QFILESYSTEMWATCHER 0
 #endif
 
-#include <QtCore/QList>
-#include <QtCore/QSet>
-#include <QtCore/QMap>
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QTimer>
+#include <QList>
+#include <QSet>
+#include <QMap>
+#include <QObject>
+#include <QString>
+#include <QTimer>
 class QSocketNotifier;
 
 #if HAVE_FAM
@@ -55,7 +55,7 @@ class QSocketNotifier;
 #define invalid_ctime (static_cast<time_t>(-1))
 
 #if HAVE_QFILESYSTEMWATCHER
-#include <QtCore/QFileSystemWatcher>
+#include <QFileSystemWatcher>
 #endif // HAVE_QFILESYSTEMWATCHER
 
 /* KDirWatchPrivate is a singleton and does the watching

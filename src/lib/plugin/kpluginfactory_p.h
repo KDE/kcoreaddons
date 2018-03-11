@@ -24,7 +24,7 @@
 
 #include "kpluginfactory.h"
 
-#include <QtCore/QHash>
+#include <QHash>
 
 class KPluginFactoryPrivate
 {

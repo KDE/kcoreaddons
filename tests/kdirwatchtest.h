@@ -21,7 +21,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <QtCore/QObject>
+#include <QObject>
 
 #include "kdirwatch.h"
 
