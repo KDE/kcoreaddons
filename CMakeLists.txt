@@ -18,6 +18,7 @@ include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(ECMQtDeclareLoggingCategory)
 include(ECMAddQch)
+include(ECMSetupQtPluginMacroNames)
 
 include(KDEInstallDirs)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
@@ -29,27 +30,15 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 set(REQUIRED_QT_VERSION 5.7.0)
 find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
 
-# TODO: create ECM macro for automoc & json things
-set(KCoreAddons_AUTOMOC_MACRO_NAMES "K_PLUGIN_FACTORY_WITH_JSON" "K_PLUGIN_FACTORY" "K_PLUGIN_CLASS_WITH_JSON")
-if(NOT CMAKE_VERSION VERSION_LESS "3.10.0")
-  # CMake 3.9+ warns about automoc on files without Q_OBJECT, and doesn't know about other macros.
-  # 3.10+ lets us provide more macro names that require automoc.
-  list(APPEND CMAKE_AUTOMOC_MACRO_NAMES ${KCoreAddons_AUTOMOC_MACRO_NAMES})
-endif()
-set(KCoreAddons_AUTOMOC_MACRO_NAMES_WITH_JSON_ARG2 "K_PLUGIN_FACTORY_WITH_JSON" "K_PLUGIN_CLASS_WITH_JSON")
-if(NOT CMAKE_VERSION VERSION_LESS "3.9.0")
-    # CMake's automoc needs help to find names of plugin metadata files in case Q_PLUGIN_METADATA
-    # is indirectly used via other C++ preprocessor macros
-    # 3.9+ lets us provide some filter rule pairs (keyword, regexp) to match the names of such files
-    # in the plain text of the sources. See AUTOMOC_DEPEND_FILTERS docs for details.
-    foreach(macro_name  ${KCoreAddons_AUTOMOC_MACRO_NAMES_WITH_JSON_ARG2})
-        list(APPEND CMAKE_AUTOMOC_DEPEND_FILTERS
-            "${macro_name}"
-            "[\n^][ \t]*${macro_name}[ \t\n]*\\([^,]*,[ \t\n]*\"([^\"]+)\""
-        )
-    endforeach()
-endif()
-
+ecm_setup_qtplugin_macro_names(
+    JSON_NONE
+        "K_PLUGIN_FACTORY"
+    JSON_ARG2
+        "K_PLUGIN_FACTORY_WITH_JSON"
+        "K_PLUGIN_CLASS_WITH_JSON"
+    CONFIG_CODE_VARIABLE
+        PACKAGE_SETUP_AUTOMOC_VARIABLES
+)
 
 find_package(Threads)
 

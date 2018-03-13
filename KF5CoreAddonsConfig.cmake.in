@@ -3,21 +3,7 @@
 include(CMakeFindDependencyMacro)
 find_dependency(Qt5Core @REQUIRED_QT_VERSION@)
 
-
-if(NOT CMAKE_VERSION VERSION_LESS "3.10.0")
-  # CMake 3.9+ warns about automoc on files without Q_OBJECT, and doesn't know about other macros.
-  # 3.10+ lets us provide more macro names that require automoc.
-  list(APPEND CMAKE_AUTOMOC_MACRO_NAMES @KCoreAddons_AUTOMOC_MACRO_NAMES@)
-endif()
-if(NOT CMAKE_VERSION VERSION_LESS "3.9.0")
-    foreach(macro_name  @KCoreAddons_AUTOMOC_MACRO_NAMES_WITH_JSON_ARG2@)
-        # tell automoc how to find names of plugin metadata files
-        list(APPEND CMAKE_AUTOMOC_DEPEND_FILTERS
-            "${macro_name}"
-            "[\n^][ \t]*${macro_name}[ \t\n]*\\([^,]*,[ \t\n]*\"([^\"]+)\""
-        )
-    endforeach()
-endif()
+@PACKAGE_SETUP_AUTOMOC_VARIABLES@
 
 if(CMAKE_CROSSCOMPILING AND KF5_HOST_TOOLING)
     find_file(TARGETSFILE KF5CoreAddons/KF5CoreAddonsToolingTargets.cmake
