@@ -1438,7 +1438,7 @@ Notes:
     <comment xml:lang="ca">Llista del connector carregador de llista de fitxers del Kate</comment>
     <comment xml:lang="ca@valencia">Llista del connector carregador de llista de fitxers del Kate</comment>
     <comment xml:lang="da">Liste over plugins til fillisteindlæsning i Kate</comment>
-    <comment xml:lang="de">Kate-Dateilistenlade-Modulliste</comment>
+    <comment xml:lang="de">Kate-Dateilisten-Modul</comment>
     <comment xml:lang="el">Λίστα αρχείου φόρτωσης λίστας πρόσθετων Kate</comment>
     <comment xml:lang="en_GB">Kate file list loader plugin list</comment>
     <comment xml:lang="es">Lista de complementos de carga de listas de archivos de Kate</comment>
