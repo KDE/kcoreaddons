@@ -285,6 +285,7 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
         if (isEmptyUrl(url) || (url.length() > mMaxUrlLen)) {
             mPos = start;
             url.clear();
+            return url;
         } else {
             --mPos;
         }
