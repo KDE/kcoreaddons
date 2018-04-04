@@ -154,7 +154,7 @@ public:
      * Destroys the KAutoSaveFile object, removes the autosave
      * file and drops the lock being held (if any).
      */
-    ~KAutoSaveFile();
+    ~KAutoSaveFile() override;
 
     /**
      * Retrieves the URL of the file managed by KAutoSaveFile. This
