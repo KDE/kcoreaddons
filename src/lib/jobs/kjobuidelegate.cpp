@@ -37,7 +37,7 @@ public:
     bool autoWarningHandling : 1;
 
     void connectJob(KJob *job);
-    void _k_result(KJob *job);
+    void _k_result();
 };
 
 KJobUiDelegate::KJobUiDelegate()
@@ -102,15 +102,12 @@ void KJobUiDelegate::slotWarning(KJob *job, const QString &plain,
 
 void KJobUiDelegate::connectJob(KJob *job)
 {
-    connect(job, SIGNAL(result(KJob*)),
-            this, SLOT(_k_result(KJob*)));
-
+    connect(job, &KJob::result, this, [this](){ d->_k_result();} );
     connect(job, &KJob::warning, this, &KJobUiDelegate::slotWarning);
 }
 
-void KJobUiDelegate::Private::_k_result(KJob *job2)
+void KJobUiDelegate::Private::_k_result()
 {
-    Q_UNUSED(job2)
     if (job->error() && autoErrorHandling) {
         q->showErrorMessage();
     }

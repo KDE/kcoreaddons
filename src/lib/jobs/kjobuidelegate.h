@@ -131,8 +131,6 @@ protected Q_SLOTS:
 private:
     void connectJob(KJob *job);
 
-    Q_PRIVATE_SLOT(d, void _k_result(KJob *))
-
     class Private;
     Private *const d;
 };
