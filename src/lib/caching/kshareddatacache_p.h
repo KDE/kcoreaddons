@@ -166,7 +166,11 @@ public:
 
 private:
 #ifdef Q_CC_GNU
-    __attribute__((always_inline, gnu_inline, artificial))
+    __attribute__((always_inline, gnu_inline
+#if !defined(Q_CC_INTEL) && !defined(Q_CC_CLANG)
+                   , artificial
+#endif
+                   ))
 #endif
     static inline void loopSpinPause()
     {
