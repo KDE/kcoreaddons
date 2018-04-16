@@ -462,16 +462,14 @@ Q_SIGNALS:
     void warning(KJob *job, const QString &plain, const QString &rich = QString());
 
 Q_SIGNALS:
-#if !defined(Q_MOC_RUN) && !defined(DOXYGEN_SHOULD_SKIP_THIS) && !defined(IN_IDE_PARSER)
-    // TODO KF6: Use QPrivateSignal instead, to allow for new signal-slot syntax
-private: // don't tell moc, doxygen or kdevelop, but those signals are in fact private
-#endif
+    // These signals must be connected from KIO::KCoreDirLister (among others),
+    // therefore they must be public.
     /**
      * Emitted when we know the amount the job will have to process. The unit of this
      * amount is sent too. It can be emitted several times if the job manages several
      * different units.
      *
-     * This is a private signal, it can't be emitted directly by subclasses of
+     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use setTotalAmount() instead.
      *
      * @param job the job that emitted this signal
@@ -485,7 +483,7 @@ private: // don't tell moc, doxygen or kdevelop, but those signals are in fact p
      * The unit of this amount is sent too. It can be emitted several times if the job
      * manages several different units.
      *
-     * This is a private signal, it can't be emitted directly by subclasses of
+     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use setProcessedAmount() instead.
      *
      * @param job the job that emitted this signal
@@ -498,7 +496,7 @@ private: // don't tell moc, doxygen or kdevelop, but those signals are in fact p
      * Emitted when we know the size of this job (data size in bytes for transfers,
      * number of entries for listings, etc).
      *
-     * This is a private signal, it can't be emitted directly by subclasses of
+     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use setTotalAmount() instead.
      *
      * @param job the job that emitted this signal
@@ -510,7 +508,7 @@ private: // don't tell moc, doxygen or kdevelop, but those signals are in fact p
      * Regularly emitted to show the progress of this job
      * (current data size in bytes for transfers, entries listed, etc.).
      *
-     * This is a private signal, it can't be emitted directly by subclasses of
+     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use setProcessedAmount() instead.
      *
      * @param job the job that emitted this signal
@@ -524,7 +522,7 @@ private: // don't tell moc, doxygen or kdevelop, but those signals are in fact p
      * a progress bar very easily. (see KProgressBar).
      * Note that this signal is not emitted for finished jobs.
      *
-     * This is a private signal, it can't be emitted directly by subclasses of
+     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use emitPercent(), setPercent() setTotalAmount() or
      * setProcessedAmount() instead.
      *
@@ -536,7 +534,7 @@ private: // don't tell moc, doxygen or kdevelop, but those signals are in fact p
     /**
      * Emitted to display information about the speed of this job.
      *
-     * This is a private signal, it can't be emitted directly by subclasses of
+     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use emitSpeed() instead.
      *
      * @param job the job that emitted this signal
