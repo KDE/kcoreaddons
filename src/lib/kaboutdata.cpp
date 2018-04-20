@@ -286,6 +286,7 @@ QString KAboutLicense::text() const
             result = d->_licenseText;
             break;
         }
+        Q_FALLTHROUGH()
     // fall through
     default:
         result += QCoreApplication::translate(
