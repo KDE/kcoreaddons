@@ -372,7 +372,7 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
         return tr("Invalid date", "used when a relative date string can't be generated because the date is invalid");
     }
 
-    const qint64 daysTo = QDate::currentDate().daysTo(date);
+    const int daysTo = QDate::currentDate().daysTo(date);
     if (daysTo > 7 || daysTo < -7) {
         return m_locale.toString(date, format);
     }
@@ -426,7 +426,7 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
 
 QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const
 {
-    const qint64 daysTo = QDate::currentDate().daysTo(dateTime.date());
+    int daysTo = QDate::currentDate().daysTo(dateTime.date());
     if (daysTo > 7 || daysTo < -7) {
         return m_locale.toString(dateTime, format);
     }

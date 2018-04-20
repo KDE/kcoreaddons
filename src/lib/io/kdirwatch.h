@@ -86,7 +86,7 @@ public:
      * is added.
      * @param parent the parent of the QObject (or 0 for parent-less KDataTools)
      */
-    explicit KDirWatch(QObject *parent = nullptr);
+    KDirWatch(QObject *parent = nullptr);
 
     /**
      * Destructor.

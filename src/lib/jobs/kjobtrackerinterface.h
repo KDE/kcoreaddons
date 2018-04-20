@@ -41,7 +41,7 @@ public:
      *
      * @param parent the parent object
      */
-    explicit KJobTrackerInterface(QObject *parent = nullptr);
+    KJobTrackerInterface(QObject *parent = nullptr);
 
     /**
      * Destroys a KJobTrackerInterface
