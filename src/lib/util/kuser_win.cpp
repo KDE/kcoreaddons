@@ -69,12 +69,12 @@ typedef std::unique_ptr<std::remove_pointer<HANDLE>::type, decltype(handleCloser
 */
 template<typename T> struct NetApiTypeInfo {};
 #define NETAPI_TYPE_INFO(prefix, n) template<> struct NetApiTypeInfo<prefix##_##n> { enum { level = n }; };
-NETAPI_TYPE_INFO(GROUP_INFO, 0);
-NETAPI_TYPE_INFO(GROUP_INFO, 3);
-NETAPI_TYPE_INFO(USER_INFO, 0);
-NETAPI_TYPE_INFO(USER_INFO, 4);
-NETAPI_TYPE_INFO(USER_INFO, 11);
-NETAPI_TYPE_INFO(GROUP_USERS_INFO, 0);
+NETAPI_TYPE_INFO(GROUP_INFO, 0)
+NETAPI_TYPE_INFO(GROUP_INFO, 3)
+NETAPI_TYPE_INFO(USER_INFO, 0)
+NETAPI_TYPE_INFO(USER_INFO, 4)
+NETAPI_TYPE_INFO(USER_INFO, 11)
+NETAPI_TYPE_INFO(GROUP_USERS_INFO, 0)
 
 // T must be a USER_INFO_* structure
 template<typename T>
