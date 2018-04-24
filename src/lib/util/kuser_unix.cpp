@@ -25,6 +25,7 @@
 
 #include <QMutableStringListIterator>
 #include <QDir>
+#include <QFileInfo>
 
 #include <pwd.h>
 #include <unistd.h>
@@ -195,7 +196,7 @@ QString KUser::faceIconPath() const
 
     pathToFaceIcon = QString(homeDir() + QLatin1Char('/') + QStringLiteral(".face.icon"));
 
-    if (QFile::exists(pathToFaceIcon)) {
+    if (QFileInfo(pathToFaceIcon).isReadable()) {
         return pathToFaceIcon;
     }
 
