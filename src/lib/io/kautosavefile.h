@@ -200,7 +200,7 @@ public:
      * @returns true if the file could be opened (= locked and
      * created), false if the operation failed
      */
-    bool open(OpenMode openmode) Q_DECL_OVERRIDE;
+    bool open(OpenMode openmode) override;
 
     /**
      * Checks for stale autosave files for the file @p url. Returns a list

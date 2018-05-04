@@ -33,7 +33,7 @@ public:
     explicit TestJob(QObject *parent = nullptr);
 
     /// Takes 1 second to finish
-    void start() Q_DECL_OVERRIDE;
+    void start() override;
 
 private Q_SLOTS:
     void doEmit();
@@ -46,11 +46,11 @@ class CompositeJob : public KCompositeJob
 public:
     explicit CompositeJob(QObject *parent = nullptr) : KCompositeJob(parent) {}
 
-    void start() Q_DECL_OVERRIDE;
-    bool addSubjob(KJob *job) Q_DECL_OVERRIDE;
+    void start() override;
+    bool addSubjob(KJob *job) override;
 
 protected Q_SLOTS:
-    void slotResult(KJob *job) Q_DECL_OVERRIDE;
+    void slotResult(KJob *job) override;
 };
 
 class KCompositeJobTest : public QObject

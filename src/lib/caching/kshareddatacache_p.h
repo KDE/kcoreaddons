@@ -134,7 +134,7 @@ public:
     {
     }
 
-    bool initialize(bool &processSharingSupported) Q_DECL_OVERRIDE
+    bool initialize(bool &processSharingSupported) override
     {
         // Clear the spinlock
         m_spinlock.store(0);
@@ -142,7 +142,7 @@ public:
         return true;
     }
 
-    bool lock() Q_DECL_OVERRIDE
+    bool lock() override
     {
         // Spin a few times attempting to gain the lock, as upper-level code won't
         // attempt again without assuming the cache is corrupt.
@@ -159,7 +159,7 @@ public:
         return false;
     }
 
-    void unlock() Q_DECL_OVERRIDE
+    void unlock() override
     {
         m_spinlock.testAndSetRelease(1, 0);
     }
@@ -197,7 +197,7 @@ public:
     {
     }
 
-    bool initialize(bool &processSharingSupported) Q_DECL_OVERRIDE
+    bool initialize(bool &processSharingSupported) override
     {
         // Setup process-sharing.
         pthread_mutexattr_t mutexAttr;
@@ -221,12 +221,12 @@ public:
         return true;
     }
 
-    bool lock() Q_DECL_OVERRIDE
+    bool lock() override
     {
         return pthread_mutex_lock(&m_mutex) == 0;
     }
 
-    void unlock() Q_DECL_OVERRIDE
+    void unlock() override
     {
         pthread_mutex_unlock(&m_mutex);
     }
@@ -245,7 +245,7 @@ public:
     {
     }
 
-    bool lock() Q_DECL_OVERRIDE
+    bool lock() override
     {
         struct timespec timeout;
 
@@ -269,7 +269,7 @@ public:
     {
     }
 
-    bool initialize(bool &processSharingSupported) Q_DECL_OVERRIDE
+    bool initialize(bool &processSharingSupported) override
     {
         processSharingSupported = false;
         if (::sysconf(_SC_SEMAPHORES) < 200112L) {
@@ -288,12 +288,12 @@ public:
         return true;
     }
 
-    bool lock() Q_DECL_OVERRIDE
+    bool lock() override
     {
         return sem_wait(&m_semaphore) == 0;
     }
 
-    void unlock() Q_DECL_OVERRIDE
+    void unlock() override
     {
         sem_post(&m_semaphore);
     }
@@ -312,7 +312,7 @@ public:
     {
     }
 
-    bool lock() Q_DECL_OVERRIDE
+    bool lock() override
     {
         struct timespec timeout;
 

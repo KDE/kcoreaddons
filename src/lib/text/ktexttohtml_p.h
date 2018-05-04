@@ -31,7 +31,7 @@ class KTextToHTMLEmoticonsDummy : public KTextToHTMLEmoticonsInterface
 public:
     QString parseEmoticons(const QString &text,
                            bool strictParse = false,
-                           const QStringList &exclude = QStringList()) Q_DECL_OVERRIDE
+                           const QStringList &exclude = QStringList()) override
     {
         Q_UNUSED(strictParse);
         Q_UNUSED(exclude);

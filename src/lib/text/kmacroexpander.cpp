@@ -108,8 +108,8 @@ public:
         KMacroExpanderBase(c), macromap(map) {}
 
 protected:
-    int expandPlainMacro(const QString &str, int pos, QStringList &ret) Q_DECL_OVERRIDE;
-    int expandEscapedMacro(const QString &str, int pos, QStringList &ret) Q_DECL_OVERRIDE;
+    int expandPlainMacro(const QString &str, int pos, QStringList &ret) override;
+    int expandEscapedMacro(const QString &str, int pos, QStringList &ret) override;
 
 private:
     QHash<KT, VT> macromap;
@@ -143,8 +143,8 @@ public:
         KMacroExpanderBase(c), macromap(map) {}
 
 protected:
-    int expandPlainMacro(const QString &str, int pos, QStringList &ret) Q_DECL_OVERRIDE;
-    int expandEscapedMacro(const QString &str, int pos, QStringList &ret) Q_DECL_OVERRIDE;
+    int expandPlainMacro(const QString &str, int pos, QStringList &ret) override;
+    int expandEscapedMacro(const QString &str, int pos, QStringList &ret) override;
 
 private:
     QHash<QChar, VT> macromap;
@@ -192,8 +192,8 @@ public:
         KMacroExpanderBase(c), macromap(map) {}
 
 protected:
-    int expandPlainMacro(const QString &str, int pos, QStringList &ret) Q_DECL_OVERRIDE;
-    int expandEscapedMacro(const QString &str, int pos, QStringList &ret) Q_DECL_OVERRIDE;
+    int expandPlainMacro(const QString &str, int pos, QStringList &ret) override;
+    int expandEscapedMacro(const QString &str, int pos, QStringList &ret) override;
 
 private:
     QHash<QString, VT> macromap;
