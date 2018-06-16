@@ -87,6 +87,11 @@ void KFormatTest::formatByteSize()
     // Spattering of specific units
     QCOMPARE(format.formatByteSize(823000, 3, KFormat::IECBinaryDialect, KFormat::UnitMegaByte), QStringLiteral("0.785 MiB"));
     QCOMPARE(format.formatByteSize(1234034.0, 4, KFormat::JEDECBinaryDialect, KFormat::UnitByte), QStringLiteral("1,234,034 B"));
+
+    // Check examples from the documentation
+    QCOMPARE(format.formatByteSize(1000, 1, KFormat::MetricBinaryDialect, KFormat::UnitKiloByte), QStringLiteral("1.0 kB"));
+    QCOMPARE(format.formatByteSize(1000, 1, KFormat::IECBinaryDialect, KFormat::UnitKiloByte), QStringLiteral("1.0 KiB"));
+    QCOMPARE(format.formatByteSize(1000, 1, KFormat::JEDECBinaryDialect, KFormat::UnitKiloByte), QStringLiteral("1.0 KB"));
 }
 
 enum TimeConstants {

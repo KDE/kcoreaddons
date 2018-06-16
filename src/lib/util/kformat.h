@@ -170,17 +170,23 @@ public:
 
     /**
      * Converts @p size from bytes to the appropriate string representation
-     * using the binary unit dialect @p dialect and the specific units @p specificUnit.
+     * using the binary unit dialect @p dialect and the specific units @p units.
      *
      * Example:
-     * formatByteSize(1000, unit, KFormat::UnitKiloByte) returns:
-     *   for KFormat::MetricBinaryDialect, "1.0 kB",
-     *   for KFormat::IECBinaryDialect,    "0.9 KiB",
-     *   for KFormat::JEDECBinaryDialect,  "0.9 KB".
+     * @code
+     * QString metric, iec, jedec, small;
+     * metric = formatByteSize(1000, 1, KFormat::MetricBinaryDialect, KFormat::UnitKiloByte);
+     * iec    = formatByteSize(1000, 1, KFormat::IECBinaryDialect, KFormat::UnitKiloByte);
+     * jedec  = formatByteSize(1000, 1, KFormat::JEDECBinaryDialect, KFormat::UnitKiloByte);
+     * small  = formatByteSize(100);
+     * // metric == "1.0 kB", iec == "1.0 KiB", jedec == "1.0 KB", small == "100 B"
+     * @endcode
      *
      * @param size size in bytes
      * @param precision number of places after the decimal point to use.  KDE uses
-     *        1 by default so when in doubt use 1.
+     *        1 by default so when in doubt use 1.  Whenever KFormat::UnitByte is used
+     *        (either explicitly or autoselected from KFormat::DefaultBinaryUnits),
+     *        the fractional part is always omitted.
      * @param dialect binary unit standard to use.  Use DefaultBinaryDialect to
      *        use the localized user selection unless you need to use a specific
      *        unit type (such as displaying a flash memory size in JEDEC).
