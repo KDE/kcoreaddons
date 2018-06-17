@@ -43,6 +43,13 @@ public:
                            KFormat::BinaryUnitDialect dialect,
                            KFormat::BinarySizeUnits units) const;
 
+    QString formatValue(double value,
+                        KFormat::Unit unit,
+                        QString unitString,
+                        int precision,
+                        KFormat::UnitPrefix prefix,
+                        KFormat::BinaryUnitDialect dialect) const;
+
     QString formatDuration(quint64 msecs,
                            KFormat::DurationFormatOptions options) const;
 

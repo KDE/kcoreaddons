@@ -37,6 +37,144 @@ KFormatPrivate::~KFormatPrivate()
 {
 }
 
+constexpr double bpow(int exp) {
+    return (exp > 0) ? 2.0 * bpow(exp - 1) :
+        (exp < 0) ? 0.5 * bpow(exp + 1) :
+        1.0;
+}
+
+QString KFormatPrivate::formatValue(double value,
+                        KFormat::Unit unit,
+                        QString unitString,
+                        int precision,
+                        KFormat::UnitPrefix prefix,
+                        KFormat::BinaryUnitDialect dialect) const
+{
+    if (dialect <= KFormat::DefaultBinaryDialect || dialect > KFormat::LastBinaryDialect) {
+        dialect = KFormat::IECBinaryDialect;
+    }
+
+    if (static_cast<int>(prefix) < static_cast<int>(KFormat::UnitPrefix::Yocto) ||
+        static_cast<int>(prefix) > static_cast<int>(KFormat::UnitPrefix::Yotta)) {
+        prefix = KFormat::UnitPrefix::AutoAdjust;
+    }
+
+    double multiplier = 1024.0;
+    if (dialect == KFormat::MetricBinaryDialect) {
+        multiplier = 1000.0;
+    }
+
+    int power = 0;
+    if (prefix == KFormat::UnitPrefix::AutoAdjust) {
+        double adjustValue = qAbs(value);
+        while (adjustValue >= multiplier) {
+            adjustValue /= multiplier;
+            power += 1;
+        }
+        while (adjustValue && adjustValue < 1.0) {
+            adjustValue *= multiplier;
+            power -= 1;
+        }
+        const KFormat::UnitPrefix map[] = {
+            KFormat::UnitPrefix::Yocto, // -8
+            KFormat::UnitPrefix::Zepto,
+            KFormat::UnitPrefix::Atto,
+            KFormat::UnitPrefix::Femto,
+            KFormat::UnitPrefix::Pico,
+            KFormat::UnitPrefix::Nano,
+            KFormat::UnitPrefix::Micro,
+            KFormat::UnitPrefix::Mili,
+            KFormat::UnitPrefix::Unity, // 0
+            KFormat::UnitPrefix::Kilo,
+            KFormat::UnitPrefix::Mega,
+            KFormat::UnitPrefix::Giga,
+            KFormat::UnitPrefix::Tera,
+            KFormat::UnitPrefix::Peta,
+            KFormat::UnitPrefix::Exa,
+            KFormat::UnitPrefix::Zetta,
+            KFormat::UnitPrefix::Yotta, // 8
+        };
+        power = std::max(-8, std::min(8, power));
+        prefix = map[power + 8];
+    }
+
+    if (prefix == KFormat::UnitPrefix::Unity &&
+        unit == KFormat::Unit::Byte) {
+        precision = 0;
+    }
+
+    struct PrefixMapEntry
+    {
+        KFormat::UnitPrefix prefix;
+        double decimalFactor;
+        double binaryFactor;
+        QChar prefixChar;
+    };
+
+    const PrefixMapEntry map[] = {
+        { KFormat::UnitPrefix::Yocto, 1e-24, bpow(-80), u'y' },
+        { KFormat::UnitPrefix::Zepto, 1e-21, bpow(-70), u'z' },
+        { KFormat::UnitPrefix::Atto,  1e-18, bpow(-60), u'a' },
+        { KFormat::UnitPrefix::Femto, 1e-15, bpow(-50), u'f' },
+        { KFormat::UnitPrefix::Pico,  1e-12, bpow(-40), u'p' },
+        { KFormat::UnitPrefix::Nano,  1e-9,  bpow(-30), u'n' },
+        { KFormat::UnitPrefix::Micro, 1e-6,  bpow(-20), u'µ' },
+        { KFormat::UnitPrefix::Mili,  1e-3,  bpow(-10), u'm' },
+        { KFormat::UnitPrefix::Unity, 1.0, 1.0, u'\0' },
+        { KFormat::UnitPrefix::Kilo,  1e3,   bpow(10), u'k' },
+        { KFormat::UnitPrefix::Mega,  1e6,   bpow(20), u'M' },
+        { KFormat::UnitPrefix::Giga,  1e9,   bpow(30), u'G' },
+        { KFormat::UnitPrefix::Tera,  1e12,  bpow(40), u'T' },
+        { KFormat::UnitPrefix::Peta,  1e15,  bpow(50), u'P' },
+        { KFormat::UnitPrefix::Exa,   1e18,  bpow(60), u'E' },
+        { KFormat::UnitPrefix::Zetta, 1e21,  bpow(70), u'Z' },
+        { KFormat::UnitPrefix::Yotta, 1e24,  bpow(80), u'Y' },
+    };
+
+    auto entry = std::find_if(std::begin(map), std::end(map),
+            [prefix](const PrefixMapEntry& e) { return e.prefix == prefix; });
+
+    switch (unit) {
+        case KFormat::Unit::Bit:
+            unitString = QStringLiteral("bit");
+            break;
+        case KFormat::Unit::Byte:
+            unitString = QStringLiteral("B");
+            break;
+        case KFormat::Unit::Meter:
+            unitString = QStringLiteral("m");
+            break;
+        case KFormat::Unit::Hertz:
+            unitString = QStringLiteral("Hz");
+            break;
+        case KFormat::Unit::Other:
+            break;
+    }
+
+    if (prefix == KFormat::UnitPrefix::Unity) {
+        QString numString = m_locale.toString(value, 'f', precision);
+        //: value without prefix, format "<val> <unit>"
+        return tr("%1 %2", "no Prefix").arg(numString, unitString);
+    }
+
+    QString prefixString;
+    if (dialect == KFormat::MetricBinaryDialect) {
+        value /= entry->decimalFactor;
+        prefixString = entry->prefixChar;
+    } else {
+        value /= entry->binaryFactor;
+        prefixString = QString(entry->prefixChar).toUpper();
+        if (dialect == KFormat::IECBinaryDialect) {
+            prefixString += u'i';
+        }
+    }
+
+    QString numString = m_locale.toString(value, 'f', precision);
+
+    //: value with prefix, format "<val> <prefix><unit>"
+    return tr("%1 %2%3", "MetricBinaryDialect").arg(numString, prefixString, unitString);
+}
+
 QString KFormatPrivate::formatByteSize(double size, int precision,
                                        KFormat::BinaryUnitDialect dialect, KFormat::BinarySizeUnits units) const
 {

@@ -37,6 +37,7 @@ private Q_SLOTS:
     void formatDecimalDuration();
     void formatSpelloutDuration();
     void formatRelativeDate();
+    void formatValue();
 };
 
 #endif // KFORMATTEST_H

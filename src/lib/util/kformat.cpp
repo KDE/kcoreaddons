@@ -52,6 +52,23 @@ QString KFormat::formatByteSize(double size,
     return d->formatByteSize(size, precision, dialect, units);
 }
 
+QString KFormat::formatValue(double value,
+                             KFormat::Unit unit,
+                             int precision,
+                             KFormat::UnitPrefix prefix,
+                             KFormat::BinaryUnitDialect dialect) const
+{
+    return d->formatValue(value, unit, QString(), precision, prefix, dialect);
+}
+
+QString KFormat::formatValue(double value,
+                             const QString& unit,
+                             int precision,
+                             KFormat::UnitPrefix prefix) const
+{
+    return d->formatValue(value, KFormat::Unit::Other, unit, precision, prefix, MetricBinaryDialect);
+}
+
 QString KFormat::formatDuration(quint64 msecs,
                                 KFormat::DurationFormatOptions options) const
 {

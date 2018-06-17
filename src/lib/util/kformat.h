@@ -111,6 +111,58 @@ public:
     };
 
     /**
+     * These units are used in KDE by the formatValue() function.
+     *
+     * @see formatValue
+     * @since 5.48
+     */
+    enum class Unit {
+        Other,
+        Bit,   ///< "bit"
+        Byte,  ///< "B"
+        Meter, ///< "m"
+        Hertz, ///< "Hz"
+    };
+
+    /**
+     * These prefixes are used in KDE by the formatValue()
+     * function.
+     *
+     * IEC prefixes are only defined for integral units of information, e.g.
+     * bits and bytes.
+     *
+     * @see BinarySizeUnits
+     * @see formatValue
+     * @since 5.48
+     */
+    enum class UnitPrefix {
+        /// Auto-choose a unit such that the result is in the range [0, 1000 or 1024)
+        AutoAdjust = -128,
+
+        Yocto = 0, ///<  --/-/y  10^-24
+        Zepto,     ///<  --/-/z  10^-21
+        Atto,      ///<  --/-/a  10^-18
+        Femto,     ///<  --/-/f  10^-15
+        Pico,      ///<  --/-/p  10^-12
+        Nano,      ///<  --/-/n  10^-9
+        Micro,     ///<  --/-/µ  10^-6
+        Mili,      ///<  --/-/m  10^-3
+        Centi,     ///<  --/-/c  0.01
+        Deci,      ///<  --/-/d  0.1
+        Unity,     ///<  ""      1
+        Deca,      ///<  --/-/da 10
+        Hecto,     ///<  --/-/h  100
+        Kilo,      ///<  Ki/K/k  1024/1000
+        Mega,      ///<  Mi/M/M  2^20/10^06
+        Giga,      ///<  Gi/G/G  2^30/10^09
+        Tera,      ///<  Ti/T/T  2^40/10^12
+        Peta,      ///<  Pi/P/P  2^50/10^15
+        Exa,       ///<  Ei/E/E  2^60/10^18
+        Zetta,     ///<  Zi/Z/Z  2^70/10^21
+        Yotta,     ///<  Yi/Y/Y  2^80/10^24
+    };
+
+    /**
      * This enum chooses what dialect is used for binary units.
      *
      * Note: Although JEDEC abuses the metric prefixes and can therefore be
@@ -287,6 +339,66 @@ public:
      */
     QString formatRelativeDateTime(const QDateTime &dateTime,
                                    QLocale::FormatType format) const;
+
+    /**
+     * Converts @p value to the appropriate string representation
+     *
+     * Example:
+     * @code
+     * // sets formatted to "1.0 kbit"
+     * auto formatted = format.formatValue(1000, KFormat::Unit::Bit, 1, KFormat::UnitPrefix::Kilo);
+     * @endcode
+     *
+     * @param value value to be formatted
+     * @param precision number of places after the decimal point to use.  KDE uses
+     *        1 by default so when in doubt use 1.
+     * @param unit unit to use in result.
+     * @param prefix specific prefix to use in result.  Use UnitPrefix::AutoAdjust
+     *        to automatically select an appropriate prefix.
+     * @param dialect prefix standard to use.  Use DefaultBinaryDialect to
+     *        use the localized user selection unless you need to use a specific
+     *        unit type. Only meaningful for KFormat::Unit::Byte, and ignored for
+     *        all other units.
+     * @return converted size as a translated string including prefix and unit.
+     *         E.g. "1.23 KiB", "2 GB" (JEDEC), "4.2 kB" (Metric), "1.2 kbit".
+     * @see Unit
+     * @see UnitPrefix
+     * @see BinaryUnitDialect
+     * @since 5.48
+     */
+    QString formatValue(double value,
+                        KFormat::Unit unit,
+                        int precision = 1,
+                        KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust,
+                        KFormat::BinaryUnitDialect dialect = KFormat::DefaultBinaryDialect) const;
+
+    /**
+     * Converts @p value to the appropriate string representation
+     *
+     * Example:
+     * @code
+     * QString bits, slow, fast;
+     * // sets bits to "1.0 kbit", slow to "1.0 kbit/s" and fast to "12.3 Mbit/s".
+     * bits = format.formatValue(1000, QStringLiteral("bit"), 1, KFormat::UnitPrefix::Kilo);
+     * slow = format.formatValue(1000, QStringLiteral("bit/s");
+     * fast = format.formatValue(12.3e6, QStringLiteral("bit/s");
+     * @endcode
+     *
+     * @param value value to be formatted
+     * @param precision number of places after the decimal point to use.  KDE uses
+     *        1 by default so when in doubt use 1.
+     * @param unit unit to use in result.
+     * @param prefix specific prefix to use in result.  Use UnitPrefix::AutoAdjust
+     *        to automatically select an appropriate prefix.
+     * @return converted size as a translated string including prefix and unit.
+     *         E.g. "1.2 kbit", "2.4 kB", "12.3 Mbit/s"
+     * @see UnitPrefix
+     * @since 5.48
+     */
+    QString formatValue(double value,
+                        const QString& unit,
+                        int precision = 1,
+                        KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust) const;
 
 private:
     QSharedDataPointer<KFormatPrivate> d;

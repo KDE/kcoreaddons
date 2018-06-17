@@ -94,6 +94,28 @@ void KFormatTest::formatByteSize()
     QCOMPARE(format.formatByteSize(1000, 1, KFormat::JEDECBinaryDialect, KFormat::UnitKiloByte), QStringLiteral("1.0 KB"));
 }
 
+void KFormatTest::formatValue()
+{
+    QLocale locale(QLocale::c());
+    locale.setNumberOptions(QLocale::DefaultNumberOptions); // Qt >= 5.6 sets QLocale::OmitGroupSeparator for the C locale
+    KFormat format(locale);
+
+    // Check examples from the documentation
+    QCOMPARE(format.formatValue(1000, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Kilo, KFormat::MetricBinaryDialect), QStringLiteral("1.0 kB"));
+    QCOMPARE(format.formatValue(1000, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Kilo, KFormat::IECBinaryDialect), QStringLiteral("1.0 KiB"));
+    QCOMPARE(format.formatValue(1000, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Kilo, KFormat::JEDECBinaryDialect), QStringLiteral("1.0 KB"));
+
+    // Check examples from the documentation
+    QCOMPARE(format.formatValue(1000, KFormat::Unit::Bit, 1, KFormat::UnitPrefix::Kilo, KFormat::MetricBinaryDialect), QStringLiteral("1.0 kbit"));
+    QCOMPARE(format.formatValue(1000, QStringLiteral("bit"), 1, KFormat::UnitPrefix::Kilo), QStringLiteral("1.0 kbit"));
+    QCOMPARE(format.formatValue(1000, QStringLiteral("bit/s"), 1, KFormat::UnitPrefix::Kilo), QStringLiteral("1.0 kbit/s"));
+
+    QCOMPARE(format.formatValue(100, QStringLiteral("bit/s")), QStringLiteral("100.0 bit/s"));
+    QCOMPARE(format.formatValue(1000, QStringLiteral("bit/s")), QStringLiteral("1.0 kbit/s"));
+    QCOMPARE(format.formatValue(10e3, QStringLiteral("bit/s")), QStringLiteral("10.0 kbit/s"));
+    QCOMPARE(format.formatValue(10e6, QStringLiteral("bit/s")), QStringLiteral("10.0 Mbit/s"));
+}
+
 enum TimeConstants {
     MSecsInDay = 86400000,
     MSecsInHour = 3600000,
