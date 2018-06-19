@@ -283,7 +283,6 @@ private Q_SLOTS:
                 "Comment=Stores network cookies\n"
                 "X-KDE-ServiceTypes=KDEDModule\n"
                 "X-KDE-Library=kf5/kded/kcookiejar\n"
-                "X-KDE-DBus-ModuleName=kcookiejar\n"
                 "X-KDE-Kded-autoload=false\n"
                 "X-KDE-Kded-load-on-demand=true\n";
         auto kcookiejarResult = QJsonDocument::fromJson(
@@ -295,7 +294,6 @@ private Q_SLOTS:
                     "      \"KDEDModule\"\n"
                     "    ]\n"
                     "  },\n"
-                    "\"X-KDE-DBus-ModuleName\": \"kcookiejar\",\n"
                     "\"X-KDE-Kded-autoload\": false,\n"
                     "\"X-KDE-Kded-load-on-demand\": true\n"
                     "}\n", &e).object();
