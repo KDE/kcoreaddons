@@ -114,7 +114,7 @@ public:
      * These units are used in KDE by the formatValue() function.
      *
      * @see formatValue
-     * @since 5.48
+     * @since 5.49
      */
     enum class Unit {
         Other,
@@ -133,7 +133,7 @@ public:
      *
      * @see BinarySizeUnits
      * @see formatValue
-     * @since 5.48
+     * @since 5.49
      */
     enum class UnitPrefix {
         /// Auto-choose a unit such that the result is in the range [0, 1000 or 1024)
@@ -364,7 +364,7 @@ public:
      * @see Unit
      * @see UnitPrefix
      * @see BinaryUnitDialect
-     * @since 5.48
+     * @since 5.49
      */
     QString formatValue(double value,
                         KFormat::Unit unit,
@@ -393,7 +393,7 @@ public:
      * @return converted size as a translated string including prefix and unit.
      *         E.g. "1.2 kbit", "2.4 kB", "12.3 Mbit/s"
      * @see UnitPrefix
-     * @since 5.48
+     * @since 5.49
      */
     QString formatValue(double value,
                         const QString& unit,
