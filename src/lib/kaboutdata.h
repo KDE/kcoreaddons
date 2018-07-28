@@ -834,7 +834,7 @@ public:
      *
      * Calling this method has no effect on the value of the desktopFileName property.
      *
-     * @note: If your program should work as a D-Bus activatable service, the base name
+     * @note If your program should work as a D-Bus activatable service, the base name
      * of the D-Bus service description file or of the desktop file you install must match
      * the D-Bus "well-known name" for which the program will register.
      * For example, KDBusService will use a name created from the reversed organization domain

@@ -77,7 +77,7 @@ class KJobPrivate;
  * reimplemented by any subclasses that introduce new
  * error codes.
  *
- * @note: KJob and its subclasses are meant to be used
+ * @note KJob and its subclasses are meant to be used
  * in a fire-and-forget way. Jobs will delete themselves
  * when they finish using deleteLater() (although this
  * behaviour can be changed), so a job instance will
@@ -469,7 +469,7 @@ Q_SIGNALS:
      * amount is sent too. It can be emitted several times if the job manages several
      * different units.
      *
-     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
+     * @note This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use setTotalAmount() instead.
      *
      * @param job the job that emitted this signal
@@ -483,7 +483,7 @@ Q_SIGNALS:
      * The unit of this amount is sent too. It can be emitted several times if the job
      * manages several different units.
      *
-     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
+     * @note This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use setProcessedAmount() instead.
      *
      * @param job the job that emitted this signal
@@ -496,7 +496,7 @@ Q_SIGNALS:
      * Emitted when we know the size of this job (data size in bytes for transfers,
      * number of entries for listings, etc).
      *
-     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
+     * @note This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use setTotalAmount() instead.
      *
      * @param job the job that emitted this signal
@@ -508,7 +508,7 @@ Q_SIGNALS:
      * Regularly emitted to show the progress of this job
      * (current data size in bytes for transfers, entries listed, etc.).
      *
-     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
+     * @note This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use setProcessedAmount() instead.
      *
      * @param job the job that emitted this signal
@@ -522,7 +522,7 @@ Q_SIGNALS:
      * a progress bar very easily. (see KProgressBar).
      * Note that this signal is not emitted for finished jobs.
      *
-     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
+     * @note This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use emitPercent(), setPercent() setTotalAmount() or
      * setProcessedAmount() instead.
      *
@@ -534,7 +534,7 @@ Q_SIGNALS:
     /**
      * Emitted to display information about the speed of this job.
      *
-     * @note: This is a private signal, it shouldn't be emitted directly by subclasses of
+     * @note This is a private signal, it shouldn't be emitted directly by subclasses of
      * KJob, use emitSpeed() instead.
      *
      * @param job the job that emitted this signal
@@ -612,7 +612,7 @@ protected:
      * It first notifies the observers to hide the progress for this job using
      * the finished() signal.
      *
-     * @note: Deletes this job using deleteLater().
+     * @note Deletes this job using deleteLater().
      *
      * @see result()
      * @see finished()
