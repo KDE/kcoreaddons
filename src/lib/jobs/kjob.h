@@ -131,7 +131,7 @@ public:
     /**
      * Retrieves the delegate attached to this job.
      *
-     * @return the delegate attached to this job, or 0 if there's no such delegate
+     * @return the delegate attached to this job, or @c nullptr if there's no such delegate
      */
     KJobUiDelegate *uiDelegate() const;
 

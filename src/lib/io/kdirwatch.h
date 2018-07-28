@@ -84,7 +84,7 @@ public:
      *
      * Scanning begins immediately when a dir/file watch
      * is added.
-     * @param parent the parent of the QObject (or 0 for parent-less KDataTools)
+     * @param parent the parent of the QObject (or @c nullptr for parent-less KDataTools)
      */
     explicit KDirWatch(QObject *parent = nullptr);
 

@@ -65,7 +65,7 @@ protected:
     /**
      * Retrieves the current job this UI delegate is attached to.
      *
-     * @return current job this UI delegate is attached to, or 0 if
+     * @return current job this UI delegate is attached to, or @c nullptr if
      * this UI delegate is not tracking any job
      */
     KJob *job() const;

@@ -116,7 +116,7 @@ public:
      * Internally, this uses QPluginLoader::instance(), and the same
      * behaviours apply.
      *
-     * \returns The factory of the plugin or 0 on error.
+     * \returns The factory of the plugin or @c nullptr on error.
      */
     KPluginFactory *factory();
 
