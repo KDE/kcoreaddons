@@ -140,6 +140,7 @@ void KFormatTest::formatDuration()
     quint64 singleDay = 1 * MSecsInDay + 5 * MSecsInHour + 8 * MSecsInMinute + 3 * MSecsInSecond + 700;
     quint64 doubleDay = 10 * MSecsInDay + 5 * MSecsInHour + 8 * MSecsInMinute + 3 * MSecsInSecond + 700;
     quint64 roundingIssues = 2* MSecsInHour +  59 * MSecsInMinute + 59 * MSecsInSecond + 900;
+    quint64 largeValue = 9999999999;
 
     // Default format
     QCOMPARE(format.formatDuration(singleSecond), QStringLiteral("0:00:04"));
@@ -151,6 +152,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay), QStringLiteral("29:08:04"));
     QCOMPARE(format.formatDuration(doubleDay), QStringLiteral("245:08:04"));
     QCOMPARE(format.formatDuration(roundingIssues), QStringLiteral("3:00:00"));
+    QCOMPARE(format.formatDuration(largeValue), QStringLiteral("2777:46:40"));
 
 
     // ShowMilliseconds format
@@ -164,6 +166,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29:08:03.700"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245:08:03.700"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("2:59:59.900"));
+    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777:46:39.999"));
 
 
     // HideSeconds format
@@ -177,6 +180,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29:08"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245:08"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("3:00"));
+    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777:47"));
 
 
     // FoldHours format
@@ -190,6 +194,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("1748:04"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708:04"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("180:00"));
+    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("166666:40"));
 
 
     // FoldHours ShowMilliseconds format
@@ -204,6 +209,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("1748:03.700"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708:03.700"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("179:59.900"));
+    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("166666:39.999"));
 
 
     // InitialDuration format
@@ -217,6 +223,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29h08m04s"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245h08m04s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("3h00m00s"));
+    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777h46m40s"));
 
 
     // InitialDuration and ShowMilliseconds format
@@ -231,6 +238,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29h08m03.700s"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245h08m03.700s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("2h59m59.900s"));
+    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777h46m39.999s"));
 
 
     // InitialDuration and HideSeconds format
@@ -245,6 +253,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29h08m"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245h08m"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("3h00m"));
+    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777h47m"));
 
 
     // InitialDuration and FoldHours format
@@ -259,6 +268,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("1748m04s"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708m04s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("180m00s"));
+    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("166666m40s"));
 
 
     // InitialDuration and FoldHours and ShowMilliseconds format
@@ -273,6 +283,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("1748m03.700s"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708m03.700s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("179m59.900s"));
+    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("166666m39.999s"));
 }
 
 void KFormatTest::formatDecimalDuration()

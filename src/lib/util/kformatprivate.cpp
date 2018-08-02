@@ -329,10 +329,10 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
     quint64 ms = msecs;
     if (options & KFormat::HideSeconds) {
         //round to nearest minute
-        ms = qRound(ms / (qreal)MSecsInMinute) * MSecsInMinute ;
+        ms = qRound64(ms / (qreal)MSecsInMinute) * MSecsInMinute ;
     } else if (!(options & KFormat::ShowMilliseconds)) {
         //round to nearest second
-        ms = qRound(ms / (qreal)MSecsInSecond) * MSecsInSecond ;
+        ms = qRound64(ms / (qreal)MSecsInSecond) * MSecsInSecond ;
     }
 
     int hours = ms / MSecsInHour;
