@@ -179,6 +179,9 @@ QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QStrin
         return value.toVariant().toStringList();
     } else {
         QString asString = value.isString() ? value.toString() : value.toVariant().toString();
+        if (asString.isEmpty()) {
+            return QStringList();
+        }
         const QString id = obj.value(QStringLiteral("KPlugin")).toObject().value(QStringLiteral("Id")).toString();
         qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a string list."
             " Treating it as a list with a single entry:" << asString << id.toLatin1().constData();
