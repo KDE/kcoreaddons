@@ -14,7 +14,7 @@ class KCoreAddonsConan(ConanFile):
         "extra-cmake-modules/5.50.0@kde/testing", # CMakeLists.txt requires 5.49.0
 
         "Qt/5.11.1@bincrafters/stable"
-        # "qt-gui/5.8.0@qt/testing",
+        # "qt-core/5.8.0@qt/testing",
 
         # fam/latest@foo/bar,
         # inotify/latest@foo/bar,
