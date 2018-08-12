@@ -245,7 +245,7 @@ void KPluginLoader::forEachPlugin(const QString &directory, std::function<void(c
         dirsToCheck << directory;
     } else {
         foreach (const QString &libDir, QCoreApplication::libraryPaths()) {
-            dirsToCheck << libDir + QDir::separator() + directory;
+            dirsToCheck << libDir + QLatin1Char('/') + directory;
         }
     }
 
