@@ -224,7 +224,6 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
                 afterUrl = QLatin1Char('"');
             }
         }
-
         url.reserve(mMaxUrlLen);    // avoid allocs
         int start = mPos;
         bool previousCharIsSpace = false;
@@ -238,6 +237,16 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
                 // Fix Bug #346132: allow "http://www.foo.bar<http://foo.bar/>"
                 // < inside a URL is not allowed, however there is a test which
                 // checks that "http://some<Host>/path" should be allowed
+                // Therefore: check if what follows is another URL and if so, stop here
+                mPos++;
+                if (atUrl()) {
+                    mPos--;
+                    break;
+                }
+                mPos--;
+            }
+            if (!previousCharIsSpace && (mText[mPos] == QLatin1Char(' ')) && ((mPos + 1) < mText.length())) {
+                // Fix kmail bug: allow "http://www.foo.bar http://foo.bar/"
                 // Therefore: check if what follows is another URL and if so, stop here
                 mPos++;
                 if (atUrl()) {
@@ -470,7 +479,6 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
                     } else {
                         hyperlink = str;
                     }
-
                     result += QLatin1String("<a href=\"") + hyperlink + QLatin1String("\">") + str.toHtmlEscaped() + QLatin1String("</a>");
                     x += helper.mPos - start;
                     continue;

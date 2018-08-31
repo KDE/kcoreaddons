@@ -437,7 +437,7 @@ void KTextToHTMLTest::testHtmlConvert_data()
     //Bug kmail
     QTest::newRow("two url with space-2") << "@@ -55,6 +55,10 @@ xsi:schemaLocation=\"http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/"
                                        << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
-                                       << "@@ -55,6 +55,10 @@ xsi:schemaLocation=&quot;<a href=\"http://www.kde.org/standards/kcfg/1.0http://www.kde.org/\">http://www.kde.org/standards/kcfg/1.0http://www.kde.org/</a>";
+                                       << "@@ -55,6 +55,10 @@ xsi:schemaLocation=&quot;<a href=\"http://www.kde.org/standards/kcfg/1.0\">http://www.kde.org/standards/kcfg/1.0</a> <a href=\"http://www.kde.org/\">http://www.kde.org/</a>";
 
 }
 
