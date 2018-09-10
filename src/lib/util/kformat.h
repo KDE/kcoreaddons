@@ -275,7 +275,7 @@ public:
      * e.g. given formatDuration(60000), returns "1.0 minutes"
      *
      * @param msecs Time duration in milliseconds
-     * @param decimalPlaces Deciaml places to round off to, defaults to 2
+     * @param decimalPlaces Decimal places to round off to, defaults to 2
      * @return converted duration as a string - e.g. "5.5 seconds" "23.0 minutes"
      */
 

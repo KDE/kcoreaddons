@@ -257,8 +257,8 @@ public:
      *
      * @note SPDX expression are expansive constructs. If you parse the return value, do it in a
      *   SPDX specification compliant manner by splitting on whitespaces to discard unwanted
-     *   informationor or by using a complete SPDX license expression parser.
-     * @note SPDX identifiers are case-insensitive. Do not use case-senstivie checks on the return
+     *   information or by using a complete SPDX license expression parser.
+     * @note SPDX identifiers are case-insensitive. Do not use case-sensitive checks on the return
      *   value.
      * @see https://spdx.org/licenses
      * @return SPDX license expression or QString() if the license has no identifier. Compliant
@@ -840,7 +840,7 @@ public:
      * For example, KDBusService will use a name created from the reversed organization domain
      * with the component name attached, so for an organization domain "bar.org" and a
      * component name "foo" the name of an installed D-Bus service file needs to be
-     * "org.bar.foo.service" or the the name of the installed desktop file "org.bar.foo.desktop"
+     * "org.bar.foo.service" or the name of the installed desktop file "org.bar.foo.desktop"
      * (and the desktopFileName property accordingly set to "org.bar.foo").
      * For still supporting the deprecated start of services via KToolInvocation,
      * the desktop file needs to have an entry with the key "X-DBUS-ServiceName"

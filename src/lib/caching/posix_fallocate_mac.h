@@ -36,6 +36,9 @@
  *
  * ***** END LICENSE BLOCK ***** */
 
+#ifndef POSIX_FALLOCATE_MAC_H
+#define POSIX_FALLOCATE_MAC_H
+
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -94,7 +97,7 @@ static int posix_fallocate(int fd, off_t offset, off_t len)
     int ret;
     if (!__builtin_saddll_overflow(offset, len, &c_test)) {
         fstore_t store = {F_ALLOCATECONTIG, F_PEOFPOSMODE, 0, offset + len};
-        // Try to get a continous chunk of disk space
+        // Try to get a continuous chunk of disk space
         fcntl(fd, F_PREALLOCATE, &store);
         if (ret < 0) {
             // OK, perhaps we are too fragmented, allocate non-continuous
@@ -111,3 +114,5 @@ static int posix_fallocate(int fd, off_t offset, off_t len)
     }
     return ret;
 }
+
+#endif

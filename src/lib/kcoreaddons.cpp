@@ -19,9 +19,10 @@
  *
  */
 
+#include "kcoreaddons.h"
+
 #include <QString>
 
-#include "kcoreaddons.h"
 #include "kcoreaddons_version.h"
 
 QString KCoreAddons::versionString()

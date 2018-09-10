@@ -536,7 +536,7 @@ KAboutData::KAboutData(const QString &_componentName,
     d->organizationDomain = hostComponents.join(dotChar);
 
     // KF6: do not set a default desktopFileName value here, but remove this code and leave it empty
-    // see KAboutData::desktopFileName() for detals
+    // see KAboutData::desktopFileName() for details
 
     // desktop file name is reverse domain name
     std::reverse(hostComponents.begin(), hostComponents.end());
@@ -568,7 +568,7 @@ KAboutData::KAboutData(const QString &_componentName,
     d->_bugAddress = "submit@bugs.kde.org";
     d->organizationDomain = QStringLiteral("kde.org");
     // KF6: do not set a default desktopFileName value here, but remove this code and leave it empty
-    // see KAboutData::desktopFileName() for detals
+    // see KAboutData::desktopFileName() for details
     d->desktopFileName = QStringLiteral("org.kde.%1").arg(d->_componentName);
 }
 
@@ -1003,7 +1003,7 @@ QString KAboutData::desktopFileName() const
     return d->desktopFileName;
     // KF6: switch to this code and adapt API dox
 #if 0
-    // if desktopFileName has been explicitely set, use that value
+    // if desktopFileName has been explicitly set, use that value
     if (!d->desktopFileName.isEmpty()) {
         return d->desktopFileName;
     }

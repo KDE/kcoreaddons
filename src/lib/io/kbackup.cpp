@@ -21,13 +21,13 @@
   Boston, MA 02110-1301, USA.
 */
 
+#include "kbackup.h"
+
 #include <QFileInfo>
 #include <QDir>
 #include <QProcess>
 
 #include <qstandardpaths.h>
-
-#include "kbackup.h"
 
 namespace KBackup
 {

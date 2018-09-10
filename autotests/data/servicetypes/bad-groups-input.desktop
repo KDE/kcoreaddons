@@ -26,7 +26,7 @@ Name[uk]=Погані групи
 Name[x-test]=xxBad Groupsxx
 Name[zh_CN]=坏分组
 Type=Service
-# one value for every property defintion in bad-groups-servicetype.desktop
+# one value for every property definition in bad-groups-servicetype.desktop
 ThisIsOkay=10
 #empty
 =11

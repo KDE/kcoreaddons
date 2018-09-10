@@ -509,7 +509,7 @@ protected:
      * This function is called when the factory asked to create an Object.
      *
      * You may reimplement it to provide a very flexible factory. This is especially useful to
-     * provide generic factories for plugins implemeted using a scripting language.
+     * provide generic factories for plugins implemented using a scripting language.
      *
      * \param iface The staticMetaObject::className() string identifying the plugin interface that
      * was requested. E.g. for KCModule plugins this string will be "KCModule".

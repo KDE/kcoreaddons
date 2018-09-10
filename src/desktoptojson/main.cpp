@@ -70,7 +70,7 @@ int main(int argc, char** argv) {
     QCommandLineOption compat = QCommandLineOption(QStringList() << QStringLiteral("c") << _c,
                                 QStringLiteral("Generate JSON that is compatible with KPluginInfo instead of the new KPluginMetaData"));
     QCommandLineOption serviceTypes = QCommandLineOption(QStringList() << QStringLiteral("s") << _s,
-                                QStringLiteral("The name or full path of a KServiceType defintion .desktop file. Can be passed multiple times"), _s);
+                                QStringLiteral("The name or full path of a KServiceType definition .desktop file. Can be passed multiple times"), _s);
 
     QCommandLineParser parser;
     parser.addVersionOption();

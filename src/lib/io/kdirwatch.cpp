@@ -29,7 +29,7 @@
 // Jul 30, 2007 - Substituted addEntry boolean params with KDirWatch::WatchModes
 // flag (Flavio Castelli)
 // Oct 4,  2005 - Inotify support (Dirk Mueller)
-// Februar 2002 - Add file watching and remote mount check for STAT
+// February 2002 - Add file watching and remote mount check for STAT
 // Mar 30, 2001 - Native support for Linux dir change notification.
 // Jan 28, 2000 - Usage of FAM service on IRIX (Josef.Weidendorfer@in.tum.de)
 // May 24. 1998 - List of times introduced, and some bugs are fixed. (sven)
@@ -158,8 +158,8 @@ static const char s_envNfsMethod[] = "KDIRWATCH_NFSMETHOD";
  * - FAM (File Alternation Monitor): first used on IRIX, SGI
  *   has ported this method to LINUX. It uses a kernel part
  *   (IMON, sending change events to /dev/imon) and a user
- *   level damon (fam), to which applications connect for
- *   notification of file changes. For NFS, the fam damon
+ *   level daemon (fam), to which applications connect for
+ *   notification of file changes. For NFS, the fam daemon
  *   on the NFS server machine is used; if IMON is not built
  *   into the kernel, fam uses polling for local files.
  * - INOTIFY: In LINUX 2.6.13, inode change notification was
@@ -1399,7 +1399,7 @@ void KDirWatchPrivate::emitEvent(Entry *e, int event, const QString &fileName)
             continue;
         }
 
-        // Emit the signals delayed, to avoid unexpected re-entrancy from the slots (#220153)
+        // Emit the signals delayed, to avoid unexpected re-entrance from the slots (#220153)
 
         if (event & Deleted) {
 #if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
@@ -1474,7 +1474,7 @@ void KDirWatchPrivate::slotRescan()
         }
         rescan_all = false;
     } else {
-        // progate dirty flag to dependant entries (e.g. file watches)
+        // propagate dirty flag to dependent entries (e.g. file watches)
         it = m_mapEntries.begin();
         for (; it != m_mapEntries.end(); ++it)
             if (((*it).m_mode == INotifyMode || (*it).m_mode == QFSWatchMode) && (*it).dirty) {
@@ -1531,7 +1531,7 @@ void KDirWatchPrivate::slotRescan()
 
 #if HAVE_SYS_INOTIFY_H
         if (entry->isDir) {
-            // Report and clear the the list of files that have changed in this directory.
+            // Report and clear the list of files that have changed in this directory.
             // Remove duplicates by changing to set and back again:
             // we don't really care about preserving the order of the
             // original changes.

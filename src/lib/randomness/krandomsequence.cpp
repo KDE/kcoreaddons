@@ -79,7 +79,7 @@ void KRandomSequence::setSeed(long lngSeed1)
 void KRandomSequence::setSeed(int lngSeed1)
 {
     // Convert the positive seed number to a negative one so that the draw()
-    // function can intialise itself the first time it is called. We just have
+    // function can initialise itself the first time it is called. We just have
     // to make sure that the seed used != 0 as zero perpetuates itself in a
     // sequence of random numbers.
     if (lngSeed1 < 0) {

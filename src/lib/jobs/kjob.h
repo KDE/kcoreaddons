@@ -253,9 +253,9 @@ public:
      * called, which usually wreaks havoc.
      *
      * Note that the event loop started by this method does not process user input events, which means
-     * your user interface will effectivly be blocked. Other events like paint or network events are
+     * your user interface will effectively be blocked. Other events like paint or network events are
      * still being processed. The advantage of not processing user input events is that the chance of
-     * accidental reentrancy is greatly reduced. Still you should avoid calling this function.
+     * accidental reentrance is greatly reduced. Still you should avoid calling this function.
      *
      * @return true if the job has been executed without error, false otherwise
      */

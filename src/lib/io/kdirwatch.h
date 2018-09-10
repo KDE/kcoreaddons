@@ -186,7 +186,7 @@ public:
      * empty. First call should be called with @p false or else all
      * directories
      * in list will be notified.
-     * @param skippedToo if true, the skipped directoris (scanning of which was
+     * @param skippedToo if true, the skipped directories (scanning of which was
      * stopped with stopDirScan() ) will be reset and notified
      * for change. Otherwise, stopped directories will continue to be
      * unnotified.

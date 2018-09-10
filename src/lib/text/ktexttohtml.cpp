@@ -45,7 +45,7 @@ static void loadEmoticonsPlugin()
         // Check if QGuiApplication::platformName property exists. This is a
         // hackish way of determining whether we are running QGuiApplication,
         // because we cannot load the FrameworkIntegration plugin into a
-        // QCoreApplication, as it would crash immediatelly
+        // QCoreApplication, as it would crash immediately
         if (qApp->metaObject()->indexOfProperty("platformName") > -1) {
             QPluginLoader lib(QStringLiteral("kf5/KEmoticonsIntegrationPlugin"));
             QObject *rootObj = lib.instance();
@@ -301,7 +301,7 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
     }
 
     // HACK: This is actually against the RFC. However, most people don't properly escape the URL in
-    //       their text with "" or <>. That leads to people writing an url, followed immediatley by
+    //       their text with "" or <>. That leads to people writing an url, followed immediately by
     //       a dot to finish the sentence. That would lead the parser to include the dot in the url,
     //       even though that is not wanted. So work around that here.
     //       Most real-life URLs hopefully don't end with dots or commas.

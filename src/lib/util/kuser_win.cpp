@@ -154,7 +154,7 @@ void enumerateGroupsForUser(uint maxCount, const QString &name, Callback callbac
     netApiEnumerate<T>(maxCount, callback, [&](int level, LPBYTE *buffer, DWORD *count, DWORD *total, PDWORD_PTR resumeHandle) -> NET_API_STATUS {
         Q_UNUSED(resumeHandle);
         NET_API_STATUS ret = NetUserGetGroups(nullptr, nameStr, level, buffer, MAX_PREFERRED_LENGTH, count, total);
-        // if we return ERROR_MORE_DATA here it will result in an enless loop
+        // if we return ERROR_MORE_DATA here it will result in an endless loop
         if (ret == ERROR_MORE_DATA) {
             qCWarning(KCOREADDONS_DEBUG) << "NetUserGetGroups for user" << name << "returned ERROR_MORE_DATA. This should not happen!";
             ret = NERR_Success;
