@@ -482,22 +482,19 @@ QString KFormatPrivate::formatSpelloutDuration(quint64 msecs) const
     if (days && hours) {
         /*: @item:intext days and hours. This uses the previous item:intext messages.
             If this does not fit the grammar of your language please contact the i18n team to solve the problem */
-        return tr("%1 and %2").arg(formatSingleDuration(Days, days))
-               .arg(formatSingleDuration(Hours, hours));
+        return tr("%1 and %2").arg(formatSingleDuration(Days, days), formatSingleDuration(Hours, hours));
     } else if (days) {
         return formatSingleDuration(Days, days);
     } else if (hours && minutes) {
         /*: @item:intext hours and minutes. This uses the previous item:intext messages.
             If this does not fit the grammar of your language please contact the i18n team to solve the problem */
-        return tr("%1 and %2").arg(formatSingleDuration(Hours, hours))
-               .arg(formatSingleDuration(Minutes, minutes));
+        return tr("%1 and %2").arg(formatSingleDuration(Hours, hours), formatSingleDuration(Minutes, minutes));
     } else if (hours) {
         return formatSingleDuration(Hours, hours);
     } else if (minutes && seconds) {
         /*: @item:intext minutes and seconds. This uses the previous item:intext messages.
             If this does not fit the grammar of your language please contact the i18n team to solve the problem */
-        return tr("%1 and %2").arg(formatSingleDuration(Minutes, minutes))
-               .arg(formatSingleDuration(Seconds, seconds));
+        return tr("%1 and %2").arg(formatSingleDuration(Minutes, minutes), formatSingleDuration(Seconds, seconds));
     } else if (minutes) {
         return formatSingleDuration(Minutes, minutes);
     } else {
@@ -572,6 +569,5 @@ QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocal
 
     /*: relative datetime with %1 result of formatReleativeDate() and %2 the formatted time
         If this does not fit the grammar of your language please contact the i18n team to solve the problem */
-    return tr("%1, %2").arg(formatRelativeDate(dateTime.date(), format))
-           .arg(m_locale.toString(dateTime.time(), format));
+    return tr("%1, %2").arg(formatRelativeDate(dateTime.date(), format), m_locale.toString(dateTime.time(), format));
 }
