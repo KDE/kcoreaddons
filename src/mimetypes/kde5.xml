@@ -3354,6 +3354,7 @@ Notes:
     <comment xml:lang="fi">KConfigXT Configuration Options</comment>
     <comment xml:lang="fr">Options de configuration de KConfigXT</comment>
     <comment xml:lang="gl">Opcións de configuración de KConfigXT</comment>
+    <comment xml:lang="hu">KConfigXT konfigurációs beállítások</comment>
     <comment xml:lang="id">Opsi Konfigurasi KConfigXT</comment>
     <comment xml:lang="it">Opzioni di configurazione KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 설정 옵션</comment>
@@ -3392,6 +3393,7 @@ Notes:
     <comment xml:lang="fi">KConfigXT Code Generation Options</comment>
     <comment xml:lang="fr">Options de génération de code de KConfigXT</comment>
     <comment xml:lang="gl">Opcións de xeración de código de KConfigXT</comment>
+    <comment xml:lang="hu">KConfigXT kódgenerálási beállítások</comment>
     <comment xml:lang="id">Opsi Penghasilan Kode KConfigXT</comment>
     <comment xml:lang="it">Opzioni di generazione codice KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 코드 생성 옵션</comment>
@@ -3426,6 +3428,7 @@ Notes:
     <comment xml:lang="fi">KXMLGUI UI Declaration</comment>
     <comment xml:lang="fr">Déclaration d'interface KXMLGUI</comment>
     <comment xml:lang="gl">Declaración de interface gráfica de KXMLGUI</comment>
+    <comment xml:lang="hu">KXMLGUI UI deklaráció</comment>
     <comment xml:lang="id">Deklarasi KXMLGUI UI</comment>
     <comment xml:lang="it">Dichiarazione UI KXMLGUI</comment>
     <comment xml:lang="ko">KXMLGUI UI 선언</comment>
@@ -3465,6 +3468,7 @@ Notes:
     <comment xml:lang="fi">KNotification Declaration</comment>
     <comment xml:lang="fr">Déclaration de KNotification</comment>
     <comment xml:lang="gl">Declaración de KNotification</comment>
+    <comment xml:lang="hu">KNotification deklaráció</comment>
     <comment xml:lang="id">Deklarasi KNotification</comment>
     <comment xml:lang="it">Dichiarazione KNotification</comment>
     <comment xml:lang="ko">KNotification 선언</comment>
