@@ -187,8 +187,8 @@ KDirWatchPrivate::KDirWatchPrivate()
     timer.setObjectName(QStringLiteral("KDirWatchPrivate::timer"));
     connect(&timer, SIGNAL(timeout()), this, SLOT(slotRescan()));
 
-    m_nfsPollInterval = qEnvironmentVariableIsSet(s_envNfsPoll) ? qgetenv(s_envNfsPoll).toInt() : 5000;
-    m_PollInterval = qEnvironmentVariableIsSet(s_envPoll) ? qgetenv(s_envPoll).toInt() : 500;
+    m_nfsPollInterval = qEnvironmentVariableIsSet(s_envNfsPoll) ? qEnvironmentVariableIntValue(s_envNfsPoll) : 5000;
+    m_PollInterval = qEnvironmentVariableIsSet(s_envPoll) ? qEnvironmentVariableIntValue(s_envPoll) : 500;
 
     m_preferredMethod = methodFromString(qEnvironmentVariableIsSet(s_envMethod) ? qgetenv(s_envMethod) : "inotify");
     // The nfs method defaults to the normal (local) method
