@@ -206,7 +206,7 @@ KDirWatchPrivate::KDirWatchPrivate()
 #if HAVE_FAM
     availableMethods << "FAM";
     use_fam = true;
-    sn = 0;
+    sn = nullptr;
 #endif
 
 #if HAVE_SYS_INOTIFY_H
@@ -642,7 +642,7 @@ bool KDirWatchPrivate::useFAM(Entry *e)
     if (e->isDir) {
         if (e->m_status == NonExistent) {
             // If the directory does not exist we watch the parent directory
-            addEntry(0, e->parentDirectory(), e, true);
+            addEntry(nullptr, e->parentDirectory(), e, true);
         } else {
             int res = FAMMonitorDirectory(&fc, QFile::encodeName(e->path).data(),
                                           &(e->fr), e);
@@ -651,7 +651,7 @@ bool KDirWatchPrivate::useFAM(Entry *e)
                 e->m_mode = UnknownMode;
                 use_fam = false;
                 delete sn;
-                sn = 0;
+                sn = nullptr;
                 return false;
             }
             qCDebug(KDIRWATCH).nospace() << " Setup FAM (Req " << FAMREQUEST_GETREQNUM(&(e->fr))
@@ -660,7 +660,7 @@ bool KDirWatchPrivate::useFAM(Entry *e)
     } else {
         if (e->m_status == NonExistent) {
             // If the file does not exist we watch the directory
-            addEntry(0, QFileInfo(e->path).absolutePath(), e, true);
+            addEntry(nullptr, QFileInfo(e->path).absolutePath(), e, true);
         } else {
             int res = FAMMonitorFile(&fc, QFile::encodeName(e->path).data(),
                                      &(e->fr), e);
@@ -669,7 +669,7 @@ bool KDirWatchPrivate::useFAM(Entry *e)
                 e->m_mode = UnknownMode;
                 use_fam = false;
                 delete sn;
-                sn = 0;
+                sn = nullptr;
                 return false;
             }
 
@@ -1599,7 +1599,7 @@ void KDirWatchPrivate::famEventReceived()
         if (FAMNextEvent(&fc, &fe) == -1) {
             qCWarning(KCOREADDONS_DEBUG) << "FAM connection problem, switching to polling.";
             use_fam = false;
-            delete sn; sn = 0;
+            delete sn; sn = nullptr;
 
             // Replace all FAMMode entries with INotify/Stat
             EntryMap::Iterator it = m_mapEntries.begin();
@@ -1620,7 +1620,7 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
 {
     //qCDebug(KDIRWATCH);
 
-    Entry *e = 0;
+    Entry *e = nullptr;
     EntryMap::Iterator it = m_mapEntries.begin();
     for (; it != m_mapEntries.end(); ++it)
         if (FAMREQUEST_GETREQNUM(&((*it).fr)) ==
@@ -1695,7 +1695,7 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
                 parentEntry->dirty = true;
             }
             // Add entry to parent dir to notice if the entry gets recreated
-            addEntry(0, e->parentDirectory(), e, true /*isDir*/);
+            addEntry(nullptr, e->parentDirectory(), e, true /*isDir*/);
         } else {
             // A file in this directory has been removed, and wasn't explicitly watched.
             // We could still inform clients, like inotify does? But stat can't.
@@ -1720,7 +1720,7 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
             bool isDir = false;
             const QList<const Client *> clients = e->clientsForFileOrDir(tpath, &isDir);
             Q_FOREACH (const Client *client, clients) {
-                addEntry(client->instance, tpath, 0, isDir,
+                addEntry(client->instance, tpath, nullptr, isDir,
                          isDir ? client->m_watchModes : KDirWatch::WatchDirOnly);
             }
 
