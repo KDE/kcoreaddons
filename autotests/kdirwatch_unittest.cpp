@@ -729,6 +729,10 @@ void KDirWatch_UnitTest::testHardlinkChange()
 
     //KDirWatch::statistics();
 
+    // The mtime of the existing file is the one of "TestFile", so it's old.
+    // We won't detect the change then, if we use that as baseline for waiting.
+    // We really need msec granularity, but that requires using statx which isn't available everywhere...
+    waitUntilNewSecond();
     appendToFile(existingFile);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), existingFile));
 #else
