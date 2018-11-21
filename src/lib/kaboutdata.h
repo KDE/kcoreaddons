@@ -29,6 +29,7 @@
 #include <kcoreaddons_export.h>
 #include <QString>
 #include <QSharedDataPointer>
+#include <QObject>
 
 template <class T> class QList;
 class QCommandLineParser;
@@ -67,6 +68,12 @@ Q_DECL_IMPORT void defaultCrashHandler(int sig);
  */
 class KCOREADDONS_EXPORT KAboutPerson
 {
+    Q_GADGET
+    Q_PROPERTY(QString name READ name CONSTANT)
+    Q_PROPERTY(QString task READ task CONSTANT)
+    Q_PROPERTY(QString emailAddress READ emailAddress CONSTANT)
+    Q_PROPERTY(QString webAddress READ webAddress CONSTANT)
+    Q_PROPERTY(QString ocsUsername READ ocsUsername CONSTANT)
     friend class KAboutData;
 public:
     /**
@@ -81,8 +88,10 @@ public:
      * @param webAddress Home page of the person.
      *
      * @param ocsUsername Open Collaboration Services username of the person.
+     *
+     * @p name default argument @since 5.53
      */
-    explicit KAboutPerson(const QString &name,
+    explicit KAboutPerson(const QString &name = QString(),
                           const QString &task = QString(),
                           const QString &emailAddress = QString(),
                           const QString &webAddress = QString(),
@@ -176,8 +185,14 @@ private:
  */
 class KCOREADDONS_EXPORT KAboutLicense
 {
+    Q_GADGET
+    Q_PROPERTY(QString name READ name CONSTANT)
+    Q_PROPERTY(QString text READ text CONSTANT)
+    Q_PROPERTY(KAboutLicense::LicenseKey key READ key CONSTANT)
+    Q_PROPERTY(QString spdx READ spdx CONSTANT)
     friend class KAboutData;
 public:
+
     /**
      * Describes the license of the software.
      */
@@ -197,6 +212,7 @@ public:
         LGPL_V3 = 7,
         LGPL_V2_1 = 8 ///< @since 5.25
     };
+    Q_ENUM(LicenseKey)
 
     /**
      * Format of the license name.
@@ -205,6 +221,7 @@ public:
         ShortName,
         FullName
     };
+    Q_ENUM(NameFormat)
 
     /**
      * Whether later versions of the license are allowed.
@@ -213,6 +230,12 @@ public:
         OnlyThisVersion,
         OrLaterVersions
     };
+    Q_ENUM(VersionRestriction)
+
+    /**
+     * @since 5.53
+     */
+    explicit KAboutLicense();
 
     /**
      * Copy constructor.  Performs a deep copy.
@@ -240,9 +263,11 @@ public:
     /**
      * Returns the license name.
      *
+     * Default argument @since 5.53
+     *
      * @return The license name as a string.
      */
-    QString name(KAboutLicense::NameFormat formatName) const;
+    QString name(KAboutLicense::NameFormat formatName = ShortName) const;
 
     /**
      * Returns the license key.
@@ -382,6 +407,22 @@ private:
  */
 class KCOREADDONS_EXPORT KAboutData
 {
+    Q_GADGET
+    Q_PROPERTY(QString displayName READ displayName CONSTANT)
+    Q_PROPERTY(QString productName READ productName CONSTANT)
+    Q_PROPERTY(QString componentName READ componentName CONSTANT)
+    Q_PROPERTY(QVariant programLogo READ programLogo CONSTANT)
+    Q_PROPERTY(QString shortDescription READ shortDescription CONSTANT)
+    Q_PROPERTY(QString homepage READ homepage CONSTANT)
+    Q_PROPERTY(QString bugAddress READ bugAddress CONSTANT)
+    Q_PROPERTY(QString version READ version CONSTANT)
+    Q_PROPERTY(QString otherText READ otherText CONSTANT)
+    Q_PROPERTY(QVariantList authors READ authorsVariant CONSTANT) //constant in practice as addAuthor is not exposed to Q_GADGET
+    Q_PROPERTY(QVariantList credits READ creditsVariant CONSTANT)
+    Q_PROPERTY(QVariantList translators READ translatorsVariant CONSTANT)
+    Q_PROPERTY(QVariantList licenses READ licensesVariant CONSTANT)
+    Q_PROPERTY(QString copyrightStatement READ copyrightStatement CONSTANT)
+    Q_PROPERTY(QString desktopFileName READ desktopFileName CONSTANT)
 public:
 
     /**
@@ -512,11 +553,13 @@ public:
      * Sets the property desktopFileName to "org.kde."+componentName and
      * the property organizationDomain to "kde.org".
      *
+     * Default arguments @since 5.53
+     *
      * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
      */
-    KAboutData(const QString &componentName,
-               const QString &displayName,
-               const QString &version
+    explicit KAboutData(const QString &componentName = {},
+               const QString &displayName = {},
+               const QString &version = {}
               );
 
     /**
@@ -1115,6 +1158,10 @@ public:
     QString desktopFileName() const;
 
 private:
+    QVariantList licensesVariant() const;
+    QVariantList authorsVariant() const;
+    QVariantList creditsVariant() const;
+    QVariantList translatorsVariant() const;
 
     friend void KCrash::defaultCrashHandler(int sig);
     static const KAboutData *applicationDataPointer();
@@ -1122,6 +1169,10 @@ private:
     class Private;
     Private *const d;
 };
+
+Q_DECLARE_METATYPE(KAboutData)
+Q_DECLARE_METATYPE(KAboutLicense)
+Q_DECLARE_METATYPE(KAboutPerson)
 
 #endif
 

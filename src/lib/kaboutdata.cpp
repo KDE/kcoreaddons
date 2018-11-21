@@ -195,6 +195,11 @@ QString KAboutLicense::Private::spdxID() const
     return QString();
 }
 
+KAboutLicense::KAboutLicense()
+    : d(new Private(Unknown, {}, nullptr))
+{}
+
+
 KAboutLicense::KAboutLicense(LicenseKey licenseType,
                              VersionRestriction versionRestriction,
                              const KAboutData *aboutData)
@@ -1115,6 +1120,7 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
     } else {
         qCWarning(KABOUTDATA) << "Could not initialize the equivalent properties of Q*Application: no instance (yet) existing.";
     }
+
     // KF6: Rethink the current relation between KAboutData::applicationData and the Q*Application metadata
     // Always overwriting the Q*Application metadata here, but not updating back the KAboutData
     // in applicationData() is unbalanced and can result in out-of-sync data if the Q*Application
@@ -1205,4 +1211,35 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
     if (foundArgument) {
         ::exit(EXIT_SUCCESS);
     }
+}
+
+template <class T>
+QVariantList listToVariant(const QList<T>& values)
+{
+    QVariantList ret;
+    ret.reserve(values.count());
+    for(const auto &license: values) {
+        ret << QVariant::fromValue(license);
+    }
+    return ret;
+}
+
+QVariantList KAboutData::licensesVariant() const
+{
+    return listToVariant(d->_licenseList);
+}
+
+QVariantList KAboutData::authorsVariant() const
+{
+    return listToVariant(d->_authorList);
+}
+
+QVariantList KAboutData::creditsVariant() const
+{
+    return listToVariant(d->_creditList);
+}
+
+QVariantList KAboutData::translatorsVariant() const
+{
+    return listToVariant(d->_translatorList);
 }
