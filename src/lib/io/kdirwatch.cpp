@@ -1777,7 +1777,7 @@ void KDirWatchPrivate::statistics()
                 qCDebug(KDIRWATCH)  << "    by " << c.instance->objectName()
                           << " (" << c.count << " times)" << pending;
             }
-            if (e->m_entries.count() > 0) {
+            if (!e->m_entries.isEmpty()) {
                 qCDebug(KDIRWATCH) << "    dependent entries:";
                 Q_FOREACH (Entry *d, e->m_entries) {
                     qCDebug(KDIRWATCH) << "      " << d << d->path << (d->m_status == NonExistent ? "NonExistent" : "EXISTS!!! ERROR!");
