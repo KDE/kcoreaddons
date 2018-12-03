@@ -30,11 +30,11 @@
 #include <QString>
 #include <QSharedDataPointer>
 #include <QObject>
+#include <QVariant>
 
 template <class T> class QList;
 class QCommandLineParser;
 class QJsonObject;
-class QVariant;
 class KAboutData;
 class KPluginMetaData;
 namespace KCrash
