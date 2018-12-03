@@ -31,7 +31,6 @@
 #include <QFile>
 #include <QTextStream>
 #include <QSharedData>
-#include <QVariant>
 #include <QList>
 #include <QUrl>
 #include <QHash>
