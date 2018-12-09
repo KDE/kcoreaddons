@@ -103,7 +103,7 @@ endfunction()
 # It will create a plugin given the SOURCES list, the name of the JSON file
 # that will define the plugin's metadata and the INSTALL_NAMESPACE so that
 # the plugin is installed with the rest of the plugins from the same sub-system,
-# within ${PLUGIN_INSTALL_DIR}.
+# within ${KDE_INSTALL_PLUGINDIR}.
 #
 # Example:
 #   kcoreaddons_add_plugin(kdeconnect_share JSON kdeconnect_share.json SOURCES ${kdeconnect_share_SRCS})
@@ -132,5 +132,5 @@ function(kcoreaddons_add_plugin plugin)
     if (NOT KCA_ADD_PLUGIN_INSTALL_NAMESPACE)
         message(FATAL_ERROR "Must specify INSTALL_NAMESPACE for ${plugin}")
     endif()
-    install(TARGETS ${plugin} DESTINATION ${PLUGIN_INSTALL_DIR}/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE})
+    install(TARGETS ${plugin} DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE})
 endfunction()
