@@ -25,7 +25,7 @@
 class StaticMessageHandler
 {
 public:
-    StaticMessageHandler() : m_handler(nullptr) {}
+    StaticMessageHandler() {}
     ~StaticMessageHandler()
     {
         delete m_handler;
@@ -42,7 +42,7 @@ public:
     }
 
 protected:
-    KMessageHandler *m_handler;
+    KMessageHandler *m_handler = nullptr;
 };
 Q_GLOBAL_STATIC(StaticMessageHandler, s_messageHandler)
 

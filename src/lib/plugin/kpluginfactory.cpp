@@ -157,7 +157,7 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
 QStringList KPluginFactory::variantListToStringList(const QVariantList &list)
 {
     QStringList stringlist;
-    Q_FOREACH (const QVariant &var, list) {
+    for (const QVariant &var : list) {
         stringlist << var.toString();
     }
     return stringlist;
@@ -166,7 +166,7 @@ QStringList KPluginFactory::variantListToStringList(const QVariantList &list)
 QVariantList KPluginFactory::stringListToVariantList(const QStringList &list)
 {
     QVariantList variantlist;
-    Q_FOREACH (const QString &str, list) {
+    for (const QString &str : list) {
         variantlist << QVariant(str);
     }
     return variantlist;
