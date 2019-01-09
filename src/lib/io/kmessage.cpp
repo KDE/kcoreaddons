@@ -30,6 +30,9 @@ public:
     {
         delete m_handler;
     }
+    StaticMessageHandler(const StaticMessageHandler &) = delete;
+    StaticMessageHandler &operator=(const StaticMessageHandler &) = delete;
+
     /* Sets the new message handler and deletes the old one */
     void setHandler(KMessageHandler *handler)
     {

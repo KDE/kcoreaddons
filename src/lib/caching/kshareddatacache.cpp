@@ -1299,6 +1299,9 @@ public:
             }
         }
 
+        CacheLocker(const CacheLocker &) = delete;
+        CacheLocker &operator=(const CacheLocker &) = delete;
+
         bool failed() const
         {
             return !d || d->shm == nullptr;

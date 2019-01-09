@@ -1033,6 +1033,9 @@ public:
         delete m_appData;
         qDeleteAll(m_pluginData);
     }
+    KAboutDataRegistry(const KAboutDataRegistry &) = delete;
+    KAboutDataRegistry &operator=(const KAboutDataRegistry &) = delete;
+
     KAboutData *m_appData;
     QHash<QString, KAboutData *> m_pluginData;
 };
