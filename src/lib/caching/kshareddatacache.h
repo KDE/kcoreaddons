@@ -82,6 +82,9 @@ public:
                      unsigned expectedItemSize = 0);
     ~KSharedDataCache();
 
+    KSharedDataCache(const KSharedDataCache &) = delete;
+    KSharedDataCache &operator=(const KSharedDataCache &) = delete;
+
     enum EvictionPolicy {
         // The default value for data in our shared memory will be 0, so it is
         // important that whatever we want for the default value is also 0.

@@ -50,6 +50,9 @@ public:
      */
     ~Kdelibs4ConfigMigrator();
 
+    Kdelibs4ConfigMigrator(const Kdelibs4ConfigMigrator &) = delete;
+    Kdelibs4ConfigMigrator &operator=(const Kdelibs4ConfigMigrator &) = delete;
+
     /**
      * Migrate the files, if any.
      *

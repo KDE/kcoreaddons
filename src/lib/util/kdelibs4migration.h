@@ -81,6 +81,9 @@ public:
      */
     ~Kdelibs4Migration();
 
+    Kdelibs4Migration(const Kdelibs4Migration &) = delete;
+    Kdelibs4Migration &operator=(const Kdelibs4Migration &) = delete;
+
     /**
      * Returns true if a "kdehome" was found.
      * Otherwise, there is nothing to migrate.
