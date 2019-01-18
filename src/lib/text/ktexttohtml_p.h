@@ -47,6 +47,7 @@ public:
     KTextToHTMLEmoticonsInterface *emoticonsInterface() const;
 
     QString getEmailAddress();
+    QString getPhoneNumber();
     bool atUrl() const;
     bool isEmptyUrl(const QString &url) const;
     QString getUrl(bool *badurl = nullptr);

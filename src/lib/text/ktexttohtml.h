@@ -60,7 +60,13 @@ enum Option
      * Interpret text highlighting markup, like *bold*, _underline_ and /italic/,
      * and wrap them in corresponding HTML entities.
      */
-    HighlightText   = 1 << 4
+    HighlightText   = 1 << 4,
+
+    /**
+     * Replace phone numbers with tel: links.
+     * @since 5.56.0
+     */
+    ConvertPhoneNumbers = 1 << 5
 };
 Q_DECLARE_FLAGS(Options, Option)
 

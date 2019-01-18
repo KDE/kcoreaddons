@@ -26,6 +26,7 @@
 #include <QStringList>
 #include <QFile>
 #include <QRegExp>
+#include <QRegularExpression>
 #include <QPluginLoader>
 #include <QVariant>
 #include <QCoreApplication>
@@ -143,6 +144,72 @@ QString KTextToHTMLHelper::getEmailAddress()
     return address;
 }
 
+QString KTextToHTMLHelper::getPhoneNumber()
+{
+    if (!mText[mPos].isDigit() && mText[mPos] != QLatin1Char('+')) {
+        return {};
+    }
+
+    static const QString allowedBeginSeparators = QStringLiteral(" \r\t\n:");
+    if (mPos > 0 && !allowedBeginSeparators.contains(mText[mPos - 1])) {
+        return {};
+    }
+
+    // this isn't 100% accurate, we filter stuff below that is too hard to capture with a regexp
+    static const QRegularExpression telPattern(QStringLiteral(R"([+0](( |( ?[/-] ?)?)\(?\d+\)?+){6,30})"));
+    const auto match = telPattern.match(mText, mPos, QRegularExpression::NormalMatch, QRegularExpression::AnchoredMatchOption);
+    if (match.hasMatch()) {
+        auto m = match.captured();
+        // check for maximum number of digits (15), see https://en.wikipedia.org/wiki/Telephone_numbering_plan
+        if (std::count_if(m.begin(), m.end(), [](const QChar &c) { return c.isDigit(); }) > 15) {
+            return {};
+        }
+        // only one / is allowed, otherwise we trigger on dates
+        if (std::count(m.begin(), m.end(), QLatin1Char('/')) > 1) {
+            return {};
+        }
+
+        // parenthesis need to be balanced, and must not be nested
+        int openIdx = -1;
+        for (int i = 0; i < m.size(); ++i) {
+            if ((m[i] == QLatin1Char('(') && openIdx >= 0) || (m[i] == QLatin1Char(')') && openIdx < 0)) {
+                return {};
+            }
+            if (m[i] == QLatin1Char('(')) {
+                openIdx = i;
+            } else if (m[i] == QLatin1Char(')')) {
+                openIdx = -1;
+            }
+        }
+        if (openIdx > 0) {
+            m = m.left(openIdx - 1).trimmed();
+        }
+
+        // check if there's a plausible separator at the end
+        static const QString allowedEndSeparators = QStringLiteral(" \r\t\n,.");
+        const auto l = m.size();
+        if (mText.size() > mPos + l && !allowedEndSeparators.contains(mText[mPos + l])) {
+            return {};
+        }
+
+        mPos += l - 1;
+        return m;
+    }
+    return {};
+}
+
+static QString normalizePhoneNumber(const QString &str)
+{
+    QString res;
+    res.reserve(str.size());
+    for (const auto c : str) {
+        if (c.isDigit() || c == QLatin1Char('+')) {
+            res.push_back(c);
+        }
+    }
+    return res;
+}
+
 bool KTextToHTMLHelper::atUrl() const
 {
     // the following characters are allowed in a dot-atom (RFC 2822):
@@ -170,7 +237,9 @@ bool KTextToHTMLHelper::atUrl() const
         (ch == QLatin1Char('w') && mText.midRef(mPos, 4) == QLatin1String("www.")) ||
         (ch == QLatin1Char('f') && (mText.midRef(mPos, 4) == QLatin1String("ftp.") ||
                                     mText.midRef(mPos, 7) == QLatin1String("file://"))) ||
-        (ch == QLatin1Char('n') && mText.midRef(mPos, 5) == QLatin1String("news:"));
+        (ch == QLatin1Char('n') && mText.midRef(mPos, 5) == QLatin1String("news:")) ||
+        (ch == QLatin1Char('t') && mText.midRef(mPos, 4) == QLatin1String("tel:"));
+
 }
 
 bool KTextToHTMLHelper::isEmptyUrl(const QString &url) const
@@ -188,7 +257,9 @@ bool KTextToHTMLHelper::isEmptyUrl(const QString &url) const
            url == QLatin1String("www") ||
            url == QLatin1String("ftp") ||
            url == QLatin1String("news") ||
-           url == QLatin1String("news://");
+           url == QLatin1String("news://") ||
+           url == QLatin1String("tel") ||
+           url == QLatin1String("tel:");
 }
 
 QString KTextToHTMLHelper::getUrl(bool *badurl)
@@ -498,6 +569,14 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
                     result += QLatin1String("<a href=\"mailto:") + str + QLatin1String("\">") + str + QLatin1String("</a>");
                     x += str.length() - 1;
                     continue;
+                }
+                if (flags & ConvertPhoneNumbers) {
+                    str = helper.getPhoneNumber();
+                    if (!str.isEmpty()) {
+                        result += QLatin1String("<a href=\"tel:") + normalizePhoneNumber(str) + QLatin1String("\">") + str + QLatin1String("</a>");
+                        x += str.length() - 1;
+                        continue;
+                    }
                 }
             }
             if (flags & HighlightText) {

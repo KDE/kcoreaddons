@@ -439,6 +439,59 @@ void KTextToHTMLTest::testHtmlConvert_data()
                                        << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                        << "@@ -55,6 +55,10 @@ xsi:schemaLocation=&quot;<a href=\"http://www.kde.org/standards/kcfg/1.0\">http://www.kde.org/standards/kcfg/1.0</a> <a href=\"http://www.kde.org/\">http://www.kde.org/</a>";
 
+    const auto opt = KTextToHTML::PreserveSpaces | KTextToHTML::ConvertPhoneNumbers;
+    // tel: urls
+    QTest::newRow("tel url compact") << "bla bla <tel:+491234567890> bla bla" << opt
+        << "bla bla &lt;<a href=\"tel:+491234567890\">tel:+491234567890</a>&gt; bla bla";
+    QTest::newRow("tel url fancy") << "bla bla tel:+49-321-123456 bla bla" << opt
+        << "bla bla <a href=\"tel:+49-321-123456\">tel:+49-321-123456</a> bla bla";
+
+    // negative tel: url tests
+    QTest::newRow("empty tel url") << "bla tel: blub" << opt
+        << "bla tel: blub";
+
+    // phone numbers
+    QTest::newRow("tel compact international") << "call +49123456789, then hang up" << opt
+        << "call <a href=\"tel:+49123456789\">+49123456789</a>, then hang up";
+    QTest::newRow("tel parenthesis/spaces international") << "phone:+33 (01) 12 34 56 78 blub" << opt
+        << "phone:<a href=\"tel:+330112345678\">+33 (01) 12 34 56 78</a> blub";
+    QTest::newRow("tel dashes international") << "bla +44-321-1-234-567" << opt
+        << "bla <a href=\"tel:+443211234567\">+44-321-1-234-567</a>";
+    QTest::newRow("tel dashes/spaces international") << "+1 123-456-7000 blub" << opt
+        << "<a href=\"tel:+11234567000\">+1 123-456-7000</a> blub";
+    QTest::newRow("tel spaces international") << "bla +32 1 234 5678 blub" << opt
+        << "bla <a href=\"tel:+3212345678\">+32 1 234 5678</a> blub";
+    QTest::newRow("tel slash domestic") << "bla 030/12345678 blub" << opt
+        << "bla <a href=\"tel:03012345678\">030/12345678</a> blub";
+    QTest::newRow("tel slash/space domestic") << "Tel.: 089 / 12 34 56 78" << opt
+        << "Tel.: <a href=\"tel:08912345678\">089 / 12 34 56 78</a>";
+    QTest::newRow("tel follow by parenthesis") << "Telefon: 0 18 05 / 12 23 46 (14 Cent/Min.*)" << opt
+        << "Telefon: <a href=\"tel:01805122346\">0 18 05 / 12 23 46</a> (14 Cent/Min.*)";
+    QTest::newRow("tel space single digit at end") << "0123/123 456 7" << opt
+        << "<a href=\"tel:01231234567\">0123/123 456 7</a>";
+    QTest::newRow("tel space around dash") << "bla +49 (0) 12 23 - 45 6000 blub" << opt
+        << "bla <a href=\"tel:+4901223456000\">+49 (0) 12 23 - 45 6000</a> blub";
+    QTest::newRow("tel two numbers speparated by dash") << "bla +49 (0) 12 23 46 78 - +49 0123/123 456 78 blub" << opt
+        << "bla <a href=\"tel:+49012234678\">+49 (0) 12 23 46 78</a> - <a href=\"tel:+49012312345678\">+49 0123/123 456 78</a> blub";
+
+    // negative tests for phone numbers
+    QTest::newRow("non-tel number") << "please send 1200 cakes" << opt
+        << "please send 1200 cakes";
+    QTest::newRow("non-tel alpha-numeric") << "bla 1-123-456-ABCD blub" << opt
+        << "bla 1-123-456-ABCD blub";
+    QTest::newRow("non-tel alpha prefix") << "ABCD0123-456-789" << opt
+        << "ABCD0123-456-789";
+    QTest::newRow("non-tel date") << "bla 02/03/2019 blub" << opt
+        << "bla 02/03/2019 blub";
+    QTest::newRow("non-tel too long") << "bla +012-4567890123456 blub" << opt
+        << "bla +012-4567890123456 blub";
+    QTest::newRow("non-tel unbalanced") << "bla +012-456789(01 blub" << opt
+        << "bla +012-456789(01 blub";
+    QTest::newRow("non-tel nested") << "bla +012-4(56(78)90)1 blub" << opt
+        << "bla +012-4(56(78)90)1 blub";
+    QTest::newRow("tel extraction disabled") << "call +49123456789 now"
+        << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+        << "call +49123456789 now";
 }
 
 
