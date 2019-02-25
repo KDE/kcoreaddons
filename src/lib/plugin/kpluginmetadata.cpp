@@ -230,7 +230,8 @@ static QList<KAboutPerson> aboutPersonFromJSON(const QJsonValue &people)
         // single author
         addPersonFromJson(people.toObject(), &ret);
     } else if (people.isArray()) {
-        foreach (const QJsonValue &val, people.toArray()) {
+        const QJsonArray peopleArray =  people.toArray();
+        for (const QJsonValue &val : peopleArray) {
             if (val.isObject()) {
                 addPersonFromJson(val.toObject(), &ret);
             }

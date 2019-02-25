@@ -169,7 +169,8 @@ bool numberedBackupFile(const QString &qFilename,
     d.setSorting(QDir::Name);
 
     uint maxBackupFound = 0;
-    Q_FOREACH (const QFileInfo &fi, d.entryInfoList()) {
+    const QFileInfoList infoList = d.entryInfoList();
+    for (const QFileInfo &fi : infoList) {
         if (fi.fileName().endsWith(backupExtension)) {
             // sTemp holds the file name, without the ending backupExtension
             QString sTemp = fi.fileName();

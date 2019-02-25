@@ -127,7 +127,7 @@ public:
 
         Entry *findSubEntry(const QString &path) const
         {
-            Q_FOREACH (Entry *sub_entry, m_entries) {
+            for (Entry *sub_entry : qAsConst(m_entries)) {
                 if (sub_entry->path == path) {
                     return sub_entry;
                 }

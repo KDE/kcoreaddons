@@ -56,7 +56,8 @@ static QStringList findAllStales(const QString &appName)
     for (const QString &dir : dirs) {
         QDir appDir(dir + QStringLiteral("/stalefiles/") + appName);
         //qCDebug(KCOREADDONS_DEBUG) << "Looking in" << appDir.absolutePath();
-        Q_FOREACH (const QString &file, appDir.entryList(QDir::Files)) {
+        const auto listFiles = appDir.entryList(QDir::Files);
+        for (const QString &file : listFiles) {
             files << (appDir.absolutePath() + QLatin1Char('/') + file);
         }
     }

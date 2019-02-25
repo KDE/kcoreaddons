@@ -1181,7 +1181,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
             printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "This application was written by somebody who wants to remain anonymous.")));
         } else {
             printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "%1 was written by:").arg(qAppName())));
-            Q_FOREACH (const KAboutPerson &person, d->_authorList) {
+            for (const KAboutPerson &person : qAsConst(d->_authorList)) {
                 QString authorData = QStringLiteral("    ") + person.name();
                 if (!person.emailAddress().isEmpty()) {
                     authorData.append(QStringLiteral(" <") + person.emailAddress() + QStringLiteral(">"));
@@ -1200,7 +1200,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         }
     } else if (parser->isSet(QStringLiteral("license"))) {
         foundArgument = true;
-        Q_FOREACH (const KAboutLicense &license, d->_licenseList) {
+        for (const KAboutLicense &license : qAsConst(d->_licenseList)) {
             printf("%s\n", qPrintable(license.text()));
         }
     }

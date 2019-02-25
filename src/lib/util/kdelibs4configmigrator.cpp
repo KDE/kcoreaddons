@@ -76,7 +76,7 @@ bool Kdelibs4ConfigMigrator::migrate()
 
     bool didSomething = false;
 
-    Q_FOREACH (const QString &configFileName, d->configFiles) {
+    for (const QString &configFileName : qAsConst(d->configFiles)) {
         const QString newConfigLocation
             = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation)
               + QLatin1Char('/') + configFileName;
@@ -100,7 +100,7 @@ bool Kdelibs4ConfigMigrator::migrate()
     if (d->appName.isEmpty() && !d->uiFiles.isEmpty()) {
         qCritical() << " We can not migrate ui file. AppName is missing";
     } else {
-        Q_FOREACH (const QString &uiFileName, d->uiFiles) {
+        for (const QString &uiFileName : qAsConst(d->uiFiles)) {
             const QString newConfigLocation
                 = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
                   QStringLiteral("/kxmlgui5/") + d->appName + QLatin1Char('/') + uiFileName;

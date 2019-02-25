@@ -327,7 +327,7 @@ private Q_SLOTS:
         if (compatibilityMode) {
             arguments << QStringLiteral("-c");
         }
-        foreach(const QString &s, serviceTypes) {
+        for(const QString &s : qAsConst(serviceTypes)) {
             arguments << QStringLiteral("-s") << s;
         }
         proc.setArguments(arguments);

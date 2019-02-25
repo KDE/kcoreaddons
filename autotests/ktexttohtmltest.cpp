@@ -159,8 +159,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     urls << QStringLiteral("user:pass@www.kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?") +
             QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
 
-    foreach (const QString &schema, schemas) {
-        foreach (QString url, urls) {   //krazy:exclude=foreach
+    for (const QString &schema : qAsConst(schemas)) {
+        for (QString url : qAsConst(urls)) {   //krazy:exclude=foreach
             // by definition: if the URL is enclosed in brackets, the URL itself is not allowed
             // to contain the closing bracket, as this would be detected as the end of the URL
             if ((left.length() == 1) && (url.contains(right[ 0 ]))) {
@@ -207,8 +207,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     QStringList starts;
     starts << QStringLiteral("www") << QStringLiteral("ftp") << QStringLiteral("news:www");
 
-    foreach (const QString &start, starts) {
-        foreach (QString url, urlsWithoutSchema) {   //krazy:exclude=foreach
+    for (const QString &start : qAsConst(starts)) {
+        for (QString url : qAsConst(urlsWithoutSchema)) {
             // by definition: if the URL is enclosed in brackets, the URL itself is not allowed
             // to contain the closing bracket, as this would be detected as the end of the URL
             if ((left.length() == 1) && (url.contains(right[ 0 ]))) {

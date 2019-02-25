@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2014 Nicol·s Alvarez <nicolas.alvarez@gmail.com>
+ *  Copyright (C) 2014 Nicol√°s Alvarez <nicolas.alvarez@gmail.com>
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public
@@ -38,8 +38,8 @@ FaceIconTest::FaceIconTest()
     listWidget = new QListWidget(this);
     layout->addWidget(listWidget);
 
-    QList<KUser> users = KUser::allUsers();
-    Q_FOREACH (const KUser &u, users) {
+    const QList<KUser> users = KUser::allUsers();
+    for (const KUser &u : users) {
         QPixmap pixmap(u.faceIconPath());
         if (pixmap.isNull()) {
             pixmap = QPixmap(QSize(48, 48));

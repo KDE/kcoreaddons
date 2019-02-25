@@ -36,7 +36,7 @@ void KAutoSaveFileTest::initTestCase()
 
 void KAutoSaveFileTest::cleanupTestCase()
 {
-    Q_FOREACH (const QString &fileToRemove, filesToRemove) {
+    for (const QString &fileToRemove : qAsConst(filesToRemove)) {
         QFile::remove(fileToRemove);
     }
 }

@@ -378,7 +378,7 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
     ServiceTypeDefinition ret;
     ret.m_definitions.reserve(paths.size());
     // as we might modify the cache we need to acquire a mutex here
-    foreach (const QString &serviceTypePath, paths) {
+    for (const QString &serviceTypePath : paths) {
         bool added = ret.addFile(serviceTypePath);
         if (!added) {
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
@@ -415,7 +415,7 @@ bool ServiceTypeDefinition::addFile(const QString& path)
 QJsonValue ServiceTypeDefinition::parseValue(const QByteArray &key, const QString &value) const
 {
     // check whether the key has a special type associated with it
-    foreach (const CustomPropertyDefinition &propertyDef, m_definitions) {
+    for (const CustomPropertyDefinition &propertyDef : qAsConst(m_definitions)) {
         if (propertyDef.key == key) {
             return propertyDef.fromString(value);
         }

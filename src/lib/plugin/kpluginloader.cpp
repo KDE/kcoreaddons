@@ -244,14 +244,15 @@ void KPluginLoader::forEachPlugin(const QString &directory, std::function<void(c
     if (QDir::isAbsolutePath(directory)) {
         dirsToCheck << directory;
     } else {
-        foreach (const QString &libDir, QCoreApplication::libraryPaths()) {
+        const QStringList listPaths = QCoreApplication::libraryPaths();
+        for (const QString &libDir : listPaths) {
             dirsToCheck << libDir + QLatin1Char('/') + directory;
         }
     }
 
     qCDebug(KCOREADDONS_DEBUG) << "Checking for plugins in" << dirsToCheck;
 
-    foreach (const QString &dir, dirsToCheck) {
+    for (const QString &dir : qAsConst(dirsToCheck)) {
         QDirIterator it(dir, QDir::Files);
         while (it.hasNext()) {
             it.next();
@@ -292,7 +293,8 @@ QList<QObject *> KPluginLoader::instantiatePlugins(const QString &directory,
 {
     QList<QObject *> ret;
     QPluginLoader loader;
-    foreach (const KPluginMetaData &metadata, findPlugins(directory, filter)) {
+    const QVector<KPluginMetaData> listMetaData = findPlugins(directory, filter);
+    for (const KPluginMetaData &metadata : listMetaData) {
         loader.setFileName(metadata.fileName());
         QObject* obj = loader.instance();
         if (!obj) {
