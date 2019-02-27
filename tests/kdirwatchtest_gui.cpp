@@ -42,7 +42,7 @@ KDirWatchTest_GUI::KDirWatchTest_GUI() : QWidget()
     QPushButton *e, *f;
 
     QVBoxLayout *lay = new QVBoxLayout(this);
-    lay->setMargin(0);
+    lay->setContentsMargins(0, 0, 0, 0);
     lay->addWidget(l1 = new QLineEdit(QLatin1String("Test 1"), this));
     lay->addWidget(l2 = new QLineEdit(QLatin1String("Test 2"), this));
     lay->addWidget(l3 = new QLineEdit(QLatin1String("Test 3"), this));
