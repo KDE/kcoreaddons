@@ -329,8 +329,10 @@ protected:
 
 private:
     // hide those
+#if QT_DEPRECATED_SINCE(5, 13)
     using QProcess::setReadChannelMode;
     using QProcess::readChannelMode;
+#endif
     using QProcess::setProcessChannelMode;
     using QProcess::processChannelMode;
 };
