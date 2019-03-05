@@ -1707,7 +1707,7 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
         } else if (e->isDir && !e->m_clients.empty()) {
             bool isDir = false;
             const QList<const Client *> clients = e->clientsForFileOrDir(tpath, &isDir);
-            Q_FOREACH (const Client *client, clients) {
+            for (const Client *client : clients) {
                 addEntry(client->instance, tpath, nullptr, isDir,
                          isDir ? client->m_watchModes : KDirWatch::WatchDirOnly);
             }
