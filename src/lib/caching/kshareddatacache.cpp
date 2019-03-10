@@ -873,7 +873,7 @@ struct SharedMemory {
             break;
         }
 
-        qSort(table, table + indexTableSize(), compareFunction);
+        std::sort(table, table + indexTableSize(), compareFunction);
 
         // Least recently used entries will be in the front.
         // Start killing until we have room.
