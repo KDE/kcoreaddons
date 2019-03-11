@@ -122,12 +122,12 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
         const QStringList argsStringList = variantListToStringList(args);
 
         if ((obj = reinterpret_cast<QObject *>(createPartObject(parentWidget, parent, iface, argsStringList)))) {
-            objectCreated(obj);
+            Q_EMIT objectCreated(obj);
             return obj;
         }
 
         if ((obj = createObject(parent, iface, argsStringList))) {
-            objectCreated(obj);
+            Q_EMIT objectCreated(obj);
             return obj;
         }
     }
