@@ -36,7 +36,7 @@
 #include <algorithm>  // std::find
 #include <functional> // std::function
 
-#if defined(__BIONIC__)
+#if defined(__BIONIC__) && __ANDROID_API__ < 26
 static inline struct passwd * getpwent() { return nullptr; }
 inline void setpwent() { }
 static inline void setgrent() { }
