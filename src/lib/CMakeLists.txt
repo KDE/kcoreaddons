@@ -45,6 +45,7 @@ if (WIN32)
     set(kcoreaddons_OPTIONAL_SRCS
         ${kcoreaddons_OPTIONAL_SRCS}
         text/kmacroexpander_win.cpp
+        util/kprocesslist_win.cpp
         util/kshell_win.cpp
         util/kuser_win.cpp
     )
@@ -54,6 +55,7 @@ if (UNIX)
     set(kcoreaddons_OPTIONAL_SRCS
         ${kcoreaddons_OPTIONAL_SRCS}
         text/kmacroexpander_unix.cpp
+        util/kprocesslist_unix.cpp
         util/kuser_unix.cpp
         util/kshell_unix.cpp
     )
@@ -87,6 +89,7 @@ set(libkcoreaddons_SRCS
     util/kformat.cpp
     util/kformatprivate.cpp
     util/kosrelease.cpp
+    util/kprocesslist.cpp
     util/kshell.cpp
     ${kcoreaddons_OPTIONAL_SRCS}
     ${kcoreaddons_QM_LOADER}
@@ -201,6 +204,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KOSRelease
         KUser
         KShell
+        KProcessList
         Kdelibs4Migration
         Kdelibs4ConfigMigrator
     RELATIVE util
@@ -244,6 +248,7 @@ if (PythonModuleGeneration_FOUND)
       text/ktexttohtmlemoticonsinterface.h
       util/kformat.h
       util/kosrelease.h
+      util/kprocesslist.h
       util/kuser.h
       util/kshell.h
       util/kdelibs4migration.h

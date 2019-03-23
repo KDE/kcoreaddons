@@ -49,6 +49,7 @@ ecm_add_tests(
     kusertest.cpp
     kdelibs4migrationtest.cpp
     kdelibs4configmigratortest.cpp
+    kprocesslisttest.cpp
     LINK_LIBRARIES Qt5::Test KF5::CoreAddons
 )
 
