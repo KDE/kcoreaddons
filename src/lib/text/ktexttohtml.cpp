@@ -25,7 +25,6 @@
 #include <QString>
 #include <QStringList>
 #include <QFile>
-#include <QRegExp>
 #include <QRegularExpression>
 #include <QPluginLoader>
 #include <QVariant>
@@ -402,26 +401,28 @@ QString KTextToHTMLHelper::highlightedText()
         return QString();
     }
 
-    QRegExp re =
-        QRegExp(QStringLiteral("\\%1((\\w+)([\\s-']*\\w+)*( ?[,.:\\?!;])?)\\%2").arg(ch).arg(ch));
+    QRegularExpression re(QStringLiteral("\\%1(.*)\\%2").arg(ch).arg(ch));
+    re.setPatternOptions(QRegularExpression::InvertedGreedinessOption);
+    const auto match = re.match(mText, mPos, QRegularExpression::NormalMatch, QRegularExpression::AnchoredMatchOption);
 
-    re.setMinimal(true);
-    if (re.indexIn(mText, mPos) == mPos) {
-        int length = re.matchedLength();
-        // there must be a whitespace after the closing formating symbol
-        if (mPos + length < mText.length() && !mText[mPos + length].isSpace()) {
-            return QString();
-        }
-        mPos += length - 1;
-        switch (ch.toLatin1()) {
-        case '*':
-            return QLatin1String("<b>*") + re.cap(1) + QLatin1String("*</b>");
-        case '_':
-            return QLatin1String("<u>_") + re.cap(1) + QLatin1String("_</u>");
-        case '/':
-            return QLatin1String("<i>/") + re.cap(1) + QLatin1String("/</i>");
-        case '-':
-            return QLatin1String("<strike>-") + re.cap(1) + QLatin1String("-</strike>");
+    if (match.hasMatch()) {
+        if (match.capturedStart() == mPos) {
+            int length = match.capturedLength();
+            // there must be a whitespace after the closing formating symbol
+            if (mPos + length < mText.length() && !mText[mPos + length].isSpace()) {
+                return QString();
+            }
+            mPos += length - 1;
+            switch (ch.toLatin1()) {
+            case '*':
+                return QLatin1String("<b>*") + match.capturedRef(1) + QLatin1String("*</b>");
+            case '_':
+                return QLatin1String("<u>_") + match.capturedRef(1) + QLatin1String("_</u>");
+            case '/':
+                return QLatin1String("<i>/") + match.capturedRef(1) + QLatin1String("/</i>");
+            case '-':
+                return QLatin1String("<strike>-") + match.capturedRef(1) + QLatin1String("-</strike>");
+            }
         }
     }
     return QString();
