@@ -335,6 +335,12 @@ void KTextToHTMLTest::testHtmlConvert_data()
     QTest::newRow("") << "*Ouais !* *Yes!*"
                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
                       << "<b>*Ouais !*</b> <b>*Yes!*</b>";
+
+    QTest::newRow("multispace") << "*Ouais     foo*"
+                      << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                      << "<b>*Ouais     foo*</b>";
+
+
     QTest::newRow("") << "the /etc/{rsyslog.d,syslog-ng.d}/package.rpmnew file"
                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
                       << "the /etc/{rsyslog.d,syslog-ng.d}/package.rpmnew file";

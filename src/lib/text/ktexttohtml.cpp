@@ -403,7 +403,8 @@ QString KTextToHTMLHelper::highlightedText()
     }
 
     QRegExp re =
-        QRegExp(QStringLiteral("\\%1((\\w+)([\\s-']\\w+)*( ?[,.:\\?!;])?)\\%2").arg(ch).arg(ch));
+        QRegExp(QStringLiteral("\\%1((\\w+)([\\s-']*\\w+)*( ?[,.:\\?!;])?)\\%2").arg(ch).arg(ch));
+
     re.setMinimal(true);
     if (re.indexIn(mText, mPos) == mPos) {
         int length = re.matchedLength();
