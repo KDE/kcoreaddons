@@ -340,6 +340,10 @@ void KTextToHTMLTest::testHtmlConvert_data()
                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
                       << "<b>*Ouais     foo*</b>";
 
+    QTest::newRow("multispace3") << "*Ouais:     foo*"
+                      << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                      << "<b>*Ouais:     foo*</b>";
+
 
     QTest::newRow("") << "the /etc/{rsyslog.d,syslog-ng.d}/package.rpmnew file"
                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
