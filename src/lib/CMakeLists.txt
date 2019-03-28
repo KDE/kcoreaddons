@@ -86,6 +86,7 @@ set(libkcoreaddons_SRCS
     util/kdelibs4configmigrator.cpp
     util/kformat.cpp
     util/kformatprivate.cpp
+    util/kosrelease.cpp
     util/kshell.cpp
     ${kcoreaddons_OPTIONAL_SRCS}
     ${kcoreaddons_QM_LOADER}
@@ -197,6 +198,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
 ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
         KFormat
+        KOSRelease
         KUser
         KShell
         Kdelibs4Migration
@@ -241,6 +243,7 @@ if (PythonModuleGeneration_FOUND)
       text/ktexttohtml.h
       text/ktexttohtmlemoticonsinterface.h
       util/kformat.h
+      util/kosrelease.h
       util/kuser.h
       util/kshell.h
       util/kdelibs4migration.h

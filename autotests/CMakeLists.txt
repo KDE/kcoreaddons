@@ -36,6 +36,7 @@ ecm_add_tests(
     kcompositejobtest.cpp
     kformattest.cpp
     kjobtest.cpp
+    kosreleasetest.cpp
     kpluginfactorytest.cpp
     kpluginloadertest.cpp
     kpluginmetadatatest.cpp
