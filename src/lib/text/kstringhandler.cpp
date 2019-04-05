@@ -166,7 +166,7 @@ QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int 
 
 QString KStringHandler::tagUrls(const QString &text)
 {
-    /*static*/ QRegExp urlEx(QStringLiteral("(www\\.(?!\\.)|(fish|(f|ht)tp(|s))://)[\\d\\w\\./,:_~\\?=&;#@\\-\\+\\%\\$]+[\\d\\w/]"));
+    /*static*/ QRegExp urlEx(QStringLiteral("(www\\.(?!\\.)|(fish|(f|ht)tp(|s))://)[\\d\\w\\./,:_~\\?=&;#@\\-\\+\\%\\$\\(]+[\\d\\w/\\)]"));
 
     QString richText(text);
     int urlPos = 0, urlLen;

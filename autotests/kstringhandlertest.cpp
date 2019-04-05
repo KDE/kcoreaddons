@@ -31,6 +31,14 @@ void KStringHandlerTest::tagURLs()
     check("tagURLs()", KStringHandler::tagURLs(test),
           "&lt;a href=<a href=\"www.foo.com\">www.foo.com</a>&gt;");
 #endif
+
+    test = QStringLiteral("http://www.foo.org/bla-(bli)");
+    QCOMPARE(KStringHandler::tagUrls(test),
+             QStringLiteral("<a href=\"http://www.foo.org/bla-(bli)\">http://www.foo.org/bla-(bli)</a>"));
+
+    test = QStringLiteral("http://www.foo.org/bla-bli");
+    QCOMPARE(KStringHandler::tagUrls(test),
+             QStringLiteral("<a href=\"http://www.foo.org/bla-bli\">http://www.foo.org/bla-bli</a>"));
 }
 
 void KStringHandlerTest::perlSplit()
