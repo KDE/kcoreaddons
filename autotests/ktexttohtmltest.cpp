@@ -344,6 +344,21 @@ void KTextToHTMLTest::testHtmlConvert_data()
                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
                       << "<b>*Ouais:     foo*</b>";
 
+    QTest::newRow("nohtmlversion") << "* Ouais:     foo *"
+                      << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                      << "* Ouais:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foo *";
+
+    QTest::newRow("nohtmlversion2") << "*Ouais:     foo *"
+                      << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                      << "*Ouais:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foo *";
+
+    QTest::newRow("nohtmlversion3") << "* Ouais:     foo*"
+                      << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                      << "* Ouais:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foo*";
+
+    QTest::newRow("nohtmlversion3") << "* Ouais: *ff sfsdf* foo *"
+                      << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                      << "* Ouais: <b>*ff sfsdf*</b> foo *";
 
     QTest::newRow("") << "the /etc/{rsyslog.d,syslog-ng.d}/package.rpmnew file"
                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
