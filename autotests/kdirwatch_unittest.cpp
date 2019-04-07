@@ -30,6 +30,8 @@
 #include <unistd.h> // ::link()
 #endif
 
+#include "config-tests.h"
+
 // Debugging notes: to see which inotify signals are emitted, either set s_verboseDebug=true
 // at the top of kdirwatch.cpp, or use the command-line tool "inotifywait -m /path"
 
@@ -808,6 +810,9 @@ void KDirWatch_UnitTest::shouldIgnoreQrcPaths()
 
 void KDirWatch_UnitTest::benchCreateTree()
 {
+#if !ENABLE_BENCHMARKS
+    QSKIP("Benchmarks are disabled in debug mode");
+#endif
     QTemporaryDir dir;
 
     QBENCHMARK {
@@ -817,6 +822,9 @@ void KDirWatch_UnitTest::benchCreateTree()
 
 void KDirWatch_UnitTest::benchCreateWatcher()
 {
+#if !ENABLE_BENCHMARKS
+    QSKIP("Benchmarks are disabled in debug mode");
+#endif
     QTemporaryDir dir;
     createDirectoryTree(dir.path());
 
@@ -828,6 +836,9 @@ void KDirWatch_UnitTest::benchCreateWatcher()
 
 void KDirWatch_UnitTest::benchNotifyWatcher()
 {
+#if !ENABLE_BENCHMARKS
+    QSKIP("Benchmarks are disabled in debug mode");
+#endif
     QTemporaryDir dir;
     // create the dir once upfront
     auto numFiles = createDirectoryTree(dir.path());

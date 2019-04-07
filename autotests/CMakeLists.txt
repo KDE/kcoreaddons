@@ -8,6 +8,11 @@ if(NOT Qt5Test_FOUND)
     return()
 endif()
 
+if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd]ebug$")
+    set(ENABLE_BENCHMARKS 1)
+endif()
+configure_file(config-tests.h.in config-tests.h)
+
 macro(build_plugin pname)
     add_library(${pname} MODULE ${ARGN})
     ecm_mark_as_test(${pname})
