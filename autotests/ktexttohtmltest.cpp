@@ -344,6 +344,14 @@ void KTextToHTMLTest::testHtmlConvert_data()
                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
                       << "<b>*Ouais:     foo*</b>";
 
+    QTest::newRow("multi-") << "** Ouais:  foo **"
+                      << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                      << "** Ouais:&nbsp;&nbsp;foo **";
+
+    QTest::newRow("multi-") << "*** Ouais:  foo ***"
+                      << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                      << "*** Ouais:&nbsp;&nbsp;foo ***";
+
     QTest::newRow("nohtmlversion") << "* Ouais:     foo *"
                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
                       << "* Ouais:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;foo *";
