@@ -206,7 +206,7 @@ bool readUntilDesktopEntryGroup(QFile &file, const QString &path, int &lineNr)
 }
 
 
-QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
+QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup, QByteArray *pName)
 {
     QByteArray group = *nextGroup;
     QByteArray type;
@@ -234,6 +234,13 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup)
         const auto match = typeEntryRegex.match(QString::fromUtf8(line));
         if (match.hasMatch()) {
             type = match.captured(1).toUtf8();
+        } else if (pName) {
+            const static QRegularExpression nameEntryRegex(
+                    QStringLiteral("^X-KDE-ServiceType\\s*=\\s*(.*)$"));
+            const auto nameMatch = nameEntryRegex.match(QString::fromUtf8(line));
+            if (nameMatch.hasMatch()) {
+                *pName = nameMatch.captured(1).toUtf8();
+            }
         }
     }
     return type;
@@ -290,7 +297,7 @@ static QString locateRelativeServiceType(const QString &relPath)
                                   QStringLiteral("kservicetypes5/") + relPath);
 }
 
-static QVector<CustomPropertyDefinition>* parseServiceTypesFile(const QString &inputPath)
+static ServiceTypeDefinition* parseServiceTypesFile(const QString &inputPath)
 {
     int lineNr = 0;
     QString path = inputPath;
@@ -316,12 +323,12 @@ static QVector<CustomPropertyDefinition>* parseServiceTypesFile(const QString &i
     if (!readUntilDesktopEntryGroup(df, path, lineNr)) {
         return nullptr;
     }
-    QVector<CustomPropertyDefinition> result;
+    ServiceTypeDefinition result;
     // TODO: passing nextGroup by pointer is inefficient as it will make deep copies every time
     // Not exactly performance critical code though so low priority
     QByteArray nextGroup = "Desktop Entry";
     // Type must be ServiceType now
-    QByteArray typeStr = readTypeEntryForCurrentGroup(df, &nextGroup);
+    QByteArray typeStr = readTypeEntryForCurrentGroup(df, &nextGroup, &result.m_serviceTypeName);
     if (typeStr != QByteArrayLiteral("ServiceType")) {
         qCWarning(DESKTOPPARSER) << path << "is not a valid service type: Type entry should be 'ServiceType', got"
             << typeStr << "instead.";
@@ -329,7 +336,7 @@ static QVector<CustomPropertyDefinition>* parseServiceTypesFile(const QString &i
     }
     while (!df.atEnd()) {
         QByteArray currentGroup = nextGroup;
-        typeStr = readTypeEntryForCurrentGroup(df, &nextGroup);
+        typeStr = readTypeEntryForCurrentGroup(df, &nextGroup, nullptr);
         if (!currentGroup.startsWith(QByteArrayLiteral("PropertyDef::"))) {
             qCWarning(DESKTOPPARSER) << "Skipping invalid group" << currentGroup << "in service type" << path;
             continue;
@@ -347,7 +354,7 @@ static QVector<CustomPropertyDefinition>* parseServiceTypesFile(const QString &i
             case QVariant::Double:
             case QVariant::Bool:
                 qCDebug(DESKTOPPARSER) << "Found property definition" << propertyName << "with type" << typeStr;
-                result.push_back(CustomPropertyDefinition(propertyName, type));
+                result.m_propertyDefs.push_back(CustomPropertyDefinition(propertyName, type));
                 break;
             case QVariant::Invalid:
                 qCWarning(DESKTOPPARSER) << "Property type" << typeStr << "is not a known QVariant type."
@@ -358,24 +365,20 @@ static QVector<CustomPropertyDefinition>* parseServiceTypesFile(const QString &i
                         << "found in" << path << "\nOnly QString, QStringList, int, double and bool are supported.";
         }
     }
-    return new QVector<CustomPropertyDefinition>(result);
+    return new ServiceTypeDefinition(result);
 }
 
 // a lazy map of service type definitions
-typedef QCache<QString, QVector<CustomPropertyDefinition>> ServiceTypesHash;
+typedef QCache<QString /*path*/, ServiceTypeDefinition> ServiceTypesHash;
 Q_GLOBAL_STATIC(ServiceTypesHash, s_serviceTypes)
 // access must be guarded by serviceTypesMutex as this code could be executed by multiple threads
 QBasicMutex s_serviceTypesMutex;
 } // end of anonymous namespace
 
 
-ServiceTypeDefinition::ServiceTypeDefinition()
+ServiceTypeDefinitions ServiceTypeDefinitions::fromFiles(const QStringList &paths)
 {
-}
-
-ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
-{
-    ServiceTypeDefinition ret;
+    ServiceTypeDefinitions ret;
     ret.m_definitions.reserve(paths.size());
     // as we might modify the cache we need to acquire a mutex here
     for (const QString &serviceTypePath : paths) {
@@ -389,16 +392,15 @@ ServiceTypeDefinition ServiceTypeDefinition::fromFiles(const QStringList &paths)
     return ret;
 }
 
-bool ServiceTypeDefinition::addFile(const QString& path)
+bool ServiceTypeDefinitions::addFile(const QString& path)
 {
     QMutexLocker lock(&s_serviceTypesMutex);
-    QVector<CustomPropertyDefinition>* def = s_serviceTypes->object(path);
+    ServiceTypeDefinition* def = s_serviceTypes->object(path);
 
     if (def) {
         // in cache but we still must make our own copy
         m_definitions << *def;
-    }
-    else {
+    } else {
         // not found in cache -> we need to parse the file
         qCDebug(DESKTOPPARSER) << "About to parse service type file" << path;
         def = parseServiceTypesFile(path);
@@ -412,19 +414,29 @@ bool ServiceTypeDefinition::addFile(const QString& path)
     return true;
 }
 
-QJsonValue ServiceTypeDefinition::parseValue(const QByteArray &key, const QString &value) const
+QJsonValue ServiceTypeDefinitions::parseValue(const QByteArray &key, const QString &value) const
 {
     // check whether the key has a special type associated with it
-    for (const CustomPropertyDefinition &propertyDef : qAsConst(m_definitions)) {
-        if (propertyDef.key == key) {
-            return propertyDef.fromString(value);
+    for (const auto &def : m_definitions) {
+        for (const CustomPropertyDefinition &propertyDef : def.m_propertyDefs) {
+            if (propertyDef.key == key) {
+                return propertyDef.fromString(value);
+            }
         }
     }
     qCDebug(DESKTOPPARSER) << "Unknown property type for key" << key << "-> falling back to string";
     return QJsonValue(value);
 }
 
-void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefinition &serviceTypes, const QString &value,
+bool ServiceTypeDefinitions::hasServiceType(const QByteArray &serviceTypeName) const
+{
+    const auto it = std::find_if(m_definitions.begin(), m_definitions.end(), [&serviceTypeName](const ServiceTypeDefinition &def) {
+            return def.m_serviceTypeName == serviceTypeName;
+    });
+    return it != m_definitions.end();
+}
+
+void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefinitions &serviceTypes, const QString &value,
                                       QJsonObject &json, QJsonObject &kplugin, int lineNr)
 {
     /* The following keys are recognized (and added to a "KPlugin" object):
@@ -528,7 +540,7 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
 {
     QFile df(src);
     int lineNr = 0;
-    ServiceTypeDefinition serviceTypeDef = ServiceTypeDefinition::fromFiles(serviceTypes);
+    ServiceTypeDefinitions serviceTypeDef = ServiceTypeDefinitions::fromFiles(serviceTypes);
     readUntilDesktopEntryGroup(df, src, lineNr);
     DESKTOPTOJSON_VERBOSE_DEBUG << "Found [Desktop Entry] group in line" << lineNr;
     auto startPos = df.pos();
@@ -547,17 +559,19 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
             const auto serviceList = deserializeList(value);
 
             for (const auto &service : serviceList) {
-                // Make up the filename from the service type name. This assumes consistent naming...
-                QString absFileName = locateRelativeServiceType(
-                        service.toLower().replace(slashChar, QLatin1Char('-')) + dotDesktop);
-                if (absFileName.isEmpty()) {
-                    absFileName = locateRelativeServiceType(
-                        service.toLower().remove(slashChar) + dotDesktop);
-                }
-                if (absFileName.isEmpty()) {
-                    qCWarning(DESKTOPPARSER) << "Unable to find service type for service" << service << "listed in" << src;
-                } else {
-                    serviceTypeDef.addFile(absFileName);
+                if (!serviceTypeDef.hasServiceType(service.toLatin1())) {
+                    // Make up the filename from the service type name. This assumes consistent naming...
+                    QString absFileName = locateRelativeServiceType(
+                            service.toLower().replace(slashChar, QLatin1Char('-')) + dotDesktop);
+                    if (absFileName.isEmpty()) {
+                        absFileName = locateRelativeServiceType(
+                                service.toLower().remove(slashChar) + dotDesktop);
+                    }
+                    if (absFileName.isEmpty()) {
+                        qCWarning(DESKTOPPARSER) << "Unable to find service type for service" << service << "listed in" << src;
+                    } else {
+                        serviceTypeDef.addFile(absFileName);
+                    }
                 }
             }
             break;

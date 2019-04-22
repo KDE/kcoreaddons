@@ -36,9 +36,13 @@ Q_DECLARE_LOGGING_CATEGORY(DESKTOPPARSER)
 struct CustomPropertyDefinition;
 struct ServiceTypeDefinition
 {
-    ServiceTypeDefinition();
+    QVector<CustomPropertyDefinition> m_propertyDefs;
+    QByteArray m_serviceTypeName;
+};
 
-    static ServiceTypeDefinition fromFiles(const QStringList &paths);
+struct ServiceTypeDefinitions
+{
+    static ServiceTypeDefinitions fromFiles(const QStringList &paths);
     /**
      * @return @p value converted to the correct JSON type.
      * If there is no custom property definition for @p key this will simply return the string value
@@ -52,8 +56,10 @@ struct ServiceTypeDefinition
      */
     bool addFile(const QString &path);
 
+    bool hasServiceType(const QByteArray &serviceTypeName) const;
+
 private:
-    QVector<CustomPropertyDefinition> m_definitions;
+    QVector<ServiceTypeDefinition> m_definitions;
 };
 
 namespace DesktopFileParser
@@ -61,7 +67,7 @@ namespace DesktopFileParser
     QByteArray escapeValue(const QByteArray &input);
     QStringList deserializeList(const QString &data, char separator = ',');
     bool convert(const QString &src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath);
-    void convertToJson(const QByteArray &key, ServiceTypeDefinition &serviceTypes, const QString &value,
+    void convertToJson(const QByteArray &key, ServiceTypeDefinitions &serviceTypes, const QString &value,
                        QJsonObject &json, QJsonObject &kplugin, int lineNr);
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
     void convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr);

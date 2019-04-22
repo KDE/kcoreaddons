@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=ServiceType
-#Name=Sample
+X-KDE-ServiceType=example/servicetype
 
 [PropertyDef::X-Test-Integer]
 Type=int

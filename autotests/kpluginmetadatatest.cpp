@@ -281,10 +281,11 @@ private Q_SLOTS:
         QVERIFY(!typesPath.isEmpty());
         const QString inputPath = QFINDTESTDATA("data/servicetypes/example-input.desktop");
         QVERIFY(!inputPath.isEmpty());
+        QTest::ignoreMessage(QtWarningMsg, qPrintable(QStringLiteral("Unable to find service type for service \"bar/foo\" listed in \"") + inputPath + QLatin1Char('"')));
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Example"));
-        QCOMPARE(md.serviceTypes(), QStringList() << QStringLiteral("foo/bar") << QStringLiteral("bar/foo"));
+        QCOMPARE(md.serviceTypes(), QStringList() << QStringLiteral("example/servicetype") << QStringLiteral("bar/foo"));
         // qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
         QCOMPARE(md.rawData().size(), 8);
         QVERIFY(md.rawData().value(QStringLiteral("KPlugin")).isObject());
