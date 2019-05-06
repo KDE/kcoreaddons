@@ -113,9 +113,9 @@ static inline ProcessInfo processInfo(DWORD processId)
     return pi;
 }
 
-KProcessList GetProcessList()
+KProcessInfoList KProcessList::processInfoList()
 {
-    KProcessList rc;
+    KProcessInfoList rc;
 
     PROCESSENTRY32 pe;
     pe.dwSize = sizeof(PROCESSENTRY32);
