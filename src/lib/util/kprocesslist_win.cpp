@@ -46,6 +46,8 @@
 #include <tlhelp32.h>
 #include <psapi.h>
 
+using namespace KProcessList;
+
 // Resolve QueryFullProcessImageNameW out of kernel32.dll due
 // to incomplete MinGW import libs and it not being present
 // on Windows XP.
