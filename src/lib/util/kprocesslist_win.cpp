@@ -74,7 +74,7 @@ struct ProcessInfo {
     QString processOwner;
 };
 
-static inline ProcessInfo processInfo(DWORD processId)
+static inline ProcessInfo winProcessInfo(DWORD processId)
 {
     ProcessInfo pi;
     HANDLE handle = OpenProcess(PROCESS_QUERY_INFORMATION, TOKEN_READ, processId);
@@ -126,7 +126,7 @@ KProcessInfoList KProcessList::processInfoList()
         return rc;
 
     for (bool hasNext = Process32First(snapshot, &pe); hasNext; hasNext = Process32Next(snapshot, &pe)) {
-        const ProcessInfo processInf = processInfo(pe.th32ProcessID);
+        const ProcessInfo processInf = winProcessInfo(pe.th32ProcessID);
         rc.push_back(KProcessInfo(pe.th32ProcessID, QString::fromUtf16(reinterpret_cast<ushort *>(pe.szExeFile)), processInf.processOwner));
     }
     CloseHandle(snapshot);
