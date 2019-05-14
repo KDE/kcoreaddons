@@ -75,7 +75,7 @@ private:
     QSharedDataPointer<KProcessInfoPrivate> d_ptr;
 };
 
-using KProcessInfoList = QList<KProcessInfo>;
+typedef QList<KProcessInfo> KProcessInfoList;
 
 /**
  * @brief Retrieves the list of currently active processes.
