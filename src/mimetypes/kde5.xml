@@ -910,7 +910,7 @@ Notes:
     <comment xml:lang="sv">Kplato-projekthantering arbetspaket</comment>
     <comment xml:lang="tr">KPlato proje yönetimi çalışma paketi</comment>
     <comment xml:lang="ug">KPlato قۇرۇلۇش باشقۇرۇش خىزمەت بوغچىسى</comment>
-    <comment xml:lang="uk">пакунок проекту керування роботами KPlato</comment>
+    <comment xml:lang="uk">пакунок проєкту керування роботами KPlato</comment>
     <comment xml:lang="zh_CN">KPlato 项目管理工作包</comment>
     <comment xml:lang="zh_TW">KPlato 專案管理工作套件</comment>
     <glob pattern="*.kplatowork"/>
@@ -1889,7 +1889,7 @@ Notes:
     <comment xml:lang="th">เอกสารโครงงาน Quanta</comment>
     <comment xml:lang="tr">Quanta projesi</comment>
     <comment xml:lang="ug">Quanta قۇرۇلۇشى</comment>
-    <comment xml:lang="uk">проект Quanta</comment>
+    <comment xml:lang="uk">проєкт Quanta</comment>
     <comment xml:lang="zh_CN">Quanta 工程</comment>
     <comment xml:lang="zh_TW">Quanta 專案</comment>
     <glob pattern="*.quanta"/>
