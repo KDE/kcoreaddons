@@ -29,6 +29,20 @@ build_plugin(alwaysunloadplugin alwaysunloadplugin.cpp)
 
 add_definitions( -DKDELIBS4CONFIGMIGRATOR_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data" )
 
+if (WIN32)
+    set(autotests_OPTIONAL_SRCS
+        ${autotests_OPTIONAL_SRCS}
+        klistopenfilesjobtest_win.cpp
+    )
+endif ()
+
+if (UNIX)
+    set(autotests_OPTIONAL_SRCS
+        ${autotests_OPTIONAL_SRCS}
+        klistopenfilesjobtest_unix.cpp
+    )
+endif ()
+
 ecm_add_tests(
     kaboutdatatest.cpp
     kaboutdataapplicationdatatest.cpp
@@ -51,6 +65,7 @@ ecm_add_tests(
     kdelibs4configmigratortest.cpp
     kprocesslisttest.cpp
     kfileutilstest.cpp
+    ${autotests_OPTIONAL_SRCS}
     LINK_LIBRARIES Qt5::Test KF5::CoreAddons
 )
 

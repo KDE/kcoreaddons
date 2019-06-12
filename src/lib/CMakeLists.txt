@@ -45,6 +45,7 @@ if (WIN32)
     set(kcoreaddons_OPTIONAL_SRCS
         ${kcoreaddons_OPTIONAL_SRCS}
         text/kmacroexpander_win.cpp
+        util/klistopenfilesjob_win.cpp
         util/kprocesslist_win.cpp
         util/kshell_win.cpp
         util/kuser_win.cpp
@@ -55,6 +56,7 @@ if (UNIX)
     set(kcoreaddons_OPTIONAL_SRCS
         ${kcoreaddons_OPTIONAL_SRCS}
         text/kmacroexpander_unix.cpp
+        util/klistopenfilesjob_unix.cpp
         util/kprocesslist_unix.cpp
         util/kuser_unix.cpp
         util/kshell_unix.cpp
@@ -249,6 +251,7 @@ if (PythonModuleGeneration_FOUND)
       text/ktexttohtml.h
       text/ktexttohtmlemoticonsinterface.h
       util/kformat.h
+      util/klistopenfilesjob.h
       util/kosrelease.h
       util/kprocesslist.h
       util/kuser.h
