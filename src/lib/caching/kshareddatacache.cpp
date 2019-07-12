@@ -30,15 +30,12 @@
 
 #include <krandom.h>
 
-#include <QDateTime>
 #include <QDebug>
 #include <QSharedPointer>
 #include <QByteArray>
 #include <QFile>
 #include <QAtomicInt>
-#include <QList>
 #include <QMutex>
-#include <QMutexLocker>
 #include <QDir>
 
 #include <sys/types.h>

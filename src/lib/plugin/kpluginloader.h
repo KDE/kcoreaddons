@@ -21,7 +21,6 @@
 #include <kexportplugin.h>
 
 #include <QPluginLoader>
-#include <QtPlugin>
 
 #include <functional>
 

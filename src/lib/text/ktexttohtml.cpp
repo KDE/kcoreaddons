@@ -27,7 +27,6 @@
 #include <QFile>
 #include <QRegularExpression>
 #include <QPluginLoader>
-#include <QVariant>
 #include <QCoreApplication>
 
 #include <limits.h>

@@ -23,7 +23,6 @@
 
 #include "desktoptojson.h"
 
-#include <QDebug>
 
 static void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {

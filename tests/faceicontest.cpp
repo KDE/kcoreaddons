@@ -21,7 +21,6 @@
 #include <QApplication>
 #include <QVBoxLayout>
 #include <QListWidget>
-#include <QDebug>
 #include <kuser.h>
 
 int main(int argc, char **argv)

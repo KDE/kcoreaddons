@@ -25,9 +25,7 @@
 
 #include <QRegExp>            // for the word ranges
 #include <QCharRef>
-#include <QMutableStringListIterator>
-#include <QVector>
-
+#include <QStringList>
 //
 // Capitalization routines
 //

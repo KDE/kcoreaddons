@@ -19,7 +19,6 @@
 #include "kpluginmetadata.h"
 #include "desktopfileparser_p.h"
 
-#include <QCoreApplication>
 #include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>

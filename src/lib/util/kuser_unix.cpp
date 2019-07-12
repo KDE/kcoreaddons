@@ -23,8 +23,6 @@
 #include "config-getgrouplist.h"
 #include "config-accountsservice.h"
 
-#include <QMutableStringListIterator>
-#include <QDir>
 #include <QFileInfo>
 
 #include <pwd.h>

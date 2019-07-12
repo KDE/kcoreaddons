@@ -24,7 +24,6 @@
 #include <QLibrary>
 #include <QDir>
 #include <QDirIterator>
-#include <QFileInfo>
 #include "kcoreaddons_debug.h"
 #include <QCoreApplication>
 #include <QMutex>

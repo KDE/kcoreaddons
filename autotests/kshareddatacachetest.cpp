@@ -24,8 +24,6 @@
 
 #include <QObject>
 #include <QString>
-#include <QStringList>
-#include <QDir>
 #include <qstandardpaths.h>
 #include <string.h> // strcpy
 

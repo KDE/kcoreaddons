@@ -23,7 +23,6 @@
 #include <QFile>
 #include <QTemporaryDir>
 #include <QTest>
-#include <QDebug>
 #include <QStandardPaths>
 
 class Kdelibs4ConfigMigratorTest : public QObject

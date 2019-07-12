@@ -25,7 +25,6 @@
 #include <QLatin1Char>
 #include <QCoreApplication>
 #include <QDir>
-#include <QDebug>
 #include <QFile>
 #include <QLockFile>
 #include <QStandardPaths>

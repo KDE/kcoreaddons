@@ -25,8 +25,6 @@
 #include "kjobuidelegate.h"
 
 #include <QEventLoop>
-#include <QMap>
-#include <QMetaType>
 #include <QTimer>
 
 KJobPrivate::KJobPrivate()

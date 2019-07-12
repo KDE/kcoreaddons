@@ -23,10 +23,10 @@
 #include <QDir>
 #include <QApplication>
 #include <QLabel>
-#include <QLayout>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTextBrowser>
+#include <QVBoxLayout>
 
 int main(int argc, char **argv)
 {

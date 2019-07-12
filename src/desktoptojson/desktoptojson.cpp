@@ -26,12 +26,10 @@
 #include "../lib/plugin/desktopfileparser_p.h"
 
 
-#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QSet>
-#include <QTextStream>
 #include <QJsonArray>
 
 DesktopToJson::DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i,

@@ -20,7 +20,6 @@
 
 #include "kosrelease.h"
 
-#include <QDebug>
 #include <QFile>
 
 #include "kcoreaddons_debug.h"

@@ -21,7 +21,6 @@
 
 #include "jsonplugin2.h"
 #include <kpluginfactory.h>
-#include <QDebug>
 
 JsonPlugin2::JsonPlugin2(QObject *parent, const QVariantList &args)
     : QObject(parent)

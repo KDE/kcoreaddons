@@ -19,7 +19,6 @@
 #include "kdirwatchtest.h"
 
 #include <QCoreApplication>
-#include <QFile>
 #include <QStringList>
 
 #include <QDebug>

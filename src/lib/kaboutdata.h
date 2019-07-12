@@ -29,7 +29,6 @@
 #include <kcoreaddons_export.h>
 #include <QString>
 #include <QSharedDataPointer>
-#include <QObject>
 #include <QVariant>
 
 template <class T> class QList;

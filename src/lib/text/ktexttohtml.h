@@ -24,7 +24,6 @@
 #include <kcoreaddons_export.h>
 
 #include <QString>
-#include <QFlag>
 
 /**
  * @author Dave Corrie \<kde@davecorrie.com\>
