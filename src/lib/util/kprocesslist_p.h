@@ -45,6 +45,7 @@ public:
     qint64 pid;
     QString name;
     QString user;
+    QString command;
 };
 
 } // KProcessList namespace

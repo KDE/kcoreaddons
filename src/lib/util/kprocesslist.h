@@ -49,7 +49,9 @@ class KProcessInfoPrivate;
 class KCOREADDONS_EXPORT KProcessInfo {
 public:
     KProcessInfo();
-    KProcessInfo(qint64 pid, const QString &name, const QString &user);
+    KProcessInfo(qint64 pid, const QString &command, const QString &user);
+    KProcessInfo(qint64 pid, const QString &command, const QString &name, const QString &user);
+
     KProcessInfo(const KProcessInfo &other);
     ~KProcessInfo();
     KProcessInfo &operator=(const KProcessInfo &other);
@@ -65,12 +67,19 @@ public:
     /**
      * @brief The name of the process. The class will try to get the full path to the executable file for the process
      * but if it is not available the name of the process will be used instead.
+     * e.g /bin/ls
      */
     QString name() const;
     /**
      * @brief The username the process is running under.
      */
     QString user() const;
+    /**
+     * @brief The command line running this process
+     * e.g /bin/ls /some/path -R
+     * @since 5.61
+     */
+    QString command() const;
 private:
     QSharedDataPointer<KProcessInfoPrivate> d_ptr;
 };
