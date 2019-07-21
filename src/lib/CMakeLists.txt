@@ -71,6 +71,7 @@ set(libkcoreaddons_SRCS
     io/kprocess.cpp
     io/kbackup.cpp
     io/kurlmimedata.cpp
+    io/kfileutils.cpp
     jobs/kcompositejob.cpp
     jobs/kjob.cpp
     jobs/kjobtrackerinterface.cpp
@@ -161,6 +162,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KBackup
         KUrlMimeData
         KFileSystemType
+        KFileUtils
     RELATIVE io
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
