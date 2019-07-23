@@ -5,13 +5,15 @@
 
 #include <KCoreAddons>
 
-static const QString TESTVALUE="5.50.0";
+static const QString TESTVALUE = "5.61.0";
 
-int main() {
+int main()
+{
 
     QString readValue = KCoreAddons::versionString();
 
-    if (readValue == TESTVALUE) {
+    if (readValue == TESTVALUE)
+    {
         std::cout << "Test OK" << std::endl;
         return 0;
     }

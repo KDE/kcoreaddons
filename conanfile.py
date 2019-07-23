@@ -1,19 +1,43 @@
 from conans import ConanFile, CMake
+import yaml
+import re
+import os.path
+
+
+def getVersion():
+    if(os.path.exists("CMakeLists.txt")):
+        regx = re.compile(r"^set\(.*VERSION\s(\"|')[0-9.]+(\"|')\)")
+        with open("CMakeLists.txt") as f:
+            for line in f:
+                if regx.match(line):
+                    version = re.search("\"[0-9\.]+\"", line)
+                    version = version.group().replace("\"", "")
+                    return version
+    return None
+
+
+def getMetaField(field):
+    if(os.path.exists("metainfo.yaml")):
+        with open("metainfo.yaml") as f:
+            metainfo = yaml.load(f.read())
+        return metainfo[field]
+    return None
 
 
 class KCoreAddonsConan(ConanFile):
-    name = "kcoreaddons"
-    version = "5.50.0"
-    license = "GPLv2"
-    url = "https://api.kde.org/frameworks/kcoreaddons/html/index.html"
-    description = "Qt addon library with a collection of non-GUI utilities"
+    name = getMetaField('name')
+    version = getVersion()
+    license = getMetaField('license')
+    url = getMetaField('url')
+    description = getMetaField('description')
 
     settings = "os", "compiler", "build_type", "arch"
 
     requires = (
-        "extra-cmake-modules/5.50.0@kde/testing", # CMakeLists.txt requires 5.49.0
+        # CMakeLists.txt requires 5.49.0
+        "extra-cmake-modules/[>=5.60.0]@kde/testing",
 
-        "Qt/5.11.1@bincrafters/stable"
+        "qt/[>=5.11.1]@bincrafters/stable"
         # "qt-core/5.8.0@qt/testing",
 
         # fam/latest@foo/bar,
@@ -25,7 +49,7 @@ class KCoreAddonsConan(ConanFile):
         "type": "git",
         "url": "auto",
         "revision": "auto"
-     }
+    }
 
     def build(self):
         cmake = CMake(self)
