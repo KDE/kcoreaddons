@@ -23,9 +23,17 @@
 
 #include "kformattest.h"
 
-#include <QtTest>
+#include <QTest>
 
 #include "kformat.h"
+
+#ifndef Q_OS_WIN
+void ignoreTranslations()
+{
+    qputenv("XDG_DATA_DIRS", "does-not-exist");
+}
+Q_CONSTRUCTOR_FUNCTION(ignoreTranslations)
+#endif
 
 void KFormatTest::formatByteSize()
 {
@@ -116,8 +124,8 @@ void KFormatTest::formatValue()
     QCOMPARE(format.formatValue(10e6, QStringLiteral("bit/s")), QStringLiteral("10.0 Mbit/s"));
 
     QCOMPARE(format.formatValue(0.010, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Milli, KFormat::MetricBinaryDialect), QStringLiteral("10.0 mm"));
-    QCOMPARE(format.formatValue(10.12e-6, KFormat::Unit::Meter, 2, KFormat::UnitPrefix::Micro, KFormat::MetricBinaryDialect), QStringLiteral("10.12 µm"));
-    QCOMPARE(format.formatValue(10.55e-6, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect), QStringLiteral("10.6 µm"));
+    QCOMPARE(format.formatValue(10.12e-6, KFormat::Unit::Meter, 2, KFormat::UnitPrefix::Micro, KFormat::MetricBinaryDialect), QString::fromUtf8("10.12 µm"));
+    QCOMPARE(format.formatValue(10.55e-6, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect), QString::fromUtf8("10.6 µm"));
 }
 
 enum TimeConstants {
