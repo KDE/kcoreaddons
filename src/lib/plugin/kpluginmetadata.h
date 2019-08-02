@@ -401,6 +401,6 @@ inline uint qHash(const KPluginMetaData &md, uint seed)
     return qHash(md.pluginId(), seed);
 }
 
-Q_DECLARE_METATYPE(KPluginMetaData);
+Q_DECLARE_METATYPE(KPluginMetaData)
 
 #endif // KPLUGINMETADATA_H
