@@ -91,6 +91,60 @@ KProcessInfoList unixProcessListPS()
     return rc;
 }
 
+bool getProcessInfo(const QString& procId, KProcessInfo& processInfo)
+{
+    if (!isUnixProcessId(procId))
+        return false;
+#ifdef Q_OS_FREEBSD
+    QString statusFileName(QStringLiteral("/status"));
+#else
+    QString statusFileName(QStringLiteral("/stat"));
+#endif
+    QString filename = QStringLiteral("/proc/");
+    filename += procId;
+    filename += statusFileName;
+    QFile file(filename);
+    if (!file.open(QIODevice::ReadOnly))
+        return false;     // process may have exited
+
+    const QStringList data = QString::fromLocal8Bit(file.readAll()).split(QLatin1Char(' '));
+    qint64 pid = procId.toUInt();
+    QString name = data.at(1);
+    if (name.startsWith(QLatin1Char('(')) && name.endsWith(QLatin1Char(')'))) {
+        name.chop(1);
+        name.remove(0, 1);
+    }
+    // State is element 2
+    // PPID is element 3
+    QString user = QFileInfo(file).owner();
+    file.close();
+
+    QString command = name;
+
+    QFile cmdFile(QLatin1String("/proc/") + procId + QLatin1String("/cmdline"));
+    if (cmdFile.open(QFile::ReadOnly)) {
+        QByteArray cmd = cmdFile.readAll();
+
+        if (!cmd.isEmpty()) {
+            // extract non-truncated name from cmdline
+            int zeroIndex = cmd.indexOf('\0');
+            int processNameStart = cmd.lastIndexOf('/', zeroIndex);
+            if (processNameStart == -1) {
+                processNameStart = 0;
+            } else {
+                processNameStart++;
+            }
+            name = QString::fromLocal8Bit(cmd.mid(processNameStart, zeroIndex - processNameStart));
+
+            cmd.replace('\0', ' ');
+            command = QString::fromLocal8Bit(cmd).trimmed();
+        }
+    }
+    cmdFile.close();
+    processInfo = KProcessInfo(pid, command, name, user);
+    return true;
+}
+
 } // unnamed namespace
 
 // Determine UNIX processes by reading "/proc". Default to ps if
@@ -98,63 +152,22 @@ KProcessInfoList unixProcessListPS()
 KProcessInfoList KProcessList::processInfoList()
 {
     const QDir procDir(QStringLiteral("/proc/"));
-#ifdef Q_OS_FREEBSD
-    QString statusFileName(QStringLiteral("/status"));
-#else
-    QString statusFileName(QStringLiteral("/stat"));
-#endif
     if (!procDir.exists())
         return unixProcessListPS();
     KProcessInfoList rc;
     const QStringList procIds = procDir.entryList();
-    if (procIds.isEmpty())
-        return rc;
     for (const QString &procId : procIds) {
-        if (!isUnixProcessId(procId))
-            continue;
-        QString filename = QStringLiteral("/proc/");
-        filename += procId;
-        filename += statusFileName;
-        QFile file(filename);
-        if (!file.open(QIODevice::ReadOnly))
-            continue;     // process may have exited
-
-        const QStringList data = QString::fromLocal8Bit(file.readAll()).split(QLatin1Char(' '));
-        qint64 pid = procId.toUInt();
-        QString name = data.at(1);
-        if (name.startsWith(QLatin1Char('(')) && name.endsWith(QLatin1Char(')'))) {
-            name.chop(1);
-            name.remove(0, 1);
+        KProcessInfo processInfo;
+        if (getProcessInfo(procId, processInfo)) {
+            rc.push_back(processInfo);
         }
-        // State is element 2
-        // PPID is element 3
-        QString user = QFileInfo(file).owner();
-        file.close();
-
-        QString command = name;
-
-        QFile cmdFile(QLatin1String("/proc/") + procId + QLatin1String("/cmdline"));
-        if (cmdFile.open(QFile::ReadOnly)) {
-            QByteArray cmd = cmdFile.readAll();
-
-            if (!cmd.isEmpty()) {
-                // extract non-truncated name from cmdline
-                int zeroIndex = cmd.indexOf('\0');
-                int processNameStart = cmd.lastIndexOf('/', zeroIndex);
-                if (processNameStart == -1) {
-                    processNameStart = 0;
-                } else {
-                    processNameStart++;
-                }
-                name = QString::fromLocal8Bit(cmd.mid(processNameStart, zeroIndex - processNameStart));
-
-                cmd.replace('\0', ' ');
-                command = QString::fromLocal8Bit(cmd).trimmed();
-            }
-        }
-        cmdFile.close();
-
-        rc.push_back(KProcessInfo(pid, command, name, user));
     }
     return rc;
+}
+
+KProcessInfo KProcessList::processInfo(qint64 pid)
+{
+    KProcessInfo processInfo;
+    getProcessInfo(QString::number(pid), processInfo);
+    return processInfo;
 }

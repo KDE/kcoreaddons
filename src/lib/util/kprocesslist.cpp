@@ -30,7 +30,6 @@
 
 #include "kprocesslist.h"
 #include "kprocesslist_p.h"
-#include <algorithm>
 
 using namespace KProcessList;
 
@@ -99,18 +98,4 @@ QString KProcessInfo::command() const
 QString KProcessInfo::user() const
 {
     return d_ptr->user;
-}
-
-KProcessInfo KProcessList::processInfo(qint64 pid)
-{
-    KProcessInfoList processInfoList = KProcessList::processInfoList();
-    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(),
-                                            [pid](const KProcessList::KProcessInfo& info)
-    {
-        return info.pid() == pid;
-    });
-    if (testProcessIterator != processInfoList.end()) {
-        return *testProcessIterator;
-    }
-    return KProcessInfo();
 }
