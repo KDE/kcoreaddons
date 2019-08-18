@@ -75,6 +75,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Relax NG</comment>
     <comment xml:lang="sr@latin">Relax NG</comment>
     <comment xml:lang="sv">RELAX NG</comment>
+    <comment xml:lang="tg">RELAX NG</comment>
     <comment xml:lang="tr">RELAX NG</comment>
     <comment xml:lang="ug">RELAX NG</comment>
     <comment xml:lang="uk">RELAX NG</comment>
@@ -135,6 +136,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">CD audio</comment>
     <comment xml:lang="sr@latin">CD audio</comment>
     <comment xml:lang="sv">Cd-ljud</comment>
+    <comment xml:lang="tg">CD-и аудио</comment>
     <comment xml:lang="th">แผ่นซีดีเสียง</comment>
     <comment xml:lang="tr">CD sesi</comment>
     <comment xml:lang="ug">ئۈن CD</comment>
@@ -194,6 +196,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">SNF bitmapski font</comment>
     <comment xml:lang="sr@latin">SNF bitmapski font</comment>
     <comment xml:lang="sv">SNF punktavbildat teckensnitt</comment>
+    <comment xml:lang="tg">Ҳуруфи нақши нуқтаии SNF</comment>
     <comment xml:lang="th">แบบอักษรบิตแมปรูปแบบ SNF</comment>
     <comment xml:lang="tr">SNF bitmap yazı tipi</comment>
     <comment xml:lang="ug">SNF بىت سۈرەت خەت نۇسخىسى</comment>
@@ -257,6 +260,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">javanski aplet</comment>
     <comment xml:lang="sr@latin">javanski aplet</comment>
     <comment xml:lang="sv">Java-miniprogram</comment>
+    <comment xml:lang="tg">Зербарномаи Java</comment>
     <comment xml:lang="th">จาวาแอพเพล็ต</comment>
     <comment xml:lang="tr">Java programcığı</comment>
     <comment xml:lang="ug">Java قوللانچاق</comment>
@@ -315,6 +319,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KHTML‑ov adapter proširenja</comment>
     <comment xml:lang="sr@latin">KHTML‑ov adapter proširenja</comment>
     <comment xml:lang="sv">KHTML-utökningsanpassning</comment>
+    <comment xml:lang="tg">Созгори васеъшавии KHTML</comment>
     <comment xml:lang="tr">KHTML Eklenti Bağdaştırıcısı</comment>
     <comment xml:lang="ug">KHTML كېڭەيتىلمە ماسلاشتۇرغۇچ</comment>
     <comment xml:lang="uk">адаптер розширень KHTML</comment>
@@ -373,6 +378,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KDE šema boja</comment>
     <comment xml:lang="sr@latin">KDE šema boja</comment>
     <comment xml:lang="sv">KDE-färgschema</comment>
+    <comment xml:lang="tg">Нақшаи рангҳои KDE</comment>
     <comment xml:lang="th">ชุดสีของ KDE</comment>
     <comment xml:lang="tr">KDE renk şeması</comment>
     <comment xml:lang="ug">KDE رەڭ لايىھىسى</comment>
@@ -435,6 +441,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">paket K‑svežih-novotarija</comment>
     <comment xml:lang="sr@latin">paket K‑svežih-novotarija</comment>
     <comment xml:lang="sv">Heta nyheter-paket</comment>
+    <comment xml:lang="tg">Бастаи KNewStuff</comment>
     <comment xml:lang="th">แพกเกจ KNewStuff</comment>
     <comment xml:lang="tr">KNewStuff paketi</comment>
     <comment xml:lang="ug">KNewStuff بوغچا</comment>
@@ -495,6 +502,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">K‑novčanikov novčanik</comment>
     <comment xml:lang="sr@latin">K‑novčanikov novčanik</comment>
     <comment xml:lang="sv">Kwallet-plånbok</comment>
+    <comment xml:lang="tg">Ҳамёни KWallet</comment>
     <comment xml:lang="th">กระเป๋าของ 'กระเป๋าคุมข้อมูล-K'</comment>
     <comment xml:lang="tr">KWallet cüzdanı</comment>
     <comment xml:lang="ug">KWallet ھەميانى</comment>
@@ -557,6 +565,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Kugarov šablon izveštaja</comment>
     <comment xml:lang="sr@latin">Kugarov šablon izveštaja</comment>
     <comment xml:lang="sv">Kugar-rapportmall</comment>
+    <comment xml:lang="tg">Қолиби гузориши Kugar</comment>
     <comment xml:lang="th">แม่แบบรายงานของ Kugar</comment>
     <comment xml:lang="tr">Kugar rapor şablonu</comment>
     <comment xml:lang="ug">Kugar دوكلات قېلىپى</comment>
@@ -618,6 +627,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">plazmoid</comment>
     <comment xml:lang="sr@latin">plazmoid</comment>
     <comment xml:lang="sv">plasmoid</comment>
+    <comment xml:lang="tg">plasmoid</comment>
     <comment xml:lang="th">พลาสมอยด์</comment>
     <comment xml:lang="tr">plasma programcığı</comment>
     <comment xml:lang="ug">plasmoid</comment>
@@ -679,6 +689,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">superkaramba tema</comment>
     <comment xml:lang="sr@latin">superkaramba tema</comment>
     <comment xml:lang="sv">Superkaramba-tema</comment>
+    <comment xml:lang="tg">Мавзӯи SuperKaramba</comment>
     <comment xml:lang="th">ชุดตกแต่งของ SuperKaramba</comment>
     <comment xml:lang="tr">SuperKaramba teması</comment>
     <comment xml:lang="ug">SuperKaramba ئۆرنىكى</comment>
@@ -737,6 +748,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">dokument upravljanja projektom Calligrinog Plana</comment>
     <comment xml:lang="sr@latin">dokument upravljanja projektom Calligrinog Plana</comment>
     <comment xml:lang="sv">Calligra Plan-projekthanteringsdokument</comment>
+    <comment xml:lang="tg">Ҳуҷҷати идоракунии лоиҳаи Calligra Plan</comment>
     <comment xml:lang="tr">Calligra Plan proje yönetimi belgesi</comment>
     <comment xml:lang="ug">Calligra Plan قۇرۇلۇش باشقۇرۇش پۈتۈكى</comment>
     <comment xml:lang="uk">документ керування роботами Plan зі складу Calligra</comment>
@@ -792,6 +804,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">dokument radnog paketa Calligrinog Plana</comment>
     <comment xml:lang="sr@latin">dokument radnog paketa Calligrinog Plana</comment>
     <comment xml:lang="sv">Calligra Plan-arbetspaketsdokument</comment>
+    <comment xml:lang="tg">Ҳуҷҷати бастаи кории Calligra Plan</comment>
     <comment xml:lang="tr">Calligra Plan iş paketi belgesi</comment>
     <comment xml:lang="ug">Calligra Plan خىزمەت بوغچا پۈتۈكى</comment>
     <comment xml:lang="uk">пакунок роботи Plan зі складу Calligra</comment>
@@ -850,6 +863,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KPlatoov dokument upravljanja projektom</comment>
     <comment xml:lang="sr@latin">KPlatoov dokument upravljanja projektom</comment>
     <comment xml:lang="sv">Kplato-projekthantering dokument</comment>
+    <comment xml:lang="tg">Ҳуҷҷати идоракунии лоиҳаи KPlato</comment>
     <comment xml:lang="tr">KPlato proje yönetimi belgesi</comment>
     <comment xml:lang="ug">KPlato قۇرۇلۇش باشقۇرۇش پۈتۈكى</comment>
     <comment xml:lang="uk">документ керування роботами KPlato</comment>
@@ -908,6 +922,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KPlatoov radni paket upravljanja projektom</comment>
     <comment xml:lang="sr@latin">KPlatoov radni paket upravljanja projektom</comment>
     <comment xml:lang="sv">Kplato-projekthantering arbetspaket</comment>
+    <comment xml:lang="tg">Бастаи кории идоракунии лоиҳаи KPlato</comment>
     <comment xml:lang="tr">KPlato proje yönetimi çalışma paketi</comment>
     <comment xml:lang="ug">KPlato قۇرۇلۇش باشقۇرۇش خىزمەت بوغچىسى</comment>
     <comment xml:lang="uk">пакунок проєкту керування роботами KPlato</comment>
@@ -966,6 +981,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Kugarova arhiva</comment>
     <comment xml:lang="sr@latin">Kugarova arhiva</comment>
     <comment xml:lang="sv">Kugar-arkiv</comment>
+    <comment xml:lang="tg">Бойгонии Kugar</comment>
     <comment xml:lang="tr">Kugar arşivi</comment>
     <comment xml:lang="ug">Kugar ئارخىپى</comment>
     <comment xml:lang="uk">архів Kugar</comment>
@@ -1026,6 +1042,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">veb arhiva</comment>
     <comment xml:lang="sr@latin">veb arhiva</comment>
     <comment xml:lang="sv">webbarkiv</comment>
+    <comment xml:lang="tg">Бойгонии шабакавӣ</comment>
     <comment xml:lang="th">แฟ้มจัดเก็บของหน้าเว็บ</comment>
     <comment xml:lang="tr">web arşivi</comment>
     <comment xml:lang="ug">تور بەت ئارخىپى</comment>
@@ -1086,6 +1103,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">W3C‑ova XML šema</comment>
     <comment xml:lang="sr@latin">W3C‑ova XML šema</comment>
     <comment xml:lang="sv">W3C XML-schema</comment>
+    <comment xml:lang="tg">Нақшаи W3C XML</comment>
     <comment xml:lang="tr">W3C XML şeması</comment>
     <comment xml:lang="ug">W3C XML لايىھە</comment>
     <comment xml:lang="uk">схема XML W3C</comment>
@@ -1144,6 +1162,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">RealAudio priključak</comment>
     <comment xml:lang="sr@latin">RealAudio priključak</comment>
     <comment xml:lang="sv">Realaudio-insticksprogramfil</comment>
+    <comment xml:lang="tg">Файли васлкунаки RealAudio</comment>
     <comment xml:lang="th">แฟ้มส่วนเสริม RealAudio</comment>
     <comment xml:lang="tr">RealAudio eklenti dosyası</comment>
     <comment xml:lang="ug">RealAudio قىستۇرما ھۆججەت</comment>
@@ -1203,6 +1222,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KPhotoAlbumov uvoz</comment>
     <comment xml:lang="sr@latin">KPhotoAlbumov uvoz</comment>
     <comment xml:lang="sv">Kfotoalbum-import</comment>
+    <comment xml:lang="tg">Воридоти KPhotoAlbum</comment>
     <comment xml:lang="tr">KPhotoAlbum içeri aktarımı</comment>
     <comment xml:lang="ug">KPhotoAlbum ئەكىر</comment>
     <comment xml:lang="uk">імпортовані дані KPhotoAlbum</comment>
@@ -1264,6 +1284,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">HDR slika</comment>
     <comment xml:lang="sr@latin">HDR slika</comment>
     <comment xml:lang="sv">HDR-bild</comment>
+    <comment xml:lang="tg">Тасвири HDR</comment>
     <comment xml:lang="th">ภาพรูปแบบ HDR</comment>
     <comment xml:lang="tr">HDR resmi</comment>
     <comment xml:lang="ug">HDR سۈرەت</comment>
@@ -1326,6 +1347,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KDE formati sirovih slika</comment>
     <comment xml:lang="sr@latin">KDE formati sirovih slika</comment>
     <comment xml:lang="sv">KDE-obehandlade bildformat</comment>
+    <comment xml:lang="tg">Қолибҳои тасвири кopкаpднашyдаи KDE</comment>
     <comment xml:lang="th">ภาพรูปแบบข้อมูลดิบของ KDE</comment>
     <comment xml:lang="tr">KDE ham resim biçimleri</comment>
     <comment xml:lang="ug">KDE raw سۈرەت پىچىمى</comment>
@@ -1401,6 +1423,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Intelov heksadekadni objektni fajl</comment>
     <comment xml:lang="sr@latin">Intelov heksadekadni objektni fajl</comment>
     <comment xml:lang="sv">Intel® hexadecimal objektfil</comment>
+    <comment xml:lang="tg">Файли маводи низоми шонздаҳии Intel®</comment>
     <comment xml:lang="th">แฟ้มออบเจ็กต์ฐานสิบหกของ Intel®</comment>
     <comment xml:lang="tr">Intel® onaltılık nesne dosyası</comment>
     <comment xml:lang="ug">Intel® ئون ئالتىلىك نەڭ ھۆججىتى</comment>
@@ -1460,6 +1483,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">spisak Kateinog priključka za učitavanje fajlova</comment>
     <comment xml:lang="sr@latin">spisak Kateinog priključka za učitavanje fajlova</comment>
     <comment xml:lang="sv">Kate insticksprogramlista för laddning av fillistor</comment>
+    <comment xml:lang="tg">Рӯйхати васлкунаки боркунандаи рӯйхати файли Kate</comment>
     <comment xml:lang="tr">Kate dosya listesi yükleyici eklentisi listesi</comment>
     <comment xml:lang="ug">Kate ھۆججەت تىزىمى يۈكلىگۈچ قىستۇرما تىزىمى</comment>
     <comment xml:lang="uk">список файлів Kate</comment>
@@ -1518,6 +1542,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">muzička notacija ABC</comment>
     <comment xml:lang="sr@latin">muzička notacija ABC</comment>
     <comment xml:lang="sv">abc-musiknotationsfil</comment>
+    <comment xml:lang="tg">Файли низоми ҳисобкунии мусиқии abc</comment>
     <comment xml:lang="tr">abc müzik notalama dosyası</comment>
     <comment xml:lang="ug">abc مۇزىكا بەلگە ھۆججىتى</comment>
     <comment xml:lang="uk">файл нотного стану abc</comment>
@@ -1581,6 +1606,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">paket fontova</comment>
     <comment xml:lang="sr@latin">paket fontova</comment>
     <comment xml:lang="sv">teckensnittspaket</comment>
+    <comment xml:lang="tg">Бастаҳои ҳуруфӣ</comment>
     <comment xml:lang="th">แพกเกจชุดแบบอักษร</comment>
     <comment xml:lang="tr">yazı tipi paketi</comment>
     <comment xml:lang="ug">خەت نۇسخا بوغچىسى</comment>
@@ -1643,6 +1669,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">windows server</comment>
     <comment xml:lang="sr@latin">windows server</comment>
     <comment xml:lang="sv">Windows-server</comment>
+    <comment xml:lang="tg">Хизматрасони Windows</comment>
     <comment xml:lang="th">เครื่องแม่ข่ายวินโดวส์</comment>
     <comment xml:lang="tr">Windows sunucusu</comment>
     <comment xml:lang="ug">Windows مۇلازىمېتىر</comment>
@@ -1703,6 +1730,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">windows radna grupa</comment>
     <comment xml:lang="sr@latin">windows radna grupa</comment>
     <comment xml:lang="sv">Windows-arbetsgrupp</comment>
+    <comment xml:lang="tg">Гурӯҳи кории Windows</comment>
     <comment xml:lang="th">กลุ่มงานของวินโดวส์</comment>
     <comment xml:lang="tr">Windows çalışma grubu</comment>
     <comment xml:lang="ug">Windows خىزمەت گۇرۇپپىسى</comment>
@@ -1763,6 +1791,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KDE sistemski monitor</comment>
     <comment xml:lang="sr@latin">KDE sistemski monitor</comment>
     <comment xml:lang="sv">KDE-systemövervakare</comment>
+    <comment xml:lang="tg">Назорати низоми KDE</comment>
     <comment xml:lang="th">เครื่องมือติดตามการทำงานของระบบของ KDE</comment>
     <comment xml:lang="tr">KDE sistem izleyici</comment>
     <comment xml:lang="ug">KDE سىستېما كۆزەتكۈچ</comment>
@@ -1824,6 +1853,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KDE tema</comment>
     <comment xml:lang="sr@latin">KDE tema</comment>
     <comment xml:lang="sv">KDE-tema</comment>
+    <comment xml:lang="tg">Мавзӯи KDE</comment>
     <comment xml:lang="th">ชุดตกแต่ง KDE</comment>
     <comment xml:lang="tr">KDE teması</comment>
     <comment xml:lang="ug">KDE ئۆرنىكى</comment>
@@ -1886,6 +1916,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Quantin projekat</comment>
     <comment xml:lang="sr@latin">Quantin projekat</comment>
     <comment xml:lang="sv">Quanta-projekt</comment>
+    <comment xml:lang="tg">Лоиҳаи Quanta</comment>
     <comment xml:lang="th">เอกสารโครงงาน Quanta</comment>
     <comment xml:lang="tr">Quanta projesi</comment>
     <comment xml:lang="ug">Quanta قۇرۇلۇشى</comment>
@@ -1947,6 +1978,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Kommanderov fajl</comment>
     <comment xml:lang="sr@latin">Kommanderov fajl</comment>
     <comment xml:lang="sv">Kommander-fil</comment>
+    <comment xml:lang="tg">Файли Kommander</comment>
     <comment xml:lang="tr">Kommander dosyası</comment>
     <comment xml:lang="ug">Kommander ھۆججەت</comment>
     <comment xml:lang="uk">файл Kommander</comment>
@@ -2007,6 +2039,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Krompirkov fajl</comment>
     <comment xml:lang="sr@latin">Krompirkov fajl</comment>
     <comment xml:lang="sv">potatis</comment>
+    <comment xml:lang="tg">Картошка</comment>
     <comment xml:lang="tr">patates</comment>
     <comment xml:lang="ug">ياڭيۇ</comment>
     <comment xml:lang="uk">картоплина</comment>
@@ -2066,6 +2099,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Kolfova sačuvana igra</comment>
     <comment xml:lang="sr@latin">Kolfova sačuvana igra</comment>
     <comment xml:lang="sv">Kolf sparat spel</comment>
+    <comment xml:lang="tg">Бозии захирашудаи Kolf</comment>
     <comment xml:lang="th">ข้อมูลที่บันทึกไว้ของเกม Kolf</comment>
     <comment xml:lang="tr">Kolf kaydedilmiş oyunu</comment>
     <comment xml:lang="ug">Kolf ساقلىغان ئويۇن</comment>
@@ -2128,6 +2162,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Kolfov teren</comment>
     <comment xml:lang="sr@latin">Kolfov teren</comment>
     <comment xml:lang="sv">Kolfbana</comment>
+    <comment xml:lang="tg">Дарси Kolf</comment>
     <comment xml:lang="th">คอร์สของเกม Kolf</comment>
     <comment xml:lang="tr">Kolf etabı</comment>
     <comment xml:lang="ug">Kolf دەرسلىكى</comment>
@@ -2193,6 +2228,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Okularova arhiva dokumenata</comment>
     <comment xml:lang="sr@latin">Okularova arhiva dokumenata</comment>
     <comment xml:lang="sv">Okular-dokumentarkiv</comment>
+    <comment xml:lang="tg">Бойгонии ҳуҷҷати Okular</comment>
     <comment xml:lang="th">แฟ้มจัดเก็บเอกสารของ Okular</comment>
     <comment xml:lang="tr">Okular belge arşivi</comment>
     <comment xml:lang="ug">Okular پۈتۈك ئارخىپى</comment>
@@ -2255,6 +2291,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Cabrijev crtež</comment>
     <comment xml:lang="sr@latin">Cabrijev crtež</comment>
     <comment xml:lang="sv">Cabri-figur</comment>
+    <comment xml:lang="tg">Андоми Cabri</comment>
     <comment xml:lang="tr">Cabri çizimi</comment>
     <comment xml:lang="ug">Cabri شەكىللەر</comment>
     <comment xml:lang="uk">рисунок Cabri</comment>
@@ -2319,6 +2356,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Dr Geov crtež</comment>
     <comment xml:lang="sr@latin">Dr Geov crtež</comment>
     <comment xml:lang="sv">Dr. Geo-figur</comment>
+    <comment xml:lang="tg">Андоми Dr. Geo</comment>
     <comment xml:lang="tr">Dr. Geo çizimi</comment>
     <comment xml:lang="ug">Dr. Geo شەكىللىرى</comment>
     <comment xml:lang="uk">рисунок Dr. Geo</comment>
@@ -2381,6 +2419,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KGeov crtež</comment>
     <comment xml:lang="sr@latin">KGeov crtež</comment>
     <comment xml:lang="sv">Kgeo-figur</comment>
+    <comment xml:lang="tg">Андоми KGeo</comment>
     <comment xml:lang="tr">KGeo çizimi</comment>
     <comment xml:lang="ug">KGeo شەكىللەر</comment>
     <comment xml:lang="uk">рисунок KGeo</comment>
@@ -2440,6 +2479,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KIG‑ov crtež</comment>
     <comment xml:lang="sr@latin">KIG‑ov crtež</comment>
     <comment xml:lang="sv">Kig-figur</comment>
+    <comment xml:lang="tg">Андоми Kig</comment>
     <comment xml:lang="tr">Kig çizimi</comment>
     <comment xml:lang="ug">Kig شەكىللەر</comment>
     <comment xml:lang="uk">рисунок Kig</comment>
@@ -2501,6 +2541,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KSegov dokument</comment>
     <comment xml:lang="sr@latin">KSegov dokument</comment>
     <comment xml:lang="sv">Kseg-dokument</comment>
+    <comment xml:lang="tg">Ҳуҷҷати KSeg</comment>
     <comment xml:lang="tr">KSeg belgesi</comment>
     <comment xml:lang="ug">KSeg پۈتۈك</comment>
     <comment xml:lang="uk">документ KSeg</comment>
@@ -2560,6 +2601,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">dokument za uvježbavanje rječnika</comment>
     <comment xml:lang="sr@latin">dokument za uvežbavanje rečnika</comment>
     <comment xml:lang="sv">dokument för ordförrådsövning</comment>
+    <comment xml:lang="tg">Ҳуҷҷати даcтypдиҳанда луғавӣ</comment>
     <comment xml:lang="tr">sözcük hazinesi çalışma belgesi</comment>
     <comment xml:lang="ug">سۆزلۈك مەشىق پۈتۈكى</comment>
     <comment xml:lang="uk">документ вправ зі словником</comment>
@@ -2619,6 +2661,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">K‑matcrtov fajl</comment>
     <comment xml:lang="sr@latin">K‑matcrtov fajl</comment>
     <comment xml:lang="sv">Kmplot-fil</comment>
+    <comment xml:lang="tg">Файли KmPlot</comment>
     <comment xml:lang="tr">KmPlot dosyası</comment>
     <comment xml:lang="ug">KmPlot ھۆججەت</comment>
     <comment xml:lang="uk">файл KmPlot</comment>
@@ -2677,6 +2720,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">rečnik K‑kviza-riječi</comment>
     <comment xml:lang="sr@latin">rečnik K‑kviza-riječi</comment>
     <comment xml:lang="sv">Kwordquiz-ordförråd</comment>
+    <comment xml:lang="tg">Луғати KWordQuiz</comment>
     <comment xml:lang="tr">KWordQuiz sözcük hazinesi</comment>
     <comment xml:lang="ug">KWordQuiz سۆزلۈكلەر</comment>
     <comment xml:lang="uk">словник KWordQuiz</comment>
@@ -2737,6 +2781,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Cachegrindov/Callgrindov profilni popis</comment>
     <comment xml:lang="sr@latin">Cachegrindov/Callgrindov profilni popis</comment>
     <comment xml:lang="sv">Cachegrind/Callgrind-profileringsutskrift</comment>
+    <comment xml:lang="tg">Барориши профили Cachegrind/Callgrind</comment>
     <comment xml:lang="tr">Cachegrind/Callgrind profil dökümü</comment>
     <comment xml:lang="ug">Cachegrind/Callgrind يېشىش سەپلىمە ھۆججىتى</comment>
     <comment xml:lang="uk">дамп профілювання Cachegrind/Callgrind</comment>
@@ -2795,6 +2840,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Umbrellov fajl</comment>
     <comment xml:lang="sr@latin">Umbrellov fajl</comment>
     <comment xml:lang="sv">Umbrello UML-modelleringsfil</comment>
+    <comment xml:lang="tg">Файли тарҳсози Umbrello UML</comment>
     <comment xml:lang="tr">Umbrello UML Modelleyici dosyası</comment>
     <comment xml:lang="ug">Umbrello UML مودېل قۇرۇش ھۆججىتى</comment>
     <comment xml:lang="uk">файл інструмента моделювання UML Umbrello</comment>
@@ -2856,6 +2902,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">windows veza</comment>
     <comment xml:lang="sr@latin">windows veza</comment>
     <comment xml:lang="sv">Windows-länk</comment>
+    <comment xml:lang="tg">Пайванди Windows</comment>
     <comment xml:lang="th">แฟ้มลิงค์ของวินโดวส์</comment>
     <comment xml:lang="tr">Windows bağlantısı</comment>
     <comment xml:lang="ug">Windows ئۇلانما</comment>
@@ -2919,6 +2966,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">KGetova spisak preuzimanja</comment>
     <comment xml:lang="sr@latin">KGetova spisak preuzimanja</comment>
     <comment xml:lang="sv">Kget-nerladdningslista</comment>
+    <comment xml:lang="tg">Рӯйхати боргириҳои KGet</comment>
     <comment xml:lang="th">รายการดาวน์โหลดของ 'ช่วยดาวน์โหลด-K (KGet)'</comment>
     <comment xml:lang="tr">KGet indirme listesi</comment>
     <comment xml:lang="ug">KGet چۈشۈرۈش تىزىمى</comment>
@@ -2978,6 +3026,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Kopeteova arhiva emotikona</comment>
     <comment xml:lang="sr@latin">Kopeteova arhiva emotikona</comment>
     <comment xml:lang="sv">Kopete-smilisarkiv</comment>
+    <comment xml:lang="tg">Бойгонии шаклакҳои Kopete</comment>
     <comment xml:lang="tr">Kopete duygu simgeleri arşivi</comment>
     <comment xml:lang="ug">Kopete چىراي ئىپادە ئارخىپى</comment>
     <comment xml:lang="uk">архів емоційок Kopete</comment>
@@ -3039,6 +3088,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">ICQ kontakt</comment>
     <comment xml:lang="sr@latin">ICQ kontakt</comment>
     <comment xml:lang="sv">ICQ-kontakt</comment>
+    <comment xml:lang="tg">Тамоси ICQ</comment>
     <comment xml:lang="th">ที่อยู่ติดต่อของ ICQ</comment>
     <comment xml:lang="tr">ICQ kişisi</comment>
     <comment xml:lang="ug">ICQ ئالاقەداش</comment>
@@ -3102,6 +3152,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Microsoftov medija format</comment>
     <comment xml:lang="sr@latin">Microsoftov medija format</comment>
     <comment xml:lang="sv">Microsoft mediaformat</comment>
+    <comment xml:lang="tg">Қолиби расонаи Microsoft</comment>
     <comment xml:lang="tr">Microsoft Medya Biçimi</comment>
     <comment xml:lang="ug">مىكروسوفت ۋاسىتە پىچىمى</comment>
     <comment xml:lang="uk">Microsoft Media Format</comment>
@@ -3167,6 +3218,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Turtle RDF dokument</comment>
     <comment xml:lang="sr@latin">Turtle RDF dokument</comment>
     <comment xml:lang="sv">Turtle RDF-dokument</comment>
+    <comment xml:lang="tg">Ҳуҷҷати Turtle RDF</comment>
     <comment xml:lang="tr">Turtle RDF belgesi</comment>
     <comment xml:lang="ug">Turtle RDF پۈتۈك</comment>
     <comment xml:lang="uk">документ RDF Turtle</comment>
@@ -3224,6 +3276,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">Softimidžova PIC slika</comment>
     <comment xml:lang="sr@latin">Softimidžova PIC slika</comment>
     <comment xml:lang="sv">Softimage PIC-bild</comment>
+    <comment xml:lang="tg">Тасвири Softimage PIC</comment>
     <comment xml:lang="th">ภาพรูปแบบ Softimage PIC</comment>
     <comment xml:lang="tr">Softimage PIC resmi</comment>
     <comment xml:lang="ug">Softimage PIC سۈرەت</comment>
@@ -3283,6 +3336,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">fajl Qt‑ovog obeleživačkog jezika</comment>
     <comment xml:lang="sr@latin">fajl Qt‑ovog obeleživačkog jezika</comment>
     <comment xml:lang="sv">Qt-taggspråkfil</comment>
+    <comment xml:lang="tg">Файли забони Qt Markup</comment>
     <comment xml:lang="tr">Qt İşaretleme Dili dosyası</comment>
     <comment xml:lang="ug">Qt بەلگە تىل ھۆججىتى</comment>
     <comment xml:lang="uk">файл мови розмітки Qt</comment>
@@ -3324,6 +3378,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">postavne opcije KConfigXT‑a</comment>
     <comment xml:lang="sr@latin">postavne opcije KConfigXT‑a</comment>
     <comment xml:lang="sv">KConfigXT-inställningsalternativ</comment>
+    <comment xml:lang="tg">Имконоти танзимоти KConfigXT</comment>
     <comment xml:lang="uk">параметри налаштування KConfigXT</comment>
     <comment xml:lang="zh_CN">KConfigXT 配置选项</comment>
     <comment xml:lang="zh_TW">KConfigXT 設定選項</comment>
@@ -3364,6 +3419,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">opcije generisanja koda KConfigXT‑a</comment>
     <comment xml:lang="sr@latin">opcije generisanja koda KConfigXT‑a</comment>
     <comment xml:lang="sv">KConfigXT-kodgenereringsalternativ</comment>
+    <comment xml:lang="tg">Имконоти эҷодкунии рамзи KConfigXT</comment>
     <comment xml:lang="uk">параметри створення коду KConfigXT</comment>
     <comment xml:lang="zh_CN">KConfigXT 代码生成选项</comment>
     <comment xml:lang="zh_TW">KConfigXT 代碼產生選項</comment>
@@ -3400,6 +3456,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">deklaracije za KXmlGui</comment>
     <comment xml:lang="sr@latin">deklaracije za KXmlGui</comment>
     <comment xml:lang="sv">KXMLGUI-användargränssnittsdeklaration</comment>
+    <comment xml:lang="tg">Баённомаи KXMLGUI UI</comment>
     <comment xml:lang="uk">оголошення інтерфейсу KXMLGUI</comment>
     <comment xml:lang="zh_CN">KXMLGUI 用户界面声明</comment>
     <comment xml:lang="zh_TW">KXMLGUI UI 宣告</comment>
@@ -3441,6 +3498,7 @@ Notes:
     <comment xml:lang="sr@ijekavianlatin">deklaracije za KNotification</comment>
     <comment xml:lang="sr@latin">deklaracije za KNotification</comment>
     <comment xml:lang="sv">KNotification-deklaration</comment>
+    <comment xml:lang="tg">Баённомаи KNotification</comment>
     <comment xml:lang="uk">оголошення KNotification</comment>
     <comment xml:lang="zh_CN">Knotification 声明</comment>
     <comment xml:lang="zh_TW">KNotification 宣告</comment>
