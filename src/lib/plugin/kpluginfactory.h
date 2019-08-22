@@ -524,7 +524,7 @@ protected:
     template<class impl, class ParentType>
     static QObject *createInstance(QWidget *parentWidget, QObject *parent, const QVariantList &args)
     {
-        Q_UNUSED(parentWidget);
+        Q_UNUSED(parentWidget)
         ParentType *p = nullptr;
         if (parent) {
             p = qobject_cast<ParentType *>(parent);
