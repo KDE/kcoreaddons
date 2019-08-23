@@ -302,7 +302,7 @@ QString KAboutLicense::text() const
 
     if (knownLicense) {
         pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                QString::fromLatin1("kf5/licenses/") + pathToFile);
+                QLatin1String("kf5/licenses/") + pathToFile);
         result += QCoreApplication::translate(
                       "KAboutLicense",
                       "This program is distributed under the terms of the %1.").arg(name(KAboutLicense::ShortName));
@@ -573,7 +573,7 @@ KAboutData::KAboutData(const QString &_componentName,
     d->organizationDomain = QStringLiteral("kde.org");
     // KF6: do not set a default desktopFileName value here, but remove this code and leave it empty
     // see KAboutData::desktopFileName() for details
-    d->desktopFileName = QStringLiteral("org.kde.%1").arg(d->_componentName);
+    d->desktopFileName = QLatin1String("org.kde.") + d->_componentName;
 }
 
 KAboutData::~KAboutData()
@@ -899,14 +899,14 @@ QList<KAboutPerson> KAboutData::credits() const
 QList<KAboutPerson> KAboutData::Private::parseTranslators(const QString &translatorName, const QString &translatorEmail)
 {
     QList<KAboutPerson> personList;
-    if (translatorName.isEmpty() || translatorName == QStringLiteral("Your names")) {
+    if (translatorName.isEmpty() || translatorName == QLatin1String("Your names")) {
         return personList;
     }
 
     const QStringList nameList(translatorName.split(QLatin1Char(',')));
 
     QStringList emailList;
-    if (!translatorEmail.isEmpty() && translatorEmail != QStringLiteral("Your emails")) {
+    if (!translatorEmail.isEmpty() && translatorEmail != QLatin1String("Your emails")) {
         emailList = translatorEmail.split(QLatin1Char(','), QString::KeepEmptyParts);
     }
 
@@ -1182,9 +1182,9 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         } else {
             printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "%1 was written by:").arg(qAppName())));
             for (const KAboutPerson &person : qAsConst(d->_authorList)) {
-                QString authorData = QStringLiteral("    ") + person.name();
+                QString authorData = QLatin1String("    ") + person.name();
                 if (!person.emailAddress().isEmpty()) {
-                    authorData.append(QStringLiteral(" <") + person.emailAddress() + QStringLiteral(">"));
+                    authorData.append(QLatin1String(" <") + person.emailAddress() + QLatin1Char('>'));
                 }
                 printf("%s\n", qPrintable(authorData));
             }

@@ -59,7 +59,7 @@ QString KStringHandler::lsqueeze(const QString &str, int maxlen)
 {
     if (str.length() > maxlen) {
         int part = maxlen - 3;
-        return QStringLiteral("...") + str.rightRef(part);
+        return QLatin1String("...") + str.rightRef(part);
     } else {
         return str;
     }
@@ -69,7 +69,7 @@ QString KStringHandler::csqueeze(const QString &str, int maxlen)
 {
     if (str.length() > maxlen && maxlen > 3) {
         const int part = (maxlen - 3) / 2;
-        return str.leftRef(part) + QStringLiteral("...") + str.rightRef(part);
+        return str.leftRef(part) + QLatin1String("...") + str.rightRef(part);
     } else {
         return str;
     }
@@ -79,7 +79,7 @@ QString KStringHandler::rsqueeze(const QString &str, int maxlen)
 {
     if (str.length() > maxlen) {
         int part = maxlen - 3;
-        return str.leftRef(part) + QStringLiteral("...");
+        return str.leftRef(part) + QLatin1String("...");
     } else {
         return str;
     }
@@ -179,7 +179,7 @@ QString KStringHandler::tagUrls(const QString &text)
             continue;
         }
         // Don't use QString::arg since %01, %20, etc could be in the string
-        QString anchor = QStringLiteral("<a href=\"") + href + QStringLiteral("\">") + href + QStringLiteral("</a>");
+        QString anchor = QLatin1String("<a href=\"") + href + QLatin1String("\">") + href + QLatin1String("</a>");
         richText.replace(urlPos, urlLen, anchor);
 
         urlPos += anchor.length();

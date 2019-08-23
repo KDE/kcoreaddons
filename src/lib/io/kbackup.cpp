@@ -83,7 +83,7 @@ bool rcsBackupFile(const QString &qFilename,
     } else {
         qBackupFilename = backupDir + fileInfo.fileName();
     }
-    qBackupFilename += QString::fromLatin1(",v");
+    qBackupFilename += QLatin1String(",v");
 
     // If backupDir is specified, copy qFilename to the
     // backupDir and perform the commit there, unlinking

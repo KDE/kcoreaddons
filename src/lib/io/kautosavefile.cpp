@@ -53,7 +53,7 @@ static QStringList findAllStales(const QString &appName)
     QStringList files;
 
     for (const QString &dir : dirs) {
-        QDir appDir(dir + QStringLiteral("/stalefiles/") + appName);
+        QDir appDir(dir + QLatin1String("/stalefiles/") + appName);
         //qCDebug(KCOREADDONS_DEBUG) << "Looking in" << appDir.absolutePath();
         const auto listFiles = appDir.entryList(QDir::Files);
         for (const QString &file : listFiles) {
@@ -137,7 +137,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
     QString tempFile;
     if (d->managedFileNameChanged) {
         QString staleFilesDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
-                                QStringLiteral("/stalefiles/") + QCoreApplication::instance()->applicationName();
+                                QLatin1String("/stalefiles/") + QCoreApplication::instance()->applicationName();
         if (!QDir().mkpath(staleFilesDir)) {
             return false;
         }
@@ -154,7 +154,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
 
         if (!d->lock)
         {
-            d->lock = new QLockFile(tempFile + QStringLiteral(".lock"));
+            d->lock = new QLockFile(tempFile + QLatin1String(".lock"));
             d->lock->setStaleLockTime(60 * 1000); // HARDCODE, 1 minute
         }
 

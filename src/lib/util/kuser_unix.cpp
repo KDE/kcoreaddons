@@ -192,7 +192,7 @@ QString KUser::faceIconPath() const
         return pathToFaceIcon;
     }
 
-    pathToFaceIcon = QString(homeDir() + QLatin1Char('/') + QStringLiteral(".face.icon"));
+    pathToFaceIcon = homeDir() + QLatin1Char('/') + QLatin1String(".face.icon");
 
     if (QFileInfo(pathToFaceIcon).isReadable()) {
         return pathToFaceIcon;

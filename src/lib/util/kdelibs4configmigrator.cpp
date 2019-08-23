@@ -103,7 +103,7 @@ bool Kdelibs4ConfigMigrator::migrate()
         for (const QString &uiFileName : qAsConst(d->uiFiles)) {
             const QString newConfigLocation
                 = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
-                  QStringLiteral("/kxmlgui5/") + d->appName + QLatin1Char('/') + uiFileName;
+                  QLatin1String("/kxmlgui5/") + d->appName + QLatin1Char('/') + uiFileName;
             if (QFile(newConfigLocation).exists()) {
                 continue;
             }

@@ -305,7 +305,7 @@ static ServiceTypeDefinition* parseServiceTypesFile(const QString &inputPath)
         path = locateRelativeServiceType(path);
         QString rcPath;
         if (path.isEmpty()) {
-            rcPath = QStringLiteral(":/kservicetypes5/") + inputPath;
+            rcPath = QLatin1String(":/kservicetypes5/") + inputPath;
             if (QFileInfo::exists(rcPath)) {
                 path = rcPath;
             }
