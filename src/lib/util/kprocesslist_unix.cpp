@@ -49,16 +49,18 @@ bool isUnixProcessId(const QString &procname)
 // Determine UNIX processes by running ps
 KProcessInfoList unixProcessListPS()
 {
-#ifdef Q_OS_MAC
-    // command goes last, otherwise it is cut off
-    static const char formatC[] = "pid state user comm command";
-#else
-    static const char formatC[] = "pid,state,user,comm,cmd";
-#endif
     KProcessInfoList rc;
     QProcess psProcess;
-    QStringList args;
-    args << QStringLiteral("-e") << QStringLiteral("-o") << QLatin1String(formatC);
+    const QStringList args {
+        QStringLiteral("-e"),
+        QStringLiteral("-o"),
+#ifdef Q_OS_MAC
+    // command goes last, otherwise it is cut off
+        QStringLiteral("pid state user comm command"),
+#else
+        QStringLiteral("pid,state,user,comm,cmd"),
+#endif
+    };
     psProcess.start(QStringLiteral("ps"), args);
     if (!psProcess.waitForStarted())
         return rc;

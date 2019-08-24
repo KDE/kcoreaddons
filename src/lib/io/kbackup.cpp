@@ -107,7 +107,7 @@ bool rcsBackupFile(const QString &qFilename,
     if (!backupDir.isEmpty()) {
         ci.setWorkingDirectory(backupDir);
     }
-    ci.start(cipath, QStringList() << QStringLiteral("-u") << fileInfo.filePath());
+    ci.start(cipath, QStringList { QStringLiteral("-u"), fileInfo.filePath() });
     if (!ci.waitForStarted()) {
         return false;
     }
@@ -123,7 +123,7 @@ bool rcsBackupFile(const QString &qFilename,
     if (!backupDir.isEmpty()) {
         rcs.setWorkingDirectory(backupDir);
     }
-    rcs.start(rcspath, QStringList() << QStringLiteral("-U") << qBackupFilename);
+    rcs.start(rcspath, QStringList { QStringLiteral("-U"), qBackupFilename });
     if (!rcs.waitForFinished()) {
         return false;
     }
@@ -133,7 +133,7 @@ bool rcsBackupFile(const QString &qFilename,
     if (!backupDir.isEmpty()) {
         co.setWorkingDirectory(backupDir);
     }
-    co.start(copath, QStringList() << qBackupFilename);
+    co.start(copath, QStringList { qBackupFilename });
     if (!co.waitForFinished()) {
         return false;
     }

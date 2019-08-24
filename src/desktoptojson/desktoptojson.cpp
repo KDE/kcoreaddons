@@ -97,10 +97,14 @@ bool DesktopToJson::resolveFiles()
 void DesktopFileParser::convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr)
 {
     // XXX: Hidden=true doesn't make sense with json plugins since the metadata is inside the .so
-    static const QStringList boolkeys = QStringList()
-            << QStringLiteral("Hidden") << QStringLiteral("X-KDE-PluginInfo-EnabledByDefault");
-    static const QStringList stringlistkeys = QStringList()
-            << QStringLiteral("X-KDE-ServiceTypes") << QStringLiteral("X-KDE-PluginInfo-Depends");
+    static const QStringList boolkeys = QStringList {
+        QStringLiteral("Hidden"),
+        QStringLiteral("X-KDE-PluginInfo-EnabledByDefault"),
+    };
+    static const QStringList stringlistkeys = QStringList {
+        QStringLiteral("X-KDE-ServiceTypes"),
+        QStringLiteral("X-KDE-PluginInfo-Depends"),
+    };
     if (boolkeys.contains(key)) {
         // should only be lower case, but be tolerant here
         if (value.toLower() == QLatin1String("true")) {

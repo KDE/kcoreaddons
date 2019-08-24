@@ -60,15 +60,15 @@ int main(int argc, char** argv) {
     const auto _c = QStringLiteral("compat");
     const auto _s = QStringLiteral("serviceType");
 
-    QCommandLineOption input = QCommandLineOption(QStringList() << QStringLiteral("i") << _i,
+    QCommandLineOption input = QCommandLineOption(QStringList { QStringLiteral("i"), _i },
                                QStringLiteral("Read input from file"), _n);
-    QCommandLineOption output = QCommandLineOption(QStringList() << QStringLiteral("o") << _o,
+    QCommandLineOption output = QCommandLineOption(QStringList { QStringLiteral("o"), _o },
                                 QStringLiteral("Write output to file"), _n);
-    QCommandLineOption verbose = QCommandLineOption(QStringList() << QStringLiteral("verbose"),
+    QCommandLineOption verbose = QCommandLineOption(QStringList { QStringLiteral("verbose") },
                                 QStringLiteral("Enable verbose (debug) output"));
-    QCommandLineOption compat = QCommandLineOption(QStringList() << QStringLiteral("c") << _c,
+    QCommandLineOption compat = QCommandLineOption(QStringList { QStringLiteral("c"), _c },
                                 QStringLiteral("Generate JSON that is compatible with KPluginInfo instead of the new KPluginMetaData"));
-    QCommandLineOption serviceTypes = QCommandLineOption(QStringList() << QStringLiteral("s") << _s,
+    QCommandLineOption serviceTypes = QCommandLineOption(QStringList { QStringLiteral("s"), _s },
                                 QStringLiteral("The name or full path of a KServiceType definition .desktop file. Can be passed multiple times"), _s);
 
     QCommandLineParser parser;

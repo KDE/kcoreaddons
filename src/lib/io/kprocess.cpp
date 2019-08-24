@@ -76,7 +76,7 @@ void KProcess::setNextOpenMode(QIODevice::OpenMode mode)
 
 void KProcess::clearEnvironment()
 {
-    setEnvironment(QStringList() << QStringLiteral(DUMMYENV));
+    setEnvironment(QStringList { QStringLiteral(DUMMYENV) });
 }
 
 void KProcess::setEnv(const QString &name, const QString &value, bool overwrite)

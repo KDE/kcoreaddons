@@ -58,7 +58,7 @@ void KUrlMimeData::setMetaData(const MetaDataMap &metaData, QMimeData *mimeData)
 
 QStringList KUrlMimeData::mimeDataTypes()
 {
-    return QStringList() << kdeUriListMime() << QStringLiteral("text/uri-list");
+    return QStringList { kdeUriListMime(), QStringLiteral("text/uri-list") };
 }
 
 static QList<QUrl> extractKdeUriList(const QMimeData *mimeData)
