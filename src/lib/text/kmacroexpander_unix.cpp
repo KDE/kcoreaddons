@@ -66,7 +66,7 @@ static QString quoteArg(const QString &arg)
     for (int i = 0; i < arg.length(); i++)
         if (isSpecial(arg.unicode()[i])) {
             QChar q(QLatin1Char('\''));
-            return QString(arg).replace(q, QLatin1String("'\\''")).prepend(q).append(q);
+            return q + QString(arg).replace(q, QLatin1String("'\\''")) + q;
         }
     return arg;
 }
