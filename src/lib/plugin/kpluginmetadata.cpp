@@ -59,9 +59,9 @@ KPluginMetaData::~KPluginMetaData()
 
 KPluginMetaData::KPluginMetaData(const QString &file)
 {
-    if (file.endsWith(QStringLiteral(".desktop"))) {
+    if (file.endsWith(QLatin1String(".desktop"))) {
         loadFromDesktopFile(file, QStringList());
-    } else if (file.endsWith(QStringLiteral(".json"))) {
+    } else if (file.endsWith(QLatin1String(".json"))) {
         d = new KPluginMetaDataPrivate;
         QFile f(file);
         bool b = f.open(QIODevice::ReadOnly);
