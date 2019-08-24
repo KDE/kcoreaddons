@@ -180,7 +180,7 @@ QString KTextToHTMLHelper::getPhoneNumber()
             }
         }
         if (openIdx > 0) {
-            m = m.left(openIdx - 1).trimmed();
+            m = m.leftRef(openIdx - 1).trimmed().toString();
         }
 
         // check if there's a plausible separator at the end
