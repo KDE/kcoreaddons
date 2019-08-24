@@ -54,11 +54,11 @@ int main(int argc, char** argv) {
     const QString description = QStringLiteral("Converts desktop files to json");
     app.setApplicationVersion(QStringLiteral("1.0"));
 
-    const static auto _i = QStringLiteral("input");
-    const static auto _o = QStringLiteral("output");
-    const static auto _n = QStringLiteral("name");
-    const static auto _c = QStringLiteral("compat");
-    const static auto _s = QStringLiteral("serviceType");
+    const auto _i = QStringLiteral("input");
+    const auto _o = QStringLiteral("output");
+    const auto _n = QStringLiteral("name");
+    const auto _c = QStringLiteral("compat");
+    const auto _s = QStringLiteral("serviceType");
 
     QCommandLineOption input = QCommandLineOption(QStringList() << QStringLiteral("i") << _i,
                                QStringLiteral("Read input from file"), _n);

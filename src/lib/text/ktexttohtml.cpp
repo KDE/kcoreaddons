@@ -83,7 +83,7 @@ QString KTextToHTMLHelper::getEmailAddress()
     if (mText[mPos] == QLatin1Char('@')) {
         // the following characters are allowed in a dot-atom (RFC 2822):
         // a-z A-Z 0-9 . ! # $ % & ' * + - / = ? ^ _ ` { | } ~
-        static const QString allowedSpecialChars = QStringLiteral(".!#$%&'*+-/=?^_`{|}~");
+        const QString allowedSpecialChars = QStringLiteral(".!#$%&'*+-/=?^_`{|}~");
 
         // determine the local part of the email address
         int start = mPos - 1;
@@ -148,7 +148,7 @@ QString KTextToHTMLHelper::getPhoneNumber()
         return {};
     }
 
-    static const QString allowedBeginSeparators = QStringLiteral(" \r\t\n:");
+    const QString allowedBeginSeparators = QStringLiteral(" \r\t\n:");
     if (mPos > 0 && !allowedBeginSeparators.contains(mText[mPos - 1])) {
         return {};
     }
@@ -184,7 +184,7 @@ QString KTextToHTMLHelper::getPhoneNumber()
         }
 
         // check if there's a plausible separator at the end
-        static const QString allowedEndSeparators = QStringLiteral(" \r\t\n,.");
+        const QString allowedEndSeparators = QStringLiteral(" \r\t\n,.");
         const auto l = m.size();
         if (mText.size() > mPos + l && !allowedEndSeparators.contains(mText[mPos + l])) {
             return {};
@@ -212,7 +212,7 @@ bool KTextToHTMLHelper::atUrl() const
 {
     // the following characters are allowed in a dot-atom (RFC 2822):
     // a-z A-Z 0-9 . ! # $ % & ' * + - / = ? ^ _ ` { | } ~
-    static const QString allowedSpecialChars = QStringLiteral(".!#$%&'*+-/=?^_`{|}~");
+    const QString allowedSpecialChars = QStringLiteral(".!#$%&'*+-/=?^_`{|}~");
 
     // the character directly before the URL must not be a letter, a number or
     // any other character allowed in a dot-atom (RFC 2822).
@@ -374,7 +374,7 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
     //       a dot to finish the sentence. That would lead the parser to include the dot in the url,
     //       even though that is not wanted. So work around that here.
     //       Most real-life URLs hopefully don't end with dots or commas.
-    static const QString wordBoundaries = QStringLiteral(".,:!?)>");
+    const QString wordBoundaries = QStringLiteral(".,:!?)>");
     if (url.length() > 1) {
         do {
             if (wordBoundaries.contains(url.at(url.length() - 1))) {
