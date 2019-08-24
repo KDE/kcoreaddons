@@ -252,7 +252,7 @@ QString KShell::quoteArgInternal(const QString &arg, bool _inquote)
 QString KShell::quoteArg(const QString &arg)
 {
     if (arg.isEmpty()) {
-        return QString::fromLatin1("\"\"");
+        return QStringLiteral("\"\"");
     }
 
     // Ensure that we don't have directly trailing backslashes,

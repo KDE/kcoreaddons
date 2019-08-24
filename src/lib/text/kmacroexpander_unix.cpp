@@ -61,7 +61,7 @@ inline static bool isSpecial(QChar cUnicode)
 static QString quoteArg(const QString &arg)
 {
     if (!arg.length()) {
-        return QString::fromLatin1("''");
+        return QStringLiteral("''");
     }
     for (int i = 0; i < arg.length(); i++)
         if (isSpecial(arg.unicode()[i])) {
@@ -114,10 +114,10 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
         }
         if (state.dquote) {
             rsts = rst.join(QLatin1String(" "));
-            rsts.replace(QRegExp(QLatin1String("([$`\"\\\\])")), QLatin1String("\\\\1"));
+            rsts.replace(QRegExp(QStringLiteral("([$`\"\\\\])")), QStringLiteral("\\\\1"));
         } else if (state.current == dollarquote) {
             rsts = rst.join(QLatin1String(" "));
-            rsts.replace(QRegExp(QLatin1String("(['\\\\])")), QLatin1String("\\\\1"));
+            rsts.replace(QRegExp(QStringLiteral("(['\\\\])")), QStringLiteral("\\\\1"));
         } else if (state.current == singlequote) {
             rsts = rst.join(QLatin1String(" "));
             rsts.replace(QLatin1Char('\''), QLatin1String("'\\''"));
@@ -175,7 +175,7 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
             }
             // always swallow the char -> prevent anomalies due to expansion
         } else if (cc == '`') {
-            str.replace(pos, 1, QLatin1String("$( "));   // add space -> avoid creating $((
+            str.replace(pos, 1, QStringLiteral("$( "));   // add space -> avoid creating $((
             pos2 = pos += 3;
             for (;;) {
                 if (pos2 >= str.length()) {

@@ -310,7 +310,7 @@ inline static bool isSpecial(QChar cUnicode)
 QString KShell::quoteArg(const QString &arg)
 {
     if (!arg.length()) {
-        return QString::fromLatin1("''");
+        return QStringLiteral("''");
     }
     for (int i = 0; i < arg.length(); i++)
         if (isSpecial(arg.unicode()[i])) {
