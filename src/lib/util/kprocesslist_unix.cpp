@@ -78,7 +78,7 @@ KProcessInfoList unixProcessListPS()
         const int endOfName = line.indexOf(blank, endOfUser+1);
 
         if (endOfPid >= 0 && endOfState >= 0 && endOfUser >= 0) {
-            qint64 pid = line.left(endOfPid).toUInt();
+            qint64 pid = line.leftRef(endOfPid).toUInt();
             QString user = line.mid(endOfState+1, endOfUser-endOfState-1);
             QString name = line.mid(endOfUser+1, endOfName-endOfUser-1);
             QString command = line.right(line.size()-endOfName-1);
