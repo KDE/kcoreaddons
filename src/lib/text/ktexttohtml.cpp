@@ -544,9 +544,9 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
                 }
                 if (!str.isEmpty()) {
                     QString hyperlink;
-                    if (str.left(4) == QLatin1String("www.")) {
+                    if (str.startsWith(QLatin1String("www."))) {
                         hyperlink = QLatin1String("http://") + str;
-                    } else if (str.left(4) == QLatin1String("ftp.")) {
+                    } else if (str.startsWith(QLatin1String("ftp."))) {
                         hyperlink = QLatin1String("ftp://") + str;
                     } else {
                         hyperlink = str;
