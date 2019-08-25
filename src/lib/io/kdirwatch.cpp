@@ -583,7 +583,7 @@ KDirWatchPrivate::Entry *KDirWatchPrivate::entry(const QString &_path)
     QString path(_path);
 
     if (path.length() > 1 && path.endsWith(QLatin1Char('/'))) {
-        path.truncate(path.length() - 1);
+        path.chop(1);
     }
 
     EntryMap::Iterator it = m_mapEntries.find(path);
@@ -799,7 +799,7 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path,
     }
 
     if (path.length() > 1 && path.endsWith(QLatin1Char('/'))) {
-        path.truncate(path.length() - 1);
+        path.chop(1);
     }
 
     EntryMap::Iterator it = m_mapEntries.find(path);

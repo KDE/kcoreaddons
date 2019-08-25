@@ -100,7 +100,7 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
         if (!metaDataPayload.isEmpty()) {
             QString str = QString::fromUtf8(metaDataPayload.constData());
             Q_ASSERT(str.endsWith(QLatin1String("$@@$")));
-            str.truncate(str.length() - 4);
+            str.chop(4);
             const QStringList lst = str.split(QStringLiteral("$@@$"));
             bool readingKey = true; // true, then false, then true, etc.
             QString key;

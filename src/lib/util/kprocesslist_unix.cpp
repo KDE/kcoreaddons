@@ -123,7 +123,7 @@ KProcessInfoList KProcessList::processInfoList()
         qint64 pid = procId.toUInt();
         QString name = data.at(1);
         if (name.startsWith(QLatin1Char('(')) && name.endsWith(QLatin1Char(')'))) {
-            name.truncate(name.size() - 1);
+            name.chop(1);
             name.remove(0, 1);
         }
         // State is element 2
