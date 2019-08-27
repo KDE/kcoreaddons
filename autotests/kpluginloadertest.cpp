@@ -199,7 +199,7 @@ private Q_SLOTS:
         KPluginLoader aplugin(QStringLiteral("alwaysunloadplugin"));
         QJsonObject ametadata = aplugin.metaData();
         QVERIFY(!ametadata.isEmpty());
-        QVERIFY(ametadata.keys().contains(QStringLiteral("IID")));
+        QVERIFY(ametadata.keys().contains(QLatin1String("IID")));
         QJsonValue ametadata_metadata = ametadata.value(QStringLiteral("MetaData"));
         QVERIFY(ametadata_metadata.toObject().isEmpty());
         QVERIFY(!aplugin.isLoaded()); // didn't load anything

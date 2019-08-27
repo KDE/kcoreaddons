@@ -88,7 +88,7 @@ void KProcessTest::test_setShellCommand()
     p.setShellCommand(QStringLiteral("cat"));
     QCOMPARE(p.program().count(), 1);
     QCOMPARE(p.program().at(0), QStandardPaths::findExecutable(QStringLiteral("cat")));
-    QVERIFY(p.program().at(0).endsWith(QStringLiteral("/bin/cat")));
+    QVERIFY(p.program().at(0).endsWith(QLatin1String("/bin/cat")));
     p.setShellCommand(QStringLiteral("true || false"));
     QCOMPARE(p.program(), QStringList() << QStringLiteral("/bin/sh") << QStringLiteral("-c")
              << QString::fromLatin1("true || false"));
