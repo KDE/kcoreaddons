@@ -113,13 +113,13 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
             continue;
         }
         if (state.dquote) {
-            rsts = rst.join(QLatin1String(" "));
+            rsts = rst.join(QLatin1Char(' '));
             rsts.replace(QRegExp(QStringLiteral("([$`\"\\\\])")), QStringLiteral("\\\\1"));
         } else if (state.current == dollarquote) {
-            rsts = rst.join(QLatin1String(" "));
+            rsts = rst.join(QLatin1Char(' '));
             rsts.replace(QRegExp(QStringLiteral("(['\\\\])")), QStringLiteral("\\\\1"));
         } else if (state.current == singlequote) {
-            rsts = rst.join(QLatin1String(" "));
+            rsts = rst.join(QLatin1Char(' '));
             rsts.replace(QLatin1Char('\''), QLatin1String("'\\''"));
         } else {
             if (rst.isEmpty()) {

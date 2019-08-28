@@ -261,19 +261,19 @@ private Q_SLOTS:
 
         //try filter
         plugins = KPluginLoader::instantiatePlugins(temp.path(), [](const KPluginMetaData & md) {
-            return md.pluginId() == QStringLiteral("jsonplugin");
+            return md.pluginId() == QLatin1String("jsonplugin");
         });
         QCOMPARE(plugins.size(), 1);
         QCOMPARE(plugins[0]->metaObject()->className(), "jsonpluginfa");
         qDeleteAll(plugins);
 
         plugins = KPluginLoader::instantiatePlugins(temp.path(), [](const KPluginMetaData & md) {
-            return md.pluginId() == QStringLiteral("unversionedplugin");
+            return md.pluginId() == QLatin1String("unversionedplugin");
         });
         QCOMPARE(plugins.size(), 0);
 
         plugins = KPluginLoader::instantiatePlugins(temp.path(), [](const KPluginMetaData & md) {
-            return md.pluginId() == QStringLiteral("foobar"); // ID does not match file name, is set in JSON
+            return md.pluginId() == QLatin1String("foobar"); // ID does not match file name, is set in JSON
         });
         QCOMPARE(plugins.size(), 1);
         QCOMPARE(plugins[0]->metaObject()->className(), "jsonplugin2");

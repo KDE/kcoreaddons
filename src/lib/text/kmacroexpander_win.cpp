@@ -66,7 +66,7 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
             return false;
         }
         if (shellQuote) {
-            rsts = KShell::quoteArgInternal(rst.join(QLatin1String(" ")), true);
+            rsts = KShell::quoteArgInternal(rst.join(QLatin1Char(' ')), true);
         } else {
             if (rst.isEmpty()) {
                 str.remove(pos, len);
