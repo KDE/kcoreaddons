@@ -68,6 +68,9 @@ target_include_directories(ktexttohtmltest PRIVATE ${KCoreAddons_BINARY_DIR}/src
 # fake static linking to prevent the export macros on Windows from kicking in
 target_compile_definitions(ktexttohtmltest PRIVATE -DKCOREADDONS_STATIC_DEFINE=1)
 
+add_executable(kprocesstest_helper kprocesstest_helper.cpp)
+target_link_libraries(kprocesstest_helper KF5::CoreAddons)
+
 target_compile_definitions(kpluginloadertest PRIVATE
     JSONPLUGIN_FILE="$<TARGET_FILE:jsonplugin>"
     VERSIONEDPLUGIN_FILE="$<TARGET_FILE:versionedplugin>"

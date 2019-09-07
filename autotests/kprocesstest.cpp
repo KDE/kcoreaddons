@@ -19,9 +19,12 @@
     Boston, MA 02110-1301, USA.
 */
 
+#include "kprocesstest_helper.h"
 #include <kprocess.h>
-#include <QtTest>
-#include <qstandardpaths.h>
+#include <QObject>
+#include <QFile>
+#include <QTest>
+#include <QStandardPaths>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -38,28 +41,27 @@ private Q_SLOTS:
 
 // IOCCC nomination pending
 
-static char **gargv;
-
-static QString recurse(KProcess::OutputChannelMode how)
+static QString callHelper(KProcess::OutputChannelMode how)
 {
     QProcess p;
     p.setProcessChannelMode(QProcess::MergedChannels);
-    p.start(QString::fromLatin1(gargv[0]), QStringList() << QString::number(how) << QStringLiteral("--nocrashhandler"));
+
+    QString helper = QCoreApplication::applicationDirPath() + QStringLiteral("/kprocesstest_helper");
+#ifdef Q_OS_WIN
+    helper += QStringLiteral(".exe");
+#endif
+
+    Q_ASSERT(QFile::exists(helper));
+    p.start(helper, QStringList() << QString::number(how) << QStringLiteral("--nocrashhandler"));
     p.waitForFinished();
     return QString::fromLatin1(p.readAllStandardOutput());
 }
-
-#define EOUT "foo - stdout"
-#define EERR "bar - stderr"
-#define POUT "program output:\n"
-#define ROUT "received stdout:\n"
-#define RERR "received stderr:\n"
 
 #define EO EOUT "\n"
 #define EE EERR "\n"
 #define TESTCHAN(me,ms,pout,rout,rerr) \
     e = QStringLiteral("mode: " ms "\n" POUT pout ROUT rout RERR rerr); \
-    a = QStringLiteral("mode: " ms "\n") + recurse(KProcess::me); \
+    a = QStringLiteral("mode: " ms "\n") + callHelper(KProcess::me); \
     QCOMPARE(a, e)
 
 void KProcessTest::test_channels()
@@ -95,24 +97,6 @@ void KProcessTest::test_setShellCommand()
 #endif
 }
 
-static void recursor(char **argv)
-{
-    if (argv[1]) {
-        KProcess p;
-        p.setShellCommand(QString::fromLatin1("echo " EOUT "; echo " EERR " >&2"));
-        p.setOutputChannelMode(static_cast<KProcess::OutputChannelMode>(atoi(argv[1])));
-        fputs(POUT, stdout);
-        fflush(stdout);
-        p.execute();
-        fputs(ROUT, stdout);
-        fputs(p.readAllStandardOutput().constData(), stdout);
-        fputs(RERR, stdout);
-        fputs(p.readAllStandardError().constData(), stdout);
-        exit(0);
-    }
-    gargv = argv;
-}
-
-QTEST_MAIN(recursor(argv); KProcessTest)
+QTEST_MAIN(KProcessTest)
 
 #include "kprocesstest.moc"
