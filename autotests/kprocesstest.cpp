@@ -74,7 +74,7 @@ void KProcessTest::test_channels()
     TESTCHAN(OnlyStdoutChannel, "forwarded stderr", EE, EO, "");
     TESTCHAN(MergedChannels, "merged", "", EO EE, "");
 #else
-    Q_UNUSED(recurse);
+    Q_UNUSED(callHelper);
     QSKIP("This test needs a UNIX system");
 #endif
 }
