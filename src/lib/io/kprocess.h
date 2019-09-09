@@ -231,11 +231,11 @@ public:
      * Start the process, wait for it to finish, and return the exit code.
      *
      * This method is roughly equivalent to the sequence:
-     * <code>
+     * @code
      *   start();
      *   waitForFinished(msecs);
      *   return exitCode();
-     * </code>
+     * @endcode
      *
      * Unlike the other execute() variants this method is not static,
      * so the process can be parametrized properly and talked to.
