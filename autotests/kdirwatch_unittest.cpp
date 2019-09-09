@@ -209,7 +209,7 @@ void KDirWatch_UnitTest::waitUntilMTimeChange(const QString &path)
 
     QFileInfo fi(path);
     QVERIFY(fi.exists());
-    const QDateTime ctime = qMax(fi.lastModified(), fi.created());
+    const QDateTime ctime = fi.lastModified();
     waitUntilAfter(ctime);
 
 }
@@ -226,7 +226,7 @@ void KDirWatch_UnitTest::waitUntilAfter(const QDateTime &ctime)
     QDateTime now;
     Q_FOREVER {
         now = QDateTime::currentDateTime();
-        if (now.toTime_t() == ctime.toTime_t())   // truncate milliseconds
+        if (now.toMSecsSinceEpoch() / 1000 == ctime.toMSecsSinceEpoch() / 1000)   // truncate milliseconds
         {
             totalWait += 50;
             QTest::qWait(50);
@@ -257,7 +257,7 @@ void KDirWatch_UnitTest::appendToFile(const QString &path)
         QVERIFY(fi.exists());
         qDebug() << "After append: file ctime=" << fi.lastModified().toString(Qt::ISODate);
         QVERIFY(fi.exists());
-        qDebug() << "After append: directory mtime=" << fi.created().toString(Qt::ISODate);
+        qDebug() << "After append: metadataChangeTime" << fi.metadataChangeTime().toString(Qt::ISODate);
 #endif
 }
 
@@ -752,7 +752,7 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     watch.stopDirScan(m_path);
 
-    //qDebug() << "create file 2 at" << QDateTime::currentDateTime().toTime_t();
+    //qDebug() << "create file 2 at" << QDateTime::currentDateTime().toMSecsSinceEpoch();
     const QString file2 = createFile(2);
     QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
     QTest::qWait(200);
@@ -772,7 +772,7 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     waitUntilMTimeChange(m_path); // necessary for the mtime comparison in scanEntry
 
-    //qDebug() << "create file 3 at" << QDateTime::currentDateTime().toTime_t();
+    //qDebug() << "create file 3 at" << QDateTime::currentDateTime().toMSecsSinceEpoch();
     const QString file3 = createFile(3);
 #ifdef Q_OS_WIN
     if (watch.internalMethod() == KDirWatch::QFSWatch) {
