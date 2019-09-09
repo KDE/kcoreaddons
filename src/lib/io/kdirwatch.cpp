@@ -1897,7 +1897,7 @@ QDateTime KDirWatch::ctime(const QString &_path) const
         return QDateTime();
     }
 
-    return QDateTime::fromMSecsSinceEpoch(e->m_ctime * 1000);
+    return QDateTime::fromSecsSinceEpoch(e->m_ctime);
 }
 
 void KDirWatch::removeDir(const QString &_path)
