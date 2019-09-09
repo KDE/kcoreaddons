@@ -386,23 +386,22 @@ public:
     template<typename T>
     T *create(QWidget *parentWidget, QObject *parent, const QString &keyword = QString(), const QVariantList &args = QVariantList());
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(4, 0)
     /**
      * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
      */
-#ifndef KCOREADDONS_NO_DEPRECATED
     template<typename T>
-    KCOREADDONS_DEPRECATED
+    KCOREADDONS_DEPRECATED_VERSION(4, 0, "Use KPluginFactory::create<T>(QObject *parent, const QVariantList &args)")
     T *create(QObject *parent, const QStringList &args)
     {
         return create<T>(parent, stringListToVariantList(args));
     }
-#endif
 
     /**
      * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
      */
-#ifndef KCOREADDONS_NO_DEPRECATED
-    KCOREADDONS_DEPRECATED QObject *create(QObject *parent = nullptr, const char *classname = "QObject", const QStringList &args = QStringList())
+    KCOREADDONS_DEPRECATED_VERSION(4, 0, "Use KPluginFactory::create<T>(QObject *parent, const QVariantList &args)")
+    QObject *create(QObject *parent = nullptr, const char *classname = "QObject", const QStringList &args = QStringList())
     {
         return create(classname, nullptr, parent, stringListToVariantList(args), QString());
     }
@@ -491,18 +490,18 @@ protected:
 
     KPluginFactoryPrivate *const d_ptr;
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(4, 0)
     /**
      * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
      */
-#ifndef KCOREADDONS_NO_DEPRECATED
-    virtual KCOREADDONS_DEPRECATED QObject *createObject(QObject *parent, const char *className, const QStringList &args);
-#endif
+    KCOREADDONS_DEPRECATED_VERSION(4, 0, "Use KPluginFactory::create<T>(QObject *parent, const QVariantList &args)")
+    virtual QObject *createObject(QObject *parent, const char *className, const QStringList &args);
 
     /**
      * @deprecated since 4.0 use create<T>(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)
      */
-#ifndef KCOREADDONS_NO_DEPRECATED
-    virtual KCOREADDONS_DEPRECATED KParts::Part *createPartObject(QWidget *parentWidget, QObject *parent, const char *classname, const QStringList &args);
+    KCOREADDONS_DEPRECATED_VERSION(4, 0, "Use KPluginFactory::create<T>(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)")
+    virtual KParts::Part *createPartObject(QWidget *parentWidget, QObject *parent, const char *classname, const QStringList &args);
 #endif
 
     /**

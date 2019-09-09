@@ -117,8 +117,14 @@ ecm_qt_declare_logging_category(libkcoreaddons_SRCS
                                 CATEGORY_NAME org.kde.kcoreaddons)
 
 add_library(KF5CoreAddons ${libkcoreaddons_SRCS})
-generate_export_header(KF5CoreAddons BASE_NAME KCoreAddons)
 add_library(KF5::CoreAddons ALIAS KF5CoreAddons)
+ecm_generate_export_header(KF5CoreAddons
+    BASE_NAME KCoreAddons
+    GROUP_BASE_NAME KF
+    VERSION ${KF5_VERSION}
+    DEPRECATION_VERSIONS 4.0 5.0 5.2
+    EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
+)
 
 target_include_directories(KF5CoreAddons PUBLIC "$<BUILD_INTERFACE:${kcoreaddons_INCLUDE_DIRS}>")
 

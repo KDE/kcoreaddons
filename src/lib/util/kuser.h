@@ -304,13 +304,14 @@ public:
     /** @return the native user id of the user. */
     KGroupId groupId() const;
 
-#ifndef KCOREADDONS_NO_DEPRECATED
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 0)
     /**
      * Returns the group id of the user.
      * @return the id of the group or -1 if user is invalid
      * @deprecated since 5.0 use KUser::groupId()
      */
-    KCOREADDONS_DEPRECATED K_GID gid() const
+    KCOREADDONS_DEPRECATED_VERSION(5, 0, "Use KUser::groupId()")
+    K_GID gid() const
     {
         return groupId().nativeId();
     }
@@ -328,13 +329,14 @@ public:
      */
     QString loginName() const;
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 0)
     /**
      * The full name of the user.
      * @return the full name of the user or QString() if user is invalid
      * @deprecated use property(KUser::FullName) instead
      */
-#ifndef KCOREADDONS_NO_DEPRECATED
-    KCOREADDONS_DEPRECATED QString fullName() const
+    KCOREADDONS_DEPRECATED_VERSION(5, 0, "Use KUser::property(KUser::FullName).toString()")
+    QString fullName() const
     {
         return property(FullName).toString();
     }
@@ -343,7 +345,8 @@ public:
      * @return the id of the user or -1 (UNIX)/ null(Windows) if user is invalid
      * @deprecated since 5.0 use KUser::userId()
      */
-    KCOREADDONS_DEPRECATED K_UID uid() const
+    KCOREADDONS_DEPRECATED_VERSION(5, 0, "Use KUser::userId().nativeId()")
+    K_UID uid() const
     {
         return userId().nativeId();
     }
@@ -517,13 +520,14 @@ public:
      */
     bool isValid() const;
 
-#ifndef KCOREADDONS_NO_DEPRECATED
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 0)
     /**
      * Returns the group id of the group.
      * @return the group id of the group or -1 if the group is invalid
      * @deprecated since 5.0 use KUserGroup::groupId()
      */
-    KCOREADDONS_DEPRECATED K_GID gid() const
+    KCOREADDONS_DEPRECATED_VERSION(5, 0, "Use KUserGroup::groupId().nativeId()")
+    K_GID gid() const
     {
         return groupId().nativeId();
     }

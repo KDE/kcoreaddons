@@ -30,6 +30,7 @@
 #define K_EXPORT_PLUGIN_VERSION(version) \
     Q_EXTERN_C Q_DECL_EXPORT const quint32 kde_plugin_version = version;
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 0)
 /**
  * \relates KPluginLoader
  * This macro exports the main object of the plugin. Most times, this will be a KPluginFactory
@@ -42,7 +43,6 @@
 #else
 #define Q_STANDARD_CALL
 
-#ifndef KCOREADDONS_NO_DEPRECATED
 class KCOREADDONS_DEPRECATED_EXPORT K_EXPORT_PLUGIN_is_deprecated_see_KDE5PORTING
 {
 };

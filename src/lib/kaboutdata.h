@@ -722,6 +722,7 @@ public:
      */
     KAboutData &setDisplayName(const QString &displayName);
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
     /**
      * Obsolete method
      *
@@ -734,8 +735,9 @@ public:
      *
      * @deprecated since 5.2, use QApplication::setWindowIcon(QIcon::fromTheme()) instead.
      */
-    KCOREADDONS_DEPRECATED KAboutData &setProgramIconName(const QString &iconName); // KF6 remove this
-
+    KCOREADDONS_DEPRECATED_VERSION(5, 2, "Use QApplication::setWindowIcon")
+    KAboutData &setProgramIconName(const QString &iconName);
+#endif
     /**
      * Defines the program logo.
      *
@@ -939,6 +941,7 @@ public:
      */
     const char *internalProgramName() const;
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
     /**
      * Returns the program's icon name.
      *
@@ -947,7 +950,9 @@ public:
      *
      * This is mostly for compatibility, given that setProgramIconName is deprecated.
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 2, "Use QApplication::windowIcon")
     QString programIconName() const;
+#endif
 
     /**
      * Returns the program logo image.

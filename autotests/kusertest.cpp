@@ -102,7 +102,9 @@ void KUserTest::testKUser()
 
     // make sure we don't crash when accessing properties of an invalid instance
     QCOMPARE(invalidKUser.faceIconPath(), QString());
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 0)
     QCOMPARE(invalidKUser.fullName(), QString());
+#endif
     QCOMPARE(invalidKUser.groupId(), KGroupId());
     invalidKUser.groupNames(); // could be empty, or "nogroup", so no checks here
     invalidKUser.groups(); // same as above

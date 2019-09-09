@@ -89,7 +89,7 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
     }
 }
 
-#ifndef KCOREADDONS_NO_DEPRECATED
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
 QObject *KPluginFactory::createObject(QObject *parent, const char *className, const QStringList &args)
 {
     Q_UNUSED(parent);
@@ -99,7 +99,7 @@ QObject *KPluginFactory::createObject(QObject *parent, const char *className, co
 }
 #endif
 
-#ifndef KCOREADDONS_NO_DEPRECATED
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
 KParts::Part *KPluginFactory::createPartObject(QWidget *parentWidget, QObject *parent, const char *classname, const QStringList &args)
 {
     Q_UNUSED(parent);
@@ -116,7 +116,7 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
 
     QObject *obj = nullptr;
 
-#ifndef KCOREADDONS_NO_DEPRECATED
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
     if (keyword.isEmpty()) {
 
         const QStringList argsStringList = variantListToStringList(args);
