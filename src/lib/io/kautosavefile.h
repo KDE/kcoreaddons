@@ -60,7 +60,7 @@ class KAutoSaveFilePrivate;
  *   void Document::open(const QUrl &url)
  *   {
  *       // check whether autosave files exist:
- *       QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles(url);
+ *       const QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles(url);
  *       if (!staleFiles.isEmpty()) {
  *           if (KMessageBox::questionYesNo(parent,
  *                                          "Auto-saved files exist. Do you want to recover them now?",
@@ -70,7 +70,7 @@ class KAutoSaveFilePrivate;
  *               return;
  *           } else {
  *               // remove the stale files
- *               foreach (KAutoSaveFile *stale, staleFiles) {
+ *               for (KAutoSaveFile *stale : staleFiles) {
  *                   stale->open(QIODevice::ReadWrite);
  *                   delete stale;
  *               }
@@ -87,7 +87,7 @@ class KAutoSaveFilePrivate;
  *
  * The function recoverFiles could loop over the list of files and do this:
  * @code
- *   foreach (KAutoSaveFile *stale, staleFiles) {
+ *   for (KAutoSaveFile *stale : staleFiles) {
  *       if (!stale->open(QIODevice::ReadWrite)) {
  *           // show an error message; we could not steal the lockfile
  *           // maybe another application got to the file before us?
