@@ -20,6 +20,7 @@
 #include "klistopenfilesjobtest_unix.h"
 #include "klistopenfilesjob.h"
 #include <QCoreApplication>
+#include <QStandardPaths>
 #include <QStringLiteral>
 #include <QTemporaryDir>
 #include <QTest>
@@ -27,8 +28,20 @@
 
 QTEST_MAIN(KListOpenFilesJobTest)
 
+namespace {
+
+bool hasLsofInstalled()
+{
+    return !QStandardPaths::findExecutable(QStringLiteral("lsof")).isEmpty();
+}
+
+}
+
 void KListOpenFilesJobTest::testOpenFiles()
 {
+    if (!hasLsofInstalled()) {
+        QSKIP("lsof is not installed - skipping test");
+    }
     QDir path(QCoreApplication::applicationDirPath());
     auto job = new KListOpenFilesJob(path.path());
     job->exec();
@@ -48,6 +61,9 @@ void KListOpenFilesJobTest::testOpenFiles()
 
 void KListOpenFilesJobTest::testNoOpenFiles()
 {
+    if (!hasLsofInstalled()) {
+        QSKIP("lsof is not installed - skipping test");
+    }
     QTemporaryDir tempDir;
     auto job = new KListOpenFilesJob(tempDir.path());
     job->exec();
@@ -57,6 +73,9 @@ void KListOpenFilesJobTest::testNoOpenFiles()
 
 void KListOpenFilesJobTest::testNonExistingDir()
 {
+    if (!hasLsofInstalled()) {
+        QSKIP("lsof is not installed - skipping test");
+    }
     QString nonExistingDir(QStringLiteral("/does/not/exist"));
     auto job = new KListOpenFilesJob(nonExistingDir);
     job->exec();
