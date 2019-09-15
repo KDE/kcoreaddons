@@ -284,6 +284,9 @@ if(BUILD_QCH)
         MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
         LINK_QCHS
             Qt5Core_QCH
+        INCLUDE_DIRS
+            ${CMAKE_CURRENT_BINARY_DIR}
+            ${kcoreaddons_INCLUDE_DIRS}
         BLANK_MACROS
             KCOREADDONS_EXPORT
             KCOREADDONS_DEPRECATED
