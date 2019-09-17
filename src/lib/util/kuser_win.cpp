@@ -447,15 +447,7 @@ QString KUser::faceIconPath() const
     }
 
     LPCWSTR username = reinterpret_cast<const WCHAR *>(d->loginName.utf16());
-
-    if (QSysInfo::windowsVersion() == QSysInfo::WV_XP ||
-        QSysInfo::windowsVersion() == QSysInfo::WV_2003)
-    {
-        return faceIconPathImpl<FaceIconPath_XP>(username);
-    } else if (QSysInfo::windowsVersion() >= QSysInfo::WV_VISTA) {
-        return faceIconPathImpl<FaceIconPath_Vista>(username);
-    }
-    return QString();
+    return faceIconPathImpl<FaceIconPath_Vista>(username);
 }
 
 QString KUser::shell() const
