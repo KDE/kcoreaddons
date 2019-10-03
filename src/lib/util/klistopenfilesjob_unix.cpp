@@ -27,7 +27,7 @@
 class KListOpenFilesJobPrivate
 {
 public:
-    KListOpenFilesJobPrivate(KListOpenFilesJob *Job, QDir Path)
+    KListOpenFilesJobPrivate(KListOpenFilesJob *Job, const QDir &Path)
         : job(Job)
         , path(Path)
         , hasEmittedResult(false)
