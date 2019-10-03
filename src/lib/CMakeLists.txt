@@ -209,6 +209,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KUser
         KShell
         KProcessList
+        KListOpenFilesJob
         Kdelibs4Migration
         Kdelibs4ConfigMigrator
     RELATIVE util
