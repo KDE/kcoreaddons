@@ -25,7 +25,7 @@
 
 #include <kcoreaddons_export.h>
 #include <kprocesslist.h>
-#include <jobs/kjob.h>
+#include <kjob.h>
 #include <QObject>
 #include <QScopedPointer>
 #include <QString>
