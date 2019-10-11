@@ -120,7 +120,7 @@ add_library(KF5CoreAddons ${libkcoreaddons_SRCS})
 add_library(KF5::CoreAddons ALIAS KF5CoreAddons)
 ecm_generate_export_header(KF5CoreAddons
     BASE_NAME KCoreAddons
-    GROUP_BASE_NAME KF
+    # GROUP_BASE_NAME KF <- enable once all of KF modules use ecm_generate_export_header
     VERSION ${KF5_VERSION}
     DEPRECATED_BASE_VERSION 0
     DEPRECATION_VERSIONS 4.0 5.0 5.2
