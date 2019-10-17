@@ -62,6 +62,17 @@ else()
     set(HAVE_SYS_INOTIFY_H FALSE)
 endif()
 
+option(ENABLE_PROCSTAT "Try to use libprocstat for process information" ON)
+if (ENABLE_PROCSTAT)
+    # Find libprocstat
+    find_package(Procstat)
+    set_package_properties(Procstat PROPERTIES
+        PURPOSE "Process information using libprocstat")
+    set(HAVE_PROCSTAT ${PROCSTAT_FOUND})
+else()
+    set(HAVE_PROCSTAT FALSE)
+endif()
+
 # Generate io/config-kdirwatch.h
 configure_file(src/lib/io/config-kdirwatch.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/lib/io/config-kdirwatch.h)
 

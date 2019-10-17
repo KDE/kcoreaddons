@@ -57,10 +57,20 @@ if (UNIX)
         ${kcoreaddons_OPTIONAL_SRCS}
         text/kmacroexpander_unix.cpp
         util/klistopenfilesjob_unix.cpp
-        util/kprocesslist_unix.cpp
         util/kuser_unix.cpp
         util/kshell_unix.cpp
     )
+    if (HAVE_PROCSTAT)
+        set(kcoreaddons_OPTIONAL_SRCS
+            ${kcoreaddons_OPTIONAL_SRCS}
+            util/kprocesslist_unix_procstat.cpp
+        )
+    else ()
+        set(kcoreaddons_OPTIONAL_SRCS
+            ${kcoreaddons_OPTIONAL_SRCS}
+            util/kprocesslist_unix.cpp
+        )
+    endif ()
 endif ()
 
 set(libkcoreaddons_SRCS
@@ -111,6 +121,13 @@ set(kcoreaddons_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/util/
 )
 
+if (HAVE_PROCSTAT)
+    set(kcoreaddons_INCLUDE_DIRS
+        ${kcoreaddons_INCLUDE_DIRS}
+        ${PROCSTAT_INCLUDE_DIR}
+    )
+endif()
+
 ecm_qt_declare_logging_category(libkcoreaddons_SRCS
                                 HEADER kcoreaddons_debug.h
                                 IDENTIFIER KCOREADDONS_DEBUG
@@ -140,6 +157,10 @@ target_link_libraries(KF5CoreAddons PRIVATE ${CMAKE_THREAD_LIBS_INIT})
 
 if(WIN32)
     target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv)
+endif()
+
+if(HAVE_PROCSTAT)
+    target_link_libraries(KF5CoreAddons PRIVATE ${PROCSTAT_LIBRARIES})
 endif()
 
 target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KCoreAddons>" )
