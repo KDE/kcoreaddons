@@ -356,7 +356,7 @@ private:
  * and by the help shown on command line (see KAboutData::setupCommandLine()).
  *
  * Porting Notes: Since KDE Frameworks 5.0, the translation catalog mechanism
- * must provided by your translation framework to load the correct catalog
+ * must be provided by your translation framework to load the correct catalog
  * instead (eg: KLocalizedString::setApplicationDomain() for KI18n, or
  * QCoreApplication::installTranslator() for Qt's translation system). This
  * applies to the old setCatalogName() and catalogName() members. But see also
