@@ -333,7 +333,7 @@ public:
     /**
      * The full name of the user.
      * @return the full name of the user or QString() if user is invalid
-     * @deprecated use property(KUser::FullName) instead
+     * @deprecated Since 5.0, use property(KUser::FullName) instead
      */
     KCOREADDONS_DEPRECATED_VERSION(5, 0, "Use KUser::property(KUser::FullName).toString()")
     QString fullName() const
