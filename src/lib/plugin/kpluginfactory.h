@@ -490,7 +490,7 @@ protected:
 
     KPluginFactoryPrivate *const d_ptr;
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(4, 0)
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
     /**
      * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
      */
