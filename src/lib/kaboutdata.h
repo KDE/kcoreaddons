@@ -941,7 +941,8 @@ public:
      */
     const char *internalProgramName() const;
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
+// Not using KCOREADDONS_ENABLE_DEPRECATED_SINCE because KXmlGui and KConfigWidgets need this, for compat
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 2)
     /**
      * Returns the program's icon name.
      *
