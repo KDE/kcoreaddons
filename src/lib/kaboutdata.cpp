@@ -608,6 +608,7 @@ KAboutData &KAboutData::operator=(const KAboutData &other)
     return *this;
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 65)
 KAboutData KAboutData::fromPluginMetaData(const KPluginMetaData &plugin)
 {
     KAboutData ret(plugin.pluginId(), plugin.name(), plugin.version(), plugin.description(),
@@ -621,6 +622,7 @@ KAboutData KAboutData::fromPluginMetaData(const KPluginMetaData &plugin)
     ret.d->_creditList = plugin.otherContributors();
     return ret;
 }
+#endif
 
 
 KAboutData &KAboutData::addAuthor(const QString &name,
