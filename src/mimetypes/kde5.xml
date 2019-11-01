@@ -3357,6 +3357,7 @@ Notes:
     <comment xml:lang="de">KConfigXT-Einrichtungsoptionen</comment>
     <comment xml:lang="en_GB">KConfigXT Configuration Options</comment>
     <comment xml:lang="es">Opciones de configuración de KConfigXT</comment>
+    <comment xml:lang="et">KConfigXT seadistusvalikud</comment>
     <comment xml:lang="eu">KConfigXT konfiguratzeko aukerak</comment>
     <comment xml:lang="fi">KConfigXT Configuration Options</comment>
     <comment xml:lang="fr">Options de configuration de KConfigXT</comment>
@@ -3398,6 +3399,7 @@ Notes:
     <comment xml:lang="de">KConfigXT-Optionen zur Quelltexterzeugung</comment>
     <comment xml:lang="en_GB">KConfigXT Code Generation Options</comment>
     <comment xml:lang="es">Opciones de generación de código de KConfigXT</comment>
+    <comment xml:lang="et">KConfigXT koodi genereerimise valikud</comment>
     <comment xml:lang="eu">KConfigXT kodea sortzeko aukerak</comment>
     <comment xml:lang="fi">KConfigXT Code Generation Options</comment>
     <comment xml:lang="fr">Options de génération de code de KConfigXT</comment>
@@ -3435,6 +3437,7 @@ Notes:
     <comment xml:lang="de">KXMLGUI-UI-Deklaration</comment>
     <comment xml:lang="en_GB">KXMLGUI UI Declaration</comment>
     <comment xml:lang="es">Declaración de interfaz de usuario de KXMLGUI</comment>
+    <comment xml:lang="et">KXMLGUI UI deklaratsioon</comment>
     <comment xml:lang="eu">KXMLGUI UI deklarazioa</comment>
     <comment xml:lang="fi">KXMLGUI UI Declaration</comment>
     <comment xml:lang="fr">Déclaration d'interface KXMLGUI</comment>
@@ -3477,6 +3480,7 @@ Notes:
     <comment xml:lang="de">KNotification-Deklaration</comment>
     <comment xml:lang="en_GB">KNotification Declaration</comment>
     <comment xml:lang="es">Declaración de KNotification</comment>
+    <comment xml:lang="et">KNotificationi deklaratsioon</comment>
     <comment xml:lang="eu">KNotification deklarazioa</comment>
     <comment xml:lang="fi">KNotification Declaration</comment>
     <comment xml:lang="fr">Déclaration de KNotification</comment>
