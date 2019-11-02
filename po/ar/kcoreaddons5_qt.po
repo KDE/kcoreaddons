@@ -1,0 +1,819 @@
+# Safa Alfulaij <safa1996alfulaij@gmail.com>, 2014, 2017, 2018.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-06-28 15:38+0300\n"
+"PO-Revision-Date: 2018-06-08 23:48+0300\n"
+"Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 2.0\n"
+"X-Qt-Contexts: true\n"
+
+#: lib/kaboutdata.cpp:296
+msgctxt "KAboutLicense|"
+msgid ""
+"No licensing terms for this program have been specified.\n"
+"Please check the documentation or the source for any\n"
+"licensing terms.\n"
+msgstr ""
+"لم تُحدّد شروط ترخيص لهذا البرنامج.\n"
+"رجاءً تحقّق من التوثيق أو أي مصدر\n"
+"لأي شروط ترخيص.\n"
+
+#: lib/kaboutdata.cpp:306
+#, qt-format
+msgctxt "KAboutLicense|"
+msgid "This program is distributed under the terms of the %1."
+msgstr "يُوزّع هذا البرنامج تحت شروط %1."
+
+#: lib/kaboutdata.cpp:352
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v2"
+msgstr "GPL v2"
+
+#: lib/kaboutdata.cpp:353
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 2"
+msgstr "رخصة غنو العمومية إصدارة ٢"
+
+#: lib/kaboutdata.cpp:356
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v2"
+msgstr "LGPL v2"
+
+#: lib/kaboutdata.cpp:357
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 2"
+msgstr "رخصة غنو العمومية الصغرى إصدارة ٢"
+
+#: lib/kaboutdata.cpp:360
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "BSD License"
+msgstr "رخصة بي‌إس‌دي"
+
+#: lib/kaboutdata.cpp:361
+msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "رخصة بي‌إس‌دي"
+
+#: lib/kaboutdata.cpp:364
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "Artistic License"
+msgstr "رخصة فنية"
+
+#: lib/kaboutdata.cpp:365
+msgctxt "KAboutLicense|@item license"
+msgid "Artistic License"
+msgstr "رخصة فنية"
+
+#: lib/kaboutdata.cpp:368
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "QPL v1.0"
+msgstr "QPL v1.0"
+
+#: lib/kaboutdata.cpp:369
+msgctxt "KAboutLicense|@item license"
+msgid "Q Public License"
+msgstr "رخصة كيوت العمومية"
+
+#: lib/kaboutdata.cpp:372
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v3"
+msgstr "GPL v3"
+
+#: lib/kaboutdata.cpp:373
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 3"
+msgstr "رخصة غنو العمومية إصدارة ٣"
+
+#: lib/kaboutdata.cpp:376
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v3"
+msgstr "LGPL v3"
+
+#: lib/kaboutdata.cpp:377
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 3"
+msgstr "رخصة غنو العمومية الصغرى إصدارة ٣"
+
+#: lib/kaboutdata.cpp:380
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v2.1"
+msgstr "LGPL v2.1"
+
+#: lib/kaboutdata.cpp:381
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 2.1"
+msgstr "رخصة غنو العمومية الصغرى إصدارة ٢٫١"
+
+#: lib/kaboutdata.cpp:385
+msgctxt "KAboutLicense|@item license"
+msgid "Custom"
+msgstr "مخصصة"
+
+#: lib/kaboutdata.cpp:388
+msgctxt "KAboutLicense|@item license"
+msgid "Not specified"
+msgstr "لم تُحدّد"
+
+#: lib/kaboutdata.cpp:943
+msgctxt "KAboutData|replace this with information about your translation team"
+msgid ""
+"<p>KDE is translated into many languages thanks to the work of the "
+"translation teams all over the world.</p><p>For more information on KDE "
+"internationalization visit <a href=\"https://l10n.kde.org\">https://l10n.kde."
+"org</a></p>"
+msgstr ""
+"<p>يعمل أفراد طاقم عربآيز على ترجمة واجهة كدي إلى اللغة العربية، وهذا بفضل "
+"جهود مترجمين متطوّعين من كافة الدول العربية وغيرها.</p>\n"
+"<p>لمزيد من المعلومات عن ترجمة كدي إلى العربةي، زُر <a href=\"https://www."
+"arabeyes.org\">الموقع الرسمي للفريق</a>. رجاءً أبلغ عن أخطاء الترجمة على "
+"العنوان الآتي: <a href=\"mailto:contact@arabeyes.org\">contact@arabeyes.org</"
+"a></p>\n"
+"<p>تُترجم كدي إلى لغات عديدة بفضل مختلف طواقم الترجمة من العالم بأسره.</p>\n"
+"<p>لمزيد من المعلومات زُر <a  href=\"https://l10n.kde.org\">https://l10n.kde."
+"org</a>.</p>"
+
+#: lib/kaboutdata.cpp:1174
+msgctxt "KAboutData CLI|"
+msgid "Show author information."
+msgstr "اعرض معلومات المؤلف."
+
+#: lib/kaboutdata.cpp:1175
+msgctxt "KAboutData CLI|"
+msgid "Show license information."
+msgstr "اعرض معلومات الرخصة."
+
+#: lib/kaboutdata.cpp:1177
+msgctxt "KAboutData CLI|"
+msgid "The base file name of the desktop entry for this application."
+msgstr "اسم ملف الأساس لمدخلة سطح المكتب لهذا التطبيق."
+
+#: lib/kaboutdata.cpp:1178
+msgctxt "KAboutData CLI|"
+msgid "file name"
+msgstr "اسم الملف"
+
+#: lib/kaboutdata.cpp:1187
+msgctxt "KAboutData CLI|"
+msgid "This application was written by somebody who wants to remain anonymous."
+msgstr "كتب أحد الأشخاص هذا التطبيق، وهو يفضّل أن يبقى مجهولًا."
+
+#: lib/kaboutdata.cpp:1189
+#, qt-format
+msgctxt "KAboutData CLI|"
+msgid "%1 was written by:"
+msgstr "كتب %1:"
+
+#: lib/kaboutdata.cpp:1200
+msgctxt "KAboutData CLI|"
+msgid "Please use https://bugs.kde.org to report bugs."
+msgstr "رجاءً استخدم https://bugs.kde.org للإبلاغ عن العلل."
+
+#: lib/kaboutdata.cpp:1202
+#, qt-format
+msgctxt "KAboutData CLI|"
+msgid "Please report bugs to %1."
+msgstr "رجاءً أبلغ عن العلل إلى %1."
+
+#: lib/plugin/kpluginloader.cpp:121
+#, qt-format
+msgctxt "KPluginLoader|"
+msgid "The library %1 does not offer a KPluginFactory."
+msgstr "المكتبة %1 لا تُوفّر KPluginFactory."
+
+#: lib/util/kformatprivate.cpp:116
+msgctxt "KFormat|SI prefix for 10^⁻24"
+msgid "y"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:117
+msgctxt "KFormat|SI prefix for 10^⁻21"
+msgid "z"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:118
+msgctxt "KFormat|SI prefix for 10^⁻18"
+msgid "a"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:119
+msgctxt "KFormat|SI prefix for 10^⁻15"
+msgid "f"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:120
+msgctxt "KFormat|SI prefix for 10^⁻12"
+msgid "p"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:121
+msgctxt "KFormat|SI prefix for 10^⁻9"
+msgid "n"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:122
+msgctxt "KFormat|SI prefix for 10^⁻6"
+msgid "µ"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:123
+msgctxt "KFormat|SI prefix for 10^⁻3"
+msgid "m"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:125
+msgctxt "KFormat|SI prefix for 10^3"
+msgid "k"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:125
+msgctxt "KFormat|IEC binary prefix for 2^10"
+msgid "Ki"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:126
+msgctxt "KFormat|SI prefix for 10^6"
+msgid "M"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:126
+msgctxt "KFormat|IEC binary prefix for 2^20"
+msgid "Mi"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:127
+msgctxt "KFormat|SI prefix for 10^9"
+msgid "G"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:127
+msgctxt "KFormat|IEC binary prefix for 2^30"
+msgid "Gi"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:128
+msgctxt "KFormat|SI prefix for 10^12"
+msgid "T"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:128
+msgctxt "KFormat|IEC binary prefix for 2^40"
+msgid "Ti"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:129
+msgctxt "KFormat|SI prefix for 10^15"
+msgid "P"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:129
+msgctxt "KFormat|IEC binary prefix for 2^50"
+msgid "Pi"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:130
+msgctxt "KFormat|SI prefix for 10^18"
+msgid "E"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:130
+msgctxt "KFormat|IEC binary prefix for 2^60"
+msgid "Ei"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:131
+msgctxt "KFormat|SI prefix for 10^21"
+msgid "Z"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:131
+msgctxt "KFormat|IEC binary prefix for 2^70"
+msgid "Zi"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:132
+msgctxt "KFormat|SI prefix for 10^24"
+msgid "Y"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:132
+msgctxt "KFormat|IEC binary prefix for 2^80"
+msgid "Yi"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:140
+msgctxt "KFormat|Symbol of binary digit"
+msgid "bit"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:143
+msgctxt "KFormat|Symbol of byte"
+msgid "B"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:146
+msgctxt "KFormat|Symbol of meter"
+msgid "m"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:149
+msgctxt "KFormat|Symbol of hertz"
+msgid "Hz"
+msgstr ""
+
+#. value without prefix, format "<val> <unit>"
+#: lib/util/kformatprivate.cpp:158
+#, qt-format
+msgctxt "KFormat|no Prefix"
+msgid "%1 %2"
+msgstr ""
+
+#. value with prefix, format "<val> <prefix><unit>"
+#: lib/util/kformatprivate.cpp:177
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 %2%3"
+msgstr ""
+
+#. MetricBinaryDialect size in bytes
+#: lib/util/kformatprivate.cpp:228
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 B"
+msgstr "%1 بايت"
+
+#. MetricBinaryDialect size in 1000 bytes
+#: lib/util/kformatprivate.cpp:231
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 kB"
+msgstr "%1 ك.بايت"
+
+#. MetricBinaryDialect size in 10^6 bytes
+#: lib/util/kformatprivate.cpp:234
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 MB"
+msgstr "%1 م.ب"
+
+#. MetricBinaryDialect size in 10^9 bytes
+#: lib/util/kformatprivate.cpp:237
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 GB"
+msgstr "%1 غ.بايت"
+
+#. MetricBinaryDialect size in 10^12 bytes
+#: lib/util/kformatprivate.cpp:240
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 TB"
+msgstr "%1 ت.بايت"
+
+#. MetricBinaryDialect size in 10^15 bytes
+#: lib/util/kformatprivate.cpp:243
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 PB"
+msgstr "%1 ب.بايت"
+
+#. MetricBinaryDialect size in 10^18 byte
+#: lib/util/kformatprivate.cpp:246
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 EB"
+msgstr "%1 إ.بايت"
+
+#. MetricBinaryDialect size in 10^21 bytes
+#: lib/util/kformatprivate.cpp:249
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 ZB"
+msgstr "%1 ز.بايت"
+
+#. MetricBinaryDialect size in 10^24 bytes
+#: lib/util/kformatprivate.cpp:252
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 YB"
+msgstr "%1 ي.بايت"
+
+#. JEDECBinaryDialect memory size in bytes
+#: lib/util/kformatprivate.cpp:258
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 B"
+msgstr "%1 بايت"
+
+#. JEDECBinaryDialect memory size in 1024 bytes
+#: lib/util/kformatprivate.cpp:261
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 KB"
+msgstr "%1 ك.بايت"
+
+#. JEDECBinaryDialect memory size in 10^20 bytes
+#: lib/util/kformatprivate.cpp:264
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 MB"
+msgstr "%1 م.ب"
+
+#. JEDECBinaryDialect memory size in 10^30 bytes
+#: lib/util/kformatprivate.cpp:267
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 GB"
+msgstr "%1 غ.بايت"
+
+#. JEDECBinaryDialect memory size in 10^40 bytes
+#: lib/util/kformatprivate.cpp:270
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 TB"
+msgstr "%1 ت.بايت"
+
+#. JEDECBinaryDialect memory size in 10^50 bytes
+#: lib/util/kformatprivate.cpp:273
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 PB"
+msgstr "%1 ب.بايت"
+
+#. JEDECBinaryDialect memory size in 10^60 bytes
+#: lib/util/kformatprivate.cpp:276
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 EB"
+msgstr "%1 إ.بايت"
+
+#. JEDECBinaryDialect memory size in 10^70 bytes
+#: lib/util/kformatprivate.cpp:279
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 ZB"
+msgstr "%1 ز.بايت"
+
+#. JEDECBinaryDialect memory size in 10^80 bytes
+#: lib/util/kformatprivate.cpp:282
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 YB"
+msgstr "%1 ي.بايت"
+
+#. IECBinaryDialect size in bytes
+#: lib/util/kformatprivate.cpp:288
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 B"
+msgstr "%1 بايت"
+
+#. IECBinaryDialect size in 1024 bytes
+#: lib/util/kformatprivate.cpp:291
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 KiB"
+msgstr "%1 ك.بايت"
+
+#. IECBinaryDialect size in 10^20 bytes
+#: lib/util/kformatprivate.cpp:294
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 MiB"
+msgstr "%1 م.بايت"
+
+#. IECBinaryDialect size in 10^30 bytes
+#: lib/util/kformatprivate.cpp:297
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 GiB"
+msgstr "%1 غ.بايت"
+
+#. IECBinaryDialect size in 10^40 bytes
+#: lib/util/kformatprivate.cpp:300
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 TiB"
+msgstr "%1 ت.بايت"
+
+#. IECBinaryDialect size in 10^50 bytes
+#: lib/util/kformatprivate.cpp:303
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 PiB"
+msgstr "%1 ب.بايت"
+
+#. IECBinaryDialect size in 10^60 bytes
+#: lib/util/kformatprivate.cpp:306
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 EiB"
+msgstr "%1 إ.بايت"
+
+#. IECBinaryDialect size in 10^70 bytes
+#: lib/util/kformatprivate.cpp:309
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 ZiB"
+msgstr "%1 ز.بايت"
+
+#. IECBinaryDialect size in 10^80 bytes
+#: lib/util/kformatprivate.cpp:312
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 YiB"
+msgstr "%1 ي.بايت"
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: lib/util/kformatprivate.cpp:351
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2.%3s"
+msgstr "%1دق%2.%3ث"
+
+#. @item:intext Duration format minutes and seconds
+#: lib/util/kformatprivate.cpp:356
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2s"
+msgstr "%1دق%2ث"
+
+#. @item:intext Duration format hours and minutes
+#: lib/util/kformatprivate.cpp:360
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m"
+msgstr "%1سا%2دق"
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: lib/util/kformatprivate.cpp:364
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3.%4s"
+msgstr "%1سا%2دق%3.%4ث"
+
+#. @item:intext Duration format hours, minutes, seconds
+#: lib/util/kformatprivate.cpp:370
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3s"
+msgstr "%1سا%2دق%3ث"
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: lib/util/kformatprivate.cpp:380
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2.%3"
+msgstr "%1:%2.%3"
+
+#. @item:intext Duration format minutes and seconds
+#. ----------
+#. @item:intext Duration format hours and minutes
+#: lib/util/kformatprivate.cpp:385 lib/util/kformatprivate.cpp:389
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2"
+msgstr "%1:%2"
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: lib/util/kformatprivate.cpp:393
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3.%4"
+msgstr "%1:%2:%3.%4"
+
+#. @item:intext Duration format hours, minutes, seconds
+#: lib/util/kformatprivate.cpp:399
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3"
+msgstr "%1:%2:%3"
+
+#. @item:intext %1 is a real number, e.g. 1.23 days
+#: lib/util/kformatprivate.cpp:414
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 days"
+msgstr "%1 يوم"
+
+#. @item:intext %1 is a real number, e.g. 1.23 hours
+#: lib/util/kformatprivate.cpp:417
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 hours"
+msgstr "%1 ساعة"
+
+#. @item:intext %1 is a real number, e.g. 1.23 minutes
+#: lib/util/kformatprivate.cpp:420
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 minutes"
+msgstr "%1 دقيقة"
+
+#. @item:intext %1 is a real number, e.g. 1.23 seconds
+#: lib/util/kformatprivate.cpp:423
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 seconds"
+msgstr "%1 ثانية"
+
+#. @item:intext %1 is a whole number
+#: lib/util/kformatprivate.cpp:428
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n millisecond(s)"
+msgid_plural "%n millisecond(s)"
+msgstr[0] "أقل من ملي‌ثانية"
+msgstr[1] "ملي‌ثانية واحدة"
+msgstr[2] "ملي‌ثانيتين"
+msgstr[3] "%n ملي‌ثوان"
+msgstr[4] "%n ملي‌ثانية"
+msgstr[5] "%n ملي‌ثانية"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:446
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n day(s)"
+msgid_plural "%n day(s)"
+msgstr[0] "أقلّ من يوم"
+msgstr[1] "يوم واحد"
+msgstr[2] "يومان"
+msgstr[3] "%n أيام"
+msgstr[4] "%n يومًا"
+msgstr[5] "%n يوم"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:451
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n hour(s)"
+msgid_plural "%n hour(s)"
+msgstr[0] "أقل من ساعة"
+msgstr[1] "ساعة واحدة"
+msgstr[2] "ساعتان"
+msgstr[3] "%n ساعات"
+msgstr[4] "%n ساعة"
+msgstr[5] "%n ساعة"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:456
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n minute(s)"
+msgid_plural "%n minute(s)"
+msgstr[0] "أقل من دقيقة"
+msgstr[1] "دقيقة واحدة"
+msgstr[2] "دقيقتان"
+msgstr[3] "%n دقائق"
+msgstr[4] "%n دقيقة"
+msgstr[5] "%n دقيقة"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:461
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n second(s)"
+msgid_plural "%n second(s)"
+msgstr[0] "أقل من ثانية"
+msgstr[1] "ثانية واحدة"
+msgstr[2] "ثانيتان"
+msgstr[3] "%n ثوان"
+msgstr[4] "%n ثانية"
+msgstr[5] "%n ثانية"
+
+#. @item:intext days and hours. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext hours and minutes. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext minutes and seconds. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: lib/util/kformatprivate.cpp:486 lib/util/kformatprivate.cpp:492
+#: lib/util/kformatprivate.cpp:498
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 and %2"
+msgstr "%1 و%2"
+
+#: lib/util/kformatprivate.cpp:509
+msgctxt ""
+"KFormat|used when a relative date string can't be generated because the date "
+"is invalid"
+msgid "Invalid date"
+msgstr "تاريخ غير صالح"
+
+#: lib/util/kformatprivate.cpp:519
+msgctxt "KFormat|"
+msgid "Tomorrow"
+msgstr "الغد"
+
+#: lib/util/kformatprivate.cpp:521
+msgctxt "KFormat|"
+msgid "Today"
+msgstr "اليوم"
+
+#: lib/util/kformatprivate.cpp:523
+msgctxt "KFormat|"
+msgid "Yesterday"
+msgstr "الغد"
+
+#: lib/util/kformatprivate.cpp:529
+msgctxt "KFormat|most recent such day before today"
+msgid "Last Monday"
+msgstr "الإثنين الفائت"
+
+#: lib/util/kformatprivate.cpp:531
+msgctxt "KFormat|most recent such day before today"
+msgid "Last Tuesday"
+msgstr "الثلاثاء الفائت"
+
+#: lib/util/kformatprivate.cpp:533
+msgctxt "KFormat|most recent such day before today"
+msgid "Last Wednesday"
+msgstr "الأربعاء الفائت"
+
+#: lib/util/kformatprivate.cpp:535
+msgctxt "KFormat|most recent such day before today"
+msgid "Last Thursday"
+msgstr "الخميس الفائت"
+
+#: lib/util/kformatprivate.cpp:537
+msgctxt "KFormat|most recent such day before today"
+msgid "Last Friday"
+msgstr "الجمعة الفائتة"
+
+#: lib/util/kformatprivate.cpp:539
+msgctxt "KFormat|most recent such day before today"
+msgid "Last Saturday"
+msgstr "السبت الفائت"
+
+#: lib/util/kformatprivate.cpp:541
+msgctxt "KFormat|most recent such day before today"
+msgid "Last Sunday"
+msgstr "الأحد الفائت"
+
+#: lib/util/kformatprivate.cpp:546
+msgctxt "KFormat|the next such day after today"
+msgid "Next Monday"
+msgstr "الإثنين القادم"
+
+#: lib/util/kformatprivate.cpp:548
+msgctxt "KFormat|the next such day after today"
+msgid "Next Tuesday"
+msgstr "الثلاثاء القادم"
+
+#: lib/util/kformatprivate.cpp:550
+msgctxt "KFormat|the next such day after today"
+msgid "Next Wednesday"
+msgstr "الأربعاء القادم"
+
+#: lib/util/kformatprivate.cpp:552
+msgctxt "KFormat|the next such day after today"
+msgid "Next Thursday"
+msgstr "الخميس القادم"
+
+#: lib/util/kformatprivate.cpp:554
+msgctxt "KFormat|the next such day after today"
+msgid "Next Friday"
+msgstr "الجمعة القادمة"
+
+#: lib/util/kformatprivate.cpp:556
+msgctxt "KFormat|the next such day after today"
+msgid "Next Saturday"
+msgstr "السبت القادم"
+
+#: lib/util/kformatprivate.cpp:558
+msgctxt "KFormat|the next such day after today"
+msgid "Next Sunday"
+msgstr "الأحد القادم"
+
+#. relative datetime with %1 result of formatReleativeDate() and %2 the formatted time If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: lib/util/kformatprivate.cpp:573
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1, %2"
+msgstr "‏%1، %2"
+
+#: lib/util/klistopenfilesjob_unix.cpp:47
+#, qt-format
+msgctxt "QObject|"
+msgid "Path %1 doesn't exist"
+msgstr ""
+
+#: lib/util/klistopenfilesjob_unix.cpp:60
+#, qt-format
+msgctxt "QObject|"
+msgid "Failed to execute `lsof' error code %1"
+msgstr ""
+
+#: lib/util/klistopenfilesjob_win.cpp:38
+msgctxt "QObject|"
+msgid "KListOpenFilesJob is not supported on Windows"
+msgstr ""
