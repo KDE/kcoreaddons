@@ -163,7 +163,7 @@ Notes:
     <comment xml:lang="fr">Police bitmap SNF</comment>
     <comment xml:lang="ga">Cló Giotánmhapach SNF</comment>
     <comment xml:lang="gd">cruth-clò bitmap SNF</comment>
-    <comment xml:lang="gl">Tipo de letra SNF mapa de bits</comment>
+    <comment xml:lang="gl">Fonte de mapa de bits SNF</comment>
     <comment xml:lang="hr">SNF bitmap pismo</comment>
     <comment xml:lang="hu">SNF-betűtípus</comment>
     <comment xml:lang="ia">font de bitmap SNF</comment>
@@ -1573,7 +1573,7 @@ Notes:
     <comment xml:lang="fr">Paquet de polices</comment>
     <comment xml:lang="ga">pacáiste clónna</comment>
     <comment xml:lang="gd">pacaid chruthan-clò</comment>
-    <comment xml:lang="gl">paquete de tipos de letra</comment>
+    <comment xml:lang="gl">paquete de fontes</comment>
     <comment xml:lang="hr">paket pisama</comment>
     <comment xml:lang="hu">betűtípuscsomag</comment>
     <comment xml:lang="ia">pacchettos de fonts</comment>
