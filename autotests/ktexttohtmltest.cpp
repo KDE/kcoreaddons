@@ -525,6 +525,10 @@ void KTextToHTMLTest::testHtmlConvert_data()
     QTest::newRow("tel extraction disabled") << "call +49123456789 now"
         << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
         << "call +49123456789 now";
+
+    QTest::newRow("bug-414360") << "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=44.85765%2C-0.55931%3B44.85713%2C-0.56117#map=18/44.85756/-0.56094"
+                     << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                     << "<a href=\"https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=44.85765%2C-0.55931%3B44.85713%2C-0.56117#map=18/44.85756/-0.56094\">https://www.openstreetmap.org/directions?engine=graphhopper_foot&amp;route=44.85765%2C-0.55931%3B44.85713%2C-0.56117#map=18/44.85756/-0.56094</a>";
 }
 
 
@@ -537,7 +541,7 @@ void KTextToHTMLTest::testHtmlConvert()
     QEXPECT_FAIL("punctation-bug", "Linklocator does not properly detect punctation as boundaries",
                  Continue);
 
-    QString actualHtml = KTextToHTML::convertToHtml(plainText, flags);
+    const QString actualHtml = KTextToHTML::convertToHtml(plainText, flags);
     QCOMPARE(actualHtml, htmlText);
 }
 
