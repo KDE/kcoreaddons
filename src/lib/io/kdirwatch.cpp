@@ -717,7 +717,7 @@ bool KDirWatchPrivate::useINotify(Entry *e)
     int mask = IN_DELETE | IN_DELETE_SELF | IN_CREATE | IN_MOVE | IN_MOVE_SELF | IN_DONT_FOLLOW | IN_MOVED_FROM | IN_MODIFY | IN_ATTRIB;
 
     if ((e->wd = inotify_add_watch(m_inotify_fd,
-                                   QFile::encodeName(e->path).data(), mask)) >= 0) {
+                                   QFile::encodeName(e->path).data(), mask)) != -1) {
         m_inotify_wd_to_entry.insert(e->wd, e);
         if (s_verboseDebug) {
             qCDebug(KDIRWATCH) << "inotify successfully used for monitoring" << e->path << "wd=" << e->wd;
@@ -725,7 +725,16 @@ bool KDirWatchPrivate::useINotify(Entry *e)
         return true;
     }
 
-    qCDebug(KDIRWATCH) << "inotify failed for monitoring" << e->path << ":" << strerror(errno);
+    if (errno == ENOSPC) {
+        // Inotify max_user_watches was reached (/proc/sys/fs/inotify/max_user_watches)
+        // See man inotify_add_watch, https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers
+        qCWarning(KDIRWATCH) << "inotify failed for monitoring" << e->path << "\n" <<
+                                "Because it reached its max_user_watches,\n" <<
+                                "you can increase the maximum number of file watches per user,\n"<<
+                                "by setting an appropriate fs.inotify.max_user_watches parameter in your /etc/sysctl.conf";
+    } else {
+        qCDebug(KDIRWATCH) << "inotify failed for monitoring" << e->path << ":" << strerror(errno) << " (errno:" << errno  <<  ")";
+    }
     return false;
 }
 #endif
