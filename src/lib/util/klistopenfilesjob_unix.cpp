@@ -64,7 +64,6 @@ private:
         if (hasEmittedResult) {
             return;
         }
-        QStringList blockApps;
         const QString out(QString::fromLocal8Bit(lsofProcess.readAll()));
         QStringList pidList = out.split(QRegExp(QStringLiteral("\\s+")), QString::SkipEmptyParts);
         pidList.removeDuplicates();
