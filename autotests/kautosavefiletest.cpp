@@ -78,6 +78,43 @@ void KAutoSaveFileTest::test_readWrite()
     filesToRemove << file.fileName();
 }
 
+void KAutoSaveFileTest::test_fileNameMaxLength()
+{
+    // In KAutoSaveFilePrivate::tempFile() the name of the kautosavefile that's going to be created
+    // is concatanated in the form:
+    // fileName + junk.truncated + protocol + _ + path.truncated + junk
+    // see tempFile() for details.
+    //
+    // Make sure that the generated filename (e.g. as you would get from QUrl::fileName()) doesn't
+    // exceed NAME_MAX (the maximum length allowed for filenames, see e.g. /usr/include/linux/limits.h)
+    // otherwise the file can't be opened.
+    //
+    // see https://phabricator.kde.org/D24489
+
+    QString s;
+    s.fill(QLatin1Char('b'), 80);
+    // create a long path that:
+    // - exceeds NAME_MAX (255)
+    // - is less than the maximum allowed path length, PATH_MAX (4096)
+    //   see e.g. /usr/include/linux/limits.h
+    const QString path = QDir::tempPath() + QLatin1Char('/')
+                         + s + QLatin1Char('/')
+                         + s + QLatin1Char('/')
+                         + s + QLatin1Char('/')
+                         + s;
+
+    QFile file(path + QLatin1Char('/') + QLatin1String("testFile.txt"));
+
+    QUrl normalFile = QUrl::fromLocalFile(file.fileName());
+
+    KAutoSaveFile saveFile(normalFile);
+
+    QVERIFY(!QFile::exists(saveFile.fileName()));
+    QVERIFY(saveFile.open(QIODevice::ReadWrite));
+
+    filesToRemove << file.fileName();
+}
+
 void KAutoSaveFileTest::test_fileStaleFiles()
 {
     QUrl normalFile = QUrl::fromLocalFile(QDir::temp().absoluteFilePath(QStringLiteral("test directory/tîst me.txt")));
