@@ -510,53 +510,21 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
     }
 
     const qint64 daysTo = QDate::currentDate().daysTo(date);
-    if (daysTo > 7 || daysTo < -7) {
+    if (daysTo > 2 || daysTo < -2) {
         return m_locale.toString(date, format);
     }
 
     switch (daysTo) {
+    case 2:
+        return tr("In two days");
     case 1:
         return tr("Tomorrow");
     case 0:
         return tr("Today");
     case -1:
         return tr("Yesterday");
-    }
-
-    if (daysTo < -1) {
-        switch (date.dayOfWeek()) {
-        case 1:
-            return tr("Last Monday",    "most recent such day before today");
-        case 2:
-            return tr("Last Tuesday",   "most recent such day before today");
-        case 3:
-            return tr("Last Wednesday", "most recent such day before today");
-        case 4:
-            return tr("Last Thursday",  "most recent such day before today");
-        case 5:
-            return tr("Last Friday",    "most recent such day before today");
-        case 6:
-            return tr("Last Saturday",  "most recent such day before today");
-        case 7:
-            return tr("Last Sunday",    "most recent such day before today");
-        }
-    } else if (daysTo > 1) {
-        switch (date.dayOfWeek()) {
-        case 1:
-            return tr("Next Monday",    "the next such day after today");
-        case 2:
-            return tr("Next Tuesday",   "the next such day after today");
-        case 3:
-            return tr("Next Wednesday", "the next such day after today");
-        case 4:
-            return tr("Next Thursday",  "the next such day after today");
-        case 5:
-            return tr("Next Friday",    "the next such day after today");
-        case 6:
-            return tr("Next Saturday",  "the next such day after today");
-        case 7:
-            return tr("Next Sunday",    "the next such day after today");
-        }
+    case -2:
+        return tr("Two days ago");
     }
     Q_UNREACHABLE();
 }
@@ -564,7 +532,7 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
 QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const
 {
     const qint64 daysTo = QDate::currentDate().daysTo(dateTime.date());
-    if (daysTo > 7 || daysTo < -7) {
+    if (daysTo > 2 || daysTo < -2) {
         return m_locale.toString(dateTime, format);
     }
 
