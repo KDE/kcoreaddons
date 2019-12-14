@@ -483,7 +483,7 @@ protected:
      */
     template<class T>
     void registerPlugin(const QString &keyword = QString(), CreateInstanceFunction instanceFunction
-                        = InheritanceChecker<T>().createInstanceFunction(reinterpret_cast<T *>(0)))
+                        = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr)))
     {
         registerPlugin(keyword, &T::staticMetaObject, instanceFunction);
     }
