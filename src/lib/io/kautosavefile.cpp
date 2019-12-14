@@ -79,8 +79,10 @@ QString KAutoSaveFilePrivate::tempFileName()
     const QByteArray encodedFileName = QUrl::toPercentEncoding(managedFile.fileName());
     QString fileName = QString::fromLatin1(encodedFileName);
 
-    // Remove any part of the path to the right if it is longer than the max file size and
-    // ensure that the max filesize takes into account the other parts of the tempFileName
+    // Remove any part of the path to the right if it is longer than the maximum file name length;
+    // note that "file name" in this context means the file name component only (e.g. test.txt), and
+    // not the whole path (e.g. /home/simba/text.txt).
+    // Ensure that the max. file name length takes into account the other parts of the tempFileName
     // Subtract 1 for the _ char, 3 for the padding separator, 5 is for the .lock,
     // 7 for QLockFile's internal code (adding tmp .rmlock) = 16
     const int pathLengthLimit = maxNameLength - NamePadding - fileName.size() - protocol.size() - 16;
