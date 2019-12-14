@@ -20,7 +20,14 @@
 
 #include "kautosavefile.h"
 
-#include <stdio.h> // for FILENAME_MAX
+#include <stdio.h> // for NAME_MAX
+
+#ifdef Q_OS_WIN
+#include <stdlib.h> // for _MAX_FNAME
+static const int maxNameLength = _MAX_FNAME;
+#else
+static const int maxNameLength = NAME_MAX;
+#endif
 
 #include <QLatin1Char>
 #include <QCoreApplication>
@@ -76,7 +83,7 @@ QString KAutoSaveFilePrivate::tempFileName()
     // ensure that the max filesize takes into account the other parts of the tempFileName
     // Subtract 1 for the _ char, 3 for the padding separator, 5 is for the .lock,
     // 7 for QLockFile's internal code (adding tmp .rmlock) = 16
-    const int pathLengthLimit = NAME_MAX - NamePadding - fileName.size() - protocol.size() - 16;
+    const int pathLengthLimit = maxNameLength - NamePadding - fileName.size() - protocol.size() - 16;
 
     QString junk = KRandom::randomString(NamePadding);
     // This is done so that the separation between the filename and path can be determined
