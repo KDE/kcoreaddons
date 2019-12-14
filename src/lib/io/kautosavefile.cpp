@@ -207,7 +207,7 @@ bool staleMatchesManaged(const QString& staleFileName, const QUrl &managedFile)
     // Check paths
     const int pathPos = staleFileName.indexOf(QChar::fromLatin1('_'), sepPos);
     const QByteArray encodedPath = staleFileName.midRef(pathPos + 1, staleFileName.length() - pathPos - 1 - KAutoSaveFilePrivate::NamePadding).toLatin1();
-    return QUrl::toPercentEncoding(managedFile.toLocalFile()).startsWith(encodedPath);
+    return QUrl::toPercentEncoding(managedFile.path()).startsWith(encodedPath);
 }
 
 QList<KAutoSaveFile *> KAutoSaveFile::staleFiles(const QUrl &filename, const QString &applicationName)
