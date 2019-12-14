@@ -305,24 +305,18 @@ private Q_SLOTS:
 
     void testFindPlugins()
     {
-        const QString plugin1Path = KPluginLoader::findPlugin(QStringLiteral("jsonplugin"));
-        QVERIFY2(!plugin1Path.isEmpty(), qPrintable(plugin1Path));
-        const QString plugin2Path = KPluginLoader::findPlugin(QStringLiteral("unversionedplugin"));
-        QVERIFY2(!plugin2Path.isEmpty(), qPrintable(plugin2Path));
-        const QString plugin3Path = KPluginLoader::findPlugin(QStringLiteral("jsonplugin2"));
-        QVERIFY2(!plugin3Path.isEmpty(), qPrintable(plugin3Path));
-
         QTemporaryDir temp;
         QVERIFY(temp.isValid());
         QDir dir(temp.path());
         QVERIFY(dir.mkdir(QStringLiteral("kpluginmetadatatest")));
         QVERIFY(dir.cd(QStringLiteral("kpluginmetadatatest")));
-        QVERIFY2(QFile::copy(plugin1Path, dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())),
-                 qPrintable(dir.absoluteFilePath(QFileInfo(plugin1Path).fileName())));
-        QVERIFY2(QFile::copy(plugin2Path, dir.absoluteFilePath(QFileInfo(plugin2Path).fileName())),
-                 qPrintable(dir.absoluteFilePath(QFileInfo(plugin2Path).fileName())));
-        QVERIFY2(QFile::copy(plugin3Path, dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())),
-                 qPrintable(dir.absoluteFilePath(QFileInfo(plugin3Path).fileName())));
+        for (const QString &name : { QStringLiteral("jsonplugin"), QStringLiteral("unversionedplugin"), QStringLiteral("jsonplugin2") }) {
+            const QString pluginPath = KPluginLoader::findPlugin(name);
+            QVERIFY2(!pluginPath.isEmpty(), qPrintable(pluginPath));
+            QVERIFY2(QFile::copy(pluginPath, dir.absoluteFilePath(QFileInfo(pluginPath).fileName())),
+                    qPrintable(dir.absoluteFilePath(QFileInfo(pluginPath).fileName())));
+        }
+
         LibraryPathRestorer restorer(QCoreApplication::libraryPaths());
         // we only want plugins from our temporary dir
         QCoreApplication::setLibraryPaths(QStringList() << temp.path());
