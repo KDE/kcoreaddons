@@ -43,3 +43,18 @@ KProcessInfoList KProcessList::processInfoList()
 
     return rc;
 }
+
+
+KProcessInfo KProcessList::processInfo(qint64 pid)
+{
+    KProcessInfoList processInfoList = KProcessList::processInfoList();
+    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(),
+                                            [pid](const KProcessList::KProcessInfo& info)
+    {
+        return info.pid() == pid;
+    });
+    if (testProcessIterator != processInfoList.end()) {
+        return *testProcessIterator;
+    }
+    return KProcessInfo();
+}
