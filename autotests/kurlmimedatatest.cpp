@@ -18,7 +18,7 @@
 */
 
 #include "kurlmimedatatest.h"
-#include <QtTest>
+#include <QTest>
 #include <QMimeData>
 #include <kurlmimedata.h>
 

@@ -19,7 +19,8 @@
 
 #include "kcompositejobtest.h"
 
-#include <QtTest>
+#include <QTest>
+#include <QSignalSpy>
 #include <QTimer>
 
 TestJob::TestJob(QObject *parent)

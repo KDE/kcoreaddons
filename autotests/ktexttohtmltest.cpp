@@ -22,7 +22,7 @@
 #include "../src/lib/text/ktexttohtml.h"
 #include "../src/lib/text/ktexttohtml_p.h"
 
-#include <QtTest>
+#include <QTest>
 #include <QDebug>
 #include <QUrl>
 

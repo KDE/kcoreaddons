@@ -20,7 +20,7 @@
 #include <kshell.h>
 #include <kuser.h>
 
-#include <QtTest>
+#include <QTest>
 
 #include <QObject>
 #include <QString>

@@ -24,7 +24,8 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <qtemporarydir.h>
-#include <QtTest>
+#include <QTest>
+#include <QSignalSpy>
 #include <sys/stat.h>
 #ifdef Q_OS_UNIX
 #include <unistd.h> // ::link()

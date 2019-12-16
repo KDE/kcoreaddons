@@ -25,7 +25,8 @@
 #include <qtemporaryfile.h>
 #include <kautosavefile.h>
 
-#include <QtTest>
+#include <QTest>
+#include <QTemporaryFile>
 
 QTEST_MAIN(KAutoSaveFileTest)
 

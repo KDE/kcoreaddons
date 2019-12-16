@@ -19,7 +19,12 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#include <QtTest>
+#include <QTest>
+#include <QStandardPaths>
+#include <QRegularExpression>
+#include <QJsonArray>
+#include <QJsonParseError>
+#include <QJsonDocument>
 
 #include <kpluginmetadata.h>
 #include <kpluginloader.h>

@@ -21,7 +21,8 @@
 #include <krandomsequence.h>
 #include <stdlib.h>
 
-#include <QtTest>
+#include <QTest>
+#include <QThread>
 
 #include <QObject>
 #include <QString>

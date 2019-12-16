@@ -20,7 +20,8 @@
 
 #include <kshareddatacache.h>
 
-#include <QtTest>
+#include <QTest>
+#include <QStandardPaths>
 
 #include <QObject>
 #include <QString>

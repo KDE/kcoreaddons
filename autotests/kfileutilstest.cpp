@@ -21,7 +21,7 @@
 
 #include <KFileUtils>
 
-#include <QtTest>
+#include <QTest>
 
 QTEST_MAIN(KFileUtilsTest)
 

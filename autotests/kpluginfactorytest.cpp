@@ -19,7 +19,7 @@
  * <http://www.gnu.org/licenses/>.
  */
 
-#include <QtTest>
+#include <QTest>
 
 #include <kpluginloader.h>
 #include <kpluginfactory.h>
