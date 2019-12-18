@@ -30,8 +30,8 @@
 #include <QString>
 #include <QSharedDataPointer>
 #include <QVariant>
+#include <qcontainerfwd.h>
 
-template <class T> class QList;
 class QCommandLineParser;
 class QJsonObject;
 class KAboutData;

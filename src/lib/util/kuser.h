@@ -27,11 +27,11 @@
 
 #include <QSharedDataPointer>
 #include <QVariant>
+#include <qcontainerfwd.h>
 
 class KUserGroup;
 class QString;
 class QStringList;
-template <class T> class QList;
 
 #ifdef Q_OS_WIN
 typedef void *K_UID;

@@ -115,11 +115,13 @@ private:
     QHash<KT, VT> macromap;
 };
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 static QStringList &operator+=(QStringList &s, const QString &n)
 {
     s << n;
     return s;
 }
+#endif
 
 ////////
 
