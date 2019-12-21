@@ -7,6 +7,7 @@
         "Description[sv]": "Det här är ännu ett insticksprogram", 
         "Description[uk]": "Це інший додаток", 
         "Description[x-test]": "xxThis is another pluginxx", 
-        "Id": "foobar"
+        "Id": "foobar",
+        "MimeTypes": [ "text/html" ]
     }
 }

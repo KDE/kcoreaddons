@@ -331,6 +331,14 @@ public:
     QStringList mimeTypes() const;
 
     /**
+     * @return true if this plugin can handle the given mimetype
+     * This is more accurate than mimeTypes().contains(mimeType) because it also
+     * takes MIME type inheritance into account.
+     * @since 5.66
+     */
+    bool supportsMimeType(const QString &mimeType) const;
+
+    /**
      * @return A string list of formfactors this plugin is useful for, e.g. desktop, tablet,
      * handset, mediacenter, etc.
      * The keys for this are not formally defined.

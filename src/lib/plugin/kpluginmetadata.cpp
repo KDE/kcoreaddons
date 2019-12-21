@@ -23,6 +23,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QLocale>
+#include <QMimeDatabase>
 #include <QPluginLoader>
 #include <QStringList>
 #include "kcoreaddons_debug.h"
@@ -329,6 +330,18 @@ QStringList KPluginMetaData::serviceTypes() const
 QStringList KPluginMetaData::mimeTypes() const
 {
     return readStringList(rootObject(), QStringLiteral("MimeTypes"));
+}
+
+bool KPluginMetaData::supportsMimeType(const QString &mimeType) const
+{
+    QMimeDatabase db;
+    const QMimeType mime = db.mimeTypeForName(mimeType);
+
+    const QStringList mimes = mimeTypes();
+    auto inherits = [&](const QString &supportedMimeName) {
+        return mime.inherits(supportedMimeName);
+    };
+    return std::find_if(mimes.begin(), mimes.end(), inherits) != mimes.end();
 }
 
 QStringList KPluginMetaData::formFactors() const

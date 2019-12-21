@@ -345,6 +345,20 @@ private Q_SLOTS:
         QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
         QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
 
+        // mimetype filter. Only one match, jsonplugin2 is specific to text/html.
+        auto supportTextPlain = [](const KPluginMetaData &metaData) { return metaData.supportsMimeType(QLatin1String("text/plain")); };
+        plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"), supportTextPlain);
+        QCOMPARE(plugins.size(), 1);
+        QCOMPARE(plugins[0].description(), QStringLiteral("This is a plugin"));
+
+        // mimetype filter. Two matches, both support text/html, via inheritance.
+        auto supportTextHtml = [](const KPluginMetaData &metaData) { return metaData.supportsMimeType(QLatin1String("text/html")); };
+        plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"), supportTextHtml);
+        std::sort(plugins.begin(), plugins.end(), sortPlugins);
+        QCOMPARE(plugins.size(), 2);
+        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
+        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
+
         // invalid std::function as filter
         plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"));
         std::sort(plugins.begin(), plugins.end(), sortPlugins);
