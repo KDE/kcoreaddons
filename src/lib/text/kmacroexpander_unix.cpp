@@ -24,7 +24,7 @@
 
 #include <QStringList>
 #include <QStack>
-#include <QRegExp>
+#include <QRegularExpression>
 
 namespace KMacroExpander
 {
@@ -114,10 +114,10 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
         }
         if (state.dquote) {
             rsts = rst.join(QLatin1Char(' '));
-            rsts.replace(QRegExp(QStringLiteral("([$`\"\\\\])")), QStringLiteral("\\\\1"));
+            rsts.replace(QRegularExpression(QStringLiteral("([$`\"\\\\])")), QStringLiteral("\\\\1"));
         } else if (state.current == dollarquote) {
             rsts = rst.join(QLatin1Char(' '));
-            rsts.replace(QRegExp(QStringLiteral("(['\\\\])")), QStringLiteral("\\\\1"));
+            rsts.replace(QRegularExpression(QStringLiteral("(['\\\\])")), QStringLiteral("\\\\1"));
         } else if (state.current == singlequote) {
             rsts = rst.join(QLatin1Char(' '));
             rsts.replace(QLatin1Char('\''), QLatin1String("'\\''"));

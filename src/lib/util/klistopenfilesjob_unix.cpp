@@ -23,6 +23,7 @@
 #include "klistopenfilesjob.h"
 #include <QDir>
 #include <QProcess>
+#include <QRegularExpression>
 
 class KListOpenFilesJobPrivate
 {
@@ -65,7 +66,7 @@ private:
             return;
         }
         const QString out(QString::fromLocal8Bit(lsofProcess.readAll()));
-        QStringList pidList = out.split(QRegExp(QStringLiteral("\\s+")), QString::SkipEmptyParts);
+        QStringList pidList = out.split(QRegularExpression(QStringLiteral("\\s+")), QString::SkipEmptyParts);
         pidList.removeDuplicates();
         for (const auto& pidStr : qAsConst(pidList)) {
             qint64 pid = pidStr.toLongLong();

@@ -23,6 +23,7 @@
 #include "kshell.h"
 #include "kshell_p.h"
 
+#include <QRegularExpression>
 #include <QString>
 #include <QStringList>
 #include <QDir>
@@ -269,7 +270,7 @@ QString KShell::quoteArg(const QString &arg)
     // Escape quotes. Preceding backslashes are doubled.
     // Note that the remaining string is not quoted.
     QString ret(arg);
-    ret.replace(QRegExp(QLatin1String("(\\\\*)\"")), QLatin1String("\\1\\1\\^\""));
+    ret.replace(QRegularExpression(QStringLiteral("(\\\\*)\"")), QStringLiteral("\\1\\1\\^\""));
     ret.replace(QLatin1Char('%'), PERCENT_ESCAPE);
     return ret;
 }

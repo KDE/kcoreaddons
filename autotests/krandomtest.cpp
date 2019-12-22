@@ -26,7 +26,7 @@
 
 #include <QObject>
 #include <QString>
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QVarLengthArray>
 #include <QTextStream>
 #include <QProcess>
@@ -108,11 +108,12 @@ void KRandomTest::test_random()
 void KRandomTest::test_randomString()
 {
     const int desiredLength = 12;
-    const QRegExp outputFormat(QStringLiteral("[A-Za-z0-9]+"));
-    QString testString = KRandom::randomString(desiredLength);
+    const QString testString = KRandom::randomString(desiredLength);
+    const QRegularExpression outputFormat(QRegularExpression::anchoredPattern(QStringLiteral("[A-Za-z0-9]+")));
+    const QRegularExpressionMatch match = outputFormat.match(testString);
 
     QCOMPARE(testString.length(), desiredLength);
-    QVERIFY(outputFormat.exactMatch(testString));
+    QVERIFY(match.hasMatch());
 }
 
 void KRandomTest::test_KRS()

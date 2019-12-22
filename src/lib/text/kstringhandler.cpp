@@ -24,6 +24,7 @@
 #include <stdlib.h>     // random()
 
 #include <QRegExp>            // for the word ranges
+#include <QRegularExpression>
 #include <QCharRef>
 #include <QStringList>
 #include <QVector>
@@ -166,24 +167,12 @@ QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int 
 
 QString KStringHandler::tagUrls(const QString &text)
 {
-    /*static*/ QRegExp urlEx(QStringLiteral("(www\\.(?!\\.)|(fish|(f|ht)tp(|s))://)[\\d\\w\\./,:_~\\?=&;#@\\-\\+\\%\\$\\(]+[\\d\\w/\\)]"));
-
     QString richText(text);
-    int urlPos = 0, urlLen;
-    while ((urlPos = urlEx.indexIn(richText, urlPos)) >= 0) {
-        urlLen = urlEx.matchedLength();
-        QString href = richText.mid(urlPos, urlLen);
-        // Qt doesn't support (?<=pattern) so we do it here
-        if ((urlPos > 0) && richText[urlPos - 1].isLetterOrNumber()) {
-            urlPos++;
-            continue;
-        }
-        // Don't use QString::arg since %01, %20, etc could be in the string
-        QString anchor = QLatin1String("<a href=\"") + href + QLatin1String("\">") + href + QLatin1String("</a>");
-        richText.replace(urlPos, urlLen, anchor);
-
-        urlPos += anchor.length();
-    }
+    const QRegularExpression urlEx(QStringLiteral("(www\\.(?!\\.)|(fish|ftp|http|https)://[\\d\\w\\./,:_~\\?=&;#@\\-\\+\\%\\$\\(\\)]+)"));
+    // the reference \1 is going to be replaced by the matched url
+    const QLatin1String regexBackRef(QLatin1String("\\1"));
+    const QString anchor = QLatin1String("<a href=\"") + regexBackRef + QLatin1String("\">") + regexBackRef + QLatin1String("</a>");
+    richText.replace(urlEx, anchor);
     return richText;
 }
 

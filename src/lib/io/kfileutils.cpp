@@ -20,6 +20,7 @@
 
 #include <QMimeDatabase>
 #include <QFileInfo>
+#include <QRegularExpression>
 
 QString KFileUtils::suggestName(const QUrl &baseURL, const QString &oldName)
 {
@@ -45,13 +46,14 @@ QString KFileUtils::suggestName(const QUrl &baseURL, const QString &oldName)
         basename = oldName.left(oldName.length() - nameSuffix.length());
     }
 
-    // check if (number) exists from the end of the oldName and increment that number
-    QRegExp numSearch(QStringLiteral("\\(\\d+\\)"));
-    int start = numSearch.lastIndexIn(oldName);
-    if (start != -1) {
-        QString numAsStr = numSearch.cap(0);
-        QString number = QString::number(numAsStr.midRef(1, numAsStr.size() - 2).toInt() + 1);
-        basename = basename.leftRef(start) + QLatin1Char('(') + number + QLatin1Char(')');
+    // check if (number) exists at the end of the oldName and increment that number
+    const QRegularExpression re(QStringLiteral("\\((\\d+)\\)"));
+    QRegularExpressionMatch rmatch;
+    oldName.lastIndexOf(re, -1, &rmatch);
+    if (rmatch.hasMatch()) {
+        const int currentNum = rmatch.captured(1).toInt();
+        const QString number = QString::number(currentNum + 1);
+        basename.replace(rmatch.capturedStart(1), rmatch.capturedLength(1), number);
     } else {
         // number does not exist, so just append " (1)" to filename
         basename += QLatin1String(" (1)");
