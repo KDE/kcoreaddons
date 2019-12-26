@@ -66,9 +66,8 @@ private:
             return;
         }
         const QString out(QString::fromLocal8Bit(lsofProcess.readAll()));
-        QStringList pidList = out.split(QRegularExpression(QStringLiteral("\\s+")), QString::SkipEmptyParts);
-        pidList.removeDuplicates();
-        for (const auto& pidStr : qAsConst(pidList)) {
+        const QVector<QStringRef> pidList = out.splitRef(QRegularExpression(QStringLiteral("\\s+")), QString::SkipEmptyParts);
+        for (const auto &pidStr : pidList) {
             qint64 pid = pidStr.toLongLong();
             if (!pid) {
                 continue;
