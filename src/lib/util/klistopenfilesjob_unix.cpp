@@ -24,6 +24,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QRegularExpression>
+#include <QVector>
 
 class KListOpenFilesJobPrivate
 {
