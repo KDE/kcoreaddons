@@ -61,7 +61,7 @@ int DesktopToJson::runMain()
         DesktopFileParser::s_compatibilityMode = true;
     }
     if (!resolveFiles()) {
-        qCCritical(DESKTOPPARSER) << "Failed to resolve filenames" << m_inFile << m_outFile << endl;
+        qCCritical(DESKTOPPARSER) << "Failed to resolve filenames" << m_inFile << m_outFile;
         return 1;
     }
 
@@ -76,7 +76,7 @@ bool DesktopToJson::resolveFiles()
         m_inFile = m_parser->value(input);
         const QFileInfo fi(m_inFile);
         if (!fi.exists()) {
-            qCCritical(DESKTOPPARSER) << "File not found: " << m_inFile << endl;
+            qCCritical(DESKTOPPARSER) << "File not found: " << m_inFile;
             return false;
         }
         if (!fi.isAbsolute()) {
@@ -138,11 +138,11 @@ bool DesktopToJson::convert(const QString &src, const QString &dest, const QStri
 
     QFile file(dest);
     if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        qCCritical(DESKTOPPARSER) << "Failed to open " << dest << endl;
+        qCCritical(DESKTOPPARSER) << "Failed to open " << dest;
         return false;
     }
 
     file.write(jdoc.toJson());
-    qCDebug(DESKTOPPARSER) << "Generated " << dest << endl;
+    qCDebug(DESKTOPPARSER) << "Generated " << dest;
     return true;
 }
