@@ -519,6 +519,8 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
         kplugin[QStringLiteral("Description")] = value;
     } else if (key.startsWith(QByteArrayLiteral("Comment["))) {
         kplugin[QStringLiteral("Description") + QString::fromUtf8(key.mid(qstrlen("Comment")))] = value;
+    } else if (key == QByteArrayLiteral("InitialPreference")) {
+        kplugin[QStringLiteral("InitialPreference")] = value.toInt();
     } else if (key == QByteArrayLiteral("Hidden")) {
         DESKTOPTOJSON_VERBOSE_WARNING << "Hidden= key found in desktop file, this makes no sense"
                 " with metadata inside the plugin.";
