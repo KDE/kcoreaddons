@@ -354,6 +354,15 @@ public:
     bool isEnabledByDefault() const;
 
     /**
+     * @return the initial preference of the plugin.
+     * This is the preference to associate with this plugin initially (before
+     * the user has had any chance to define preferences for it).
+     * Higher values indicate stronger preference.
+     * @since 5.67
+     */
+    int initialPreference() const;
+
+    /**
      * @return the value for @p key from the metadata or @p defaultValue if the key does not exist
      * or the value for @p key is not of type string
      *
