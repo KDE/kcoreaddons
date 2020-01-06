@@ -24,7 +24,7 @@
 
 #include "kpluginfactory.h"
 
-#include <QHash>
+#include <QMultiHash>
 
 class KPluginFactoryPrivate
 {
@@ -37,7 +37,7 @@ protected:
     {
     }
 
-    QHash<QString, Plugin> createInstanceHash;
+    QMultiHash<QString, Plugin> createInstanceHash;
     QString catalogName;
     bool catalogInitialized;
 

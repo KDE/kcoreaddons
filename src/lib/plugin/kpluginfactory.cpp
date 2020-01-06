@@ -85,7 +85,7 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
                 }
             }
         }
-        d->createInstanceHash.insertMulti(keyword, KPluginFactoryPrivate::Plugin(metaObject, instanceFunction));
+        d->createInstanceHash.insert(keyword, KPluginFactoryPrivate::Plugin(metaObject, instanceFunction));
     }
 }
 
