@@ -192,6 +192,16 @@ KCOREADDONS_EXPORT QString quoteArg(const QString &arg);
  * @return the expanded path
  */
 KCOREADDONS_EXPORT QString tildeExpand(const QString &path);
+
+/**
+ * Performs tilde collapse on @p path. If path did not start by the user
+ * homedir returns path unchanged.
+ *
+ * @param path the path to tilde-collpase
+ * @return the collapsed path
+ * @since 5.67
+ */
+KCOREADDONS_EXPORT QString tildeCollapse(const QString &path);
 }
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KShell::Options)

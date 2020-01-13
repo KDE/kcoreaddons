@@ -33,6 +33,7 @@ class KShellTest : public QObject
 
 private Q_SLOTS:
     void tildeExpand();
+    void tildeCollapse();
     void quoteArg();
     void joinArgs();
     void splitJoin();
@@ -64,6 +65,14 @@ KShellTest::tildeExpand()
 #else
     QCOMPARE(KShell::tildeExpand(QStringLiteral("\\~") + me), QString(QStringLiteral("~") + me));
 #endif
+}
+
+void
+KShellTest::tildeCollapse()
+{
+    QCOMPARE(KShell::tildeCollapse(QDir::homePath()), QStringLiteral("~"));
+    QCOMPARE(KShell::tildeCollapse(QDir::homePath() + QStringLiteral("/Documents")), QStringLiteral("~/Documents"));
+    QCOMPARE(KShell::tildeCollapse(QStringLiteral("/test/") + QDir::homePath()), QStringLiteral("/test/") + QDir::homePath());
 }
 
 void

@@ -68,3 +68,16 @@ QString KShell::tildeExpand(const QString &fname)
     }
     return fname;
 }
+
+QString KShell::tildeCollapse(const QString &path)
+{
+    if (!path.isEmpty()) {
+        const auto homePath = QDir::homePath();
+        if (path.startsWith(homePath)) {
+            auto newPath = path;
+            newPath.replace(0, homePath.length(), QLatin1Char('~'));
+            return newPath;
+        }
+    }
+    return path;
+}
