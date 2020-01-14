@@ -138,8 +138,14 @@ QStringList KStringHandler::perlSplit(const QChar &sep, const QString &s, int ma
     return l;
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
 QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int max)
 {
+    // nothing to split
+    if (s.isEmpty()) {
+        return QStringList();
+    }
+
     bool ignoreMax = 0 == max;
 
     QStringList l;
@@ -163,6 +169,40 @@ QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int 
     }
 
     return l;
+}
+#endif
+
+QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QString &s, int max)
+{
+    // nothing to split
+    if (s.isEmpty()) {
+        return QStringList();
+    }
+
+    bool ignoreMax = max == 0;
+
+    QStringList list;
+
+    int start = 0;
+    QRegularExpressionMatchIterator iter = sep.globalMatch(s);
+    QRegularExpressionMatch match;
+    QString chunk;
+    while (iter.hasNext() && (ignoreMax || list.count() < max - 1)) {
+        match = iter.next();
+        chunk = s.mid(start, match.capturedStart() - start);
+        if (!chunk.isEmpty()) {
+            list.append(chunk);
+        }
+        start = match.capturedEnd();
+    }
+
+    // catch the remainder
+    chunk = s.mid(start, s.size() - start);
+    if (!chunk.isEmpty()) {
+        list.append(chunk);
+    }
+
+    return list;
 }
 
 QString KStringHandler::tagUrls(const QString &text)

@@ -1,6 +1,7 @@
 
 #include "kstringhandlertest.h"
 
+#include <QRegularExpression>
 #include <QTest>
 
 QTEST_MAIN(KStringHandlerTest)
@@ -56,6 +57,8 @@ void KStringHandlerTest::perlSplit()
     expected.clear();
     expected << QStringLiteral("Split") << QStringLiteral("me") << QStringLiteral("up ! I'm bored ! OK ?");
     QCOMPARE(KStringHandler::perlSplit(QRegExp(QStringLiteral("[! ]")),
+                                       QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
+    QCOMPARE(KStringHandler::perlSplit(QRegularExpression(QStringLiteral("[! ]")),
                                        QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
 }
 
