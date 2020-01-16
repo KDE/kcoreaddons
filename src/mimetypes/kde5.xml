@@ -3510,4 +3510,10 @@ Notes:
     <sub-class-of type="text/plain"/>
     <glob pattern="*.notifyrc"/>
   </mime-type>
+  <mime-type type="text/vnd.kde.kcrash-report">
+    <comment>KCrash Report</comment>
+    <generic-icon name="text-plain"/>
+    <sub-class-of type="text/plain"/>
+    <glob pattern="*.kcrash.txt"/>
+  </mime-type>
 </mime-info>
