@@ -112,7 +112,7 @@ Notes:
     <comment xml:lang="kk">аудио CD</comment>
     <comment xml:lang="km">ស៊ីឌី​អូឌីយ៉ូ</comment>
     <comment xml:lang="ko">CD 오디오</comment>
-    <comment xml:lang="lt">CD audio</comment>
+    <comment xml:lang="lt">Garso CD</comment>
     <comment xml:lang="lv">CD audio</comment>
     <comment xml:lang="ml">സിഡി ശബ്ദം</comment>
     <comment xml:lang="mr">CD ऑडिओ</comment>
@@ -237,7 +237,7 @@ Notes:
     <comment xml:lang="kk">Java апплеті</comment>
     <comment xml:lang="km">អាប់ភ្លេត​ Java</comment>
     <comment xml:lang="ko">자바 애플릿</comment>
-    <comment xml:lang="lt">Java papildinys</comment>
+    <comment xml:lang="lt">Java programėlė</comment>
     <comment xml:lang="lv">Java sīklietotne</comment>
     <comment xml:lang="ml">ജാവ ആപ്പ്ലെറ്റ്</comment>
     <comment xml:lang="mr">जावा एप्लेट</comment>
@@ -297,7 +297,7 @@ Notes:
     <comment xml:lang="kk">KHTML кеңейтулер адаптері</comment>
     <comment xml:lang="km">អាដាប់ទ័រ​ផ្នែកបន្ថែម​របស់ KHTML</comment>
     <comment xml:lang="ko">KHTML 확장 기능 어댑터</comment>
-    <comment xml:lang="lt">KHTML praplėtimų adapteris</comment>
+    <comment xml:lang="lt">KHTML plėtinių adapteris</comment>
     <comment xml:lang="lv">KHTML paplašinājumu adapteris</comment>
     <comment xml:lang="ml">കെഎച്ച്ടിഎംഎല്‍ എക്സ്റ്റന്‍ഷന്‍ അഡാപ്റ്റര്‍</comment>
     <comment xml:lang="mr">KHTML एक्सटेंशन एडॅप्टर</comment>
@@ -356,7 +356,7 @@ Notes:
     <comment xml:lang="kk">KDE түстер сұлбасы</comment>
     <comment xml:lang="km">គ្រោងពណ៌​របស់ KDE</comment>
     <comment xml:lang="ko">KDE 색 배열</comment>
-    <comment xml:lang="lt">KDE spalvų schema</comment>
+    <comment xml:lang="lt">KDE spalvų rinkinys</comment>
     <comment xml:lang="lv">KDE krāsu shēma</comment>
     <comment xml:lang="ml">കെഡിഇ നിറക്കൂട്ട്</comment>
     <comment xml:lang="mr">केडीई रंग सुत्रयोजना</comment>
@@ -480,7 +480,7 @@ Notes:
     <comment xml:lang="kk">KWallet әмияны</comment>
     <comment xml:lang="km">កាបូប​របស់ KWallet</comment>
     <comment xml:lang="ko">KWallet 지갑</comment>
-    <comment xml:lang="lt">KWallet piniginė</comment>
+    <comment xml:lang="lt">KWallet slaptažodinė</comment>
     <comment xml:lang="lv">KWallet maks</comment>
     <comment xml:lang="ml">കെവാലറ്റ് മടിശ്ശീല</comment>
     <comment xml:lang="mr">के-वॉलेट पाकीट</comment>
@@ -604,7 +604,7 @@ Notes:
     <comment xml:lang="kk">-лері</comment>
     <comment xml:lang="km">plasmoid</comment>
     <comment xml:lang="ko">plasmoid</comment>
-    <comment xml:lang="lt">plazmoidas</comment>
+    <comment xml:lang="lt">Plasma įskiepis</comment>
     <comment xml:lang="lv">plazmoīds</comment>
     <comment xml:lang="ml">പ്ലാസ്മോയിഡ്</comment>
     <comment xml:lang="mr">प्लाज्मोइड</comment>
@@ -667,7 +667,7 @@ Notes:
     <comment xml:lang="kk">SuperKaramba нақышы</comment>
     <comment xml:lang="km">ស្បែក​របស់ SuperKaramba</comment>
     <comment xml:lang="ko">SuperKaramba 테마</comment>
-    <comment xml:lang="lt">SuperKaramba tema</comment>
+    <comment xml:lang="lt">SuperKaramba apipavidalinimas</comment>
     <comment xml:lang="lv">SuperKaramba tēma</comment>
     <comment xml:lang="ml">സൂപ്പര്‍കരാംബ പ്രമേയം</comment>
     <comment xml:lang="mr">सुपरकरंबा शैली</comment>
@@ -1020,7 +1020,7 @@ Notes:
     <comment xml:lang="kk">веб архиві</comment>
     <comment xml:lang="km">ប័ណ្ណសារ​បណ្ដាញ</comment>
     <comment xml:lang="ko">웹 압축 파일</comment>
-    <comment xml:lang="lt">žiniatinklio archyvas</comment>
+    <comment xml:lang="lt">saityno archyvas</comment>
     <comment xml:lang="lv">tīmekļa arhīvs</comment>
     <comment xml:lang="ml">വെബ് ശേഖരണം</comment>
     <comment xml:lang="mr">वेब संग्रह</comment>
@@ -1199,7 +1199,7 @@ Notes:
     <comment xml:lang="kk">KPhotoAlbum импорт еткені</comment>
     <comment xml:lang="km">នាំចូល KPhotoAlbum</comment>
     <comment xml:lang="ko">KPhotoAlbum 가져오기</comment>
-    <comment xml:lang="lt">KPhotoAlbum importas</comment>
+    <comment xml:lang="lt">KPhotoAlbum importavimas</comment>
     <comment xml:lang="lv">KPhotoAlbum imports</comment>
     <comment xml:lang="ml">കെഫോട്ടോആല്‍ബം ഇറക്കുമതി</comment>
     <comment xml:lang="mr">के-फोटो-अल्बम आयात</comment>
@@ -1260,7 +1260,7 @@ Notes:
     <comment xml:lang="kk">HDR кескіні</comment>
     <comment xml:lang="km">រូបភាព HDR</comment>
     <comment xml:lang="ko">HDR 그림</comment>
-    <comment xml:lang="lt">HDR paveikslėlis</comment>
+    <comment xml:lang="lt">HDR paveikslas</comment>
     <comment xml:lang="lv">HDR attēls</comment>
     <comment xml:lang="ml">എച്ച് ഡി ആര്‍ ചിത്രം</comment>
     <comment xml:lang="mr">HDR प्रतिमा</comment>
@@ -1326,7 +1326,7 @@ Notes:
     <comment xml:lang="kk">KDE шікі кескін пішімі</comment>
     <comment xml:lang="km">ទ្រង់ទ្រាយ​រូបភាព​ដើម KDE</comment>
     <comment xml:lang="ko">KDE RAW 그림 형식</comment>
-    <comment xml:lang="lt">KDE gryni paveikslėlių formatai</comment>
+    <comment xml:lang="lt">KDE neapdorotų paveikslų formatai</comment>
     <comment xml:lang="lv">KDE raw attēlu formāti</comment>
     <comment xml:lang="ml">കെഡിഇ സംസ്കരിക്കാത്ത ചിത്ര ഘടന</comment>
     <comment xml:lang="mr">केडीई रॉ इमेज फॉर्मेट</comment>
@@ -1461,7 +1461,7 @@ Notes:
     <comment xml:lang="kk">Kate файлдар тізімін жүктеу плагин тізімі</comment>
     <comment xml:lang="km">បញ្ជី​កម្មវិធី​ជំនួយ​របស់​កម្មវិធី​ផ្ទុក​បញ្ជី​ឯកសារ​របស់ Kate</comment>
     <comment xml:lang="ko">Kate 파일 목록 로더 플러그인 목록</comment>
-    <comment xml:lang="lt">Kate failų sąrašo užkrovimo papildinių sąrašas</comment>
+    <comment xml:lang="lt">Kate failų sąrašo įkėliklio papildinių sąrašas</comment>
     <comment xml:lang="lv">Kate failu saraksta ielādētāja spraudņa saraksts</comment>
     <comment xml:lang="ml">കേറ്റ് ഫയല്‍ പട്ടിക ലഭ്യമാക്കുന്നതിന്റെ സംയോജകങ്ങളുടെ പട്ടിക</comment>
     <comment xml:lang="mr">केट फाईल यादी लोड करणाऱ्या प्लगइनची यादी</comment>
@@ -1769,7 +1769,7 @@ Notes:
     <comment xml:lang="kk">KDE жүйе мониторы</comment>
     <comment xml:lang="km">កម្មវិធី​ត្រួតពិនិត្យ​ប្រព័ន្ធ​របស់ KDE</comment>
     <comment xml:lang="ko">KDE 시스템 모니터</comment>
-    <comment xml:lang="lt">KDE sistemos stebėtojas</comment>
+    <comment xml:lang="lt">KDE sistemos prižiūryklė</comment>
     <comment xml:lang="lv">KDE sistēmas novērotājs</comment>
     <comment xml:lang="ml">കെഡിഇ സിസ്റ്റം നിരിക്ഷകന്‍</comment>
     <comment xml:lang="mr">केडीई प्रणाली मॉनिटर</comment>
@@ -1831,7 +1831,7 @@ Notes:
     <comment xml:lang="kk">KDE нақышы</comment>
     <comment xml:lang="km">ស្បែក​របស់ KDE</comment>
     <comment xml:lang="ko">KDE 테마</comment>
-    <comment xml:lang="lt">KDE tema</comment>
+    <comment xml:lang="lt">KDE apipavidalinimas</comment>
     <comment xml:lang="lv">KDE tēma</comment>
     <comment xml:lang="ml">കെഡിഇ പ്രമേയം</comment>
     <comment xml:lang="mr">केडीई शैली</comment>
@@ -2077,7 +2077,7 @@ Notes:
     <comment xml:lang="kk">Kolf сақталған ойыны</comment>
     <comment xml:lang="km">ល្បែង​ដែលបានរក្សាទុក​របស់ Kolf</comment>
     <comment xml:lang="ko">Kolf 저장된 게임</comment>
-    <comment xml:lang="lt">Kolf išsaugotas žaidimas</comment>
+    <comment xml:lang="lt">Kolf įrašytas žaidimas</comment>
     <comment xml:lang="lv">Kolf saglabāta spēle</comment>
     <comment xml:lang="ml">കോള്‍ഫ് ശേഖരിച്ച കളി</comment>
     <comment xml:lang="mr">कोल्फ साठवलेला खेळ</comment>
@@ -3004,7 +3004,7 @@ Notes:
     <comment xml:lang="kk">Kopete көңіл күйі белгілер архиві</comment>
     <comment xml:lang="km">ប័ណ្ណសារ​សញ្ញា​អារម្មណ៍​របស់ Kopete</comment>
     <comment xml:lang="ko">Kopete 이모티콘 압축 파일</comment>
-    <comment xml:lang="lt">Kopete jaustukų rinkinys</comment>
+    <comment xml:lang="lt">Kopete jaustukų archyvas</comment>
     <comment xml:lang="lv">Kopete emocijzīmju arhīvs</comment>
     <comment xml:lang="ml">കോപ്പിറ്റേ വികാരചിഹ്നങ്ങളുടെ ശേഖരം</comment>
     <comment xml:lang="mr">कोपेट भावप्रतिमा संग्रह</comment>
@@ -3064,7 +3064,7 @@ Notes:
     <comment xml:lang="kk">ICQ контакты</comment>
     <comment xml:lang="km">ទំនាក់ទំនង ICQ</comment>
     <comment xml:lang="ko">ICQ 대화 상대</comment>
-    <comment xml:lang="lt">ICQ kontaktas</comment>
+    <comment xml:lang="lt">ICQ adresatas</comment>
     <comment xml:lang="lv">ICQ kontakts</comment>
     <comment xml:lang="ml">ഐ സി ക്യൂ സമ്പര്‍ക്കം</comment>
     <comment xml:lang="mr">ICQ संपर्क</comment>
@@ -3129,7 +3129,7 @@ Notes:
     <comment xml:lang="kk">Microsoft Media Format</comment>
     <comment xml:lang="km">ទ្រង់ទ្រាយ​របស់ Microsoft Media</comment>
     <comment xml:lang="ko">Microsoft 미디어 포맷</comment>
-    <comment xml:lang="lt">Microsoft media formatas</comment>
+    <comment xml:lang="lt">Microsoft medijos formatas</comment>
     <comment xml:lang="lv">Microsoft Media formāts</comment>
     <comment xml:lang="ml">മൈക്രോസോഫ്റ്റ് മിഡിയ ഘടന</comment>
     <comment xml:lang="mr">मायक्रोसोफ्ट मीडिया पद्धत</comment>
@@ -3255,7 +3255,7 @@ Notes:
     <comment xml:lang="kk">Softimage PIC кескіні</comment>
     <comment xml:lang="km">រូបភាព Softimage PIC</comment>
     <comment xml:lang="ko">Softimage PIC 그림</comment>
-    <comment xml:lang="lt">Softimage PIC paveikslėlis</comment>
+    <comment xml:lang="lt">Softimage PIC paveikslas</comment>
     <comment xml:lang="lv">Softimage PIC attēls</comment>
     <comment xml:lang="ml">സോഫ്റ്റ്‌ഇമേജ് പിക്ക് ചിത്രം</comment>
     <comment xml:lang="mr">सोफ्टइमेज PIC प्रतिमा</comment>
@@ -3316,7 +3316,7 @@ Notes:
     <comment xml:lang="kk">Qt белгілеу тіліндегі файл</comment>
     <comment xml:lang="km">ឯកសារ​ភាសា​សម្គាល់ ​Qt </comment>
     <comment xml:lang="ko">Qt 마크업 언어 파일</comment>
-    <comment xml:lang="lt">Qt ženklinimo kalba</comment>
+    <comment xml:lang="lt">Qt ženklinimo kalbos failas</comment>
     <comment xml:lang="lv">Qt Markup Language fails</comment>
     <comment xml:lang="mr">क्यूटी मार्कअप भाषा फाईल</comment>
     <comment xml:lang="nb">FIl for Qt oppmerkingsspråk</comment>
@@ -3366,6 +3366,7 @@ Notes:
     <comment xml:lang="id">Opsi Konfigurasi KConfigXT</comment>
     <comment xml:lang="it">Opzioni di configurazione KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 설정 옵션</comment>
+    <comment xml:lang="lt">KConfigXT konfigūravimo parinktys</comment>
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
     <comment xml:lang="nn">KConfigXT-oppsett</comment>
     <comment xml:lang="pl">Opcje KConfigXT</comment>
@@ -3408,6 +3409,7 @@ Notes:
     <comment xml:lang="id">Opsi Penghasilan Kode KConfigXT</comment>
     <comment xml:lang="it">Opzioni di generazione codice KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 코드 생성 옵션</comment>
+    <comment xml:lang="lt">KConfigXT kodo generavimo parinktys</comment>
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
     <comment xml:lang="nn">KConfigXT-kodegeneringsval</comment>
     <comment xml:lang="pl">Opcje tworzenia kodu KConfigXT</comment>
@@ -3446,6 +3448,7 @@ Notes:
     <comment xml:lang="id">Deklarasi KXMLGUI UI</comment>
     <comment xml:lang="it">Dichiarazione UI KXMLGUI</comment>
     <comment xml:lang="ko">KXMLGUI UI 선언</comment>
+    <comment xml:lang="lt">KXMLGUI naudotojo sąsajos deklaracija</comment>
     <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
     <comment xml:lang="nn">KXMLGUI UI-deklarasjon</comment>
     <comment xml:lang="pl">Dklaracja KXMLGUI UI</comment>
@@ -3489,6 +3492,7 @@ Notes:
     <comment xml:lang="id">Deklarasi KNotification</comment>
     <comment xml:lang="it">Dichiarazione KNotification</comment>
     <comment xml:lang="ko">KNotification 선언</comment>
+    <comment xml:lang="lt">KNotification deklaracija</comment>
     <comment xml:lang="nl">Declaratie van KNotification</comment>
     <comment xml:lang="nn">KNotification-deklarasjon</comment>
     <comment xml:lang="pl">Deklaracja KNotification</comment>
@@ -3512,6 +3516,14 @@ Notes:
   </mime-type>
   <mime-type type="text/vnd.kde.kcrash-report">
     <comment>KCrash Report</comment>
+    <comment xml:lang="ca">Informe del KCrash</comment>
+    <comment xml:lang="es">Informe de KCrash</comment>
+    <comment xml:lang="eu">KCrash txostena</comment>
+    <comment xml:lang="lt">KCrash pranešimas</comment>
+    <comment xml:lang="nl">Rapport van KCrash</comment>
+    <comment xml:lang="pt">Relatório do KCrash</comment>
+    <comment xml:lang="pt_BR">Relatório do KCrash</comment>
+    <comment xml:lang="uk">звіт KCrash</comment>
     <generic-icon name="text-plain"/>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.kcrash.txt"/>
