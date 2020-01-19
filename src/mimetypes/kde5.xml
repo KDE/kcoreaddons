@@ -384,7 +384,7 @@ Notes:
     <comment xml:lang="ug">KDE رەڭ لايىھىسى</comment>
     <comment xml:lang="uk">схема кольорів KDE</comment>
     <comment xml:lang="zh_CN">KDE 配色方案</comment>
-    <comment xml:lang="zh_TW">KDE 顏色機制</comment>
+    <comment xml:lang="zh_TW">KDE 配色</comment>
     <acronym>KDE</acronym>
     <expanded-acronym>K Desktop Environment</expanded-acronym>
     <glob pattern="*.kcsrc"/>
@@ -3518,12 +3518,15 @@ Notes:
     <comment>KCrash Report</comment>
     <comment xml:lang="ca">Informe del KCrash</comment>
     <comment xml:lang="es">Informe de KCrash</comment>
+    <comment xml:lang="et">KCrashi aruanne</comment>
     <comment xml:lang="eu">KCrash txostena</comment>
     <comment xml:lang="lt">KCrash pranešimas</comment>
     <comment xml:lang="nl">Rapport van KCrash</comment>
     <comment xml:lang="pt">Relatório do KCrash</comment>
     <comment xml:lang="pt_BR">Relatório do KCrash</comment>
+    <comment xml:lang="sv">KCrash-rapport</comment>
     <comment xml:lang="uk">звіт KCrash</comment>
+    <comment xml:lang="zh_TW">KCrash 報告</comment>
     <generic-icon name="text-plain"/>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.kcrash.txt"/>
