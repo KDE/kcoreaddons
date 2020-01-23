@@ -373,7 +373,7 @@ Q_SIGNALS:
      * @see result
      */
     void finished(KJob *job
-#if !defined(DOXYGEN_SHOULD_SKIP_THIS)
+#if !defined(K_DOXYGEN)
                   , QPrivateSignal
 #endif
                  );
@@ -387,7 +387,7 @@ Q_SIGNALS:
      * @param job the job that emitted this signal
      */
     void suspended(KJob *job
-#if !defined(DOXYGEN_SHOULD_SKIP_THIS)
+#if !defined(K_DOXYGEN)
                    , QPrivateSignal
 #endif
                   );
@@ -401,7 +401,7 @@ Q_SIGNALS:
      * @param job the job that emitted this signal
      */
     void resumed(KJob *job
-#if !defined(DOXYGEN_SHOULD_SKIP_THIS)
+#if !defined(K_DOXYGEN)
                  , QPrivateSignal
 #endif
                 );
@@ -421,7 +421,7 @@ Q_SIGNALS:
      * @see kill
      */
     void result(KJob *job
-#if !defined(DOXYGEN_SHOULD_SKIP_THIS)
+#if !defined(K_DOXYGEN)
                 , QPrivateSignal
 #endif
                );
