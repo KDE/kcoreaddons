@@ -318,6 +318,13 @@ public:
     QStringList dependencies() const;
 
     /**
+     * Returns the service types that this plugin implements.
+     *
+     * This is mostly for historical / compatibility purposes.
+     * As a general rule, instead of opening many plugins to then filter by servicetype,
+     * put all plugins of the same type in a subdirectory, that you can pass to findPlugins directly.
+     * No point in opening 20 plugins to pick out only 3, when the filesystem can do that filtering for you.
+     *
      * @note Unlike KService this does not contain the MIME types. To get the handled MIME types
      * use the KPluginMetaData::mimeTypes() function.
      * @return a list of service types this plugin implements (e.g. "Plasma/DataEngine")
