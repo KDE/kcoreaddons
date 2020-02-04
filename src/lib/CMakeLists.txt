@@ -128,10 +128,41 @@ if (HAVE_PROCSTAT)
     )
 endif()
 
+ecm_qt_export_logging_category(
+    IDENTIFIER KDIRWATCH
+    CATEGORY_NAME kf5.kcoreaddons.kdirwatch
+    DEFAULT_SEVERITY Warning
+    DESCRIPTION "KDirWatch (KCoreAddons)"
+    EXPORT KCOREADDONS
+)
+ecm_qt_export_logging_category(
+    IDENTIFIER KABOUTDATA
+    CATEGORY_NAME kf5.kcoreaddons.kaboutdata
+    DESCRIPTION "KAboutData (KCoreAddons)"
+    EXPORT KCOREADDONS
+)
+ecm_qt_export_logging_category(
+    IDENTIFIER DESKTOPPARSER
+    CATEGORY_NAME kf5.kcoreaddons.desktopparser
+    DEFAULT_SEVERITY Warning
+    DESCRIPTION "DesktopParser (KCoreAddons)"
+    EXPORT KCOREADDONS
+)
+ecm_qt_export_logging_category(
+    IDENTIFIER MIGRATOR
+    CATEGORY_NAME kf5.kcoreaddons.kdelibs4configmigrator
+    DEFAULT_SEVERITY Warning
+    DESCRIPTION "Kdelibs4ConfigMigrator (KCoreAddons)"
+    EXPORT KCOREADDONS
+)
+
 ecm_qt_declare_logging_category(libkcoreaddons_SRCS
-                                HEADER kcoreaddons_debug.h
-                                IDENTIFIER KCOREADDONS_DEBUG
-                                CATEGORY_NAME org.kde.kcoreaddons)
+    HEADER kcoreaddons_debug.h
+    IDENTIFIER KCOREADDONS_DEBUG
+    CATEGORY_NAME org.kde.kcoreaddons
+    DESCRIPTION "kcoreaddons (kcoreaddons lib)"
+    EXPORT KCOREADDONS
+)
 
 add_library(KF5CoreAddons ${libkcoreaddons_SRCS})
 add_library(KF5::CoreAddons ALIAS KF5CoreAddons)
@@ -330,3 +361,9 @@ endif()
 include(ECMGeneratePriFile)
 ecm_generate_pri_file(BASE_NAME KCoreAddons LIB_NAME KF5CoreAddons DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KCoreAddons)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
+
+ecm_qt_install_logging_categories(
+    EXPORT KCOREADDONS
+    FILE kcoreaddons.categories
+    DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
+)
