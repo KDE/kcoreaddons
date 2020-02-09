@@ -750,8 +750,11 @@ public:
      * Use this if you need to have an application logo
      * in AboutData other than the application icon.
      *
-     * Because KAboutData is a core class it cannot use QImage directly,
-     * so this is a QVariant that should contain a QImage.
+     * Because KAboutData is a core class it cannot use QImage/QPixmap/QIcon directly,
+     * so this is a QVariant that should contain a QImage/QPixmap/QIcon.
+     *
+     * QIcon should be preferred, to be able to properly handle HiDPI scaling.
+     * If a QIcon is provided, it will be used at a typical size of 48x48.
      *
      * @param image logo image.
      * @see programLogo()
@@ -964,8 +967,8 @@ public:
     /**
      * Returns the program logo image.
      *
-     * Because KAboutData is a core class it cannot use QImage directly,
-     * so this is a QVariant containing a QImage.
+     * Because KAboutData is a core class it cannot use QImage/QPixmap/QIcon directly,
+     * so this is a QVariant containing a QImage/QPixmap/QIcon.
      *
      * @return the program logo data, or a null image if there is
      *         no custom application logo defined.
