@@ -3533,6 +3533,7 @@ Notes:
     <comment xml:lang="sk">Hlásenie KCrash</comment>
     <comment xml:lang="sv">KCrash-rapport</comment>
     <comment xml:lang="uk">звіт KCrash</comment>
+    <comment xml:lang="zh_CN">KCrash 报告</comment>
     <comment xml:lang="zh_TW">KCrash 報告</comment>
     <generic-icon name="text-plain"/>
     <sub-class-of type="text/plain"/>
