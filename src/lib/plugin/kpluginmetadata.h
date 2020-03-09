@@ -295,9 +295,9 @@ public:
     QString copyrightText() const;
 
     /**
-     * @return the internal name of the plugin (for KParts Plugins this is
-     * the same name as set in the .rc file). If the plugin name property is not set in
-     * the metadata this will return the plugin file name without the file extension.
+     * @return the internal name of the plugin
+     * If the Id property is not set in the metadata, this will return the
+     * plugin file name without the file extension.
      */
     QString pluginId() const;
 
