@@ -336,6 +336,9 @@ bool KPluginMetaData::supportsMimeType(const QString &mimeType) const
 {
     QMimeDatabase db;
     const QMimeType mime = db.mimeTypeForName(mimeType);
+    if (!mime.isValid()) {
+        return false;
+    }
 
     const QStringList mimes = mimeTypes();
     auto inherits = [&](const QString &supportedMimeName) {

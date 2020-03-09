@@ -359,6 +359,11 @@ private Q_SLOTS:
         QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
         QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
 
+        // mimetype filter with invalid mimetype
+        auto supportDoesNotExist = [](const KPluginMetaData &metaData) { return metaData.supportsMimeType(QLatin1String("does/not/exist")); };
+        plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"), supportDoesNotExist);
+        QCOMPARE(plugins.size(), 0);
+
         // invalid std::function as filter
         plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"));
         std::sort(plugins.begin(), plugins.end(), sortPlugins);
