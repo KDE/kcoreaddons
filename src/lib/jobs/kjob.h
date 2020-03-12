@@ -39,8 +39,8 @@ class KJobPrivate;
  * void SomeClass::methodWithAsynchronousJobCall()
  * {
  *   KJob* job = someoperation(some parameters);
- *   connect(job, SIGNAL(result(KJob*)),
- *           this, SLOT(handleResult(KJob*)));
+ *   connect(job, &KJob::result,
+ *           this, &SomeClass::handleResult);
  *   job->start();
  * }
  * \endcode
@@ -49,7 +49,7 @@ class KJobPrivate;
  * And handleResult is usually at least:
  *
  * \code
- * void SomeClass::handleResult( KJob *job )
+ * void SomeClass::handleResult(KJob *job)
  * {
  *   if (job->error()) {
  *       doSomething();
@@ -168,7 +168,7 @@ public:
      * \code
      * void ExampleJob::start()
      * {
-     *  QTimer::singleShot(0, this, SLOT(doWork()));
+     *  QTimer::singleShot(0, this, &ExampleJob::doWork);
      * }
      * \endcode
      */
