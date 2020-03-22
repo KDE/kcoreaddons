@@ -1,20 +1,8 @@
 /*
-  Copyright (C) 2005 Ingo Kloecker <kloecker@kde.org>
-  Copyright (C) 2007 Allen Winter <winter@kde.org>
+    SPDX-FileCopyrightText: 2005 Ingo Kloecker <kloecker@kde.org>
+    SPDX-FileCopyrightText: 2007 Allen Winter <winter@kde.org>
 
-  This library is free software; you can redistribute it and/or
-  modify it under the terms of the GNU Library General Public
-  License version 2 as published by the Free Software Foundation.
-
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  Library General Public License for more details.
-
-  You should have received a copy of the GNU Library General Public License
-  along with this library; see the file COPYING.LIB.  If not, write to
-  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-  Boston, MA 02110-1301, USA.
+    SPDX-License-Identifier: LGPL-2.0-only
 */
 
 #include "ktexttohtmltest.h"
@@ -414,7 +402,7 @@ void KTextToHTMLTest::testHtmlConvert_data()
     QTest::newRow("url-in-parenthesis-3") << "bla (https://www.kde.org - section 5.2)"
                                           << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                           << "bla (<a href=\"https://www.kde.org\">https://www.kde.org</a> - section 5.2)";
-    
+
     // Fix url as foo <<url> <url>> when we concatened them.
     QTest::newRow("url-with-url") << "foo <https://www.kde.org/ <https://www.kde.org/>>"
                                   << KTextToHTML::Options(KTextToHTML::PreserveSpaces)

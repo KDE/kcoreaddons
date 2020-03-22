@@ -1,20 +1,10 @@
-/* This file is part of the KDE libraries
-    Copyright (c) 2003,2007-2008 Oswald Buddenhagen <ossi@kde.org>
-    Copyright (c) 2005 Thomas Braxton <brax108@cox.net>
+/*
+    This file is part of the KDE libraries
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Library General Public
-    License version 2 as published by the Free Software Foundation.
+    SPDX-FileCopyrightText: 2003, 2007-2008 Oswald Buddenhagen <ossi@kde.org>
+    SPDX-FileCopyrightText: 2005 Thomas Braxton <brax108@cox.net>
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
-
-    You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA 02110-1301, USA.
+    SPDX-License-Identifier: LGPL-2.0-only
 */
 
 #include <kshell.h>

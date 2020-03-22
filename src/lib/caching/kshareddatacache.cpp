@@ -1,25 +1,14 @@
 /*
- * This file is part of the KDE project.
- * Copyright © 2010, 2012 Michael Pyne <mpyne@kde.org>
- * Copyright © 2012 Ralf Jung <ralfjung-e@gmx.de>
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Library General Public
- * License version 2 as published by the Free Software Foundation.
- *
- * This library includes "MurmurHash" code from Austin Appleby, which is
- * placed in the public domain. See http://sites.google.com/site/murmurhash/
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU Library General Public License
- * along with this library; see the file COPYING.LIB.  If not, write to
- * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
- * Boston, MA 02110-1301, USA.
- */
+    This file is part of the KDE project.
+
+    SPDX-FileCopyrightText: 2010, 2012 Michael Pyne <mpyne@kde.org>
+    SPDX-FileCopyrightText: 2012 Ralf Jung <ralfjung-e@gmx.de>
+
+    SPDX-License-Identifier: LGPL-2.0-only
+
+    This library includes "MurmurHash" code from Austin Appleby, which is
+    placed in the public domain. See http://sites.google.com/site/murmurhash/
+*/
 
 #include "kshareddatacache.h"
 #include "kshareddatacache_p.h" // Various auxiliary support code
@@ -1034,7 +1023,7 @@ public:
         if (!QDir().mkpath(fileInfo.absolutePath())) {
             return;
         }
- 
+
         // The basic idea is to open the file that we want to map into shared
         // memory, and then actually establish the mapping. Once we have mapped the
         // file into shared memory we can close the file handle, the mapping will

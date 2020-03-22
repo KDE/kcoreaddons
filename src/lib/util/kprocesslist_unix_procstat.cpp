@@ -1,19 +1,11 @@
-/**************************************************************************
-**
-** This file is part of the KDE Frameworks
-**
-** Copyright (c) 2019 Tobias C. Berner <tcberner@FreeBSD.org>
-**
-** GNU Lesser General Public License Usage
-**
-** This file may be used under the terms of the GNU Lesser General Public
-** License version 2.1 as published by the Free Software Foundation and
-** appearing in the file LICENSE.LGPL included in the packaging of this file.
-** Please review the following information to ensure the GNU Lesser General
-** Public License version 2.1 requirements will be met:
-** http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-**
-**************************************************************************/
+/*
+
+    This file is part of the KDE Frameworks
+
+    SPDX-FileCopyrightText: 2019 Tobias C. Berner <tcberner@FreeBSD.org>
+
+    SPDX-License-Identifier: LGPL-2.1-only
+*/
 
 #include "kprocesslist.h"
 #include "kprocesslist_unix_procstat_p.h"
