@@ -952,6 +952,8 @@ void KDirWatchPrivate::addWatch(Entry *e)
     switch (preferredMethod) {
 #if HAVE_FAM
     case KDirWatch::FAM: entryAdded = useFAM(e); break;
+#else
+    case KDirWatch::FAM: Q_UNREACHABLE(); break;
 #endif
 #if HAVE_SYS_INOTIFY_H
     case KDirWatch::INotify: entryAdded = useINotify(e); break;

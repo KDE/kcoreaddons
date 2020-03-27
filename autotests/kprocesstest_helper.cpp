@@ -14,6 +14,10 @@
 
 int main(int argc, char **argv)
 {
+    if (argc < 2) {
+        printf("Missing parameter");
+        return -1;
+    }
     KProcess p;
     p.setShellCommand(QString::fromLatin1("echo " EOUT "; echo " EERR " >&2"));
     p.setOutputChannelMode(static_cast<KProcess::OutputChannelMode>(atoi(argv[1])));
