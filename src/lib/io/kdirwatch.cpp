@@ -953,13 +953,17 @@ void KDirWatchPrivate::addWatch(Entry *e)
 #if HAVE_FAM
     case KDirWatch::FAM: entryAdded = useFAM(e); break;
 #else
-    case KDirWatch::FAM: Q_UNREACHABLE(); break;
+    case KDirWatch::FAM: entryAdded = false; break;
 #endif
 #if HAVE_SYS_INOTIFY_H
     case KDirWatch::INotify: entryAdded = useINotify(e); break;
+#else
+    case KDirWatch::INotify: entryAdded = false; break;
 #endif
 #if HAVE_QFILESYSTEMWATCHER
     case KDirWatch::QFSWatch: entryAdded = useQFSWatch(e); break;
+#else
+    case KDirWatch::QFSWatch: entryAdded = false; break;
 #endif
     case KDirWatch::Stat: entryAdded = useStat(e); break;
     }
