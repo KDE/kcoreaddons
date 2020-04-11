@@ -32,10 +32,30 @@ class KCOREADDONS_EXPORT KJobUiDelegate : public QObject
     Q_OBJECT
 
 public:
+
+    /**
+     * Flags for the constructor, to enable automatic handling of errors and/or warnings
+     * @since 5.70
+     */
+    enum Flag {
+        AutoHandlingDisabled = 0, ///< No automatic handling (default)
+        AutoErrorHandlingEnabled = 1, ///< Equivalent to setAutoErrorHandlingEnabled(true)
+        AutoWarningHandlingEnabled = 2, ///< Equivalent to setAutoWarningHandlingEnabled(true)
+        AutoHandlingEnabled = AutoErrorHandlingEnabled | AutoWarningHandlingEnabled ///< Enables both error and warning handling
+    };
+    Q_DECLARE_FLAGS(Flags, Flag)
+
     /**
      * Constructs a new KJobUiDelegate.
      */
     KJobUiDelegate();
+
+    /**
+     * Constructs a new KJobUiDelegate with a flags argument.
+     * @param flags allows to enable automatic error/warning handling
+     * @since 5.70
+     */
+    KJobUiDelegate(Flags flags); // KF6 TODO merge with default constructor, using AutoHandlingDisabled as default value
 
     /**
      * Destroys a KJobUiDelegate.
@@ -123,5 +143,7 @@ private:
     class Private;
     Private *const d;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(KJobUiDelegate::Flags)
 
 #endif // KJOBUIDELEGATE_H

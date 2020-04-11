@@ -32,7 +32,17 @@ public:
 KJobUiDelegate::KJobUiDelegate()
     : QObject(), d(new Private(this))
 {
+}
 
+KJobUiDelegate::KJobUiDelegate(Flags flags)
+    : QObject(), d(new Private(this))
+{
+    if (flags & AutoErrorHandlingEnabled) {
+        d->autoErrorHandling = true;
+    }
+    if (flags & AutoWarningHandlingEnabled) {
+        d->autoWarningHandling = true;
+    }
 }
 
 KJobUiDelegate::~KJobUiDelegate()
