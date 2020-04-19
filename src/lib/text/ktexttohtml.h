@@ -19,6 +19,7 @@ namespace KTextToHTML
 {
 
 /**
+ * @see Options
  * @since 5.5.0
  */
 enum Option
@@ -54,6 +55,9 @@ enum Option
      */
     ConvertPhoneNumbers = 1 << 5
 };
+/**
+ * Stores a combination of #Option values.
+ */
 Q_DECLARE_FLAGS(Options, Option)
 
 /**

@@ -85,12 +85,19 @@ public:
     enum Unit { Bytes, Files, Directories };
     Q_ENUM(Unit)
 
-    enum Capability { NoCapabilities = 0x0000,
-                      Killable       = 0x0001,
-                      Suspendable    = 0x0002
-                    };
+    /**
+     * @see Capabilities
+     */
+    enum Capability {
+        NoCapabilities = 0x0000, ///< None of the capabilities exist
+        Killable       = 0x0001, ///< The job can be killed
+        Suspendable    = 0x0002, ///< The job can be suspended
+    };
     Q_ENUM(Capability)
 
+    /**
+     * Stores a combination of #Capability values.
+     */
     Q_DECLARE_FLAGS(Capabilities, Capability)
     Q_FLAG(Capabilities)
 

@@ -178,6 +178,7 @@ public:
 
     /**
      * Format flags for formatDuration()
+     * @see DurationFormatOptions
      */
     enum DurationFormatOption {
         DefaultDuration     = 0x0,   ///< Default formatting in localized 1:23:45 format
@@ -186,6 +187,9 @@ public:
         HideSeconds         = 0x4,   ///< Hide the seconds, e.g. 1:23 or 1h23m, overrides ShowMilliseconds
         FoldHours           = 0x8    ///< Fold the hours into the minutes, e.g. 83:45 or 83m45s, overrides HideSeconds
     };
+    /**
+     * Stores a combination of #DurationFormatOption values.
+     */
     Q_DECLARE_FLAGS(DurationFormatOptions, DurationFormatOption)
     Q_FLAG(DurationFormatOption)
 

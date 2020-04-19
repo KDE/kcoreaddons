@@ -24,6 +24,7 @@ namespace KShell
 
 /**
  * Flags for splitArgs().
+ * @see Options
  */
 enum Option {
     NoOptions = 0,
@@ -66,6 +67,9 @@ enum Option {
      */
     AbortOnMeta = 2
 };
+/**
+ * Stores a combination of #Option values.
+ */
 Q_DECLARE_FLAGS(Options, Option)
 
 /**

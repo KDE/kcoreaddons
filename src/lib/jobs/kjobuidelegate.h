@@ -35,6 +35,7 @@ public:
 
     /**
      * Flags for the constructor, to enable automatic handling of errors and/or warnings
+     * @see Flags
      * @since 5.70
      */
     enum Flag {
@@ -43,6 +44,9 @@ public:
         AutoWarningHandlingEnabled = 2, ///< Equivalent to setAutoWarningHandlingEnabled(true)
         AutoHandlingEnabled = AutoErrorHandlingEnabled | AutoWarningHandlingEnabled ///< Enables both error and warning handling
     };
+    /**
+     * Stores a combination of #Flag values.
+     */
     Q_DECLARE_FLAGS(Flags, Flag)
 
     /**
