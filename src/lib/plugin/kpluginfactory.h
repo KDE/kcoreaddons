@@ -530,7 +530,14 @@ private:
     void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceFunction instanceFunction);
 };
 
+// Deprecation wrapper macro added only for 5.70, while backward typedef added in 4.0
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 70)
+/**
+ * Backward compatibility typedef for KPluginFactory
+ * @deprecated since 4.0, use KPluginFactory
+ */
 typedef KPluginFactory KLibFactory;
+#endif
 
 template<typename T>
 inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
