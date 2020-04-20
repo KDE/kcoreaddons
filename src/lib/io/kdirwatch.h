@@ -61,12 +61,16 @@ public:
 
     /**
     * Available watch modes for directory monitoring
+    * @see WatchModes
     **/
     enum WatchMode {
         WatchDirOnly = 0,  ///< Watch just the specified directory
         WatchFiles = 0x01, ///< Watch also all files contained by the directory
         WatchSubDirs = 0x02 ///< Watch also all the subdirs contained by the directory
     };
+    /**
+     * Stores a combination of #WatchMode values.
+     */
     Q_DECLARE_FLAGS(WatchModes, WatchMode)
 
     /**
