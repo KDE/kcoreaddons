@@ -78,7 +78,7 @@ class KCOREADDONS_EXPORT KJob : public QObject
     Q_PROPERTY(int error READ error NOTIFY result)
     Q_PROPERTY(QString errorText READ errorText NOTIFY result)
     Q_PROPERTY(QString errorString READ errorString NOTIFY result)
-    Q_PROPERTY(unsigned long percent READ percent NOTIFY percent)
+    Q_PROPERTY(ulong percent READ percent NOTIFY percent)
     Q_PROPERTY(Capabilities capabilities READ capabilities CONSTANT)
 
 public:
