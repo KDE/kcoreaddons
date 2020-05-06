@@ -399,7 +399,9 @@ static SharedLockId findBestSharedLock()
         sem_t tempSemaphore;
         QSharedPointer<KSDCLock> tempLock;
         if (timeoutsSupported) {
+#ifdef KSDC_TIMEOUTS_SUPPORTED
             tempLock = QSharedPointer<KSDCLock>(new semaphoreTimedLock(tempSemaphore));
+#endif
         } else {
             tempLock = QSharedPointer<KSDCLock>(new semaphoreLock(tempSemaphore));
         }
