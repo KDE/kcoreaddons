@@ -538,7 +538,7 @@ void KTextToHTMLTest::benchHtmlConvert_data()
     QTest::addColumn<QString>("text");
     QTest::addColumn<KTextToHTML::Options>("options");
 
-    auto text = QString(QStringLiteral("foo bar asdf :)")).repeated(1000);
+    auto text = QStringLiteral("foo bar asdf :)").repeated(1000);
     QTest::newRow("plain") << text << KTextToHTML::Options();
     QTest::newRow("preserve-spaces") << text << KTextToHTML::Options(KTextToHTML::PreserveSpaces);
     QTest::newRow("highlight-text") << text << KTextToHTML::Options(KTextToHTML::HighlightText);
