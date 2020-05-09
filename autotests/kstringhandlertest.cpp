@@ -56,8 +56,10 @@ void KStringHandlerTest::perlSplit()
 
     expected.clear();
     expected << QStringLiteral("Split") << QStringLiteral("me") << QStringLiteral("up ! I'm bored ! OK ?");
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
     QCOMPARE(KStringHandler::perlSplit(QRegExp(QStringLiteral("[! ]")),
                                        QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
+#endif
     QCOMPARE(KStringHandler::perlSplit(QRegularExpression(QStringLiteral("[! ]")),
                                        QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
 }
