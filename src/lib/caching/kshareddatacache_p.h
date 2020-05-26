@@ -126,7 +126,7 @@ public:
     bool initialize(bool &processSharingSupported) override
     {
         // Clear the spinlock
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+#if QT_VERSION < QT_VERSION_CHECK(5, 14, 0)
         m_spinlock.store(0);
 #else
         m_spinlock.storeRelaxed(0);
