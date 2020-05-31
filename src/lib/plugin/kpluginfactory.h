@@ -28,7 +28,7 @@ class Part;
 #define KPluginFactory_iid "org.kde.KPluginFactory"
 
 #define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, ...) \
-    class name : public KPluginFactory \
+    class name : public baseFactory \
     { \
         Q_OBJECT \
         Q_INTERFACES(KPluginFactory) \
