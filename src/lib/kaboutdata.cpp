@@ -902,7 +902,11 @@ QList<KAboutPerson> KAboutData::Private::parseTranslators(const QString &transla
 
     QStringList emailList;
     if (!translatorEmail.isEmpty() && translatorEmail != QLatin1String("Your emails")) {
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
         emailList = translatorEmail.split(QLatin1Char(','), QString::KeepEmptyParts);
+#else
+        emailList = translatorEmail.split(QLatin1Char(','), Qt::KeepEmptyParts);
+#endif
     }
 
     QStringList::const_iterator nit;
