@@ -3425,7 +3425,7 @@ Notes:
     <comment xml:lang="lt">KConfigXT konfigūravimo parinktys</comment>
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
     <comment xml:lang="nn">KConfigXT-oppsett</comment>
-    <comment xml:lang="pl">Opcje KConfigXT</comment>
+    <comment xml:lang="pl">Ustawienia KConfigXT</comment>
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de configuração do KConfigXT</comment>
     <comment xml:lang="ru">Параметры конфигурации KConfigXT</comment>
@@ -3470,7 +3470,7 @@ Notes:
     <comment xml:lang="lt">KConfigXT kodo generavimo parinktys</comment>
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
     <comment xml:lang="nn">KConfigXT-kodegeneringsval</comment>
-    <comment xml:lang="pl">Opcje tworzenia kodu KConfigXT</comment>
+    <comment xml:lang="pl">Ustawienia do tworzenia kodu KConfigXT</comment>
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de geração de código do KConfigXT</comment>
     <comment xml:lang="ru">Параметры создания кода KConfigXT</comment>
@@ -3511,7 +3511,7 @@ Notes:
     <comment xml:lang="lt">KXMLGUI naudotojo sąsajos deklaracija</comment>
     <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
     <comment xml:lang="nn">KXMLGUI UI-deklarasjon</comment>
-    <comment xml:lang="pl">Dklaracja KXMLGUI UI</comment>
+    <comment xml:lang="pl">Deklaracja KXMLGUI UI</comment>
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
     <comment xml:lang="pt_BR">Declaração UI do KXMLGUI</comment>
     <comment xml:lang="ru">Конфигурация интерфейса KXMLGUI</comment>
@@ -3594,6 +3594,7 @@ Notes:
     <comment xml:lang="lt">KCrash pranešimas</comment>
     <comment xml:lang="nl">Rapport van KCrash</comment>
     <comment xml:lang="nn">KCrash-rapport</comment>
+    <comment xml:lang="pl">Zgłoszenie KCrash</comment>
     <comment xml:lang="pt">Relatório do KCrash</comment>
     <comment xml:lang="pt_BR">Relatório do KCrash</comment>
     <comment xml:lang="ru">Отчёт об ошибке KCrash</comment>
