@@ -223,7 +223,8 @@ bool KTextToHTMLHelper::atUrl() const
         (ch == QLatin1Char('f') && (mText.midRef(mPos, 4) == QLatin1String("ftp.") ||
                                     mText.midRef(mPos, 7) == QLatin1String("file://"))) ||
         (ch == QLatin1Char('n') && mText.midRef(mPos, 5) == QLatin1String("news:")) ||
-        (ch == QLatin1Char('t') && mText.midRef(mPos, 4) == QLatin1String("tel:"));
+        (ch == QLatin1Char('t') && mText.midRef(mPos, 4) == QLatin1String("tel:")) ||
+        (ch == QLatin1Char('x') && mText.midRef(mPos, 5) == QLatin1String("xmpp:"));
 
 }
 
@@ -244,7 +245,8 @@ bool KTextToHTMLHelper::isEmptyUrl(const QString &url) const
            url == QLatin1String("news") ||
            url == QLatin1String("news://") ||
            url == QLatin1String("tel") ||
-           url == QLatin1String("tel:");
+           url == QLatin1String("tel:") ||
+           url == QLatin1String("xmpp:");
 }
 
 QString KTextToHTMLHelper::getUrl(bool *badurl)

@@ -517,6 +517,17 @@ void KTextToHTMLTest::testHtmlConvert_data()
     QTest::newRow("bug-414360") << "https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=44.85765%2C-0.55931%3B44.85713%2C-0.56117#map=18/44.85756/-0.56094"
                      << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                      << "<a href=\"https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=44.85765%2C-0.55931%3B44.85713%2C-0.56117#map=18/44.85756/-0.56094\">https://www.openstreetmap.org/directions?engine=graphhopper_foot&amp;route=44.85765%2C-0.55931%3B44.85713%2C-0.56117#map=18/44.85756/-0.56094</a>";
+
+    //xmpp bug 422291
+    QTest::newRow("xmpp1") << "xmpp:username@server.tld"
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "<a href=\"xmpp:username@server.tld\">xmpp:username@server.tld</a>";
+    QTest::newRow("xmpp2") << "xmpp:conversations@conference.siacs.eu"
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "<a href=\"xmpp:conversations@conference.siacs.eu\">xmpp:conversations@conference.siacs.eu</a>";
+    QTest::newRow("xmpp3") << "xmpp:conversations@conference.siacs.eu?join"
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "<a href=\"xmpp:conversations@conference.siacs.eu?join\">xmpp:conversations@conference.siacs.eu?join</a>";
 }
 
 
