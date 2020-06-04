@@ -24,9 +24,11 @@
 #include <fcntl.h>
 
 #include <QFile>
+#include <QRandomGenerator>
 #include <QThread>
 #include <QThreadStorage>
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 71)
 int KRandom::random()
 {
     static QThreadStorage<bool> initialized_threads;
@@ -44,6 +46,7 @@ int KRandom::random()
     }
     return qrand();
 }
+#endif
 
 QString KRandom::randomString(int length)
 {
@@ -54,7 +57,7 @@ QString KRandom::randomString(int length)
     QString str; str.resize(length);
     int i = 0;
     while (length--) {
-        int r = random() % 62;
+        int r = QRandomGenerator::global()->generate() % 62;
         r += 48;
         if (r > 57) {
             r += 7;
