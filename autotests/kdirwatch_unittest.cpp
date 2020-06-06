@@ -75,7 +75,8 @@ public:
 
         m_path = m_tempDir.path() + QLatin1Char('/');
         KDirWatch *dirW = &s_staticObject()->m_dirWatch;
-        m_slow = (dirW->internalMethod() == KDirWatch::FAM || dirW->internalMethod() == KDirWatch::Stat);
+        m_stat = dirW->internalMethod() == KDirWatch::Stat;
+        m_slow = (dirW->internalMethod() == KDirWatch::FAM || m_stat);
         qDebug() << "Using method" << methodToString(dirW->internalMethod());
     }
 
@@ -133,6 +134,7 @@ private:
     QTemporaryDir m_tempDir;
     QString m_path;
     bool m_slow;
+    bool m_stat;
 };
 
 QTEST_MAIN(KDirWatch_UnitTest)
@@ -536,6 +538,13 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
     // Make sure this even works multiple times, as needed for ksycoca
     for (int i = 0; i < 5; ++i) {
 
+        if (m_slow) {
+            waitUntilNewSecond();
+        }
+
+        qDebug() << "Attempt #" << (i+1) << "removing+recreating" << file1;
+        QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
+
         QFile::remove(file1);
         // And recreate immediately, to try and fool KDirWatch with unchanged ctime/mtime ;)
         // (This emulates the /etc/localtime case)
@@ -544,8 +553,9 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
         //QCOMPARE(KDE::stat(QFile::encodeName(file1), &stat_buf), 0);
         //qDebug() << "new inode" << stat_buf.st_ino; // same!
 
-        {
-            QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
+        if (m_stat) {
+            QVERIFY(spyDirty.wait());
+        } else {
             if(!waitForRecreationSignal(watch, file1)) {
                 // We may get a dirty signal here instead of a deleted/created set.
                 if (spyDirty.isEmpty() || !verifySignalPath(spyDirty, SIGNAL(dirty(QString)), file1)) {
