@@ -1,0 +1,255 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Federico Zenith <federico.zenith@member.fsf.org>, 2009, 2010, 2011, 2014.
+# Vincenzo Reale <smart2128@baslug.org>, 2017, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: xml_mimetypes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-01-17 02:56+0100\n"
+"PO-Revision-Date: 2020-01-17 20:14+0100\n"
+"Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 19.12.1\n"
+
+#: kde5.xml.podir/kde5.xml.in.h:1
+msgid "RELAX NG"
+msgstr "RELAX NG"
+
+#: kde5.xml.podir/kde5.xml.in.h:2
+msgid "CD audio"
+msgstr "audio CD"
+
+#: kde5.xml.podir/kde5.xml.in.h:3
+msgid "SNF bitmap font"
+msgstr "carattere bitmap SNF"
+
+#: kde5.xml.podir/kde5.xml.in.h:4
+msgid "Java applet"
+msgstr "applet Java"
+
+#: kde5.xml.podir/kde5.xml.in.h:5
+msgid "KHTML Extension Adaptor"
+msgstr "adattatore di estensioni di KHTML"
+
+#: kde5.xml.podir/kde5.xml.in.h:6
+msgid "KDE color scheme"
+msgstr "schema di colori di KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:7
+msgid "KNewStuff package"
+msgstr "pacchetto di KNewStuff"
+
+#: kde5.xml.podir/kde5.xml.in.h:9
+msgid "KWallet wallet"
+msgstr "Portafogli di KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:10
+msgid "Kugar report template"
+msgstr "modello di rapporto di Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:11
+msgid "plasmoid"
+msgstr "plasmoide"
+
+#: kde5.xml.podir/kde5.xml.in.h:12
+msgid "SuperKaramba theme"
+msgstr "tema di SuperKaramba"
+
+#: kde5.xml.podir/kde5.xml.in.h:13
+msgid "Calligra Plan project management document"
+msgstr "documento di gestione dei progetti di Calligra Plan"
+
+#: kde5.xml.podir/kde5.xml.in.h:14
+msgid "Calligra Plan work package document"
+msgstr "documento dei pacchetti di lavoro di Calligra Plan"
+
+#: kde5.xml.podir/kde5.xml.in.h:15
+msgid "KPlato project management document"
+msgstr "documento di gestione dei progetti di KPlato"
+
+#: kde5.xml.podir/kde5.xml.in.h:16
+msgid "KPlato project management work package"
+msgstr "pacchetto di lavoro di gestione dei progetti di KPlato"
+
+#: kde5.xml.podir/kde5.xml.in.h:17
+msgid "Kugar archive"
+msgstr "archivio di Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:19
+msgid "web archive"
+msgstr "archivio Web"
+
+#: kde5.xml.podir/kde5.xml.in.h:20
+msgid "W3C XML schema"
+msgstr "Schema XML del W3C"
+
+#: kde5.xml.podir/kde5.xml.in.h:22
+msgid "RealAudio plugin file"
+msgstr "file di estensioni RealAudio"
+
+#: kde5.xml.podir/kde5.xml.in.h:24
+msgid "KPhotoAlbum import"
+msgstr "importazione di KPhotoAlbum"
+
+#: kde5.xml.podir/kde5.xml.in.h:26
+msgid "HDR image"
+msgstr "immagine HDR"
+
+#: kde5.xml.podir/kde5.xml.in.h:27
+msgid "KDE raw image formats"
+msgstr "formati di immagine raw di KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:28
+msgid "Intel® hexadecimal object file"
+msgstr "file oggetto esadecimale Intel®"
+
+#: kde5.xml.podir/kde5.xml.in.h:29
+msgid "Kate file list loader plugin list"
+msgstr "elenco delle estensioni del caricatore di elenchi di file di Kate"
+
+#: kde5.xml.podir/kde5.xml.in.h:30
+msgid "abc musical notation file"
+msgstr "file di notazione musicale abc"
+
+#: kde5.xml.podir/kde5.xml.in.h:31
+msgid "fonts package"
+msgstr "pacchetto di caratteri"
+
+#: kde5.xml.podir/kde5.xml.in.h:32
+msgid "Windows server"
+msgstr "server Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:33
+msgid "Windows workgroup"
+msgstr "gruppo di lavoro di Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:35
+msgid "KDE system monitor"
+msgstr "monitor di sistema di KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:36
+msgid "KDE theme"
+msgstr "tema di KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:37
+msgid "Quanta project"
+msgstr "progetto di Quanta"
+
+#: kde5.xml.podir/kde5.xml.in.h:38
+msgid "Kommander file"
+msgstr "file di Kommander"
+
+#: kde5.xml.podir/kde5.xml.in.h:39
+msgid "potato"
+msgstr "patata"
+
+#: kde5.xml.podir/kde5.xml.in.h:40
+msgid "Kolf saved game"
+msgstr "partita salvata di Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:41
+msgid "Kolf course"
+msgstr "campo da Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:42
+msgid "Okular document archive"
+msgstr "archivio di documenti di Okular"
+
+#: kde5.xml.podir/kde5.xml.in.h:43
+msgid "Cabri figure"
+msgstr "figura Cabri"
+
+#: kde5.xml.podir/kde5.xml.in.h:44
+msgid "Dr. Geo figure"
+msgstr "figura Dr. Geo"
+
+#: kde5.xml.podir/kde5.xml.in.h:45
+msgid "KGeo figure"
+msgstr "figura di KGeo"
+
+#: kde5.xml.podir/kde5.xml.in.h:46
+msgid "Kig figure"
+msgstr "figura di Kig"
+
+#: kde5.xml.podir/kde5.xml.in.h:47
+msgid "KSeg document"
+msgstr "documento di KSeg"
+
+#: kde5.xml.podir/kde5.xml.in.h:48
+msgid "vocabulary trainer document"
+msgstr "documento di allenamento a vocabolario"
+
+#: kde5.xml.podir/kde5.xml.in.h:49
+msgid "KmPlot file"
+msgstr "file di KmPlot"
+
+#: kde5.xml.podir/kde5.xml.in.h:50
+msgid "KWordQuiz vocabulary"
+msgstr "vocabolario di KWordQuiz"
+
+#: kde5.xml.podir/kde5.xml.in.h:51
+msgid "Cachegrind/Callgrind profile dump"
+msgstr "dump di profilatura di Cachegrind e Callgrind"
+
+#: kde5.xml.podir/kde5.xml.in.h:52
+msgid "Umbrello UML Modeller file"
+msgstr "file del modellatore UML Umbrello"
+
+#: kde5.xml.podir/kde5.xml.in.h:53
+msgid "Windows link"
+msgstr "collegamento di Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:54
+msgid "KGet download list"
+msgstr "elenco di scaricamenti di KGet"
+
+#: kde5.xml.podir/kde5.xml.in.h:55
+msgid "Kopete emoticons archive"
+msgstr "archivio di faccine di Kopete"
+
+#: kde5.xml.podir/kde5.xml.in.h:56
+msgid "ICQ contact"
+msgstr "contatto ICQ"
+
+#: kde5.xml.podir/kde5.xml.in.h:58
+msgid "Microsoft Media Format"
+msgstr "formato multimediale di Microsoft"
+
+#: kde5.xml.podir/kde5.xml.in.h:60
+msgid "Turtle RDF document"
+msgstr "documento Turtle RDF"
+
+#: kde5.xml.podir/kde5.xml.in.h:62
+msgid "Softimage PIC image"
+msgstr "immagine Softimage PIC"
+
+#: kde5.xml.podir/kde5.xml.in.h:64
+msgid "Qt Markup Language file"
+msgstr "File di linguaggio a marcatori di Qt"
+
+#: kde5.xml.podir/kde5.xml.in.h:65
+msgid "KConfigXT Configuration Options"
+msgstr "Opzioni di configurazione KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:66
+msgid "KConfigXT Code Generation Options"
+msgstr "Opzioni di generazione codice KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:67
+msgid "KXMLGUI UI Declaration"
+msgstr "Dichiarazione UI KXMLGUI"
+
+#: kde5.xml.podir/kde5.xml.in.h:68
+msgid "KNotification Declaration"
+msgstr "Dichiarazione KNotification"
+
+#: kde5.xml.podir/kde5.xml.in.h:69
+msgid "KCrash Report"
+msgstr "Rapporto di KCrash"
