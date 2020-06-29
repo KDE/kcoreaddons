@@ -26,13 +26,14 @@
  */
 namespace KRandom
 {
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 71)
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 72)
 /**
  * Generates a uniform random number.
  * @return A random number in the range [0, RAND_MAX). The RNG is seeded
  *   on first use.
+ * @deprecated Since 5.72, use QRandomGenerator::global()->generate()
  */
-KCOREADDONS_DEPRECATED_VERSION(5, 71, "Use QRandomGenerator::global()->generate()")
+KCOREADDONS_DEPRECATED_VERSION(5, 72, "Use QRandomGenerator::global()->generate()")
 KCOREADDONS_EXPORT int random();
 #endif
 

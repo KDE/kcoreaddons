@@ -28,7 +28,7 @@
 #include <QThread>
 #include <QThreadStorage>
 
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 71)
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 72)
 int KRandom::random()
 {
     static QThreadStorage<bool> initialized_threads;
