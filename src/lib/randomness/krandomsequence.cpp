@@ -7,7 +7,8 @@
 */
 
 #include "krandomsequence.h"
-#include "krandom.h"
+
+#include <QRandomGenerator>
 
 class Q_DECL_HIDDEN KRandomSequence::Private
 {
@@ -73,7 +74,7 @@ void KRandomSequence::setSeed(int lngSeed1)
     if (lngSeed1 < 0) {
         d->lngSeed1 = -1;
     } else if (lngSeed1 == 0) {
-        d->lngSeed1 = -((KRandom::random() & ~1) + 1);
+        d->lngSeed1 = -((QRandomGenerator::global()->bounded(RAND_MAX) & ~1) + 1);
     } else {
         d->lngSeed1 = -lngSeed1;
     }

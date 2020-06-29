@@ -65,7 +65,7 @@ QString KRandom::randomString(int length)
     QString str; str.resize(length);
     int i = 0;
     while (length--) {
-        int r = QRandomGenerator::global()->generate() % 62;
+        int r = QRandomGenerator::global()->bounded(62);
         r += 48;
         if (r > 57) {
             r += 7;

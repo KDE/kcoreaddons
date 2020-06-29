@@ -44,6 +44,7 @@ static bool seqsAreEqual(const intSequenceType &l, const intSequenceType &r)
     return l_first == last;
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 72)
 // Fills seq with random bytes produced by a new process. Seq should already
 // be sized to the needed amount of random numbers.
 static bool getChildRandSeq(intSequenceType &seq)
@@ -65,18 +66,22 @@ static bool getChildRandSeq(intSequenceType &seq)
     childStream >> c;
     return c == '\n' && childStream.status() == QTextStream::Ok;
 }
+#endif
 
 class KRandomTest : public QObject
 {
     Q_OBJECT
 
 private Q_SLOTS:
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 72)
     void test_random();
+#endif
     void test_randomString();
     void test_randomStringThreaded();
     void test_KRS();
 };
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 72)
 void KRandomTest::test_random()
 {
     int testValue = KRandom::random();
@@ -93,6 +98,7 @@ void KRandomTest::test_random()
 
     QVERIFY(!seqsAreEqual(out1, out2));
 }
+#endif
 
 void KRandomTest::test_randomString()
 {
@@ -173,6 +179,7 @@ void KRandomTest::test_randomStringThreaded()
     }
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 72)
 // Used by getChildRandSeq... outputs random numbers to stdout and then
 // exits the process.
 static void childGenRandom(int count)
@@ -189,15 +196,18 @@ static void childGenRandom(int count)
     std::cout << KRandom::random() << '\n';
     exit(0);
 }
+#endif
 
 // Manually implemented to dispatch to child process if needed to support
 // subtests
 int main(int argc, char *argv[])
 {
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 72)
     if (argc > 1) {
         childGenRandom(std::atoi(argv[1]));
         Q_UNREACHABLE();
     }
+#endif
 
     binpath = argv[0];
     KRandomTest randomTest;

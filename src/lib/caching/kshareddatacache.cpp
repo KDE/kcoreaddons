@@ -17,8 +17,6 @@
 #include "qstandardpaths.h"
 #include <qplatformdefs.h>
 
-#include <krandom.h>
-
 #include <QDebug>
 #include <QSharedPointer>
 #include <QByteArray>
@@ -26,6 +24,7 @@
 #include <QAtomicInt>
 #include <QMutex>
 #include <QDir>
+#include <QRandomGenerator>
 
 #include <sys/types.h>
 #include <sys/mman.h>
@@ -1463,7 +1462,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
             cullCollisions = true;
         } else if (loadFactor > startCullPoint) {
             const int tripWireValue = RAND_MAX * (loadFactor - startCullPoint) / (mustCullPoint - startCullPoint);
-            if (KRandom::random() >= tripWireValue) {
+            if (QRandomGenerator::global()->bounded(RAND_MAX) >= tripWireValue) {
                 cullCollisions = true;
             }
         }

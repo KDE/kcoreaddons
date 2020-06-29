@@ -38,11 +38,11 @@ public:
      * reproduced by starting the sequence with the same seed.
      *
      * If you need a single value which needs to be unpredictable,
-     * you need to use KRandom::random() instead.
+     * you need to use QRandomGenerator::global()->generate() instead.
      *
      * @param intSeed Seed to initialize the sequence with.
      * If lngSeed is 0, the sequence is initialized with a value from
-     * KRandom::random().
+     * [0, RAND_MAX)
      *
      * Do not use methods working with long type because on 64-bit
      * their size is different.
@@ -69,7 +69,7 @@ public:
      * Restart the sequence based on lngSeed.
      * @param intSeed Seed to initialize the sequence with.
      * If lngSeed is 0, the sequence is initialized with a value from
-     * KRandom::random().
+     * [0, RAND_MAX).
      */
     void setSeed(int intSeed = 0);
     void setSeed(long lngSeed = 0);
