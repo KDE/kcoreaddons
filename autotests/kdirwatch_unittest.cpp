@@ -324,14 +324,28 @@ bool KDirWatch_UnitTest::waitForRecreationSignal(KDirWatch &watch, const QString
   // When watching for a deleted + created signal pair, the two might come so close that
   // using waitForOneSignal will miss the created signal.  This function monitors both all
   // the time to ensure both are received.
+  //
+  // In addition, it allows dirty() to be emitted (for that same path) as an alternative
 
   const QString expectedPath = removeTrailingSlash(path);
-  QSignalSpy spyDeleted(&watch, SIGNAL(deleted(QString)));
-  QSignalSpy spyCreated(&watch, SIGNAL(created(QString)));
+  QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
+  QSignalSpy spyDeleted(&watch, &KDirWatch::deleted);
+  QSignalSpy spyCreated(&watch, &KDirWatch::created);
 
-  if(!spyDeleted.wait(50 * s_maxTries)) {
-    qWarning() << "Timeout waiting for KDirWatch signal deleted(QString) (" << path << ")";
-    return false;
+  int numTries = 0;
+  while (spyDeleted.isEmpty() && spyDirty.isEmpty()) {
+      if (++numTries > s_maxTries) {
+          return false;
+      }
+      spyDeleted.wait(50);
+      while (!spyDirty.isEmpty()) {
+          if (spyDirty.at(0).at(0).toString() != expectedPath) { // unrelated
+              spyDirty.removeFirst();
+          }
+      }
+  }
+  if (!spyDirty.isEmpty()) {
+      return true;
   }
 
   // Don't bother waiting for the created signal if the signal spy already received a signal.
@@ -538,31 +552,59 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
     // Make sure this even works multiple times, as needed for ksycoca
     for (int i = 0; i < 5; ++i) {
 
-        if (m_slow) {
+        if (m_slow || watch.internalMethod() == KDirWatch::QFSWatch) {
             waitUntilNewSecond();
         }
 
         qDebug() << "Attempt #" << (i+1) << "removing+recreating" << file1;
-        QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
 
+        // When watching for a deleted + created signal pair, the two might come so close that
+        // using waitForOneSignal will miss the created signal.  This function monitors both all
+        // the time to ensure both are received.
+        //
+        // In addition, allow dirty() to be emitted (for that same path) as an alternative
+
+        const QString expectedPath = file1;
+        QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
+        QSignalSpy spyDeleted(&watch, &KDirWatch::deleted);
+        QSignalSpy spyCreated(&watch, &KDirWatch::created);
+
+        // WHEN
         QFile::remove(file1);
         // And recreate immediately, to try and fool KDirWatch with unchanged ctime/mtime ;)
         // (This emulates the /etc/localtime case)
         createFile(file1);
-
         //QCOMPARE(KDE::stat(QFile::encodeName(file1), &stat_buf), 0);
         //qDebug() << "new inode" << stat_buf.st_ino; // same!
 
-        if (m_stat) {
-            QVERIFY(spyDirty.wait());
-        } else {
-            if(!waitForRecreationSignal(watch, file1)) {
-                // We may get a dirty signal here instead of a deleted/created set.
-                if (spyDirty.isEmpty() || !verifySignalPath(spyDirty, SIGNAL(dirty(QString)), file1)) {
-                    QFAIL("Failed to detect file deletion and recreation through either a deleted/created signal pair or through a dirty signal!");
+        // THEN
+        int numTries = 0;
+        while (spyDeleted.isEmpty() && spyDirty.isEmpty()) {
+            if (++numTries > s_maxTries) {
+                QFAIL("Failed to detect file deletion and recreation through either a deleted/created signal pair or through a dirty signal!");
+                return;
+            }
+            spyDeleted.wait(50);
+            while (!spyDirty.isEmpty()) {
+                if (spyDirty.at(0).at(0).toString() != expectedPath) { // unrelated
+                    spyDirty.removeFirst();
+                } else {
+                    break;
                 }
             }
         }
+        if (!spyDirty.isEmpty()) {
+            continue; // all ok
+        }
+
+        // Don't bother waiting for the created signal if the signal spy already received a signal.
+        if (spyCreated.isEmpty() && !spyCreated.wait(50 * s_maxTries)) {
+            qWarning() << "Timeout waiting for KDirWatch signal created(QString) (" << expectedPath << ")";
+            QFAIL("Timeout waiting for KDirWatch signal created, after deleted was emitted");
+            return;
+        }
+
+        QVERIFY(verifySignalPath(spyDeleted, "deleted(QString)", expectedPath) && verifySignalPath(spyCreated, "created(QString)", expectedPath));
     }
 
     waitUntilMTimeChange(file1);
