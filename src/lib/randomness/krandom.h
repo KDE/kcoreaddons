@@ -13,7 +13,10 @@
 
 #include <kcoreaddons_export.h>
 
+#include <QRandomGenerator>
 #include <QString>
+
+#include <limits>
 
 /**
  * \headerfile krandom.h <KRandom>
@@ -43,6 +46,38 @@ KCOREADDONS_EXPORT int random();
  * @return the random string
  */
 KCOREADDONS_EXPORT QString randomString(int length);
+
+/**
+ * Reorders the elements of the given container randomly using the given random number generator.
+ *
+ * The container needs to implement size() and T &operator[]
+ *
+ * @since 5.73
+ */
+template<typename T>
+void shuffle(T &container, QRandomGenerator *generator)
+{
+    Q_ASSERT(container.size() <= std::numeric_limits<int>::max());
+    // Fisher-Yates algorithm
+    for (int index = container.size() - 1; index > 0; --index) {
+        const int swapIndex = generator->bounded(index + 1);
+        qSwap(container[index], container[swapIndex]);
+    }
+}
+
+/**
+ * Reorders the elements of the given container randomly.
+ *
+ * The container needs to implement size() and T &operator[]
+ *
+ * @since 5.73
+ */
+template<typename T>
+void shuffle(T &container)
+{
+    shuffle(container, QRandomGenerator::global());
+}
+
 }
 
 #endif

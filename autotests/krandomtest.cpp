@@ -79,6 +79,7 @@ private Q_SLOTS:
     void test_randomString();
     void test_randomStringThreaded();
     void test_KRS();
+    void test_shuffle();
 };
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 72)
@@ -146,6 +147,33 @@ void KRandomTest::test_KRS()
     QVERIFY(seqsAreEqual(out1, out2));
     QVERIFY(all_of(out1.begin(), out1.end(), [&](int x) { return x < maxInt; }));
     QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) { return x < maxInt; }));
+}
+
+void KRandomTest::test_shuffle()
+{
+    {
+        QRandomGenerator rg(1);
+        QList<int> list = {1, 2, 3, 4, 5};
+        const QList<int> shuffled = {5, 2, 4, 3, 1};
+        KRandom::shuffle(list, &rg);
+        QCOMPARE(list, shuffled);
+    }
+
+    {
+        QRandomGenerator rg(1);
+        QVector<int> vector = {1, 2, 3, 4, 5};
+        const QVector<int> shuffled = {5, 2, 4, 3, 1};
+        KRandom::shuffle(vector, &rg);
+        QCOMPARE(vector, shuffled);
+    }
+
+    {
+        QRandomGenerator rg(1);
+        std::vector<int> std_vector = {1, 2, 3, 4, 5};
+        const std::vector<int> shuffled = {5, 2, 4, 3, 1};
+        KRandom::shuffle(std_vector, &rg);
+        QCOMPARE(std_vector, shuffled);
+    }
 }
 
 class KRandomTestThread : public QThread
