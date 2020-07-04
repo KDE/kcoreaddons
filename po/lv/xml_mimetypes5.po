@@ -1,0 +1,258 @@
+# translation of xml_mimetypes.po to Latvian
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
+# Maris Nartiss <maris.kde@gmail.com>, 2009.
+# Einars Sprugis <einars8@gmail.com>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: xml_mimetypes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-01-17 02:56+0100\n"
+"PO-Revision-Date: 2011-08-18 00:00+0300\n"
+"Last-Translator: Einars Sprugis <einars8@gmail.com>\n"
+"Language-Team: Latvian <locale@laka.lv>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+
+#: kde5.xml.podir/kde5.xml.in.h:1
+msgid "RELAX NG"
+msgstr "RELAX NG"
+
+#: kde5.xml.podir/kde5.xml.in.h:2
+msgid "CD audio"
+msgstr "CD audio"
+
+#: kde5.xml.podir/kde5.xml.in.h:3
+msgid "SNF bitmap font"
+msgstr "SNF bitkartes fonts"
+
+#: kde5.xml.podir/kde5.xml.in.h:4
+msgid "Java applet"
+msgstr "Java sīklietotne"
+
+#: kde5.xml.podir/kde5.xml.in.h:5
+msgid "KHTML Extension Adaptor"
+msgstr "KHTML paplašinājumu adapteris"
+
+#: kde5.xml.podir/kde5.xml.in.h:6
+msgid "KDE color scheme"
+msgstr "KDE krāsu shēma"
+
+#: kde5.xml.podir/kde5.xml.in.h:7
+msgid "KNewStuff package"
+msgstr "KNewStuff pakotne"
+
+#: kde5.xml.podir/kde5.xml.in.h:9
+msgid "KWallet wallet"
+msgstr "KWallet maks"
+
+#: kde5.xml.podir/kde5.xml.in.h:10
+msgid "Kugar report template"
+msgstr "Kugar atskaites sagatave"
+
+#: kde5.xml.podir/kde5.xml.in.h:11
+msgid "plasmoid"
+msgstr "plazmoīds"
+
+#: kde5.xml.podir/kde5.xml.in.h:12
+msgid "SuperKaramba theme"
+msgstr "SuperKaramba tēma"
+
+#: kde5.xml.podir/kde5.xml.in.h:13
+msgid "Calligra Plan project management document"
+msgstr "Calligra Plan projektu pārvaldības dokuments"
+
+#: kde5.xml.podir/kde5.xml.in.h:14
+msgid "Calligra Plan work package document"
+msgstr "Calligra Plan darba pakotnes dokuments"
+
+#: kde5.xml.podir/kde5.xml.in.h:15
+msgid "KPlato project management document"
+msgstr "KPlato projektu pārvaldības dokuments"
+
+#: kde5.xml.podir/kde5.xml.in.h:16
+msgid "KPlato project management work package"
+msgstr "KPlato projektu pārvaldības darba pakotne"
+
+#: kde5.xml.podir/kde5.xml.in.h:17
+msgid "Kugar archive"
+msgstr "Kugar arhīvs"
+
+#: kde5.xml.podir/kde5.xml.in.h:19
+msgid "web archive"
+msgstr "tīmekļa arhīvs"
+
+#: kde5.xml.podir/kde5.xml.in.h:20
+msgid "W3C XML schema"
+msgstr "W3C XML shēma"
+
+#: kde5.xml.podir/kde5.xml.in.h:22
+msgid "RealAudio plugin file"
+msgstr "RealAudio spraudņa fails"
+
+#: kde5.xml.podir/kde5.xml.in.h:24
+msgid "KPhotoAlbum import"
+msgstr "KPhotoAlbum imports"
+
+#: kde5.xml.podir/kde5.xml.in.h:26
+msgid "HDR image"
+msgstr "HDR attēls"
+
+#: kde5.xml.podir/kde5.xml.in.h:27
+msgid "KDE raw image formats"
+msgstr "KDE raw attēlu formāti"
+
+#: kde5.xml.podir/kde5.xml.in.h:28
+msgid "Intel® hexadecimal object file"
+msgstr "Intel® hexadecimālais objekta fails"
+
+#: kde5.xml.podir/kde5.xml.in.h:29
+msgid "Kate file list loader plugin list"
+msgstr "Kate failu saraksta ielādētāja spraudņa saraksts"
+
+#: kde5.xml.podir/kde5.xml.in.h:30
+msgid "abc musical notation file"
+msgstr "abc mūzikas notācijas fails"
+
+#: kde5.xml.podir/kde5.xml.in.h:31
+msgid "fonts package"
+msgstr "fontu pakotne"
+
+#: kde5.xml.podir/kde5.xml.in.h:32
+msgid "Windows server"
+msgstr "Windows serveris"
+
+#: kde5.xml.podir/kde5.xml.in.h:33
+msgid "Windows workgroup"
+msgstr "Windows darbagrupa"
+
+#: kde5.xml.podir/kde5.xml.in.h:35
+msgid "KDE system monitor"
+msgstr "KDE sistēmas novērotājs"
+
+#: kde5.xml.podir/kde5.xml.in.h:36
+msgid "KDE theme"
+msgstr "KDE tēma"
+
+#: kde5.xml.podir/kde5.xml.in.h:37
+msgid "Quanta project"
+msgstr "Quanta projekts"
+
+#: kde5.xml.podir/kde5.xml.in.h:38
+msgid "Kommander file"
+msgstr "Kommander fails"
+
+#: kde5.xml.podir/kde5.xml.in.h:39
+msgid "potato"
+msgstr "kartupelis"
+
+#: kde5.xml.podir/kde5.xml.in.h:40
+msgid "Kolf saved game"
+msgstr "Kolf saglabāta spēle"
+
+#: kde5.xml.podir/kde5.xml.in.h:41
+msgid "Kolf course"
+msgstr "Kolf kurss"
+
+#: kde5.xml.podir/kde5.xml.in.h:42
+msgid "Okular document archive"
+msgstr "Okular dokumentu arhīvs"
+
+#: kde5.xml.podir/kde5.xml.in.h:43
+msgid "Cabri figure"
+msgstr "Cabri figūra"
+
+#: kde5.xml.podir/kde5.xml.in.h:44
+msgid "Dr. Geo figure"
+msgstr "Dr. Geo figūra"
+
+#: kde5.xml.podir/kde5.xml.in.h:45
+msgid "KGeo figure"
+msgstr "KGeo figūra"
+
+#: kde5.xml.podir/kde5.xml.in.h:46
+msgid "Kig figure"
+msgstr "Kig figūra"
+
+#: kde5.xml.podir/kde5.xml.in.h:47
+msgid "KSeg document"
+msgstr "KSeg dokuments"
+
+#: kde5.xml.podir/kde5.xml.in.h:48
+msgid "vocabulary trainer document"
+msgstr "vārdnīcas trenētāja dokuments"
+
+#: kde5.xml.podir/kde5.xml.in.h:49
+msgid "KmPlot file"
+msgstr "KmPlot fails"
+
+#: kde5.xml.podir/kde5.xml.in.h:50
+msgid "KWordQuiz vocabulary"
+msgstr "KWordQuiz vārdnīca"
+
+#: kde5.xml.podir/kde5.xml.in.h:51
+msgid "Cachegrind/Callgrind profile dump"
+msgstr "Cachegrind/Callgrind profilēšanas dati"
+
+#: kde5.xml.podir/kde5.xml.in.h:52
+msgid "Umbrello UML Modeller file"
+msgstr "Umbrello UML Modelētāja fails"
+
+#: kde5.xml.podir/kde5.xml.in.h:53
+msgid "Windows link"
+msgstr "Windows saite"
+
+#: kde5.xml.podir/kde5.xml.in.h:54
+msgid "KGet download list"
+msgstr "KGet jelupielāžu saraksts"
+
+#: kde5.xml.podir/kde5.xml.in.h:55
+msgid "Kopete emoticons archive"
+msgstr "Kopete emocijzīmju arhīvs"
+
+#: kde5.xml.podir/kde5.xml.in.h:56
+msgid "ICQ contact"
+msgstr "ICQ kontakts"
+
+#: kde5.xml.podir/kde5.xml.in.h:58
+msgid "Microsoft Media Format"
+msgstr "Microsoft Media formāts"
+
+#: kde5.xml.podir/kde5.xml.in.h:60
+msgid "Turtle RDF document"
+msgstr "Turtle RDF dokuments"
+
+#: kde5.xml.podir/kde5.xml.in.h:62
+msgid "Softimage PIC image"
+msgstr "Softimage PIC attēls"
+
+#: kde5.xml.podir/kde5.xml.in.h:64
+msgid "Qt Markup Language file"
+msgstr "Qt Markup Language fails"
+
+#: kde5.xml.podir/kde5.xml.in.h:65
+msgid "KConfigXT Configuration Options"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:66
+msgid "KConfigXT Code Generation Options"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:67
+msgid "KXMLGUI UI Declaration"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:68
+msgid "KNotification Declaration"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:69
+msgid "KCrash Report"
+msgstr ""

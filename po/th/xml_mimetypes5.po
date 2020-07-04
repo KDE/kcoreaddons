@@ -1,0 +1,254 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Thanomsub Noppaburana <donga.nb@gmail.com>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2020-01-17 02:56+0100\n"
+"PO-Revision-Date: 2010-03-25 11:33+0700\n"
+"Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
+"Language-Team: Thai <thai-l10n@googlegroups.com>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 1.0\n"
+
+#: kde5.xml.podir/kde5.xml.in.h:1
+msgid "RELAX NG"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:2
+msgid "CD audio"
+msgstr "แผ่นซีดีเสียง"
+
+#: kde5.xml.podir/kde5.xml.in.h:3
+msgid "SNF bitmap font"
+msgstr "แบบอักษรบิตแมปรูปแบบ SNF"
+
+#: kde5.xml.podir/kde5.xml.in.h:4
+msgid "Java applet"
+msgstr "จาวาแอพเพล็ต"
+
+#: kde5.xml.podir/kde5.xml.in.h:5
+msgid "KHTML Extension Adaptor"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:6
+msgid "KDE color scheme"
+msgstr "ชุดสีของ KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:7
+msgid "KNewStuff package"
+msgstr "แพกเกจ KNewStuff"
+
+#: kde5.xml.podir/kde5.xml.in.h:9
+msgid "KWallet wallet"
+msgstr "กระเป๋าของ 'กระเป๋าคุมข้อมูล-K'"
+
+#: kde5.xml.podir/kde5.xml.in.h:10
+msgid "Kugar report template"
+msgstr "แม่แบบรายงานของ Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:11
+msgid "plasmoid"
+msgstr "พลาสมอยด์"
+
+#: kde5.xml.podir/kde5.xml.in.h:12
+msgid "SuperKaramba theme"
+msgstr "ชุดตกแต่งของ SuperKaramba"
+
+#: kde5.xml.podir/kde5.xml.in.h:13
+msgid "Calligra Plan project management document"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:14
+msgid "Calligra Plan work package document"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:15
+msgid "KPlato project management document"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:16
+msgid "KPlato project management work package"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:17
+msgid "Kugar archive"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:19
+msgid "web archive"
+msgstr "แฟ้มจัดเก็บของหน้าเว็บ"
+
+#: kde5.xml.podir/kde5.xml.in.h:20
+msgid "W3C XML schema"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:22
+msgid "RealAudio plugin file"
+msgstr "แฟ้มส่วนเสริม RealAudio"
+
+#: kde5.xml.podir/kde5.xml.in.h:24
+msgid "KPhotoAlbum import"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:26
+msgid "HDR image"
+msgstr "ภาพรูปแบบ HDR"
+
+#: kde5.xml.podir/kde5.xml.in.h:27
+msgid "KDE raw image formats"
+msgstr "ภาพรูปแบบข้อมูลดิบของ KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:28
+msgid "Intel® hexadecimal object file"
+msgstr "แฟ้มออบเจ็กต์ฐานสิบหกของ Intel®"
+
+#: kde5.xml.podir/kde5.xml.in.h:29
+msgid "Kate file list loader plugin list"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:30
+msgid "abc musical notation file"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:31
+msgid "fonts package"
+msgstr "แพกเกจชุดแบบอักษร"
+
+#: kde5.xml.podir/kde5.xml.in.h:32
+msgid "Windows server"
+msgstr "เครื่องแม่ข่ายวินโดวส์"
+
+#: kde5.xml.podir/kde5.xml.in.h:33
+msgid "Windows workgroup"
+msgstr "กลุ่มงานของวินโดวส์"
+
+#: kde5.xml.podir/kde5.xml.in.h:35
+msgid "KDE system monitor"
+msgstr "เครื่องมือติดตามการทำงานของระบบของ KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:36
+msgid "KDE theme"
+msgstr "ชุดตกแต่ง KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:37
+msgid "Quanta project"
+msgstr "เอกสารโครงงาน Quanta"
+
+#: kde5.xml.podir/kde5.xml.in.h:38
+msgid "Kommander file"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:39
+msgid "potato"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:40
+msgid "Kolf saved game"
+msgstr "ข้อมูลที่บันทึกไว้ของเกม Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:41
+msgid "Kolf course"
+msgstr "คอร์สของเกม Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:42
+msgid "Okular document archive"
+msgstr "แฟ้มจัดเก็บเอกสารของ Okular"
+
+#: kde5.xml.podir/kde5.xml.in.h:43
+msgid "Cabri figure"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:44
+msgid "Dr. Geo figure"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:45
+msgid "KGeo figure"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:46
+msgid "Kig figure"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:47
+msgid "KSeg document"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:48
+msgid "vocabulary trainer document"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:49
+msgid "KmPlot file"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:50
+msgid "KWordQuiz vocabulary"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:51
+msgid "Cachegrind/Callgrind profile dump"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:52
+msgid "Umbrello UML Modeller file"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:53
+msgid "Windows link"
+msgstr "แฟ้มลิงค์ของวินโดวส์"
+
+#: kde5.xml.podir/kde5.xml.in.h:54
+msgid "KGet download list"
+msgstr "รายการดาวน์โหลดของ 'ช่วยดาวน์โหลด-K (KGet)'"
+
+#: kde5.xml.podir/kde5.xml.in.h:55
+msgid "Kopete emoticons archive"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:56
+msgid "ICQ contact"
+msgstr "ที่อยู่ติดต่อของ ICQ"
+
+#: kde5.xml.podir/kde5.xml.in.h:58
+msgid "Microsoft Media Format"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:60
+msgid "Turtle RDF document"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:62
+msgid "Softimage PIC image"
+msgstr "ภาพรูปแบบ Softimage PIC"
+
+#: kde5.xml.podir/kde5.xml.in.h:64
+msgid "Qt Markup Language file"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:65
+msgid "KConfigXT Configuration Options"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:66
+msgid "KConfigXT Code Generation Options"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:67
+msgid "KXMLGUI UI Declaration"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:68
+msgid "KNotification Declaration"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:69
+msgid "KCrash Report"
+msgstr ""
