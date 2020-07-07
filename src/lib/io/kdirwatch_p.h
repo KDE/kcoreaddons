@@ -204,6 +204,7 @@ public:
 
     void checkFAMEvent(FAMEvent *fe);
     bool useFAM(Entry *e);
+    void disableFAM();
 #endif
 
 #if HAVE_SYS_INOTIFY_H

@@ -4,6 +4,7 @@
    SPDX-FileCopyrightText: 2007 Flavio Castelli <flavio.castelli@gmail.com>
    SPDX-FileCopyrightText: 2008 Rafal Rzepecki <divided.mind@gmail.com>
    SPDX-FileCopyrightText: 2010 David Faure <faure@kde.org>
+   SPDX-FileCopyrightText: 2020 Harald Sitter <sitter@kde.org>
 
    SPDX-License-Identifier: LGPL-2.0-only
 */
@@ -668,14 +669,21 @@ bool KDirWatchPrivate::useFAM(Entry *e)
 
     // handle FAM events to avoid deadlock
     // (FAM sends back all files in a directory when monitoring)
-    do {
-      famEventReceived();
-      if (startedFAMMonitor && !e->m_famReportedSeen) {
-        // 50 is ~half the time it takes to setup a watch.  If gamin's latency
-        // gets better, this can be reduced.
-        QThread::msleep(50);
-      }
-    } while (startedFAMMonitor &&!e->m_famReportedSeen);
+    const int iterationCap = 80;
+    for (int i = 0; i <= iterationCap; ++i) { // we'll not wait forever; blocking for 4s seems plenty
+        famEventReceived();
+        // NB: check use_fam, if fam is defunct event receiving might disable fam support!
+        if (use_fam && startedFAMMonitor && !e->m_famReportedSeen) {
+            // 50 is ~half the time it takes to setup a watch.  If gamin's latency
+            // gets better, this can be reduced.
+            QThread::msleep(50);
+        } else if (use_fam && i == iterationCap) {
+            disableFAM();
+            return false;
+        } else {
+            break;
+        }
+    }
 
     return true;
 }
@@ -1588,23 +1596,29 @@ void KDirWatchPrivate::famEventReceived()
 
     while (use_fam && FAMPending(&fc)) {
         if (FAMNextEvent(&fc, &fe) == -1) {
-            qCWarning(KCOREADDONS_DEBUG) << "FAM connection problem, switching to polling.";
-            use_fam = false;
-            delete sn; sn = nullptr;
-
-            // Replace all FAMMode entries with INotify/Stat
-            EntryMap::Iterator it = m_mapEntries.begin();
-            for (; it != m_mapEntries.end(); ++it)
-                if ((*it).m_mode == FAMMode && !(*it).m_clients.empty()) {
-                    Entry *e = &(*it);
-                    addWatch(e);
-                }
+            disableFAM();
         } else {
             checkFAMEvent(&fe);
         }
     }
 
     QTimer::singleShot(0, this, SLOT(slotRemoveDelayed()));
+}
+
+void KDirWatchPrivate::disableFAM()
+{
+    qCWarning(KCOREADDONS_DEBUG) << "FAM connection problem, switching to a different system.";
+    use_fam = false;
+    delete sn;
+    sn = nullptr;
+
+    // Replace all FAMMode entries with another system (INotify/QFSW/Stat)
+    for (auto it = m_mapEntries.begin(); it != m_mapEntries.end(); ++it) {
+        if ((*it).m_mode == FAMMode && !(*it).m_clients.empty()) {
+            Entry *e = &(*it);
+            addWatch(e);
+        }
+    }
 }
 
 void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
