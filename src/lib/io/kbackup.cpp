@@ -16,7 +16,7 @@
 #include <QDir>
 #include <QProcess>
 
-#include <qstandardpaths.h>
+#include <QStandardPaths>
 
 namespace KBackup
 {

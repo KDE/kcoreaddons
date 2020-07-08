@@ -10,7 +10,7 @@
 #include <QFile>
 #include <QTextStream>
 
-#include <qtemporaryfile.h>
+#include <QTemporaryFile>
 #include <kautosavefile.h>
 
 #include <QTest>

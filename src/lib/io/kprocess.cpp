@@ -8,7 +8,7 @@
 
 #include "kprocess_p.h"
 
-#include <qstandardpaths.h>
+#include <QStandardPaths>
 #include <qplatformdefs.h>
 #include <kshell.h>
 #ifdef Q_OS_WIN
@@ -16,7 +16,7 @@
 # include <kshell_p.h>
 #endif
 
-#include <qfile.h>
+#include <QFile>
 
 /////////////////////////////
 // public member functions //

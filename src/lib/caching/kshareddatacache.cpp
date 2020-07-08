@@ -14,7 +14,7 @@
 #include "kshareddatacache_p.h" // Various auxiliary support code
 #include "kcoreaddons_debug.h"
 
-#include "qstandardpaths.h"
+#include <QStandardPaths>
 #include <qplatformdefs.h>
 
 #include <QDebug>

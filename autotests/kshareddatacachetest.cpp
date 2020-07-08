@@ -12,7 +12,7 @@
 
 #include <QObject>
 #include <QString>
-#include <qstandardpaths.h>
+#include <QStandardPaths>
 #include <string.h> // strcpy
 
 class KSharedDataCacheTest : public QObject

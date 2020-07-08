@@ -11,7 +11,7 @@
 #include <QDir>
 #include <QDebug>
 #include <QFileInfo>
-#include <qtemporarydir.h>
+#include <QTemporaryDir>
 #include <QTest>
 #include <QSignalSpy>
 #include <sys/stat.h>
