@@ -149,6 +149,13 @@ void KDirWatch_UnitTest::createFile(const QString &path)
 {
     QFile file(path);
     QVERIFY(file.open(QIODevice::WriteOnly));
+#ifdef Q_OS_FREEBSD
+    // FreeBSD has inotify implemented as user-space library over native kevent API.
+    // When using it, one has to open() a file to start watching it, so workaround
+    // test breakage by giving inotify time to react to file creation.
+    // Full context: https://github.com/libinotify-kqueue/libinotify-kqueue/issues/10
+    QThread::msleep(1);
+#endif
     file.write(QByteArray("foo"));
     file.close();
     //qDebug() << path;
