@@ -154,7 +154,8 @@ void KDirWatch_UnitTest::createFile(const QString &path)
     // When using it, one has to open() a file to start watching it, so workaround
     // test breakage by giving inotify time to react to file creation.
     // Full context: https://github.com/libinotify-kqueue/libinotify-kqueue/issues/10
-    QThread::msleep(1);
+    if(!m_slow)
+        QThread::msleep(1);
 #endif
     file.write(QByteArray("foo"));
     file.close();
