@@ -20,9 +20,9 @@
 
 // in the desktoptojson binary enable debug messages by default, in the library only warning messages
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
-Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf5.kcoreaddons.desktopparser", QtDebugMsg)
+Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf.coreaddons.desktopparser", QtDebugMsg)
 #else
-Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf5.kcoreaddons.desktopparser", QtWarningMsg)
+Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf.coreaddons.desktopparser", QtWarningMsg)
 #endif
 
 

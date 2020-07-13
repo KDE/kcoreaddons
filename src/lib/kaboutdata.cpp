@@ -31,7 +31,7 @@
 
 Q_DECLARE_LOGGING_CATEGORY(KABOUTDATA)
 // logging category for this framework, default: log stuff >= warning
-Q_LOGGING_CATEGORY(KABOUTDATA, "kf5.kcoreaddons.kaboutdata", QtWarningMsg)
+Q_LOGGING_CATEGORY(KABOUTDATA, "kf.coreaddons.kaboutdata", QtWarningMsg)
 
 
 class Q_DECL_HIDDEN KAboutPerson::Private

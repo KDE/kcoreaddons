@@ -74,7 +74,7 @@
 
 Q_DECLARE_LOGGING_CATEGORY(KDIRWATCH)
 // logging category for this framework, default: log stuff >= warning
-Q_LOGGING_CATEGORY(KDIRWATCH, "kf5.kcoreaddons.kdirwatch", QtWarningMsg)
+Q_LOGGING_CATEGORY(KDIRWATCH, "kf.coreaddons.kdirwatch", QtWarningMsg)
 
 // set this to true for much more verbose debug output
 static bool s_verboseDebug = false;

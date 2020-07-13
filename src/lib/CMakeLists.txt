@@ -130,27 +130,31 @@ endif()
 
 ecm_qt_export_logging_category(
     IDENTIFIER KDIRWATCH
-    CATEGORY_NAME kf5.kcoreaddons.kdirwatch
+    CATEGORY_NAME kf.coreaddons.kdirwatch
+    OLD_CATEGORY_NAMES kf5.kcoreaddons.kdirwatch
     DEFAULT_SEVERITY Warning
     DESCRIPTION "KDirWatch (KCoreAddons)"
     EXPORT KCOREADDONS
 )
 ecm_qt_export_logging_category(
     IDENTIFIER KABOUTDATA
-    CATEGORY_NAME kf5.kcoreaddons.kaboutdata
+    CATEGORY_NAME kf.coreaddons.kaboutdata
+    OLD_CATEGORY_NAMES kf5.kcoreaddons.kaboutdata
     DESCRIPTION "KAboutData (KCoreAddons)"
     EXPORT KCOREADDONS
 )
 ecm_qt_export_logging_category(
     IDENTIFIER DESKTOPPARSER
-    CATEGORY_NAME kf5.kcoreaddons.desktopparser
+    CATEGORY_NAME kf.coreaddons.desktopparser
+    OLD_CATEGORY_NAMES kf5.kcoreaddons.desktopparser
     DEFAULT_SEVERITY Warning
     DESCRIPTION "DesktopParser (KCoreAddons)"
     EXPORT KCOREADDONS
 )
 ecm_qt_export_logging_category(
     IDENTIFIER MIGRATOR
-    CATEGORY_NAME kf5.kcoreaddons.kdelibs4configmigrator
+    CATEGORY_NAME kf.coreaddons.kdelibs4configmigrator
+    OLD_CATEGORY_NAMES kf5.kcoreaddons.kdelibs4configmigrator
     DEFAULT_SEVERITY Warning
     DESCRIPTION "Kdelibs4ConfigMigrator (KCoreAddons)"
     EXPORT KCOREADDONS
@@ -159,7 +163,8 @@ ecm_qt_export_logging_category(
 ecm_qt_declare_logging_category(libkcoreaddons_SRCS
     HEADER kcoreaddons_debug.h
     IDENTIFIER KCOREADDONS_DEBUG
-    CATEGORY_NAME org.kde.kcoreaddons
+    CATEGORY_NAME kf.coreaddons
+    OLD_CATEGORY_NAMES org.kde.kcoreaddons
     DESCRIPTION "kcoreaddons (kcoreaddons lib)"
     EXPORT KCOREADDONS
 )
