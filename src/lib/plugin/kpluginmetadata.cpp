@@ -265,6 +265,11 @@ QString KPluginMetaData::license() const
     return rootObject()[QStringLiteral("License")].toString();
 }
 
+QString KPluginMetaData::licenseText() const
+{
+    return KAboutLicense::byKeyword(license()).text();
+}
+
 QString KPluginMetaData::name() const
 {
     return readTranslatedString(rootObject(), QStringLiteral("Name"));
@@ -387,5 +392,31 @@ bool KPluginMetaData::operator==(const KPluginMetaData &other) const
 QObject* KPluginMetaData::instantiate() const
 {
     return QPluginLoader(m_fileName).instance();
+}
+
+template <class T>
+QVariantList listToVariant(const QList<T>& values)
+{
+    QVariantList ret;
+    ret.reserve(values.count());
+    for(const auto &license: values) {
+        ret << QVariant::fromValue(license);
+    }
+    return ret;
+}
+
+QVariantList KPluginMetaData::authorsVariant() const
+{
+    return listToVariant(authors());
+}
+
+QVariantList KPluginMetaData::translatorsVariant() const
+{
+    return listToVariant(translators());
+}
+
+QVariantList KPluginMetaData::otherContributorsVariant() const
+{
+    return listToVariant(otherContributors());
 }
 

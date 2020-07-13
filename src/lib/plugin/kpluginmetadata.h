@@ -87,6 +87,33 @@ class QObject;
  */
 class KCOREADDONS_EXPORT KPluginMetaData
 {
+    Q_GADGET
+    Q_PROPERTY(bool isValid READ isValid CONSTANT)
+    Q_PROPERTY(bool isHidden READ isHidden CONSTANT)
+    Q_PROPERTY(QString fileName READ fileName CONSTANT)
+    Q_PROPERTY(QString metaDataFileName READ metaDataFileName CONSTANT)
+    Q_PROPERTY(QJsonObject rawData READ rawData CONSTANT)
+    Q_PROPERTY(QString name READ name CONSTANT)
+    Q_PROPERTY(QString description READ description CONSTANT)
+    Q_PROPERTY(QString extraInformation READ extraInformation CONSTANT)
+    Q_PROPERTY(QVariantList authors READ authorsVariant CONSTANT)
+    Q_PROPERTY(QVariantList translators READ translatorsVariant CONSTANT)
+    Q_PROPERTY(QVariantList otherContributors READ otherContributorsVariant CONSTANT)
+    Q_PROPERTY(QString category READ category CONSTANT)
+    Q_PROPERTY(QString iconName READ iconName CONSTANT)
+    Q_PROPERTY(QString license READ license CONSTANT)
+    Q_PROPERTY(QString licenseText READ licenseText CONSTANT)
+    Q_PROPERTY(QString copyrightText READ copyrightText CONSTANT)
+    Q_PROPERTY(QString pluginId READ pluginId CONSTANT)
+    Q_PROPERTY(QString version READ version CONSTANT)
+    Q_PROPERTY(QString website READ website CONSTANT)
+    Q_PROPERTY(QStringList dependencies READ dependencies CONSTANT)
+    Q_PROPERTY(QStringList serviceTypes READ serviceTypes CONSTANT)
+    Q_PROPERTY(QStringList mimeTypes READ mimeTypes CONSTANT)
+    Q_PROPERTY(QStringList formFactors READ formFactors CONSTANT)
+    Q_PROPERTY(bool isEnabledByDefault READ isEnabledByDefault CONSTANT)
+    Q_PROPERTY(int initialPreference READ isEnabledByDefault CONSTANT)
+
 public:
 
     /** Creates an invalid KPluginMetaData instance */
@@ -278,6 +305,12 @@ public:
     QString license() const;
 
     /**
+     * @return the text of the license, equivalent to KAboutLicense::byKeyword(license()).text()
+     * @since 5.73
+     */
+    QString licenseText() const;
+
+    /**
      * @return a short copyright statement
      *
      * @since 5.18
@@ -405,6 +438,10 @@ private:
     QJsonObject rootObject() const;
     void loadFromDesktopFile(const QString &file, const QStringList &serviceTypes);
 private:
+    QVariantList authorsVariant() const;
+    QVariantList translatorsVariant() const;
+    QVariantList otherContributorsVariant() const;
+
     QJsonObject m_metaData;
     QString m_fileName;
     QExplicitlySharedDataPointer<KPluginMetaDataPrivate> d; // for future binary compatible extensions
