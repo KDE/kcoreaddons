@@ -337,7 +337,7 @@ Notes:
     <comment xml:lang="az">KDE rəng sxemi</comment>
     <comment xml:lang="bg">Цветова схема за KDE</comment>
     <comment xml:lang="bs">KDE šema boja</comment>
-    <comment xml:lang="ca">Esquema de color del KDE</comment>
+    <comment xml:lang="ca">Esquema de colors del KDE</comment>
     <comment xml:lang="ca@valencia">Esquema de color del KDE</comment>
     <comment xml:lang="cs">Barevné schéma KDE</comment>
     <comment xml:lang="da">KDE farvetema</comment>
@@ -1461,7 +1461,7 @@ Notes:
     <comment xml:lang="ar">قائمة ملحقات محملات قائمة ملفات لكيت</comment>
     <comment xml:lang="az">Kate fayllar siyahısı</comment>
     <comment xml:lang="bs">spisak Kateinog priključka za učitavanje datoteka</comment>
-    <comment xml:lang="ca">Llista del connector carregador de llista de fitxers del Kate</comment>
+    <comment xml:lang="ca">Llista del connector carregador de la llista de fitxers del Kate</comment>
     <comment xml:lang="ca@valencia">Llista del connector carregador de llista de fitxers del Kate</comment>
     <comment xml:lang="da">Liste over plugins til fillisteindlæsning i Kate</comment>
     <comment xml:lang="de">Kate-Dateilisten-Modul</comment>
@@ -1773,7 +1773,7 @@ Notes:
     <comment xml:lang="az">KDE sistem izləyicisi</comment>
     <comment xml:lang="bg">Системен монитор за KDE</comment>
     <comment xml:lang="bs">KDE sistemski monitor</comment>
-    <comment xml:lang="ca">Controlador del sistema del KDE</comment>
+    <comment xml:lang="ca">Monitor del sistema del KDE</comment>
     <comment xml:lang="ca@valencia">Controlador del sistema del KDE</comment>
     <comment xml:lang="cs">Monitor systému pro KDE</comment>
     <comment xml:lang="da">KDE systemovervågning</comment>
@@ -3346,7 +3346,7 @@ Notes:
     <comment xml:lang="ar">ملف لغة الوصف Qt</comment>
     <comment xml:lang="az">Qt Markup dil faylı</comment>
     <comment xml:lang="bs">Datoteka Qt jezika za označavanje</comment>
-    <comment xml:lang="ca">Fitxer de llenguatge de marques de les Qt</comment>
+    <comment xml:lang="ca">Fitxer del llenguatge de marques de les Qt</comment>
     <comment xml:lang="ca@valencia">Fitxer de llenguatge de marques de les Qt</comment>
     <comment xml:lang="cs">Soubor Qt Markup Language</comment>
     <comment xml:lang="da">Qt Markup Language-fil</comment>
@@ -3492,7 +3492,7 @@ Notes:
   <mime-type type="application/vnd.kde.kxmlguirc">
     <comment>KXMLGUI UI Declaration</comment>
     <comment xml:lang="az">KXMLGUI UI Deklarasiya</comment>
-    <comment xml:lang="ca">Declaració IU KXMLGUI</comment>
+    <comment xml:lang="ca">Declaració de la IU del KXMLGUI</comment>
     <comment xml:lang="ca@valencia">Declaració IU KXMLGUI</comment>
     <comment xml:lang="da">KXMLGUI UI-erklæring</comment>
     <comment xml:lang="de">KXMLGUI-UI-Deklaration</comment>
