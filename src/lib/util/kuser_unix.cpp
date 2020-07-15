@@ -10,6 +10,7 @@
 #include "kuser.h"
 #include "config-getgrouplist.h"
 #include "config-accountsservice.h"
+#include "kcoreaddons_debug.h"
 
 #include <QFileInfo>
 
@@ -208,7 +209,7 @@ static void listGroupsForUser(const char *name, gid_t gid, uint maxCount, Func h
     int result = getgrouplist(name, gid, gid_buffer.data(), &numGroups);
     if (result < 0 && uint(numGroups) < maxCount) {
         // getgrouplist returns -1 if the buffer was too small to store all entries, the required size is in numGroups
-        qDebug("Buffer was too small: %d, need %d", gid_buffer.size(), numGroups);
+        qCDebug(KCOREADDONS_DEBUG, "Buffer was too small: %d, need %d", gid_buffer.size(), numGroups);
         gid_buffer.resize(numGroups);
         numGroups = gid_buffer.size();
         getgrouplist(name, gid, gid_buffer.data(), &numGroups);
@@ -509,7 +510,7 @@ KUserId KUserId::fromName(const QString &name)
     QByteArray name8Bit = name.toLocal8Bit();
     struct passwd *p = ::getpwnam(name8Bit.constData());
     if (!p) {
-        qWarning("Failed to lookup user %s: %s", name8Bit.constData(), strerror(errno));
+        qCWarning(KCOREADDONS_DEBUG, "Failed to lookup user %s: %s", name8Bit.constData(), strerror(errno));
         return KUserId();
     }
     return KUserId(p->pw_uid);
@@ -523,7 +524,7 @@ KGroupId KGroupId::fromName(const QString &name)
     QByteArray name8Bit = name.toLocal8Bit();
     struct group *g = ::getgrnam(name8Bit.constData());
     if (!g) {
-        qWarning("Failed to lookup group %s: %s", name8Bit.constData(), strerror(errno));
+        qCWarning(KCOREADDONS_DEBUG, "Failed to lookup group %s: %s", name8Bit.constData(), strerror(errno));
         return KGroupId();
     }
     return KGroupId(g->gr_gid);

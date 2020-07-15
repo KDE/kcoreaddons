@@ -86,7 +86,7 @@ bool Kdelibs4ConfigMigrator::migrate()
     }
 
     if (d->appName.isEmpty() && !d->uiFiles.isEmpty()) {
-        qCritical() << " We can not migrate ui file. AppName is missing";
+        qCCritical(MIGRATOR) << " We can not migrate ui file. AppName is missing";
     } else {
         for (const QString &uiFileName : qAsConst(d->uiFiles)) {
             const QString newConfigLocation

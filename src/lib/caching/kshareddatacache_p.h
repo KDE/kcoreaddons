@@ -11,7 +11,6 @@
 
 #include <config-caching.h> // HAVE_SYS_MMAN_H
 
-#include <QDebug>
 #include <QSharedPointer>
 #include <qbasicatomic.h>
 
@@ -452,7 +451,7 @@ static KSDCLock *createLockFromId(SharedLockId id, SharedLock &lock)
         break;
 
     default:
-        qCritical() << "Creating shell of a lock!";
+        qCCritical(KCOREADDONS_DEBUG) << "Creating shell of a lock!";
         return new KSDCLock;
     }
 }
@@ -467,9 +466,9 @@ static bool ensureFileAllocated(int fd, size_t fileSize)
 
     if (result != 0) {
         if (result == ENOSPC) {
-            qCritical() << "No space left on device. Check filesystem free space at your XDG_CACHE_HOME!";
+            qCCritical(KCOREADDONS_DEBUG) << "No space left on device. Check filesystem free space at your XDG_CACHE_HOME!";
         }
-        qCritical() << "The operating system is unable to promise"
+        qCCritical(KCOREADDONS_DEBUG) << "The operating system is unable to promise"
                     << fileSize
                     << "bytes for mapped cache, "
                     "abandoning the cache for crash-safety.";

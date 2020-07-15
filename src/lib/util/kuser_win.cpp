@@ -110,7 +110,7 @@ static void netApiEnumerate(uint maxCount, Callback callback, EnumFunction enumF
                 callback(groupInfo.get()[i]);
             }
         } else {
-            qWarning("NetApi enumerate function failed: status = %d", (int)nStatus);
+            qCWarning(KCOREADDONS_DEBUG, "NetApi enumerate function failed: status = %d", (int)nStatus);
         }
     } while (nStatus == ERROR_MORE_DATA);
 }
@@ -700,7 +700,7 @@ struct WindowsSIDWrapper : public QSharedData {
         bool success = CopySid(SECURITY_MAX_SID_SIZE, copy->sidBuffer, sid);
         if (!success) {
             QString sidString = sidToString(sid);
-            qWarning("Failed to copy SID %s, error = %d", qPrintable(sidString), (int)GetLastError());
+            qCWarning(KCOREADDONS_DEBUG, "Failed to copy SID %s, error = %d", qPrintable(sidString), (int)GetLastError());
             delete copy;
             return nullptr;
         }
@@ -832,7 +832,7 @@ static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS t
 {
     HANDLE _token;
     if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &_token)) {
-        qWarning("Failed to get the token for the current process: %d", (int)GetLastError());
+        qCWarning(KCOREADDONS_DEBUG, "Failed to get the token for the current process: %d", (int)GetLastError());
         return nullptr;
     }
     ScopedHANDLE token(_token, handleCloser);
@@ -840,14 +840,14 @@ static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS t
     DWORD requiredSize;
     if (!GetTokenInformation(token.get(), type, nullptr, 0, &requiredSize)) {
         if (GetLastError() != ERROR_INSUFFICIENT_BUFFER) {
-            qWarning("Failed to get the required size for the token information %d: %d",
+            qCWarning(KCOREADDONS_DEBUG, "Failed to get the required size for the token information %d: %d",
                      type, (int)GetLastError());
             return nullptr;
         }
     }
     std::unique_ptr<char[]> buffer(new char[requiredSize]);
     if (!GetTokenInformation(token.get(), type, buffer.get(), requiredSize, &requiredSize)) {
-        qWarning("Failed to get token information %d from current process: %d",
+        qCWarning(KCOREADDONS_DEBUG, "Failed to get token information %d from current process: %d",
                  type, (int)GetLastError());
         return nullptr;
     }
