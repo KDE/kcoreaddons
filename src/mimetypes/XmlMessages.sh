@@ -7,7 +7,7 @@ function po_for_file
 {
     case "$1" in
        kde5.xml)
-           echo xml_mimetypes5.po
+           echo kde5_xml_mimetypes.po
        ;;
     esac
 }
