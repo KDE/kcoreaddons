@@ -391,6 +391,38 @@ public:
                         const QString& unit,
                         int precision = 1,
                         KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust) const;
+    /**
+     * Converts @p value to the appropriate string representation.
+     *
+     * Example:
+     * @code
+     * QString iec, jedec, metric;
+     * // Sets iec to "1.0 KiB/s", jedec to "1.0 KB/s" and metric to "1.0 kB/s"
+     * iec = format.formatValue(1024, QStringLiteral("B/s"), 1, KFormat::UnitPrefix::AutoAdjust, KFormat::IECBinaryDialect);
+     * jedec = format.formatValue(1024, QStringLiteral("B/s"), 1, KFormat::UnitPrefix::AutoAdjust, KFormat::JEDECBinaryDialect);
+     * metric = format.formatValue(1000, QStringLiteral("B/s"), 1, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect);
+     * @endcode
+     *
+     * @param value value to be formatted
+     * @param precision number of places after the decimal point to use. 1 is used by default; when
+     *        in doubt use 1
+     * @param unit unit to use in result
+     * @param prefix specific prefix to use in result. Use UnitPrefix::AutoAdjust
+     *        to automatically select an appropriate prefix
+     * @param dialect prefix standard to use. Use DefaultBinaryDialect to
+     *        use the localized user selection unless you need to use a specific
+     *        unit type
+     * @return converted size as a translated string including prefix and unit.
+     *         E.g. "1.2 kbit", "2.4 kB", "12.3 Mbit/s"
+     * @see UnitPrefix
+     * @since 5.74
+     */
+    QString formatValue(double value,
+                        const QString& unit,
+                        int precision,
+                        KFormat::UnitPrefix prefix,
+                        KFormat::BinaryUnitDialect dialect) const;
+
 
 private:
     QSharedDataPointer<KFormatPrivate> d;

@@ -56,6 +56,16 @@ QString KFormat::formatValue(double value,
     return d->formatValue(value, KFormat::Unit::Other, unit, precision, prefix, MetricBinaryDialect);
 }
 
+// TODO KF6 Merge both methods
+QString KFormat::formatValue(double value,
+                             const QString& unit,
+                             int precision,
+                             KFormat::UnitPrefix prefix,
+                             KFormat::BinaryUnitDialect dialect) const
+{
+    return d->formatValue(value, KFormat::Unit::Other, unit, precision, prefix, dialect);
+}
+
 QString KFormat::formatDuration(quint64 msecs,
                                 KFormat::DurationFormatOptions options) const
 {
