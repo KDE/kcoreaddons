@@ -220,8 +220,8 @@ public:
      * @code
      * QString metric, iec, jedec, small;
      * metric = formatByteSize(1000, 1, KFormat::MetricBinaryDialect, KFormat::UnitKiloByte);
-     * iec    = formatByteSize(1000, 1, KFormat::IECBinaryDialect, KFormat::UnitKiloByte);
-     * jedec  = formatByteSize(1000, 1, KFormat::JEDECBinaryDialect, KFormat::UnitKiloByte);
+     * iec    = formatByteSize(1024, 1, KFormat::IECBinaryDialect, KFormat::UnitKiloByte);
+     * jedec  = formatByteSize(1024, 1, KFormat::JEDECBinaryDialect, KFormat::UnitKiloByte);
      * small  = formatByteSize(100);
      * // metric == "1.0 kB", iec == "1.0 KiB", jedec == "1.0 KB", small == "100 B"
      * @endcode
