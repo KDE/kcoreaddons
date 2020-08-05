@@ -35,17 +35,55 @@ QString KFormatPrivate::formatValue(double value,
                         KFormat::Unit unit,
                         QString unitString,
                         int precision,
-                        KFormat::UnitPrefix prefix,
+                        KFormat::UnitPrefix fromPrefix,
+                        KFormat::UnitPrefix toPrefix,
                         KFormat::BinaryUnitDialect dialect) const
 {
     if (dialect <= KFormat::DefaultBinaryDialect || dialect > KFormat::LastBinaryDialect) {
         dialect = KFormat::IECBinaryDialect;
     }
 
-    if (static_cast<int>(prefix) < static_cast<int>(KFormat::UnitPrefix::Yocto) ||
-        static_cast<int>(prefix) > static_cast<int>(KFormat::UnitPrefix::Yotta)) {
-        prefix = KFormat::UnitPrefix::AutoAdjust;
+    if (static_cast<int>(fromPrefix) < static_cast<int>(KFormat::UnitPrefix::Yocto) ||
+        static_cast<int>(fromPrefix) > static_cast<int>(KFormat::UnitPrefix::Yotta)) {
+        fromPrefix = KFormat::UnitPrefix::Unity;
     }
+    if (static_cast<int>(toPrefix) < static_cast<int>(KFormat::UnitPrefix::Yocto) ||
+        static_cast<int>(toPrefix) > static_cast<int>(KFormat::UnitPrefix::Yotta)) {
+        toPrefix = KFormat::UnitPrefix::AutoAdjust;
+    }
+
+    struct PrefixMapEntry
+    {
+        KFormat::UnitPrefix prefix;
+        double decimalFactor;
+        double binaryFactor;
+        QString toPrefixCharSI;
+        QString toPrefixCharIEC;
+    };
+
+    const PrefixMapEntry map[] = {
+        { KFormat::UnitPrefix::Yocto, 1e-24, bpow(-80), tr("y", "SI toPrefix for 10^⁻24"), QString() },
+        { KFormat::UnitPrefix::Zepto, 1e-21, bpow(-70), tr("z", "SI toPrefix for 10^⁻21"), QString() },
+        { KFormat::UnitPrefix::Atto,  1e-18, bpow(-60), tr("a", "SI toPrefix for 10^⁻18"), QString() },
+        { KFormat::UnitPrefix::Femto, 1e-15, bpow(-50), tr("f", "SI toPrefix for 10^⁻15"), QString() },
+        { KFormat::UnitPrefix::Pico,  1e-12, bpow(-40), tr("p", "SI toPrefix for 10^⁻12"), QString() },
+        { KFormat::UnitPrefix::Nano,  1e-9,  bpow(-30), tr("n", "SI toPrefix for 10^⁻9") , QString() },
+        { KFormat::UnitPrefix::Micro, 1e-6,  bpow(-20), tr("µ", "SI toPrefix for 10^⁻6") , QString() },
+        { KFormat::UnitPrefix::Milli, 1e-3,  bpow(-10), tr("m", "SI toPrefix for 10^⁻3") , QString() },
+        { KFormat::UnitPrefix::Unity, 1.0,   1.0      , QString()                      , QString() },
+        { KFormat::UnitPrefix::Kilo,  1e3,   bpow(10) , tr("k", "SI toPrefix for 10^3")  , tr("Ki", "IEC binary toPrefix for 2^10") },
+        { KFormat::UnitPrefix::Mega,  1e6,   bpow(20) , tr("M", "SI toPrefix for 10^6")  , tr("Mi", "IEC binary toPrefix for 2^20") },
+        { KFormat::UnitPrefix::Giga,  1e9,   bpow(30) , tr("G", "SI toPrefix for 10^9")  , tr("Gi", "IEC binary toPrefix for 2^30") },
+        { KFormat::UnitPrefix::Tera,  1e12,  bpow(40) , tr("T", "SI toPrefix for 10^12") , tr("Ti", "IEC binary toPrefix for 2^40") },
+        { KFormat::UnitPrefix::Peta,  1e15,  bpow(50) , tr("P", "SI toPrefix for 10^15") , tr("Pi", "IEC binary toPrefix for 2^50") },
+        { KFormat::UnitPrefix::Exa,   1e18,  bpow(60) , tr("E", "SI toPrefix for 10^18") , tr("Ei", "IEC binary toPrefix for 2^60") },
+        { KFormat::UnitPrefix::Zetta, 1e21,  bpow(70) , tr("Z", "SI toPrefix for 10^21") , tr("Zi", "IEC binary toPrefix for 2^70") },
+        { KFormat::UnitPrefix::Yotta, 1e24,  bpow(80) , tr("Y", "SI toPrefix for 10^24") , tr("Yi", "IEC binary toPrefix for 2^80") },
+    };
+
+    auto fromEntry = std::find_if(std::begin(map), std::end(map),
+        [fromPrefix] (const PrefixMapEntry &e) {return e.prefix == fromPrefix;});
+    value *= dialect == KFormat::MetricBinaryDialect ? fromEntry->decimalFactor : fromEntry->binaryFactor;
 
     double multiplier = 1024.0;
     if (dialect == KFormat::MetricBinaryDialect) {
@@ -53,7 +91,7 @@ QString KFormatPrivate::formatValue(double value,
     }
 
     int power = 0;
-    if (prefix == KFormat::UnitPrefix::AutoAdjust) {
+    if (toPrefix == KFormat::UnitPrefix::AutoAdjust) {
         double adjustValue = qAbs(value);
         while (adjustValue >= multiplier) {
             adjustValue /= multiplier;
@@ -83,45 +121,16 @@ QString KFormatPrivate::formatValue(double value,
             KFormat::UnitPrefix::Yotta, // 8
         };
         power = std::max(-8, std::min(8, power));
-        prefix = map[power + 8];
+        toPrefix = map[power + 8];
     }
 
-    if (prefix == KFormat::UnitPrefix::Unity &&
+    if (toPrefix == KFormat::UnitPrefix::Unity &&
         unit == KFormat::Unit::Byte) {
         precision = 0;
     }
 
-    struct PrefixMapEntry
-    {
-        KFormat::UnitPrefix prefix;
-        double decimalFactor;
-        double binaryFactor;
-        QString prefixCharSI;
-        QString prefixCharIEC;
-    };
-
-    const PrefixMapEntry map[] = {
-        { KFormat::UnitPrefix::Yocto, 1e-24, bpow(-80), tr("y", "SI prefix for 10^⁻24"), QString() },
-        { KFormat::UnitPrefix::Zepto, 1e-21, bpow(-70), tr("z", "SI prefix for 10^⁻21"), QString() },
-        { KFormat::UnitPrefix::Atto,  1e-18, bpow(-60), tr("a", "SI prefix for 10^⁻18"), QString() },
-        { KFormat::UnitPrefix::Femto, 1e-15, bpow(-50), tr("f", "SI prefix for 10^⁻15"), QString() },
-        { KFormat::UnitPrefix::Pico,  1e-12, bpow(-40), tr("p", "SI prefix for 10^⁻12"), QString() },
-        { KFormat::UnitPrefix::Nano,  1e-9,  bpow(-30), tr("n", "SI prefix for 10^⁻9") , QString() },
-        { KFormat::UnitPrefix::Micro, 1e-6,  bpow(-20), tr("µ", "SI prefix for 10^⁻6") , QString() },
-        { KFormat::UnitPrefix::Milli, 1e-3,  bpow(-10), tr("m", "SI prefix for 10^⁻3") , QString() },
-        { KFormat::UnitPrefix::Unity, 1.0,   1.0      , QString()                      , QString() },
-        { KFormat::UnitPrefix::Kilo,  1e3,   bpow(10) , tr("k", "SI prefix for 10^3")  , tr("Ki", "IEC binary prefix for 2^10") },
-        { KFormat::UnitPrefix::Mega,  1e6,   bpow(20) , tr("M", "SI prefix for 10^6")  , tr("Mi", "IEC binary prefix for 2^20") },
-        { KFormat::UnitPrefix::Giga,  1e9,   bpow(30) , tr("G", "SI prefix for 10^9")  , tr("Gi", "IEC binary prefix for 2^30") },
-        { KFormat::UnitPrefix::Tera,  1e12,  bpow(40) , tr("T", "SI prefix for 10^12") , tr("Ti", "IEC binary prefix for 2^40") },
-        { KFormat::UnitPrefix::Peta,  1e15,  bpow(50) , tr("P", "SI prefix for 10^15") , tr("Pi", "IEC binary prefix for 2^50") },
-        { KFormat::UnitPrefix::Exa,   1e18,  bpow(60) , tr("E", "SI prefix for 10^18") , tr("Ei", "IEC binary prefix for 2^60") },
-        { KFormat::UnitPrefix::Zetta, 1e21,  bpow(70) , tr("Z", "SI prefix for 10^21") , tr("Zi", "IEC binary prefix for 2^70") },
-        { KFormat::UnitPrefix::Yotta, 1e24,  bpow(80) , tr("Y", "SI prefix for 10^24") , tr("Yi", "IEC binary prefix for 2^80") },
-    };
-
     auto entry = std::find_if(std::begin(map), std::end(map),
-            [prefix](const PrefixMapEntry& e) { return e.prefix == prefix; });
+            [toPrefix](const PrefixMapEntry& e) { return e.prefix == toPrefix; });
 
     switch (unit) {
         case KFormat::Unit::Bit:
@@ -140,29 +149,29 @@ QString KFormatPrivate::formatValue(double value,
             break;
     }
 
-    if (prefix == KFormat::UnitPrefix::Unity) {
+    if (toPrefix == KFormat::UnitPrefix::Unity) {
         QString numString = m_locale.toString(value, 'f', precision);
-        //: value without prefix, format "<val> <unit>"
+        //: value without toPrefix, format "<val> <unit>"
         return tr("%1 %2", "no Prefix").arg(numString, unitString);
     }
 
-    QString prefixString;
+    QString toPrefixString;
     if (dialect == KFormat::MetricBinaryDialect) {
         value /= entry->decimalFactor;
-        prefixString = entry->prefixCharSI;
+        toPrefixString = entry->toPrefixCharSI;
     } else {
         value /= entry->binaryFactor;
         if (dialect == KFormat::IECBinaryDialect) {
-            prefixString = entry->prefixCharIEC;
+            toPrefixString = entry->toPrefixCharIEC;
         } else {
-            prefixString = entry->prefixCharSI.toUpper();
+            toPrefixString = entry->toPrefixCharSI.toUpper();
         }
     }
 
     QString numString = m_locale.toString(value, 'f', precision);
 
-    //: value with prefix, format "<val> <prefix><unit>"
-    return tr("%1 %2%3", "MetricBinaryDialect").arg(numString, prefixString, unitString);
+    //: value with toPrefix, format "<val> <toPrefix><unit>"
+    return tr("%1 %2%3", "MetricBinaryDialect").arg(numString, toPrefixString, unitString);
 }
 
 QString KFormatPrivate::formatByteSize(double size, int precision,

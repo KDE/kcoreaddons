@@ -1,6 +1,7 @@
 /*
     This file is part of the KDE Frameworks
 
+    SPDX-FileCopyrightText: 2020 David Redondo <kde@david-redondo.de>
     SPDX-FileCopyrightText: 2013 John Layt <jlayt@kde.org>
     SPDX-FileCopyrightText: 2010 Michael Leupold <lemma@confuego.org>
     SPDX-FileCopyrightText: 2009 Michael Pyne <mpyne@kde.org>
@@ -115,6 +116,43 @@ void KFormatTest::formatValue()
     QCOMPARE(format.formatValue(10.12e-6, KFormat::Unit::Meter, 2, KFormat::UnitPrefix::Micro, KFormat::MetricBinaryDialect), QString::fromUtf8("10.12 µm"));
     QCOMPARE(format.formatValue(10.55e-6, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect), QString::fromUtf8("10.6 µm"));
 }
+
+void KFormatTest::convertValue()
+{
+    QLocale locale(QLocale::c());
+    locale.setNumberOptions(QLocale::DefaultNumberOptions); // Qt >= 5.6 sets QLocale::OmitGroupSeparator for the C locale
+    KFormat format(locale);
+
+    // Test automatic conversion
+    QCOMPARE(format.convertValue(1.0, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Unity), QStringLiteral("1 B"));
+    QCOMPARE(format.convertValue(1024, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Unity, KFormat::UnitPrefix::AutoAdjust, KFormat::IECBinaryDialect), QStringLiteral("1.0 KiB"));
+    QCOMPARE(format.convertValue(1.0, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::AutoAdjust, KFormat::IECBinaryDialect), QStringLiteral("1.0 KiB"));
+    QCOMPARE(format.convertValue(1024, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::AutoAdjust, KFormat::IECBinaryDialect), QStringLiteral("1.0 MiB"));
+    QCOMPARE(format.convertValue(1/1024.0, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::AutoAdjust, KFormat::IECBinaryDialect), QStringLiteral("1 B"));
+    QCOMPARE(format.convertValue(1.0, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Unity), QStringLiteral("1.0 m"));
+    QCOMPARE(format.convertValue(1000, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Unity, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect), QStringLiteral("1.0 km"));
+    QCOMPARE(format.convertValue(1, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect), QStringLiteral("1.0 km"));
+    QCOMPARE(format.convertValue(1000, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect), QStringLiteral("1.0 Mm"));
+    QCOMPARE(format.convertValue(0.001, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect), QStringLiteral("1.0 m"));
+
+    //Convert explicitely between different prefixes
+     QCOMPARE(format.convertValue(1.0, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Unity, KFormat::UnitPrefix::Unity,  KFormat::MetricBinaryDialect), QStringLiteral("1.0 m"));
+     QCOMPARE(format.convertValue(1.0, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::Kilo,  KFormat::MetricBinaryDialect), QStringLiteral("1.0 km"));
+     QCOMPARE(format.convertValue(1.0, KFormat::Unit::Meter, 3, KFormat::UnitPrefix::Unity, KFormat::UnitPrefix::Kilo,  KFormat::MetricBinaryDialect), QStringLiteral("0.001 km"));
+     QCOMPARE(format.convertValue(1.0, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::Unity,  KFormat::MetricBinaryDialect), QStringLiteral("1,000.0 m"));
+     QCOMPARE(format.convertValue(1.0, KFormat::Unit::Meter, 6, KFormat::UnitPrefix::Milli, KFormat::UnitPrefix::Kilo,  KFormat::MetricBinaryDialect), QStringLiteral("0.000001 km"));
+     QCOMPARE(format.convertValue(1.0, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::Milli,  KFormat::MetricBinaryDialect), QStringLiteral("1,000,000.0 mm"));
+
+    QCOMPARE(format.convertValue(1.0, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Unity, KFormat::UnitPrefix::Unity,  KFormat::IECBinaryDialect), QStringLiteral("1 B"));
+    QCOMPARE(format.convertValue(1.0, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::Kilo,  KFormat::IECBinaryDialect), QStringLiteral("1.0 KiB"));
+    QCOMPARE(format.convertValue(1.0, KFormat::Unit::Byte, 3, KFormat::UnitPrefix::Unity, KFormat::UnitPrefix::Kilo,  KFormat::IECBinaryDialect), QStringLiteral("0.001 KiB"));
+    QCOMPARE(format.convertValue(1.0, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Kilo, KFormat::UnitPrefix::Unity,  KFormat::IECBinaryDialect), QStringLiteral("1,024 B"));
+    QCOMPARE(format.convertValue(1.0, KFormat::Unit::Byte, 6, KFormat::UnitPrefix::Unity, KFormat::UnitPrefix::Mega,  KFormat::IECBinaryDialect), QStringLiteral("0.000001 MiB"));
+    QCOMPARE(format.convertValue(1.0, KFormat::Unit::Byte, 1, KFormat::UnitPrefix::Mega, KFormat::UnitPrefix::Unity,  KFormat::IECBinaryDialect), QStringLiteral("1,048,576 B"));
+
+}
+
+
 
 enum TimeConstants {
     MSecsInDay = 86400000,

@@ -45,7 +45,7 @@ QString KFormat::formatValue(double value,
                              KFormat::UnitPrefix prefix,
                              KFormat::BinaryUnitDialect dialect) const
 {
-    return d->formatValue(value, unit, QString(), precision, prefix, dialect);
+    return d->formatValue(value, unit, QString(), precision, KFormat::UnitPrefix::Unity, prefix, dialect);
 }
 
 QString KFormat::formatValue(double value,
@@ -53,7 +53,7 @@ QString KFormat::formatValue(double value,
                              int precision,
                              KFormat::UnitPrefix prefix) const
 {
-    return d->formatValue(value, KFormat::Unit::Other, unit, precision, prefix, MetricBinaryDialect);
+    return d->formatValue(value, KFormat::Unit::Other, unit, precision, KFormat::UnitPrefix::Unity, prefix, MetricBinaryDialect);
 }
 
 // TODO KF6 Merge both methods
@@ -63,7 +63,27 @@ QString KFormat::formatValue(double value,
                              KFormat::UnitPrefix prefix,
                              KFormat::BinaryUnitDialect dialect) const
 {
-    return d->formatValue(value, KFormat::Unit::Other, unit, precision, prefix, dialect);
+    return d->formatValue(value, KFormat::Unit::Other, unit, precision, prefix,  KFormat::UnitPrefix::Unity, dialect);
+}
+
+QString KFormat::convertValue(double value,
+                             KFormat::Unit unit,
+                             int precision,
+                             KFormat::UnitPrefix fromPrefix,
+                             KFormat::UnitPrefix toPrefix,
+                             KFormat::BinaryUnitDialect dialect) const
+{
+    return d->formatValue(value, unit, QString(), precision, fromPrefix, toPrefix, dialect);
+}
+
+QString KFormat::convertValue(double value,
+                             const QString &unit,
+                             int precision,
+                             KFormat::UnitPrefix fromPrefix,
+                             KFormat::UnitPrefix toPrefix,
+                             KFormat::BinaryUnitDialect dialect) const
+{
+    return d->formatValue(value, KFormat::Unit::Other, unit, precision, fromPrefix, toPrefix, dialect);
 }
 
 QString KFormat::formatDuration(quint64 msecs,

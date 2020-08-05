@@ -35,7 +35,8 @@ public:
                         KFormat::Unit unit,
                         QString unitString,
                         int precision,
-                        KFormat::UnitPrefix prefix,
+                        KFormat::UnitPrefix fromPrefix,
+                        KFormat::UnitPrefix toPrefix,
                         KFormat::BinaryUnitDialect dialect) const;
 
     QString formatDuration(quint64 msecs,

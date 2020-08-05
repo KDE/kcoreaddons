@@ -423,6 +423,52 @@ public:
                         KFormat::UnitPrefix prefix,
                         KFormat::BinaryUnitDialect dialect) const;
 
+    /**
+     * Converts a @p value to the appropriate string representation. @p value is the numeric value
+     * of the underlying quantity expressed in \p unit with \p fromPrefix.
+     *
+     * Example:
+     * @code
+     * // Sets meter to "1 m" and kilo to "1 km"
+     * auto milli = format.formatValue(1000, KFormat::Unit::Meter, KFormat::UnitPrefix::Milli);
+     * auto kilo = format.formatValue(1000, KFormat::Unit::Meter, KFormat::UnitPrefix::Unity);
+     * @endcode
+     *
+     * @param value value to be formatted, given in the prefix \p fromPrefix
+     * @param unit the unit to use
+     * @param precision number of places after the decimal point to use. 1 is used by default; when
+     *        in doubt use 1
+     * @param fromPrefix the prefix \p value is given in. Using UnitPrefix::AutoAdjust, has the same
+     *        effect as using UnitPrefix::Unity.
+     * @param toPrefix prefix to use in the result. Use UnitPrefix::AutoAdjust
+     *        to automatically select an appropriate prefix
+     * @param dialect prefix standard to use. Use DefaultBinaryDialect to
+     *        use the localized user selection unless you need to use a specific
+     *        unit type
+     * @return converted size as a translated string including prefix and unit.
+     *         E.g. "1.2 kbit", "2.4 kB", "12.3 Mbit/s"
+     * @since 5.74
+     */
+    QString convertValue(double value,
+                        KFormat::Unit unit,
+                        int precision,
+                        KFormat::UnitPrefix fromPrefix,
+                        KFormat::UnitPrefix toPrefix = KFormat::UnitPrefix::AutoAdjust,
+                        KFormat::BinaryUnitDialect dialect = KFormat::DefaultBinaryDialect) const;
+
+    /**
+     * Converts a @p value to the appropriate string representation. @p value is the numeric value
+     * of the underlying quantity expressed in \p unit with \p fromPrefix.
+     * @see convertValue
+     * @since 5.74
+     */
+    QString convertValue(double value,
+                        const QString &unit,
+                        int precision,
+                        KFormat::UnitPrefix fromPrefix,
+                        KFormat::UnitPrefix toPrefix = KFormat::UnitPrefix::AutoAdjust,
+                        KFormat::BinaryUnitDialect dialect = KFormat::DefaultBinaryDialect) const;
+
 
 private:
     QSharedDataPointer<KFormatPrivate> d;
