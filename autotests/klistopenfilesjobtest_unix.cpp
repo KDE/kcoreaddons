@@ -30,9 +30,11 @@ void KListOpenFilesJobTest::testOpenFiles()
     if (!hasLsofInstalled()) {
         QSKIP("lsof is not installed - skipping test");
     }
-    QDir path(QCoreApplication::applicationDirPath());
-    auto job = new KListOpenFilesJob(path.path());
-    job->exec();
+    QTemporaryDir tempDir;
+    QFile tempFile(tempDir.path() + QStringLiteral("/file"));
+    QVERIFY(tempFile.open(QIODevice::WriteOnly));
+    auto job = new KListOpenFilesJob(tempDir.path());
+    QVERIFY2(job->exec(), qPrintable(job->errorString()));
     QCOMPARE(job->error(), KJob::NoError);
     auto processInfoList = job->processInfoList();
     QVERIFY(!processInfoList.empty());
@@ -54,7 +56,7 @@ void KListOpenFilesJobTest::testNoOpenFiles()
     }
     QTemporaryDir tempDir;
     auto job = new KListOpenFilesJob(tempDir.path());
-    job->exec();
+    QVERIFY2(job->exec(), qPrintable(job->errorString()));
     QCOMPARE(job->error(), KJob::NoError);
     QVERIFY(job->processInfoList().empty());
 }
@@ -66,7 +68,7 @@ void KListOpenFilesJobTest::testNonExistingDir()
     }
     QString nonExistingDir(QStringLiteral("/does/not/exist"));
     auto job = new KListOpenFilesJob(nonExistingDir);
-    job->exec();
+    QVERIFY(!job->exec());
     QCOMPARE(job->error(), static_cast<int>(KListOpenFilesJob::Error::DoesNotExist));
     QCOMPARE(job->errorText(), QStringLiteral("Path %1 doesn't exist").arg(nonExistingDir));
     QVERIFY(job->processInfoList().empty());
@@ -99,7 +101,7 @@ void KListOpenFilesJobTest::testLsofNotFound()
     ScopedEnvVariable emptyPathEnvironment(QLatin1String("PATH"), QByteArray());
     QDir path(QCoreApplication::applicationDirPath());
     auto job = new KListOpenFilesJob(path.path());
-    job->exec();
+    QVERIFY(!job->exec());
     QCOMPARE(job->error(), static_cast<int>(KListOpenFilesJob::Error::InternalError));
     QVERIFY(job->processInfoList().empty());
 }
