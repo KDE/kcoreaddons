@@ -337,7 +337,7 @@ Notes:
     <comment xml:lang="az">KDE rəng sxemi</comment>
     <comment xml:lang="bg">Цветова схема за KDE</comment>
     <comment xml:lang="bs">KDE šema boja</comment>
-    <comment xml:lang="ca">Esquema de colors del KDE</comment>
+    <comment xml:lang="ca">Esquema de color del KDE</comment>
     <comment xml:lang="ca@valencia">Esquema de color del KDE</comment>
     <comment xml:lang="cs">Barevné schéma KDE</comment>
     <comment xml:lang="da">KDE farvetema</comment>
@@ -1648,7 +1648,7 @@ Notes:
     <comment xml:lang="ar">خادم ويندوز</comment>
     <comment xml:lang="az">Windows serveri</comment>
     <comment xml:lang="bs">windows server</comment>
-    <comment xml:lang="ca">Servidor Windows</comment>
+    <comment xml:lang="ca">Servidor de Windows</comment>
     <comment xml:lang="ca@valencia">Servidor Windows</comment>
     <comment xml:lang="cs">Windows server</comment>
     <comment xml:lang="da">Windows-server</comment>
@@ -2902,7 +2902,7 @@ Notes:
     <comment xml:lang="ar">وصلة ويندوز</comment>
     <comment xml:lang="az">Windows yarlığı</comment>
     <comment xml:lang="bs">windows veza</comment>
-    <comment xml:lang="ca">Enllaç del Windows</comment>
+    <comment xml:lang="ca">Enllaç de Windows</comment>
     <comment xml:lang="ca@valencia">Enllaç del Windows</comment>
     <comment xml:lang="cs">Odkaz Windows</comment>
     <comment xml:lang="da">Windows-link</comment>
