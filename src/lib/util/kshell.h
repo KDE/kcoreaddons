@@ -71,6 +71,7 @@ enum Option {
  * Stores a combination of #Option values.
  */
 Q_DECLARE_FLAGS(Options, Option)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Options)
 
 /**
  * Status codes from splitArgs()
@@ -194,7 +195,5 @@ KCOREADDONS_EXPORT QString tildeExpand(const QString &path);
  */
 KCOREADDONS_EXPORT QString tildeCollapse(const QString &path);
 }
-
-Q_DECLARE_OPERATORS_FOR_FLAGS(KShell::Options)
 
 #endif /* KSHELL_H */

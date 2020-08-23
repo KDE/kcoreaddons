@@ -59,6 +59,7 @@ enum Option
  * Stores a combination of #Option values.
  */
 Q_DECLARE_FLAGS(Options, Option)
+Q_DECLARE_OPERATORS_FOR_FLAGS(Options)
 
 /**
  * Converts plaintext into html. The following characters are converted
@@ -85,7 +86,5 @@ KCOREADDONS_EXPORT QString convertToHtml(const QString &plainText,
                                          int maxAddressLen = 255);
 
 }
-
-Q_DECLARE_OPERATORS_FOR_FLAGS(KTextToHTML::Options)
 
 #endif
