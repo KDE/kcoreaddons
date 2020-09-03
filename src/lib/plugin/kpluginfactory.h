@@ -27,6 +27,31 @@ class Part;
 
 #define KPluginFactory_iid "org.kde.KPluginFactory"
 
+/**
+ * \relates KPluginFactory
+ * 
+ * Declare a KPluginFactory subclass of the given base factory.
+ * 
+ * \param name The name of the KPluginFactory derived class.
+ * 
+ * \param baseFactory The name of the base class (base factory) to use.
+ *                    This must be a KPluginFactory subclass with
+ *                    a default constructor.
+ * 
+ * Additional parameters may be additional Qt properties, such as
+ * Q_PLUGIN_METADATA.
+ * 
+ * \note That the base factory must be a subclass of KPluginFactory.
+ * While this macro is largely an implementation detail, factories
+ * that have a different create() interface can be declared through
+ * this macro. Normal use through other K_PLUGIN_FACTORY macros
+ * uses KPluginFactory as a base.
+ * 
+ * \note This macro is usually only an implementation detail
+ * for K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY or
+ * K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON .
+ * 
+ */
 #define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, ...) \
     class name : public baseFactory \
     { \
@@ -299,6 +324,10 @@ class Part;
  *     }
  * };
  * \endcode
+ * 
+ * To use such a custom KPluginFactory, use the K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY
+ * and K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY macro's, passing in the
+ * name of the custom subclass as \p baseFactory .
  *
  * If you want to load a library use KPluginLoader.
  * The application that wants to instantiate plugin classes can do the following:
