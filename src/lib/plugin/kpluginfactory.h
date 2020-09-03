@@ -28,26 +28,26 @@ class Part;
 #define KPluginFactory_iid "org.kde.KPluginFactory"
 
 /**
- * \relates KPluginFactory
+ * @relates KPluginFactory
  * 
  * Declare a KPluginFactory subclass of the given base factory.
  * 
- * \param name The name of the KPluginFactory derived class.
+ * @param name The name of the KPluginFactory derived class.
  * 
- * \param baseFactory The name of the base class (base factory) to use.
+ * @param baseFactory The name of the base class (base factory) to use.
  *                    This must be a KPluginFactory subclass with
  *                    a default constructor.
  * 
  * Additional parameters may be additional Qt properties, such as
  * Q_PLUGIN_METADATA.
  * 
- * \note That the base factory must be a subclass of KPluginFactory.
+ * @note That the base factory must be a subclass of KPluginFactory.
  * While this macro is largely an implementation detail, factories
  * that have a different create() interface can be declared through
  * this macro. Normal use through other K_PLUGIN_FACTORY macros
  * uses KPluginFactory as a base.
  * 
- * \note This macro is usually only an implementation detail
+ * @note This macro is usually only an implementation detail
  * for K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY or
  * K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON .
  * 
@@ -85,13 +85,13 @@ class Part;
     K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations)
 
 /**
- * \relates KPluginFactory
+ * @relates KPluginFactory
  *
  * Create a KPluginFactory subclass and export it as the root plugin object.
  *
- * \param name The name of the KPluginFactory derived class.
+ * @param name The name of the KPluginFactory derived class.
  *
- * \param pluginRegistrations Code to be inserted into the constructor of the
+ * @param pluginRegistrations Code to be inserted into the constructor of the
  * class. Usually a series of registerPlugin() calls.
  *
  * @note K_PLUGIN_FACTORY declares the subclass including a Q_OBJECT macro.
@@ -104,7 +104,7 @@ class Part;
  * in the same source file when that one has the name "myplugin.cpp".
  *
  * Example:
- * \code
+ * @code
  * #include <KPluginFactory>
  * #include <plugininterface.h>
  *
@@ -121,18 +121,18 @@ class Part;
  *                 )
  *
  * #include <myplugin.moc>
- * \endcode
+ * @endcode
  *
  * If you want to compile a .json file into the plugin, use K_PLUGIN_FACTORY_WITH_JSON.
  *
- * \see K_PLUGIN_FACTORY_WITH_JSON
- * \see K_PLUGIN_FACTORY_DECLARATION
- * \see K_PLUGIN_FACTORY_DEFINITION
+ * @see K_PLUGIN_FACTORY_WITH_JSON
+ * @see K_PLUGIN_FACTORY_DECLARATION
+ * @see K_PLUGIN_FACTORY_DEFINITION
  */
 #define K_PLUGIN_FACTORY(name, pluginRegistrations) K_PLUGIN_FACTORY_WITH_BASEFACTORY(name, KPluginFactory, pluginRegistrations)
 
 /**
- * \relates KPluginFactory
+ * @relates KPluginFactory
  *
  * Create a KPluginFactory subclass and export it as the root plugin object with
  * JSON metadata.
@@ -140,12 +140,12 @@ class Part;
  * This macro does the same as K_PLUGIN_FACTORY, but adds a JSON file as plugin
  * metadata.  See Q_PLUGIN_METADATA() for more information.
  *
- * \param name The name of the KPluginFactory derived class.
+ * @param name The name of the KPluginFactory derived class.
  *
- * \param pluginRegistrations Code to be inserted into the constructor of the
+ * @param pluginRegistrations Code to be inserted into the constructor of the
  * class. Usually a series of registerPlugin() calls.
  *
- * \param jsonFile Name of the json file to be compiled into the plugin as metadata
+ * @param jsonFile Name of the json file to be compiled into the plugin as metadata
  *
  * @note K_PLUGIN_FACTORY_WITH_JSON declares the subclass including a Q_OBJECT macro.
  * So you need to make sure to have Qt's moc run also for the source file
@@ -157,7 +157,7 @@ class Part;
  * in the same source file when that one has the name "myplugin.cpp".
  *
  * Example:
- * \code
+ * @code
  * #include <KPluginFactory>
  * #include <plugininterface.h>
  *
@@ -175,18 +175,18 @@ class Part;
  *                 )
  *
  * #include <myplugin.moc>
- * \endcode
+ * @endcode
  *
- * \see K_PLUGIN_FACTORY
- * \see K_PLUGIN_FACTORY_DECLARATION
- * \see K_PLUGIN_FACTORY_DEFINITION
+ * @see K_PLUGIN_FACTORY
+ * @see K_PLUGIN_FACTORY_DECLARATION
+ * @see K_PLUGIN_FACTORY_DEFINITION
  *
  * @since 5.0
  */
 #define K_PLUGIN_FACTORY_WITH_JSON(name, jsonFile, pluginRegistrations)  K_PLUGIN_FACTORY_WITH_BASEFACTORY_JSON(name, KPluginFactory, jsonFile, pluginRegistrations)
 
 /**
- * \relates KPluginFactory
+ * @relates KPluginFactory
  *
  * Create a KPluginFactory subclass and export it as the root plugin object with
  * JSON metadata.
@@ -200,7 +200,7 @@ class Part;
  * in the same source file when that one has the name "myplugin.cpp".
  *
  * Example:
- * \code
+ * @code
  * #include <KPluginFactory>
  * #include <plugininterface.h>
  *
@@ -215,44 +215,44 @@ class Part;
  * K_PLUGIN_CLASS_WITH_JSON(MyPlugin, "metadata.json")
  *
  * #include <myplugin.moc>
- * \endcode
+ * @endcode
  *
- * \see K_PLUGIN_FACTORY_WITH_JSON
+ * @see K_PLUGIN_FACTORY_WITH_JSON
  *
  * @since 5.44
  */
 #define K_PLUGIN_CLASS_WITH_JSON(classname, jsonFile) K_PLUGIN_FACTORY_WITH_JSON(classname ## Factory, jsonFile, registerPlugin<classname >();)
 
 /**
- * \relates KPluginFactory
+ * @relates KPluginFactory
  *
  * K_PLUGIN_FACTORY_DECLARATION declares the KPluginFactory subclass. This macro
  * can be used in a header file.
  *
- * \param name The name of the KPluginFactory derived class.
+ * @param name The name of the KPluginFactory derived class.
  *
- * \see K_PLUGIN_FACTORY
- * \see K_PLUGIN_FACTORY_DEFINITION
+ * @see K_PLUGIN_FACTORY
+ * @see K_PLUGIN_FACTORY_DEFINITION
  */
 #define K_PLUGIN_FACTORY_DECLARATION(name) K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, KPluginFactory)
 
 /**
- * \relates KPluginFactory
+ * @relates KPluginFactory
  * K_PLUGIN_FACTORY_DEFINITION defines the KPluginFactory subclass. This macro
  * can <b>not</b> be used in a header file.
  *
- * \param name The name of the KPluginFactory derived class.
+ * @param name The name of the KPluginFactory derived class.
  *
- * \param pluginRegistrations Code to be inserted into the constructor of the
+ * @param pluginRegistrations Code to be inserted into the constructor of the
  * class. Usually a series of registerPlugin() calls.
  *
- * \see K_PLUGIN_FACTORY
- * \see K_PLUGIN_FACTORY_DECLARATION
+ * @see K_PLUGIN_FACTORY
+ * @see K_PLUGIN_FACTORY_DECLARATION
  */
 #define K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations) K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, KPluginFactory, pluginRegistrations)
 
 /**
- * \class KPluginFactory kpluginfactory.h <KPluginFactory>
+ * @class KPluginFactory kpluginfactory.h <KPluginFactory>
  *
  * KPluginFactory provides a convenient way to provide factory-style plugins.
  * Qt plugins provide a singleton object, but a common pattern is for plugins
@@ -265,24 +265,24 @@ class Part;
  *
  * The objects created by KPluginFactory must inherit QObject, and must have a
  * standard constructor pattern:
- * \li if the object is a KPart::Part, it must be of the form
- * \code
+ * @li if the object is a KPart::Part, it must be of the form
+ * @code
  * T(QWidget *parentWidget, QObject *parent, const QVariantList &args)
- * \endcode
- * \li if it is a QWidget, it must be of the form
- * \code
+ * @endcode
+ * @li if it is a QWidget, it must be of the form
+ * @code
  * T(QWidget *parent, const QVariantList &args)
- * \endcode
- * \li otherwise it must be of the form
- * \code
+ * @endcode
+ * @li otherwise it must be of the form
+ * @code
  * T(QObject *parent, const QVariantList &args)
- * \endcode
+ * @endcode
  *
  * You should typically use either K_PLUGIN_FACTORY() or
  * K_PLUGIN_FACTORY_WITH_JSON() in your plugin code to create the factory.  The
  * typical pattern is
  *
- * \code
+ * @code
  * #include <KPluginFactory>
  * #include <plugininterface.h>
  *
@@ -298,7 +298,7 @@ class Part;
  *                  registerPlugin<MyPlugin>();
  *                 )
  * #include <myplugin.moc>
- * \endcode
+ * @endcode
  *
  * If you want to write a custom KPluginFactory not using the standard macro(s)
  * you can reimplement the
@@ -306,7 +306,7 @@ class Part;
  * method.
  *
  * Example:
- * \code
+ * @code
  * class SomeScriptLanguageFactory : public KPluginFactory
  * {
  *     Q_OBJECT
@@ -323,15 +323,15 @@ class Part;
  *         return object;
  *     }
  * };
- * \endcode
+ * @endcode
  * 
  * To use such a custom KPluginFactory, use the K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY
  * and K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY macro's, passing in the
- * name of the custom subclass as \p baseFactory .
+ * name of the custom subclass as @p baseFactory .
  *
  * If you want to load a library use KPluginLoader.
  * The application that wants to instantiate plugin classes can do the following:
- * \code
+ * @code
  * KPluginFactory *factory = KPluginLoader("libraryname").factory();
  * if (factory) {
  *     PluginInterface *p1 = factory->create<PluginInterface>(parent);
@@ -339,10 +339,10 @@ class Part;
  *     NextInterface *p3   = factory->create<NextInterface>("keyword1", parent);
  *     NextInterface *p3   = factory->create<NextInterface>("keyword2", parent);
  * }
- * \endcode
+ * @endcode
  *
- * \author Matthias Kretz <kretz@kde.org>
- * \author Bernhard Loos <nhuh.put@web.de>
+ * @author Matthias Kretz <kretz@kde.org>
+ * @author Bernhard Loos <nhuh.put@web.de>
  */
 class KCOREADDONS_EXPORT KPluginFactory : public QObject
 {
@@ -361,44 +361,44 @@ public:
 
     /**
      * Use this method to create an object. It will try to create an object which inherits
-     * \p T. If it has multiple choices it's not defined which object will be returned, so be careful
+     * @p T. If it has multiple choices it's not defined which object will be returned, so be careful
      * to request a unique interface or use keywords.
      *
-     * \tparam T The interface for which an object should be created. The object will inherit \p T.
-     * \param parent The parent of the object. If \p parent is a widget type, it will also passed
+     * @tparam T The interface for which an object should be created. The object will inherit @p T.
+     * @param parent The parent of the object. If @p parent is a widget type, it will also passed
      *               to the parentWidget argument of the CreateInstanceFunction for the object.
-     * \param args Additional arguments which will be passed to the object.
-     * \returns A pointer to the created object is returned, or @c nullptr if an error occurred.
+     * @param args Additional arguments which will be passed to the object.
+     * @returns A pointer to the created object is returned, or @c nullptr if an error occurred.
      */
     template<typename T>
     T *create(QObject *parent = nullptr, const QVariantList &args = QVariantList());
 
     /**
      * Use this method to create an object. It will try to create an object which inherits
-     * \p T and was registered with \p keyword.
+     * @p T and was registered with @p keyword.
      *
-     * \tparam T The interface for which an object should be created. The object will inherit \p T.
-     * \param keyword The keyword of the object.
-     * \param parent The parent of the object. If \p parent is a widget type, it will also passed
+     * @tparam T The interface for which an object should be created. The object will inherit @p T.
+     * @param keyword The keyword of the object.
+     * @param parent The parent of the object. If @p parent is a widget type, it will also passed
      *               to the parentWidget argument of the CreateInstanceFunction for the object.
-     * \param args Additional arguments which will be passed to the object.
-     * \returns A pointer to the created object is returned, or @c nullptr if an error occurred.
+     * @param args Additional arguments which will be passed to the object.
+     * @returns A pointer to the created object is returned, or @c nullptr if an error occurred.
      */
     template<typename T>
     T *create(const QString &keyword, QObject *parent = nullptr, const QVariantList &args = QVariantList());
 
     /**
      * Use this method to create an object. It will try to create an object which inherits
-     * \p T and was registered with \p keyword.
-     * This overload has an additional \p parentWidget argument, which is used by some plugins (e.g. Parts).
+     * @p T and was registered with @p keyword.
+     * This overload has an additional @p parentWidget argument, which is used by some plugins (e.g. Parts).
 
-     * \tparam T The interface for which an object should be created. The object will inherit \p T.
-     * \param parentWidget An additional parent widget.
-     * \param parent The parent of the object. If \p parent is a widget type, it will also passed
+     * @tparam T The interface for which an object should be created. The object will inherit @p T.
+     * @param parentWidget An additional parent widget.
+     * @param parent The parent of the object. If @p parent is a widget type, it will also passed
      *               to the parentWidget argument of the CreateInstanceFunction for the object.
-     * \param keyword The keyword of the object.
-     * \param args Additional arguments which will be passed to the object.
-     * \returns A pointer to the created object is returned, or @c nullptr if an error occurred.
+     * @param keyword The keyword of the object.
+     * @param args Additional arguments which will be passed to the object.
+     * @returns A pointer to the created object is returned, or @c nullptr if an error occurred.
      */
     template<typename T>
     T *create(QWidget *parentWidget, QObject *parent, const QString &keyword = QString(), const QVariantList &args = QVariantList());
@@ -425,13 +425,13 @@ public:
 #endif
 
     /**
-     * \internal
+     * @internal
      * Converts a QStringList to a QVariantList
      */
     static QVariantList stringListToVariantList(const QStringList &list);
 
     /**
-     * \internal
+     * @internal
      * Converts a QVariantList of strings to a QStringList
      */
     static QStringList variantListToStringList(const QVariantList &list);
@@ -473,30 +473,30 @@ protected:
      * for an interface the plugin implements.
      *
      * You can register as many plugin classes as you want as long as either the plugin interface or
-     * the \p keyword makes it unique. E.g. it is possible to register a KCModule and a
+     * the @p keyword makes it unique. E.g. it is possible to register a KCModule and a
      * KParts::Part without having to specify keywords since their interfaces differ.
      *
-     * \tparam T the name of the plugin class
+     * @tparam T the name of the plugin class
      *
-     * \param keyword An optional keyword as unique identifier for the plugin. This allows you to
+     * @param keyword An optional keyword as unique identifier for the plugin. This allows you to
      * put more than one plugin with the same interface into the same library using the same
      * factory. X-KDE-PluginKeyword is a convenient way to specify the keyword in a desktop file.
      *
-     * \param instanceFunction A function pointer to a function that creates an instance of the
+     * @param instanceFunction A function pointer to a function that creates an instance of the
      * plugin. The default function that will be used depends on the type of interface. If the
      * interface inherits from
-     * \li \c KParts::Part the function will call
-     * \code
+     * @li @c KParts::Part the function will call
+     * @code
      * new T(QWidget *parentWidget, QObject *parent, const QVariantList &args)
-     * \endcode
-     * \li \c QWidget the function will call
-     * \code
+     * @endcode
+     * @li @c QWidget the function will call
+     * @code
      * new T(QWidget *parent, const QVariantList &args)
-     * \endcode
-     * \li else the function will call
-     * \code
+     * @endcode
+     * @li else the function will call
+     * @code
      * new T(QObject *parent, const QVariantList &args)
-     * \endcode
+     * @endcode
      */
     template<class T>
     void registerPlugin(const QString &keyword = QString(), CreateInstanceFunction instanceFunction
@@ -527,12 +527,12 @@ protected:
      * You may reimplement it to provide a very flexible factory. This is especially useful to
      * provide generic factories for plugins implemented using a scripting language.
      *
-     * \param iface The staticMetaObject::className() string identifying the plugin interface that
+     * @param iface The staticMetaObject::className() string identifying the plugin interface that
      * was requested. E.g. for KCModule plugins this string will be "KCModule".
-     * \param parentWidget Only used if the requested plugin is a KPart.
-     * \param parent The parent object for the plugin object.
-     * \param args A plugin specific list of arbitrary arguments.
-     * \param keyword A string that uniquely identifies the plugin. If a KService is used this
+     * @param parentWidget Only used if the requested plugin is a KPart.
+     * @param parent The parent object for the plugin object.
+     * @param args A plugin specific list of arbitrary arguments.
+     * @param keyword A string that uniquely identifies the plugin. If a KService is used this
      * keyword is read from the X-KDE-PluginKeyword entry in the .desktop file.
      */
     virtual QObject *create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword);
