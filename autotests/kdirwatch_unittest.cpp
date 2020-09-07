@@ -108,7 +108,6 @@ private Q_SLOTS: // test methods
     void nestedEventLoop();
     void testHardlinkChange();
     void stopAndRestart();
-    void shouldIgnoreQrcPaths();
     void benchCreateTree();
     void benchCreateWatcher();
     void benchNotifyWatcher();
@@ -443,6 +442,8 @@ void KDirWatch_UnitTest::removeAndReAdd()
 {
     KDirWatch watch;
     watch.addDir(m_path);
+    // This triggers bug #374075.
+    watch.addDir(QStringLiteral(":/kio5/newfile-templates"));
     watch.startScan();
     if (watch.internalMethod() != KDirWatch::INotify) {
         waitUntilNewSecond();    // necessary for mtime checks in scanEntry
@@ -834,29 +835,6 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     QFile::remove(file2);
     QFile::remove(file3);
-}
-
-void KDirWatch_UnitTest::shouldIgnoreQrcPaths()
-{
-    const auto oldCwd = QDir::currentPath();
-    QVERIFY(QDir::setCurrent(QDir::homePath()));
-
-    KDirWatch watch;
-    watch.addDir(QDir::homePath());
-    // This triggers bug #374075.
-    watch.addDir(QStringLiteral(":/kio5/newfile-templates"));
-
-    QSignalSpy dirtySpy(&watch, &KDirWatch::dirty);
-
-    QFile file(QStringLiteral("bug374075.txt"));
-    QVERIFY(file.open(QIODevice::WriteOnly));
-    QVERIFY(file.write(QByteArrayLiteral("test")));
-    file.close();
-    QVERIFY(file.exists());
-    QVERIFY(dirtySpy.wait());
-    QVERIFY(dirtySpy.count() > 0);
-    QVERIFY(file.remove());
-    QVERIFY(QDir::setCurrent(oldCwd));
 }
 
 void KDirWatch_UnitTest::benchCreateTree()
