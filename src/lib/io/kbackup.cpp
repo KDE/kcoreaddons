@@ -21,28 +21,12 @@
 namespace KBackup
 {
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 bool backupFile(const QString &qFilename, const QString &backupDir)
 {
-    // get backup type from config, by default use "simple"
-    // get extension from config, by default use "~"
-    // get max number of backups from config, by default set to 10
-#pragma message("KDE5 TODO: Remove KConfig correctly")
-#if 0
-    KConfigGroup g(KSharedConfig::openConfig(), "Backups"); // look in the Backups section
-    QString type = g.readEntry("Type", "simple");
-    QString extension = g.readEntry("Extension", "~");
-    QString message = g.readEntry("Message", "Automated KDE Commit");
-    int maxnum = g.readEntry("MaxBackups", 10);
-    if (type.toLower() == QLatin1String("numbered")) {
-        return (numberedBackupFile(qFilename, backupDir, extension, maxnum));
-    } else if (type.toLower() == QLatin1String("rcs")) {
-        return (rcsBackupFile(qFilename, backupDir, message));
-    } else {
-        return (simpleBackupFile(qFilename, backupDir, extension));
-    }
-#endif
     return (simpleBackupFile(qFilename, backupDir, QStringLiteral("~")));
 }
+#endif
 
 bool simpleBackupFile(const QString &qFilename,
                       const QString &backupDir,
