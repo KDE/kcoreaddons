@@ -3428,6 +3428,7 @@ Notes:
     <comment xml:lang="pl">Ustawienia KConfigXT</comment>
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de configuração do KConfigXT</comment>
+    <comment xml:lang="ro">Opțiuni de configurare KConfigXT</comment>
     <comment xml:lang="ru">Параметры конфигурации KConfigXT</comment>
     <comment xml:lang="sk">Konfiguračné možnosti KConfigXT</comment>
     <comment xml:lang="sl">Nastavitvene možnosti KConfigXT</comment>
@@ -3473,6 +3474,7 @@ Notes:
     <comment xml:lang="pl">Ustawienia do tworzenia kodu KConfigXT</comment>
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de geração de código do KConfigXT</comment>
+    <comment xml:lang="ro">Opțiuni de generare a codului KConfigXT</comment>
     <comment xml:lang="ru">Параметры создания кода KConfigXT</comment>
     <comment xml:lang="sk">Nástroje generovania kódu KConfigXT</comment>
     <comment xml:lang="sl">Možnosti ustvarjanja kode KConfigXT</comment>
@@ -3514,6 +3516,7 @@ Notes:
     <comment xml:lang="pl">Deklaracja KXMLGUI UI</comment>
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
     <comment xml:lang="pt_BR">Declaração UI do KXMLGUI</comment>
+    <comment xml:lang="ro">Declarație KXMLGUI UI</comment>
     <comment xml:lang="ru">Конфигурация интерфейса KXMLGUI</comment>
     <comment xml:lang="sk">Deklarácia KXMLGUI UI</comment>
     <comment xml:lang="sl">Deklaracija uporabniškega vmesnika KXMLGUI</comment>
@@ -3560,6 +3563,7 @@ Notes:
     <comment xml:lang="pl">Deklaracja KNotification</comment>
     <comment xml:lang="pt">Declaração do KNotification</comment>
     <comment xml:lang="pt_BR">Declaração do KNotification</comment>
+    <comment xml:lang="ro">Declarație KNotification</comment>
     <comment xml:lang="ru">Конфигурация KNotification</comment>
     <comment xml:lang="sk">Deklarácia KNotification</comment>
     <comment xml:lang="sl">Deklaracija KNotification</comment>
@@ -3597,6 +3601,7 @@ Notes:
     <comment xml:lang="pl">Zgłoszenie KCrash</comment>
     <comment xml:lang="pt">Relatório do KCrash</comment>
     <comment xml:lang="pt_BR">Relatório do KCrash</comment>
+    <comment xml:lang="ro">Raport KCrash</comment>
     <comment xml:lang="ru">Отчёт об ошибке KCrash</comment>
     <comment xml:lang="sk">Hlásenie KCrash</comment>
     <comment xml:lang="sl">Poročilo KCrash</comment>
