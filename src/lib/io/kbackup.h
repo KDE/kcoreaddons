@@ -20,21 +20,43 @@
  */
 namespace KBackup
 {
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 75)
 /**
  * @brief Function to create a backup file before saving.
  *
- * If empty (the default), the backup will be in the same directory as @p filename.
- * The backup type (simple, rcs, or numbered), extension string, and maximum
- * number of backup files are read from the user's global configuration.
- * Use simpleBackupFile() or numberedBackupFile() to force one of these
- * specific backup styles.
- * You can use this method even if you don't use KSaveFile.
+ * @warning This code lost its former functionality during the conversion from KDELibs4 to KDE Framrworks 5.
+ * It now only forwards and calls
+ * @code
+KBackup::simpleBackupFile(filename, backupDir, QStringLiteral("~")));
+ * @endcode
+ * To restore the former functionality for your software, which read
+ * the backup type (simple or numbered), extension string, and maximum
+ * number of backup files from the user's global configuration,
+ * you could use code like this:
+ * @code
+    KConfigGroup configGroup(KSharedConfig::openConfig(), "Backups"); // look in the Backups section
+    const QString type = configGroup.readEntry("Type", QStringLiteral("simple"));
+    const QString extension = configGroup.readEntry("Extension", QStringLiteral("~"));
+    bool success = false;
+    if (type == QLatin1String("numbered")) {
+        const int maxNumber = configGroup.readEntry("MaxBackups", 10);
+        success = numberedBackupFile(filename, backupDir, extension, maxNumber);
+    } else {
+        success = simpleBackupFile(filename, backupDir, extension);
+    }
+ * @endcode
+ *
  * @param filename the file to backup
  * @param backupDir optional directory where to save the backup file in.
+ *                  If empty (the default), the backup will be in the same directory as @p filename.
  * @return true if successful, or false if an error has occurred.
+ *
+ * @deprecated Since 5.0, use simpleBackupFile() or numberedBackupFile() directly
  */
+KCOREADDONS_DEPRECATED_VERSION_BELATED(5, 75, 5, 0, "Use simpleBackupFile() or numberedBackupFile() directly")
 KCOREADDONS_EXPORT bool backupFile(const QString &filename,
                                    const QString &backupDir = QString());
+#endif
 
 /**
 * @brief Function to create a backup file for a given filename.
