@@ -14,9 +14,11 @@
 
 #include <QFileInfo>
 #include <QDir>
-#include <QProcess>
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
+#include <QProcess>
 #include <QStandardPaths>
+#endif
 
 namespace KBackup
 {
@@ -60,6 +62,7 @@ bool simpleBackupFile(const QString &qFilename,
     return QFile::copy(qFilename, backupFileName);
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 bool rcsBackupFile(const QString &qFilename,
                    const QString &backupDir,
                    const QString &backupMessage)
@@ -133,6 +136,7 @@ bool rcsBackupFile(const QString &qFilename,
         return true;
     }
 }
+#endif
 
 bool numberedBackupFile(const QString &qFilename,
                         const QString &backupDir,

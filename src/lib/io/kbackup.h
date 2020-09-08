@@ -84,6 +84,7 @@ KCOREADDONS_EXPORT bool numberedBackupFile(const QString &filename,
         const uint maxBackups = 10
                                           );
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 75)
 /**
  * @brief Function to create an rcs backup file for a given filename.
  *
@@ -105,11 +106,14 @@ KCOREADDONS_EXPORT bool numberedBackupFile(const QString &filename,
  * @p filename.
  * @param backupMessage is the RCS commit message for this revision.
  * @return true if successful, or false if an error has occurred.
+ * @deprecated Since 5.75, no known users
  */
+KCOREADDONS_DEPRECATED_VERSION(5, 75, "No known users")
 KCOREADDONS_EXPORT bool rcsBackupFile(const QString &filename,
                                       const QString &backupDir = QString(),
                                       const QString &backupMessage = QString()
                                      );
+#endif
 }
 
 #endif
