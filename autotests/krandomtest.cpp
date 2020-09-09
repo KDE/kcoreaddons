@@ -27,6 +27,7 @@ typedef QVarLengthArray<int> intSequenceType;
 
 static const char *binpath;
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 static bool seqsAreEqual(const intSequenceType &l, const intSequenceType &r)
 {
     if(l.size() != r.size()) {
@@ -43,6 +44,7 @@ static bool seqsAreEqual(const intSequenceType &l, const intSequenceType &r)
 
     return l_first == last;
 }
+#endif
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 72)
 // Fills seq with random bytes produced by a new process. Seq should already
@@ -78,7 +80,9 @@ private Q_SLOTS:
 #endif
     void test_randomString();
     void test_randomStringThreaded();
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
     void test_KRS();
+#endif
     void test_shuffle();
 };
 
@@ -112,6 +116,7 @@ void KRandomTest::test_randomString()
     QVERIFY(match.hasMatch());
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 void KRandomTest::test_KRS()
 {
     using std::generate;
@@ -148,6 +153,7 @@ void KRandomTest::test_KRS()
     QVERIFY(all_of(out1.begin(), out1.end(), [&](int x) { return x < maxInt; }));
     QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) { return x < maxInt; }));
 }
+#endif
 
 void KRandomTest::test_shuffle()
 {

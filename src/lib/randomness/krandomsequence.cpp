@@ -8,6 +8,8 @@
 
 #include "krandomsequence.h"
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
+
 #include <QRandomGenerator>
 
 class Q_DECL_HIDDEN KRandomSequence::Private
@@ -204,3 +206,5 @@ KRandomSequence::getBool()
 
     return ((static_cast<unsigned int>(d->lngShufflePos)) & 1);
 }
+
+#endif
