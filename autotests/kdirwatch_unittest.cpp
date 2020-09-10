@@ -14,6 +14,7 @@
 #include <QTemporaryDir>
 #include <QTest>
 #include <QSignalSpy>
+#include <thread>
 #include <sys/stat.h>
 #ifdef Q_OS_UNIX
 #include <unistd.h> // ::link()
@@ -111,6 +112,7 @@ private Q_SLOTS: // test methods
     void benchCreateTree();
     void benchCreateWatcher();
     void benchNotifyWatcher();
+    void testRefcounting();
 
 protected Q_SLOTS: // internal slots
     void nestedEventLoopSlot();
@@ -903,6 +905,24 @@ void KDirWatch_UnitTest::benchNotifyWatcher()
         QTRY_COMPARE_WITH_TIMEOUT(spy.count(), numFiles, s_maxTries * 50 * 2);
         spy.clear();
     }
+}
+
+void KDirWatch_UnitTest::testRefcounting()
+{
+    bool initialExists = false;
+    bool secondExists = true; // the expectation is it will be set false
+    auto thread = std::thread([&] {
+        QTemporaryDir dir;
+        {
+            KDirWatch watch;
+            watch.addFile(dir.path());
+            initialExists = KDirWatch::exists();
+        } // out of scope, the internal private should have been unset
+        secondExists = KDirWatch::exists();
+    });
+    thread.join();
+    QVERIFY(initialExists);
+    QVERIFY(!secondExists);
 }
 
 #include "kdirwatch_unittest.moc"

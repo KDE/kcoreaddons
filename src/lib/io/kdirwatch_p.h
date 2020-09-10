@@ -5,6 +5,7 @@
     SPDX-FileCopyrightText: 2006 Dirk Mueller <mueller@kde.org>
     SPDX-FileCopyrightText: 2007 Flavio Castelli <flavio.castelli@gmail.com>
     SPDX-FileCopyrightText: 2008 Jarosław Staniek <staniek@kde.org>
+    SPDX-FileCopyrightText: 2020 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: LGPL-2.0-only
 
@@ -173,6 +174,9 @@ public:
 
     static bool isNoisyFile(const char *filename);
 
+    void ref();
+    void unref();
+
 public Q_SLOTS:
     void slotRescan();
     void famEventReceived(); // for FAM
@@ -221,6 +225,10 @@ public:
 #endif
 
     bool _isStopped;
+
+private:
+    // Public objects that reference this thread-local private instance.
+    uint m_references;
 };
 
 QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry);

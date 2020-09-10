@@ -88,6 +88,11 @@ static KDirWatchPrivate *createPrivate()
     }
     return dwp_self.localData();
 }
+static void destroyPrivate()
+{
+    dwp_self.localData()->deleteLater();
+    dwp_self.setLocalData(nullptr);
+}
 
 // Convert a string into a watch Method
 static KDirWatch::Method methodFromString(const QByteArray &method)
@@ -167,7 +172,8 @@ KDirWatchPrivate::KDirWatchPrivate()
 #if HAVE_SYS_INOTIFY_H
       mSn(nullptr),
 #endif
-      _isStopped(false)
+      _isStopped(false),
+      m_references(0)
 {
     // Debug unittest on CI
     if (qAppName() == QLatin1String("kservicetest") || qAppName() == QLatin1String("filetypestest")) {
@@ -1585,6 +1591,19 @@ bool KDirWatchPrivate::isNoisyFile(const char *filename)
     return false;
 }
 
+void KDirWatchPrivate::ref()
+{
+    ++m_references;
+}
+
+void KDirWatchPrivate::unref()
+{
+    --m_references;
+    if (m_references == 0) {
+        destroyPrivate();
+    }
+}
+
 #if HAVE_FAM
 void KDirWatchPrivate::famEventReceived()
 {
@@ -1873,6 +1892,7 @@ static void postRoutine_KDirWatch()
 KDirWatch::KDirWatch(QObject *parent)
     : QObject(parent), d(createPrivate())
 {
+    d->ref();
     static QBasicAtomicInt nameCounter = Q_BASIC_ATOMIC_INITIALIZER(1);
     const int counter = nameCounter.fetchAndAddRelaxed(1); // returns the old value
     setObjectName(QStringLiteral("KDirWatch-%1").arg(counter));
@@ -1887,6 +1907,7 @@ KDirWatch::~KDirWatch()
 {
     if (d && dwp_self.hasLocalData()) { // skip this after app destruction
         d->removeEntries(this);
+        d->unref();
     }
 }
 

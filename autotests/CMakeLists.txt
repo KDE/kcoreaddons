@@ -8,6 +8,8 @@ if(NOT Qt5Test_FOUND)
     return()
 endif()
 
+find_package(Threads REQUIRED) # std::thread
+
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd]ebug$")
     set(ENABLE_BENCHMARKS 1)
 endif()
@@ -112,7 +114,7 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
     string(TOLOWER ${_backendName} _lowercaseBackendName)
     set(BACKEND_TEST_TARGET kdirwatch_${_lowercaseBackendName}_unittest)
     add_executable(${BACKEND_TEST_TARGET} kdirwatch_unittest.cpp)
-    target_link_libraries(${BACKEND_TEST_TARGET} Qt5::Test KF5::CoreAddons)
+    target_link_libraries(${BACKEND_TEST_TARGET} Qt5::Test KF5::CoreAddons Threads::Threads)
     ecm_mark_as_test(${BACKEND_TEST_TARGET})
     add_test(NAME ${BACKEND_TEST_TARGET} COMMAND ${BACKEND_TEST_TARGET})
     target_compile_definitions(${BACKEND_TEST_TARGET} PUBLIC -DKDIRWATCH_TEST_METHOD=\"${_backendName}\")
