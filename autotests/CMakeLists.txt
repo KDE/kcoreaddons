@@ -8,7 +8,7 @@ if(NOT Qt5Test_FOUND)
     return()
 endif()
 
-find_package(Threads REQUIRED) # std::thread
+find_package(Threads REQUIRED)
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd]ebug$")
     set(ENABLE_BENCHMARKS 1)

@@ -14,7 +14,7 @@
 #include <QTemporaryDir>
 #include <QTest>
 #include <QSignalSpy>
-#include <thread>
+#include <QThread>
 #include <sys/stat.h>
 #ifdef Q_OS_UNIX
 #include <unistd.h> // ::link()
@@ -911,7 +911,7 @@ void KDirWatch_UnitTest::testRefcounting()
 {
     bool initialExists = false;
     bool secondExists = true; // the expectation is it will be set false
-    auto thread = std::thread([&] {
+    auto thread = QThread::create([&] {
         QTemporaryDir dir;
         {
             KDirWatch watch;
@@ -920,7 +920,9 @@ void KDirWatch_UnitTest::testRefcounting()
         } // out of scope, the internal private should have been unset
         secondExists = KDirWatch::exists();
     });
-    thread.join();
+    thread->start();
+    thread->wait();
+    delete thread;
     QVERIFY(initialExists);
     QVERIFY(!secondExists);
 }
