@@ -909,6 +909,7 @@ void KDirWatch_UnitTest::benchNotifyWatcher()
 
 void KDirWatch_UnitTest::testRefcounting()
 {
+#if QT_CONFIG(cxx11_future)
     bool initialExists = false;
     bool secondExists = true; // the expectation is it will be set false
     auto thread = QThread::create([&] {
@@ -925,6 +926,7 @@ void KDirWatch_UnitTest::testRefcounting()
     delete thread;
     QVERIFY(initialExists);
     QVERIFY(!secondExists);
+#endif
 }
 
 #include "kdirwatch_unittest.moc"
