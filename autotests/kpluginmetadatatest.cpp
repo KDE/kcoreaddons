@@ -16,7 +16,7 @@
 #include <kaboutdata.h>
 
 #include <QLocale>
-
+#include <QLoggingCategory>
 
 namespace QTest
 {
@@ -32,8 +32,39 @@ template<> inline char *toString(const QJsonValue &val)
 class KPluginMetaDataTest : public QObject
 {
     Q_OBJECT
+    bool m_canMessage = false;
 
+    void doMessagesWorkInternal()
+    {
+    }
+
+    Q_REQUIRED_RESULT bool doMessagesWork()
+    {
+        // Q_SKIP returns, but since this is called in multiple tests we want to return a bool so the caller can
+        // return easily.
+        auto internalCheck = [this] {
+            // Make sure output is well formed AND generated. To that end we cannot run this test when any of the
+            // overriding environment variables are set.
+            // https://bugs.kde.org/show_bug.cgi?id=387006
+            if (qEnvironmentVariableIsSet("QT_MESSAGE_PATTERN")) {
+                QSKIP("QT_MESSAGE_PATTERN prevents warning expectations from matching");
+            }
+            if (qEnvironmentVariableIsSet("QT_LOGGING_RULES")) {
+                QSKIP("QT_LOGGING_RULES prevents warning expectations from matching");
+            }
+            if (qEnvironmentVariableIsSet("QT_LOGGING_CONF")) {
+                QSKIP("QT_LOGGING_CONF prevents warning expectations from matching");
+            }
+            m_canMessage = true;
+            // Ensure all frameworks output is enabled so the expectations can match.
+            // qtlogging.ini may have disabled it but we can fix that because setFilterRules overrides the ini files.
+            QLoggingCategory::setFilterRules(QStringLiteral("kf.*=true"));
+        };
+        internalCheck();
+        return m_canMessage;
+    }
 private Q_SLOTS:
+
     void testFromPluginLoader()
     {
         QString location = KPluginLoader::findPlugin(QStringLiteral("jsonplugin"));
@@ -175,6 +206,9 @@ private Q_SLOTS:
 
     void testReadStringList()
     {
+        if (!doMessagesWork()) {
+            return;
+        }
         QJsonParseError e;
         QJsonObject jo = QJsonDocument::fromJson("{\n"
                                                  "\"String\": \"foo\",\n"
@@ -267,6 +301,9 @@ private Q_SLOTS:
 
     void testServiceType()
     {
+        if (!doMessagesWork()) {
+            return;
+        }
         const QString typesPath = QFINDTESTDATA("data/servicetypes/example-servicetype.desktop");
         QVERIFY(!typesPath.isEmpty());
         const QString inputPath = QFINDTESTDATA("data/servicetypes/example-input.desktop");
@@ -291,6 +328,9 @@ private Q_SLOTS:
 
     void testBadGroupsInServiceType()
     {
+        if (!doMessagesWork()) {
+            return;
+        }
         const QString typesPath = QFINDTESTDATA("data/servicetypes/bad-groups-servicetype.desktop");
         QVERIFY(!typesPath.isEmpty());
         const QString inputPath = QFINDTESTDATA("data/servicetypes/bad-groups-input.desktop");

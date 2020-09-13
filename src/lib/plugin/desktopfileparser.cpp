@@ -19,6 +19,7 @@
 #include <QRegularExpressionMatch>
 
 // in the desktoptojson binary enable debug messages by default, in the library only warning messages
+// NOTE: should you change this, also update the test case, it hardcodes the category name as well!
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
 Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf.coreaddons.desktopparser", QtDebugMsg)
 #else
