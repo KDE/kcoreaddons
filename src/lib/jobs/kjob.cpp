@@ -17,11 +17,6 @@
 #include <QTimer>
 
 KJobPrivate::KJobPrivate()
-    : q_ptr(nullptr), uiDelegate(nullptr), error(KJob::NoError),
-      progressUnit(KJob::Bytes), percentage(0),
-      speedTimer(nullptr), eventLoop(nullptr),
-      capabilities(KJob::NoCapabilities),
-      suspended(false), isAutoDelete(true), isFinished(false)
 {
 }
 

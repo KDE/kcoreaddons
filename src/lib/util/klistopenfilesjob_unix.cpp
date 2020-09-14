@@ -21,7 +21,6 @@ public:
     KListOpenFilesJobPrivate(KListOpenFilesJob *Job, const QDir &Path)
         : job(Job)
         , path(Path)
-        , hasEmittedResult(false)
     {
         QObject::connect(&lsofProcess, &QProcess::errorOccurred, [this](QProcess::ProcessError error) {
             lsofError(error);
@@ -83,7 +82,7 @@ private:
 private:
     KListOpenFilesJob *job;
     const QDir path;
-    bool hasEmittedResult;
+    bool hasEmittedResult = false;
     QProcess lsofProcess;
     KProcessList::KProcessInfoList processInfoList;
 };

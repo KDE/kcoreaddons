@@ -27,12 +27,12 @@ private:
     void convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr);
     bool resolveFiles();
 
-    QCommandLineParser *m_parser;
-    QCommandLineOption input;
-    QCommandLineOption output;
-    QCommandLineOption verbose;
-    QCommandLineOption compat;
-    QCommandLineOption serviceTypesOption;
+    QCommandLineParser *const m_parser;
+    const QCommandLineOption input;
+    const QCommandLineOption output;
+    const QCommandLineOption verbose;
+    const QCommandLineOption compat;
+    const QCommandLineOption serviceTypesOption;
     QString m_inFile;
     QString m_outFile;
 };

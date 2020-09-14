@@ -31,7 +31,7 @@ public:
 
     QStringList configFiles;
     QStringList uiFiles;
-    QString appName;
+    const QString appName;
 };
 
 Kdelibs4ConfigMigrator::Kdelibs4ConfigMigrator(const QString &appName)

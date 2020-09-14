@@ -32,15 +32,10 @@ class KAutoSaveFilePrivate
 public:
     enum {NamePadding=8};
 
-    KAutoSaveFilePrivate()
-        : lock(nullptr),
-          managedFileNameChanged(false)
-    {}
-
     QString tempFileName();
     QUrl managedFile;
-    QLockFile *lock;
-    bool managedFileNameChanged;
+    QLockFile *lock = nullptr;
+    bool managedFileNameChanged = false;
 };
 
 static QStringList findAllStales(const QString &appName)

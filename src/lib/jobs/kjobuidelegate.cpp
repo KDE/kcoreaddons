@@ -15,13 +15,13 @@ class Q_DECL_HIDDEN KJobUiDelegate::Private
 {
 public:
     Private(KJobUiDelegate *delegate)
-        : q(delegate), job(nullptr),
+        : q(delegate),
           autoErrorHandling(false),
           autoWarningHandling(true) { }
 
     KJobUiDelegate *const q;
 
-    KJob *job;
+    KJob *job = nullptr;
     bool autoErrorHandling : 1;
     bool autoWarningHandling : 1;
 

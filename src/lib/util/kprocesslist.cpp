@@ -12,9 +12,7 @@
 
 using namespace KProcessList;
 
-KProcessInfoPrivate::KProcessInfoPrivate() :
-    valid(false),
-    pid(-1)
+KProcessInfoPrivate::KProcessInfoPrivate()
 {
 }
 

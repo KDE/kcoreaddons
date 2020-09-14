@@ -28,27 +28,27 @@ public:
     KJobPrivate();
     virtual ~KJobPrivate();
 
-    KJob *q_ptr;
+    KJob *q_ptr = nullptr;
 
-    KJobUiDelegate *uiDelegate;
+    KJobUiDelegate *uiDelegate = nullptr;
     QString errorText;
-    int error;
-    KJob::Unit progressUnit;
+    int error = KJob::NoError;
+    KJob::Unit progressUnit = KJob::Bytes;
     QMap<KJob::Unit, qulonglong> processedAmount;
     QMap<KJob::Unit, qulonglong> totalAmount;
-    unsigned long percentage;
-    QTimer *speedTimer;
-    QEventLoop *eventLoop;
+    unsigned long percentage = 0;
+    QTimer *speedTimer = nullptr;
+    QEventLoop *eventLoop = nullptr;
     // eventLoopLocker prevents QCoreApplication from exiting when the last
     // window is closed until the job has finished running
     QEventLoopLocker eventLoopLocker;
-    KJob::Capabilities capabilities;
-    bool suspended;
-    bool isAutoDelete;
+    KJob::Capabilities capabilities = KJob::NoCapabilities;
+    bool suspended = false;
+    bool isAutoDelete = true;
 
     void _k_speedTimeout();
 
-    bool isFinished;
+    bool isFinished = false;
 
     Q_DECLARE_PUBLIC(KJob)
 };

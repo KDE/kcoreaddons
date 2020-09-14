@@ -20,8 +20,8 @@ class KProcessInfoPrivate : public QSharedData {
 public:
     KProcessInfoPrivate();
 
-    bool valid;
-    qint64 pid;
+    bool valid = false;
+    qint64 pid = -1;
     QString name;
     QString user;
     QString command;
