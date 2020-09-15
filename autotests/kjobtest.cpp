@@ -7,9 +7,13 @@
 
 #include "kjobtest.h"
 
+#include <QMetaEnum>
 #include <QTimer>
 #include <QSignalSpy>
 #include <QTest>
+#include <QVector>
+
+#include <string>
 
 QTEST_MAIN(KJobTest)
 
@@ -265,6 +269,77 @@ void KJobTest::testDestroy()
     QCOMPARE(m_lastErrorText, QString{});
     QCOMPARE(m_resultCount, 0);
     QCOMPARE(m_finishedCount, 1);
+}
+
+void KJobTest::testEmitAtMostOnce_data()
+{
+    QTest::addColumn<bool>("autoDelete");
+    QTest::addColumn<QVector<Action>>("actions");
+
+    const auto actionName = [](Action action) {
+        return QMetaEnum::fromType<Action>().valueToKey(static_cast<int>(action));
+    };
+
+    for (bool autoDelete : {true, false}) {
+        for (Action a : {Action::Start, Action::KillQuietly, Action::KillVerbosely}) {
+            for (Action b : {Action::Start, Action::KillQuietly, Action::KillVerbosely}) {
+                const auto dataTag = std::string{actionName(a)} + '-' + actionName(b)
+                                     + (autoDelete ? "-autoDelete" : "");
+                QTest::newRow(dataTag.c_str()) << autoDelete << QVector<Action>{a, b};
+            }
+        }
+    }
+}
+
+void KJobTest::testEmitAtMostOnce()
+{
+    auto *const job = setupErrorResultFinished();
+    QSignalSpy destroyed_spy(job, &QObject::destroyed);
+
+    QFETCH(bool, autoDelete);
+    job->setAutoDelete(autoDelete);
+
+    QFETCH(QVector<Action>, actions);
+    for (auto action : actions) {
+        switch (action) {
+            case Action::Start:
+                job->start(); // in effect calls QTimer::singleShot(0, ... emitResult)
+                break;
+            case Action::KillQuietly:
+                QTimer::singleShot(0, job, [=] { job->kill(KJob::Quietly); });
+                break;
+            case Action::KillVerbosely:
+                QTimer::singleShot(0, job, [=] { job->kill(KJob::EmitResult); });
+                break;
+        }
+    }
+
+    QVERIFY(!job->isFinished());
+    loop.processEvents(QEventLoop::AllEvents, 2000);
+    QCOMPARE(destroyed_spy.size(), autoDelete);
+    if (!autoDelete) {
+        QVERIFY(job->isFinished());
+    }
+
+    QVERIFY(!actions.empty());
+    // The first action alone should determine the job's error and result.
+    const auto firstAction = actions.front();
+
+    const int errorCode = firstAction == Action::Start ? KJob::NoError
+                                                       : KJob::KilledJobError;
+    QCOMPARE(m_lastError, errorCode);
+    QCOMPARE(m_lastErrorText, QString{});
+    if (!autoDelete) {
+        QCOMPARE(job->error(), m_lastError);
+        QCOMPARE(job->errorText(), m_lastErrorText);
+    }
+
+    QCOMPARE(m_resultCount, firstAction == Action::KillQuietly ? 0 : 1);
+    QCOMPARE(m_finishedCount, 1);
+
+    if (!autoDelete) {
+        delete job;
+    }
 }
 
 void KJobTest::testDelegateUsage()

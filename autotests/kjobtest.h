@@ -50,6 +50,13 @@ class KJobTest : public QObject
 {
     Q_OBJECT
 public:
+    enum class Action {
+        Start,
+        KillQuietly,
+        KillVerbosely
+    };
+    Q_ENUM(Action)
+
     KJobTest();
 
 public Q_SLOTS:
@@ -68,6 +75,8 @@ private Q_SLOTS:
     void testKill_data();
     void testKill();
     void testDestroy();
+    void testEmitAtMostOnce_data();
+    void testEmitAtMostOnce();
     void testDelegateUsage();
     void testNestedExec();
 

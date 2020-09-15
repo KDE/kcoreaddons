@@ -79,6 +79,7 @@ bool KJob::isSuspended() const
 void KJob::finishJob(bool emitResult)
 {
     Q_D(KJob);
+    Q_ASSERT(!d->isFinished);
     d->isFinished = true;
 
     if (d->eventLoop) {
@@ -99,10 +100,18 @@ void KJob::finishJob(bool emitResult)
 
 bool KJob::kill(KillVerbosity verbosity)
 {
-    if (doKill()) {
-        setError(KilledJobError);
+    Q_D(KJob);
+    if (d->isFinished) {
+        return true;
+    }
 
-        finishJob(verbosity != Quietly);
+    if (doKill()) {
+        // A subclass can (but should not) call emitResult() or kill()
+        // from doKill() and thus set isFinished to true.
+        if (!d->isFinished) {
+            setError(KilledJobError);
+            finishJob(verbosity != Quietly);
+        }
         return true;
     } else {
         return false;
@@ -278,7 +287,9 @@ void KJob::setPercent(unsigned long percentage)
 
 void KJob::emitResult()
 {
-    finishJob(true);
+    if (!d_func()->isFinished) {
+        finishJob(true);
+    }
 }
 
 void KJob::emitPercent(qulonglong processedAmount, qulonglong totalAmount)
