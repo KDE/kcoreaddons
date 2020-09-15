@@ -43,7 +43,9 @@ void KJobTest::testEmitResult()
 
     QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject*)));
     job->start();
+    QVERIFY(!job->isFinished());
     loop.exec();
+    QVERIFY(job->isFinished());
 
     QCOMPARE(m_lastError, errorCode);
     QCOMPARE(m_lastErrorText, errorText);
@@ -184,7 +186,9 @@ void KJobTest::testExec()
 
     QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject*)));
 
+    QVERIFY(!job->isFinished());
     bool status = job->exec();
+    QVERIFY(job->isFinished());
 
     QCOMPARE(resultEmitted, 1);
     QCOMPARE(status, (errorCode == KJob::NoError));
@@ -221,15 +225,8 @@ void KJobTest::testKill_data()
 
 void KJobTest::testKill()
 {
-    TestJob *job = new TestJob;
-
-    connect(job, &KJob::result, this, &KJobTest::slotResult);
-    connect(job, &KJob::finished, this, &KJobTest::slotFinished);
-
-    m_lastError = KJob::NoError;
-    m_lastErrorText.clear();
-    m_resultCount = 0;
-    m_finishedCount = 0;
+    auto *const job = setupErrorResultFinished();
+    QSignalSpy destroyed_spy(job, &QObject::destroyed);
 
     QFETCH(int, killVerbosity);
     QFETCH(int, errorCode);
@@ -237,9 +234,9 @@ void KJobTest::testKill()
     QFETCH(int, resultEmitCount);
     QFETCH(int, finishedEmitCount);
 
-    QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject*)));
-
+    QVERIFY(!job->isFinished());
     job->kill(static_cast<KJob::KillVerbosity>(killVerbosity));
+    QVERIFY(job->isFinished());
     loop.processEvents(QEventLoop::AllEvents, 2000);
 
     QCOMPARE(m_lastError, errorCode);
@@ -257,6 +254,17 @@ void KJobTest::testKill()
     // ... but when we enter the event loop again.
     loop.exec();
     QCOMPARE(destroyed_spy.size(), 1);
+}
+
+void KJobTest::testDestroy()
+{
+    auto *const job = setupErrorResultFinished();
+    QVERIFY(!job->isFinished());
+    delete job;
+    QCOMPARE(m_lastError, static_cast<int>(KJob::NoError));
+    QCOMPARE(m_lastErrorText, QString{});
+    QCOMPARE(m_resultCount, 0);
+    QCOMPARE(m_finishedCount, 1);
 }
 
 void KJobTest::testDelegateUsage()
@@ -307,6 +315,10 @@ void KJobTest::slotFinishInnerJob()
 
 void KJobTest::slotResult(KJob *job)
 {
+    const auto testJob = qobject_cast<const TestJob *>(job);
+    QVERIFY(testJob);
+    QVERIFY(testJob->isFinished());
+
     if (job->error()) {
         m_lastError = job->error();
         m_lastErrorText = job->errorText();
@@ -321,6 +333,15 @@ void KJobTest::slotResult(KJob *job)
 
 void KJobTest::slotFinished(KJob *job)
 {
+    // qobject_cast and dynamic_cast to TestJob* fail when finished() signal is emitted from
+    // ~KJob(). The static_cast allows to call the otherwise protected KJob::isFinished().
+    // WARNING: don't use this trick in production code, because static_cast-ing
+    // to a wrong type and then dereferencing the pointer is undefined behavior.
+    // Normally a KJob and its subclasses should manage their finished state on their own.
+    // If you *really* need KJob::isFinished() to be public, request this access
+    // modifier change in the KJob class.
+    QVERIFY(static_cast<const TestJob *>(job)->isFinished());
+
     if (job->error()) {
         m_lastError = job->error();
         m_lastErrorText = job->errorText();
@@ -330,6 +351,19 @@ void KJobTest::slotFinished(KJob *job)
     }
 
     m_finishedCount++;
+}
+
+TestJob *KJobTest::setupErrorResultFinished()
+{
+    m_lastError = KJob::UserDefinedError;
+    m_lastErrorText.clear();
+    m_resultCount = 0;
+    m_finishedCount = 0;
+
+    auto *job = new TestJob;
+    connect(job, &KJob::result, this, &KJobTest::slotResult);
+    connect(job, &KJob::finished, this, &KJobTest::slotFinished);
+    return job;
 }
 
 TestJob::TestJob() : KJob()

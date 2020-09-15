@@ -21,6 +21,7 @@ public:
     ~TestJob() override;
 
     void start() override;
+    using KJob::isFinished;
 
 protected:
     bool doKill() override;
@@ -66,6 +67,7 @@ private Q_SLOTS:
     void testExec();
     void testKill_data();
     void testKill();
+    void testDestroy();
     void testDelegateUsage();
     void testNestedExec();
 
@@ -73,6 +75,8 @@ private Q_SLOTS:
     void slotFinished(KJob *job);
 
 private:
+    TestJob *setupErrorResultFinished();
+
     QEventLoop loop;
     int m_lastError;
     QString m_lastErrorText;

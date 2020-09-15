@@ -550,6 +550,15 @@ Q_SIGNALS:
 
 protected:
     /**
+     * Returns if the job has been finished and has emitted the finished() signal.
+     *
+     * @return if the job has been finished
+     * @see finished()
+     * @since 5.75
+     */
+    bool isFinished() const;
+
+    /**
      * Sets the error code.
      *
      * It should be called when an error

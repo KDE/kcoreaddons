@@ -39,6 +39,7 @@ KJob::KJob(KJobPrivate &dd, QObject *parent)
 KJob::~KJob()
 {
     if (!d_ptr->isFinished) {
+        d_ptr->isFinished = true;
         emit finished(this, QPrivateSignal());
     }
 
@@ -215,6 +216,11 @@ qulonglong KJob::totalAmount(Unit unit) const
 unsigned long KJob::percent() const
 {
     return d_func()->percentage;
+}
+
+bool KJob::isFinished() const
+{
+    return d_func()->isFinished;
 }
 
 void KJob::setError(int errorCode)
