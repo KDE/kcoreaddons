@@ -240,9 +240,10 @@ bool KTextToHTMLHelper::isEmptyUrl(const QString &url) const
            url == QLatin1String("smb://") ||
            url == QLatin1String("vnc://") ||
            url == QLatin1String("mailto") ||
+           url == QLatin1String("mailto:") ||
            url == QLatin1String("www") ||
            url == QLatin1String("ftp") ||
-           url == QLatin1String("news") ||
+           url == QLatin1String("news:") ||
            url == QLatin1String("news://") ||
            url == QLatin1String("tel") ||
            url == QLatin1String("tel:") ||

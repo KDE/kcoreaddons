@@ -528,6 +528,19 @@ void KTextToHTMLTest::testHtmlConvert_data()
     QTest::newRow("xmpp3") << "xmpp:conversations@conference.siacs.eu?join"
                                        << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                        << "<a href=\"xmpp:conversations@conference.siacs.eu?join\">xmpp:conversations@conference.siacs.eu?join</a>";
+
+    //Test news: only
+    QTest::newRow("news") << "news: "
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "news:&nbsp;";
+
+    QTest::newRow("ftp") << "ftp: "
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "ftp:&nbsp;";
+    QTest::newRow("mailto") << "mailto: "
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "mailto:&nbsp;";
+
 }
 
 
