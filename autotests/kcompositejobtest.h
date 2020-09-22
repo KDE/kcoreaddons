@@ -8,7 +8,6 @@
 #ifndef KCOMPOSITEJOBTEST_H
 #define KCOMPOSITEJOBTEST_H
 
-#include <QEventLoop>
 #include <QObject>
 
 #include "kcompositejob.h"
@@ -23,8 +22,18 @@ public:
     /// Takes 1 second to finish
     void start() override;
 
-private Q_SLOTS:
-    void doEmit();
+    using KJob::emitResult;
+};
+
+class KillableTestJob : public TestJob
+{
+    Q_OBJECT
+
+public:
+    explicit KillableTestJob(QObject *parent = nullptr);
+
+protected:
+    bool doKill() override;
 };
 
 class CompositeJob : public KCompositeJob
@@ -35,7 +44,8 @@ public:
     explicit CompositeJob(QObject *parent = nullptr) : KCompositeJob(parent) {}
 
     void start() override;
-    bool addSubjob(KJob *job) override;
+    using KCompositeJob::addSubjob;
+    using KCompositeJob::clearSubjobs;
 
 protected Q_SLOTS:
     void slotResult(KJob *job) override;
@@ -46,13 +56,21 @@ class KCompositeJobTest : public QObject
     Q_OBJECT
 
 public:
+    enum class Action {
+        Finish,
+        KillVerbosely,
+        KillQuietly,
+        Destroy
+    };
+    Q_ENUM(Action)
+
     KCompositeJobTest();
 
 private Q_SLOTS:
     void testDeletionDuringExecution();
 
-private:
-    QEventLoop loop;
+    void testFinishingSubjob();
+    void testFinishingSubjob_data();
 };
 
 #endif // KCOMPOSITEJOBTEST_H

@@ -42,7 +42,7 @@ protected:
     /**
      * Add a job that has to be finished before a result
      * is emitted. This has obviously to be called before
-     * the result has been emitted by the job.
+     * the finished() signal has been emitted by the job.
      *
      * Note that the composite job takes ownership of @p job
      *
@@ -90,6 +90,11 @@ protected Q_SLOTS:
      * to parent job, and in all cases it calls removeSubjob.
      *
      * @param job the subjob
+     *
+     * @since 5.75: this slot is connected to &KJob::finished instead of &KJob::result,
+     * so it is now guaranteed to be called even if a subjob is killed Quietly or
+     * destroyed before it finishes.
+     * TODO KF6: rename to slotFinished
      */
     virtual void slotResult(KJob *job);
 

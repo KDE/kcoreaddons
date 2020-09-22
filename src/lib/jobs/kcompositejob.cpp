@@ -40,7 +40,7 @@ bool KCompositeJob::addSubjob(KJob *job)
 
     job->setParent(this);
     d->subjobs.append(job);
-    connect(job, &KJob::result, this, &KCompositeJob::slotResult);
+    connect(job, &KJob::finished, this, &KCompositeJob::slotResult);
 
     // Forward information from that subjob.
     connect(job, &KJob::infoMessage, this, &KCompositeJob::slotInfoMessage);
@@ -54,7 +54,7 @@ bool KCompositeJob::removeSubjob(KJob *job)
     // remove only Subjobs that are on the list
     if (d->subjobs.removeAll(job) > 0) {
         job->setParent(nullptr);
-        disconnect(job, &KJob::result, this, &KCompositeJob::slotResult);
+        disconnect(job, &KJob::finished, this, &KCompositeJob::slotResult);
         disconnect(job, &KJob::infoMessage, this, &KCompositeJob::slotInfoMessage);
         return true;
     }
@@ -76,7 +76,7 @@ void KCompositeJob::clearSubjobs()
     Q_D(KCompositeJob);
     for (KJob *job : qAsConst(d->subjobs)) {
         job->setParent(nullptr);
-        disconnect(job, &KJob::result, this, &KCompositeJob::slotResult);
+        disconnect(job, &KJob::finished, this, &KCompositeJob::slotResult);
         disconnect(job, &KJob::infoMessage, this, &KCompositeJob::slotInfoMessage);
     }
     d->subjobs.clear();
