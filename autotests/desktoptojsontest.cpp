@@ -112,6 +112,7 @@ private Q_SLOTS:
                 "X-KDE-PluginInfo-Depends=foo,bar,esc\\,aped\n" // string list key
                 "X-KDE-ServiceTypes=\n" // empty string list
                 "X-KDE-PluginInfo-EnabledByDefault=true\n" // bool key
+                "X-KDE-PluginInfo-ConfigModule=foo_config\n"
                 // now start a new group
                 "[New Group]\n"
                 "InWrongGroup=true\n";
@@ -134,6 +135,7 @@ private Q_SLOTS:
         kpluginObj[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(QStringList());
         kpluginObj[QStringLiteral("EnabledByDefault")] = true;
         kpluginObj[QStringLiteral("Version")] = QStringLiteral("1.0");
+        kpluginObj[QStringLiteral("ConfigModule")] = QStringLiteral("foo_config");
         QJsonObject compatResult = expectedResult;
         compatResult[QStringLiteral("Name")] = QStringLiteral("Example");
         compatResult[QStringLiteral("Name[de_DE]")] = QStringLiteral("Beispiel");
@@ -143,6 +145,7 @@ private Q_SLOTS:
                 (QStringList() << QStringLiteral("foo") << QStringLiteral("bar") << QStringLiteral("esc,aped"));
         compatResult[QStringLiteral("X-KDE-ServiceTypes")] = QJsonArray::fromStringList(QStringList());
         compatResult[QStringLiteral("X-KDE-PluginInfo-EnabledByDefault")] = true;
+        compatResult[QStringLiteral("X-KDE-PluginInfo-ConfigModule")] = QStringLiteral("foo_config");
 
         expectedResult[QStringLiteral("KPlugin")] = kpluginObj;
 

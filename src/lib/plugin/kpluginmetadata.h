@@ -58,6 +58,7 @@ class QObject;
  * FormFactors        | formFactors()        | string array
  * Translators        | translators()        | object array (KAboutPerson)
  * OtherContributors  | otherContributors()  | object array (KAboutPerson)
+ * ConfigModule       | configModule()       | string
  *
  * The Authors, Translators and OtherContributors keys are expected to be
  * list of objects that match the structure expected by KAboutPerson::fromJSON().
@@ -113,6 +114,7 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(QStringList formFactors READ formFactors CONSTANT)
     Q_PROPERTY(bool isEnabledByDefault READ isEnabledByDefault CONSTANT)
     Q_PROPERTY(int initialPreference READ isEnabledByDefault CONSTANT)
+    Q_PROPERTY(QString configModule READ configModule CONSTANT)
 
 public:
 
@@ -399,6 +401,12 @@ public:
      * @see KPluginMetaData::rawData() if QString is not the correct type for @p key
      */
     QString value(const QString &key, const QString &defaultValue = QString()) const;
+
+    /**
+     * @return the ID of the config module for this plugin.
+     * @since 5.75
+     */
+    QString configModule() const;
 
     /** @return the value for @p key inside @p jo as a string list. If the type of @p key is string, a list with containing
      * just that string will be returned, if it is an array the list will contain one entry for each array member.

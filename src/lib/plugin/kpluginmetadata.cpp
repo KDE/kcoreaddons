@@ -363,6 +363,11 @@ int KPluginMetaData::initialPreference() const
     return rootObject()[QStringLiteral("InitialPreference")].toInt();
 }
 
+QString KPluginMetaData::configModule() const
+{
+    return rootObject()[QStringLiteral("ConfigModule")].toString();
+}
+
 QString KPluginMetaData::value(const QString &key, const QString &defaultValue) const
 {
     const QJsonValue value = m_metaData.value(key);
