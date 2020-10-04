@@ -453,7 +453,7 @@ TestJob::~TestJob()
 
 void TestJob::start()
 {
-    QTimer::singleShot(0, this, SLOT(doEmit()));
+    QTimer::singleShot(0, this, [this] { emitResult(); });
 }
 
 bool TestJob::doKill()
@@ -484,11 +484,6 @@ void TestJob::setTotalSize(qulonglong size)
 void TestJob::setPercent(unsigned long percentage)
 {
     KJob::setPercent(percentage);
-}
-
-void TestJob::doEmit()
-{
-    emitResult();
 }
 
 void WaitJob::start()

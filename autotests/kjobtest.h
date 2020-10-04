@@ -32,9 +32,6 @@ public:
     void setProcessedSize(qulonglong size);
     void setTotalSize(qulonglong size);
     void setPercent(unsigned long percentage);
-
-private Q_SLOTS:
-    void doEmit();
 };
 
 class TestJobUiDelegate : public KJobUiDelegate
