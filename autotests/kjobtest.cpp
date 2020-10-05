@@ -37,7 +37,10 @@ void KJobTest::testEmitResult()
 {
     TestJob *job = new TestJob;
 
-    connect(job, &KJob::result, this, &KJobTest::slotResult);
+    connect(job, &KJob::result, this, [this](KJob *job) {
+        slotResult(job);
+        loop.quit();
+    });
 
     QFETCH(int, errorCode);
     QFETCH(QString, errorText);
@@ -403,7 +406,6 @@ void KJobTest::slotResult(KJob *job)
     }
 
     m_resultCount++;
-    loop.quit();
 }
 
 void KJobTest::slotFinished(KJob *job)
