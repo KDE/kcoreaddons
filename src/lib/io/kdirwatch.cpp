@@ -2051,22 +2051,28 @@ KDirWatch::Method KDirWatch::internalMethod() const
 {
     // This reproduces the logic in KDirWatchPrivate::addWatch
     switch (d->m_preferredMethod) {
+    case KDirWatch::FAM:
 #if HAVE_FAM
-    case KDirWatch::FAM: if (d->use_fam) {
+        if (d->use_fam) {
             return KDirWatch::FAM;
         }
-        break;
 #endif
+        break;
+    case KDirWatch::INotify:
 #if HAVE_SYS_INOTIFY_H
-    case KDirWatch::INotify: if (d->supports_inotify) {
+        if (d->supports_inotify) {
             return KDirWatch::INotify;
         }
+#endif
+        break;
+    case KDirWatch::QFSWatch:
+#if HAVE_QFILESYSTEMWATCHER
+        return KDirWatch::QFSWatch;
+#else
         break;
 #endif
-#if HAVE_QFILESYSTEMWATCHER
-    case KDirWatch::QFSWatch: return KDirWatch::QFSWatch;
-#endif
-    case KDirWatch::Stat: return KDirWatch::Stat;
+    case KDirWatch::Stat:
+        return KDirWatch::Stat;
     }
 
 #if HAVE_SYS_INOTIFY_H
