@@ -91,9 +91,9 @@ class Part;
  *
  * Create a KPluginFactory subclass and export it as the root plugin object.
  *
- * @param name The name of the KPluginFactory derived class.
+ * @param name the name of the KPluginFactory derived class.
  *
- * @param pluginRegistrations Code to be inserted into the constructor of the
+ * @param pluginRegistrations code to be inserted into the constructor of the
  * class. Usually a series of registerPlugin() calls.
  *
  * @note K_PLUGIN_FACTORY declares the subclass including a Q_OBJECT macro.
@@ -142,16 +142,16 @@ class Part;
  * This macro does the same as K_PLUGIN_FACTORY, but adds a JSON file as plugin
  * metadata.  See Q_PLUGIN_METADATA() for more information.
  *
- * @param name The name of the KPluginFactory derived class.
+ * @param name the name of the KPluginFactory derived class.
  *
- * @param pluginRegistrations Code to be inserted into the constructor of the
+ * @param pluginRegistrations code to be inserted into the constructor of the
  * class. Usually a series of registerPlugin() calls.
  *
- * @param jsonFile Name of the json file to be compiled into the plugin as metadata
+ * @param jsonFile name of the JSON file to be compiled into the plugin as metadata
  *
  * @note K_PLUGIN_FACTORY_WITH_JSON declares the subclass including a Q_OBJECT macro.
  * So you need to make sure to have Qt's moc run also for the source file
- * where you use the macro. E.g. in projects using CMake and it's automoc feature,
+ * where you use the macro. E.g. in projects using CMake and its automoc feature,
  * as usual you need to have a line
  * @code
  * #include <myplugin.moc>
@@ -231,7 +231,7 @@ class Part;
  * K_PLUGIN_FACTORY_DECLARATION declares the KPluginFactory subclass. This macro
  * can be used in a header file.
  *
- * @param name The name of the KPluginFactory derived class.
+ * @param name the name of the KPluginFactory derived class.
  *
  * @see K_PLUGIN_FACTORY
  * @see K_PLUGIN_FACTORY_DEFINITION
@@ -243,9 +243,9 @@ class Part;
  * K_PLUGIN_FACTORY_DEFINITION defines the KPluginFactory subclass. This macro
  * can <b>not</b> be used in a header file.
  *
- * @param name The name of the KPluginFactory derived class.
+ * @param name the name of the KPluginFactory derived class.
  *
- * @param pluginRegistrations Code to be inserted into the constructor of the
+ * @param pluginRegistrations code to be inserted into the constructor of the
  * class. Usually a series of registerPlugin() calls.
  *
  * @see K_PLUGIN_FACTORY
@@ -366,11 +366,11 @@ public:
      * @p T. If it has multiple choices it's not defined which object will be returned, so be careful
      * to request a unique interface or use keywords.
      *
-     * @tparam T The interface for which an object should be created. The object will inherit @p T.
-     * @param parent The parent of the object. If @p parent is a widget type, it will also passed
+     * @tparam T the interface for which an object should be created. The object will inherit @p T.
+     * @param parent the parent of the object. If @p parent is a widget type, it will also passed
      *               to the parentWidget argument of the CreateInstanceFunction for the object.
-     * @param args Additional arguments which will be passed to the object.
-     * @returns A pointer to the created object is returned, or @c nullptr if an error occurred.
+     * @param args additional arguments which will be passed to the object.
+     * @returns pointer to the created object is returned, or @c nullptr if an error occurred.
      */
     template<typename T>
     T *create(QObject *parent = nullptr, const QVariantList &args = QVariantList());
@@ -379,12 +379,12 @@ public:
      * Use this method to create an object. It will try to create an object which inherits
      * @p T and was registered with @p keyword.
      *
-     * @tparam T The interface for which an object should be created. The object will inherit @p T.
-     * @param keyword The keyword of the object.
-     * @param parent The parent of the object. If @p parent is a widget type, it will also passed
+     * @tparam T the interface for which an object should be created. The object will inherit @p T.
+     * @param keyword the keyword of the object.
+     * @param parent the parent of the object. If @p parent is a widget type, it will also passed
      *               to the parentWidget argument of the CreateInstanceFunction for the object.
-     * @param args Additional arguments which will be passed to the object.
-     * @returns A pointer to the created object is returned, or @c nullptr if an error occurred.
+     * @param args additional arguments which will be passed to the object.
+     * @returns pointer to the created object is returned, or @c nullptr if an error occurred.
      */
     template<typename T>
     T *create(const QString &keyword, QObject *parent = nullptr, const QVariantList &args = QVariantList());
@@ -394,13 +394,13 @@ public:
      * @p T and was registered with @p keyword.
      * This overload has an additional @p parentWidget argument, which is used by some plugins (e.g. Parts).
 
-     * @tparam T The interface for which an object should be created. The object will inherit @p T.
-     * @param parentWidget An additional parent widget.
-     * @param parent The parent of the object. If @p parent is a widget type, it will also passed
+     * @tparam T the interface for which an object should be created. The object will inherit @p T.
+     * @param parentWidget an additional parent widget.
+     * @param parent the parent of the object. If @p parent is a widget type, it will also passed
      *               to the parentWidget argument of the CreateInstanceFunction for the object.
-     * @param keyword The keyword of the object.
-     * @param args Additional arguments which will be passed to the object.
-     * @returns A pointer to the created object is returned, or @c nullptr if an error occurred.
+     * @param keyword the keyword of the object.
+     * @param args additional arguments which will be passed to the object.
+     * @returns pointer to the created object is returned, or @c nullptr if an error occurred.
      */
     template<typename T>
     T *create(QWidget *parentWidget, QObject *parent, const QString &keyword = QString(), const QVariantList &args = QVariantList());
@@ -480,11 +480,11 @@ protected:
      *
      * @tparam T the name of the plugin class
      *
-     * @param keyword An optional keyword as unique identifier for the plugin. This allows you to
+     * @param keyword an optional keyword as unique identifier for the plugin. This allows you to
      * put more than one plugin with the same interface into the same library using the same
      * factory. X-KDE-PluginKeyword is a convenient way to specify the keyword in a desktop file.
      *
-     * @param instanceFunction A function pointer to a function that creates an instance of the
+     * @param instanceFunction a function pointer to a function that creates an instance of the
      * plugin. The default function that will be used depends on the type of interface. If the
      * interface inherits from
      * @li @c KParts::Part the function will call
@@ -529,12 +529,12 @@ protected:
      * You may reimplement it to provide a very flexible factory. This is especially useful to
      * provide generic factories for plugins implemented using a scripting language.
      *
-     * @param iface The staticMetaObject::className() string identifying the plugin interface that
+     * @param iface the staticMetaObject::className() string identifying the plugin interface that
      * was requested. E.g. for KCModule plugins this string will be "KCModule".
-     * @param parentWidget Only used if the requested plugin is a KPart.
-     * @param parent The parent object for the plugin object.
-     * @param args A plugin specific list of arbitrary arguments.
-     * @param keyword A string that uniquely identifies the plugin. If a KService is used this
+     * @param parentWidget only used if the requested plugin is a KPart.
+     * @param parent the parent object for the plugin object.
+     * @param args a plugin specific list of arbitrary arguments.
+     * @param keyword a string that uniquely identifies the plugin. If a KService is used this
      * keyword is read from the X-KDE-PluginKeyword entry in the .desktop file.
      */
     virtual QObject *create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword);
