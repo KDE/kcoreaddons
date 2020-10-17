@@ -1138,7 +1138,13 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
 void KAboutData::registerPluginData(const KAboutData &aboutData)
 {
-    s_registry->m_pluginData.insert(aboutData.componentName(), new KAboutData(aboutData));
+    auto &data = s_registry->m_pluginData[aboutData.componentName()];
+    if (data) {
+        // silently ignore double registration, assuming it's for the same plugin
+        // all of this is getting deprecated anyways, we just don't want to leak anything
+        return;
+    }
+    data = new KAboutData(aboutData);
 }
 #endif
 
