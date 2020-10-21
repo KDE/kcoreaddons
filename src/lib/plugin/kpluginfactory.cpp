@@ -15,8 +15,6 @@
 
 Q_GLOBAL_STATIC(QObjectCleanupHandler, factorycleanup)
 
-extern int kLibraryDebugArea();
-
 KPluginFactory::KPluginFactory()
     : d_ptr(new KPluginFactoryPrivate)
 {
