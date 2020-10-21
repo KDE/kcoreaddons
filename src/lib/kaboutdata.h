@@ -443,18 +443,29 @@ public:
      */
     static void setApplicationData(const KAboutData &aboutData);
 
+// BUILD, not ENABLE, as producers need to support the registry for backward-compat
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
     /**
      * Register the KAboutData information for a plugin.
      * Call this from the constructor of the plugin.
      * This will register the plugin's @p aboutData under the component name
      * that was set in @p aboutData.
+     * @deprecated Since 5.76. The central registry is to be removed in the future
+     * in favour of plugin type specific local registries, using KPluginMetaData.
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 76, "See API docs")
     static void registerPluginData(const KAboutData &aboutData);
+#endif
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 76)
     /**
      * Return the KAboutData for the given plugin identified by @p componentName.
+     * @deprecated Since 5.76. The central registry is to be removed in the future
+     * in favour of plugin type specific local registries, using KPluginMetaData.
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 76, "See API docs")
     static KAboutData *pluginData(const QString &componentName);
+#endif
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 65)
     /**

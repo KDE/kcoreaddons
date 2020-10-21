@@ -1030,13 +1030,17 @@ public:
     ~KAboutDataRegistry()
     {
         delete m_appData;
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
         qDeleteAll(m_pluginData);
+#endif
     }
     KAboutDataRegistry(const KAboutDataRegistry &) = delete;
     KAboutDataRegistry &operator=(const KAboutDataRegistry &) = delete;
 
     KAboutData *m_appData;
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
     QHash<QString, KAboutData *> m_pluginData;
+#endif
 };
 
 Q_GLOBAL_STATIC(KAboutDataRegistry, s_registry)
@@ -1131,16 +1135,20 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
     // that increases behavioural complexity a little.
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
 void KAboutData::registerPluginData(const KAboutData &aboutData)
 {
     s_registry->m_pluginData.insert(aboutData.componentName(), new KAboutData(aboutData));
 }
+#endif
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
 KAboutData *KAboutData::pluginData(const QString &componentName)
 {
     KAboutData *ad = s_registry->m_pluginData.value(componentName);
     return ad;
 }
+#endif
 
 // only for KCrash (no memory allocation allowed)
 const KAboutData *KAboutData::applicationDataPointer()
