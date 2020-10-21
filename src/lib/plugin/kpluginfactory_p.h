@@ -20,14 +20,12 @@ class KPluginFactoryPrivate
 protected:
     typedef QPair<const QMetaObject *, KPluginFactory::CreateInstanceFunction> Plugin;
 
-    KPluginFactoryPrivate() : catalogInitialized(false) {}
+    KPluginFactoryPrivate() = default;
     ~KPluginFactoryPrivate()
     {
     }
 
     QMultiHash<QString, Plugin> createInstanceHash;
-    QString catalogName;
-    bool catalogInitialized;
 
     KPluginFactory *q_ptr;
 };
