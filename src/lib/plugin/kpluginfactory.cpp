@@ -21,7 +21,6 @@ KPluginFactory::KPluginFactory()
     : d_ptr(new KPluginFactoryPrivate)
 {
     Q_D(KPluginFactory);
-    d->q_ptr = this;
 
     factorycleanup()->add(this);
 }

@@ -16,7 +16,8 @@
 
 class KPluginFactoryPrivate
 {
-    Q_DECLARE_PUBLIC(KPluginFactory)
+    friend class KPluginFactory;
+
 protected:
     typedef QPair<const QMetaObject *, KPluginFactory::CreateInstanceFunction> Plugin;
 
@@ -26,8 +27,6 @@ protected:
     }
 
     QMultiHash<QString, Plugin> createInstanceHash;
-
-    KPluginFactory *q_ptr;
 };
 
 #endif // KPLUGINFACTORY_P_H
