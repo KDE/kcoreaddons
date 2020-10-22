@@ -12,7 +12,7 @@
 #include <QFileInfo>
 #include <QRegularExpression>
 
-QString KFileUtils::suggestName(const QUrl &baseURL, const QString &oldName)
+QString KFileUtils::makeSuggestedName(const QString &oldName)
 {
     QString basename;
 
@@ -48,18 +48,21 @@ QString KFileUtils::suggestName(const QUrl &baseURL, const QString &oldName)
         // number does not exist, so just append " (1)" to filename
         basename += QLatin1String(" (1)");
     }
-    const QString suggestedName = basename + nameSuffix;
 
-    // Check if suggested name already exists
-    bool exists = false;
+    return basename + nameSuffix;
+}
+
+
+QString KFileUtils::suggestName(const QUrl &baseURL, const QString &oldName)
+{
+    QString suggestedName = makeSuggestedName(oldName);
 
     if (baseURL.isLocalFile()) {
-        exists = QFileInfo::exists(baseURL.toLocalFile() + QLatin1Char('/') + suggestedName);
+        const QString basePath = baseURL.toLocalFile() + QLatin1Char('/');
+        while (QFileInfo::exists(basePath + suggestedName)) {
+            suggestedName = makeSuggestedName(suggestedName);
+        }
     }
 
-    if (!exists) {
-        return suggestedName;
-    } else { // already exists -> recurse
-        return suggestName(baseURL, suggestedName);
-    }
+    return suggestedName;
 }
