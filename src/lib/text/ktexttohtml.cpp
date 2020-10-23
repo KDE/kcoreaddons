@@ -9,7 +9,6 @@
 #include "ktexttohtml_p.h"
 #include "ktexttohtmlemoticonsinterface.h"
 
-#include <QString>
 #include <QStringList>
 #include <QFile>
 #include <QRegularExpression>

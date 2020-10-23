@@ -15,7 +15,6 @@
 #include <QLocale>
 #include <QMimeDatabase>
 #include <QPluginLoader>
-#include <QStringList>
 #include "kcoreaddons_debug.h"
 
 #include "kpluginloader.h"

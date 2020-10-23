@@ -24,7 +24,6 @@
 #include <fcntl.h>
 
 #include <QFile>
-#include <QRandomGenerator>
 #include <QThread>
 #include <QThreadStorage>
 

@@ -21,7 +21,6 @@ static const int maxNameLength = NAME_MAX;
 #include <QLatin1Char>
 #include <QCoreApplication>
 #include <QDir>
-#include <QFile>
 #include <QLockFile>
 #include <QStandardPaths>
 #include "krandom.h"

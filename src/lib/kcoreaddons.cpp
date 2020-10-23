@@ -8,7 +8,6 @@
 
 #include "kcoreaddons.h"
 
-#include <QString>
 
 #include "kcoreaddons_version.h"
 
