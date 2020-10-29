@@ -305,13 +305,14 @@ int KProcess::startDetached(const QStringList &argv)
     return startDetached(prog, args);
 }
 
+[[deprecated]]
 int KProcess::pid() const
 {
-#ifdef Q_OS_UNIX
-    return static_cast<int>(QProcess::pid());
-#else
-    return QProcess::pid() ? QProcess::pid()->dwProcessId : 0;
-#endif
+    return processId();
 }
 
+int KProcess::processId() const
+{
+    return static_cast<int>(QProcess::processId());
+}
 #include "moc_kprocess.cpp"
