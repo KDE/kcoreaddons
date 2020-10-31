@@ -164,6 +164,25 @@ void KJobTest::testProgressTracking()
     QCOMPARE(percent_spy.at(4).at(0).value<KJob *>(), job);
     QCOMPARE(percent_spy.at(4).at(1).value<unsigned long>(), static_cast<unsigned long>(150));
 
+    processed_spy.clear();
+    total_spy.clear();
+    percent_spy.clear();
+
+    /**
+     * Try again with Files as the progress unit
+     */
+    testJob->setProgressUnit(KJob::Files);
+    testJob->setProcessedSize(16);
+    QCOMPARE(percent_spy.size(), 0); // no impact on percent
+
+    testJob->setTotalFiles(5);
+    QCOMPARE(percent_spy.size(), 1);
+    QCOMPARE(percent_spy.at(0).at(1).value<unsigned long>(), static_cast<unsigned long>(0));
+
+    testJob->setProcessedFiles(2);
+    QCOMPARE(percent_spy.size(), 2);
+    QCOMPARE(percent_spy.at(1).at(1).value<unsigned long>(), static_cast<unsigned long>(40));
+
     delete job;
 }
 
@@ -481,6 +500,16 @@ void TestJob::setProcessedSize(qulonglong size)
 void TestJob::setTotalSize(qulonglong size)
 {
     KJob::setTotalAmount(KJob::Bytes, size);
+}
+
+void TestJob::setProcessedFiles(qulonglong files)
+{
+    KJob::setProcessedAmount(KJob::Files, files);
+}
+
+void TestJob::setTotalFiles(qulonglong files)
+{
+    KJob::setTotalAmount(KJob::Files, files);
 }
 
 void TestJob::setPercent(unsigned long percentage)

@@ -22,6 +22,7 @@ public:
 
     void start() override;
     using KJob::isFinished;
+    using KJob::setProgressUnit;
 
 protected:
     bool doKill() override;
@@ -31,6 +32,8 @@ public:
     void setErrorText(const QString &errorText);
     void setProcessedSize(qulonglong size);
     void setTotalSize(qulonglong size);
+    void setProcessedFiles(qulonglong files);
+    void setTotalFiles(qulonglong files);
     void setPercent(unsigned long percentage);
 };
 

@@ -276,6 +276,12 @@ void KJob::setTotalAmount(Unit unit, qulonglong amount)
     }
 }
 
+void KJob::setProgressUnit(Unit unit)
+{
+    Q_D(KJob);
+    d->progressUnit = unit;
+}
+
 void KJob::setPercent(unsigned long percentage)
 {
     Q_D(KJob);

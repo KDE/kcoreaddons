@@ -619,8 +619,20 @@ protected:
     void setTotalAmount(Unit unit, qulonglong amount);
 
     /**
+     * Sets the unit that will be used internally to calculate
+     * the progress percentage.
+     * The default progress unit is Bytes.
+     * @since 5.76
+     */
+    void setProgressUnit(Unit unit);
+
+    /**
      * Sets the overall progress of the job. The percent() signal
      * is emitted if the value changed.
+     *
+     * The job takes care of this if you call setProcessedAmount
+     * in Bytes (or the unit set by setProgressUnit).
+     * This method allows you to set your own progress, as an alternative.
      *
      * @param percentage the new overall progress
      */
