@@ -105,6 +105,9 @@ public:
      * Internally, this uses QPluginLoader::instance(), and the same
      * behaviours apply.
      *
+     * Since KF 5.77, the factory will have the metadata set fetched from
+     * any JSON metadata that is embedded into the plugin binary.
+     *
      * \returns The factory of the plugin or @c nullptr on error.
      */
     KPluginFactory *factory();

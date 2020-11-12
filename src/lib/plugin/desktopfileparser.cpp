@@ -435,12 +435,16 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
 
         X-KDE-PluginInfo-Author=Author's Name
         X-KDE-PluginInfo-Email=author@foo.bar
+        # alternatively to X-KDE-PluginInfo-Author & X-KDE-PluginInfo-Email:
+        X-KDE-PluginInfo-Authors=Author A's Name;AuthorB's Name (since KF 5.77)
+        X-KDE-PluginInfo-Emails=authorA@foo.bar;authorB@foo.bar (since KF 5.77)
         X-KDE-PluginInfo-Name=internalname
         X-KDE-PluginInfo-Version=1.1
         X-KDE-PluginInfo-Website=http://www.plugin.org/
         X-KDE-PluginInfo-Category=playlist
         X-KDE-PluginInfo-Depends=plugin1,plugin3
         X-KDE-PluginInfo-License=GPL
+        X-KDE-PluginInfo-Copyright=Copyright <year> by Author's Name (since KF 5.77, translatable)
         X-KDE-PluginInfo-EnabledByDefault=true
         X-KDE-FormFactors=desktop
     */
@@ -452,6 +456,11 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
         kplugin[QStringLiteral("Category")] = value;
     } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-License")) {
         kplugin[QStringLiteral("License")] = value;
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Copyright")) {
+        kplugin[QStringLiteral("Copyright")] = value;
+    } else if (key.startsWith(QByteArrayLiteral("X-KDE-PluginInfo-Copyright["))) {
+        const QString languageSuffix = QString::fromUtf8(key.mid(qstrlen("X-KDE-PluginInfo-Copyright")));
+        kplugin[QStringLiteral("Copyright") + languageSuffix] = value;
     } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Version")) {
         kplugin[QStringLiteral("Version")] = value;
     } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Website")) {
@@ -496,6 +505,28 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
         QJsonArray array;
         array.append(authorsObject);
         kplugin[QStringLiteral("Authors")] = array;
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Authors")) {
+        const auto authors = deserializeList(value);
+        QJsonArray oldArray = kplugin.value(QStringLiteral("Authors")).toArray();
+        QJsonArray newArray;
+        for (int i = 0; i < authors.size(); ++i) {
+            QJsonObject authorsObject = oldArray.at(i).toObject();
+            // if the authors object doesn't exist yet this will create it
+            authorsObject[QStringLiteral("Name")] = authors[i];
+            newArray.append(authorsObject);
+        }
+        kplugin[QStringLiteral("Authors")] = newArray;
+    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Emails")) {
+        const auto emails = deserializeList(value);
+        QJsonArray oldArray = kplugin.value(QStringLiteral("Authors")).toArray();
+        QJsonArray newArray;
+        for (int i = 0; i < emails.size(); ++i) {
+            QJsonObject authorsObject = oldArray.at(i).toObject();
+            // if the authors object doesn't exist yet this will create it
+            authorsObject[QStringLiteral("Email")] = emails[i];
+            newArray.append(authorsObject);
+        }
+        kplugin[QStringLiteral("Authors")] = newArray;
     } else if (key == QByteArrayLiteral("Name") || key.startsWith(QByteArrayLiteral("Name["))) {
         // TODO: also handle GenericName? does that make any sense, or is X-KDE-PluginInfo-Category enough?
         kplugin[QString::fromUtf8(key)] = value;

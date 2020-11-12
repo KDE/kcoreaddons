@@ -39,6 +39,7 @@ protected:
     QPluginLoader *loader = nullptr;
     quint32 pluginVersion = ~0U;
     bool pluginVersionResolved = false;
+    bool isPluginMetaDataSet = false;
 };
 
 QString KPluginLoader::findPlugin(const QString &name)
@@ -106,6 +107,11 @@ KPluginFactory *KPluginLoader::factory()
         qCDebug(KCOREADDONS_DEBUG) << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
         delete obj;
         d->errorString = tr("The library %1 does not offer a KPluginFactory.").arg(d->name);
+    }
+
+    if (!d->isPluginMetaDataSet) {
+        factory->setMetaData(KPluginMetaData(*d->loader));
+        d->isPluginMetaDataSet = true;
     }
 
     return factory;

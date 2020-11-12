@@ -11,7 +11,7 @@
 #define KPLUGINFACTORY_P_H
 
 #include "kpluginfactory.h"
-
+#include <KPluginMetaData>
 #include <QMultiHash>
 
 class KPluginFactoryPrivate
@@ -20,13 +20,16 @@ class KPluginFactoryPrivate
 
 protected:
     typedef QPair<const QMetaObject *, KPluginFactory::CreateInstanceFunction> Plugin;
+    using PluginWithMetadata = QPair<const QMetaObject *, KPluginFactory::CreateInstanceWithMetaDataFunction>;
 
     KPluginFactoryPrivate() = default;
     ~KPluginFactoryPrivate()
     {
     }
 
+    KPluginMetaData metaData;
     QMultiHash<QString, Plugin> createInstanceHash;
+    QMultiHash<QString, PluginWithMetadata> createInstanceWithMetaDataHash;
 };
 
 #endif // KPLUGINFACTORY_P_H
