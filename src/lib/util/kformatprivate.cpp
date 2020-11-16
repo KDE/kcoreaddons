@@ -519,9 +519,20 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
 
 QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const
 {
-    const qint64 daysTo = QDate::currentDate().daysTo(dateTime.date());
+    const QDateTime now = QDateTime::currentDateTime();
+    const qint64 daysTo = dateTime.daysTo(now);
     if (daysTo > 2 || daysTo < -2) {
         return m_locale.toString(dateTime, format);
+    }
+
+    const auto secsToNow = dateTime.secsTo(now);
+    if (secsToNow >= 0 && secsToNow < 60 * 60) {
+        const int minutesToNow = secsToNow / 60;
+        if (minutesToNow <= 1) {
+            return tr("Just now");
+        } else {
+            return tr("%1 minutes ago").arg(minutesToNow);
+        }
     }
 
     /*: relative datetime with %1 result of formatReleativeDate() and %2 the formatted time

@@ -325,6 +325,7 @@ void KFormatTest::formatRelativeDate()
     KFormat format(QLocale::c());
 
     QDate testDate = QDate::currentDate();
+
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat), QStringLiteral("Today"));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::ShortFormat), QStringLiteral("Today"));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat), QStringLiteral("Today"));
@@ -370,6 +371,16 @@ void KFormatTest::formatRelativeDate()
 
     QDateTime testDateTime = QDateTime(QDate::currentDate(), QTime(3, 0, 0));
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("Today, 03:00:00"));
+
+    QDateTime now = QDateTime::currentDateTime();
+
+    // 1 minute ago
+    testDateTime = now.addSecs(-1);
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("Just Now"));
+
+    // 5 minutes ago
+    testDateTime = now.addSecs(-300);
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("5 minutes ago"));
 
     testDateTime = QDateTime(QDate::currentDate().addDays(8), QTime(3, 0, 0));
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::LongFormat),
