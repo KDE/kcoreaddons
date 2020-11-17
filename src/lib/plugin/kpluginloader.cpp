@@ -109,7 +109,7 @@ KPluginFactory *KPluginLoader::factory()
         d->errorString = tr("The library %1 does not offer a KPluginFactory.").arg(d->name);
     }
 
-    if (!d->isPluginMetaDataSet) {
+    if (!d->isPluginMetaDataSet && factory) {
         factory->setMetaData(KPluginMetaData(*d->loader));
         d->isPluginMetaDataSet = true;
     }
