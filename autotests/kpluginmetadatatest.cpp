@@ -245,7 +245,7 @@ private Q_SLOTS:
         QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Null")), QStringList());
         QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"QuotedNull\" to be a string list. Treating it as a list with a single entry: \"null\" ");
         QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("QuotedNull")), QStringList(QStringLiteral("null")));
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("ArrayWithNull")), QStringList() << QStringLiteral("foo") << QStringLiteral("") << QStringLiteral("bar"));
+        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("ArrayWithNull")), QStringList() << QStringLiteral("foo") << QString() << QStringLiteral("bar"));
         QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Object")), QStringList());
     }
 

@@ -391,7 +391,7 @@ void KDirWatch_UnitTest::touchOneFile() // watch a dir, create a file in it
 
     // dirty(the directory) should be emitted.
     QSignalSpy spyCreated(&watch, SIGNAL(created(QString)));
-    const QString file0 = createFile(0);
+    createFile(0);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
     QCOMPARE(spyCreated.count(), 0); // "This is not emitted when creating a file is created in a watched directory."
 
@@ -448,7 +448,7 @@ void KDirWatch_UnitTest::removeAndReAdd()
     if (watch.internalMethod() != KDirWatch::INotify) {
         waitUntilNewSecond();    // necessary for mtime checks in scanEntry
     }
-    const QString file0 = createFile(0);
+    createFile(0);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
 
     // Just like KDirLister does: remove the watch, then re-add it.
@@ -457,8 +457,7 @@ void KDirWatch_UnitTest::removeAndReAdd()
     if (watch.internalMethod() != KDirWatch::INotify) {
         waitUntilMTimeChange(m_path);    // necessary for FAM and QFSWatcher
     }
-    const QString file1 = createFile(1);
-    //qDebug() << "created" << file1;
+    createFile(1);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
 }
 
