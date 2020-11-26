@@ -12,7 +12,9 @@
 
 #include <stdlib.h>     // random()
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
 #include <QRegExp>            // for the word ranges
+#endif
 #include <QRegularExpression>
 #include <QCharRef>
 #include <QStringList>
