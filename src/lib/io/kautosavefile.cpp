@@ -9,7 +9,7 @@
 
 #include "kautosavefile.h"
 
-#include <stdio.h> // for NAME_MAX
+#include <climits> // for NAME_MAX
 
 #ifdef Q_OS_WIN
 #include <stdlib.h> // for _MAX_FNAME
