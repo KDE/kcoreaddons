@@ -198,7 +198,7 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                             if (pos >= args.length()) {
                                 goto quoteerr;
                             }
-                            cret += args.unicode()[pos++].toLatin1() & 31;
+                            cret += QChar::fromLatin1(args.unicode()[pos++].toLatin1() & 31);
                             break;
                         case 'x': {
                             if (pos >= args.length()) {
