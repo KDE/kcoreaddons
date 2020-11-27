@@ -66,6 +66,10 @@ QString KTextToHTMLHelper::getEmailAddress()
 {
     QString address;
 
+    if (mText.isEmpty()) {
+        return QString();
+    }
+
     if (mText[mPos] == QLatin1Char('@')) {
         // the following characters are allowed in a dot-atom (RFC 2822):
         // a-z A-Z 0-9 . ! # $ % & ' * + - / = ? ^ _ ` { | } ~
