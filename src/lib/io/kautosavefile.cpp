@@ -163,33 +163,33 @@ bool KAutoSaveFile::open(OpenMode openmode)
     return false;
 }
 
-static QUrl extractManagedFilePath(const QString& staleFileName)
+static QUrl extractManagedFilePath(QStringView staleFileName)
 {
     // Warning, if we had a long path, it was truncated by tempFileName()
     // So in that case, extractManagedFilePath will return an incorrect truncated path for original source
-    const QStringRef sep = staleFileName.rightRef(3);
+    const QStringView sep = staleFileName.right(3);
     int sepPos = staleFileName.indexOf(sep);
-    const QByteArray managedFilename = staleFileName.leftRef(sepPos).toLatin1();
+    const QByteArray managedFilename = staleFileName.left(sepPos).toLatin1();
 
     const int pathPos = staleFileName.indexOf(QChar::fromLatin1('_'), sepPos);
     QUrl managedFileName;
     //name.setScheme(file.mid(sepPos + 3, pathPos - sep.size() - 3));
-    const QByteArray encodedPath = staleFileName.midRef(pathPos+1, staleFileName.length()-pathPos-1-KAutoSaveFilePrivate::NamePadding).toLatin1();
+    const QByteArray encodedPath = staleFileName.mid(pathPos+1, staleFileName.length()-pathPos-1-KAutoSaveFilePrivate::NamePadding).toLatin1();
     managedFileName.setPath(QUrl::fromPercentEncoding(encodedPath) + QLatin1Char('/') + QFileInfo(QUrl::fromPercentEncoding(managedFilename)).fileName());
     return managedFileName;
 }
 
-bool staleMatchesManaged(const QString& staleFileName, const QUrl &managedFile)
+bool staleMatchesManaged(QStringView staleFileName, const QUrl &managedFile)
 {
-    const QStringRef sep = staleFileName.rightRef(3);
+    const QStringView sep = staleFileName.right(3);
     int sepPos = staleFileName.indexOf(sep);
     // Check filenames first
-    if (managedFile.fileName() != QUrl::fromPercentEncoding(staleFileName.leftRef(sepPos).toLatin1())) {
+    if (managedFile.fileName() != QUrl::fromPercentEncoding(staleFileName.left(sepPos).toLatin1())) {
         return false;
     }
     // Check paths
     const int pathPos = staleFileName.indexOf(QChar::fromLatin1('_'), sepPos);
-    const QByteArray encodedPath = staleFileName.midRef(pathPos + 1, staleFileName.length() - pathPos - 1 - KAutoSaveFilePrivate::NamePadding).toLatin1();
+    const QByteArray encodedPath = staleFileName.mid(pathPos + 1, staleFileName.length() - pathPos - 1 - KAutoSaveFilePrivate::NamePadding).toLatin1();
     return QUrl::toPercentEncoding(managedFile.path()).startsWith(encodedPath);
 }
 
