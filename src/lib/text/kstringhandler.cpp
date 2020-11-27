@@ -16,7 +16,6 @@
 #include <QRegExp>            // for the word ranges
 #endif
 #include <QRegularExpression>
-#include <QCharRef>
 #include <QStringList>
 #include <QVector>
 
