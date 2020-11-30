@@ -540,6 +540,9 @@ void KTextToHTMLTest::testHtmlConvert_data()
     QTest::newRow("mailto") << "mailto: "
                                        << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                        << "mailto:&nbsp;";
+    QTest::newRow("empty") << ""
+                                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+                                       << "";
 
 }
 
