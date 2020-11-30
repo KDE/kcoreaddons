@@ -436,7 +436,7 @@ QString KTextToHTMLHelper::pngToDataUrl(const QString &iconPath) const
 
 QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::Options &flags, int maxUrlLen, int maxAddressLen)
 {
-    KTextToHTMLHelper helper(plainText, maxUrlLen, maxAddressLen);
+    KTextToHTMLHelper helper(plainText, 0, maxUrlLen, maxAddressLen);
 
     QString str;
     QString result(static_cast<QChar *>(nullptr), helper.mText.length() * 2);
