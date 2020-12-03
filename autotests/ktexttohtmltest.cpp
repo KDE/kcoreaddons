@@ -148,7 +148,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
             QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
 
     for (const QString &schema : qAsConst(schemas)) {
-        for (QString url : qAsConst(urls)) {   //krazy:exclude=foreach
+        for (QString url : qAsConst(urls)) {
             // by definition: if the URL is enclosed in brackets, the URL itself is not allowed
             // to contain the closing bracket, as this would be detected as the end of the URL
             if ((left.length() == 1) && (url.contains(right[ 0 ]))) {
