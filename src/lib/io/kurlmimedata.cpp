@@ -56,6 +56,7 @@ static QList<QUrl> extractKdeUriList(const QMimeData *mimeData)
     const QByteArray ba = mimeData->data(kdeUriListMime());
     // Code from qmimedata.cpp
     QList<QByteArray> urls = ba.split('\n');
+    uris.reserve(urls.size());
     for (int i = 0; i < urls.size(); ++i) {
         QByteArray data = urls.at(i).trimmed();
         if (!data.isEmpty()) {

@@ -135,6 +135,7 @@ KProcessInfoList KProcessList::processInfoList()
         return unixProcessListPS();
     KProcessInfoList rc;
     const QStringList procIds = procDir.entryList();
+    rc.reserve(procIds.size() / 2);
     for (const QString &procId : procIds) {
         KProcessInfo processInfo;
         if (getProcessInfo(procId, processInfo)) {
