@@ -6,8 +6,9 @@
 */
 
 #include "desktoptojson.h"
-#include "../lib/plugin/desktopfileparser_p.h"
 
+#include "../lib/plugin/desktopfileparser_p.h"
+#include "desktoptojson_debug.h"
 
 #include <QFile>
 #include <QFileInfo>

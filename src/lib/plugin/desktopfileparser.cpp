@@ -8,6 +8,12 @@
 
 #include "desktopfileparser_p.h"
 
+#ifdef BUILDING_DESKTOPTOJSON_TOOL
+#include "desktoptojson_debug.h"
+#else
+#include "desktopfileparser_debug.h"
+#endif
+// Qt
 #include <QCache>
 #include <QDir>
 #include <QFile>
@@ -17,15 +23,6 @@
 #include <QStandardPaths>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-
-// in the desktoptojson binary enable debug messages by default, in the library only warning messages
-// NOTE: should you change this, also update the test case, it hardcodes the category name as well!
-#ifdef BUILDING_DESKTOPTOJSON_TOOL
-Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf.coreaddons.desktopparser", QtDebugMsg)
-#else
-Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf.coreaddons.desktopparser", QtWarningMsg)
-#endif
-
 
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
 // use if not else to prevent wrong scoping
