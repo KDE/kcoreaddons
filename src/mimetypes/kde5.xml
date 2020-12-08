@@ -1365,7 +1365,7 @@ Notes:
     <comment xml:lang="sl">Možnosti ustvarjanja kode KConfigXT</comment>
     <comment xml:lang="sv">KConfigXT-kodgenereringsalternativ</comment>
     <comment xml:lang="uk">параметри створення коду KConfigXT</comment>
-    <comment xml:lang="vi">các lựa chọn sinh mã KConfigXT</comment>
+    <comment xml:lang="vi">các lựa chọn tạo mã KConfigXT</comment>
     <generic-icon name="text-plain"/>
     <sub-class-of type="text/plain"/>
     <glob pattern="*.kcfgc"/>
