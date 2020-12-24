@@ -18,8 +18,6 @@ Q_GLOBAL_STATIC(QObjectCleanupHandler, factorycleanup)
 KPluginFactory::KPluginFactory()
     : d_ptr(new KPluginFactoryPrivate)
 {
-    Q_D(KPluginFactory);
-
     factorycleanup()->add(this);
 }
 

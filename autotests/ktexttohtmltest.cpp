@@ -106,7 +106,7 @@ void KTextToHTMLTest::testGetEmailAddress()
 void KTextToHTMLTest::testGetUrl()
 {
     QStringList brackets;
-    brackets << QStringLiteral("") << QStringLiteral("");   // no brackets
+    brackets << QString() << QString();   // no brackets
     brackets << QStringLiteral("<") << QStringLiteral(">");
     brackets << QStringLiteral("[") << QStringLiteral("]");
     brackets << QStringLiteral("\"") << QStringLiteral("\"");
