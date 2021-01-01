@@ -16,6 +16,8 @@ private Q_SLOTS:
     void preProcessWrap();
     void logicalLength_data();
     void logicalLength();
+    void subsequence_data();
+    void subsequence();
 
 private:
     static QString test;

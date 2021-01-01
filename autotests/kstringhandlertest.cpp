@@ -196,3 +196,36 @@ void KStringHandlerTest::logicalLength()
     QCOMPARE(KStringHandler::logicalLength(string), expected);
 }
 
+void KStringHandlerTest::subsequence_data()
+{
+    QTest::addColumn<QString>("pattern");
+    QTest::addColumn<QString>("text");
+    QTest::addColumn<bool>("expectedCaseSensitive");
+    QTest::addColumn<bool>("expectedCaseInsensitive");
+
+    QTest::newRow("empty pattern") << "" << "not empty" << false << false;
+    QTest::newRow("empty text") << "pattern" << "" << false << false;
+
+    QTest::newRow("two words inside") << "fox dog" << "The quick brown fox jumps over the lazy dog" << true << true;
+    QTest::newRow("old acronym") << "kde" << "Kool Desktop Environment" << false << true;
+    QTest::newRow("new acronym") << "kde" << "K Desktop Environment" << false << true;
+    QTest::newRow("capitalized acronym") << "KDE" << "K Desktop Environment" << true << true;
+
+    QTest::newRow("inside a word") << "libremath" << "LibreOffice Math" << false << true;
+    QTest::newRow("pattern with space") << "Libre Math" << "LibreOffice Math" << true << true;
+
+    QTest::newRow("no match") << "match" << "no milk" << false << false;
+    QTest::newRow("match at end") << "end" << "at the end" << true << true;
+    QTest::newRow("beyond the end") << "end" << "at the en" << false << false;
+}
+
+void KStringHandlerTest::subsequence()
+{
+    QFETCH(QString, pattern);
+    QFETCH(QString, text);
+    QFETCH(bool, expectedCaseSensitive);
+    QFETCH(bool, expectedCaseInsensitive);
+
+    QCOMPARE(KStringHandler::isSubsequence(pattern, text, Qt::CaseSensitive), expectedCaseSensitive);
+    QCOMPARE(KStringHandler::isSubsequence(pattern, text, Qt::CaseInsensitive), expectedCaseInsensitive);
+}

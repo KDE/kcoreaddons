@@ -378,3 +378,20 @@ int KStringHandler::logicalLength(const QString& text)
     }
     return length;
 }
+
+bool KStringHandler::isSubsequence(const QString &pattern, const QString &text, Qt::CaseSensitivity cs)
+{
+    if (pattern.isEmpty()) {
+        return false;
+    }
+
+    const bool caseSensitive = (cs == Qt::CaseSensitive);
+
+    auto i = text.constBegin(), j = pattern.constBegin();
+    for (; i != text.constEnd() && j != pattern.constEnd(); ++i) {
+        if ((caseSensitive && *i == *j) || (!caseSensitive && i->toLower() == j->toLower())) {
+            ++j;
+        }
+    }
+    return j == pattern.constEnd();
+}

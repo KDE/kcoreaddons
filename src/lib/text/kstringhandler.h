@@ -244,5 +244,14 @@ KCOREADDONS_EXPORT QString preProcessWrap(const QString &text);
 */
 KCOREADDONS_EXPORT int logicalLength(const QString &text);
 
+/**
+ * Returns true if @p pattern matches a subsequence of the string @p text.
+ * For instance the pattern "libremath" matches the text "LibreOffice Math", assuming
+ * @p cs is Qt::CaseInsensitive.
+ *
+ * @since 5.79
+ */
+KCOREADDONS_EXPORT bool isSubsequence(const QString &pattern, const QString &text, Qt::CaseSensitivity cs = Qt::CaseSensitive);
+
 }
 #endif
