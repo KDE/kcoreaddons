@@ -439,7 +439,6 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
         X-KDE-PluginInfo-Version=1.1
         X-KDE-PluginInfo-Website=http://www.plugin.org/
         X-KDE-PluginInfo-Category=playlist
-        X-KDE-PluginInfo-Depends=plugin1,plugin3
         X-KDE-PluginInfo-License=GPL
         X-KDE-PluginInfo-Copyright=Copyright <year> by Author's Name (since KF 5.77, translatable)
         X-KDE-PluginInfo-EnabledByDefault=true
