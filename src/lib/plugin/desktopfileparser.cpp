@@ -33,6 +33,8 @@
 #define DESKTOPTOJSON_VERBOSE_WARNING QT_NO_QDEBUG_MACRO()
 #endif
 
+#include "../lib/kcoreaddons_export.h"
+
 
 using namespace DesktopFileParser;
 
@@ -461,9 +463,14 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
         kplugin[QStringLiteral("Version")] = value;
     } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Website")) {
         kplugin[QStringLiteral("Website")] = value;
-    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Depends")) {
+    }
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
+    else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Depends")) {
         kplugin[QStringLiteral("Dependencies")] = QJsonArray::fromStringList(deserializeList(value));
-    } else if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
+        qCDebug(DESKTOPPARSER) << "The X-KDE-PluginInfo-Depends property is deprecated and will be removed in KF6";
+    }
+#endif
+    else if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
         //NOTE: "X-KDE-ServiceTypes" and "ServiceTypes" were already managed in the first parse step, so this second one is almost a noop
         const auto services = deserializeList(value);
         kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(services);

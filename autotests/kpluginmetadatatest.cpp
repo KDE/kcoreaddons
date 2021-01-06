@@ -157,7 +157,9 @@ private Q_SLOTS:
         QCOMPARE(m.extraInformation(), QStringLiteral("Something else"));
         QCOMPARE(m.iconName(), QStringLiteral("preferences-system-time"));
         QCOMPARE(m.category(), QStringLiteral("Date and Time"));
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
         QCOMPARE(m.dependencies(), QStringList() << QStringLiteral("foo") << QStringLiteral("bar"));
+#endif
         QCOMPARE(m.authors().size(), 1);
         QCOMPARE(m.authors().constFirst().name(), QStringLiteral("Aaron Seigo"));
         QCOMPARE(m.authors().constFirst().emailAddress(), QStringLiteral("aseigo@kde.org"));
@@ -263,7 +265,9 @@ private Q_SLOTS:
         QCOMPARE(md.website(), QStringLiteral("https://kde.org/"));
         QCOMPARE(md.category(), QStringLiteral("Examples"));
         QCOMPARE(md.version(), QStringLiteral("1.0"));
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
         QCOMPARE(md.dependencies(), QStringList());
+#endif
         QCOMPARE(md.isHidden(), false);
         QCOMPARE(md.serviceTypes(), QStringList(QStringLiteral("KService/NSA")));
         QCOMPARE(md.mimeTypes(), QStringList() << QStringLiteral("image/png") << QStringLiteral("application/pdf"));

@@ -311,10 +311,12 @@ QString KPluginMetaData::website() const
     return rootObject()[QStringLiteral("Website")].toString();
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
 QStringList KPluginMetaData::dependencies() const
 {
     return readStringList(rootObject(), QStringLiteral("Dependencies"));
 }
+#endif
 
 QStringList KPluginMetaData::serviceTypes() const
 {

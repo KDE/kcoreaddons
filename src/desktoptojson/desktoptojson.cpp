@@ -8,6 +8,7 @@
 #include "desktoptojson.h"
 
 #include "../lib/plugin/desktopfileparser_p.h"
+#include "../lib/kcoreaddons_export.h"
 #include "desktoptojson_debug.h"
 
 #include <QFile>
@@ -87,7 +88,9 @@ void DesktopFileParser::convertToCompatibilityJson(const QString &key, const QSt
     };
     static const QStringList stringlistkeys = QStringList {
         QStringLiteral("X-KDE-ServiceTypes"),
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
         QStringLiteral("X-KDE-PluginInfo-Depends"),
+#endif
     };
     if (boolkeys.contains(key)) {
         // should only be lower case, but be tolerant here
