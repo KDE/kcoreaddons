@@ -7,6 +7,7 @@
 #include <QDebug>
 
 #include "kuser.h"
+#include "kcoreaddons_debug.h"
 
 namespace QTest
 {
@@ -34,16 +35,16 @@ private Q_SLOTS:
 
 static inline void printUserInfo(KUser user)
 {
-    qDebug() << "Login name:" << user.loginName();
-    qDebug() << "Full name:" << user.property(KUser::FullName);
-    qDebug() << "User ID:" << user.userId().toString();
-    qDebug() << "Group ID:" << user.groupId().toString();
-    qDebug() << "Home dir:" << user.homeDir();
-    qDebug() << "Superuser:" << user.isSuperUser();
-    qDebug() << "Shell: " << user.shell();
-    qDebug() << "Face icon path:" << user.faceIconPath();
-    qDebug() << "Groups:" << user.groupNames();
-    qDebug();
+    qCDebug(KCOREADDONS_DEBUG) << "Login name:" << user.loginName();
+    qCDebug(KCOREADDONS_DEBUG) << "Full name:" << user.property(KUser::FullName);
+    qCDebug(KCOREADDONS_DEBUG) << "User ID:" << user.userId().toString();
+    qCDebug(KCOREADDONS_DEBUG) << "Group ID:" << user.groupId().toString();
+    qCDebug(KCOREADDONS_DEBUG) << "Home dir:" << user.homeDir();
+    qCDebug(KCOREADDONS_DEBUG) << "Superuser:" << user.isSuperUser();
+    qCDebug(KCOREADDONS_DEBUG) << "Shell: " << user.shell();
+    qCDebug(KCOREADDONS_DEBUG) << "Face icon path:" << user.faceIconPath();
+    qCDebug(KCOREADDONS_DEBUG) << "Groups:" << user.groupNames();
+    qCDebug(KCOREADDONS_DEBUG);
 }
 
 void KUserTest::testKUser()
@@ -67,7 +68,7 @@ void KUserTest::testKUser()
     // check that the limiting works
     QCOMPARE(user.groups(1).size(), 1);
     QCOMPARE(user.groupNames(1).size(), 1);
-    qDebug() << "All users: " << allUserNames;
+    qCDebug(KCOREADDONS_DEBUG) << "All users: " << allUserNames;
     // check that the limiting works
     QCOMPARE(KUser::allUserNames(1).size(), 1);
     QCOMPARE(KUser::allUsers(1).size(), 1);
@@ -132,13 +133,13 @@ void KUserTest::testKUserGroup()
     QVERIFY(!allGroupNames.isEmpty());
     QVERIFY(!allGroups.isEmpty());
     QCOMPARE(allGroups.size(), allGroupNames.size());
-    qDebug() << "All groups: " << allGroupNames;
+    qCDebug(KCOREADDONS_DEBUG) << "All groups: " << allGroupNames;
     // check that the limiting works
     QCOMPARE(KUserGroup::allGroupNames(1).size(), 1);
     QCOMPARE(KUserGroup::allGroups(1).size(), 1);
     // We can't test the KUser properties, since they differ on each system
     // instead just print them all out, this can be verified by the person running the test
-    qDebug().nospace() << "Current group: " << group.name() << ", group ID =" << group.groupId().toString() << ", members = " << group.userNames();
+    qCDebug(KCOREADDONS_DEBUG).nospace() << "Current group: " << group.name() << ", group ID =" << group.groupId().toString() << ", members = " << group.userNames();
 #if 0 //enable this if you think that KUser might not be working correctly
     for (int i = 0; i < allGroups.size(); ++i) {
         qDebug().nospace() << "Group " << i << ": name = " << allGroups[i].name()

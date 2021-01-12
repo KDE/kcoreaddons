@@ -9,6 +9,7 @@
 
 #include <kpluginloader.h>
 #include <kpluginmetadata.h>
+#include "kcoreaddons_debug.h"
 
 class LibraryPathRestorer {
 public:
@@ -143,7 +144,7 @@ private Q_SLOTS:
         if (aplugin.unload()) {
             QVERIFY(!aplugin.isLoaded());
         } else {
-            qDebug() << "Could not unload alwaysunloadplugin:" << aplugin.errorString();
+            qCDebug(KCOREADDONS_DEBUG) << "Could not unload alwaysunloadplugin:" << aplugin.errorString();
         }
 
         KPluginLoader eplugin(KPluginName::fromErrorString(QStringLiteral("there was an error")));

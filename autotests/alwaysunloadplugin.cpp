@@ -6,6 +6,7 @@
 */
 
 #include "alwaysunloadplugin.h"
+#include "kcoreaddons_debug.h"
 #include <kexportplugin.h>
 #include <kpluginfactory.h>
 #include <QDebug>
@@ -13,7 +14,7 @@
 AlwaysUnloadPlugin::AlwaysUnloadPlugin(QObject *parent, const QVariantList &args)
     : QObject(parent)
 {
-    qDebug() << "Created AlwaysUnloadPlugin with args" << args;
+    qCDebug(KCOREADDONS_DEBUG) << "Created AlwaysUnloadPlugin with args" << args;
 }
 
 K_PLUGIN_FACTORY(AlwaysUnloadPluginFactory, registerPlugin<AlwaysUnloadPlugin>();)

@@ -21,6 +21,7 @@
 #endif
 
 #include "config-tests.h"
+#include "kcoreaddons_debug.h"
 
 // Debugging notes: to see which inotify signals are emitted, either set s_verboseDebug=true
 // at the top of kdirwatch.cpp, or use the command-line tool "inotifywait -m /path"
@@ -78,7 +79,7 @@ public:
         KDirWatch *dirW = &s_staticObject()->m_dirWatch;
         m_stat = dirW->internalMethod() == KDirWatch::Stat;
         m_slow = (dirW->internalMethod() == KDirWatch::FAM || m_stat);
-        qDebug() << "Using method" << methodToString(dirW->internalMethod());
+        qCDebug(KCOREADDONS_DEBUG) << "Using method" << methodToString(dirW->internalMethod());
     }
 
 private Q_SLOTS: // test methods
@@ -236,7 +237,7 @@ void KDirWatch_UnitTest::waitUntilAfter(const QDateTime &ctime)
         }
     }
     //if (totalWait > 0)
-    qDebug() << "Waited" << totalWait << "ms so that now" << now.toString(Qt::ISODate) << "is >" << ctime.toString(Qt::ISODate);
+    qCDebug(KCOREADDONS_DEBUG) << "Waited" << totalWait << "ms so that now" << now.toString(Qt::ISODate) << "is >" << ctime.toString(Qt::ISODate);
 }
 
 // helper method: modifies a file
@@ -309,7 +310,7 @@ bool KDirWatch_UnitTest::verifySignalPath(QSignalSpy &spy, const char *sig, cons
       return true;
     }
     if (got.startsWith(expectedPath + QLatin1Char('/'))) {
-      qDebug() << "Ignoring (inotify) notification of" << (sig + 1) << '(' << got << ')';
+      qCDebug(KCOREADDONS_DEBUG) << "Ignoring (inotify) notification of" << (sig + 1) << '(' << got << ')';
       continue;
     }
     qWarning() << "Expected" << sig << '(' << expectedPath << ')' << "but got" << sig << '(' << got << ')';
@@ -404,7 +405,6 @@ void KDirWatch_UnitTest::touch1000Files()
     QList<QVariantList> spy = waitForDirtySignal(watch, fileCount);
     if (watch.internalMethod() == KDirWatch::INotify) {
         QVERIFY(spy.count() >= fileCount);
-        qDebug() << spy.count();
     } else {
         // More stupid backends just see one mtime change on the directory
         QVERIFY(spy.count() >= 1);
@@ -465,7 +465,7 @@ void KDirWatch_UnitTest::watchNonExistent()
     }
 
     // Now create it, KDirWatch should emit created()
-    qDebug() << "Creating" << subdir;
+    qCDebug(KCOREADDONS_DEBUG) << "Creating" << subdir;
     QDir().mkdir(subdir);
 
     QVERIFY(waitForOneSignal(watch, SIGNAL(created(QString)), subdir));
@@ -488,7 +488,7 @@ void KDirWatch_UnitTest::watchNonExistent()
 
     QVERIFY(!QFile::exists(file));
     // Now create it, KDirWatch should emit created
-    qDebug() << "Creating" << file;
+    qCDebug(KCOREADDONS_DEBUG) << "Creating" << file;
     createFile(file);
     QVERIFY(waitForOneSignal(watch, SIGNAL(created(QString)), file));
 
@@ -552,7 +552,7 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
             waitUntilNewSecond();
         }
 
-        qDebug() << "Attempt #" << (i+1) << "removing+recreating" << file1;
+        qCDebug(KCOREADDONS_DEBUG) << "Attempt #" << (i+1) << "removing+recreating" << file1;
 
         // When watching for a deleted + created signal pair, the two might come so close that
         // using waitForOneSignal will miss the created signal.  This function monitors both all
@@ -656,7 +656,7 @@ void KDirWatch_UnitTest::testMoveTo()
     createFile(filetemp);
     QFile::remove(file1);
     QVERIFY(QFile::rename(filetemp, file1)); // overwrite file1 with the tempfile
-    qDebug() << "Overwrite file1 with tempfile";
+    qCDebug(KCOREADDONS_DEBUG) << "Overwrite file1 with tempfile";
 
     QSignalSpy spyCreated(&watch, SIGNAL(created(QString)));
     QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
@@ -776,7 +776,7 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     watch.stopDirScan(m_path);
 
-    //qDebug() << "create file 2 at" << QDateTime::currentDateTime().toMSecsSinceEpoch();
+    qCDebug(KCOREADDONS_DEBUG) << "create file 2 at" << QDateTime::currentDateTime().toMSecsSinceEpoch();
     const QString file2 = createFile(2);
     QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
     QTest::qWait(200);
@@ -796,7 +796,7 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     waitUntilMTimeChange(m_path); // necessary for the mtime comparison in scanEntry
 
-    //qDebug() << "create file 3 at" << QDateTime::currentDateTime().toMSecsSinceEpoch();
+    qCDebug(KCOREADDONS_DEBUG) << "create file 3 at" << QDateTime::currentDateTime().toMSecsSinceEpoch();
     const QString file3 = createFile(3);
 #ifdef Q_OS_WIN
     if (watch.internalMethod() == KDirWatch::QFSWatch) {

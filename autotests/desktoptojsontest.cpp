@@ -13,6 +13,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include "kcoreaddons_debug.h"
 
 namespace QTest
 {
@@ -306,8 +307,6 @@ private Q_SLOTS:
         inputFile.write(input);
         inputFile.flush();
         inputFile.close();
-        qDebug() << expectedResult;
-
 
         QProcess proc;
         proc.setProgram(QStringLiteral(DESKTOP_TO_JSON_EXE));
@@ -321,15 +320,13 @@ private Q_SLOTS:
         proc.setArguments(arguments);
         proc.start();
         QVERIFY(proc.waitForFinished(10000));
-        qDebug() << "desktoptojson STDOUT: " <<  proc.readAllStandardOutput().data();
         QByteArray errorOut = proc.readAllStandardError();
         if (!errorOut.isEmpty()) {
-            qWarning().nospace() << "desktoptojson STDERR:\n\n" <<  errorOut.constData() << "\n";
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "desktoptojson STDERR:\n\n" <<  errorOut.constData() << "\n";
         }
         QCOMPARE(proc.exitCode(), 0);
         QVERIFY(output.open());
         QByteArray jsonString = output.readAll();
-        qDebug() << "result: " << jsonString;
         QJsonParseError e;
         QJsonDocument doc = QJsonDocument::fromJson(jsonString, &e);
         QCOMPARE(e.error, QJsonParseError::NoError);

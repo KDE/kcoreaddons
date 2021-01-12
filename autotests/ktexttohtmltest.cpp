@@ -6,6 +6,7 @@
 */
 
 #include "ktexttohtmltest.h"
+#include "kcoreaddons_debug.h"
 
 #include "../src/lib/text/ktexttohtml.h"
 #include "../src/lib/text/ktexttohtml_p.h"
@@ -172,7 +173,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
 
             bool ok = (gotUrl == (schema + url));
             if (!ok) {
-                qDebug() << "got:" << gotUrl;
+                qCDebug(KCOREADDONS_DEBUG) << "got:" << gotUrl;
             }
             QVERIFY2(ok, qPrintable(test));
         }
@@ -219,7 +220,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
 
             bool ok = (gotUrl == (start + url));
             if (!ok) {
-                qDebug() << "got:" << gotUrl;
+                qCDebug(KCOREADDONS_DEBUG) << "got:" << gotUrl;
             }
             QVERIFY2(ok, qPrintable(gotUrl));
         }
@@ -254,7 +255,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
 
         bool ok = (gotUrl == addr);
         if (!ok) {
-            qDebug() << "got:" << gotUrl;
+            qCDebug(KCOREADDONS_DEBUG) << "got:" << gotUrl;
         }
         QVERIFY2(ok, qPrintable(gotUrl));
     }

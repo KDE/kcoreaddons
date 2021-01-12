@@ -6,6 +6,7 @@
 */
 
 #include "unversionedplugin.h"
+#include "kcoreaddons_debug.h"
 #include <kexportplugin.h>
 #include <kpluginfactory.h>
 #include <QDebug>
@@ -13,7 +14,7 @@
 UnversionedPlugin::UnversionedPlugin(QObject *parent, const QVariantList &args)
     : QObject(parent)
 {
-    qDebug() << "Created UnversionedPlugin with args" << args;
+    qCDebug(KCOREADDONS_DEBUG) << "Created UnversionedPlugin with args" << args;
 }
 
 K_PLUGIN_FACTORY(UnversionedPluginFactory, registerPlugin<UnversionedPlugin>();)

@@ -14,6 +14,7 @@
 #include <kpluginmetadata.h>
 #include <kpluginloader.h>
 #include <kaboutdata.h>
+#include "kcoreaddons_debug.h"
 
 #include <QLocale>
 #include <QLoggingCategory>

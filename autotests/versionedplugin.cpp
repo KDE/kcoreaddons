@@ -6,6 +6,7 @@
 */
 
 #include "versionedplugin.h"
+#include "kcoreaddons_debug.h"
 #include <kexportplugin.h>
 #include <kpluginfactory.h>
 #include <QDebug>
@@ -13,7 +14,7 @@
 VersionedPlugin::VersionedPlugin(QObject *parent, const QVariantList &args)
     : QObject(parent)
 {
-    qDebug() << "Created VersionedPlugin with args" << args;
+    qCDebug(KCOREADDONS_DEBUG) << "Created VersionedPlugin with args" << args;
 }
 
 K_PLUGIN_FACTORY(VersionedPluginFactory, registerPlugin<VersionedPlugin>();)
