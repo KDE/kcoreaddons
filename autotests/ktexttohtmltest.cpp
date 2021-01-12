@@ -171,7 +171,6 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
             url.remove(QLatin1Char('\t'));
 
             bool ok = (gotUrl == (schema + url));
-            //qDebug() << "check:" << (ok ? "OK" : "NOK") << test << "=>" << (schema + url);
             if (!ok) {
                 qDebug() << "got:" << gotUrl;
             }
@@ -219,7 +218,6 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
             url.remove(QLatin1Char('\t'));
 
             bool ok = (gotUrl == (start + url));
-            //qDebug() << "check:" << (ok ? "OK" : "NOK") << test << "=>" << (start + url);
             if (!ok) {
                 qDebug() << "got:" << gotUrl;
             }
@@ -255,7 +253,6 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
         QString gotUrl = ll.getUrl();
 
         bool ok = (gotUrl == addr);
-        //qDebug() << "check:" << (ok ? "OK" : "NOK") << test << "=>" << addr;
         if (!ok) {
             qDebug() << "got:" << gotUrl;
         }

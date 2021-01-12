@@ -313,7 +313,6 @@ private Q_SLOTS:
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Example"));
         QCOMPARE(md.serviceTypes(), QStringList() << QStringLiteral("example/servicetype") << QStringLiteral("bar/foo"));
-        // qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
         QCOMPARE(md.rawData().size(), 8);
         QVERIFY(md.rawData().value(QStringLiteral("KPlugin")).isObject());
         QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Integer")), QJsonValue(42));
@@ -349,7 +348,6 @@ private Q_SLOTS:
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Bad Groups"));
-        // qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
         QCOMPARE(md.rawData().size(), 8);
         QCOMPARE(md.rawData().value(QStringLiteral("ThisIsOkay")), QJsonValue(10)); // integer
         // 11 is empty group

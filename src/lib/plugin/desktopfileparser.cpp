@@ -599,7 +599,6 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
     df.seek(startPos);
 
     QJsonObject kplugin; // the "KPlugin" key of the metadata
-    //QJsonObject json;
     while (!df.atEnd()) {
         QByteArray key;
         QString value;

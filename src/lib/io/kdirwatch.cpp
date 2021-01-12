@@ -256,7 +256,6 @@ KDirWatchPrivate::~KDirWatchPrivate()
 
 void KDirWatchPrivate::inotifyEventReceived()
 {
-    //qCDebug(KDIRWATCH);
 #if HAVE_SYS_INOTIFY_H
     if (!supports_inotify) {
         return;
@@ -699,8 +698,6 @@ bool KDirWatchPrivate::useFAM(Entry *e)
 // setup INotify notification, returns false if not possible
 bool KDirWatchPrivate::useINotify(Entry *e)
 {
-    //qCDebug(KDIRWATCH) << "trying to use inotify for monitoring";
-
     e->wd = -1;
     e->dirty = false;
 
@@ -1398,13 +1395,6 @@ void KDirWatchPrivate::emitEvent(Entry *e, int event, const QString &fileName)
 
         if (c.watchingStopped) {
             // Do not add event to a list of pending events, the docs say restartDirScan won't emit!
-#if 0
-            if (event == Changed) {
-                c.pending |= event;
-            } else if (event == Created || event == Deleted) {
-                c.pending = event;
-            }
-#endif
             continue;
         }
         // not stopped
@@ -1611,8 +1601,6 @@ void KDirWatchPrivate::famEventReceived()
 
     delayRemove = true;
 
-    //qCDebug(KDIRWATCH) << "Fam event received";
-
     while (use_fam && FAMPending(&fc)) {
         if (FAMNextEvent(&fc, &fe) == -1) {
             disableFAM();
@@ -1642,8 +1630,6 @@ void KDirWatchPrivate::disableFAM()
 
 void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
 {
-    //qCDebug(KDIRWATCH);
-
     Entry *e = nullptr;
     EntryMap::Iterator it = m_mapEntries.begin();
     for (; it != m_mapEntries.end(); ++it)
@@ -2037,7 +2023,6 @@ void KDirWatch::setCreated(const QString &_file)
 
 void KDirWatch::setDirty(const QString &_file)
 {
-    //qCDebug(KDIRWATCH) << objectName() << "emitting dirty" << _file;
     emit dirty(_file);
 }
 

@@ -160,7 +160,6 @@ void KDirWatch_UnitTest::createFile(const QString &path)
 #endif
     file.write(QByteArray("foo"));
     file.close();
-    //qDebug() << path;
 }
 
 // helper method: create a file (identified by number)
@@ -245,20 +244,11 @@ void KDirWatch_UnitTest::appendToFile(const QString &path)
 {
     QVERIFY(QFile::exists(path));
     waitUntilMTimeChange(path);
-    //const QString directory = QDir::cleanPath(path+"/..");
-    //waitUntilMTimeChange(directory);
 
     QFile file(path);
     QVERIFY(file.open(QIODevice::Append | QIODevice::WriteOnly));
     file.write(QByteArray("foobar"));
     file.close();
-#if 0
-        QFileInfo fi(path);
-        QVERIFY(fi.exists());
-        qDebug() << "After append: file ctime=" << fi.lastModified().toString(Qt::ISODate);
-        QVERIFY(fi.exists());
-        qDebug() << "After append: metadataChangeTime" << fi.metadataChangeTime().toString(Qt::ISODate);
-#endif
 }
 
 // helper method: modifies a file (identified by number)
@@ -555,10 +545,6 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
     KDirWatch watch;
     watch.addFile(file1);
 
-    //KDE_struct_stat stat_buf;
-    //QCOMPARE(KDE::stat(QFile::encodeName(file1), &stat_buf), 0);
-    //qDebug() << "initial inode" << stat_buf.st_ino;
-
     // Make sure this even works multiple times, as needed for ksycoca
     for (int i = 0; i < 5; ++i) {
 
@@ -584,8 +570,6 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
         // And recreate immediately, to try and fool KDirWatch with unchanged ctime/mtime ;)
         // (This emulates the /etc/localtime case)
         createFile(file1);
-        //QCOMPARE(KDE::stat(QFile::encodeName(file1), &stat_buf), 0);
-        //qDebug() << "new inode" << stat_buf.st_ino; // same!
 
         // THEN
         int numTries = 0;
@@ -691,11 +675,7 @@ void KDirWatch_UnitTest::testMoveTo()
     appendToFile(file1);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), file1));
 
-    //qDebug() << "after created";
-    //KDirWatch::statistics();
     watch.removeFile(file1); // now we remove it
-    //qDebug() << "after removeFile";
-    //KDirWatch::statistics();
 
     // Just touch another file to trigger a findSubEntry - this where the crash happened
     waitUntilMTimeChange(m_path);
@@ -742,12 +722,10 @@ void KDirWatch_UnitTest::nestedEventLoopSlot()
 
     const QString file1 = m_path + QLatin1String("nested_1");
     appendToFile(file1);
-    //qDebug() << "now waiting for signal";
     // The nested event processing here was from a messagebox in #220153
     QList<QVariantList> spy = waitForDirtySignal(*watch, 1);
     QVERIFY(spy.count() >= 1);
     QCOMPARE(spy[spy.count() - 1][0].toString(), file1);
-    //qDebug() << "done";
 
     // Now the user pressed reload...
     const QString file0 = m_path + QLatin1String("nested_0");
@@ -770,17 +748,12 @@ void KDirWatch_UnitTest::testHardlinkChange()
     watch.addFile(existingFile);
     watch.startScan();
 
-    //waitUntilMTimeChange(existingFile);
-    //waitUntilMTimeChange(m_path);
-
     QFile::remove(existingFile);
     const QString testFile = m_path + QLatin1String("TestFile");
     QVERIFY(::link(QFile::encodeName(testFile).constData(), QFile::encodeName(existingFile).constData()) == 0); // make ExistingFile "point" to TestFile
     QVERIFY(QFile::exists(existingFile));
 
     QVERIFY(waitForRecreationSignal(watch, existingFile));
-
-    //KDirWatch::statistics();
 
     // The mtime of the existing file is the one of "TestFile", so it's old.
     // We won't detect the change then, if we use that as baseline for waiting.

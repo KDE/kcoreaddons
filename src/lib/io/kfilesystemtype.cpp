@@ -85,7 +85,6 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
     struct statfs buf;
     if (statfs(path.constData(), &buf) != 0) {
-        //qCDebug(KCOREADDONS_DEBUG) << path << errno << strerror(errno);
         return KFileSystemType::Unknown;
     }
     switch (static_cast<unsigned long>(buf.f_type)) {
