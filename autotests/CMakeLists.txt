@@ -19,9 +19,6 @@ ecm_qt_declare_logging_category(autotests_static_SRCS
         HEADER kcoreaddons_debug.h
         IDENTIFIER KCOREADDONS_DEBUG
         CATEGORY_NAME kf.coreaddons
-        OLD_CATEGORY_NAMES org.kde.kcoreaddons
-        DESCRIPTION "kcoreaddons (kcoreaddons lib)"
-        EXPORT KCOREADDONS
         )
 add_library(autotests_static STATIC ${autotests_static_SRCS})
 target_link_libraries(autotests_static Qt5::Core)
