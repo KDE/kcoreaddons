@@ -87,10 +87,13 @@ protected:
 
 public:
     /**
-     * Display a dialog box to inform the user of the error given by
-     * this job.
-     * Only call if error is not 0, and only in the slot connected
-     * to result.
+     * Display to the user the error given by this job.
+     * The default implementation uses qWarning(). Subclasses
+     * reimplement this to use something more user-visible such
+     * as a message box.
+     *
+     * Only call this method if error is not 0, and only in the
+     * slot connected to result.
      */
     virtual void showErrorMessage();
 
