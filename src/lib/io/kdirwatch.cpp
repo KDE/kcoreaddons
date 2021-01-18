@@ -2018,18 +2018,18 @@ void KDirWatch::statistics()
 void KDirWatch::setCreated(const QString &_file)
 {
     qCDebug(KDIRWATCH) << objectName() << "emitting created" << _file;
-    emit created(_file);
+    Q_EMIT created(_file);
 }
 
 void KDirWatch::setDirty(const QString &_file)
 {
-    emit dirty(_file);
+    Q_EMIT dirty(_file);
 }
 
 void KDirWatch::setDeleted(const QString &_file)
 {
     qCDebug(KDIRWATCH) << objectName() << "emitting deleted" << _file;
-    emit deleted(_file);
+    Q_EMIT deleted(_file);
 }
 
 KDirWatch::Method KDirWatch::internalMethod() const

@@ -205,7 +205,7 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
     }
 
     if (obj) {
-        emit objectCreated(obj);
+        Q_EMIT objectCreated(obj);
     }
     return obj;
 }
