@@ -417,24 +417,6 @@ QString KTextToHTMLHelper::highlightedText()
     return QString();
 }
 
-
-QString KTextToHTMLHelper::pngToDataUrl(const QString &iconPath) const
-{
-    if (iconPath.isEmpty()) {
-        return QString();
-    }
-
-    QFile pngFile(iconPath);
-    if (!pngFile.open(QIODevice::ReadOnly | QIODevice::Unbuffered)) {
-        return QString();
-    }
-
-    QByteArray ba = pngFile.readAll();
-    pngFile.close();
-    return QLatin1String("data:image/png;base64,") + QLatin1String(ba.toBase64().constData());
-}
-
-
 QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::Options &flags, int maxUrlLen, int maxAddressLen)
 {
     KTextToHTMLHelper helper(plainText, 0, maxUrlLen, maxAddressLen);

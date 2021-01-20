@@ -37,7 +37,6 @@ public:
     bool atUrl() const;
     bool isEmptyUrl(const QString &url) const;
     QString getUrl(bool *badurl = nullptr);
-    QString pngToDataUrl(const QString &pngPath) const;
     QString highlightedText();
 
     QString mText;
