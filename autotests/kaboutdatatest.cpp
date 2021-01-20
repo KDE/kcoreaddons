@@ -13,6 +13,14 @@
 #include <QTextStream>
 #include <QTest>
 #include <QLatin1String>
+#ifndef Q_OS_WIN
+void initLocale()
+{
+    qputenv("LC_ALL", "en_US.utf-8");
+}
+
+Q_CONSTRUCTOR_FUNCTION(initLocale)
+#endif
 
 class KAboutDataTest : public QObject
 {
