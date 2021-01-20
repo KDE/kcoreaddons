@@ -410,7 +410,7 @@ QString KTextToHTMLHelper::highlightedText()
             case '/':
                 return QLatin1String("<i>/") + match.capturedRef(1) + QLatin1String("/</i>");
             case '-':
-                return QLatin1String("<strike>-") + match.capturedRef(1) + QLatin1String("-</strike>");
+                return QLatin1String("<s>-") + match.capturedRef(1) + QLatin1String("-</s>");
             }
         }
     }
