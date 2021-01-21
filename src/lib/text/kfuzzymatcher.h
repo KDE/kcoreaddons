@@ -34,15 +34,19 @@ namespace KFuzzyMatcher
  * @param pattern to search for. For e.g., text entered by a user to filter a
  * list
  * @param str the current string from your list of strings
+ * @return true on sucesseful match
+ *
+ * @since 5.79
  */
 KCOREADDONS_EXPORT bool matchSimple(const QStringView pattern, const QStringView str);
 
 /**
- * @brief This should be the main function to use most of the times. @p outscore
- * is the score of this match and should be used to sort the results later.
- * Without sorting of the results this function won't very effective. Also note
- * that this function scores separator matches higher than sequential matches.
- * See @ref matchSequential for details
+ * @brief This should be the function to use if the strings you are matching
+ * consists of file names, code etc. @p outscore is the score of this match and
+ * should be used to sort the results later. Without sorting of the results this
+ * function won't very effective. Also note that this function scores separator
+ * matches higher than sequential matches.
+ * See @ref matchSequential for more details
  *
  * If you are using this function in a QSortFilterProxyModel based class, keep
  * in mind that during the initial load of the model when the pattern is empty,
@@ -56,17 +60,26 @@ KCOREADDONS_EXPORT bool matchSimple(const QStringView pattern, const QStringView
  * @param outScore The output score of a particular match. This determines the
  * quality of match and should be used for sorting later.
  * @return true on a successful match.
+ *
+ * @since 5.79
  */
 KCOREADDONS_EXPORT bool match(const QStringView pattern, const QStringView str, int &outScore);
 
 /**
- * @brief This is a special case function which doesn't score separator matches
- * higher than sequential matches. For example, if you have the following
- * strings: Sort Items Split or join a tag and you use @ref match, then it can
- * be that the second result is scored better than the first one despite the
- * fact that the first one is an exact match. This happens because @ref match
- * will score separator matches higher than sequential matches. Use this
- * function if you want sequential matches to take preference.
+ * @brief This is a special case function which scores sequential matches
+ * higher than separator matches. For example, if you have the following
+ * strings:
+ *
+ * \code
+ * "Sort Items"
+ * "Split or join a tag"
+ * \endcode
+ *
+ * and you use @ref match, then it can be that the second result is scored
+ * better than the first one despite the fact that the first one is an exact
+ * match. This happens because @ref match will score separator matches higher
+ * than sequential matches. Use this function if you want sequential matches
+ * to take preference.
  *
  * @param pattern to search for. For e.g., text entered by a user to filter a
  * list
@@ -74,6 +87,8 @@ KCOREADDONS_EXPORT bool match(const QStringView pattern, const QStringView str, 
  * @param outScore The output score of a particular match. This determines the
  * quality of match and should be used for sorting later.
  * @return true on a successful match.
+ *
+ * @since 5.79
  */
 KCOREADDONS_EXPORT bool matchSequential(const QStringView pattern,
                                         const QStringView str,
@@ -99,6 +114,8 @@ KCOREADDONS_EXPORT bool matchSequential(const QStringView pattern,
  * function does not check that whether it is a closing tag for @p htmlTag or
  * not.
  * @return htmlTag wrapped output string. It is the same as @p str
+ *
+ * @since 5.79
  */
 KCOREADDONS_EXPORT QString toFuzzyMatchedDisplayString(const QStringView pattern,
                                                        QString &str,
