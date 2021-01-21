@@ -94,6 +94,7 @@ set(libkcoreaddons_SRCS
     plugin/desktopfileparser.cpp
     randomness/krandom.cpp
     randomness/krandomsequence.cpp
+    text/kfuzzymatcher.cpp
     text/kmacroexpander.cpp
     text/kstringhandler.cpp
     text/ktexttohtml.cpp
@@ -259,6 +260,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
 )
 ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
+        KFuzzyMatcher
         KMacroExpander
         KStringHandler
         KTextToHTML
