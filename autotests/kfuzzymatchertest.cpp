@@ -19,108 +19,150 @@ void KFuzzyMatcherTest::testMatchSimple()
     QCOMPARE(KFuzzyMatcher::matchSimple(QStringLiteral("Name"), QStringLiteral("Nam")), false);
 }
 
-void KFuzzyMatcherTest::testMatch()
+void KFuzzyMatcherTest::testMatch_data()
 {
-    // string , score
-    QVector<QString> l = {QStringLiteral("Sort"),
-                          QStringLiteral("Some other right test"),
-                          QStringLiteral("Soup rate"),
-                          QStringLiteral("Someother"),
-                          QStringLiteral("irrelevant")};
+    QTest::addColumn<QString>("pattern");
+    QTest::addColumn<QStringList>("input");
+    QTest::addColumn<QStringList>("expected");
+    QTest::addColumn<int>("size");
 
-    const QString pattern = QStringLiteral("sort");
+    QTest::newRow("pattern=sort") << QStringLiteral("sort")
+                          << QStringList{
+                                QStringLiteral("Sort"),
+                                QStringLiteral("Some other right test"),
+                                QStringLiteral("Soup rate"),
+                                QStringLiteral("Someother"),
+                                QStringLiteral("irrelevant"),
+                              }
+                          << QStringList{
+                                QStringLiteral("Some other right test"),
+                                QStringLiteral("Sort"),
+                                QStringLiteral("Soup rate"),
+                              }
+                          << 3;
 
-    // <string, score>
+
+    QTest::newRow("pattern=kateapp") << QStringLiteral("kaapp")
+                          << QStringList{
+                                QStringLiteral("kateapp.cpp"),
+                                QStringLiteral("kate_application"),
+                                QStringLiteral("kateapp.h"),
+                                QStringLiteral("katepap.c")
+                              }
+                          << QStringList{
+                                QStringLiteral("kate_application"),
+                                QStringLiteral("kateapp.h"),
+                                QStringLiteral("kateapp.cpp")
+                             }
+                          << 3;
+}
+
+template <bool (*MatchFunc)(const QStringView, const QStringView, int &)>
+static QStringList matchHelper(const QString& pattern, const QStringList& input)
+{
     QVector<QPair<QString, int>> actual;
-
-    for (int i = 0; i < l.size(); ++i) {
+    for (int i = 0; i < input.size(); ++i) {
         int score = 0;
-        bool res = KFuzzyMatcher::match(pattern, l.at(i), score);
+        bool res = MatchFunc(pattern, input.at(i), score);
         if (res) {
-            actual.push_back({l.at(i), score});
+            actual.push_back({input.at(i), score});
         }
     }
 
-    // two strings filtered out
-    QCOMPARE(actual.size(), 3);
-
     // sort descending based on score
-    std::sort(actual.begin(), actual.end(), [](const QPair<QString, int> &l, const QPair<QString, int> &r) {
+    std::sort(actual.begin(), actual.end(), [](const QPair<QString, int> &l,
+                                               const QPair<QString, int> &r) {
         return l.second > r.second;
     });
 
-    const QVector<QString> expected = {
-        QStringLiteral("Some other right test"), QStringLiteral("Sort"), QStringLiteral("Soup rate")};
 
-    for (int i = 0; i < actual.size(); ++i) {
-        QCOMPARE(actual.at(i).first, expected.at(i));
+    QStringList actualOut;
+    for (const auto& s : actual) {
+        actualOut << s.first;
     }
+    return actualOut;
 }
 
-void KFuzzyMatcherTest::testMatch2()
+void KFuzzyMatcherTest::testMatch()
 {
-    const QString pattern = QStringLiteral("kaapp");
-    const QVector<QString> strs = {QStringLiteral("kateapp.cpp"),
-                                   QStringLiteral("kate_application"),
-                                   QStringLiteral("kateapp.h"),
-                                   QStringLiteral("katepap.c")};
+    QFETCH(QString, pattern);
+    QFETCH(QStringList, input);
+    QFETCH(QStringList, expected);
+    QFETCH(int, size);
 
-    QVector<QString> matched;
-    for (const auto &str : strs) {
-        int score = 0;
-        auto res = KFuzzyMatcher::match(pattern, str, score);
-        if (res) {
-            matched.push_back(str);
-        }
-    }
+    const auto actual = matchHelper<KFuzzyMatcher::match>(pattern, input);
 
-    QCOMPARE(matched.size(), 3);
-    QCOMPARE(matched.contains(QStringLiteral("kateapp.cpp")), true);
-    QCOMPARE(matched.contains(QStringLiteral("katepap.c")), false);
+    QCOMPARE(actual.size(), size);
+    QCOMPARE(actual, expected);
+}
+
+void KFuzzyMatcherTest::testMatchSequential_data()
+{
+    QTest::addColumn<QString>("pattern");
+    QTest::addColumn<QStringList>("input");
+    QTest::addColumn<QStringList>("expected");
+    QTest::addColumn<int>("size");
+
+    QTest::newRow("sort") << QStringLiteral("sort")
+                          << QStringList{
+                                QStringLiteral("Sort"),
+                                QStringLiteral("Some other right test"),
+                                QStringLiteral("Soup rate"),
+                                QStringLiteral("Someother"),
+                                QStringLiteral("irrelevant"),
+                              }
+                          << QStringList{
+                                QStringLiteral("Sort"),
+                                QStringLiteral("Some other right test"),
+                                QStringLiteral("Soup rate"),
+                              }
+                          << 3;
 }
 
 void KFuzzyMatcherTest::testMatchSequential()
 {
-    // string , score
-    QVector<QString> l = {QStringLiteral("Sort"),
-                          QStringLiteral("Some other right test"),
-                          QStringLiteral("Soup rate"),
-                          QStringLiteral("Someother"),
-                          QStringLiteral("irrelevant")};
+    QFETCH(QString, pattern);
+    QFETCH(QStringList, input);
+    QFETCH(QStringList, expected);
+    QFETCH(int, size);
 
-    const QString pattern = QStringLiteral("sort");
+    const auto actual = matchHelper<KFuzzyMatcher::matchSequential>(pattern, input);
 
-    // <string, score>
-    QVector<QPair<QString, int>> actual;
+    QCOMPARE(actual.size(), size);
+    QCOMPARE(actual, expected);
+}
 
-    for (int i = 0; i < l.size(); ++i) {
-        int score = 0;
-        bool res = KFuzzyMatcher::matchSequential(pattern, l.at(i), score);
-        if (res) {
-            actual.push_back({l.at(i), score});
-        }
-    }
+void KFuzzyMatcherTest::testToFuzzyMatchedDisplayString_data()
+{
+    QTest::addColumn<QString>("pattern");
+    QTest::addColumn<QString>("input");
+    QTest::addColumn<QString>("expected");
+    QTest::addColumn<QString>("tag");
+    QTest::addColumn<QString>("tagClose");
 
-    // two strings filtered out
-    QCOMPARE(actual.size(), 3);
+    QTest::newRow("HelloBold") << QStringLiteral("Hlo")
+                               << QStringLiteral("Hello")
+                               << QStringLiteral("<b>H</b>e<b>l</b>l<b>o</b>")
+                               << QStringLiteral("<b>")
+                               << QStringLiteral("</b>");
 
-    // sort descending based on score
-    std::sort(actual.begin(), actual.end(), [](const QPair<QString, int> &l, const QPair<QString, int> &r) {
-        return l.second > r.second;
-    });
-
-    const QVector<QString> expected = {
-        QStringLiteral("Sort"), QStringLiteral("Some other right test"), QStringLiteral("Soup rate")};
-
-    for (int i = 0; i < actual.size(); ++i) {
-        QCOMPARE(actual.at(i).first, expected.at(i));
-    }
+    QTest::newRow("HelloItalic") << QStringLiteral("Hlo")
+                                 << QStringLiteral("Hello")
+                                 << QStringLiteral("<i>H</i>e<i>l</i>l<i>o</i>")
+                                 << QStringLiteral("<i>")
+                                 << QStringLiteral("</i>");
 }
 
 void KFuzzyMatcherTest::testToFuzzyMatchedDisplayString()
 {
-    QString pattern = QStringLiteral("Hlo");
-    QString str = QStringLiteral("Hello");
-    KFuzzyMatcher::toFuzzyMatchedDisplayString(pattern, str, QStringLiteral("<b>"), QStringLiteral("</b>"));
-    QCOMPARE(str, QStringLiteral("<b>H</b>e<b>l</b>l<b>o</b>"));
+    QFETCH(QString, pattern);
+    QFETCH(QString, input);
+    QFETCH(QString, expected);
+    QFETCH(QString, tag);
+    QFETCH(QString, tagClose);
+
+    QString actual = KFuzzyMatcher::toFuzzyMatchedDisplayString(pattern, input, tag, tagClose);
+
+    QCOMPARE(actual, expected);
+    QCOMPARE(input, expected);
 }

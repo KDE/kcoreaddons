@@ -9,9 +9,11 @@ class KFuzzyMatcherTest : public QObject
 
 private Q_SLOTS:
     void testMatchSimple();
+    void testMatch_data();
     void testMatch();
-    void testMatch2();
+    void testMatchSequential_data();
     void testMatchSequential();
+    void testToFuzzyMatchedDisplayString_data();
     void testToFuzzyMatchedDisplayString();
 };
 
