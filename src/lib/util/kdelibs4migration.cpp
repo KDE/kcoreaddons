@@ -27,7 +27,7 @@ Kdelibs4Migration::Kdelibs4Migration()
     : d(new Kdelibs4MigrationPrivate)
 {
     if (qEnvironmentVariableIsSet("KDEHOME")) {
-        //qCDebug(KCOREADDONS_DEBUG) << "Using KDEHOME as the location of the old config file";
+        qCDebug(KCOREADDONS_DEBUG) << "Using KDEHOME as the location of the old config file";
         d->m_kdeHome = QString::fromLocal8Bit(qgetenv("KDEHOME"));
     } else {
         QDir homeDir = QDir::home();
@@ -42,7 +42,7 @@ Kdelibs4Migration::Kdelibs4Migration()
 #endif
         for (const QString &testSubdir : qAsConst(testSubdirs)) {
             if (homeDir.exists(testSubdir)) {
-                //qCDebug(KCOREADDONS_DEBUG) << "Using" << testSubdir << "as the location of the old config file";
+                qCDebug(KCOREADDONS_DEBUG) << "Using" << testSubdir << "as the location of the old config file";
                 d->m_kdeHome = homeDir.filePath(testSubdir);
                 break;
             }

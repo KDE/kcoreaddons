@@ -71,7 +71,6 @@ class QObject;
         "Icon": "preferences-system-time",
         "Authors": { "Name": "Aaron Seigo", "Email": "aseigo@kde.org" },
         "Category": "Date and Time",
-        "Dependencies": [],
         "EnabledByDefault": "true",
         "License": "LGPL",
         "Id": "time",
@@ -107,7 +106,9 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(QString pluginId READ pluginId CONSTANT)
     Q_PROPERTY(QString version READ version CONSTANT)
     Q_PROPERTY(QString website READ website CONSTANT)
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 79)
     Q_PROPERTY(QStringList dependencies READ dependencies CONSTANT)
+#endif
     Q_PROPERTY(QStringList serviceTypes READ serviceTypes CONSTANT)
     Q_PROPERTY(QStringList mimeTypes READ mimeTypes CONSTANT)
     Q_PROPERTY(QStringList formFactors READ formFactors CONSTANT)
@@ -334,11 +335,15 @@ public:
      */
     QString website() const;
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 79)
     /**
      * @return a list of plugins that this plugin depends on so that it can function properly
      * @see KJsonPluginInfo::pluginId()
+     * @deprecated Since 5.79, plugin dependencies are deprecated and will be removed in KF6
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 79, "Plugin dependencies are deprecated and will be removed in KF6")
     QStringList dependencies() const;
+#endif
 
     /**
      * Returns the service types that this plugin implements.

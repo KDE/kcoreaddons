@@ -66,25 +66,25 @@ QString KTextToHTMLHelper::getEmailAddress()
 {
     QString address;
 
-    if (mText[mPos] == QLatin1Char('@')) {
+    if (mPos < mText.length() && mText.at(mPos) == QLatin1Char('@')) {
         // the following characters are allowed in a dot-atom (RFC 2822):
         // a-z A-Z 0-9 . ! # $ % & ' * + - / = ? ^ _ ` { | } ~
         const QString allowedSpecialChars = QStringLiteral(".!#$%&'*+-/=?^_`{|}~");
 
         // determine the local part of the email address
         int start = mPos - 1;
-        while (start >= 0 && mText[start].unicode() < 128 &&
-                (mText[start].isLetterOrNumber() ||
-                 mText[start] == QLatin1Char('@') || // allow @ to find invalid email addresses
-                 allowedSpecialChars.indexOf(mText[start]) != -1)) {
-            if (mText[start] == QLatin1Char('@')) {
+        while (start >= 0 && mText.at(start).unicode() < 128 &&
+                (mText.at(start).isLetterOrNumber() ||
+                 mText.at(start) == QLatin1Char('@') || // allow @ to find invalid email addresses
+                 allowedSpecialChars.indexOf(mText.at(start)) != -1)) {
+            if (mText.at(start) == QLatin1Char('@')) {
                 return QString(); // local part contains '@' -> no email address
             }
             --start;
         }
         ++start;
         // we assume that an email address starts with a letter or a digit
-        while ((start < mPos) && !mText[start].isLetterOrNumber()) {
+        while ((start < mPos) && !mText.at(start).isLetterOrNumber()) {
             ++start;
         }
         if (start == mPos) {
@@ -95,20 +95,20 @@ QString KTextToHTMLHelper::getEmailAddress()
         int dotPos = INT_MAX;
         int end = mPos + 1;
         while (end < mText.length() &&
-                (mText[end].isLetterOrNumber() ||
-                 mText[end] == QLatin1Char('@') || // allow @ to find invalid email addresses
-                 mText[end] == QLatin1Char('.') ||
-                 mText[end] == QLatin1Char('-'))) {
-            if (mText[end] == QLatin1Char('@')) {
+                (mText.at(end).isLetterOrNumber() ||
+                 mText.at(end) == QLatin1Char('@') || // allow @ to find invalid email addresses
+                 mText.at(end) == QLatin1Char('.') ||
+                 mText.at(end) == QLatin1Char('-'))) {
+            if (mText.at(end) == QLatin1Char('@')) {
                 return QString(); // domain part contains '@' -> no email address
             }
-            if (mText[end] == QLatin1Char('.')) {
+            if (mText.at(end) == QLatin1Char('.')) {
                 dotPos = qMin(dotPos, end);   // remember index of first dot in domain
             }
             ++end;
         }
         // we assume that an email address ends with a letter or a digit
-        while ((end > mPos) && !mText[end - 1].isLetterOrNumber()) {
+        while ((end > mPos) && !mText.at(end - 1).isLetterOrNumber()) {
             --end;
         }
         if (end == mPos) {
@@ -130,12 +130,12 @@ QString KTextToHTMLHelper::getEmailAddress()
 
 QString KTextToHTMLHelper::getPhoneNumber()
 {
-    if (!mText[mPos].isDigit() && mText[mPos] != QLatin1Char('+')) {
+    if (!mText.at(mPos).isDigit() && mText.at(mPos) != QLatin1Char('+')) {
         return {};
     }
 
     const QString allowedBeginSeparators = QStringLiteral(" \r\t\n:");
-    if (mPos > 0 && !allowedBeginSeparators.contains(mText[mPos - 1])) {
+    if (mPos > 0 && !allowedBeginSeparators.contains(mText.at(mPos - 1))) {
         return {};
     }
 
@@ -172,7 +172,7 @@ QString KTextToHTMLHelper::getPhoneNumber()
         // check if there's a plausible separator at the end
         const QString allowedEndSeparators = QStringLiteral(" \r\t\n,.");
         const auto l = m.size();
-        if (mText.size() > mPos + l && !allowedEndSeparators.contains(mText[mPos + l])) {
+        if (mText.size() > mPos + l && !allowedEndSeparators.contains(mText.at(mPos + l))) {
             return {};
         }
 
@@ -194,37 +194,38 @@ static QString normalizePhoneNumber(const QString &str)
     return res;
 }
 
+// The following characters are allowed in a dot-atom (RFC 2822):
+// a-z A-Z 0-9 . ! # $ % & ' * + - / = ? ^ _ ` { | } ~
+static const char s_allowedSpecialChars[] = ".!#$%&'*+-/=?^_`{|}~";
+
 bool KTextToHTMLHelper::atUrl() const
 {
-    // the following characters are allowed in a dot-atom (RFC 2822):
-    // a-z A-Z 0-9 . ! # $ % & ' * + - / = ? ^ _ ` { | } ~
-    const QString allowedSpecialChars = QStringLiteral(".!#$%&'*+-/=?^_`{|}~");
-
-    // the character directly before the URL must not be a letter, a number or
+    // The character directly before the URL must not be a letter, a number or
     // any other character allowed in a dot-atom (RFC 2822).
-    if ((mPos > 0) &&
-            (mText[mPos - 1].isLetterOrNumber() ||
-             (allowedSpecialChars.indexOf(mText[mPos - 1]) != -1))) {
-        return false;
+    if (mPos > 0) {
+        const auto chBefore = mText.at(mPos - 1);
+        if (chBefore.isLetterOrNumber() || QLatin1String(s_allowedSpecialChars).contains(chBefore)) {
+            return false;
+        }
     }
-    QChar ch = mText[mPos];
-    return
-        (ch == QLatin1Char('h') && (mText.midRef(mPos, 7) == QLatin1String("http://") ||
-                                    mText.midRef(mPos, 8) == QLatin1String("https://"))) ||
-        (ch == QLatin1Char('v') && mText.midRef(mPos, 6) == QLatin1String("vnc://")) ||
-        (ch == QLatin1Char('f') && (mText.midRef(mPos, 7) == QLatin1String("fish://") ||
-                                    mText.midRef(mPos, 6) == QLatin1String("ftp://") ||
-                                    mText.midRef(mPos, 7) == QLatin1String("ftps://"))) ||
-        (ch == QLatin1Char('s') && (mText.midRef(mPos, 7) == QLatin1String("sftp://") ||
-                                    mText.midRef(mPos, 6) == QLatin1String("smb://"))) ||
-        (ch == QLatin1Char('m') && mText.midRef(mPos, 7) == QLatin1String("mailto:")) ||
-        (ch == QLatin1Char('w') && mText.midRef(mPos, 4) == QLatin1String("www.")) ||
-        (ch == QLatin1Char('f') && (mText.midRef(mPos, 4) == QLatin1String("ftp.") ||
-                                    mText.midRef(mPos, 7) == QLatin1String("file://"))) ||
-        (ch == QLatin1Char('n') && mText.midRef(mPos, 5) == QLatin1String("news:")) ||
-        (ch == QLatin1Char('t') && mText.midRef(mPos, 4) == QLatin1String("tel:")) ||
-        (ch == QLatin1Char('x') && mText.midRef(mPos, 5) == QLatin1String("xmpp:"));
 
+    const auto segment = mText.midRef(mPos);
+    return
+        segment.startsWith(QLatin1String("http://"))
+        || segment.startsWith(QLatin1String("https://"))
+        || segment.startsWith(QLatin1String("vnc://"))
+        || segment.startsWith(QLatin1String("fish://"))
+        || segment.startsWith(QLatin1String("ftp://"))
+        || segment.startsWith(QLatin1String("ftps://"))
+        || segment.startsWith(QLatin1String("sftp://"))
+        || segment.startsWith(QLatin1String("smb://"))
+        || segment.startsWith(QLatin1String("mailto:"))
+        || segment.startsWith(QLatin1String("www."))
+        || segment.startsWith(QLatin1String("ftp."))
+        || segment.startsWith(QLatin1String("file://"))
+        || segment.startsWith(QLatin1String("news:"))
+        || segment.startsWith(QLatin1String("tel:"))
+        || segment.startsWith(QLatin1String("xmpp:"));
 }
 
 bool KTextToHTMLHelper::isEmptyUrl(const QString &url) const
@@ -268,7 +269,7 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
 
         // detect if the url has been surrounded by brackets or quotes
         if (mPos > 0) {
-            beforeUrl = mText[mPos - 1];
+            beforeUrl = mText.at(mPos - 1);
 
             /*if ( beforeUrl == '(' ) {
               afterUrl = ')';
@@ -288,10 +289,10 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
         bool previousCharIsADoubleQuote = false;
         bool previousIsAnAnchor = false;
         while ((mPos < mText.length()) &&
-                (mText[mPos].isPrint() || mText[mPos].isSpace()) &&
-                ((afterUrl.isNull() && !mText[mPos].isSpace()) ||
-                 (!afterUrl.isNull() && mText[mPos] != afterUrl))) {
-            if (!previousCharIsSpace && (mText[mPos] == QLatin1Char('<')) && ((mPos + 1) < mText.length())) {
+                (mText.at(mPos).isPrint() || mText.at(mPos).isSpace()) &&
+                ((afterUrl.isNull() && !mText.at(mPos).isSpace()) ||
+                 (!afterUrl.isNull() && mText.at(mPos) != afterUrl))) {
+            if (!previousCharIsSpace && (mText.at(mPos) == QLatin1Char('<')) && ((mPos + 1) < mText.length())) {
                 // Fix Bug #346132: allow "http://www.foo.bar<http://foo.bar/>"
                 // < inside a URL is not allowed, however there is a test which
                 // checks that "http://some<Host>/path" should be allowed
@@ -303,7 +304,7 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
                 }
                 mPos--;
             }
-            if (!previousCharIsSpace && (mText[mPos] == QLatin1Char(' ')) && ((mPos + 1) < mText.length())) {
+            if (!previousCharIsSpace && (mText.at(mPos) == QLatin1Char(' ')) && ((mPos + 1) < mText.length())) {
                 // Fix kmail bug: allow "http://www.foo.bar http://foo.bar/"
                 // Therefore: check if what follows is another URL and if so, stop here
                 mPos++;
@@ -313,34 +314,34 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
                 }
                 mPos--;
             }
-            if (mText[mPos].isSpace()) {
+            if (mText.at(mPos).isSpace()) {
                 previousCharIsSpace = true;
-            } else if (!previousIsAnAnchor && mText[mPos] == QLatin1Char('[')) {
+            } else if (!previousIsAnAnchor && mText.at(mPos) == QLatin1Char('[')) {
                 break;
-            } else if (!previousIsAnAnchor && mText[mPos] == QLatin1Char(']')) {
+            } else if (!previousIsAnAnchor && mText.at(mPos) == QLatin1Char(']')) {
                 break;
             } else { // skip whitespace
-                if (previousCharIsSpace && mText[mPos] == QLatin1Char('<')) {
+                if (previousCharIsSpace && mText.at(mPos) == QLatin1Char('<')) {
                     url.append(QLatin1Char(' '));
                     break;
                 }
                 previousCharIsSpace = false;
-                if (mText[mPos] == QLatin1Char('>') && previousCharIsADoubleQuote) {
+                if (mText.at(mPos) == QLatin1Char('>') && previousCharIsADoubleQuote) {
                     //it's an invalid url
                     if (badurl) {
                         *badurl = true;
                     }
                     return QString();
                 }
-                if (mText[mPos] == QLatin1Char('"')) {
+                if (mText.at(mPos) == QLatin1Char('"')) {
                     previousCharIsADoubleQuote = true;
                 } else {
                     previousCharIsADoubleQuote = false;
                 }
-                if (mText[mPos] == QLatin1Char('#')) {
+                if (mText.at(mPos) == QLatin1Char('#')) {
                     previousIsAnAnchor = true;
                 }
-                url.append(mText[mPos]);
+                url.append(mText.at(mPos));
                 if (url.length() > mMaxUrlLen) {
                     break;
                 }
@@ -380,11 +381,11 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
 QString KTextToHTMLHelper::highlightedText()
 {
     // formating symbols must be prepended with a whitespace
-    if ((mPos > 0) && !mText[mPos - 1].isSpace()) {
+    if ((mPos > 0) && !mText.at(mPos - 1).isSpace()) {
         return QString();
     }
 
-    const QChar ch = mText[mPos];
+    const QChar ch = mText.at(mPos);
     if (ch != QLatin1Char('/') && ch != QLatin1Char('*') && ch != QLatin1Char('_') && ch != QLatin1Char('-')) {
         return QString();
     }
@@ -397,7 +398,7 @@ QString KTextToHTMLHelper::highlightedText()
         if (match.capturedStart() == mPos) {
             int length = match.capturedLength();
             // there must be a whitespace after the closing formating symbol
-            if (mPos + length < mText.length() && !mText[mPos + length].isSpace()) {
+            if (mPos + length < mText.length() && !mText.at(mPos + length).isSpace()) {
                 return QString();
             }
             mPos += length - 1;
@@ -409,30 +410,12 @@ QString KTextToHTMLHelper::highlightedText()
             case '/':
                 return QLatin1String("<i>/") + match.capturedRef(1) + QLatin1String("/</i>");
             case '-':
-                return QLatin1String("<strike>-") + match.capturedRef(1) + QLatin1String("-</strike>");
+                return QLatin1String("<s>-") + match.capturedRef(1) + QLatin1String("-</s>");
             }
         }
     }
     return QString();
 }
-
-
-QString KTextToHTMLHelper::pngToDataUrl(const QString &iconPath) const
-{
-    if (iconPath.isEmpty()) {
-        return QString();
-    }
-
-    QFile pngFile(iconPath);
-    if (!pngFile.open(QIODevice::ReadOnly | QIODevice::Unbuffered)) {
-        return QString();
-    }
-
-    QByteArray ba = pngFile.readAll();
-    pngFile.close();
-    return QLatin1String("data:image/png;base64,") + QLatin1String(ba.toBase64().constData());
-}
-
 
 QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::Options &flags, int maxUrlLen, int maxAddressLen)
 {
@@ -446,14 +429,14 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
 
     for (helper.mPos = 0, x = 0; helper.mPos < helper.mText.length();
             ++helper.mPos, ++x) {
-        ch = helper.mText[helper.mPos];
+        ch = helper.mText.at(helper.mPos);
         if (flags & PreserveSpaces) {
             if (ch == QLatin1Char(' ')) {
                 if (helper.mPos + 1 < helper.mText.length()) {
-                    if (helper.mText[helper.mPos + 1] != QLatin1Char(' ')) {
+                    if (helper.mText.at(helper.mPos + 1) != QLatin1Char(' ')) {
 
                         // A single space, make it breaking if not at the start or end of the line
-                        const bool endOfLine = helper.mText[helper.mPos + 1] == QLatin1Char('\n');
+                        const bool endOfLine = helper.mText.at(helper.mPos + 1) == QLatin1Char('\n');
                         if (!startOfLine && !endOfLine) {
                             result += QLatin1Char(' ');
                         } else {
@@ -462,7 +445,7 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
                     } else {
 
                         // Whitespace of more than one space, make it all non-breaking
-                        while (helper.mPos < helper.mText.length() && helper.mText[helper.mPos] == QLatin1Char(' ')) {
+                        while (helper.mPos < helper.mText.length() && helper.mText.at(helper.mPos) == QLatin1Char(' ')) {
                             result += QLatin1String("&nbsp;");
                             ++helper.mPos;
                             ++x;
@@ -516,7 +499,7 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
                     QString resultBadUrl;
                     const int helperTextSize(helper.mText.count());
                     for (int i = 0; i < helperTextSize; ++i) {
-                        const QChar chBadUrl = helper.mText[i];
+                        const QChar chBadUrl = helper.mText.at(i);
                         if (chBadUrl == QLatin1Char('&')) {
                             resultBadUrl += QLatin1String("&amp;");
                         } else if (chBadUrl == QLatin1Char('"')) {
@@ -582,12 +565,17 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
     }
 
     if (flags & ReplaceSmileys) {
-        const QStringList exclude = { QStringLiteral("(c)"), QStringLiteral("(C)"), QStringLiteral("&gt;:-("), QStringLiteral("&gt;:("), QStringLiteral("(B)"), QStringLiteral("(b)"), QStringLiteral("(P)"), QStringLiteral("(p)")
-                                      , QStringLiteral("(O)"), QStringLiteral("(o)"), QStringLiteral("(D)"), QStringLiteral("(d)"), QStringLiteral("(E)"), QStringLiteral("(e)"), QStringLiteral("(K)"), QStringLiteral("(k)")
-                                      , QStringLiteral("(I)"), QStringLiteral("(i)"), QStringLiteral("(L)"), QStringLiteral("(l)"), QStringLiteral("(8)"), QStringLiteral("(T)"), QStringLiteral("(t)"), QStringLiteral("(G)")
-                                      , QStringLiteral("(g)"), QStringLiteral("(F)"), QStringLiteral("(f)"), QStringLiteral("(H)")
-                                      , QStringLiteral("8)"), QStringLiteral("(N)"), QStringLiteral("(n)"), QStringLiteral("(Y)"), QStringLiteral("(y)"), QStringLiteral("(U)"), QStringLiteral("(u)"), QStringLiteral("(W)"), QStringLiteral("(w)")
-                                      , QStringLiteral("(6)")};
+        const QStringList exclude = {
+            QStringLiteral("(c)"), QStringLiteral("(C)"), QStringLiteral("&gt;:-("), QStringLiteral("&gt;:("),
+            QStringLiteral("(B)"), QStringLiteral("(b)"), QStringLiteral("(P)"), QStringLiteral("(p)"),
+            QStringLiteral("(O)"), QStringLiteral("(o)"), QStringLiteral("(D)"), QStringLiteral("(d)"),
+            QStringLiteral("(E)"), QStringLiteral("(e)"), QStringLiteral("(K)"), QStringLiteral("(k)"),
+            QStringLiteral("(I)"), QStringLiteral("(i)"), QStringLiteral("(L)"), QStringLiteral("(l)"),
+            QStringLiteral("(8)"), QStringLiteral("(T)"), QStringLiteral("(t)"), QStringLiteral("(G)"),
+            QStringLiteral("(g)"), QStringLiteral("(F)"), QStringLiteral("(f)"), QStringLiteral("(H)"),
+            QStringLiteral("8)"), QStringLiteral("(N)"), QStringLiteral("(n)"), QStringLiteral("(Y)"),
+            QStringLiteral("(y)"), QStringLiteral("(U)"), QStringLiteral("(u)"), QStringLiteral("(W)"),
+            QStringLiteral("(w)"), QStringLiteral("(6)")};
 
         result = helper.emoticonsInterface()->parseEmoticons(result, true, exclude);
     }

@@ -15,6 +15,12 @@
 #include <algorithm>
 
 QTEST_MAIN(KListOpenFilesJobTest)
+void initLocale()
+{
+    qputenv("LC_ALL", "en_US.utf-8");
+}
+
+Q_CONSTRUCTOR_FUNCTION(initLocale)
 
 namespace {
 

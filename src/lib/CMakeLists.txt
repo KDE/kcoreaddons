@@ -144,7 +144,8 @@ ecm_qt_export_logging_category(
     DESCRIPTION "KAboutData (KCoreAddons)"
     EXPORT KCOREADDONS
 )
-ecm_qt_export_logging_category(
+ecm_qt_declare_logging_category(libkcoreaddons_SRCS
+    HEADER desktopfileparser_debug.h
     IDENTIFIER DESKTOPPARSER
     CATEGORY_NAME kf.coreaddons.desktopparser
     OLD_CATEGORY_NAMES kf5.kcoreaddons.desktopparser
@@ -177,7 +178,7 @@ ecm_generate_export_header(KF5CoreAddons
     GROUP_BASE_NAME KF
     VERSION ${KF5_VERSION}
     DEPRECATED_BASE_VERSION 0
-    DEPRECATION_VERSIONS 4.0 5.0 5.2 5.65 5.67 5.70 5.72 5.75 5.76 5.78
+    DEPRECATION_VERSIONS 4.0 5.0 5.2 5.65 5.67 5.70 5.72 5.75 5.76 5.78 5.79
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
@@ -368,9 +369,3 @@ endif()
 include(ECMGeneratePriFile)
 ecm_generate_pri_file(BASE_NAME KCoreAddons LIB_NAME KF5CoreAddons DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KCoreAddons)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
-
-ecm_qt_install_logging_categories(
-    EXPORT KCOREADDONS
-    FILE kcoreaddons.categories
-    DESTINATION "${KDE_INSTALL_LOGGINGCATEGORIESDIR}"
-)

@@ -8,6 +8,12 @@
 
 #include "desktopfileparser_p.h"
 
+#ifdef BUILDING_DESKTOPTOJSON_TOOL
+#include "desktoptojson_debug.h"
+#else
+#include "desktopfileparser_debug.h"
+#endif
+// Qt
 #include <QCache>
 #include <QDir>
 #include <QFile>
@@ -18,15 +24,6 @@
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
 
-// in the desktoptojson binary enable debug messages by default, in the library only warning messages
-// NOTE: should you change this, also update the test case, it hardcodes the category name as well!
-#ifdef BUILDING_DESKTOPTOJSON_TOOL
-Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf.coreaddons.desktopparser", QtDebugMsg)
-#else
-Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf.coreaddons.desktopparser", QtWarningMsg)
-#endif
-
-
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
 // use if not else to prevent wrong scoping
 #define DESKTOPTOJSON_VERBOSE_DEBUG if (!DesktopFileParser::s_verbose) {} else qCDebug(DESKTOPPARSER)
@@ -35,6 +32,8 @@ Q_LOGGING_CATEGORY(DESKTOPPARSER, "kf.coreaddons.desktopparser", QtWarningMsg)
 #define DESKTOPTOJSON_VERBOSE_DEBUG QT_NO_QDEBUG_MACRO()
 #define DESKTOPTOJSON_VERBOSE_WARNING QT_NO_QDEBUG_MACRO()
 #endif
+
+#include "../lib/kcoreaddons_export.h"
 
 
 using namespace DesktopFileParser;
@@ -442,7 +441,6 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
         X-KDE-PluginInfo-Version=1.1
         X-KDE-PluginInfo-Website=http://www.plugin.org/
         X-KDE-PluginInfo-Category=playlist
-        X-KDE-PluginInfo-Depends=plugin1,plugin3
         X-KDE-PluginInfo-License=GPL
         X-KDE-PluginInfo-Copyright=Copyright <year> by Author's Name (since KF 5.77, translatable)
         X-KDE-PluginInfo-EnabledByDefault=true
@@ -465,9 +463,14 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
         kplugin[QStringLiteral("Version")] = value;
     } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Website")) {
         kplugin[QStringLiteral("Website")] = value;
-    } else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Depends")) {
+    }
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
+    else if (key == QByteArrayLiteral("X-KDE-PluginInfo-Depends")) {
         kplugin[QStringLiteral("Dependencies")] = QJsonArray::fromStringList(deserializeList(value));
-    } else if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
+        qCDebug(DESKTOPPARSER) << "The X-KDE-PluginInfo-Depends property is deprecated and will be removed in KF6";
+    }
+#endif
+    else if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
         //NOTE: "X-KDE-ServiceTypes" and "ServiceTypes" were already managed in the first parse step, so this second one is almost a noop
         const auto services = deserializeList(value);
         kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(services);
@@ -603,7 +606,6 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
     df.seek(startPos);
 
     QJsonObject kplugin; // the "KPlugin" key of the metadata
-    //QJsonObject json;
     while (!df.atEnd()) {
         QByteArray key;
         QString value;

@@ -6,6 +6,7 @@
 */
 
 #include "ktexttohtmltest.h"
+#include "kcoreaddons_debug.h"
 
 #include "../src/lib/text/ktexttohtml.h"
 #include "../src/lib/text/ktexttohtml_p.h"
@@ -106,7 +107,7 @@ void KTextToHTMLTest::testGetEmailAddress()
 void KTextToHTMLTest::testGetUrl()
 {
     QStringList brackets;
-    brackets << QStringLiteral("") << QStringLiteral("");   // no brackets
+    brackets << QString() << QString();   // no brackets
     brackets << QStringLiteral("<") << QStringLiteral(">");
     brackets << QStringLiteral("[") << QStringLiteral("]");
     brackets << QStringLiteral("\"") << QStringLiteral("\"");
@@ -171,9 +172,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
             url.remove(QLatin1Char('\t'));
 
             bool ok = (gotUrl == (schema + url));
-            //qDebug() << "check:" << (ok ? "OK" : "NOK") << test << "=>" << (schema + url);
             if (!ok) {
-                qDebug() << "got:" << gotUrl;
+                qCDebug(KCOREADDONS_DEBUG) << "got:" << gotUrl;
             }
             QVERIFY2(ok, qPrintable(test));
         }
@@ -219,9 +219,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
             url.remove(QLatin1Char('\t'));
 
             bool ok = (gotUrl == (start + url));
-            //qDebug() << "check:" << (ok ? "OK" : "NOK") << test << "=>" << (start + url);
             if (!ok) {
-                qDebug() << "got:" << gotUrl;
+                qCDebug(KCOREADDONS_DEBUG) << "got:" << gotUrl;
             }
             QVERIFY2(ok, qPrintable(gotUrl));
         }
@@ -255,9 +254,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
         QString gotUrl = ll.getUrl();
 
         bool ok = (gotUrl == addr);
-        //qDebug() << "check:" << (ok ? "OK" : "NOK") << test << "=>" << addr;
         if (!ok) {
-            qDebug() << "got:" << gotUrl;
+            qCDebug(KCOREADDONS_DEBUG) << "got:" << gotUrl;
         }
         QVERIFY2(ok, qPrintable(gotUrl));
     }

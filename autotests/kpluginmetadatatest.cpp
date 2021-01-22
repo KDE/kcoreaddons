@@ -14,6 +14,7 @@
 #include <kpluginmetadata.h>
 #include <kpluginloader.h>
 #include <kaboutdata.h>
+#include "kcoreaddons_debug.h"
 
 #include <QLocale>
 #include <QLoggingCategory>
@@ -156,16 +157,18 @@ private Q_SLOTS:
         QCOMPARE(m.extraInformation(), QStringLiteral("Something else"));
         QCOMPARE(m.iconName(), QStringLiteral("preferences-system-time"));
         QCOMPARE(m.category(), QStringLiteral("Date and Time"));
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
         QCOMPARE(m.dependencies(), QStringList() << QStringLiteral("foo") << QStringLiteral("bar"));
+#endif
         QCOMPARE(m.authors().size(), 1);
-        QCOMPARE(m.authors()[0].name(), QStringLiteral("Aaron Seigo"));
-        QCOMPARE(m.authors()[0].emailAddress(), QStringLiteral("aseigo@kde.org"));
+        QCOMPARE(m.authors().constFirst().name(), QStringLiteral("Aaron Seigo"));
+        QCOMPARE(m.authors().constFirst().emailAddress(), QStringLiteral("aseigo@kde.org"));
         QCOMPARE(m.translators().size(), 1);
-        QCOMPARE(m.translators()[0].name(), QStringLiteral("No One"));
-        QCOMPARE(m.translators()[0].emailAddress(), QStringLiteral("no.one@kde.org"));
+        QCOMPARE(m.translators().constFirst().name(), QStringLiteral("No One"));
+        QCOMPARE(m.translators().constFirst().emailAddress(), QStringLiteral("no.one@kde.org"));
         QCOMPARE(m.otherContributors().size(), 1);
-        QCOMPARE(m.otherContributors()[0].name(), QStringLiteral("No One"));
-        QCOMPARE(m.otherContributors()[0].emailAddress(), QStringLiteral("no.one@kde.org"));
+        QCOMPARE(m.otherContributors().constFirst().name(), QStringLiteral("No One"));
+        QCOMPARE(m.otherContributors().constFirst().emailAddress(), QStringLiteral("no.one@kde.org"));
         QVERIFY(m.isEnabledByDefault());
         QCOMPARE(m.license(), QStringLiteral("LGPL"));
         QCOMPARE(m.copyrightText(), QStringLiteral("(c) Alex Richardson 2015"));
@@ -262,7 +265,9 @@ private Q_SLOTS:
         QCOMPARE(md.website(), QStringLiteral("https://kde.org/"));
         QCOMPARE(md.category(), QStringLiteral("Examples"));
         QCOMPARE(md.version(), QStringLiteral("1.0"));
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
         QCOMPARE(md.dependencies(), QStringList());
+#endif
         QCOMPARE(md.isHidden(), false);
         QCOMPARE(md.serviceTypes(), QStringList(QStringLiteral("KService/NSA")));
         QCOMPARE(md.mimeTypes(), QStringList() << QStringLiteral("image/png") << QStringLiteral("application/pdf"));
@@ -313,7 +318,6 @@ private Q_SLOTS:
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Example"));
         QCOMPARE(md.serviceTypes(), QStringList() << QStringLiteral("example/servicetype") << QStringLiteral("bar/foo"));
-        // qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
         QCOMPARE(md.rawData().size(), 8);
         QVERIFY(md.rawData().value(QStringLiteral("KPlugin")).isObject());
         QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Integer")), QJsonValue(42));
@@ -349,7 +353,6 @@ private Q_SLOTS:
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Bad Groups"));
-        // qDebug().noquote() << QJsonDocument(md.rawData()).toJson();
         QCOMPARE(md.rawData().size(), 8);
         QCOMPARE(md.rawData().value(QStringLiteral("ThisIsOkay")), QJsonValue(10)); // integer
         // 11 is empty group

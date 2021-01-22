@@ -13,6 +13,14 @@
 #include <QTextStream>
 #include <QTest>
 #include <QLatin1String>
+#ifndef Q_OS_WIN
+void initLocale()
+{
+    qputenv("LC_ALL", "en_US.utf-8");
+}
+
+Q_CONSTRUCTOR_FUNCTION(initLocale)
+#endif
 
 class KAboutDataTest : public QObject
 {
@@ -332,7 +340,7 @@ void KAboutDataTest::testLicenseSPDXID()
                                     QLatin1String(ShortDescription), KAboutLicense::GPL_V2);
         aboutData.setLicense(KAboutLicense::LicenseKey(i));
         QVERIFY(aboutData.licenses().count() == 1);
-        auto license = aboutData.licenses()[0];
+        const auto license = aboutData.licenses().constFirst();
         auto licenseFromKeyword = KAboutLicense::byKeyword(license.spdx());
 
         QCOMPARE(license.key(), licenseFromKeyword.key());
@@ -349,7 +357,8 @@ void KAboutDataTest::testLicenseOrLater()
     QCOMPARE(aboutData.licenses().at(0).spdx(), QStringLiteral("GPL-2.0+"));
     aboutData.addLicense(KAboutLicense::LGPL_V3, KAboutLicense::OrLaterVersions);
     bool foundLGPL = false;
-    for (auto license : aboutData.licenses()) {
+    const QList<KAboutLicense> licenses = aboutData.licenses();
+    for (const auto &license : licenses) {
         if (license.key() == KAboutLicense::LGPL_V3) {
             QCOMPARE(license.spdx(), QStringLiteral("LGPL-3.0+"));
             foundLGPL = true;

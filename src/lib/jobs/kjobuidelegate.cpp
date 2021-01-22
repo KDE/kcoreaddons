@@ -10,6 +10,7 @@
 
 #include "kjobuidelegate.h"
 #include "kjob.h"
+#include <QDebug>
 
 class Q_DECL_HIDDEN KJobUiDelegate::Private
 {
@@ -69,6 +70,9 @@ KJob *KJobUiDelegate::job() const
 
 void KJobUiDelegate::showErrorMessage()
 {
+    if (d->job->error() != KJob::KilledJobError) {
+        qWarning() << d->job->errorString();
+    }
 }
 
 void KJobUiDelegate::setAutoErrorHandlingEnabled(bool enable)

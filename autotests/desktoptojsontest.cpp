@@ -13,6 +13,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include "kcoreaddons_debug.h"
+#include <kcoreaddons_export.h>
 
 namespace QTest
 {
@@ -109,7 +111,9 @@ private Q_SLOTS:
                 // The multiple values should be separated by a semicolon and the value of the key
                 // may be optionally terminated by a semicolon. Trailing empty strings must always
                 // be terminated with a semicolon. Semicolons in these values need to be escaped using \;.
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
                 "X-KDE-PluginInfo-Depends=foo,bar,esc\\,aped\n" // string list key
+#endif
                 "X-KDE-ServiceTypes=\n" // empty string list
                 "X-KDE-PluginInfo-EnabledByDefault=true\n" // bool key
                 // now start a new group
@@ -129,8 +133,10 @@ private Q_SLOTS:
         kpluginObj[QStringLiteral("Name")] = QStringLiteral("Example");
         kpluginObj[QStringLiteral("Name[de_DE]")] = QStringLiteral("Beispiel");
         kpluginObj[QStringLiteral("Category")] = QStringLiteral("Examples");
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
         kpluginObj[QStringLiteral("Dependencies")] = QJsonArray::fromStringList
                 (QStringList() << QStringLiteral("foo") << QStringLiteral("bar") << QStringLiteral("esc,aped"));
+#endif
         kpluginObj[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(QStringList());
         kpluginObj[QStringLiteral("EnabledByDefault")] = true;
         kpluginObj[QStringLiteral("Version")] = QStringLiteral("1.0");
@@ -139,8 +145,10 @@ private Q_SLOTS:
         compatResult[QStringLiteral("Name[de_DE]")] = QStringLiteral("Beispiel");
         compatResult[QStringLiteral("X-KDE-PluginInfo-Category")] = QStringLiteral("Examples");
         compatResult[QStringLiteral("X-KDE-PluginInfo-Version")] = QStringLiteral("1.0");
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
         compatResult[QStringLiteral("X-KDE-PluginInfo-Depends")] = QJsonArray::fromStringList
                 (QStringList() << QStringLiteral("foo") << QStringLiteral("bar") << QStringLiteral("esc,aped"));
+#endif
         compatResult[QStringLiteral("X-KDE-ServiceTypes")] = QJsonArray::fromStringList(QStringList());
         compatResult[QStringLiteral("X-KDE-PluginInfo-EnabledByDefault")] = true;
 
@@ -306,8 +314,6 @@ private Q_SLOTS:
         inputFile.write(input);
         inputFile.flush();
         inputFile.close();
-        qDebug() << expectedResult;
-
 
         QProcess proc;
         proc.setProgram(QStringLiteral(DESKTOP_TO_JSON_EXE));
@@ -321,15 +327,13 @@ private Q_SLOTS:
         proc.setArguments(arguments);
         proc.start();
         QVERIFY(proc.waitForFinished(10000));
-        qDebug() << "desktoptojson STDOUT: " <<  proc.readAllStandardOutput().data();
         QByteArray errorOut = proc.readAllStandardError();
         if (!errorOut.isEmpty()) {
-            qWarning().nospace() << "desktoptojson STDERR:\n\n" <<  errorOut.constData() << "\n";
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "desktoptojson STDERR:\n\n" <<  errorOut.constData() << "\n";
         }
         QCOMPARE(proc.exitCode(), 0);
         QVERIFY(output.open());
         QByteArray jsonString = output.readAll();
-        qDebug() << "result: " << jsonString;
         QJsonParseError e;
         QJsonDocument doc = QJsonDocument::fromJson(jsonString, &e);
         QCOMPARE(e.error, QJsonParseError::NoError);

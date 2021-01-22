@@ -458,9 +458,9 @@ Q_SIGNALS:
      *
      * @param job the job that emitted this signal
      * @param plain the info message
-     * @param rich the rich text version of the message, or QString() is none is available
+     * @param rich the rich text version of the message, or QString() is none is available -- do not use, it's ignored
      */
-    void infoMessage(KJob *job, const QString &plain, const QString &rich = QString());
+    void infoMessage(KJob *job, const QString &plain, const QString &rich = QString()); // KF6 TODO remove the 'rich' argument
 
     /**
      * Emitted to display a warning about this job.

@@ -40,7 +40,7 @@ KJob::~KJob()
 {
     if (!d_ptr->isFinished) {
         d_ptr->isFinished = true;
-        emit finished(this, QPrivateSignal());
+        Q_EMIT finished(this, QPrivateSignal());
     }
 
     delete d_ptr->speedTimer;
@@ -87,10 +87,10 @@ void KJob::finishJob(bool emitResult)
     }
 
     // If we are displaying a progress dialog, remove it first.
-    emit finished(this, QPrivateSignal());
+    Q_EMIT finished(this, QPrivateSignal());
 
     if (emitResult) {
-        emit result(this, QPrivateSignal());
+        Q_EMIT result(this, QPrivateSignal());
     }
 
     if (isAutoDelete()) {
@@ -124,7 +124,7 @@ bool KJob::suspend()
     if (!d->suspended) {
         if (doSuspend()) {
             d->suspended = true;
-            emit suspended(this, QPrivateSignal());
+            Q_EMIT suspended(this, QPrivateSignal());
 
             return true;
         }
@@ -139,7 +139,7 @@ bool KJob::resume()
     if (d->suspended) {
         if (doResume()) {
             d->suspended = false;
-            emit resumed(this, QPrivateSignal());
+            Q_EMIT resumed(this, QPrivateSignal());
 
             return true;
         }
@@ -252,9 +252,9 @@ void KJob::setProcessedAmount(Unit unit, qulonglong amount)
     d->processedAmount[unit] = amount;
 
     if (should_emit) {
-        emit processedAmount(this, unit, amount);
+        Q_EMIT processedAmount(this, unit, amount);
         if (unit == d->progressUnit) {
-            emit processedSize(this, amount);
+            Q_EMIT processedSize(this, amount);
             emitPercent(d->processedAmount[unit], d->totalAmount[unit]);
         }
     }
@@ -268,9 +268,9 @@ void KJob::setTotalAmount(Unit unit, qulonglong amount)
     d->totalAmount[unit] = amount;
 
     if (should_emit) {
-        emit totalAmount(this, unit, amount);
+        Q_EMIT totalAmount(this, unit, amount);
         if (unit == d->progressUnit) {
-            emit totalSize(this, amount);
+            Q_EMIT totalSize(this, amount);
             emitPercent(d->processedAmount[unit], d->totalAmount[unit]);
         }
     }
@@ -287,7 +287,7 @@ void KJob::setPercent(unsigned long percentage)
     Q_D(KJob);
     if (d->percentage != percentage) {
         d->percentage = percentage;
-        emit percent(this, percentage);
+        Q_EMIT percent(this, percentage);
     }
 }
 
@@ -306,7 +306,7 @@ void KJob::emitPercent(qulonglong processedAmount, qulonglong totalAmount)
         unsigned long oldPercentage = d->percentage;
         d->percentage = 100.0 * processedAmount / totalAmount;
         if (d->percentage != oldPercentage) {
-            emit percent(this, d->percentage);
+            Q_EMIT percent(this, d->percentage);
         }
     }
 }
@@ -319,7 +319,7 @@ void KJob::emitSpeed(unsigned long value)
         connect(d->speedTimer, SIGNAL(timeout()), SLOT(_k_speedTimeout()));
     }
 
-    emit speed(this, value);
+    Q_EMIT speed(this, value);
     d->speedTimer->start(5000);   // 5 seconds interval should be enough
 }
 
@@ -328,7 +328,7 @@ void KJobPrivate::_k_speedTimeout()
     Q_Q(KJob);
     // send 0 and stop the timer
     // timer will be restarted only when we receive another speed event
-    emit q->speed(q, 0);
+    Q_EMIT q->speed(q, 0);
     speedTimer->stop();
 }
 

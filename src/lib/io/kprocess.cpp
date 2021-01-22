@@ -308,11 +308,15 @@ int KProcess::startDetached(const QStringList &argv)
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 78)
 int KProcess::pid() const
 {
+QT_WARNING_PUSH
+QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
+QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
 #ifdef Q_OS_UNIX
     return static_cast<int>(QProcess::pid());
 #else
     return QProcess::pid() ? QProcess::pid()->dwProcessId : 0;
 #endif
+QT_WARNING_POP
 }
 #endif
 

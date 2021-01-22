@@ -108,6 +108,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
         if (penalty < maxLeadingLetterPenalty) {
             penalty = maxLeadingLetterPenalty;
         }
+
         outScore += penalty;
 
         // Apply unmatched penalty

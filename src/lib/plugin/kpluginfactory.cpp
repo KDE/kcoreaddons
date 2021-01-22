@@ -18,8 +18,6 @@ Q_GLOBAL_STATIC(QObjectCleanupHandler, factorycleanup)
 KPluginFactory::KPluginFactory()
     : d_ptr(new KPluginFactoryPrivate)
 {
-    Q_D(KPluginFactory);
-
     factorycleanup()->add(this);
 }
 
@@ -207,7 +205,7 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
     }
 
     if (obj) {
-        emit objectCreated(obj);
+        Q_EMIT objectCreated(obj);
     }
     return obj;
 }

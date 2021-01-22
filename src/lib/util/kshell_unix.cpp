@@ -30,17 +30,8 @@ static int fromHex(QChar cUnicode)
 
 inline static bool isQuoteMeta(QChar cUnicode)
 {
-#if 0 // it's not worth it, especially after seeing gcc's asm output ...
-    static const uchar iqm[] = {
-        0x00, 0x00, 0x00, 0x00, 0x94, 0x00, 0x00, 0x00,
-        0x00, 0x00, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00
-    }; // \'"$
-
-    return (c < sizeof(iqm) * 8) && (iqm[c / 8] & (1 << (c & 7)));
-#else
     char c = cUnicode.toLatin1();
     return c == '\\' || c == '\'' || c == '"' || c == '$';
-#endif
 }
 
 inline static bool isMeta(QChar cUnicode)

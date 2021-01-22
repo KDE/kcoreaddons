@@ -9,12 +9,10 @@
 #define DESKTOPFILEPARSER_H
 
 #include <QByteArray>
-#include <QLoggingCategory>
 #include <QVector>
 class QJsonObject;
 class QJsonValue;
 
-Q_DECLARE_LOGGING_CATEGORY(DESKTOPPARSER)
 
 struct CustomPropertyDefinition;
 struct ServiceTypeDefinition

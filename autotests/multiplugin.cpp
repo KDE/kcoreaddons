@@ -6,6 +6,7 @@
 */
 
 #include "multiplugin.h"
+#include "kcoreaddons_debug.h"
 #include <kexportplugin.h>
 #include <kpluginfactory.h>
 #include <QDebug>
@@ -13,14 +14,14 @@
 MultiPlugin1::MultiPlugin1(QObject *parent, const QVariantList &args)
     : QObject(parent)
 {
-    qDebug() << "MultiPlugin1" << args;
+    qCDebug(KCOREADDONS_DEBUG) << "MultiPlugin1" << args;
     setObjectName(QLatin1String("MultiPlugin1"));
 }
 
 MultiPlugin2::MultiPlugin2(QObject *parent, const QVariantList &args)
     : QObject(parent)
 {
-    qDebug() << "MultiPlugin2" << args;
+    qCDebug(KCOREADDONS_DEBUG) << "MultiPlugin2" << args;
     setObjectName(QLatin1String("MultiPlugin2"));
 }
 

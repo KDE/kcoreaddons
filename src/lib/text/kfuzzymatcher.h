@@ -86,6 +86,7 @@ KCOREADDONS_EXPORT bool match(const QStringView pattern, const QStringView str, 
  * than sequential matches. Use this function if you want sequential matches
  * to take preference. This will be needed if you are filtering user interface
  * strings.
+ * to take preference.
  *
  * @param pattern to search for. For e.g., text entered by a user to filter a
  * list
