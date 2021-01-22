@@ -29,12 +29,14 @@ static bool match_recursive(QStringView::const_iterator pattern,
     static constexpr int recursionLimit = 10;
     // Count recursions
     ++recursionCount;
-    if (recursionCount >= recursionLimit)
+    if (recursionCount >= recursionLimit) {
         return false;
+    }
 
     // Detect end of strings
-    if (pattern == patternEnd || str == strEnd)
+    if (pattern == patternEnd || str == strEnd) {
         return false;
+    }
 
     // Recursion params
     bool recursiveMatch = false;
@@ -47,8 +49,9 @@ static bool match_recursive(QStringView::const_iterator pattern,
         // Found match
         if (pattern->toLower() == str->toLower()) {
             // Supplied matches buffer was too short
-            if (nextMatch >= maxMatches)
+            if (nextMatch >= maxMatches) {
                 return false;
+            }
 
             // "Copy-on-Write" srcMatches into matches
             if (firstMatch && srcMatches) {
@@ -93,16 +96,18 @@ static bool match_recursive(QStringView::const_iterator pattern,
         static constexpr int unmatchedLetterPenalty = -1; // penalty for every letter that doesn't matter
 
         // Iterate str to end
-        while (str != strEnd)
+        while (str != strEnd) {
             ++str;
+        }
 
         // Initialize score
         outScore = 100;
 
         // Apply leading letter penalty
         int penalty = leadingLetterPenalty * matches[0];
-        if (penalty < maxLeadingLetterPenalty)
+        if (penalty < maxLeadingLetterPenalty) {
             penalty = maxLeadingLetterPenalty;
+        }
         outScore += penalty;
 
         // Apply unmatched penalty
@@ -117,8 +122,9 @@ static bool match_recursive(QStringView::const_iterator pattern,
                 uint8_t prevIdx = matches[i - 1];
 
                 // Sequential
-                if (currIdx == (prevIdx + 1))
+                if (currIdx == (prevIdx + 1)) {
                     outScore += sequentialBonus;
+                }
             }
 
             // Check for bonuses based on neighbor character value
@@ -131,8 +137,9 @@ static bool match_recursive(QStringView::const_iterator pattern,
 
                 // Separator
                 bool neighborSeparator = neighbor == QLatin1Char('_') || neighbor == QLatin1Char(' ');
-                if (neighborSeparator)
+                if (neighborSeparator) {
                     outScore += separatorBonus;
+                }
             } else {
                 // First letter
                 outScore += firstLetterBonus;
@@ -190,8 +197,9 @@ bool KFuzzyMatcher::matchSimple(const QStringView pattern, const QStringView str
 {
     auto patternIt = pattern.cbegin();
     for (auto strIt = str.cbegin(); strIt != str.cend() && patternIt != pattern.cend(); ++strIt) {
-        if (strIt->toLower() == patternIt->toLower())
+        if (strIt->toLower() == patternIt->toLower()) {
             ++patternIt;
+        }
     }
     return patternIt == pattern.cend();
 }
