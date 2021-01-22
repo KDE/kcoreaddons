@@ -14,9 +14,14 @@ class QStringView;
 /**
  * This namespace contains functions for fuzzy matching of strings.
  *
- * This code is ported to Qt from
- * lib_fts https://github.com/forrestthewoods/lib_fts which tries to
- * replicate SublimeText like fuzzy matching
+ * This code is ported to Qt from lib_fts:
+ * https://github.com/forrestthewoods/lib_fts
+ * which tries to replicate SublimeText like fuzzy matching.
+ *
+ * In general match() and matchSequential() will suffice for most usecases
+ * but should the need arise to extend this for some particular reason, for example
+ * scoring based on a different kind of separator, it should ideally be handled in a
+ * separate internal method with an interface similar to the existing ones.
  *
  * All methods in here except toFuzzyMatchedDisplayString() are stateless.
  *
@@ -79,7 +84,8 @@ KCOREADDONS_EXPORT bool match(const QStringView pattern, const QStringView str, 
  * better than the first one despite the fact that the first one is an exact
  * match. This happens because @ref match will score separator matches higher
  * than sequential matches. Use this function if you want sequential matches
- * to take preference.
+ * to take preference. This will be needed if you are filtering user interface
+ * strings.
  *
  * @param pattern to search for. For e.g., text entered by a user to filter a
  * list
