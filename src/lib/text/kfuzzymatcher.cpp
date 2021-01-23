@@ -95,10 +95,8 @@ static bool match_recursive(QStringView::const_iterator pattern,
         static constexpr int maxLeadingLetterPenalty = -15; // maximum penalty for leading letters
         static constexpr int unmatchedLetterPenalty = -1; // penalty for every letter that doesn't matter
 
-        // Iterate str to end
-        while (str != strEnd) {
-            ++str;
-        }
+        // Jump str to end
+        str = strEnd;
 
         // Initialize score
         outScore = 100;
