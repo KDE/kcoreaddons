@@ -43,7 +43,7 @@ namespace KFuzzyMatcher
  *
  * @since 5.79
  */
-KCOREADDONS_EXPORT bool matchSimple(const QStringView pattern, const QStringView str);
+KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
 
 /**
  * @brief This should be the function to use if the strings you are matching
@@ -68,7 +68,7 @@ KCOREADDONS_EXPORT bool matchSimple(const QStringView pattern, const QStringView
  *
  * @since 5.79
  */
-KCOREADDONS_EXPORT bool match(const QStringView pattern, const QStringView str, int &outScore);
+KCOREADDONS_EXPORT bool match(QStringView pattern, QStringView str, int &outScore);
 
 /**
  * @brief This is a special case function which scores sequential matches
@@ -97,9 +97,7 @@ KCOREADDONS_EXPORT bool match(const QStringView pattern, const QStringView str, 
  *
  * @since 5.79
  */
-KCOREADDONS_EXPORT bool matchSequential(const QStringView pattern,
-                                        const QStringView str,
-                                        int &outScore);
+KCOREADDONS_EXPORT bool matchSequential(QStringView pattern, QStringView str, int &outScore);
 
 /**
  * @brief This is a utility function to display what is being matched.
@@ -124,9 +122,9 @@ KCOREADDONS_EXPORT bool matchSequential(const QStringView pattern,
  *
  * @since 5.79
  */
-KCOREADDONS_EXPORT QString toFuzzyMatchedDisplayString(const QStringView pattern,
+KCOREADDONS_EXPORT QString toFuzzyMatchedDisplayString(QStringView pattern,
                                                        QString &str,
-                                                       const QString &htmlTag,
-                                                       const QString &htmlTagClose);
+                                                       QStringView htmlTag,
+                                                       QStringView htmlTagClose);
 
 } // namespace KFuzzyMatcher

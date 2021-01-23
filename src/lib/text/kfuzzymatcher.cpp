@@ -156,7 +156,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
 }
 // clang-format on
 
-static bool match_internal(const QStringView pattern, const QStringView str, int &outScore, unsigned char *matches, int maxMatches)
+static bool match_internal(QStringView pattern, QStringView str, int &outScore, unsigned char *matches, int maxMatches)
 {
     int recursionCount = 0;
 
@@ -171,7 +171,7 @@ static bool match_internal(const QStringView pattern, const QStringView str, int
 
 /**************************************************************/
 
-QString KFuzzyMatcher::toFuzzyMatchedDisplayString(const QStringView pattern, QString &str, const QString &htmlTag, const QString &htmlTagClose)
+QString KFuzzyMatcher::toFuzzyMatchedDisplayString(QStringView pattern, QString &str, QStringView htmlTag, QStringView htmlTagClose)
 {
     bool wasMatching = false;
     for (int i = 0, j = 0; i < str.size() && j < pattern.size(); ++i) {
@@ -197,7 +197,7 @@ QString KFuzzyMatcher::toFuzzyMatchedDisplayString(const QStringView pattern, QS
     return str;
 }
 
-bool KFuzzyMatcher::matchSimple(const QStringView pattern, const QStringView str)
+bool KFuzzyMatcher::matchSimple(QStringView pattern, QStringView str)
 {
     auto patternIt = pattern.cbegin();
     for (auto strIt = str.cbegin(); strIt != str.cend() && patternIt != pattern.cend(); ++strIt) {
@@ -208,7 +208,7 @@ bool KFuzzyMatcher::matchSimple(const QStringView pattern, const QStringView str
     return patternIt == pattern.cend();
 }
 
-bool KFuzzyMatcher::matchSequential(const QStringView pattern, const QStringView str, int &outScore)
+bool KFuzzyMatcher::matchSequential(QStringView pattern, QStringView str, int &outScore)
 {
     int recursionCount = 0;
     uint8_t matches[256];
@@ -222,7 +222,7 @@ bool KFuzzyMatcher::matchSequential(const QStringView pattern, const QStringView
                            nullptr, matches, maxMatches, 0, recursionCount, 40);
 }
 
-bool KFuzzyMatcher::match(const QStringView pattern, const QStringView str, int &outScore)
+bool KFuzzyMatcher::match(QStringView pattern, QStringView str, int &outScore)
 {
     uint8_t matches[256];
     return match_internal(pattern, str, outScore, matches, sizeof(matches));
