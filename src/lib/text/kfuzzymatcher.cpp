@@ -173,16 +173,27 @@ static bool match_internal(const QStringView pattern, const QStringView str, int
 
 QString KFuzzyMatcher::toFuzzyMatchedDisplayString(const QStringView pattern, QString &str, const QString &htmlTag, const QString &htmlTagClose)
 {
-    // TODO: improve this so that we don't have to put html tags on every char
-    // probably using some kind of intervals container
-    int j = 0;
-    for (int i = 0; i < str.size() && j < pattern.size(); ++i) {
-        if (str.at(i).toLower() == pattern.at(j).toLower()) {
-            str.replace(i, 1, htmlTag + str.at(i) + htmlTagClose);
-            i += htmlTag.size() + htmlTagClose.size();
+    bool wasMatching = false;
+    for (int i = 0, j = 0; i < str.size() && j < pattern.size(); ++i) {
+        bool matching = str.at(i).toLower() == pattern.at(j).toLower();
+        if (!wasMatching && matching) {
+            str.insert(i, htmlTag);
+            i += htmlTag.size();
+            ++j;
+            wasMatching = true;
+        } else if (wasMatching && !matching) {
+            str.insert(i, htmlTagClose);
+            i += htmlTagClose.size();
+            wasMatching = false;
+        } else if (matching) {
             ++j;
         }
     }
+
+    if (wasMatching) {
+        str.append(htmlTagClose);
+    }
+
     return str;
 }
 

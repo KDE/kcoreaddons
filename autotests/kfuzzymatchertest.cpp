@@ -166,11 +166,17 @@ void KFuzzyMatcherTest::testToFuzzyMatchedDisplayString_data()
                                << QStringLiteral("<b>")
                                << QStringLiteral("</b>");
 
-    QTest::newRow("HelloItalic") << QStringLiteral("Hlo")
+    QTest::newRow("HelloItalic") << QStringLiteral("Hllo")
                                  << QStringLiteral("Hello")
-                                 << QStringLiteral("<i>H</i>e<i>l</i>l<i>o</i>")
+                                 << QStringLiteral("<i>H</i>e<i>llo</i>")
                                  << QStringLiteral("<i>")
                                  << QStringLiteral("</i>");
+
+    QTest::newRow("SpanStyle")   << QStringLiteral("Hello ld")
+                                 << QStringLiteral("Hello World")
+                                 << QStringLiteral("<span style=\"color: red;\">Hello </span>Wor<span style=\"color: red;\">ld</span>")
+                                 << QStringLiteral("<span style=\"color: red;\">")
+                                 << QStringLiteral("</span>");
 }
 
 void KFuzzyMatcherTest::testToFuzzyMatchedDisplayString()
