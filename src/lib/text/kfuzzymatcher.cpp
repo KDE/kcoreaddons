@@ -82,7 +82,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
     }
 
     // Determine if full pattern was matched
-    bool matched = pattern == patternEnd ? true : false;
+    bool matched = pattern == patternEnd;
 
     // Calculate score
     if (matched) {
