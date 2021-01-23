@@ -16,14 +16,27 @@ QTEST_MAIN(KFuzzyMatcherTest)
 
 #include "kfuzzymatcher.h"
 
+void KFuzzyMatcherTest::testMatchSimple_data()
+{
+    QTest::addColumn<QString>("pattern");
+    QTest::addColumn<QString>("inputstr");
+    QTest::addColumn<bool>("expected");
+
+    QTest::newRow("AbcD") << QStringLiteral("AbcD") << QStringLiteral("AbCdefg") << true;
+    QTest::newRow("WithSpace") << QStringLiteral("Wa qa") << QStringLiteral("Wa qar") << true;
+    QTest::newRow("RTL") << QStringLiteral("ارو") << QStringLiteral("اردو") << true;
+    QTest::newRow("WithSep") << QStringLiteral("tf") << QStringLiteral("the_file") << true;
+    QTest::newRow("Umlaut") << QStringLiteral("Häu") << QStringLiteral("Häuser") << true;
+    QTest::newRow("Unmatched") << QStringLiteral("Name") << QStringLiteral("Nam") << false;
+}
+
 void KFuzzyMatcherTest::testMatchSimple()
 {
-    QCOMPARE(KFuzzyMatcher::matchSimple(QStringLiteral("AbcD"), QStringLiteral("AbCdefg")), true);
-    QCOMPARE(KFuzzyMatcher::matchSimple(QStringLiteral("Wa qa"), QStringLiteral("Wa qar")), true);
-    QCOMPARE(KFuzzyMatcher::matchSimple(QStringLiteral("ارو"), QStringLiteral("اردو")), true);
-    QCOMPARE(KFuzzyMatcher::matchSimple(QStringLiteral("tf"), QStringLiteral("the_file")), true);
-    QCOMPARE(KFuzzyMatcher::matchSimple(QStringLiteral("Häu"), QStringLiteral("Häuser")), true);
-    QCOMPARE(KFuzzyMatcher::matchSimple(QStringLiteral("Name"), QStringLiteral("Nam")), false);
+    QFETCH(QString, pattern);
+    QFETCH(QString, inputstr);
+    QFETCH(bool, expected);
+
+    QVERIFY(KFuzzyMatcher::matchSimple(pattern, inputstr) == expected);
 }
 
 void KFuzzyMatcherTest::testMatch_data()

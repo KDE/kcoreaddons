@@ -15,6 +15,7 @@ class KFuzzyMatcherTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
+    void testMatchSimple_data();
     void testMatchSimple();
     void testMatch_data();
     void testMatch();
