@@ -61,8 +61,8 @@ static bool match_recursive(QStringView::const_iterator pattern,
 
             // Recursive call that "skips" this match
             uint8_t recursiveMatches[256];
-            int recursiveScore;
-            auto strNextChar = std::next(str);
+            int recursiveScore = 0;
+            const auto strNextChar = std::next(str);
             if (match_recursive(pattern, strNextChar, recursiveScore, strBegin,
                                 strEnd, patternEnd, matches, recursiveMatches,
                                 sizeof(recursiveMatches), nextMatch, recursionCount)) {
@@ -82,11 +82,11 @@ static bool match_recursive(QStringView::const_iterator pattern,
     }
 
     // Determine if full pattern was matched
-    bool matched = pattern == patternEnd;
+    const bool matched = pattern == patternEnd;
 
     // Calculate score
     if (matched) {
-        int sequentialBonus = seqBonus; // bonus for adjacent matches
+        const int sequentialBonus = seqBonus; // bonus for adjacent matches
         static constexpr int separatorBonus = 30; // bonus if match occurs after a separator
         static constexpr int camelBonus = 30; // bonus if match is uppercase and prev is lower
         static constexpr int firstLetterBonus = 15; // bonus if the first letter is matched
@@ -99,7 +99,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
         outScore = 100;
 
         // Apply leading letter penalty
-        int penalty = std::max(leadingLetterPenalty * matches[0], maxLeadingLetterPenalty);
+        const int penalty = std::max(leadingLetterPenalty * matches[0], maxLeadingLetterPenalty);
 
         outScore += penalty;
 
@@ -109,10 +109,10 @@ static bool match_recursive(QStringView::const_iterator pattern,
 
         // Apply ordering bonuses
         for (int i = 0; i < nextMatch; ++i) {
-            uint8_t currIdx = matches[i];
+            const uint8_t currIdx = matches[i];
 
             if (i > 0) {
-                uint8_t prevIdx = matches[i - 1];
+                const uint8_t prevIdx = matches[i - 1];
 
                 // Sequential
                 if (currIdx == (prevIdx + 1)) {
@@ -123,13 +123,13 @@ static bool match_recursive(QStringView::const_iterator pattern,
             // Check for bonuses based on neighbor character value
             if (currIdx > 0) {
                 // Camel case
-                QChar neighbor = *(strBegin + currIdx - 1);
-                QChar curr = *(strBegin + currIdx);
+                const QChar neighbor = *(strBegin + currIdx - 1);
+                const QChar curr = *(strBegin + currIdx);
                 if (neighbor.isLower() && curr.isUpper())
                     outScore += camelBonus;
 
                 // Separator
-                bool neighborSeparator = neighbor == QLatin1Char('_') || neighbor == QLatin1Char(' ');
+                const bool neighborSeparator = neighbor == QLatin1Char('_') || neighbor == QLatin1Char(' ');
                 if (neighborSeparator) {
                     outScore += separatorBonus;
                 }
