@@ -15,6 +15,8 @@
 #include <QObject>
 #include <QPair>
 
+#include <memory>
+
 /**
  * @class KJobTrackerInterface kjobtrackerinterface.h KJobTrackerInterface
  *
@@ -176,7 +178,7 @@ protected Q_SLOTS:
 
 private:
     class Private;
-    Private *const d;
+    std::unique_ptr<Private> const d;
 };
 
 #endif

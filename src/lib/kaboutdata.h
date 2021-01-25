@@ -18,6 +18,7 @@
 #include <QSharedDataPointer>
 #include <QVariant>
 #include <qcontainerfwd.h>
+#include <memory>
 
 class QCommandLineParser;
 class QJsonObject;
@@ -1180,7 +1181,7 @@ private:
     static const KAboutData *applicationDataPointer();
 
     class Private;
-    Private *const d;
+    std::unique_ptr<Private> const d;
 };
 
 Q_DECLARE_METATYPE(KAboutData)

@@ -37,10 +37,7 @@ KProcess::KProcess(KProcessPrivate *d, QObject *parent) :
     setOutputChannelMode(ForwardedChannels);
 }
 
-KProcess::~KProcess()
-{
-    delete d_ptr;
-}
+KProcess::~KProcess() = default;
 
 void KProcess::setOutputChannelMode(OutputChannelMode mode)
 {

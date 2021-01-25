@@ -12,6 +12,7 @@
 
 #include <QPluginLoader>
 
+#include <memory>
 #include <functional>
 
 class KPluginFactory;
@@ -370,7 +371,7 @@ private:
     Q_DECLARE_PRIVATE(KPluginLoader)
     Q_DISABLE_COPY(KPluginLoader)
 
-    KPluginLoaderPrivate *const d_ptr;
+    std::unique_ptr<KPluginLoaderPrivate> const d_ptr;
 };
 
 /**

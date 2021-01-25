@@ -39,10 +39,7 @@ Kdelibs4ConfigMigrator::Kdelibs4ConfigMigrator(const QString &appName)
 {
 }
 
-Kdelibs4ConfigMigrator::~Kdelibs4ConfigMigrator()
-{
-    delete d;
-}
+Kdelibs4ConfigMigrator::~Kdelibs4ConfigMigrator() = default;
 
 void Kdelibs4ConfigMigrator::setConfigFiles(const QStringList &configFileNameList)
 {

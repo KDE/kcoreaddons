@@ -18,6 +18,7 @@
 #include <kexportplugin.h> // for source compat
 
 #include <type_traits>
+#include <memory>
 
 class QWidget;
 
@@ -655,7 +656,7 @@ protected:
         registerPlugin<T>(keyword, instanceFunction);
     }
 
-    KPluginFactoryPrivate *const d_ptr;
+    std::unique_ptr<KPluginFactoryPrivate> const d_ptr;
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
     /**

@@ -16,8 +16,9 @@
 #include <kprocesslist.h>
 #include <kjob.h>
 #include <QObject>
-#include <QScopedPointer>
 #include <QString>
+
+#include <memory>
 
 class KListOpenFilesJobPrivate;
 
@@ -63,7 +64,7 @@ public:
     };
 private:
     friend class KListOpenFilesJobPrivate;
-    QScopedPointer<KListOpenFilesJobPrivate> d;
+    std::unique_ptr<KListOpenFilesJobPrivate> const d;
 };
 
 #endif // KLISTOPENFILESJOB_H

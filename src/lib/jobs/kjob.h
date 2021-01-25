@@ -14,6 +14,7 @@
 #include <kcoreaddons_export.h>
 #include <QObject>
 #include <QPair>
+#include <memory>
 
 class KJobUiDelegate;
 
@@ -670,7 +671,7 @@ protected:
     void emitSpeed(unsigned long speed);
 
 protected:
-    KJobPrivate *const d_ptr;
+    std::unique_ptr<KJobPrivate> const d_ptr;
     KJob(KJobPrivate &dd, QObject *parent);
 
 private:

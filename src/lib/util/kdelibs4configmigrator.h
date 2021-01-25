@@ -11,6 +11,7 @@
 
 #include <kcoreaddons_export.h>
 #include <QStringList>
+#include <memory>
 
 /**
  * @class Kdelibs4ConfigMigrator kdelibs4configmigrator.h Kdelibs4ConfigMigrator
@@ -71,7 +72,7 @@ public:
 private:
     class Private;
     friend class Private;
-    Private *const d;
+    std::unique_ptr<Private> const d;
 };
 
 #endif // KDELIBS4CONFIGMIGRATOR_H

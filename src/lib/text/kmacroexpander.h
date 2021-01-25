@@ -11,6 +11,7 @@
 
 #include <kcoreaddons_export.h>
 #include <QChar>
+#include <memory>
 
 class QString;
 class QStringList;
@@ -149,7 +150,7 @@ protected:
     virtual int expandEscapedMacro(const QString &str, int pos, QStringList &ret);
 
 private:
-    KMacroExpanderBasePrivate *const d;
+    std::unique_ptr<KMacroExpanderBasePrivate> const d;
 };
 
 /**

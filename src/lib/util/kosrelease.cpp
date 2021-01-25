@@ -185,10 +185,7 @@ KOSRelease::KOSRelease(const QString &filePath)
 {
 }
 
-KOSRelease::~KOSRelease()
-{
-    delete d;
-}
+KOSRelease::~KOSRelease() = default;
 
 QString KOSRelease::name() const
 {

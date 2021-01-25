@@ -45,7 +45,6 @@ KJob::~KJob()
 
     delete d_ptr->speedTimer;
     delete d_ptr->uiDelegate;
-    delete d_ptr;
 }
 
 void KJob::setUiDelegate(KJobUiDelegate *delegate)

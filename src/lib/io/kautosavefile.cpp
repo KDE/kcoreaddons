@@ -95,7 +95,6 @@ KAutoSaveFile::~KAutoSaveFile()
 {
     releaseLock();
     delete d->lock;
-    delete d;
 }
 
 QUrl KAutoSaveFile::managedFile() const

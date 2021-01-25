@@ -13,6 +13,7 @@
 
 #include <kcoreaddons_export.h>
 #include <QObject>
+#include <memory>
 
 class KJob;
 
@@ -148,7 +149,7 @@ private:
     void connectJob(KJob *job);
 
     class Private;
-    Private *const d;
+    std::unique_ptr<Private> const d;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KJobUiDelegate::Flags)

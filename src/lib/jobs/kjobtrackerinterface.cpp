@@ -27,10 +27,7 @@ KJobTrackerInterface::KJobTrackerInterface(QObject *parent)
     qRegisterMetaType<QPair<QString,QString>>();
 }
 
-KJobTrackerInterface::~KJobTrackerInterface()
-{
-    delete d;
-}
+KJobTrackerInterface::~KJobTrackerInterface() = default;
 
 void KJobTrackerInterface::registerJob(KJob *job)
 {

@@ -18,14 +18,14 @@ class KPluginFactoryPrivate
 {
     friend class KPluginFactory;
 
+public:
+    ~KPluginFactoryPrivate() = default;
+
 protected:
     typedef QPair<const QMetaObject *, KPluginFactory::CreateInstanceFunction> Plugin;
     using PluginWithMetadata = QPair<const QMetaObject *, KPluginFactory::CreateInstanceWithMetaDataFunction>;
 
     KPluginFactoryPrivate() = default;
-    ~KPluginFactoryPrivate()
-    {
-    }
 
     KPluginMetaData metaData;
     QMultiHash<QString, Plugin> createInstanceHash;

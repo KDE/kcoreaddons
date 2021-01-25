@@ -57,10 +57,7 @@ Kdelibs4Migration::Kdelibs4Migration()
     }
 }
 
-Kdelibs4Migration::~Kdelibs4Migration()
-{
-    delete d;
-}
+Kdelibs4Migration::~Kdelibs4Migration() = default;
 
 bool Kdelibs4Migration::kdeHomeFound() const
 {

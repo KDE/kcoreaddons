@@ -26,11 +26,12 @@
 class KPluginLoaderPrivate
 {
     Q_DECLARE_PUBLIC(KPluginLoader)
+public:
+    ~KPluginLoaderPrivate() = default;
+
 protected:
     KPluginLoaderPrivate(const QString &libname)
         : name(libname)
-    {}
-    ~KPluginLoaderPrivate()
     {}
 
     KPluginLoader *q_ptr = nullptr;
@@ -86,10 +87,7 @@ KPluginLoader::KPluginLoader(const KPluginName &pluginName, QObject *parent)
     }
 }
 
-KPluginLoader::~KPluginLoader()
-{
-    delete d_ptr;
-}
+KPluginLoader::~KPluginLoader() = default;
 
 KPluginFactory *KPluginLoader::factory()
 {

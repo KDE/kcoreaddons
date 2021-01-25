@@ -27,10 +27,7 @@ KPluginFactory::KPluginFactory(KPluginFactoryPrivate &d)
     factorycleanup()->add(this);
 }
 
-KPluginFactory::~KPluginFactory()
-{
-    delete d_ptr;
-}
+KPluginFactory::~KPluginFactory() = default;
 
 KPluginMetaData KPluginFactory::metaData() const
 {

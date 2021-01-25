@@ -555,10 +555,7 @@ KAboutData::KAboutData(const QString &_componentName,
     d->desktopFileName = QLatin1String("org.kde.") + d->_componentName;
 }
 
-KAboutData::~KAboutData()
-{
-    delete d;
-}
+KAboutData::~KAboutData() = default;
 
 KAboutData::KAboutData(const KAboutData &other): d(new Private)
 {

@@ -12,6 +12,8 @@
 #include <QString>
 #include <QStringList>
 
+#include <memory>
+
 /**
  * @brief The OSRelease class parses /etc/os-release files
  *
@@ -88,7 +90,7 @@ private:
     Q_DISABLE_COPY(KOSRelease)
 
     class Private;
-    Private *const d = nullptr;
+    std::unique_ptr<Private> const d;
 };
 
 #endif // KOSRELEASE_H

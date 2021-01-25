@@ -16,10 +16,7 @@ KMacroExpanderBase::KMacroExpanderBase(QChar c) : d(new KMacroExpanderBasePrivat
 {
 }
 
-KMacroExpanderBase::~KMacroExpanderBase()
-{
-    delete d;
-}
+KMacroExpanderBase::~KMacroExpanderBase() = default;
 
 void KMacroExpanderBase::setEscapeChar(QChar c)
 {

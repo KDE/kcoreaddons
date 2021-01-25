@@ -14,6 +14,8 @@
 
 #include <QString>
 
+#include <memory>
+
 class Kdelibs4MigrationPrivate;
 
 /**
@@ -102,7 +104,7 @@ public:
     QString saveLocation(const char *type, const QString &suffix = QString()) const;
 
 private:
-    Kdelibs4MigrationPrivate *d;
+    std::unique_ptr<Kdelibs4MigrationPrivate> const d;
 };
 
 #endif // KFORMAT_H

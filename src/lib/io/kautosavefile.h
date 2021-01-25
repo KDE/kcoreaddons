@@ -15,6 +15,8 @@
 #include <QList>
 #include <QUrl>
 
+#include <memory>
+
 class KAutoSaveFilePrivate;
 /**
  * \class KAutoSaveFile kautosavefile.h <KAutoSaveFile>
@@ -231,7 +233,7 @@ public:
 private:
     Q_DISABLE_COPY(KAutoSaveFile)
     friend class KAutoSaveFilePrivate;
-    KAutoSaveFilePrivate *const d;
+    std::unique_ptr<KAutoSaveFilePrivate> const d;
 };
 
 #endif // KAUTOSAVEFILE_H

@@ -46,10 +46,7 @@ KJobUiDelegate::KJobUiDelegate(Flags flags)
     }
 }
 
-KJobUiDelegate::~KJobUiDelegate()
-{
-    delete d;
-}
+KJobUiDelegate::~KJobUiDelegate() = default;
 
 bool KJobUiDelegate::setJob(KJob *job)
 {
