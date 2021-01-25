@@ -155,8 +155,9 @@ private:
      */
     explicit KAboutPerson(const QString &name, const QString &email, bool disambiguation);
 
+private:
     class Private;
-    Private *const d;
+    QSharedDataPointer<Private> d;
 };
 
 /**

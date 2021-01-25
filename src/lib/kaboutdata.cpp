@@ -34,7 +34,7 @@ Q_DECLARE_LOGGING_CATEGORY(KABOUTDATA)
 Q_LOGGING_CATEGORY(KABOUTDATA, "kf.coreaddons.kaboutdata", QtWarningMsg)
 
 
-class Q_DECL_HIDDEN KAboutPerson::Private
+class Q_DECL_HIDDEN KAboutPerson::Private : public QSharedData
 {
 public:
     QString _name;
@@ -65,15 +65,9 @@ KAboutPerson::KAboutPerson(const QString &_name, const QString &_email, bool)
     d->_emailAddress = _email;
 }
 
-KAboutPerson::KAboutPerson(const KAboutPerson &other): d(new Private)
-{
-    *d = *other.d;
-}
+KAboutPerson::KAboutPerson(const KAboutPerson &other) = default;
 
-KAboutPerson::~KAboutPerson()
-{
-    delete d;
-}
+KAboutPerson::~KAboutPerson() = default;
 
 QString KAboutPerson::name() const
 {
@@ -100,11 +94,7 @@ QString KAboutPerson::ocsUsername() const
     return d->_ocsUsername;
 }
 
-KAboutPerson &KAboutPerson::operator=(const KAboutPerson &other)
-{
-    *d = *other.d;
-    return *this;
-}
+KAboutPerson &KAboutPerson::operator=(const KAboutPerson &other) = default;
 
 KAboutPerson KAboutPerson::fromJSON(const QJsonObject &obj)
 {
