@@ -403,8 +403,7 @@ public:
     static QStringList allUserNames(uint maxCount = KCOREADDONS_UINT_MAX);
 
 private:
-    class Private;
-    QExplicitlySharedDataPointer<Private> d;
+    QExplicitlySharedDataPointer<class KUserPrivate> d;
 };
 
 /**
@@ -560,8 +559,7 @@ public:
     static QStringList allGroupNames(uint maxCount = KCOREADDONS_UINT_MAX);
 
 private:
-    class Private;
-    QSharedDataPointer<Private> d;
+    QSharedDataPointer<class KUserGroupPrivate> d;
 };
 
 #if !defined(Q_OS_WIN)

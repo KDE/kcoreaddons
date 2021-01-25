@@ -160,12 +160,12 @@ void enumerateUsersForGroup(const QString &name, uint maxCount, Callback callbac
     });
 }
 
-class Q_DECL_HIDDEN KUser::Private : public QSharedData
+class KUserPrivate : public QSharedData
 {
-    typedef QExplicitlySharedDataPointer<Private> Ptr;
-    Private() : isAdmin(false) {}
+    typedef QExplicitlySharedDataPointer<KUserPrivate> Ptr;
+    KUserPrivate() : isAdmin(false) {}
     //takes ownership over userInfo_
-    Private(KUserId uid, KGroupId gid, const QString &loginName, const QString &fullName,
+    KUserPrivate(KUserId uid, KGroupId gid, const QString &loginName, const QString &fullName,
             const QString &domain, const QString &homeDir, bool isAdmin)
         : uid(uid), gid(gid), loginName(loginName), fullName(fullName),
           domain(domain), homeDir(homeDir), isAdmin(isAdmin)
@@ -274,40 +274,40 @@ public:
                 group = KGroupId::fromName(QString::fromWCharArray(info.grui0_name));
             });
         }
-        return Ptr(new Private(uid, group, loginName, fullName, domainName, homeDir, isAdmin));
+        return Ptr(new KUserPrivate(uid, group, loginName, fullName, domainName, homeDir, isAdmin));
     }
 };
 
-KUser::Private::Ptr KUser::Private::sharedNull(new KUser::Private());
+KUserPrivate::Ptr KUserPrivate::sharedNull(new KUserPrivate());
 
 KUser::KUser(UIDMode mode)
 {
     if (mode == UseEffectiveUID) {
-        d = Private::create(KUserId::currentEffectiveUserId());
+        d = KUserPrivate::create(KUserId::currentEffectiveUserId());
     } else if (mode == UseRealUserID) {
-        d = Private::create(KUserId::currentUserId());
+        d = KUserPrivate::create(KUserId::currentUserId());
     } else {
-        d = Private::sharedNull;
+        d = KUserPrivate::sharedNull;
     }
 }
 
 KUser::KUser(K_UID uid)
-    : d(Private::create(KUserId(uid)))
+    : d(KUserPrivate::create(KUserId(uid)))
 {
 }
 
 KUser::KUser(KUserId uid)
-    : d(Private::create(uid))
+    : d(KUserPrivate::create(uid))
 {
 }
 
 KUser::KUser(const QString &name)
-    : d(Private::create(KUserId::fromName(name)))
+    : d(KUserPrivate::create(KUserId::fromName(name)))
 {
 }
 
 KUser::KUser(const char *name)
-    : d(Private::create(KUserId::fromName(QString::fromLocal8Bit(name))))
+    : d(KUserPrivate::create(KUserId::fromName(QString::fromLocal8Bit(name))))
 {
 }
 
@@ -466,13 +466,13 @@ KUser::~KUser()
 {
 }
 
-class Q_DECL_HIDDEN KUserGroup::Private : public QSharedData
+class KUserGroupPrivate : public QSharedData
 {
 public:
     QString name;
     KGroupId gid;
-    Private() {}
-    Private(const QString &name, KGroupId id)
+    KUserGroupPrivate() {}
+    KUserGroupPrivate(const QString &name, KGroupId id)
         : name(name), gid(id)
     {
         if (!name.isEmpty()) {
@@ -492,12 +492,12 @@ public:
 };
 
 KUserGroup::KUserGroup(const QString &_name)
-    : d(new Private(_name, KGroupId()))
+    : d(new KUserGroupPrivate(_name, KGroupId()))
 {
 }
 
 KUserGroup::KUserGroup(const char *_name)
-    : d(new Private(QLatin1String(_name), KGroupId()))
+    : d(new KUserGroupPrivate(QLatin1String(_name), KGroupId()))
 {
 }
 
@@ -524,14 +524,14 @@ static QString nameFromGroupId(KGroupId gid)
 }
 
 KUserGroup::KUserGroup(KGroupId gid)
-    : d(new Private(nameFromGroupId(gid), gid))
+    : d(new KUserGroupPrivate(nameFromGroupId(gid), gid))
 {
 }
 
 KUserGroup::KUserGroup(K_GID gid)
 {
     KGroupId groupId(gid);
-    d = new Private(nameFromGroupId(groupId), groupId);
+    d = new KUserGroupPrivate(nameFromGroupId(groupId), groupId);
 }
 
 KUserGroup::KUserGroup(KUser::UIDMode mode)
@@ -542,7 +542,7 @@ KUserGroup::KUserGroup(KUser::UIDMode mode)
     } else if (mode == KUser::UseRealUserID) {
         gid = KGroupId::currentEffectiveGroupId();
     }
-    d = new Private(nameFromGroupId(gid), gid);
+    d = new KUserGroupPrivate(nameFromGroupId(gid), gid);
 }
 
 KUserGroup::KUserGroup(const KUserGroup &group)

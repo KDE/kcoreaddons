@@ -34,7 +34,7 @@ Q_DECLARE_LOGGING_CATEGORY(KABOUTDATA)
 Q_LOGGING_CATEGORY(KABOUTDATA, "kf.coreaddons.kaboutdata", QtWarningMsg)
 
 
-class Q_DECL_HIDDEN KAboutPerson::Private : public QSharedData
+class KAboutPersonPrivate : public QSharedData
 {
 public:
     QString _name;
@@ -49,7 +49,7 @@ KAboutPerson::KAboutPerson(const QString &_name,
                            const QString &_emailAddress,
                            const QString &_webAddress,
                            const QString &_ocsUsername)
-    : d(new Private)
+    : d(new KAboutPersonPrivate)
 {
     d->_name = _name;
     d->_task = _task;
@@ -59,7 +59,7 @@ KAboutPerson::KAboutPerson(const QString &_name,
 }
 
 KAboutPerson::KAboutPerson(const QString &_name, const QString &_email, bool)
-    : d(new Private)
+    : d(new KAboutPersonPrivate)
 {
     d->_name = _name;
     d->_emailAddress = _email;
@@ -107,26 +107,26 @@ KAboutPerson KAboutPerson::fromJSON(const QJsonObject &obj)
 }
 
 
-class Q_DECL_HIDDEN KAboutLicense::Private : public QSharedData
+class KAboutLicensePrivate : public QSharedData
 {
 public:
-    Private(LicenseKey licenseType,
-            VersionRestriction versionRestriction,
+    KAboutLicensePrivate(KAboutLicense::LicenseKey licenseType,
+            KAboutLicense::VersionRestriction versionRestriction,
             const KAboutData *aboutData);
-    Private(const Private &other);
+    KAboutLicensePrivate(const KAboutLicensePrivate &other);
 
     QString spdxID() const;
 
-    LicenseKey _licenseKey;
+    KAboutLicense::LicenseKey _licenseKey;
     QString _licenseText;
     QString _pathToLicenseTextFile;
-    VersionRestriction _versionRestriction;
+    KAboutLicense::VersionRestriction _versionRestriction;
     // needed for access to the possibly changing copyrightStatement()
     const KAboutData *_aboutData;
 };
 
-KAboutLicense::Private::Private(LicenseKey licenseType,
-                                VersionRestriction versionRestriction,
+KAboutLicensePrivate::KAboutLicensePrivate(KAboutLicense::LicenseKey licenseType,
+                                KAboutLicense::VersionRestriction versionRestriction,
                                 const KAboutData *aboutData)
     : QSharedData(),
       _licenseKey(licenseType),
@@ -135,7 +135,7 @@ KAboutLicense::Private::Private(LicenseKey licenseType,
 {
 }
 
-KAboutLicense::Private::Private(const KAboutLicense::Private &other)
+KAboutLicensePrivate::KAboutLicensePrivate(const KAboutLicensePrivate &other)
     : QSharedData(other),
       _licenseKey(other._licenseKey),
       _licenseText(other._licenseText),
@@ -144,7 +144,7 @@ KAboutLicense::Private::Private(const KAboutLicense::Private &other)
       _aboutData(other._aboutData)
 {}
 
-QString KAboutLicense::Private::spdxID() const
+QString KAboutLicensePrivate::spdxID() const
 {
     switch (_licenseKey) {
     case KAboutLicense::GPL_V2:
@@ -172,25 +172,25 @@ QString KAboutLicense::Private::spdxID() const
 }
 
 KAboutLicense::KAboutLicense()
-    : d(new Private(Unknown, {}, nullptr))
+    : d(new KAboutLicensePrivate(Unknown, {}, nullptr))
 {}
 
 
 KAboutLicense::KAboutLicense(LicenseKey licenseType,
                              VersionRestriction versionRestriction,
                              const KAboutData *aboutData)
-    : d(new Private(licenseType, versionRestriction, aboutData))
+    : d(new KAboutLicensePrivate(licenseType, versionRestriction, aboutData))
 {
 
 }
 
 KAboutLicense::KAboutLicense(LicenseKey licenseType, const KAboutData *aboutData)
-    : d(new Private(licenseType, OnlyThisVersion, aboutData))
+    : d(new KAboutLicensePrivate(licenseType, OnlyThisVersion, aboutData))
 {
 }
 
 KAboutLicense::KAboutLicense(const KAboutData *aboutData)
-    : d(new Private(Unknown, OnlyThisVersion, aboutData))
+    : d(new KAboutLicensePrivate(Unknown, OnlyThisVersion, aboutData))
 {
 }
 

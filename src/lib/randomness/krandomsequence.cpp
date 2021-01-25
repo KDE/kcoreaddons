@@ -13,7 +13,7 @@
 #include <QRandomGenerator>
 #include <QSharedData>
 
-class Q_DECL_HIDDEN KRandomSequence::Private : public QSharedData
+class KRandomSequencePrivate : public QSharedData
 {
 public:
     enum {SHUFFLE_TABLE_SIZE = 32};
@@ -30,13 +30,15 @@ public:
 //  Construction / Destruction
 //////////////////////////////////////////////////////////////////////////////
 
-KRandomSequence::KRandomSequence(long lngSeed1) : d(new Private)
+KRandomSequence::KRandomSequence(long lngSeed1)
+    : d(new KRandomSequencePrivate)
 {
     // Seed the generator
     setSeed(lngSeed1);
 }
 
-KRandomSequence::KRandomSequence(int lngSeed1) : d(new Private)
+KRandomSequence::KRandomSequence(int lngSeed1)
+    : d(new KRandomSequencePrivate)
 {
     // Seed the generator
     setSeed(lngSeed1);
@@ -74,7 +76,7 @@ void KRandomSequence::setSeed(int lngSeed1)
 static const int sMod1           = 2147483563;
 static const int sMod2           = 2147483399;
 
-void KRandomSequence::Private::draw()
+void KRandomSequencePrivate::draw()
 {
     static const int sMM1            = sMod1 - 1;
     static const int sA1             = 40014;

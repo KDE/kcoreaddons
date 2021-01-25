@@ -154,8 +154,7 @@ public:
     void modulate(int i);
 
 private:
-    class Private;
-    QSharedDataPointer<Private> d;
+    QSharedDataPointer<class KRandomSequencePrivate> d;
 };
 
 #endif

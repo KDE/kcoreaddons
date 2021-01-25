@@ -157,8 +157,7 @@ private:
     explicit KAboutPerson(const QString &name, const QString &email, bool disambiguation);
 
 private:
-    class Private;
-    QSharedDataPointer<Private> d;
+    QSharedDataPointer<class KAboutPersonPrivate> d;
 };
 
 /**
@@ -328,8 +327,8 @@ private:
      */
     void setLicenseFromText(const QString &licenseText);
 
-    class Private;
-    QSharedDataPointer<Private> d;
+private:
+    QSharedDataPointer<class KAboutLicensePrivate> d;
 };
 
 /**

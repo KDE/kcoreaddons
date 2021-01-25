@@ -32,21 +32,21 @@ inline void endpwent() { }
 static inline void endgrent() { }
 #endif
 
-class Q_DECL_HIDDEN KUser::Private : public QSharedData
+class KUserPrivate : public QSharedData
 {
 public:
     uid_t uid;
     gid_t gid;
     QString loginName;
     QString homeDir, shell;
-    QMap<UserProperty, QVariant> properties;
+    QMap<KUser::UserProperty, QVariant> properties;
 
-    Private() : uid(uid_t(-1)), gid(gid_t(-1)) {}
-    Private(const char *name) : uid(uid_t(-1)), gid(gid_t(-1))
+    KUserPrivate() : uid(uid_t(-1)), gid(gid_t(-1)) {}
+    KUserPrivate(const char *name) : uid(uid_t(-1)), gid(gid_t(-1))
     {
         fillPasswd(name ? ::getpwnam(name) : nullptr);
     }
-    Private(const passwd *p) : uid(uid_t(-1)), gid(gid_t(-1))
+    KUserPrivate(const passwd *p) : uid(uid_t(-1)), gid(gid_t(-1))
     {
         fillPasswd(p);
     }
@@ -87,40 +87,40 @@ KUser::KUser(UIDMode mode)
 {
     uid_t _uid = ::getuid(), _euid;
     if (mode == UseEffectiveUID && (_euid = ::geteuid()) != _uid) {
-        d = new Private(::getpwuid(_euid));
+        d = new KUserPrivate(::getpwuid(_euid));
     } else {
-        d = new Private(qgetenv("LOGNAME").constData());
+        d = new KUserPrivate(qgetenv("LOGNAME").constData());
         if (d->uid != _uid) {
-            d = new Private(qgetenv("USER").constData());
+            d = new KUserPrivate(qgetenv("USER").constData());
             if (d->uid != _uid) {
-                d = new Private(::getpwuid(_uid));
+                d = new KUserPrivate(::getpwuid(_uid));
             }
         }
     }
 }
 
 KUser::KUser(K_UID _uid)
-    : d(new Private(::getpwuid(_uid)))
+    : d(new KUserPrivate(::getpwuid(_uid)))
 {
 }
 
 KUser::KUser(KUserId _uid)
-    : d(new Private(::getpwuid(_uid.nativeId())))
+    : d(new KUserPrivate(::getpwuid(_uid.nativeId())))
 {
 }
 
 KUser::KUser(const QString &name)
-    : d(new Private(name.toLocal8Bit().data()))
+    : d(new KUserPrivate(name.toLocal8Bit().data()))
 {
 }
 
 KUser::KUser(const char *name)
-    : d(new Private(name))
+    : d(new KUserPrivate(name))
 {
 }
 
 KUser::KUser(const passwd *p)
-    : d(new Private(p))
+    : d(new KUserPrivate(p))
 {
 }
 
@@ -324,18 +324,18 @@ KUser::~KUser()
 {
 }
 
-class Q_DECL_HIDDEN KUserGroup::Private : public QSharedData
+class KUserGroupPrivate : public QSharedData
 {
 public:
     gid_t gid;
     QString name;
 
-    Private() : gid(gid_t(-1)) {}
-    Private(const char *_name) : gid(gid_t(-1))
+    KUserGroupPrivate() : gid(gid_t(-1)) {}
+    KUserGroupPrivate(const char *_name) : gid(gid_t(-1))
     {
         fillGroup(_name ? ::getgrnam(_name) : nullptr);
     }
-    Private(const ::group *p) : gid(gid_t(-1))
+    KUserGroupPrivate(const ::group *p) : gid(gid_t(-1))
     {
         fillGroup(p);
     }
@@ -351,31 +351,31 @@ public:
 
 KUserGroup::KUserGroup(KUser::UIDMode mode)
 {
-    d = new Private(getgrgid(KUser(mode).groupId().nativeId()));
+    d = new KUserGroupPrivate(getgrgid(KUser(mode).groupId().nativeId()));
 }
 
 KUserGroup::KUserGroup(K_GID _gid)
-    : d(new Private(getgrgid(_gid)))
+    : d(new KUserGroupPrivate(getgrgid(_gid)))
 {
 }
 
 KUserGroup::KUserGroup(KGroupId _gid)
-    : d(new Private(getgrgid(_gid.nativeId())))
+    : d(new KUserGroupPrivate(getgrgid(_gid.nativeId())))
 {
 }
 
 KUserGroup::KUserGroup(const QString &_name)
-    : d(new Private(_name.toLocal8Bit().data()))
+    : d(new KUserGroupPrivate(_name.toLocal8Bit().data()))
 {
 }
 
 KUserGroup::KUserGroup(const char *_name)
-    : d(new Private(_name))
+    : d(new KUserGroupPrivate(_name))
 {
 }
 
 KUserGroup::KUserGroup(const ::group *g)
-    : d(new Private(g))
+    : d(new KUserGroupPrivate(g))
 {
 }
 
