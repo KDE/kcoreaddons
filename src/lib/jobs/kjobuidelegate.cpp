@@ -12,10 +12,10 @@
 #include "kjob.h"
 #include <QDebug>
 
-class Q_DECL_HIDDEN KJobUiDelegate::Private
+class KJobUiDelegatePrivate
 {
 public:
-    Private(KJobUiDelegate *delegate)
+    KJobUiDelegatePrivate(KJobUiDelegate *delegate)
         : q(delegate),
           autoErrorHandling(false),
           autoWarningHandling(true) { }
@@ -31,12 +31,14 @@ public:
 };
 
 KJobUiDelegate::KJobUiDelegate()
-    : QObject(), d(new Private(this))
+    : QObject()
+    , d(new KJobUiDelegatePrivate(this))
 {
 }
 
 KJobUiDelegate::KJobUiDelegate(Flags flags)
-    : QObject(), d(new Private(this))
+    : QObject()
+    , d(new KJobUiDelegatePrivate(this))
 {
     if (flags & AutoErrorHandlingEnabled) {
         d->autoErrorHandling = true;
@@ -106,7 +108,7 @@ void KJobUiDelegate::connectJob(KJob *job)
     connect(job, &KJob::warning, this, &KJobUiDelegate::slotWarning);
 }
 
-void KJobUiDelegate::Private::_k_result()
+void KJobUiDelegatePrivate::_k_result()
 {
     if (job->error() && autoErrorHandling) {
         q->showErrorMessage();

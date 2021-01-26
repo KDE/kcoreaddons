@@ -62,6 +62,7 @@ class KCOREADDONS_EXPORT KAboutPerson
     Q_PROPERTY(QString webAddress READ webAddress CONSTANT)
     Q_PROPERTY(QString ocsUsername READ ocsUsername CONSTANT)
     friend class KAboutData;
+    friend class KAboutDataPrivate;
 public:
     /**
      * Convenience constructor
@@ -1179,8 +1180,8 @@ private:
     friend void KCrash::defaultCrashHandler(int sig);
     static const KAboutData *applicationDataPointer();
 
-    class Private;
-    std::unique_ptr<Private> const d;
+private:
+    std::unique_ptr<class KAboutDataPrivate> const d;
 };
 
 Q_DECLARE_METATYPE(KAboutData)

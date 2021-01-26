@@ -20,10 +20,10 @@ Q_DECLARE_LOGGING_CATEGORY(MIGRATOR)
 // logging category for this framework, default: log stuff >= warning
 Q_LOGGING_CATEGORY(MIGRATOR, "kf.coreaddons.kdelibs4configmigrator", QtWarningMsg)
 
-class Q_DECL_HIDDEN Kdelibs4ConfigMigrator::Private
+class Kdelibs4ConfigMigratorPrivate
 {
 public:
-    Private(const QString &_appName)
+    Kdelibs4ConfigMigratorPrivate(const QString &_appName)
         : appName(_appName)
     {
 
@@ -35,7 +35,7 @@ public:
 };
 
 Kdelibs4ConfigMigrator::Kdelibs4ConfigMigrator(const QString &appName)
-    : d(new Private(appName))
+    : d(new Kdelibs4ConfigMigratorPrivate(appName))
 {
 }
 

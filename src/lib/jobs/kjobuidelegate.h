@@ -148,8 +148,8 @@ protected Q_SLOTS:
 private:
     void connectJob(KJob *job);
 
-    class Private;
-    std::unique_ptr<Private> const d;
+private:
+    std::unique_ptr<class KJobUiDelegatePrivate> const d;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KJobUiDelegate::Flags)

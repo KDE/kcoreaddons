@@ -70,9 +70,8 @@ public:
     void setUiFiles(const QStringList &uiFileNameList);
 
 private:
-    class Private;
-    friend class Private;
-    std::unique_ptr<Private> const d;
+    friend class Kdelibs4ConfigMigratorPrivate;
+    std::unique_ptr<class Kdelibs4ConfigMigratorPrivate> const d;
 };
 
 #endif // KDELIBS4CONFIGMIGRATOR_H

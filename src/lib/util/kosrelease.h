@@ -89,8 +89,7 @@ public:
 private:
     Q_DISABLE_COPY(KOSRelease)
 
-    class Private;
-    std::unique_ptr<Private> const d;
+    std::unique_ptr<class KOSReleasePrivate> const d;
 };
 
 #endif // KOSRELEASE_H

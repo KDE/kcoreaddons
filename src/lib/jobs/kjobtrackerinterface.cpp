@@ -10,19 +10,20 @@
 
 #include "kjob.h"
 
-class Q_DECL_HIDDEN KJobTrackerInterface::Private
+class KJobTrackerInterfacePrivate
 {
 public:
-    Private(KJobTrackerInterface *interface) : q(interface)
+    KJobTrackerInterfacePrivate(KJobTrackerInterface *interface)
+        : q(interface)
     {
-
     }
 
     KJobTrackerInterface *const q;
 };
 
 KJobTrackerInterface::KJobTrackerInterface(QObject *parent)
-    : QObject(parent), d(new Private(this))
+    : QObject(parent)
+    , d(new KJobTrackerInterfacePrivate(this))
 {
     qRegisterMetaType<QPair<QString,QString>>();
 }

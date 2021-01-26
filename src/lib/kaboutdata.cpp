@@ -434,10 +434,10 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
     return KAboutLicense(license, restriction, nullptr);
 }
 
-class Q_DECL_HIDDEN KAboutData::Private
+class KAboutDataPrivate
 {
 public:
-    Private()
+    KAboutDataPrivate()
         : customAuthorTextEnabled(false)
     {}
     QString _componentName;
@@ -482,7 +482,7 @@ KAboutData::KAboutData(const QString &_componentName,
                        const QString &homePageAddress,
                        const QString &bugAddress
                       )
-    : d(new Private)
+    : d(new KAboutDataPrivate)
 {
     d->_componentName = _componentName;
     int p = d->_componentName.indexOf(QLatin1Char('/'));
@@ -532,7 +532,7 @@ KAboutData::KAboutData(const QString &_componentName,
                        const QString &_displayName,
                        const QString &_version
                       )
-    : d(new Private)
+    : d(new KAboutDataPrivate)
 {
     d->_componentName = _componentName;
     int p = d->_componentName.indexOf(QLatin1Char('/'));
@@ -557,7 +557,8 @@ KAboutData::KAboutData(const QString &_componentName,
 
 KAboutData::~KAboutData() = default;
 
-KAboutData::KAboutData(const KAboutData &other): d(new Private)
+KAboutData::KAboutData(const KAboutData &other)
+    : d(new KAboutDataPrivate)
 {
     *d = *other.d;
     QList<KAboutLicense>::iterator it = d->_licenseList.begin(), itEnd = d->_licenseList.end();
@@ -622,7 +623,7 @@ KAboutData &KAboutData::addCredit(const QString &name,
 KAboutData &KAboutData::setTranslator(const QString &name,
                                       const QString &emailAddress)
 {
-    d->_translatorList = Private::parseTranslators(name, emailAddress);
+    d->_translatorList = KAboutDataPrivate::parseTranslators(name, emailAddress);
     return *this;
 }
 
@@ -878,7 +879,7 @@ QList<KAboutPerson> KAboutData::credits() const
     return d->_creditList;
 }
 
-QList<KAboutPerson> KAboutData::Private::parseTranslators(const QString &translatorName, const QString &translatorEmail)
+QList<KAboutPerson> KAboutDataPrivate::parseTranslators(const QString &translatorName, const QString &translatorEmail)
 {
     QList<KAboutPerson> personList;
     if (translatorName.isEmpty() || translatorName == QLatin1String("Your names")) {

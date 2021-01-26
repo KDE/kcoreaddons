@@ -70,10 +70,10 @@ static QString defaultFilePath()
     }
 }
 
-class Q_DECL_HIDDEN KOSRelease::Private
+class KOSReleasePrivate
 {
 public:
-    Private(QString filePath)
+    explicit KOSReleasePrivate(QString filePath)
         : name(QStringLiteral("Linux"))
         , id(QStringLiteral("linux"))
         , prettyName(QStringLiteral("Linux"))
@@ -181,7 +181,7 @@ public:
 };
 
 KOSRelease::KOSRelease(const QString &filePath)
-    : d(new Private(filePath))
+    : d(new KOSReleasePrivate(filePath))
 {
 }
 

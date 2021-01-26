@@ -177,8 +177,7 @@ protected Q_SLOTS:
     virtual void speed(KJob *job, unsigned long value);
 
 private:
-    class Private;
-    std::unique_ptr<Private> const d;
+    std::unique_ptr<class KJobTrackerInterfacePrivate> const d;
 };
 
 #endif
