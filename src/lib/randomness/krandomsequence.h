@@ -14,6 +14,7 @@
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 75)
 
 #include <QList>
+#include <QSharedDataPointer>
 
 /**
  * \class KRandomSequence krandomsequence.h <KRandomSequence>
@@ -154,7 +155,7 @@ public:
 
 private:
     class Private;
-    Private *const d;
+    QSharedDataPointer<Private> d;
 };
 
 #endif

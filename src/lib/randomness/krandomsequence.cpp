@@ -11,8 +11,9 @@
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 
 #include <QRandomGenerator>
+#include <QSharedData>
 
-class Q_DECL_HIDDEN KRandomSequence::Private
+class Q_DECL_HIDDEN KRandomSequence::Private : public QSharedData
 {
 public:
     enum {SHUFFLE_TABLE_SIZE = 32};
@@ -41,23 +42,11 @@ KRandomSequence::KRandomSequence(int lngSeed1) : d(new Private)
     setSeed(lngSeed1);
 }
 
-KRandomSequence::~KRandomSequence()
-{
-    delete d;
-}
+KRandomSequence::~KRandomSequence() = default;
 
-KRandomSequence::KRandomSequence(const KRandomSequence &a) : d(new Private)
-{
-    *d = *a.d;
-}
+KRandomSequence::KRandomSequence(const KRandomSequence &a) = default;
 
-KRandomSequence &KRandomSequence::operator=(const KRandomSequence &a)
-{
-    if (this != &a) {
-        *d = *a.d;
-    }
-    return *this;
-}
+KRandomSequence &KRandomSequence::operator=(const KRandomSequence &a) = default;
 
 //////////////////////////////////////////////////////////////////////////////
 //  Member Functions
