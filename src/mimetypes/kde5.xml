@@ -561,7 +561,7 @@ Notes:
     <comment xml:lang="sv">Kfotoalbum-import</comment>
     <comment xml:lang="tr">KPhotoAlbum içeri aktarımı</comment>
     <comment xml:lang="uk">файли імпортування KPhotoAlbum</comment>
-    <comment xml:lang="vi">phần nhập KPhotoAlbum</comment>
+    <comment xml:lang="vi">phần nhập khẩu KPhotoAlbum</comment>
     <comment xml:lang="zh_CN">KPhotoAlbum 导入文件</comment>
     <glob pattern="*.kim"/>
   </mime-type>
