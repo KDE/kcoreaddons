@@ -115,7 +115,7 @@ QStringList KShell::splitArgs(const QString &_args, Options flags, Errors *err)
 
     int p = 0;
     const int length = args.length();
-    forever {
+    for (;;) {
     while (p < length && isWhiteSpace(args[p].unicode()))
         {
             ++p;
@@ -127,7 +127,7 @@ QStringList KShell::splitArgs(const QString &_args, Options flags, Errors *err)
 
         QString arg;
         bool inquote = false;
-        forever {
+        for (;;) {
         bool copy = true; // copy this char
         int bslashes = 0; // number of preceding backslashes to insert
         while (p < length && args[p] == bs)
