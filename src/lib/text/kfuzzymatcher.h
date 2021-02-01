@@ -172,7 +172,7 @@ KCOREADDONS_EXPORT Result matchSequential(QStringView pattern, QStringView str);
  * @param htmlTag is the html tag you want to use for example \<b\> or \<span
  * style=...\>
  * @param htmlTagClose is the corresponding closing tag for @p htmlTag. The
- * function does not check that whether it is a closing tag for @p htmlTag or
+ * function does not check whether it is a closing tag for @p htmlTag or
  * not.
  * @return html styled output string
  *
