@@ -81,7 +81,7 @@ struct KCOREADDONS_EXPORT Result
         get filtered out.
     */
     int score;
-    /** @c true if match was succesful */
+    /** @c true if match was successful */
     bool matched;
 };
 
