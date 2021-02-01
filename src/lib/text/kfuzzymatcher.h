@@ -77,8 +77,7 @@ namespace KFuzzyMatcher
 struct KCOREADDONS_EXPORT Result
 {
     /** Score of this match. This can be negative. if @ref matched is @c false
-        then the score will be useless for usual cases because the string will
-        get filtered out.
+        then the score will be zero.
     */
     int score;
     /** @c true if match was successful */
@@ -119,9 +118,8 @@ KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
  * list or model
  * @param str the current string from your list of strings
  * @return A @ref Result type with score of this match and whether the match was
- * successful. If there is no match, score is likely useless as the string will
- * be filtered out. If the match is successful, score must be used to sort the
- * results.
+ * successful. If there is no match, score is zero. If the match is successful,
+ * score must be used to sort the results.
  *
  * @since 5.79
  */
@@ -148,9 +146,8 @@ KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
  * list or model
  * @param str the current string from your list of strings
  * @return A @ref Result type with score of this match and whether the match was
- * successful. If there is no match, score is likely useless as the string will
- * be filtered out. If the match is successful, score must be used to sort the
- * results.
+ * successful. If there is no match, score is zero. If the match is successful,
+ * score must be used to sort the results.
  *
  * @since 5.79
  */
