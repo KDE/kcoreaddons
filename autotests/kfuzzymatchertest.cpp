@@ -45,7 +45,7 @@ void KFuzzyMatcherTest::testMatch_data()
     QTest::addColumn<QStringList>("input");
     QTest::addColumn<QStringList>("expected");
     QTest::addColumn<int>("size");
-
+// clang-format off
     QTest::newRow("pattern=sort") << QStringLiteral("sort")
                           << QStringList{
                                 QStringLiteral("Sort"),
@@ -75,6 +75,17 @@ void KFuzzyMatcherTest::testMatch_data()
                                 QStringLiteral("kateapp.cpp")
                              }
                           << 3;
+
+    QTest::newRow("pattern=this") << QStringLiteral("this")
+                          << QStringList{
+                                QStringLiteral("th"),
+                                QStringLiteral("ths"),
+                                QStringLiteral("thsi")
+                              }
+                          << QStringList{
+                             }
+                          << 0;
+// clang-format on
 }
 
 template <bool (*MatchFunc)(const QStringView, const QStringView, int &)>
@@ -118,6 +129,7 @@ void KFuzzyMatcherTest::testMatch()
 
 void KFuzzyMatcherTest::testMatchSequential_data()
 {
+// clang-format off
     QTest::addColumn<QString>("pattern");
     QTest::addColumn<QStringList>("input");
     QTest::addColumn<QStringList>("expected");
@@ -137,6 +149,7 @@ void KFuzzyMatcherTest::testMatchSequential_data()
                                 QStringLiteral("Soup rate"),
                               }
                           << 3;
+// clang-format on
 }
 
 void KFuzzyMatcherTest::testMatchSequential()
