@@ -88,15 +88,14 @@ void KFuzzyMatcherTest::testMatch_data()
 // clang-format on
 }
 
-template <bool (*MatchFunc)(const QStringView, const QStringView, int &)>
+template <KFuzzyMatcher::Result (*MatchFunc)(const QStringView, const QStringView)>
 static QStringList matchHelper(const QString& pattern, const QStringList& input)
 {
     QVector<QPair<QString, int>> actual;
     for (int i = 0; i < input.size(); ++i) {
-        int score = 0;
-        bool res = MatchFunc(pattern, input.at(i), score);
-        if (res) {
-            actual.push_back({input.at(i), score});
+        KFuzzyMatcher::Result res = MatchFunc(pattern, input.at(i));
+        if (res.matched) {
+            actual.push_back({input.at(i), res.score});
         }
     }
 

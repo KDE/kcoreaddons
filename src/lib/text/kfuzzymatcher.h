@@ -23,13 +23,25 @@ class QStringView;
  * scoring based on a different kind of separator, it should ideally be handled in a
  * separate internal method with an interface similar to the existing ones.
  *
- * All methods in here except toFuzzyMatchedDisplayString() are stateless.
+ * All methods in here are stateless i.e., the input string will not be modified.
  *
  * @short Namespace for fuzzy matching of strings
  * @author Waqar Ahmed <waqar.17a@gmail.com>
  */
 namespace KFuzzyMatcher
 {
+
+/**
+ * @brief The Result struct
+ */
+struct KCOREADDONS_EXPORT Result
+{
+    /** Score of this match */
+    int score;
+    /** match succesful? */
+    bool matched;
+};
+
 /**
  * @brief simple fuzzy matching of chars in @p pattern with chars in @p str
  * sequentially. If there is a match, it will return true and false otherwise.
@@ -39,7 +51,7 @@ namespace KFuzzyMatcher
  * @param pattern to search for. For e.g., text entered by a user to filter a
  * list
  * @param str the current string from your list of strings
- * @return true on sucesseful match
+ * @return true on sucessful match
  *
  * @since 5.79
  */
@@ -64,11 +76,13 @@ KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
  * @param str the current string from your list of strings
  * @param outScore The output score of a particular match. This determines the
  * quality of match and should be used for sorting later.
- * @return true on a successful match.
+ * @return A @ref Result type with score of this match and whether there is a match.
+ * If there is no match, score is likely useless as the string will be filtered out.
+ * If the match is successful, score must be used to sort the results.
  *
  * @since 5.79
  */
-KCOREADDONS_EXPORT bool match(QStringView pattern, QStringView str, int &outScore);
+KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
 
 /**
  * @brief This is a special case function which scores sequential matches
@@ -91,13 +105,13 @@ KCOREADDONS_EXPORT bool match(QStringView pattern, QStringView str, int &outScor
  * @param pattern to search for. For e.g., text entered by a user to filter a
  * list
  * @param str the current string from your list of strings
- * @param outScore The output score of a particular match. This determines the
- * quality of match and should be used for sorting later.
- * @return true on a successful match.
+ * @return A @ref Result type with score of this match and whether there is a match.
+ * If there is no match, score is likely useless as the string will be filtered out.
+ * If the match is successful, score must be used to sort the results.
  *
  * @since 5.79
  */
-KCOREADDONS_EXPORT bool matchSequential(QStringView pattern, QStringView str, int &outScore);
+KCOREADDONS_EXPORT Result matchSequential(QStringView pattern, QStringView str);
 
 /**
  * @brief This is a utility function to display what is being matched.
@@ -111,8 +125,7 @@ KCOREADDONS_EXPORT bool matchSequential(QStringView pattern, QStringView str, in
  * \endcode
  *
  * @param pattern is the current pattern entered by user
- * @param str is the string that will be wrapped with @p htmlTag. String will be
- * modified
+ * @param str is the string that will be wrapped with @p htmlTag.
  * @param htmlTag is the html tag you want to use for example <b> or <span
  * style=...>
  * @param htmlTagClose is the corresponding closing tag for @p htmlTag. The

@@ -209,7 +209,7 @@ bool KFuzzyMatcher::matchSimple(QStringView pattern, QStringView str)
     return patternIt == pattern.cend();
 }
 
-bool KFuzzyMatcher::matchSequential(QStringView pattern, QStringView str, int &outScore)
+KFuzzyMatcher::Result KFuzzyMatcher::matchSequential(QStringView pattern, QStringView str)
 {
     int recursionCount = 0;
     uint8_t matches[256];
@@ -219,12 +219,16 @@ bool KFuzzyMatcher::matchSequential(QStringView pattern, QStringView str, int &o
     const auto patternEnd = pattern.cend();
     const auto strEnd = str.cend();
 
-    return match_recursive(patternIt, strIt, outScore, strIt, strEnd, patternEnd,
+    int score = 0;
+    const bool matched = match_recursive(patternIt, strIt, score, strIt, strEnd, patternEnd,
                            nullptr, matches, maxMatches, 0, recursionCount, 40);
+    return KFuzzyMatcher::Result{score, matched};
 }
 
-bool KFuzzyMatcher::match(QStringView pattern, QStringView str, int &outScore)
+KFuzzyMatcher::Result KFuzzyMatcher::match(QStringView pattern, QStringView str)
 {
     uint8_t matches[256];
-    return match_internal(pattern, str, outScore, matches, sizeof(matches));
+    int score = 0;
+    const bool matched = match_internal(pattern, str, score, matches, sizeof(matches));
+    return KFuzzyMatcher::Result{score, matched};
 }
