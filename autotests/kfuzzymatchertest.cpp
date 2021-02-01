@@ -190,5 +190,4 @@ void KFuzzyMatcherTest::testToFuzzyMatchedDisplayString()
     QString actual = KFuzzyMatcher::toFuzzyMatchedDisplayString(pattern, input, tag, tagClose);
 
     QCOMPARE(actual, expected);
-    QCOMPARE(input, expected);
 }

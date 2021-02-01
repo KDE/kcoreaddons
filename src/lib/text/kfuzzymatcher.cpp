@@ -68,7 +68,8 @@ static bool match_recursive(QStringView::const_iterator pattern,
                                 sizeof(recursiveMatches), nextMatch, recursionCount)) {
                 // Pick best recursive score
                 if (!recursiveMatch || recursiveScore > bestRecursiveScore) {
-                    memcpy(bestRecursiveMatches, recursiveMatches, 256);
+                    static_assert(sizeof(recursiveMatches) == sizeof(bestRecursiveMatches), "Should be equal");
+                    memcpy(bestRecursiveMatches, recursiveMatches, sizeof(recursiveMatches));
                     bestRecursiveScore = recursiveScore;
                 }
                 recursiveMatch = true;
@@ -171,7 +172,7 @@ static bool match_internal(QStringView pattern, QStringView str, int &outScore, 
 
 /**************************************************************/
 
-QString KFuzzyMatcher::toFuzzyMatchedDisplayString(QStringView pattern, QString &str, QStringView htmlTag, QStringView htmlTagClose)
+QString KFuzzyMatcher::toFuzzyMatchedDisplayString(QStringView pattern, QString str, QStringView htmlTag, QStringView htmlTagClose)
 {
     bool wasMatching = false;
     for (int i = 0, j = 0; i < str.size() && j < pattern.size(); ++i) {
