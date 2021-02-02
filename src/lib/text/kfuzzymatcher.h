@@ -17,15 +17,16 @@ class QStringView;
  * which tries to replicate SublimeText like fuzzy matching.
  *
  * @note
- * In general @ref match() and @ref matchSequential() will suffice for most usecases
+ * In general match() and matchSequential() will suffice for most usecases
  * but should the need arise to extend this for some particular reason, for example
  * scoring based on a different kind of separator, it should ideally be handled in a
  * separate internal method with an interface similar to the existing ones.
  *
- * All methods in here are stateless i.e., the input string will not be modified.
+ * All methods in here are stateless i.e., the input string will not be modified. Also
+ * note that strings in all the functions in this namespace will be matched case-insensitively.
  *
- * If you are using it with @c QSortFilterProxyModel, and you choose to use @ref match()
- * or @ref matchSequential, you need override both @c QSortFilterProxyModel::lessThan and
+ * If you are using this with @c QSortFilterProxyModel, and you choose to use match()
+ * or matchSequential(), you need override both @c QSortFilterProxyModel::lessThan and
  * @c QSortFilterProxyModel::filterAcceptsRow. A simple example:
  *
  * \code
@@ -76,7 +77,7 @@ namespace KFuzzyMatcher
  */
 struct KCOREADDONS_EXPORT Result
 {
-    /** Score of this match. This can be negative. if @ref matched is @c false
+    /** Score of this match. This can be negative. if matched is @c false
         then the score will be zero.
     */
     int score;
@@ -103,10 +104,10 @@ KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
  * @brief This should be the function to use if the strings you are matching
  * consist of file names, code etc.
  *
- * The return value of this function contains @ref Result#score which should be used to
+ * The return value of this function contains Result#score which should be used to
  * sort the results. Without sorting of the results this function won't very effective.
  * Also note that this function scores separator matches higher than sequential matches.
- * See @ref matchSequential for more details
+ * See matchSequential() for more details
  *
  * If you are using this function in a @c QSortFilterProxyModel based class, keep
  * in mind that during the initial load of the model when the pattern is empty,
@@ -117,7 +118,7 @@ KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
  * @param pattern to search for. For e.g., text entered by a user to filter a
  * list or model
  * @param str the current string from your list of strings
- * @return A @ref Result type with score of this match and whether the match was
+ * @return A Result type with score of this match and whether the match was
  * successful. If there is no match, score is zero. If the match is successful,
  * score must be used to sort the results.
  *
@@ -135,9 +136,9 @@ KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
  * "Split or join a tag"
  * \endcode
  *
- * and you use @ref match with pattern @c "sort", then it can be that the second
+ * and you use match with pattern @c "sort", then it can be that the second
  * result is scored better than the first one despite the fact that the first one
- * is an exact match. This happens because @ref match will score separator matches
+ * is an exact match. This happens because match will score separator matches
  * higher than sequential matches. Use this function if you want sequential matches
  * to take preference. This can be useful if you are filtering user interface
  * strings
@@ -145,7 +146,7 @@ KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
  * @param pattern to search for. For e.g., text entered by a user to filter a
  * list or model
  * @param str the current string from your list of strings
- * @return A @ref Result type with score of this match and whether the match was
+ * @return A Result type with score of this match and whether the match was
  * successful. If there is no match, score is zero. If the match is successful,
  * score must be used to sort the results.
  *
