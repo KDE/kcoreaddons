@@ -54,9 +54,10 @@ static bool match_recursive(QStringView::const_iterator pattern,
 
     // Loop through pattern and str looking for a match
     bool firstMatch = true;
+    QChar currentPatternChar = toLower(*pattern);
     while (pattern != patternEnd && str != strEnd) {
         // Found match
-        if (toLower(*pattern) == toLower(*str)) {
+        if (currentPatternChar == toLower(*str)) {
             // Supplied matches buffer was too short
             if (nextMatch >= maxMatches) {
                 return false;
@@ -87,6 +88,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
             // Advance
             matches[nextMatch++] = (uint8_t)(std::distance(strBegin, str));
             ++pattern;
+            currentPatternChar = toLower(*pattern);
         }
         ++str;
     }
@@ -135,8 +137,9 @@ static bool match_recursive(QStringView::const_iterator pattern,
                 // Camel case
                 const QChar neighbor = *(strBegin + currIdx - 1);
                 const QChar curr = *(strBegin + currIdx);
-                if (neighbor.isLower() && curr.isUpper())
+                if (neighbor.isLower() && curr.isUpper()) {
                     outScore += camelBonus;
+                }
 
                 // Separator
                 const bool neighborSeparator = neighbor == QLatin1Char('_') || neighbor == QLatin1Char(' ');
