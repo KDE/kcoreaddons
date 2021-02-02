@@ -177,7 +177,7 @@ KCOREADDONS_EXPORT Result matchSequential(QStringView pattern, QStringView str);
  * @since 5.79
  */
 KCOREADDONS_EXPORT QString toFuzzyMatchedDisplayString(QStringView pattern,
-                                                       QString str,
+                                                       QStringView str,
                                                        QStringView htmlTag,
                                                        QStringView htmlTagClose);
 
