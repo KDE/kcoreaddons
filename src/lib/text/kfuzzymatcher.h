@@ -80,9 +80,9 @@ struct KCOREADDONS_EXPORT Result
     /** Score of this match. This can be negative. if matched is @c false
         then the score will be zero.
     */
-    int score;
+    int score = 0;
     /** @c true if match was successful */
-    bool matched;
+    bool matched = false;
 };
 
 /**

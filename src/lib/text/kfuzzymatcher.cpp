@@ -235,7 +235,10 @@ KFuzzyMatcher::Result KFuzzyMatcher::matchSequential(QStringView pattern, QStrin
     int score = 0;
     const bool matched = match_recursive(patternIt, strIt, score, strIt, strEnd, patternEnd,
                            nullptr, matches, maxMatches, 0, recursionCount, 40);
-    return KFuzzyMatcher::Result{score, matched};
+    KFuzzyMatcher::Result result;
+    result.matched = matched;
+    result.score = score;
+    return result;
 }
 
 KFuzzyMatcher::Result KFuzzyMatcher::match(QStringView pattern, QStringView str)
@@ -243,5 +246,8 @@ KFuzzyMatcher::Result KFuzzyMatcher::match(QStringView pattern, QStringView str)
     uint8_t matches[256];
     int score = 0;
     const bool matched = match_internal(pattern, str, score, matches, sizeof(matches));
-    return KFuzzyMatcher::Result{score, matched};
+    KFuzzyMatcher::Result result;
+    result.matched = matched;
+    result.score = score;
+    return result;
 }
