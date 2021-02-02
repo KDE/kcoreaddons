@@ -11,6 +11,15 @@
 #include <QString>
 #include <QStringView>
 
+/**
+ * Custom toLower function which is much faster than
+ * c.toLower() directly
+ */
+static inline constexpr QChar toLower(QChar c)
+{
+    return c.isLower() ? c : c.toLower();
+}
+
 // internal
 // clang-format off
 static bool match_recursive(QStringView::const_iterator pattern,
@@ -47,7 +56,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
     bool firstMatch = true;
     while (pattern != patternEnd && str != strEnd) {
         // Found match
-        if (pattern->toLower() == str->toLower()) {
+        if (toLower(*pattern) == toLower(*str)) {
             // Supplied matches buffer was too short
             if (nextMatch >= maxMatches) {
                 return false;
