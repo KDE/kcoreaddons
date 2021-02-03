@@ -188,15 +188,18 @@ QString KFuzzyMatcher::toFuzzyMatchedDisplayString(QStringView pattern, QStringV
 {
     bool wasMatching = false;
     QString ret = str.toString();
+    const QString htmlTagStr = htmlTag.toString();
+    const QString htmlTagCloseStr = htmlTagClose.toString();
+
     for (int i = 0, j = 0; i < ret.size() && j < pattern.size(); ++i) {
         bool matching = ret.at(i).toLower() == pattern.at(j).toLower();
         if (!wasMatching && matching) {
-            ret.insert(i, htmlTag);
+            ret.insert(i, htmlTagStr);
             i += htmlTag.size();
             ++j;
             wasMatching = true;
         } else if (wasMatching && !matching) {
-            ret.insert(i, htmlTagClose);
+            ret.insert(i, htmlTagCloseStr);
             i += htmlTagClose.size();
             wasMatching = false;
         } else if (matching) {
@@ -205,7 +208,7 @@ QString KFuzzyMatcher::toFuzzyMatchedDisplayString(QStringView pattern, QStringV
     }
 
     if (wasMatching) {
-        ret.append(htmlTagClose);
+        ret.append(htmlTagCloseStr);
     }
 
     return ret;
