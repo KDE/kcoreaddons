@@ -30,12 +30,13 @@ static bool match_recursive(QStringView::const_iterator pattern,
                             const QStringView::const_iterator patternEnd,
                             const uint8_t *srcMatches,
                             uint8_t *matches,
-                            int maxMatches,
                             int nextMatch,
-                            int &recursionCount,
-                            int seqBonus = 15)
+                            int &recursionCount)
 {
     static constexpr int recursionLimit = 10;
+    // max number of matches allowed, this should be enough
+    static constexpr int maxMatches = 256;
+
     // Count recursions
     ++recursionCount;
     if (recursionCount >= recursionLimit) {
@@ -49,12 +50,14 @@ static bool match_recursive(QStringView::const_iterator pattern,
 
     // Recursion params
     bool recursiveMatch = false;
-    uint8_t bestRecursiveMatches[256];
+    uint8_t bestRecursiveMatches[maxMatches];
     int bestRecursiveScore = 0;
 
     // Loop through pattern and str looking for a match
     bool firstMatch = true;
     QChar currentPatternChar = toLower(*pattern);
+    // Are we matching in sequence start from start?
+    bool matchingInSequence = true;
     while (pattern != patternEnd && str != strEnd) {
         // Found match
         if (currentPatternChar == toLower(*str)) {
@@ -70,16 +73,15 @@ static bool match_recursive(QStringView::const_iterator pattern,
             }
 
             // Recursive call that "skips" this match
-            uint8_t recursiveMatches[256];
+            uint8_t recursiveMatches[maxMatches];
             int recursiveScore = 0;
             const auto strNextChar = std::next(str);
-            if (match_recursive(pattern, strNextChar, recursiveScore, strBegin,
+            if (!matchingInSequence && match_recursive(pattern, strNextChar, recursiveScore, strBegin,
                                 strEnd, patternEnd, matches, recursiveMatches,
-                                sizeof(recursiveMatches), nextMatch, recursionCount)) {
+                                nextMatch, recursionCount)) {
                 // Pick best recursive score
                 if (!recursiveMatch || recursiveScore > bestRecursiveScore) {
-                    static_assert(sizeof(recursiveMatches) == sizeof(bestRecursiveMatches), "Should be equal");
-                    memcpy(bestRecursiveMatches, recursiveMatches, sizeof(recursiveMatches));
+                    memcpy(bestRecursiveMatches, recursiveMatches, maxMatches);
                     bestRecursiveScore = recursiveScore;
                 }
                 recursiveMatch = true;
@@ -89,6 +91,8 @@ static bool match_recursive(QStringView::const_iterator pattern,
             matches[nextMatch++] = (uint8_t)(std::distance(strBegin, str));
             ++pattern;
             currentPatternChar = toLower(*pattern);
+        } else {
+            matchingInSequence = false;
         }
         ++str;
     }
@@ -98,14 +102,16 @@ static bool match_recursive(QStringView::const_iterator pattern,
 
     // Calculate score
     if (matched) {
-        const int sequentialBonus = seqBonus; // bonus for adjacent matches
-        static constexpr int separatorBonus = 30; // bonus if match occurs after a separator
-        static constexpr int camelBonus = 30; // bonus if match is uppercase and prev is lower
+        static constexpr int sequentialBonus = 30;
+        static constexpr int separatorBonus = 25; // bonus if match occurs after a separator
+        static constexpr int camelBonus = 25; // bonus if match is uppercase and prev is lower
         static constexpr int firstLetterBonus = 15; // bonus if the first letter is matched
 
         static constexpr int leadingLetterPenalty = -5; // penalty applied for every letter in str before the first match
         static constexpr int maxLeadingLetterPenalty = -15; // maximum penalty for leading letters
         static constexpr int unmatchedLetterPenalty = -1; // penalty for every letter that doesn't matter
+
+        static constexpr int nonBeginSequenceBonus = 10;
 
         // Initialize score
         outScore = 100;
@@ -119,7 +125,10 @@ static bool match_recursive(QStringView::const_iterator pattern,
         const int unmatched = (int)(std::distance(strBegin, strEnd)) - nextMatch;
         outScore += unmatchedLetterPenalty * unmatched;
 
+        uint8_t seqs[maxMatches] = {0};
+
         // Apply ordering bonuses
+        int j = 0;
         for (int i = 0; i < nextMatch; ++i) {
             const uint8_t currIdx = matches[i];
 
@@ -128,7 +137,13 @@ static bool match_recursive(QStringView::const_iterator pattern,
 
                 // Sequential
                 if (currIdx == (prevIdx + 1)) {
-                    outScore += sequentialBonus;
+                    if (j > 0 && seqs[j - 1] == i - 1){
+                        outScore += sequentialBonus;
+                        seqs[j++] = i;
+                    } else {
+                        // In sequence, but from first char
+                        outScore += nonBeginSequenceBonus;
+                    }
                 }
             }
 
@@ -149,6 +164,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
             } else {
                 // First letter
                 outScore += firstLetterBonus;
+                seqs[j++] = i;
             }
         }
     }
@@ -156,7 +172,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
     // Return best result
     if (recursiveMatch && (!matched || bestRecursiveScore > outScore)) {
         // Recursive score is better than "this"
-        memcpy(matches, bestRecursiveMatches, maxMatches);
+        memcpy(matches, bestRecursiveMatches, nextMatch);
         outScore = bestRecursiveScore;
         return true;
     } else if (matched) {
@@ -169,8 +185,12 @@ static bool match_recursive(QStringView::const_iterator pattern,
 }
 // clang-format on
 
-static bool match_internal(QStringView pattern, QStringView str, int &outScore, unsigned char *matches, int maxMatches)
+static bool match_internal(QStringView pattern, QStringView str, int &outScore, unsigned char *matches)
 {
+    if (pattern.isEmpty()) {
+        return true;
+    }
+
     int recursionCount = 0;
 
     auto strIt = str.cbegin();
@@ -179,40 +199,10 @@ static bool match_internal(QStringView pattern, QStringView str, int &outScore, 
     const auto strEnd = str.cend();
 
     return match_recursive(patternIt, strIt, outScore, strIt, strEnd, patternEnd,
-                           nullptr, matches, maxMatches, 0, recursionCount);
+                           nullptr, matches, 0, recursionCount);
 }
 
 /**************************************************************/
-
-QString KFuzzyMatcher::toFuzzyMatchedDisplayString(QStringView pattern, QStringView str, QStringView htmlTag, QStringView htmlTagClose)
-{
-    bool wasMatching = false;
-    QString ret = str.toString();
-    const QString htmlTagStr = htmlTag.toString();
-    const QString htmlTagCloseStr = htmlTagClose.toString();
-
-    for (int i = 0, j = 0; i < ret.size() && j < pattern.size(); ++i) {
-        bool matching = ret.at(i).toLower() == pattern.at(j).toLower();
-        if (!wasMatching && matching) {
-            ret.insert(i, htmlTagStr);
-            i += htmlTag.size();
-            ++j;
-            wasMatching = true;
-        } else if (wasMatching && !matching) {
-            ret.insert(i, htmlTagCloseStr);
-            i += htmlTagClose.size();
-            wasMatching = false;
-        } else if (matching) {
-            ++j;
-        }
-    }
-
-    if (wasMatching) {
-        ret.append(htmlTagCloseStr);
-    }
-
-    return ret;
-}
 
 bool KFuzzyMatcher::matchSimple(QStringView pattern, QStringView str)
 {
@@ -225,32 +215,14 @@ bool KFuzzyMatcher::matchSimple(QStringView pattern, QStringView str)
     return patternIt == pattern.cend();
 }
 
-KFuzzyMatcher::Result KFuzzyMatcher::matchSequential(QStringView pattern, QStringView str)
-{
-    int recursionCount = 0;
-    uint8_t matches[256];
-    auto maxMatches = sizeof(matches);
-    auto strIt = str.cbegin();
-    auto patternIt = pattern.cbegin();
-    const auto patternEnd = pattern.cend();
-    const auto strEnd = str.cend();
-
-    int score = 0;
-    const bool matched = match_recursive(patternIt, strIt, score, strIt, strEnd, patternEnd,
-                           nullptr, matches, maxMatches, 0, recursionCount, 40);
-    KFuzzyMatcher::Result result;
-    result.matched = matched;
-    result.score = score;
-    return result;
-}
-
 KFuzzyMatcher::Result KFuzzyMatcher::match(QStringView pattern, QStringView str)
 {
     uint8_t matches[256];
     int score = 0;
-    const bool matched = match_internal(pattern, str, score, matches, sizeof(matches));
+    const bool matched = match_internal(pattern, str, score, matches);
     KFuzzyMatcher::Result result;
     result.matched = matched;
     result.score = score;
     return result;
 }
+

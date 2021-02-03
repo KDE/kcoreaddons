@@ -10,11 +10,12 @@
 #include <QString>
 #include <QStringList>
 #include <QTest>
+
 #include <algorithm>
 
-QTEST_MAIN(KFuzzyMatcherTest)
-
 #include "kfuzzymatcher.h"
+
+QTEST_MAIN(KFuzzyMatcherTest)
 
 void KFuzzyMatcherTest::testMatchSimple_data()
 {
@@ -28,6 +29,7 @@ void KFuzzyMatcherTest::testMatchSimple_data()
     QTest::newRow("WithSep") << QStringLiteral("tf") << QStringLiteral("the_file") << true;
     QTest::newRow("Umlaut") << QStringLiteral("Häu") << QStringLiteral("Häuser") << true;
     QTest::newRow("Unmatched") << QStringLiteral("Name") << QStringLiteral("Nam") << false;
+    QTest::newRow("Empty Pattern") << QStringLiteral("") << QStringLiteral("Nam") << true;
 }
 
 void KFuzzyMatcherTest::testMatchSimple()
@@ -55,8 +57,8 @@ void KFuzzyMatcherTest::testMatch_data()
                                 QStringLiteral("irrelevant"),
                               }
                           << QStringList{
-                                QStringLiteral("Some other right test"),
                                 QStringLiteral("Sort"),
+                                QStringLiteral("Some other right test"),
                                 QStringLiteral("Soup rate"),
                               }
                           << 3;
@@ -85,15 +87,86 @@ void KFuzzyMatcherTest::testMatch_data()
                           << QStringList{
                              }
                           << 0;
+
+    QTest::newRow("pattern=marath") << QStringLiteral("marath")
+                          << QStringList{
+                             QStringLiteral("Maralen of the Mornsong"),
+                             QStringLiteral("Silumgar, the Drifting Death"),
+                             QStringLiteral("Maralen of the Mornsong Avatar"),
+                             QStringLiteral("Marshaling the Troops"),
+                             QStringLiteral("Homeward Path"),
+                             QStringLiteral("Marath, Will of the Wild"),
+                             QStringLiteral("Marshal's Anthem"),
+                             QStringLiteral("Marchesa, the Black Rose"),
+                             QStringLiteral("Mark for Death"),
+                             QStringLiteral("Master Apothecary"),
+                             QStringLiteral("Mazirek, Kraul Death Priest"),
+                             QStringLiteral("Akroma, Angel of Wrath"),
+                             QStringLiteral("Akroma, Angel of Wrath Avatar"),
+                             QStringLiteral("Commander's Authority"),
+                             QStringLiteral("Shaman of the Great Hunt"),
+                             QStringLiteral("Halimar Wavewatch"),
+                             QStringLiteral("Pyromancer's Swath")
+                              }
+                          << QStringList{
+                             QStringLiteral("Marath, Will of the Wild"),
+                             QStringLiteral("Maralen of the Mornsong"),
+                             QStringLiteral("Maralen of the Mornsong Avatar"),
+                             QStringLiteral("Marshal's Anthem"),
+                             QStringLiteral("Marshaling the Troops"),
+                             QStringLiteral("Marchesa, the Black Rose"),
+                             QStringLiteral("Mark for Death"),
+                             QStringLiteral("Master Apothecary"),
+                             QStringLiteral("Mazirek, Kraul Death Priest"),
+                             QStringLiteral("Akroma, Angel of Wrath"),
+                             QStringLiteral("Akroma, Angel of Wrath Avatar"),
+                             QStringLiteral("Commander's Authority"),
+                             QStringLiteral("Homeward Path"),
+                             QStringLiteral("Shaman of the Great Hunt"),
+                             QStringLiteral("Halimar Wavewatch"),
+                             QStringLiteral("Pyromancer's Swath"),
+                             QStringLiteral("Silumgar, the Drifting Death")
+                             }
+                          << 17;
+
+    // This tests our recursive best match
+    QTest::newRow("pattern=lll") << QStringLiteral("lll")
+                          << QStringList{
+                                QStringLiteral("SVisualLoggerLogsList.h"),
+                                QStringLiteral("SimpleFileLogger.cpp"),
+                                QStringLiteral("StringHandlerLogList.txt"),
+                                QStringLiteral("LeapFromLostAllan"),
+                                QStringLiteral("BumpLLL"),
+                              }
+                          << QStringList{
+                             QStringLiteral("SVisualLoggerLogsList.h"),
+                             QStringLiteral("LeapFromLostAllan"),
+                             QStringLiteral("BumpLLL"),
+                             QStringLiteral("StringHandlerLogList.txt"),
+                             QStringLiteral("SimpleFileLogger.cpp"),
+                             }
+                          << 5;
+
+    QTest::newRow("pattern=") << QStringLiteral("")
+                          << QStringList{
+                                QStringLiteral("th"),
+                                QStringLiteral("ths"),
+                                QStringLiteral("thsi")
+                              }
+                          << QStringList{
+                             QStringLiteral("th"),
+                             QStringLiteral("ths"),
+                             QStringLiteral("thsi")
+                             }
+                          << 3;
 // clang-format on
 }
 
-template <KFuzzyMatcher::Result (*MatchFunc)(const QStringView, const QStringView)>
 static QStringList matchHelper(const QString& pattern, const QStringList& input)
 {
     QVector<QPair<QString, int>> actual;
     for (int i = 0; i < input.size(); ++i) {
-        KFuzzyMatcher::Result res = MatchFunc(pattern, input.at(i));
+        KFuzzyMatcher::Result res = KFuzzyMatcher::match(pattern, input.at(i));
         if (res.matched) {
             actual.push_back({input.at(i), res.score});
         }
@@ -120,86 +193,8 @@ void KFuzzyMatcherTest::testMatch()
     QFETCH(QStringList, expected);
     QFETCH(int, size);
 
-    const auto actual = matchHelper<KFuzzyMatcher::match>(pattern, input);
+    const QStringList actual = matchHelper(pattern, input);
 
     QCOMPARE(actual.size(), size);
-    QCOMPARE(actual, expected);
-}
-
-void KFuzzyMatcherTest::testMatchSequential_data()
-{
-// clang-format off
-    QTest::addColumn<QString>("pattern");
-    QTest::addColumn<QStringList>("input");
-    QTest::addColumn<QStringList>("expected");
-    QTest::addColumn<int>("size");
-
-    QTest::newRow("sort") << QStringLiteral("sort")
-                          << QStringList{
-                                QStringLiteral("Sort"),
-                                QStringLiteral("Some other right test"),
-                                QStringLiteral("Soup rate"),
-                                QStringLiteral("Someother"),
-                                QStringLiteral("irrelevant"),
-                              }
-                          << QStringList{
-                                QStringLiteral("Sort"),
-                                QStringLiteral("Some other right test"),
-                                QStringLiteral("Soup rate"),
-                              }
-                          << 3;
-// clang-format on
-}
-
-void KFuzzyMatcherTest::testMatchSequential()
-{
-    QFETCH(QString, pattern);
-    QFETCH(QStringList, input);
-    QFETCH(QStringList, expected);
-    QFETCH(int, size);
-
-    const auto actual = matchHelper<KFuzzyMatcher::matchSequential>(pattern, input);
-
-    QCOMPARE(actual.size(), size);
-    QCOMPARE(actual, expected);
-}
-
-void KFuzzyMatcherTest::testToFuzzyMatchedDisplayString_data()
-{
-    QTest::addColumn<QString>("pattern");
-    QTest::addColumn<QString>("input");
-    QTest::addColumn<QString>("expected");
-    QTest::addColumn<QString>("tag");
-    QTest::addColumn<QString>("tagClose");
-
-    QTest::newRow("HelloBold") << QStringLiteral("Hlo")
-                               << QStringLiteral("Hello")
-                               << QStringLiteral("<b>H</b>e<b>l</b>l<b>o</b>")
-                               << QStringLiteral("<b>")
-                               << QStringLiteral("</b>");
-
-    QTest::newRow("HelloItalic") << QStringLiteral("Hllo")
-                                 << QStringLiteral("Hello")
-                                 << QStringLiteral("<i>H</i>e<i>llo</i>")
-                                 << QStringLiteral("<i>")
-                                 << QStringLiteral("</i>");
-
-    QTest::newRow("SpanStyle")   << QStringLiteral("Hello ld")
-                                 << QStringLiteral("Hello World")
-                                 << QStringLiteral("<span style=\"color: red;\">Hello </span>Wor<span style=\"color: red;\">ld</span>")
-                                 << QStringLiteral("<span style=\"color: red;\">")
-                                 << QStringLiteral("</span>");
-}
-
-void KFuzzyMatcherTest::testToFuzzyMatchedDisplayString()
-{
-    QFETCH(QString, pattern);
-    QFETCH(QString, input);
-    QFETCH(QString, expected);
-    QFETCH(QString, tag);
-    QFETCH(QString, tagClose);
-
-    QString actual = KFuzzyMatcher::toFuzzyMatchedDisplayString(pattern, input, tag, tagClose);
-
     QCOMPARE(actual, expected);
 }
