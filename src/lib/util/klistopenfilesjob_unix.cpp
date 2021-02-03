@@ -22,13 +22,16 @@ public:
         : job(Job)
         , path(Path)
     {
-        QObject::connect(&lsofProcess, &QProcess::errorOccurred, [this](QProcess::ProcessError error) {
+        QObject::connect(&lsofProcess, &QProcess::errorOccurred, job, [this](QProcess::ProcessError error) {
             lsofError(error);
         });
-        QObject::connect(&lsofProcess, QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+
+        QObject::connect(&lsofProcess,
+                         QOverload<int, QProcess::ExitStatus>::of(&QProcess::finished),
+                         job,
                          [this](int exitCode, QProcess::ExitStatus exitStatus) {
-            lsofFinished(exitCode, exitStatus);
-        });
+                             lsofFinished(exitCode, exitStatus);
+                         });
     }
     void start()
     {

@@ -198,6 +198,7 @@ public Q_SLOTS:
      * set to Quietly, signal result will NOT be emitted.
      * @return true if the operation is supported and succeeded, false otherwise
      */
+    // TODO KF6 slot arguments need to be fully-qualified, KJob::KillVerbosity
     bool kill(KillVerbosity verbosity = Quietly);
 
     /**

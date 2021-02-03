@@ -362,7 +362,7 @@ QString KStringHandler::preProcessWrap(const QString &text)
 int KStringHandler::logicalLength(const QString& text)
 {
     int length = 0;
-    auto chrs = text.toUcs4();
+    const auto chrs = text.toUcs4();
     for (auto chr : chrs) {
         auto script = QChar::script(chr);
         if (script == QChar::Script_Han ||
