@@ -172,7 +172,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
     // Return best result
     if (recursiveMatch && (!matched || bestRecursiveScore > outScore)) {
         // Recursive score is better than "this"
-        memcpy(matches, bestRecursiveMatches, nextMatch);
+        memcpy(matches, bestRecursiveMatches, maxMatches);
         outScore = bestRecursiveScore;
         return true;
     } else if (matched) {
