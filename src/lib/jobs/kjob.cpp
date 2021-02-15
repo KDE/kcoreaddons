@@ -251,7 +251,10 @@ void KJob::setProcessedAmount(Unit unit, qulonglong amount)
     d->processedAmount[unit] = amount;
 
     if (should_emit) {
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 80)
         Q_EMIT processedAmount(this, unit, amount);
+#endif
+        Q_EMIT processedAmountChanged(this, unit, amount, QPrivateSignal{});
         if (unit == d->progressUnit) {
             Q_EMIT processedSize(this, amount);
             emitPercent(d->processedAmount[unit], d->totalAmount[unit]);
@@ -267,7 +270,10 @@ void KJob::setTotalAmount(Unit unit, qulonglong amount)
     d->totalAmount[unit] = amount;
 
     if (should_emit) {
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 80)
         Q_EMIT totalAmount(this, unit, amount);
+#endif
+        Q_EMIT totalAmountChanged(this, unit, amount, QPrivateSignal{});
         if (unit == d->progressUnit) {
             Q_EMIT totalSize(this, amount);
             emitPercent(d->processedAmount[unit], d->totalAmount[unit]);
@@ -286,7 +292,10 @@ void KJob::setPercent(unsigned long percentage)
     Q_D(KJob);
     if (d->percentage != percentage) {
         d->percentage = percentage;
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 80)
         Q_EMIT percent(this, percentage);
+#endif
+        Q_EMIT percentChanged(this, percentage, QPrivateSignal{});
     }
 }
 
@@ -305,7 +314,10 @@ void KJob::emitPercent(qulonglong processedAmount, qulonglong totalAmount)
         unsigned long oldPercentage = d->percentage;
         d->percentage = 100.0 * processedAmount / totalAmount;
         if (d->percentage != oldPercentage) {
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 80)
             Q_EMIT percent(this, d->percentage);
+#endif
+            Q_EMIT percentChanged(this, d->percentage, QPrivateSignal{});
         }
     }
 }

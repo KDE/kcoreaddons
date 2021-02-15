@@ -40,13 +40,9 @@ void KJobTrackerInterface::registerJob(KJob *job)
     connect(job, &KJob::description, this, &KJobTrackerInterface::description);
     connect(job, &KJob::infoMessage, this, &KJobTrackerInterface::infoMessage);
     connect(job, &KJob::warning, this, &KJobTrackerInterface::warning);
-
-    connect(job, QOverload<KJob *, KJob::Unit, qulonglong>::of(&KJob::totalAmount),
-            this, &KJobTrackerInterface::totalAmount);
-    connect(job, QOverload<KJob *, KJob::Unit, qulonglong>::of(&KJob::processedAmount),
-            this, &KJobTrackerInterface::processedAmount);
-    connect(job, QOverload<KJob *, unsigned long>::of(&KJob::percent),
-            this, &KJobTrackerInterface::percent);
+    connect(job, &KJob::totalAmountChanged, this, &KJobTrackerInterface::totalAmount);
+    connect(job, &KJob::processedAmountChanged, this, &KJobTrackerInterface::processedAmount);
+    connect(job, &KJob::percentChanged, this, &KJobTrackerInterface::percent);
     connect(job, &KJob::speed, this, &KJobTrackerInterface::speed);
 }
 

@@ -73,9 +73,14 @@ void KJobTest::testProgressTracking()
     qRegisterMetaType<KJob *>("KJob*");
     qRegisterMetaType<qulonglong>("qulonglong");
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QSignalSpy processed_spy(job, SIGNAL(processedAmount(KJob*,KJob::Unit,qulonglong)));
     QSignalSpy total_spy(job, SIGNAL(totalAmount(KJob*,KJob::Unit,qulonglong)));
     QSignalSpy percent_spy(job, SIGNAL(percent(KJob*,ulong)));
+#endif
+    QSignalSpy processedChanged_spy(job, &KJob::processedAmountChanged);
+    QSignalSpy totalChanged_spy(job, &KJob::totalAmountChanged);
+    QSignalSpy percentChanged_spy(job, &KJob::percentChanged);
 
     /* Process a first item. Corresponding signal should be emitted.
      * Total size didn't change.
@@ -83,17 +88,25 @@ void KJobTest::testProgressTracking()
      */
     testJob->setProcessedSize(1);
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(processed_spy.size(), 1);
     QCOMPARE(processed_spy.at(0).at(0).value<KJob *>(), static_cast<KJob *>(job));
     QCOMPARE(processed_spy.at(0).at(2).value<qulonglong>(), qulonglong(1));
     QCOMPARE(total_spy.size(), 0);
     QCOMPARE(percent_spy.size(), 0);
+#endif
+    QCOMPARE(processedChanged_spy.size(), 1);
+    QCOMPARE(processedChanged_spy.at(0).at(0).value<KJob *>(), static_cast<KJob *>(job));
+    QCOMPARE(processedChanged_spy.at(0).at(2).value<qulonglong>(), qulonglong(1));
+    QCOMPARE(totalChanged_spy.size(), 0);
+    QCOMPARE(percentChanged_spy.size(), 0);
 
     /* Now, we know the total size. It's signaled.
      * The new percentage is signaled too.
      */
     testJob->setTotalSize(10);
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(processed_spy.size(), 1);
     QCOMPARE(total_spy.size(), 1);
     QCOMPARE(total_spy.at(0).at(0).value<KJob *>(), job);
@@ -101,23 +114,39 @@ void KJobTest::testProgressTracking()
     QCOMPARE(percent_spy.size(), 1);
     QCOMPARE(percent_spy.at(0).at(0).value<KJob *>(), job);
     QCOMPARE(percent_spy.at(0).at(1).value<unsigned long>(), static_cast<unsigned long>(10));
+#endif
+    QCOMPARE(processedChanged_spy.size(), 1);
+    QCOMPARE(totalChanged_spy.size(), 1);
+    QCOMPARE(totalChanged_spy.at(0).at(0).value<KJob *>(), job);
+    QCOMPARE(totalChanged_spy.at(0).at(2).value<qulonglong>(), qulonglong(10));
+    QCOMPARE(percentChanged_spy.size(), 1);
+    QCOMPARE(percentChanged_spy.at(0).at(0).value<KJob *>(), job);
+    QCOMPARE(percentChanged_spy.at(0).at(1).value<unsigned long>(), static_cast<unsigned long>(10));
 
     /* We announce a new percentage by hand.
      * Total, and processed didn't change, so no signal is emitted for them.
      */
     testJob->setPercent(15);
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(processed_spy.size(), 1);
     QCOMPARE(total_spy.size(), 1);
     QCOMPARE(percent_spy.size(), 2);
     QCOMPARE(percent_spy.at(1).at(0).value<KJob *>(), job);
     QCOMPARE(percent_spy.at(1).at(1).value<unsigned long>(), static_cast<unsigned long>(15));
+#endif
+    QCOMPARE(processedChanged_spy.size(), 1);
+    QCOMPARE(totalChanged_spy.size(), 1);
+    QCOMPARE(percentChanged_spy.size(), 2);
+    QCOMPARE(percentChanged_spy.at(1).at(0).value<KJob *>(), job);
+    QCOMPARE(percentChanged_spy.at(1).at(1).value<unsigned long>(), static_cast<unsigned long>(15));
 
     /* We make some progress.
      * Processed size and percent are signaled.
      */
     testJob->setProcessedSize(3);
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(processed_spy.size(), 2);
     QCOMPARE(processed_spy.at(1).at(0).value<KJob *>(), job);
     QCOMPARE(processed_spy.at(1).at(2).value<qulonglong>(), qulonglong(3));
@@ -125,21 +154,34 @@ void KJobTest::testProgressTracking()
     QCOMPARE(percent_spy.size(), 3);
     QCOMPARE(percent_spy.at(2).at(0).value<KJob *>(), job);
     QCOMPARE(percent_spy.at(2).at(1).value<unsigned long>(), static_cast<unsigned long>(30));
+#endif
+    QCOMPARE(processedChanged_spy.size(), 2);
+    QCOMPARE(processedChanged_spy.at(1).at(0).value<KJob *>(), job);
+    QCOMPARE(processedChanged_spy.at(1).at(2).value<qulonglong>(), qulonglong(3));
+    QCOMPARE(totalChanged_spy.size(), 1);
+    QCOMPARE(percentChanged_spy.size(), 3);
+    QCOMPARE(percentChanged_spy.at(2).at(0).value<KJob *>(), job);
+    QCOMPARE(percentChanged_spy.at(2).at(1).value<unsigned long>(), static_cast<unsigned long>(30));
 
     /* We set a new total size, but equals to the previous one.
      * No signal is emitted.
      */
     testJob->setTotalSize(10);
-
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(processed_spy.size(), 2);
     QCOMPARE(total_spy.size(), 1);
     QCOMPARE(percent_spy.size(), 3);
+#endif
+    QCOMPARE(processedChanged_spy.size(), 2);
+    QCOMPARE(totalChanged_spy.size(), 1);
+    QCOMPARE(percentChanged_spy.size(), 3);
 
     /* We 'lost' the previous work done.
      * Signals both percentage and new processed size.
      */
     testJob->setProcessedSize(0);
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(processed_spy.size(), 3);
     QCOMPARE(processed_spy.at(2).at(0).value<KJob *>(), job);
     QCOMPARE(processed_spy.at(2).at(2).value<qulonglong>(), qulonglong(0));
@@ -147,6 +189,14 @@ void KJobTest::testProgressTracking()
     QCOMPARE(percent_spy.size(), 4);
     QCOMPARE(percent_spy.at(3).at(0).value<KJob *>(), job);
     QCOMPARE(percent_spy.at(3).at(1).value<unsigned long>(), static_cast<unsigned long>(0));
+#endif
+    QCOMPARE(processedChanged_spy.size(), 3);
+    QCOMPARE(processedChanged_spy.at(2).at(0).value<KJob *>(), job);
+    QCOMPARE(processedChanged_spy.at(2).at(2).value<qulonglong>(), qulonglong(0));
+    QCOMPARE(totalChanged_spy.size(), 1);
+    QCOMPARE(percentChanged_spy.size(), 4);
+    QCOMPARE(percentChanged_spy.at(3).at(0).value<KJob *>(), job);
+    QCOMPARE(percentChanged_spy.at(3).at(1).value<unsigned long>(), static_cast<unsigned long>(0));
 
     /* We process more than the total size!?
      * Signals both percentage and new processed size.
@@ -156,6 +206,7 @@ void KJobTest::testProgressTracking()
      */
     testJob->setProcessedSize(15);
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(processed_spy.size(), 4);
     QCOMPARE(processed_spy.at(3).at(0).value<KJob *>(), job);
     QCOMPARE(processed_spy.at(3).at(2).value<qulonglong>(), qulonglong(15));
@@ -163,25 +214,49 @@ void KJobTest::testProgressTracking()
     QCOMPARE(percent_spy.size(), 5);
     QCOMPARE(percent_spy.at(4).at(0).value<KJob *>(), job);
     QCOMPARE(percent_spy.at(4).at(1).value<unsigned long>(), static_cast<unsigned long>(150));
+#endif
+    QCOMPARE(processedChanged_spy.size(), 4);
+    QCOMPARE(processedChanged_spy.at(3).at(0).value<KJob *>(), job);
+    QCOMPARE(processedChanged_spy.at(3).at(2).value<qulonglong>(), qulonglong(15));
+    QCOMPARE(totalChanged_spy.size(), 1);
+    QCOMPARE(percentChanged_spy.size(), 5);
+    QCOMPARE(percentChanged_spy.at(4).at(0).value<KJob *>(), job);
+    QCOMPARE(percentChanged_spy.at(4).at(1).value<unsigned long>(), static_cast<unsigned long>(150));
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     processed_spy.clear();
     total_spy.clear();
     percent_spy.clear();
+#endif
+    processedChanged_spy.clear();
+    totalChanged_spy.clear();
+    percentChanged_spy.clear();
 
     /**
      * Try again with Files as the progress unit
      */
     testJob->setProgressUnit(KJob::Files);
     testJob->setProcessedSize(16);
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(percent_spy.size(), 0); // no impact on percent
+#endif
+    QCOMPARE(percentChanged_spy.size(), 0);
 
     testJob->setTotalFiles(5);
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(percent_spy.size(), 1);
     QCOMPARE(percent_spy.at(0).at(1).value<unsigned long>(), static_cast<unsigned long>(0));
+#endif
+    QCOMPARE(percentChanged_spy.size(), 1);
+    QCOMPARE(percentChanged_spy.at(0).at(1).value<unsigned long>(), static_cast<unsigned long>(0));
 
     testJob->setProcessedFiles(2);
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
     QCOMPARE(percent_spy.size(), 2);
     QCOMPARE(percent_spy.at(1).at(1).value<unsigned long>(), static_cast<unsigned long>(40));
+#endif
+    QCOMPARE(percentChanged_spy.size(), 2);
+    QCOMPARE(percentChanged_spy.at(1).at(1).value<unsigned long>(), static_cast<unsigned long>(40));
 
     delete job;
 }
