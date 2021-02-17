@@ -87,6 +87,9 @@ bool getProcessInfo(const QString& procId, KProcessInfo& processInfo)
         return false;     // process may have exited
 
     const QStringList data = QString::fromLocal8Bit(file.readAll()).split(QLatin1Char(' '));
+    if (data.length() < 2) {
+        return false;
+    }
     qint64 pid = procId.toUInt();
     QString name = data.at(1);
     if (name.startsWith(QLatin1Char('(')) && name.endsWith(QLatin1Char(')'))) {
