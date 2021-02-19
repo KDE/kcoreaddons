@@ -96,7 +96,9 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
         }
         // before the notilde label, as a tilde does not match anyway
         if (firstword) {
-            if (c == QLatin1Char('_') || (c >= QLatin1Char('A') && c <= QLatin1Char('Z')) || (c >= QLatin1Char('a') && c <= QLatin1Char('z'))) {
+            if (c == QLatin1Char('_') //
+                || (c >= QLatin1Char('A') && c <= QLatin1Char('Z')) //
+                || (c >= QLatin1Char('a') && c <= QLatin1Char('z'))) {
                 int pos2 = pos;
                 QChar cc;
                 do {
@@ -106,8 +108,10 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                         goto okret;
                     }
                     cc = args.unicode()[pos2++];
-                } while (cc == QLatin1Char('_') || (cc >= QLatin1Char('A') && cc <= QLatin1Char('Z')) || (cc >= QLatin1Char('a') && cc <= QLatin1Char('z'))
-                         || (cc >= QLatin1Char('0') && cc <= QLatin1Char('9')));
+                } while (cc == QLatin1Char('_') /* clang-format off */
+                         || (cc >= QLatin1Char('A') && cc <= QLatin1Char('Z'))
+                         || (cc >= QLatin1Char('a') && cc <= QLatin1Char('z'))
+                         || (cc >= QLatin1Char('0') && cc <= QLatin1Char('9'))); /* clang-format on */
                 if (cc == QLatin1Char('=')) {
                     goto metaerr;
                 }
@@ -138,7 +142,9 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                             goto quoteerr;
                         }
                         c = args.unicode()[pos++];
-                        if (c != QLatin1Char('"') && c != QLatin1Char('\\') && !((flags & AbortOnMeta) && (c == QLatin1Char('$') || c == QLatin1Char('`')))) {
+                        if (c != QLatin1Char('"') //
+                            && c != QLatin1Char('\\') //
+                            && !((flags & AbortOnMeta) && (c == QLatin1Char('$') || c == QLatin1Char('`')))) {
                             cret += QLatin1Char('\\');
                         }
                     } else if ((flags & AbortOnMeta) && (c == QLatin1Char('$') || c == QLatin1Char('`'))) {

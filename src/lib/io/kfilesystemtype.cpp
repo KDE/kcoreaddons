@@ -14,19 +14,28 @@
 #ifndef Q_OS_WIN
 inline KFileSystemType::Type kde_typeFromName(const char *name)
 {
-    if (qstrncmp(name, "nfs", 3) == 0 || qstrncmp(name, "autofs", 6) == 0 || qstrncmp(name, "cachefs", 7) == 0 || qstrncmp(name, "fuse.sshfs", 10) == 0
+    /* clang-format off */
+    if (qstrncmp(name, "nfs", 3) == 0
+        || qstrncmp(name, "autofs", 6) == 0
+        || qstrncmp(name, "cachefs", 7) == 0
+        || qstrncmp(name, "fuse.sshfs", 10) == 0
         || qstrncmp(name, "xtreemfs@", 9) == 0) { // #178678
+
         return KFileSystemType::Nfs;
     }
-    if (qstrncmp(name, "fat", 3) == 0 || qstrncmp(name, "vfat", 4) == 0 || qstrncmp(name, "msdos", 5) == 0) {
+    if (qstrncmp(name, "fat", 3) == 0
+        || qstrncmp(name, "vfat", 4) == 0
+        || qstrncmp(name, "msdos", 5) == 0) {
         return KFileSystemType::Fat;
     }
-    if (qstrncmp(name, "cifs", 4) == 0 || qstrncmp(name, "smbfs", 5) == 0) {
+    if (qstrncmp(name, "cifs", 4) == 0
+        || qstrncmp(name, "smbfs", 5) == 0) {
         return KFileSystemType::Smb;
     }
     if (qstrncmp(name, "ramfs", 5) == 0) {
         return KFileSystemType::Ramfs;
     }
+    /* clang-format on */
 
     return KFileSystemType::Other;
 }
