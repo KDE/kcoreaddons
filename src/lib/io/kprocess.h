@@ -52,7 +52,7 @@ public:
              to the parent process' respective channel */
         OnlyStdoutChannel = QProcess::ForwardedErrorChannel,
         /**< Only standard output is handled; standard error is forwarded */
-        OnlyStderrChannel = QProcess::ForwardedOutputChannel
+        OnlyStderrChannel = QProcess::ForwardedOutputChannel,
         /**< Only standard error is handled; standard output is forwarded */
     };
 

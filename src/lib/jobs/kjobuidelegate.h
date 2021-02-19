@@ -43,7 +43,7 @@ public:
         AutoHandlingDisabled = 0, ///< No automatic handling (default)
         AutoErrorHandlingEnabled = 1, ///< Equivalent to setAutoErrorHandlingEnabled(true)
         AutoWarningHandlingEnabled = 2, ///< Equivalent to setAutoWarningHandlingEnabled(true)
-        AutoHandlingEnabled = AutoErrorHandlingEnabled | AutoWarningHandlingEnabled ///< Enables both error and warning handling
+        AutoHandlingEnabled = AutoErrorHandlingEnabled | AutoWarningHandlingEnabled, ///< Enables both error and warning handling
     };
     /**
      * Stores a combination of #Flag values.

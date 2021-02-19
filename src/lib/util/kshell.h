@@ -65,7 +65,7 @@ enum Option {
      * inserted by quoteArg() are converted back and cause no bail-out,
      * though.
      */
-    AbortOnMeta = 2
+    AbortOnMeta = 2,
 };
 /**
  * Stores a combination of #Option values.
@@ -91,7 +91,7 @@ enum Errors {
      * The AbortOnMeta flag was set and an unhandled shell meta character
      * was encountered.
      */
-    FoundMeta
+    FoundMeta,
 };
 
 /**

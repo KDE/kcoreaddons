@@ -24,7 +24,7 @@ enum Type {
     Smb, ///< SMB/CIFS mount (networked but with some FAT-like behavior)
     Fat,  ///< FAT or similar (msdos, fat, vfat)
     Ramfs,  ///< RAMDISK mount
-    Other ///< ext, reiser, and so on. "Normal" local filesystems.
+    Other, ///< ext, reiser, and so on. "Normal" local filesystems.
 };
 
 /**

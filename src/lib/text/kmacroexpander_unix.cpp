@@ -17,7 +17,7 @@ namespace KMacroExpander
 {
 
 enum Quoting { noquote, singlequote, doublequote, dollarquote,
-               paren, subst, group, math
+               paren, subst, group, math,
              };
 typedef struct {
     Quoting current;

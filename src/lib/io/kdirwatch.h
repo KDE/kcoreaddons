@@ -66,7 +66,7 @@ public:
     enum WatchMode {
         WatchDirOnly = 0,  ///< Watch just the specified directory
         WatchFiles = 0x01, ///< Watch also all files contained by the directory
-        WatchSubDirs = 0x02 ///< Watch also all the subdirs contained by the directory
+        WatchSubDirs = 0x02, ///< Watch also all the subdirs contained by the directory
     };
     /**
      * Stores a combination of #WatchMode values.
@@ -216,7 +216,7 @@ public:
      */
     static void statistics(); // TODO implement a QDebug operator for KDirWatch instead.
 
-    enum Method { FAM, INotify, Stat, QFSWatch };
+    enum Method { FAM, INotify, Stat, QFSWatch, };
     /**
      * Returns the preferred internal method to
      * watch for changes.

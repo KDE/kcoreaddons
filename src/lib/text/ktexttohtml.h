@@ -53,7 +53,7 @@ enum Option
      * Replace phone numbers with tel: links.
      * @since 5.56.0
      */
-    ConvertPhoneNumbers = 1 << 5
+    ConvertPhoneNumbers = 1 << 5,
 };
 /**
  * Stores a combination of #Option values.

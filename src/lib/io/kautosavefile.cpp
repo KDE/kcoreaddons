@@ -29,7 +29,7 @@ static const int maxNameLength = NAME_MAX;
 class KAutoSaveFilePrivate
 {
 public:
-    enum {NamePadding=8};
+    enum {NamePadding=8,};
 
     QString tempFileName();
     QUrl managedFile;

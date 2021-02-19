@@ -196,7 +196,7 @@ public:
 
     enum UIDMode {
         UseEffectiveUID, ///< Use the effective user id.
-        UseRealUserID    ///< Use the real user id.
+        UseRealUserID,    ///< Use the real user id.
     };
 
     /**
@@ -373,7 +373,7 @@ public:
      */
     QStringList groupNames(uint maxCount = KCOREADDONS_UINT_MAX) const;
 
-    enum UserProperty { FullName, RoomNumber, WorkPhone, HomePhone };
+    enum UserProperty { FullName, RoomNumber, WorkPhone, HomePhone, };
 
     /**
      * Returns an extended property.

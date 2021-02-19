@@ -120,7 +120,7 @@ enum TimeConstants {
     MSecsInDay = 86400000,
     MSecsInHour = 3600000,
     MSecsInMinute = 60000,
-    MSecsInSecond = 1000
+    MSecsInSecond = 1000,
 };
 
 void KFormatTest::formatDuration()

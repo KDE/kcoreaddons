@@ -62,7 +62,7 @@ enum MessageType {
      * Fatal message.
      * Display a message before the application fail and close itself.
      */
-    Fatal
+    Fatal,
 };
 
 /**

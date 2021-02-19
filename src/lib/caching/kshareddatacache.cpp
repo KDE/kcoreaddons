@@ -332,7 +332,7 @@ struct SharedMemory {
      */
     enum {
         PIXMAP_CACHE_VERSION = 12,
-        MINIMUM_CACHE_SIZE = 4096
+        MINIMUM_CACHE_SIZE = 4096,
     };
 
     // Note to those who follow me. You should not, under any circumstances, ever

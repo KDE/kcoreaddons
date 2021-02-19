@@ -16,7 +16,7 @@
 class KRandomSequencePrivate : public QSharedData
 {
 public:
-    enum {SHUFFLE_TABLE_SIZE = 32};
+    enum {SHUFFLE_TABLE_SIZE = 32,};
 
     void draw(); // Generate the random number
 

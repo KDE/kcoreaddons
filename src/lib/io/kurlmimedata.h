@@ -69,7 +69,7 @@ enum DecodeOptions {
      * decode it as the KDE-style URL. Useful in DnD code e.g. when moving icons,
      * and the kde-style url is used as identifier for the icons.
      */
-    PreferKdeUrls
+    PreferKdeUrls,
 };
 
 /**

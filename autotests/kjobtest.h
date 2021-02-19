@@ -53,7 +53,7 @@ public:
     enum class Action {
         Start,
         KillQuietly,
-        KillVerbosely
+        KillVerbosely,
     };
     Q_ENUM(Action)
 

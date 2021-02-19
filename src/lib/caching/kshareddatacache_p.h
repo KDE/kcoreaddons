@@ -323,7 +323,7 @@ enum SharedLockId {
     LOCKTYPE_INVALID   = 0,
     LOCKTYPE_MUTEX     = 1,  // pthread_mutex
     LOCKTYPE_SEMAPHORE = 2,  // sem_t
-    LOCKTYPE_SPINLOCK  = 3   // atomic int in shared memory
+    LOCKTYPE_SPINLOCK  = 3,   // atomic int in shared memory
 };
 
 // This type is a union of all possible lock types, with a SharedLockId used

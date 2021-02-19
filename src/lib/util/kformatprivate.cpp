@@ -310,7 +310,7 @@ enum TimeConstants {
     MSecsInDay = 86400000,
     MSecsInHour = 3600000,
     MSecsInMinute = 60000,
-    MSecsInSecond = 1000
+    MSecsInSecond = 1000,
 };
 
 QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOptions options) const
@@ -420,7 +420,7 @@ enum DurationUnits {
     Days = 0,
     Hours,
     Minutes,
-    Seconds
+    Seconds,
 };
 
 static QString formatSingleDuration(DurationUnits units, int n)

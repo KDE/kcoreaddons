@@ -181,7 +181,7 @@ public:
      */
     Q_SCRIPTABLE virtual void start() = 0;
 
-    enum KillVerbosity { Quietly, EmitResult };
+    enum KillVerbosity { Quietly, EmitResult, };
     Q_ENUM(KillVerbosity)
 
 public Q_SLOTS:
@@ -275,7 +275,7 @@ public:
         /*** Indicates the job was killed */
         KilledJobError = 1,
         /*** Subclasses should define error codes starting at this value */
-        UserDefinedError = 100
+        UserDefinedError = 100,
     };
 
     /**
@@ -656,7 +656,7 @@ protected:
      * @code
      * enum {
      *   InvalidFoo = UserDefinedError,
-     *   BarNotFound
+     *   BarNotFound,
      * };
      * @endcode
      *
