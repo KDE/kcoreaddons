@@ -17,8 +17,8 @@
 #ifndef KDIRWATCH_P_H
 #define KDIRWATCH_P_H
 
-#include <io/config-kdirwatch.h>
 #include "kdirwatch.h"
+#include <io/config-kdirwatch.h>
 
 #ifndef QT_NO_FILESYSTEMWATCHER
 #define HAVE_QFILESYSTEMWATCHER 1
@@ -27,20 +27,20 @@
 #endif
 
 #include <QList>
-#include <QSet>
 #include <QMap>
 #include <QObject>
+#include <QSet>
 #include <QString>
 #include <QTimer>
 class QSocketNotifier;
 
 #if HAVE_FAM
-#include <limits.h>
 #include <fam.h>
+#include <limits.h>
 #endif
 
-#include <sys/types.h> // time_t, ino_t
 #include <ctime>
+#include <sys/types.h> // time_t, ino_t
 
 #define invalid_ctime (static_cast<time_t>(-1))
 
@@ -55,26 +55,40 @@ class KDirWatchPrivate : public QObject
 {
     Q_OBJECT
 public:
-
-    enum entryStatus { Normal = 0, NonExistent, };
-    enum entryMode { UnknownMode = 0, StatMode, INotifyMode, FAMMode, QFSWatchMode, };
-    enum { NoChange = 0, Changed = 1, Created = 2, Deleted = 4, };
+    enum entryStatus {
+        Normal = 0,
+        NonExistent,
+    };
+    enum entryMode {
+        UnknownMode = 0,
+        StatMode,
+        INotifyMode,
+        FAMMode,
+        QFSWatchMode,
+    };
+    enum {
+        NoChange = 0,
+        Changed = 1,
+        Created = 2,
+        Deleted = 4,
+    };
 
     struct Client {
         Client(KDirWatch *inst, KDirWatch::WatchModes watchModes)
-            : instance(inst),
-            count(1),
-            watchingStopped(inst->isStopped()),
-            pending(NoChange),
-            m_watchModes(watchModes)
-        {}
+            : instance(inst)
+            , count(1)
+            , watchingStopped(inst->isStopped())
+            , pending(NoChange)
+            , m_watchModes(watchModes)
+        {
+        }
 
         // The compiler needs a copy ctor for Client when Entry is inserted into m_mapEntries
         // (even though the vector of clients is empty at that point, so no performance penalty there)
-        //Client(const Client &) = delete;
-        //Client &operator=(const Client &) = delete;
-        //Client(Client &&) = default;
-        //Client &operator=(Client &&) = default;
+        // Client(const Client &) = delete;
+        // Client &operator=(const Client &) = delete;
+        // Client(Client &&) = default;
+        // Client &operator=(Client &&) = default;
 
         KDirWatch *instance;
         int count;
@@ -154,8 +168,7 @@ public:
 
     void resetList(KDirWatch *instance, bool skippedToo);
     void useFreq(Entry *e, int newFreq);
-    void addEntry(KDirWatch *instance, const QString &_path, Entry *sub_entry,
-                  bool isDir, KDirWatch::WatchModes watchModes = KDirWatch::WatchDirOnly);
+    void addEntry(KDirWatch *instance, const QString &_path, Entry *sub_entry, bool isDir, KDirWatch::WatchModes watchModes = KDirWatch::WatchDirOnly);
     void removeEntry(KDirWatch *instance, const QString &path, Entry *sub_entry);
     void removeEntry(KDirWatch *instance, Entry *e, Entry *sub_entry);
     bool stopEntryScan(KDirWatch *instance, Entry *e);
@@ -182,7 +195,7 @@ public Q_SLOTS:
     void famEventReceived(); // for FAM
     void inotifyEventReceived(); // for inotify
     void slotRemoveDelayed();
-    void fswEventReceived(const QString &path);  // for QFileSystemWatcher
+    void fswEventReceived(const QString &path); // for QFileSystemWatcher
 
 public:
     QTimer timer;
@@ -234,4 +247,3 @@ private:
 QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry);
 
 #endif // KDIRWATCH_P_H
-

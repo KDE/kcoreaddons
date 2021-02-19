@@ -10,10 +10,10 @@
 
 #include "kstringhandler.h"
 
-#include <stdlib.h>     // random()
+#include <stdlib.h> // random()
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
-#include <QRegExp>            // for the word ranges
+#include <QRegExp> // for the word ranges
 #endif
 #include <QRegularExpression>
 #include <QStringList>
@@ -41,7 +41,7 @@ QStringList KStringHandler::capwords(const QStringList &list)
 {
     QStringList tmp = list;
     for (QStringList::Iterator it = tmp.begin(); it != tmp.end(); ++it) {
-        *it = (*it)[ 0 ].toUpper() + (*it).midRef(1);
+        *it = (*it)[0].toUpper() + (*it).midRef(1);
     }
     return tmp;
 }
@@ -213,8 +213,7 @@ QString KStringHandler::obscure(const QString &str)
     for (int i = 0; i < str.length(); ++i)
         // yes, no typo. can't encode ' ' or '!' because
         // they're the unicode BOM. stupid scrambling. stupid.
-        result += (unicode[ i ].unicode() <= 0x21) ? unicode[ i ] :
-                  QChar(0x1001F - unicode[ i ].unicode());
+        result += (unicode[i].unicode() <= 0x21) ? unicode[i] : QChar(0x1001F - unicode[i].unicode());
 
     return result;
 }
@@ -226,39 +225,279 @@ bool KStringHandler::isUtf8(const char *buf)
     bool gotone = false;
 
     if (!buf) {
-        return true;    // whatever, just don't crash
+        return true; // whatever, just don't crash
     }
 
-#define F 0   /* character never appears in text */
-#define T 1   /* character appears in plain ASCII text */
-#define I 2   /* character appears in ISO-8859 text */
-#define X 3   /* character appears in non-ISO extended ASCII (Mac, IBM PC) */
+#define F 0 /* character never appears in text */
+#define T 1 /* character appears in plain ASCII text */
+#define I 2 /* character appears in ISO-8859 text */
+#define X 3 /* character appears in non-ISO extended ASCII (Mac, IBM PC) */
 
     static const unsigned char text_chars[256] = {
         /*                  BEL BS HT LF    FF CR    */
-        F, F, F, F, F, F, F, T, T, T, T, F, T, T, F, F,  /* 0x0X */
+        F,
+        F,
+        F,
+        F,
+        F,
+        F,
+        F,
+        T,
+        T,
+        T,
+        T,
+        F,
+        T,
+        T,
+        F,
+        F, /* 0x0X */
         /*                              ESC          */
-        F, F, F, F, F, F, F, F, F, F, F, T, F, F, F, F,  /* 0x1X */
-        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x2X */
-        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x3X */
-        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x4X */
-        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x5X */
-        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, T,  /* 0x6X */
-        T, T, T, T, T, T, T, T, T, T, T, T, T, T, T, F,  /* 0x7X */
+        F,
+        F,
+        F,
+        F,
+        F,
+        F,
+        F,
+        F,
+        F,
+        F,
+        F,
+        T,
+        F,
+        F,
+        F,
+        F, /* 0x1X */
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T, /* 0x2X */
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T, /* 0x3X */
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T, /* 0x4X */
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T, /* 0x5X */
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T, /* 0x6X */
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        T,
+        F, /* 0x7X */
         /*            NEL                            */
-        X, X, X, X, X, T, X, X, X, X, X, X, X, X, X, X,  /* 0x8X */
-        X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X,  /* 0x9X */
-        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xaX */
-        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xbX */
-        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xcX */
-        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xdX */
-        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I,  /* 0xeX */
-        I, I, I, I, I, I, I, I, I, I, I, I, I, I, I, I   /* 0xfX */
+        X,
+        X,
+        X,
+        X,
+        X,
+        T,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X, /* 0x8X */
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X,
+        X, /* 0x9X */
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I, /* 0xaX */
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I, /* 0xbX */
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I, /* 0xcX */
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I, /* 0xdX */
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I, /* 0xeX */
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I,
+        I /* 0xfX */
     };
 
     /* *ulen = 0; */
     for (i = 0; (c = buf[i]); ++i) {
-        if ((c & 0x80) == 0) {        /* 0xxxxxxx is plain ASCII */
+        if ((c & 0x80) == 0) { /* 0xxxxxxx is plain ASCII */
             /*
              * Even if the whole file is valid UTF-8 sequences,
              * still reject it if it uses weird control characters.
@@ -270,18 +509,18 @@ bool KStringHandler::isUtf8(const char *buf)
 
         } else if ((c & 0x40) == 0) { /* 10xxxxxx never 1st byte */
             return false;
-        } else {                           /* 11xxxxxx begins UTF-8 */
+        } else { /* 11xxxxxx begins UTF-8 */
             int following;
 
-            if ((c & 0x20) == 0) {             /* 110xxxxx */
+            if ((c & 0x20) == 0) { /* 110xxxxx */
                 following = 1;
-            } else if ((c & 0x10) == 0) {      /* 1110xxxx */
+            } else if ((c & 0x10) == 0) { /* 1110xxxx */
                 following = 2;
-            } else if ((c & 0x08) == 0) {      /* 11110xxx */
+            } else if ((c & 0x08) == 0) { /* 11110xxx */
                 following = 3;
-            } else if ((c & 0x04) == 0) {      /* 111110xx */
+            } else if ((c & 0x04) == 0) { /* 111110xx */
                 following = 4;
-            } else if ((c & 0x02) == 0) {      /* 1111110x */
+            } else if ((c & 0x02) == 0) { /* 1111110x */
                 following = 5;
             } else {
                 return false;
@@ -301,7 +540,7 @@ bool KStringHandler::isUtf8(const char *buf)
         }
     }
 done:
-    return gotone;   /* don't claim it's UTF-8 if it's all 7-bit */
+    return gotone; /* don't claim it's UTF-8 if it's all 7-bit */
 }
 
 #undef F
@@ -318,9 +557,7 @@ QString KStringHandler::from8Bit(const char *str)
         static const QLatin1String emptyString("");
         return emptyString;
     }
-    return KStringHandler::isUtf8(str) ?
-           QString::fromUtf8(str) :
-           QString::fromLocal8Bit(str);
+    return KStringHandler::isUtf8(str) ? QString::fromUtf8(str) : QString::fromLocal8Bit(str);
 }
 
 QString KStringHandler::preProcessWrap(const QString &text)
@@ -335,9 +572,9 @@ QString KStringHandler::preProcessWrap(const QString &text)
         bool openingParens = (c == QLatin1Char('(') || c == QLatin1Char('{') || c == QLatin1Char('['));
         bool singleQuote = (c == QLatin1Char('\''));
         bool closingParens = (c == QLatin1Char(')') || c == QLatin1Char('}') || c == QLatin1Char(']'));
-        bool breakAfter   = (closingParens || c.isPunct() || c.isSymbol());
-        bool nextIsSpace  = (i == (text.length() - 1) || text[i + 1].isSpace());
-        bool prevIsSpace  = (i == 0 || text[i - 1].isSpace() || result[result.length() - 1] == zwsp);
+        bool breakAfter = (closingParens || c.isPunct() || c.isSymbol());
+        bool nextIsSpace = (i == (text.length() - 1) || text[i + 1].isSpace());
+        bool prevIsSpace = (i == 0 || text[i - 1].isSpace() || result[result.length() - 1] == zwsp);
 
         // Provide a breaking opportunity before opening parenthesis
         if (openingParens && !prevIsSpace) {
@@ -359,18 +596,14 @@ QString KStringHandler::preProcessWrap(const QString &text)
     return result;
 }
 
-int KStringHandler::logicalLength(const QString& text)
+int KStringHandler::logicalLength(const QString &text)
 {
     int length = 0;
     const auto chrs = text.toUcs4();
     for (auto chr : chrs) {
         auto script = QChar::script(chr);
-        if (script == QChar::Script_Han ||
-            script == QChar::Script_Hangul ||
-            script == QChar::Script_Hiragana ||
-            script == QChar::Script_Katakana ||
-            script == QChar::Script_Yi ||
-            QChar::isHighSurrogate(chr)) {
+        if (script == QChar::Script_Han || script == QChar::Script_Hangul || script == QChar::Script_Hiragana || script == QChar::Script_Katakana
+            || script == QChar::Script_Yi || QChar::isHighSurrogate(chr)) {
             length += 2;
         } else {
             length += 1;

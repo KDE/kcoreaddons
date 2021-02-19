@@ -12,8 +12,8 @@
 #define KJOB_P_H
 
 #include "kjob.h"
-#include <QMap>
 #include <QEventLoopLocker>
+#include <QMap>
 
 class KJobUiDelegate;
 class QTimer;

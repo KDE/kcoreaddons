@@ -47,7 +47,7 @@ void KFuzzyMatcherTest::testMatch_data()
     QTest::addColumn<QStringList>("input");
     QTest::addColumn<QStringList>("expected");
     QTest::addColumn<int>("size");
-// clang-format off
+    // clang-format off
     QTest::newRow("pattern=sort") << QStringLiteral("sort")
                           << QStringList{
                                 QStringLiteral("Sort"),
@@ -159,10 +159,10 @@ void KFuzzyMatcherTest::testMatch_data()
                              QStringLiteral("thsi")
                              }
                           << 3;
-// clang-format on
+    // clang-format on
 }
 
-static QStringList matchHelper(const QString& pattern, const QStringList& input)
+static QStringList matchHelper(const QString &pattern, const QStringList &input)
 {
     QVector<QPair<QString, int>> actual;
     for (int i = 0; i < input.size(); ++i) {
@@ -173,14 +173,12 @@ static QStringList matchHelper(const QString& pattern, const QStringList& input)
     }
 
     // sort descending based on score
-    std::sort(actual.begin(), actual.end(), [](const QPair<QString, int> &l,
-                                               const QPair<QString, int> &r) {
+    std::sort(actual.begin(), actual.end(), [](const QPair<QString, int> &l, const QPair<QString, int> &r) {
         return l.second > r.second;
     });
 
-
     QStringList actualOut;
-    for (const auto& s : actual) {
+    for (const auto &s : actual) {
         actualOut << s.first;
     }
     return actualOut;

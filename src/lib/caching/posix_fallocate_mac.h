@@ -10,14 +10,13 @@
 #define POSIX_FALLOCATE_MAC_H
 
 #include <fcntl.h>
-#include <unistd.h>
-#include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 // created from the OSX-specific code from Mozilla's mozilla::fallocation() function
 // of which the licensing information is copied above.
 // Adaptation (C) 2015,2016 R.J.V. Bertin
-
 
 // From Linux `man posix_fallocate`:
 // DESCRIPTION
@@ -59,7 +58,6 @@
 //      the file to be open for writing.
 //      Note: ftruncate() and truncate() do not modify the current file offset for any open
 //      file descriptions associated with the file.
-
 
 static int posix_fallocate(int fd, off_t offset, off_t len)
 {

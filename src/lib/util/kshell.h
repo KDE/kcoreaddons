@@ -21,7 +21,6 @@ class QString;
  */
 namespace KShell
 {
-
 /**
  * Flags for splitArgs().
  * @see Options

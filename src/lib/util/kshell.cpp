@@ -33,9 +33,9 @@ QString KShell::joinArgs(const QStringList &args)
 }
 
 #ifdef Q_OS_WIN
-# define ESCAPE '^'
+#define ESCAPE '^'
 #else
-# define ESCAPE '\\'
+#define ESCAPE '\\'
 #endif
 
 QString KShell::tildeExpand(const QString &fname)

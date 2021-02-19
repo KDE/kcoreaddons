@@ -114,9 +114,7 @@ protected Q_SLOTS:
      * @param field1 first field (localized name and value)
      * @param field2 second field (localized name and value)
      */
-    virtual void description(KJob *job, const QString &title,
-                             const QPair<QString, QString> &field1,
-                             const QPair<QString, QString> &field2);
+    virtual void description(KJob *job, const QString &title, const QPair<QString, QString> &field1, const QPair<QString, QString> &field2);
 
     /**
      * Called to display state information about a job.

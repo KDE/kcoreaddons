@@ -36,8 +36,7 @@ public:
     void start()
     {
         if (!path.exists()) {
-            emitResult(static_cast<int>(KListOpenFilesJob::Error::DoesNotExist),
-                       QObject::tr("Path %1 doesn't exist").arg(path.path()));
+            emitResult(static_cast<int>(KListOpenFilesJob::Error::DoesNotExist), QObject::tr("Path %1 doesn't exist").arg(path.path()));
             return;
         }
         lsofProcess.start(QStringLiteral("lsof"), {QStringLiteral("-t"), QStringLiteral("+d"), path.path()});
@@ -46,11 +45,11 @@ public:
     {
         return processInfoList;
     }
+
 private:
     void lsofError(QProcess::ProcessError processError)
     {
-        emitResult(static_cast<int>(KListOpenFilesJob::Error::InternalError),
-                   QObject::tr("Failed to execute `lsof' error code %1").arg(processError));
+        emitResult(static_cast<int>(KListOpenFilesJob::Error::InternalError), QObject::tr("Failed to execute `lsof' error code %1").arg(processError));
     }
     void lsofFinished(int, QProcess::ExitStatus)
     {
@@ -68,7 +67,7 @@ private:
         }
         job->emitResult();
     }
-    void emitResult(int error, const QString& errorText)
+    void emitResult(int error, const QString &errorText)
     {
         if (hasEmittedResult) {
             return;
@@ -78,6 +77,7 @@ private:
         job->emitResult();
         hasEmittedResult = true;
     }
+
 private:
     KListOpenFilesJob *job;
     const QDir path;
@@ -86,7 +86,7 @@ private:
     KProcessList::KProcessInfoList processInfoList;
 };
 
-KListOpenFilesJob::KListOpenFilesJob(const QString& path)
+KListOpenFilesJob::KListOpenFilesJob(const QString &path)
     : d(new KListOpenFilesJobPrivate(this, path))
 {
 }

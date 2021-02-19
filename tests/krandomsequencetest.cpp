@@ -9,40 +9,43 @@
 #include <QList>
 #include <QString>
 
-#include "krandomsequence.h"
 #include "krandom.h"
+#include "krandomsequence.h"
 
 #include <stdio.h>
 
-int
-main(/*int argc, char *argv[]*/)
+int main(/*int argc, char *argv[]*/)
 {
     long seed;
     KRandomSequence seq;
 
     seed = 2;
-    seq.setSeed(seed); printf("Seed = %4ld :", seed);
+    seq.setSeed(seed);
+    printf("Seed = %4ld :", seed);
     for (int i = 0; i < 20; i++) {
         printf("%3ld ", seq.getLong(100));
     }
     printf("\n");
 
     seed = 0;
-    seq.setSeed(seed); printf("Seed = %4ld :", seed);
+    seq.setSeed(seed);
+    printf("Seed = %4ld :", seed);
     for (int i = 0; i < 20; i++) {
         printf("%3ld ", seq.getLong(100));
     }
     printf("\n");
 
     seed = 0;
-    seq.setSeed(seed); printf("Seed = %4ld :", seed);
+    seq.setSeed(seed);
+    printf("Seed = %4ld :", seed);
     for (int i = 0; i < 20; i++) {
         printf("%3ld ", seq.getLong(100));
     }
     printf("\n");
 
     seed = 2;
-    seq.setSeed(seed); printf("Seed = %4ld :", seed);
+    seq.setSeed(seed);
+    printf("Seed = %4ld :", seed);
     for (int i = 0; i < 20; i++) {
         printf("%3ld ", seq.getLong(100));
     }

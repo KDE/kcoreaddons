@@ -25,7 +25,7 @@ KJobTrackerInterface::KJobTrackerInterface(QObject *parent)
     : QObject(parent)
     , d(new KJobTrackerInterfacePrivate(this))
 {
-    qRegisterMetaType<QPair<QString,QString>>();
+    qRegisterMetaType<QPair<QString, QString>>();
 }
 
 KJobTrackerInterface::~KJobTrackerInterface() = default;
@@ -35,7 +35,7 @@ void KJobTrackerInterface::registerJob(KJob *job)
     connect(job, &KJob::finished, this, &KJobTrackerInterface::unregisterJob);
     connect(job, &KJob::finished, this, &KJobTrackerInterface::finished);
     connect(job, &KJob::suspended, this, &KJobTrackerInterface::suspended);
-    connect(job, &KJob::resumed,this, &KJobTrackerInterface::resumed);
+    connect(job, &KJob::resumed, this, &KJobTrackerInterface::resumed);
 
     connect(job, &KJob::description, this, &KJobTrackerInterface::description);
     connect(job, &KJob::infoMessage, this, &KJobTrackerInterface::infoMessage);
@@ -66,15 +66,12 @@ void KJobTrackerInterface::resumed(KJob *job)
     Q_UNUSED(job)
 }
 
-void KJobTrackerInterface::description(KJob *job, const QString &title,
-                                       const QPair<QString, QString> &field1,
-                                       const QPair<QString, QString> &field2)
+void KJobTrackerInterface::description(KJob *job, const QString &title, const QPair<QString, QString> &field1, const QPair<QString, QString> &field2)
 {
     Q_UNUSED(job)
     Q_UNUSED(title)
     Q_UNUSED(field1)
     Q_UNUSED(field2)
-
 }
 
 void KJobTrackerInterface::infoMessage(KJob *job, const QString &plain, const QString &rich)

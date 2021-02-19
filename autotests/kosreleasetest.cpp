@@ -18,7 +18,7 @@ private Q_SLOTS:
         QCOMPARE(r.name(), QStringLiteral("Name"));
         QCOMPARE(r.version(), QStringLiteral("100.5"));
         QCOMPARE(r.id(), QStringLiteral("theid"));
-        QCOMPARE(r.idLike(), QStringList({ QStringLiteral("otherid"), QStringLiteral("otherotherid") }));
+        QCOMPARE(r.idLike(), QStringList({QStringLiteral("otherid"), QStringLiteral("otherotherid")}));
         QCOMPARE(r.versionCodename(), QStringLiteral("versioncodename"));
         QCOMPARE(r.versionId(), QStringLiteral("500.1"));
         QCOMPARE(r.prettyName(), QStringLiteral("Pretty Name #1"));
@@ -33,7 +33,7 @@ private Q_SLOTS:
         QCOMPARE(r.variant(), QStringLiteral("Test = Edition"));
         QCOMPARE(r.variantId(), QStringLiteral("test"));
         QCOMPARE(r.logo(), QStringLiteral("start-here-test"));
-        QCOMPARE(r.extraKeys(), QStringList({ QStringLiteral("DEBIAN_BTS") }));
+        QCOMPARE(r.extraKeys(), QStringList({QStringLiteral("DEBIAN_BTS")}));
         QCOMPARE(r.extraValue(QStringLiteral("DEBIAN_BTS")), QStringLiteral("debbugs://bugs.debian.org/"));
     }
 };

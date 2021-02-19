@@ -7,31 +7,33 @@
 
 #include "desktoptojson.h"
 
-#include "../lib/plugin/desktopfileparser_p.h"
 #include "../lib/kcoreaddons_export.h"
+#include "../lib/plugin/desktopfileparser_p.h"
 #include "desktoptojson_debug.h"
 
 #include <QFile>
 #include <QFileInfo>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QJsonArray>
 
-DesktopToJson::DesktopToJson(QCommandLineParser *parser, const QCommandLineOption &i,
-                             const QCommandLineOption &o, const QCommandLineOption &v,
-                             const QCommandLineOption &c, const QCommandLineOption &s)
-    : m_parser(parser),
-      input(i),
-      output(o),
-      verbose(v),
-      compat(c),
-      serviceTypesOption(s)
+DesktopToJson::DesktopToJson(QCommandLineParser *parser,
+                             const QCommandLineOption &i,
+                             const QCommandLineOption &o,
+                             const QCommandLineOption &v,
+                             const QCommandLineOption &c,
+                             const QCommandLineOption &s)
+    : m_parser(parser)
+    , input(i)
+    , output(o)
+    , verbose(v)
+    , compat(c)
+    , serviceTypesOption(s)
 {
 }
 
 bool DesktopFileParser::s_verbose = false;
 bool DesktopFileParser::s_compatibilityMode = false;
-
 
 int DesktopToJson::runMain()
 {
@@ -82,14 +84,15 @@ bool DesktopToJson::resolveFiles()
 void DesktopFileParser::convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr)
 {
     // XXX: Hidden=true doesn't make sense with json plugins since the metadata is inside the .so
-    static const QStringList boolkeys = QStringList {
+    static const QStringList boolkeys = QStringList{
         QStringLiteral("Hidden"),
         QStringLiteral("X-KDE-PluginInfo-EnabledByDefault"),
     };
-    static const QStringList stringlistkeys = QStringList {
+    static const QStringList stringlistkeys = QStringList
+    {
         QStringLiteral("X-KDE-ServiceTypes"),
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
-        QStringLiteral("X-KDE-PluginInfo-Depends"),
+            QStringLiteral("X-KDE-PluginInfo-Depends"),
 #endif
     };
     if (boolkeys.contains(key)) {
@@ -98,8 +101,8 @@ void DesktopFileParser::convertToCompatibilityJson(const QString &key, const QSt
             json[key] = true;
         } else {
             if (value.toLower() != QLatin1String("false")) {
-                qCWarning(DESKTOPPARSER).nospace() << "Expected boolean value for key \"" << key
-                    << "\" at line " << lineNr << "but got \"" << value << "\" instead.";
+                qCWarning(DESKTOPPARSER).nospace() << "Expected boolean value for key \"" << key << "\" at line " << lineNr << "but got \"" << value
+                                                   << "\" instead.";
             }
             json[key] = false;
         }
@@ -110,9 +113,8 @@ void DesktopFileParser::convertToCompatibilityJson(const QString &key, const QSt
     }
 }
 
-bool DesktopToJson::convert(const QString &src, const QString &dest, const QStringList& serviceTypes)
+bool DesktopToJson::convert(const QString &src, const QString &dest, const QStringList &serviceTypes)
 {
-
     QJsonObject json;
     DesktopFileParser::convert(src, serviceTypes, json, nullptr);
 

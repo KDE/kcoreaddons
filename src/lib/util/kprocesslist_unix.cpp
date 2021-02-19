@@ -21,7 +21,6 @@
 #include "kprocesslist.h"
 #include "kcoreaddons_debug.h"
 
-#include <QProcess>
 #include <QDir>
 #include <QDebug>
 
@@ -31,8 +30,8 @@
 
 using namespace KProcessList;
 
-namespace {
-
+namespace
+{
 bool isUnixProcessId(const QString &procname)
 {
     for (int i = 0; i != procname.size(); ++i) {
@@ -47,11 +46,11 @@ KProcessInfoList unixProcessListPS()
 {
     KProcessInfoList rc;
     QProcess psProcess;
-    const QStringList args {
+    const QStringList args{
         QStringLiteral("-e"),
         QStringLiteral("-o"),
 #ifdef Q_OS_MAC
-    // command goes last, otherwise it is cut off
+        // command goes last, otherwise it is cut off
         QStringLiteral("pid state user comm command"),
 #else
 #ifdef Q_OS_FREEBSD
@@ -86,15 +85,15 @@ KProcessInfoList unixProcessListPS()
         // we can't just split on blank as the process name might
         // contain them
         const int endOfPid = line.indexOf(blank);
-        const int endOfState = line.indexOf(blank, endOfPid+1);
-        const int endOfUser = line.indexOf(blank, endOfState+1);
-        const int endOfName = line.indexOf(blank, endOfUser+1);
+        const int endOfState = line.indexOf(blank, endOfPid + 1);
+        const int endOfUser = line.indexOf(blank, endOfState + 1);
+        const int endOfName = line.indexOf(blank, endOfUser + 1);
 
         if (endOfPid >= 0 && endOfState >= 0 && endOfUser >= 0) {
             qint64 pid = line.leftRef(endOfPid).toUInt();
-            QString user = line.mid(endOfState+1, endOfUser-endOfState-1);
-            QString name = line.mid(endOfUser+1, endOfName-endOfUser-1);
-            QString command = line.right(line.size()-endOfName-1);
+            QString user = line.mid(endOfState + 1, endOfUser - endOfState - 1);
+            QString name = line.mid(endOfUser + 1, endOfName - endOfUser - 1);
+            QString command = line.right(line.size() - endOfName - 1);
             rc.push_back(KProcessInfo(pid, command, name, user));
         }
     }
@@ -102,7 +101,7 @@ KProcessInfoList unixProcessListPS()
     return rc;
 }
 
-bool getProcessInfo(const QString& procId, KProcessInfo& processInfo)
+bool getProcessInfo(const QString &procId, KProcessInfo &processInfo)
 {
     if (!isUnixProcessId(procId))
         return false;
@@ -116,7 +115,7 @@ bool getProcessInfo(const QString& procId, KProcessInfo& processInfo)
     filename += statusFileName;
     QFile file(filename);
     if (!file.open(QIODevice::ReadOnly))
-        return false;     // process may have exited
+        return false; // process may have exited
 
     const QStringList data = QString::fromLocal8Bit(file.readAll()).split(QLatin1Char(' '));
     if (data.length() < 2) {

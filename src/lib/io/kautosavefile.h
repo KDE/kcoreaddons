@@ -213,9 +213,7 @@ public:
      * the lock. Subsequent releaseLock() or deleting of the object will
      * then erase the stale autosave file.
      */
-    static QList<KAutoSaveFile *> staleFiles(const QUrl &url,
-            const QString &applicationName =
-                QString());
+    static QList<KAutoSaveFile *> staleFiles(const QUrl &url, const QString &applicationName = QString());
 
     /**
      * Returns all stale autosave files left behind by crashed or
@@ -227,8 +225,7 @@ public:
      *
      * See staleFiles() for information on the returned objects.
      */
-    static QList<KAutoSaveFile *> allStaleFiles(const QString &applicationName =
-                QString());
+    static QList<KAutoSaveFile *> allStaleFiles(const QString &applicationName = QString());
 
 private:
     Q_DISABLE_COPY(KAutoSaveFile)

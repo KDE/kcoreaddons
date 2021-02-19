@@ -16,11 +16,11 @@
 #include <memory> // unique_ptr
 #include <type_traits>
 
-#include <qt_windows.h>
 #include <lm.h> //Net*
-#include <userenv.h> //GetProfilesDirectoryW
+#include <qt_windows.h>
 #include <sddl.h> //ConvertSidToStringSidW
 #include <shlobj.h>
+#include <userenv.h> //GetProfilesDirectoryW
 
 // this can't be a lambda due to a MSVC2012 bug
 // (works fine in 2010 and 2013)
@@ -40,11 +40,12 @@ public:
     // explicit scope resolution operator needed in ::netApiBufferDeleter
     // because of *another* MSVC bug :(
     inline explicit ScopedNetApiBuffer(T *data)
-        : std::unique_ptr<T, ::netApiBufferDeleter>(data, ::netApiBufferDeleter()) {}
+        : std::unique_ptr<T, ::netApiBufferDeleter>(data, ::netApiBufferDeleter())
+    {
+    }
 };
 
-const auto handleCloser = [](HANDLE h)
-{
+const auto handleCloser = [](HANDLE h) {
     if (h != INVALID_HANDLE_VALUE) {
         CloseHandle(h);
     }
@@ -52,11 +53,17 @@ const auto handleCloser = [](HANDLE h)
 typedef std::unique_ptr<std::remove_pointer<HANDLE>::type, decltype(handleCloser)> ScopedHANDLE;
 
 /** Make sure the NetApi functions are called with the correct level argument (for template functions)
-* This argument can be retrieved by using NetApiTypeInfo<T>::level. In order to do so the type must be
-* registered by writing e.g. NETAPI_TYPE_INFO(GROUP_INFO, 0) for GROUP_INFO_0
-*/
-template<typename T> struct NetApiTypeInfo {};
-#define NETAPI_TYPE_INFO(prefix, n) template<> struct NetApiTypeInfo<prefix##_##n> { enum { level = n }; };
+ * This argument can be retrieved by using NetApiTypeInfo<T>::level. In order to do so the type must be
+ * registered by writing e.g. NETAPI_TYPE_INFO(GROUP_INFO, 0) for GROUP_INFO_0
+ */
+template<typename T>
+struct NetApiTypeInfo {
+};
+#define NETAPI_TYPE_INFO(prefix, n)                                                                                                                            \
+    template<>                                                                                                                                                 \
+    struct NetApiTypeInfo<prefix##_##n> {                                                                                                                      \
+        enum { level = n };                                                                                                                                    \
+    };
 NETAPI_TYPE_INFO(GROUP_INFO, 0)
 NETAPI_TYPE_INFO(GROUP_INFO, 3)
 NETAPI_TYPE_INFO(USER_INFO, 0)
@@ -77,17 +84,17 @@ ScopedNetApiBuffer<T> getUserInfo(LPCWSTR server, const QString &userName, NET_A
     if (errCode) {
         *errCode = status;
     }
-    return ScopedNetApiBuffer<T>((T*)userInfoTmp);
+    return ScopedNetApiBuffer<T>((T *)userInfoTmp);
 }
 
-//enumeration functions
+// enumeration functions
 /** simplify calling the Net*Enum functions to prevent copy and paste for allUsers(), allUserNames(), allGroups(), allGroupNames()
-* @tparam T The type that is enumerated (e.g. USER_INFO_11) Must be registered using NETAPI_TYPE_INFO.
-* @param callback Callback for each listed object. Signature: void(const T&)
-* @param enumFunc This function enumerates the data using a Net* function.
-* It will be called in a loop as long as it returns ERROR_MORE_DATA.
-*
-*/
+ * @tparam T The type that is enumerated (e.g. USER_INFO_11) Must be registered using NETAPI_TYPE_INFO.
+ * @param callback Callback for each listed object. Signature: void(const T&)
+ * @param enumFunc This function enumerates the data using a Net* function.
+ * It will be called in a loop as long as it returns ERROR_MORE_DATA.
+ *
+ */
 template<class T, class Callback, class EnumFunction>
 static void netApiEnumerate(uint maxCount, Callback callback, EnumFunction enumFunc)
 {
@@ -100,11 +107,11 @@ static void netApiEnumerate(uint maxCount, Callback callback, EnumFunction enumF
         DWORD entriesRead = 0;
         DWORD totalEntries = 0;
         nStatus = enumFunc(level, &buffer, &entriesRead, &totalEntries, &resumeHandle);
-        //qDebug("Net*Enum(level = %d) returned %d entries, total was (%d), status = %d, resume handle = %llx",
+        // qDebug("Net*Enum(level = %d) returned %d entries, total was (%d), status = %d, resume handle = %llx",
         //    level, entriesRead, totalEntries, nStatus, resumeHandle);
 
         // buffer must always be freed, even if Net*Enum fails
-        ScopedNetApiBuffer<T> groupInfo((T*)buffer);
+        ScopedNetApiBuffer<T> groupInfo((T *)buffer);
         if (nStatus == NERR_Success || nStatus == ERROR_MORE_DATA) {
             for (DWORD i = 0; total < maxCount && i < entriesRead; i++, total++) {
                 callback(groupInfo.get()[i]);
@@ -122,7 +129,7 @@ void enumerateAllUsers(uint maxCount, Callback callback)
         // pass 0 as filter -> get all users
         // Why does this function take a DWORD* as resume handle and NetUserEnum/NetGroupGetUsers a UINT64*
         // Great API design by Microsoft...
-        //casting the uint64* to uint32* is fine, it just writes to the first 32 bits
+        // casting the uint64* to uint32* is fine, it just writes to the first 32 bits
         return NetUserEnum(nullptr, level, 0, buffer, MAX_PREFERRED_LENGTH, count, total, (PDWORD)resumeHandle);
     });
 }
@@ -163,12 +170,19 @@ void enumerateUsersForGroup(const QString &name, uint maxCount, Callback callbac
 class KUserPrivate : public QSharedData
 {
     typedef QExplicitlySharedDataPointer<KUserPrivate> Ptr;
-    KUserPrivate() : isAdmin(false) {}
-    //takes ownership over userInfo_
-    KUserPrivate(KUserId uid, KGroupId gid, const QString &loginName, const QString &fullName,
-            const QString &domain, const QString &homeDir, bool isAdmin)
-        : uid(uid), gid(gid), loginName(loginName), fullName(fullName),
-          domain(domain), homeDir(homeDir), isAdmin(isAdmin)
+    KUserPrivate()
+        : isAdmin(false)
+    {
+    }
+    // takes ownership over userInfo_
+    KUserPrivate(KUserId uid, KGroupId gid, const QString &loginName, const QString &fullName, const QString &domain, const QString &homeDir, bool isAdmin)
+        : uid(uid)
+        , gid(gid)
+        , loginName(loginName)
+        , fullName(fullName)
+        , domain(domain)
+        , homeDir(homeDir)
+        , isAdmin(isAdmin)
     {
         Q_ASSERT(uid.isValid());
     }
@@ -191,6 +205,7 @@ class KUserPrivate : public QSharedData
         }
         return homeDir;
     }
+
 public:
     static Ptr sharedNull;
     KUserId uid;
@@ -220,10 +235,8 @@ public:
         QString loginName = QString::fromWCharArray(nameBuffer);
         QString domainName = QString::fromWCharArray(domainBuffer);
         if (use != SidTypeUser && use != SidTypeDeletedAccount) {
-            qCWarning(KCOREADDONS_DEBUG).nospace()
-                << "SID for " << domainName << "\\" << loginName << " (" << uid.toString()
-                << ") is not of type user (" << SidTypeUser << " or " << SidTypeDeletedAccount
-                << "). Got type " << use << " instead.";
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "SID for " << domainName << "\\" << loginName << " (" << uid.toString() << ") is not of type user ("
+                                                   << SidTypeUser << " or " << SidTypeDeletedAccount << "). Got type " << use << " instead.";
             return sharedNull;
         }
         // now get the server name to query (could be null for local machine)
@@ -261,14 +274,13 @@ public:
             homeDir = QString::fromWCharArray(userInfo11->usri11_home_dir);
             isAdmin = userInfo11->usri11_priv == USER_PRIV_ADMIN;
         } else {
-            qCWarning(KCOREADDONS_DEBUG).nospace() << "Could not get information for user " << domainName << "\\" << loginName
-                                 << ": error code = " << status;
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "Could not get information for user " << domainName << "\\" << loginName << ": error code = " << status;
             return sharedNull;
         }
         if (homeDir.isEmpty()) {
             homeDir = guessHomeDir(loginName, uid);
         }
-        //if we couldn't find a primary group just take the first group found for this user
+        // if we couldn't find a primary group just take the first group found for this user
         if (!group.isValid()) {
             enumerateGroupsForUser<GROUP_USERS_INFO_0>(1, loginName, [&](const GROUP_USERS_INFO_0 &info) {
                 group = KGroupId::fromName(QString::fromWCharArray(info.grui0_name));
@@ -352,7 +364,10 @@ QString KUser::homeDir() const
 class COMInitializer
 {
 public:
-    COMInitializer() : result(CoInitialize(nullptr)) {}
+    COMInitializer()
+        : result(CoInitialize(nullptr))
+    {
+    }
     ~COMInitializer()
     {
         if (SUCCEEDED(result)) {
@@ -364,7 +379,10 @@ public:
 class W32Library
 {
 public:
-    W32Library(HMODULE h): h(h) {}
+    W32Library(HMODULE h)
+        : h(h)
+    {
+    }
     ~W32Library()
     {
         if (h) {
@@ -386,7 +404,7 @@ public:
 // These structs encapsulate the differences.
 
 struct FaceIconPath_XP {
-    typedef HRESULT (WINAPI *funcptr_t)(LPCWSTR, DWORD, LPWSTR);
+    typedef HRESULT(WINAPI *funcptr_t)(LPCWSTR, DWORD, LPWSTR);
     static const int ordinal = 233;
     static HRESULT getPicturePath(funcptr_t SHGetUserPicturePathXP, LPCWSTR username, LPWSTR buf, UINT bufsize)
     {
@@ -396,7 +414,7 @@ struct FaceIconPath_XP {
     }
 };
 struct FaceIconPath_Vista {
-    typedef HRESULT (WINAPI *funcptr_t)(LPCWSTR, DWORD, LPWSTR, UINT);
+    typedef HRESULT(WINAPI *funcptr_t)(LPCWSTR, DWORD, LPWSTR, UINT);
     static const int ordinal = 261;
     static HRESULT getPicturePath(funcptr_t SHGetUserPicturePathV, LPCWSTR username, LPWSTR buf, UINT bufsize)
     {
@@ -404,7 +422,7 @@ struct FaceIconPath_Vista {
     }
 };
 
-template <typename Platform>
+template<typename Platform>
 static QString faceIconPathImpl(LPCWSTR username)
 {
     static COMInitializer COMinit;
@@ -413,8 +431,8 @@ static QString faceIconPathImpl(LPCWSTR username)
     if (!shellMod) {
         return QString();
     }
-    static typename Platform::funcptr_t sgupp_ptr = reinterpret_cast<typename Platform::funcptr_t>(
-            GetProcAddress(shellMod, MAKEINTRESOURCEA(Platform::ordinal)));
+    static typename Platform::funcptr_t sgupp_ptr =
+        reinterpret_cast<typename Platform::funcptr_t>(GetProcAddress(shellMod, MAKEINTRESOURCEA(Platform::ordinal)));
     if (!sgupp_ptr) {
         return QString();
     }
@@ -471,9 +489,12 @@ class KUserGroupPrivate : public QSharedData
 public:
     QString name;
     KGroupId gid;
-    KUserGroupPrivate() {}
+    KUserGroupPrivate()
+    {
+    }
     KUserGroupPrivate(const QString &name, KGroupId id)
-        : name(name), gid(id)
+        : name(name)
+        , gid(id)
     {
         if (!name.isEmpty()) {
             PBYTE groupInfoTmp = nullptr;
@@ -550,7 +571,7 @@ KUserGroup::KUserGroup(const KUserGroup &group)
 {
 }
 
-KUserGroup &KUserGroup::operator =(const KUserGroup &group)
+KUserGroup &KUserGroup::operator=(const KUserGroup &group)
 {
     d = group.d;
     return *this;
@@ -695,7 +716,7 @@ struct WindowsSIDWrapper : public QSharedData {
         if (!sid || !IsValidSid(sid)) {
             return nullptr;
         }
-        //create a copy of sid
+        // create a copy of sid
         WindowsSIDWrapper *copy = new WindowsSIDWrapper();
         bool success = CopySid(SECURITY_MAX_SID_SIZE, copy->sidBuffer, sid);
         if (!success) {
@@ -761,7 +782,7 @@ bool KUserOrGroupId<void *>::operator==(const KUserOrGroupId<void *> &other) con
         }
         return EqualSid(data->sidBuffer, other.data->sidBuffer);
     }
-    return !other.data; //only equal if other data is also invalid
+    return !other.data; // only equal if other data is also invalid
 }
 
 template<>
@@ -803,11 +824,11 @@ static T sidFromName(const QString &name, Callback callback)
 KUserId KUserId::fromName(const QString &name)
 {
     return sidFromName<KUserId>(name, [&](PSID sid, SID_NAME_USE sidType) -> KUserId {
-        if (sidType != SidTypeUser && sidType != SidTypeDeletedAccount)
-        {
-            qCWarning(KCOREADDONS_DEBUG).nospace() << "Failed to lookup user name " << name
-                << ": resulting SID " << sidToString(sid) << " is not a user."
-                " Got SID type " << sidType << " instead.";
+        if (sidType != SidTypeUser && sidType != SidTypeDeletedAccount) {
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "Failed to lookup user name " << name << ": resulting SID " << sidToString(sid)
+                                                   << " is not a user."
+                                                      " Got SID type "
+                                                   << sidType << " instead.";
             return KUserId();
         }
         return KUserId(sid);
@@ -817,11 +838,11 @@ KUserId KUserId::fromName(const QString &name)
 KGroupId KGroupId::fromName(const QString &name)
 {
     return sidFromName<KGroupId>(name, [&](PSID sid, SID_NAME_USE sidType) -> KGroupId {
-        if (sidType != SidTypeGroup && sidType != SidTypeWellKnownGroup)
-        {
-            qCWarning(KCOREADDONS_DEBUG).nospace() << "Failed to lookup user name " << name
-                << ": resulting SID " << sidToString(sid) << " is not a group."
-                " Got SID type " << sidType << " instead.";
+        if (sidType != SidTypeGroup && sidType != SidTypeWellKnownGroup) {
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "Failed to lookup user name " << name << ": resulting SID " << sidToString(sid)
+                                                   << " is not a group."
+                                                      " Got SID type "
+                                                   << sidType << " instead.";
             return KGroupId();
         }
         return KGroupId(sid);
@@ -840,15 +861,13 @@ static std::unique_ptr<char[]> queryProcessInformation(TOKEN_INFORMATION_CLASS t
     DWORD requiredSize;
     if (!GetTokenInformation(token.get(), type, nullptr, 0, &requiredSize)) {
         if (GetLastError() != ERROR_INSUFFICIENT_BUFFER) {
-            qCWarning(KCOREADDONS_DEBUG, "Failed to get the required size for the token information %d: %d",
-                     type, (int)GetLastError());
+            qCWarning(KCOREADDONS_DEBUG, "Failed to get the required size for the token information %d: %d", type, (int)GetLastError());
             return nullptr;
         }
     }
     std::unique_ptr<char[]> buffer(new char[requiredSize]);
     if (!GetTokenInformation(token.get(), type, buffer.get(), requiredSize, &requiredSize)) {
-        qCWarning(KCOREADDONS_DEBUG, "Failed to get token information %d from current process: %d",
-                 type, (int)GetLastError());
+        qCWarning(KCOREADDONS_DEBUG, "Failed to get token information %d from current process: %d", type, (int)GetLastError());
         return nullptr;
     }
     return buffer;

@@ -8,7 +8,6 @@
 
 #include "kcoreaddons.h"
 
-
 #include "kcoreaddons_version.h"
 
 QString KCoreAddons::versionString()

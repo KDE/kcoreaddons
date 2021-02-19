@@ -36,10 +36,7 @@ inline static bool isQuoteMeta(QChar cUnicode)
 
 inline static bool isMeta(QChar cUnicode)
 {
-    static const uchar iqm[] = {
-        0x00, 0x00, 0x00, 0x00, 0xdc, 0x07, 0x00, 0xd8,
-        0x00, 0x00, 0x00, 0x38, 0x01, 0x00, 0x00, 0x38
-    }; // \'"$`<>|;&(){}*?#[]
+    static const uchar iqm[] = {0x00, 0x00, 0x00, 0x00, 0xdc, 0x07, 0x00, 0xd8, 0x00, 0x00, 0x00, 0x38, 0x01, 0x00, 0x00, 0x38}; // \'"$`<>|;&(){}*?#[]
 
     uint c = cUnicode.unicode();
 
@@ -99,9 +96,7 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
         }
         // before the notilde label, as a tilde does not match anyway
         if (firstword) {
-            if (c == QLatin1Char('_') ||
-                    (c >= QLatin1Char('A') && c <= QLatin1Char('Z')) ||
-                    (c >= QLatin1Char('a') && c <= QLatin1Char('z'))) {
+            if (c == QLatin1Char('_') || (c >= QLatin1Char('A') && c <= QLatin1Char('Z')) || (c >= QLatin1Char('a') && c <= QLatin1Char('z'))) {
                 int pos2 = pos;
                 QChar cc;
                 do {
@@ -111,10 +106,8 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                         goto okret;
                     }
                     cc = args.unicode()[pos2++];
-                } while (cc == QLatin1Char('_') ||
-                         (cc >= QLatin1Char('A') && cc <= QLatin1Char('Z')) ||
-                         (cc >= QLatin1Char('a') && cc <= QLatin1Char('z')) ||
-                         (cc >= QLatin1Char('0') && cc <= QLatin1Char('9')));
+                } while (cc == QLatin1Char('_') || (cc >= QLatin1Char('A') && cc <= QLatin1Char('Z')) || (cc >= QLatin1Char('a') && cc <= QLatin1Char('z'))
+                         || (cc >= QLatin1Char('0') && cc <= QLatin1Char('9')));
                 if (cc == QLatin1Char('=')) {
                     goto metaerr;
                 }
@@ -145,22 +138,15 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                             goto quoteerr;
                         }
                         c = args.unicode()[pos++];
-                        if (c != QLatin1Char('"') &&
-                                c != QLatin1Char('\\') &&
-                                !((flags & AbortOnMeta) &&
-                                  (c == QLatin1Char('$') ||
-                                   c == QLatin1Char('`')))) {
+                        if (c != QLatin1Char('"') && c != QLatin1Char('\\') && !((flags & AbortOnMeta) && (c == QLatin1Char('$') || c == QLatin1Char('`')))) {
                             cret += QLatin1Char('\\');
                         }
-                    } else if ((flags & AbortOnMeta) &&
-                               (c == QLatin1Char('$') ||
-                                c == QLatin1Char('`'))) {
+                    } else if ((flags & AbortOnMeta) && (c == QLatin1Char('$') || c == QLatin1Char('`'))) {
                         goto metaerr;
                     }
                     cret += c;
                 }
-            } else if (c == QLatin1Char('$') && pos < args.length() &&
-                       args.unicode()[pos] == QLatin1Char('\'')) {
+            } else if (c == QLatin1Char('$') && pos < args.length() && args.unicode()[pos] == QLatin1Char('\'')) {
                 pos++;
                 for (;;) {
                     if (pos >= args.length()) {
@@ -176,15 +162,33 @@ QStringList KShell::splitArgs(const QString &args, Options flags, Errors *err)
                         }
                         c = args.unicode()[pos++];
                         switch (c.toLatin1()) {
-                        case 'a': cret += QLatin1Char('\a'); break;
-                        case 'b': cret += QLatin1Char('\b'); break;
-                        case 'e': cret += QLatin1Char('\033'); break;
-                        case 'f': cret += QLatin1Char('\f'); break;
-                        case 'n': cret += QLatin1Char('\n'); break;
-                        case 'r': cret += QLatin1Char('\r'); break;
-                        case 't': cret += QLatin1Char('\t'); break;
-                        case '\\': cret += QLatin1Char('\\'); break;
-                        case '\'': cret += QLatin1Char('\''); break;
+                        case 'a':
+                            cret += QLatin1Char('\a');
+                            break;
+                        case 'b':
+                            cret += QLatin1Char('\b');
+                            break;
+                        case 'e':
+                            cret += QLatin1Char('\033');
+                            break;
+                        case 'f':
+                            cret += QLatin1Char('\f');
+                            break;
+                        case 'n':
+                            cret += QLatin1Char('\n');
+                            break;
+                        case 'r':
+                            cret += QLatin1Char('\r');
+                            break;
+                        case 't':
+                            cret += QLatin1Char('\t');
+                            break;
+                        case '\\':
+                            cret += QLatin1Char('\\');
+                            break;
+                        case '\'':
+                            cret += QLatin1Char('\'');
+                            break;
                         case 'c':
                             if (pos >= args.length()) {
                                 goto quoteerr;
@@ -276,10 +280,7 @@ metaerr:
 
 inline static bool isSpecial(QChar cUnicode)
 {
-    static const uchar iqm[] = {
-        0xff, 0xff, 0xff, 0xff, 0xdf, 0x07, 0x00, 0xd8,
-        0x00, 0x00, 0x00, 0x38, 0x01, 0x00, 0x00, 0x78
-    }; // 0-32 \'"$`<>|;&(){}*?#!~[]
+    static const uchar iqm[] = {0xff, 0xff, 0xff, 0xff, 0xdf, 0x07, 0x00, 0xd8, 0x00, 0x00, 0x00, 0x38, 0x01, 0x00, 0x00, 0x78}; // 0-32 \'"$`<>|;&(){}*?#!~[]
 
     uint c = cUnicode.unicode();
     return ((c < sizeof(iqm) * 8) && (iqm[c / 8] & (1 << (c & 7))));

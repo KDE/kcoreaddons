@@ -11,11 +11,11 @@
 #include "kpluginfactory.h"
 #include "kpluginmetadata.h"
 
-#include <QLibrary>
-#include <QDir>
-#include <QDirIterator>
 #include "kcoreaddons_debug.h"
 #include <QCoreApplication>
+#include <QDir>
+#include <QDirIterator>
+#include <QLibrary>
 #include <QMutex>
 
 // TODO: Upstream the versioning stuff to Qt
@@ -32,7 +32,8 @@ public:
 protected:
     KPluginLoaderPrivate(const QString &libname)
         : name(libname)
-    {}
+    {
+    }
 
     KPluginLoader *q_ptr = nullptr;
     const QString name;
@@ -57,8 +58,8 @@ QString KPluginLoader::findPlugin(const QString &name)
 }
 
 KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
-    : QObject(parent),
-      d_ptr(new KPluginLoaderPrivate(plugin))
+    : QObject(parent)
+    , d_ptr(new KPluginLoaderPrivate(plugin))
 {
     d_ptr->q_ptr = this;
     Q_D(KPluginLoader);
@@ -67,8 +68,8 @@ KPluginLoader::KPluginLoader(const QString &plugin, QObject *parent)
 }
 
 KPluginLoader::KPluginLoader(const KPluginName &pluginName, QObject *parent)
-    : QObject(parent),
-      d_ptr(new KPluginLoaderPrivate(pluginName.name()))
+    : QObject(parent)
+    , d_ptr(new KPluginLoaderPrivate(pluginName.name()))
 {
     d_ptr->q_ptr = this;
     Q_D(KPluginLoader);
@@ -78,9 +79,8 @@ KPluginLoader::KPluginLoader(const KPluginName &pluginName, QObject *parent)
     if (pluginName.isValid()) {
         d->loader->setFileName(pluginName.name());
         if (d->loader->fileName().isEmpty()) {
-            qCDebug(KCOREADDONS_DEBUG) << "Failed to load plugin" << pluginName.name() << d->loader->errorString()
-                       << "\nPlugin search paths are" << QCoreApplication::libraryPaths()
-                       << "\nThe environment variable QT_PLUGIN_PATH might be not correctly set";
+            qCDebug(KCOREADDONS_DEBUG) << "Failed to load plugin" << pluginName.name() << d->loader->errorString() << "\nPlugin search paths are"
+                                       << QCoreApplication::libraryPaths() << "\nThe environment variable QT_PLUGIN_PATH might be not correctly set";
         }
     } else {
         d->errorString = pluginName.errorString();
@@ -227,7 +227,6 @@ bool KPluginLoader::unload()
     return d->loader->unload();
 }
 
-
 void KPluginLoader::forEachPlugin(const QString &directory, std::function<void(const QString &)> callback)
 {
     QStringList dirsToCheck;
@@ -282,27 +281,24 @@ QVector<KPluginMetaData> KPluginLoader::findPlugins(const QString &directory, st
     return ret;
 }
 
-QVector< KPluginMetaData > KPluginLoader::findPluginsById(const QString& directory, const QString& pluginId)
+QVector<KPluginMetaData> KPluginLoader::findPluginsById(const QString &directory, const QString &pluginId)
 {
-    auto filter = [&pluginId](const KPluginMetaData &md) -> bool
-    {
+    auto filter = [&pluginId](const KPluginMetaData &md) -> bool {
         return md.pluginId() == pluginId;
     };
     return KPluginLoader::findPlugins(directory, filter);
 }
 
-QList<QObject *> KPluginLoader::instantiatePlugins(const QString &directory,
-        std::function<bool(const KPluginMetaData &)> filter, QObject* parent)
+QList<QObject *> KPluginLoader::instantiatePlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter, QObject *parent)
 {
     QList<QObject *> ret;
     QPluginLoader loader;
     const QVector<KPluginMetaData> listMetaData = findPlugins(directory, filter);
     for (const KPluginMetaData &metadata : listMetaData) {
         loader.setFileName(metadata.fileName());
-        QObject* obj = loader.instance();
+        QObject *obj = loader.instance();
         if (!obj) {
-            qCWarning(KCOREADDONS_DEBUG).nospace() << "Could not instantiate plugin \"" << metadata.fileName() << "\": "
-                << loader.errorString();
+            qCWarning(KCOREADDONS_DEBUG).nospace() << "Could not instantiate plugin \"" << metadata.fileName() << "\": " << loader.errorString();
             continue;
         }
         obj->setParent(parent);

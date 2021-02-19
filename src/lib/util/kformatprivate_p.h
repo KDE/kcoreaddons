@@ -22,38 +22,25 @@ class KFormatPrivate : public QSharedData
     Q_DECLARE_TR_FUNCTIONS(KFormat)
 
 public:
-
     explicit KFormatPrivate(const QLocale &locale);
     virtual ~KFormatPrivate();
 
-    QString formatByteSize(double size,
-                           int precision,
-                           KFormat::BinaryUnitDialect dialect,
-                           KFormat::BinarySizeUnits units) const;
+    QString formatByteSize(double size, int precision, KFormat::BinaryUnitDialect dialect, KFormat::BinarySizeUnits units) const;
 
-    QString formatValue(double value,
-                        KFormat::Unit unit,
-                        QString unitString,
-                        int precision,
-                        KFormat::UnitPrefix prefix,
-                        KFormat::BinaryUnitDialect dialect) const;
+    QString
+    formatValue(double value, KFormat::Unit unit, QString unitString, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const;
 
-    QString formatDuration(quint64 msecs,
-                           KFormat::DurationFormatOptions options) const;
+    QString formatDuration(quint64 msecs, KFormat::DurationFormatOptions options) const;
 
-    QString formatDecimalDuration(quint64 msecs,
-                                  int decimalPlaces) const;
+    QString formatDecimalDuration(quint64 msecs, int decimalPlaces) const;
 
     QString formatSpelloutDuration(quint64 msecs) const;
 
-    QString formatRelativeDate(const QDate &date,
-                               QLocale::FormatType format) const;
+    QString formatRelativeDate(const QDate &date, QLocale::FormatType format) const;
 
-    QString formatRelativeDateTime(const QDateTime &dateTime,
-                                   QLocale::FormatType format) const;
+    QString formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const;
 
 private:
-
     QLocale m_locale;
 };
 

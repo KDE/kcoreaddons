@@ -198,8 +198,7 @@ static bool match_internal(QStringView pattern, QStringView str, int &outScore, 
     const auto patternEnd = pattern.cend();
     const auto strEnd = str.cend();
 
-    return match_recursive(patternIt, strIt, outScore, strIt, strEnd, patternEnd,
-                           nullptr, matches, 0, recursionCount);
+    return match_recursive(patternIt, strIt, outScore, strIt, strEnd, patternEnd, nullptr, matches, 0, recursionCount);
 }
 
 /**************************************************************/
@@ -225,4 +224,3 @@ KFuzzyMatcher::Result KFuzzyMatcher::match(QStringView pattern, QStringView str)
     result.score = score;
     return result;
 }
-

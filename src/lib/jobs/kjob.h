@@ -11,9 +11,9 @@
 #ifndef KJOB_H
 #define KJOB_H
 
-#include <kcoreaddons_export.h>
 #include <QObject>
 #include <QPair>
+#include <kcoreaddons_export.h>
 #include <memory>
 
 class KJobUiDelegate;
@@ -88,11 +88,11 @@ public:
      * @see totalAmount
      */
     enum Unit {
-        Bytes,          ///< Directory and file sizes in bytes
-        Files,          ///< The number of files handled by the job
-        Directories,    ///< The number of directories handled by the job
-        Items,          ///< The number of items (e.g. both directories and files) handled by the job
-                        ///< @since 5.72
+        Bytes, ///< Directory and file sizes in bytes
+        Files, ///< The number of files handled by the job
+        Directories, ///< The number of directories handled by the job
+        Items, ///< The number of items (e.g. both directories and files) handled by the job
+               ///< @since 5.72
     };
     Q_ENUM(Unit)
 
@@ -101,8 +101,8 @@ public:
      */
     enum Capability {
         NoCapabilities = 0x0000, ///< None of the capabilities exist
-        Killable       = 0x0001, ///< The job can be killed
-        Suspendable    = 0x0002, ///< The job can be suspended
+        Killable = 0x0001, ///< The job can be killed
+        Suspendable = 0x0002, ///< The job can be suspended
     };
     Q_ENUM(Capability)
 
@@ -181,7 +181,10 @@ public:
      */
     Q_SCRIPTABLE virtual void start() = 0;
 
-    enum KillVerbosity { Quietly, EmitResult, };
+    enum KillVerbosity {
+        Quietly,
+        EmitResult,
+    };
     Q_ENUM(KillVerbosity)
 
 public Q_SLOTS:
@@ -384,9 +387,10 @@ Q_SIGNALS:
      */
     void finished(KJob *job
 #if !defined(K_DOXYGEN)
-                  , QPrivateSignal
+                  ,
+                  QPrivateSignal
 #endif
-                 );
+    );
 
     /**
      * Emitted when the job is suspended.
@@ -398,9 +402,10 @@ Q_SIGNALS:
      */
     void suspended(KJob *job
 #if !defined(K_DOXYGEN)
-                   , QPrivateSignal
+                   ,
+                   QPrivateSignal
 #endif
-                  );
+    );
 
     /**
      * Emitted when the job is resumed.
@@ -412,9 +417,10 @@ Q_SIGNALS:
      */
     void resumed(KJob *job
 #if !defined(K_DOXYGEN)
-                 , QPrivateSignal
+                 ,
+                 QPrivateSignal
 #endif
-                );
+    );
 
     /**
      * Emitted when the job is finished (except when killed with KJob::Quietly).
@@ -434,9 +440,10 @@ Q_SIGNALS:
      */
     void result(KJob *job
 #if !defined(K_DOXYGEN)
-                , QPrivateSignal
+                ,
+                QPrivateSignal
 #endif
-               );
+    );
 
     /**
      * Emitted to display general description of this job. A description has
@@ -451,7 +458,8 @@ Q_SIGNALS:
      * @param field1 first field (localized name and value)
      * @param field2 second field (localized name and value)
      */
-    void description(KJob *job, const QString &title,
+    void description(KJob *job,
+                     const QString &title,
                      const QPair<QString, QString> &field1 = QPair<QString, QString>(),
                      const QPair<QString, QString> &field2 = QPair<QString, QString>());
     /**

@@ -7,15 +7,15 @@
 */
 
 #include "kprocesstest_helper.h"
-#include <kprocess.h>
-#include <QObject>
 #include <QFile>
-#include <QTest>
+#include <QObject>
 #include <QStandardPaths>
+#include <QTest>
+#include <kprocess.h>
 
+#include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <signal.h>
 
 class KProcessTest : public QObject
 {
@@ -46,9 +46,9 @@ static QString callHelper(KProcess::OutputChannelMode how)
 
 #define EO EOUT "\n"
 #define EE EERR "\n"
-#define TESTCHAN(me,ms,pout,rout,rerr) \
-    e = QStringLiteral("mode: " ms "\n" POUT pout ROUT rout RERR rerr); \
-    a = QStringLiteral("mode: " ms "\n") + callHelper(KProcess::me); \
+#define TESTCHAN(me, ms, pout, rout, rerr)                                                                                                                     \
+    e = QStringLiteral("mode: " ms "\n" POUT pout ROUT rout RERR rerr);                                                                                        \
+    a = QStringLiteral("mode: " ms "\n") + callHelper(KProcess::me);                                                                                           \
     QCOMPARE(a, e)
 
 void KProcessTest::test_channels()
@@ -79,8 +79,7 @@ void KProcessTest::test_setShellCommand()
     QCOMPARE(p.program().at(0), QStandardPaths::findExecutable(QStringLiteral("cat")));
     QVERIFY(p.program().at(0).endsWith(QLatin1String("/bin/cat")));
     p.setShellCommand(QStringLiteral("true || false"));
-    QCOMPARE(p.program(), QStringList() << QStringLiteral("/bin/sh") << QStringLiteral("-c")
-             << QString::fromLatin1("true || false"));
+    QCOMPARE(p.program(), QStringList() << QStringLiteral("/bin/sh") << QStringLiteral("-c") << QString::fromLatin1("true || false"));
 #endif
 }
 

@@ -18,7 +18,7 @@
 int main(int argc, char **argv)
 {
     // TODO port to QCommandLineArguments once it exists
-    //options.add("+[directory ...]", qi18n("Directory(ies) to watch"));
+    // options.add("+[directory ...]", qi18n("Directory(ies) to watch"));
 
     QCoreApplication a(argc, argv);
 

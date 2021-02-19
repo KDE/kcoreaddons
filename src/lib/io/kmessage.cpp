@@ -7,13 +7,14 @@
 */
 #include "kmessage.h"
 
-
 #include <iostream>
 
 class StaticMessageHandler
 {
 public:
-    StaticMessageHandler() {}
+    StaticMessageHandler()
+    {
+    }
     ~StaticMessageHandler()
     {
         delete m_handler;
@@ -87,4 +88,3 @@ void KMessage::message(KMessage::MessageType messageType, const QString &text, c
         internalMessageFallback(messageType, text, caption);
     }
 }
-

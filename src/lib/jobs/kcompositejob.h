@@ -105,6 +105,7 @@ protected Q_SLOTS:
 
 protected:
     KCompositeJob(KCompositeJobPrivate &dd, QObject *parent);
+
 private:
     Q_DECLARE_PRIVATE(KCompositeJob)
 };

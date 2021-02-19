@@ -6,15 +6,15 @@
 
 #include "kdirwatchtest_gui.h"
 
-#include <kdirwatch.h>
-#include <qplatformdefs.h>
-#include <QDir>
 #include <QApplication>
+#include <QDir>
 #include <QLabel>
 #include <QLineEdit>
 #include <QPushButton>
 #include <QTextBrowser>
 #include <QVBoxLayout>
+#include <kdirwatch.h>
+#include <qplatformdefs.h>
 
 int main(int argc, char **argv)
 {
@@ -25,7 +25,8 @@ int main(int argc, char **argv)
     return app.exec();
 }
 
-KDirWatchTest_GUI::KDirWatchTest_GUI() : QWidget()
+KDirWatchTest_GUI::KDirWatchTest_GUI()
+    : QWidget()
 {
     QPushButton *e, *f;
 
@@ -125,4 +126,3 @@ void KDirWatchTest_GUI::slotDeleted(const QString &path)
 {
     m_eventBrowser->append(QLatin1String("Deleted(") + sender()->objectName() + QLatin1String("): ") + path + QLatin1Char('\n'));
 }
-

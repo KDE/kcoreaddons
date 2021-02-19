@@ -16,11 +16,11 @@
 
 #include "kcoreaddons_debug.h"
 
-#include <unistd.h> // Check for sched_yield
-#include <sched.h>  // sched_yield
 #include <errno.h>
 #include <fcntl.h>
+#include <sched.h> // sched_yield
 #include <time.h>
+#include <unistd.h> // Check for sched_yield
 
 // Mac OS X, for all its POSIX compliance, does not support timeouts on its
 // mutexes, which is kind of a disaster for cross-process support. However
@@ -154,13 +154,16 @@ public:
 
 private:
 #ifdef Q_CC_GNU
-    __attribute__((always_inline, gnu_inline
+    __attribute__((always_inline,
+                   gnu_inline
 #if !defined(Q_CC_INTEL) && !defined(Q_CC_CLANG)
-                   , artificial
+                   ,
+                   artificial
 #endif
                    ))
 #endif
-    static inline void loopSpinPause()
+    static inline void
+    loopSpinPause()
     {
         // TODO: Spinning might be better in multi-core systems... but that means
         // figuring how to find numbers of CPUs in a cross-platform way.
@@ -168,7 +171,7 @@ private:
         sched_yield();
 #else
         // Sleep for shortest possible time (nanosleep should round-up).
-        struct timespec wait_time = { 0 /* sec */, 100 /* ns */ };
+        struct timespec wait_time = {0 /* sec */, 100 /* ns */};
         ::nanosleep(&wait_time, static_cast<struct timespec *>(0));
 #endif
     }
@@ -194,8 +197,7 @@ public:
         // Initialize attributes, enable process-shared primitives, and setup
         // the mutex.
         if (::sysconf(_SC_THREAD_PROCESS_SHARED) >= 200112L && pthread_mutexattr_init(&mutexAttr) == 0) {
-            if (pthread_mutexattr_setpshared(&mutexAttr, PTHREAD_PROCESS_SHARED) == 0 &&
-                    pthread_mutex_init(&m_mutex, &mutexAttr) == 0) {
+            if (pthread_mutexattr_setpshared(&mutexAttr, PTHREAD_PROCESS_SHARED) == 0 && pthread_mutex_init(&m_mutex, &mutexAttr) == 0) {
                 processSharingSupported = true;
             }
             pthread_mutexattr_destroy(&mutexAttr);
@@ -320,10 +322,10 @@ public:
 // cache and used by multiple processes, therefore you should consider this
 // a versioned field, do not re-arrange.
 enum SharedLockId {
-    LOCKTYPE_INVALID   = 0,
-    LOCKTYPE_MUTEX     = 1,  // pthread_mutex
-    LOCKTYPE_SEMAPHORE = 2,  // sem_t
-    LOCKTYPE_SPINLOCK  = 3,   // atomic int in shared memory
+    LOCKTYPE_INVALID = 0,
+    LOCKTYPE_MUTEX = 1, // pthread_mutex
+    LOCKTYPE_SEMAPHORE = 2, // sem_t
+    LOCKTYPE_SPINLOCK = 3, // atomic int in shared memory
 };
 
 // This type is a union of all possible lock types, with a SharedLockId used
@@ -464,10 +466,9 @@ static bool ensureFileAllocated(int fd, size_t fileSize)
         if (result == ENOSPC) {
             qCCritical(KCOREADDONS_DEBUG) << "No space left on device. Check filesystem free space at your XDG_CACHE_HOME!";
         }
-        qCCritical(KCOREADDONS_DEBUG) << "The operating system is unable to promise"
-                    << fileSize
-                    << "bytes for mapped cache, "
-                    "abandoning the cache for crash-safety.";
+        qCCritical(KCOREADDONS_DEBUG) << "The operating system is unable to promise" << fileSize
+                                      << "bytes for mapped cache, "
+                                         "abandoning the cache for crash-safety.";
         return false;
     }
 
@@ -475,11 +476,12 @@ static bool ensureFileAllocated(int fd, size_t fileSize)
 #else
 
 #ifdef __GNUC__
-#warning "This system does not seem to support posix_fallocate, which is needed to ensure KSharedDataCache's underlying files are fully committed to disk to avoid crashes with low disk space."
+#warning                                                                                                                                                       \
+    "This system does not seem to support posix_fallocate, which is needed to ensure KSharedDataCache's underlying files are fully committed to disk to avoid crashes with low disk space."
 #endif
     qCWarning(KCOREADDONS_DEBUG) << "This system misses support for posix_fallocate()"
-               " -- ensure this partition has room for at least"
-               << fileSize << "bytes.";
+                                    " -- ensure this partition has room for at least"
+                                 << fileSize << "bytes.";
 
     // TODO: It's possible to emulate the functionality, but doing so
     // overwrites the data in the file so we don't do this. If you were to add

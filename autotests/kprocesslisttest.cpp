@@ -12,8 +12,8 @@
 #include <QTest>
 #include <algorithm>
 
-namespace {
-
+namespace
+{
 QString getTestExeName()
 {
     static QString testExeName = QCoreApplication::instance()->applicationFilePath().section(QLatin1Char('/'), -1);
@@ -53,12 +53,11 @@ void KProcessListTest::testProcessInfoList()
 {
     KProcessList::KProcessInfoList processInfoList = KProcessList::processInfoList();
     QVERIFY(processInfoList.empty() == false);
-    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(), [](const KProcessList::KProcessInfo& info)
-    {
+    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(), [](const KProcessList::KProcessInfo &info) {
         return info.command().endsWith(QLatin1String("/") + getTestExeName());
     });
     QVERIFY(testProcessIterator != processInfoList.end());
-    const auto& processInfo = *testProcessIterator;
+    const auto &processInfo = *testProcessIterator;
     QVERIFY(processInfo.isValid() == true);
     QVERIFY(processInfo.command().endsWith(QLatin1String("/") + getTestExeName()));
     QCOMPARE(processInfo.name(), getTestExeName());

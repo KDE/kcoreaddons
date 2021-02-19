@@ -13,12 +13,12 @@
 #ifndef KABOUTDATA_H
 #define KABOUTDATA_H
 
-#include <kcoreaddons_export.h>
-#include <QString>
 #include <QSharedDataPointer>
+#include <QString>
 #include <QVariant>
-#include <qcontainerfwd.h>
+#include <kcoreaddons_export.h>
 #include <memory>
+#include <qcontainerfwd.h>
 
 class QCommandLineParser;
 class QJsonObject;
@@ -63,6 +63,7 @@ class KCOREADDONS_EXPORT KAboutPerson
     Q_PROPERTY(QString ocsUsername READ ocsUsername CONSTANT)
     friend class KAboutData;
     friend class KAboutDataPrivate;
+
 public:
     /**
      * Convenience constructor
@@ -179,8 +180,8 @@ class KCOREADDONS_EXPORT KAboutLicense
     Q_PROPERTY(KAboutLicense::LicenseKey key READ key CONSTANT)
     Q_PROPERTY(QString spdx READ spdx CONSTANT)
     friend class KAboutData;
-public:
 
+public:
     /**
      * Describes the license of the software.
      */
@@ -188,7 +189,7 @@ public:
         Custom = -2,
         File = -1,
         Unknown = 0,
-        GPL  = 1,
+        GPL = 1,
         GPL_V2 = 1,
         LGPL = 2,
         LGPL_V2 = 2,
@@ -308,9 +309,7 @@ private:
     /**
      * @internal Used by KAboutData to construct a predefined license.
      */
-    explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType,
-                           enum KAboutLicense::VersionRestriction versionRestriction,
-                           const KAboutData *aboutData);
+    explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType, enum KAboutLicense::VersionRestriction versionRestriction, const KAboutData *aboutData);
     /**
      * @internal Used by KAboutData to construct a predefined license.
      */
@@ -405,14 +404,13 @@ class KCOREADDONS_EXPORT KAboutData
     Q_PROPERTY(QString bugAddress READ bugAddress CONSTANT)
     Q_PROPERTY(QString version READ version CONSTANT)
     Q_PROPERTY(QString otherText READ otherText CONSTANT)
-    Q_PROPERTY(QVariantList authors READ authorsVariant CONSTANT) //constant in practice as addAuthor is not exposed to Q_GADGET
+    Q_PROPERTY(QVariantList authors READ authorsVariant CONSTANT) // constant in practice as addAuthor is not exposed to Q_GADGET
     Q_PROPERTY(QVariantList credits READ creditsVariant CONSTANT)
     Q_PROPERTY(QVariantList translators READ translatorsVariant CONSTANT)
     Q_PROPERTY(QVariantList licenses READ licensesVariant CONSTANT)
     Q_PROPERTY(QString copyrightStatement READ copyrightStatement CONSTANT)
     Q_PROPERTY(QString desktopFileName READ desktopFileName CONSTANT)
 public:
-
     /**
      * Returns the KAboutData for the application.
      *
@@ -541,8 +539,7 @@ public:
                const QString &copyrightStatement = QString(),
                const QString &otherText = QString(),
                const QString &homePageAddress = QString(),
-               const QString &bugAddress = QStringLiteral("submit@bugs.kde.org")
-              );
+               const QString &bugAddress = QStringLiteral("submit@bugs.kde.org"));
 
     /**
      * Constructor.
@@ -562,10 +559,7 @@ public:
      *
      * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
      */
-    explicit KAboutData(const QString &componentName = {},
-               const QString &displayName = {},
-               const QString &version = {}
-              );
+    explicit KAboutData(const QString &componentName = {}, const QString &displayName = {}, const QString &version = {});
 
     /**
      * Copy constructor.  Performs a deep copy.
@@ -661,8 +655,7 @@ public:
      * @param emailAddress the email address(es) of the translator(s)
      * @see KAboutTranslator
      */
-    KAboutData &setTranslator(const QString &name,
-                              const QString &emailAddress);
+    KAboutData &setTranslator(const QString &name, const QString &emailAddress);
 
     /**
      * Defines a license text, which is translated.
@@ -758,7 +751,7 @@ public:
      *
      * @param image logo image.
      * @see programLogo()
-    */
+     */
     KAboutData &setProgramLogo(const QVariant &image);
 
     /**
@@ -809,8 +802,7 @@ public:
      *
      * @since 5.37
      */
-    KAboutData &setLicense(KAboutLicense::LicenseKey licenseKey,
-                           KAboutLicense::VersionRestriction versionRestriction);
+    KAboutData &setLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction);
 
     /**
      * Adds a license identifier.
@@ -836,8 +828,7 @@ public:
      *
      * @since 5.37
      */
-    KAboutData &addLicense(KAboutLicense::LicenseKey licenseKey,
-                           KAboutLicense::VersionRestriction versionRestriction);
+    KAboutData &addLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction);
 
     /**
      * Defines the copyright statement to show when displaying the license.
@@ -1100,8 +1091,7 @@ public:
      * displayed at all.  Call unsetCustomAuthorText() to revert to the default
      * message.
      */
-    KAboutData &setCustomAuthorText(const QString &plainText,
-                                    const QString &richText);
+    KAboutData &setCustomAuthorText(const QString &plainText, const QString &richText);
 
     /**
      * Clears any custom text displayed around the list of authors and falls
@@ -1189,4 +1179,3 @@ Q_DECLARE_METATYPE(KAboutLicense)
 Q_DECLARE_METATYPE(KAboutPerson)
 
 #endif
-

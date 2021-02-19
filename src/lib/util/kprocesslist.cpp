@@ -16,18 +16,18 @@ KProcessInfoPrivate::KProcessInfoPrivate()
 {
 }
 
-KProcessInfo::KProcessInfo() :
-    d_ptr(new KProcessInfoPrivate)
+KProcessInfo::KProcessInfo()
+    : d_ptr(new KProcessInfoPrivate)
 {
 }
 
-KProcessInfo::KProcessInfo(qint64 pid, const QString& command, const QString& user) :
-    KProcessInfo(pid, command, command, user)
-{}
+KProcessInfo::KProcessInfo(qint64 pid, const QString &command, const QString &user)
+    : KProcessInfo(pid, command, command, user)
+{
+}
 
-
-KProcessInfo::KProcessInfo(qint64 pid, const QString& command, const QString &name, const QString& user) :
-    d_ptr(new KProcessInfoPrivate)
+KProcessInfo::KProcessInfo(qint64 pid, const QString &command, const QString &name, const QString &user)
+    : d_ptr(new KProcessInfoPrivate)
 {
     d_ptr->valid = true;
     d_ptr->pid = pid;
@@ -36,8 +36,8 @@ KProcessInfo::KProcessInfo(qint64 pid, const QString& command, const QString &na
     d_ptr->user = user;
 }
 
-KProcessInfo::KProcessInfo(const KProcessInfo &other) :
-    d_ptr(new KProcessInfoPrivate)
+KProcessInfo::KProcessInfo(const KProcessInfo &other)
+    : d_ptr(new KProcessInfoPrivate)
 {
     *this = other;
 }

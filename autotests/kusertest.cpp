@@ -3,11 +3,11 @@
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
-#include <QTest>
 #include <QDebug>
+#include <QTest>
 
-#include "kuser.h"
 #include "kcoreaddons_debug.h"
+#include "kuser.h"
 
 namespace QTest
 {
@@ -75,7 +75,7 @@ void KUserTest::testKUser()
     // We can't test the KUser properties, since they differ on each system
     // instead just print them all out, this can be verified by the person running the test
     printUserInfo(user);
-#if 0 //enable this if you think that KUser might not be working correctly
+#if 0 // enable this if you think that KUser might not be working correctly
     Q_FOREACH (const KUser &u, allUsers) {
         printUserInfo(u);
     }
@@ -83,9 +83,9 @@ void KUserTest::testKUser()
 
     // test operator==
     KUser invalidKUser = KUser(KUserId());
-    QVERIFY(invalidKUser != invalidKUser); //invalid never equal
+    QVERIFY(invalidKUser != invalidKUser); // invalid never equal
     QVERIFY(invalidKUser != user);
-    QVERIFY(user != invalidKUser);    // now test the other way around
+    QVERIFY(user != invalidKUser); // now test the other way around
     QCOMPARE(user, user);
 
     // make sure we don't crash when accessing properties of an invalid instance
@@ -139,8 +139,9 @@ void KUserTest::testKUserGroup()
     QCOMPARE(KUserGroup::allGroups(1).size(), 1);
     // We can't test the KUser properties, since they differ on each system
     // instead just print them all out, this can be verified by the person running the test
-    qCDebug(KCOREADDONS_DEBUG).nospace() << "Current group: " << group.name() << ", group ID =" << group.groupId().toString() << ", members = " << group.userNames();
-#if 0 //enable this if you think that KUser might not be working correctly
+    qCDebug(KCOREADDONS_DEBUG).nospace() << "Current group: " << group.name() << ", group ID =" << group.groupId().toString()
+                                         << ", members = " << group.userNames();
+#if 0 // enable this if you think that KUser might not be working correctly
     for (int i = 0; i < allGroups.size(); ++i) {
         qDebug().nospace() << "Group " << i << ": name = " << allGroups[i].name()
                            << ", group ID =" << allGroups[i].groupId().toString();
@@ -149,9 +150,9 @@ void KUserTest::testKUserGroup()
 #endif
     // test operator==
     KUserGroup invalidKUserGroup = KUserGroup(KGroupId());
-    QVERIFY(invalidKUserGroup != invalidKUserGroup); //invalid never equal
+    QVERIFY(invalidKUserGroup != invalidKUserGroup); // invalid never equal
     QVERIFY(invalidKUserGroup != group);
-    QVERIFY(group != invalidKUserGroup);    // now test the other way around
+    QVERIFY(group != invalidKUserGroup); // now test the other way around
     QCOMPARE(group, group);
 
     // make sure we don't crash when accessing an invalid KUserGroup
@@ -159,7 +160,6 @@ void KUserTest::testKUserGroup()
     invalidKUserGroup.name(); // could be empty, or "nogroup", so no checks here
     QCOMPARE(invalidKUserGroup.userNames(), QStringList());
     QCOMPARE(invalidKUserGroup.users(), QList<KUser>());
-
 }
 
 void KUserTest::testKUserId()
@@ -173,7 +173,7 @@ void KUserTest::testKUserId()
     QCOMPARE(currentUser, currentEffectiveUser);
 
     KUser kuser(currentUser);
-    //now get the same user from his name
+    // now get the same user from his name
     QString userName = kuser.loginName();
     qDebug("Current user: %s, id: %s", qPrintable(userName), qPrintable(currentUser.toString()));
     QVERIFY(!userName.isEmpty());
@@ -193,7 +193,7 @@ void KUserTest::testKUserId()
     KUserId invalid3 = KUserId::fromName(QStringLiteral("This_user_does_not_exist"));
     QVERIFY(!invalid3.isValid());
 
-    //check comparison
+    // check comparison
     QCOMPARE(invalid, KUserId());
     QCOMPARE(invalid, invalid2);
     QCOMPARE(invalid, invalid3);
@@ -204,7 +204,7 @@ void KUserTest::testKUserId()
     QVERIFY(currentUser != invalid2);
     QVERIFY(currentUser != invalid3);
     QVERIFY(invalid != currentUser);
-    //Copy constructor and assignment
+    // Copy constructor and assignment
     KUserId currentUserCopy = currentUser;
     QCOMPARE(currentUser, currentUserCopy);
     QCOMPARE(currentUser, KUserId(currentUser));
@@ -221,7 +221,7 @@ void KUserTest::testKGroupId()
     // these should be the same since this is not a setuid program
     QCOMPARE(currentGroup, currentEffectiveGroup);
 
-    //now get the same Group from his name
+    // now get the same Group from his name
     KUserGroup kuserGroup(currentGroup);
     QString groupName = kuserGroup.name();
     qDebug("Current group: %s, id: %s", qPrintable(groupName), qPrintable(currentGroup.toString()));
@@ -242,7 +242,7 @@ void KUserTest::testKGroupId()
     KGroupId invalid3 = KGroupId::fromName(QStringLiteral("This_Group_does_not_exist"));
     QVERIFY(!invalid3.isValid());
 
-    //check comparison
+    // check comparison
     QCOMPARE(invalid, KGroupId());
     QCOMPARE(invalid, invalid2);
     QCOMPARE(invalid, invalid3);
@@ -253,7 +253,7 @@ void KUserTest::testKGroupId()
     QVERIFY(currentGroup != invalid);
     QVERIFY(currentGroup != invalid2);
     QVERIFY(currentGroup != invalid3);
-    //Copy constructor and assignment
+    // Copy constructor and assignment
     KGroupId currentGroupCopy = currentGroup;
     QCOMPARE(currentGroup, currentGroupCopy);
     QCOMPARE(currentGroup, KGroupId(currentGroup));

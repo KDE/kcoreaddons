@@ -14,7 +14,10 @@
 class KMacroExpanderBasePrivate
 {
 public:
-    KMacroExpanderBasePrivate(QChar c) : escapechar(c) {}
+    KMacroExpanderBasePrivate(QChar c)
+        : escapechar(c)
+    {
+    }
     QChar escapechar;
 };
 

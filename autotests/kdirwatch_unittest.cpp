@@ -8,12 +8,12 @@
 
 #include <kdirwatch.h>
 
-#include <QDir>
 #include <QDebug>
+#include <QDir>
 #include <QFileInfo>
+#include <QSignalSpy>
 #include <QTemporaryDir>
 #include <QTest>
-#include <QSignalSpy>
 #include <QThread>
 #include <sys/stat.h>
 #ifdef Q_OS_UNIX
@@ -53,10 +53,12 @@ Q_GLOBAL_STATIC(StaticObject, s_staticObject)
 class StaticObjectUsingSelf // like KSambaShare does, bug 353080
 {
 public:
-    StaticObjectUsingSelf() {
+    StaticObjectUsingSelf()
+    {
         KDirWatch::self();
     }
-    ~StaticObjectUsingSelf() {
+    ~StaticObjectUsingSelf()
+    {
         if (KDirWatch::exists() && KDirWatch::self()->contains(QDir::homePath())) {
             KDirWatch::self()->removeDir(QDir::homePath());
         }
@@ -156,7 +158,7 @@ void KDirWatch_UnitTest::createFile(const QString &path)
     // When using it, one has to open() a file to start watching it, so workaround
     // test breakage by giving inotify time to react to file creation.
     // Full context: https://github.com/libinotify-kqueue/libinotify-kqueue/issues/10
-    if(!m_slow)
+    if (!m_slow)
         QThread::msleep(1);
 #endif
     file.write(QByteArray("foo"));
@@ -178,7 +180,7 @@ void KDirWatch_UnitTest::removeFile(int num)
     QFile::remove(m_path + fileName);
 }
 
-int KDirWatch_UnitTest::createDirectoryTree(const QString& basePath, int depth)
+int KDirWatch_UnitTest::createDirectoryTree(const QString &basePath, int depth)
 {
     int filesCreated = 0;
 
@@ -211,7 +213,6 @@ void KDirWatch_UnitTest::waitUntilMTimeChange(const QString &path)
     QVERIFY(fi.exists());
     const QDateTime ctime = fi.lastModified();
     waitUntilAfter(ctime);
-
 }
 
 void KDirWatch_UnitTest::waitUntilNewSecond()
@@ -226,7 +227,7 @@ void KDirWatch_UnitTest::waitUntilAfter(const QDateTime &ctime)
     QDateTime now;
     Q_FOREVER {
         now = QDateTime::currentDateTime();
-        if (now.toMSecsSinceEpoch() / 1000 == ctime.toMSecsSinceEpoch() / 1000)   // truncate milliseconds
+        if (now.toMSecsSinceEpoch() / 1000 == ctime.toMSecsSinceEpoch() / 1000) // truncate milliseconds
         {
             totalWait += 50;
             QTest::qWait(50);
@@ -236,7 +237,7 @@ void KDirWatch_UnitTest::waitUntilAfter(const QDateTime &ctime)
             break;
         }
     }
-    //if (totalWait > 0)
+    // if (totalWait > 0)
     qCDebug(KCOREADDONS_DEBUG) << "Waited" << totalWait << "ms so that now" << now.toString(Qt::ISODate) << "is >" << ctime.toString(Qt::ISODate);
 }
 
@@ -304,57 +305,57 @@ bool KDirWatch_UnitTest::waitForOneSignal(KDirWatch &watch, const char *sig, con
 
 bool KDirWatch_UnitTest::verifySignalPath(QSignalSpy &spy, const char *sig, const QString &expectedPath)
 {
-  for (int i = 0; i < spy.count(); ++i) {
-    const QString got = spy[i][0].toString();
-    if (got == expectedPath) {
-      return true;
+    for (int i = 0; i < spy.count(); ++i) {
+        const QString got = spy[i][0].toString();
+        if (got == expectedPath) {
+            return true;
+        }
+        if (got.startsWith(expectedPath + QLatin1Char('/'))) {
+            qCDebug(KCOREADDONS_DEBUG) << "Ignoring (inotify) notification of" << (sig + 1) << '(' << got << ')';
+            continue;
+        }
+        qWarning() << "Expected" << sig << '(' << expectedPath << ')' << "but got" << sig << '(' << got << ')';
+        return false;
     }
-    if (got.startsWith(expectedPath + QLatin1Char('/'))) {
-      qCDebug(KCOREADDONS_DEBUG) << "Ignoring (inotify) notification of" << (sig + 1) << '(' << got << ')';
-      continue;
-    }
-    qWarning() << "Expected" << sig << '(' << expectedPath << ')' << "but got" << sig << '(' << got << ')';
     return false;
-  }
-  return false;
 }
 
 bool KDirWatch_UnitTest::waitForRecreationSignal(KDirWatch &watch, const QString &path)
 {
-  // When watching for a deleted + created signal pair, the two might come so close that
-  // using waitForOneSignal will miss the created signal.  This function monitors both all
-  // the time to ensure both are received.
-  //
-  // In addition, it allows dirty() to be emitted (for that same path) as an alternative
+    // When watching for a deleted + created signal pair, the two might come so close that
+    // using waitForOneSignal will miss the created signal.  This function monitors both all
+    // the time to ensure both are received.
+    //
+    // In addition, it allows dirty() to be emitted (for that same path) as an alternative
 
-  const QString expectedPath = removeTrailingSlash(path);
-  QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
-  QSignalSpy spyDeleted(&watch, &KDirWatch::deleted);
-  QSignalSpy spyCreated(&watch, &KDirWatch::created);
+    const QString expectedPath = removeTrailingSlash(path);
+    QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
+    QSignalSpy spyDeleted(&watch, &KDirWatch::deleted);
+    QSignalSpy spyCreated(&watch, &KDirWatch::created);
 
-  int numTries = 0;
-  while (spyDeleted.isEmpty() && spyDirty.isEmpty()) {
-      if (++numTries > s_maxTries) {
-          return false;
-      }
-      spyDeleted.wait(50);
-      while (!spyDirty.isEmpty()) {
-          if (spyDirty.at(0).at(0).toString() != expectedPath) { // unrelated
-              spyDirty.removeFirst();
-          }
-      }
-  }
-  if (!spyDirty.isEmpty()) {
-      return true;
-  }
+    int numTries = 0;
+    while (spyDeleted.isEmpty() && spyDirty.isEmpty()) {
+        if (++numTries > s_maxTries) {
+            return false;
+        }
+        spyDeleted.wait(50);
+        while (!spyDirty.isEmpty()) {
+            if (spyDirty.at(0).at(0).toString() != expectedPath) { // unrelated
+                spyDirty.removeFirst();
+            }
+        }
+    }
+    if (!spyDirty.isEmpty()) {
+        return true;
+    }
 
-  // Don't bother waiting for the created signal if the signal spy already received a signal.
-  if(spyCreated.isEmpty() && !spyCreated.wait(50 * s_maxTries)) {
-    qWarning() << "Timeout waiting for KDirWatch signal created(QString) (" << path << ")";
-    return false;
-  }
+    // Don't bother waiting for the created signal if the signal spy already received a signal.
+    if (spyCreated.isEmpty() && !spyCreated.wait(50 * s_maxTries)) {
+        qWarning() << "Timeout waiting for KDirWatch signal created(QString) (" << path << ")";
+        return false;
+    }
 
-  return verifySignalPath(spyDeleted, "deleted(QString)", expectedPath) && verifySignalPath(spyCreated, "created(QString)", expectedPath);
+    return verifySignalPath(spyDeleted, "deleted(QString)", expectedPath) && verifySignalPath(spyCreated, "created(QString)", expectedPath);
 }
 
 QList<QVariantList> KDirWatch_UnitTest::waitForDeletedSignal(KDirWatch &watch, int expected)
@@ -436,7 +437,7 @@ void KDirWatch_UnitTest::removeAndReAdd()
     watch.addDir(QStringLiteral(":/kio5/newfile-templates"));
     watch.startScan();
     if (watch.internalMethod() != KDirWatch::INotify) {
-        waitUntilNewSecond();    // necessary for mtime checks in scanEntry
+        waitUntilNewSecond(); // necessary for mtime checks in scanEntry
     }
     createFile(0);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
@@ -445,7 +446,7 @@ void KDirWatch_UnitTest::removeAndReAdd()
     watch.removeDir(m_path);
     watch.addDir(m_path);
     if (watch.internalMethod() != KDirWatch::INotify) {
-        waitUntilMTimeChange(m_path);    // necessary for FAM and QFSWatcher
+        waitUntilMTimeChange(m_path); // necessary for FAM and QFSWatcher
     }
     createFile(1);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
@@ -547,12 +548,11 @@ void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtim
 
     // Make sure this even works multiple times, as needed for ksycoca
     for (int i = 0; i < 5; ++i) {
-
         if (m_slow || watch.internalMethod() == KDirWatch::QFSWatch) {
             waitUntilNewSecond();
         }
 
-        qCDebug(KCOREADDONS_DEBUG) << "Attempt #" << (i+1) << "removing+recreating" << file1;
+        qCDebug(KCOREADDONS_DEBUG) << "Attempt #" << (i + 1) << "removing+recreating" << file1;
 
         // When watching for a deleted + created signal pair, the two might come so close that
         // using waitForOneSignal will miss the created signal.  This function monitors both all
@@ -780,7 +780,7 @@ void KDirWatch_UnitTest::stopAndRestart()
     const QString file2 = createFile(2);
     QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
     QTest::qWait(200);
-    QCOMPARE(spyDirty.count(), 0);// suspended -> no signal
+    QCOMPARE(spyDirty.count(), 0); // suspended -> no signal
 
     watch.restartDirScan(m_path);
 
@@ -831,7 +831,7 @@ void KDirWatch_UnitTest::benchCreateWatcher()
 
     QBENCHMARK {
         KDirWatch watch;
-        watch.addDir(dir.path(), KDirWatch::WatchSubDirs | KDirWatch:: WatchFiles);
+        watch.addDir(dir.path(), KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
     }
 }
 
@@ -846,7 +846,7 @@ void KDirWatch_UnitTest::benchNotifyWatcher()
     waitUntilMTimeChange(dir.path());
 
     KDirWatch watch;
-    watch.addDir(dir.path(), KDirWatch::WatchSubDirs | KDirWatch:: WatchFiles);
+    watch.addDir(dir.path(), KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
 
     // now touch all the files repeatedly and wait for the dirty updates to come in
     QSignalSpy spy(&watch, &KDirWatch::dirty);

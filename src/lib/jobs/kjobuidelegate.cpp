@@ -16,9 +16,11 @@ class KJobUiDelegatePrivate
 {
 public:
     KJobUiDelegatePrivate(KJobUiDelegate *delegate)
-        : q(delegate),
-          autoErrorHandling(false),
-          autoWarningHandling(true) { }
+        : q(delegate)
+        , autoErrorHandling(false)
+        , autoWarningHandling(true)
+    {
+    }
 
     KJobUiDelegate *const q;
 
@@ -94,8 +96,7 @@ bool KJobUiDelegate::isAutoWarningHandlingEnabled() const
     return d->autoWarningHandling;
 }
 
-void KJobUiDelegate::slotWarning(KJob *job, const QString &plain,
-                                 const QString &rich)
+void KJobUiDelegate::slotWarning(KJob *job, const QString &plain, const QString &rich)
 {
     Q_UNUSED(job)
     Q_UNUSED(plain)
@@ -104,7 +105,9 @@ void KJobUiDelegate::slotWarning(KJob *job, const QString &plain,
 
 void KJobUiDelegate::connectJob(KJob *job)
 {
-    connect(job, &KJob::result, this, [this](){ d->_k_result();} );
+    connect(job, &KJob::result, this, [this]() {
+        d->_k_result();
+    });
     connect(job, &KJob::warning, this, &KJobUiDelegate::slotWarning);
 }
 

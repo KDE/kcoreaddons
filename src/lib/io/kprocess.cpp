@@ -9,11 +9,11 @@
 #include "kprocess_p.h"
 
 #include <QStandardPaths>
-#include <qplatformdefs.h>
 #include <kshell.h>
+#include <qplatformdefs.h>
 #ifdef Q_OS_WIN
-# include <qt_windows.h>
-# include <kshell_p.h>
+#include <kshell_p.h>
+#include <qt_windows.h>
 #endif
 
 #include <QFile>
@@ -22,16 +22,16 @@
 // public member functions //
 /////////////////////////////
 
-KProcess::KProcess(QObject *parent) :
-    QProcess(parent),
-    d_ptr(new KProcessPrivate(this))
+KProcess::KProcess(QObject *parent)
+    : QProcess(parent)
+    , d_ptr(new KProcessPrivate(this))
 {
     setOutputChannelMode(ForwardedChannels);
 }
 
-KProcess::KProcess(KProcessPrivate *d, QObject *parent) :
-    QProcess(parent),
-    d_ptr(d)
+KProcess::KProcess(KProcessPrivate *d, QObject *parent)
+    : QProcess(parent)
+    , d_ptr(d)
 {
     d_ptr->q_ptr = this;
     setOutputChannelMode(ForwardedChannels);
@@ -60,7 +60,7 @@ void KProcess::setNextOpenMode(QIODevice::OpenMode mode)
 
 void KProcess::clearEnvironment()
 {
-    setEnvironment(QStringList { QStringLiteral(DUMMYENV) });
+    setEnvironment(QStringList{QStringLiteral(DUMMYENV)});
 }
 
 void KProcess::setEnv(const QString &name, const QString &value, bool overwrite)
@@ -167,8 +167,7 @@ void KProcess::setShellCommand(const QString &cmd)
     Q_D(KProcess);
 
     KShell::Errors err;
-    d->args = KShell::splitArgs(
-                  cmd, KShell::AbortOnMeta | KShell::TildeExpand, &err);
+    d->args = KShell::splitArgs(cmd, KShell::AbortOnMeta | KShell::TildeExpand, &err);
     if (err == KShell::NoError && !d->args.isEmpty()) {
         d->prog = QStandardPaths::findExecutable(d->args[0]);
         if (!d->prog.isEmpty()) {
@@ -184,7 +183,8 @@ void KProcess::setShellCommand(const QString &cmd)
 
 #ifdef Q_OS_UNIX
 // #ifdef NON_FREE // ... as they ship non-POSIX /bin/sh
-# if !defined(__linux__) && !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__) && !defined(__GNU__) && !defined(__APPLE__)
+#if !defined(__linux__) && !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__) && !defined(__GNU__)              \
+    && !defined(__APPLE__)
     // If /bin/sh is a symlink, we can be pretty sure that it points to a
     // POSIX shell - the original bourne shell is about the only non-POSIX
     // shell still in use and it is always installed natively as /bin/sh.
@@ -199,7 +199,7 @@ void KProcess::setShellCommand(const QString &cmd)
                 if (d->prog.isEmpty()) {
                     d->prog = QStandardPaths::findExecutable(QStringLiteral("zsh"));
                     if (d->prog.isEmpty())
-                        // We're pretty much screwed, to be honest ...
+                    // We're pretty much screwed, to be honest ...
                     {
                         d->prog = QStringLiteral("/bin/sh");
                     }
@@ -207,9 +207,9 @@ void KProcess::setShellCommand(const QString &cmd)
             }
         }
     }
-# else
+#else
     d->prog = QStringLiteral("/bin/sh");
-# endif
+#endif
 
     d->args << QStringLiteral("-c") << cmd;
 #else // Q_OS_UNIX
@@ -220,7 +220,7 @@ void KProcess::setShellCommand(const QString &cmd)
 #ifndef _WIN32_WCE
     WCHAR sysdir[MAX_PATH + 1];
     UINT size = GetSystemDirectoryW(sysdir, MAX_PATH + 1);
-    d->prog = QString::fromUtf16((const ushort *) sysdir, size);
+    d->prog = QString::fromUtf16((const ushort *)sysdir, size);
     d->prog += QLatin1String("\\cmd.exe");
     setNativeArguments(QLatin1String("/V:OFF /S /C \"") + cmd + QLatin1Char('"'));
 #else
@@ -305,15 +305,15 @@ int KProcess::startDetached(const QStringList &argv)
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 78)
 int KProcess::pid() const
 {
-QT_WARNING_PUSH
-QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
-QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_CLANG("-Wdeprecated-declarations")
+    QT_WARNING_DISABLE_GCC("-Wdeprecated-declarations")
 #ifdef Q_OS_UNIX
     return static_cast<int>(QProcess::pid());
 #else
     return QProcess::pid() ? QProcess::pid()->dwProcessId : 0;
 #endif
-QT_WARNING_POP
+    QT_WARNING_POP
 }
 #endif
 

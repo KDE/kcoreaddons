@@ -12,8 +12,8 @@
 
 #include "kbackup.h"
 
-#include <QFileInfo>
 #include <QDir>
+#include <QFileInfo>
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 #include <QProcess>
@@ -22,7 +22,6 @@
 
 namespace KBackup
 {
-
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 bool backupFile(const QString &qFilename, const QString &backupDir)
 {
@@ -30,9 +29,7 @@ bool backupFile(const QString &qFilename, const QString &backupDir)
 }
 #endif
 
-bool simpleBackupFile(const QString &qFilename,
-                      const QString &backupDir,
-                      const QString &backupExtension)
+bool simpleBackupFile(const QString &qFilename, const QString &backupDir, const QString &backupExtension)
 {
     QString backupFileName = qFilename + backupExtension;
 
@@ -41,15 +38,13 @@ bool simpleBackupFile(const QString &qFilename,
         backupFileName = backupDir + QLatin1Char('/') + fileInfo.fileName() + backupExtension;
     }
 
-//    qCDebug(KCOREADDONS_DEBUG) << "KBackup copying " << qFilename << " to " << backupFileName;
+    //    qCDebug(KCOREADDONS_DEBUG) << "KBackup copying " << qFilename << " to " << backupFileName;
     QFile::remove(backupFileName);
     return QFile::copy(qFilename, backupFileName);
 }
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
-bool rcsBackupFile(const QString &qFilename,
-                   const QString &backupDir,
-                   const QString &backupMessage)
+bool rcsBackupFile(const QString &qFilename, const QString &backupDir, const QString &backupMessage)
 {
     QFileInfo fileInfo(qFilename);
 
@@ -83,7 +78,7 @@ bool rcsBackupFile(const QString &qFilename,
     if (!backupDir.isEmpty()) {
         ci.setWorkingDirectory(backupDir);
     }
-    ci.start(cipath, QStringList { QStringLiteral("-u"), fileInfo.filePath() });
+    ci.start(cipath, QStringList{QStringLiteral("-u"), fileInfo.filePath()});
     if (!ci.waitForStarted()) {
         return false;
     }
@@ -99,7 +94,7 @@ bool rcsBackupFile(const QString &qFilename,
     if (!backupDir.isEmpty()) {
         rcs.setWorkingDirectory(backupDir);
     }
-    rcs.start(rcspath, QStringList { QStringLiteral("-U"), qBackupFilename });
+    rcs.start(rcspath, QStringList{QStringLiteral("-U"), qBackupFilename});
     if (!rcs.waitForFinished()) {
         return false;
     }
@@ -109,7 +104,7 @@ bool rcsBackupFile(const QString &qFilename,
     if (!backupDir.isEmpty()) {
         co.setWorkingDirectory(backupDir);
     }
-    co.start(copath, QStringList { qBackupFilename });
+    co.start(copath, QStringList{qBackupFilename});
     if (!co.waitForFinished()) {
         return false;
     }
@@ -122,10 +117,7 @@ bool rcsBackupFile(const QString &qFilename,
 }
 #endif
 
-bool numberedBackupFile(const QString &qFilename,
-                        const QString &backupDir,
-                        const QString &backupExtension,
-                        const uint maxBackups)
+bool numberedBackupFile(const QString &qFilename, const QString &backupDir, const QString &backupExtension, const uint maxBackups)
 {
     QFileInfo fileInfo(qFilename);
 
@@ -172,13 +164,13 @@ bool numberedBackupFile(const QString &qFilename,
     QString to = sTemplate.arg(maxBackupFound + 1);
     for (int i = maxBackupFound; i > 0; i--) {
         QString from = sTemplate.arg(i);
-//        qCDebug(KCOREADDONS_DEBUG) << "KBackup renaming " << from << " to " << to;
+        //        qCDebug(KCOREADDONS_DEBUG) << "KBackup renaming " << from << " to " << to;
         QFile::rename(from, to);
         to = from;
     }
 
     // Finally create most recent backup by copying the file to backup number 1.
-//    qCDebug(KCOREADDONS_DEBUG) << "KBackup copying " << qFilename << " to " << sTemplate.arg(1);
+    //    qCDebug(KCOREADDONS_DEBUG) << "KBackup copying " << qFilename << " to " << sTemplate.arg(1);
     return QFile::copy(qFilename, sTemplate.arg(1));
 }
 

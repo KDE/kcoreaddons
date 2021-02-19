@@ -32,7 +32,10 @@ class CompositeJob : public KCompositeJob
     Q_OBJECT
 
 public:
-    explicit CompositeJob(QObject *parent = nullptr) : KCompositeJob(parent) {}
+    explicit CompositeJob(QObject *parent = nullptr)
+        : KCompositeJob(parent)
+    {
+    }
 
     void start() override;
     bool addSubjob(KJob *job) override;

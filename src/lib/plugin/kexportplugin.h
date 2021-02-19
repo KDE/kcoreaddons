@@ -18,8 +18,7 @@
  * Use this macro if you want to give your plugin a version number.
  * You can later access the version number with KPluginLoader::pluginVersion()
  */
-#define K_EXPORT_PLUGIN_VERSION(version) \
-    Q_EXTERN_C Q_DECL_EXPORT const quint32 kde_plugin_version = version;
+#define K_EXPORT_PLUGIN_VERSION(version) Q_EXTERN_C Q_DECL_EXPORT const quint32 kde_plugin_version = version;
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 0)
 /**
@@ -29,7 +28,7 @@
  * Take a look at the documentation of Q_EXPORT_PLUGIN2 for some details.
  */
 
-#if defined (Q_OS_WIN32) && defined(Q_CC_BOR)
+#if defined(Q_OS_WIN32) && defined(Q_CC_BOR)
 #define Q_STANDARD_CALL __stdcall
 #else
 #define Q_STANDARD_CALL
@@ -38,11 +37,9 @@ class KCOREADDONS_DEPRECATED_EXPORT K_EXPORT_PLUGIN_is_deprecated_see_KDE5PORTIN
 {
 };
 
-#define K_EXPORT_PLUGIN(factory) \
-    K_EXPORT_PLUGIN_is_deprecated_see_KDE5PORTING dummy;
+#define K_EXPORT_PLUGIN(factory) K_EXPORT_PLUGIN_is_deprecated_see_KDE5PORTING dummy;
 #endif
 
 #endif
 
 #endif // KEXPORTPLUGIN_H
-

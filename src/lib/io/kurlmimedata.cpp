@@ -7,10 +7,13 @@
 */
 
 #include "kurlmimedata.h"
-#include <QStringList>
 #include <QMimeData>
+#include <QStringList>
 
-static QString kdeUriListMime() { return QStringLiteral("application/x-kde4-urilist"); } // keep this name "kde4" for compat.
+static QString kdeUriListMime()
+{
+    return QStringLiteral("application/x-kde4-urilist");
+} // keep this name "kde4" for compat.
 
 static QByteArray uriListData(const QList<QUrl> &urls)
 {
@@ -23,8 +26,7 @@ static QByteArray uriListData(const QList<QUrl> &urls)
     return result;
 }
 
-void KUrlMimeData::setUrls(const QList<QUrl> &urls, const QList<QUrl> &mostLocalUrls,
-                           QMimeData *mimeData)
+void KUrlMimeData::setUrls(const QList<QUrl> &urls, const QList<QUrl> &mostLocalUrls, QMimeData *mimeData)
 {
     // Export the most local urls as text/uri-list and plain text, for non KDE apps.
     mimeData->setUrls(mostLocalUrls); // set text/uri-list and text/plain
@@ -47,7 +49,7 @@ void KUrlMimeData::setMetaData(const MetaDataMap &metaData, QMimeData *mimeData)
 
 QStringList KUrlMimeData::mimeDataTypes()
 {
-    return QStringList { kdeUriListMime(), QStringLiteral("text/uri-list") };
+    return QStringList{kdeUriListMime(), QStringLiteral("text/uri-list")};
 }
 
 static QList<QUrl> extractKdeUriList(const QMimeData *mimeData)
@@ -66,10 +68,7 @@ static QList<QUrl> extractKdeUriList(const QMimeData *mimeData)
     return uris;
 }
 
-
-QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
-        DecodeOptions decodeOptions,
-        MetaDataMap *metaData)
+QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData, DecodeOptions decodeOptions, MetaDataMap *metaData)
 {
     QList<QUrl> uris;
     if (decodeOptions == PreferLocalUrls) {
@@ -107,4 +106,3 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData,
     }
     return uris;
 }
-

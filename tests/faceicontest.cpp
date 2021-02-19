@@ -7,8 +7,8 @@
 #include "faceicontest.h"
 
 #include <QApplication>
-#include <QVBoxLayout>
 #include <QListWidget>
+#include <QVBoxLayout>
 #include <kuser.h>
 
 int main(int argc, char **argv)

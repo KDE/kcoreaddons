@@ -6,8 +6,8 @@
 */
 
 #include "kurlmimedatatest.h"
-#include <QTest>
 #include <QMimeData>
+#include <QTest>
 #include <kurlmimedata.h>
 
 QTEST_MAIN(KUrlMimeDataTest)
@@ -125,7 +125,7 @@ void KUrlMimeDataTest::testMostLocalUrlList()
     QVERIFY(mimeData->hasUrls());
     QVERIFY(mimeData->hasText());
     // The support for urls is done in hasText, a direct call to hasFormat will say false.
-    //QVERIFY(mimeData->hasFormat(QLatin1String("text/plain")));
+    // QVERIFY(mimeData->hasFormat(QLatin1String("text/plain")));
 
     // urlsFromMimeData decodes the real "kde" urls by default, if any
     QList<QUrl> decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData);

@@ -19,7 +19,6 @@
  */
 namespace KFileUtils
 {
-
 /**
  * Given a directory path and a string representing a file or directory
  * (which usually exist already), this function returns a suggested name

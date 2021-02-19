@@ -7,11 +7,11 @@
 // test object
 #include "kdelibs4configmigrator.h"
 // Qt
-#include <QObject>
 #include <QFile>
+#include <QObject>
+#include <QStandardPaths>
 #include <QTemporaryDir>
 #include <QTest>
-#include <QStandardPaths>
 
 class Kdelibs4ConfigMigratorTest : public QObject
 {
@@ -57,7 +57,7 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateConfigFiles()
     const QString kdehome = kdehomeDir.path();
     qputenv("KDEHOME", QFile::encodeName(kdehome));
 
-    //Generate kde4 config dir
+    // Generate kde4 config dir
     const QString configPath = kdehome + QLatin1Char('/') + QLatin1String("share/config/");
     QDir().mkpath(configPath);
     QVERIFY(QDir(configPath).exists());
@@ -92,7 +92,7 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateUiFiles()
 
     const QString appName = QLatin1String("foo");
 
-    //Generate kde4 data dir
+    // Generate kde4 data dir
     const QString dataPath = kdehome + QLatin1Char('/') + QLatin1String("share/apps/");
     QDir().mkpath(dataPath);
     QVERIFY(QDir(dataPath).exists());
@@ -126,4 +126,3 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateUiFiles()
 QTEST_MAIN(Kdelibs4ConfigMigratorTest)
 
 #include "kdelibs4configmigratortest.moc"
-

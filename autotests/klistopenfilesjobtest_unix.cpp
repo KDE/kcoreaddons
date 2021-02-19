@@ -22,8 +22,8 @@ void initLocale()
 
 Q_CONSTRUCTOR_FUNCTION(initLocale)
 
-namespace {
-
+namespace
+{
 bool hasLsofInstalled()
 {
     return !QStandardPaths::findExecutable(QStringLiteral("lsof")).isEmpty();
@@ -44,13 +44,11 @@ void KListOpenFilesJobTest::testOpenFiles()
     QCOMPARE(job->error(), KJob::NoError);
     auto processInfoList = job->processInfoList();
     QVERIFY(!processInfoList.empty());
-    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(),
-                                            [](const KProcessList::KProcessInfo& info)
-    {
+    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(), [](const KProcessList::KProcessInfo &info) {
         return info.pid() == QCoreApplication::applicationPid();
     });
     QVERIFY(testProcessIterator != processInfoList.end());
-    const auto& processInfo = *testProcessIterator;
+    const auto &processInfo = *testProcessIterator;
     QVERIFY(processInfo.isValid());
     QCOMPARE(processInfo.pid(), QCoreApplication::applicationPid());
 }
@@ -86,7 +84,7 @@ void KListOpenFilesJobTest::testNonExistingDir()
 class ScopedEnvVariable
 {
 public:
-    ScopedEnvVariable(const QLatin1String& Name, const QByteArray& NewValue)
+    ScopedEnvVariable(const QLatin1String &Name, const QByteArray &NewValue)
         : name(Name)
         , originalValue(qgetenv(name.latin1()))
     {
@@ -96,6 +94,7 @@ public:
     {
         qputenv(name.latin1(), originalValue);
     }
+
 private:
     const QLatin1String name;
     const QByteArray originalValue;

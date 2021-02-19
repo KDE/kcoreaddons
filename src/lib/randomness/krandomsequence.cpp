@@ -16,7 +16,9 @@
 class KRandomSequencePrivate : public QSharedData
 {
 public:
-    enum {SHUFFLE_TABLE_SIZE = 32,};
+    enum {
+        SHUFFLE_TABLE_SIZE = 32,
+    };
 
     void draw(); // Generate the random number
 
@@ -73,19 +75,19 @@ void KRandomSequence::setSeed(int lngSeed1)
     }
 }
 
-static const int sMod1           = 2147483563;
-static const int sMod2           = 2147483399;
+static const int sMod1 = 2147483563;
+static const int sMod2 = 2147483399;
 
 void KRandomSequencePrivate::draw()
 {
-    static const int sMM1            = sMod1 - 1;
-    static const int sA1             = 40014;
-    static const int sA2             = 40692;
-    static const int sQ1             = 53668;
-    static const int sQ2             = 52774;
-    static const int sR1             = 12211;
-    static const int sR2             = 3791;
-    static const int sDiv            = 1 + sMM1 / SHUFFLE_TABLE_SIZE;
+    static const int sMM1 = sMod1 - 1;
+    static const int sA1 = 40014;
+    static const int sA2 = 40692;
+    static const int sQ1 = 53668;
+    static const int sQ2 = 52774;
+    static const int sR1 = 12211;
+    static const int sR2 = 3791;
+    static const int sDiv = 1 + sMM1 / SHUFFLE_TABLE_SIZE;
 
     // Long period (>2 * 10^18) random number generator of L'Ecuyer with
     // Bayes-Durham shuffle and added safeguards. Returns a uniform random
@@ -144,8 +146,7 @@ void KRandomSequencePrivate::draw()
     }
 }
 
-void
-KRandomSequence::modulate(int i)
+void KRandomSequence::modulate(int i)
 {
     d->lngSeed2 -= i;
     if (d->lngSeed2 < 0) {
@@ -159,12 +160,11 @@ KRandomSequence::modulate(int i)
     d->draw();
 }
 
-double
-KRandomSequence::getDouble()
+double KRandomSequence::getDouble()
 {
-    static const double finalAmp         = 1.0 / double(sMod1);
-    static const double epsilon          = 1.2E-7;
-    static const double maxRand          = 1.0 - epsilon;
+    static const double finalAmp = 1.0 / double(sMod1);
+    static const double epsilon = 1.2E-7;
+    static const double maxRand = 1.0 - epsilon;
     double temp;
     d->draw();
     // Return a value that is not one of the endpoints
@@ -176,22 +176,19 @@ KRandomSequence::getDouble()
     }
 }
 
-unsigned long
-KRandomSequence::getLong(unsigned long max)
+unsigned long KRandomSequence::getLong(unsigned long max)
 {
     return getInt(static_cast<int>(max));
 }
 
-unsigned int
-KRandomSequence::getInt(unsigned int max)
+unsigned int KRandomSequence::getInt(unsigned int max)
 {
     d->draw();
 
     return max ? ((static_cast<unsigned int>(d->lngShufflePos)) % max) : 0;
 }
 
-bool
-KRandomSequence::getBool()
+bool KRandomSequence::getBool()
 {
     d->draw();
 

@@ -5,7 +5,6 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-
 #include "desktopfileparser_p.h"
 
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
@@ -20,21 +19,26 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QMutex>
-#include <QStandardPaths>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
+#include <QStandardPaths>
 
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
 // use if not else to prevent wrong scoping
-#define DESKTOPTOJSON_VERBOSE_DEBUG if (!DesktopFileParser::s_verbose) {} else qCDebug(DESKTOPPARSER)
-#define DESKTOPTOJSON_VERBOSE_WARNING if (!DesktopFileParser::s_verbose) {} else qCWarning(DESKTOPPARSER)
+#define DESKTOPTOJSON_VERBOSE_DEBUG                                                                                                                            \
+    if (!DesktopFileParser::s_verbose) {                                                                                                                       \
+    } else                                                                                                                                                     \
+        qCDebug(DESKTOPPARSER)
+#define DESKTOPTOJSON_VERBOSE_WARNING                                                                                                                          \
+    if (!DesktopFileParser::s_verbose) {                                                                                                                       \
+    } else                                                                                                                                                     \
+        qCWarning(DESKTOPPARSER)
 #else
 #define DESKTOPTOJSON_VERBOSE_DEBUG QT_NO_QDEBUG_MACRO()
 #define DESKTOPTOJSON_VERBOSE_WARNING QT_NO_QDEBUG_MACRO()
 #endif
 
 #include "../lib/kcoreaddons_export.h"
-
 
 using namespace DesktopFileParser;
 
@@ -123,9 +127,15 @@ QByteArray DesktopFileParser::escapeValue(const QByteArray &input)
 
 struct CustomPropertyDefinition {
     // default ctor needed for QVector
-    CustomPropertyDefinition() : type(QVariant::String) {}
+    CustomPropertyDefinition()
+        : type(QVariant::String)
+    {
+    }
     CustomPropertyDefinition(const QByteArray &key, QVariant::Type type)
-        : key(key) , type(type) {}
+        : key(key)
+        , type(type)
+    {
+    }
     QJsonValue fromString(const QString &str) const
     {
         switch (type) {
@@ -168,8 +178,8 @@ struct CustomPropertyDefinition {
     QVariant::Type type;
 };
 
-namespace {
-
+namespace
+{
 bool readUntilDesktopEntryGroup(QFile &file, const QString &path, int &lineNr)
 {
     if (!file.open(QFile::ReadOnly)) {
@@ -187,7 +197,6 @@ bool readUntilDesktopEntryGroup(QFile &file, const QString &path, int &lineNr)
     qCWarning(DESKTOPPARSER) << "Error: Could not find [Desktop Entry] group in " << path;
     return false;
 }
-
 
 QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup, QByteArray *pName)
 {
@@ -212,14 +221,12 @@ QByteArray readTypeEntryForCurrentGroup(QFile &df, QByteArray *nextGroup, QByteA
             break;
         }
 
-        const static QRegularExpression typeEntryRegex(
-                QStringLiteral("^Type\\s*=\\s*(.*)$"));
+        const static QRegularExpression typeEntryRegex(QStringLiteral("^Type\\s*=\\s*(.*)$"));
         const auto match = typeEntryRegex.match(QString::fromUtf8(line));
         if (match.hasMatch()) {
             type = match.captured(1).toUtf8();
         } else if (pName) {
-            const static QRegularExpression nameEntryRegex(
-                    QStringLiteral("^X-KDE-ServiceType\\s*=\\s*(.*)$"));
+            const static QRegularExpression nameEntryRegex(QStringLiteral("^X-KDE-ServiceType\\s*=\\s*(.*)$"));
             const auto nameMatch = nameEntryRegex.match(QString::fromUtf8(line));
             if (nameMatch.hasMatch()) {
                 *pName = nameMatch.captured(1).toUtf8();
@@ -249,8 +256,10 @@ bool tokenizeKeyValue(QFile &df, const QString &src, QByteArray &key, QString &v
     // must have form key=value now
     const int equalsIndex = line.indexOf('=');
     if (equalsIndex == -1) {
-        qCWarning(DESKTOPPARSER).nospace() << qPrintable(src) << ':' << lineNr << ": Line is neither comment nor group "
-            "and doesn't contain an '=' character: \"" << line.constData() << '\"';
+        qCWarning(DESKTOPPARSER).nospace() << qPrintable(src) << ':' << lineNr
+                                           << ": Line is neither comment nor group "
+                                              "and doesn't contain an '=' character: \""
+                                           << line.constData() << '\"';
         return true;
     }
     // trim key and value to remove spaces around the '=' char
@@ -276,11 +285,10 @@ bool tokenizeKeyValue(QFile &df, const QString &src, QByteArray &key, QString &v
 
 static QString locateRelativeServiceType(const QString &relPath)
 {
-    return QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                  QStringLiteral("kservicetypes5/") + relPath);
+    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kservicetypes5/") + relPath);
 }
 
-static ServiceTypeDefinition* parseServiceTypesFile(const QString &inputPath)
+static ServiceTypeDefinition *parseServiceTypesFile(const QString &inputPath)
 {
     int lineNr = 0;
     QString path = inputPath;
@@ -294,7 +302,8 @@ static ServiceTypeDefinition* parseServiceTypesFile(const QString &inputPath)
             }
         }
         if (path.isEmpty()) {
-            qCWarning(DESKTOPPARSER).nospace() << "Could not locate service type file kservicetypes5/" << qPrintable(inputPath) << ", tried " << QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation) << " and " << rcPath;
+            qCWarning(DESKTOPPARSER).nospace() << "Could not locate service type file kservicetypes5/" << qPrintable(inputPath) << ", tried "
+                                               << QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation) << " and " << rcPath;
             return nullptr;
         }
     }
@@ -313,8 +322,7 @@ static ServiceTypeDefinition* parseServiceTypesFile(const QString &inputPath)
     // Type must be ServiceType now
     QByteArray typeStr = readTypeEntryForCurrentGroup(df, &nextGroup, &result.m_serviceTypeName);
     if (typeStr != QByteArrayLiteral("ServiceType")) {
-        qCWarning(DESKTOPPARSER) << path << "is not a valid service type: Type entry should be 'ServiceType', got"
-            << typeStr << "instead.";
+        qCWarning(DESKTOPPARSER) << path << "is not a valid service type: Type entry should be 'ServiceType', got" << typeStr << "instead.";
         return nullptr;
     }
     while (!df.atEnd()) {
@@ -331,21 +339,23 @@ static ServiceTypeDefinition* parseServiceTypesFile(const QString &inputPath)
         QByteArray propertyName = currentGroup.mid(qstrlen("PropertyDef::"));
         QVariant::Type type = QVariant::nameToType(typeStr.constData());
         switch (type) {
-            case QVariant::String:
-            case QVariant::StringList:
-            case QVariant::Int:
-            case QVariant::Double:
-            case QVariant::Bool:
-                qCDebug(DESKTOPPARSER) << "Found property definition" << propertyName << "with type" << typeStr;
-                result.m_propertyDefs.push_back(CustomPropertyDefinition(propertyName, type));
-                break;
-            case QVariant::Invalid:
-                qCWarning(DESKTOPPARSER) << "Property type" << typeStr << "is not a known QVariant type."
-                        " Found while parsing property definition for" << propertyName << "in" << path;
-                break;
-            default:
-                qCWarning(DESKTOPPARSER) << "Unsupported property type" << typeStr << "for property" << propertyName
-                        << "found in" << path << "\nOnly QString, QStringList, int, double and bool are supported.";
+        case QVariant::String:
+        case QVariant::StringList:
+        case QVariant::Int:
+        case QVariant::Double:
+        case QVariant::Bool:
+            qCDebug(DESKTOPPARSER) << "Found property definition" << propertyName << "with type" << typeStr;
+            result.m_propertyDefs.push_back(CustomPropertyDefinition(propertyName, type));
+            break;
+        case QVariant::Invalid:
+            qCWarning(DESKTOPPARSER) << "Property type" << typeStr
+                                     << "is not a known QVariant type."
+                                        " Found while parsing property definition for"
+                                     << propertyName << "in" << path;
+            break;
+        default:
+            qCWarning(DESKTOPPARSER) << "Unsupported property type" << typeStr << "for property" << propertyName << "found in" << path
+                                     << "\nOnly QString, QStringList, int, double and bool are supported.";
         }
     }
     return new ServiceTypeDefinition(result);
@@ -357,7 +367,6 @@ Q_GLOBAL_STATIC(ServiceTypesHash, s_serviceTypes)
 // access must be guarded by serviceTypesMutex as this code could be executed by multiple threads
 QBasicMutex s_serviceTypesMutex;
 } // end of anonymous namespace
-
 
 ServiceTypeDefinitions ServiceTypeDefinitions::fromFiles(const QStringList &paths)
 {
@@ -375,10 +384,10 @@ ServiceTypeDefinitions ServiceTypeDefinitions::fromFiles(const QStringList &path
     return ret;
 }
 
-bool ServiceTypeDefinitions::addFile(const QString& path)
+bool ServiceTypeDefinitions::addFile(const QString &path)
 {
     QMutexLocker lock(&s_serviceTypesMutex);
-    ServiceTypeDefinition* def = s_serviceTypes->object(path);
+    ServiceTypeDefinition *def = s_serviceTypes->object(path);
 
     if (def) {
         // in cache but we still must make our own copy
@@ -414,13 +423,17 @@ QJsonValue ServiceTypeDefinitions::parseValue(const QByteArray &key, const QStri
 bool ServiceTypeDefinitions::hasServiceType(const QByteArray &serviceTypeName) const
 {
     const auto it = std::find_if(m_definitions.begin(), m_definitions.end(), [&serviceTypeName](const ServiceTypeDefinition &def) {
-            return def.m_serviceTypeName == serviceTypeName;
+        return def.m_serviceTypeName == serviceTypeName;
     });
     return it != m_definitions.end();
 }
 
-void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefinitions &serviceTypes, const QString &value,
-                                      QJsonObject &json, QJsonObject &kplugin, int lineNr)
+void DesktopFileParser::convertToJson(const QByteArray &key,
+                                      ServiceTypeDefinitions &serviceTypes,
+                                      const QString &value,
+                                      QJsonObject &json,
+                                      QJsonObject &kplugin,
+                                      int lineNr)
 {
     /* The following keys are recognized (and added to a "KPlugin" object):
 
@@ -471,7 +484,7 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
     }
 #endif
     else if (key == QByteArrayLiteral("X-KDE-ServiceTypes") || key == QByteArrayLiteral("ServiceTypes")) {
-        //NOTE: "X-KDE-ServiceTypes" and "ServiceTypes" were already managed in the first parse step, so this second one is almost a noop
+        // NOTE: "X-KDE-ServiceTypes" and "ServiceTypes" were already managed in the first parse step, so this second one is almost a noop
         const auto services = deserializeList(value);
         kplugin[QStringLiteral("ServiceTypes")] = QJsonArray::fromStringList(services);
     } else if (key == QByteArrayLiteral("MimeType")) {
@@ -489,8 +502,8 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
             boolValue = true;
         } else {
             if (value.toLower() != QLatin1String("false")) {
-                qCWarning(DESKTOPPARSER).nospace() << "Expected boolean value for key \"" << key
-                    << "\" at line " << lineNr << "but got \"" << value << "\" instead.";
+                qCWarning(DESKTOPPARSER).nospace() << "Expected boolean value for key \"" << key << "\" at line " << lineNr << "but got \"" << value
+                                                   << "\" instead.";
             }
         }
         kplugin[QStringLiteral("EnabledByDefault")] = boolValue;
@@ -541,13 +554,10 @@ void DesktopFileParser::convertToJson(const QByteArray &key, ServiceTypeDefiniti
         kplugin[QStringLiteral("InitialPreference")] = value.toInt();
     } else if (key == QByteArrayLiteral("Hidden")) {
         DESKTOPTOJSON_VERBOSE_WARNING << "Hidden= key found in desktop file, this makes no sense"
-                " with metadata inside the plugin.";
+                                         " with metadata inside the plugin.";
         kplugin[QString::fromUtf8(key)] = (value.toLower() == QLatin1String("true"));
-    } else if (key == QByteArrayLiteral("Exec") ||
-               key == QByteArrayLiteral("Type") ||
-               key == QByteArrayLiteral("Actions") ||
-               key == QByteArrayLiteral("X-KDE-Library") ||
-               key == QByteArrayLiteral("Encoding")) {
+    } else if (key == QByteArrayLiteral("Exec") || key == QByteArrayLiteral("Type") || key == QByteArrayLiteral("Actions")
+               || key == QByteArrayLiteral("X-KDE-Library") || key == QByteArrayLiteral("Encoding")) {
         // Exec= doesn't make sense here, however some .desktop files (like e.g. in kdevelop) have a dummy value here
         // also the Type=Service entry is no longer needed
         // Actions= is used as hack at least with the Dolphin KPart to report the different view mode options
@@ -570,7 +580,7 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
     DESKTOPTOJSON_VERBOSE_DEBUG << "Found [Desktop Entry] group in line" << lineNr;
     auto startPos = df.pos();
 
-    //parse it a first time to know servicetype
+    // parse it a first time to know servicetype
     while (!df.atEnd()) {
         QByteArray key;
         QString value;
@@ -586,11 +596,9 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
             for (const auto &service : serviceList) {
                 if (!serviceTypeDef.hasServiceType(service.toLatin1())) {
                     // Make up the filename from the service type name. This assumes consistent naming...
-                    QString absFileName = locateRelativeServiceType(
-                            service.toLower().replace(slashChar, QLatin1Char('-')) + dotDesktop);
+                    QString absFileName = locateRelativeServiceType(service.toLower().replace(slashChar, QLatin1Char('-')) + dotDesktop);
                     if (absFileName.isEmpty()) {
-                        absFileName = locateRelativeServiceType(
-                                service.toLower().remove(slashChar) + dotDesktop);
+                        absFileName = locateRelativeServiceType(service.toLower().remove(slashChar) + dotDesktop);
                     }
                     if (absFileName.isEmpty()) {
                         qCWarning(DESKTOPPARSER) << "Unable to find service type for service" << service << "listed in" << src;
@@ -602,7 +610,7 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
             break;
         }
     }
-    lineNr=0;
+    lineNr = 0;
     df.seek(startPos);
 
     QJsonObject kplugin; // the "KPlugin" key of the metadata
@@ -630,4 +638,3 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
     json[QStringLiteral("KPlugin")] = kplugin;
     return true;
 }
-

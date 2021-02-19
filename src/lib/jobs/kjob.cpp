@@ -25,13 +25,15 @@ KJobPrivate::~KJobPrivate()
 }
 
 KJob::KJob(QObject *parent)
-    : QObject(parent), d_ptr(new KJobPrivate)
+    : QObject(parent)
+    , d_ptr(new KJobPrivate)
 {
     d_ptr->q_ptr = this;
 }
 
 KJob::KJob(KJobPrivate &dd, QObject *parent)
-    : QObject(parent), d_ptr(&dd)
+    : QObject(parent)
+    , d_ptr(&dd)
 {
     d_ptr->q_ptr = this;
 }
@@ -179,7 +181,7 @@ bool KJob::exec()
     const bool wasAutoDelete = isAutoDelete();
     setAutoDelete(false);
 
-    Q_ASSERT(! d->eventLoop);
+    Q_ASSERT(!d->eventLoop);
 
     QEventLoop loop(this);
     d->eventLoop = &loop;
@@ -331,7 +333,7 @@ void KJob::emitSpeed(unsigned long value)
     }
 
     Q_EMIT speed(this, value);
-    d->speedTimer->start(5000);   // 5 seconds interval should be enough
+    d->speedTimer->start(5000); // 5 seconds interval should be enough
 }
 
 void KJobPrivate::_k_speedTimeout()

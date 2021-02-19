@@ -13,9 +13,9 @@
 
 #include <QExplicitlySharedDataPointer>
 #include <QJsonObject>
+#include <QMetaType>
 #include <QString>
 #include <QStringList>
-#include <QMetaType>
 
 #include <functional>
 
@@ -25,7 +25,6 @@ class QStringList;
 class KPluginMetaDataPrivate;
 class KAboutPerson;
 class QObject;
-
 
 /**
  * @class KPluginMetaData kpluginmetadata.h KPluginMetaData
@@ -116,7 +115,6 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(int initialPreference READ isEnabledByDefault CONSTANT)
 
 public:
-
     /** Creates an invalid KPluginMetaData instance */
     KPluginMetaData();
 
@@ -240,7 +238,6 @@ public:
      * @return the full metadata stored inside the plugin file.
      */
     QJsonObject rawData() const;
-
 
     /**
      * Tries to instantiate this plugin using KPluginMetaData::fileName().
@@ -439,9 +436,11 @@ public:
     {
         return !(*this == other);
     }
+
 private:
     QJsonObject rootObject() const;
     void loadFromDesktopFile(const QString &file, const QStringList &serviceTypes);
+
 private:
     QVariantList authorsVariant() const;
     QVariantList translatorsVariant() const;

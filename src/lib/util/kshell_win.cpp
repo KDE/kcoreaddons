@@ -10,10 +10,10 @@
 #include "kshell.h"
 #include "kshell_p.h"
 
+#include <QDir>
 #include <QRegularExpression>
 #include <QString>
 #include <QStringList>
-#include <QDir>
 
 /*
  * A short introduction into cmd semantics:
@@ -43,10 +43,7 @@
 
 inline static bool isMetaChar(ushort c)
 {
-    static const uchar iqm[] = {
-        0x00, 0x00, 0x00, 0x00, 0x40, 0x03, 0x00, 0x50,
-        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10
-    }; // &()<>|
+    static const uchar iqm[] = {0x00, 0x00, 0x00, 0x00, 0x40, 0x03, 0x00, 0x50, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x10}; // &()<>|
 
     return (c < sizeof(iqm) * 8) && (iqm[c / 8] & (1 << (c & 7)));
 }
@@ -57,10 +54,7 @@ inline static bool isSpecialChar(ushort c)
     // - control chars & space
     // - the shell meta chars &()<>^|
     // - the potential separators ,;=
-    static const uchar iqm[] = {
-        0xff, 0xff, 0xff, 0xff, 0x41, 0x13, 0x00, 0x78,
-        0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x10
-    };
+    static const uchar iqm[] = {0xff, 0xff, 0xff, 0xff, 0x41, 0x13, 0x00, 0x78, 0x00, 0x00, 0x00, 0x40, 0x00, 0x00, 0x00, 0x10};
 
     return (c < sizeof(iqm) * 8) && (iqm[c / 8] & (1 << (c & 7)));
 }
@@ -116,27 +110,23 @@ QStringList KShell::splitArgs(const QString &_args, Options flags, Errors *err)
     int p = 0;
     const int length = args.length();
     for (;;) {
-    while (p < length && isWhiteSpace(args[p].unicode()))
-        {
+        while (p < length && isWhiteSpace(args[p].unicode())) {
             ++p;
         }
-        if (p == length)
-        {
+        if (p == length) {
             return ret;
         }
 
         QString arg;
         bool inquote = false;
         for (;;) {
-        bool copy = true; // copy this char
-        int bslashes = 0; // number of preceding backslashes to insert
-        while (p < length && args[p] == bs)
-            {
+            bool copy = true; // copy this char
+            int bslashes = 0; // number of preceding backslashes to insert
+            while (p < length && args[p] == bs) {
                 ++p;
                 ++bslashes;
             }
-            if (p < length && args[p] == dq)
-            {
+            if (p < length && args[p] == dq) {
                 if (bslashes % 2 == 0) {
                     // Even number of backslashes, so the quote is not escaped.
                     if (inquote) {
@@ -158,13 +148,11 @@ QStringList KShell::splitArgs(const QString &_args, Options flags, Errors *err)
                 bslashes /= 2;
             }
 
-            while (--bslashes >= 0)
-            {
+            while (--bslashes >= 0) {
                 arg.append(bs);
             }
 
-            if (p == length || (!inquote && isWhiteSpace(args[p].unicode())))
-            {
+            if (p == length || (!inquote && isWhiteSpace(args[p].unicode()))) {
                 ret.append(arg);
                 if (inquote) {
                     if (err) {
@@ -175,14 +163,13 @@ QStringList KShell::splitArgs(const QString &_args, Options flags, Errors *err)
                 break;
             }
 
-            if (copy)
-            {
+            if (copy) {
                 arg.append(args[p]);
             }
             ++p;
         }
     }
-    //not reached
+    // not reached
 }
 
 QString KShell::quoteArgInternal(const QString &arg, bool _inquote)
@@ -261,4 +248,3 @@ QString KShell::quoteArg(const QString &arg)
     ret.replace(QLatin1Char('%'), PERCENT_ESCAPE);
     return ret;
 }
-

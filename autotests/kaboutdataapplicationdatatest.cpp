@@ -25,18 +25,17 @@ private Q_SLOTS:
 #endif
 };
 
-
-static const char AppName[] =            "app";
-static const char ProgramName[] =        "ProgramName";
-static const char Version[] =            "Version";
+static const char AppName[] = "app";
+static const char ProgramName[] = "ProgramName";
+static const char Version[] = "Version";
 static const char OrganizationDomain[] = "no.where";
-static const char DesktopFileName[] =    "org.kde.someapp";
+static const char DesktopFileName[] = "org.kde.someapp";
 
-static const char AppName2[] =            "otherapp";
-static const char ProgramName2[] =        "OtherProgramName";
-static const char Version2[] =            "OtherVersion";
+static const char AppName2[] = "otherapp";
+static const char ProgramName2[] = "OtherProgramName";
+static const char Version2[] = "OtherVersion";
 static const char OrganizationDomain2[] = "other.no.where";
-static const char DesktopFileName2[] =    "org.kde.otherapp";
+static const char DesktopFileName2[] = "org.kde.otherapp";
 
 void KAboutDataApplicationDataTest::testInteractionWithQApplicationData()
 {

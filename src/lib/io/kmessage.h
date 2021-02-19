@@ -101,7 +101,9 @@ KCOREADDONS_EXPORT void setMessageHandler(KMessageHandler *handler);
 class KCOREADDONS_EXPORT KMessageHandler
 {
 public:
-    virtual ~KMessageHandler() {} // KF6 TODO: de-inline (-Wweak-vtables)
+    virtual ~KMessageHandler()
+    {
+    } // KF6 TODO: de-inline (-Wweak-vtables)
     /**
      * @brief Display a long message of a certain type.
      * A long message span on multiple lines and can have a caption.

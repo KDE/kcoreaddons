@@ -8,9 +8,9 @@
 #include "kjobtest.h"
 
 #include <QMetaEnum>
-#include <QTimer>
 #include <QSignalSpy>
 #include <QTest>
+#include <QTimer>
 #include <QVector>
 
 #include <string>
@@ -20,7 +20,6 @@ QTEST_MAIN(KJobTest)
 KJobTest::KJobTest()
     : loop(this)
 {
-
 }
 
 void KJobTest::testEmitResult_data()
@@ -48,7 +47,7 @@ void KJobTest::testEmitResult()
     job->setError(errorCode);
     job->setErrorText(errorText);
 
-    QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject*)));
+    QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject *)));
     job->start();
     QVERIFY(!job->isFinished());
     loop.exec();
@@ -283,9 +282,11 @@ void KJobTest::testExec()
 
     int resultEmitted = 0;
     // Prove to Kai Uwe that one can connect a job to a lambdas, despite the "private" signal
-    connect(job, &KJob::result, this, [&resultEmitted](KJob *) { ++resultEmitted; });
+    connect(job, &KJob::result, this, [&resultEmitted](KJob *) {
+        ++resultEmitted;
+    });
 
-    QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject*)));
+    QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject *)));
 
     QVERIFY(!job->isFinished());
     bool status = job->exec();
@@ -293,8 +294,8 @@ void KJobTest::testExec()
 
     QCOMPARE(resultEmitted, 1);
     QCOMPARE(status, (errorCode == KJob::NoError));
-    QCOMPARE(job->error(),  errorCode);
-    QCOMPARE(job->errorText(),  errorText);
+    QCOMPARE(job->error(), errorCode);
+    QCOMPARE(job->errorText(), errorText);
 
     // Verify that the job is not deleted immediately...
     QCOMPARE(destroyed_spy.size(), 0);
@@ -312,16 +313,8 @@ void KJobTest::testKill_data()
     QTest::addColumn<int>("resultEmitCount");
     QTest::addColumn<int>("finishedEmitCount");
 
-    QTest::newRow("killed with result") << int(KJob::EmitResult)
-                                        << int(KJob::KilledJobError)
-                                        << QString()
-                                        << 1
-                                        << 1;
-    QTest::newRow("killed quietly") << int(KJob::Quietly)
-                                    << int(KJob::KilledJobError)
-                                    << QString()
-                                    << 0
-                                    << 1;
+    QTest::newRow("killed with result") << int(KJob::EmitResult) << int(KJob::KilledJobError) << QString() << 1 << 1;
+    QTest::newRow("killed quietly") << int(KJob::Quietly) << int(KJob::KilledJobError) << QString() << 0 << 1;
 }
 
 void KJobTest::testKill()
@@ -343,8 +336,8 @@ void KJobTest::testKill()
     QCOMPARE(m_lastError, errorCode);
     QCOMPARE(m_lastErrorText, errorText);
 
-    QCOMPARE(job->error(),  errorCode);
-    QCOMPARE(job->errorText(),  errorText);
+    QCOMPARE(job->error(), errorCode);
+    QCOMPARE(job->errorText(), errorText);
 
     QCOMPARE(m_resultCount, resultEmitCount);
     QCOMPARE(m_finishedCount, finishedEmitCount);
@@ -380,8 +373,7 @@ void KJobTest::testEmitAtMostOnce_data()
     for (bool autoDelete : {true, false}) {
         for (Action a : {Action::Start, Action::KillQuietly, Action::KillVerbosely}) {
             for (Action b : {Action::Start, Action::KillQuietly, Action::KillVerbosely}) {
-                const auto dataTag = std::string{actionName(a)} + '-' + actionName(b)
-                                     + (autoDelete ? "-autoDelete" : "");
+                const auto dataTag = std::string{actionName(a)} + '-' + actionName(b) + (autoDelete ? "-autoDelete" : "");
                 QTest::newRow(dataTag.c_str()) << autoDelete << QVector<Action>{a, b};
             }
         }
@@ -399,15 +391,19 @@ void KJobTest::testEmitAtMostOnce()
     QFETCH(QVector<Action>, actions);
     for (auto action : actions) {
         switch (action) {
-            case Action::Start:
-                job->start(); // in effect calls QTimer::singleShot(0, ... emitResult)
-                break;
-            case Action::KillQuietly:
-                QTimer::singleShot(0, job, [=] { job->kill(KJob::Quietly); });
-                break;
-            case Action::KillVerbosely:
-                QTimer::singleShot(0, job, [=] { job->kill(KJob::EmitResult); });
-                break;
+        case Action::Start:
+            job->start(); // in effect calls QTimer::singleShot(0, ... emitResult)
+            break;
+        case Action::KillQuietly:
+            QTimer::singleShot(0, job, [=] {
+                job->kill(KJob::Quietly);
+            });
+            break;
+        case Action::KillVerbosely:
+            QTimer::singleShot(0, job, [=] {
+                job->kill(KJob::EmitResult);
+            });
+            break;
         }
     }
 
@@ -422,8 +418,7 @@ void KJobTest::testEmitAtMostOnce()
     // The first action alone should determine the job's error and result.
     const auto firstAction = actions.front();
 
-    const int errorCode = firstAction == Action::Start ? KJob::NoError
-                                                       : KJob::KilledJobError;
+    const int errorCode = firstAction == Action::Start ? KJob::NoError : KJob::KilledJobError;
     QCOMPARE(m_lastError, errorCode);
     QCOMPARE(m_lastErrorText, QString{});
     if (!autoDelete) {
@@ -537,19 +532,20 @@ TestJob *KJobTest::setupErrorResultFinished()
     return job;
 }
 
-TestJob::TestJob() : KJob()
+TestJob::TestJob()
+    : KJob()
 {
-
 }
 
 TestJob::~TestJob()
 {
-
 }
 
 void TestJob::start()
 {
-    QTimer::singleShot(0, this, [this] { emitResult(); });
+    QTimer::singleShot(0, this, [this] {
+        emitResult();
+    });
 }
 
 bool TestJob::doKill()

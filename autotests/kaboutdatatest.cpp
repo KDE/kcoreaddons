@@ -8,11 +8,11 @@
 // test object
 #include <kaboutdata.h>
 // Qt
-#include <QObject>
 #include <QFile>
-#include <QTextStream>
-#include <QTest>
 #include <QLatin1String>
+#include <QObject>
+#include <QTest>
+#include <QTextStream>
 #ifndef Q_OS_WIN
 void initLocale()
 {
@@ -43,27 +43,30 @@ private Q_SLOTS:
     void testLicenseOrLater();
 };
 
-static const char AppName[] =            "app";
-static const char ProgramName[] =        "ProgramName";
+static const char AppName[] = "app";
+static const char ProgramName[] = "ProgramName";
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
-static const char ProgramIconName[] =    "program-icon";
+static const char ProgramIconName[] = "program-icon";
 #endif
-static const char Version[] =            "Version";
-static const char ShortDescription[] =   "ShortDescription";
+static const char Version[] = "Version";
+static const char ShortDescription[] = "ShortDescription";
 static const char CopyrightStatement[] = "CopyrightStatement";
-static const char Text[] =               "Text";
-static const char HomePageAddress[] =    "http://test.no.where/";
-static const char HomePageSecure[] =     "https://test.no.where/";
+static const char Text[] = "Text";
+static const char HomePageAddress[] = "http://test.no.where/";
+static const char HomePageSecure[] = "https://test.no.where/";
 static const char OrganizationDomain[] = "no.where";
-static const char BugsEmailAddress[] =   "bugs@no.else";
-static const char LicenseText[] =        "free to write, reading forbidden";
-static const char LicenseFileName[] =    "testlicensefile";
-static const char LicenseFileText[] =    "free to write, reading forbidden, in the file";
+static const char BugsEmailAddress[] = "bugs@no.else";
+static const char LicenseText[] = "free to write, reading forbidden";
+static const char LicenseFileName[] = "testlicensefile";
+static const char LicenseFileText[] = "free to write, reading forbidden, in the file";
 
 void KAboutDataTest::testLongFormConstructorWithDefaults()
 {
-    KAboutData aboutData(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                         QLatin1String(ShortDescription), KAboutLicense::Unknown);
+    KAboutData aboutData(QString::fromLatin1(AppName),
+                         QLatin1String(ProgramName),
+                         QString::fromLatin1(Version),
+                         QLatin1String(ShortDescription),
+                         KAboutLicense::Unknown);
 
     QCOMPARE(aboutData.componentName(), QString::fromLatin1(AppName));
     QCOMPARE(aboutData.productName(), QString::fromLatin1(AppName));
@@ -94,15 +97,20 @@ void KAboutDataTest::testLongFormConstructorWithDefaults()
     QCOMPARE(aboutData.customAuthorRichText(), QString());
     QVERIFY(!aboutData.customAuthorTextEnabled());
     QCOMPARE(aboutData.desktopFileName(), QStringLiteral("org.kde.app"));
-    //TODO: test internalVersion, internalProgramName, internalBugAddress
+    // TODO: test internalVersion, internalProgramName, internalBugAddress
 }
 
 void KAboutDataTest::testLongFormConstructor()
 {
-    KAboutData aboutData(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                         QLatin1String(ShortDescription), KAboutLicense::Unknown,
-                         QLatin1String(CopyrightStatement), QLatin1String(Text),
-                         QString::fromLatin1(HomePageAddress), QString::fromLatin1(BugsEmailAddress));
+    KAboutData aboutData(QString::fromLatin1(AppName),
+                         QLatin1String(ProgramName),
+                         QString::fromLatin1(Version),
+                         QLatin1String(ShortDescription),
+                         KAboutLicense::Unknown,
+                         QLatin1String(CopyrightStatement),
+                         QLatin1String(Text),
+                         QString::fromLatin1(HomePageAddress),
+                         QString::fromLatin1(BugsEmailAddress));
 
     QCOMPARE(aboutData.componentName(), QLatin1String(AppName));
     QCOMPARE(aboutData.productName(), QLatin1String(AppName));
@@ -133,14 +141,19 @@ void KAboutDataTest::testLongFormConstructor()
     QCOMPARE(aboutData.customAuthorRichText(), QString());
     QVERIFY(!aboutData.customAuthorTextEnabled());
     QCOMPARE(aboutData.desktopFileName(), QStringLiteral("where.no.app"));
-    //TODO: test internalVersion, internalProgramName, internalBugAddress
+    // TODO: test internalVersion, internalProgramName, internalBugAddress
 
     // We support http and https protocols on the homepage address, ensure they
     // give the same org. domain and desktop file name.
-    KAboutData aboutDataSecure(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                               QLatin1String(ShortDescription), KAboutLicense::Unknown,
-                               QLatin1String(CopyrightStatement), QLatin1String(Text),
-                               QString::fromLatin1(HomePageSecure), QString::fromLatin1(BugsEmailAddress));
+    KAboutData aboutDataSecure(QString::fromLatin1(AppName),
+                               QLatin1String(ProgramName),
+                               QString::fromLatin1(Version),
+                               QLatin1String(ShortDescription),
+                               KAboutLicense::Unknown,
+                               QLatin1String(CopyrightStatement),
+                               QLatin1String(Text),
+                               QString::fromLatin1(HomePageSecure),
+                               QString::fromLatin1(BugsEmailAddress));
     QCOMPARE(aboutDataSecure.componentName(), QLatin1String(AppName));
     QCOMPARE(aboutDataSecure.productName(), QLatin1String(AppName));
     QCOMPARE(aboutDataSecure.organizationDomain(), QString::fromLatin1(OrganizationDomain));
@@ -180,21 +193,29 @@ void KAboutDataTest::testShortFormConstructor()
     QCOMPARE(aboutData.customAuthorRichText(), QString());
     QVERIFY(!aboutData.customAuthorTextEnabled());
     QCOMPARE(aboutData.desktopFileName(), QStringLiteral("org.kde.app"));
-    //TODO: test internalVersion, internalProgramName, internalBugAddress
+    // TODO: test internalVersion, internalProgramName, internalBugAddress
 }
 
 void KAboutDataTest::testKAboutDataOrganizationDomain()
 {
-    KAboutData data(QString::fromLatin1("app"), QLatin1String("program"), QString::fromLatin1("version"),
-                    QLatin1String("description"), KAboutLicense::LGPL,
-                    QLatin1String("copyright"), QLatin1String("hello world"),
+    KAboutData data(QString::fromLatin1("app"),
+                    QLatin1String("program"),
+                    QString::fromLatin1("version"),
+                    QLatin1String("description"),
+                    KAboutLicense::LGPL,
+                    QLatin1String("copyright"),
+                    QLatin1String("hello world"),
                     QStringLiteral("http://www.koffice.org"));
     QCOMPARE(data.organizationDomain(), QString::fromLatin1("koffice.org"));
     QCOMPARE(data.desktopFileName(), QStringLiteral("org.koffice.app"));
 
-    KAboutData data2(QString::fromLatin1("app"), QLatin1String("program"), QString::fromLatin1("version"),
-                     QLatin1String("description"), KAboutLicense::LGPL,
-                     QString::fromLatin1("copyright"), QLatin1String("hello world"),
+    KAboutData data2(QString::fromLatin1("app"),
+                     QLatin1String("program"),
+                     QString::fromLatin1("version"),
+                     QLatin1String("description"),
+                     KAboutLicense::LGPL,
+                     QString::fromLatin1("copyright"),
+                     QLatin1String("hello world"),
                      QStringLiteral("app"));
     QCOMPARE(data2.organizationDomain(), QString::fromLatin1("kde.org"));
     QCOMPARE(data2.desktopFileName(), QStringLiteral("org.kde.app"));
@@ -212,10 +233,15 @@ void KAboutDataTest::testSetAddLicense()
     const QString copyrightStatement = QLatin1String(CopyrightStatement);
     const QString lineFeed = QString::fromLatin1("\n\n");
 
-    KAboutData aboutData(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                         QLatin1String(ShortDescription), KAboutLicense::Unknown,
-                         QLatin1String(CopyrightStatement), QLatin1String(Text),
-                         QString::fromLatin1(HomePageAddress), QString::fromLatin1(BugsEmailAddress));
+    KAboutData aboutData(QString::fromLatin1(AppName),
+                         QLatin1String(ProgramName),
+                         QString::fromLatin1(Version),
+                         QLatin1String(ShortDescription),
+                         KAboutLicense::Unknown,
+                         QLatin1String(CopyrightStatement),
+                         QLatin1String(Text),
+                         QString::fromLatin1(HomePageAddress),
+                         QString::fromLatin1(BugsEmailAddress));
 
     // set to GPL2
     aboutData.setLicense(KAboutLicense::GPL_V2);
@@ -266,8 +292,7 @@ void KAboutDataTest::testSetAddLicense()
     QCOMPARE(aboutData.licenses().at(2).text(), QLatin1String(LicenseText));
     QCOMPARE(aboutData.licenses().at(3).name(KAboutLicense::ShortName), QString::fromLatin1("Custom"));
     QCOMPARE(aboutData.licenses().at(3).name(KAboutLicense::FullName), QString::fromLatin1("Custom"));
-    QCOMPARE(aboutData.licenses().at(3).text(), QString(copyrightStatement + lineFeed +
-                                                        QLatin1String(LicenseFileText)));
+    QCOMPARE(aboutData.licenses().at(3).text(), QString(copyrightStatement + lineFeed + QLatin1String(LicenseFileText)));
 }
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
@@ -275,10 +300,15 @@ void KAboutDataTest::testSetProgramIconName()
 {
     const QString programIconName(QString::fromLatin1(ProgramIconName));
 
-    KAboutData aboutData(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                         QLatin1String(ShortDescription), KAboutLicense::Unknown,
-                         QLatin1String(CopyrightStatement), QLatin1String(Text),
-                         QString::fromLatin1(HomePageAddress), QString::fromLatin1(BugsEmailAddress));
+    KAboutData aboutData(QString::fromLatin1(AppName),
+                         QLatin1String(ProgramName),
+                         QString::fromLatin1(Version),
+                         QLatin1String(ShortDescription),
+                         KAboutLicense::Unknown,
+                         QLatin1String(CopyrightStatement),
+                         QLatin1String(Text),
+                         QString::fromLatin1(HomePageAddress),
+                         QString::fromLatin1(BugsEmailAddress));
 
     // Deprecated, still want to test this though. Silence GCC warnings.
 #pragma GCC diagnostic push
@@ -292,12 +322,18 @@ void KAboutDataTest::testSetProgramIconName()
 
 void KAboutDataTest::testCopying()
 {
-    KAboutData aboutData(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                         QLatin1String(ShortDescription), KAboutLicense::GPL_V2);
+    KAboutData aboutData(QString::fromLatin1(AppName),
+                         QLatin1String(ProgramName),
+                         QString::fromLatin1(Version),
+                         QLatin1String(ShortDescription),
+                         KAboutLicense::GPL_V2);
 
     {
-        KAboutData aboutData2(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                              QLatin1String(ShortDescription), KAboutLicense::GPL_V3);
+        KAboutData aboutData2(QString::fromLatin1(AppName),
+                              QLatin1String(ProgramName),
+                              QString::fromLatin1(Version),
+                              QLatin1String(ShortDescription),
+                              KAboutLicense::GPL_V3);
         aboutData2.addLicense(KAboutLicense::GPL_V2, KAboutLicense::OrLaterVersions);
         aboutData = aboutData2;
     }
@@ -315,8 +351,11 @@ void KAboutDataTest::testCopying()
 
 void KAboutDataTest::testSetDesktopFileName()
 {
-    KAboutData aboutData(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                         QLatin1String(ShortDescription), KAboutLicense::Unknown);
+    KAboutData aboutData(QString::fromLatin1(AppName),
+                         QLatin1String(ProgramName),
+                         QString::fromLatin1(Version),
+                         QLatin1String(ShortDescription),
+                         KAboutLicense::Unknown);
     QCOMPARE(aboutData.desktopFileName(), QStringLiteral("org.kde.app"));
 
     // set different desktopFileName
@@ -333,11 +372,14 @@ void KAboutDataTest::testLicenseSPDXID()
     license = KAboutLicense::byKeyword(QStringLiteral("GPLv2"));
     QCOMPARE(license.spdx(), QStringLiteral("GPL-2.0"));
 
-    //we should be able to match by spdx too
-    //create a KAboutLicense from enum, then make sure going to spdx and back gives the same enum
-    for(int i = 1; i <= KAboutLicense::LGPL_V2_1 ; ++i) { /*current highest enum value*/
-        KAboutData aboutData(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                                    QLatin1String(ShortDescription), KAboutLicense::GPL_V2);
+    // we should be able to match by spdx too
+    // create a KAboutLicense from enum, then make sure going to spdx and back gives the same enum
+    for (int i = 1; i <= KAboutLicense::LGPL_V2_1; ++i) { /*current highest enum value*/
+        KAboutData aboutData(QString::fromLatin1(AppName),
+                             QLatin1String(ProgramName),
+                             QString::fromLatin1(Version),
+                             QLatin1String(ShortDescription),
+                             KAboutLicense::GPL_V2);
         aboutData.setLicense(KAboutLicense::LicenseKey(i));
         QVERIFY(aboutData.licenses().count() == 1);
         const auto license = aboutData.licenses().constFirst();
@@ -350,8 +392,11 @@ void KAboutDataTest::testLicenseSPDXID()
 void KAboutDataTest::testLicenseOrLater()
 {
     // For kaboutdata we can replace the license with an orLater version. Or add a second one.
-    KAboutData aboutData(QString::fromLatin1(AppName), QLatin1String(ProgramName), QString::fromLatin1(Version),
-                         QLatin1String(ShortDescription), KAboutLicense::GPL_V2);
+    KAboutData aboutData(QString::fromLatin1(AppName),
+                         QLatin1String(ProgramName),
+                         QString::fromLatin1(Version),
+                         QLatin1String(ShortDescription),
+                         KAboutLicense::GPL_V2);
     QCOMPARE(aboutData.licenses().at(0).spdx(), QStringLiteral("GPL-2.0"));
     aboutData.setLicense(KAboutLicense::GPL_V2, KAboutLicense::OrLaterVersions);
     QCOMPARE(aboutData.licenses().at(0).spdx(), QStringLiteral("GPL-2.0+"));

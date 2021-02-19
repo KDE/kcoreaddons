@@ -36,7 +36,7 @@ static void setVar(QStringList *var, const QString &value)
     //       is required to not contain spaces even if more advanced shell escaping
     //       is also allowed...
     QString value_ = value;
-    if (value_.at(0) == QLatin1Char('"') && value_.at(value_.size()-1) == QLatin1Char('"')) {
+    if (value_.at(0) == QLatin1Char('"') && value_.at(value_.size() - 1) == QLatin1Char('"')) {
         value_.remove(0, 1);
         value_.remove(-1, 1);
     }
@@ -80,26 +80,24 @@ public:
     {
         // Default values for non-optional fields set above ^.
 
-        QHash<QString, QString *> stringHash = {
-            { QStringLiteral("NAME"), &name },
-            { QStringLiteral("VERSION"), &version },
-            { QStringLiteral("ID"), &id },
-            // idLike is not a QString, special handling below!
-            { QStringLiteral("VERSION_CODENAME"), &versionCodename },
-            { QStringLiteral("VERSION_ID"), &versionId },
-            { QStringLiteral("PRETTY_NAME"), &prettyName },
-            { QStringLiteral("ANSI_COLOR"), &ansiColor },
-            { QStringLiteral("CPE_NAME"), &cpeName },
-            { QStringLiteral("HOME_URL"), &homeUrl },
-            { QStringLiteral("DOCUMENTATION_URL"), &documentationUrl },
-            { QStringLiteral("SUPPORT_URL"), &supportUrl },
-            { QStringLiteral("BUG_REPORT_URL"), &bugReportUrl },
-            { QStringLiteral("PRIVACY_POLICY_URL"), &privacyPolicyUrl },
-            { QStringLiteral("BUILD_ID"), &buildId },
-            { QStringLiteral("VARIANT"), &variant },
-            { QStringLiteral("VARIANT_ID"), &variantId },
-            { QStringLiteral("LOGO"), &logo }
-        };
+        QHash<QString, QString *> stringHash = {{QStringLiteral("NAME"), &name},
+                                                {QStringLiteral("VERSION"), &version},
+                                                {QStringLiteral("ID"), &id},
+                                                // idLike is not a QString, special handling below!
+                                                {QStringLiteral("VERSION_CODENAME"), &versionCodename},
+                                                {QStringLiteral("VERSION_ID"), &versionId},
+                                                {QStringLiteral("PRETTY_NAME"), &prettyName},
+                                                {QStringLiteral("ANSI_COLOR"), &ansiColor},
+                                                {QStringLiteral("CPE_NAME"), &cpeName},
+                                                {QStringLiteral("HOME_URL"), &homeUrl},
+                                                {QStringLiteral("DOCUMENTATION_URL"), &documentationUrl},
+                                                {QStringLiteral("SUPPORT_URL"), &supportUrl},
+                                                {QStringLiteral("BUG_REPORT_URL"), &bugReportUrl},
+                                                {QStringLiteral("PRIVACY_POLICY_URL"), &privacyPolicyUrl},
+                                                {QStringLiteral("BUILD_ID"), &buildId},
+                                                {QStringLiteral("VARIANT"), &variant},
+                                                {QStringLiteral("VARIANT_ID"), &variantId},
+                                                {QStringLiteral("LOGO"), &logo}};
 
         if (filePath.isEmpty()) {
             filePath = defaultFilePath();

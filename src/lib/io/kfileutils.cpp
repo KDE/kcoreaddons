@@ -8,8 +8,8 @@
 
 #include "kfileutils.h"
 
-#include <QMimeDatabase>
 #include <QFileInfo>
+#include <QMimeDatabase>
 #include <QRegularExpression>
 
 QString KFileUtils::makeSuggestedName(const QString &oldName)
@@ -51,7 +51,6 @@ QString KFileUtils::makeSuggestedName(const QString &oldName)
 
     return basename + nameSuffix;
 }
-
 
 QString KFileUtils::suggestName(const QUrl &baseURL, const QString &oldName)
 {

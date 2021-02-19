@@ -13,7 +13,7 @@ class KListOpenFilesJobPrivate
 {
 };
 
-KListOpenFilesJob::KListOpenFilesJob(const QString&)
+KListOpenFilesJob::KListOpenFilesJob(const QString &)
     : d(nullptr)
 {
 }
@@ -22,7 +22,7 @@ KListOpenFilesJob::~KListOpenFilesJob() = default;
 
 void KListOpenFilesJob::start()
 {
-    QTimer::singleShot(0, [this](){
+    QTimer::singleShot(0, [this]() {
         setError(static_cast<int>(KListOpenFilesJob::Error::NotSupported));
         setErrorText(QObject::tr("KListOpenFilesJob is not supported on Windows"));
         emitResult();

@@ -7,9 +7,9 @@
 
 #include "versionedplugin.h"
 #include "kcoreaddons_debug.h"
+#include <QDebug>
 #include <kexportplugin.h>
 #include <kpluginfactory.h>
-#include <QDebug>
 
 VersionedPlugin::VersionedPlugin(QObject *parent, const QVariantList &args)
     : QObject(parent)

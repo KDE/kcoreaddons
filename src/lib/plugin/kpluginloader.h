@@ -12,8 +12,8 @@
 
 #include <QPluginLoader>
 
-#include <memory>
 #include <functional>
+#include <memory>
 
 class KPluginFactory;
 class KPluginMetaData;
@@ -307,8 +307,8 @@ public:
      * @since 5.1
      */
     static QList<QObject *> instantiatePlugins(const QString &directory,
-            std::function<bool(const KPluginMetaData &)> filter = std::function<bool(const KPluginMetaData &)>(),
-            QObject* parent = nullptr);
+                                               std::function<bool(const KPluginMetaData &)> filter = std::function<bool(const KPluginMetaData &)>(),
+                                               QObject *parent = nullptr);
 
     /**
      * Find all plugins inside @p directory. Only plugins which have JSON metadata will be considered.
@@ -327,7 +327,7 @@ public:
      * @since 5.1
      */
     static QVector<KPluginMetaData> findPlugins(const QString &directory,
-            std::function<bool(const KPluginMetaData &)> filter = std::function<bool(const KPluginMetaData &)>());
+                                                std::function<bool(const KPluginMetaData &)> filter = std::function<bool(const KPluginMetaData &)>());
 
     /**
      * Find all plugins inside @p directory with a given pluginId. Only plugins which have JSON metadata will be considered.
@@ -365,8 +365,8 @@ public:
      *
      * @since 5.1
      */
-    static void forEachPlugin(const QString &directory,
-            std::function<void(const QString &)> callback = std::function<void(const QString &)>());
+    static void forEachPlugin(const QString &directory, std::function<void(const QString &)> callback = std::function<void(const QString &)>());
+
 private:
     Q_DECLARE_PRIVATE(KPluginLoader)
     Q_DISABLE_COPY(KPluginLoader)
@@ -444,11 +444,15 @@ private:
 };
 
 inline KPluginName::KPluginName(const QString &name)
-    : m_name(name), m_isError(false)
-{}
+    : m_name(name)
+    , m_isError(false)
+{
+}
 inline KPluginName::KPluginName(const QString &name, bool isError)
-    : m_name(name), m_isError(isError)
-{}
+    : m_name(name)
+    , m_isError(isError)
+{
+}
 inline QString KPluginName::name() const
 {
     return m_isError ? QString() : m_name;

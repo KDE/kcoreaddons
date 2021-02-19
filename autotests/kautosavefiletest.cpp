@@ -13,8 +13,8 @@
 #include <QTemporaryFile>
 #include <kautosavefile.h>
 
-#include <QTest>
 #include <QTemporaryFile>
+#include <QTest>
 
 QTEST_MAIN(KAutoSaveFileTest)
 
@@ -38,7 +38,7 @@ void KAutoSaveFileTest::test_readWrite()
 
     QUrl normalFile = QUrl::fromLocalFile(QFileInfo(file).absoluteFilePath());
 
-    //Test basic functionality
+    // Test basic functionality
     KAutoSaveFile saveFile(normalFile);
 
     QVERIFY(!QFile::exists(saveFile.fileName()));
@@ -86,11 +86,7 @@ void KAutoSaveFileTest::test_fileNameMaxLength()
     // - exceeds NAME_MAX (255)
     // - is less than the maximum allowed path length, PATH_MAX (4096)
     //   see e.g. /usr/include/linux/limits.h
-    const QString path = QDir::tempPath() + QLatin1Char('/')
-                         + s + QLatin1Char('/')
-                         + s + QLatin1Char('/')
-                         + s + QLatin1Char('/')
-                         + s;
+    const QString path = QDir::tempPath() + QLatin1Char('/') + s + QLatin1Char('/') + s + QLatin1Char('/') + s + QLatin1Char('/') + s;
 
     QFile file(path + QLatin1Char('/') + QLatin1String("testFile.txt"));
 
@@ -151,5 +147,4 @@ void KAutoSaveFileTest::test_locking()
     QVERIFY(saveFile2->open(QIODevice::ReadWrite));
 
     delete saveFile2;
-
 }

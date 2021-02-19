@@ -58,6 +58,7 @@ struct group;
 template<typename T>
 struct KCOREADDONS_EXPORT KUserOrGroupId {
     typedef T NativeType;
+
 protected:
     /** Creates an invalid KUserOrGroupId */
     KUserOrGroupId();
@@ -69,6 +70,7 @@ protected:
     KUserOrGroupId(const KUserOrGroupId<T> &other);
     KUserOrGroupId &operator=(const KUserOrGroupId<T> &other);
     ~KUserOrGroupId();
+
 public:
     /** @return true if this object references a valid user/group ID.
      * @note If this returns true it doesn't necessarily mean that the referenced user/group exists,
@@ -91,6 +93,7 @@ public:
     bool operator==(const KUserOrGroupId &other) const;
     /** @return whether this KUserOrGroupId is not equal to @p other */
     bool operator!=(const KUserOrGroupId &other) const;
+
 private:
 #ifdef Q_OS_WIN
     QExplicitlySharedDataPointer<WindowsSIDWrapper> data;
@@ -100,16 +103,26 @@ private:
 };
 
 #ifdef Q_OS_WIN
-template<> KUserOrGroupId<void *>::KUserOrGroupId();
-template<> KUserOrGroupId<void *>::~KUserOrGroupId();
-template<> KUserOrGroupId<void *>::KUserOrGroupId(KUserOrGroupId::NativeType nativeId);
-template<> KUserOrGroupId<void *>::KUserOrGroupId(const KUserOrGroupId &other);
-template<> KUserOrGroupId<void *>& KUserOrGroupId<void *>::operator=(const KUserOrGroupId &other);
-template<> bool KUserOrGroupId<void *>::isValid() const;
-template<> KUserOrGroupId<void *>::NativeType KUserOrGroupId<void *>::nativeId() const;
-template<> QString KUserOrGroupId<void *>::toString() const;
-template<> bool KUserOrGroupId<void *>::operator==(const KUserOrGroupId &other) const;
-template<> bool KUserOrGroupId<void *>::operator!=(const KUserOrGroupId &other) const;
+template<>
+KUserOrGroupId<void *>::KUserOrGroupId();
+template<>
+KUserOrGroupId<void *>::~KUserOrGroupId();
+template<>
+KUserOrGroupId<void *>::KUserOrGroupId(KUserOrGroupId::NativeType nativeId);
+template<>
+KUserOrGroupId<void *>::KUserOrGroupId(const KUserOrGroupId &other);
+template<>
+KUserOrGroupId<void *> &KUserOrGroupId<void *>::operator=(const KUserOrGroupId &other);
+template<>
+bool KUserOrGroupId<void *>::isValid() const;
+template<>
+KUserOrGroupId<void *>::NativeType KUserOrGroupId<void *>::nativeId() const;
+template<>
+QString KUserOrGroupId<void *>::toString() const;
+template<>
+bool KUserOrGroupId<void *>::operator==(const KUserOrGroupId &other) const;
+template<>
+bool KUserOrGroupId<void *>::operator!=(const KUserOrGroupId &other) const;
 #endif
 
 /** A platform independent user ID.
@@ -119,11 +132,21 @@ template<> bool KUserOrGroupId<void *>::operator!=(const KUserOrGroupId &other) 
  */
 struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<K_UID> {
     /** Creates an invalid KUserId */
-    KUserId() {}
+    KUserId()
+    {
+    }
     /** Creates an KUserId from the native user ID type */
-    explicit KUserId(K_UID uid) : KUserOrGroupId(uid) {}
-    KUserId(const KUserId &other) : KUserOrGroupId(other) {}
-    ~KUserId() {}
+    explicit KUserId(K_UID uid)
+        : KUserOrGroupId(uid)
+    {
+    }
+    KUserId(const KUserId &other)
+        : KUserOrGroupId(other)
+    {
+    }
+    ~KUserId()
+    {
+    }
     /** @return a KUserId for the user with name @p name, or an invalid KUserId if no
      * user with this name was found on the system
      */
@@ -144,11 +167,21 @@ struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<K_UID> {
  */
 struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
     /** Creates an invalid KGroupId */
-    KGroupId() {}
+    KGroupId()
+    {
+    }
     /** Creates an KGroupId from the native group ID type */
-    explicit KGroupId(K_GID gid) : KUserOrGroupId(gid) {}
-    KGroupId(const KGroupId &other) : KUserOrGroupId(other) {}
-    ~KGroupId() {}
+    explicit KGroupId(K_GID gid)
+        : KUserOrGroupId(gid)
+    {
+    }
+    KGroupId(const KGroupId &other)
+        : KUserOrGroupId(other)
+    {
+    }
+    ~KGroupId()
+    {
+    }
     /** @return A KGroupId for the user with name @p name, or an invalid KGroupId if no
      * user with this name was found on the system
      */
@@ -191,12 +224,10 @@ KCOREADDONS_EXPORT uint qHash(const KGroupId &id, uint seed = 0);
  */
 class KCOREADDONS_EXPORT KUser
 {
-
 public:
-
     enum UIDMode {
         UseEffectiveUID, ///< Use the effective user id.
-        UseRealUserID,    ///< Use the real user id.
+        UseRealUserID, ///< Use the real user id.
     };
 
     /**
@@ -222,10 +253,10 @@ public:
     explicit KUser(K_UID uid);
 
     /**
-    * Creates an object for the user with the given user id.
-    * If the KUserId object is invalid this one will be, too.
-    * @param uid the user id
-    */
+     * Creates an object for the user with the given user id.
+     * If the KUserId object is invalid this one will be, too.
+     * @param uid the user id
+     */
     explicit KUser(KUserId uid);
 
     /**
@@ -265,19 +296,19 @@ public:
      * @param user the user to copy
      * @return this object
      */
-    KUser &operator =(const KUser &user);
+    KUser &operator=(const KUser &user);
 
     /**
      * Two KUser objects are equal if the userId() are identical.
      * Invalid users never compare equal.
      */
-    bool operator ==(const KUser &user) const;
+    bool operator==(const KUser &user) const;
 
     /**
      * Two KUser objects are not equal if userId() are not identical.
      * Invalid users always compare unequal.
      */
-    bool operator !=(const KUser &user) const;
+    bool operator!=(const KUser &user) const;
 
     /**
      * Returns true if the user is valid. A KUser object can be invalid if
@@ -373,7 +404,12 @@ public:
      */
     QStringList groupNames(uint maxCount = KCOREADDONS_UINT_MAX) const;
 
-    enum UserProperty { FullName, RoomNumber, WorkPhone, HomePhone, };
+    enum UserProperty {
+        FullName,
+        RoomNumber,
+        WorkPhone,
+        HomePhone,
+    };
 
     /**
      * Returns an extended property.
@@ -397,9 +433,9 @@ public:
     static QList<KUser> allUsers(uint maxCount = KCOREADDONS_UINT_MAX);
 
     /**
-    * @param maxCount the maximum number of users to return
-    * @return all user names of the system.
-    */
+     * @param maxCount the maximum number of users to return
+     * @return all user names of the system.
+     */
     static QStringList allUserNames(uint maxCount = KCOREADDONS_UINT_MAX);
 
 private:
@@ -420,9 +456,7 @@ private:
  */
 class KCOREADDONS_EXPORT KUserGroup
 {
-
 public:
-
     /**
      * Create an object from a group name.
      * If the group does not exist, isValid() will return false.
@@ -438,10 +472,10 @@ public:
     explicit KUserGroup(const char *name);
 
     /**
-    * Creates an object for the group with the given group id.
-    * If the KGroupId object is invalid this one will be, too.
-    * @param gid the group id
-    */
+     * Creates an object for the group with the given group id.
+     * If the KGroupId object is invalid this one will be, too.
+     * @param gid the group id
+     */
     explicit KUserGroup(KGroupId gid);
 
     /**
@@ -483,21 +517,21 @@ public:
      * @param group the group that should be copied
      * @return this group
      */
-    KUserGroup &operator =(const KUserGroup &group);
+    KUserGroup &operator=(const KUserGroup &group);
 
     /**
      * Two KUserGroup objects are equal if their gid()s are identical.
      * Invalid groups never compare equal.
      * @return true if the groups are identical
      */
-    bool operator ==(const KUserGroup &group) const;
+    bool operator==(const KUserGroup &group) const;
 
     /**
      * Two KUserGroup objects are not equal if their gid()s are not identical.
      * Invalid groups always compare unequal.
      * @return true if the groups are not identical
      */
-    bool operator !=(const KUserGroup &group) const;
+    bool operator!=(const KUserGroup &group) const;
 
     /**
      * Returns whether the group is valid.

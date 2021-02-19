@@ -9,16 +9,16 @@
 #include "kpluginmetadata.h"
 #include "desktopfileparser_p.h"
 
+#include "kcoreaddons_debug.h"
 #include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QLocale>
 #include <QMimeDatabase>
 #include <QPluginLoader>
-#include "kcoreaddons_debug.h"
 
-#include "kpluginloader.h"
 #include "kaboutdata.h"
+#include "kpluginloader.h"
 
 class KPluginMetaDataPrivate : public QSharedData
 {
@@ -31,7 +31,9 @@ KPluginMetaData::KPluginMetaData()
 }
 
 KPluginMetaData::KPluginMetaData(const KPluginMetaData &other)
-    : m_metaData(other.m_metaData), m_fileName(other.fileName()), d(other.d)
+    : m_metaData(other.m_metaData)
+    , m_fileName(other.fileName())
+    , d(other.d)
 {
 }
 
@@ -142,7 +144,6 @@ QString KPluginMetaData::metaDataFileName() const
     return d ? d->metaDataFileName : m_fileName;
 }
 
-
 bool KPluginMetaData::isValid() const
 {
     // it can be valid even if m_fileName is empty (as long as the plugin id is set in the metadata)
@@ -172,8 +173,10 @@ QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QStrin
             return QStringList();
         }
         const QString id = obj.value(QStringLiteral("KPlugin")).toObject().value(QStringLiteral("Id")).toString();
-        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a string list."
-            " Treating it as a list with a single entry:" << asString << id.toLatin1().constData();
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key
+                                     << "to be a string list."
+                                        " Treating it as a list with a single entry:"
+                                     << asString << id.toLatin1().constData();
         return QStringList(asString);
     }
 }
@@ -203,7 +206,8 @@ QString KPluginMetaData::readTranslatedString(const QJsonObject &jo, const QStri
     return readTranslatedValue(jo, key, defaultValue).toString(defaultValue);
 }
 
-static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson>* out) {
+static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson> *out)
+{
     KAboutPerson person = KAboutPerson::fromJSON(obj);
     if (person.name().isEmpty()) {
         qCWarning(KCOREADDONS_DEBUG) << "Invalid plugin metadata: Attempting to create a KAboutPerson from json without 'Name' property:" << obj;
@@ -219,7 +223,7 @@ static QList<KAboutPerson> aboutPersonFromJSON(const QJsonValue &people)
         // single author
         addPersonFromJson(people.toObject(), &ret);
     } else if (people.isArray()) {
-        const QJsonArray peopleArray =  people.toArray();
+        const QJsonArray peopleArray = people.toArray();
         for (const QJsonValue &val : peopleArray) {
             if (val.isObject()) {
                 addPersonFromJson(val.toObject(), &ret);
@@ -370,16 +374,18 @@ QString KPluginMetaData::value(const QString &key, const QString &defaultValue) 
     if (value.isString()) {
         return value.toString(defaultValue);
     } else if (value.isArray()) {
-        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a single string."
-            " but it is a stringlist";
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key
+                                     << "to be a single string."
+                                        " but it is a stringlist";
         const QStringList list = value.toVariant().toStringList();
         if (list.isEmpty()) {
             return defaultValue;
         }
         return list.join(QChar::fromLatin1(','));
     } else if (value.isBool()) {
-        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a single string."
-            " but it is a bool";
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key
+                                     << "to be a single string."
+                                        " but it is a bool";
         return value.toBool() ? QStringLiteral("true") : QStringLiteral("false");
     }
     return defaultValue;
@@ -390,17 +396,17 @@ bool KPluginMetaData::operator==(const KPluginMetaData &other) const
     return m_fileName == other.m_fileName && m_metaData == other.m_metaData;
 }
 
-QObject* KPluginMetaData::instantiate() const
+QObject *KPluginMetaData::instantiate() const
 {
     return QPluginLoader(m_fileName).instance();
 }
 
-template <class T>
-QVariantList listToVariant(const QList<T>& values)
+template<class T>
+QVariantList listToVariant(const QList<T> &values)
 {
     QVariantList ret;
     ret.reserve(values.count());
-    for(const auto &license: values) {
+    for (const auto &license : values) {
         ret << QVariant::fromValue(license);
     }
     return ret;
@@ -420,4 +426,3 @@ QVariantList KPluginMetaData::otherContributorsVariant() const
 {
     return listToVariant(otherContributors());
 }
-

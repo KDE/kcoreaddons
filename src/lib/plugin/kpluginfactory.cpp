@@ -10,8 +10,8 @@
 #include "kpluginfactory.h"
 #include "kpluginfactory_p.h"
 
-#include <QObjectCleanupHandler>
 #include "kcoreaddons_debug.h"
+#include <QObjectCleanupHandler>
 
 Q_GLOBAL_STATIC(QObjectCleanupHandler, factorycleanup)
 
@@ -36,12 +36,11 @@ KPluginMetaData KPluginFactory::metaData() const
     return d->metaData;
 }
 
-void KPluginFactory::setMetaData(const KPluginMetaData& metaData)
+void KPluginFactory::setMetaData(const KPluginMetaData &metaData)
 {
     Q_D(KPluginFactory);
     d->metaData = metaData;
 }
-
 
 void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceFunction instanceFunction)
 {
@@ -60,10 +59,10 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
         const QMetaObject *superClass = metaObject->superClass();
         if (superClass) {
             for (const KPluginFactoryPrivate::Plugin &plugin : clashes) {
-                for (const QMetaObject *otherSuper = plugin.first->superClass(); otherSuper;
-                        otherSuper = otherSuper->superClass()) {
+                for (const QMetaObject *otherSuper = plugin.first->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
                     if (superClass == otherSuper) {
-                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className() << ") were registered. Use keywords to identify the plugins.";
+                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className()
+                                                     << ") were registered. Use keywords to identify the plugins.";
                     }
                 }
             }
@@ -71,10 +70,10 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
         for (const KPluginFactoryPrivate::Plugin &plugin : clashes) {
             superClass = plugin.first->superClass();
             if (superClass) {
-                for (const QMetaObject *otherSuper = metaObject->superClass(); otherSuper;
-                        otherSuper = otherSuper->superClass()) {
+                for (const QMetaObject *otherSuper = metaObject->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
                     if (superClass == otherSuper) {
-                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className() << ") were registered. Use keywords to identify the plugins.";
+                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className()
+                                                     << ") were registered. Use keywords to identify the plugins.";
                     }
                 }
             }
@@ -83,8 +82,7 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
     }
 }
 
-void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *metaObject,
-                                    CreateInstanceWithMetaDataFunction instanceFunction)
+void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceWithMetaDataFunction instanceFunction)
 {
     Q_D(KPluginFactory);
 
@@ -101,10 +99,10 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
         const QMetaObject *superClass = metaObject->superClass();
         if (superClass) {
             for (const KPluginFactoryPrivate::PluginWithMetadata &plugin : clashes) {
-                for (const QMetaObject *otherSuper = plugin.first->superClass(); otherSuper;
-                        otherSuper = otherSuper->superClass()) {
+                for (const QMetaObject *otherSuper = plugin.first->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
                     if (superClass == otherSuper) {
-                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className() << ") were registered. Use keywords to identify the plugins.";
+                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className()
+                                                     << ") were registered. Use keywords to identify the plugins.";
                     }
                 }
             }
@@ -112,10 +110,10 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
         for (const KPluginFactoryPrivate::PluginWithMetadata &plugin : clashes) {
             superClass = plugin.first->superClass();
             if (superClass) {
-                for (const QMetaObject *otherSuper = metaObject->superClass(); otherSuper;
-                        otherSuper = otherSuper->superClass()) {
+                for (const QMetaObject *otherSuper = metaObject->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
                     if (superClass == otherSuper) {
-                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className() << ") were registered. Use keywords to identify the plugins.";
+                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className()
+                                                     << ") were registered. Use keywords to identify the plugins.";
                     }
                 }
             }
@@ -153,7 +151,6 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
     if (keyword.isEmpty()) {
-
         const QStringList argsStringList = variantListToStringList(args);
 
         if ((obj = reinterpret_cast<QObject *>(createPartObject(parentWidget, parent, iface, argsStringList)))) {
@@ -184,8 +181,7 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
     }
 
     if (!obj) {
-        const QList<KPluginFactoryPrivate::PluginWithMetadata> candidates =
-            (d->createInstanceWithMetaDataHash.values(keyword));
+        const QList<KPluginFactoryPrivate::PluginWithMetadata> candidates = (d->createInstanceWithMetaDataHash.values(keyword));
         // for !keyword.isEmpty() candidates.count() is 0 or 1
 
         for (const KPluginFactoryPrivate::PluginWithMetadata &plugin : candidates) {
@@ -224,4 +220,3 @@ QVariantList KPluginFactory::stringListToVariantList(const QStringList &list)
     }
     return variantlist;
 }
-

@@ -7,9 +7,9 @@
 
 #include "multiplugin.h"
 #include "kcoreaddons_debug.h"
+#include <QDebug>
 #include <kexportplugin.h>
 #include <kpluginfactory.h>
-#include <QDebug>
 
 MultiPlugin1::MultiPlugin1(QObject *parent, const QVariantList &args)
     : QObject(parent)
@@ -28,6 +28,6 @@ MultiPlugin2::MultiPlugin2(QObject *parent, const QVariantList &args)
 K_PLUGIN_FACTORY(MultiPluginFactory,
                  registerPlugin<MultiPlugin1>();
                  registerPlugin<MultiPlugin2>(QLatin1String("secondary")); // keyword
-                )
+)
 
 #include "multiplugin.moc"

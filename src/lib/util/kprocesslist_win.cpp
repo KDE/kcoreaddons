@@ -14,17 +14,17 @@
 
 // Enable Win API of XP SP1 and later
 #ifdef Q_OS_WIN
-#    if !defined(_WIN32_WINNT)
-#        define _WIN32_WINNT 0x0502
-#    endif
-#    include <qt_windows.h>
-#    if !defined(PROCESS_SUSPEND_RESUME) // Check flag for MinGW
-#        define PROCESS_SUSPEND_RESUME (0x0800)
-#    endif // PROCESS_SUSPEND_RESUME
+#if !defined(_WIN32_WINNT)
+#define _WIN32_WINNT 0x0502
+#endif
+#include <qt_windows.h>
+#if !defined(PROCESS_SUSPEND_RESUME) // Check flag for MinGW
+#define PROCESS_SUSPEND_RESUME (0x0800)
+#endif // PROCESS_SUSPEND_RESUME
 #endif // Q_OS_WIN
 
-#include <tlhelp32.h>
 #include <psapi.h>
+#include <tlhelp32.h>
 
 using namespace KProcessList;
 
@@ -34,14 +34,12 @@ using namespace KProcessList;
 static inline BOOL queryFullProcessImageName(HANDLE h, DWORD flags, LPWSTR buffer, DWORD *size)
 {
     // Resolve required symbols from the kernel32.dll
-    typedef BOOL (WINAPI *QueryFullProcessImageNameWProtoType)(HANDLE, DWORD, LPWSTR, PDWORD);
+    typedef BOOL(WINAPI * QueryFullProcessImageNameWProtoType)(HANDLE, DWORD, LPWSTR, PDWORD);
     static QueryFullProcessImageNameWProtoType queryFullProcessImageNameW = 0;
     if (!queryFullProcessImageNameW) {
         QLibrary kernel32Lib(QLatin1String("kernel32.dll"), 0);
         if (kernel32Lib.isLoaded() || kernel32Lib.load()) {
-            queryFullProcessImageNameW
-                = (QueryFullProcessImageNameWProtoType)kernel32Lib.resolve(
-                "QueryFullProcessImageNameW");
+            queryFullProcessImageNameW = (QueryFullProcessImageNameWProtoType)kernel32Lib.resolve("QueryFullProcessImageNameW");
         }
     }
     if (!queryFullProcessImageNameW)
@@ -71,21 +69,14 @@ static inline ProcessInfo winProcessInfo(DWORD processId)
         QByteArray buf;
         buf.resize(size);
         PTOKEN_USER userToken = reinterpret_cast<PTOKEN_USER>(buf.data());
-        if (userToken
-            && GetTokenInformation(processTokenHandle, TokenUser, userToken, size, &size)) {
+        if (userToken && GetTokenInformation(processTokenHandle, TokenUser, userToken, size, &size)) {
             SID_NAME_USE sidNameUse;
-            TCHAR user[MAX_PATH] = { 0 };
+            TCHAR user[MAX_PATH] = {0};
             DWORD userNameLength = MAX_PATH;
-            TCHAR domain[MAX_PATH] = { 0 };
+            TCHAR domain[MAX_PATH] = {0};
             DWORD domainNameLength = MAX_PATH;
 
-            if (LookupAccountSid(NULL,
-                                 userToken->User.Sid,
-                                 user,
-                                 &userNameLength,
-                                 domain,
-                                 &domainNameLength,
-                                 &sidNameUse))
+            if (LookupAccountSid(NULL, userToken->User.Sid, user, &userNameLength, domain, &domainNameLength, &sidNameUse))
                 pi.processOwner = QString::fromUtf16(reinterpret_cast<const ushort *>(user));
         }
     }
@@ -116,9 +107,7 @@ KProcessInfoList KProcessList::processInfoList()
 KProcessInfo KProcessList::processInfo(qint64 pid)
 {
     KProcessInfoList processInfoList = KProcessList::processInfoList();
-    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(),
-                                            [pid](const KProcessList::KProcessInfo& info)
-    {
+    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(), [pid](const KProcessList::KProcessInfo &info) {
         return info.pid() == pid;
     });
     if (testProcessIterator != processInfoList.end()) {

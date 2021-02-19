@@ -12,8 +12,7 @@ QString KStringHandlerTest::test = QStringLiteral("The quick brown fox jumped ov
 
 void KStringHandlerTest::capwords()
 {
-    QCOMPARE(KStringHandler::capwords(test),
-             QStringLiteral("The Quick Brown Fox Jumped Over The Lazy Bridge. "));
+    QCOMPARE(KStringHandler::capwords(test), QStringLiteral("The Quick Brown Fox Jumped Over The Lazy Bridge. "));
 }
 
 void KStringHandlerTest::tagURLs()
@@ -23,8 +22,7 @@ void KStringHandlerTest::tagURLs()
              QStringLiteral("Click on <a href=\"https://foo@bar:www.kde.org/yoyo/dyne.html#a1\">https://foo@bar:www.kde.org/yoyo/dyne.html#a1</a> for info."));
 
     test = QStringLiteral("http://www.foo.org/story$806");
-    QCOMPARE(KStringHandler::tagUrls(test),
-             QStringLiteral("<a href=\"http://www.foo.org/story$806\">http://www.foo.org/story$806</a>"));
+    QCOMPARE(KStringHandler::tagUrls(test), QStringLiteral("<a href=\"http://www.foo.org/story$806\">http://www.foo.org/story$806</a>"));
 
 #if 0
     // XFAIL - i.e. this needs to be fixed, but has never been
@@ -34,34 +32,28 @@ void KStringHandlerTest::tagURLs()
 #endif
 
     test = QStringLiteral("http://www.foo.org/bla-(bli)");
-    QCOMPARE(KStringHandler::tagUrls(test),
-             QStringLiteral("<a href=\"http://www.foo.org/bla-(bli)\">http://www.foo.org/bla-(bli)</a>"));
+    QCOMPARE(KStringHandler::tagUrls(test), QStringLiteral("<a href=\"http://www.foo.org/bla-(bli)\">http://www.foo.org/bla-(bli)</a>"));
 
     test = QStringLiteral("http://www.foo.org/bla-bli");
-    QCOMPARE(KStringHandler::tagUrls(test),
-             QStringLiteral("<a href=\"http://www.foo.org/bla-bli\">http://www.foo.org/bla-bli</a>"));
+    QCOMPARE(KStringHandler::tagUrls(test), QStringLiteral("<a href=\"http://www.foo.org/bla-bli\">http://www.foo.org/bla-bli</a>"));
 }
 
 void KStringHandlerTest::perlSplit()
 {
     QStringList expected;
-    expected << QStringLiteral("some") << QStringLiteral("string") << QStringLiteral("for")
-             << QStringLiteral("you__here");
+    expected << QStringLiteral("some") << QStringLiteral("string") << QStringLiteral("for") << QStringLiteral("you__here");
     QCOMPARE(KStringHandler::perlSplit(QStringLiteral("__"), QStringLiteral("some__string__for__you__here"), 4), expected);
 
     expected.clear();
     expected << QStringLiteral("kparts") << QStringLiteral("reaches") << QStringLiteral("the parts other parts can't");
-    QCOMPARE(KStringHandler::perlSplit(QLatin1Char(' '),
-                                       QStringLiteral("kparts reaches the parts other parts can't"), 3), expected);
+    QCOMPARE(KStringHandler::perlSplit(QLatin1Char(' '), QStringLiteral("kparts reaches the parts other parts can't"), 3), expected);
 
     expected.clear();
     expected << QStringLiteral("Split") << QStringLiteral("me") << QStringLiteral("up ! I'm bored ! OK ?");
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
-    QCOMPARE(KStringHandler::perlSplit(QRegExp(QStringLiteral("[! ]")),
-                                       QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
+    QCOMPARE(KStringHandler::perlSplit(QRegExp(QStringLiteral("[! ]")), QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
 #endif
-    QCOMPARE(KStringHandler::perlSplit(QRegularExpression(QStringLiteral("[! ]")),
-                                       QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
+    QCOMPARE(KStringHandler::perlSplit(QRegularExpression(QStringLiteral("[! ]")), QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
 }
 
 void KStringHandlerTest::obscure()
@@ -82,71 +74,58 @@ void KStringHandlerTest::preProcessWrap_data()
     QTest::addColumn<QString>("expected");
 
     // Should result in no additional breaks
-    QTest::newRow("spaces") << "foo bar baz" << "foo bar baz";
+    QTest::newRow("spaces") << "foo bar baz"
+                            << "foo bar baz";
 
     // Should insert a ZWSP after each '_'
-    QTest::newRow("underscores") << "foo_bar_baz"
-                                 << QString(QStringLiteral("foo_") + zwsp + QStringLiteral("bar_") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("underscores") << "foo_bar_baz" << QString(QStringLiteral("foo_") + zwsp + QStringLiteral("bar_") + zwsp + QStringLiteral("baz"));
 
     // Should insert a ZWSP after each '-'
-    QTest::newRow("hyphens") << "foo-bar-baz"
-                             << QString(QStringLiteral("foo-") + zwsp +
-                                        QStringLiteral("bar-") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("hyphens") << "foo-bar-baz" << QString(QStringLiteral("foo-") + zwsp + QStringLiteral("bar-") + zwsp + QStringLiteral("baz"));
 
     // Should insert a ZWSP after each '.'
-    QTest::newRow("periods") << "foo.bar.baz"
-                             << QString(QStringLiteral("foo.") +
-                                        zwsp + QStringLiteral("bar.") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("periods") << "foo.bar.baz" << QString(QStringLiteral("foo.") + zwsp + QStringLiteral("bar.") + zwsp + QStringLiteral("baz"));
 
     // Should insert a ZWSP after each ','
-    QTest::newRow("commas") << "foo,bar,baz"
-                            << QString(QStringLiteral("foo,") + zwsp +
-                                       QStringLiteral("bar,") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("commas") << "foo,bar,baz" << QString(QStringLiteral("foo,") + zwsp + QStringLiteral("bar,") + zwsp + QStringLiteral("baz"));
 
     // Should result in no additional breaks since the '_'s are followed by spaces
-    QTest::newRow("mixed underscores and spaces")
-            << "foo_ bar_ baz" << "foo_ bar_ baz";
+    QTest::newRow("mixed underscores and spaces") << "foo_ bar_ baz"
+                                                  << "foo_ bar_ baz";
 
     // Should result in no additional breaks since the '_' is the last char
-    QTest::newRow("ends with underscore") << "foo_" << "foo_";
+    QTest::newRow("ends with underscore") << "foo_"
+                                          << "foo_";
 
     // Should insert a ZWSP before '(' and after ')'
-    QTest::newRow("parens") << "foo(bar)baz"
-                            << QString(QStringLiteral("foo") + zwsp +
-                                       QStringLiteral("(bar)") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("parens") << "foo(bar)baz" << QString(QStringLiteral("foo") + zwsp + QStringLiteral("(bar)") + zwsp + QStringLiteral("baz"));
 
     // Should insert a ZWSP before '[' and after ']'
-    QTest::newRow("brackets") << "foo[bar]baz"
-                              << QString(QStringLiteral("foo") + zwsp +
-                                         QStringLiteral("[bar]") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("brackets") << "foo[bar]baz" << QString(QStringLiteral("foo") + zwsp + QStringLiteral("[bar]") + zwsp + QStringLiteral("baz"));
 
     // Should insert a ZWSP before '{' and after '}'
-    QTest::newRow("curly braces") << "foo{bar}baz"
-                                  << QString(QStringLiteral("foo") + zwsp +
-                                             QStringLiteral("{bar}") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("curly braces") << "foo{bar}baz" << QString(QStringLiteral("foo") + zwsp + QStringLiteral("{bar}") + zwsp + QStringLiteral("baz"));
 
     // Should insert a ZWSP before '(' but not after ')' since it's the last char
-    QTest::newRow("ends with ')'") << "foo(bar)"
-                                   << QString(QStringLiteral("foo") + zwsp + QStringLiteral("(bar)"));
+    QTest::newRow("ends with ')'") << "foo(bar)" << QString(QStringLiteral("foo") + zwsp + QStringLiteral("(bar)"));
 
     // Should insert a single ZWSP between the '_' and the '('
-    QTest::newRow("'_' followed by '('") << "foo_(bar)"
-                                         << QString(QStringLiteral("foo_") + zwsp + QStringLiteral("(bar)"));
+    QTest::newRow("'_' followed by '('") << "foo_(bar)" << QString(QStringLiteral("foo_") + zwsp + QStringLiteral("(bar)"));
 
     // Should insert ZWSP's between the '_' and the '[', between the double
     // '['s and the double ']'s, but not before and after 'bar'
     QTest::newRow("'_' before double brackets") << "foo_[[bar]]"
-            << QString(QStringLiteral("foo_") + zwsp +
-                       QStringLiteral("[") + zwsp + QStringLiteral("[bar]") + zwsp +
-                       QStringLiteral("]"));
+                                                << QString(QStringLiteral("foo_") + zwsp + QStringLiteral("[") + zwsp + QStringLiteral("[bar]") + zwsp
+                                                           + QStringLiteral("]"));
 
     // Should only insert ZWSP's between the double '['s and the double ']'s
     QTest::newRow("space before double brackets") << "foo [[bar]]"
-            << QString(QStringLiteral("foo [") + zwsp + QStringLiteral("[bar]") + zwsp + QStringLiteral("]"));
+                                                  << QString(QStringLiteral("foo [") + zwsp + QStringLiteral("[bar]") + zwsp + QStringLiteral("]"));
 
     // Shouldn't result in any additional breaks since the '(' is preceded
     // by a space, and the ')' is followed by a space.
-    QTest::newRow("parens with spaces") << "foo (bar) baz" << "foo (bar) baz";
+    QTest::newRow("parens with spaces") << "foo (bar) baz"
+                                        << "foo (bar) baz";
 
     // Should insert a WJ (Word Joiner) before a single quote
     const QChar wj(0x2060);
@@ -173,8 +152,7 @@ void KStringHandlerTest::preProcessWrap()
     QFETCH(QString, string);
     QFETCH(QString, expected);
 
-    QCOMPARE(replaceZwsp(KStringHandler::preProcessWrap(string)),
-             replaceZwsp(expected));
+    QCOMPARE(replaceZwsp(KStringHandler::preProcessWrap(string)), replaceZwsp(expected));
 }
 
 void KStringHandlerTest::logicalLength_data()
@@ -195,4 +173,3 @@ void KStringHandlerTest::logicalLength()
     QFETCH(int, expected);
     QCOMPARE(KStringHandler::logicalLength(string), expected);
 }
-

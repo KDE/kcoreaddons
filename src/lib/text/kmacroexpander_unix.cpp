@@ -9,16 +9,22 @@
 
 #include "kmacroexpander_p.h"
 
-#include <QStringList>
-#include <QStack>
 #include <QRegularExpression>
+#include <QStack>
+#include <QStringList>
 
 namespace KMacroExpander
 {
-
-enum Quoting { noquote, singlequote, doublequote, dollarquote,
-               paren, subst, group, math,
-             };
+enum Quoting {
+    noquote,
+    singlequote,
+    doublequote,
+    dollarquote,
+    paren,
+    subst,
+    group,
+    math,
+};
 typedef struct {
     Quoting current;
     bool dquote;
@@ -36,10 +42,7 @@ using namespace KMacroExpander;
 
 inline static bool isSpecial(QChar cUnicode)
 {
-    static const uchar iqm[] = {
-        0xff, 0xff, 0xff, 0xff, 0xdf, 0x07, 0x00, 0xd8,
-        0x00, 0x00, 0x00, 0x38, 0x01, 0x00, 0x00, 0x78
-    }; // 0-32 \'"$`<>|;&(){}*?#!~[]
+    static const uchar iqm[] = {0xff, 0xff, 0xff, 0xff, 0xdf, 0x07, 0x00, 0xd8, 0x00, 0x00, 0x00, 0x38, 0x01, 0x00, 0x00, 0x78}; // 0-32 \'"$`<>|;&(){}*?#!~[]
 
     uint c = cUnicode.unicode();
     return (c < sizeof(iqm) * 8) && (iqm[c / 8] & (1 << (c & 7)));
@@ -75,7 +78,7 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
     int len;
     int pos2;
     ushort ec = d->escapechar.unicode();
-    State state = { noquote, false };
+    State state = {noquote, false};
     QStack<State> sstack;
     QStack<Save> ostack;
     QStringList rst;
@@ -138,7 +141,7 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
             if (cc == '(') {
                 sstack.push(state);
                 if (str.unicode()[pos + 1].unicode() == '(') {
-                    Save sav = { str, pos + 2 };
+                    Save sav = {str, pos + 2};
                     ostack.push(sav);
                     state.current = math;
                     pos += 2;
@@ -162,7 +165,7 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
             }
             // always swallow the char -> prevent anomalies due to expansion
         } else if (cc == '`') {
-            str.replace(pos, 1, QStringLiteral("$( "));   // add space -> avoid creating $((
+            str.replace(pos, 1, QStringLiteral("$( ")); // add space -> avoid creating $((
             pos2 = pos += 3;
             for (;;) {
                 if (pos2 >= str.length()) {
@@ -175,8 +178,7 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
                 }
                 if (cc == '\\') {
                     cc = str.unicode()[++pos2].unicode();
-                    if (cc == '$' || cc == '`' || cc == '\\' ||
-                            (cc == '"' && state.dquote)) {
+                    if (cc == '$' || cc == '`' || cc == '\\' || (cc == '"' && state.dquote)) {
                         str.remove(pos2 - 1, 1);
                         continue;
                     }

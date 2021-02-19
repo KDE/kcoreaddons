@@ -8,13 +8,13 @@
 
 #include "kdelibs4configmigrator.h"
 
-#include <QStandardPaths>
 #include <Kdelibs4Migration>
+#include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QDir>
 #include <QLoggingCategory>
 #include <QPluginLoader>
+#include <QStandardPaths>
 
 Q_DECLARE_LOGGING_CATEGORY(MIGRATOR)
 // logging category for this framework, default: log stuff >= warning
@@ -26,7 +26,6 @@ public:
     Kdelibs4ConfigMigratorPrivate(const QString &_appName)
         : appName(_appName)
     {
-
     }
 
     QStringList configFiles;
@@ -62,14 +61,12 @@ bool Kdelibs4ConfigMigrator::migrate()
     bool didSomething = false;
 
     for (const QString &configFileName : qAsConst(d->configFiles)) {
-        const QString newConfigLocation
-            = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation)
-              + QLatin1Char('/') + configFileName;
+        const QString newConfigLocation = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + QLatin1Char('/') + configFileName;
 
         if (QFile(newConfigLocation).exists()) {
             continue;
         }
-        //Be safe
+        // Be safe
         QFileInfo fileInfo(newConfigLocation);
         QDir().mkpath(fileInfo.absolutePath());
 
@@ -86,9 +83,8 @@ bool Kdelibs4ConfigMigrator::migrate()
         qCCritical(MIGRATOR) << " We can not migrate ui file. AppName is missing";
     } else {
         for (const QString &uiFileName : qAsConst(d->uiFiles)) {
-            const QString newConfigLocation
-                = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
-                  QLatin1String("/kxmlgui5/") + d->appName + QLatin1Char('/') + uiFileName;
+            const QString newConfigLocation = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/kxmlgui5/") + d->appName
+                + QLatin1Char('/') + uiFileName;
             if (QFile(newConfigLocation).exists()) {
                 continue;
             }

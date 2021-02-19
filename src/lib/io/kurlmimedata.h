@@ -9,9 +9,9 @@
 #ifndef KURLMIMEDATA_H
 #define KURLMIMEDATA_H
 
+#include "kcoreaddons_export.h"
 #include <QMap>
 #include <QUrl>
-#include "kcoreaddons_export.h"
 QT_BEGIN_NAMESPACE
 class QMimeData;
 QT_END_NAMESPACE
@@ -39,8 +39,7 @@ typedef QMap<QString, QString> MetaDataMap;
  *
  * @param mimeData the QMimeData instance used to drag or copy this URL
  */
-KCOREADDONS_EXPORT void setUrls(const QList<QUrl> &urls, const QList<QUrl> &mostLocalUrls,
-                                QMimeData *mimeData);
+KCOREADDONS_EXPORT void setUrls(const QList<QUrl> &urls, const QList<QUrl> &mostLocalUrls, QMimeData *mimeData);
 /**
  * @param metaData KIO metadata shipped in the mime data, which is used for instance to
  * set a correct HTTP referrer (some websites require it for downloading e.g. an image)
@@ -86,11 +85,8 @@ enum DecodeOptions {
  * @param metaData optional pointer to a map which will hold the metadata after this call
  * @return the list of urls
  */
-KCOREADDONS_EXPORT QList<QUrl> urlsFromMimeData(const QMimeData *mimeData,
-        DecodeOptions decodeOptions = PreferKdeUrls,
-        MetaDataMap *metaData = nullptr);
+KCOREADDONS_EXPORT QList<QUrl> urlsFromMimeData(const QMimeData *mimeData, DecodeOptions decodeOptions = PreferKdeUrls, MetaDataMap *metaData = nullptr);
 
 }
 
 #endif /* KURLMIMEDATA_H */
-

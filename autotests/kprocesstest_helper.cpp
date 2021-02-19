@@ -6,8 +6,8 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include <kprocess.h>
 #include "kprocesstest_helper.h"
+#include <kprocess.h>
 
 #include <stdio.h>
 #include <stdlib.h>

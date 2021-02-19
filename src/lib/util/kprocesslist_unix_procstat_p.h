@@ -9,111 +9,121 @@
 
 #pragma once
 
-#include <sys/types.h>
-#include <sys/sysctl.h>
+#include <libprocstat.h>
 #include <sys/param.h>
 #include <sys/queue.h>
+#include <sys/sysctl.h>
+#include <sys/types.h>
 #include <sys/user.h>
-#include <libprocstat.h>
 
 namespace KProcessList
 {
-    struct ProcStat
+struct ProcStat {
+public:
+    struct procstat *pstat;
+    ProcStat()
     {
-        public:
-            struct procstat *pstat;
-            ProcStat()
-            {
-                pstat = procstat_open_sysctl();
-            }
+        pstat = procstat_open_sysctl();
+    }
 
-            ~ProcStat()
-            {
-                procstat_close(pstat);
-            }
-
-            operator bool() const
-            {
-                return pstat;
-            }
-    };
-
-    struct ProcStatProcesses
+    ~ProcStat()
     {
-        private:
-            ProcStat& parent;
-            unsigned int proc_count;
-            struct kinfo_proc *procs;
-        public:
-            ProcStatProcesses(ProcStat& pstat) : parent(pstat)
-            {
-                procs = procstat_getprocs(parent.pstat, KERN_PROC_PROC, 0, &proc_count);
+        procstat_close(pstat);
+    }
+
+    operator bool() const
+    {
+        return pstat;
+    }
+};
+
+struct ProcStatProcesses {
+private:
+    ProcStat &parent;
+    unsigned int proc_count;
+    struct kinfo_proc *procs;
+
+public:
+    ProcStatProcesses(ProcStat &pstat)
+        : parent(pstat)
+    {
+        procs = procstat_getprocs(parent.pstat, KERN_PROC_PROC, 0, &proc_count);
+    }
+
+    ~ProcStatProcesses()
+    {
+        if (procs) {
+            procstat_freeprocs(parent.pstat, procs);
+        }
+    }
+
+    operator bool() const
+    {
+        return procs && proc_count > 0;
+    }
+
+    unsigned int count() const
+    {
+        return proc_count;
+    }
+
+    class ProcessIterator
+    {
+    private:
+        const ProcStatProcesses &processes;
+        unsigned int pos;
+
+    public:
+        ProcessIterator(const ProcStatProcesses &processes, unsigned int pos)
+            : processes(processes)
+            , pos(pos){};
+
+        bool operator!=(const ProcessIterator &other) const
+        {
+            return pos != other.pos;
+        }
+
+        ProcessIterator &operator++()
+        {
+            if (pos < processes.count()) {
+                ++pos;
+            }
+            return *this;
+        }
+
+        const KProcessInfo operator*()
+        {
+            QStringList command_line;
+            QString command;
+            char pathname[PATH_MAX];
+            struct kinfo_proc *proc = &processes.procs[pos];
+            if (procstat_getpathname(processes.parent.pstat, proc, pathname, sizeof(pathname)) != 0) {
+                command = QString::fromLocal8Bit(pathname);
+            } else {
+                command = QString::fromLocal8Bit(proc->ki_comm);
             }
 
-            ~ProcStatProcesses()
-            {
-                if (procs)
-                {
-                    procstat_freeprocs(parent.pstat, procs);
+            char **args;
+            args = procstat_getargv(processes.parent.pstat, proc, 0);
+            if (args) {
+                for (int i = 0; args[i] != nullptr; i++) {
+                    command_line << QString::fromLocal8Bit(args[i]);
                 }
             }
 
-            operator bool() const
-            {
-                return procs && proc_count > 0;
-            }
-
-            unsigned int count() const
-            {
-                return proc_count;
-            }
-
-            class ProcessIterator
-            {
-                private:
-                    const ProcStatProcesses& processes;
-                    unsigned int pos;
-                public:
-                    ProcessIterator(const ProcStatProcesses& processes, unsigned int pos) : processes(processes), pos(pos) {};
-
-                    bool operator!=(const ProcessIterator& other) const { return pos != other.pos; }
-
-                    ProcessIterator& operator++()
-                    {
-                        if (pos < processes.count())
-                        {
-                            ++pos;
-                        }
-                        return *this;
-                    }
-
-                    const KProcessInfo operator*()
-                    {
-                        QStringList command_line;
-                        QString command;
-                        char pathname[PATH_MAX];
-                        struct kinfo_proc *proc = &processes.procs[pos];
-                        if (procstat_getpathname(processes.parent.pstat, proc, pathname, sizeof(pathname)) != 0) {
-                            command = QString::fromLocal8Bit(pathname);
-                        } else {
-                            command = QString::fromLocal8Bit(proc->ki_comm);
-                        }
-
-                        char **args;
-                        args = procstat_getargv(processes.parent.pstat, proc, 0);
-                        if (args) {
-                            for (int i = 0; args[i] != nullptr; i++) {
-                                command_line << QString::fromLocal8Bit(args[i]);
-                            }
-                        }
-
-                        pid_t pid    = proc->ki_pid;
-                        QString user = QString::fromLocal8Bit(proc->ki_login);
-                        return KProcessInfo(pid, command_line.join(QString::fromLocal8Bit(" ")), command, user);
-                    }
-            };
-
-            ProcessIterator begin() const { return ProcessIterator(*this, 0); }
-            ProcessIterator end() const { return ProcessIterator(*this, this->count()); }
+            pid_t pid = proc->ki_pid;
+            QString user = QString::fromLocal8Bit(proc->ki_login);
+            return KProcessInfo(pid, command_line.join(QString::fromLocal8Bit(" ")), command, user);
+        }
     };
+
+    ProcessIterator begin() const
+    {
+        return ProcessIterator(*this, 0);
+    }
+    ProcessIterator end() const
+    {
+        return ProcessIterator(*this, this->count());
+    }
+};
 }

@@ -10,14 +10,13 @@
 #ifndef KPROCESSLIST_H
 #define KPROCESSLIST_H
 
-#include <kcoreaddons_export.h>
+#include <QList>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QList>
+#include <kcoreaddons_export.h>
 
 namespace KProcessList
 {
-
 class KProcessInfoPrivate;
 
 /**
@@ -25,7 +24,8 @@ class KProcessInfoPrivate;
  * processInfoList and processInfo. To check if the data contained in this class is valid use the isValid method.
  * @since 5.58
  */
-class KCOREADDONS_EXPORT KProcessInfo {
+class KCOREADDONS_EXPORT KProcessInfo
+{
 public:
     KProcessInfo();
     KProcessInfo(qint64 pid, const QString &command, const QString &user);
@@ -59,6 +59,7 @@ public:
      * @since 5.61
      */
     QString command() const;
+
 private:
     QSharedDataPointer<KProcessInfoPrivate> d_ptr;
 };

@@ -8,10 +8,10 @@
 #ifndef KJOBTEST_H
 #define KJOBTEST_H
 
-#include <QObject>
-#include <QEventLoop>
 #include "kjob.h"
 #include "kjobuidelegate.h"
+#include <QEventLoop>
+#include <QObject>
 
 class TestJob : public KJob
 {
@@ -100,10 +100,8 @@ class WaitJob : public KJob
 {
     Q_OBJECT
 public:
-
     void start() override;
     void makeItFinish();
 };
 
 #endif
-

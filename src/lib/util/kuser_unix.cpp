@@ -7,29 +7,43 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "kuser.h"
-#include "config-getgrouplist.h"
 #include "config-accountsservice.h"
+#include "config-getgrouplist.h"
 #include "kcoreaddons_debug.h"
+#include "kuser.h"
 
 #include <QFileInfo>
 
-#include <pwd.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <grp.h>
 #include <errno.h>
+#include <grp.h>
+#include <pwd.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-#include <algorithm>  // std::find
+#include <algorithm> // std::find
 #include <functional> // std::function
 
 #if defined(__BIONIC__) && __ANDROID_API__ < 26
-static inline struct passwd * getpwent() { return nullptr; }
-inline void setpwent() { }
-static inline void setgrent() { }
-static inline struct group * getgrent() { return nullptr; }
-inline void endpwent() { }
-static inline void endgrent() { }
+static inline struct passwd *getpwent()
+{
+    return nullptr;
+}
+inline void setpwent()
+{
+}
+static inline void setgrent()
+{
+}
+static inline struct group *getgrent()
+{
+    return nullptr;
+}
+inline void endpwent()
+{
+}
+static inline void endgrent()
+{
+}
 #endif
 
 class KUserPrivate : public QSharedData
@@ -41,12 +55,20 @@ public:
     QString homeDir, shell;
     QMap<KUser::UserProperty, QVariant> properties;
 
-    KUserPrivate() : uid(uid_t(-1)), gid(gid_t(-1)) {}
-    KUserPrivate(const char *name) : uid(uid_t(-1)), gid(gid_t(-1))
+    KUserPrivate()
+        : uid(uid_t(-1))
+        , gid(gid_t(-1))
+    {
+    }
+    KUserPrivate(const char *name)
+        : uid(uid_t(-1))
+        , gid(gid_t(-1))
     {
         fillPasswd(name ? ::getpwnam(name) : nullptr);
     }
-    KUserPrivate(const passwd *p) : uid(uid_t(-1)), gid(gid_t(-1))
+    KUserPrivate(const passwd *p)
+        : uid(uid_t(-1))
+        , gid(gid_t(-1))
     {
         fillPasswd(p);
     }
@@ -129,13 +151,13 @@ KUser::KUser(const KUser &user)
 {
 }
 
-KUser &KUser::operator =(const KUser &user)
+KUser &KUser::operator=(const KUser &user)
 {
     d = user.d;
     return *this;
 }
 
-bool KUser::operator ==(const KUser &user) const
+bool KUser::operator==(const KUser &user) const
 {
     return isValid() && (d->uid == user.d->uid);
 }
@@ -172,7 +194,7 @@ QString KUser::homeDir() const
 
 QString KUser::faceIconPath() const
 {
-    QString  pathToFaceIcon;
+    QString pathToFaceIcon;
     if (!d->loginName.isEmpty()) {
         pathToFaceIcon = QStringLiteral(ACCOUNTS_SERVICE_ICON_DIR) + QLatin1Char('/') + d->loginName;
     }
@@ -235,9 +257,8 @@ static void listGroupsForUser(const char *name, gid_t gid, uint maxCount, Func h
         }
     }
 
-    static const auto groupContainsUser = [](struct group * g, const char *name) -> bool {
-        for (char **user = g->gr_mem; *user; user++)
-        {
+    static const auto groupContainsUser = [](struct group *g, const char *name) -> bool {
+        for (char **user = g->gr_mem; *user; user++) {
             if (strcmp(name, *user) == 0) {
                 return true;
             }
@@ -263,24 +284,18 @@ static void listGroupsForUser(const char *name, gid_t gid, uint maxCount, Func h
 QList<KUserGroup> KUser::groups(uint maxCount) const
 {
     QList<KUserGroup> result;
-    listGroupsForUser(
-        d->loginName.toLocal8Bit().constData(), d->gid, maxCount,
-        [&](const group * g) {
-            result.append(KUserGroup(g));
-        }
-    );
+    listGroupsForUser(d->loginName.toLocal8Bit().constData(), d->gid, maxCount, [&](const group *g) {
+        result.append(KUserGroup(g));
+    });
     return result;
 }
 
 QStringList KUser::groupNames(uint maxCount) const
 {
     QStringList result;
-    listGroupsForUser(
-        d->loginName.toLocal8Bit().constData(), d->gid, maxCount,
-        [&](const group * g) {
-            result.append(QString::fromLocal8Bit(g->gr_name));
-        }
-    );
+    listGroupsForUser(d->loginName.toLocal8Bit().constData(), d->gid, maxCount, [&](const group *g) {
+        result.append(QString::fromLocal8Bit(g->gr_name));
+    });
     return result;
 }
 
@@ -330,12 +345,17 @@ public:
     gid_t gid;
     QString name;
 
-    KUserGroupPrivate() : gid(gid_t(-1)) {}
-    KUserGroupPrivate(const char *_name) : gid(gid_t(-1))
+    KUserGroupPrivate()
+        : gid(gid_t(-1))
+    {
+    }
+    KUserGroupPrivate(const char *_name)
+        : gid(gid_t(-1))
     {
         fillGroup(_name ? ::getgrnam(_name) : nullptr);
     }
-    KUserGroupPrivate(const ::group *p) : gid(gid_t(-1))
+    KUserGroupPrivate(const ::group *p)
+        : gid(gid_t(-1))
     {
         fillGroup(p);
     }
@@ -384,13 +404,13 @@ KUserGroup::KUserGroup(const KUserGroup &group)
 {
 }
 
-KUserGroup &KUserGroup::operator =(const KUserGroup &group)
+KUserGroup &KUserGroup::operator=(const KUserGroup &group)
 {
     d = group.d;
     return *this;
 }
 
-bool KUserGroup::operator ==(const KUserGroup &group) const
+bool KUserGroup::operator==(const KUserGroup &group) const
 {
     return isValid() && (d->gid == group.d->gid);
 }
@@ -433,7 +453,7 @@ static void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd
         }
     }
 
-    //gr_mem doesn't contain users where the primary group == gid -> we have to iterate over all users
+    // gr_mem doesn't contain users where the primary group == gid -> we have to iterate over all users
     setpwent();
     while ((p = getpwent()) && found < maxCount) {
         if (p->pw_gid != gid) {

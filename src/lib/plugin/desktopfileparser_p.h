@@ -13,16 +13,13 @@
 class QJsonObject;
 class QJsonValue;
 
-
 struct CustomPropertyDefinition;
-struct ServiceTypeDefinition
-{
+struct ServiceTypeDefinition {
     QVector<CustomPropertyDefinition> m_propertyDefs;
     QByteArray m_serviceTypeName;
 };
 
-struct ServiceTypeDefinitions
-{
+struct ServiceTypeDefinitions {
     static ServiceTypeDefinitions fromFiles(const QStringList &paths);
     /**
      * @return @p value converted to the correct JSON type.
@@ -45,17 +42,15 @@ private:
 
 namespace DesktopFileParser
 {
-    QByteArray escapeValue(const QByteArray &input);
-    QStringList deserializeList(const QString &data, char separator = ',');
-    bool convert(const QString &src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath);
-    void convertToJson(const QByteArray &key, ServiceTypeDefinitions &serviceTypes, const QString &value,
-                       QJsonObject &json, QJsonObject &kplugin, int lineNr);
+QByteArray escapeValue(const QByteArray &input);
+QStringList deserializeList(const QString &data, char separator = ',');
+bool convert(const QString &src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath);
+void convertToJson(const QByteArray &key, ServiceTypeDefinitions &serviceTypes, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
-    void convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr);
-    extern bool s_verbose;
-    extern bool s_compatibilityMode;
+void convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr);
+extern bool s_verbose;
+extern bool s_compatibilityMode;
 #endif
 }
-
 
 #endif // DESKTOPFILEPARSER_H

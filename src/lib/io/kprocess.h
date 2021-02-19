@@ -36,7 +36,6 @@ class KCOREADDONS_EXPORT KProcess : public QProcess
     Q_DECLARE_PRIVATE(KProcess)
 
 public:
-
     /**
      * Modes in which the output channels can be opened.
      */
@@ -323,12 +322,11 @@ protected:
 private:
     // hide those
 #if QT_DEPRECATED_SINCE(5, 13)
-    using QProcess::setReadChannelMode;
     using QProcess::readChannelMode;
+    using QProcess::setReadChannelMode;
 #endif
-    using QProcess::setProcessChannelMode;
     using QProcess::processChannelMode;
+    using QProcess::setProcessChannelMode;
 };
 
 #endif
-

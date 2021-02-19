@@ -18,18 +18,20 @@ static const int maxNameLength = _MAX_FNAME;
 static const int maxNameLength = NAME_MAX;
 #endif
 
-#include <QLatin1Char>
+#include "kcoreaddons_debug.h"
+#include "krandom.h"
 #include <QCoreApplication>
 #include <QDir>
+#include <QLatin1Char>
 #include <QLockFile>
 #include <QStandardPaths>
-#include "krandom.h"
-#include "kcoreaddons_debug.h"
 
 class KAutoSaveFilePrivate
 {
 public:
-    enum {NamePadding=8,};
+    enum {
+        NamePadding = 8,
+    };
 
     QString tempFileName();
     QUrl managedFile;
@@ -78,17 +80,16 @@ QString KAutoSaveFilePrivate::tempFileName()
 }
 
 KAutoSaveFile::KAutoSaveFile(const QUrl &filename, QObject *parent)
-    : QFile(parent),
-      d(new KAutoSaveFilePrivate)
+    : QFile(parent)
+    , d(new KAutoSaveFilePrivate)
 {
     setManagedFile(filename);
 }
 
 KAutoSaveFile::KAutoSaveFile(QObject *parent)
-    : QFile(parent),
-      d(new KAutoSaveFilePrivate)
+    : QFile(parent)
+    , d(new KAutoSaveFilePrivate)
 {
-
 }
 
 KAutoSaveFile::~KAutoSaveFile()
@@ -129,8 +130,8 @@ bool KAutoSaveFile::open(OpenMode openmode)
 
     QString tempFile;
     if (d->managedFileNameChanged) {
-        QString staleFilesDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) +
-                                QLatin1String("/stalefiles/") + QCoreApplication::instance()->applicationName();
+        QString staleFilesDir = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/stalefiles/")
+            + QCoreApplication::instance()->applicationName();
         if (!QDir().mkpath(staleFilesDir)) {
             return false;
         }
@@ -144,9 +145,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
     setFileName(tempFile);
 
     if (QFile::open(openmode)) {
-
-        if (!d->lock)
-        {
+        if (!d->lock) {
             d->lock = new QLockFile(tempFile + QLatin1String(".lock"));
             d->lock->setStaleLockTime(60 * 1000); // HARDCODE, 1 minute
         }
@@ -154,7 +153,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
         if (d->lock->isLocked() || d->lock->tryLock()) {
             return true;
         } else {
-            qCWarning(KCOREADDONS_DEBUG)<<"Could not lock file:"<<tempFile;
+            qCWarning(KCOREADDONS_DEBUG) << "Could not lock file:" << tempFile;
             close();
         }
     }
@@ -162,7 +161,7 @@ bool KAutoSaveFile::open(OpenMode openmode)
     return false;
 }
 
-static QUrl extractManagedFilePath(const QString& staleFileName)
+static QUrl extractManagedFilePath(const QString &staleFileName)
 {
     // Warning, if we had a long path, it was truncated by tempFileName()
     // So in that case, extractManagedFilePath will return an incorrect truncated path for original source
@@ -172,13 +171,13 @@ static QUrl extractManagedFilePath(const QString& staleFileName)
 
     const int pathPos = staleFileName.indexOf(QChar::fromLatin1('_'), sepPos);
     QUrl managedFileName;
-    //name.setScheme(file.mid(sepPos + 3, pathPos - sep.size() - 3));
-    const QByteArray encodedPath = staleFileName.midRef(pathPos+1, staleFileName.length()-pathPos-1-KAutoSaveFilePrivate::NamePadding).toLatin1();
+    // name.setScheme(file.mid(sepPos + 3, pathPos - sep.size() - 3));
+    const QByteArray encodedPath = staleFileName.midRef(pathPos + 1, staleFileName.length() - pathPos - 1 - KAutoSaveFilePrivate::NamePadding).toLatin1();
     managedFileName.setPath(QUrl::fromPercentEncoding(encodedPath) + QLatin1Char('/') + QFileInfo(QUrl::fromPercentEncoding(managedFilename)).fileName());
     return managedFileName;
 }
 
-bool staleMatchesManaged(const QString& staleFileName, const QUrl &managedFile)
+bool staleMatchesManaged(const QString &staleFileName, const QUrl &managedFile)
 {
     const QStringRef sep = staleFileName.rightRef(3);
     int sepPos = staleFileName.indexOf(sep);

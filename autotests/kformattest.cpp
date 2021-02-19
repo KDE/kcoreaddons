@@ -38,7 +38,7 @@ void KFormatTest::formatByteSize()
     QCOMPARE(format.formatByteSize(5000000), QStringLiteral("4.8 MiB"));
     QCOMPARE(format.formatByteSize(50000000), QStringLiteral("47.7 MiB"));
     QCOMPARE(format.formatByteSize(500000000), QStringLiteral("476.8 MiB"));
-#if (defined(__WORDSIZE) && (__WORDSIZE == 64)) || defined (_LP64) || defined(__LP64__) || defined(__ILP64__)
+#if (defined(__WORDSIZE) && (__WORDSIZE == 64)) || defined(_LP64) || defined(__LP64__) || defined(__ILP64__)
     QCOMPARE(format.formatByteSize(5000000000), QStringLiteral("4.7 GiB"));
     QCOMPARE(format.formatByteSize(50000000000), QStringLiteral("46.6 GiB"));
     QCOMPARE(format.formatByteSize(500000000000), QStringLiteral("465.7 GiB"));
@@ -113,7 +113,8 @@ void KFormatTest::formatValue()
 
     QCOMPARE(format.formatValue(0.010, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::Milli, KFormat::MetricBinaryDialect), QStringLiteral("10.0 mm"));
     QCOMPARE(format.formatValue(10.12e-6, KFormat::Unit::Meter, 2, KFormat::UnitPrefix::Micro, KFormat::MetricBinaryDialect), QString::fromUtf8("10.12 µm"));
-    QCOMPARE(format.formatValue(10.55e-6, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect), QString::fromUtf8("10.6 µm"));
+    QCOMPARE(format.formatValue(10.55e-6, KFormat::Unit::Meter, 1, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect),
+             QString::fromUtf8("10.6 µm"));
 }
 
 enum TimeConstants {
@@ -135,7 +136,7 @@ void KFormatTest::formatDuration()
     quint64 doubleHour = 15 * MSecsInHour + 8 * MSecsInMinute + 3 * MSecsInSecond + 700;
     quint64 singleDay = 1 * MSecsInDay + 5 * MSecsInHour + 8 * MSecsInMinute + 3 * MSecsInSecond + 700;
     quint64 doubleDay = 10 * MSecsInDay + 5 * MSecsInHour + 8 * MSecsInMinute + 3 * MSecsInSecond + 700;
-    quint64 roundingIssues = 2* MSecsInHour +  59 * MSecsInMinute + 59 * MSecsInSecond + 900;
+    quint64 roundingIssues = 2 * MSecsInHour + 59 * MSecsInMinute + 59 * MSecsInSecond + 900;
     quint64 largeValue = 9999999999;
 
     // Default format
@@ -150,7 +151,6 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(roundingIssues), QStringLiteral("3:00:00"));
     QCOMPARE(format.formatDuration(largeValue), QStringLiteral("2777:46:40"));
 
-
     // ShowMilliseconds format
     KFormat::DurationFormatOptions options = KFormat::ShowMilliseconds;
     QCOMPARE(format.formatDuration(singleSecond, options), QStringLiteral("0:00:03.700"));
@@ -162,8 +162,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29:08:03.700"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245:08:03.700"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("2:59:59.900"));
-    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777:46:39.999"));
-
+    QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("2777:46:39.999"));
 
     // HideSeconds format
     options = KFormat::HideSeconds;
@@ -176,8 +175,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29:08"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245:08"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("3:00"));
-    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777:47"));
-
+    QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("2777:47"));
 
     // FoldHours format
     options = KFormat::FoldHours;
@@ -190,8 +188,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("1748:04"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708:04"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("180:00"));
-    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("166666:40"));
-
+    QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("166666:40"));
 
     // FoldHours ShowMilliseconds format
     options = KFormat::FoldHours;
@@ -205,8 +202,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("1748:03.700"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708:03.700"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("179:59.900"));
-    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("166666:39.999"));
-
+    QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("166666:39.999"));
 
     // InitialDuration format
     options = KFormat::InitialDuration;
@@ -219,8 +215,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29h08m04s"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245h08m04s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("3h00m00s"));
-    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777h46m40s"));
-
+    QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("2777h46m40s"));
 
     // InitialDuration and ShowMilliseconds format
     options = KFormat::InitialDuration;
@@ -234,8 +229,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29h08m03.700s"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245h08m03.700s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("2h59m59.900s"));
-    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777h46m39.999s"));
-
+    QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("2777h46m39.999s"));
 
     // InitialDuration and HideSeconds format
     options = KFormat::InitialDuration;
@@ -249,8 +243,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("29h08m"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("245h08m"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("3h00m"));
-    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("2777h47m"));
-
+    QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("2777h47m"));
 
     // InitialDuration and FoldHours format
     options = KFormat::InitialDuration;
@@ -264,8 +257,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("1748m04s"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708m04s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("180m00s"));
-    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("166666m40s"));
-
+    QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("166666m40s"));
 
     // InitialDuration and FoldHours and ShowMilliseconds format
     options = KFormat::InitialDuration;
@@ -279,7 +271,7 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(singleDay, options), QStringLiteral("1748m03.700s"));
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708m03.700s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("179m59.900s"));
-    QCOMPARE(format.formatDuration(largeValue,options), QStringLiteral("166666m39.999s"));
+    QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("166666m39.999s"));
 }
 
 void KFormatTest::formatDecimalDuration()
@@ -351,20 +343,14 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat), QStringLiteral("Two days ago"));
 
     testDate = QDate::currentDate().addDays(-3);
-    QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat),
-             QLocale::c().toString(testDate, QLocale::LongFormat));
-    QCOMPARE(format.formatRelativeDate(testDate, QLocale::ShortFormat),
-             QLocale::c().toString(testDate, QLocale::ShortFormat));
-    QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat),
-             QLocale::c().toString(testDate, QLocale::NarrowFormat));
+    QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat), QLocale::c().toString(testDate, QLocale::LongFormat));
+    QCOMPARE(format.formatRelativeDate(testDate, QLocale::ShortFormat), QLocale::c().toString(testDate, QLocale::ShortFormat));
+    QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat), QLocale::c().toString(testDate, QLocale::NarrowFormat));
 
     testDate = QDate::currentDate().addDays(3);
-    QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat),
-             QLocale::c().toString(testDate, QLocale::LongFormat));
-    QCOMPARE(format.formatRelativeDate(testDate, QLocale::ShortFormat),
-             QLocale::c().toString(testDate, QLocale::ShortFormat));
-    QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat),
-             QLocale::c().toString(testDate, QLocale::NarrowFormat));
+    QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat), QLocale::c().toString(testDate, QLocale::LongFormat));
+    QCOMPARE(format.formatRelativeDate(testDate, QLocale::ShortFormat), QLocale::c().toString(testDate, QLocale::ShortFormat));
+    QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat), QLocale::c().toString(testDate, QLocale::NarrowFormat));
 
     testDate = QDate(); // invalid date
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat), QStringLiteral("Invalid date"));
@@ -390,8 +376,7 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("5 minutes ago"));
 
     testDateTime = QDateTime(QDate::currentDate().addDays(8), QTime(3, 0, 0));
-    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::LongFormat),
-             QLocale::c().toString(testDateTime, QLocale::LongFormat));
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QLocale::c().toString(testDateTime, QLocale::LongFormat));
 }
 
 QTEST_MAIN(KFormatTest)

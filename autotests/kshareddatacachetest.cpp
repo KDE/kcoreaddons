@@ -7,12 +7,12 @@
 
 #include <kshareddatacache.h>
 
-#include <QTest>
 #include <QStandardPaths>
+#include <QTest>
 
 #include <QObject>
-#include <QString>
 #include <QStandardPaths>
+#include <QString>
 #include <string.h> // strcpy
 
 class KSharedDataCacheTest : public QObject

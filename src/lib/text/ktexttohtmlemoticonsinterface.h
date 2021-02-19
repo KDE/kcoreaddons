@@ -7,8 +7,8 @@
 #ifndef KTEXTTOHTMLEMOTICONSINTERFACE_H
 #define KTEXTTOHTMLEMOTICONSINTERFACE_H
 
-#include <QStringList>
 #include <QMetaType>
+#include <QStringList>
 
 /**
  * @internal
@@ -17,13 +17,14 @@
 class KTextToHTMLEmoticonsInterface
 {
 public:
-    KTextToHTMLEmoticonsInterface() {}
-    virtual ~KTextToHTMLEmoticonsInterface() {} // KF6 TODO: de-inline (-Wweak-vtables)
+    KTextToHTMLEmoticonsInterface()
+    {
+    }
+    virtual ~KTextToHTMLEmoticonsInterface()
+    {
+    } // KF6 TODO: de-inline (-Wweak-vtables)
 
-    virtual QString parseEmoticons(const QString &text,
-                                   bool strictParse = false,
-                                   const QStringList &exclude = QStringList()) = 0;
-
+    virtual QString parseEmoticons(const QString &text, bool strictParse = false, const QStringList &exclude = QStringList()) = 0;
 };
 
 Q_DECLARE_METATYPE(KTextToHTMLEmoticonsInterface *)

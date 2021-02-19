@@ -13,7 +13,6 @@ class QString;
 
 namespace KShell
 {
-
 QString homeDir(const QString &user);
 QString quoteArgInternal(const QString &arg, bool _inquote);
 

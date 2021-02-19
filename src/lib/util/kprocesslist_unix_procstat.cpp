@@ -10,9 +10,8 @@
 #include "kprocesslist.h"
 #include "kprocesslist_unix_procstat_p.h"
 
-#include <QProcess>
 #include <QDir>
-
+#include <QProcess>
 
 using namespace KProcessList;
 
@@ -22,27 +21,22 @@ KProcessInfoList KProcessList::processInfoList()
     KProcessInfoList rc;
 
     ProcStat pstat;
-    if (!pstat)
-    {
+    if (!pstat) {
         return rc;
     }
 
     ProcStatProcesses procs(pstat);
-    for (const auto& process_info: procs)
-    {
+    for (const auto &process_info : procs) {
         rc.push_back(process_info);
     }
 
     return rc;
 }
 
-
 KProcessInfo KProcessList::processInfo(qint64 pid)
 {
     KProcessInfoList processInfoList = KProcessList::processInfoList();
-    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(),
-                                            [pid](const KProcessList::KProcessInfo& info)
-    {
+    auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(), [pid](const KProcessList::KProcessInfo &info) {
         return info.pid() == pid;
     });
     if (testProcessIterator != processInfoList.end()) {

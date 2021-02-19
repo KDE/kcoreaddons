@@ -13,9 +13,9 @@
  */
 #include "kshareddatacache.h"
 
-#include <QString>
 #include <QByteArray>
 #include <QCache>
+#include <QString>
 
 class Q_DECL_HIDDEN KSharedDataCache::Private
 {
@@ -24,9 +24,7 @@ public:
     QCache<QString, QByteArray> cache;
 };
 
-KSharedDataCache::KSharedDataCache(const QString &cacheName,
-                                   unsigned defaultCacheSize,
-                                   unsigned expectedItemSize)
+KSharedDataCache::KSharedDataCache(const QString &cacheName, unsigned defaultCacheSize, unsigned expectedItemSize)
     : d(new Private)
 {
     d->cache.setMaxCost(defaultCacheSize);

@@ -69,12 +69,10 @@ class QStringView;
  */
 namespace KFuzzyMatcher
 {
-
 /**
  * @brief The result of a fuzzy match
  */
-struct KCOREADDONS_EXPORT Result
-{
+struct KCOREADDONS_EXPORT Result {
     /** Score of this match. This can be negative. if matched is @c false
         then the score will be zero.
     */

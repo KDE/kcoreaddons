@@ -9,9 +9,9 @@
 #ifndef _KDIRWATCHTEST_H_
 #define _KDIRWATCHTEST_H_
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <QObject>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "kdirwatch.h"
 
@@ -19,7 +19,9 @@ class myTest : public QObject
 {
     Q_OBJECT
 public:
-    myTest() { }
+    myTest()
+    {
+    }
 public Q_SLOTS:
     void dirty(const QString &a)
     {

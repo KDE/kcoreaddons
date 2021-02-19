@@ -11,8 +11,8 @@
 #ifndef KBACKUP_H
 #define KBACKUP_H
 
-#include <kcoreaddons_export.h>
 #include <QString>
+#include <kcoreaddons_export.h>
 
 /**
  * @namespace KBackup
@@ -54,24 +54,21 @@ KBackup::simpleBackupFile(filename, backupDir, QStringLiteral("~")));
  * @deprecated Since 5.0, use simpleBackupFile() or numberedBackupFile() directly
  */
 KCOREADDONS_DEPRECATED_VERSION_BELATED(5, 75, 5, 0, "Use simpleBackupFile() or numberedBackupFile() directly")
-KCOREADDONS_EXPORT bool backupFile(const QString &filename,
-                                   const QString &backupDir = QString());
+KCOREADDONS_EXPORT bool backupFile(const QString &filename, const QString &backupDir = QString());
 #endif
 
 /**
-* @brief Function to create a backup file for a given filename.
-*
-* This function creates a backup file from the given filename.
-* You can use this method even if you don't use KSaveFile.
-* @param filename the file to backup
-* @param backupDir optional directory where to save the backup file in.
-* If empty (the default), the backup will be in the same directory as @p filename.
-* @param backupExtension the extension to append to @p filename, "~" by default.
-* @return true if successful, or false if an error has occurred.
-*/
-KCOREADDONS_EXPORT bool simpleBackupFile(const QString &filename,
-        const QString &backupDir = QString(),
-        const QString &backupExtension = QStringLiteral("~"));
+ * @brief Function to create a backup file for a given filename.
+ *
+ * This function creates a backup file from the given filename.
+ * You can use this method even if you don't use KSaveFile.
+ * @param filename the file to backup
+ * @param backupDir optional directory where to save the backup file in.
+ * If empty (the default), the backup will be in the same directory as @p filename.
+ * @param backupExtension the extension to append to @p filename, "~" by default.
+ * @return true if successful, or false if an error has occurred.
+ */
+KCOREADDONS_EXPORT bool simpleBackupFile(const QString &filename, const QString &backupDir = QString(), const QString &backupExtension = QStringLiteral("~"));
 
 /**
  * @brief Function to create a backup file for a given filename.
@@ -101,10 +98,9 @@ KCOREADDONS_EXPORT bool simpleBackupFile(const QString &filename,
  * @return true if successful, or false if an error has occurred.
  */
 KCOREADDONS_EXPORT bool numberedBackupFile(const QString &filename,
-        const QString &backupDir = QString(),
-        const QString &backupExtension = QStringLiteral("~"),
-        const uint maxBackups = 10
-                                          );
+                                           const QString &backupDir = QString(),
+                                           const QString &backupExtension = QStringLiteral("~"),
+                                           const uint maxBackups = 10);
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 75)
 /**
@@ -131,10 +127,7 @@ KCOREADDONS_EXPORT bool numberedBackupFile(const QString &filename,
  * @deprecated Since 5.75, no known users
  */
 KCOREADDONS_DEPRECATED_VERSION(5, 75, "No known users")
-KCOREADDONS_EXPORT bool rcsBackupFile(const QString &filename,
-                                      const QString &backupDir = QString(),
-                                      const QString &backupMessage = QString()
-                                     );
+KCOREADDONS_EXPORT bool rcsBackupFile(const QString &filename, const QString &backupDir = QString(), const QString &backupMessage = QString());
 #endif
 }
 

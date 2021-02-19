@@ -66,9 +66,7 @@ public:
      *   KSharedDataCache to use whatever it feels is the best default for the
      *   system.
      */
-    KSharedDataCache(const QString &cacheName,
-                     unsigned defaultCacheSize,
-                     unsigned expectedItemSize = 0);
+    KSharedDataCache(const QString &cacheName, unsigned defaultCacheSize, unsigned expectedItemSize = 0);
     ~KSharedDataCache();
 
     KSharedDataCache(const KSharedDataCache &) = delete;

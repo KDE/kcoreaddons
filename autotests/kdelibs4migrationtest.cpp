@@ -7,8 +7,8 @@
 // test object
 #include <kdelibs4migration.h>
 // Qt
-#include <QObject>
 #include <QFile>
+#include <QObject>
 #include <QTemporaryDir>
 #include <QTest>
 
@@ -43,4 +43,3 @@ void MigrationTest::testPaths()
 QTEST_MAIN(MigrationTest)
 
 #include "kdelibs4migrationtest.moc"
-

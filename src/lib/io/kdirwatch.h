@@ -58,13 +58,12 @@ class KCOREADDONS_EXPORT KDirWatch : public QObject
     Q_OBJECT
 
 public:
-
     /**
-    * Available watch modes for directory monitoring
-    * @see WatchModes
-    **/
+     * Available watch modes for directory monitoring
+     * @see WatchModes
+     **/
     enum WatchMode {
-        WatchDirOnly = 0,  ///< Watch just the specified directory
+        WatchDirOnly = 0, ///< Watch just the specified directory
         WatchFiles = 0x01, ///< Watch also all files contained by the directory
         WatchSubDirs = 0x02, ///< Watch also all the subdirs contained by the directory
     };
@@ -216,7 +215,12 @@ public:
      */
     static void statistics(); // TODO implement a QDebug operator for KDirWatch instead.
 
-    enum Method { FAM, INotify, Stat, QFSWatch, };
+    enum Method {
+        FAM,
+        INotify,
+        Stat,
+        QFSWatch,
+    };
     /**
      * Returns the preferred internal method to
      * watch for changes.
@@ -302,4 +306,3 @@ private:
 Q_DECLARE_OPERATORS_FOR_FLAGS(KDirWatch::WatchModes)
 
 #endif
-

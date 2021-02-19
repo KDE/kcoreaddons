@@ -9,8 +9,8 @@
 #ifndef KDELIBS4CONFIGMIGRATOR_H
 #define KDELIBS4CONFIGMIGRATOR_H
 
-#include <kcoreaddons_export.h>
 #include <QStringList>
+#include <kcoreaddons_export.h>
 #include <memory>
 
 /**

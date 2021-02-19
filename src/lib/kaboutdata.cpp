@@ -13,26 +13,24 @@
 #include "kaboutdata.h"
 #include "kpluginmetadata.h"
 
-#include <QCoreApplication>
-#include <QStandardPaths>
-#include <QFile>
-#include <QTextStream>
-#include <QSharedData>
-#include <QList>
-#include <QUrl>
-#include <QHash>
-#include <QCommandLineParser>
 #include <QCommandLineOption>
+#include <QCommandLineParser>
+#include <QCoreApplication>
+#include <QFile>
+#include <QHash>
 #include <QJsonObject>
+#include <QList>
 #include <QLoggingCategory>
+#include <QSharedData>
+#include <QStandardPaths>
+#include <QTextStream>
+#include <QUrl>
 
 #include <algorithm>
-
 
 Q_DECLARE_LOGGING_CATEGORY(KABOUTDATA)
 // logging category for this framework, default: log stuff >= warning
 Q_LOGGING_CATEGORY(KABOUTDATA, "kf.coreaddons.kaboutdata", QtWarningMsg)
-
 
 class KAboutPersonPrivate : public QSharedData
 {
@@ -44,11 +42,7 @@ public:
     QString _ocsUsername;
 };
 
-KAboutPerson::KAboutPerson(const QString &_name,
-                           const QString &_task,
-                           const QString &_emailAddress,
-                           const QString &_webAddress,
-                           const QString &_ocsUsername)
+KAboutPerson::KAboutPerson(const QString &_name, const QString &_task, const QString &_emailAddress, const QString &_webAddress, const QString &_ocsUsername)
     : d(new KAboutPersonPrivate)
 {
     d->_name = _name;
@@ -106,13 +100,10 @@ KAboutPerson KAboutPerson::fromJSON(const QJsonObject &obj)
     return KAboutPerson(name, task, email, website, userName);
 }
 
-
 class KAboutLicensePrivate : public QSharedData
 {
 public:
-    KAboutLicensePrivate(KAboutLicense::LicenseKey licenseType,
-            KAboutLicense::VersionRestriction versionRestriction,
-            const KAboutData *aboutData);
+    KAboutLicensePrivate(KAboutLicense::LicenseKey licenseType, KAboutLicense::VersionRestriction versionRestriction, const KAboutData *aboutData);
     KAboutLicensePrivate(const KAboutLicensePrivate &other);
 
     QString spdxID() const;
@@ -126,23 +117,24 @@ public:
 };
 
 KAboutLicensePrivate::KAboutLicensePrivate(KAboutLicense::LicenseKey licenseType,
-                                KAboutLicense::VersionRestriction versionRestriction,
-                                const KAboutData *aboutData)
-    : QSharedData(),
-      _licenseKey(licenseType),
-      _versionRestriction(versionRestriction),
-      _aboutData(aboutData)
+                                           KAboutLicense::VersionRestriction versionRestriction,
+                                           const KAboutData *aboutData)
+    : QSharedData()
+    , _licenseKey(licenseType)
+    , _versionRestriction(versionRestriction)
+    , _aboutData(aboutData)
 {
 }
 
 KAboutLicensePrivate::KAboutLicensePrivate(const KAboutLicensePrivate &other)
-    : QSharedData(other),
-      _licenseKey(other._licenseKey),
-      _licenseText(other._licenseText),
-      _pathToLicenseTextFile(other._pathToLicenseTextFile),
-      _versionRestriction(other._versionRestriction),
-      _aboutData(other._aboutData)
-{}
+    : QSharedData(other)
+    , _licenseKey(other._licenseKey)
+    , _licenseText(other._licenseText)
+    , _pathToLicenseTextFile(other._pathToLicenseTextFile)
+    , _versionRestriction(other._versionRestriction)
+    , _aboutData(other._aboutData)
+{
+}
 
 QString KAboutLicensePrivate::spdxID() const
 {
@@ -173,15 +165,12 @@ QString KAboutLicensePrivate::spdxID() const
 
 KAboutLicense::KAboutLicense()
     : d(new KAboutLicensePrivate(Unknown, {}, nullptr))
-{}
+{
+}
 
-
-KAboutLicense::KAboutLicense(LicenseKey licenseType,
-                             VersionRestriction versionRestriction,
-                             const KAboutData *aboutData)
+KAboutLicense::KAboutLicense(LicenseKey licenseType, VersionRestriction versionRestriction, const KAboutData *aboutData)
     : d(new KAboutLicensePrivate(licenseType, versionRestriction, aboutData))
 {
-
 }
 
 KAboutLicense::KAboutLicense(LicenseKey licenseType, const KAboutData *aboutData)
@@ -200,7 +189,8 @@ KAboutLicense::KAboutLicense(const KAboutLicense &other)
 }
 
 KAboutLicense::~KAboutLicense()
-{}
+{
+}
 
 void KAboutLicense::setLicenseFromPath(const QString &pathToFile)
 {
@@ -270,19 +260,15 @@ QString KAboutLicense::text() const
         Q_FALLTHROUGH();
     // fall through
     default:
-        result += QCoreApplication::translate(
-                      "KAboutLicense",
-                      "No licensing terms for this program have been specified.\n"
-                      "Please check the documentation or the source for any\n"
-                      "licensing terms.\n");
+        result += QCoreApplication::translate("KAboutLicense",
+                                              "No licensing terms for this program have been specified.\n"
+                                              "Please check the documentation or the source for any\n"
+                                              "licensing terms.\n");
     }
 
     if (knownLicense) {
-        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                QLatin1String("kf5/licenses/") + pathToFile);
-        result += QCoreApplication::translate(
-                      "KAboutLicense",
-                      "This program is distributed under the terms of the %1.").arg(name(KAboutLicense::ShortName));
+        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String("kf5/licenses/") + pathToFile);
+        result += QCoreApplication::translate("KAboutLicense", "This program is distributed under the terms of the %1.").arg(name(KAboutLicense::ShortName));
         if (!pathToFile.isEmpty()) {
             result += lineFeed;
         }
@@ -365,10 +351,7 @@ QString KAboutLicense::name(KAboutLicense::NameFormat formatName) const
         licenseShort = licenseFull = QCoreApplication::translate("KAboutLicense", "Not specified", "@item license");
     }
 
-    const QString result =
-        (formatName == KAboutLicense::ShortName) ? licenseShort :
-        (formatName == KAboutLicense::FullName) ?  licenseFull :
-        QString();
+    const QString result = (formatName == KAboutLicense::ShortName) ? licenseShort : (formatName == KAboutLicense::FullName) ? licenseFull : QString();
 
     return result;
 }
@@ -388,37 +371,22 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
 {
     // Setup keyword->enum dictionary on first call.
     // Use normalized keywords, by the algorithm below.
-    static const QHash<QByteArray, KAboutLicense::LicenseKey> licenseDict {
-        { "gpl", KAboutLicense::GPL },
-        { "gplv2", KAboutLicense::GPL_V2 },
-        { "gplv2+", KAboutLicense::GPL_V2 },
-        { "gpl20", KAboutLicense::GPL_V2 },
-        { "gpl20+", KAboutLicense::GPL_V2 },
-        { "lgpl", KAboutLicense::LGPL },
-        { "lgplv2", KAboutLicense::LGPL_V2 },
-        { "lgplv2+", KAboutLicense::LGPL_V2 },
-        { "lgpl20", KAboutLicense::LGPL_V2 },
-        { "lgpl20+", KAboutLicense::LGPL_V2 },
-        { "bsd", KAboutLicense::BSDL },
-        { "bsd2clause", KAboutLicense::BSDL },
-        { "artistic", KAboutLicense::Artistic },
-        { "artistic10", KAboutLicense::Artistic },
-        { "qpl", KAboutLicense::QPL },
-        { "qplv1", KAboutLicense::QPL_V1_0 },
-        { "qplv10", KAboutLicense::QPL_V1_0 },
-        { "qpl10", KAboutLicense::QPL_V1_0 },
-        { "gplv3", KAboutLicense::GPL_V3 },
-        { "gplv3+", KAboutLicense::GPL_V3 },
-        { "gpl30", KAboutLicense::GPL_V3 },
-        { "gpl30+", KAboutLicense::GPL_V3 },
-        { "lgplv3", KAboutLicense::LGPL_V3 },
-        { "lgplv3+", KAboutLicense::LGPL_V3 },
-        { "lgpl30", KAboutLicense::LGPL_V3 },
-        { "lgpl30+", KAboutLicense::LGPL_V3 },
-        { "lgplv21", KAboutLicense::LGPL_V2_1 },
-        { "lgplv21+", KAboutLicense::LGPL_V2_1 },
-        { "lgpl21", KAboutLicense::LGPL_V2_1 },
-        { "lgpl21+", KAboutLicense::LGPL_V2_1 },
+    static const QHash<QByteArray, KAboutLicense::LicenseKey> licenseDict{
+        {"gpl", KAboutLicense::GPL},           {"gplv2", KAboutLicense::GPL_V2},
+        {"gplv2+", KAboutLicense::GPL_V2},     {"gpl20", KAboutLicense::GPL_V2},
+        {"gpl20+", KAboutLicense::GPL_V2},     {"lgpl", KAboutLicense::LGPL},
+        {"lgplv2", KAboutLicense::LGPL_V2},    {"lgplv2+", KAboutLicense::LGPL_V2},
+        {"lgpl20", KAboutLicense::LGPL_V2},    {"lgpl20+", KAboutLicense::LGPL_V2},
+        {"bsd", KAboutLicense::BSDL},          {"bsd2clause", KAboutLicense::BSDL},
+        {"artistic", KAboutLicense::Artistic}, {"artistic10", KAboutLicense::Artistic},
+        {"qpl", KAboutLicense::QPL},           {"qplv1", KAboutLicense::QPL_V1_0},
+        {"qplv10", KAboutLicense::QPL_V1_0},   {"qpl10", KAboutLicense::QPL_V1_0},
+        {"gplv3", KAboutLicense::GPL_V3},      {"gplv3+", KAboutLicense::GPL_V3},
+        {"gpl30", KAboutLicense::GPL_V3},      {"gpl30+", KAboutLicense::GPL_V3},
+        {"lgplv3", KAboutLicense::LGPL_V3},    {"lgplv3+", KAboutLicense::LGPL_V3},
+        {"lgpl30", KAboutLicense::LGPL_V3},    {"lgpl30+", KAboutLicense::LGPL_V3},
+        {"lgplv21", KAboutLicense::LGPL_V2_1}, {"lgplv21+", KAboutLicense::LGPL_V2_1},
+        {"lgpl21", KAboutLicense::LGPL_V2_1},  {"lgpl21+", KAboutLicense::LGPL_V2_1},
     };
 
     // Normalize keyword.
@@ -428,8 +396,7 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
     keyword.remove(QLatin1Char('.'));
     keyword.remove(QLatin1Char('-'));
 
-    LicenseKey license = licenseDict.value(keyword.toLatin1(),
-                                           KAboutLicense::Custom);
+    LicenseKey license = licenseDict.value(keyword.toLatin1(), KAboutLicense::Custom);
     auto restriction = keyword.endsWith(QLatin1Char('+')) ? OrLaterVersions : OnlyThisVersion;
     return KAboutLicense(license, restriction, nullptr);
 }
@@ -439,7 +406,8 @@ class KAboutDataPrivate
 public:
     KAboutDataPrivate()
         : customAuthorTextEnabled(false)
-    {}
+    {
+    }
     QString _componentName;
     QString _displayName;
     QString _shortDescription;
@@ -469,7 +437,6 @@ public:
     QByteArray _bugAddress;
 
     static QList<KAboutPerson> parseTranslators(const QString &translatorName, const QString &translatorEmail);
-
 };
 
 KAboutData::KAboutData(const QString &_componentName,
@@ -480,8 +447,7 @@ KAboutData::KAboutData(const QString &_componentName,
                        const QString &_copyrightStatement,
                        const QString &text,
                        const QString &homePageAddress,
-                       const QString &bugAddress
-                      )
+                       const QString &bugAddress)
     : d(new KAboutDataPrivate)
 {
     d->_componentName = _componentName;
@@ -528,10 +494,7 @@ KAboutData::KAboutData(const QString &_componentName,
     d->desktopFileName = hostComponents.join(dotChar);
 }
 
-KAboutData::KAboutData(const QString &_componentName,
-                       const QString &_displayName,
-                       const QString &_version
-                      )
+KAboutData::KAboutData(const QString &_componentName, const QString &_displayName, const QString &_version)
     : d(new KAboutDataPrivate)
 {
     d->_componentName = _componentName;
@@ -586,9 +549,14 @@ KAboutData &KAboutData::operator=(const KAboutData &other)
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 65)
 KAboutData KAboutData::fromPluginMetaData(const KPluginMetaData &plugin)
 {
-    KAboutData ret(plugin.pluginId(), plugin.name(), plugin.version(), plugin.description(),
-                   KAboutLicense::byKeyword(plugin.license()).key(), plugin.copyrightText(),
-                   plugin.extraInformation(), plugin.website());
+    KAboutData ret(plugin.pluginId(),
+                   plugin.name(),
+                   plugin.version(),
+                   plugin.description(),
+                   KAboutLicense::byKeyword(plugin.license()).key(),
+                   plugin.copyrightText(),
+                   plugin.extraInformation(),
+                   plugin.website());
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 2)
     ret.d->programIconName = plugin.iconName();
 #endif
@@ -599,29 +567,19 @@ KAboutData KAboutData::fromPluginMetaData(const KPluginMetaData &plugin)
 }
 #endif
 
-
-KAboutData &KAboutData::addAuthor(const QString &name,
-                                  const QString &task,
-                                  const QString &emailAddress,
-                                  const QString &webAddress,
-                                  const QString &ocsUsername)
+KAboutData &KAboutData::addAuthor(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &ocsUsername)
 {
     d->_authorList.append(KAboutPerson(name, task, emailAddress, webAddress, ocsUsername));
     return *this;
 }
 
-KAboutData &KAboutData::addCredit(const QString &name,
-                                  const QString &task,
-                                  const QString &emailAddress,
-                                  const QString &webAddress,
-                                  const QString &ocsUsername)
+KAboutData &KAboutData::addCredit(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &ocsUsername)
 {
     d->_creditList.append(KAboutPerson(name, task, emailAddress, webAddress, ocsUsername));
     return *this;
 }
 
-KAboutData &KAboutData::setTranslator(const QString &name,
-                                      const QString &emailAddress)
+KAboutData &KAboutData::setTranslator(const QString &name, const QString &emailAddress)
 {
     d->_translatorList = KAboutDataPrivate::parseTranslators(name, emailAddress);
     return *this;
@@ -706,8 +664,7 @@ KAboutData &KAboutData::setLicense(KAboutLicense::LicenseKey licenseKey)
     return setLicense(licenseKey, KAboutLicense::OnlyThisVersion);
 }
 
-KAboutData &KAboutData::setLicense(KAboutLicense::LicenseKey licenseKey,
-                                   KAboutLicense::VersionRestriction versionRestriction)
+KAboutData &KAboutData::setLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction)
 {
     d->_licenseList[0] = KAboutLicense(licenseKey, versionRestriction, this);
     return *this;
@@ -718,8 +675,7 @@ KAboutData &KAboutData::addLicense(KAboutLicense::LicenseKey licenseKey)
     return addLicense(licenseKey, KAboutLicense::OnlyThisVersion);
 }
 
-KAboutData &KAboutData::addLicense(KAboutLicense::LicenseKey licenseKey,
-                                   KAboutLicense::VersionRestriction versionRestriction)
+KAboutData &KAboutData::addLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction)
 {
     // if the default license is unknown, overwrite instead of append
     KAboutLicense &firstLicense = d->_licenseList[0];
@@ -914,17 +870,14 @@ QList<KAboutPerson> KAboutData::translators() const
     return d->_translatorList;
 }
 
-
 QString KAboutData::aboutTranslationTeam()
 {
-    return QCoreApplication::translate(
-               "KAboutData",
-               "<p>KDE is translated into many languages thanks to the work "
-               "of the translation teams all over the world.</p>"
-               "<p>For more information on KDE internationalization "
-               "visit <a href=\"https://l10n.kde.org\">https://l10n.kde.org</a></p>",
-               "replace this with information about your translation team"
-           );
+    return QCoreApplication::translate("KAboutData",
+                                       "<p>KDE is translated into many languages thanks to the work "
+                                       "of the translation teams all over the world.</p>"
+                                       "<p>For more information on KDE internationalization "
+                                       "visit <a href=\"https://l10n.kde.org\">https://l10n.kde.org</a></p>",
+                                       "replace this with information about your translation team");
 }
 
 QString KAboutData::otherText() const
@@ -957,8 +910,7 @@ bool KAboutData::customAuthorTextEnabled() const
     return d->customAuthorTextEnabled;
 }
 
-KAboutData &KAboutData::setCustomAuthorText(const QString &plainText,
-        const QString &richText)
+KAboutData &KAboutData::setCustomAuthorText(const QString &plainText, const QString &richText)
 {
     d->customAuthorPlainText = plainText;
     d->customAuthorRichText = richText;
@@ -1010,7 +962,10 @@ QString KAboutData::desktopFileName() const
 class KAboutDataRegistry
 {
 public:
-    KAboutDataRegistry() : m_appData(nullptr) {}
+    KAboutDataRegistry()
+        : m_appData(nullptr)
+    {
+    }
     ~KAboutDataRegistry()
     {
         delete m_appData;
@@ -1029,13 +984,12 @@ public:
 
 Q_GLOBAL_STATIC(KAboutDataRegistry, s_registry)
 
-namespace {
-
-void warnIfOutOfSync(const char *aboutDataString, const QString &aboutDataValue,
-                     const char *appDataString, const QString &appDataValue)
+namespace
+{
+void warnIfOutOfSync(const char *aboutDataString, const QString &aboutDataValue, const char *appDataString, const QString &appDataValue)
 {
     if (aboutDataValue != appDataValue) {
-        qCWarning(KABOUTDATA) << appDataString <<appDataValue << "is out-of-sync with" << aboutDataString << aboutDataValue;
+        qCWarning(KABOUTDATA) << appDataString << appDataValue << "is out-of-sync with" << aboutDataString << aboutDataValue;
     }
 }
 
@@ -1050,9 +1004,7 @@ KAboutData KAboutData::applicationData()
     // not yet existing
     if (!aboutData) {
         // init from current Q*Application data
-        aboutData = new KAboutData(QCoreApplication::applicationName(),
-                                   QString(),
-                                   QString());
+        aboutData = new KAboutData(QCoreApplication::applicationName(), QString(), QString());
         // For applicationDisplayName & desktopFileName, which are only properties of QGuiApplication,
         // we have to try to get them via the property system, as the static getter methods are
         // part of QtGui only. Disadvantage: requires an app instance.
@@ -1063,24 +1015,35 @@ KAboutData KAboutData::applicationData()
             aboutData->setDisplayName(app->property("applicationDisplayName").toString());
             aboutData->setDesktopFileName(app->property("desktopFileName").toString());
         } else {
-            qCWarning(KABOUTDATA) << "Could not initialize the properties of KAboutData::applicationData by the equivalent properties from Q*Application: no app instance (yet) existing.";
+            qCWarning(KABOUTDATA) << "Could not initialize the properties of KAboutData::applicationData by the equivalent properties from Q*Application: no "
+                                     "app instance (yet) existing.";
         }
 
         s_registry->m_appData = aboutData;
     } else {
         // check if in-sync with Q*Application metadata, as their setters could have been called
         // after the last KAboutData::setApplicationData, with different values
-        warnIfOutOfSync("KAboutData::applicationData().componentName", aboutData->componentName(),
-                        "QCoreApplication::applicationName", QCoreApplication::applicationName());
-        warnIfOutOfSync("KAboutData::applicationData().version", aboutData->version(),
-                        "QCoreApplication::applicationVersion", QCoreApplication::applicationVersion());
-        warnIfOutOfSync("KAboutData::applicationData().organizationDomain", aboutData->organizationDomain(),
-                        "QCoreApplication::organizationDomain", QCoreApplication::organizationDomain());
+        warnIfOutOfSync("KAboutData::applicationData().componentName",
+                        aboutData->componentName(),
+                        "QCoreApplication::applicationName",
+                        QCoreApplication::applicationName());
+        warnIfOutOfSync("KAboutData::applicationData().version",
+                        aboutData->version(),
+                        "QCoreApplication::applicationVersion",
+                        QCoreApplication::applicationVersion());
+        warnIfOutOfSync("KAboutData::applicationData().organizationDomain",
+                        aboutData->organizationDomain(),
+                        "QCoreApplication::organizationDomain",
+                        QCoreApplication::organizationDomain());
         if (app) {
-            warnIfOutOfSync("KAboutData::applicationData().displayName", aboutData->displayName(),
-                            "QGuiApplication::applicationDisplayName", app->property("applicationDisplayName").toString());
-            warnIfOutOfSync("KAboutData::applicationData().desktopFileName", aboutData->desktopFileName(),
-                            "QGuiApplication::desktopFileName", app->property("desktopFileName").toString());
+            warnIfOutOfSync("KAboutData::applicationData().displayName",
+                            aboutData->displayName(),
+                            "QGuiApplication::applicationDisplayName",
+                            app->property("applicationDisplayName").toString());
+            warnIfOutOfSync("KAboutData::applicationData().desktopFileName",
+                            aboutData->desktopFileName(),
+                            "QGuiApplication::desktopFileName",
+                            app->property("desktopFileName").toString());
         }
     }
 
@@ -1163,10 +1126,10 @@ bool KAboutData::setupCommandLine(QCommandLineParser *parser)
     }
 
     return parser->addOption(QCommandLineOption(QStringLiteral("author"), QCoreApplication::translate("KAboutData CLI", "Show author information.")))
-           && parser->addOption(QCommandLineOption(QStringLiteral("license"), QCoreApplication::translate("KAboutData CLI", "Show license information.")))
-           && parser->addOption(QCommandLineOption(QStringLiteral("desktopfile"),
-                                                   QCoreApplication::translate("KAboutData CLI", "The base file name of the desktop entry for this application."),
-                                                   QCoreApplication::translate("KAboutData CLI", "file name")));
+        && parser->addOption(QCommandLineOption(QStringLiteral("license"), QCoreApplication::translate("KAboutData CLI", "Show license information.")))
+        && parser->addOption(QCommandLineOption(QStringLiteral("desktopfile"),
+                                                QCoreApplication::translate("KAboutData CLI", "The base file name of the desktop entry for this application."),
+                                                QCoreApplication::translate("KAboutData CLI", "file name")));
 }
 
 void KAboutData::processCommandLine(QCommandLineParser *parser)
@@ -1175,7 +1138,8 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
     if (parser->isSet(QStringLiteral("author"))) {
         foundArgument = true;
         if (d->_authorList.isEmpty()) {
-            printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "This application was written by somebody who wants to remain anonymous.")));
+            printf("%s\n",
+                   qPrintable(QCoreApplication::translate("KAboutData CLI", "This application was written by somebody who wants to remain anonymous.")));
         } else {
             printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "%1 was written by:").arg(qAppName())));
             for (const KAboutPerson &person : qAsConst(d->_authorList)) {
@@ -1187,7 +1151,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
             }
         }
         if (!customAuthorTextEnabled()) {
-            if (bugAddress() == QLatin1String("submit@bugs.kde.org") ) {
+            if (bugAddress() == QLatin1String("submit@bugs.kde.org")) {
                 printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please use https://bugs.kde.org to report bugs.")));
             } else if (!bugAddress().isEmpty()) {
                 printf("%s\n", qPrintable(QCoreApplication::translate("KAboutData CLI", "Please report bugs to %1.").arg(bugAddress())));
@@ -1212,12 +1176,12 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
     }
 }
 
-template <class T>
-QVariantList listToVariant(const QList<T>& values)
+template<class T>
+QVariantList listToVariant(const QList<T> &values)
 {
     QVariantList ret;
     ret.reserve(values.count());
-    for(const auto &license: values) {
+    for (const auto &license : values) {
         ret << QVariant::fromValue(license);
     }
     return ret;

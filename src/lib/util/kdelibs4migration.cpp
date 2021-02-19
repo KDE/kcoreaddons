@@ -9,12 +9,12 @@
 
 #include "kdelibs4migration.h"
 #include "config-kde4home.h"
-#include <QDir>
 #include "kcoreaddons_debug.h"
+#include <QDir>
 #include <QVector>
 
 #ifdef Q_OS_WIN
-# include <shlobj.h>
+#include <shlobj.h>
 #endif
 
 class Kdelibs4MigrationPrivate
@@ -36,8 +36,7 @@ Kdelibs4Migration::Kdelibs4Migration()
 #ifdef Q_OS_WIN
         WCHAR wPath[MAX_PATH + 1];
         if (SHGetFolderPathW(NULL, CSIDL_APPDATA, NULL, SHGFP_TYPE_CURRENT, wPath) == S_OK) {
-            testSubdirs << QDir::fromNativeSeparators(QString::fromUtf16((const ushort *) wPath)) +
-                           QLatin1String("/" KDE4_DEFAULT_HOME);
+            testSubdirs << QDir::fromNativeSeparators(QString::fromUtf16((const ushort *)wPath)) + QLatin1String("/" KDE4_DEFAULT_HOME);
         }
 #endif
         for (const QString &testSubdir : qAsConst(testSubdirs)) {
@@ -88,15 +87,13 @@ QString Kdelibs4Migration::locateLocal(const char *type, const QString &filename
 static const struct {
     const char *type;
     const char *subdir;
-} s_subdirs[] = {
-    { "config", "share/config/" },
-    { "data", "share/apps/" },
-    { "services", "share/kde4/services" },
-    { "servicetypes", "share/kde4/servicetypes" },
-    { "wallpaper", "share/wallpapers" },
-    { "emoticons", "share/emoticons" },
-    { "templates", "share/templates" }
-};
+} s_subdirs[] = {{"config", "share/config/"},
+                 {"data", "share/apps/"},
+                 {"services", "share/kde4/services"},
+                 {"servicetypes", "share/kde4/servicetypes"},
+                 {"wallpaper", "share/wallpapers"},
+                 {"emoticons", "share/emoticons"},
+                 {"templates", "share/templates"}};
 
 QString Kdelibs4Migration::saveLocation(const char *type, const QString &suffix) const
 {
@@ -116,4 +113,3 @@ QString Kdelibs4Migration::saveLocation(const char *type, const QString &suffix)
     qCWarning(KCOREADDONS_DEBUG) << "No such resource" << type;
     return QString();
 }
-

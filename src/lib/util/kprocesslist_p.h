@@ -10,13 +10,13 @@
 #ifndef KPROCESSLIST_P_H
 #define KPROCESSLIST_P_H
 
-#include <QSharedData>
 #include "kprocesslist.h"
+#include <QSharedData>
 
 namespace KProcessList
 {
-
-class KProcessInfoPrivate : public QSharedData {
+class KProcessInfoPrivate : public QSharedData
+{
 public:
     KProcessInfoPrivate();
 

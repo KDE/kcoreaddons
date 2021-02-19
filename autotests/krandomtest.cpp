@@ -14,14 +14,14 @@
 #include <QThread>
 
 #include <QObject>
-#include <QString>
-#include <QRegularExpression>
-#include <QVarLengthArray>
-#include <QTextStream>
 #include <QProcess>
+#include <QRegularExpression>
+#include <QString>
+#include <QTextStream>
+#include <QVarLengthArray>
 
-#include <iostream>
 #include <algorithm>
+#include <iostream>
 
 typedef QVarLengthArray<int> intSequenceType;
 
@@ -30,7 +30,7 @@ static const char *binpath;
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 static bool seqsAreEqual(const intSequenceType &l, const intSequenceType &r)
 {
-    if(l.size() != r.size()) {
+    if (l.size() != r.size()) {
         return false;
     }
     const intSequenceType::const_iterator last(l.end());
@@ -38,8 +38,9 @@ static bool seqsAreEqual(const intSequenceType &l, const intSequenceType &r)
     intSequenceType::const_iterator l_first(l.begin());
     intSequenceType::const_iterator r_first(r.begin());
 
-    while(l_first != last && *l_first == *r_first) {
-        l_first++; r_first++;
+    while (l_first != last && *l_first == *r_first) {
+        l_first++;
+        r_first++;
     }
 
     return l_first == last;
@@ -61,8 +62,10 @@ static bool getChildRandSeq(intSequenceType &seq)
     QTextStream childStream(subtestProcess.readAllStandardOutput());
 
     std::generate(seq.begin(), seq.end(), [&]() {
-            int temp; childStream >> temp; return temp;
-            });
+        int temp;
+        childStream >> temp;
+        return temp;
+    });
 
     char c;
     childStream >> c;
@@ -119,39 +122,63 @@ void KRandomTest::test_randomString()
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 75)
 void KRandomTest::test_KRS()
 {
-    using std::generate;
     using std::all_of;
+    using std::generate;
 
     const int maxInt = 50000;
     KRandomSequence krs1, krs2;
     intSequenceType out1(10), out2(10);
 
-    generate(out1.begin(), out1.end(), [&]() { return krs1.getInt(maxInt); });
-    generate(out2.begin(), out2.end(), [&]() { return krs2.getInt(maxInt); });
+    generate(out1.begin(), out1.end(), [&]() {
+        return krs1.getInt(maxInt);
+    });
+    generate(out2.begin(), out2.end(), [&]() {
+        return krs2.getInt(maxInt);
+    });
     QVERIFY(!seqsAreEqual(out1, out2));
-    QVERIFY(all_of(out1.begin(), out1.end(), [&](int x) { return x < maxInt; }));
-    QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) { return x < maxInt; }));
+    QVERIFY(all_of(out1.begin(), out1.end(), [&](int x) {
+        return x < maxInt;
+    }));
+    QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) {
+        return x < maxInt;
+    }));
 
     // Compare same-seed
     krs1.setSeed(5000);
     krs2.setSeed(5000);
 
-    generate(out1.begin(), out1.end(), [&]() { return krs1.getInt(maxInt); });
-    generate(out2.begin(), out2.end(), [&]() { return krs2.getInt(maxInt); });
+    generate(out1.begin(), out1.end(), [&]() {
+        return krs1.getInt(maxInt);
+    });
+    generate(out2.begin(), out2.end(), [&]() {
+        return krs2.getInt(maxInt);
+    });
     QVERIFY(seqsAreEqual(out1, out2));
-    QVERIFY(all_of(out1.begin(), out1.end(), [&](int x) { return x < maxInt; }));
-    QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) { return x < maxInt; }));
+    QVERIFY(all_of(out1.begin(), out1.end(), [&](int x) {
+        return x < maxInt;
+    }));
+    QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) {
+        return x < maxInt;
+    }));
 
     // Compare same-seed and assignment ctor
 
     krs1 = KRandomSequence(8000);
     krs2 = KRandomSequence(8000);
 
-    generate(out1.begin(), out1.end(), [&]() { return krs1.getInt(maxInt); });
-    generate(out2.begin(), out2.end(), [&]() { return krs2.getInt(maxInt); });
+    generate(out1.begin(), out1.end(), [&]() {
+        return krs1.getInt(maxInt);
+    });
+    generate(out2.begin(), out2.end(), [&]() {
+        return krs2.getInt(maxInt);
+    });
     QVERIFY(seqsAreEqual(out1, out2));
-    QVERIFY(all_of(out1.begin(), out1.end(), [&](int x) { return x < maxInt; }));
-    QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) { return x < maxInt; }));
+    QVERIFY(all_of(out1.begin(), out1.end(), [&](int x) {
+        return x < maxInt;
+    }));
+    QVERIFY(all_of(out2.begin(), out2.end(), [&](int x) {
+        return x < maxInt;
+    }));
 }
 #endif
 
@@ -189,6 +216,7 @@ protected:
     {
         result = KRandom::randomString(32);
     };
+
 public:
     QString result;
 };
@@ -196,19 +224,19 @@ public:
 void KRandomTest::test_randomStringThreaded()
 {
     static const int size = 5;
-    KRandomTestThread* threads[size];
-    for (int i=0; i < size; ++i) {
+    KRandomTestThread *threads[size];
+    for (int i = 0; i < size; ++i) {
         threads[i] = new KRandomTestThread();
         threads[i]->start();
     }
     QSet<QString> results;
-    for (int i=0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         threads[i]->wait(2000);
         results.insert(threads[i]->result);
     }
     // each thread should have returned a unique result
     QCOMPARE(results.size(), size);
-    for (int i=0; i < size; ++i) {
+    for (int i = 0; i < size; ++i) {
         delete threads[i];
     }
 }

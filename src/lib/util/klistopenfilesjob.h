@@ -12,16 +12,15 @@
 #ifndef KLISTOPENFILESJOB_H
 #define KLISTOPENFILESJOB_H
 
-#include <kcoreaddons_export.h>
-#include <kprocesslist.h>
-#include <kjob.h>
 #include <QObject>
 #include <QString>
+#include <kcoreaddons_export.h>
+#include <kjob.h>
+#include <kprocesslist.h>
 
 #include <memory>
 
 class KListOpenFilesJobPrivate;
-
 
 /**
  * @brief Provides information about processes that have open files in a given path or subdirectory of path.
@@ -62,6 +61,7 @@ public:
         /*** The specified path does not exist */
         DoesNotExist = KJob::UserDefinedError + 11,
     };
+
 private:
     friend class KListOpenFilesJobPrivate;
     std::unique_ptr<KListOpenFilesJobPrivate> const d;

@@ -11,8 +11,8 @@
 #ifndef KJOBUIDELEGATE_H
 #define KJOBUIDELEGATE_H
 
-#include <kcoreaddons_export.h>
 #include <QObject>
+#include <kcoreaddons_export.h>
 #include <memory>
 
 class KJob;
@@ -33,7 +33,6 @@ class KCOREADDONS_EXPORT KJobUiDelegate : public QObject
     Q_OBJECT
 
 public:
-
     /**
      * Flags for the constructor, to enable automatic handling of errors and/or warnings
      * @see Flags

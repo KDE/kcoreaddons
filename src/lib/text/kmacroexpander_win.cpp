@@ -62,8 +62,7 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
             rsts = KShell::joinArgs(rst);
         }
         pos2 = 0;
-        while (pos2 < rsts.length() &&
-                ((uc = rsts.unicode()[pos2].unicode()) == '\\' || uc == '^')) {
+        while (pos2 < rsts.length() && ((uc = rsts.unicode()[pos2].unicode()) == '\\' || uc == '^')) {
             pos2++;
         }
         if (pos2 < rsts.length() && rsts.unicode()[pos2].unicode() == '"') {

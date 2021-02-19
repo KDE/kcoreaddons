@@ -7,7 +7,6 @@
 
 #include "desktoptojson.h"
 
-
 static void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     auto getFprintfS = [](auto data) {
@@ -23,26 +22,22 @@ static void messageOutput(QtMsgType type, const QMessageLogContext &context, con
         fprintf(stdout, "%s\n", getFprintfS(localMsg.constData()));
         break;
     case QtInfoMsg:
-        fprintf(stdout, "Info: %s (%s:%u, %s)\n", getFprintfS(localMsg.constData()),
-                getFprintfS(context.file), context.line, getFprintfS(context.function));
+        fprintf(stdout, "Info: %s (%s:%u, %s)\n", getFprintfS(localMsg.constData()), getFprintfS(context.file), context.line, getFprintfS(context.function));
         break;
     case QtWarningMsg:
-        fprintf(stderr, "Warning: %s (%s:%u, %s)\n", getFprintfS(localMsg.constData()),
-                getFprintfS(context.file), context.line, getFprintfS(context.function));
+        fprintf(stderr, "Warning: %s (%s:%u, %s)\n", getFprintfS(localMsg.constData()), getFprintfS(context.file), context.line, getFprintfS(context.function));
         break;
     case QtCriticalMsg:
-        fprintf(stderr, "Error: %s (%s:%u, %s)\n", getFprintfS(localMsg.constData()),
-                getFprintfS(context.file), context.line, getFprintfS(context.function));
+        fprintf(stderr, "Error: %s (%s:%u, %s)\n", getFprintfS(localMsg.constData()), getFprintfS(context.file), context.line, getFprintfS(context.function));
         break;
     case QtFatalMsg:
-        fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", getFprintfS(localMsg.constData()),
-                getFprintfS(context.file), context.line, getFprintfS(context.function));
+        fprintf(stderr, "Fatal: %s (%s:%u, %s)\n", getFprintfS(localMsg.constData()), getFprintfS(context.file), context.line, getFprintfS(context.function));
         abort();
     }
 }
 
-
-int main(int argc, char** argv) {
+int main(int argc, char **argv)
+{
     qInstallMessageHandler(messageOutput);
     QCoreApplication app(argc, argv);
 
@@ -55,16 +50,15 @@ int main(int argc, char** argv) {
     const auto _c = QStringLiteral("compat");
     const auto _s = QStringLiteral("serviceType");
 
-    QCommandLineOption input = QCommandLineOption(QStringList { QStringLiteral("i"), _i },
-                               QStringLiteral("Read input from file"), _n);
-    QCommandLineOption output = QCommandLineOption(QStringList { QStringLiteral("o"), _o },
-                                QStringLiteral("Write output to file"), _n);
-    QCommandLineOption verbose = QCommandLineOption(QStringList { QStringLiteral("verbose") },
-                                QStringLiteral("Enable verbose (debug) output"));
-    QCommandLineOption compat = QCommandLineOption(QStringList { QStringLiteral("c"), _c },
-                                QStringLiteral("Generate JSON that is compatible with KPluginInfo instead of the new KPluginMetaData"));
-    QCommandLineOption serviceTypes = QCommandLineOption(QStringList { QStringLiteral("s"), _s },
-                                QStringLiteral("The name or full path of a KServiceType definition .desktop file. Can be passed multiple times"), _s);
+    QCommandLineOption input = QCommandLineOption(QStringList{QStringLiteral("i"), _i}, QStringLiteral("Read input from file"), _n);
+    QCommandLineOption output = QCommandLineOption(QStringList{QStringLiteral("o"), _o}, QStringLiteral("Write output to file"), _n);
+    QCommandLineOption verbose = QCommandLineOption(QStringList{QStringLiteral("verbose")}, QStringLiteral("Enable verbose (debug) output"));
+    QCommandLineOption compat = QCommandLineOption(QStringList{QStringLiteral("c"), _c},
+                                                   QStringLiteral("Generate JSON that is compatible with KPluginInfo instead of the new KPluginMetaData"));
+    QCommandLineOption serviceTypes =
+        QCommandLineOption(QStringList{QStringLiteral("s"), _s},
+                           QStringLiteral("The name or full path of a KServiceType definition .desktop file. Can be passed multiple times"),
+                           _s);
 
     QCommandLineParser parser;
     parser.addVersionOption();

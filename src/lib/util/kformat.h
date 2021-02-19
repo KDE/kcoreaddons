@@ -15,9 +15,9 @@
 
 #include <kcoreaddons_export.h>
 
-#include <QString>
 #include <QLocale>
 #include <QSharedPointer>
+#include <QString>
 
 class QDate;
 class QDateTime;
@@ -43,18 +43,18 @@ class KFormatPrivate;
 */
 
 /**
-  * @class KFormat kformat.h KFormat
-  *
-  * KFormat provides support for formatting numbers and datetimes in
-  * formats that are not supported by QLocale.
-  *
-  * @author John Layt <jlayt@kde.org>,
-  *         Michael Pyne <mpyne@kde.org>,
-  *         Albert Astals Cid <aacid@kde.org>,
-  *
-  * @short Class for formatting numbers and datetimes.
-  * @since 5.0
-  */
+ * @class KFormat kformat.h KFormat
+ *
+ * KFormat provides support for formatting numbers and datetimes in
+ * formats that are not supported by QLocale.
+ *
+ * @author John Layt <jlayt@kde.org>,
+ *         Michael Pyne <mpyne@kde.org>,
+ *         Albert Astals Cid <aacid@kde.org>,
+ *
+ * @short Class for formatting numbers and datetimes.
+ * @since 5.0
+ */
 class KCOREADDONS_EXPORT KFormat Q_DECL_FINAL
 {
     Q_GADGET
@@ -86,13 +86,13 @@ public:
         DefaultBinaryUnits = -1,
 
         // The first real unit must be 0 for the current implementation!
-        UnitByte,      ///<  B         1 byte
-        UnitKiloByte,  ///<  KiB/KB/kB 1024/1000 bytes.
-        UnitMegaByte,  ///<  MiB/MB/MB 2^20/10^06 bytes.
-        UnitGigaByte,  ///<  GiB/GB/GB 2^30/10^09 bytes.
-        UnitTeraByte,  ///<  TiB/TB/TB 2^40/10^12 bytes.
-        UnitPetaByte,  ///<  PiB/PB/PB 2^50/10^15 bytes.
-        UnitExaByte,   ///<  EiB/EB/EB 2^60/10^18 bytes.
+        UnitByte, ///<  B         1 byte
+        UnitKiloByte, ///<  KiB/KB/kB 1024/1000 bytes.
+        UnitMegaByte, ///<  MiB/MB/MB 2^20/10^06 bytes.
+        UnitGigaByte, ///<  GiB/GB/GB 2^30/10^09 bytes.
+        UnitTeraByte, ///<  TiB/TB/TB 2^40/10^12 bytes.
+        UnitPetaByte, ///<  PiB/PB/PB 2^50/10^15 bytes.
+        UnitExaByte, ///<  EiB/EB/EB 2^60/10^18 bytes.
         UnitZettaByte, ///<  ZiB/ZB/ZB 2^70/10^21 bytes.
         UnitYottaByte, ///<  YiB/YB/YB 2^80/10^24 bytes.
         UnitLastUnit = UnitYottaByte,
@@ -106,8 +106,8 @@ public:
      */
     enum class Unit {
         Other,
-        Bit,   ///< "bit"
-        Byte,  ///< "B"
+        Bit, ///< "bit"
+        Byte, ///< "B"
         Meter, ///< "m"
         Hertz, ///< "Hz"
     };
@@ -128,26 +128,26 @@ public:
         AutoAdjust = -128,
 
         Yocto = 0, ///<  --/-/y  10^-24
-        Zepto,     ///<  --/-/z  10^-21
-        Atto,      ///<  --/-/a  10^-18
-        Femto,     ///<  --/-/f  10^-15
-        Pico,      ///<  --/-/p  10^-12
-        Nano,      ///<  --/-/n  10^-9
-        Micro,     ///<  --/-/µ  10^-6
-        Milli,     ///<  --/-/m  10^-3
-        Centi,     ///<  --/-/c  0.01
-        Deci,      ///<  --/-/d  0.1
-        Unity,     ///<  ""      1
-        Deca,      ///<  --/-/da 10
-        Hecto,     ///<  --/-/h  100
-        Kilo,      ///<  Ki/K/k  1024/1000
-        Mega,      ///<  Mi/M/M  2^20/10^06
-        Giga,      ///<  Gi/G/G  2^30/10^09
-        Tera,      ///<  Ti/T/T  2^40/10^12
-        Peta,      ///<  Pi/P/P  2^50/10^15
-        Exa,       ///<  Ei/E/E  2^60/10^18
-        Zetta,     ///<  Zi/Z/Z  2^70/10^21
-        Yotta,     ///<  Yi/Y/Y  2^80/10^24
+        Zepto, ///<  --/-/z  10^-21
+        Atto, ///<  --/-/a  10^-18
+        Femto, ///<  --/-/f  10^-15
+        Pico, ///<  --/-/p  10^-12
+        Nano, ///<  --/-/n  10^-9
+        Micro, ///<  --/-/µ  10^-6
+        Milli, ///<  --/-/m  10^-3
+        Centi, ///<  --/-/c  0.01
+        Deci, ///<  --/-/d  0.1
+        Unity, ///<  ""      1
+        Deca, ///<  --/-/da 10
+        Hecto, ///<  --/-/h  100
+        Kilo, ///<  Ki/K/k  1024/1000
+        Mega, ///<  Mi/M/M  2^20/10^06
+        Giga, ///<  Gi/G/G  2^30/10^09
+        Tera, ///<  Ti/T/T  2^40/10^12
+        Peta, ///<  Pi/P/P  2^50/10^15
+        Exa, ///<  Ei/E/E  2^60/10^18
+        Zetta, ///<  Zi/Z/Z  2^70/10^21
+        Yotta, ///<  Yi/Y/Y  2^80/10^24
     };
 
     /**
@@ -170,9 +170,9 @@ public:
      */
     enum BinaryUnitDialect {
         DefaultBinaryDialect = -1, ///< Used if no specific preference
-        IECBinaryDialect,          ///< KiB, MiB, etc. 2^(10*n)
-        JEDECBinaryDialect,        ///< KB, MB, etc. 2^(10*n)
-        MetricBinaryDialect,       ///< SI Units, kB, MB, etc. 10^(3*n)
+        IECBinaryDialect, ///< KiB, MiB, etc. 2^(10*n)
+        JEDECBinaryDialect, ///< KB, MB, etc. 2^(10*n)
+        MetricBinaryDialect, ///< SI Units, kB, MB, etc. 10^(3*n)
         LastBinaryDialect = MetricBinaryDialect,
     };
 
@@ -181,11 +181,11 @@ public:
      * @see DurationFormatOptions
      */
     enum DurationFormatOption {
-        DefaultDuration     = 0x0,   ///< Default formatting in localized 1:23:45 format
-        InitialDuration     = 0x1,   ///< Default formatting in localized 1h23m45s format
-        ShowMilliseconds    = 0x2,   ///< Include milliseconds in format, e.g. 1:23:45.678
-        HideSeconds         = 0x4,   ///< Hide the seconds, e.g. 1:23 or 1h23m, overrides ShowMilliseconds
-        FoldHours           = 0x8,   ///< Fold the hours into the minutes, e.g. 83:45 or 83m45s, overrides HideSeconds
+        DefaultDuration = 0x0, ///< Default formatting in localized 1:23:45 format
+        InitialDuration = 0x1, ///< Default formatting in localized 1h23m45s format
+        ShowMilliseconds = 0x2, ///< Include milliseconds in format, e.g. 1:23:45.678
+        HideSeconds = 0x4, ///< Hide the seconds, e.g. 1:23 or 1h23m, overrides ShowMilliseconds
+        FoldHours = 0x8, ///< Fold the hours into the minutes, e.g. 83:45 or 83m45s, overrides HideSeconds
     };
     /**
      * Stores a combination of #DurationFormatOption values.
@@ -205,7 +205,7 @@ public:
      */
     KFormat(const KFormat &other);
 
-    KFormat& operator=(const KFormat &other);
+    KFormat &operator=(const KFormat &other);
 
     /**
      * Destructor
@@ -257,8 +257,7 @@ public:
      * @return converted duration as a string - e.g. "1:23:45" "1h23m"
      */
 
-    QString formatDuration(quint64 msecs,
-                           KFormat::DurationFormatOptions options = KFormat::DefaultDuration) const;
+    QString formatDuration(quint64 msecs, KFormat::DurationFormatOptions options = KFormat::DefaultDuration) const;
 
     /**
      * Given a number of milliseconds, converts that to a string containing
@@ -271,8 +270,7 @@ public:
      * @return converted duration as a string - e.g. "5.5 seconds" "23.0 minutes"
      */
 
-    QString formatDecimalDuration(quint64 msecs,
-                                  int decimalPlaces = 2) const;
+    QString formatDecimalDuration(quint64 msecs, int decimalPlaces = 2) const;
 
     /**
      * Given a number of milliseconds, converts that to a spell-out string containing
@@ -308,8 +306,7 @@ public:
      *
      * @return the date as a string
      */
-    QString formatRelativeDate(const QDate &date,
-                               QLocale::FormatType format) const;
+    QString formatRelativeDate(const QDate &date, QLocale::FormatType format) const;
 
     /**
      * Returns a string formatted to a relative datetime style.
@@ -329,8 +326,7 @@ public:
      *
      * @return the date as a string
      */
-    QString formatRelativeDateTime(const QDateTime &dateTime,
-                                   QLocale::FormatType format) const;
+    QString formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const;
 
     /**
      * Converts @p value to the appropriate string representation
@@ -387,10 +383,7 @@ public:
      * @see UnitPrefix
      * @since 5.49
      */
-    QString formatValue(double value,
-                        const QString& unit,
-                        int precision = 1,
-                        KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust) const;
+    QString formatValue(double value, const QString &unit, int precision = 1, KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust) const;
     /**
      * Converts @p value to the appropriate string representation.
      *
@@ -417,12 +410,7 @@ public:
      * @see UnitPrefix
      * @since 5.74
      */
-    QString formatValue(double value,
-                        const QString& unit,
-                        int precision,
-                        KFormat::UnitPrefix prefix,
-                        KFormat::BinaryUnitDialect dialect) const;
-
+    QString formatValue(double value, const QString &unit, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const;
 
 private:
     QSharedDataPointer<KFormatPrivate> d;

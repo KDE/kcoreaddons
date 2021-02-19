@@ -11,23 +11,23 @@
 */
 
 #include "kshareddatacache.h"
-#include "kshareddatacache_p.h" // Various auxiliary support code
 #include "kcoreaddons_debug.h"
+#include "kshareddatacache_p.h" // Various auxiliary support code
 
 #include <QStandardPaths>
 #include <qplatformdefs.h>
 
-#include <QSharedPointer>
-#include <QByteArray>
-#include <QFile>
 #include <QAtomicInt>
-#include <QMutex>
+#include <QByteArray>
 #include <QDir>
+#include <QFile>
+#include <QMutex>
 #include <QRandomGenerator>
+#include <QSharedPointer>
 
-#include <sys/types.h>
-#include <sys/mman.h>
 #include <stdlib.h>
+#include <sys/mman.h>
+#include <sys/types.h>
 
 /// The maximum number of probes to make while searching for a bucket in
 /// the presence of collisions in the cache index table.
@@ -75,11 +75,14 @@ static unsigned int MurmurHashAligned(const void *key, int len, unsigned int see
         unsigned int t = 0, d = 0;
 
         switch (align) {
-        case 1: t |= data[2] << 16;
+        case 1:
+            t |= data[2] << 16;
             Q_FALLTHROUGH();
-        case 2: t |= data[1] << 8;
+        case 2:
+            t |= data[1] << 8;
             Q_FALLTHROUGH();
-        case 3: t |= data[0];
+        case 3:
+            t |= data[0];
         }
 
         t <<= (8 * align);
@@ -111,13 +114,17 @@ static unsigned int MurmurHashAligned(const void *key, int len, unsigned int see
         d = 0;
 
         switch (pack) {
-        case 3: d |= data[2] << 16;
+        case 3:
+            d |= data[2] << 16;
             Q_FALLTHROUGH();
-        case 2: d |= data[1] << 8;
+        case 2:
+            d |= data[1] << 8;
             Q_FALLTHROUGH();
-        case 1: d |= data[0];
+        case 1:
+            d |= data[0];
             Q_FALLTHROUGH();
-        case 0: h += (t >> sr) | (d << sl);
+        case 0:
+            h += (t >> sr) | (d << sl);
             h *= m;
             h ^= h >> r;
         }
@@ -139,11 +146,14 @@ static unsigned int MurmurHashAligned(const void *key, int len, unsigned int see
     // Handle tail bytes
 
     switch (len) {
-    case 3: h += data[2] << 16;
+    case 3:
+        h += data[2] << 16;
         Q_FALLTHROUGH();
-    case 2: h += data[1] << 8;
+    case 2:
+        h += data[1] << 8;
         Q_FALLTHROUGH();
-    case 1: h += data[0];
+    case 1:
+        h += data[0];
         h *= m;
         h ^= h >> r;
     };
@@ -176,7 +186,7 @@ static quint32 generateHash(const QByteArray &buffer)
 // out the expected alignment. Enter ALIGNOF...
 #ifndef ALIGNOF
 #if defined(Q_CC_GNU) || defined(Q_CC_SUN)
-#define ALIGNOF(x) (__alignof__ (x)) // GCC provides what we want directly
+#define ALIGNOF(x) (__alignof__(x)) // GCC provides what we want directly
 #else
 
 #include <stddef.h> // offsetof
@@ -184,7 +194,7 @@ static quint32 generateHash(const QByteArray &buffer)
 template<class T>
 struct __alignmentHack {
     char firstEntry;
-    T    obj;
+    T obj;
     static const size_t size = offsetof(__alignmentHack, obj);
 };
 #define ALIGNOF(x) (__alignmentHack<x>::size)
@@ -298,9 +308,9 @@ typedef qint32 pageID;
 // you must use relative offsets since the pointer start addresses will be
 // different in each process.
 struct IndexTableEntry {
-    uint   fileNameHash;
-    uint   totalItemSize; // in bytes
-    mutable uint   useCount;
+    uint fileNameHash;
+    uint totalItemSize; // in bytes
+    mutable uint useCount;
     time_t addTime;
     mutable time_t lastUsedTime;
     pageID firstPage;
@@ -339,13 +349,13 @@ struct SharedMemory {
     // re-arrange the following two fields, even if you change the version number
     // for later revisions of this code.
     QAtomicInt ready; ///< DO NOT INITIALIZE
-    quint8     version;
+    quint8 version;
 
     // See kshareddatacache_p.h
     SharedLock shmLock;
 
-    uint       cacheSize;
-    uint       cacheAvail;
+    uint cacheSize;
+    uint cacheAvail;
     QAtomicInt evictionPolicy;
 
     // pageSize and cacheSize determine the number of pages. The number of
@@ -409,8 +419,7 @@ struct SharedMemory {
     bool performInitialSetup(uint _cacheSize, uint _pageSize)
     {
         if (_cacheSize < MINIMUM_CACHE_SIZE) {
-            qCCritical(KCOREADDONS_DEBUG) << "Internal error: Attempted to create a cache sized < "
-                        << MINIMUM_CACHE_SIZE;
+            qCCritical(KCOREADDONS_DEBUG) << "Internal error: Attempted to create a cache sized < " << MINIMUM_CACHE_SIZE;
             return false;
         }
 
@@ -422,7 +431,7 @@ struct SharedMemory {
         shmLock.type = findBestSharedLock();
         if (shmLock.type == LOCKTYPE_INVALID) {
             qCCritical(KCOREADDONS_DEBUG) << "Unable to find an appropriate lock to guard the shared cache. "
-                        << "This *should* be essentially impossible. :(";
+                                          << "This *should* be essentially impossible. :(";
             return false;
         }
 
@@ -436,7 +445,7 @@ struct SharedMemory {
 
         if (!isProcessShared) {
             qCWarning(KCOREADDONS_DEBUG) << "Cache initialized, but does not support being"
-                       << "shared across processes.";
+                                         << "shared across processes.";
         }
 
         // These must be updated to make some of our auxiliary functions
@@ -677,9 +686,7 @@ struct SharedMemory {
 
             // Found an entry, move it.
             qint32 affectedIndex = pages[currentPage].index;
-            if (Q_UNLIKELY(affectedIndex < 0 ||
-                           affectedIndex >= idLimit ||
-                           indexTable()[affectedIndex].firstPage != currentPage)) {
+            if (Q_UNLIKELY(affectedIndex < 0 || affectedIndex >= idLimit || indexTable()[affectedIndex].firstPage != currentPage)) {
                 throw KSDCCorrupted();
             }
 
@@ -693,8 +700,7 @@ struct SharedMemory {
 
                 // We always move used pages into previously-found empty spots,
                 // so check ordering as well for logic errors.
-                if (Q_UNLIKELY(!sourcePage || !destinationPage ||
-                               sourcePage < destinationPage)) {
+                if (Q_UNLIKELY(!sourcePage || !destinationPage || sourcePage < destinationPage)) {
                     throw KSDCCorrupted();
                 }
 
@@ -741,10 +747,8 @@ struct SharedMemory {
         // later removed then we can't find C either. So, we must keep
         // searching for probeNumber number of tries (or we find the item,
         // obviously).
-        while (indexTable()[position].fileNameHash != keyHash &&
-                probeNumber < MAX_PROBE_COUNT) {
-            position = (keyHash + (probeNumber + probeNumber * probeNumber) / 2)
-                       % indexTableSize();
+        while (indexTable()[position].fileNameHash != keyHash && probeNumber < MAX_PROBE_COUNT) {
+            position = (keyHash + (probeNumber + probeNumber * probeNumber) / 2) % indexTableSize();
             probeNumber++;
         }
 
@@ -771,7 +775,7 @@ struct SharedMemory {
     // Function to use with QSharedPointer in removeUsedPages below...
     static void deleteTable(IndexTableEntry *table)
     {
-        delete [] table;
+        delete[] table;
     }
 
     /**
@@ -803,8 +807,7 @@ struct SharedMemory {
         // eviction order set for the cache until there is enough room
         // available to hold the number of pages we need.
 
-        qCDebug(KCOREADDONS_DEBUG) << "Removing old entries to free up" << numberNeeded << "pages,"
-                 << cacheAvail << "are already theoretically available.";
+        qCDebug(KCOREADDONS_DEBUG) << "Removing old entries to free up" << numberNeeded << "pages," << cacheAvail << "are already theoretically available.";
 
         if (cacheAvail > 3 * numberNeeded) {
             defragment();
@@ -814,7 +817,7 @@ struct SharedMemory {
                 return result;
             } else {
                 qCCritical(KCOREADDONS_DEBUG) << "Just defragmented a locked cache, but still there"
-                            << "isn't enough room for the current request.";
+                                              << "isn't enough room for the current request.";
             }
         }
 
@@ -841,8 +844,7 @@ struct SharedMemory {
         // our copy of the index table). On the other hand if the entry is not
         // used then we note that with -1.
         for (uint i = 0; i < indexTableSize(); ++i) {
-            table[i].firstPage = table[i].useCount > 0 ? static_cast<pageID>(i)
-                                 : -1;
+            table[i].firstPage = table[i].useCount > 0 ? static_cast<pageID>(i) : -1;
         }
 
         // Declare the comparison function that we'll use to pass to qSort,
@@ -880,13 +882,11 @@ struct SharedMemory {
 
             // Removed everything, still no luck (or curIndex is set but too high).
             if (curIndex < 0 || static_cast<uint>(curIndex) >= indexTableSize()) {
-                qCCritical(KCOREADDONS_DEBUG) << "Trying to remove index" << curIndex
-                            << "out-of-bounds for index table of size" << indexTableSize();
+                qCCritical(KCOREADDONS_DEBUG) << "Trying to remove index" << curIndex << "out-of-bounds for index table of size" << indexTableSize();
                 throw KSDCCorrupted();
             }
 
-            qCDebug(KCOREADDONS_DEBUG) << "Removing entry of" << indexTable()[curIndex].totalItemSize
-                     << "size";
+            qCDebug(KCOREADDONS_DEBUG) << "Removing entry of" << indexTable()[curIndex].totalItemSize << "size";
             removeEntry(curIndex);
         }
 
@@ -895,8 +895,7 @@ struct SharedMemory {
         defragment();
 
         pageID result = pageTableSize();
-        while (i < indexTableSize() &&
-                (static_cast<uint>(result = findEmptyPages(numberNeeded))) >= pageTableSize()) {
+        while (i < indexTableSize() && (static_cast<uint>(result = findEmptyPages(numberNeeded))) >= pageTableSize()) {
             int curIndex = table[i++].firstPage;
 
             if (curIndex < 0) {
@@ -925,8 +924,7 @@ struct SharedMemory {
         // Knowing the number of pages, we can determine what addresses we'd be
         // using (properly aligned), and from there determine how much memory
         // we'd use.
-        IndexTableEntry *indexTableStart =
-            offsetAs<IndexTableEntry>(static_cast<void *>(nullptr), sizeof(SharedMemory));
+        IndexTableEntry *indexTableStart = offsetAs<IndexTableEntry>(static_cast<void *>(nullptr), sizeof(SharedMemory));
 
         indexTableStart += indexTableSize;
 
@@ -964,10 +962,7 @@ struct SharedMemory {
 class Q_DECL_HIDDEN KSharedDataCache::Private
 {
 public:
-    Private(const QString &name,
-            unsigned defaultCacheSize,
-            unsigned expectedItemSize
-           )
+    Private(const QString &name, unsigned defaultCacheSize, unsigned expectedItemSize)
         : m_cacheName(name)
         , shm(nullptr)
         , m_lock()
@@ -990,8 +985,7 @@ public:
         m_lock.clear();
 
         if (shm && 0 != ::munmap(shm, m_mapSize)) {
-            qCCritical(KCOREADDONS_DEBUG) << "Unable to unmap shared memory segment"
-                        << static_cast<void *>(shm) << ":" << ::strerror(errno);
+            qCCritical(KCOREADDONS_DEBUG) << "Unable to unmap shared memory segment" << static_cast<void *>(shm) << ":" << ::strerror(errno);
         }
 
         shm = nullptr;
@@ -1039,9 +1033,7 @@ public:
         // We establish the shared memory mapping here, only if we will have appropriate
         // mutex support (systemSupportsProcessSharing), then we:
         // Open the file and resize to some sane value if the file is too small.
-        if (file.open(QIODevice::ReadWrite) &&
-                (file.size() >= size ||
-                 (file.resize(size) && ensureFileAllocated(file.handle(), size)))) {
+        if (file.open(QIODevice::ReadWrite) && (file.size() >= size || (file.resize(size) && ensureFileAllocated(file.handle(), size)))) {
             // Use mmap directly instead of QFile::map since the QFile (and its
             // shared mapping) will disappear unless we hang onto the QFile for no
             // reason (see the note below, we don't care about the file per se...)
@@ -1056,8 +1048,7 @@ public:
                 // First make sure that the version of the cache on disk is
                 // valid.  We also need to check that version != 0 to
                 // disambiguate against an uninitialized cache.
-                if (mapped->version != SharedMemory::PIXMAP_CACHE_VERSION &&
-                        mapped->version > 0) {
+                if (mapped->version != SharedMemory::PIXMAP_CACHE_VERSION && mapped->version > 0) {
                     qCWarning(KCOREADDONS_DEBUG) << "Deleting wrong version of cache" << cacheName;
 
                     // CAUTION: Potentially recursive since the recovery
@@ -1096,7 +1087,7 @@ public:
         // if we do get shared memory we never look at disk again.
         if (mapAddress == MAP_FAILED) {
             qCWarning(KCOREADDONS_DEBUG) << "Failed to establish shared memory mapping, will fallback"
-                       << "to private memory -- memory usage will increase";
+                                         << "to private memory -- memory usage will increase";
 
             mapAddress = QT_MMAP(nullptr, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
         }
@@ -1104,8 +1095,7 @@ public:
         // Well now we're really hosed. We can still work, but we can't even cache
         // data.
         if (mapAddress == MAP_FAILED) {
-            qCCritical(KCOREADDONS_DEBUG) << "Unable to allocate shared memory segment for shared data cache"
-                        << cacheName << "of size" << cacheSize;
+            qCCritical(KCOREADDONS_DEBUG) << "Unable to allocate shared memory segment for shared data cache" << cacheName << "of size" << cacheSize;
             return;
         }
 
@@ -1136,8 +1126,8 @@ public:
             if (shm->ready.testAndSetAcquire(0, 1)) {
                 if (!shm->performInitialSetup(cacheSize, pageSize)) {
                     qCCritical(KCOREADDONS_DEBUG) << "Unable to perform initial setup, this system probably "
-                                "does not really support process-shared pthreads or "
-                                "semaphores, even though it claims otherwise.";
+                                                     "does not really support process-shared pthreads or "
+                                                     "semaphores, even though it claims otherwise.";
 
                     file.remove();
                     detachFromSharedMemory();
@@ -1195,9 +1185,7 @@ public:
 
         // Check for unsigned integer wraparound, and then
         // bounds access
-        if (Q_UNLIKELY((endOfShm < startOfShm) ||
-                       (endOfAccess < startOfAccess) ||
-                       (endOfAccess > endOfShm))) {
+        if (Q_UNLIKELY((endOfShm < startOfShm) || (endOfAccess < startOfAccess) || (endOfAccess > endOfShm))) {
             throw KSDCCorrupted();
         }
     }
@@ -1232,14 +1220,13 @@ public:
                 d->recoverCorruptedCache();
 
                 if (!d->shm) {
-                    qCWarning(KCOREADDONS_DEBUG) << "Lost the connection to shared memory for cache"
-                               << d->m_cacheName;
+                    qCWarning(KCOREADDONS_DEBUG) << "Lost the connection to shared memory for cache" << d->m_cacheName;
                     return false;
                 }
 
                 if (lockCount++ > 4) {
-                    qCCritical(KCOREADDONS_DEBUG) << "There is a very serious problem with the KDE data cache"
-                                << d->m_cacheName << "giving up trying to access cache.";
+                    qCCritical(KCOREADDONS_DEBUG) << "There is a very serious problem with the KDE data cache" << d->m_cacheName
+                                                  << "giving up trying to access cache.";
                     d->detachFromSharedMemory();
                     return false;
                 }
@@ -1263,9 +1250,9 @@ public:
                 return false;
             }
             switch (d->shm->evictionPolicy.loadRelaxed()) {
-            case NoEvictionPreference:   // fallthrough
+            case NoEvictionPreference: // fallthrough
             case EvictLeastRecentlyUsed: // fallthrough
-            case EvictLeastOftenUsed:    // fallthrough
+            case EvictLeastOftenUsed: // fallthrough
             case EvictOldest:
                 break;
             default:
@@ -1276,7 +1263,8 @@ public:
         }
 
     public:
-        CacheLocker(const Private *_d) : d(const_cast<Private *>(_d))
+        CacheLocker(const Private *_d)
+            : d(const_cast<Private *>(_d))
         {
             if (Q_UNLIKELY(!d || !d->shm || !cautiousLock())) {
                 d = nullptr;
@@ -1322,28 +1310,26 @@ void SharedMemory::removeEntry(uint index)
     pageID firstPage = entriesIndex[index].firstPage;
     if (firstPage < 0 || static_cast<quint32>(firstPage) >= pageTableSize()) {
         qCDebug(KCOREADDONS_DEBUG) << "Trying to remove an entry which is already invalid. This "
-                 << "cache is likely corrupt.";
+                                   << "cache is likely corrupt.";
         throw KSDCCorrupted();
     }
 
     if (index != static_cast<uint>(pageTableEntries[firstPage].index)) {
         qCCritical(KCOREADDONS_DEBUG) << "Removing entry" << index << "but the matching data"
-                    << "doesn't link back -- cache is corrupt, clearing.";
+                                      << "doesn't link back -- cache is corrupt, clearing.";
         throw KSDCCorrupted();
     }
 
     uint entriesToRemove = intCeil(entriesIndex[index].totalItemSize, cachePageSize());
     uint savedCacheSize = cacheAvail;
-    for (uint i = firstPage; i < pageTableSize() &&
-            static_cast<uint>(pageTableEntries[i].index) == index; ++i) {
+    for (uint i = firstPage; i < pageTableSize() && static_cast<uint>(pageTableEntries[i].index) == index; ++i) {
         pageTableEntries[i].index = -1;
         cacheAvail++;
     }
 
     if ((cacheAvail - savedCacheSize) != entriesToRemove) {
-        qCCritical(KCOREADDONS_DEBUG) << "We somehow did not remove" << entriesToRemove
-                    << "when removing entry" << index << ", instead we removed"
-                    << (cacheAvail - savedCacheSize);
+        qCCritical(KCOREADDONS_DEBUG) << "We somehow did not remove" << entriesToRemove << "when removing entry" << index << ", instead we removed"
+                                      << (cacheAvail - savedCacheSize);
         throw KSDCCorrupted();
     }
 
@@ -1351,7 +1337,7 @@ void SharedMemory::removeEntry(uint index)
 #ifdef NDEBUG
     void *const startOfData = page(firstPage);
     if (startOfData) {
-        QByteArray str((const char *) startOfData);
+        QByteArray str((const char *)startOfData);
         str.prepend(" REMOVED: ");
         str.prepend(QByteArray::number(index));
         str.prepend("ENTRY ");
@@ -1369,9 +1355,7 @@ void SharedMemory::removeEntry(uint index)
     entriesIndex[index].firstPage = -1;
 }
 
-KSharedDataCache::KSharedDataCache(const QString &cacheName,
-                                   unsigned defaultCacheSize,
-                                   unsigned expectedItemSize)
+KSharedDataCache::KSharedDataCache(const QString &cacheName, unsigned defaultCacheSize, unsigned expectedItemSize)
     : d(nullptr)
 {
     try {
@@ -1383,9 +1367,8 @@ KSharedDataCache::KSharedDataCache(const QString &cacheName,
         try {
             d = new Private(cacheName, defaultCacheSize, expectedItemSize);
         } catch (KSDCCorrupted) {
-            qCCritical(KCOREADDONS_DEBUG)
-                    << "Even a brand-new cache starts off corrupted, something is"
-                    << "seriously wrong. :-(";
+            qCCritical(KCOREADDONS_DEBUG) << "Even a brand-new cache starts off corrupted, something is"
+                                          << "seriously wrong. :-(";
             d = nullptr; // Just in case
         }
     }
@@ -1437,8 +1420,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
         const static double mustCullPoint = 0.96l;
 
         // cacheAvail is in pages, cacheSize is in bytes.
-        double loadFactor = 1.0 - (1.0l * d->shm->cacheAvail * d->shm->cachePageSize()
-                                   / d->shm->cacheSize);
+        double loadFactor = 1.0 - (1.0l * d->shm->cacheAvail * d->shm->cachePageSize() / d->shm->cacheSize);
         bool cullCollisions = false;
 
         if (Q_UNLIKELY(loadFactor >= mustCullPoint)) {
@@ -1476,8 +1458,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
                 }
             }
 
-            position = (keyHash + (probeNumber + probeNumber * probeNumber) / 2)
-                       % d->shm->indexTableSize();
+            position = (keyHash + (probeNumber + probeNumber * probeNumber) / 2) % d->shm->indexTableSize();
             probeNumber++;
         }
 
@@ -1501,8 +1482,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
 
         // If the cache has no room, or the fragmentation is too great to find
         // the required number of consecutive free pages, take action.
-        if (pagesNeeded > d->shm->cacheAvail ||
-                (firstPage = d->shm->findEmptyPages(pagesNeeded)) >= d->shm->pageTableSize()) {
+        if (pagesNeeded > d->shm->cacheAvail || (firstPage = d->shm->findEmptyPages(pagesNeeded)) >= d->shm->pageTableSize()) {
             // If we have enough free space just defragment
             uint freePagesDesired = 3 * qMax(1u, pagesNeeded / 2);
 
@@ -1516,13 +1496,11 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
                 // extra. However we can't rely on the return value of
                 // removeUsedPages giving us a good location since we're not
                 // passing in the actual number of pages that we need.
-                d->shm->removeUsedPages(qMin(2 * freePagesDesired, d->shm->pageTableSize())
-                                        - d->shm->cacheAvail);
+                d->shm->removeUsedPages(qMin(2 * freePagesDesired, d->shm->pageTableSize()) - d->shm->cacheAvail);
                 firstPage = d->shm->findEmptyPages(pagesNeeded);
             }
 
-            if (firstPage >= d->shm->pageTableSize() ||
-                    d->shm->cacheAvail < pagesNeeded) {
+            if (firstPage >= d->shm->pageTableSize() || d->shm->cacheAvail < pagesNeeded) {
                 qCCritical(KCOREADDONS_DEBUG) << "Unable to free up memory for" << key;
                 return false;
             }

@@ -13,12 +13,12 @@
 #include "kcoreaddons_export.h"
 
 #include <QObject>
-#include <QVariant>
 #include <QStringList>
+#include <QVariant>
 #include <kexportplugin.h> // for source compat
 
-#include <type_traits>
 #include <memory>
+#include <type_traits>
 
 class QWidget;
 
@@ -58,36 +58,34 @@ class KPluginMetaData;
  * @since 5.80
  *
  */
-#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, ...) \
-    class name : public baseFactory \
-    { \
-        Q_OBJECT \
-        Q_INTERFACES(KPluginFactory) \
-        __VA_ARGS__ \
-    public: \
-        explicit name(); \
-        ~name(); \
+#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, ...)                                                                             \
+    class name : public baseFactory                                                                                                                            \
+    {                                                                                                                                                          \
+        Q_OBJECT                                                                                                                                               \
+        Q_INTERFACES(KPluginFactory)                                                                                                                           \
+        __VA_ARGS__                                                                                                                                            \
+    public:                                                                                                                                                    \
+        explicit name();                                                                                                                                       \
+        ~name();                                                                                                                                               \
     };
 
-#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, json) \
+#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, json)                                                                            \
     K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, Q_PLUGIN_METADATA(IID KPluginFactory_iid FILE json))
 
-#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory) \
+#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory)                                                                                       \
     K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, Q_PLUGIN_METADATA(IID KPluginFactory_iid))
 
-#define K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations) \
-    name::name() \
-    { \
-        pluginRegistrations \
-    } \
-    name::~name() {}
+#define K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations)                                                                   \
+    name::name(){pluginRegistrations} name::~name()                                                                                                            \
+    {                                                                                                                                                          \
+    }
 
-#define K_PLUGIN_FACTORY_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations) \
-    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory) \
+#define K_PLUGIN_FACTORY_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations)                                                                              \
+    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory)                                                                                           \
     K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations)
 
-#define K_PLUGIN_FACTORY_WITH_BASEFACTORY_JSON(name, baseFactory, jsonFile, pluginRegistrations) \
-    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, jsonFile) \
+#define K_PLUGIN_FACTORY_WITH_BASEFACTORY_JSON(name, baseFactory, jsonFile, pluginRegistrations)                                                               \
+    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, jsonFile)                                                                            \
     K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations)
 
 /**
@@ -210,7 +208,8 @@ class KPluginMetaData;
  *
  * @since 5.0
  */
-#define K_PLUGIN_FACTORY_WITH_JSON(name, jsonFile, pluginRegistrations)  K_PLUGIN_FACTORY_WITH_BASEFACTORY_JSON(name, KPluginFactory, jsonFile, pluginRegistrations)
+#define K_PLUGIN_FACTORY_WITH_JSON(name, jsonFile, pluginRegistrations)                                                                                        \
+    K_PLUGIN_FACTORY_WITH_BASEFACTORY_JSON(name, KPluginFactory, jsonFile, pluginRegistrations)
 
 /**
  * @relates KPluginFactory
@@ -266,7 +265,7 @@ class KPluginMetaData;
  *
  * @since 5.44
  */
-#define K_PLUGIN_CLASS_WITH_JSON(classname, jsonFile) K_PLUGIN_FACTORY_WITH_JSON(classname ## Factory, jsonFile, registerPlugin<classname >();)
+#define K_PLUGIN_CLASS_WITH_JSON(classname, jsonFile) K_PLUGIN_FACTORY_WITH_JSON(classname##Factory, jsonFile, registerPlugin<classname>();)
 
 /**
  * @relates KPluginFactory
@@ -381,7 +380,7 @@ class KPluginMetaData;
  *     }
  * };
  * @endcode
- * 
+ *
  * To use such a custom KPluginFactory, use the K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY
  * and K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY macros, passing in the
  * name of the custom subclass as @p baseFactory .
@@ -497,7 +496,6 @@ public:
      */
     void setMetaData(const KPluginMetaData &metaData);
 
-
     /**
      * @internal
      * Converts a QStringList to a QVariantList
@@ -526,10 +524,8 @@ protected:
     template<class impl>
     struct InheritanceChecker {
         /// property to control the availability of the registerPlugin overload taking default values
-        static constexpr bool enabled =
-            std::is_constructible<impl, QWidget *, QObject *, const QVariantList &>::value ||
-            std::is_constructible<impl, QWidget *, const QVariantList &>::value ||
-            std::is_constructible<impl, QObject *, const QVariantList &>::value;
+        static constexpr bool enabled = std::is_constructible<impl, QWidget *, QObject *, const QVariantList &>::value
+            || std::is_constructible<impl, QWidget *, const QVariantList &>::value || std::is_constructible<impl, QObject *, const QVariantList &>::value;
 
         CreateInstanceFunction createInstanceFunction(KParts::Part *)
         {
@@ -558,10 +554,9 @@ protected:
     template<class impl>
     struct InheritanceWithMetaDataChecker {
         /// property to control the availability of the registerPlugin overload taking default values
-        static constexpr bool enabled =
-            std::is_constructible<impl, QWidget *, QObject *, const KPluginMetaData &, const QVariantList &>::value ||
-            std::is_constructible<impl, QWidget *, const KPluginMetaData &, const QVariantList &>::value ||
-            std::is_constructible<impl, QObject *, const KPluginMetaData &, const QVariantList &>::value;
+        static constexpr bool enabled = std::is_constructible<impl, QWidget *, QObject *, const KPluginMetaData &, const QVariantList &>::value
+            || std::is_constructible<impl, QWidget *, const KPluginMetaData &, const QVariantList &>::value
+            || std::is_constructible<impl, QObject *, const KPluginMetaData &, const QVariantList &>::value;
 
         CreateInstanceWithMetaDataFunction createInstanceFunction(KParts::Part *)
         {
@@ -580,8 +575,8 @@ protected:
     explicit KPluginFactory(KPluginFactoryPrivate &dd);
 
     // Use std::enable_if_t once C++14 can be relied on
-    template< bool B, class T = void >
-    using enable_if_t = typename std::enable_if<B,T>::type;
+    template<bool B, class T = void>
+    using enable_if_t = typename std::enable_if<B, T>::type;
 
     /**
      * Registers a metadata-less plugin with the factory. Call this function from the constructor of the
@@ -630,8 +625,7 @@ protected:
     template<class T, enable_if_t<InheritanceChecker<T>::enabled, int> = 0>
     void registerPlugin(const QString &keyword = QString())
     {
-        CreateInstanceFunction instanceFunction =
-            InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
+        CreateInstanceFunction instanceFunction = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
         registerPlugin<T>(keyword, instanceFunction);
     }
 
@@ -682,8 +676,7 @@ protected:
     template<class T, enable_if_t<InheritanceWithMetaDataChecker<T>::enabled, int> = 0>
     void registerPlugin(const QString &keyword = QString())
     {
-        CreateInstanceWithMetaDataFunction instanceFunction =
-            InheritanceWithMetaDataChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
+        CreateInstanceWithMetaDataFunction instanceFunction = InheritanceWithMetaDataChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
         registerPlugin<T>(keyword, instanceFunction);
     }
 
@@ -699,7 +692,9 @@ protected:
     /**
      * @deprecated since 4.0 use create<T>(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)
      */
-    KCOREADDONS_DEPRECATED_VERSION(4, 0, "Use KPluginFactory::create<T>(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)")
+    KCOREADDONS_DEPRECATED_VERSION(4,
+                                   0,
+                                   "Use KPluginFactory::create<T>(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)")
     virtual KParts::Part *createPartObject(QWidget *parentWidget, QObject *parent, const char *classname, const QStringList &args);
 #endif
 
@@ -757,8 +752,7 @@ protected:
 
 private:
     void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceFunction instanceFunction);
-    void registerPlugin(const QString &keyword, const QMetaObject *metaObject,
-                        CreateInstanceWithMetaDataFunction instanceFunction);
+    void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceWithMetaDataFunction instanceFunction);
 };
 
 // Deprecation wrapper macro added only for 5.70, while backward typedef added in 4.0
@@ -773,7 +767,8 @@ typedef KPluginFactory KLibFactory;
 template<typename T>
 inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
 {
-    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : nullptr, parent, args, QString());
+    QObject *o =
+        create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : nullptr, parent, args, QString());
 
     T *t = qobject_cast<T *>(o);
     if (!t) {
@@ -785,7 +780,8 @@ inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
 template<typename T>
 inline T *KPluginFactory::create(const QString &keyword, QObject *parent, const QVariantList &args)
 {
-    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : nullptr, parent, args, keyword);
+    QObject *o =
+        create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : nullptr, parent, args, keyword);
 
     T *t = qobject_cast<T *>(o);
     if (!t) {

@@ -6,8 +6,8 @@
 
 #include <QTest>
 
-#include <kpluginloader.h>
 #include <kpluginfactory.h>
+#include <kpluginloader.h>
 
 class KPluginFactoryTest : public QObject
 {
@@ -49,4 +49,3 @@ private Q_SLOTS:
 QTEST_MAIN(KPluginFactoryTest)
 
 #include "kpluginfactorytest.moc"
-
