@@ -8,9 +8,11 @@
 */
 
 #include "kprocesslist.h"
+#include "kcoreaddons_debug.h"
 
 #include <QProcess>
 #include <QDir>
+#include <QDebug>
 
 using namespace KProcessList;
 
@@ -41,10 +43,16 @@ KProcessInfoList unixProcessListPS()
 #endif
     };
     psProcess.start(QStringLiteral("ps"), args);
-    if (!psProcess.waitForStarted())
+    if (!psProcess.waitForStarted()) {
+        qCWarning(KCOREADDONS_DEBUG) << "Failed to execute ps" << args;
         return rc;
+    }
     psProcess.waitForFinished();
-    QByteArray output = psProcess.readAllStandardOutput();
+    const QByteArray output = psProcess.readAllStandardOutput();
+    const QByteArray errorOutput = psProcess.readAllStandardError();
+    if (!errorOutput.isEmpty()) {
+        qCWarning(KCOREADDONS_DEBUG) << "ps said" << errorOutput;
+    }
     // Split "457 S+   /Users/foo.app"
     const QStringList lines = QString::fromLocal8Bit(output).split(QLatin1Char('\n'));
     const int lineCount = lines.size();
