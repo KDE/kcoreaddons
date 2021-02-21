@@ -369,10 +369,10 @@ void KFormatTest::formatRelativeDate()
     testDate = QDate(); // invalid date
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat), QStringLiteral("Invalid date"));
 
-    QDateTime testDateTime = QDateTime(QDate::currentDate(), QTime(3, 0, 0));
-    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("Today, 03:00:00"));
-
     QDateTime now = QDateTime::currentDateTime();
+
+    QDateTime testDateTime = now.addSecs(-3600);
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("Today, %1").arg(testDateTime.toString(QStringLiteral("hh:mm:ss"))));
 
     // 1 minute ago
     testDateTime = now.addSecs(-1);
