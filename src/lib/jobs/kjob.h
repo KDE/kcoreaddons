@@ -597,7 +597,7 @@ Q_SIGNALS:
      * @deprecated since 5.80, use the KJob::percentChanged(KJob *, qulonglong)
      * signal instead.
      */
-    KCOREADDONS_DEPRECATED_VERSION(5, 80, "Use KJob::percentChanged(KJob *, KJob::Unit, qulonglong) signal")
+    KCOREADDONS_DEPRECATED_VERSION(5, 80, "Use KJob::percentChanged(KJob *, qulonglong) signal")
     void percent(KJob *job, unsigned long percent); // clazy:exclude=overloaded-signal
 #endif
 
