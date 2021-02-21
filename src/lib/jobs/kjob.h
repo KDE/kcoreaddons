@@ -594,7 +594,7 @@ Q_SIGNALS:
      * @param job the job that emitted this signal
      * @param percent the percentage
      *
-     * @deprecated since 5.80, use the KJob::percentChanged(KJob *, KJob::Unit, qulonglong)
+     * @deprecated since 5.80, use the KJob::percentChanged(KJob *, qulonglong)
      * signal instead.
      */
     KCOREADDONS_DEPRECATED_VERSION(5, 80, "Use KJob::percentChanged(KJob *, KJob::Unit, qulonglong) signal")
