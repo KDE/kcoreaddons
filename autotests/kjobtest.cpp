@@ -348,6 +348,9 @@ void KJobTest::testKill()
     // ... but when we enter the event loop again.
     loop.exec();
     QCOMPARE(destroyed_spy.size(), 1);
+
+    QVERIFY(m_jobFinishCount.size() == (finishedEmitCount - resultEmitCount));
+    m_jobFinishCount.clear();
 }
 
 void KJobTest::testDestroy()
@@ -359,6 +362,9 @@ void KJobTest::testDestroy()
     QCOMPARE(m_lastErrorText, QString{});
     QCOMPARE(m_resultCount, 0);
     QCOMPARE(m_finishedCount, 1);
+
+    QVERIFY(m_jobFinishCount.size() == 1);
+    m_jobFinishCount.clear();
 }
 
 void KJobTest::testEmitAtMostOnce_data()
@@ -486,6 +492,13 @@ void KJobTest::slotResult(KJob *job)
     QVERIFY(testJob);
     QVERIFY(testJob->isFinished());
 
+    // Ensure the job has already emitted finished() if we are tracking from
+    // setupErrorResultFinished
+    if(m_jobFinishCount.contains(job)) {
+        QVERIFY(m_jobFinishCount.value(job) == 1);
+        QVERIFY(m_jobFinishCount.remove(job) == 1 /* num items removed */);
+    }
+
     if (job->error()) {
         m_lastError = job->error();
         m_lastErrorText = job->errorText();
@@ -499,14 +512,8 @@ void KJobTest::slotResult(KJob *job)
 
 void KJobTest::slotFinished(KJob *job)
 {
-    // qobject_cast and dynamic_cast to TestJob* fail when finished() signal is emitted from
-    // ~KJob(). The static_cast allows to call the otherwise protected KJob::isFinished().
-    // WARNING: don't use this trick in production code, because static_cast-ing
-    // to a wrong type and then dereferencing the pointer is undefined behavior.
-    // Normally a KJob and its subclasses should manage their finished state on their own.
-    // If you *really* need KJob::isFinished() to be public, request this access
-    // modifier change in the KJob class.
-    QVERIFY(static_cast<const TestJob *>(job)->isFinished());
+    QVERIFY2(m_jobFinishCount.value(job) == 0, "Ensure we have not double-emitted KJob::finished()");
+    m_jobFinishCount[job]++;
 
     if (job->error()) {
         m_lastError = job->error();
@@ -527,6 +534,7 @@ TestJob *KJobTest::setupErrorResultFinished()
     m_finishedCount = 0;
 
     auto *job = new TestJob;
+    m_jobFinishCount[job] = 0;
     connect(job, &KJob::result, this, &KJobTest::slotResult);
     connect(job, &KJob::finished, this, &KJobTest::slotFinished);
     return job;

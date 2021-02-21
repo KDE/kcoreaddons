@@ -11,6 +11,7 @@
 #include "kjob.h"
 #include "kjobuidelegate.h"
 #include <QEventLoop>
+#include <QMap>
 #include <QObject>
 
 class TestJob : public KJob
@@ -94,6 +95,7 @@ private:
 
     WaitJob *m_outerJob;
     WaitJob *m_innerJob;
+    QMap<KJob *, int> m_jobFinishCount;
 };
 
 class WaitJob : public KJob

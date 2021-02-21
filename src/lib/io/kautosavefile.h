@@ -212,6 +212,11 @@ public:
      * objects. By calling open() on them, the application will steal
      * the lock. Subsequent releaseLock() or deleting of the object will
      * then erase the stale autosave file.
+     *
+     * The application owns all returned KAutoSaveFile objects and is
+     * responsible for deleting them when no longer needed. Remember that
+     * deleting the KAutoSaveFile will release the file lock and remove the
+     * stale autosave file.
      */
     static QList<KAutoSaveFile *> staleFiles(const QUrl &url, const QString &applicationName = QString());
 
@@ -224,6 +229,11 @@ public:
      * calling this function.
      *
      * See staleFiles() for information on the returned objects.
+     *
+     * The application owns all returned KAutoSaveFile objects and is
+     * responsible for deleting them when no longer needed. Remember that
+     * deleting the KAutoSaveFile will release the file lock and remove the
+     * stale autosave file.
      */
     static QList<KAutoSaveFile *> allStaleFiles(const QString &applicationName = QString());
 
