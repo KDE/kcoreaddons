@@ -144,8 +144,12 @@ KProcessInfoList KProcessList::processInfoList()
     const QDir procDir(QStringLiteral("/proc/"));
     if (!procDir.exists())
         return unixProcessListPS();
+    const QStringList procIds = procDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
+#ifdef Q_OS_FREEBSD
+    if (procIds.isEmpty())
+        return unixProcessListPS();
+#endif
     KProcessInfoList rc;
-    const QStringList procIds = procDir.entryList(QDir::Dirs);
     rc.reserve(procIds.size());
     for (const QString &procId : procIds) {
         KProcessInfo processInfo;
