@@ -7,12 +7,27 @@
     SPDX-License-Identifier: LGPL-2.1-only WITH Qt-LGPL-exception-1.1 OR LicenseRef-Qt-Commercial
 */
 
+/*
+ * Implementation notes:
+ *
+ * This file implements KProcessInfo and KProcessInfoList via Linux /proc
+ * **or** via ps(1). If there's no /proc, it falls back to ps(1), usually.
+ *
+ * Although the code contains #ifdefs for FreeBSD (e.g. for ps(1) command-
+ * line arguments), FreeBSD should never use this code, only the
+ * procstat-based code in `kprocesslist_unix_procstat.cpp`.
+ */
+
 #include "kprocesslist.h"
 #include "kcoreaddons_debug.h"
 
 #include <QProcess>
 #include <QDir>
 #include <QDebug>
+
+#ifdef Q_OS_FREEBSD
+#error This KProcessInfo implementation is not supported on FreeBSD (use procstat)
+#endif
 
 using namespace KProcessList;
 
@@ -169,6 +184,11 @@ KProcessInfoList KProcessList::processInfoList()
     return rc;
 }
 
+// Determine UNIX process by reading "/proc".
+//
+// TODO: Use ps if "/proc" does not exist or is bogus; use code
+//       from unixProcessListPS() but add a `-p pid` argument.
+//
 KProcessInfo KProcessList::processInfo(qint64 pid)
 {
     KProcessInfo processInfo;
