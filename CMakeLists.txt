@@ -63,7 +63,7 @@ else()
 endif()
 
 set(HAVE_PROCSTAT FALSE)
-string(REGEX MATCH "[Bb][Ss][Dd]" BSDLIKE CMAKE_SYSTEM_NAME)
+string(REGEX MATCH "[Bb][Ss][Dd]" BSDLIKE ${CMAKE_SYSTEM_NAME})
 if (BSDLIKE)
     option(ENABLE_PROCSTAT "Try to use libprocstat for process information (for BSD-like systems)" ON)
     if (ENABLE_PROCSTAT)
@@ -72,6 +72,11 @@ if (BSDLIKE)
         set_package_properties(Procstat PROPERTIES
             PURPOSE "Process information using libprocstat")
         set(HAVE_PROCSTAT ${PROCSTAT_FOUND})
+    endif()
+    if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+        set_package_properties(Procstat PROPERTIES
+            TYPE REQUIRED
+        )
     endif()
 endif()
 
