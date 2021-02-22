@@ -21,8 +21,9 @@
 #include "kprocesslist.h"
 #include "kcoreaddons_debug.h"
 
-#include <QDir>
 #include <QDebug>
+#include <QDir>
+#include <QProcess>
 
 #ifdef Q_OS_FREEBSD
 #error This KProcessInfo implementation is not supported on FreeBSD (use procstat)
