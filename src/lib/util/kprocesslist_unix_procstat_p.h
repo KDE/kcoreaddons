@@ -9,12 +9,14 @@
 
 #pragma once
 
-#include <libprocstat.h>
 #include <sys/param.h>
-#include <sys/queue.h>
 #include <sys/sysctl.h>
 #include <sys/types.h>
 #include <sys/user.h>
+
+#include <sys/queue.h> // Must be included before libprocstat.h, otherwise this fails to build on FreeBSD
+
+#include <libprocstat.h>
 
 namespace KProcessList
 {
