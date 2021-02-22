@@ -6,6 +6,10 @@
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
+
+#ifndef KFUZZYMATCHER_H
+#define KFUZZYMATCHER_H
+
 #include <kcoreaddons_export.h>
 
 class QString;
@@ -118,3 +122,5 @@ KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
 KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
 
 } // namespace KFuzzyMatcher
+
+#endif // KFUZZYMATCHER_H
