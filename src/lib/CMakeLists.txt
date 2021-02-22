@@ -197,7 +197,7 @@ if(WIN32)
     target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv)
 endif()
 
-if(HAVE_PROCSTAT)
+if (HAVE_PROCSTAT)
     target_link_libraries(KF5CoreAddons PRIVATE ${PROCSTAT_LIBRARIES})
 endif()
 
