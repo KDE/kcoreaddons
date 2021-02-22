@@ -16,8 +16,10 @@
 #include <memory> // unique_ptr
 #include <type_traits>
 
+#include <qt_windows.h> // Must be included before lm.h
+
 #include <lm.h> //Net*
-#include <qt_windows.h>
+
 #include <sddl.h> //ConvertSidToStringSidW
 #include <shlobj.h>
 #include <userenv.h> //GetProfilesDirectoryW
