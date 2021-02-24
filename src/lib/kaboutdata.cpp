@@ -11,6 +11,7 @@
 */
 
 #include "kaboutdata.h"
+#include "kcoreaddons_debug.h"
 #include "kpluginmetadata.h"
 
 #include <QCommandLineOption>
@@ -20,17 +21,12 @@
 #include <QHash>
 #include <QJsonObject>
 #include <QList>
-#include <QLoggingCategory>
 #include <QSharedData>
 #include <QStandardPaths>
 #include <QTextStream>
 #include <QUrl>
 
 #include <algorithm>
-
-Q_DECLARE_LOGGING_CATEGORY(KABOUTDATA)
-// logging category for this framework, default: log stuff >= warning
-Q_LOGGING_CATEGORY(KABOUTDATA, "kf.coreaddons.kaboutdata", QtWarningMsg)
 
 class KAboutPersonPrivate : public QSharedData
 {

@@ -15,11 +15,10 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd]ebug$")
 endif()
 
 set(autotests_static_SRCS "")
-ecm_qt_declare_logging_category(autotests_static_SRCS
-        HEADER kcoreaddons_debug.h
-        IDENTIFIER KCOREADDONS_DEBUG
-        CATEGORY_NAME kf.coreaddons
-        )
+ecm_generate_qloggingcategories_source(autotests_static_SRCS
+    HEADER kcoreaddons_debug.h
+    CATEGORY_NAMES kf.coreaddons
+)
 add_library(autotests_static STATIC ${autotests_static_SRCS})
 target_link_libraries(autotests_static Qt5::Core)
 

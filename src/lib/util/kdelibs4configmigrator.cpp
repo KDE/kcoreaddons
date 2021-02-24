@@ -7,18 +7,14 @@
 */
 
 #include "kdelibs4configmigrator.h"
+#include "kcoreaddons_debug.h"
 
 #include <Kdelibs4Migration>
 #include <QDir>
 #include <QFile>
 #include <QFileInfo>
-#include <QLoggingCategory>
 #include <QPluginLoader>
 #include <QStandardPaths>
-
-Q_DECLARE_LOGGING_CATEGORY(MIGRATOR)
-// logging category for this framework, default: log stuff >= warning
-Q_LOGGING_CATEGORY(MIGRATOR, "kf.coreaddons.kdelibs4configmigrator", QtWarningMsg)
 
 class Kdelibs4ConfigMigratorPrivate
 {

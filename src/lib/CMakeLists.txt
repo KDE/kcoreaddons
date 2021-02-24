@@ -129,48 +129,6 @@ if (HAVE_PROCSTAT)
     )
 endif()
 
-ecm_qt_export_logging_category(
-    IDENTIFIER KDIRWATCH
-    CATEGORY_NAME kf.coreaddons.kdirwatch
-    OLD_CATEGORY_NAMES kf5.kcoreaddons.kdirwatch
-    DEFAULT_SEVERITY Warning
-    DESCRIPTION "KDirWatch (KCoreAddons)"
-    EXPORT KCOREADDONS
-)
-ecm_qt_export_logging_category(
-    IDENTIFIER KABOUTDATA
-    CATEGORY_NAME kf.coreaddons.kaboutdata
-    OLD_CATEGORY_NAMES kf5.kcoreaddons.kaboutdata
-    DESCRIPTION "KAboutData (KCoreAddons)"
-    EXPORT KCOREADDONS
-)
-ecm_qt_declare_logging_category(libkcoreaddons_SRCS
-    HEADER desktopfileparser_debug.h
-    IDENTIFIER DESKTOPPARSER
-    CATEGORY_NAME kf.coreaddons.desktopparser
-    OLD_CATEGORY_NAMES kf5.kcoreaddons.desktopparser
-    DEFAULT_SEVERITY Warning
-    DESCRIPTION "DesktopParser (KCoreAddons)"
-    EXPORT KCOREADDONS
-)
-ecm_qt_export_logging_category(
-    IDENTIFIER MIGRATOR
-    CATEGORY_NAME kf.coreaddons.kdelibs4configmigrator
-    OLD_CATEGORY_NAMES kf5.kcoreaddons.kdelibs4configmigrator
-    DEFAULT_SEVERITY Warning
-    DESCRIPTION "Kdelibs4ConfigMigrator (KCoreAddons)"
-    EXPORT KCOREADDONS
-)
-
-ecm_qt_declare_logging_category(libkcoreaddons_SRCS
-    HEADER kcoreaddons_debug.h
-    IDENTIFIER KCOREADDONS_DEBUG
-    CATEGORY_NAME kf.coreaddons
-    OLD_CATEGORY_NAMES org.kde.kcoreaddons
-    DESCRIPTION "kcoreaddons (kcoreaddons lib)"
-    EXPORT KCOREADDONS
-)
-
 add_library(KF5CoreAddons ${libkcoreaddons_SRCS})
 add_library(KF5::CoreAddons ALIAS KF5CoreAddons)
 ecm_generate_export_header(KF5CoreAddons
@@ -180,6 +138,15 @@ ecm_generate_export_header(KF5CoreAddons
     DEPRECATED_BASE_VERSION 0
     DEPRECATION_VERSIONS 4.0 5.0 5.2 5.65 5.67 5.70 5.72 5.75 5.76 5.78 5.79 5.80
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
+)
+ecm_generate_qloggingcategories_source(KF5CoreAddons
+    HEADER kcoreaddons_debug.h
+    CATEGORY_NAMES
+        kf.coreaddons
+        kf.coreaddons.kdirwatch
+        kf.coreaddons.kaboutdata
+        kf.coreaddons.desktopparser
+        kf.coreaddons.kdelibs4configmigrator
 )
 
 target_include_directories(KF5CoreAddons PUBLIC "$<BUILD_INTERFACE:${kcoreaddons_INCLUDE_DIRS}>")

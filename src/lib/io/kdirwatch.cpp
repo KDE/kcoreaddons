@@ -39,7 +39,6 @@
 #include <QCoreApplication>
 #include <QDir>
 #include <QFile>
-#include <QLoggingCategory>
 #include <QSocketNotifier>
 #include <QThread>
 #include <QThreadStorage>
@@ -72,10 +71,6 @@
 #include <sys/utsname.h>
 
 #endif // HAVE_SYS_INOTIFY_H
-
-Q_DECLARE_LOGGING_CATEGORY(KDIRWATCH)
-// logging category for this framework, default: log stuff >= warning
-Q_LOGGING_CATEGORY(KDIRWATCH, "kf.coreaddons.kdirwatch", QtWarningMsg)
 
 // set this to true for much more verbose debug output
 static bool s_verboseDebug = false;
