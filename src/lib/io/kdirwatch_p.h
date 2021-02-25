@@ -46,6 +46,8 @@ class QSocketNotifier;
 
 #if HAVE_SYS_INOTIFY_H
 struct inotify_event;
+
+#include <QMultiHash>
 #endif // HAVE_SYS_INOTIFY_H
 
 #if HAVE_QFILESYSTEMWATCHER
@@ -232,7 +234,7 @@ public:
     QSocketNotifier *mSn;
     bool supports_inotify;
     int m_inotify_fd;
-    QHash<int, Entry *> m_inotify_wd_to_entry;
+    QMultiHash<int, Entry *> m_inotify_wd_to_entry;
 
     bool useINotify(Entry *e);
     void handleINotifyEventEntry(const QString &path, const struct inotify_event *const event, Entry *entry);

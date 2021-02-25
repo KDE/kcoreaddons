@@ -276,7 +276,7 @@ void KDirWatchPrivate::handleINotifyEventEntry(const QString &path, const struct
             qCDebug(KDIRWATCH) << "-->got deleteself signal for" << e->path;
         }
         e->m_status = NonExistent;
-        m_inotify_wd_to_entry.remove(e->wd);
+        m_inotify_wd_to_entry.remove(e->wd, e);
         e->wd = -1;
         e->m_ctime = invalid_ctime;
         emitEvent(e, Deleted, e->path);
@@ -421,12 +421,16 @@ void KDirWatchPrivate::inotifyEventReceived()
                 continue;
             }
 
-            Entry *e = m_inotify_wd_to_entry.value(event->wd);
-            if (!e) {
+            // If multiple file names match an inode, inotify will only use one
+            // wd and there will be duplicate Entry objects for each path.
+            const auto watchedEntries = m_inotify_wd_to_entry.values(event->wd);
+            if (watchedEntries.isEmpty()) {
                 continue;
             }
 
-            handleINotifyEventEntry(path, event, e);
+            for (Entry *e : watchedEntries) {
+                handleINotifyEventEntry(path, event, e);
+            }
 
             if (!rescan_timer.isActive()) {
                 rescan_timer.start(m_PollInterval); // singleshot
@@ -1017,8 +1021,10 @@ void KDirWatchPrivate::removeWatch(Entry *e)
 #endif
 #if HAVE_SYS_INOTIFY_H
     if (e->m_mode == INotifyMode) {
-        m_inotify_wd_to_entry.remove(e->wd);
-        (void)inotify_rm_watch(m_inotify_fd, e->wd);
+        m_inotify_wd_to_entry.remove(e->wd, e);
+        if (!m_inotify_wd_to_entry.contains(e->wd)) {
+            (void)inotify_rm_watch(m_inotify_fd, e->wd);
+        }
         if (s_verboseDebug) {
             qCDebug(KDIRWATCH).nospace() << "Cancelled INotify (fd " << m_inotify_fd << ", " << e->wd << ") for " << e->path;
         }
@@ -1090,7 +1096,7 @@ void KDirWatchPrivate::removeEntry(KDirWatch *instance, Entry *e, Entry *sub_ent
     }
     QString p = e->path; // take a copy, QMap::remove takes a reference and deletes, since e points into the map
 #if HAVE_SYS_INOTIFY_H
-    m_inotify_wd_to_entry.remove(e->wd);
+    m_inotify_wd_to_entry.remove(e->wd, e);
 #endif
     m_mapEntries.remove(p); // <e> not valid any more
 }
