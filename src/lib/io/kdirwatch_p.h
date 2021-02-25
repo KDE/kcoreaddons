@@ -44,6 +44,10 @@ class QSocketNotifier;
 
 #define invalid_ctime (static_cast<time_t>(-1))
 
+#if HAVE_SYS_INOTIFY_H
+struct inotify_event;
+#endif // HAVE_SYS_INOTIFY_H
+
 #if HAVE_QFILESYSTEMWATCHER
 #include <QFileSystemWatcher>
 #endif // HAVE_QFILESYSTEMWATCHER
@@ -231,6 +235,8 @@ public:
     QHash<int, Entry *> m_inotify_wd_to_entry;
 
     bool useINotify(Entry *e);
+    void handleINotifyEventEntry(const QString &path, const struct inotify_event *const event, Entry *entry);
+
 #endif
 #if HAVE_QFILESYSTEMWATCHER
     QFileSystemWatcher *fsWatcher;
