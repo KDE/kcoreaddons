@@ -10,11 +10,12 @@
 #define KMACROEXPANDER_H
 
 #include <QChar>
+#include <QStringList>
+
 #include <kcoreaddons_export.h>
 #include <memory>
 
 class QString;
-class QStringList;
 template<typename KT, typename VT>
 class QHash;
 class KMacroExpanderBasePrivate;

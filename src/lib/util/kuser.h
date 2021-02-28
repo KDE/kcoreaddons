@@ -14,12 +14,12 @@
 #include <kcoreaddons_export.h>
 
 #include <QSharedDataPointer>
+#include <QStringList>
 #include <QVariant>
 #include <qcontainerfwd.h>
 
 class KUserGroup;
 class QString;
-class QStringList;
 
 #ifdef Q_OS_WIN
 typedef void *K_UID;

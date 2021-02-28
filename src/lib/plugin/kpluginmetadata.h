@@ -21,7 +21,6 @@
 
 class KPluginLoader;
 class QPluginLoader;
-class QStringList;
 class KPluginMetaDataPrivate;
 class KAboutPerson;
 class QObject;

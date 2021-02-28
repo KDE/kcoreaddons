@@ -8,10 +8,10 @@
 #ifndef KSHELL_H
 #define KSHELL_H
 
+#include <QStringList>
 #include <kcoreaddons_export.h>
 #include <qglobal.h>
 
-class QStringList;
 class QString;
 
 /**

@@ -13,13 +13,13 @@
 
 #include <kcoreaddons_export.h>
 
+#include <QStringList>
 #include <qnamespace.h>
 
 class QChar;
 class QRegExp;
 class QRegularExpression;
 class QString;
-class QStringList;
 
 /**
  * This namespace contains utility functions for handling strings.
