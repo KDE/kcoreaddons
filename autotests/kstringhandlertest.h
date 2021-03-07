@@ -10,7 +10,8 @@ class KStringHandlerTest : public QObject
 private Q_SLOTS:
     void capwords();
     void tagURLs();
-    void perlSplit();
+    void perlSplitTextSep();
+    void perlSplitRegexSep();
     void obscure();
     void preProcessWrap_data();
     void preProcessWrap();

@@ -24,21 +24,19 @@ void KStringHandlerTest::tagURLs()
     test = QStringLiteral("http://www.foo.org/story$806");
     QCOMPARE(KStringHandler::tagUrls(test), QStringLiteral("<a href=\"http://www.foo.org/story$806\">http://www.foo.org/story$806</a>"));
 
-#if 0
-    // XFAIL - i.e. this needs to be fixed, but has never been
-    test = "&lt;a href=www.foo.com&gt;";
-    check("tagURLs()", KStringHandler::tagURLs(test),
-          "&lt;a href=<a href=\"www.foo.com\">www.foo.com</a>&gt;");
-#endif
-
     test = QStringLiteral("http://www.foo.org/bla-(bli)");
     QCOMPARE(KStringHandler::tagUrls(test), QStringLiteral("<a href=\"http://www.foo.org/bla-(bli)\">http://www.foo.org/bla-(bli)</a>"));
 
     test = QStringLiteral("http://www.foo.org/bla-bli");
     QCOMPARE(KStringHandler::tagUrls(test), QStringLiteral("<a href=\"http://www.foo.org/bla-bli\">http://www.foo.org/bla-bli</a>"));
+
+    // Test with Unicode characters
+    test = QStringLiteral("Click on https://foo@bar:www.kde.org/ÿöyo/dyne.html#a1 for info.");
+    QCOMPARE(KStringHandler::tagUrls(test),
+             QStringLiteral("Click on <a href=\"https://foo@bar:www.kde.org/ÿöyo/dyne.html#a1\">https://foo@bar:www.kde.org/ÿöyo/dyne.html#a1</a> for info."));
 }
 
-void KStringHandlerTest::perlSplit()
+void KStringHandlerTest::perlSplitTextSep()
 {
     QStringList expected;
     expected << QStringLiteral("some") << QStringLiteral("string") << QStringLiteral("for") << QStringLiteral("you__here");
@@ -47,13 +45,23 @@ void KStringHandlerTest::perlSplit()
     expected.clear();
     expected << QStringLiteral("kparts") << QStringLiteral("reaches") << QStringLiteral("the parts other parts can't");
     QCOMPARE(KStringHandler::perlSplit(QLatin1Char(' '), QStringLiteral("kparts reaches the parts other parts can't"), 3), expected);
+}
 
-    expected.clear();
-    expected << QStringLiteral("Split") << QStringLiteral("me") << QStringLiteral("up ! I'm bored ! OK ?");
+void KStringHandlerTest::perlSplitRegexSep()
+{
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
-    QCOMPARE(KStringHandler::perlSplit(QRegExp(QStringLiteral("[! ]")), QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
+    QCOMPARE(KStringHandler::perlSplit(QRegExp(QStringLiteral("[! ]")), QStringLiteral("Split me up ! I'm bored ! OK ?"), 3),
+             (QStringList{QStringLiteral("Split"), QStringLiteral("me"), QStringLiteral("up ! I'm bored ! OK ?")}));
 #endif
-    QCOMPARE(KStringHandler::perlSplit(QRegularExpression(QStringLiteral("[! ]")), QStringLiteral("Split me up ! I'm bored ! OK ?"), 3), expected);
+    QCOMPARE(KStringHandler::perlSplit(QRegularExpression(QStringLiteral("[! ]")), QStringLiteral("Split me up ! I'm bored ! OK ?"), 3),
+             (QStringList{QStringLiteral("Split"), QStringLiteral("me"), QStringLiteral("up ! I'm bored ! OK ?")}));
+
+    QCOMPARE(KStringHandler::perlSplit(QRegularExpression(QStringLiteral("\\W")), QStringLiteral("aaa ggg cd ef"), 3),
+             (QStringList{QStringLiteral("aaa"), QStringLiteral("ggg"), QStringLiteral("cd ef")}));
+
+    // Test with Unicode characters
+    QCOMPARE(KStringHandler::perlSplit(QRegularExpression(QStringLiteral("\\W")), QStringLiteral("aaa gǵg cd ef"), 3),
+             (QStringList{QStringLiteral("aaa"), QStringLiteral("gǵg"), QStringLiteral("cd ef")}));
 }
 
 void KStringHandlerTest::obscure()

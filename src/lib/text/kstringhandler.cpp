@@ -174,7 +174,10 @@ QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QStri
     QStringList list;
 
     int start = 0;
-    QRegularExpressionMatchIterator iter = sep.globalMatch(s);
+    QRegularExpression separator(sep);
+    separator.setPatternOptions(QRegularExpression::UseUnicodePropertiesOption);
+
+    QRegularExpressionMatchIterator iter = separator.globalMatch(s);
     QRegularExpressionMatch match;
     QString chunk;
     while (iter.hasNext() && (ignoreMax || list.count() < max - 1)) {
@@ -198,11 +201,10 @@ QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QStri
 QString KStringHandler::tagUrls(const QString &text)
 {
     QString richText(text);
-    const QRegularExpression urlEx(QStringLiteral("(www\\.(?!\\.)|(fish|ftp|http|https)://[\\d\\w\\./,:_~\\?=&;#@\\-\\+\\%\\$\\(\\)]+)"));
-    // the reference \1 is going to be replaced by the matched url
-    const QLatin1String regexBackRef(QLatin1String("\\1"));
-    const QString anchor = QLatin1String("<a href=\"") + regexBackRef + QLatin1String("\">") + regexBackRef + QLatin1String("</a>");
-    richText.replace(urlEx, anchor);
+    static const QRegularExpression urlEx(QStringLiteral("(www\\.(?!\\.)|(fish|ftp|http|https)://[\\d\\w\\./,:_~\\?=&;#@\\-\\+\\%\\$\\(\\)]+)"),
+                                          QRegularExpression::UseUnicodePropertiesOption);
+    // The reference \1 is going to be replaced by the matched url
+    richText.replace(urlEx, QStringLiteral("<a href=\"\\1\">\\1</a>"));
     return richText;
 }
 
