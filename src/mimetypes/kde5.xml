@@ -364,6 +364,7 @@ Notes:
     <comment>Calligra Plan project management document</comment>
     <comment xml:lang="az">Calligra Plan layihəsi darəetmə sənədi</comment>
     <comment xml:lang="ca">Document per a la gestió de projectes del Calligra Plan</comment>
+    <comment xml:lang="cs">Dokument pro správu projektů Calligra Plan</comment>
     <comment xml:lang="de">Calligra-Plan-Projektverwaltungdokument</comment>
     <comment xml:lang="el">Έγγραφο διαχείρισης έργων Calligra Plan</comment>
     <comment xml:lang="en_GB">Calligra Plan project management document</comment>
@@ -392,6 +393,7 @@ Notes:
     <comment>Calligra Plan work package document</comment>
     <comment xml:lang="az">Calligra Plan iş paketi sənədi</comment>
     <comment xml:lang="ca">Document de paquet de treball del Calligra Plan</comment>
+    <comment xml:lang="cs">Dokument pracovního balíčku Calligra Plan</comment>
     <comment xml:lang="de">Calligra-Plan-Arbeitspaketdokument</comment>
     <comment xml:lang="el">Έγγραφο πακέτου εργασίας Calligra Plan</comment>
     <comment xml:lang="en_GB">Calligra Plan work package document</comment>
@@ -1763,6 +1765,7 @@ Notes:
     <comment>KXMLGUI UI Declaration</comment>
     <comment xml:lang="az">KXMLGUI UI Deklarasiyası</comment>
     <comment xml:lang="ca">Declaració d'IU del KXMLGUI</comment>
+    <comment xml:lang="cs">Deklarace KXMLGUI UI</comment>
     <comment xml:lang="de">KXMLGUI-UI-Deklaration</comment>
     <comment xml:lang="el">Δήλωση KXMLGUI UI</comment>
     <comment xml:lang="en_GB">KXMLGUI UI Declaration</comment>
