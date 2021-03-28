@@ -237,7 +237,11 @@ void KPluginLoader::forEachPlugin(const QString &directory, std::function<void(c
         dirsToCheck << directory;
     } else {
         const QStringList listPaths = QCoreApplication::libraryPaths();
-        dirsToCheck.reserve(listPaths.size());
+        dirsToCheck.reserve(listPaths.size() + 1);
+
+        // add application directory first to prefer plugins bundled with application & have working pre-installation loading
+        dirsToCheck << QCoreApplication::applicationDirPath() + QLatin1Char('/') + directory;
+
         for (const QString &libDir : listPaths) {
             dirsToCheck << libDir + QLatin1Char('/') + directory;
         }
