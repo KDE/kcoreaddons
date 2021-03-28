@@ -104,6 +104,7 @@ set(libkcoreaddons_SRCS
     util/kosrelease.cpp
     util/kprocesslist.cpp
     util/kshell.cpp
+    util/kexpected.cpp
     ${kcoreaddons_OPTIONAL_SRCS}
     ${kcoreaddons_QM_LOADER}
 )
@@ -276,6 +277,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KListOpenFilesJob
         Kdelibs4Migration
         Kdelibs4ConfigMigrator
+        KExpected
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )

@@ -12,6 +12,9 @@
 
 #include <QPluginLoader>
 
+#include <KPluginFactory>
+
+#include "kexpected.h"
 #include <functional>
 
 class KPluginFactory;
@@ -366,6 +369,27 @@ public:
      */
     static void forEachPlugin(const QString &directory,
             std::function<void(const QString &)> callback = std::function<void(const QString &)>());
+
+    template<typename T>
+    static KExpected<T *, QString> instantiatePlugin(const QString &fileName, QObject *parent = nullptr, const QVariantList &args = {})
+    {
+        QPluginLoader loader(fileName);
+        KPluginFactory *factory = qobject_cast<KPluginFactory *>(loader.instance());
+
+        if (!factory) {
+            qDebug() << "Could not create KPluginFactory for" << fileName << loader.errorString();
+            return kMakeUnexpected(loader.errorString());
+        }
+
+        T *instance = factory->create<T>(parent, args);
+
+        if (!instance) {
+            qDebug() << "KPluginFactory could not load the plugin:" << fileName << loader.errorString();
+            return kMakeUnexpected(loader.errorString());
+        }
+        return instance;
+    }
+
 private:
     Q_DECLARE_PRIVATE(KPluginLoader)
     Q_DISABLE_COPY(KPluginLoader)
