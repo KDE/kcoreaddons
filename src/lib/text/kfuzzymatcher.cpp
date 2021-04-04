@@ -102,7 +102,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
 
     // Calculate score
     if (matched) {
-        static constexpr int sequentialBonus = 30;
+        static constexpr int sequentialBonus = 25;
         static constexpr int separatorBonus = 25; // bonus if match occurs after a separator
         static constexpr int camelBonus = 25; // bonus if match is uppercase and prev is lower
         static constexpr int firstLetterBonus = 15; // bonus if the first letter is matched
@@ -206,20 +206,48 @@ static bool match_internal(QStringView pattern, QStringView str, int &outScore, 
 bool KFuzzyMatcher::matchSimple(QStringView pattern, QStringView str)
 {
     auto patternIt = pattern.cbegin();
+    /**
+     * Instead of doing
+     *
+     *      strIt.toLower() == patternIt.toLower()
+     *
+     * we convert patternIt to Upper / Lower as needed and compare with strIt. This
+     * saves us from calling toLower() on both strings, making things a little bit faster
+     */
+    bool lower = patternIt->isLower();
+    QChar cUp = lower ? patternIt->toUpper() : *patternIt;
+    QChar cLow = lower ? *patternIt : patternIt->toLower();
     for (auto strIt = str.cbegin(); strIt != str.cend() && patternIt != pattern.cend(); ++strIt) {
-        if (strIt->toLower() == patternIt->toLower()) {
+        if (*strIt == cLow || *strIt == cUp) {
             ++patternIt;
+            lower = patternIt->isLower();
+            cUp = lower ? patternIt->toUpper() : *patternIt;
+            cLow = lower ? *patternIt : patternIt->toLower();
         }
     }
+
     return patternIt == pattern.cend();
 }
 
 KFuzzyMatcher::Result KFuzzyMatcher::match(QStringView pattern, QStringView str)
 {
-    uint8_t matches[256];
-    int score = 0;
-    const bool matched = match_internal(pattern, str, score, matches);
+    /**
+     * Simple substring matching to flush out non-matching strings
+     */
+    const bool simpleMatch = matchSimple(pattern, str);
+
     KFuzzyMatcher::Result result;
+    result.matched = false;
+    result.score = 0;
+
+    if (!simpleMatch) {
+        return result;
+    }
+
+    // actual algorithm
+    int score = 0;
+    uint8_t matches[256];
+    const bool matched = match_internal(pattern, str, score, matches);
     result.matched = matched;
     result.score = score;
     return result;
