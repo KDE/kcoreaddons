@@ -45,7 +45,7 @@
 #include <QThreadStorage>
 #include <QTimer>
 #include <assert.h>
-#include <errno.h>
+#include <cerrno>
 #include <sys/stat.h>
 
 #include <qplatformdefs.h> // QT_LSTAT, QT_STAT, QT_STATBUF

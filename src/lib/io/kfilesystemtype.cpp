@@ -8,8 +8,8 @@
 
 #include "kfilesystemtype.h"
 #include "kcoreaddons_debug.h"
+
 #include <QFile>
-//#include <errno.h>
 
 #ifndef Q_OS_WIN
 inline KFileSystemType::Type kde_typeFromName(const char *name)

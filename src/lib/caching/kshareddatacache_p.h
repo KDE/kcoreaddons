@@ -16,7 +16,7 @@
 
 #include "kcoreaddons_debug.h"
 
-#include <errno.h>
+#include <cerrno>
 #include <fcntl.h>
 #include <sched.h> // sched_yield
 #include <time.h>
