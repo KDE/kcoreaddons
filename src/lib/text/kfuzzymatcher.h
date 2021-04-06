@@ -6,7 +6,6 @@
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
-
 #ifndef KFUZZYMATCHER_H
 #define KFUZZYMATCHER_H
 
@@ -16,6 +15,9 @@ class QString;
 class QStringView;
 
 /**
+ * This namespace contains functions for fuzzy matching a list of strings
+ * against a pattern.
+ *
  * This code is ported to Qt from lib_fts:
  * https://github.com/forrestthewoods/lib_fts
  * which tries to replicate SublimeText like fuzzy matching.
@@ -29,7 +31,7 @@ class QStringView;
  * Limitations:
  * - Currently this will match only strings with length < 256 correctly. This is because we
  * intend on matching a pattern against words / short strings and not paragraphs.
- * - No more than 256 matches will happen
+ * - No more than 256 matches will happen.
  *
  * If you are using this with @c QSortFilterProxyModel, you need to override both
  * @c QSortFilterProxyModel::lessThan and @c QSortFilterProxyModel::filterAcceptsRow.
@@ -77,9 +79,10 @@ namespace KFuzzyMatcher
  * @brief The result of a fuzzy match
  */
 struct KCOREADDONS_EXPORT Result {
-    /** Score of this match. This can be negative. if matched is @c false
-        then the score will be zero.
-    */
+    /**
+     * Score of this match. This can be negative.if matched is @c false
+     * then the score will be zero.
+     */
     int score = 0;
     /** @c true if match was successful */
     bool matched = false;
