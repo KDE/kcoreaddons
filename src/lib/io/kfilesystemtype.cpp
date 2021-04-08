@@ -74,6 +74,12 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #ifndef SMB_SUPER_MAGIC
 #define SMB_SUPER_MAGIC 0x0000517B
 #endif
+#ifndef SMB2_MAGIC_NUMBER
+#define SMB2_MAGIC_NUMBER 0xFE534D42
+#endif
+#ifndef CIFS_MAGIC_NUMBER
+#define CIFS_MAGIC_NUMBER 0xFF534D42
+#endif
 #ifndef FUSE_SUPER_MAGIC
 #define FUSE_SUPER_MAGIC 0x65735546
 #endif
@@ -97,6 +103,8 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
     case FUSE_SUPER_MAGIC: // TODO could be anything. Need to use statfs() to find out more.
         return KFileSystemType::Nfs;
     case SMB_SUPER_MAGIC:
+    case SMB2_MAGIC_NUMBER:
+    case CIFS_MAGIC_NUMBER:
         return KFileSystemType::Smb;
     case MSDOS_SUPER_MAGIC:
         return KFileSystemType::Fat;
