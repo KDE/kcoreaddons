@@ -13,6 +13,8 @@
 
 class QString;
 class QStringView;
+template<typename T>
+class QVector;
 
 /**
  * This namespace contains functions for fuzzy matching a list of strings
@@ -89,6 +91,35 @@ struct KCOREADDONS_EXPORT Result {
 };
 
 /**
+ * @brief A range representing a matched sequence in a string
+ *
+ * @since 5.84
+ */
+struct KCOREADDONS_EXPORT Range {
+    int start;
+    int length;
+};
+
+/**
+ * @brief The type of matches to consider when requesting for ranges.
+ * @see matchedRanges
+ *
+ * @since 5.84
+ */
+enum class RangeType : unsigned char {
+    /**
+     * We want ranges only where the pattern fully matches the user
+     * supplied string
+     */
+    FullyMatched,
+    /**
+     * We want ranges for all matches, even if the pattern partially
+     * matched the user supplied string
+     */
+    All
+};
+
+/**
  * @brief Simple fuzzy matching of chars in @p pattern with chars in @p str
  * sequentially. If there is a match, it will return true and false otherwise.
  * There is no scoring. You should use this if score is not important for you
@@ -123,6 +154,71 @@ KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
  * @since 5.79
  */
 KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
+
+/**
+ * @brief A function which returns the positions + lengths where the @p pattern matched
+ * inside the @p str. The resulting ranges can then be utilized to show the user where
+ * the matches occurred. Example:
+ *
+ * @code
+ * String: hello
+ * Pattern: Hlo
+ *
+ * Output: [Range{0, 1}, Range{3, 2}]
+ * @endcode
+ *
+ * In the above example @c "Hlo" matched inside the string @c "hello" in two places i.e.,
+ * position 0 and position 3. At position 0 it matched 'h', and at position 3 it
+ * matched 'lo'.
+ *
+ * The ranges themeselves can't do much so you will have to make the result useful
+ * in your own way. Some possible uses can be:
+ * - Transform the result into a vector of @c QTextLayout::FormatRange and then paint
+ *   them in the view
+ * - Use the result to transform the string into html, for example conver the string from
+ *   above example to "\<b\>H\</b\>el\<b\>lo\</b\>, and then use @c QTextDocument
+ *   to paint it into your view.
+ *
+ * Example with the first method:
+ * @code
+ *       auto ranges = KFuzzyMatcher::matchedRanges(pattern, string);
+ *       QVector<QTextLayout::FormatRange> out;
+ *       std::transform(ranges.begin(), ranges.end(), std::back_inserter(out), [](const KFuzzyMatcher::Range &fr){
+ *          return QTextLayout::FormatRange{fr.start, fr.length, QTextCharFormat()};
+ *       });
+ *
+ *       QTextLayout layout(text, font);
+ *       layout.beginLayout();
+ *       QTextLine line = layout.createLine();
+ *       //...
+ *       layout.endLayout();
+ *
+ *       layout.setFormats(layout.formats() + out);
+ *       layout.draw(painter, position);
+ * @endcode
+ *
+ * If @p pattern is empty, the function will return an empty vector
+ *
+ * if @p type is @c RangeType::All, the function will try to get ranges even if
+ * the pattern didn't fully match. For example:
+ * @code
+ * pattern: "git"
+ * string: "gti"
+ * RangeType: All
+ *
+ * Output: [Range{0, 1}, Range{2, 1}]
+ * @endcode
+ *
+ * @param pattern to search for. For e.g., text entered by a user to filter a
+ * list or model
+ * @param str the current string from your list of strings
+ * @param type whether to consider ranges from full matches only or all matches including partial matches
+ * @return A vector of ranges containing positions and lengths where the pattern
+ * matched. If there was no match, the vector will be empty
+ *
+ * @since 5.84
+ */
+KCOREADDONS_EXPORT QVector<KFuzzyMatcher::Range> matchedRanges(QStringView pattern, QStringView str, RangeType type = RangeType::FullyMatched);
 
 } // namespace KFuzzyMatcher
 

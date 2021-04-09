@@ -196,3 +196,40 @@ void KFuzzyMatcherTest::testMatch()
     QCOMPARE(actual.size(), size);
     QCOMPARE(actual, expected);
 }
+
+void KFuzzyMatcherTest::testMatchedRanges_data()
+{
+    QTest::addColumn<QString>("pattern");
+    QTest::addColumn<QString>("string");
+
+    using Range = QPair<int, int>;
+    QTest::addColumn<QVector<Range>>("expectedRanges");
+
+    QTest::addColumn<bool>("matchingOnly");
+
+    QTest::newRow("Emtpy") << QStringLiteral("") << QStringLiteral("") << QVector<Range>{} << true;
+    QTest::newRow("Hello") << QStringLiteral("Hlo") << QStringLiteral("Hello") << QVector<Range>{{0, 1}, {3, 2}} << true;
+    QTest::newRow("lll") << QStringLiteral("lll") << QStringLiteral("SVisualLoggerLogsList") << QVector<Range>{{7, 1}, {13, 1}, {17, 1}} << true;
+    QTest::newRow("Sort") << QStringLiteral("sort") << QStringLiteral("SorT") << QVector<Range>{{0, 4}} << true;
+    QTest::newRow("Unmatching") << QStringLiteral("git") << QStringLiteral("gti") << QVector<Range>{} << true;
+    QTest::newRow("UnmatchingWithAllMatches") << QStringLiteral("git") << QStringLiteral("gti") << QVector<Range>{{0, 1}, {2, 1}} << false;
+}
+
+void KFuzzyMatcherTest::testMatchedRanges()
+{
+    QFETCH(QString, pattern);
+    QFETCH(QString, string);
+    QFETCH(bool, matchingOnly);
+    using Range = QPair<int, int>;
+    QFETCH(QVector<Range>, expectedRanges);
+
+    const auto matchMode = matchingOnly ? KFuzzyMatcher::RangeType::FullyMatched : KFuzzyMatcher::RangeType::All;
+
+    auto resultRanges = KFuzzyMatcher::matchedRanges(pattern, string, matchMode);
+    QCOMPARE(resultRanges.size(), expectedRanges.size());
+
+    bool res = std::equal(expectedRanges.begin(), expectedRanges.end(), resultRanges.begin(), [](const Range &l, const KFuzzyMatcher::Range &r) {
+        return l.first == r.start && l.second == r.length;
+    });
+    QVERIFY(res);
+}

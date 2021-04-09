@@ -19,6 +19,8 @@ private Q_SLOTS:
     void testMatchSimple();
     void testMatch_data();
     void testMatch();
+    void testMatchedRanges_data();
+    void testMatchedRanges();
 };
 
 #endif // KFUZZYMATCHERTEST_H

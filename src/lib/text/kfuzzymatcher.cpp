@@ -10,6 +10,7 @@
 
 #include <QString>
 #include <QStringView>
+#include <QVector>
 
 /**
  * Custom toLower function which is much faster than
@@ -31,6 +32,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
                             const uint8_t *srcMatches,
                             uint8_t *matches,
                             int nextMatch,
+                            int &totalMatches,
                             int &recursionCount)
 {
     static constexpr int recursionLimit = 10;
@@ -78,7 +80,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
             const auto strNextChar = std::next(str);
             if (!matchingInSequence && match_recursive(pattern, strNextChar, recursiveScore, strBegin,
                                 strEnd, patternEnd, matches, recursiveMatches,
-                                nextMatch, recursionCount)) {
+                                nextMatch, totalMatches, recursionCount)) {
                 // Pick best recursive score
                 if (!recursiveMatch || recursiveScore > bestRecursiveScore) {
                     memcpy(bestRecursiveMatches, recursiveMatches, maxMatches);
@@ -169,6 +171,8 @@ static bool match_recursive(QStringView::const_iterator pattern,
         }
     }
 
+    totalMatches = nextMatch;
+
     // Return best result
     if (recursiveMatch && (!matched || bestRecursiveScore > outScore)) {
         // Recursive score is better than "this"
@@ -198,7 +202,8 @@ static bool match_internal(QStringView pattern, QStringView str, int &outScore, 
     const auto patternEnd = pattern.cend();
     const auto strEnd = str.cend();
 
-    return match_recursive(patternIt, strIt, outScore, strIt, strEnd, patternEnd, nullptr, matches, 0, recursionCount);
+    int total = 0;
+    return match_recursive(patternIt, strIt, outScore, strIt, strEnd, patternEnd, nullptr, matches, 0, total, recursionCount);
 }
 
 /**************************************************************/
@@ -251,4 +256,49 @@ KFuzzyMatcher::Result KFuzzyMatcher::match(QStringView pattern, QStringView str)
     result.matched = matched;
     result.score = score;
     return result;
+}
+
+QVector<KFuzzyMatcher::Range> KFuzzyMatcher::matchedRanges(QStringView pattern, QStringView str, RangeType type)
+{
+    QVector<KFuzzyMatcher::Range> ranges;
+    if (pattern.isEmpty()) {
+        return ranges;
+    }
+
+    int totalMatches = 0;
+    int score = 0;
+    int recursionCount = 0;
+
+    auto strIt = str.cbegin();
+    auto patternIt = pattern.cbegin();
+    const auto patternEnd = pattern.cend();
+    const auto strEnd = str.cend();
+
+    uint8_t matches[256];
+    auto res = match_recursive(patternIt, strIt, score, strIt, strEnd, patternEnd, nullptr, matches, 0, totalMatches, recursionCount);
+    // didn't match? => We don't care about results
+    if (!res && type == RangeType::FullyMatched) {
+        return {};
+    }
+
+    int previousMatch = 0;
+    for (int i = 0; i < totalMatches; ++i) {
+        auto matchPos = matches[i];
+        /**
+         * Check if this match is part of the previous
+         * match. If it is, we increase the length of
+         * the last range.
+         */
+        if (!ranges.isEmpty() && matchPos == previousMatch + 1) {
+            ranges.last().length++;
+        } else {
+            /**
+             * This is a new match inside the string
+             */
+            ranges.push_back({/* start: */ matchPos, /* length: */ 1});
+        }
+        previousMatch = matchPos;
+    }
+
+    return ranges;
 }
