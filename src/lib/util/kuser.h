@@ -216,7 +216,7 @@ KCOREADDONS_EXPORT uint qHash(const KGroupId &id, uint seed = 0);
  * @short Represents a user on your system
  *
  * This class represents a user on your system. You can either get
- * information about the current user, of fetch information about
+ * information about the current user, or fetch information about
  * a user on the system. Instances of this class will be explicitly shared,
  * so copying objects is very cheap and you can safely pass objects by value.
  *
