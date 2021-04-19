@@ -78,6 +78,7 @@ Notes:
     <comment xml:lang="ro">CD audio</comment>
     <comment xml:lang="sl">Zvočni CD</comment>
     <comment xml:lang="sv">Cd-ljud</comment>
+    <comment xml:lang="ta">CD ஒலிக்கோப்பை</comment>
     <comment xml:lang="tr">CD sesi</comment>
     <comment xml:lang="uk">звуковий компакт-диск</comment>
     <comment xml:lang="vi">âm thanh CD</comment>
@@ -202,6 +203,7 @@ Notes:
     <comment xml:lang="ro">schemă de culori KDE</comment>
     <comment xml:lang="sl">Barvna shema KDE</comment>
     <comment xml:lang="sv">KDE-färgschema</comment>
+    <comment xml:lang="ta">கே.டீ.யீ. நிறத் திட்டம்</comment>
     <comment xml:lang="tr">KDE renk şeması</comment>
     <comment xml:lang="uk">схема кольорів KDE</comment>
     <comment xml:lang="vi">quy hoạch màu KDE</comment>
@@ -236,6 +238,7 @@ Notes:
     <comment xml:lang="ro">pachet KNewStuff</comment>
     <comment xml:lang="sl">Paket KNewStuff</comment>
     <comment xml:lang="sv">Heta nyheter-paket</comment>
+    <comment xml:lang="ta">KNewStuff தொகுப்பு</comment>
     <comment xml:lang="tr">KNewStuff paketi</comment>
     <comment xml:lang="uk">пакунок KNewStuff</comment>
     <comment xml:lang="vi">gói KNewStuff</comment>
@@ -333,6 +336,7 @@ Notes:
     <comment xml:lang="ro">plasmoid</comment>
     <comment xml:lang="sl">plasmoid</comment>
     <comment xml:lang="sv">plasmoid</comment>
+    <comment xml:lang="ta">பிளாஸ்மாய்ட்</comment>
     <comment xml:lang="tr">plasmoid</comment>
     <comment xml:lang="uk">плазмоїд</comment>
     <comment xml:lang="vi">plasmoid</comment>
@@ -549,6 +553,7 @@ Notes:
     <comment xml:lang="ro">arhivă web</comment>
     <comment xml:lang="sl">spletni arhiv</comment>
     <comment xml:lang="sv">webbarkiv</comment>
+    <comment xml:lang="ta">இணைய காப்பகம்</comment>
     <comment xml:lang="tr">web arşivi</comment>
     <comment xml:lang="uk">вебархів</comment>
     <comment xml:lang="vi">kho trữ web</comment>
@@ -669,6 +674,7 @@ Notes:
     <comment xml:lang="pt_BR">Imagem HDR</comment>
     <comment xml:lang="sl">Slika HDR</comment>
     <comment xml:lang="sv">HDR-bild</comment>
+    <comment xml:lang="ta">HDR படம்</comment>
     <comment xml:lang="tr">HDR resmi</comment>
     <comment xml:lang="uk">зображення HDR</comment>
     <comment xml:lang="vi">ảnh HDR</comment>
@@ -808,6 +814,7 @@ Notes:
     <comment xml:lang="pt_BR">arquivo de notação musical do abc</comment>
     <comment xml:lang="sl">Datoteka glasbenega zapisa abc</comment>
     <comment xml:lang="sv">abc-musiknotationsfil</comment>
+    <comment xml:lang="ta">abc பாடல் குறிப்பு கோப்பு</comment>
     <comment xml:lang="tr">abc müzik notalama dosyası</comment>
     <comment xml:lang="uk">файл нотного стану abc</comment>
     <comment xml:lang="vi">tệp kí hiệu âm nhạc abc</comment>
@@ -844,6 +851,7 @@ Notes:
     <comment xml:lang="ro">pachet de fonturi</comment>
     <comment xml:lang="sl">paket pisav</comment>
     <comment xml:lang="sv">teckensnittspaket</comment>
+    <comment xml:lang="ta">எழுத்துரு தொகுப்பு</comment>
     <comment xml:lang="tr">yazı tipi paketi</comment>
     <comment xml:lang="uk">пакунок шрифтів</comment>
     <comment xml:lang="vi">gói phông chữ</comment>
@@ -877,6 +885,7 @@ Notes:
     <comment xml:lang="ro">server Windows</comment>
     <comment xml:lang="sl">Strežnik Windows</comment>
     <comment xml:lang="sv">Windows-server</comment>
+    <comment xml:lang="ta">விண்டோஸ் சேவையகம்</comment>
     <comment xml:lang="tr">Windows sunucusu</comment>
     <comment xml:lang="uk">сервер Windows</comment>
     <comment xml:lang="vi">máy chủ Windows</comment>
@@ -908,6 +917,7 @@ Notes:
     <comment xml:lang="ro">grup de lucru Windows</comment>
     <comment xml:lang="sl">Delovna skupina Windows</comment>
     <comment xml:lang="sv">Windows-arbetsgrupp</comment>
+    <comment xml:lang="ta">விண்டோஸ் பணிக்குழு</comment>
     <comment xml:lang="tr">Windows çalışma grubu</comment>
     <comment xml:lang="uk">робоча група Windows</comment>
     <comment xml:lang="vi">nhóm làm việc Windows</comment>
@@ -939,6 +949,7 @@ Notes:
     <comment xml:lang="ro">monitor de sistem KDE</comment>
     <comment xml:lang="sl">Sistemski nadzornik KDE</comment>
     <comment xml:lang="sv">KDE-systemövervakare</comment>
+    <comment xml:lang="ta">கே.டீ.யீ. கணினி மேற்பார்வை</comment>
     <comment xml:lang="tr">KDE sistem izleyici</comment>
     <comment xml:lang="uk">монітор системи KDE</comment>
     <comment xml:lang="vi">trình giám sát hệ thống KDE</comment>
@@ -971,6 +982,7 @@ Notes:
     <comment xml:lang="ro">tematică KDE</comment>
     <comment xml:lang="sl">Tema KDE</comment>
     <comment xml:lang="sv">KDE-tema</comment>
+    <comment xml:lang="ta">கே.டீ.யீ. திட்டமுறை</comment>
     <comment xml:lang="tr">KDE teması</comment>
     <comment xml:lang="uk">тема KDE</comment>
     <comment xml:lang="vi">chủ đề KDE</comment>
@@ -1036,6 +1048,7 @@ Notes:
     <comment xml:lang="ro">fișier Kommander</comment>
     <comment xml:lang="sl">Datoteka Kommanderja</comment>
     <comment xml:lang="sv">Kommander-fil</comment>
+    <comment xml:lang="ta">Kommander கோப்பு</comment>
     <comment xml:lang="tr">Kommander dosyası</comment>
     <comment xml:lang="uk">файл Kommander</comment>
     <comment xml:lang="vi">tệp Kommander</comment>
@@ -1068,6 +1081,7 @@ Notes:
     <comment xml:lang="ro">cartof</comment>
     <comment xml:lang="sl">krompirček</comment>
     <comment xml:lang="sv">potatis</comment>
+    <comment xml:lang="ta">உருளைக்கிழங்கு</comment>
     <comment xml:lang="tr">patates</comment>
     <comment xml:lang="uk">картопля</comment>
     <comment xml:lang="vi">potato</comment>
@@ -1099,6 +1113,7 @@ Notes:
     <comment xml:lang="ro">joc salvat Kolf</comment>
     <comment xml:lang="sl">Shranjena igra Kolf</comment>
     <comment xml:lang="sv">Kolf sparat spel</comment>
+    <comment xml:lang="ta">Kolf சேமிக்கப்பட்ட ஆட்டம்</comment>
     <comment xml:lang="tr">Kolf kaydedilmiş oyunu</comment>
     <comment xml:lang="uk">збережена гра Kolf</comment>
     <comment xml:lang="vi">bàn chơi Kolf đã lưu</comment>
@@ -1169,6 +1184,7 @@ Notes:
     <comment xml:lang="pt_BR">Arquivo de documento do Okular</comment>
     <comment xml:lang="sl">Arhiv dokumentov za Okular</comment>
     <comment xml:lang="sv">Okular-dokumentarkiv</comment>
+    <comment xml:lang="ta">ஆக்குலர் ஆவணக் காப்பகம்</comment>
     <comment xml:lang="tr">Okular belge arşivi</comment>
     <comment xml:lang="uk">архів документа Okular</comment>
     <comment xml:lang="vi">kho trữ tài liệu Okular</comment>
@@ -1200,6 +1216,7 @@ Notes:
     <comment xml:lang="pt_BR">Imagem do Cabri</comment>
     <comment xml:lang="sl">Lik Cabri</comment>
     <comment xml:lang="sv">Cabri-figur</comment>
+    <comment xml:lang="ta">Cabri படம்</comment>
     <comment xml:lang="tr">Cabri çizimi</comment>
     <comment xml:lang="uk">рисунок Cabri</comment>
     <comment xml:lang="vi">hình Cabri</comment>
@@ -1234,6 +1251,7 @@ Notes:
     <comment xml:lang="pt_BR">Imagem do Dr. Geo</comment>
     <comment xml:lang="sl">Lik Dr. Geo</comment>
     <comment xml:lang="sv">Dr. Geo-figur</comment>
+    <comment xml:lang="ta">Dr. Geo படம்</comment>
     <comment xml:lang="tr">Dr. Geo çizimi</comment>
     <comment xml:lang="uk">рисунок Dr. Geo</comment>
     <comment xml:lang="vi">hình Dr. Geo</comment>
@@ -1267,6 +1285,7 @@ Notes:
     <comment xml:lang="pt_BR">Imagem do KGeo</comment>
     <comment xml:lang="sl">Lik KGeo</comment>
     <comment xml:lang="sv">Kgeo-figur</comment>
+    <comment xml:lang="ta">KGeo படம்</comment>
     <comment xml:lang="tr">KGeo çizimi</comment>
     <comment xml:lang="uk">рисунок KGeo</comment>
     <comment xml:lang="vi">hình KGeo</comment>
@@ -1297,6 +1316,7 @@ Notes:
     <comment xml:lang="pt_BR">Imagem do Kig</comment>
     <comment xml:lang="sl">Lik Kig</comment>
     <comment xml:lang="sv">Kig-figur</comment>
+    <comment xml:lang="ta">Kig படம்</comment>
     <comment xml:lang="tr">Kig çizimi</comment>
     <comment xml:lang="uk">рисунок Kig</comment>
     <comment xml:lang="vi">hình Kig</comment>
@@ -1328,6 +1348,7 @@ Notes:
     <comment xml:lang="pt_BR">Documento do KSeg</comment>
     <comment xml:lang="sl">Dokument KSeg</comment>
     <comment xml:lang="sv">Kseg-dokument</comment>
+    <comment xml:lang="ta">KSeg ஆவணம்</comment>
     <comment xml:lang="tr">KSeg belgesi</comment>
     <comment xml:lang="uk">документ KSeg</comment>
     <comment xml:lang="vi">tài liệu KSeg</comment>
@@ -1389,6 +1410,7 @@ Notes:
     <comment xml:lang="pt_BR">Arquivo do KmPlot</comment>
     <comment xml:lang="sl">Datoteka KmPlot</comment>
     <comment xml:lang="sv">Kmplot-fil</comment>
+    <comment xml:lang="ta">KmPlot கோப்பு</comment>
     <comment xml:lang="tr">KmPlot dosyası</comment>
     <comment xml:lang="uk">файл KmPlot</comment>
     <comment xml:lang="vi">tệp KmPlot</comment>
@@ -1514,6 +1536,7 @@ Notes:
     <comment xml:lang="pt_BR">Link do Windows</comment>
     <comment xml:lang="sl">Povezava v Windows</comment>
     <comment xml:lang="sv">Windows-länk</comment>
+    <comment xml:lang="ta">விண்டோஸ் இணைப்பு</comment>
     <comment xml:lang="tr">Windows bağlantısı</comment>
     <comment xml:lang="uk">посилання Windows</comment>
     <comment xml:lang="vi">liên kết Windows</comment>
@@ -1547,6 +1570,7 @@ Notes:
     <comment xml:lang="pt_BR">Lista de downloads do KGet</comment>
     <comment xml:lang="sl">Seznam prejemov KGet</comment>
     <comment xml:lang="sv">Kget-nerladdningslista</comment>
+    <comment xml:lang="ta">KGet பதிவிறக்க பட்டியல்</comment>
     <comment xml:lang="tr">KGet indirme listesi</comment>
     <comment xml:lang="uk">список отримань KGet</comment>
     <comment xml:lang="vi">danh sách tải về KGet</comment>
@@ -1607,6 +1631,7 @@ Notes:
     <comment xml:lang="pt_BR">Contato do ICQ</comment>
     <comment xml:lang="sl">Stik ICQ</comment>
     <comment xml:lang="sv">ICQ-kontakt</comment>
+    <comment xml:lang="ta">ICQ தொடர்பு</comment>
     <comment xml:lang="tr">ICQ kişisi</comment>
     <comment xml:lang="uk">контакт ICQ</comment>
     <comment xml:lang="vi">liên hệ ICQ</comment>
@@ -1639,6 +1664,7 @@ Notes:
     <comment xml:lang="pt_BR">Formato de mídia da Microsoft</comment>
     <comment xml:lang="sl">Microsoft Media Format</comment>
     <comment xml:lang="sv">Microsoft mediaformat</comment>
+    <comment xml:lang="ta">மைக்ரோசாப்ட் ஊடகப் படிவம்</comment>
     <comment xml:lang="tr">Microsoft Medya Biçimi</comment>
     <comment xml:lang="uk">Microsoft Media Format</comment>
     <comment xml:lang="vi">định dạng phương tiện Microsoft</comment>
@@ -1908,6 +1934,7 @@ Notes:
     <comment xml:lang="pt_BR">Relatório do KCrash</comment>
     <comment xml:lang="sl">Poročilo KCrash</comment>
     <comment xml:lang="sv">KCrash-rapport</comment>
+    <comment xml:lang="ta">KCrash அறிக்கை</comment>
     <comment xml:lang="tr">KCrash Raporu</comment>
     <comment xml:lang="uk">звіт KCrash</comment>
     <comment xml:lang="vi">báo cáo KCrash</comment>
