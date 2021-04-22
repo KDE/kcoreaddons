@@ -398,7 +398,12 @@ bool KPluginMetaData::operator==(const KPluginMetaData &other) const
 
 QObject *KPluginMetaData::instantiate() const
 {
-    return QPluginLoader(m_fileName).instance();
+    QPluginLoader loader(m_fileName);
+    const auto ret = loader.instance();
+    if (!ret) {
+        qCWarning(KCOREADDONS_DEBUG) << "Could not create plugin" << name() << "error:" << loader.errorString();
+    }
+    return ret;
 }
 
 template<class T>
