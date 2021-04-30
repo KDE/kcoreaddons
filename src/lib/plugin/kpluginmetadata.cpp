@@ -296,7 +296,7 @@ QJsonValue KPluginMetaData::readTranslatedValue(const QJsonObject &jo, const QSt
     if (it != jo.constEnd()) {
         return it.value();
     }
-    const QStringRef language = languageWithCountry.midRef(0, languageWithCountry.indexOf(QLatin1Char('_')));
+    const QStringView language = QStringView(languageWithCountry).mid(0, languageWithCountry.indexOf(QLatin1Char('_')));
     it = jo.constFind(key + QLatin1Char('[') + language + QLatin1Char(']'));
     if (it != jo.constEnd()) {
         return it.value();

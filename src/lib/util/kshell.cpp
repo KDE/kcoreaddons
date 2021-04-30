@@ -47,7 +47,7 @@ QString KShell::tildeExpand(const QString &fname)
         }
         QString ret = homeDir(fname.mid(1, pos - 1));
         if (!ret.isNull()) {
-            ret += fname.midRef(pos);
+            ret += QStringView(fname).mid(pos);
         }
         return ret;
     } else if (fname.length() > 1 && fname[0] == QLatin1Char(ESCAPE) && fname[1] == QLatin1Char('~')) {

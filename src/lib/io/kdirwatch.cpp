@@ -1365,7 +1365,7 @@ void KDirWatchPrivate::emitEvent(Entry *e, int event, const QString &fileName)
             path += QLatin1Char('/') + fileName;
 #elif defined(Q_OS_WIN)
             // current drive is passed instead of /
-            path += QDir::currentPath().leftRef(2) + QLatin1Char('/') + fileName;
+            path += QStringView(QDir::currentPath()).left(2) + QLatin1Char('/') + fileName;
 #endif
         }
     }

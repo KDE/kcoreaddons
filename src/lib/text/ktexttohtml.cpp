@@ -210,7 +210,7 @@ bool KTextToHTMLHelper::atUrl() const
         }
     }
 
-    const auto segment = mText.midRef(mPos);
+    const auto segment = QStringView(mText).mid(mPos);
     /* clang-format off */
     return segment.startsWith(QLatin1String("http://"))
         || segment.startsWith(QLatin1String("https://"))
