@@ -141,44 +141,50 @@ QString KTextToHTMLHelper::getPhoneNumber()
     static const QRegularExpression telPattern(QStringLiteral(R"([+0](( |( ?[/-] ?)?)\(?\d+\)?+){6,30})"));
     const auto match = telPattern.match(mText, mPos, QRegularExpression::NormalMatch, QRegularExpression::AnchoredMatchOption);
     if (match.hasMatch()) {
-        auto m = match.captured();
+        QStringView matchedText = match.capturedView();
         // check for maximum number of digits (15), see https://en.wikipedia.org/wiki/Telephone_numbering_plan
-        const int count = std::count_if(m.begin(), m.end(), [](const QChar &c) {
+        const int digitsCount = std::count_if(matchedText.cbegin(), matchedText.cend(), [](const QChar c) {
             return c.isDigit();
         });
-        if (count > 15) {
+
+        if (digitsCount > 15) {
             return {};
         }
+
         // only one / is allowed, otherwise we trigger on dates
-        if (std::count(m.begin(), m.end(), QLatin1Char('/')) > 1) {
+        if (matchedText.count(QLatin1Char('/')) > 1) {
             return {};
         }
 
         // parenthesis need to be balanced, and must not be nested
         int openIdx = -1;
-        for (int i = 0; i < m.size(); ++i) {
-            if ((m[i] == QLatin1Char('(') && openIdx >= 0) || (m[i] == QLatin1Char(')') && openIdx < 0)) {
+        for (int i = 0, size = matchedText.size(); i < size; ++i) {
+            const QChar ch = matchedText.at(i);
+            if ((ch == QLatin1Char('(') && openIdx >= 0) || (ch == QLatin1Char(')') && openIdx < 0)) {
                 return {};
             }
-            if (m[i] == QLatin1Char('(')) {
+
+            if (ch == QLatin1Char('(')) {
                 openIdx = i;
-            } else if (m[i] == QLatin1Char(')')) {
+            } else if (ch == QLatin1Char(')')) {
                 openIdx = -1;
             }
         }
+
         if (openIdx > 0) {
-            m = m.leftRef(openIdx - 1).trimmed().toString();
+            matchedText.truncate(openIdx - 1);
+            matchedText = matchedText.trimmed();
         }
 
         // check if there's a plausible separator at the end
-        const QString allowedEndSeparators = QStringLiteral(" \r\t\n,.");
-        const auto l = m.size();
-        if (mText.size() > mPos + l && !allowedEndSeparators.contains(mText.at(mPos + l))) {
+        const int matchedTextLength = matchedText.size();
+        const int endIdx = mPos + matchedTextLength;
+        if (endIdx < mText.size() && !QStringView(u" \r\t\n,.").contains(mText.at(endIdx))) {
             return {};
         }
 
-        mPos += l - 1;
-        return m;
+        mPos += matchedTextLength - 1;
+        return matchedText.toString();
     }
     return {};
 }
