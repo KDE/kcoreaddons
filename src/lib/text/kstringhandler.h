@@ -88,6 +88,27 @@ KCOREADDONS_EXPORT QString csqueeze(const QString &str, int maxlen = 40);
 KCOREADDONS_EXPORT QString rsqueeze(const QString &str, int maxlen = 40);
 
 /**
+ * Split a string into a QStringList in a similar fashion to the static
+ * QStringList function in Qt, except you can specify a maximum number
+ * of tokens. If max is specified (!= 0) then only that number of tokens
+ * will be extracted. The final token will be the remainder of the string.
+ *
+ * Example:
+ * @code
+ * perlSplit("__", "some__string__for__you__here", 4)
+ * QStringList contains: "some", "string", "for", "you__here"
+ * @endcode
+ *
+ * @param sep is the string to use to delimit @p str
+ * @param str the string to split
+ * @param max the maximum number of extractions to perform, or 0
+ * @return A QStringList containing tokens extracted from @p str
+ *
+ * @since 5.87
+ */
+KCOREADDONS_EXPORT QStringList perlSplit(const QStringView sep, const QStringView str, int max);
+
+/**
  * Split a QString into a QStringList in a similar fashion to the static
  * QStringList function in Qt, except you can specify a maximum number
  * of tokens. If max is specified (!= 0) then only that number of tokens

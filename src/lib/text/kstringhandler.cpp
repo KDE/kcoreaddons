@@ -76,56 +76,42 @@ QString KStringHandler::rsqueeze(const QString &str, const int maxlen)
     }
 }
 
-QStringList KStringHandler::perlSplit(const QString &sep, const QString &s, const int max)
+QStringList KStringHandler::perlSplit(const QStringView sep, const QStringView str, int max)
 {
-    const bool ignoreMax = 0 == max;
+    const bool ignoreMax = max == 0;
 
-    QStringList l;
+    const int sepLength = sep.size();
 
+    QStringList list;
     int searchStart = 0;
+    int sepIndex = str.indexOf(sep, searchStart);
 
-    int tokenStart = s.indexOf(sep, searchStart);
-
-    while (-1 != tokenStart && (ignoreMax || l.count() < max - 1)) {
-        if (!s.midRef(searchStart, tokenStart - searchStart).isEmpty()) {
-            l << s.mid(searchStart, tokenStart - searchStart);
+    while (sepIndex != -1 && (ignoreMax || list.count() < max - 1)) {
+        const auto chunk = str.mid(searchStart, sepIndex - searchStart);
+        if (!chunk.isEmpty()) {
+            list.append(chunk.toString());
         }
 
-        searchStart = tokenStart + sep.length();
-        tokenStart = s.indexOf(sep, searchStart);
+        searchStart = sepIndex + sepLength;
+        sepIndex = str.indexOf(sep, searchStart);
     }
 
-    if (!s.midRef(searchStart, s.length() - searchStart).isEmpty()) {
-        l << s.mid(searchStart, s.length() - searchStart);
+    const auto lastChunk = str.mid(searchStart, str.length() - searchStart);
+    if (!lastChunk.isEmpty()) {
+        list.append(lastChunk.toString());
     }
 
-    return l;
+    return list;
 }
 
-QStringList KStringHandler::perlSplit(const QChar &sep, const QString &s, const int max)
+QStringList KStringHandler::perlSplit(const QString &sep, const QString &s, int max)
 {
-    const bool ignoreMax = 0 == max;
+    return perlSplit(QStringView(sep), QStringView(s), max);
+}
 
-    QStringList l;
-
-    int searchStart = 0;
-
-    int tokenStart = s.indexOf(sep, searchStart);
-
-    while (-1 != tokenStart && (ignoreMax || l.count() < max - 1)) {
-        if (!s.midRef(searchStart, tokenStart - searchStart).isEmpty()) {
-            l << s.mid(searchStart, tokenStart - searchStart);
-        }
-
-        searchStart = tokenStart + 1;
-        tokenStart = s.indexOf(sep, searchStart);
-    }
-
-    if (!s.midRef(searchStart, s.length() - searchStart).isEmpty()) {
-        l << s.mid(searchStart, s.length() - searchStart);
-    }
-
-    return l;
+QStringList KStringHandler::perlSplit(const QChar &sep, const QString &str, int max)
+{
+    return perlSplit(QStringView(&sep, 1), QStringView(str), max);
 }
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
