@@ -205,7 +205,7 @@ target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_IN
 
 target_compile_definitions(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
 
-set_target_properties(KF5CoreAddons PROPERTIES VERSION   ${KCOREADDONS_VERSION_STRING}
+set_target_properties(KF5CoreAddons PROPERTIES VERSION   ${KCOREADDONS_VERSION}
                                                SOVERSION ${KCOREADDONS_SOVERSION}
                                                EXPORT_NAME CoreAddons
 )
