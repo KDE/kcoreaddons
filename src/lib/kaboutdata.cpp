@@ -290,12 +290,12 @@ QString KAboutLicense::spdx() const
     // SPDX licenses are comprised of an identifier (e.g. GPL-2.0), an optional + to denote 'or
     // later versions' and optional ' WITH $exception' to denote standardized exceptions from the
     // core license. As we do not offer exceptions we effectively only return GPL-2.0 or GPL-2.0+,
-    // this may change in the future. To that end the documentation makes no assertations about the
+    // this may change in the future. To that end the documentation makes no assertions about the
     // actual content of the SPDX license expression we return.
     // Expressions can in theory also contain AND, OR and () to build constructs involving more than
     // one license. As this is outside the scope of a single license object we'll ignore this here
     // for now.
-    // The expecation is that the return value is only run through spec-compliant parsers, so this
+    // The expectation is that the return value is only run through spec-compliant parsers, so this
     // can potentially be changed.
 
     auto id = d->spdxID();
