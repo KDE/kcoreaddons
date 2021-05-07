@@ -34,7 +34,7 @@ class Kdelibs4MigrationPrivate;
   * here with _KDE4_DEFAULT_HOME_POSTFIX
   *
   * The purpose is to be able to let the application migrate these files
-  * to the KF5/Qt5 location for these files (QStandardPaths).
+  * to the KF5/Qt location for these files (QStandardPaths).
   *
   * Files from the "config" resource (as saved by KConfig) should be migrated to
   * QStandardPaths::writableLocation(QStandardPaths::ConfigLocation)

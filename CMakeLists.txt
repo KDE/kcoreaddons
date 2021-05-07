@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
-
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
 set(KF_VERSION "5.82.0") # handled by release scripts
 project(KCoreAddons VERSION ${KF_VERSION})
 
@@ -30,7 +32,18 @@ option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, 
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
 set(REQUIRED_QT_VERSION 5.15.0)
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
+set(REQUIRED_QT6_VERSION 6.0.0)
+
+find_package(QT NAMES Qt6 Qt5 CONFIG REQUIRED Core)
+
+if(${QT_VERSION_MAJOR} EQUAL 5)
+    find_package(Qt${QT_VERSION_MAJOR} ${REQUIRED_QT5_VERSION} CONFIG REQUIRED Core)
+endif()
+
+if(${QT_VERSION_MAJOR} EQUAL 6)
+    find_package(Qt${QT_VERSION_MAJOR} ${REQUIRED_QT6_VERSION} CONFIG REQUIRED Core)
+endif()
+
 
 ecm_setup_qtplugin_macro_names(
     JSON_NONE

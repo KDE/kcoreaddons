@@ -186,7 +186,7 @@ target_include_directories(KF5CoreAddons PUBLIC "$<BUILD_INTERFACE:${kcoreaddons
 
 target_link_libraries(KF5CoreAddons
   PUBLIC
-    Qt5::Core
+    Qt::Core
   PRIVATE
     ${kcoreaddons_OPTIONAL_LIBS}
 )
@@ -351,7 +351,7 @@ if(BUILD_QCH)
             ${KCoreAddons_HEADERS}
         MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
         LINK_QCHS
-            Qt5Core_QCH
+            QtCore_QCH
         INCLUDE_DIRS
             ${CMAKE_CURRENT_BINARY_DIR}
             ${kcoreaddons_INCLUDE_DIRS}

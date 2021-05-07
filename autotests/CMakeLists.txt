@@ -1,10 +1,10 @@
 include(ECMAddTests)
 include(ConfigureChecks.cmake) #configure checks for QFileSystemWatcher
 
-find_package(Qt5Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
+find_package(Qt${QT_VERSION_MAJOR}Test CONFIG QUIET)
 
-if(NOT Qt5Test_FOUND)
-    message(STATUS "Qt5Test not found, autotests will not be built.")
+if(NOT Qt${QT_VERSION_MAJOR}Test_FOUND)
+    message(STATUS "QtTest not found, autotests will not be built.")
     return()
 endif()
 
@@ -21,7 +21,7 @@ ecm_qt_declare_logging_category(autotests_static_SRCS
         CATEGORY_NAME kf.coreaddons
         )
 add_library(autotests_static STATIC ${autotests_static_SRCS})
-target_link_libraries(autotests_static Qt5::Core)
+target_link_libraries(autotests_static Qt::Core)
 
 configure_file(config-tests.h.in config-tests.h)
 
@@ -79,18 +79,18 @@ ecm_add_tests(
     kfileutilstest.cpp
     kfuzzymatchertest.cpp
     ${autotests_OPTIONAL_SRCS}
-    LINK_LIBRARIES Qt5::Test KF5::CoreAddons autotests_static
+    LINK_LIBRARIES Qt::Test KF5::CoreAddons autotests_static
 )
 
 if(NOT CMAKE_CROSSCOMPILING)
-    ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt5::Test KF5::CoreAddons autotests_static)
+    ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt::Test KF5::CoreAddons autotests_static)
     target_compile_definitions(desktoptojsontest PRIVATE
         DESKTOP_TO_JSON_EXE="$<TARGET_FILE:desktoptojson>"
     )
 endif()
 
 set(ktexttohtmltest_SRCS ktexttohtmltest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp)
-ecm_add_test(${ktexttohtmltest_SRCS} TEST_NAME ktexttohtmltest LINK_LIBRARIES Qt5::Test autotests_static)
+ecm_add_test(${ktexttohtmltest_SRCS} TEST_NAME ktexttohtmltest LINK_LIBRARIES Qt::Test autotests_static)
 # include the binary dir in order to get kcoreaddons_export.h
 target_include_directories(ktexttohtmltest PRIVATE ${KCoreAddons_BINARY_DIR}/src/lib)
 # fake static linking to prevent the export macros on Windows from kicking in
@@ -125,7 +125,7 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
     string(TOLOWER ${_backendName} _lowercaseBackendName)
     set(BACKEND_TEST_TARGET kdirwatch_${_lowercaseBackendName}_unittest)
     add_executable(${BACKEND_TEST_TARGET} kdirwatch_unittest.cpp)
-    target_link_libraries(${BACKEND_TEST_TARGET} Qt5::Test KF5::CoreAddons Threads::Threads autotests_static)
+    target_link_libraries(${BACKEND_TEST_TARGET} Qt::Test KF5::CoreAddons Threads::Threads autotests_static)
     ecm_mark_as_test(${BACKEND_TEST_TARGET})
     add_test(NAME ${BACKEND_TEST_TARGET} COMMAND ${BACKEND_TEST_TARGET})
     target_compile_definitions(${BACKEND_TEST_TARGET} PUBLIC -DKDIRWATCH_TEST_METHOD=\"${_backendName}\")
