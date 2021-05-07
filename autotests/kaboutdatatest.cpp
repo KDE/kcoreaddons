@@ -41,6 +41,8 @@ private Q_SLOTS:
 
     void testLicenseSPDXID();
     void testLicenseOrLater();
+
+    void testProductName();
 };
 
 static const char AppName[] = "app";
@@ -97,7 +99,11 @@ void KAboutDataTest::testLongFormConstructorWithDefaults()
     QCOMPARE(aboutData.customAuthorRichText(), QString());
     QVERIFY(!aboutData.customAuthorTextEnabled());
     QCOMPARE(aboutData.desktopFileName(), QStringLiteral("org.kde.app"));
-    // TODO: test internalVersion, internalProgramName, internalBugAddress
+
+    QCOMPARE(aboutData.internalVersion(), Version);
+    QCOMPARE(aboutData.internalProgramName(), ProgramName);
+    QCOMPARE(aboutData.internalBugAddress(), "submit@bugs.kde.org");
+    QCOMPARE(aboutData.internalProductName(), nullptr);
 }
 
 void KAboutDataTest::testLongFormConstructor()
@@ -141,7 +147,11 @@ void KAboutDataTest::testLongFormConstructor()
     QCOMPARE(aboutData.customAuthorRichText(), QString());
     QVERIFY(!aboutData.customAuthorTextEnabled());
     QCOMPARE(aboutData.desktopFileName(), QStringLiteral("where.no.app"));
-    // TODO: test internalVersion, internalProgramName, internalBugAddress
+
+    QCOMPARE(aboutData.internalVersion(), Version);
+    QCOMPARE(aboutData.internalProgramName(), ProgramName);
+    QCOMPARE(aboutData.internalBugAddress(), BugsEmailAddress);
+    QCOMPARE(aboutData.internalProductName(), nullptr);
 
     // We support http and https protocols on the homepage address, ensure they
     // give the same org. domain and desktop file name.
@@ -193,7 +203,11 @@ void KAboutDataTest::testShortFormConstructor()
     QCOMPARE(aboutData.customAuthorRichText(), QString());
     QVERIFY(!aboutData.customAuthorTextEnabled());
     QCOMPARE(aboutData.desktopFileName(), QStringLiteral("org.kde.app"));
-    // TODO: test internalVersion, internalProgramName, internalBugAddress
+
+    QCOMPARE(aboutData.internalVersion(), Version);
+    QCOMPARE(aboutData.internalProgramName(), ProgramName);
+    QCOMPARE(aboutData.internalBugAddress(), "submit@bugs.kde.org");
+    QCOMPARE(aboutData.internalProductName(), nullptr);
 }
 
 void KAboutDataTest::testKAboutDataOrganizationDomain()
@@ -411,6 +425,16 @@ void KAboutDataTest::testLicenseOrLater()
         }
     }
     QCOMPARE(foundLGPL, true);
+}
+
+void KAboutDataTest::testProductName()
+{
+    KAboutData aboutData(QString::fromLatin1(AppName), QString::fromLatin1(ProgramName));
+    QCOMPARE(aboutData.productName(), QString::fromLatin1(AppName));
+    QCOMPARE(aboutData.internalProductName(), nullptr);
+    aboutData.setProductName("frameworks-kcoreaddons/aboutdata");
+    QCOMPARE(aboutData.productName(), QString::fromLatin1("frameworks-kcoreaddons/aboutdata"));
+    QCOMPARE(aboutData.internalProductName(), "frameworks-kcoreaddons/aboutdata");
 }
 
 QTEST_MAIN(KAboutDataTest)

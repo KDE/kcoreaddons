@@ -418,7 +418,6 @@ public:
     QList<KAboutPerson> _creditList;
     QList<KAboutPerson> _translatorList;
     QList<KAboutLicense> _licenseList;
-    QString productName;
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 2)
     QString programIconName;
 #endif
@@ -435,6 +434,7 @@ public:
     QByteArray _internalProgramName;
     QByteArray _version;
     QByteArray _bugAddress;
+    QByteArray productName;
 
     static QList<KAboutPerson> parseTranslators(const QString &translatorName, const QString &translatorEmail);
 };
@@ -719,7 +719,7 @@ KAboutData &KAboutData::setOrganizationDomain(const QByteArray &domain)
 
 KAboutData &KAboutData::setProductName(const QByteArray &_productName)
 {
-    d->productName = QString::fromUtf8(_productName.data());
+    d->productName = _productName;
     return *this;
 }
 
@@ -731,9 +731,14 @@ QString KAboutData::componentName() const
 QString KAboutData::productName() const
 {
     if (!d->productName.isEmpty()) {
-        return d->productName;
+        return QString::fromUtf8(d->productName);
     }
     return componentName();
+}
+
+const char *KAboutData::internalProductName() const
+{
+    return d->productName.isEmpty() ? nullptr : d->productName.constData();
 }
 
 QString KAboutData::displayName() const

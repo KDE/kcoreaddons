@@ -923,6 +923,12 @@ public:
     QString productName() const;
 
     /**
+     * @internal
+     * Provided for use by KCrash
+     */
+    const char *internalProductName() const;
+
+    /**
      * Returns the translated program name.
      * @return the program name (translated).
      */
