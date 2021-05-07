@@ -146,8 +146,9 @@ KCOREADDONS_EXPORT QStringList perlSplit(const QChar &sep, const QString &s, int
  * @deprecated Since 5.67, use perlSplit(const QRegularExpression &sep,
  * const QString &s, int max = 0) instead.
  */
+KCOREADDONS_EXPORT
 KCOREADDONS_DEPRECATED_VERSION(5, 67, "Use KStringHandler::perlSplit(const QRegularExpression &, const QString &, int)")
-KCOREADDONS_EXPORT QStringList perlSplit(const QRegExp &sep, const QString &s, int max = 0);
+QStringList perlSplit(const QRegExp &sep, const QString &s, int max = 0);
 #endif
 
 /**

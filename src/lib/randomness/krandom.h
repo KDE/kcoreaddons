@@ -36,11 +36,12 @@ namespace KRandom
  *   on first use.
  * @deprecated Since 5.72, use QRandomGenerator::global(). The 1:1 port is bounded(RAND_MAX) but check all the methods that QRandomGenerator provides.
  */
+KCOREADDONS_EXPORT
 KCOREADDONS_DEPRECATED_VERSION(
     5,
     72,
     "Use QRandomGenerator::global(). The 1:1 port is bounded(RAND_MAX) but check see all the methods that QRandomGenerator provides.")
-KCOREADDONS_EXPORT int random();
+int random();
 #endif
 
 /**

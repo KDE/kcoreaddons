@@ -53,8 +53,9 @@ KBackup::simpleBackupFile(filename, backupDir, QStringLiteral("~")));
  *
  * @deprecated Since 5.0, use simpleBackupFile() or numberedBackupFile() directly
  */
+KCOREADDONS_EXPORT
 KCOREADDONS_DEPRECATED_VERSION_BELATED(5, 75, 5, 0, "Use simpleBackupFile() or numberedBackupFile() directly")
-KCOREADDONS_EXPORT bool backupFile(const QString &filename, const QString &backupDir = QString());
+bool backupFile(const QString &filename, const QString &backupDir = QString());
 #endif
 
 /**
@@ -126,8 +127,9 @@ KCOREADDONS_EXPORT bool numberedBackupFile(const QString &filename,
  * @return true if successful, or false if an error has occurred.
  * @deprecated Since 5.75, no known users
  */
+KCOREADDONS_EXPORT
 KCOREADDONS_DEPRECATED_VERSION(5, 75, "No known users")
-KCOREADDONS_EXPORT bool rcsBackupFile(const QString &filename, const QString &backupDir = QString(), const QString &backupMessage = QString());
+bool rcsBackupFile(const QString &filename, const QString &backupDir = QString(), const QString &backupMessage = QString());
 #endif
 }
 
