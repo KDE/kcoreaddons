@@ -183,7 +183,7 @@ KDirWatchPrivate::KDirWatchPrivate()
         s_verboseDebug = true;
     }
     timer.setObjectName(QStringLiteral("KDirWatchPrivate::timer"));
-    connect(&timer, SIGNAL(timeout()), this, SLOT(slotRescan()));
+    connect(&timer, &QTimer::timeout, this, &KDirWatchPrivate::slotRescan);
 
     m_nfsPollInterval = qEnvironmentVariableIsSet(s_envNfsPoll) ? qEnvironmentVariableIntValue(s_envNfsPoll) : 5000;
     m_PollInterval = qEnvironmentVariableIsSet(s_envPoll) ? qEnvironmentVariableIntValue(s_envPoll) : 500;
@@ -199,7 +199,7 @@ KDirWatchPrivate::KDirWatchPrivate()
     // used for FAM and inotify
     rescan_timer.setObjectName(QStringLiteral("KDirWatchPrivate::rescan_timer"));
     rescan_timer.setSingleShot(true);
-    connect(&rescan_timer, SIGNAL(timeout()), this, SLOT(slotRescan()));
+    connect(&rescan_timer, &QTimer::timeout, this, &KDirWatchPrivate::slotRescan);
 
 #if HAVE_FAM
     availableMethods << "FAM";
@@ -744,8 +744,8 @@ bool KDirWatchPrivate::useQFSWatch(Entry *e)
     // qCDebug(KDIRWATCH) << "fsWatcher->addPath" << e->path;
     if (!fsWatcher) {
         fsWatcher = new QFileSystemWatcher();
-        connect(fsWatcher, SIGNAL(directoryChanged(QString)), this, SLOT(fswEventReceived(QString)));
-        connect(fsWatcher, SIGNAL(fileChanged(QString)), this, SLOT(fswEventReceived(QString)));
+        connect(fsWatcher, &QFileSystemWatcher::directoryChanged, this, &KDirWatchPrivate::fswEventReceived);
+        connect(fsWatcher, &QFileSystemWatcher::fileChanged, this, &KDirWatchPrivate::fswEventReceived);
     }
     fsWatcher->addPath(e->path);
     return true;
@@ -1554,7 +1554,7 @@ void KDirWatchPrivate::slotRescan()
     }
 #endif
 
-    QTimer::singleShot(0, this, SLOT(slotRemoveDelayed()));
+    QTimer::singleShot(0, this, &KDirWatchPrivate::slotRemoveDelayed);
 }
 
 bool KDirWatchPrivate::isNoisyFile(const char *filename)
@@ -1605,7 +1605,7 @@ void KDirWatchPrivate::famEventReceived()
         }
     }
 
-    QTimer::singleShot(0, this, SLOT(slotRemoveDelayed()));
+    QTimer::singleShot(0, this, &KDirWatchPrivate::slotRemoveDelayed);
 }
 
 void KDirWatchPrivate::disableFAM()

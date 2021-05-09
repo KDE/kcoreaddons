@@ -272,7 +272,7 @@ static QString removeTrailingSlash(const QString &path)
 // helper method
 QList<QVariantList> KDirWatch_UnitTest::waitForDirtySignal(KDirWatch &watch, int expected)
 {
-    QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
+    QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
     int numTries = 0;
     // Give time for KDirWatch to notify us
     while (spyDirty.count() < expected) {
@@ -360,7 +360,7 @@ bool KDirWatch_UnitTest::waitForRecreationSignal(KDirWatch &watch, const QString
 
 QList<QVariantList> KDirWatch_UnitTest::waitForDeletedSignal(KDirWatch &watch, int expected)
 {
-    QSignalSpy spyDeleted(&watch, SIGNAL(created(QString)));
+    QSignalSpy spyDeleted(&watch, &KDirWatch::created);
     int numTries = 0;
     // Give time for KDirWatch to notify us
     while (spyDeleted.count() < expected) {
@@ -382,7 +382,7 @@ void KDirWatch_UnitTest::touchOneFile() // watch a dir, create a file in it
     waitUntilMTimeChange(m_path);
 
     // dirty(the directory) should be emitted.
-    QSignalSpy spyCreated(&watch, SIGNAL(created(QString)));
+    QSignalSpy spyCreated(&watch, &KDirWatch::created);
     createFile(0);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
     QCOMPARE(spyCreated.count(), 0); // "This is not emitted when creating a file is created in a watched directory."
@@ -525,7 +525,7 @@ void KDirWatch_UnitTest::testDelete()
 
     KDirWatch::statistics();
 
-    QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
+    QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
     QFile::remove(file1);
     QVERIFY(waitForOneSignal(watch, SIGNAL(deleted(QString)), file1));
     QTest::qWait(40); // just in case delayed processing would emit it
@@ -658,8 +658,8 @@ void KDirWatch_UnitTest::testMoveTo()
     QVERIFY(QFile::rename(filetemp, file1)); // overwrite file1 with the tempfile
     qCDebug(KCOREADDONS_DEBUG) << "Overwrite file1 with tempfile";
 
-    QSignalSpy spyCreated(&watch, SIGNAL(created(QString)));
-    QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
+    QSignalSpy spyCreated(&watch, &KDirWatch::created);
+    QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
 
     // Getting created() on an unwatched file is an inotify bonus, it's not part of the requirements.
@@ -705,8 +705,8 @@ void KDirWatch_UnitTest::nestedEventLoop() // #220153: watch two files, and modi
     appendToFile(file0);
 
     // use own spy, to connect it before nestedEventLoopSlot, otherwise it reverses order
-    QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
-    connect(&watch, SIGNAL(dirty(QString)), this, SLOT(nestedEventLoopSlot()));
+    QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
+    connect(&watch, &KDirWatch::dirty, this, &KDirWatch_UnitTest::nestedEventLoopSlot);
     waitForDirtySignal(watch, 1);
     QVERIFY(spyDirty.count() >= 2);
     QCOMPARE(spyDirty[0][0].toString(), file0);
@@ -718,7 +718,7 @@ void KDirWatch_UnitTest::nestedEventLoopSlot()
     const KDirWatch *const_watch = qobject_cast<const KDirWatch *>(sender());
     KDirWatch *watch = const_cast<KDirWatch *>(const_watch);
     // let's not come in this slot again
-    disconnect(watch, SIGNAL(dirty(QString)), this, SLOT(nestedEventLoopSlot()));
+    disconnect(watch, &KDirWatch::dirty, this, &KDirWatch_UnitTest::nestedEventLoopSlot);
 
     const QString file1 = m_path + QLatin1String("nested_1");
     appendToFile(file1);
@@ -778,7 +778,7 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     qCDebug(KCOREADDONS_DEBUG) << "create file 2 at" << QDateTime::currentDateTime().toMSecsSinceEpoch();
     const QString file2 = createFile(2);
-    QSignalSpy spyDirty(&watch, SIGNAL(dirty(QString)));
+    QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
     QTest::qWait(200);
     QCOMPARE(spyDirty.count(), 0); // suspended -> no signal
 

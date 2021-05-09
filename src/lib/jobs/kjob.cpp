@@ -332,14 +332,16 @@ void KJob::emitSpeed(unsigned long value)
     Q_D(KJob);
     if (!d->speedTimer) {
         d->speedTimer = new QTimer(this);
-        connect(d->speedTimer, SIGNAL(timeout()), SLOT(_k_speedTimeout()));
+        connect(d->speedTimer, &QTimer::timeout, this, [d]() {
+            d->speedTimeout();
+        });
     }
 
     Q_EMIT speed(this, value);
     d->speedTimer->start(5000); // 5 seconds interval should be enough
 }
 
-void KJobPrivate::_k_speedTimeout()
+void KJobPrivate::speedTimeout()
 {
     Q_Q(KJob);
     // send 0 and stop the timer

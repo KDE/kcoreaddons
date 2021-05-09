@@ -46,7 +46,7 @@ public:
     bool suspended = false;
     bool isAutoDelete = true;
 
-    void _k_speedTimeout();
+    void speedTimeout();
 
     bool isFinished = false;
 

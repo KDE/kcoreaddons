@@ -47,7 +47,7 @@ void KJobTest::testEmitResult()
     job->setError(errorCode);
     job->setErrorText(errorText);
 
-    QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject *)));
+    QSignalSpy destroyed_spy(job, &QObject::destroyed);
     job->start();
     QVERIFY(!job->isFinished());
     loop.exec();
@@ -58,7 +58,7 @@ void KJobTest::testEmitResult()
 
     // Verify that the job is not deleted immediately...
     QCOMPARE(destroyed_spy.size(), 0);
-    QTimer::singleShot(0, &loop, SLOT(quit()));
+    QTimer::singleShot(0, &loop, &QEventLoop::quit);
     // ... but when we enter the event loop again.
     loop.exec();
     QCOMPARE(destroyed_spy.size(), 1);
@@ -73,9 +73,9 @@ void KJobTest::testProgressTracking()
     qRegisterMetaType<qulonglong>("qulonglong");
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
-    QSignalSpy processed_spy(job, SIGNAL(processedAmount(KJob*,KJob::Unit,qulonglong)));
-    QSignalSpy total_spy(job, SIGNAL(totalAmount(KJob*,KJob::Unit,qulonglong)));
-    QSignalSpy percent_spy(job, SIGNAL(percent(KJob*,ulong)));
+    QSignalSpy processed_spy(job, QOverload<KJob *, KJob::Unit, qulonglong>::of(&KJob::processedAmount));
+    QSignalSpy total_spy(job, QOverload<KJob *, KJob::Unit, qulonglong>::of(&KJob::totalAmount));
+    QSignalSpy percent_spy(job, QOverload<KJob *, ulong>::of(&KJob::percent));
 #endif
     QSignalSpy processedChanged_spy(job, &KJob::processedAmountChanged);
     QSignalSpy totalChanged_spy(job, &KJob::totalAmountChanged);
@@ -286,7 +286,7 @@ void KJobTest::testExec()
         ++resultEmitted;
     });
 
-    QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject *)));
+    QSignalSpy destroyed_spy(job, &QObject::destroyed);
 
     QVERIFY(!job->isFinished());
     bool status = job->exec();
@@ -299,7 +299,7 @@ void KJobTest::testExec()
 
     // Verify that the job is not deleted immediately...
     QCOMPARE(destroyed_spy.size(), 0);
-    QTimer::singleShot(0, &loop, SLOT(quit()));
+    QTimer::singleShot(0, &loop, &QEventLoop::quit);
     // ... but when we enter the event loop again.
     loop.exec();
     QCOMPARE(destroyed_spy.size(), 1);
@@ -344,7 +344,7 @@ void KJobTest::testKill()
 
     // Verify that the job is not deleted immediately...
     QCOMPARE(destroyed_spy.size(), 0);
-    QTimer::singleShot(0, &loop, SLOT(quit()));
+    QTimer::singleShot(0, &loop, &QEventLoop::quit);
     // ... but when we enter the event loop again.
     loop.exec();
     QCOMPARE(destroyed_spy.size(), 1);
@@ -463,21 +463,21 @@ void KJobTest::testDelegateUsage()
 void KJobTest::testNestedExec()
 {
     m_innerJob = nullptr;
-    QTimer::singleShot(100, this, SLOT(slotStartInnerJob()));
+    QTimer::singleShot(100, this, &KJobTest::slotStartInnerJob);
     m_outerJob = new WaitJob();
     m_outerJob->exec();
 }
 
 void KJobTest::slotStartInnerJob()
 {
-    QTimer::singleShot(100, this, SLOT(slotFinishOuterJob()));
+    QTimer::singleShot(100, this, &KJobTest::slotFinishOuterJob);
     m_innerJob = new WaitJob();
     m_innerJob->exec();
 }
 
 void KJobTest::slotFinishOuterJob()
 {
-    QTimer::singleShot(100, this, SLOT(slotFinishInnerJob()));
+    QTimer::singleShot(100, this, &KJobTest::slotFinishInnerJob);
     m_outerJob->makeItFinish();
 }
 

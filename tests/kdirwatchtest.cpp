@@ -27,9 +27,9 @@ int main(int argc, char **argv)
     KDirWatch *dirwatch1 = KDirWatch::self();
     KDirWatch *dirwatch2 = new KDirWatch;
 
-    testObject.connect(dirwatch1, SIGNAL(dirty(QString)), SLOT(dirty(QString)));
-    testObject.connect(dirwatch1, SIGNAL(created(QString)), SLOT(created(QString)));
-    testObject.connect(dirwatch1, SIGNAL(deleted(QString)), SLOT(deleted(QString)));
+    testObject.connect(dirwatch1, &KDirWatch::dirty, &myTest::dirty);
+    testObject.connect(dirwatch1, &KDirWatch::created, &myTest::created);
+    testObject.connect(dirwatch1, &KDirWatch::deleted, &myTest::deleted);
 
     // TODO port to QCommandLineArguments once it exists
     const QStringList args = a.arguments();

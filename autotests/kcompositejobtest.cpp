@@ -18,7 +18,7 @@ TestJob::TestJob(QObject *parent)
 
 void TestJob::start()
 {
-    QTimer::singleShot(1000, this, SLOT(doEmit()));
+    QTimer::singleShot(1000, this, &TestJob::doEmit);
 }
 
 void TestJob::doEmit()
@@ -76,7 +76,7 @@ void KCompositeJobTest::testDeletionDuringExecution()
 
     QCOMPARE(job->parent(), compositeJob);
 
-    QSignalSpy destroyed_spy(job, SIGNAL(destroyed(QObject *)));
+    QSignalSpy destroyed_spy(job, &QObject::destroyed);
     // check if job got reparented properly
     delete someParent;
     someParent = nullptr;

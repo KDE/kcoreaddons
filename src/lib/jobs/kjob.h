@@ -766,7 +766,6 @@ protected:
 private:
     void finishJob(bool emitResult);
 
-    Q_PRIVATE_SLOT(d_func(), void _k_speedTimeout())
     Q_DECLARE_PRIVATE(KJob)
 };
 
