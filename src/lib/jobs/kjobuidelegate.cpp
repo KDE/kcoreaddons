@@ -9,7 +9,9 @@
 */
 
 #include "kjobuidelegate.h"
+#include "kcoreaddons_debug.h"
 #include "kjob.h"
+
 #include <QDebug>
 
 class KJobUiDelegatePrivate
@@ -55,6 +57,8 @@ KJobUiDelegate::~KJobUiDelegate() = default;
 bool KJobUiDelegate::setJob(KJob *job)
 {
     if (d->job != nullptr) {
+        qCWarning(KCOREADDONS_DEBUG) << "Trying to attach UI delegate:" << this << "to job" << job //
+                                     << "but this delegate is already attached to a different job" << d->job;
         return false;
     }
 

@@ -70,7 +70,10 @@ protected:
     /**
      * Attach this UI delegate to a job. Once attached it'll track the job events.
      *
-     * @return true if the job we're correctly attached to the job, false otherwise.
+     * @return @c true if this UI delegate was successfully attached to @p job, @c false otherwise
+     *
+     * @note if this UI delegate is already attached to a job, calling this method will return
+     * @c false.
      */
     virtual bool setJob(KJob *job);
 

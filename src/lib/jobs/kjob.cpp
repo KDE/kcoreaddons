@@ -52,13 +52,16 @@ KJob::~KJob()
 void KJob::setUiDelegate(KJobUiDelegate *delegate)
 {
     Q_D(KJob);
-    if (delegate == nullptr || delegate->setJob(this)) {
+    if (!delegate) {
+        delete d->uiDelegate;
+        d->uiDelegate = nullptr;
+        return;
+    }
+
+    if (delegate->setJob(this)) {
         delete d->uiDelegate;
         d->uiDelegate = delegate;
-
-        if (d->uiDelegate) {
-            d->uiDelegate->connectJob(this);
-        }
+        d->uiDelegate->connectJob(this);
     }
 }
 
