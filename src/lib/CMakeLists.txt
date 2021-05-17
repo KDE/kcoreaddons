@@ -13,37 +13,38 @@ configure_file(util/config-kde4home.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-k
 set (ACCOUNTS_SERVICE_ICON_DIR "/var/lib/AccountsService/icons" CACHE STRING "Accounts Services icon storage directory")
 configure_file(util/config-accountsservice.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-accountsservice.h)
 
-ecm_create_qm_loader(kcoreaddons_QM_LOADER kcoreaddons5_qt)
+add_library(KF5CoreAddons)
+add_library(KF5::CoreAddons ALIAS KF5CoreAddons)
 
-set(kcoreaddons_OPTIONAL_SRCS )
-set(kcoreaddons_OPTIONAL_LIBS )
+ecm_create_qm_loader(KF5CoreAddons kcoreaddons5_qt)
 
 if (FAM_FOUND)
-   include_directories(${FAM_INCLUDE_DIR})
-   set(kcoreaddons_OPTIONAL_LIBS ${kcoreaddons_OPTIONAL_LIBS} ${FAM_LIBRARIES})
+    target_include_directories(KF5CoreAddons PRIVATE ${FAM_INCLUDE_DIR})
+    target_link_libraries(KF5CoreAddons PRIVATE ${FAM_LIBRARIES})
 endif ()
 
 if (Inotify_FOUND)
-   include_directories(${Inotify_INCLUDE_DIRS})
-   set(kcoreaddons_OPTIONAL_LIBS ${kcoreaddons_OPTIONAL_LIBS} ${Inotify_LIBRARIES})
+    target_include_directories(KF5CoreAddons PRIVATE ${Inotify_INCLUDE_DIRS})
+    target_link_libraries(KF5CoreAddons PRIVATE ${Inotify_LIBRARIES})
 endif ()
 
 if(NOT WIN32)
-    set(kcoreaddons_OPTIONAL_SRCS caching/kshareddatacache.cpp)
-    set(kcoreaddons_OPTIONAL_LIBS ${kcoreaddons_OPTIONAL_LIBS} ${CMAKE_THREAD_LIBS_INIT})
+    target_sources(KF5CoreAddons PRIVATE
+        caching/kshareddatacache.cpp
+    )
+    target_link_libraries(KF5CoreAddons PRIVATE ${CMAKE_THREAD_LIBS_INIT})
 
     set_source_files_properties(caching/kshareddatacache.cpp
         PROPERTIES COMPILE_FLAGS -fexceptions)
 
 else()
-    set(kcoreaddons_OPTIONAL_SRCS
+    target_sources(KF5CoreAddons PRIVATE
         caching/kshareddatacache_win.cpp
     )
 endif()
 
 if (WIN32)
-    set(kcoreaddons_OPTIONAL_SRCS
-        ${kcoreaddons_OPTIONAL_SRCS}
+    target_sources(KF5CoreAddons PRIVATE
         text/kmacroexpander_win.cpp
         util/klistopenfilesjob_win.cpp
         util/kprocesslist_win.cpp
@@ -53,27 +54,24 @@ if (WIN32)
 endif ()
 
 if (UNIX)
-    set(kcoreaddons_OPTIONAL_SRCS
-        ${kcoreaddons_OPTIONAL_SRCS}
+    target_sources(KF5CoreAddons PRIVATE
         text/kmacroexpander_unix.cpp
         util/klistopenfilesjob_unix.cpp
         util/kuser_unix.cpp
         util/kshell_unix.cpp
     )
     if (HAVE_PROCSTAT)
-        set(kcoreaddons_OPTIONAL_SRCS
-            ${kcoreaddons_OPTIONAL_SRCS}
+        target_sources(KF5CoreAddons PRIVATE
             util/kprocesslist_unix_procstat.cpp
         )
     else ()
-        set(kcoreaddons_OPTIONAL_SRCS
-            ${kcoreaddons_OPTIONAL_SRCS}
+        target_sources(KF5CoreAddons PRIVATE
             util/kprocesslist_unix.cpp
         )
     endif ()
 endif ()
 
-set(libkcoreaddons_SRCS
+target_sources(KF5CoreAddons PRIVATE
     kaboutdata.cpp
     kcoreaddons.cpp
     io/kautosavefile.cpp
@@ -105,8 +103,6 @@ set(libkcoreaddons_SRCS
     util/kosrelease.cpp
     util/kprocesslist.cpp
     util/kshell.cpp
-    ${kcoreaddons_OPTIONAL_SRCS}
-    ${kcoreaddons_QM_LOADER}
 )
 
 
@@ -144,7 +140,7 @@ ecm_qt_export_logging_category(
     DESCRIPTION "KAboutData (KCoreAddons)"
     EXPORT KCOREADDONS
 )
-ecm_qt_declare_logging_category(libkcoreaddons_SRCS
+ecm_qt_declare_logging_category(KF5CoreAddons
     HEADER desktopfileparser_debug.h
     IDENTIFIER DESKTOPPARSER
     CATEGORY_NAME kf.coreaddons.desktopparser
@@ -162,7 +158,7 @@ ecm_qt_export_logging_category(
     EXPORT KCOREADDONS
 )
 
-ecm_qt_declare_logging_category(libkcoreaddons_SRCS
+ecm_qt_declare_logging_category(KF5CoreAddons
     HEADER kcoreaddons_debug.h
     IDENTIFIER KCOREADDONS_DEBUG
     CATEGORY_NAME kf.coreaddons
@@ -171,8 +167,6 @@ ecm_qt_declare_logging_category(libkcoreaddons_SRCS
     EXPORT KCOREADDONS
 )
 
-add_library(KF5CoreAddons ${libkcoreaddons_SRCS})
-add_library(KF5::CoreAddons ALIAS KF5CoreAddons)
 ecm_generate_export_header(KF5CoreAddons
     BASE_NAME KCoreAddons
     GROUP_BASE_NAME KF
@@ -187,8 +181,6 @@ target_include_directories(KF5CoreAddons PUBLIC "$<BUILD_INTERFACE:${kcoreaddons
 target_link_libraries(KF5CoreAddons
   PUBLIC
     Qt5::Core
-  PRIVATE
-    ${kcoreaddons_OPTIONAL_LIBS}
 )
 
 target_link_libraries(KF5CoreAddons PRIVATE ${CMAKE_THREAD_LIBS_INIT})

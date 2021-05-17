@@ -1,6 +1,8 @@
 include(ECMMarkNonGuiExecutable)
 
-ecm_qt_declare_logging_category(desktoptojson_LOG_SRCS
+add_executable(desktoptojson)
+
+ecm_qt_declare_logging_category(desktoptojson
     HEADER desktoptojson_debug.h
     # reusing the one also used with desktopfileparser.cpp in library case
     IDENTIFIER DESKTOPPARSER
@@ -11,11 +13,10 @@ ecm_qt_declare_logging_category(desktoptojson_LOG_SRCS
     EXPORT KCOREADDONS
 )
 
-add_executable(desktoptojson
+target_sources(desktoptojson PRIVATE
     main.cpp
     desktoptojson.cpp
     ../lib/plugin/desktopfileparser.cpp
-    ${desktoptojson_LOG_SRCS}
 )
 if(NOT CMAKE_TOOLCHAIN_FILE)
     add_executable(KF5::desktoptojson ALIAS desktoptojson)

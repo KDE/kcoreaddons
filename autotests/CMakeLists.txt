@@ -14,13 +14,12 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd]ebug$")
     set(ENABLE_BENCHMARKS 1)
 endif()
 
-set(autotests_static_SRCS "")
-ecm_qt_declare_logging_category(autotests_static_SRCS
+add_library(autotests_static STATIC)
+ecm_qt_declare_logging_category(autotests_static
         HEADER kcoreaddons_debug.h
         IDENTIFIER KCOREADDONS_DEBUG
         CATEGORY_NAME kf.coreaddons
         )
-add_library(autotests_static STATIC ${autotests_static_SRCS})
 target_link_libraries(autotests_static Qt5::Core)
 
 configure_file(config-tests.h.in config-tests.h)
@@ -89,8 +88,10 @@ if(NOT CMAKE_CROSSCOMPILING)
     )
 endif()
 
-set(ktexttohtmltest_SRCS ktexttohtmltest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp)
-ecm_add_test(${ktexttohtmltest_SRCS} TEST_NAME ktexttohtmltest LINK_LIBRARIES Qt5::Test autotests_static)
+ecm_add_test(ktexttohtmltest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp
+    TEST_NAME ktexttohtmltest
+    LINK_LIBRARIES Qt5::Test autotests_static
+)
 # include the binary dir in order to get kcoreaddons_export.h
 target_include_directories(ktexttohtmltest PRIVATE ${KCoreAddons_BINARY_DIR}/src/lib)
 # fake static linking to prevent the export macros on Windows from kicking in
