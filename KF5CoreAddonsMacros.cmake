@@ -96,7 +96,11 @@ function(_desktop_to_json_cmake28 desktop json compat)
 endfunction()
 
 #
-# kcoreaddons_add_plugin(plugin_name SOURCES... [JSON "pluginname.json"] [INSTALL_NAMESPACE "servicename"])
+# kcoreaddons_add_plugin(plugin_name
+#     [SOURCES <src> [<src> [...]]] # optional since 5.83, required before
+#     [JSON "pluginname.json"]
+#     [INSTALL_NAMESPACE "servicename"]
+# )
 #
 # This macro helps simplifying the creation of plugins for KPluginFactory
 # based systems.
@@ -116,9 +120,6 @@ function(kcoreaddons_add_plugin plugin)
     set(multiValueArgs SOURCES)
     cmake_parse_arguments(KCA_ADD_PLUGIN "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    if(NOT KCA_ADD_PLUGIN_SOURCES)
-      message(FATAL_ERROR "kcoreaddons_add_plugin called without SOURCES parameter")
-    endif()
     get_filename_component(json "${KCA_ADD_PLUGIN_JSON}" REALPATH)
 
     add_library(${plugin} MODULE ${KCA_ADD_PLUGIN_SOURCES})
