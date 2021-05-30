@@ -32,11 +32,11 @@ if(NOT WIN32)
     target_sources(KF5CoreAddons PRIVATE
         caching/kshareddatacache.cpp
     )
-    target_link_libraries(KF5CoreAddons PRIVATE ${CMAKE_THREAD_LIBS_INIT})
 
     set_source_files_properties(caching/kshareddatacache.cpp
         PROPERTIES COMPILE_FLAGS -fexceptions)
 
+    target_link_libraries(KF5CoreAddons PRIVATE Threads::Threads)
 else()
     target_sources(KF5CoreAddons PRIVATE
         caching/kshareddatacache_win.cpp
@@ -182,8 +182,6 @@ target_link_libraries(KF5CoreAddons
   PUBLIC
     Qt5::Core
 )
-
-target_link_libraries(KF5CoreAddons PRIVATE ${CMAKE_THREAD_LIBS_INIT})
 
 if(WIN32)
     target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv)

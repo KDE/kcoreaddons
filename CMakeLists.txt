@@ -42,7 +42,9 @@ ecm_setup_qtplugin_macro_names(
         PACKAGE_SETUP_AUTOMOC_VARIABLES
 )
 
-find_package(Threads)
+if(NOT WIN32)
+    find_package(Threads REQUIRED)
+endif()
 
 # Configure checks for kdirwatch
 find_package(FAM)
