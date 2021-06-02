@@ -33,6 +33,7 @@
 #include "kcoreaddons_debug.h"
 #include "kdirwatch_p.h"
 #include "kfilesystemtype.h"
+#include "knetworkmounts.h"
 
 #include <io/config-kdirwatch.h>
 
@@ -936,8 +937,11 @@ void KDirWatchPrivate::addWatch(Entry *e)
     // cannot detect changes made by other machines. However as a default inotify
     // is fine, since the most common case is a NFS-mounted home, where all changes
     // are made locally. #177892.
+
     KDirWatch::Method preferredMethod = m_preferredMethod;
-    if (m_nfsPreferredMethod != m_preferredMethod) {
+    if (KNetworkMounts::self()->isOptionEnabledForPath(e->path, KNetworkMounts::KDirWatchUseINotify)) {
+        preferredMethod = KDirWatch::INotify;
+    } else if (m_nfsPreferredMethod != m_preferredMethod) {
         if (KFileSystemType::fileSystemType(e->path) == KFileSystemType::Nfs) {
             preferredMethod = m_nfsPreferredMethod;
         }
@@ -1887,6 +1891,10 @@ KDirWatch::~KDirWatch()
 
 void KDirWatch::addDir(const QString &_path, WatchModes watchModes)
 {
+    if (KNetworkMounts::self()->isOptionEnabledForPath(_path, KNetworkMounts::KDirWatchDontAddWatches)) {
+        return;
+    }
+
     if (d) {
         d->addEntry(this, _path, nullptr, true, watchModes);
     }
@@ -1894,6 +1902,10 @@ void KDirWatch::addDir(const QString &_path, WatchModes watchModes)
 
 void KDirWatch::addFile(const QString &_path)
 {
+    if (KNetworkMounts::self()->isOptionEnabledForPath(_path, KNetworkMounts::KDirWatchDontAddWatches)) {
+        return;
+    }
+
     if (!d) {
         return;
     }

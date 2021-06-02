@@ -82,6 +82,7 @@ target_sources(KF5CoreAddons PRIVATE
     io/kbackup.cpp
     io/kurlmimedata.cpp
     io/kfileutils.cpp
+    io/knetworkmounts.cpp
     jobs/kcompositejob.cpp
     jobs/kjob.cpp
     jobs/kjobtrackerinterface.cpp
@@ -221,6 +222,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KUrlMimeData
         KFileSystemType
         KFileUtils
+        KNetworkMounts
     RELATIVE io
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
@@ -294,6 +296,7 @@ if (PythonModuleGeneration_FOUND)
       io/kbackup.h
       io/kurlmimedata.h
       io/kfilesystemtype.h
+      io/knetworkmounts.h
       jobs/kcompositejob.h
       jobs/kjob.h
       jobs/kjobtrackerinterface.h

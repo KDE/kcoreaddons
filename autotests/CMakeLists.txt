@@ -75,6 +75,10 @@ ecm_add_tests(
     kprocesslisttest.cpp
     kfileutilstest.cpp
     kfuzzymatchertest.cpp
+    knetworkmountstestcanonical.cpp
+    knetworkmountstestnoconfig.cpp
+    knetworkmountstestpaths.cpp
+    knetworkmountsteststatic.cpp
     ${autotests_OPTIONAL_SRCS}
     LINK_LIBRARIES Qt5::Test KF5::CoreAddons autotests_static
 )

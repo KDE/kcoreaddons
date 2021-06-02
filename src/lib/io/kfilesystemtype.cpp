@@ -8,6 +8,7 @@
 
 #include "kfilesystemtype.h"
 #include "kcoreaddons_debug.h"
+#include "knetworkmounts.h"
 
 #include <QFile>
 
@@ -141,5 +142,11 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 
 KFileSystemType::Type KFileSystemType::fileSystemType(const QString &path)
 {
-    return determineFileSystemTypeImpl(QFile::encodeName(path));
+    if (KNetworkMounts::self()->isSlowPath(path, KNetworkMounts::KNetworkMountsType::SmbPaths)) {
+        return KFileSystemType::Smb;
+    } else if (KNetworkMounts::self()->isSlowPath(path, KNetworkMounts::KNetworkMountsType::NfsPaths)) {
+        return KFileSystemType::Nfs;
+    } else {
+        return determineFileSystemTypeImpl(QFile::encodeName(path));
+    }
 }
