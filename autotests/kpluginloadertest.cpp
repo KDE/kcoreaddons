@@ -392,6 +392,18 @@ private Q_SLOTS:
         QCOMPARE(plugins.size(), 2);
         QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
         QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
+
+        // This plugin has no explicit pluginId and will fall back to basename of file
+        const KPluginMetaData validPlugin = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("jsonplugin"));
+        QVERIFY(validPlugin.isValid());
+        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
+
+        // The basename matches, but the pluginId does not match
+        const KPluginMetaData nonMatchingPluginId = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("jsonplugin2"));
+        QVERIFY(!nonMatchingPluginId.isValid());
+
+        const KPluginMetaData nonExistingPlugin = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("invalidid"));
+        QVERIFY(!nonExistingPlugin.isValid());
     }
 
     void testForEachPlugin()

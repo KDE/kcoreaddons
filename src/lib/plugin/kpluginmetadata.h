@@ -202,6 +202,17 @@ public:
     static KPluginMetaData fromDesktopFile(const QString &file, const QStringList &serviceTypes = QStringList());
 
     /**
+     * @param directory The directory to search for plugins. If a relative path is given for @p directory,
+     * all entries of QCoreApplication::libraryPaths() will be checked with @p directory appended as a
+     * subdirectory. If an absolute path is given only that directory will be searched.
+     * @note Check if the returned KPluginMetaData is valid before continuing to use it.
+     *
+     * @param pluginId The Id of the plugin. The id should be the same as the filename, see KPluginMetaData::pluginId().
+     * @since 5.84
+     */
+    static KPluginMetaData findPluginById(const QString &directory, const QString &pluginId);
+
+    /**
      * @return whether this object holds valid information about a plugin.
      * If this is @c true pluginId() will return a non-empty string.
      */
