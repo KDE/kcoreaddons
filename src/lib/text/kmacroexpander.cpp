@@ -10,7 +10,6 @@
 #include "kmacroexpander_p.h"
 
 #include <QHash>
-#include <QStringList>
 
 KMacroExpanderBase::KMacroExpanderBase(QChar c)
     : d(new KMacroExpanderBasePrivate(c))
