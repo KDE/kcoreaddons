@@ -115,6 +115,7 @@ KPluginFactory *KPluginLoader::factory()
     return factory;
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 84)
 quint32 KPluginLoader::pluginVersion()
 {
     Q_D(const KPluginLoader);
@@ -124,6 +125,7 @@ quint32 KPluginLoader::pluginVersion()
     }
     return d->pluginVersion;
 }
+#endif
 
 QString KPluginLoader::pluginName() const
 {

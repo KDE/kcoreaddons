@@ -44,6 +44,7 @@ private Q_SLOTS:
         QVERIFY2(!location.isEmpty(), qPrintable(location));
     }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 84)
     void testPluginVersion()
     {
         KPluginLoader vplugin(QStringLiteral("versionedplugin"));
@@ -64,6 +65,7 @@ private Q_SLOTS:
         KPluginLoader noplugin(QStringLiteral("idonotexist"));
         QCOMPARE(noplugin.pluginVersion(), quint32(-1));
     }
+#endif
 
     void testPluginName()
     {

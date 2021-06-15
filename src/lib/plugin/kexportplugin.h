@@ -13,12 +13,15 @@
 #include <QtPlugin>
 #include <kcoreaddons_export.h>
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 84)
 /**
  * \relates KPluginLoader
  * Use this macro if you want to give your plugin a version number.
  * You can later access the version number with KPluginLoader::pluginVersion()
+ * @deprecated Since 5.84, use @ref KPluginMetaData::version() or a versioned namespace instead
  */
 #define K_EXPORT_PLUGIN_VERSION(version) Q_EXTERN_C Q_DECL_EXPORT const quint32 kde_plugin_version = version;
+#endif
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 0)
 /**

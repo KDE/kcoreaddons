@@ -8,6 +8,7 @@
 #ifndef KPLUGINLOADER_H
 #define KPLUGINLOADER_H
 
+#include <kcoreaddons_export.h>
 #include <kexportplugin.h>
 
 #include <QPluginLoader>
@@ -64,7 +65,9 @@ class KCOREADDONS_EXPORT KPluginLoader : public QObject
     Q_PROPERTY(QString fileName READ fileName)
     Q_PROPERTY(QLibrary::LoadHints loadHints READ loadHints WRITE setLoadHints)
     Q_PROPERTY(QString pluginName READ pluginName)
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 84)
     Q_PROPERTY(quint32 pluginVersion READ pluginVersion)
+#endif
 public:
     /**
      * Load a plugin by name.
@@ -125,6 +128,7 @@ public:
      */
     QString pluginName() const;
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 84)
     /**
      * Returns the plugin version.
      *
@@ -132,8 +136,11 @@ public:
      *
      * \returns The version given to K_EXPORT_PLUGIN_VERSION, or (quint32) -1 if
      *          the macro was not used or the plugin could not be loaded.
+     * @deprecated Since 5.84, use @ref KPluginMetaData::version() or a versioned namespace instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use KPluginMetaData::version or a versioned namespace instead")
     quint32 pluginVersion();
+#endif
 
     /**
      * Locates a plugin.
