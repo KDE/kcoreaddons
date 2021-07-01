@@ -104,7 +104,7 @@ static KDirWatch::Method methodFromString(const QByteArray &method)
     } else if (method == "QFSWatch") {
         return KDirWatch::QFSWatch;
     } else {
-#if defined(HAVE_SYS_INOTIFY_H)
+#if HAVE_SYS_INOTIFY_H
         // inotify supports delete+recreate+modify, which QFSWatch doesn't support
         return KDirWatch::INotify;
 #else
