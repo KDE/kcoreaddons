@@ -6,6 +6,7 @@
     SPDX-FileCopyrightText: 2008 Friedrich W. H. Kossebau <kossebau@kde.org>
     SPDX-FileCopyrightText: 2010 Teo Mrnjavac <teo@kde.org>
     SPDX-FileCopyrightText: 2017 Harald Sitter <sitter@kde.org>
+    SPDX-FileCopyrightText: 2021 Julius Künzel <jk.kdedev@smartlab.uber.space>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -401,6 +402,68 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
     return KAboutLicense(license, restriction, nullptr);
 }
 
+class KAboutComponentPrivate : public QSharedData
+{
+public:
+    QString _name;
+    QString _description;
+    QString _version;
+    QString _webAddress;
+    KAboutLicense _license;
+};
+
+KAboutComponent::KAboutComponent(const QString &_name, const QString &_description, const QString &_version, const QString &_webAddress, enum KAboutLicense::LicenseKey licenseType)
+    : d(new KAboutComponentPrivate)
+{
+    d->_name = _name;
+    d->_description = _description;
+    d->_version = _version;
+    d->_webAddress = _webAddress;
+    d->_license = KAboutLicense(licenseType, nullptr);
+}
+
+KAboutComponent::KAboutComponent(const QString &_name, const QString &_description, const QString &_version, const QString &_webAddress, const QString &pathToLicenseFile)
+    : d(new KAboutComponentPrivate)
+{
+    d->_name = _name;
+    d->_description = _description;
+    d->_version = _version;
+    d->_webAddress = _webAddress;
+    d->_license = KAboutLicense();
+    d->_license.setLicenseFromPath(pathToLicenseFile);
+}
+
+KAboutComponent::KAboutComponent(const KAboutComponent &other) = default;
+
+KAboutComponent::~KAboutComponent() = default;
+
+QString KAboutComponent::name() const
+{
+    return d->_name;
+}
+
+QString KAboutComponent::description() const
+{
+    return d->_description;
+}
+
+QString KAboutComponent::version() const
+{
+    return d->_version;
+}
+
+QString KAboutComponent::webAddress() const
+{
+    return d->_webAddress;
+}
+
+KAboutLicense KAboutComponent::license() const
+{
+    return d->_license;
+}
+
+KAboutComponent &KAboutComponent::operator=(const KAboutComponent &other) = default;
+
 class KAboutDataPrivate
 {
 public:
@@ -417,6 +480,7 @@ public:
     QList<KAboutPerson> _authorList;
     QList<KAboutPerson> _creditList;
     QList<KAboutPerson> _translatorList;
+    QList<KAboutComponent> _componentList;
     QList<KAboutLicense> _licenseList;
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 2)
     QString programIconName;
@@ -582,6 +646,18 @@ KAboutData &KAboutData::addCredit(const QString &name, const QString &task, cons
 KAboutData &KAboutData::setTranslator(const QString &name, const QString &emailAddress)
 {
     d->_translatorList = KAboutDataPrivate::parseTranslators(name, emailAddress);
+    return *this;
+}
+
+KAboutData &KAboutData::addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, KAboutLicense::LicenseKey licenseKey)
+{
+    d->_componentList.append(KAboutComponent(name, description, version, webAddress, licenseKey));
+    return *this;
+}
+
+KAboutData &KAboutData::addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, const QString &pathToLicenseFile)
+{
+    d->_componentList.append(KAboutComponent(name, description, version, webAddress, pathToLicenseFile));
     return *this;
 }
 
@@ -888,6 +964,11 @@ QString KAboutData::aboutTranslationTeam()
 QString KAboutData::otherText() const
 {
     return d->_otherText;
+}
+
+QList<KAboutComponent> KAboutData::components() const
+{
+    return d->_componentList;
 }
 
 QList<KAboutLicense> KAboutData::licenses() const
@@ -1210,4 +1291,9 @@ QVariantList KAboutData::creditsVariant() const
 QVariantList KAboutData::translatorsVariant() const
 {
     return listToVariant(d->_translatorList);
+}
+
+QVariantList KAboutData::componentsVariant() const
+{
+    return listToVariant(d->_componentList);
 }

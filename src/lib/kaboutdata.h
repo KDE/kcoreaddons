@@ -6,6 +6,7 @@
     SPDX-FileCopyrightText: 2010 Teo Mrnjavac <teo@kde.org>
     SPDX-FileCopyrightText: 2013 David Faure <faure+bluesystems@kde.org>
     SPDX-FileCopyrightText: 2017 Harald Sitter <sitter@kde.org>
+    SPDX-FileCopyrightText: 2021 Julius Künzel <jk.kdedev@smartlab.uber.space>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -180,6 +181,7 @@ class KCOREADDONS_EXPORT KAboutLicense
     Q_PROPERTY(KAboutLicense::LicenseKey key READ key CONSTANT)
     Q_PROPERTY(QString spdx READ spdx CONSTANT)
     friend class KAboutData;
+    friend class KAboutComponent;
 
 public:
     /**
@@ -332,6 +334,138 @@ private:
 };
 
 /**
+ * This class is used to store information about a third party component.
+ * It can store the component's name, a description, a link to a website
+ * and the license of the libary. This class is intended for use in the
+ * KAboutData class, but it can be used elsewhere as well.
+ * Normally you should at least define the libary's name.
+ * Creating a KAboutComponent object by yourself is relatively useless,
+ * but the KAboutData method KAboutData::libaries() return lists of
+ * KAboutComponent data objects which you can examine.
+ *
+ * Example usage within a main(), retrieving the list of components used
+ * by a program and re-using data from one of them:
+ *
+ * @code
+ * KAboutData about("khello", i18n("KHello"), "0.1",
+ *                   i18n("A KDE version of Hello, world!"),
+ *                   KAboutLicense::LGPL,
+ *                   i18n("Copyright (C) 2014 Developer"));
+ *
+ * about.addComponent(i18n("Awsom Lib"),
+ *                  i18n("Does awesom stuff. Copyright (C) 2014"),
+ *                  i18n("1.02.3"),
+ *                  "http://example.com",
+ *                  KAboutLicense::LGPL);
+ * QList<KAboutComponent> components = about.components();
+ * @endcode
+ *
+ * @since 5.84
+ */
+class KCOREADDONS_EXPORT KAboutComponent
+{
+    Q_GADGET
+    Q_PROPERTY(QString name READ name CONSTANT)
+    Q_PROPERTY(QString description READ description CONSTANT)
+    Q_PROPERTY(QString webAddress READ webAddress CONSTANT)
+    Q_PROPERTY(KAboutLicense licenses READ license CONSTANT)
+    friend class KAboutData;
+    friend class KAboutDataPrivate;
+
+public:
+    /**
+     * Convenience constructor
+     *
+     * @param name The name of the component.
+     *
+     * @param description The description of this component.
+     *
+     * @param version The version of this component.
+     *
+     * @param webAddress Website of the component.
+     *
+     * @param licenseType The license identifier of the component.
+     *
+     * @p name default argument
+     */
+    explicit KAboutComponent(const QString &name = QString(),
+                          const QString &description = QString(),
+                          const QString &version = QString(),
+                          const QString &webAddress = QString(),
+                          enum KAboutLicense::LicenseKey licenseType = KAboutLicense::Unknown);
+
+    /**
+     * Convenience constructor
+     *
+     * @param name The name of the component.
+     *
+     * @param description The description of this component.
+     *
+     * @param version The version of this component.
+     *
+     * @param webAddress Website of the component.
+     *
+     * @param pathToLicenseFile Path to the file in the local filesystem containing the license text.
+     *        The file format has to be plain text in an encoding compatible to the local.
+     *
+     * @p name default argument
+     */
+    explicit KAboutComponent(const QString &name,
+                          const QString &description,
+                          const QString &version,
+                          const QString &webAddress,
+                          const QString &pathToLicenseFile);
+
+    /**
+     * Copy constructor. Performs a deep copy.
+     * @param other object to copy
+     */
+    KAboutComponent(const KAboutComponent &other);
+
+    ~KAboutComponent();
+
+    /**
+     * Assignment operator. Performs a deep copy.
+     * @param other object to copy
+     */
+    KAboutComponent &operator=(const KAboutComponent &other);
+
+    /**
+     * The component's name
+     * @return the component's name (can be QString(), if it has been
+     *           constructed with an empty name)
+     */
+    QString name() const;
+
+    /**
+     * The component's description
+     * @return the component's description (can be empty)
+     */
+    QString description() const;
+
+    /**
+     * The component's version
+     * @return the component's task (can be empty)
+     */
+    QString version() const;
+
+    /**
+     * The website or a relevant link
+     * @return the component's website (can be empty)
+     */
+    QString webAddress() const;
+
+    /**
+     * The component's license
+     * @return the component's KAboutLicense
+     */
+    KAboutLicense license() const;
+
+private:
+    QSharedDataPointer<class KAboutComponentPrivate> d;
+};
+
+/**
  * @class KAboutData kaboutdata.h KAboutData
  *
  * This class is used to store information about a program or plugin.
@@ -407,6 +541,7 @@ class KCOREADDONS_EXPORT KAboutData
     Q_PROPERTY(QVariantList authors READ authorsVariant CONSTANT) // constant in practice as addAuthor is not exposed to Q_GADGET
     Q_PROPERTY(QVariantList credits READ creditsVariant CONSTANT)
     Q_PROPERTY(QVariantList translators READ translatorsVariant CONSTANT)
+    Q_PROPERTY(QVariantList components READ componentsVariant CONSTANT)
     Q_PROPERTY(QVariantList licenses READ licensesVariant CONSTANT)
     Q_PROPERTY(QString copyrightStatement READ copyrightStatement CONSTANT)
     Q_PROPERTY(QString desktopFileName READ desktopFileName CONSTANT)
@@ -656,6 +791,63 @@ public:
      * @see KAboutTranslator
      */
     KAboutData &setTranslator(const QString &name, const QString &emailAddress);
+
+    /**
+     * Defines a component that is used by the application.
+     *
+     * You can call this function as many times as you need. Each entry is
+     * appended to a list.
+     *
+     * @param name The component's name. It should be translated.
+     *
+     * @param description Short description of the component and maybe
+     *        copyright info. This text can contain newlines. It should
+     *        be translated. Can be left empty.
+     *
+     * @param version The version of the component. Can be left empty.
+     *
+     * @param webAddress The component's homepage or a relevant link.
+     *        Start the address with "http://". "http://some.domain" is
+     *        correct, "some.domain" is not. Can be left empty.
+     *
+     * @param licenseKey The component's license identifier. Can be left empty (i.e. KAboutLicense::Unknown)
+     *
+     * @since 5.84
+     */
+    KAboutData &addComponent(const QString &name,
+                           const QString &description = QString(),
+                           const QString &version = QString(),
+                           const QString &webAddress = QString(),
+                           KAboutLicense::LicenseKey licenseKey = KAboutLicense::Unknown);
+
+    /**
+     * Defines a component that is used by the application with a custom license text file.
+     *
+     * You can call this function as many times as you need. Each entry is
+     * appended to a list.
+     *
+     * @param name The component's name. It should be translated.
+     *
+     * @param description Short description of the component and maybe
+     *        copyright info. This text can contain newlines. It should
+     *        be translated. Can be left empty.
+     *
+     * @param version The version of the component. Can be left empty.
+     *
+     * @param webAddress The component's homepage or a relevant link.
+     *        Start the address with "http://". "http://some.domain" is
+     *        correct, "some.domain" is not. Can be left empty.
+     *
+     * @param pathToLicenseFile Path to the file in the local filesystem containing the license text.
+     *        The file format has to be plain text in an encoding compatible to the local.
+     *
+     * @since 5.84
+     */
+    KAboutData &addComponent(const QString &name,
+                           const QString &description,
+                           const QString &version,
+                           const QString &webAddress,
+                           const QString &pathToLicenseFile);
 
     /**
      * Defines a license text, which is translated.
@@ -1041,6 +1233,13 @@ public:
     static QString aboutTranslationTeam();
 
     /**
+     * Returns a list of components.
+     * @return component information (list of components).
+     * @since 5.84
+     */
+    QList<KAboutComponent> components() const;
+
+    /**
      * Returns a translated, free form text.
      * @return the free form text (translated). Can be QString() if not set.
      */
@@ -1172,6 +1371,7 @@ private:
     QVariantList authorsVariant() const;
     QVariantList creditsVariant() const;
     QVariantList translatorsVariant() const;
+    QVariantList componentsVariant() const;
 
     friend void KCrash::defaultCrashHandler(int sig);
     static const KAboutData *applicationDataPointer();
@@ -1183,5 +1383,6 @@ private:
 Q_DECLARE_METATYPE(KAboutData)
 Q_DECLARE_METATYPE(KAboutLicense)
 Q_DECLARE_METATYPE(KAboutPerson)
+Q_DECLARE_METATYPE(KAboutComponent)
 
 #endif
