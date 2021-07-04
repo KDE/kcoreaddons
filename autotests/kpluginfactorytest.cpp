@@ -4,7 +4,9 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
+#include <QPluginLoader>
 #include <QTest>
+#include <kpluginmetadata.h>
 
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
@@ -16,8 +18,8 @@ class KPluginFactoryTest : public QObject
 private Q_SLOTS:
     void testCreate()
     {
-        KPluginLoader multiplugin(QStringLiteral("multiplugin"));
-        KPluginFactory *factory = multiplugin.factory();
+        QPluginLoader multiplugin(QStringLiteral("multiplugin"));
+        KPluginFactory *factory = KPluginMetaData(multiplugin).factory();
         QVERIFY(factory);
         QVariantList args;
         args << QStringLiteral("Some") << QStringLiteral("args") << 5;

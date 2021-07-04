@@ -118,11 +118,14 @@ public:
     /** Creates an invalid KPluginMetaData instance */
     KPluginMetaData();
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 84)
     /**
      * Reads the plugin metadata from a KPluginLoader instance. You must call KPluginLoader::setFileName()
      * or use the appropriate constructor on @p loader before calling this.
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use KPluginMetaData(QPluginLoader) instead")
     KPluginMetaData(const KPluginLoader &loader);
+#endif
 
     /**
      * Reads the plugin metadata from a QPluginLoader instance. You must call QPluginLoader::setFileName()
