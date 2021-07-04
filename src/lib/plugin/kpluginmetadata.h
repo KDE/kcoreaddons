@@ -2,6 +2,7 @@
     This file is part of the KDE project
 
     SPDX-FileCopyrightText: 2014 Alex Richardson <arichardson.kde@gmail.com>
+    SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.0-only
 */
@@ -20,6 +21,7 @@
 #include <functional>
 
 class KPluginLoader;
+class KPluginFactory;
 class QPluginLoader;
 class KPluginMetaDataPrivate;
 class KAboutPerson;
@@ -206,10 +208,25 @@ public:
      * subdirectory. If an absolute path is given only that directory will be searched.
      * @note Check if the returned KPluginMetaData is valid before continuing to use it.
      *
-     * @param pluginId The Id of the plugin. The id should be the same as the filename, see KPluginMetaData::pluginId().
+     * @param pluginId The Id of the plugin. The id should be the same as the filename, see KPluginMetaData::pluginId()
      * @since 5.84
      */
     static KPluginMetaData findPluginById(const QString &directory, const QString &pluginId);
+
+    /**
+     * Find all plugins inside @p directory. Only plugins which have JSON metadata will be considered.
+     *
+     * @param directory The directory to search for plugins. If a relative path is given for @p directory,
+     * all entries of QCoreApplication::libraryPaths() will be checked with @p directory appended as a
+     * subdirectory. If an absolute path is given only that directory will be searched.
+     *
+     * @param filter a callback function that returns @c true if the found plugin should be loaded
+     * and @c false if it should be skipped. If this argument is omitted all plugins will be loaded
+     *
+     * @return all plugins found in @p directory that fulfil the constraints of @p filter
+     * @since 5.86
+     */
+    static QVector<KPluginMetaData> findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter = {});
 
     /**
      * @return whether this object holds valid information about a plugin.
