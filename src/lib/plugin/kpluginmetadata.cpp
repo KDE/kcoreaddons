@@ -2,6 +2,7 @@
     This file is part of the KDE project
 
     SPDX-FileCopyrightText: 2014 Alex Richardson <arichardson.kde@gmail.com>
+    SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.0-only
 */
@@ -10,6 +11,9 @@
 #include "desktopfileparser_p.h"
 
 #include "kcoreaddons_debug.h"
+#include <QCoreApplication>
+#include <QDir>
+#include <QDirIterator>
 #include <QFileInfo>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -18,12 +22,50 @@
 #include <QPluginLoader>
 
 #include "kaboutdata.h"
+#include "kpluginfactory.h"
 #include "kpluginloader.h"
 
 class KPluginMetaDataPrivate : public QSharedData
 {
 public:
     QString metaDataFileName;
+    static void forEachPlugin(const QString &directory, std::function<void(const QString &)> callback)
+    {
+        QStringList dirsToCheck;
+#ifdef Q_OS_ANDROID
+        dirsToCheck << QCoreApplication::libraryPaths();
+#else
+        if (QDir::isAbsolutePath(directory)) {
+            dirsToCheck << directory;
+        } else {
+            const QStringList listPaths = QCoreApplication::libraryPaths();
+            dirsToCheck.reserve(listPaths.size());
+            for (const QString &libDir : listPaths) {
+                dirsToCheck << libDir + QLatin1Char('/') + directory;
+            }
+        }
+#endif
+
+        qCDebug(KCOREADDONS_DEBUG) << "Checking for plugins in" << dirsToCheck;
+
+        for (const QString &dir : qAsConst(dirsToCheck)) {
+            QDirIterator it(dir, QDir::Files);
+            while (it.hasNext()) {
+                it.next();
+#ifdef Q_OS_ANDROID
+                QString prefix(QLatin1String("libplugins_") + QString(directory).replace(QLatin1Char('/'), QLatin1String("_")));
+                if (!prefix.endsWith(QLatin1Char('_'))) {
+                    prefix.append(QLatin1Char('_'));
+                }
+                if (it.fileName().startsWith(prefix) && QLibrary::isLibrary(it.fileName())) {
+#else
+                if (QLibrary::isLibrary(it.fileName())) {
+#endif
+                    callback(it.fileInfo().absoluteFilePath());
+                }
+            }
+        }
+    }
 };
 
 KPluginMetaData::KPluginMetaData()
@@ -108,7 +150,7 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
 
 {
     KPluginMetaData metaData;
-    KPluginLoader::forEachPlugin(directory, [&](const QString &pluginPath) {
+    KPluginMetaDataPrivate::forEachPlugin(directory, [&](const QString &pluginPath) {
         if (metaData.isValid()) {
             return; // We have already found the match
         }
@@ -176,6 +218,28 @@ QString KPluginMetaData::fileName() const
 QString KPluginMetaData::metaDataFileName() const
 {
     return d ? d->metaDataFileName : m_fileName;
+}
+
+QVector<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)
+{
+    QVector<KPluginMetaData> ret;
+    QSet<QString> addedPluginIds;
+    KPluginMetaDataPrivate::forEachPlugin(directory, [&](const QString &pluginPath) {
+        KPluginMetaData metadata(pluginPath);
+        if (!metadata.isValid()) {
+            qCDebug(KCOREADDONS_DEBUG) << pluginPath << "does not contain valid JSON metadata";
+            return;
+        }
+        if (addedPluginIds.contains(metadata.pluginId())) {
+            return;
+        }
+        if (filter && !filter(metadata)) {
+            return;
+        }
+        addedPluginIds << metadata.pluginId();
+        ret.append(metadata);
+    });
+    return ret;
 }
 
 bool KPluginMetaData::isValid() const
