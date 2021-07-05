@@ -127,6 +127,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     schemas << QStringLiteral("sftp://");
     schemas << QStringLiteral("smb://");
     schemas << QStringLiteral("file://");
+    schemas << QStringLiteral("irc://");
+    schemas << QStringLiteral("ircs://");
 
     QStringList urls;
     urls << QStringLiteral("www.kde.org");
