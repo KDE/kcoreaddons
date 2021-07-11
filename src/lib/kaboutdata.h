@@ -369,6 +369,7 @@ class KCOREADDONS_EXPORT KAboutComponent
     Q_PROPERTY(QString description READ description CONSTANT)
     Q_PROPERTY(QString webAddress READ webAddress CONSTANT)
     Q_PROPERTY(KAboutLicense licenses READ license CONSTANT)
+    Q_PROPERTY(QString version READ version CONSTANT)
     friend class KAboutData;
     friend class KAboutDataPrivate;
 
