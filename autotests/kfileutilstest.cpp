@@ -1,6 +1,7 @@
 /*
     This file is part of the KDE libraries
     SPDX-FileCopyrightText: 2000-2005 David Faure <faure@kde.org>
+    SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -8,7 +9,7 @@
 #include "kfileutilstest.h"
 
 #include <KFileUtils>
-
+#include <QStandardPaths>
 #include <QTest>
 
 QTEST_MAIN(KFileUtilsTest)
@@ -52,4 +53,32 @@ void KFileUtilsTest::testSuggestName()
         QVERIFY(file.open(QIODevice::WriteOnly));
     }
     QCOMPARE(KFileUtils::suggestName(baseUrl, oldName), expectedOutput);
+}
+
+void KFileUtilsTest::testfindAllUniqueFiles()
+{
+    const QString testBaseDirPath = QDir::currentPath() + QLatin1String("/kfileutilstestdata/");
+    QDir testDataBaseDir(testBaseDirPath);
+    testDataBaseDir.mkpath(QStringLiteral("."));
+    testDataBaseDir.mkpath(QStringLiteral("testdir1/testDirName"));
+    testDataBaseDir.mkpath(QStringLiteral("testdir2/testDirName"));
+    testDataBaseDir.mkpath(QStringLiteral("testdir3/testDirName"));
+
+    QFile file1(testBaseDirPath + QLatin1String("/testdir1/testDirName/testfile.test"));
+    file1.open(QFile::WriteOnly);
+    QFile file2(testBaseDirPath + QLatin1String("/testdir2/testDirName/testfile.test"));
+    file2.open(QFile::WriteOnly);
+    QFile file3(testBaseDirPath + QLatin1String("/testdir3/testDirName/differentfile.test"));
+    file3.open(QFile::WriteOnly);
+    QFile file4(testBaseDirPath + QLatin1String("/testdir3/testDirName/nomatch.txt"));
+    file4.open(QFile::WriteOnly);
+
+    qputenv("XDG_DATA_DIRS", qPrintable(QStringLiteral("%1testdir1:%1testdir2:%1testdir3").arg(testBaseDirPath)));
+
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("testDirName"), QStandardPaths::LocateDirectory);
+    const QStringList expected = {testDataBaseDir.filePath(QStringLiteral("testdir1/testDirName/testfile.test")),
+                                  testDataBaseDir.filePath(QStringLiteral("testdir3/testDirName/differentfile.test"))};
+
+    const QStringList actual = KFileUtils::findAllUniqueFiles(dirs, QStringList{QStringLiteral("*.test")});
+    QCOMPARE(actual, expected);
 }

@@ -16,6 +16,7 @@ class KFileUtilsTest : public QObject
 private Q_SLOTS:
     void testSuggestName_data();
     void testSuggestName();
+    void testfindAllUniqueFiles();
 };
 
 #endif
