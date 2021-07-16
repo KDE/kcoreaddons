@@ -1,5 +1,6 @@
 /*
     SPDX-FileCopyrightText: 2014 Alex Merry <alex.merry@kde.org>
+    SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
@@ -16,8 +17,8 @@ class KPluginFactoryTest : public QObject
 private Q_SLOTS:
     void testCreate()
     {
-        KPluginLoader multiplugin(QStringLiteral("multiplugin"));
-        KPluginFactory *factory = multiplugin.factory();
+        KPluginFactory::Result<KPluginFactory> factoryResult = KPluginFactory::loadFactory(KPluginMetaData(QStringLiteral("multiplugin")));
+        auto factory = factoryResult.plugin;
         QVERIFY(factory);
         QVariantList args;
         args << QStringLiteral("Some") << QStringLiteral("args") << 5;
@@ -43,6 +44,38 @@ private Q_SLOTS:
         QVERIFY(obj != obj2);
         delete obj;
         delete obj2;
+    }
+
+    void testCreateUsingUtilityMethods()
+    {
+        auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QStringLiteral("jsonplugin")), nullptr, QVariantList());
+        QVERIFY(result.plugin);
+        QCOMPARE(result.plugin->metaObject()->className(), "JsonPlugin");
+        QVERIFY(result.errorString.isEmpty());
+        QCOMPARE(result.errorReason, KPluginFactory::NO_ERROR);
+    }
+
+    void testCreateUsingUtilityMethodsErrorHandling()
+    {
+        {
+            auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QFINDTESTDATA("jsonplugin.json")), nullptr, QVariantList());
+            QVERIFY(!result.plugin);
+            QCOMPARE(result.errorReason, KPluginFactory::INVALID_PLUGIN);
+        }
+        {
+            // it is a valid plugin, but does not contain a KPluginFactory
+            QVERIFY(QPluginLoader(QStringLiteral("qtplugin")).instance());
+            auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QStringLiteral("qtplugin")), nullptr, QVariantList());
+            QVERIFY(!result.plugin);
+            // But does not contain a valid plugin factory
+            QCOMPARE(result.errorReason, KPluginFactory::INVALID_FACTORY);
+        }
+        {
+            // it is a QObject, but not a KPluginFactoryTest instance
+            auto result = KPluginFactory::instantiatePlugin<KPluginFactoryTest>(KPluginMetaData(QStringLiteral("jsonplugin")), nullptr, QVariantList());
+            QVERIFY(!result.plugin);
+            QCOMPARE(result.errorReason, KPluginFactory::INVALID_KPLUGINFACTORY_INSTANTIATION);
+        }
     }
 };
 

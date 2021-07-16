@@ -3,6 +3,7 @@
 
     SPDX-FileCopyrightText: 2007 Matthias Kretz <kretz@kde.org>
     SPDX-FileCopyrightText: 2007 Bernhard Loos <nhuh.put@web.de>
+    SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -11,6 +12,7 @@
 #define KPLUGINFACTORY_H
 
 #include "kcoreaddons_export.h"
+#include "kpluginmetadata.h"
 
 #include <QObject>
 #include <QStringList>
@@ -415,6 +417,84 @@ public:
      */
     ~KPluginFactory() override;
 
+    /// @since 5.86
+    enum ResultErrorReason {
+        NO_ERROR = 0,
+        INVALID_PLUGIN,
+        INVALID_FACTORY,
+        INVALID_KPLUGINFACTORY_INSTANTIATION,
+    };
+    /**
+     * Holds the result of a plugin load operation, i.e. the loaded plugin on success or information about the error on failure
+     * @since 5.86
+     */
+    template<typename T>
+    class Result
+    {
+    public:
+        T *plugin = nullptr;
+        /// translated, user-visible error string
+        QString errorString;
+        /// untranslated error text
+        QString errorText;
+        ResultErrorReason errorReason = NO_ERROR;
+        explicit operator bool() const
+        {
+            return plugin != nullptr;
+        }
+    };
+
+    /**
+     * Attempts to load the KPluginFactory from the given metadata.
+     * The errors will be logged using the `kf.coreaddons` debug category.
+     * @param data KPluginMetaData from which the plugin should be loaded
+     * @return Result object which contains the plugin instance and potentially error information
+     * @since 5.86
+     */
+    static Result<KPluginFactory> loadFactory(const KPluginMetaData &data);
+
+    /**
+     * Attempts to load the KPluginFactory and create a @p T instance from the given metadata
+     * @code
+        KPluginFactory::Result<MyClass> pluginResult = KPluginFactory::instantiatePlugin<MyClass>(metaData, parent, args);
+        if (pluginResult) {
+            // The plugin is valid and can be accessed
+        } else {
+            // The pluginResult object contains information about the error
+        }
+     * @endcode
+     * If there is no extra error handling needed the plugin can be directly accessed and checked if it is a nullptr
+     * @code
+        if (auto plugin = KPluginFactory::instantiatePlugin<MyClass>(metaData, parent, args).plugin) {
+            // The plugin is valid and can be accessed
+        }
+     * @endcode
+     * @param data KPluginMetaData from which the plugin should be loaded
+     * @return Result object which contains the plugin instance and potentially error information
+     * @since 5.86
+     */
+    template<typename T>
+    static Result<T> instantiatePlugin(const KPluginMetaData &data, QObject *parent = nullptr, const QVariantList &args = {})
+    {
+        Result<T> result;
+        KPluginFactory::Result<KPluginFactory> factoryResult = loadFactory(data);
+        if (!factoryResult.plugin) {
+            result.errorString = factoryResult.errorString;
+            result.errorReason = factoryResult.errorReason;
+            return result;
+        }
+        T *instance = factoryResult.plugin->create<T>(parent, args);
+        if (!instance) {
+            result.errorString = tr("KPluginFactory could not load the plugin: %1").arg(data.fileName());
+            result.errorText = QStringLiteral("KPluginFactory could not load the plugin: %1").arg(data.fileName());
+            result.errorReason = INVALID_KPLUGINFACTORY_INSTANTIATION;
+            logFailedInstantiationMessage(data);
+        } else {
+            result.plugin = instance;
+        }
+        return result;
+    }
+
     /**
      * Use this method to create an object. It will try to create an object which inherits
      * @p T. If it has multiple choices it's not defined which object will be returned, so be careful
@@ -753,6 +833,8 @@ protected:
 private:
     void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceFunction instanceFunction);
     void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceWithMetaDataFunction instanceFunction);
+    // The logging categories are not part of the public API, consequently this needs to be a private function
+    static void logFailedInstantiationMessage(KPluginMetaData data);
 };
 
 // Deprecation wrapper macro added only for 5.70, while backward typedef added in 4.0

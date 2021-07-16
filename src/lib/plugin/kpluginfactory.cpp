@@ -3,6 +3,7 @@
 
     SPDX-FileCopyrightText: 2007 Matthias Kretz <kretz@kde.org>
     SPDX-FileCopyrightText: 2007 Bernhard Loos <nhuh.put@web.de>
+    SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -28,6 +29,35 @@ KPluginFactory::KPluginFactory(KPluginFactoryPrivate &d)
 }
 
 KPluginFactory::~KPluginFactory() = default;
+
+KPluginFactory::Result<KPluginFactory> KPluginFactory::loadFactory(const KPluginMetaData &data)
+{
+    Result<KPluginFactory> result;
+    QPluginLoader loader(data.fileName());
+    QObject *obj = loader.instance();
+
+    if (!obj) {
+        result.errorString = tr("Could not load plugin from %1").arg(data.fileName());
+        result.errorText = QStringLiteral("Could not load plugin from %1").arg(data.fileName());
+        result.errorReason = INVALID_PLUGIN;
+        qCWarning(KCOREADDONS_DEBUG) << result.errorText;
+        return result;
+    }
+
+    KPluginFactory *factory = qobject_cast<KPluginFactory *>(obj);
+
+    if (factory == nullptr) {
+        result.errorString = tr("The library %1 does not offer a KPluginFactory.").arg(data.fileName());
+        result.errorReason = INVALID_FACTORY;
+        qCWarning(KCOREADDONS_DEBUG) << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
+        delete obj;
+    } else {
+        factory->setMetaData(data);
+        result.plugin = factory;
+    }
+
+    return result;
+}
 
 KPluginMetaData KPluginFactory::metaData() const
 {
@@ -120,6 +150,11 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
         }
         d->createInstanceWithMetaDataHash.insert(keyword, {metaObject, instanceFunction});
     }
+}
+
+void KPluginFactory::logFailedInstantiationMessage(KPluginMetaData data)
+{
+    qCWarning(KCOREADDONS_DEBUG) << "KPluginFactory could not load the plugin" << data.fileName();
 }
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
