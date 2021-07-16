@@ -9,6 +9,9 @@
 #define KPLUGINLOADER_H
 
 #include <kcoreaddons_export.h>
+
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 84)
+
 #include <kexportplugin.h>
 
 #include <QPluginLoader>
@@ -58,6 +61,10 @@ class KPluginName;
  * \see KPluginFactory
  *
  * \author Bernhard Loos <nhuh.put@web.de>
+ * @deprecated Since 5.84, the @p findPluginsById, @p findPlugins and @p factory methods have been imported to @ref KPluginMetaData.
+ * Check the deprecating messages of the other search related methods for porting instructions.
+ * The methods which are exclusively used to work around QTBUG-39642 are
+ * deprecated in favour of using QPluginLoader directly. With Qt 5.15 this bug has been fixed.
  */
 class KCOREADDONS_EXPORT KPluginLoader : public QObject
 {
@@ -65,9 +72,7 @@ class KCOREADDONS_EXPORT KPluginLoader : public QObject
     Q_PROPERTY(QString fileName READ fileName)
     Q_PROPERTY(QLibrary::LoadHints loadHints READ loadHints WRITE setLoadHints)
     Q_PROPERTY(QString pluginName READ pluginName)
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 84)
     Q_PROPERTY(quint32 pluginVersion READ pluginVersion)
-#endif
 public:
     /**
      * Load a plugin by name.
@@ -113,7 +118,9 @@ public:
      * any JSON metadata that is embedded into the plugin binary.
      *
      * \returns The factory of the plugin or @c nullptr on error.
+     * @deprecated Since 5.84, use @ref KPluginMetaData::factory instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use KPluginMetaData::factory instead")
     KPluginFactory *factory();
 
     /**
@@ -125,10 +132,11 @@ public:
      * \returns The plugin name.
      *
      * \see fileName()
+     * @deprecated Since 5.84, use @ref KPluginMetaData::pluginId instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use KPluginMetaData::pluginId instead")
     QString pluginName() const;
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 84)
     /**
      * Returns the plugin version.
      *
@@ -140,7 +148,6 @@ public:
      */
     KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use KPluginMetaData::version or a versioned namespace instead")
     quint32 pluginVersion();
-#endif
 
     /**
      * Locates a plugin.
@@ -163,7 +170,9 @@ public:
      *              could not be found.
      *
      * @since 5.0
+     * @deprecated Since 5.84, use QPluginLoader::findPlugin() or KPluginMetaData::findPluginById instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::findPlugin() or KPluginMetaData::findPluginById instead")
     static QString findPlugin(const QString &name);
 
     /**
@@ -172,7 +181,9 @@ public:
      * \returns The description of the last error.
      *
      * \see QPluginLoader::errorString()
+     * @deprecated Since 5.84, use QPluginLoader::errorString() instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::errorString() instead")
     QString errorString() const;
 
     /**
@@ -185,7 +196,9 @@ public:
      *          not be found.
      *
      * \see QPluginLoader::fileName(), pluginName()
+     * @deprecated Since 5.84, use QPluginLoader::fileName() instead, in case of complex query logic consider using @ref KPluginLoader::findPlugins
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::fileName() instead, in case of complex query logic consider using KPluginLoader::findPlugins")
     QString fileName() const;
 
     /**
@@ -197,7 +210,9 @@ public:
      * \returns The plugin's root object.
      *
      * \see QPluginLoader::instance()
+     * @deprecated Since 5.84, use QPluginLoader::instance() instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::instance() instead")
     QObject *instance();
 
     /**
@@ -206,7 +221,9 @@ public:
      * \returns  @c True if the plugin is loaded, @c false otherwise.
      *
      * \see QPluginLoader::isLoaded()
+     * @deprecated Since 5.84, use QPluginLoader::isLoaded() instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::isLoaded() instead")
     bool isLoaded() const;
 
     /**
@@ -222,7 +239,9 @@ public:
      *           otherwise.
      *
      * \see QPluginLoader::load()
+     * @deprecated Since 5.84, use QPluginLoader::load() instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::load() instead")
     bool load();
 
     /**
@@ -234,7 +253,9 @@ public:
      * \returns  The load hints for the plugin.
      *
      * \see QPluginLoader::loadHints(), setLoadHints()
+     * @deprecated Since 5.84, use QPluginLoader::loadHints() instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::loadHints() instead")
     QLibrary::LoadHints loadHints() const;
 
     /**
@@ -243,7 +264,9 @@ public:
      * \returns  A JSON object containing the plugin's metadata, if found.
      *
      * \see QPluginLoader::metaData()
+     * @deprecated Since 5.84, use QPluginLoader::metaData() or @ref KPluginMetaData instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::metaData() or KPluginMetaData instead")
     QJsonObject metaData() const;
 
     /**
@@ -255,7 +278,9 @@ public:
      * \param loadHints  The load hints for the plugin.
      *
      * \see QPluginLoader::setLoadHints(), loadHints()
+     * @deprecated Since 5.84, use QPluginLoader::setLoadHints instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::setLoadHints instead")
     void setLoadHints(QLibrary::LoadHints loadHints);
 
     /**
@@ -268,7 +293,9 @@ public:
      * \returns  @c True if the plugin was unloaded, @c false otherwise.
      *
      * \see QPluginLoader::unload(), load(), instance(), factory()
+     * @deprecated Since 5.84, use QPluginLoader::unload() instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use QPluginLoader::unload() instead")
     bool unload();
 
     /**
@@ -312,7 +339,12 @@ public:
      * @see KPluginLoader::findPlugins()
      *
      * @since 5.1
+     * @deprecated Since 5.84 create instances from the KPluginMetaData::findPlugins result instead. In case
+     * you are using KPluginFactory use KPluginMetaData::factory on the returned metadata objects. Otherwise use
+     * @ref KPluginMetaData::instantiate or QPluginLoader on the returned metadata objects.
+     * @deprecated Since 5.84, create instances from the @ref KPluginMetaData::findPlugins result instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Create instances from the KPluginMetaData::findPlugins result instead")
     static QList<QObject *> instantiatePlugins(const QString &directory,
                                                std::function<bool(const KPluginMetaData &)> filter = std::function<bool(const KPluginMetaData &)>(),
                                                QObject *parent = nullptr);
@@ -332,7 +364,9 @@ public:
      * @see KPluginLoader::instantiatePlugins()
      *
      * @since 5.1
+     * @deprecated Since 5.84 use @ref KPluginMetaData::findPlugins instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use KPluginMetaData::findPlugins instead")
     static QVector<KPluginMetaData> findPlugins(const QString &directory,
                                                 std::function<bool(const KPluginMetaData &)> filter = std::function<bool(const KPluginMetaData &)>());
 
@@ -350,7 +384,9 @@ public:
      * @see KPluginLoader::instantiatePlugins()
      *
      * @since 5.11
+     * @deprecated Since 5.84 use @ref KPluginMetaData::findPluginsById instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use KPluginMetaData::findPluginsById instead")
     static QVector<KPluginMetaData> findPluginsById(const QString &directory, const QString &pluginId);
 
     /**
@@ -371,7 +407,10 @@ public:
      * @see KPluginLoader::findPlugins(), KPluginLoader::instantiatePlugins()
      *
      * @since 5.1
+     * @deprecated Since 5.84 use @ref KPluginMetaData::findPlugins instead. This will warn about invalid plugin
+     * metadata and only return valid results.
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 84, "Use KPluginMetaData::findPlugins instead")
     static void forEachPlugin(const QString &directory, std::function<void(const QString &)> callback = std::function<void(const QString &)>());
 
 private:
@@ -477,4 +516,5 @@ inline KPluginName KPluginName::fromErrorString(const QString &errorString)
     return KPluginName(errorString, true);
 }
 
+#endif
 #endif
