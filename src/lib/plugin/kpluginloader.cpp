@@ -8,6 +8,8 @@
 
 #include "kpluginloader.h"
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 86)
+
 #include "kpluginfactory.h"
 #include "kpluginmetadata.h"
 
@@ -313,3 +315,5 @@ QList<QObject *> KPluginLoader::instantiatePlugins(const QString &directory, std
     }
     return ret;
 }
+
+#endif

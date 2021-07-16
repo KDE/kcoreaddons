@@ -13,7 +13,7 @@
 #include <QtPlugin>
 #include <kcoreaddons_export.h>
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 84)
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 86)
 /**
  * \relates KPluginLoader
  * Use this macro if you want to give your plugin a version number.

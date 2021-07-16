@@ -132,11 +132,13 @@ KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
     m_metaData = loader.metaData().value(QStringLiteral("MetaData")).toObject();
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 86)
 KPluginMetaData::KPluginMetaData(const KPluginLoader &loader)
 {
     m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
     m_metaData = loader.metaData().value(QStringLiteral("MetaData")).toObject();
 }
+#endif
 
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &file)
 {
@@ -180,7 +182,7 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
     auto filter = [&pluginId](const KPluginMetaData &md) -> bool {
         return md.pluginId() == pluginId;
     };
-    const QVector<KPluginMetaData> metaDataVector = KPluginLoader::findPlugins(directory, filter);
+    const QVector<KPluginMetaData> metaDataVector = KPluginMetaData::findPlugins(directory, filter);
     if (!metaDataVector.isEmpty()) {
         metaData = metaDataVector.first();
     }

@@ -31,6 +31,7 @@ class KPluginLoaderTest : public QObject
 {
     Q_OBJECT
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 86)
 private Q_SLOTS:
     void testFindPlugin_missing()
     {
@@ -301,113 +302,6 @@ private Q_SLOTS:
         qDeleteAll(plugins);
     }
 
-    void testFindPlugins()
-    {
-        QTemporaryDir temp;
-        QVERIFY(temp.isValid());
-        QDir dir(temp.path());
-        QVERIFY(dir.mkdir(QStringLiteral("kpluginmetadatatest")));
-        QVERIFY(dir.cd(QStringLiteral("kpluginmetadatatest")));
-        for (const QString &name : {QStringLiteral("jsonplugin"), QStringLiteral("unversionedplugin"), QStringLiteral("jsonplugin2")}) {
-            const QString pluginPath = KPluginLoader::findPlugin(name);
-            QVERIFY2(!pluginPath.isEmpty(), qPrintable(pluginPath));
-            QVERIFY2(QFile::copy(pluginPath, dir.absoluteFilePath(QFileInfo(pluginPath).fileName())),
-                     qPrintable(dir.absoluteFilePath(QFileInfo(pluginPath).fileName())));
-        }
-
-        LibraryPathRestorer restorer(QCoreApplication::libraryPaths());
-        // we only want plugins from our temporary dir
-        QCoreApplication::setLibraryPaths(QStringList() << temp.path());
-
-        auto sortPlugins = [](const KPluginMetaData &a, const KPluginMetaData &b) {
-            return a.pluginId() < b.pluginId();
-        };
-        // it should find jsonplugin and jsonplugin2 since unversionedplugin does not have any meta data
-        auto plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"));
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 2);
-        QCOMPARE(plugins[0].pluginId(), QStringLiteral("foobar")); // ID is not the filename, it is set in the JSON metadata
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-        QCOMPARE(plugins[1].pluginId(), QStringLiteral("jsonplugin"));
-        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
-
-        // filter accepts none
-        plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"), [](const KPluginMetaData &) {
-            return false;
-        });
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 0);
-
-        // filter accepts all
-        plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"), [](const KPluginMetaData &) {
-            return true;
-        });
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 2);
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
-
-        // mimetype filter. Only one match, jsonplugin2 is specific to text/html.
-        auto supportTextPlain = [](const KPluginMetaData &metaData) {
-            return metaData.supportsMimeType(QLatin1String("text/plain"));
-        };
-        plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"), supportTextPlain);
-        QCOMPARE(plugins.size(), 1);
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is a plugin"));
-
-        // mimetype filter. Two matches, both support text/html, via inheritance.
-        auto supportTextHtml = [](const KPluginMetaData &metaData) {
-            return metaData.supportsMimeType(QLatin1String("text/html"));
-        };
-        plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"), supportTextHtml);
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 2);
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
-
-        // mimetype filter with invalid mimetype
-        auto supportDoesNotExist = [](const KPluginMetaData &metaData) {
-            return metaData.supportsMimeType(QLatin1String("does/not/exist"));
-        };
-        plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"), supportDoesNotExist);
-        QCOMPARE(plugins.size(), 0);
-
-        // invalid std::function as filter
-        plugins = KPluginLoader::findPlugins(QStringLiteral("kpluginmetadatatest"));
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 2);
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
-
-        // by plugin id
-        plugins = KPluginLoader::findPluginsById(dir.absolutePath(), QStringLiteral("foobar"));
-        QCOMPARE(plugins.size(), 1);
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-
-        // by plugin invalid id
-        plugins = KPluginLoader::findPluginsById(dir.absolutePath(), QStringLiteral("invalidid"));
-        QCOMPARE(plugins.size(), 0);
-
-        // absolute path, no filter
-        plugins = KPluginLoader::findPlugins(dir.absolutePath());
-        std::sort(plugins.begin(), plugins.end(), sortPlugins);
-        QCOMPARE(plugins.size(), 2);
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-        QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
-
-        // This plugin has no explicit pluginId and will fall back to basename of file
-        const KPluginMetaData validPlugin = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("jsonplugin"));
-        QVERIFY(validPlugin.isValid());
-        QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
-
-        // The basename matches, but the pluginId does not match
-        const KPluginMetaData nonMatchingPluginId = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("jsonplugin2"));
-        QVERIFY(!nonMatchingPluginId.isValid());
-
-        const KPluginMetaData nonExistingPlugin = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("invalidid"));
-        QVERIFY(!nonExistingPlugin.isValid());
-    }
-
     void testForEachPlugin()
     {
         const QString jsonPluginSrc = KPluginLoader::findPlugin(QStringLiteral("jsonplugin"));
@@ -483,6 +377,7 @@ private Q_SLOTS:
         foundPlugins.sort();
         QCOMPARE(foundPlugins, expectedPlugins);
     }
+#endif
 };
 
 QTEST_MAIN(KPluginLoaderTest)
