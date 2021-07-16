@@ -3,6 +3,7 @@
 
     SPDX-FileCopyrightText: 2007 Matthias Kretz <kretz@kde.org>
     SPDX-FileCopyrightText: 2007 Bernhard Loos <nhuh.put@web.de>
+    SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -11,6 +12,7 @@
 #define KPLUGINFACTORY_H
 
 #include "kcoreaddons_export.h"
+#include "kpluginmetadata.h"
 
 #include <QObject>
 #include <QStringList>
@@ -415,6 +417,30 @@ public:
      */
     ~KPluginFactory() override;
 
+    struct KPluginLoadingError {
+        QString errorString;
+        enum { NO_ERROR = 0, INVALID_PLUGIN, INVALID_FACTORY, INVALID_KPLUGINFACTORY_INSTANTIATION } reason = NO_ERROR;
+    };
+
+    /**
+     * @since 5.85
+     */
+    static KPluginFactory *loadFactory(const KPluginMetaData &data, KPluginLoadingError *error = nullptr);
+
+    template<typename T>
+    static T *instantiatePlugin(const KPluginMetaData &data, QObject *parent = nullptr, const QVariantList &args = {}, KPluginLoadingError *error = nullptr)
+    {
+        KPluginFactory *factory = loadFactory(data, error);
+        if (!factory) {
+            return nullptr;
+        }
+        T *instance = factory->create<T>(parent, args);
+        if (!instance) {
+            createFailedInstanciationMessage(data, error);
+        }
+        return instance;
+    }
+
     /**
      * Use this method to create an object. It will try to create an object which inherits
      * @p T. If it has multiple choices it's not defined which object will be returned, so be careful
@@ -753,6 +779,8 @@ protected:
 private:
     void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceFunction instanceFunction);
     void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceWithMetaDataFunction instanceFunction);
+    // The logging categories are not part of the public API, consequently this needs to be a private function
+    static void createFailedInstanciationMessage(KPluginMetaData data, KPluginLoadingError *error);
 };
 
 // Deprecation wrapper macro added only for 5.70, while backward typedef added in 4.0

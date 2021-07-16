@@ -3,6 +3,7 @@
 
     SPDX-FileCopyrightText: 2007 Matthias Kretz <kretz@kde.org>
     SPDX-FileCopyrightText: 2007 Bernhard Loos <nhuh.put@web.de>
+    SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -28,6 +29,41 @@ KPluginFactory::KPluginFactory(KPluginFactoryPrivate &d)
 }
 
 KPluginFactory::~KPluginFactory() = default;
+
+KPluginFactory *KPluginFactory::loadFactory(const KPluginMetaData &data, KPluginLoadingError *error)
+{
+    QPluginLoader loader(data.fileName());
+    QObject *obj = loader.instance();
+
+    if (!obj) {
+        auto errorString = tr("Could not load plugin from %1").arg(data.fileName());
+        if (error) {
+            error->errorString = errorString;
+            error->reason = KPluginLoadingError::INVALID_PLUGIN;
+            qWarning() << "error->reason = KPluginLoadingError::INVALID_PLUGIN" << error->reason;
+        } else {
+            qCWarning(KCOREADDONS_DEBUG) << errorString;
+        }
+        return nullptr;
+    }
+
+    KPluginFactory *factory = qobject_cast<KPluginFactory *>(obj);
+
+    if (factory == nullptr) {
+        if (error) {
+            error->errorString = tr("The library %1 does not offer a KPluginFactory.").arg(data.fileName());
+            error->reason = KPluginLoadingError::INVALID_FACTORY;
+        } else {
+            qCWarning(KCOREADDONS_DEBUG) << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
+        }
+        delete obj;
+    } else {
+        factory->setMetaData(KPluginMetaData(data));
+    }
+
+    qWarning() << factory;
+    return factory;
+}
 
 KPluginMetaData KPluginFactory::metaData() const
 {
@@ -119,6 +155,16 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
             }
         }
         d->createInstanceWithMetaDataHash.insert(keyword, {metaObject, instanceFunction});
+    }
+}
+
+void KPluginFactory::createFailedInstanciationMessage(KPluginMetaData data, KPluginLoadingError *error)
+{
+    if (error) {
+        error->errorString = tr("KPluginFactory could not load the plugin: %1").arg(data.fileName());
+        error->reason = KPluginLoadingError::INVALID_KPLUGINFACTORY_INSTANTIATION;
+    } else {
+        qCWarning(KCOREADDONS_DEBUG) << "KPluginFactory could not load the plugin" << data.fileName();
     }
 }
 
