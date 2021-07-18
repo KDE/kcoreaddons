@@ -268,15 +268,20 @@ public:
      */
     QJsonObject rawData() const;
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 86)
     /**
      * Tries to instantiate this plugin using KPluginMetaData::fileName().
      * @note The value of KPluginMetaData::dependencies() is not used here, dependencies must be
      * resolved manually.
      *
      * @return The plugin root object or @c nullptr if it could not be loaded
-     * @see QPluginLoader::instance(), KPluginLoader::instance()
+     * @see QPluginLoader::instance(), KPluginFactory::loadFactory, KPluginFactory::instantiatePlugin
+     * @deprecated Since 5.86, use @ref KPluginFactory::loadFactory or @ref KPluginFactory::instantiatePlugin when using
+     * KPluginFactory. Otherwise use QPluginLoader::instance() instead.
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 86, "See API docs")
     QObject *instantiate() const;
+#endif
 
     /**
      * @return the user visible name of the plugin.
