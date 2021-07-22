@@ -376,13 +376,21 @@ QStringList KPluginMetaData::mimeTypes() const
 
 bool KPluginMetaData::supportsMimeType(const QString &mimeType) const
 {
+    // Check for exact matches first. This can delay parsing the full MIME
+    // database until later and noticeably speed up application startup on
+    // slower systems.
+    const QStringList mimes = mimeTypes();
+    if (mimes.contains(mimeType)) {
+        return true;
+    }
+
+    // Now check for MIME type inheritance to find non-exact matches:
     QMimeDatabase db;
     const QMimeType mime = db.mimeTypeForName(mimeType);
     if (!mime.isValid()) {
         return false;
     }
 
-    const QStringList mimes = mimeTypes();
     auto inherits = [&](const QString &supportedMimeName) {
         return mime.inherits(supportedMimeName);
     };
