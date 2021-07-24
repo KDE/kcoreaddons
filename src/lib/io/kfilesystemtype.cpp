@@ -54,11 +54,8 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 }
 
 #elif defined(Q_OS_LINUX) || defined(Q_OS_HURD)
-#include <sys/vfs.h>
-#ifdef QT_LINUXBASE
-// LSB 3.2 has statfs in sys/statfs.h, sys/vfs.h is just an empty dummy header
 #include <sys/statfs.h>
-#endif
+
 #ifndef NFS_SUPER_MAGIC
 #define NFS_SUPER_MAGIC 0x00006969
 #endif
@@ -115,8 +112,8 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
     }
 }
 
-#elif defined(Q_OS_SOLARIS) || defined(Q_OS_IRIX) || defined(Q_OS_AIX) || defined(Q_OS_HPUX) || defined(Q_OS_OSF) || defined(Q_OS_QNX) || defined(Q_OS_SCO)    \
-    || defined(Q_OS_UNIXWARE) || defined(Q_OS_RELIANT) || defined(Q_OS_NETBSD)
+#elif defined(Q_OS_AIX) || defined(Q_OS_HPUX) || defined(Q_OS_QNX) || defined(Q_OS_SCO) || defined(Q_OS_UNIXWARE) || defined(Q_OS_RELIANT)                     \
+    || defined(Q_OS_NETBSD)
 #include <sys/statvfs.h>
 
 KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
