@@ -56,36 +56,36 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #elif defined(Q_OS_LINUX) || defined(Q_OS_HURD)
 #include <sys/statfs.h>
 
-#ifndef NFS_SUPER_MAGIC
-#define NFS_SUPER_MAGIC 0x00006969
+#include <linux/magic.h> // A lot of the filesystem superblock MAGIC numbers
+
+// From /usr/src/linux-5.13.2-1-vanilla/fs/ntfs/ntfs.h
+#ifndef NTFS_SB_MAGIC
+#define NTFS_SB_MAGIC 0x5346544e
 #endif
-#ifndef AUTOFS_SUPER_MAGIC
-#define AUTOFS_SUPER_MAGIC 0x00000187
-#endif
-#ifndef AUTOFSNG_SUPER_MAGIC
-#define AUTOFSNG_SUPER_MAGIC 0x7d92b1a0
-#endif
-#ifndef MSDOS_SUPER_MAGIC
-#define MSDOS_SUPER_MAGIC 0x00004d44
-#endif
-#ifndef SMB_SUPER_MAGIC
-#define SMB_SUPER_MAGIC 0x0000517B
-#endif
+
+// From /usr/src/linux-5.13.2-1-vanilla/fs/cifs/smb2glob.h
 #ifndef SMB2_MAGIC_NUMBER
 #define SMB2_MAGIC_NUMBER 0xFE534D42
 #endif
+
+// From /usr/src/linux-5.13.2-1-vanilla/fs/cifs/cifsglob.h
 #ifndef CIFS_MAGIC_NUMBER
 #define CIFS_MAGIC_NUMBER 0xFF534D42
 #endif
+
+// From /usr/src/linux-5.13.2-1-vanilla/fs/fuse/inode.c
 #ifndef FUSE_SUPER_MAGIC
 #define FUSE_SUPER_MAGIC 0x65735546
 #endif
-#ifndef RAMFS_MAGIC
-#define RAMFS_MAGIC 0x858458F6
+
+#ifndef AUTOFSNG_SUPER_MAGIC
+#define AUTOFSNG_SUPER_MAGIC 0x7d92b1a0
 #endif
 
 // Reverse-engineering without C++ code:
 // strace stat -f /mnt 2>&1|grep statfs|grep mnt, and look for f_type
+//
+// Also grep'ing in /usr/src/<kernel-version>/fs/
 
 static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
@@ -93,6 +93,7 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
     if (statfs(path.constData(), &buf) != 0) {
         return KFileSystemType::Unknown;
     }
+
     switch (static_cast<unsigned long>(buf.f_type)) {
     case NFS_SUPER_MAGIC:
     case AUTOFS_SUPER_MAGIC:
@@ -105,6 +106,8 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
         return KFileSystemType::Smb;
     case MSDOS_SUPER_MAGIC:
         return KFileSystemType::Fat;
+    case NTFS_SB_MAGIC:
+        return KFileSystemType::Ntfs;
     case RAMFS_MAGIC:
         return KFileSystemType::Ramfs;
     default:

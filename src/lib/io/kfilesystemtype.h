@@ -25,6 +25,7 @@ enum Type {
     Fat, ///< FAT or similar (msdos, fat, vfat)
     Ramfs, ///< RAMDISK mount
     Other, ///< ext, reiser, and so on. "Normal" local filesystems.
+    Ntfs, ///< NTFS filesystem
 };
 
 /**
