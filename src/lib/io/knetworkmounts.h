@@ -52,6 +52,8 @@
  * the config file again.
  *
  * @author Robert Hoffmann <robert@roberthoffmann.de>
+ *
+ * @since 5.85
  **/
 class KCOREADDONS_EXPORT KNetworkMounts : public QObject
 {
