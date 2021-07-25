@@ -100,6 +100,7 @@ endfunction()
 #     [SOURCES <src> [<src> [...]]] # optional since 5.83, required before
 #     [JSON "pluginname.json"]
 #     [INSTALL_NAMESPACE "servicename"]
+#     [OUTPUT_NAME "specifies the name of the installed library file"] # since 5.85
 # )
 #
 # This macro helps simplifying the creation of plugins for KPluginFactory
@@ -120,7 +121,7 @@ endfunction()
 
 function(kcoreaddons_add_plugin plugin)
     set(options)
-    set(oneValueArgs JSON INSTALL_NAMESPACE)
+    set(oneValueArgs JSON INSTALL_NAMESPACE OUTPUT_NAME)
     set(multiValueArgs SOURCES)
     cmake_parse_arguments(KCA_ADD_PLUGIN "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
@@ -136,6 +137,9 @@ function(kcoreaddons_add_plugin plugin)
     # See https://community.kde.org/Guidelines_and_HOWTOs/Making_apps_run_uninstalled
     if(NOT ("${ECM_GLOBAL_FIND_VERSION}" VERSION_LESS "5.38.0"))
         set_target_properties(${plugin} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}")
+        if (KCA_ADD_PLUGIN_OUTPUT_NAME)
+            set_target_properties(${plugin} PROPERTIES OUTPUT_NAME "${KCA_ADD_PLUGIN_OUTPUT_NAME}")
+        endif()
     endif()
 
     if (NOT KCA_ADD_PLUGIN_INSTALL_NAMESPACE)
