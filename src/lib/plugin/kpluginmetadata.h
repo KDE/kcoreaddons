@@ -221,6 +221,15 @@ public:
     static KPluginMetaData fromDesktopFile(const QString &file, const QStringList &serviceTypes = QStringList());
 
     /**
+     * Load a KPluginMetaData instance from a .json file. Unlike the constructor with a single file argument,
+     * this ensure that only JSON format plugins are loaded and any other type is rejected.
+     *
+     * @param jsonFile the .json file to load
+     * @since 5.91
+     */
+    static KPluginMetaData fromJsonFile(const QString &jsonFile);
+
+    /**
      * @param directory The directory to search for plugins. If a relative path is given for @p directory,
      * all entries of QCoreApplication::libraryPaths() will be checked with @p directory appended as a
      * subdirectory. If an absolute path is given only that directory will be searched.
@@ -568,6 +577,7 @@ public:
 private:
     QJsonObject rootObject() const;
     void loadFromDesktopFile(const QString &file, const QStringList &serviceTypes);
+    void loadFromJsonFile(const QString &file);
 
 private:
     QVariantList authorsVariant() const;

@@ -419,7 +419,7 @@ private Q_SLOTS:
     void testJSONMetadata()
     {
         const QString inputPath = QFINDTESTDATA("data/testmetadata.json");
-        KPluginMetaData md(inputPath);
+        KPluginMetaData md = KPluginMetaData::fromJsonFile(inputPath);
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Test"));
 

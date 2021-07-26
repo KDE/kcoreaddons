@@ -104,22 +104,7 @@ KPluginMetaData::KPluginMetaData(const QString &file)
     if (file.endsWith(QLatin1String(".desktop"))) {
         loadFromDesktopFile(file, QStringList());
     } else if (file.endsWith(QLatin1String(".json"))) {
-        d = new KPluginMetaDataPrivate;
-        QFile f(file);
-        bool b = f.open(QIODevice::ReadOnly);
-        if (!b) {
-            qCWarning(KCOREADDONS_DEBUG) << "Couldn't open" << file;
-            return;
-        }
-
-        QJsonParseError error;
-        m_metaData = QJsonDocument::fromJson(f.readAll(), &error).object();
-        if (error.error) {
-            qCWarning(KCOREADDONS_DEBUG) << "error parsing" << file << error.errorString();
-        }
-        QString abspath = QFileInfo(file).absoluteFilePath();
-        m_fileName = abspath;
-        d->metaDataFileName = abspath;
+        loadFromJsonFile(file);
     } else {
         QPluginLoader loader(file);
         d->m_requestedFileName = file;
@@ -236,6 +221,32 @@ void KPluginMetaData::loadFromDesktopFile(const QString &file, const QStringList
         // no library, make filename point to the .desktop file
         m_fileName = d->metaDataFileName;
     }
+}
+
+void KPluginMetaData::loadFromJsonFile(const QString &file)
+{
+    d = new KPluginMetaDataPrivate;
+    QFile f(file);
+    bool b = f.open(QIODevice::ReadOnly);
+    if (!b) {
+        qCWarning(KCOREADDONS_DEBUG) << "Couldn't open" << file;
+        return;
+    }
+    QJsonParseError error;
+    m_metaData = QJsonDocument::fromJson(f.readAll(), &error).object();
+    if (error.error) {
+        qCWarning(KCOREADDONS_DEBUG) << "error parsing" << file << error.errorString();
+    }
+    QString abspath = QFileInfo(file).absoluteFilePath();
+    m_fileName = abspath;
+    d->metaDataFileName = abspath;
+}
+
+KPluginMetaData KPluginMetaData::fromJsonFile(const QString &file)
+{
+    KPluginMetaData result;
+    result.loadFromJsonFile(file);
+    return result;
 }
 
 QJsonObject KPluginMetaData::rawData() const
