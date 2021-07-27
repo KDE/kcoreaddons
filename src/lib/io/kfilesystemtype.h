@@ -9,8 +9,9 @@
 #ifndef KFILESYSTEMTYPE_P_H
 #define KFILESYSTEMTYPE_P_H
 
-#include <QString>
 #include <kcoreaddons_export.h>
+
+#include <QString>
 
 /**
  * @namespace KFileSystemType
@@ -22,18 +23,27 @@ enum Type {
     Unknown,
     Nfs, ///< NFS or other full-featured networked filesystems (autofs, subfs, cachefs, sshfs)
     Smb, ///< SMB/CIFS mount (networked but with some FAT-like behavior)
-    Fat, ///< FAT or similar (msdos, fat, vfat)
+    Fat, ///< FAT or similar (msdos, FAT, VFAT)
     Ramfs, ///< RAMDISK mount
-    Other, ///< ext, reiser, and so on. "Normal" local filesystems.
+    Other, ///< Ext3, Ext4, ReiserFs, and so on. "Normal" local filesystems.
     Ntfs, ///< @since 5.85 NTFS filesystem
 };
 
 /**
- * Returns the file system type at a given path, as much as we are able to figure it out.
+ * For a given @p path, returns the filesystem type, one of @ref KFileSystemType::Type
+ * values. If the type can't be determined, @c KFileSystemType::Unknown is returned.
+ *
  * @since 5.0
  */
 KCOREADDONS_EXPORT Type fileSystemType(const QString &path);
 
+/**
+ * Returns the possibly translated name of a filesystem corresponding to a
+ * value from @ref KFileSystemType::Type.
+ *
+ * @since 5.86
+ */
+KCOREADDONS_EXPORT QString fileSystemName(KFileSystemType::Type type);
 }
 
 #endif
