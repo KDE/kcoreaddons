@@ -13,7 +13,8 @@
 #include <QFileInfo>
 #include <QMimeDatabase>
 #include <QRegularExpression>
-#include <QSet>
+
+#include <set>
 
 QString KFileUtils::makeSuggestedName(const QString &oldName)
 {
@@ -72,14 +73,14 @@ QString KFileUtils::suggestName(const QUrl &baseURL, const QString &oldName)
 QStringList KFileUtils::findAllUniqueFiles(const QStringList &dirs, const QStringList &nameFilters)
 {
     QStringList foundFilePaths;
-    QSet<QString> foundFileNames;
+    std::set<QString> foundFileNames;
     for (const QString &dir : dirs) {
         QDirIterator it(dir, nameFilters, QDir::Files);
         while (it.hasNext()) {
             it.next();
-            if (!foundFileNames.contains(it.fileName())) {
+            const auto [iter, isFirstSeen] = foundFileNames.insert(it.fileName());
+            if (isFirstSeen) {
                 foundFilePaths << it.filePath();
-                foundFileNames << it.fileName();
             }
         }
     }
