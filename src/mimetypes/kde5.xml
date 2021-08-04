@@ -785,7 +785,7 @@ Notes:
     <comment xml:lang="sv">KDE-obehandlade bildformat</comment>
     <comment xml:lang="tr">KDE ham resim biçimleri</comment>
     <comment xml:lang="uk">формати цифрових негативів KDE</comment>
-    <comment xml:lang="vi">các định dạng ảnh thô ở KDE</comment>
+    <comment xml:lang="vi">các dạng thức ảnh thô ở KDE</comment>
     <comment xml:lang="zh_CN">KDE RAW 图像格式</comment>
     <glob pattern="*.bay"/>
     <glob pattern="*.bmq"/>
@@ -1847,7 +1847,7 @@ Notes:
     <comment xml:lang="ta">மைக்ரோசாப்ட் ஊடகப் படிவம்</comment>
     <comment xml:lang="tr">Microsoft Medya Biçimi</comment>
     <comment xml:lang="uk">Microsoft Media Format</comment>
-    <comment xml:lang="vi">định dạng phương tiện Microsoft</comment>
+    <comment xml:lang="vi">Dạng thức phương tiện Microsoft</comment>
     <comment xml:lang="zh_CN">Microsoft 媒体格式</comment>
     <sub-class-of type="video/x-ms-wmv"/>
     <alias type="video/mediaplayer"/>
