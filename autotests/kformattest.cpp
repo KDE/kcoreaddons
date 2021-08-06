@@ -358,16 +358,17 @@ void KFormatTest::formatRelativeDate()
     QDateTime now = QDateTime::currentDateTime();
 
     // An hour ago is **usually** today, except after midnight; just bump
-    // to after 1am to make the "today" test work.
+    // to after 2am to make the "today" test work.
     if (now.time().hour() == 0)
     {
-        now = now.addSecs(3601);
+        now = now.addSecs(7201);
     }
 
     QDateTime testDateTime = now.addSecs(-3600);
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("Today, %1").arg(testDateTime.toString(QStringLiteral("hh:mm:ss"))));
 
     // 1 second ago
+    now = QDateTime::currentDateTime();
     testDateTime = now.addSecs(-1);
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("Just now"));
 
