@@ -65,6 +65,11 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #define NTFS_SB_MAGIC 0x5346544e
 #endif
 
+// From /usr/src/linux-5.13.2-1-vanilla/fs/exfat/exfat_fs.h
+#ifndef EXFAT_SUPER_MAGIC
+#define EXFAT_SUPER_MAGIC 0x2011BAB0UL
+#endif
+
 // From /usr/src/linux-5.13.2-1-vanilla/fs/cifs/smb2glob.h
 #ifndef SMB2_MAGIC_NUMBER
 #define SMB2_MAGIC_NUMBER 0xFE534D42
@@ -110,6 +115,8 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
         return KFileSystemType::Fat;
     case NTFS_SB_MAGIC:
         return KFileSystemType::Ntfs;
+    case EXFAT_SUPER_MAGIC:
+        return KFileSystemType::Exfat;
     case RAMFS_MAGIC:
         return KFileSystemType::Ramfs;
     default:
@@ -167,6 +174,8 @@ QString KFileSystemType::fileSystemName(KFileSystemType::Type type)
         return QCoreApplication::translate("KFileSystemType", "Other");
     case KFileSystemType::Ntfs:
         return QCoreApplication::translate("KFileSystemType", "NTFS");
+    case KFileSystemType::Exfat:
+        return QCoreApplication::translate("KFileSystemType", "ExFAT");
     case KFileSystemType::Unknown:
         return QCoreApplication::translate("KFileSystemType", "Unknown");
     }
