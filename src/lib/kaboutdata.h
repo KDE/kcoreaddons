@@ -27,7 +27,11 @@ class KAboutData;
 class KPluginMetaData;
 namespace KCrash
 {
+#ifdef KCOREADDONS_STATIC
+void defaultCrashHandler(int sig);
+#else
 Q_DECL_IMPORT void defaultCrashHandler(int sig);
+#endif
 }
 
 /**

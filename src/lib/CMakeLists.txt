@@ -16,6 +16,10 @@ configure_file(util/config-accountsservice.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/c
 add_library(KF5CoreAddons)
 add_library(KF5::CoreAddons ALIAS KF5CoreAddons)
 
+if(NOT BUILD_SHARED_LIBS)
+    target_compile_definitions(KF5CoreAddons PUBLIC -DKCOREADDONS_STATIC)
+endif()
+
 ecm_create_qm_loader(KF5CoreAddons kcoreaddons5_qt)
 
 if (FAM_FOUND)
