@@ -296,7 +296,6 @@ if (PythonModuleGeneration_FOUND)
       io/kbackup.h
       io/kurlmimedata.h
       io/kfilesystemtype.h
-      io/knetworkmounts.h
       jobs/kcompositejob.h
       jobs/kjob.h
       jobs/kjobtrackerinterface.h
