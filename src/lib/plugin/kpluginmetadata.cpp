@@ -76,10 +76,10 @@ KPluginMetaData::KPluginMetaData(const QString &file)
         if (!qtMetaData.isEmpty()) {
             m_metaData = qtMetaData.value(QStringLiteral("MetaData")).toObject();
             if (m_metaData.isEmpty()) {
-                qCWarning(KCOREADDONS_DEBUG) << "plugin metadata in" << file << "does not have a valid 'MetaData' object";
+                qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << file << "does not have a valid 'MetaData' object";
             }
         } else {
-            qCWarning(KCOREADDONS_DEBUG) << "no metadata found in" << file << loader.errorString();
+            qCDebug(KCOREADDONS_DEBUG) << "no metadata found in" << file << loader.errorString();
         }
     }
 }
