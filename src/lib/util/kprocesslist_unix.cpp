@@ -36,8 +36,9 @@ namespace
 bool isUnixProcessId(const QString &procname)
 {
     for (int i = 0; i != procname.size(); ++i) {
-        if (!procname.at(i).isDigit())
+        if (!procname.at(i).isDigit()) {
             return false;
+        }
     }
     return true;
 }
@@ -104,8 +105,9 @@ KProcessInfoList unixProcessListPS()
 
 bool getProcessInfo(const QString &procId, KProcessInfo &processInfo)
 {
-    if (!isUnixProcessId(procId))
+    if (!isUnixProcessId(procId)) {
         return false;
+    }
 #ifdef Q_OS_FREEBSD
     QString statusFileName(QStringLiteral("/status"));
 #else
@@ -115,8 +117,9 @@ bool getProcessInfo(const QString &procId, KProcessInfo &processInfo)
     filename += procId;
     filename += statusFileName;
     QFile file(filename);
-    if (!file.open(QIODevice::ReadOnly))
+    if (!file.open(QIODevice::ReadOnly)) {
         return false; // process may have exited
+    }
 
     const QStringList data = QString::fromLocal8Bit(file.readAll()).split(QLatin1Char(' '));
     if (data.length() < 2) {
@@ -166,8 +169,9 @@ bool getProcessInfo(const QString &procId, KProcessInfo &processInfo)
 KProcessInfoList KProcessList::processInfoList()
 {
     const QDir procDir(QStringLiteral("/proc/"));
-    if (!procDir.exists())
+    if (!procDir.exists()) {
         return unixProcessListPS();
+    }
     const QStringList procIds = procDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
 #ifdef Q_OS_FREEBSD
     if (procIds.isEmpty())

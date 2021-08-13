@@ -192,8 +192,9 @@ int KMacroMapExpander<QString, VT>::expandPlainMacro(const QString &str, int pos
         return 0;
     }
     int sl;
-    for (sl = 0; isIdentifier(str.unicode()[pos + sl].unicode()); sl++)
+    for (sl = 0; isIdentifier(str.unicode()[pos + sl].unicode()); sl++) {
         ;
+    }
     if (!sl) {
         return 0;
     }
@@ -216,7 +217,9 @@ int KMacroMapExpander<QString, VT>::expandEscapedMacro(const QString &str, int p
         ret += QString(escapeChar());
         return 2;
     }
-    int sl, rsl, rpos;
+    int sl;
+    int rsl;
+    int rpos;
     if (str.unicode()[pos + 1].unicode() == '{') {
         rpos = pos + 2;
         if ((sl = str.indexOf(QLatin1Char('}'), rpos)) < 0) {
@@ -226,8 +229,9 @@ int KMacroMapExpander<QString, VT>::expandEscapedMacro(const QString &str, int p
         rsl = sl + 3;
     } else {
         rpos = pos + 1;
-        for (sl = 0; isIdentifier(str.unicode()[rpos + sl].unicode()); ++sl)
+        for (sl = 0; isIdentifier(str.unicode()[rpos + sl].unicode()); ++sl) {
             ;
+        }
         rsl = sl + 1;
     }
     if (!sl) {
@@ -273,8 +277,9 @@ int KWordMacroExpander::expandPlainMacro(const QString &str, int pos, QStringLis
         return 0;
     }
     int sl;
-    for (sl = 0; isIdentifier(str.unicode()[pos + sl].unicode()); sl++)
+    for (sl = 0; isIdentifier(str.unicode()[pos + sl].unicode()); sl++) {
         ;
+    }
     if (!sl) {
         return 0;
     }
@@ -294,7 +299,9 @@ int KWordMacroExpander::expandEscapedMacro(const QString &str, int pos, QStringL
         ret += QString(escapeChar());
         return 2;
     }
-    int sl, rsl, rpos;
+    int sl;
+    int rsl;
+    int rpos;
     if (str.unicode()[pos + 1].unicode() == '{') {
         rpos = pos + 2;
         if ((sl = str.indexOf(QLatin1Char('}'), rpos)) < 0) {
@@ -304,8 +311,9 @@ int KWordMacroExpander::expandEscapedMacro(const QString &str, int pos, QStringL
         rsl = sl + 3;
     } else {
         rpos = pos + 1;
-        for (sl = 0; isIdentifier(str.unicode()[rpos + sl].unicode()); ++sl)
+        for (sl = 0; isIdentifier(str.unicode()[rpos + sl].unicode()); ++sl) {
             ;
+        }
         rsl = sl + 1;
     }
     if (!sl) {

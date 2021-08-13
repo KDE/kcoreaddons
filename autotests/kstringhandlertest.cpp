@@ -145,12 +145,13 @@ static QString replaceZwsp(const QString &string)
     const QChar zwsp(0x200b);
 
     QString result;
-    for (int i = 0; i < string.length(); i++)
+    for (int i = 0; i < string.length(); i++) {
         if (string[i] == zwsp) {
             result += QStringLiteral("<zwsp>");
         } else {
             result += string[i];
         }
+    }
 
     return result;
 }

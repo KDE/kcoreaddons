@@ -170,7 +170,8 @@ void KShellTest::quoteSplit()
 
 void KShellTest::abortOnMeta()
 {
-    KShell::Errors err1 = KShell::NoError, err2 = KShell::NoError;
+    KShell::Errors err1 = KShell::NoError;
+    KShell::Errors err2 = KShell::NoError;
 
     QCOMPARE(sj(QStringLiteral("text"), KShell::AbortOnMeta, &err1), QStringLiteral("text"));
     QVERIFY(err1 == KShell::NoError);

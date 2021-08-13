@@ -10,8 +10,9 @@
 static void messageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     auto getFprintfS = [](auto data) {
-        if (data == nullptr)
+        if (data == nullptr) {
             return "";
+        }
         return data;
     };
 

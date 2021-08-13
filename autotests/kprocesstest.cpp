@@ -54,7 +54,8 @@ static QString callHelper(KProcess::OutputChannelMode how)
 void KProcessTest::test_channels()
 {
 #ifdef Q_OS_UNIX
-    QString e, a;
+    QString e;
+    QString a;
     TESTCHAN(SeparateChannels, "separate", "", EO, EE);
     TESTCHAN(ForwardedChannels, "forwarded", EO EE, "", "");
     TESTCHAN(OnlyStderrChannel, "forwarded stdout", EO, "", EE);

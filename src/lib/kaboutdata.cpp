@@ -588,7 +588,8 @@ KAboutData::KAboutData(const KAboutData &other)
     : d(new KAboutDataPrivate)
 {
     *d = *other.d;
-    QList<KAboutLicense>::iterator it = d->_licenseList.begin(), itEnd = d->_licenseList.end();
+    QList<KAboutLicense>::iterator it = d->_licenseList.begin();
+    QList<KAboutLicense>::iterator itEnd = d->_licenseList.end();
     for (; it != itEnd; ++it) {
         KAboutLicense &al = *it;
         al.d.detach();
@@ -600,7 +601,8 @@ KAboutData &KAboutData::operator=(const KAboutData &other)
 {
     if (this != &other) {
         *d = *other.d;
-        QList<KAboutLicense>::iterator it = d->_licenseList.begin(), itEnd = d->_licenseList.end();
+        QList<KAboutLicense>::iterator it = d->_licenseList.begin();
+        QList<KAboutLicense>::iterator itEnd = d->_licenseList.end();
         for (; it != itEnd; ++it) {
             KAboutLicense &al = *it;
             al.d.detach();

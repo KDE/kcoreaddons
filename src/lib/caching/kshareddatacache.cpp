@@ -72,7 +72,8 @@ static unsigned int MurmurHashAligned(const void *key, int len, unsigned int see
     if (align && len >= 4) {
         // Pre-load the temp registers
 
-        unsigned int t = 0, d = 0;
+        unsigned int t = 0;
+        unsigned int d = 0;
 
         switch (align) {
         case 1:

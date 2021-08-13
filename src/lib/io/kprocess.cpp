@@ -72,7 +72,7 @@ void KProcess::setEnv(const QString &name, const QString &value, bool overwrite)
     }
     QString fname(name);
     fname.append(QLatin1Char('='));
-    for (QStringList::Iterator it = env.begin(); it != env.end(); ++it)
+    for (QStringList::Iterator it = env.begin(); it != env.end(); ++it) {
         if ((*it).startsWith(fname)) {
             if (overwrite) {
                 *it = fname.append(value);
@@ -80,6 +80,7 @@ void KProcess::setEnv(const QString &name, const QString &value, bool overwrite)
             }
             return;
         }
+    }
     env.append(fname.append(value));
     setEnvironment(env);
 }
@@ -93,7 +94,7 @@ void KProcess::unsetEnv(const QString &name)
     }
     QString fname(name);
     fname.append(QLatin1Char('='));
-    for (QStringList::Iterator it = env.begin(); it != env.end(); ++it)
+    for (QStringList::Iterator it = env.begin(); it != env.end(); ++it) {
         if ((*it).startsWith(fname)) {
             env.erase(it);
             if (env.isEmpty()) {
@@ -102,6 +103,7 @@ void KProcess::unsetEnv(const QString &name)
             setEnvironment(env);
             return;
         }
+    }
 }
 
 void KProcess::setProgram(const QString &exe, const QStringList &args)

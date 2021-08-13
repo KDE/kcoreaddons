@@ -297,10 +297,11 @@ QString KShell::quoteArg(const QString &arg)
     if (!arg.length()) {
         return QStringLiteral("''");
     }
-    for (int i = 0; i < arg.length(); i++)
+    for (int i = 0; i < arg.length(); i++) {
         if (isSpecial(arg.unicode()[i])) {
             QChar q(QLatin1Char('\''));
             return q + QString(arg).replace(q, QLatin1String("'\\''")) + q;
         }
+    }
     return arg;
 }

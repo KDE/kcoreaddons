@@ -1161,7 +1161,8 @@ bool KDirWatchPrivate::stopEntryScan(KDirWatch *instance, Entry *e)
 // instance ==0: start scanning for all instances
 bool KDirWatchPrivate::restartEntryScan(KDirWatch *instance, Entry *e, bool notify)
 {
-    int wasWatching = 0, newWatching = 0;
+    int wasWatching = 0;
+    int newWatching = 0;
     for (Client &client : e->m_clients) {
         if (!client.watchingStopped) {
             wasWatching += client.count;
@@ -1471,10 +1472,11 @@ void KDirWatchPrivate::slotRescan()
     } else {
         // propagate dirty flag to dependent entries (e.g. file watches)
         it = m_mapEntries.begin();
-        for (; it != m_mapEntries.end(); ++it)
+        for (; it != m_mapEntries.end(); ++it) {
             if (((*it).m_mode == INotifyMode || (*it).m_mode == QFSWatchMode) && (*it).dirty) {
                 (*it).propagate_dirty();
             }
+        }
     }
 
 #if HAVE_SYS_INOTIFY_H

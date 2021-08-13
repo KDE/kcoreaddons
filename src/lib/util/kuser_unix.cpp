@@ -107,7 +107,8 @@ public:
 
 KUser::KUser(UIDMode mode)
 {
-    uid_t _uid = ::getuid(), _euid;
+    uid_t _uid = ::getuid();
+    uid_t _euid;
     if (mode == UseEffectiveUID && (_euid = ::geteuid()) != _uid) {
         d = new KUserPrivate(::getpwuid(_euid));
     } else {

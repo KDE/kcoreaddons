@@ -99,7 +99,8 @@ void KRandomTest::test_random()
 
     // Verify seeding results in different numbers across different procs
     // See bug 362161
-    intSequenceType out1(10), out2(10);
+    intSequenceType out1(10);
+    intSequenceType out2(10);
 
     QVERIFY(getChildRandSeq(out1));
     QVERIFY(getChildRandSeq(out2));
@@ -126,8 +127,10 @@ void KRandomTest::test_KRS()
     using std::generate;
 
     const int maxInt = 50000;
-    KRandomSequence krs1, krs2;
-    intSequenceType out1(10), out2(10);
+    KRandomSequence krs1;
+    KRandomSequence krs2;
+    intSequenceType out1(10);
+    intSequenceType out2(10);
 
     generate(out1.begin(), out1.end(), [&]() {
         return krs1.getInt(maxInt);

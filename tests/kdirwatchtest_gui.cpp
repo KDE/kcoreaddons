@@ -28,7 +28,8 @@ int main(int argc, char **argv)
 KDirWatchTest_GUI::KDirWatchTest_GUI()
     : QWidget()
 {
-    QPushButton *e, *f;
+    QPushButton *e;
+    QPushButton *f;
 
     QVBoxLayout *lay = new QVBoxLayout(this);
     lay->setContentsMargins(0, 0, 0, 0);

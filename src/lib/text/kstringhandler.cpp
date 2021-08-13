@@ -211,17 +211,19 @@ QString KStringHandler::obscure(const QString &str)
 {
     QString result;
     const QChar *unicode = str.unicode();
-    for (int i = 0; i < str.length(); ++i)
+    for (int i = 0; i < str.length(); ++i) {
         // yes, no typo. can't encode ' ' or '!' because
         // they're the unicode BOM. stupid scrambling. stupid.
         result += (unicode[i].unicode() <= 0x21) ? unicode[i] : QChar(0x1001F - unicode[i].unicode());
+    }
 
     return result;
 }
 
 bool KStringHandler::isUtf8(const char *buf)
 {
-    int i, n;
+    int i;
+    int n;
     unsigned char c;
     bool gotone = false;
 
