@@ -425,6 +425,15 @@ private Q_SLOTS:
         QJsonArray expected;
         expected.append(QStringLiteral("Export"));
         QCOMPARE(md.rawData().value(QStringLiteral("X-Purpose-PluginTypes")).toArray(), expected);
+        QCOMPARE(md.value(QStringLiteral("SomeInt"), 24), 42);
+        QCOMPARE(md.value(QStringLiteral("SomeIntAsString"), 24), 42);
+        QCOMPARE(md.value(QStringLiteral("SomeStringNotAInt"), 24), 24);
+        QCOMPARE(md.value(QStringLiteral("DoesNotExist"), 24), 24);
+
+        QVERIFY(md.value(QStringLiteral("SomeBool"), false));
+        QVERIFY(!md.value(QStringLiteral("SomeBoolThatIsFalse"), true));
+        QVERIFY(md.value(QStringLiteral("SomeBoolAsString"), false));
+        QVERIFY(md.value(QStringLiteral("DoesNotExist"), true));
     }
 
     void testFindPlugins()

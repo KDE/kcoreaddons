@@ -509,6 +509,38 @@ QString KPluginMetaData::value(const QString &key, const QString &defaultValue) 
     return defaultValue;
 }
 
+bool KPluginMetaData::value(const QString &key, bool defaultValue) const
+{
+    const QJsonValue value = m_metaData.value(key);
+    if (value.isBool()) {
+        return value.toBool();
+    } else if (value.isString()) {
+        return value.toString() == QLatin1String("true");
+    } else {
+        return defaultValue;
+    }
+}
+
+int KPluginMetaData::value(const QString &key, int defaultValue) const
+{
+    const QJsonValue value = m_metaData.value(key);
+    if (value.isDouble()) {
+        return value.toInt();
+    } else if (value.isString()) {
+        const QString intString = value.toString();
+        bool ok;
+        int convertedIntValue = intString.toInt(&ok);
+        if (ok) {
+            return convertedIntValue;
+        } else {
+            qCWarning(KCOREADDONS_DEBUG) << "Expected" << key << "to be an int, instead" << intString << "was specified in the json metadata" << m_fileName;
+            return defaultValue;
+        }
+    } else {
+        return defaultValue;
+    }
+}
+
 bool KPluginMetaData::operator==(const KPluginMetaData &other) const
 {
     return m_fileName == other.m_fileName && m_metaData == other.m_metaData;
