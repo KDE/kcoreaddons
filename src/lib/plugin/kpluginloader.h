@@ -174,9 +174,9 @@ public:
      *              could not be found.
      *
      * @since 5.0
-     * @deprecated Since 5.86, use QPluginLoader::findPlugin() or KPluginMetaData::findPluginById instead
+     * @deprecated Since 5.86, contruct a QPluginLoader and call fileName() or use KPluginMetaData::findPluginById instead
      */
-    KCOREADDONS_DEPRECATED_VERSION(5, 86, "Use QPluginLoader::findPlugin() or KPluginMetaData::findPluginById instead")
+    KCOREADDONS_DEPRECATED_VERSION(5, 86, "Contruct a QPluginLoader and call fileName() or use KPluginMetaData::findPluginById instead")
     static QString findPlugin(const QString &name);
 
     /**
