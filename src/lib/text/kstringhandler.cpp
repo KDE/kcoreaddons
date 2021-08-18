@@ -148,10 +148,10 @@ QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, cons
 }
 #endif
 
-QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QString &s, const int max)
+QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QString &str, int max)
 {
     // nothing to split
-    if (s.isEmpty()) {
+    if (str.isEmpty()) {
         return QStringList();
     }
 
@@ -163,12 +163,12 @@ QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QStri
     QRegularExpression separator(sep);
     separator.setPatternOptions(QRegularExpression::UseUnicodePropertiesOption);
 
-    QRegularExpressionMatchIterator iter = separator.globalMatch(s);
+    QRegularExpressionMatchIterator iter = separator.globalMatch(str);
     QRegularExpressionMatch match;
     QString chunk;
     while (iter.hasNext() && (ignoreMax || list.count() < max - 1)) {
         match = iter.next();
-        chunk = s.mid(start, match.capturedStart() - start);
+        chunk = str.mid(start, match.capturedStart() - start);
         if (!chunk.isEmpty()) {
             list.append(chunk);
         }
@@ -176,7 +176,7 @@ QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QStri
     }
 
     // catch the remainder
-    chunk = s.mid(start, s.size() - start);
+    chunk = str.mid(start, str.size() - start);
     if (!chunk.isEmpty()) {
         list.append(chunk);
     }
