@@ -54,7 +54,13 @@ private:
             return;
         }
         const QString out(QString::fromLocal8Bit(lsofProcess.readAll()));
+
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        const QVector<QStringView> pidList = QStringView(out).split(QRegularExpression(QStringLiteral("\\s+")), Qt::SkipEmptyParts);
+#else
         const QVector<QStringRef> pidList = out.splitRef(QRegularExpression(QStringLiteral("\\s+")), Qt::SkipEmptyParts);
+#endif
+
         for (const auto &pidStr : pidList) {
             qint64 pid = pidStr.toLongLong();
             if (!pid) {
