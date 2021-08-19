@@ -52,7 +52,7 @@ private Q_SLOTS:
         QVERIFY(result.plugin);
         QCOMPARE(result.plugin->metaObject()->className(), "JsonPlugin");
         QVERIFY(result.errorString.isEmpty());
-        QCOMPARE(result.errorReason, KPluginFactory::NO_ERROR);
+        QCOMPARE(result.errorReason, KPluginFactory::NO_PLUGIN_ERROR);
     }
 
     void testCreateUsingUtilityMethodsErrorHandling()

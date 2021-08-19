@@ -419,7 +419,7 @@ public:
 
     /// @since 5.86
     enum ResultErrorReason {
-        NO_ERROR = 0,
+        NO_PLUGIN_ERROR = 0,
         INVALID_PLUGIN,
         INVALID_FACTORY,
         INVALID_KPLUGINFACTORY_INSTANTIATION,
@@ -437,7 +437,7 @@ public:
         QString errorString;
         /// untranslated error text
         QString errorText;
-        ResultErrorReason errorReason = NO_ERROR;
+        ResultErrorReason errorReason = NO_PLUGIN_ERROR;
         explicit operator bool() const
         {
             return plugin != nullptr;
