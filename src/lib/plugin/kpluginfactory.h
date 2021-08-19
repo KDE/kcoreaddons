@@ -501,6 +501,49 @@ public:
     }
 
     /**
+     * Attempts to load the KPluginFactory and create a @p T instance from the given metadata.
+     * Behaves like \ref instantiatePlugin except it also takes a parent widget.
+     * @code
+        KPluginFactory::Result<MyClass> pluginResult = KPluginFactory::instantiatePlugin<MyClass>(metaData, parentWidget, parent, args);
+        if (pluginResult) {
+            // The plugin is valid and can be accessed
+        } else {
+            // The pluginResult object contains information about the error
+        }
+     * @endcode
+     * If there is no extra error handling needed the plugin can be directly accessed and checked if it is a nullptr
+     * @code
+        if (auto plugin = KPluginFactory::instantiatePlugin<MyClass>(metaData, parent, args).plugin) {
+            // The plugin is valid and can be accessed
+        }
+     * @endcode
+     * @param data KPluginMetaData from which the plugin should be loaded
+     * @return Result object which contains the plugin instance and potentially error information
+     * @since 5.89
+     */
+    template<typename T>
+    static Result<T> instantiatePart(const KPluginMetaData &data, QWidget *parentWidget = nullptr, QObject *parent = nullptr, const QVariantList &args = {})
+    {
+        Result<T> result;
+        KPluginFactory::Result<KPluginFactory> factoryResult = loadFactory(data);
+        if (!factoryResult.plugin) {
+            result.errorString = factoryResult.errorString;
+            result.errorReason = factoryResult.errorReason;
+            return result;
+        }
+        T *instance = factoryResult.plugin->create<T>(parentWidget, parent, QString(), args);
+        if (!instance) {
+            result.errorString = tr("KPluginFactory could not load the plugin: %1").arg(data.fileName());
+            result.errorText = QStringLiteral("KPluginFactory could not load the plugin: %1").arg(data.fileName());
+            result.errorReason = INVALID_KPLUGINFACTORY_INSTANTIATION;
+            logFailedInstantiationMessage(data);
+        } else {
+            result.plugin = instance;
+        }
+        return result;
+    }
+
+    /**
      * Use this method to create an object. It will try to create an object which inherits
      * @p T. If it has multiple choices it's not defined which object will be returned, so be careful
      * to request a unique interface or use keywords.
