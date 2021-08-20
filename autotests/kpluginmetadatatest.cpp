@@ -367,6 +367,10 @@ private Q_SLOTS:
                      QJsonArray::fromStringList(QStringList() << QStringLiteral("a") << QStringLiteral("b") << QStringLiteral("c") << QStringLiteral("def"))));
         QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Size")), QJsonValue(QStringLiteral("10,20"))); // QSize no longer supported (and also no longer used)
         QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Unknown")), QJsonValue(QStringLiteral("true"))); // unknown property -> string
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 88)
+        const QString charOverloadVlaue = md.value(QStringLiteral("X-Test-Unknown"), "true");
+        QCOMPARE(charOverloadVlaue, QStringLiteral("true"));
+#endif
     }
 
     void testBadGroupsInServiceType()

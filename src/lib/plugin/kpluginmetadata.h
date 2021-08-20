@@ -442,6 +442,21 @@ public:
      */
     QString value(const QString &key, const QString &defaultValue = QString()) const;
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /**
+     * Overload to make sure the bool overload is not taken by accident
+     * @overload
+     * @since 5.88
+     */
+    KCOREADDONS_DEPRECATED_VERSION(5, 88, "Construct a QString instead of using a char array, otherwise there the bool overload could be chosen by accident")
+    QString value(const QString &key, const char *ch) const
+    {
+        return value(key, QString::fromLatin1(ch));
+    }
+#else
+    QString value(const QString &key, const char *ch) const = delete;
+#endif
+
     /**
      * @overload
      * @since 5.88
