@@ -3,6 +3,24 @@
 include(CMakeFindDependencyMacro)
 find_dependency(Qt@QT_MAJOR_VERSION@Core @REQUIRED_QT_VERSION@)
 
+if(NOT @BUILD_SHARED_LIBS@)
+    if(NOT WIN32)
+        find_dependency(Threads)
+    endif()
+
+    if(@Inotify_FOUND@)
+        find_dependency(Inotify)
+    endif()
+
+    if(@Procstat_FOUND@)
+        find_dependency(Procstat)
+    endif()
+
+    if(@HAVE_QTDBUS@)
+        find_dependency(Qt@QT_MAJOR_VERSION@DBus @REQUIRED_QT_VERSION@)
+    endif()
+endif()
+
 @PACKAGE_SETUP_AUTOMOC_VARIABLES@
 
 if(CMAKE_CROSSCOMPILING AND KF5_HOST_TOOLING)
