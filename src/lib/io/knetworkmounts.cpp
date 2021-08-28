@@ -15,8 +15,8 @@
 #include <QDir>
 #include <QStandardPaths>
 
-KNetworkMountsPrivate::KNetworkMountsPrivate(KNetworkMounts *q)
-    : q(q)
+KNetworkMountsPrivate::KNetworkMountsPrivate(KNetworkMounts *qq)
+    : q(qq)
 {
 }
 
