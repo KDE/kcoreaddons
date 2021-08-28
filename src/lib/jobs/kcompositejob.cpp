@@ -74,7 +74,7 @@ const QList<KJob *> &KCompositeJob::subjobs() const
 void KCompositeJob::clearSubjobs()
 {
     Q_D(KCompositeJob);
-    for (KJob *job : qAsConst(d->subjobs)) {
+    for (KJob *job : std::as_const(d->subjobs)) {
         job->setParent(nullptr);
         disconnect(job, &KJob::result, this, &KCompositeJob::slotResult);
         disconnect(job, &KJob::infoMessage, this, &KCompositeJob::slotInfoMessage);

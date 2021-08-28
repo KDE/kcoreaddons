@@ -48,7 +48,7 @@ void KFileUtilsTest::testSuggestName()
 
     QTemporaryDir dir;
     const QUrl baseUrl = QUrl::fromLocalFile(dir.path());
-    for (const QString &localFile : qAsConst(existingFiles)) {
+    for (const QString &localFile : std::as_const(existingFiles)) {
         QFile file(dir.path() + QLatin1Char('/') + localFile);
         QVERIFY(file.open(QIODevice::WriteOnly));
     }

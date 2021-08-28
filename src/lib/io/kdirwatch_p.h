@@ -131,7 +131,7 @@ public:
 
         Entry *findSubEntry(const QString &path) const
         {
-            for (Entry *sub_entry : qAsConst(m_entries)) {
+            for (Entry *sub_entry : std::as_const(m_entries)) {
                 if (sub_entry->path == path) {
                     return sub_entry;
                 }

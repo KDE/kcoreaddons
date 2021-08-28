@@ -146,8 +146,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     urls << QStringLiteral("user:pass@www.kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
     urls << QStringLiteral("user:pass@www.kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?") + QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
 
-    for (const QString &schema : qAsConst(schemas)) {
-        for (QString url : qAsConst(urls)) {
+    for (const QString &schema : std::as_const(schemas)) {
+        for (QString url : std::as_const(urls)) {
             // by definition: if the URL is enclosed in brackets, the URL itself is not allowed
             // to contain the closing bracket, as this would be detected as the end of the URL
             if ((left.length() == 1) && (url.contains(right[0]))) {
@@ -191,8 +191,8 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     QStringList starts;
     starts << QStringLiteral("www") << QStringLiteral("ftp") << QStringLiteral("news:www");
 
-    for (const QString &start : qAsConst(starts)) {
-        for (QString url : qAsConst(urlsWithoutSchema)) {
+    for (const QString &start : std::as_const(starts)) {
+        for (QString url : std::as_const(urlsWithoutSchema)) {
             // by definition: if the URL is enclosed in brackets, the URL itself is not allowed
             // to contain the closing bracket, as this would be detected as the end of the URL
             if ((left.length() == 1) && (url.contains(right[0]))) {

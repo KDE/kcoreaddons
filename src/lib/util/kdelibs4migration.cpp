@@ -39,7 +39,7 @@ Kdelibs4Migration::Kdelibs4Migration()
             testSubdirs << QDir::fromNativeSeparators(QString::fromUtf16((const ushort *)wPath)) + QLatin1String("/" KDE4_DEFAULT_HOME);
         }
 #endif
-        for (const QString &testSubdir : qAsConst(testSubdirs)) {
+        for (const QString &testSubdir : std::as_const(testSubdirs)) {
             if (homeDir.exists(testSubdir)) {
                 qCDebug(KCOREADDONS_DEBUG) << "Using" << testSubdir << "as the location of the old config file";
                 d->m_kdeHome = homeDir.filePath(testSubdir);

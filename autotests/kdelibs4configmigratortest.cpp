@@ -64,7 +64,7 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateConfigFiles()
 
     QStringList listConfig;
     listConfig << QLatin1String("foorc") << QLatin1String("foo1rc");
-    for (const QString &config : qAsConst(listConfig)) {
+    for (const QString &config : std::as_const(listConfig)) {
         QFile fooConfigFile(QLatin1String(KDELIBS4CONFIGMIGRATOR_DATA_DIR) + QLatin1Char('/') + config);
         QVERIFY(fooConfigFile.exists());
         const QString storedConfigFilePath = configPath + QLatin1Char('/') + config;
@@ -76,7 +76,7 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateConfigFiles()
     migration.setConfigFiles(QStringList() << listConfig);
     QVERIFY(migration.migrate());
 
-    for (const QString &config : qAsConst(listConfig)) {
+    for (const QString &config : std::as_const(listConfig)) {
         const QString migratedConfigFile = QStandardPaths::locate(QStandardPaths::ConfigLocation, config);
         QVERIFY(!migratedConfigFile.isEmpty());
         QVERIFY(QFile(migratedConfigFile).exists());
@@ -101,7 +101,7 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateUiFiles()
 
     QStringList listUi;
     listUi << QLatin1String("appuirc") << QLatin1String("appui1rc");
-    for (const QString &uifile : qAsConst(listUi)) {
+    for (const QString &uifile : std::as_const(listUi)) {
         QFile fooConfigFile(QLatin1String(KDELIBS4CONFIGMIGRATOR_DATA_DIR) + QLatin1Char('/') + uifile);
         QVERIFY(fooConfigFile.exists());
         QDir().mkpath(dataPath + QLatin1Char('/') + appName);
@@ -116,7 +116,7 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateUiFiles()
     migration.setUiFiles(QStringList() << listUi);
     QVERIFY(migration.migrate());
 
-    for (const QString &uifile : qAsConst(listUi)) {
+    for (const QString &uifile : std::as_const(listUi)) {
         const QString xdgUiFile = xdgDatahome + QLatin1String("/kxmlgui5/") + appName + QLatin1Char('/') + uifile;
         QVERIFY(QFile(xdgUiFile).exists());
         QFile::remove(xdgUiFile);

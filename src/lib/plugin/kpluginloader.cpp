@@ -250,7 +250,7 @@ void KPluginLoader::forEachPlugin(const QString &directory, std::function<void(c
 
     qCDebug(KCOREADDONS_DEBUG) << "Checking for plugins in" << dirsToCheck;
 
-    for (const QString &dir : qAsConst(dirsToCheck)) {
+    for (const QString &dir : std::as_const(dirsToCheck)) {
         QDirIterator it(dir, QDir::Files);
         while (it.hasNext()) {
             it.next();

@@ -444,7 +444,7 @@ KDirWatchPrivate::Entry::~Entry()
  */
 void KDirWatchPrivate::Entry::propagate_dirty()
 {
-    for (Entry *sub_entry : qAsConst(m_entries)) {
+    for (Entry *sub_entry : std::as_const(m_entries)) {
         if (!sub_entry->dirty) {
             sub_entry->dirty = true;
             sub_entry->propagate_dirty();
@@ -560,7 +560,7 @@ QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry)
     debug.space();
     if (!entry.m_entries.isEmpty()) {
         debug << ", nonexistent subentries:";
-        for (KDirWatchPrivate::Entry *subEntry : qAsConst(entry.m_entries)) {
+        for (KDirWatchPrivate::Entry *subEntry : std::as_const(entry.m_entries)) {
             debug << subEntry << subEntry->path;
         }
     }
@@ -1117,7 +1117,7 @@ void KDirWatchPrivate::removeEntries(KDirWatch *instance)
         }
     }
 
-    for (const QString &path : qAsConst(pathList)) {
+    for (const QString &path : std::as_const(pathList)) {
         removeEntry(instance, path, nullptr);
     }
 
@@ -1534,7 +1534,7 @@ void KDirWatchPrivate::slotRescan()
             // original changes.
             QStringList pendingFileChanges = entry->m_pendingFileChanges;
             pendingFileChanges.removeDuplicates();
-            for (const QString &changedFilename : qAsConst(pendingFileChanges)) {
+            for (const QString &changedFilename : std::as_const(pendingFileChanges)) {
                 if (s_verboseDebug) {
                     qCDebug(KDIRWATCH) << "processing pending file change for" << changedFilename;
                 }
@@ -1555,7 +1555,7 @@ void KDirWatchPrivate::slotRescan()
 
 #if HAVE_SYS_INOTIFY_H
     // Remove watch of parent of new created directories
-    for (Entry *e : qAsConst(cList)) {
+    for (Entry *e : std::as_const(cList)) {
         removeEntry(nullptr, e->parentDirectory(), e);
     }
 #endif
@@ -1782,7 +1782,7 @@ void KDirWatchPrivate::statistics()
             }
             if (!e->m_entries.isEmpty()) {
                 qCDebug(KDIRWATCH) << "    dependent entries:";
-                for (Entry *d : qAsConst(e->m_entries)) {
+                for (Entry *d : std::as_const(e->m_entries)) {
                     qCDebug(KDIRWATCH) << "      " << d << d->path << (d->m_status == NonExistent ? "NonExistent" : "EXISTS!!! ERROR!");
                     if (s_verboseDebug) {
                         Q_ASSERT(d->m_status == NonExistent); // it doesn't belong here otherwise
@@ -1822,7 +1822,7 @@ void KDirWatchPrivate::fswEventReceived(const QString &path)
             addWatch(e);
         } else if (e->isDir) {
             // Check if any file or dir was created under this directory, that we were waiting for
-            for (Entry *sub_entry : qAsConst(e->m_entries)) {
+            for (Entry *sub_entry : std::as_const(e->m_entries)) {
                 fswEventReceived(sub_entry->path); // recurse, to call scanEntry and see if something changed
             }
         } else {
