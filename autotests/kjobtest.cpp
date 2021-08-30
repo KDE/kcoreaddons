@@ -73,9 +73,9 @@ void KJobTest::testProgressTracking()
     qRegisterMetaType<qulonglong>("qulonglong");
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
-    QSignalSpy processed_spy(job, QOverload<KJob *, KJob::Unit, qulonglong>::of(&KJob::processedAmount));
-    QSignalSpy total_spy(job, QOverload<KJob *, KJob::Unit, qulonglong>::of(&KJob::totalAmount));
-    QSignalSpy percent_spy(job, QOverload<KJob *, ulong>::of(&KJob::percent));
+    QSignalSpy processed_spy(job, qOverload<KJob *, KJob::Unit, qulonglong>(&KJob::processedAmount));
+    QSignalSpy total_spy(job, qOverload<KJob *, KJob::Unit, qulonglong>(&KJob::totalAmount));
+    QSignalSpy percent_spy(job, qOverload<KJob *, ulong>(&KJob::percent));
 #endif
     QSignalSpy processedChanged_spy(job, &KJob::processedAmountChanged);
     QSignalSpy totalChanged_spy(job, &KJob::totalAmountChanged);
