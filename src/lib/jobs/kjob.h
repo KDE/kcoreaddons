@@ -88,11 +88,13 @@ public:
      * @see totalAmount
      */
     enum Unit {
-        Bytes, ///< Directory and file sizes in bytes
+        Bytes = 0, ///< Directory and file sizes in bytes
         Files, ///< The number of files handled by the job
         Directories, ///< The number of directories handled by the job
         Items, ///< The number of items (e.g. both directories and files) handled by the job
                ///< @since 5.72
+
+        UnitsCount, ///< @internal since 5.87, used internally only, do not use.
     };
     Q_ENUM(Unit)
 

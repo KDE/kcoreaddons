@@ -11,6 +11,7 @@
 #include "kjob.h"
 #include "kjob_p.h"
 
+#include "kcoreaddons_debug.h"
 #include "kjobuidelegate.h"
 
 #include <QEventLoop>
@@ -218,12 +219,22 @@ QString KJob::errorString() const
 
 qulonglong KJob::processedAmount(Unit unit) const
 {
-    return d_func()->processedAmount[unit];
+    if (unit >= UnitsCount) {
+        qCWarning(KCOREADDONS_DEBUG) << "KJob::processedAmount() was called on an invalid Unit" << unit;
+        return 0;
+    }
+
+    return d_func()->m_jobAmounts[unit].processedAmount;
 }
 
 qulonglong KJob::totalAmount(Unit unit) const
 {
-    return d_func()->totalAmount[unit];
+    if (unit >= UnitsCount) {
+        qCWarning(KCOREADDONS_DEBUG) << "KJob::totalAmount() was called on an invalid Unit" << unit;
+        return 0;
+    }
+
+    return d_func()->m_jobAmounts[unit].totalAmount;
 }
 
 unsigned long KJob::percent() const
@@ -250,10 +261,18 @@ void KJob::setErrorText(const QString &errorText)
 
 void KJob::setProcessedAmount(Unit unit, qulonglong amount)
 {
-    Q_D(KJob);
-    bool should_emit = (d->processedAmount[unit] != amount);
+    if (unit >= UnitsCount) {
+        qCWarning(KCOREADDONS_DEBUG) << "KJob::setProcessedAmount() was called on an invalid Unit" << unit;
+        return;
+    }
 
-    d->processedAmount[unit] = amount;
+    Q_D(KJob);
+
+    auto &[processed, total] = d->m_jobAmounts[unit];
+
+    const bool should_emit = (processed != amount);
+
+    processed = amount;
 
     if (should_emit) {
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 80)
@@ -262,17 +281,25 @@ void KJob::setProcessedAmount(Unit unit, qulonglong amount)
         Q_EMIT processedAmountChanged(this, unit, amount, QPrivateSignal{});
         if (unit == d->progressUnit) {
             Q_EMIT processedSize(this, amount);
-            emitPercent(d->processedAmount[unit], d->totalAmount[unit]);
+            emitPercent(processed, total);
         }
     }
 }
 
 void KJob::setTotalAmount(Unit unit, qulonglong amount)
 {
-    Q_D(KJob);
-    bool should_emit = (d->totalAmount[unit] != amount);
+    if (unit >= UnitsCount) {
+        qCWarning(KCOREADDONS_DEBUG) << "KJob::setTotalAmount() was called on an invalid Unit" << unit;
+        return;
+    }
 
-    d->totalAmount[unit] = amount;
+    Q_D(KJob);
+
+    auto &[processed, total] = d->m_jobAmounts[unit];
+
+    const bool should_emit = (total != amount);
+
+    total = amount;
 
     if (should_emit) {
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 80)
@@ -281,7 +308,7 @@ void KJob::setTotalAmount(Unit unit, qulonglong amount)
         Q_EMIT totalAmountChanged(this, unit, amount, QPrivateSignal{});
         if (unit == d->progressUnit) {
             Q_EMIT totalSize(this, amount);
-            emitPercent(d->processedAmount[unit], d->totalAmount[unit]);
+            emitPercent(processed, total);
         }
     }
 }

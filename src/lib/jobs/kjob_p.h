@@ -15,6 +15,8 @@
 #include <QEventLoopLocker>
 #include <QMap>
 
+#include <array>
+
 class KJobUiDelegate;
 class QTimer;
 class QEventLoop;
@@ -34,8 +36,14 @@ public:
     QString errorText;
     int error = KJob::NoError;
     KJob::Unit progressUnit = KJob::Bytes;
-    QMap<KJob::Unit, qulonglong> processedAmount;
-    QMap<KJob::Unit, qulonglong> totalAmount;
+
+    struct Amounts {
+        qulonglong processedAmount = 0;
+        qulonglong totalAmount = 0;
+    };
+
+    std::array<Amounts, KJob::UnitsCount> m_jobAmounts;
+
     unsigned long percentage = 0;
     QTimer *speedTimer = nullptr;
     QEventLoop *eventLoop = nullptr;
