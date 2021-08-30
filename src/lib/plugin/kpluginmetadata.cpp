@@ -391,10 +391,12 @@ QString KPluginMetaData::copyrightText() const
     return readTranslatedString(rootObject(), QStringLiteral("Copyright"));
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 87)
 QString KPluginMetaData::extraInformation() const
 {
     return readTranslatedString(rootObject(), QStringLiteral("ExtraInformation"));
 }
+#endif
 
 QString KPluginMetaData::pluginId() const
 {

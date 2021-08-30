@@ -93,7 +93,9 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(QJsonObject rawData READ rawData CONSTANT)
     Q_PROPERTY(QString name READ name CONSTANT)
     Q_PROPERTY(QString description READ description CONSTANT)
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 87)
     Q_PROPERTY(QString extraInformation READ extraInformation CONSTANT)
+#endif
     Q_PROPERTY(QVariantList authors READ authorsVariant CONSTANT)
     Q_PROPERTY(QVariantList translators READ translatorsVariant CONSTANT)
     Q_PROPERTY(QVariantList otherContributors READ otherContributorsVariant CONSTANT)
@@ -293,12 +295,16 @@ public:
      */
     QString description() const;
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 87)
     /**
      * @return additional information about this plugin (e.g. for use in an "about plugin" dialog)
      *
      * @since 5.18
+     * @deprecated Since 5.87, deprecate for lack of usage. Use a meaningful custom key in the json metadata instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 87, "Deprecate for lack of usage, use a meaningful custom key in the json metadata instead")
     QString extraInformation() const;
+#endif
 
     /**
      * @return the author(s) of this plugin.

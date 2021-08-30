@@ -178,7 +178,9 @@ private Q_SLOTS:
         QCOMPARE(m.pluginId(), QStringLiteral("time"));
         QCOMPARE(m.name(), QStringLiteral("Date and Time"));
         QCOMPARE(m.description(), QStringLiteral("Date and time by timezone"));
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 87)
         QCOMPARE(m.extraInformation(), QStringLiteral("Something else"));
+#endif
         QCOMPARE(m.iconName(), QStringLiteral("preferences-system-time"));
         QCOMPARE(m.category(), QStringLiteral("Date and Time"));
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
