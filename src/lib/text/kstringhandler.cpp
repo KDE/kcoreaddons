@@ -45,17 +45,17 @@ QStringList KStringHandler::capwords(const QStringList &list)
     return tmp;
 }
 
-QString KStringHandler::lsqueeze(const QString &str, int maxlen)
+QString KStringHandler::lsqueeze(const QString &str, const int maxlen)
 {
     if (str.length() > maxlen) {
-        int part = maxlen - 3;
+        const int part = maxlen - 3;
         return QLatin1String("...") + str.rightRef(part);
     } else {
         return str;
     }
 }
 
-QString KStringHandler::csqueeze(const QString &str, int maxlen)
+QString KStringHandler::csqueeze(const QString &str, const int maxlen)
 {
     if (str.length() > maxlen && maxlen > 3) {
         const int part = (maxlen - 3) / 2;
@@ -65,19 +65,19 @@ QString KStringHandler::csqueeze(const QString &str, int maxlen)
     }
 }
 
-QString KStringHandler::rsqueeze(const QString &str, int maxlen)
+QString KStringHandler::rsqueeze(const QString &str, const int maxlen)
 {
     if (str.length() > maxlen) {
-        int part = maxlen - 3;
+        const int part = maxlen - 3;
         return str.leftRef(part) + QLatin1String("...");
     } else {
         return str;
     }
 }
 
-QStringList KStringHandler::perlSplit(const QString &sep, const QString &s, int max)
+QStringList KStringHandler::perlSplit(const QString &sep, const QString &s, const int max)
 {
-    bool ignoreMax = 0 == max;
+    const bool ignoreMax = 0 == max;
 
     QStringList l;
 
@@ -101,9 +101,9 @@ QStringList KStringHandler::perlSplit(const QString &sep, const QString &s, int 
     return l;
 }
 
-QStringList KStringHandler::perlSplit(const QChar &sep, const QString &s, int max)
+QStringList KStringHandler::perlSplit(const QChar &sep, const QString &s, const int max)
 {
-    bool ignoreMax = 0 == max;
+    const bool ignoreMax = 0 == max;
 
     QStringList l;
 
@@ -128,14 +128,14 @@ QStringList KStringHandler::perlSplit(const QChar &sep, const QString &s, int ma
 }
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
-QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int max)
+QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, const int max)
 {
     // nothing to split
     if (s.isEmpty()) {
         return QStringList();
     }
 
-    bool ignoreMax = 0 == max;
+    const bool ignoreMax = 0 == max;
 
     QStringList l;
 
@@ -161,14 +161,14 @@ QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, int 
 }
 #endif
 
-QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QString &s, int max)
+QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QString &s, const int max)
 {
     // nothing to split
     if (s.isEmpty()) {
         return QStringList();
     }
 
-    bool ignoreMax = max == 0;
+    const bool ignoreMax = max == 0;
 
     QStringList list;
 
@@ -333,12 +333,12 @@ QString KStringHandler::preProcessWrap(const QString &text)
 
     for (int i = 0; i < text.length(); i++) {
         const QChar c = text[i];
-        bool openingParens = (c == QLatin1Char('(') || c == QLatin1Char('{') || c == QLatin1Char('['));
-        bool singleQuote = (c == QLatin1Char('\''));
-        bool closingParens = (c == QLatin1Char(')') || c == QLatin1Char('}') || c == QLatin1Char(']'));
-        bool breakAfter = (closingParens || c.isPunct() || c.isSymbol());
-        bool nextIsSpace = (i == (text.length() - 1) || text[i + 1].isSpace());
-        bool prevIsSpace = (i == 0 || text[i - 1].isSpace() || result[result.length() - 1] == zwsp);
+        const bool openingParens = (c == QLatin1Char('(') || c == QLatin1Char('{') || c == QLatin1Char('['));
+        const bool singleQuote = (c == QLatin1Char('\''));
+        const bool closingParens = (c == QLatin1Char(')') || c == QLatin1Char('}') || c == QLatin1Char(']'));
+        const bool breakAfter = (closingParens || c.isPunct() || c.isSymbol());
+        const bool nextIsSpace = (i == (text.length() - 1) || text[i + 1].isSpace());
+        const bool prevIsSpace = (i == 0 || text[i - 1].isSpace() || result[result.length() - 1] == zwsp);
 
         // Provide a breaking opportunity before opening parenthesis
         if (openingParens && !prevIsSpace) {
@@ -364,8 +364,8 @@ int KStringHandler::logicalLength(const QString &text)
 {
     int length = 0;
     const auto chrs = text.toUcs4();
-    for (auto chr : chrs) {
-        auto script = QChar::script(chr);
+    for (const auto chr : chrs) {
+        const auto script = QChar::script(chr);
         /* clang-format off */
         if (script == QChar::Script_Han
             || script == QChar::Script_Hangul
