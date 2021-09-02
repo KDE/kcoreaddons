@@ -140,6 +140,15 @@ void KStringHandlerTest::preProcessWrap_data()
 
     // Should insert a WJ (Word Joiner) before a single quote
     QTest::newRow("single quote") << "foo'bar" << QString(QStringLiteral("foo") + WJ + QStringLiteral("'bar"));
+
+    // Should insert a ZWSP between sub-words, but not before nor after the word
+    QTest::newRow("camelCase") << "camelCase" << QString(QStringLiteral("camel") + ZWSP + QStringLiteral("Case"));
+
+    // Why limiting yourself to ASCII? More and more programming languages these days allow for Unicode identifiers.
+    QTest::newRow("camelCase international") << "приветМир" << QString(QStringLiteral("привет") + ZWSP + QStringLiteral("Мир"));
+
+    // Should insert a ZWSP between sub-words, but not before first (upper case) letter
+    QTest::newRow("PascalCase") << "PascalCase" << QString(QStringLiteral("Pascal") + ZWSP + QStringLiteral("Case"));
 }
 
 // Little helper function to make tests diagnostics more readable by humans
