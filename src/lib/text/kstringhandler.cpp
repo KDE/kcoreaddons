@@ -337,7 +337,10 @@ QString KStringHandler::preProcessWrap(const QString &text)
         const bool singleQuote = (c == QLatin1Char('\''));
         const bool closingParens = (c == QLatin1Char(')') || c == QLatin1Char('}') || c == QLatin1Char(']'));
         const bool breakAfter = (closingParens || c.isPunct() || c.isSymbol());
-        const bool nextIsSpace = (i == (text.length() - 1) || text[i + 1].isSpace());
+        const bool isLastChar = i == (text.length() - 1);
+        const bool isLower = c.isLower();
+        const bool nextIsUpper = !isLastChar && text[i + 1].isUpper(); // false by default
+        const bool nextIsSpace = isLastChar || text[i + 1].isSpace(); // true by default
         const bool prevIsSpace = (i == 0 || text[i - 1].isSpace() || result[result.length() - 1] == zwsp);
 
         // Provide a breaking opportunity before opening parenthesis
@@ -352,7 +355,10 @@ QString KStringHandler::preProcessWrap(const QString &text)
 
         result += c;
 
-        if (breakAfter && !openingParens && !nextIsSpace && !singleQuote) {
+        // Provide a breaking opportunity between camelCase and PascalCase sub-words
+        const bool isCamelCase = isLower && nextIsUpper;
+
+        if (isCamelCase || (breakAfter && !openingParens && !nextIsSpace && !singleQuote)) {
             result += zwsp;
         }
     }
