@@ -74,10 +74,13 @@ void KStringHandlerTest::obscure()
     QCOMPARE(KStringHandler::obscure(QString::fromUtf8(obscuredBytes.constData())), test);
 }
 
+// Zero-Width Space
+static const QChar ZWSP(0x200b);
+// Word Joiner
+static const QChar WJ(0x2060);
+
 void KStringHandlerTest::preProcessWrap_data()
 {
-    const QChar zwsp(0x200b);
-
     QTest::addColumn<QString>("string");
     QTest::addColumn<QString>("expected");
 
@@ -86,16 +89,16 @@ void KStringHandlerTest::preProcessWrap_data()
                             << "foo bar baz";
 
     // Should insert a ZWSP after each '_'
-    QTest::newRow("underscores") << "foo_bar_baz" << QString(QStringLiteral("foo_") + zwsp + QStringLiteral("bar_") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("underscores") << "foo_bar_baz" << QString(QStringLiteral("foo_") + ZWSP + QStringLiteral("bar_") + ZWSP + QStringLiteral("baz"));
 
     // Should insert a ZWSP after each '-'
-    QTest::newRow("hyphens") << "foo-bar-baz" << QString(QStringLiteral("foo-") + zwsp + QStringLiteral("bar-") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("hyphens") << "foo-bar-baz" << QString(QStringLiteral("foo-") + ZWSP + QStringLiteral("bar-") + ZWSP + QStringLiteral("baz"));
 
     // Should insert a ZWSP after each '.'
-    QTest::newRow("periods") << "foo.bar.baz" << QString(QStringLiteral("foo.") + zwsp + QStringLiteral("bar.") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("periods") << "foo.bar.baz" << QString(QStringLiteral("foo.") + ZWSP + QStringLiteral("bar.") + ZWSP + QStringLiteral("baz"));
 
     // Should insert a ZWSP after each ','
-    QTest::newRow("commas") << "foo,bar,baz" << QString(QStringLiteral("foo,") + zwsp + QStringLiteral("bar,") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("commas") << "foo,bar,baz" << QString(QStringLiteral("foo,") + ZWSP + QStringLiteral("bar,") + ZWSP + QStringLiteral("baz"));
 
     // Should result in no additional breaks since the '_'s are followed by spaces
     QTest::newRow("mixed underscores and spaces") << "foo_ bar_ baz"
@@ -106,29 +109,29 @@ void KStringHandlerTest::preProcessWrap_data()
                                           << "foo_";
 
     // Should insert a ZWSP before '(' and after ')'
-    QTest::newRow("parens") << "foo(bar)baz" << QString(QStringLiteral("foo") + zwsp + QStringLiteral("(bar)") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("parens") << "foo(bar)baz" << QString(QStringLiteral("foo") + ZWSP + QStringLiteral("(bar)") + ZWSP + QStringLiteral("baz"));
 
     // Should insert a ZWSP before '[' and after ']'
-    QTest::newRow("brackets") << "foo[bar]baz" << QString(QStringLiteral("foo") + zwsp + QStringLiteral("[bar]") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("brackets") << "foo[bar]baz" << QString(QStringLiteral("foo") + ZWSP + QStringLiteral("[bar]") + ZWSP + QStringLiteral("baz"));
 
     // Should insert a ZWSP before '{' and after '}'
-    QTest::newRow("curly braces") << "foo{bar}baz" << QString(QStringLiteral("foo") + zwsp + QStringLiteral("{bar}") + zwsp + QStringLiteral("baz"));
+    QTest::newRow("curly braces") << "foo{bar}baz" << QString(QStringLiteral("foo") + ZWSP + QStringLiteral("{bar}") + ZWSP + QStringLiteral("baz"));
 
     // Should insert a ZWSP before '(' but not after ')' since it's the last char
-    QTest::newRow("ends with ')'") << "foo(bar)" << QString(QStringLiteral("foo") + zwsp + QStringLiteral("(bar)"));
+    QTest::newRow("ends with ')'") << "foo(bar)" << QString(QStringLiteral("foo") + ZWSP + QStringLiteral("(bar)"));
 
     // Should insert a single ZWSP between the '_' and the '('
-    QTest::newRow("'_' followed by '('") << "foo_(bar)" << QString(QStringLiteral("foo_") + zwsp + QStringLiteral("(bar)"));
+    QTest::newRow("'_' followed by '('") << "foo_(bar)" << QString(QStringLiteral("foo_") + ZWSP + QStringLiteral("(bar)"));
 
     // Should insert ZWSP's between the '_' and the '[', between the double
     // '['s and the double ']'s, but not before and after 'bar'
     QTest::newRow("'_' before double brackets") << "foo_[[bar]]"
-                                                << QString(QStringLiteral("foo_") + zwsp + QStringLiteral("[") + zwsp + QStringLiteral("[bar]") + zwsp
+                                                << QString(QStringLiteral("foo_") + ZWSP + QStringLiteral("[") + ZWSP + QStringLiteral("[bar]") + ZWSP
                                                            + QStringLiteral("]"));
 
     // Should only insert ZWSP's between the double '['s and the double ']'s
     QTest::newRow("space before double brackets") << "foo [[bar]]"
-                                                  << QString(QStringLiteral("foo [") + zwsp + QStringLiteral("[bar]") + zwsp + QStringLiteral("]"));
+                                                  << QString(QStringLiteral("foo [") + ZWSP + QStringLiteral("[bar]") + ZWSP + QStringLiteral("]"));
 
     // Shouldn't result in any additional breaks since the '(' is preceded
     // by a space, and the ')' is followed by a space.
@@ -136,20 +139,20 @@ void KStringHandlerTest::preProcessWrap_data()
                                         << "foo (bar) baz";
 
     // Should insert a WJ (Word Joiner) before a single quote
-    const QChar wj(0x2060);
-    QTest::newRow("single quote") << "foo'bar" << QString(QStringLiteral("foo") + QString(wj) + QStringLiteral("'bar"));
+    QTest::newRow("single quote") << "foo'bar" << QString(QStringLiteral("foo") + WJ + QStringLiteral("'bar"));
 }
 
+// Little helper function to make tests diagnostics more readable by humans
 static QString replaceZwsp(const QString &string)
 {
-    const QChar zwsp(0x200b);
-
+    const QString replacement = QStringLiteral("<ZWSP>");
     QString result;
-    for (int i = 0; i < string.length(); i++) {
-        if (string[i] == zwsp) {
-            result += QStringLiteral("<zwsp>");
+    result.reserve(string.length() + string.count(ZWSP) * replacement.length());
+    for (const auto i : string) {
+        if (i == ZWSP) {
+            result += replacement;
         } else {
-            result += string[i];
+            result += i;
         }
     }
 
