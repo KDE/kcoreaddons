@@ -91,6 +91,24 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #define AUTOFSNG_SUPER_MAGIC 0x7d92b1a0
 #endif
 
+#ifdef Q_OS_HURD
+#ifndef NFS_SUPER_MAGIC
+#define NFS_SUPER_MAGIC 0x00006969
+#endif
+#ifndef AUTOFS_SUPER_MAGIC
+#define AUTOFS_SUPER_MAGIC 0x00000187
+#endif
+#ifndef MSDOS_SUPER_MAGIC
+#define MSDOS_SUPER_MAGIC 0x00004d44
+#endif
+#ifndef SMB_SUPER_MAGIC
+#define SMB_SUPER_MAGIC 0x0000517B
+#endif
+#ifndef RAMFS_MAGIC
+#define RAMFS_MAGIC 0x858458F6
+#endif
+#endif
+
 // Reverse-engineering without C++ code:
 // strace stat -f /mnt 2>&1|grep statfs|grep mnt, and look for f_type
 //
