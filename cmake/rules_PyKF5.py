@@ -35,6 +35,7 @@ def local_function_rules():
         ["KCrash", "defaultCrashHandler", ".*", ".*", ".*", rules_engine.function_discard],
 
         ["KPluginFactory", "create", ".*", ".*", ".*QWidget.*", rules_engine.function_discard],
+        ["KPluginFactory", "loadFactory", ".*", ".*", ".*", rules_engine.function_discard],
 
         # Deprecated
         ["KPluginFactory", "createPartObject", ".*", ".*", ".*", rules_engine.function_discard],
