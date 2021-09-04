@@ -58,7 +58,9 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #elif defined(Q_OS_LINUX) || defined(Q_OS_HURD)
 #include <sys/statfs.h>
 
+#ifdef Q_OS_LINUX
 #include <linux/magic.h> // A lot of the filesystem superblock MAGIC numbers
+#endif
 
 // From /usr/src/linux-5.13.2-1-vanilla/fs/ntfs/ntfs.h
 #ifndef NTFS_SB_MAGIC
