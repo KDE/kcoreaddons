@@ -11,10 +11,10 @@
 
 #include <kcoreaddons_export.h>
 
+#include <QtContainerFwd>
+
 class QString;
 class QStringView;
-template<typename T>
-class QVector;
 
 /**
  * This namespace contains functions for fuzzy matching a list of strings
