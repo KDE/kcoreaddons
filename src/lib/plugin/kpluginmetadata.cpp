@@ -483,6 +483,10 @@ bool KPluginMetaData::isEnabledByDefault() const
 
 int KPluginMetaData::initialPreference() const
 {
+    const QJsonValue weight = m_metaData.value(QStringLiteral("X-KDE-Weight"));
+    if (weight.isDouble()) {
+        return weight.toInt();
+    }
     return rootObject()[QStringLiteral("InitialPreference")].toInt();
 }
 

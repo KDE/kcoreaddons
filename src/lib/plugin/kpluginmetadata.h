@@ -430,6 +430,7 @@ public:
      * This is the preference to associate with this plugin initially (before
      * the user has had any chance to define preferences for it).
      * Higher values indicate stronger preference.
+     * Since 5.87: The X-KDE-Weight is returned if it is set. This should improve compatibility with the KCMs.
      * @since 5.67
      */
     int initialPreference() const;
