@@ -134,7 +134,9 @@ function(kcoreaddons_add_plugin plugin)
 
     # If find_package(ECM 5.38) or higher is called, output the plugin in a INSTALL_NAMESPACE subfolder.
     # See https://community.kde.org/Guidelines_and_HOWTOs/Making_apps_run_uninstalled
-    if(NOT ("${ECM_GLOBAL_FIND_VERSION}" VERSION_LESS "5.38.0"))
+    if(NOT ("${ECM_GLOBAL_FIND_VERSION}" VERSION_LESS "5.88.0"))
+        set_target_properties(${plugin} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/plugins/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}")
+    elseif(NOT ("${ECM_GLOBAL_FIND_VERSION}" VERSION_LESS "5.38.0"))
         set_target_properties(${plugin} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}")
     endif()
 
