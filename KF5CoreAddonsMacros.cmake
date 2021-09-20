@@ -142,6 +142,10 @@ function(kcoreaddons_add_plugin plugin)
         message(FATAL_ERROR "Must specify INSTALL_NAMESPACE for ${plugin}")
     endif()
 
+    if ("${ECM_GLOBAL_FIND_VERSION}" VERSION_GREATER_EQUAL "5.88.0")
+        target_compile_definitions(${plugin} PRIVATE KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME=${plugin}_factory)
+    endif()
+
     if(NOT ANDROID)
         install(TARGETS ${plugin} DESTINATION ${KDE_INSTALL_PLUGINDIR}/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE})
     else()

@@ -267,7 +267,12 @@ class KPluginMetaData;
  *
  * @since 5.44
  */
+#ifdef KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME
+#define K_PLUGIN_CLASS_WITH_JSON(classname, jsonFile)                                                                                                          \
+    K_PLUGIN_FACTORY_WITH_JSON(KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME, jsonFile, registerPlugin<classname>();)
+#else
 #define K_PLUGIN_CLASS_WITH_JSON(classname, jsonFile) K_PLUGIN_FACTORY_WITH_JSON(classname##Factory, jsonFile, registerPlugin<classname>();)
+#endif
 
 /**
  * @relates KPluginFactory
