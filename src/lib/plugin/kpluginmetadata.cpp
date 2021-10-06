@@ -22,6 +22,7 @@
 #include <QLocale>
 #include <QMimeDatabase>
 #include <QPluginLoader>
+#include <QStandardPaths>
 
 #include "kaboutdata.h"
 #include "kpluginfactory.h"
@@ -208,7 +209,7 @@ KPluginMetaData KPluginMetaData::fromDesktopFile(const QString &file, const QStr
 void KPluginMetaData::loadFromDesktopFile(const QString &file, const QStringList &serviceTypes)
 {
     QString libraryPath;
-    if (!DesktopFileParser::convert(file, serviceTypes, m_metaData, &libraryPath)) {
+    if (!DesktopFileParser::convert(file, serviceTypes, m_metaData, &libraryPath, QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation))) {
         Q_ASSERT(!isValid());
         return; // file could not be parsed for some reason, leave this object invalid
     }

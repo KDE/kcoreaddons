@@ -20,7 +20,7 @@ struct ServiceTypeDefinition {
 };
 
 struct ServiceTypeDefinitions {
-    static ServiceTypeDefinitions fromFiles(const QStringList &paths);
+    static ServiceTypeDefinitions fromFiles(const QStringList &paths, const QStringList &serviceTypesSearchPaths);
     /**
      * @return @p value converted to the correct JSON type.
      * If there is no custom property definition for @p key this will simply return the string value
@@ -32,7 +32,7 @@ struct ServiceTypeDefinitions {
      *
      * @returns whether the action could be performed
      */
-    bool addFile(const QString &path);
+    bool addFile(const QString &path, const QStringList &serviceTypesSearchPaths);
 
     bool hasServiceType(const QByteArray &serviceTypeName) const;
 
@@ -44,7 +44,7 @@ namespace DesktopFileParser
 {
 QByteArray escapeValue(const QByteArray &input);
 QStringList deserializeList(const QString &data, char separator = ',');
-bool convert(const QString &src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath);
+bool convert(const QString &src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath, const QStringList &serviceTypesSearchPaths);
 void convertToJson(const QByteArray &key, ServiceTypeDefinitions &serviceTypes, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
 void convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr);

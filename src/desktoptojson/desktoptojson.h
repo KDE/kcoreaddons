@@ -21,11 +21,23 @@ public:
                   const QCommandLineOption &o,
                   const QCommandLineOption &v,
                   const QCommandLineOption &c,
-                  const QCommandLineOption &s);
+                  const QCommandLineOption &s,
+                  const QCommandLineOption &strictPathMode,
+                  const QCommandLineOption &searchPaths)
+        : m_parser(parser)
+        , input(i)
+        , output(o)
+        , verbose(v)
+        , compat(c)
+        , serviceTypesOption(s)
+        , strictPathMode(strictPathMode)
+        , genericDataPathOption(searchPaths)
+    {
+    }
     int runMain();
 
 private:
-    bool convert(const QString &src, const QString &dest, const QStringList &serviceTypes);
+    bool convert(const QString &src, const QString &dest, const QStringList &serviceTypes, const QStringList &searchPaths);
     void convertToJson(const QString &key, const QString &value, QJsonObject &json, QJsonObject &kplugin, int lineNr);
     void convertToCompatibilityJson(const QString &key, const QString &value, QJsonObject &json, int lineNr);
     bool resolveFiles();
@@ -36,6 +48,8 @@ private:
     const QCommandLineOption verbose;
     const QCommandLineOption compat;
     const QCommandLineOption serviceTypesOption;
+    const QCommandLineOption strictPathMode;
+    const QCommandLineOption genericDataPathOption;
     QString m_inFile;
     QString m_outFile;
 };

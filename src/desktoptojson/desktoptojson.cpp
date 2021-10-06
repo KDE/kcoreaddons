@@ -16,21 +16,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-
-DesktopToJson::DesktopToJson(QCommandLineParser *parser,
-                             const QCommandLineOption &i,
-                             const QCommandLineOption &o,
-                             const QCommandLineOption &v,
-                             const QCommandLineOption &c,
-                             const QCommandLineOption &s)
-    : m_parser(parser)
-    , input(i)
-    , output(o)
-    , verbose(v)
-    , compat(c)
-    , serviceTypesOption(s)
-{
-}
+#include <QStandardPaths>
 
 bool DesktopFileParser::s_verbose = false;
 bool DesktopFileParser::s_compatibilityMode = false;
@@ -54,7 +40,15 @@ int DesktopToJson::runMain()
 
 #pragma message("TODO: make it an error if one of the service type files is invalid or not found")
     const QStringList serviceTypes = m_parser->values(serviceTypesOption);
-    return convert(m_inFile, m_outFile, serviceTypes) ? EXIT_SUCCESS : EXIT_FAILURE;
+    QStringList searchPaths = m_parser->values(genericDataPathOption);
+    if (!m_parser->isSet(strictPathMode)) {
+        // In non-strict mode, we also search the default (host) generic data location.
+        searchPaths.append(QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation));
+    } else if (searchPaths.empty()) {
+        qCCritical(DESKTOPPARSER) << "Strict path mode enabled but no service types search path passed";
+        return 1;
+    }
+    return convert(m_inFile, m_outFile, serviceTypes, searchPaths) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
 bool DesktopToJson::resolveFiles()
@@ -113,10 +107,10 @@ void DesktopFileParser::convertToCompatibilityJson(const QString &key, const QSt
     }
 }
 
-bool DesktopToJson::convert(const QString &src, const QString &dest, const QStringList &serviceTypes)
+bool DesktopToJson::convert(const QString &src, const QString &dest, const QStringList &serviceTypes, const QStringList &searchPaths)
 {
     QJsonObject json;
-    DesktopFileParser::convert(src, serviceTypes, json, nullptr);
+    DesktopFileParser::convert(src, serviceTypes, json, nullptr, searchPaths);
 
     if (DesktopFileParser::s_compatibilityMode) {
         Q_ASSERT(json.value(QStringLiteral("KPlugin")).toObject().isEmpty());

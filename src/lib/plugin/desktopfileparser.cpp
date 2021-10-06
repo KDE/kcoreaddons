@@ -21,7 +21,6 @@
 #include <QMutex>
 #include <QRegularExpression>
 #include <QRegularExpressionMatch>
-#include <QStandardPaths>
 
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
 // use if not else to prevent wrong scoping
@@ -285,17 +284,23 @@ bool tokenizeKeyValue(QFile &df, const QString &src, QByteArray &key, QString &v
 
 static constexpr const char KSERVICESTYPES_PATH[] = "kservicetypes" QT_STRINGIFY(QT_VERSION_MAJOR) "/";
 
-static QString locateRelativeServiceType(const QString &relPath)
+static QString locateRelativeServiceType(const QString &relPath, const QStringList &serviceTypeSearchPaths)
 {
-    return QStandardPaths::locate(QStandardPaths::GenericDataLocation, QLatin1String(KSERVICESTYPES_PATH) + relPath);
+    for (const auto &dir : serviceTypeSearchPaths) {
+        QString path = dir + QLatin1Char('/') + QLatin1String(KSERVICESTYPES_PATH) + relPath;
+        if (QFile::exists(path)) {
+            return path;
+        }
+    }
+    return QString();
 }
 
-static ServiceTypeDefinition *parseServiceTypesFile(const QString &inputPath)
+static ServiceTypeDefinition *parseServiceTypesFile(const QString &inputPath, const QStringList &serviceTypeSearchPaths)
 {
     int lineNr = 0;
     QString path = inputPath;
     if (QDir::isRelativePath(path)) {
-        path = locateRelativeServiceType(path);
+        path = locateRelativeServiceType(path, serviceTypeSearchPaths);
         QString rcPath;
         if (path.isEmpty()) {
             rcPath = QLatin1String(":/") + QLatin1String(KSERVICESTYPES_PATH) + inputPath;
@@ -305,7 +310,7 @@ static ServiceTypeDefinition *parseServiceTypesFile(const QString &inputPath)
         }
         if (path.isEmpty()) {
             qCWarning(DESKTOPPARSER).nospace() << "Could not locate service type file " << KSERVICESTYPES_PATH << qPrintable(inputPath) << ", tried "
-                                               << QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation) << " and " << rcPath;
+                                               << serviceTypeSearchPaths << " and " << rcPath;
             return nullptr;
         }
     }
@@ -370,13 +375,13 @@ Q_GLOBAL_STATIC(ServiceTypesHash, s_serviceTypes)
 QBasicMutex s_serviceTypesMutex;
 } // end of anonymous namespace
 
-ServiceTypeDefinitions ServiceTypeDefinitions::fromFiles(const QStringList &paths)
+ServiceTypeDefinitions ServiceTypeDefinitions::fromFiles(const QStringList &paths, const QStringList &serviceTypesSearchPaths)
 {
     ServiceTypeDefinitions ret;
     ret.m_definitions.reserve(paths.size());
     // as we might modify the cache we need to acquire a mutex here
     for (const QString &serviceTypePath : paths) {
-        bool added = ret.addFile(serviceTypePath);
+        bool added = ret.addFile(serviceTypePath, serviceTypesSearchPaths);
         if (!added) {
 #ifdef BUILDING_DESKTOPTOJSON_TOOL
             exit(1); // this is a fatal error when using kcoreaddons_desktop_to_json()
@@ -386,7 +391,7 @@ ServiceTypeDefinitions ServiceTypeDefinitions::fromFiles(const QStringList &path
     return ret;
 }
 
-bool ServiceTypeDefinitions::addFile(const QString &path)
+bool ServiceTypeDefinitions::addFile(const QString &path, const QStringList &serviceTypesSearchPaths)
 {
     QMutexLocker lock(&s_serviceTypesMutex);
     ServiceTypeDefinition *def = s_serviceTypes->object(path);
@@ -397,7 +402,7 @@ bool ServiceTypeDefinitions::addFile(const QString &path)
     } else {
         // not found in cache -> we need to parse the file
         qCDebug(DESKTOPPARSER) << "About to parse service type file" << path;
-        def = parseServiceTypesFile(path);
+        def = parseServiceTypesFile(path, serviceTypesSearchPaths);
         if (!def) {
             return false;
         }
@@ -578,11 +583,15 @@ void DesktopFileParser::convertToJson(const QByteArray &key,
     }
 }
 
-bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTypes, QJsonObject &json, QString *libraryPath)
+bool DesktopFileParser::convert(const QString &src,
+                                const QStringList &serviceTypes,
+                                QJsonObject &json,
+                                QString *libraryPath,
+                                const QStringList &serviceTypesSearchPaths)
 {
     QFile df(src);
     int lineNr = 0;
-    ServiceTypeDefinitions serviceTypeDef = ServiceTypeDefinitions::fromFiles(serviceTypes);
+    ServiceTypeDefinitions serviceTypeDef = ServiceTypeDefinitions::fromFiles(serviceTypes, serviceTypesSearchPaths);
     readUntilDesktopEntryGroup(df, src, lineNr);
     DESKTOPTOJSON_VERBOSE_DEBUG << "Found [Desktop Entry] group in line" << lineNr;
     auto startPos = df.pos();
@@ -603,14 +612,16 @@ bool DesktopFileParser::convert(const QString &src, const QStringList &serviceTy
             for (const auto &service : serviceList) {
                 if (!serviceTypeDef.hasServiceType(service.toLatin1())) {
                     // Make up the filename from the service type name. This assumes consistent naming...
-                    QString absFileName = locateRelativeServiceType(service.toLower().replace(slashChar, QLatin1Char('-')) + dotDesktop);
+                    QString absFileName =
+                        locateRelativeServiceType(service.toLower().replace(slashChar, QLatin1Char('-')) + dotDesktop, serviceTypesSearchPaths);
                     if (absFileName.isEmpty()) {
-                        absFileName = locateRelativeServiceType(service.toLower().remove(slashChar) + dotDesktop);
+                        absFileName = locateRelativeServiceType(service.toLower().remove(slashChar) + dotDesktop, serviceTypesSearchPaths);
                     }
                     if (absFileName.isEmpty()) {
-                        qCWarning(DESKTOPPARSER) << "Unable to find service type for service" << service << "listed in" << src;
+                        qCWarning(DESKTOPPARSER) << "Unable to find service type for service" << service << "listed in" << src
+                                                 << "- service type search directories were" << serviceTypesSearchPaths;
                     } else {
-                        serviceTypeDef.addFile(absFileName);
+                        serviceTypeDef.addFile(absFileName, serviceTypesSearchPaths);
                     }
                 }
             }

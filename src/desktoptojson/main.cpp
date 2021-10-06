@@ -60,6 +60,12 @@ int main(int argc, char **argv)
         QCommandLineOption(QStringList{QStringLiteral("s"), _s},
                            QStringLiteral("The name or full path of a KServiceType definition .desktop file. Can be passed multiple times"),
                            _s);
+    QCommandLineOption genericDataPath =
+        QCommandLineOption(QStringList{QStringLiteral("generic-data-path")},
+                           QStringLiteral("Override the default search path for service types (useful when cross-compiling). Can be passed multiple times"),
+                           QStringLiteral("PATH"));
+    QCommandLineOption strictPathMode = QCommandLineOption(QStringList{QStringLiteral("strict-path-mode")},
+                                                           QStringLiteral("Only search for service types in the explicitly listed data directories."));
 
     QCommandLineParser parser;
     parser.addVersionOption();
@@ -70,8 +76,10 @@ int main(int argc, char **argv)
     parser.addOption(verbose);
     parser.addOption(compat);
     parser.addOption(serviceTypes);
+    parser.addOption(genericDataPath);
+    parser.addOption(strictPathMode);
 
-    DesktopToJson dtj(&parser, input, output, verbose, compat, serviceTypes);
+    DesktopToJson dtj(&parser, input, output, verbose, compat, serviceTypes, strictPathMode, genericDataPath);
 
     parser.process(app);
     return dtj.runMain();
