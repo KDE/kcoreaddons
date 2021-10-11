@@ -8,7 +8,7 @@
 */
 
 #include "kdelibs4migration.h"
-#include "config-kde4home.h"
+#include "config-util.h"
 #include "kcoreaddons_debug.h"
 #include <QDir>
 #include <QVector>

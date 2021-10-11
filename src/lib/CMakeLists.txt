@@ -5,13 +5,11 @@ configure_file(caching/config-caching.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config
 
 include(CheckSymbolExists)
 check_symbol_exists("getgrouplist" "grp.h" HAVE_GETGROUPLIST)
-configure_file(util/config-getgrouplist.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-getgrouplist.h)
 
 set (KDE4_DEFAULT_HOME ".kde${_KDE4_DEFAULT_HOME_POSTFIX}" CACHE STRING "The default KDE home directory" )
-configure_file(util/config-kde4home.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-kde4home.h)
-
 set (ACCOUNTS_SERVICE_ICON_DIR "/var/lib/AccountsService/icons" CACHE STRING "Accounts Services icon storage directory")
-configure_file(util/config-accountsservice.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-accountsservice.h)
+
+configure_file(util/config-util.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-util.h)
 
 add_library(KF5CoreAddons)
 add_library(KF5::CoreAddons ALIAS KF5CoreAddons)

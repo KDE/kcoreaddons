@@ -7,8 +7,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#include "config-accountsservice.h"
-#include "config-getgrouplist.h"
+#include "config-util.h"
 #include "kcoreaddons_debug.h"
 #include "kuser.h"
 
