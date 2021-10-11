@@ -7,6 +7,7 @@
 
 #include <QTest>
 
+#include <QPluginLoader>
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
 
@@ -46,6 +47,15 @@ private Q_SLOTS:
         delete obj2;
     }
 
+    void testResultingCMakeMacroPlugin()
+    {
+        KPluginMetaData data(QStringLiteral("plugins/namespace/jsonplugin_cmake_macro"));
+        QVERIFY(data.isValid());
+
+        auto instance = QPluginLoader(data.fileName()).instance();
+        QVERIFY(instance);
+        QCOMPARE(instance->metaObject()->className(), "jsonplugin_cmake_macro_factory");
+    }
     void testCreateUsingUtilityMethods()
     {
         auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QStringLiteral("jsonplugin")), nullptr, QVariantList());
