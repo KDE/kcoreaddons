@@ -51,11 +51,11 @@ KPluginFactory::Result<KPluginFactory> KPluginFactory::loadFactory(const KPlugin
         result.errorReason = INVALID_FACTORY;
         qCWarning(KCOREADDONS_DEBUG) << "Expected a KPluginFactory, got a" << obj->metaObject()->className();
         delete obj;
-    } else {
-        factory->setMetaData(data);
-        result.plugin = factory;
+        return result;
     }
 
+    factory->setMetaData(data);
+    result.plugin = factory;
     return result;
 }
 
