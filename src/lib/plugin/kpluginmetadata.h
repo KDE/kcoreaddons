@@ -69,7 +69,7 @@ class QObject;
         "Name": "Date and Time",
         "Description": "Date and time by timezone",
         "Icon": "preferences-system-time",
-        "Authors": { "Name": "Aaron Seigo", "Email": "aseigo@kde.org" },
+        "Authors": [ { "Name": "Aaron Seigo", "Email": "aseigo@kde.org" } ],
         "Category": "Date and Time",
         "EnabledByDefault": "true",
         "License": "LGPL",
