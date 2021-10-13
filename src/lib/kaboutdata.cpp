@@ -1269,8 +1269,8 @@ QVariantList listToVariant(const QList<T> &values)
 {
     QVariantList ret;
     ret.reserve(values.count());
-    for (const auto &license : values) {
-        ret << QVariant::fromValue(license);
+    for (const auto &value : values) {
+        ret << QVariant::fromValue(value);
     }
     return ret;
 }
