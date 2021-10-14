@@ -436,12 +436,12 @@ QStringList KPluginMetaData::dependencies() const
 
 QStringList KPluginMetaData::serviceTypes() const
 {
-    return readStringList(rootObject(), QStringLiteral("ServiceTypes"));
+    return rootObject().value(QStringLiteral("ServiceTypes")).toVariant().toStringList();
 }
 
 QStringList KPluginMetaData::mimeTypes() const
 {
-    return readStringList(rootObject(), QStringLiteral("MimeTypes"));
+    return rootObject().value(QStringLiteral("MimeTypes")).toVariant().toStringList();
 }
 
 bool KPluginMetaData::supportsMimeType(const QString &mimeType) const
