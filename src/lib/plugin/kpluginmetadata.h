@@ -472,8 +472,20 @@ public:
     /** @return the value for @p key inside @p jo as a string list. If the type of @p key is string, a list with containing
      * just that string will be returned, if it is an array the list will contain one entry for each array member.
      * If the key cannot be found an empty list will be returned.
+     * @overload
+     * @since 5.88
      */
+    QStringList value(const QString &key, const QStringList &defaultValue) const;
+
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 88)
+    /** @return the value for @p key inside @p jo as a string list. If the type of @p key is string, a list with containing
+     * just that string will be returned, if it is an array the list will contain one entry for each array member.
+     * If the key cannot be found an empty list will be returned.
+     * @deprecated Since 5.88, use @p value(QString, QStringList) on KPluginMetaData instance instead
+     */
+    KCOREADDONS_DEPRECATED_VERSION(5, 88, "Use value(QString, QStringList) on KPluginMetaData instance instead")
     static QStringList readStringList(const QJsonObject &jo, const QString &key);
+#endif
 
     /**
      * Reads a value from @p jo but unlike QJsonObject::value() it allows different entries for each locale

@@ -262,31 +262,23 @@ private Q_SLOTS:
                              &e)
                              .object();
         QCOMPARE(e.error, QJsonParseError::NoError);
-        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"String\" to be a string list. Treating it as a list with a single entry: \"foo\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("String")), QStringList(QStringLiteral("foo")));
-        ;
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("OneArrayEntry")), QStringList(QStringLiteral("foo")));
-        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"Bool\" to be a string list. Treating it as a list with a single entry: \"true\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Bool")), QStringList(QStringLiteral("true")));
-        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"QuotedBool\" to be a string list. Treating it as a list with a single entry: \"true\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("QuotedBool")), QStringList(QStringLiteral("true")));
-        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"Number\" to be a string list. Treating it as a list with a single entry: \"12345\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Number")), QStringList(QStringLiteral("12345")));
-        QTest::ignoreMessage(QtWarningMsg,
-                             "Expected JSON property \"QuotedNumber\" to be a string list. Treating it as a list with a single entry: \"12345\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("QuotedNumber")), QStringList(QStringLiteral("12345")));
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("EmptyArray")), QStringList());
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("NumberArray")),
-                 QStringList() << QStringLiteral("1") << QStringLiteral("2") << QStringLiteral("3"));
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("BoolArray")),
+        QTest::ignoreMessage(QtWarningMsg, QRegularExpression(QStringLiteral("Expected JSON property ")));
+        KPluginMetaData data(jo, QStringLiteral("test"));
+        QCOMPARE(data.value(QStringLiteral("String"), QStringList()), QStringList(QStringLiteral("foo")));
+        QCOMPARE(data.value(QStringLiteral("OneArrayEntry"), QStringList()), QStringList(QStringLiteral("foo")));
+        QCOMPARE(data.value(QStringLiteral("Bool"), QStringList()), QStringList(QStringLiteral("true")));
+        QCOMPARE(data.value(QStringLiteral("QuotedBool"), QStringList()), QStringList(QStringLiteral("true")));
+        QCOMPARE(data.value(QStringLiteral("Number"), QStringList()), QStringList(QStringLiteral("12345")));
+        QCOMPARE(data.value(QStringLiteral("QuotedNumber"), QStringList()), QStringList(QStringLiteral("12345")));
+        QCOMPARE(data.value(QStringLiteral("EmptyArray"), QStringList()), QStringList());
+        QCOMPARE(data.value(QStringLiteral("NumberArray"), QStringList()), QStringList() << QStringLiteral("1") << QStringLiteral("2") << QStringLiteral("3"));
+        QCOMPARE(data.value(QStringLiteral("BoolArray"), QStringList()),
                  QStringList() << QStringLiteral("true") << QStringLiteral("false") << QStringLiteral("true"));
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("StringArray")), QStringList() << QStringLiteral("foo") << QStringLiteral("bar"));
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Null")), QStringList());
-        QTest::ignoreMessage(QtWarningMsg, "Expected JSON property \"QuotedNull\" to be a string list. Treating it as a list with a single entry: \"null\" ");
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("QuotedNull")), QStringList(QStringLiteral("null")));
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("ArrayWithNull")),
-                 QStringList() << QStringLiteral("foo") << QString() << QStringLiteral("bar"));
-        QCOMPARE(KPluginMetaData::readStringList(jo, QStringLiteral("Object")), QStringList());
+        QCOMPARE(data.value(QStringLiteral("StringArray"), QStringList()), QStringList() << QStringLiteral("foo") << QStringLiteral("bar"));
+        QCOMPARE(data.value(QStringLiteral("Null"), QStringList()), QStringList());
+        QCOMPARE(data.value(QStringLiteral("QuotedNull"), QStringList()), QStringList(QStringLiteral("null")));
+        QCOMPARE(data.value(QStringLiteral("ArrayWithNull"), QStringList()), QStringList() << QStringLiteral("foo") << QString() << QStringLiteral("bar"));
+        QCOMPARE(data.value(QStringLiteral("Object"), QStringList()), QStringList());
     }
 
     void testFromDesktopFile()
@@ -310,7 +302,7 @@ private Q_SLOTS:
         QCOMPARE(md.mimeTypes(), QStringList() << QStringLiteral("image/png") << QStringLiteral("application/pdf"));
 
         auto kp = md.rawData()[QStringLiteral("KPlugin")].toObject();
-        QStringList formFactors = KPluginMetaData::readStringList(kp, QStringLiteral("FormFactors"));
+        QStringList formFactors = kp.value(QStringLiteral("FormFactors")).toVariant().toStringList();
         QCOMPARE(formFactors, QStringList() << QStringLiteral("mediacenter") << QStringLiteral("desktop"));
         QCOMPARE(md.formFactors(), QStringList() << QStringLiteral("mediacenter") << QStringLiteral("desktop"));
 
@@ -327,7 +319,7 @@ private Q_SLOTS:
         const QString typesPath = QFINDTESTDATA("data/servicetypes/example-servicetype.desktop");
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(dfile, QStringList() << typesPath);
         QVERIFY(md.isValid());
-        QStringList list = KPluginMetaData::readStringList(md.rawData(), QStringLiteral("X-Test-List"));
+        QStringList list = md.value(QStringLiteral("X-Test-List"), QStringList());
         QCOMPARE(list, QStringList({QStringLiteral("first"), QStringLiteral("second")}));
     }
 

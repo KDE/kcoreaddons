@@ -48,6 +48,7 @@ def local_function_rules():
         ["KPluginMetaData", "value", ".*", ".*", ".*int.*", rules_engine.function_discard],
         ["KPluginMetaData", "value", ".*", ".*", ".*bool.*", rules_engine.function_discard],
         ["KPluginMetaData", "value", ".*", ".*", ".*char.*", rules_engine.function_discard],
+        ["KPluginMetaData", "value", ".*", ".*", ".*QStringList.*", rules_engine.function_discard],
 
         [".*", "qobject_cast", ".*", ".*", ".*", rules_engine.function_discard],
         [".*", "qobject_interface_iid", ".*", ".*", ".*", rules_engine.function_discard],

@@ -268,6 +268,7 @@ QJsonObject KPluginMetaData::rootObject() const
     return m_metaData[QStringLiteral("KPlugin")].toObject();
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 88)
 QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QString &key)
 {
     const QJsonValue value = obj.value(key);
@@ -288,6 +289,7 @@ QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QStrin
         return QStringList(asString);
     }
 }
+#endif
 
 QJsonValue KPluginMetaData::readTranslatedValue(const QJsonObject &jo, const QString &key, const QJsonValue &defaultValue)
 {
@@ -538,6 +540,27 @@ int KPluginMetaData::value(const QString &key, int defaultValue) const
         }
     } else {
         return defaultValue;
+    }
+}
+QStringList KPluginMetaData::value(const QString &key, const QStringList &defaultValue) const
+{
+    const QJsonValue value = m_metaData.value(key);
+    if (value.isUndefined() || value.isNull()) {
+        return defaultValue;
+    } else if (value.isObject()) {
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a string list, instead an object was specified in the json metadata"
+                                     << m_fileName;
+        return defaultValue;
+    } else if (value.isArray()) {
+        return value.toVariant().toStringList();
+    } else {
+        const QString asString = value.isString() ? value.toString() : value.toVariant().toString();
+        if (asString.isEmpty()) {
+            return defaultValue;
+        }
+        qCDebug(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a string list in the json metadata" << m_fileName
+                                   << "Treating it as a list with a single entry:" << asString;
+        return QStringList(asString);
     }
 }
 
