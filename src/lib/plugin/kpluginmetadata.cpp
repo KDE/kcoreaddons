@@ -11,6 +11,7 @@
 #include "desktopfileparser_p.h"
 
 #include "kcoreaddons_debug.h"
+#include "kjsonutils.h"
 #include <QCoreApplication>
 #include <QDir>
 #include <QDirIterator>
@@ -289,32 +290,17 @@ QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QStrin
         return QStringList(asString);
     }
 }
-#endif
 
 QJsonValue KPluginMetaData::readTranslatedValue(const QJsonObject &jo, const QString &key, const QJsonValue &defaultValue)
 {
-    QString languageWithCountry = QLocale().name();
-    auto it = jo.constFind(key + QLatin1Char('[') + languageWithCountry + QLatin1Char(']'));
-    if (it != jo.constEnd()) {
-        return it.value();
-    }
-    const QStringView language = QStringView(languageWithCountry).mid(0, languageWithCountry.indexOf(QLatin1Char('_')));
-    it = jo.constFind(key + QLatin1Char('[') + language + QLatin1Char(']'));
-    if (it != jo.constEnd()) {
-        return it.value();
-    }
-    // no translated value found -> check key
-    it = jo.constFind(key);
-    if (it != jo.constEnd()) {
-        return jo.value(key);
-    }
-    return defaultValue;
+    return KJsonUtils::readTranslatedValue(jo, key, defaultValue);
 }
 
 QString KPluginMetaData::readTranslatedString(const QJsonObject &jo, const QString &key, const QString &defaultValue)
 {
     return readTranslatedValue(jo, key, defaultValue).toString(defaultValue);
 }
+#endif
 
 static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson> *out)
 {
@@ -365,7 +351,7 @@ QString KPluginMetaData::category() const
 
 QString KPluginMetaData::description() const
 {
-    return readTranslatedString(rootObject(), QStringLiteral("Description"));
+    return KJsonUtils::readTranslatedString(rootObject(), QStringLiteral("Description"));
 }
 
 QString KPluginMetaData::iconName() const
@@ -385,18 +371,18 @@ QString KPluginMetaData::licenseText() const
 
 QString KPluginMetaData::name() const
 {
-    return readTranslatedString(rootObject(), QStringLiteral("Name"));
+    return KJsonUtils::readTranslatedString(rootObject(), QStringLiteral("Name"));
 }
 
 QString KPluginMetaData::copyrightText() const
 {
-    return readTranslatedString(rootObject(), QStringLiteral("Copyright"));
+    return KJsonUtils::readTranslatedString(rootObject(), QStringLiteral("Copyright"));
 }
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 87)
 QString KPluginMetaData::extraInformation() const
 {
-    return readTranslatedString(rootObject(), QStringLiteral("ExtraInformation"));
+    return KJsonUtils::readTranslatedString(rootObject(), QStringLiteral("ExtraInformation"));
 }
 #endif
 

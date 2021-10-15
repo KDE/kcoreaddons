@@ -487,21 +487,29 @@ public:
     static QStringList readStringList(const QJsonObject &jo, const QString &key);
 #endif
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 88)
     /**
      * Reads a value from @p jo but unlike QJsonObject::value() it allows different entries for each locale
      * This is done by appending the locale identifier in brackets to the key (e.g. "[de_DE]" or "[es]")
      * When looking for a key "foo" with German (Germany) locale we will first attempt to read "foo[de_DE]",
      * if that does not exist "foo[de]", finally falling back to "foo" if that also doesn't exist.
      * @return the translated value for @p key from @p jo or @p defaultValue if @p key was not found
+     * @deprecated Since 5.88, use KJsonUtils::readTranslatedValue instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 88, "Use KJsonUtils::readTranslatedValue instead")
     static QJsonValue readTranslatedValue(const QJsonObject &jo, const QString &key, const QJsonValue &defaultValue = QJsonValue());
+#endif
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 88)
     /**
      * @return the translated value of @p key from @p jo as a string or @p defaultValue if @p key was not found
      * or the value for @p key is not of type string
      * @see KPluginMetaData::readTranslatedValue(const QJsonObject &jo, const QString &key)
+     * @deprecated Since 5.88, use KJsonUtils::readTranslatedString instead
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 88, "Use KJsonUtils::readTranslatedString instead")
     static QString readTranslatedString(const QJsonObject &jo, const QString &key, const QString &defaultValue = QString());
+#endif
 
     /**
      * @return @c true if this object is equal to @p other, otherwise @c false

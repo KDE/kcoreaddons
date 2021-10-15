@@ -12,6 +12,7 @@
 */
 
 #include "kaboutdata.h"
+#include "kjsonutils.h"
 #include "kpluginmetadata.h"
 
 #include <QCommandLineOption>
@@ -93,8 +94,8 @@ KAboutPerson &KAboutPerson::operator=(const KAboutPerson &other) = default;
 
 KAboutPerson KAboutPerson::fromJSON(const QJsonObject &obj)
 {
-    const QString name = KPluginMetaData::readTranslatedString(obj, QStringLiteral("Name"));
-    const QString task = KPluginMetaData::readTranslatedString(obj, QStringLiteral("Task"));
+    const QString name = KJsonUtils::readTranslatedString(obj, QStringLiteral("Name"));
+    const QString task = KJsonUtils::readTranslatedString(obj, QStringLiteral("Task"));
     const QString email = obj[QStringLiteral("Email")].toString();
     const QString website = obj[QStringLiteral("Website")].toString();
     const QString userName = obj[QStringLiteral("UserName")].toString();

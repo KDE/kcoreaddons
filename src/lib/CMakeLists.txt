@@ -95,6 +95,7 @@ target_sources(KF5CoreAddons PRIVATE
     plugin/desktopfileparser.cpp
     randomness/krandom.cpp
     randomness/krandomsequence.cpp
+    text/kjsonutils.cpp
     text/kfuzzymatcher.cpp
     text/kmacroexpander.cpp
     text/kstringhandler.cpp
@@ -255,6 +256,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
 )
 ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
+        KJsonUtils
         KFuzzyMatcher
         KMacroExpander
         KStringHandler
