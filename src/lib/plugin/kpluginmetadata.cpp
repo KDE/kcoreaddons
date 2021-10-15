@@ -469,7 +469,7 @@ bool KPluginMetaData::supportsMimeType(const QString &mimeType) const
 
 QStringList KPluginMetaData::formFactors() const
 {
-    return readStringList(rootObject(), QStringLiteral("FormFactors"));
+    return rootObject().value(QStringLiteral("FormFactors")).toVariant().toStringList();
 }
 
 bool KPluginMetaData::isEnabledByDefault() const
