@@ -3,7 +3,7 @@
 
     SPDX-FileCopyrightText: 2007 Matthias Kretz <kretz@kde.org>
     SPDX-FileCopyrightText: 2007 Bernhard Loos <nhuh.put@web.de>
-    SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
+    SPDX-FileCopyrightText: 2021-2023 Alexander Lohnau <alexander.lohnau@gmx.de>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -387,7 +387,6 @@ class KPluginMetaData;
 class KCOREADDONS_EXPORT KPluginFactory : public QObject
 {
     Q_OBJECT
-    Q_DECLARE_PRIVATE(KPluginFactory)
 public:
     /**
      * This constructor creates a factory for a plugin.
@@ -540,9 +539,11 @@ Q_SIGNALS:
 
 protected:
     /**
-     * Function pointer type to a function that instantiates a plugin.
+     * Function pointer type to a function that instantiates a plugin
+     * For plugins that don't support a KPluginMetaData parameter it is discarded
+     * @since 5.77
      */
-    typedef QObject *(*CreateInstanceFunction)(QWidget *, QObject *, const QVariantList &);
+    using CreateInstanceWithMetaDataFunction = QObject *(*)(QWidget *, QObject *, const KPluginMetaData &, const QVariantList &);
 
     /**
      * This is used to detect the arguments need for the constructor of metadata-less plugin classes.
@@ -554,25 +555,19 @@ protected:
         static constexpr bool enabled = std::is_constructible<impl, QWidget *, QObject *, const QVariantList &>::value
             || std::is_constructible<impl, QWidget *, const QVariantList &>::value || std::is_constructible<impl, QObject *, const QVariantList &>::value;
 
-        CreateInstanceFunction createInstanceFunction(KParts::Part *)
+        CreateInstanceWithMetaDataFunction createInstanceFunction(KParts::Part *)
         {
             return &createPartInstance<impl>;
         }
-        CreateInstanceFunction createInstanceFunction(QWidget *)
+        CreateInstanceWithMetaDataFunction createInstanceFunction(QWidget *)
         {
             return &createInstance<impl, QWidget>;
         }
-        CreateInstanceFunction createInstanceFunction(...)
+        CreateInstanceWithMetaDataFunction createInstanceFunction(...)
         {
             return &createInstance<impl, QObject>;
         }
     };
-
-    /**
-     * Function pointer type to a function that instantiates a plugin, also taking a plugin metadata argument.
-     * @since 5.77
-     */
-    using CreateInstanceWithMetaDataFunction = QObject *(*)(QWidget *, QObject *, const KPluginMetaData &, const QVariantList &);
 
     /**
      * This is used to detect the arguments need for the constructor of metadata-taking plugin classes.
@@ -599,15 +594,11 @@ protected:
         }
     };
 
-    explicit KPluginFactory(KPluginFactoryPrivate &dd);
-
     // Use std::enable_if_t once C++14 can be relied on
     template<bool B, class T = void>
     using enable_if_t = typename std::enable_if<B, T>::type;
 
     /**
-     * Overload for registerPlugin<T>(const QString &keyword, CreateInstanceFunction instanceFunction)
-     *
      * Uses a default instance creation function depending on the type of interface. If the
      * interface inherits from
      * @li @c KParts::Part the function will call
@@ -628,8 +619,8 @@ protected:
     template<class T, enable_if_t<InheritanceChecker<T>::enabled, int> = 0>
     void registerPlugin()
     {
-        CreateInstanceFunction instanceFunction = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
-        registerPlugin(QString(), &T::staticMetaObject, instanceFunction);
+        CreateInstanceWithMetaDataFunction instanceFunction = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
+        registerPlugin(&T::staticMetaObject, instanceFunction);
     }
 
     /**
@@ -654,7 +645,7 @@ protected:
     void registerPlugin()
     {
         CreateInstanceWithMetaDataFunction instanceFunction = InheritanceWithMetaDataChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
-        registerPlugin(QString(), &T::staticMetaObject, instanceFunction);
+        registerPlugin(&T::staticMetaObject, instanceFunction);
     }
 
     /**
@@ -669,10 +660,8 @@ protected:
     template<class T>
     void registerPlugin(CreateInstanceWithMetaDataFunction instanceFunction)
     {
-        registerPlugin(QString(), &T::staticMetaObject, instanceFunction);
+        registerPlugin(&T::staticMetaObject, instanceFunction);
     }
-
-    std::unique_ptr<KPluginFactoryPrivate> const d_ptr;
 
     /**
      * This function is called when the factory asked to create an Object.
@@ -685,15 +674,14 @@ protected:
      * @param parentWidget only used if the requested plugin is a KPart.
      * @param parent the parent object for the plugin object.
      * @param args a plugin specific list of arbitrary arguments.
-     * @param keyword a string that uniquely identifies the plugin. If a KService is used this
-     * keyword is read from the X-KDE-PluginKeyword entry in the .desktop file.
      */
-    virtual QObject *create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword);
+    virtual QObject *create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args);
 
     template<class impl, class ParentType>
-    static QObject *createInstance(QWidget *parentWidget, QObject *parent, const QVariantList &args)
+    static QObject *createInstance(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     {
         Q_UNUSED(parentWidget)
+        Q_UNUSED(metaData)
         ParentType *p = nullptr;
         if (parent) {
             p = qobject_cast<ParentType *>(parent);
@@ -703,8 +691,9 @@ protected:
     }
 
     template<class impl>
-    static QObject *createPartInstance(QWidget *parentWidget, QObject *parent, const QVariantList &args)
+    static QObject *createPartInstance(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     {
+        Q_UNUSED(metaData);
         return new impl(parentWidget, parent, args);
     }
 
@@ -727,8 +716,9 @@ protected:
     }
 
 private:
-    void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceFunction instanceFunction);
-    void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceWithMetaDataFunction instanceFunction);
+    friend KPluginFactoryPrivate;
+    std::unique_ptr<KPluginFactoryPrivate> const d;
+    void registerPlugin(const QMetaObject *metaObject, CreateInstanceWithMetaDataFunction instanceFunction);
     // The logging categories are not part of the public API, consequently this needs to be a private function
     static void logFailedInstantiationMessage(KPluginMetaData data);
     static void logFailedInstantiationMessage(const char *className, KPluginMetaData data);
@@ -737,8 +727,7 @@ private:
 template<typename T>
 inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
 {
-    QObject *o =
-        create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : nullptr, parent, args, QString());
+    QObject *o = create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : nullptr, parent, args);
 
     T *t = qobject_cast<T *>(o);
     if (!t) {
@@ -750,7 +739,7 @@ inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
 template<typename T>
 inline T *KPluginFactory::create(QWidget *parentWidget, QObject *parent, const QVariantList &args)
 {
-    QObject *o = create(T::staticMetaObject.className(), parentWidget, parent, args, QString());
+    QObject *o = create(T::staticMetaObject.className(), parentWidget, parent, args);
 
     T *t = qobject_cast<T *>(o);
     if (!t) {
