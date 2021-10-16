@@ -87,6 +87,8 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
     } else {
         const QList<KPluginFactoryPrivate::Plugin> clashes(d->createInstanceHash.values(keyword));
         const QMetaObject *superClass = metaObject->superClass();
+
+        // check hierarchy of all registered with the same keyword registered classes
         if (superClass) {
             for (const KPluginFactoryPrivate::Plugin &plugin : clashes) {
                 for (const QMetaObject *otherSuper = plugin.first->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
@@ -97,6 +99,7 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
                 }
             }
         }
+        // check hierarchy of newly newly registered plugin against all registered classes with the same keyword
         for (const KPluginFactoryPrivate::Plugin &plugin : clashes) {
             superClass = plugin.first->superClass();
             if (superClass) {
@@ -127,6 +130,7 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
     } else {
         const QList<KPluginFactoryPrivate::PluginWithMetadata> clashes(d->createInstanceWithMetaDataHash.values(keyword));
         const QMetaObject *superClass = metaObject->superClass();
+        // check hierarchy of all registered with the same keyword registered classes
         if (superClass) {
             for (const KPluginFactoryPrivate::PluginWithMetadata &plugin : clashes) {
                 for (const QMetaObject *otherSuper = plugin.first->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
@@ -137,6 +141,7 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
                 }
             }
         }
+        // check hierarchy of newly newly registered plugin against all registered classes with the same keyword
         for (const KPluginFactoryPrivate::PluginWithMetadata &plugin : clashes) {
             superClass = plugin.first->superClass();
             if (superClass) {
