@@ -93,8 +93,9 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
             for (const KPluginFactoryPrivate::Plugin &plugin : clashes) {
                 for (const QMetaObject *otherSuper = plugin.first->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
                     if (superClass == otherSuper) {
-                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className()
-                                                     << ") were registered. Use keywords to identify the plugins.";
+                        qCWarning(KCOREADDONS_DEBUG).nospace() << "Two plugins with the same interface (" << superClass->className()
+                                                               << ") were registered in the KPluginFactory " << this->metaObject()->className() << ". "
+                                                               << "This might be due to a missing Q_OBJECT macro in one of the registered classes";
                     }
                 }
             }
@@ -105,8 +106,9 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
             if (superClass) {
                 for (const QMetaObject *otherSuper = metaObject->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
                     if (superClass == otherSuper) {
-                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className()
-                                                     << ") were registered. Use keywords to identify the plugins.";
+                        qCWarning(KCOREADDONS_DEBUG).nospace() << "Two plugins with the same interface (" << superClass->className()
+                                                               << ") were registered in the KPluginFactory " << this->metaObject()->className() << ". "
+                                                               << "This might be due to a missing Q_OBJECT macro in one of the registered classes";
                     }
                 }
             }
@@ -135,8 +137,9 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
             for (const KPluginFactoryPrivate::PluginWithMetadata &plugin : clashes) {
                 for (const QMetaObject *otherSuper = plugin.first->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
                     if (superClass == otherSuper) {
-                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className()
-                                                     << ") were registered. Use keywords to identify the plugins.";
+                        qCWarning(KCOREADDONS_DEBUG).nospace() << "Two plugins with the same interface (" << superClass->className()
+                                                               << ") were registered in the KPluginFactory " << this->metaObject()->className() << ". "
+                                                               << "This might be due to a missing Q_OBJECT macro in one of the registered classes";
                     }
                 }
             }
@@ -147,8 +150,9 @@ void KPluginFactory::registerPlugin(const QString &keyword, const QMetaObject *m
             if (superClass) {
                 for (const QMetaObject *otherSuper = metaObject->superClass(); otherSuper; otherSuper = otherSuper->superClass()) {
                     if (superClass == otherSuper) {
-                        qCWarning(KCOREADDONS_DEBUG) << "Two plugins with the same interface(" << superClass->className()
-                                                     << ") were registered. Use keywords to identify the plugins.";
+                        qCWarning(KCOREADDONS_DEBUG).nospace() << "Two plugins with the same interface (" << superClass->className()
+                                                               << ") were registered in the KPluginFactory " << this->metaObject()->className() << ". "
+                                                               << "This might be due to a missing Q_OBJECT macro in one of the registered classes";
                     }
                 }
             }
