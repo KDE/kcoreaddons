@@ -33,8 +33,13 @@ KPluginFactory::~KPluginFactory() = default;
 KPluginFactory::Result<KPluginFactory> KPluginFactory::loadFactory(const KPluginMetaData &data)
 {
     Result<KPluginFactory> result;
-    QPluginLoader loader(data.fileName());
-    QObject *obj = loader.instance();
+    QObject *obj = nullptr;
+    if (data.isStaticPlugin()) {
+        obj = data.staticPlugin().instance();
+    } else {
+        QPluginLoader loader(data.fileName());
+        obj = loader.instance();
+    }
 
     if (!obj) {
         result.errorString = tr("Could not load plugin from %1").arg(data.fileName());
