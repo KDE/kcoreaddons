@@ -26,7 +26,7 @@ class QPluginLoader;
 class KPluginMetaDataPrivate;
 class KAboutPerson;
 class QObject;
-
+class QStaticPlugin;
 /**
  * @class KPluginMetaData kpluginmetadata.h KPluginMetaData
  *
@@ -173,6 +173,17 @@ public:
      * @since 5.5
      */
     KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile, const QString &metaDataFile);
+
+    /*
+     * Constructs a KPluginMetaData from the static plugin.
+     * If it does not have any meta data the @p metaData value is used
+     *
+     * @see KPluginFactory::loadFactory
+     * @see KPluginFactory::instantiatePlugin
+     *
+     * @since 5.88
+     */
+    KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaData = {});
 
     /**
      * Copy contructor
@@ -524,10 +535,13 @@ private:
     QVariantList authorsVariant() const;
     QVariantList translatorsVariant() const;
     QVariantList otherContributorsVariant() const;
+    bool isStaticPlugin() const;
+    QStaticPlugin getStaticPlugin() const;
 
     QJsonObject m_metaData;
     QString m_fileName;
     QExplicitlySharedDataPointer<KPluginMetaDataPrivate> d; // for future binary compatible extensions
+    friend class KPluginFactory;
 };
 
 inline uint qHash(const KPluginMetaData &md, uint seed)

@@ -25,10 +25,13 @@
 #include "kpluginfactory.h"
 #include "kpluginloader.h"
 
+#include <optional>
+
 class KPluginMetaDataPrivate : public QSharedData
 {
 public:
     QString metaDataFileName;
+    std::optional<QStaticPlugin> staticPlugin = std::nullopt;
     static void forEachPlugin(const QString &directory, std::function<void(const QString &)> callback)
     {
         QStringList dirsToCheck;
@@ -154,6 +157,12 @@ KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &plu
         d = new KPluginMetaDataPrivate;
         d->metaDataFileName = metaDataFile;
     }
+}
+
+KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaData)
+{
+    d->staticPlugin = plugin;
+    m_metaData = plugin.metaData().isEmpty() ? metaData : plugin.metaData();
 }
 
 KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId)
@@ -605,4 +614,14 @@ QVariantList KPluginMetaData::translatorsVariant() const
 QVariantList KPluginMetaData::otherContributorsVariant() const
 {
     return listToVariant(otherContributors());
+}
+bool KPluginMetaData::isStaticPlugin() const
+{
+    return d && d->staticPlugin.has_value();
+}
+
+QStaticPlugin KPluginMetaData::getStaticPlugin() const
+{
+    Q_ASSERT(d->staticPlugin.has_value());
+    return d->staticPlugin.value();
 }
