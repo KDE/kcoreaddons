@@ -43,6 +43,7 @@ kcoreaddons_add_plugin(jsonplugin_cmake_macro SOURCES kpluginclass.cpp INSTALL_N
 ecm_mark_as_test(jsonplugin_cmake_macro)
 target_link_libraries(jsonplugin_cmake_macro KF5::CoreAddons autotests_static)
 
+
 add_definitions( -DKDELIBS4CONFIGMIGRATOR_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data" )
 
 if (WIN32)
@@ -89,6 +90,17 @@ ecm_add_tests(
     ${autotests_OPTIONAL_SRCS}
     LINK_LIBRARIES Qt5::Test KF5::CoreAddons autotests_static
 )
+
+set_target_properties(kpluginfactorytest PROPERTIES ENABLE_EXPORTS 1)
+kcoreaddons_add_plugin(static_jsonplugin_cmake_macro SOURCES statickpluginclass.cpp INSTALL_NAMESPACE "staticnamespace" STATIC)
+target_link_libraries(static_jsonplugin_cmake_macro KF5::CoreAddons autotests_static)
+target_link_libraries(kpluginfactorytest static_jsonplugin_cmake_macro)
+
+kcoreaddons_add_plugin(static_jsonplugin_cmake_macro_2 SOURCES statickpluginclass_2.cpp INSTALL_NAMESPACE "staticnamespace2" STATIC)
+target_link_libraries(static_jsonplugin_cmake_macro_2 KF5::CoreAddons autotests_static)
+target_link_libraries(kpluginfactorytest static_jsonplugin_cmake_macro_2)
+
+kcoreaddons_target_static_plugins(kpluginfactorytest)
 
 if(NOT CMAKE_CROSSCOMPILING)
     ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt5::Test KF5::CoreAddons autotests_static)
