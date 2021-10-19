@@ -99,6 +99,7 @@ endfunction()
 # kcoreaddons_add_plugin(plugin_name
 #     [SOURCES <src> [<src> [...]]] # optional since 5.83, required before
 #     [JSON "pluginname.json"]
+#     [STATIC]
 #     [INSTALL_NAMESPACE "servicename"]
 # )
 #
@@ -112,6 +113,7 @@ endfunction()
 # can be dropped with any older KF5 requirement.
 # In case you generate the JSON files during the build it should be manually added to the AUTOGEN_TARGET_DEPENDS property,
 # the kcoreaddons_desktop_to_json already does this for the generated file.
+# Since 5.89 the macro supports static plugins by passing in the STATIC option.
 #
 # Example:
 #   kcoreaddons_add_plugin(kdeconnect_share SOURCES ${kdeconnect_share_SRCS} INSTALL_NAMESPACE "kdeconnect")
@@ -119,12 +121,22 @@ endfunction()
 # Since 5.10.0
 
 function(kcoreaddons_add_plugin plugin)
-    set(options)
+    set(options STATIC)
     set(oneValueArgs JSON INSTALL_NAMESPACE)
     set(multiValueArgs SOURCES)
     cmake_parse_arguments(KCA_ADD_PLUGIN "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
-    add_library(${plugin} MODULE ${KCA_ADD_PLUGIN_SOURCES})
+    if (NOT KCA_ADD_PLUGIN_INSTALL_NAMESPACE)
+        message(FATAL_ERROR "Must specify INSTALL_NAMESPACE for ${plugin}")
+    endif()
+
+    if (KCA_ADD_PLUGIN_STATIC)
+        add_library(${plugin} OBJECT ${KCA_ADD_PLUGIN_SOURCES})
+        target_compile_definitions(${plugin} PRIVATE QT_STATICPLUGIN)
+        set_property(TARGET ${plugin} PROPERTY AUTOMOC_MOC_OPTIONS "-MX-KDE-PluginNamespace=${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}")
+    else()
+        add_library(${plugin} MODULE ${KCA_ADD_PLUGIN_SOURCES})
+    endif()
 
     if ("${ECM_GLOBAL_FIND_VERSION}" VERSION_GREATER_EQUAL "5.85.0" AND KCA_ADD_PLUGIN_JSON)
         message(WARNING "Setting the JSON parameter is deprecated, see function docs for details")
@@ -132,20 +144,21 @@ function(kcoreaddons_add_plugin plugin)
     get_filename_component(json "${KCA_ADD_PLUGIN_JSON}" REALPATH)
     set_property(TARGET ${plugin} APPEND PROPERTY AUTOGEN_TARGET_DEPENDS ${json})
 
+
+    if ("${ECM_GLOBAL_FIND_VERSION}" VERSION_GREATER_EQUAL "5.88.0")
+        target_compile_definitions(${plugin} PRIVATE KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME=${plugin}_factory)
+    endif()
+
+    # If we have static plugins there are no plugins to install
+    if (KCA_ADD_PLUGIN_STATIC)
+        return()
+    endif()
     # If find_package(ECM 5.38) or higher is called, output the plugin in a INSTALL_NAMESPACE subfolder.
     # See https://community.kde.org/Guidelines_and_HOWTOs/Making_apps_run_uninstalled
     if(NOT ("${ECM_GLOBAL_FIND_VERSION}" VERSION_LESS "5.88.0"))
         set_target_properties(${plugin} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/plugins/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}")
     elseif(NOT ("${ECM_GLOBAL_FIND_VERSION}" VERSION_LESS "5.38.0"))
         set_target_properties(${plugin} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}")
-    endif()
-
-    if (NOT KCA_ADD_PLUGIN_INSTALL_NAMESPACE)
-        message(FATAL_ERROR "Must specify INSTALL_NAMESPACE for ${plugin}")
-    endif()
-
-    if ("${ECM_GLOBAL_FIND_VERSION}" VERSION_GREATER_EQUAL "5.88.0")
-        target_compile_definitions(${plugin} PRIVATE KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME=${plugin}_factory)
     endif()
 
     if(NOT ANDROID)
