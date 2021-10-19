@@ -162,8 +162,10 @@ KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &plu
 
 KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaData)
 {
+    d = new KPluginMetaDataPrivate();
     d->staticPlugin = plugin;
-    m_metaData = plugin.metaData().isEmpty() ? metaData : plugin.metaData();
+    auto metaDataObject = plugin.metaData().value(QLatin1String("MetaData")).toObject();
+    m_metaData = metaDataObject.isEmpty() ? metaData : metaDataObject;
 }
 
 KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId)
@@ -243,6 +245,16 @@ QString KPluginMetaData::metaDataFileName() const
 QVector<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)
 {
     QVector<KPluginMetaData> ret;
+    const auto staticPlugins = QPluginLoader::staticPlugins();
+    const QJsonArray namespaceArr{directory};
+    for (QStaticPlugin p : staticPlugins) {
+        if (p.metaData().value(QLatin1String("X-KDE-PluginNamespace")) == namespaceArr) {
+            KPluginMetaData metaData(p);
+            if (!filter || filter(metaData)) {
+                ret << metaData;
+            }
+        }
+    }
     QSet<QString> addedPluginIds;
     KPluginMetaDataPrivate::forEachPlugin(directory, [&](const QString &pluginPath) {
         KPluginMetaData metadata(pluginPath);
