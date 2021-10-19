@@ -89,6 +89,14 @@ private Q_SLOTS:
             QCOMPARE(result.errorReason, KPluginFactory::INVALID_KPLUGINFACTORY_INSTANTIATION);
         }
     }
+
+    void testStaticPlugins()
+    {
+        const auto plugins = KPluginMetaData::findPlugins(QStringLiteral("staticnamespace"));
+        QCOMPARE(plugins.count(), 1);
+
+        QVERIFY(KPluginFactory::instantiatePlugin<QObject>(plugins.first()));
+    }
 };
 
 QTEST_MAIN(KPluginFactoryTest)

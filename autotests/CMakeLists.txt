@@ -90,6 +90,18 @@ ecm_add_tests(
     LINK_LIBRARIES Qt5::Test KF5::CoreAddons autotests_static
 )
 
+set_target_properties(kpluginfactorytest PROPERTIES ENABLE_EXPORTS 1)
+kcoreaddons_add_plugin(static_jsonplugin_cmake_macro SOURCES statickpluginclass.cpp INSTALL_NAMESPACE "staticnamespace" STATIC)
+target_link_libraries(static_jsonplugin_cmake_macro KF5::CoreAddons autotests_static)
+
+kcoreaddons_add_plugin(static_jsonplugin_cmake_macro_2 SOURCES statickpluginclass_2.cpp INSTALL_NAMESPACE "staticnamespace2" STATIC)
+target_link_libraries(static_jsonplugin_cmake_macro_2 KF5::CoreAddons autotests_static)
+
+kcoreaddons_target_static_plugins(kpluginfactorytest "staticnamespace")
+kcoreaddons_target_static_plugins(kpluginfactorytest "staticnamespace2")
+kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace")
+kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace2")
+
 if(NOT CMAKE_CROSSCOMPILING)
     ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt5::Test KF5::CoreAddons autotests_static)
     target_compile_definitions(desktoptojsontest PRIVATE

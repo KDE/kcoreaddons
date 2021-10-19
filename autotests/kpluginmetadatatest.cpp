@@ -544,6 +544,17 @@ private Q_SLOTS:
         const KPluginMetaData nonExistingPlugin = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("invalidid"));
         QVERIFY(!nonExistingPlugin.isValid());
     }
+
+    void testStaticPlugins()
+    {
+        QCOMPARE(QPluginLoader::staticPlugins().count(), 2);
+
+        const auto plugins = KPluginMetaData::findPlugins(QStringLiteral("staticnamespace"));
+        QCOMPARE(plugins.count(), 1);
+
+        QCOMPARE(plugins.first().description(), QStringLiteral("This is a plugin"));
+        QCOMPARE(plugins.first().fileName(), QStringLiteral("static_jsonplugin_cmake_macro"));
+    }
 };
 
 QTEST_MAIN(KPluginMetaDataTest)
