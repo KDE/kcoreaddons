@@ -1153,8 +1153,9 @@ public:
      * @return the program's icon name.
      *
      * This is mostly for compatibility, given that setProgramIconName is deprecated.
+     * @deprecated Since 5.2, Use QGuiApplication::windowIcon instead
      */
-    KCOREADDONS_DEPRECATED_VERSION(5, 2, "Use QApplication::windowIcon")
+    KCOREADDONS_DEPRECATED_VERSION(5, 2, "Use QGuiApplication::windowIcon instead")
     QString programIconName() const;
 #endif
 
