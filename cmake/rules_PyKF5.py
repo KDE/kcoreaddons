@@ -36,6 +36,7 @@ def local_function_rules():
 
         ["KPluginFactory", "create", ".*", ".*", ".*QWidget.*", rules_engine.function_discard],
         ["KPluginFactory", "loadFactory", ".*", ".*", ".*", rules_engine.function_discard],
+        ["KPluginMetaData", ".*", ".*", ".*", "QStaticPlugin.*", rules_engine.function_discard],
 
         [".*", ".*", ".*", ".*", ".*QStringView.*", rules_engine.function_discard],
 
