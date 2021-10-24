@@ -3,7 +3,7 @@
 
     SPDX-FileCopyrightText: 2006 Michaël Larouche <michael.larouche@kdemail.net>
 
-    SPDX-License-Identifier: LGPL-2.0-only
+    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 #ifndef KDECORE_KMESSAGE_H
 #define KDECORE_KMESSAGE_H
