@@ -90,7 +90,6 @@ ecm_add_tests(
     LINK_LIBRARIES Qt5::Test KF5::CoreAddons autotests_static
 )
 
-set_target_properties(kpluginfactorytest PROPERTIES ENABLE_EXPORTS 1)
 kcoreaddons_add_plugin(static_jsonplugin_cmake_macro SOURCES statickpluginclass.cpp INSTALL_NAMESPACE "staticnamespace" STATIC)
 target_link_libraries(static_jsonplugin_cmake_macro KF5::CoreAddons autotests_static)
 

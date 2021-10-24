@@ -166,6 +166,9 @@ KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaDa
     d->staticPlugin = plugin;
     auto metaDataObject = plugin.metaData().value(QLatin1String("MetaData")).toObject();
     m_metaData = metaDataObject.isEmpty() ? metaData : metaDataObject;
+    if (auto names = plugin.metaData().value(QLatin1String("X-KDE-FileName")).toVariant().toStringList(); !names.isEmpty()) {
+        m_fileName = names.constFirst();
+    }
 }
 
 KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId)

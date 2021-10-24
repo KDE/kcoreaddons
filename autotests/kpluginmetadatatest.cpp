@@ -553,7 +553,7 @@ private Q_SLOTS:
         QCOMPARE(plugins.count(), 1);
 
         QCOMPARE(plugins.first().description(), QStringLiteral("This is a plugin"));
-        QCOMPARE(plugins.first().fileName(), QStringLiteral("static_jsonplugin_cmake_macro"));
+        QCOMPARE(plugins.first().fileName(), QStringLiteral("staticnamespace/static_jsonplugin_cmake_macro"));
     }
 };
 
