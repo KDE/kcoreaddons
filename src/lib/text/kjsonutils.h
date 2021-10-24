@@ -2,7 +2,7 @@
     SPDX-FileCopyrightText: 2014 Alex Richardson <arichardson.kde@gmail.com>
     SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
-    SPDX-License-Identifier: LGPL-2.0-only
+    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
 #include "kcoreaddons_export.h"
