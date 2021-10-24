@@ -3,7 +3,7 @@
 
     SPDX-FileCopyrightText: 2006 Kevin Ottens <ervin@kde.org>
 
-    SPDX-License-Identifier: LGPL-2.0-only
+    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
 #include "kcompositejob.h"
