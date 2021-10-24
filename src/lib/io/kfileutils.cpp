@@ -4,7 +4,7 @@
     SPDX-FileCopyrightText: 2000-2005 David Faure <faure@kde.org>
     SPDX-FileCopyrightText: 2021 Alexander Lohnau <alexander.lohnau@gmx.de>
 
-    SPDX-License-Identifier: LGPL-2.0-only
+    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
 #include "kfileutils.h"
