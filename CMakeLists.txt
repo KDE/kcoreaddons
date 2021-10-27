@@ -35,6 +35,7 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
 ecm_setup_qtplugin_macro_names(
     JSON_NONE
         "K_PLUGIN_FACTORY"
+        "K_PLUGIN_CLASS"
     JSON_ARG2
         "K_PLUGIN_FACTORY_WITH_JSON"
         "K_PLUGIN_CLASS_WITH_JSON"

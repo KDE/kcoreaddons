@@ -275,6 +275,17 @@ class KPluginMetaData;
 #endif
 
 /**
+ * Alternative for K_PLUGIN_CLASS_WITH_JSON if the plugin does not contain any meta data.
+ * For example if a plugin has a KCM as separate plugin associated with it.
+ * @since 5.88
+ *
+ */
+#ifdef KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME
+#define K_PLUGIN_CLASS(classname) K_PLUGIN_FACTORY(KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME, registerPlugin<classname>();)
+#else
+#define K_PLUGIN_CLASS(classname) K_PLUGIN_FACTORY(classname##Factory, registerPlugin<classname>();)
+#endif
+/**
  * @relates KPluginFactory
  *
  * K_PLUGIN_FACTORY_DECLARATION declares the KPluginFactory subclass. This macro
