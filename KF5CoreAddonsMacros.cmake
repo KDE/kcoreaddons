@@ -200,3 +200,12 @@ function(kcoreaddons_target_static_plugins app_target plugin_namespace)
      # in case of apps bundling their plugins in a small static lib the linking needs to be public
     target_sources(${app_target} PUBLIC ${PLUGIN_FILE})
 endfunction()
+
+# Clear previously set plugins, otherwise Q_IMPORT_PLUGIN statements
+# will fail to compile if plugins got removed from the build
+get_directory_property(_cache_vars CACHE_VARIABLES)
+foreach(CACHED_VAR IN LISTS _cache_vars)
+    if (CACHED_VAR MATCHES "^KCOREADDONS_STATIC_PLUGINS")
+        set(${CACHED_VAR} "" CACHE INTERNAL "")
+    endif()
+endforeach()
