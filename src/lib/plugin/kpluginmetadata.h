@@ -527,6 +527,8 @@ public:
         return !(*this == other);
     }
 
+    bool isStaticPlugin() const;
+
 private:
     QJsonObject rootObject() const;
     void loadFromDesktopFile(const QString &file, const QStringList &serviceTypes);
@@ -535,7 +537,6 @@ private:
     QVariantList authorsVariant() const;
     QVariantList translatorsVariant() const;
     QVariantList otherContributorsVariant() const;
-    bool isStaticPlugin() const;
     QStaticPlugin getStaticPlugin() const;
 
     QJsonObject m_metaData;
