@@ -244,12 +244,9 @@ QString KPluginMetaData::metaDataFileName() const
 QVector<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)
 {
     QVector<KPluginMetaData> ret;
-    const auto staticPlugins = QPluginLoader::staticPlugins();
-    const QJsonArray namespaceArr{directory};
+    const auto staticPlugins = KPluginLoader::staticPlugins(directory);
     for (QStaticPlugin p : staticPlugins) {
-        if (p.metaData().value(QLatin1String("X-KDE-PluginNamespace")) == namespaceArr) {
-            ret << KPluginMetaData(p);
-        }
+        ret << KPluginMetaData(p);
     }
     QSet<QString> addedPluginIds;
     KPluginMetaDataPrivate::forEachPlugin(directory, [&](const QString &pluginPath) {

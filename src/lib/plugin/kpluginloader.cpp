@@ -46,6 +46,9 @@ protected:
     bool isPluginMetaDataSet = false;
 };
 
+typedef QMultiHash<QString, QStaticPlugin> StaticPluginMap;
+Q_GLOBAL_STATIC(StaticPluginMap, s_staticPlugins)
+
 QString KPluginLoader::findPlugin(const QString &name)
 {
     // We just defer to Qt; unfortunately, QPluginLoader's searching code is not
@@ -314,6 +317,16 @@ QList<QObject *> KPluginLoader::instantiatePlugins(const QString &directory, std
         ret.append(obj);
     }
     return ret;
+}
+
+QVector<QStaticPlugin> KPluginLoader::staticPlugins(const QString &directory)
+{
+    return s_staticPlugins->values(directory).toVector();
+}
+
+void kRegisterStaticPluginFunction(const QString &directory, const QStaticPlugin &plugin)
+{
+    s_staticPlugins->insert(directory, plugin);
 }
 
 #endif

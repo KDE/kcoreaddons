@@ -418,6 +418,8 @@ public:
     KCOREADDONS_DEPRECATED_VERSION(5, 86, "Use KPluginMetaData::findPlugins instead")
     static void forEachPlugin(const QString &directory, std::function<void(const QString &)> callback = std::function<void(const QString &)>());
 
+    static QVector<QStaticPlugin> staticPlugins(const QString &directory);
+
 private:
     Q_DECLARE_PRIVATE(KPluginLoader)
     Q_DISABLE_COPY(KPluginLoader)
@@ -425,6 +427,27 @@ private:
     std::unique_ptr<KPluginLoaderPrivate> const d_ptr;
 };
 
+/*
+ * Used by K_IMPORT_PLUGIN
+ * @internal
+ */
+void KCOREADDONS_EXPORT kRegisterStaticPluginFunction(const QString &directory, const QStaticPlugin &plugin);
+
+/**
+ * This macro imports the plugin named PluginName, which corresponds with the name of the class that declares metadata for the plugin with Q_PLUGIN_METADATA().
+ * It can then be found by querying findPlugins() with the same directory
+ */
+#define K_IMPORT_PLUGIN(NAMESPACE, PLUGIN)                                                                                                                     \
+    extern const QT_PREPEND_NAMESPACE(QStaticPlugin) qt_static_plugin_##PLUGIN();                                                                              \
+    class Static##PLUGIN##PluginInstance                                                                                                                       \
+    {                                                                                                                                                          \
+    public:                                                                                                                                                    \
+        Static##PLUGIN##PluginInstance()                                                                                                                       \
+        {                                                                                                                                                      \
+            kRegisterStaticPluginFunction(NAMESPACE, qt_static_plugin_##PLUGIN());                                                                             \
+        }                                                                                                                                                      \
+    };                                                                                                                                                         \
+    static Static##PLUGIN##PluginInstance static##PLUGIN##Instance;
 /**
  * Represents the name of a plugin intended for KPluginLoader.
  *

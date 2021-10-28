@@ -90,8 +90,6 @@ private Q_SLOTS:
 
     void testStaicPlugins()
     {
-        QCOMPARE(QPluginLoader::staticPlugins().count(), 2);
-
         const auto plugins = KPluginMetaData::findPlugins(QStringLiteral("staticnamespace"));
         QCOMPARE(plugins.count(), 1);
 
