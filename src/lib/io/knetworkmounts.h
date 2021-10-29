@@ -276,7 +276,7 @@ private:
     KNetworkMounts();
 
     /// Destructor
-    ~KNetworkMounts();
+    ~KNetworkMounts() override;
 
     std::unique_ptr<class KNetworkMountsPrivate> const d;
 };

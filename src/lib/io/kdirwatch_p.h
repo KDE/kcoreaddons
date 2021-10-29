@@ -164,7 +164,7 @@ public:
     typedef QMap<QString, Entry> EntryMap;
 
     KDirWatchPrivate();
-    ~KDirWatchPrivate();
+    ~KDirWatchPrivate() override;
 
     void resetList(KDirWatch *instance, bool skippedToo);
     void useFreq(Entry *e, int newFreq);

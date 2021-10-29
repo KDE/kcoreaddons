@@ -107,7 +107,7 @@ public:
      * Unless unload() was called explicitly, the plugin stays in memory until
      * the application terminates.
      */
-    ~KPluginLoader();
+    ~KPluginLoader() override;
 
     /**
      * Returns the factory object of the plugin.

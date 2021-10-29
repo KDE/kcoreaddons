@@ -20,7 +20,7 @@ class KCOREADDONS_EXPORT KCompositeJobPrivate : public KJobPrivate
 {
 public:
     KCompositeJobPrivate();
-    ~KCompositeJobPrivate();
+    ~KCompositeJobPrivate() override;
 
     QList<KJob *> subjobs;
 

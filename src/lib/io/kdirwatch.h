@@ -86,7 +86,7 @@ public:
      *
      * Stops scanning and cleans up.
      */
-    ~KDirWatch();
+    ~KDirWatch() override;
 
     /**
      * Adds a directory to be watched.
