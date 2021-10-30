@@ -9,6 +9,7 @@
 
 #include "kpluginmetadata.h"
 #include "desktopfileparser_p.h"
+#include "kstaticpluginhelpers_p.h"
 
 #include "kcoreaddons_debug.h"
 #include "kjsonutils.h"
@@ -248,14 +249,11 @@ QString KPluginMetaData::metaDataFileName() const
 QVector<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)
 {
     QVector<KPluginMetaData> ret;
-    const auto staticPlugins = QPluginLoader::staticPlugins();
-    const QJsonArray namespaceArr{directory};
+    const auto staticPlugins = KStaticPluginHelpers::staticPlugins(directory);
     for (QStaticPlugin p : staticPlugins) {
-        if (p.metaData().value(QLatin1String("X-KDE-PluginNamespace")) == namespaceArr) {
-            KPluginMetaData metaData(p);
-            if (!filter || filter(metaData)) {
-                ret << metaData;
-            }
+        KPluginMetaData metaData(p);
+        if (!filter || filter(metaData)) {
+            ret << metaData;
         }
     }
     QSet<QString> addedPluginIds;

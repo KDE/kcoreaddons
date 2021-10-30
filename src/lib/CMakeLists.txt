@@ -92,6 +92,7 @@ target_sources(KF5CoreAddons PRIVATE
     plugin/kpluginfactory.cpp
     plugin/kpluginloader.cpp
     plugin/kpluginmetadata.cpp
+    plugin/kstaticpluginhelpers.cpp
     plugin/desktopfileparser.cpp
     randomness/krandom.cpp
     randomness/krandomsequence.cpp
@@ -244,6 +245,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KPluginFactory
         KPluginLoader
         KPluginMetaData
+        KStaticPluginHelpers
     RELATIVE plugin
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
