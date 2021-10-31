@@ -708,7 +708,17 @@ protected:
      * If those constructor methods are not callable this overload is not available.
      */
     template<class T, enable_if_t<InheritanceChecker<T>::enabled, int> = 0>
-    void registerPlugin(const QString &keyword = QString())
+    void registerPlugin()
+    {
+        CreateInstanceFunction instanceFunction = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
+        registerPlugin(QString(), &T::staticMetaObject, instanceFunction);
+    }
+
+    /**
+     * @overload
+     */
+    template<class T, enable_if_t<InheritanceChecker<T>::enabled, int> = 0>
+    void registerPlugin(const QString &keyword)
     {
         CreateInstanceFunction instanceFunction = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
         registerPlugin<T>(keyword, instanceFunction);
@@ -739,7 +749,7 @@ protected:
     }
 
     /**
-     * Overload for registerPlugin<T>(const QString &keyword, CreateInstanceWithMetaDataFunction instanceFunction)
+     * Overload for registerPlugin<T>(CreateInstanceWithMetaDataFunction instanceFunction)
      *
      * Uses a default instance creation function depending on the type of interface. If the
      * interface inherits from
@@ -759,12 +769,21 @@ protected:
      * If those constructor methods are not callable this overload is not available.
      */
     template<class T, enable_if_t<InheritanceWithMetaDataChecker<T>::enabled, int> = 0>
-    void registerPlugin(const QString &keyword = QString())
+    void registerPlugin()
+    {
+        CreateInstanceWithMetaDataFunction instanceFunction = InheritanceWithMetaDataChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
+        registerPlugin(QString(), &T::staticMetaObject, instanceFunction);
+    }
+
+    /**
+     * @overload
+     */
+    template<class T, enable_if_t<InheritanceWithMetaDataChecker<T>::enabled, int> = 0>
+    void registerPlugin(const QString &keyword)
     {
         CreateInstanceWithMetaDataFunction instanceFunction = InheritanceWithMetaDataChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
         registerPlugin<T>(keyword, instanceFunction);
     }
-
     std::unique_ptr<KPluginFactoryPrivate> const d_ptr;
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
