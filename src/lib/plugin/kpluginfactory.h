@@ -714,15 +714,19 @@ protected:
         registerPlugin(QString(), &T::staticMetaObject, instanceFunction);
     }
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
     /**
      * @overload
+     * @deprecated Since 5.89, use overload without keyword instead
      */
     template<class T, enable_if_t<InheritanceChecker<T>::enabled, int> = 0>
+    KCOREADDONS_DEPRECATED_VERSION(5, 89, "Use overload without keyword instead")
     void registerPlugin(const QString &keyword)
     {
         CreateInstanceFunction instanceFunction = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
         registerPlugin<T>(keyword, instanceFunction);
     }
+#endif
 
     /**
      * Registers a metadata-taking plugin with the factory. Call this function from the constructor of the
@@ -775,15 +779,19 @@ protected:
         registerPlugin(QString(), &T::staticMetaObject, instanceFunction);
     }
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
     /**
      * @overload
+     * @deprecated Since 5.89, use overload without keyword instead
      */
     template<class T, enable_if_t<InheritanceWithMetaDataChecker<T>::enabled, int> = 0>
+    KCOREADDONS_DEPRECATED_VERSION(5, 89, "Use overload without keyword instead")
     void registerPlugin(const QString &keyword)
     {
         CreateInstanceWithMetaDataFunction instanceFunction = InheritanceWithMetaDataChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
         registerPlugin<T>(keyword, instanceFunction);
     }
+#endif
     std::unique_ptr<KPluginFactoryPrivate> const d_ptr;
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
