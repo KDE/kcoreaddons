@@ -72,15 +72,17 @@ void KProcess::setEnv(const QString &name, const QString &value, bool overwrite)
     }
     QString fname(name);
     fname.append(QLatin1Char('='));
-    for (QStringList::Iterator it = env.begin(); it != env.end(); ++it) {
-        if ((*it).startsWith(fname)) {
-            if (overwrite) {
-                *it = fname.append(value);
-                setEnvironment(env);
-            }
-            return;
+    auto it = std::find_if(env.begin(), env.end(), [&fname](const QString &s) {
+        return s.startsWith(fname);
+    });
+    if (it != env.end()) {
+        if (overwrite) {
+            *it = fname.append(value);
+            setEnvironment(env);
         }
+        return;
     }
+
     env.append(fname.append(value));
     setEnvironment(env);
 }
@@ -94,15 +96,16 @@ void KProcess::unsetEnv(const QString &name)
     }
     QString fname(name);
     fname.append(QLatin1Char('='));
-    for (QStringList::Iterator it = env.begin(); it != env.end(); ++it) {
-        if ((*it).startsWith(fname)) {
-            env.erase(it);
-            if (env.isEmpty()) {
-                env.append(QStringLiteral(DUMMYENV));
-            }
-            setEnvironment(env);
-            return;
+
+    auto it = std::find_if(env.begin(), env.end(), [&fname](const QString &s) {
+        return s.startsWith(fname);
+    });
+    if (it != env.end()) {
+        env.erase(it);
+        if (env.isEmpty()) {
+            env.append(QStringLiteral(DUMMYENV));
         }
+        setEnvironment(env);
     }
 }
 

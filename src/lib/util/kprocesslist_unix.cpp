@@ -35,12 +35,9 @@ namespace
 {
 bool isUnixProcessId(const QString &procname)
 {
-    for (int i = 0; i != procname.size(); ++i) {
-        if (!procname.at(i).isDigit()) {
-            return false;
-        }
-    }
-    return true;
+    return std::none_of(procname.cbegin(), procname.cend(), [](const QChar ch) {
+        return !ch.isDigit();
+    });
 }
 
 // Determine UNIX processes by running ps
