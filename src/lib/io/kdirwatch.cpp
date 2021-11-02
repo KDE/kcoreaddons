@@ -459,12 +459,12 @@ void KDirWatchPrivate::Entry::addClient(KDirWatch *instance, KDirWatch::WatchMod
         return;
     }
 
-    for (Client &client : m_clients) {
-        if (client.instance == instance) {
-            client.count++;
-            client.m_watchModes = watchModes;
-            return;
-        }
+    auto it = findInstance(instance);
+    if (it != m_clients.end()) {
+        Client &client = *it;
+        ++client.count;
+        client.m_watchModes = watchModes;
+        return;
     }
 
     m_clients.emplace_back(instance, watchModes);
@@ -472,16 +472,12 @@ void KDirWatchPrivate::Entry::addClient(KDirWatch *instance, KDirWatch::WatchMod
 
 void KDirWatchPrivate::Entry::removeClient(KDirWatch *instance)
 {
-    auto it = m_clients.begin();
-    const auto end = m_clients.end();
-    for (; it != end; ++it) {
+    auto it = findInstance(instance);
+    if (it != m_clients.end()) {
         Client &client = *it;
-        if (client.instance == instance) {
-            client.count--;
-            if (client.count == 0) {
-                m_clients.erase(it);
-            }
-            return;
+        --client.count;
+        if (client.count == 0) {
+            m_clients.erase(it);
         }
     }
 }
@@ -1094,20 +1090,14 @@ void KDirWatchPrivate::removeEntries(KDirWatch *instance)
 
     QStringList pathList;
     // put all entries where instance is a client in list
-    EntryMap::Iterator it = m_mapEntries.begin();
-    for (; it != m_mapEntries.end(); ++it) {
-        Client *c = nullptr;
-        for (Client &client : (*it).m_clients) {
-            if (client.instance == instance) {
-                c = &client;
-                break;
-            }
-        }
-        if (c) {
-            c->count = 1; // forces deletion of instance as client
-            pathList.append((*it).path);
-        } else if ((*it).m_mode == StatMode && (*it).freq < minfreq) {
-            minfreq = (*it).freq;
+    for (auto it = m_mapEntries.begin(); it != m_mapEntries.end(); ++it) {
+        Entry &entry = it.value();
+        auto clientIt = entry.findInstance(instance);
+        if (clientIt != entry.m_clients.end()) {
+            clientIt->count = 1; // forces deletion of instance as client
+            pathList.append(entry.path);
+        } else if (entry.m_mode == StatMode && entry.freq < minfreq) {
+            minfreq = entry.freq;
         }
     }
 

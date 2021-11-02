@@ -145,6 +145,13 @@ public:
         QList<const Client *> clientsForFileOrDir(const QString &tpath, bool *isDir) const;
         QList<const Client *> inotifyClientsForFileOrDir(bool isDir) const;
 
+        std::vector<Client>::iterator findInstance(KDirWatch *other)
+        {
+            return std::find_if(m_clients.begin(), m_clients.end(), [other](const Client &client) {
+                return client.instance == other;
+            });
+        }
+
 #if HAVE_FAM
         FAMRequest fr;
         bool m_famReportedSeen;
