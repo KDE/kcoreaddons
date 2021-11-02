@@ -589,10 +589,7 @@ KAboutData::KAboutData(const KAboutData &other)
     : d(new KAboutDataPrivate)
 {
     *d = *other.d;
-    QList<KAboutLicense>::iterator it = d->_licenseList.begin();
-    QList<KAboutLicense>::iterator itEnd = d->_licenseList.end();
-    for (; it != itEnd; ++it) {
-        KAboutLicense &al = *it;
+    for (KAboutLicense &al : d->_licenseList) {
         al.d.detach();
         al.d->_aboutData = this;
     }
@@ -602,10 +599,7 @@ KAboutData &KAboutData::operator=(const KAboutData &other)
 {
     if (this != &other) {
         *d = *other.d;
-        QList<KAboutLicense>::iterator it = d->_licenseList.begin();
-        QList<KAboutLicense>::iterator itEnd = d->_licenseList.end();
-        for (; it != itEnd; ++it) {
-            KAboutLicense &al = *it;
+        for (KAboutLicense &al : d->_licenseList) {
             al.d.detach();
             al.d->_aboutData = this;
         }
@@ -921,9 +915,8 @@ QList<KAboutPerson> KAboutData::credits() const
 
 QList<KAboutPerson> KAboutDataPrivate::parseTranslators(const QString &translatorName, const QString &translatorEmail)
 {
-    QList<KAboutPerson> personList;
     if (translatorName.isEmpty() || translatorName == QLatin1String("Your names")) {
-        return personList;
+        return {};
     }
 
     const QStringList nameList(translatorName.split(QLatin1Char(',')));
@@ -933,17 +926,19 @@ QList<KAboutPerson> KAboutDataPrivate::parseTranslators(const QString &translato
         emailList = translatorEmail.split(QLatin1Char(','), Qt::KeepEmptyParts);
     }
 
-    QStringList::const_iterator nit;
-    QStringList::const_iterator eit = emailList.constBegin();
+    QList<KAboutPerson> personList;
+    personList.reserve(nameList.size());
 
-    for (nit = nameList.constBegin(); nit != nameList.constEnd(); ++nit) {
+    auto eit = emailList.constBegin();
+
+    for (const QString &name : nameList) {
         QString email;
         if (eit != emailList.constEnd()) {
             email = *eit;
             ++eit;
         }
 
-        personList.append(KAboutPerson((*nit).trimmed(), email.trimmed(), true));
+        personList.append(KAboutPerson(name.trimmed(), email.trimmed(), true));
     }
 
     return personList;

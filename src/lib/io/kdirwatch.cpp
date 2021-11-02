@@ -383,13 +383,11 @@ void KDirWatchPrivate::inotifyEventReceived()
                     // watched file as it would have its own watch descriptor, so
                     // no addEntry/ removeEntry bookkeeping should be required.  Emit
                     // the event immediately if any clients are interested.
-                    KDirWatch::WatchModes flag = isDir ? KDirWatch::WatchSubDirs : KDirWatch::WatchFiles;
-                    int counter = 0;
-                    for (const Client &client : e->m_clients) {
-                        if (client.m_watchModes & flag) {
-                            counter++;
-                        }
-                    }
+                    const KDirWatch::WatchModes flag = isDir ? KDirWatch::WatchSubDirs : KDirWatch::WatchFiles;
+                    int counter = std::count_if(e->m_clients.cbegin(), e->m_clients.cend(), [flag](const Client &client) {
+                        return client.m_watchModes & flag;
+                    });
+
                     if (counter != 0) {
                         emitEvent(e, Deleted, tpath);
                     }
@@ -581,12 +579,8 @@ KDirWatchPrivate::Entry *KDirWatchPrivate::entry(const QString &_path)
         path.chop(1);
     }
 
-    EntryMap::Iterator it = m_mapEntries.find(path);
-    if (it == m_mapEntries.end()) {
-        return nullptr;
-    } else {
-        return &(*it);
-    }
+    auto it = m_mapEntries.find(path);
+    return it != m_mapEntries.end() ? &it.value() : nullptr;
 }
 
 // set polling frequency for a entry and adjust global freq if needed
@@ -802,17 +796,18 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path, Entry
         path.chop(1);
     }
 
-    EntryMap::Iterator it = m_mapEntries.find(path);
+    auto it = m_mapEntries.find(path);
     if (it != m_mapEntries.end()) {
+        Entry &entry = it.value();
         if (sub_entry) {
-            (*it).m_entries.append(sub_entry);
+            entry.m_entries.append(sub_entry);
             if (s_verboseDebug) {
                 qCDebug(KDIRWATCH) << "Added already watched Entry" << path << "(for" << sub_entry->path << ")";
             }
         } else {
-            (*it).addClient(instance, watchModes);
+            entry.addClient(instance, watchModes);
             if (s_verboseDebug) {
-                qCDebug(KDIRWATCH) << "Added already watched Entry" << path << "(now" << (*it).clientCount() << "clients)"
+                qCDebug(KDIRWATCH) << "Added already watched Entry" << path << "(now" << entry.clientCount() << "clients)"
                                    << QStringLiteral("[%1]").arg(instance->objectName());
             }
         }
@@ -824,7 +819,7 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path, Entry
     QT_STATBUF stat_buf;
     bool exists = (QT_STAT(QFile::encodeName(path).constData(), &stat_buf) == 0);
 
-    EntryMap::iterator newIt = m_mapEntries.insert(path, Entry());
+    auto newIt = m_mapEntries.insert(path, Entry());
     // the insert does a copy, so we have to use <e> now
     Entry *e = &(*newIt);
 
@@ -915,8 +910,7 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path, Entry
 
         QDir basedir(e->path);
         const QFileInfoList contents = basedir.entryInfoList(filters);
-        for (QFileInfoList::const_iterator iter = contents.constBegin(); iter != contents.constEnd(); ++iter) {
-            const QFileInfo &fileInfo = *iter;
+        for (const QFileInfo &fileInfo : contents) {
             // treat symlinks as files--don't follow them.
             bool isDir = fileInfo.isDir() && !fileInfo.isSymLink();
 
@@ -1218,9 +1212,8 @@ bool KDirWatchPrivate::restartEntryScan(KDirWatch *instance, Entry *e, bool noti
 // instance ==0: stop scanning for all instances
 void KDirWatchPrivate::stopScan(KDirWatch *instance)
 {
-    EntryMap::Iterator it = m_mapEntries.begin();
-    for (; it != m_mapEntries.end(); ++it) {
-        stopEntryScan(instance, &(*it));
+    for (auto it = m_mapEntries.begin(); it != m_mapEntries.end(); ++it) {
+        stopEntryScan(instance, &it.value());
     }
 }
 
@@ -1230,9 +1223,8 @@ void KDirWatchPrivate::startScan(KDirWatch *instance, bool notify, bool skippedT
         resetList(instance, skippedToo);
     }
 
-    EntryMap::Iterator it = m_mapEntries.begin();
-    for (; it != m_mapEntries.end(); ++it) {
-        restartEntryScan(instance, &(*it), notify);
+    for (auto it = m_mapEntries.begin(); it != m_mapEntries.end(); ++it) {
+        restartEntryScan(instance, &it.value(), notify);
     }
 
     // timer should still be running when in polling mode
@@ -1242,9 +1234,9 @@ void KDirWatchPrivate::startScan(KDirWatch *instance, bool notify, bool skippedT
 void KDirWatchPrivate::resetList(KDirWatch *instance, bool skippedToo)
 {
     Q_UNUSED(instance);
-    EntryMap::Iterator it = m_mapEntries.begin();
-    for (; it != m_mapEntries.end(); ++it) {
-        for (Client &client : (*it).m_clients) {
+
+    for (auto it = m_mapEntries.begin(); it != m_mapEntries.end(); ++it) {
+        for (Client &client : it.value().m_clients) {
             if (!client.watchingStopped || skippedToo) {
                 client.pending = NoChange;
             }
@@ -1800,29 +1792,30 @@ void KDirWatchPrivate::fswEventReceived(const QString &path)
     if (s_verboseDebug) {
         qCDebug(KDIRWATCH) << path;
     }
-    EntryMap::Iterator it = m_mapEntries.find(path);
+
+    auto it = m_mapEntries.find(path);
     if (it != m_mapEntries.end()) {
-        Entry *e = &(*it);
-        e->dirty = true;
-        const int ev = scanEntry(e);
+        Entry *entry = &it.value();
+        entry->dirty = true;
+        const int ev = scanEntry(entry);
         if (s_verboseDebug) {
-            qCDebug(KDIRWATCH) << "scanEntry for" << e->path << "says" << ev;
+            qCDebug(KDIRWATCH) << "scanEntry for" << entry->path << "says" << ev;
         }
         if (ev != NoChange) {
-            emitEvent(e, ev);
+            emitEvent(entry, ev);
         }
         if (ev == Deleted) {
-            if (e->isDir) {
-                addEntry(nullptr, e->parentDirectory(), e, true);
+            if (entry->isDir) {
+                addEntry(nullptr, entry->parentDirectory(), entry, true);
             } else {
-                addEntry(nullptr, QFileInfo(e->path).absolutePath(), e, true);
+                addEntry(nullptr, QFileInfo(entry->path).absolutePath(), entry, true);
             }
         } else if (ev == Created) {
             // We were waiting for it to appear; now watch it
-            addWatch(e);
-        } else if (e->isDir) {
+            addWatch(entry);
+        } else if (entry->isDir) {
             // Check if any file or dir was created under this directory, that we were waiting for
-            for (Entry *sub_entry : std::as_const(e->m_entries)) {
+            for (Entry *sub_entry : std::as_const(entry->m_entries)) {
                 fswEventReceived(sub_entry->path); // recurse, to call scanEntry and see if something changed
             }
         } else {
@@ -1832,7 +1825,7 @@ void KDirWatchPrivate::fswEventReceived(const QString &path)
              * to reliably detect this case, always re-request the watch on a dirty signal, to avoid losing the
              * underlying OS monitor.
              */
-            fsWatcher->addPath(e->path);
+            fsWatcher->addPath(entry->path);
         }
     }
 }

@@ -201,11 +201,11 @@ QString KStringHandler::tagUrls(const QString &text)
 QString KStringHandler::obscure(const QString &str)
 {
     QString result;
-    const QChar *unicode = str.unicode();
-    for (int i = 0; i < str.length(); ++i) {
+    for (const QChar ch : str) {
         // yes, no typo. can't encode ' ' or '!' because
         // they're the unicode BOM. stupid scrambling. stupid.
-        result += (unicode[i].unicode() <= 0x21) ? unicode[i] : QChar(0x1001F - unicode[i].unicode());
+        const ushort uc = ch.unicode();
+        result += (uc <= 0x21) ? ch : QChar(0x1001F - uc);
     }
 
     return result;

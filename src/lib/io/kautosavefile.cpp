@@ -44,13 +44,16 @@ static QStringList findAllStales(const QString &appName)
     const QStringList dirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
     QStringList files;
 
+    const QString suffix = QLatin1String("/stalefiles/") + appName;
     for (const QString &dir : dirs) {
-        QDir appDir(dir + QLatin1String("/stalefiles/") + appName);
+        QDir appDir(dir + suffix);
+        const QString absPath = appDir.absolutePath() + QLatin1Char('/');
         qCDebug(KCOREADDONS_DEBUG) << "Looking in" << appDir.absolutePath();
-        const auto listFiles = appDir.entryList(QDir::Files);
-        for (const QString &file : listFiles) {
-            files << (appDir.absolutePath() + QLatin1Char('/') + file);
+        QStringList listFiles = appDir.entryList(QDir::Files);
+        for (QString &file : listFiles) {
+            file.prepend(absPath);
         }
+        files += listFiles;
     }
     return files;
 }

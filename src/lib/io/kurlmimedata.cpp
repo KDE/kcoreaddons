@@ -38,7 +38,7 @@ void KUrlMimeData::setUrls(const QList<QUrl> &urls, const QList<QUrl> &mostLocal
 void KUrlMimeData::setMetaData(const MetaDataMap &metaData, QMimeData *mimeData)
 {
     QByteArray metaDataData; // :)
-    for (MetaDataMap::const_iterator it = metaData.begin(); it != metaData.end(); ++it) {
+    for (auto it = metaData.cbegin(); it != metaData.cend(); ++it) {
         metaDataData += it.key().toUtf8();
         metaDataData += "$@@$";
         metaDataData += it.value().toUtf8();
@@ -93,11 +93,11 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData, DecodeOpti
             const QStringList lst = str.split(QStringLiteral("$@@$"));
             bool readingKey = true; // true, then false, then true, etc.
             QString key;
-            for (QStringList::const_iterator it = lst.begin(); it != lst.end(); ++it) {
+            for (const QString &s : lst) {
                 if (readingKey) {
-                    key = *it;
+                    key = s;
                 } else {
-                    metaData->insert(key, *it);
+                    metaData->insert(key, s);
                 }
                 readingKey = !readingKey;
             }

@@ -513,9 +513,7 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
                 str = helper.getUrl(&badUrl);
                 if (badUrl) {
                     QString resultBadUrl;
-                    const int helperTextSize(helper.mText.count());
-                    for (int i = 0; i < helperTextSize; ++i) {
-                        const QChar chBadUrl = helper.mText.at(i);
+                    for (const QChar chBadUrl : std::as_const(helper.mText)) {
                         if (chBadUrl == QLatin1Char('&')) {
                             resultBadUrl += QLatin1String("&amp;");
                         } else if (chBadUrl == QLatin1Char('"')) {

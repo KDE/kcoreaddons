@@ -53,38 +53,31 @@ int main(/*int argc, char *argv[]*/)
 
     seq.setSeed(KRandom::random());
 
-    QList<QString> list;
-    list.append(QLatin1String("A"));
-    list.append(QLatin1String("B"));
-    list.append(QLatin1String("C"));
-    list.append(QLatin1String("D"));
-    list.append(QLatin1String("E"));
-    list.append(QLatin1String("F"));
-    list.append(QLatin1String("G"));
+    QStringList list{
+        QLatin1String("A"),
+        QLatin1String("B"),
+        QLatin1String("C"),
+        QLatin1String("D"),
+        QLatin1String("E"),
+        QLatin1String("F"),
+        QLatin1String("G"),
+    };
 
-    for (QList<QString>::Iterator str = list.begin(); str != list.end(); ++str) {
-        printf("%s", str->toLatin1().data());
-    }
-    printf("\n");
+    auto printList = [&list]() {
+        for (const QString &str : std::as_const(list)) {
+            printf("%s", str.toLatin1().data());
+        }
+        printf("\n");
+    };
 
-    seq.randomize(list);
-
-    for (QList<QString>::Iterator str = list.begin(); str != list.end(); ++str) {
-        printf("%s", str->toLatin1().data());
-    }
-    printf("\n");
+    printList();
 
     seq.randomize(list);
-
-    for (QList<QString>::Iterator str = list.begin(); str != list.end(); ++str) {
-        printf("%s", str->toLatin1().data());
-    }
-    printf("\n");
+    printList();
 
     seq.randomize(list);
+    printList();
 
-    for (QList<QString>::Iterator str = list.begin(); str != list.end(); ++str) {
-        printf("%s", str->toLatin1().data());
-    }
-    printf("\n");
+    seq.randomize(list);
+    printList();
 }

@@ -23,11 +23,11 @@ QString KShell::homeDir(const QString &user)
 QString KShell::joinArgs(const QStringList &args)
 {
     QString ret;
-    for (QStringList::ConstIterator it = args.begin(); it != args.end(); ++it) {
+    for (const auto &arg : args) {
         if (!ret.isEmpty()) {
             ret.append(QLatin1Char(' '));
         }
-        ret.append(quoteArg(*it));
+        ret += quoteArg(arg);
     }
     return ret;
 }
