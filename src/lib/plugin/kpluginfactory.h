@@ -533,20 +533,29 @@ public:
 #endif
 
     /**
-     * Use this method to create an object. It will try to create an object which inherits
-     * @p T and was registered with @p keyword.
+     * Use this method to create an object. It will try to create an object which inherits @p T
      * This overload has an additional @p parentWidget argument, which is used by some plugins (e.g. Parts).
 
      * @tparam T the interface for which an object should be created. The object will inherit @p T.
      * @param parentWidget an additional parent widget.
      * @param parent the parent of the object. If @p parent is a widget type, it will also passed
      *               to the parentWidget argument of the CreateInstanceFunction for the object.
-     * @param keyword the keyword of the object.
      * @param args additional arguments which will be passed to the object.
      * @returns pointer to the created object is returned, or @c nullptr if an error occurred.
      */
     template<typename T>
+    T *create(QWidget *parentWidget, QObject *parent, const QVariantList &args);
+
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
+    /**
+     * @overload
+     * @param keyword the keyword of the object.
+     * @deprecated Since 5.89, use overload without keyword instead
+     */
+    template<typename T>
+    KCOREADDONS_DEPRECATED_VERSION(5, 89, "Use overload without keyword instead")
     T *create(QWidget *parentWidget, QObject *parent, const QString &keyword = QString(), const QVariantList &args = QVariantList());
+#endif
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(4, 0)
     /**
@@ -917,6 +926,19 @@ inline T *KPluginFactory::create(const QString &keyword, QObject *parent, const 
 #endif
 
 template<typename T>
+inline T *KPluginFactory::create(QWidget *parentWidget, QObject *parent, const QVariantList &args)
+{
+    QObject *o = create(T::staticMetaObject.className(), parentWidget, parent, args, QString());
+
+    T *t = qobject_cast<T *>(o);
+    if (!t) {
+        delete o;
+    }
+    return t;
+}
+
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
+template<typename T>
 inline T *KPluginFactory::create(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)
 {
     QObject *o = create(T::staticMetaObject.className(), parentWidget, parent, args, keyword);
@@ -927,6 +949,7 @@ inline T *KPluginFactory::create(QWidget *parentWidget, QObject *parent, const Q
     }
     return t;
 }
+#endif
 
 Q_DECLARE_INTERFACE(KPluginFactory, KPluginFactory_iid)
 
