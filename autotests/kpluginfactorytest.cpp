@@ -35,6 +35,7 @@ private Q_SLOTS:
         delete obj;
         delete obj2;
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
         obj = factory->create<QObject>(QStringLiteral("secondary"), this, args);
         QVERIFY(obj);
         QCOMPARE(obj->objectName(), QString::fromLatin1("MultiPlugin2"));
@@ -45,6 +46,7 @@ private Q_SLOTS:
         QVERIFY(obj != obj2);
         delete obj;
         delete obj2;
+#endif
     }
 
     void testResultingCMakeMacroPlugin()

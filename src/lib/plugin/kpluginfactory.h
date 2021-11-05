@@ -514,6 +514,7 @@ public:
     template<typename T>
     T *create(QObject *parent = nullptr, const QVariantList &args = QVariantList());
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
     /**
      * Use this method to create an object. It will try to create an object which inherits
      * @p T and was registered with @p keyword.
@@ -524,9 +525,12 @@ public:
      *               to the parentWidget argument of the CreateInstanceFunction for the object.
      * @param args additional arguments which will be passed to the object.
      * @returns pointer to the created object is returned, or @c nullptr if an error occurred.
+     * @deprecated Since 5.89, use overload without keyword instead
      */
     template<typename T>
+    KCOREADDONS_DEPRECATED_VERSION(5, 89, "Use overload without keyword instead")
     T *create(const QString &keyword, QObject *parent = nullptr, const QVariantList &args = QVariantList());
+#endif
 
     /**
      * Use this method to create an object. It will try to create an object which inherits
@@ -897,6 +901,7 @@ inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
     return t;
 }
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
 template<typename T>
 inline T *KPluginFactory::create(const QString &keyword, QObject *parent, const QVariantList &args)
 {
@@ -909,6 +914,7 @@ inline T *KPluginFactory::create(const QString &keyword, QObject *parent, const 
     }
     return t;
 }
+#endif
 
 template<typename T>
 inline T *KPluginFactory::create(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)
