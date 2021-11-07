@@ -420,10 +420,12 @@ QStringList KPluginMetaData::dependencies() const
 }
 #endif
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
 QStringList KPluginMetaData::serviceTypes() const
 {
     return rootObject().value(QStringLiteral("ServiceTypes")).toVariant().toStringList();
 }
+#endif
 
 QStringList KPluginMetaData::mimeTypes() const
 {

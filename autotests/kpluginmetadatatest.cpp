@@ -200,7 +200,9 @@ private Q_SLOTS:
         QCOMPARE(m.copyrightText(), QStringLiteral("(c) Alex Richardson 2015"));
         QCOMPARE(m.version(), QStringLiteral("1.0"));
         QCOMPARE(m.website(), QStringLiteral("https://plasma.kde.org/"));
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
         QCOMPARE(m.serviceTypes(), QStringList() << QStringLiteral("Plasma/DataEngine"));
+#endif
         QCOMPARE(m.mimeTypes(), QStringList() << QStringLiteral("image/png"));
     }
 
@@ -298,7 +300,9 @@ private Q_SLOTS:
         QCOMPARE(md.dependencies(), QStringList());
 #endif
         QCOMPARE(md.isHidden(), false);
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
         QCOMPARE(md.serviceTypes(), QStringList(QStringLiteral("KService/NSA")));
+#endif
         QCOMPARE(md.mimeTypes(), QStringList() << QStringLiteral("image/png") << QStringLiteral("application/pdf"));
 
         auto kp = md.rawData()[QStringLiteral("KPlugin")].toObject();
@@ -347,7 +351,9 @@ private Q_SLOTS:
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Example"));
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
         QCOMPARE(md.serviceTypes(), QStringList() << QStringLiteral("example/servicetype") << QStringLiteral("bar/foo"));
+#endif
         QCOMPARE(md.rawData().size(), 8);
         QVERIFY(md.rawData().value(QStringLiteral("KPlugin")).isObject());
         QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Integer")), QJsonValue(42));

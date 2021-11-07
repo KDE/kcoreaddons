@@ -110,7 +110,9 @@ class KCOREADDONS_EXPORT KPluginMetaData
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 79)
     Q_PROPERTY(QStringList dependencies READ dependencies CONSTANT)
 #endif
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
     Q_PROPERTY(QStringList serviceTypes READ serviceTypes CONSTANT)
+#endif
     Q_PROPERTY(QStringList mimeTypes READ mimeTypes CONSTANT)
     Q_PROPERTY(QStringList formFactors READ formFactors CONSTANT)
     Q_PROPERTY(bool isEnabledByDefault READ isEnabledByDefault CONSTANT)
@@ -382,6 +384,7 @@ public:
     QStringList dependencies() const;
 #endif
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
     /**
      * Returns the service types that this plugin implements.
      *
@@ -393,8 +396,11 @@ public:
      * @note Unlike KService this does not contain the MIME types. To get the handled MIME types
      * use the KPluginMetaData::mimeTypes() function.
      * @return a list of service types this plugin implements (e.g. "Plasma/DataEngine")
+     * @dprecated Since 5.89, use dedicated plugin namespaces instead to filter plugins of a specific type
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 89, "See API docs")
     QStringList serviceTypes() const;
+#endif
 
     /**
      * @return a list of MIME types this plugin can handle (e.g. "application/pdf", "image/png", etc.)
