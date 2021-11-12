@@ -131,12 +131,12 @@ function(kcoreaddons_add_plugin plugin)
     endif()
 
     if (KCA_ADD_PLUGIN_STATIC)
-        add_library(${plugin} OBJECT ${KCA_ADD_PLUGIN_SOURCES})
+        add_library(${plugin} STATIC ${KCA_ADD_PLUGIN_SOURCES})
         target_compile_definitions(${plugin} PRIVATE QT_STATICPLUGIN)
         set_property(TARGET ${plugin} PROPERTY AUTOMOC_MOC_OPTIONS -MX-KDE-FileName=${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}/${plugin})
-        string(REPLACE "/" "_" SANATIZED_PLUGIN_NAMESPACE ${KCA_ADD_PLUGIN_INSTALL_NAMESPACE})
-        if (NOT ${plugin} IN_LIST KCOREADDONS_STATIC_PLUGINS${SANATIZED_PLUGIN_NAMESPACE})
-            set(KCOREADDONS_STATIC_PLUGINS${SANATIZED_PLUGIN_NAMESPACE} "${KCOREADDONS_STATIC_PLUGINS${SANATIZED_PLUGIN_NAMESPACE}};${plugin}" CACHE INTERNAL "list of known static plugins for ${KCA_ADD_PLUGIN_INSTALL_NAMESPACE} namespace, used to generate Q_IMPORT_PLUGIN macros")
+        string(REPLACE "/" "_" SANITIZED_PLUGIN_NAMESPACE ${KCA_ADD_PLUGIN_INSTALL_NAMESPACE})
+        if (NOT ${plugin} IN_LIST KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE})
+            set(KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE} "${KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE}};${plugin}" CACHE INTERNAL "list of known static plugins for ${KCA_ADD_PLUGIN_INSTALL_NAMESPACE} namespace, used to generate Q_IMPORT_PLUGIN macros")
         endif()
     else()
         add_library(${plugin} MODULE ${KCA_ADD_PLUGIN_SOURCES})
@@ -179,16 +179,16 @@ endfunction()
 
 # This macro imports the plugins for the given namespace that were
 # registered using the kcoreaddons_add_plugin function.
-# This includes the K_IMPORT_PLUGIN statements and linking the plugins to the given target
-# Since 5.89 the macro supports static plugins by passing in the STATIC option.
+# This includes the K_IMPORT_PLUGIN statements and linking the plugins to the given target.
+# Since 5.89
 function(kcoreaddons_target_static_plugins app_target plugin_namespace)
     cmake_parse_arguments(ARGS "" "LINK_OPTION" "" ${ARGN})
     set(IMPORT_PLUGIN_STATEMENTS "#include <kstaticpluginhelpers.h>\n\n")
-    string(REPLACE "/" "_" sanatized_plugin_namespace ${plugin_namespace})
-    set(TMP_PLUGIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_static_${sanatized_plugin_namespace}_plugins_tmp.cpp")
-    set(PLUGIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_static_${sanatized_plugin_namespace}_plugins.cpp")
+    string(REPLACE "/" "_" SANITIZED_PLUGIN_NAMESPACE ${plugin_namespace})
+    set(TMP_PLUGIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_static_${SANITIZED_PLUGIN_NAMESPACE}_plugins_tmp.cpp")
+    set(PLUGIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_static_${SANITIZED_PLUGIN_NAMESPACE}_plugins.cpp")
 
-    foreach(PLUGIN_TARGET_NAME IN LISTS KCOREADDONS_STATIC_PLUGINS${sanatized_plugin_namespace})
+    foreach(PLUGIN_TARGET_NAME IN LISTS KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE})
         if (PLUGIN_TARGET_NAME)
             set(IMPORT_PLUGIN_STATEMENTS "${IMPORT_PLUGIN_STATEMENTS}K_IMPORT_PLUGIN(QStringLiteral(\"${plugin_namespace}\"), ${PLUGIN_TARGET_NAME}_factory)\;\n")
             target_link_libraries(${app_target} ${ARGS_LINK_OPTION} ${PLUGIN_TARGET_NAME})

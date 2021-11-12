@@ -14,7 +14,7 @@
 void KCOREADDONS_EXPORT kRegisterStaticPluginFunction(const QString &directory, QStaticPlugin plugin);
 
 /**
- * This macro imports the plugin given plugin, which corresponds with the name of the class
+ * This macro imports the plugin that corresponds with the name of the class
  * that declares metadata for the plugin with Q_PLUGIN_METADATA().
  * To query the available plugins, @ref KPluginMetaData::findPlugins or @ref KPluginMetaData::findPluginById
  * can be used with the same namespace parameter.
