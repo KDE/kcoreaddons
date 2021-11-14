@@ -5,6 +5,9 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
+#ifndef KJSONUTILS_H
+#define KJSONUTILS_H
+
 #include "kcoreaddons_export.h"
 
 #include <QJsonValue>
@@ -32,3 +35,5 @@ KCOREADDONS_EXPORT QJsonValue readTranslatedValue(const QJsonObject &jo, const Q
  */
 KCOREADDONS_EXPORT QString readTranslatedString(const QJsonObject &jo, const QString &key, const QString &defaultValue = QString());
 }
+
+#endif // KJSONUTILS_H
