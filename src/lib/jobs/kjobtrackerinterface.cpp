@@ -25,6 +25,7 @@ KJobTrackerInterface::KJobTrackerInterface(QObject *parent)
     : QObject(parent)
     , d(new KJobTrackerInterfacePrivate(this))
 {
+    qRegisterMetaType<KJob::Unit>();
     qRegisterMetaType<QPair<QString, QString>>();
 }
 
