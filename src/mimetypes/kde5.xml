@@ -50,6 +50,7 @@ Notes:
     <comment xml:lang="pt">RELAX NG</comment>
     <comment xml:lang="pt_BR">RELAX NG</comment>
     <comment xml:lang="ro">RELAX NG</comment>
+    <comment xml:lang="sk">RELAX NG</comment>
     <comment xml:lang="sl">RELAX NG</comment>
     <comment xml:lang="sv">RELAX NG</comment>
     <comment xml:lang="tr">RELAX NG</comment>
@@ -86,6 +87,7 @@ Notes:
     <comment xml:lang="pt">Áudio de CD</comment>
     <comment xml:lang="pt_BR">Áudio de CD</comment>
     <comment xml:lang="ro">CD audio</comment>
+    <comment xml:lang="sk">Audio CD</comment>
     <comment xml:lang="sl">Zvočni CD</comment>
     <comment xml:lang="sv">Cd-ljud</comment>
     <comment xml:lang="ta">CD ஒலிக்கோப்பை</comment>
@@ -123,6 +125,7 @@ Notes:
     <comment xml:lang="pt">Tipo de letra por imagens SNF</comment>
     <comment xml:lang="pt_BR">Fonte bitmap SNF</comment>
     <comment xml:lang="ro">font SNF hartă de biți</comment>
+    <comment xml:lang="sk">Bitmapové písmo SNF</comment>
     <comment xml:lang="sl">Bitna pisava SNF</comment>
     <comment xml:lang="sv">SNF punktavbildat teckensnitt</comment>
     <comment xml:lang="tr">SNF bit eşlem yazı tipi</comment>
@@ -161,6 +164,7 @@ Notes:
     <comment xml:lang="pt">'Applet' de Java</comment>
     <comment xml:lang="pt_BR">Miniaplicativo Java</comment>
     <comment xml:lang="ro">miniaplicație Java</comment>
+    <comment xml:lang="sk">Aplet jazyka Java</comment>
     <comment xml:lang="sl">Aplet Java</comment>
     <comment xml:lang="sv">Java-miniprogram</comment>
     <comment xml:lang="tr">Java programcığı</comment>
@@ -196,6 +200,7 @@ Notes:
     <comment xml:lang="pt">Adaptador de Extensões do KHTML</comment>
     <comment xml:lang="pt_BR">Adaptador de extensões do KHTML</comment>
     <comment xml:lang="ro">adaptor de extensii KHTML</comment>
+    <comment xml:lang="sk">Adaptér rozšírenia KHTML</comment>
     <comment xml:lang="sl">Prilagodilnik razširitve KHTML</comment>
     <comment xml:lang="sv">KHTML-utökningsanpassning</comment>
     <comment xml:lang="tr">KHTML Uzatma Adaptörü</comment>
@@ -231,6 +236,7 @@ Notes:
     <comment xml:lang="pt">Esquema de cores do KDE</comment>
     <comment xml:lang="pt_BR">Esquema de cores do KDE</comment>
     <comment xml:lang="ro">schemă de culori KDE</comment>
+    <comment xml:lang="sk">Farebná schéma prostredia KDE</comment>
     <comment xml:lang="sl">Barvna shema KDE</comment>
     <comment xml:lang="sv">KDE-färgschema</comment>
     <comment xml:lang="ta">கே.டீ.யீ. நிறத் திட்டம்</comment>
@@ -271,6 +277,7 @@ Notes:
     <comment xml:lang="pt">Pacote do KNewStuff</comment>
     <comment xml:lang="pt_BR">Pacote do KNewStuff</comment>
     <comment xml:lang="ro">pachet KNewStuff</comment>
+    <comment xml:lang="sk">Balík KNewStuff</comment>
     <comment xml:lang="sl">Paket KNewStuff</comment>
     <comment xml:lang="sv">Heta nyheter-paket</comment>
     <comment xml:lang="ta">KNewStuff தொகுப்பு</comment>
@@ -308,6 +315,7 @@ Notes:
     <comment xml:lang="pt">Carteira da KWallet</comment>
     <comment xml:lang="pt_BR">Carteira do KWallet</comment>
     <comment xml:lang="ro">portofel KWallet</comment>
+    <comment xml:lang="sk">Peňaženka aplikácia KWallet</comment>
     <comment xml:lang="sl">Listnica Kwallet</comment>
     <comment xml:lang="sv">Kwallet-plånbok</comment>
     <comment xml:lang="tr">KWallet cüzdanı</comment>
@@ -384,6 +392,7 @@ Notes:
     <comment xml:lang="pt">plasmóide</comment>
     <comment xml:lang="pt_BR">plasmoide</comment>
     <comment xml:lang="ro">plasmoid</comment>
+    <comment xml:lang="sk">plasmoid</comment>
     <comment xml:lang="sl">plasmoid</comment>
     <comment xml:lang="sv">plasmoid</comment>
     <comment xml:lang="ta">பிளாஸ்மாய்ட்</comment>
@@ -566,6 +575,7 @@ Notes:
     <comment xml:lang="pt">Pacote de trabalho de gestão de projectos do KPlato</comment>
     <comment xml:lang="pt_BR">Pacote de trabalho de gerenciamento de projetos do KPlato</comment>
     <comment xml:lang="ro">pachet de lucru pentru management de proiect KPlato</comment>
+    <comment xml:lang="sk">Pracovný balík riadenia projektov v KPlato</comment>
     <comment xml:lang="sl">Delovni paket upravljanja projektov KPlato</comment>
     <comment xml:lang="sv">Kplato-projekthantering arbetspaket</comment>
     <comment xml:lang="tr">KPlato proje yönetimi çalışma paketi</comment>
@@ -602,6 +612,7 @@ Notes:
     <comment xml:lang="pt">Pacote do Kugar</comment>
     <comment xml:lang="pt_BR">Arquivo do Kugar</comment>
     <comment xml:lang="ro">arhivă Kugar</comment>
+    <comment xml:lang="sk">Archív Kugar</comment>
     <comment xml:lang="sl">Arhiv Kugar</comment>
     <comment xml:lang="sv">Kugar-arkiv</comment>
     <comment xml:lang="tr">Kugar arşivi</comment>
@@ -639,6 +650,7 @@ Notes:
     <comment xml:lang="pt">pacote Web</comment>
     <comment xml:lang="pt_BR">Arquivo Web</comment>
     <comment xml:lang="ro">arhivă web</comment>
+    <comment xml:lang="sk">webový archív</comment>
     <comment xml:lang="sl">spletni arhiv</comment>
     <comment xml:lang="sv">webbarkiv</comment>
     <comment xml:lang="ta">இணைய காப்பகம்</comment>
@@ -677,6 +689,7 @@ Notes:
     <comment xml:lang="pt">Esquema XML da W3C</comment>
     <comment xml:lang="pt_BR">Esquema XML da W3C</comment>
     <comment xml:lang="ro">Schemă XML W3C</comment>
+    <comment xml:lang="sk">Schéma W3C XML</comment>
     <comment xml:lang="sl">Shema W3C XML</comment>
     <comment xml:lang="sv">W3C XML-schema</comment>
     <comment xml:lang="tr">W3C XML şeması</comment>
@@ -713,6 +726,7 @@ Notes:
     <comment xml:lang="pt">Ficheiro de 'plugin' do RealAudio</comment>
     <comment xml:lang="pt_BR">Arquivo de plugin do RealAudio</comment>
     <comment xml:lang="ro">fișier cu extensie RealAudio</comment>
+    <comment xml:lang="sk">Súbor zásuvného modulu RealAudio</comment>
     <comment xml:lang="sl">Datoteka vstavka RealAudio</comment>
     <comment xml:lang="sv">Realaudio-insticksprogramfil</comment>
     <comment xml:lang="tr">RealAudio eklenti dosyası</comment>
@@ -784,6 +798,7 @@ Notes:
     <comment xml:lang="pt">Imagem HDR</comment>
     <comment xml:lang="pt_BR">Imagem HDR</comment>
     <comment xml:lang="ro">imagine HDR</comment>
+    <comment xml:lang="sk">Obrázok HDR</comment>
     <comment xml:lang="sl">Slika HDR</comment>
     <comment xml:lang="sv">HDR-bild</comment>
     <comment xml:lang="ta">HDR படம்</comment>
@@ -825,6 +840,7 @@ Notes:
     <comment xml:lang="pt">Formatos de imagem em bruto do KDE</comment>
     <comment xml:lang="pt_BR">Formatos de imagem RAW do KDE</comment>
     <comment xml:lang="ro">formate de imagine brute KDE</comment>
+    <comment xml:lang="sk">Formáty surových obrázkov prostredia KDE</comment>
     <comment xml:lang="sl">KDE surovi formati slik</comment>
     <comment xml:lang="sv">KDE-obehandlade bildformat</comment>
     <comment xml:lang="tr">KDE ham resim biçimleri</comment>
@@ -990,6 +1006,7 @@ Notes:
     <comment xml:lang="pt">pacote de tipos de letra</comment>
     <comment xml:lang="pt_BR">pacote de fontes</comment>
     <comment xml:lang="ro">pachet de fonturi</comment>
+    <comment xml:lang="sk">balík písiem</comment>
     <comment xml:lang="sl">paket pisav</comment>
     <comment xml:lang="sv">teckensnittspaket</comment>
     <comment xml:lang="ta">எழுத்துரு தொகுப்பு</comment>
@@ -1029,6 +1046,7 @@ Notes:
     <comment xml:lang="pt">Servidor do Windows</comment>
     <comment xml:lang="pt_BR">Servidor do Windows</comment>
     <comment xml:lang="ro">server Windows</comment>
+    <comment xml:lang="sk">Server Windows</comment>
     <comment xml:lang="sl">Strežnik Windows</comment>
     <comment xml:lang="sv">Windows-server</comment>
     <comment xml:lang="ta">விண்டோஸ் சேவையகம்</comment>
@@ -1905,6 +1923,7 @@ Notes:
     <comment xml:lang="pt">Contacto de ICQ</comment>
     <comment xml:lang="pt_BR">Contato do ICQ</comment>
     <comment xml:lang="ro">contact ICQ</comment>
+    <comment xml:lang="sk">Kontakt ICQ</comment>
     <comment xml:lang="sl">Stik ICQ</comment>
     <comment xml:lang="sv">ICQ-kontakt</comment>
     <comment xml:lang="ta">ICQ தொடர்பு</comment>
@@ -2262,6 +2281,7 @@ Notes:
     <comment xml:lang="pt">Relatório do KCrash</comment>
     <comment xml:lang="pt_BR">Relatório do KCrash</comment>
     <comment xml:lang="ro">raport KCrash</comment>
+    <comment xml:lang="sk">Hlásenie aplikácie KCrash</comment>
     <comment xml:lang="sl">Poročilo KCrash</comment>
     <comment xml:lang="sv">KCrash-rapport</comment>
     <comment xml:lang="ta">KCrash அறிக்கை</comment>
