@@ -30,7 +30,7 @@ option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, 
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
 set(REQUIRED_QT_VERSION 5.15.2)
-find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
+find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
 
 ecm_setup_qtplugin_macro_names(
     JSON_NONE
@@ -135,7 +135,7 @@ install(EXPORT KF5CoreAddonsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FIL
 install(EXPORT KF5CoreAddonsToolingTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5CoreAddonsToolingTargets.cmake NAMESPACE KF5:: )
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_version.h
-        DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5} COMPONENT Devel )
+        DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF} COMPONENT Devel )
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 

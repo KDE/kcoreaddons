@@ -27,7 +27,7 @@ set_property(TARGET desktoptojson PROPERTY CXX_STANDARD 14)
 # Mark it as non-gui so we won't create an app bundle on Mac OS X
 ecm_mark_nongui_executable(desktoptojson)
 
-target_link_libraries(desktoptojson Qt5::Core)
+target_link_libraries(desktoptojson Qt${QT_MAJOR_VERSION}::Core)
 target_compile_definitions(desktoptojson PRIVATE BUILDING_DESKTOPTOJSON_TOOL=1)
 
 install(TARGETS desktoptojson EXPORT KF5CoreAddonsToolingTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})

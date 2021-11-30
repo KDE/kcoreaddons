@@ -185,7 +185,7 @@ target_include_directories(KF5CoreAddons PUBLIC "$<BUILD_INTERFACE:${kcoreaddons
 
 target_link_libraries(KF5CoreAddons
   PUBLIC
-    Qt5::Core
+    Qt${QT_MAJOR_VERSION}::Core
 )
 
 if(WIN32)
@@ -196,7 +196,7 @@ if (HAVE_PROCSTAT)
     target_link_libraries(KF5CoreAddons PRIVATE ${PROCSTAT_LIBRARIES})
 endif()
 
-target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KCoreAddons>" )
+target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons>" )
 
 target_compile_definitions(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
 
@@ -332,7 +332,7 @@ install(TARGETS KF5CoreAddons EXPORT KF5CoreAddonsTargets ${KF5_INSTALL_TARGETS_
 install(FILES
     ${KCoreAddons_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_export.h
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KCoreAddons COMPONENT Devel
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel
 )
 
 # Includes CMake code to install open-source license texts for KAboutData.
@@ -365,5 +365,5 @@ if(BUILD_QCH)
 endif()
 
 include(ECMGeneratePriFile)
-ecm_generate_pri_file(BASE_NAME KCoreAddons LIB_NAME KF5CoreAddons DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KCoreAddons)
+ecm_generate_pri_file(BASE_NAME KCoreAddons LIB_NAME KF5CoreAddons DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
