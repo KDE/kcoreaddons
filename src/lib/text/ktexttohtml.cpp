@@ -423,13 +423,13 @@ QString KTextToHTMLHelper::highlightedText()
             mPos += length - 1;
             switch (ch.toLatin1()) {
             case '*':
-                return QLatin1String("<b>*") + match.capturedRef(1) + QLatin1String("*</b>");
+                return QLatin1String("<b>*") + match.capturedView(1) + QLatin1String("*</b>");
             case '_':
-                return QLatin1String("<u>_") + match.capturedRef(1) + QLatin1String("_</u>");
+                return QLatin1String("<u>_") + match.capturedView(1) + QLatin1String("_</u>");
             case '/':
-                return QLatin1String("<i>/") + match.capturedRef(1) + QLatin1String("/</i>");
+                return QLatin1String("<i>/") + match.capturedView(1) + QLatin1String("/</i>");
             case '-':
-                return QLatin1String("<s>-") + match.capturedRef(1) + QLatin1String("-</s>");
+                return QLatin1String("<s>-") + match.capturedView(1) + QLatin1String("-</s>");
             }
         }
     }

@@ -581,7 +581,11 @@ private:
     friend class KPluginFactory;
 };
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+inline size_t qHash(const KPluginMetaData &md, size_t seed)
+#else
 inline uint qHash(const KPluginMetaData &md, uint seed)
+#endif
 {
     return qHash(md.pluginId(), seed);
 }
