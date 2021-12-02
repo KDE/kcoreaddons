@@ -130,13 +130,15 @@ function(kcoreaddons_add_plugin plugin)
         message(FATAL_ERROR "Must specify INSTALL_NAMESPACE for ${plugin}")
     endif()
 
+    string(REPLACE "-" "_" SANITIZED_PLUGIN_NAME ${plugin})
     if (KCA_ADD_PLUGIN_STATIC)
         add_library(${plugin} STATIC ${KCA_ADD_PLUGIN_SOURCES})
         target_compile_definitions(${plugin} PRIVATE QT_STATICPLUGIN)
         set_property(TARGET ${plugin} PROPERTY AUTOMOC_MOC_OPTIONS -MX-KDE-FileName=${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}/${plugin})
         string(REPLACE "/" "_" SANITIZED_PLUGIN_NAMESPACE ${KCA_ADD_PLUGIN_INSTALL_NAMESPACE})
-        if (NOT ${plugin} IN_LIST KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE})
-            set(KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE} "${KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE}};${plugin}" CACHE INTERNAL "list of known static plugins for ${KCA_ADD_PLUGIN_INSTALL_NAMESPACE} namespace, used to generate Q_IMPORT_PLUGIN macros")
+
+        if (NOT ${SANITIZED_PLUGIN_NAME} IN_LIST KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE})
+            set(KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE} "${KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE}};${SANITIZED_PLUGIN_NAME}" CACHE INTERNAL "list of known static plugins for ${KCA_ADD_PLUGIN_INSTALL_NAMESPACE} namespace, used to generate Q_IMPORT_PLUGIN macros")
         endif()
     else()
         add_library(${plugin} MODULE ${KCA_ADD_PLUGIN_SOURCES})
@@ -150,7 +152,7 @@ function(kcoreaddons_add_plugin plugin)
 
 
     if ("${ECM_GLOBAL_FIND_VERSION}" VERSION_GREATER_EQUAL "5.88.0")
-        target_compile_definitions(${plugin} PRIVATE KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME=${plugin}_factory)
+        target_compile_definitions(${plugin} PRIVATE KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME=${SANITIZED_PLUGIN_NAME}_factory)
     endif()
 
     # If we have static plugins there are no plugins to install
