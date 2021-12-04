@@ -1,0 +1,438 @@
+# translation of xml_mimetypes.po to galician
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Marce Villarino <mvillarino@kde-espana.es>, 2009.
+# marce villarino <mvillarino@users.sourceforge.net>, 2009.
+# Marce Villarino <mvillarino@kde-espana.es>, 2009, 2010, 2011.
+# Marce Villarino <mvillarino@kde-espana.es>, 2011, 2012, 2014.
+# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2017.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2018, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: xml_mimetypes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-07-14 00:15+0000\n"
+"PO-Revision-Date: 2019-11-17 09:53+0100\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"Language-Team: Galician <proxecto@trasno.gal>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.03.70\n"
+
+#: kde5.xml.podir/kde5.xml.in.h:1
+#, fuzzy
+#| msgid "RELAX NG"
+msgctxt "comment"
+msgid "RELAX NG"
+msgstr "RELAX NG"
+
+#: kde5.xml.podir/kde5.xml.in.h:2
+#, fuzzy
+#| msgid "CD audio"
+msgctxt "comment"
+msgid "CD audio"
+msgstr "CD de son"
+
+#: kde5.xml.podir/kde5.xml.in.h:3
+#, fuzzy
+#| msgid "SNF bitmap font"
+msgctxt "comment"
+msgid "SNF bitmap font"
+msgstr "Fonte de mapa de bits SNF"
+
+#: kde5.xml.podir/kde5.xml.in.h:4
+#, fuzzy
+#| msgid "Java applet"
+msgctxt "comment"
+msgid "Java applet"
+msgstr "Miniaplicativo de Java"
+
+#: kde5.xml.podir/kde5.xml.in.h:5
+#, fuzzy
+#| msgid "KHTML Extension Adaptor"
+msgctxt "comment"
+msgid "KHTML Extension Adaptor"
+msgstr "Adaptador de extensión de KHTML"
+
+#: kde5.xml.podir/kde5.xml.in.h:6
+#, fuzzy
+#| msgid "KDE color scheme"
+msgctxt "comment"
+msgid "KDE color scheme"
+msgstr "Esquema de cores de KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:7
+#, fuzzy
+#| msgid "KNewStuff package"
+msgctxt "comment"
+msgid "KNewStuff package"
+msgstr "Paquete de KNewStuff"
+
+#: kde5.xml.podir/kde5.xml.in.h:9
+#, fuzzy
+#| msgid "KWallet wallet"
+msgctxt "comment"
+msgid "KWallet wallet"
+msgstr "Carteira de KWallet"
+
+#: kde5.xml.podir/kde5.xml.in.h:10
+#, fuzzy
+#| msgid "Kugar report template"
+msgctxt "comment"
+msgid "Kugar report template"
+msgstr "Modelo de informe de Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:11
+#, fuzzy
+#| msgid "plasmoid"
+msgctxt "comment"
+msgid "plasmoid"
+msgstr "plasmoide"
+
+#: kde5.xml.podir/kde5.xml.in.h:12
+#, fuzzy
+#| msgid "SuperKaramba theme"
+msgctxt "comment"
+msgid "SuperKaramba theme"
+msgstr "Tema de SuperKaramba"
+
+#: kde5.xml.podir/kde5.xml.in.h:13
+#, fuzzy
+#| msgid "Calligra Plan project management document"
+msgctxt "comment"
+msgid "Calligra Plan project management document"
+msgstr "Proxecto do Calligra Plan"
+
+#: kde5.xml.podir/kde5.xml.in.h:14
+#, fuzzy
+#| msgid "Calligra Plan work package document"
+msgctxt "comment"
+msgid "Calligra Plan work package document"
+msgstr "Paquete de traballo do Calligra Plan"
+
+#: kde5.xml.podir/kde5.xml.in.h:15
+#, fuzzy
+#| msgid "KPlato project management document"
+msgctxt "comment"
+msgid "KPlato project management document"
+msgstr "Proxecto de KPlato"
+
+#: kde5.xml.podir/kde5.xml.in.h:16
+#, fuzzy
+#| msgid "KPlato project management work package"
+msgctxt "comment"
+msgid "KPlato project management work package"
+msgstr "Paquete de traballo de KPlato"
+
+#: kde5.xml.podir/kde5.xml.in.h:17
+#, fuzzy
+#| msgid "Kugar archive"
+msgctxt "comment"
+msgid "Kugar archive"
+msgstr "Arquivo de Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:18
+#, fuzzy
+#| msgid "web archive"
+msgctxt "comment"
+msgid "web archive"
+msgstr "arquivo web"
+
+#: kde5.xml.podir/kde5.xml.in.h:19
+#, fuzzy
+#| msgid "W3C XML schema"
+msgctxt "comment"
+msgid "W3C XML schema"
+msgstr "Esquema XML do W3C"
+
+#: kde5.xml.podir/kde5.xml.in.h:21
+#, fuzzy
+#| msgid "RealAudio plugin file"
+msgctxt "comment"
+msgid "RealAudio plugin file"
+msgstr "Ficheiro de complemento de RealAudio"
+
+#: kde5.xml.podir/kde5.xml.in.h:23
+#, fuzzy
+#| msgid "KPhotoAlbum import"
+msgctxt "comment"
+msgid "KPhotoAlbum import"
+msgstr "Importación de KPhotoAlbum"
+
+#: kde5.xml.podir/kde5.xml.in.h:25
+#, fuzzy
+#| msgid "HDR image"
+msgctxt "comment"
+msgid "HDR image"
+msgstr "Imaxe de HDR"
+
+#: kde5.xml.podir/kde5.xml.in.h:26
+#, fuzzy
+#| msgid "KDE raw image formats"
+msgctxt "comment"
+msgid "KDE raw image formats"
+msgstr "Formatos de imaxe raw de KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:27
+#, fuzzy
+#| msgid "Intel® hexadecimal object file"
+msgctxt "comment"
+msgid "Intel® hexadecimal object file"
+msgstr "Ficheiro de obxecto hexadecimal de Intel®"
+
+#: kde5.xml.podir/kde5.xml.in.h:28
+#, fuzzy
+#| msgid "Kate file list loader plugin list"
+msgctxt "comment"
+msgid "Kate file list loader plugin list"
+msgstr "Lista de complementos do cargador de lista de ficheiros de Kate"
+
+#: kde5.xml.podir/kde5.xml.in.h:29
+#, fuzzy
+#| msgid "abc musical notation file"
+msgctxt "comment"
+msgid "abc musical notation file"
+msgstr "ficheiro de notación musical abc"
+
+#: kde5.xml.podir/kde5.xml.in.h:30
+#, fuzzy
+#| msgid "fonts package"
+msgctxt "comment"
+msgid "fonts package"
+msgstr "paquete de fontes"
+
+# skip-rule: PT-2010-window
+#: kde5.xml.podir/kde5.xml.in.h:31
+#, fuzzy
+#| msgid "Windows server"
+msgctxt "comment"
+msgid "Windows server"
+msgstr "Servidor de Windows"
+
+# skip-rule: PT-2010-window
+#: kde5.xml.podir/kde5.xml.in.h:32
+#, fuzzy
+#| msgid "Windows workgroup"
+msgctxt "comment"
+msgid "Windows workgroup"
+msgstr "Grupo de traballo de Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:34
+#, fuzzy
+#| msgid "KDE system monitor"
+msgctxt "comment"
+msgid "KDE system monitor"
+msgstr "Monitor do sistema de KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:35
+#, fuzzy
+#| msgid "KDE theme"
+msgctxt "comment"
+msgid "KDE theme"
+msgstr "Tema de KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:36
+#, fuzzy
+#| msgid "Quanta project"
+msgctxt "comment"
+msgid "Quanta project"
+msgstr "Proxecto de Quanta"
+
+#: kde5.xml.podir/kde5.xml.in.h:37
+#, fuzzy
+#| msgid "Kommander file"
+msgctxt "comment"
+msgid "Kommander file"
+msgstr "Ficheiro do Kommander"
+
+#: kde5.xml.podir/kde5.xml.in.h:38
+#, fuzzy
+#| msgid "potato"
+msgctxt "comment"
+msgid "potato"
+msgstr "potato"
+
+#: kde5.xml.podir/kde5.xml.in.h:39
+#, fuzzy
+#| msgid "Kolf saved game"
+msgctxt "comment"
+msgid "Kolf saved game"
+msgstr "Partida de Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:40
+#, fuzzy
+#| msgid "Kolf course"
+msgctxt "comment"
+msgid "Kolf course"
+msgstr "Campo de Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:41
+#, fuzzy
+#| msgid "Okular document archive"
+msgctxt "comment"
+msgid "Okular document archive"
+msgstr "Arquivo de documento de Okular"
+
+#: kde5.xml.podir/kde5.xml.in.h:42
+#, fuzzy
+#| msgid "Cabri figure"
+msgctxt "comment"
+msgid "Cabri figure"
+msgstr "Figura de Cabri"
+
+#: kde5.xml.podir/kde5.xml.in.h:43
+#, fuzzy
+#| msgid "Dr. Geo figure"
+msgctxt "comment"
+msgid "Dr. Geo figure"
+msgstr "Figura de Dr. Geo"
+
+#: kde5.xml.podir/kde5.xml.in.h:44
+#, fuzzy
+#| msgid "KGeo figure"
+msgctxt "comment"
+msgid "KGeo figure"
+msgstr "Figura de KGeo"
+
+#: kde5.xml.podir/kde5.xml.in.h:45
+#, fuzzy
+#| msgid "Kig figure"
+msgctxt "comment"
+msgid "Kig figure"
+msgstr "Figura de Kig"
+
+#: kde5.xml.podir/kde5.xml.in.h:46
+#, fuzzy
+#| msgid "KSeg document"
+msgctxt "comment"
+msgid "KSeg document"
+msgstr "Documento de KSeg"
+
+#: kde5.xml.podir/kde5.xml.in.h:47
+#, fuzzy
+#| msgid "vocabulary trainer document"
+msgctxt "comment"
+msgid "vocabulary trainer document"
+msgstr "documento de práctica de vocabulario"
+
+#: kde5.xml.podir/kde5.xml.in.h:48
+#, fuzzy
+#| msgid "KmPlot file"
+msgctxt "comment"
+msgid "KmPlot file"
+msgstr "Ficheiro de KmPlot"
+
+#: kde5.xml.podir/kde5.xml.in.h:49
+#, fuzzy
+#| msgid "KWordQuiz vocabulary"
+msgctxt "comment"
+msgid "KWordQuiz vocabulary"
+msgstr "Vocabulario de KWordQuiz"
+
+#: kde5.xml.podir/kde5.xml.in.h:50
+#, fuzzy
+#| msgid "Cachegrind/Callgrind profile dump"
+msgctxt "comment"
+msgid "Cachegrind/Callgrind profile dump"
+msgstr "Envorcado de perfil de Cachegrind/Callgrind"
+
+#: kde5.xml.podir/kde5.xml.in.h:51
+#, fuzzy
+#| msgid "Umbrello UML Modeller file"
+msgctxt "comment"
+msgid "Umbrello UML Modeller file"
+msgstr "Ficheiro de modelo UML de Umbrello"
+
+# skip-rule: PT-2010-window
+#: kde5.xml.podir/kde5.xml.in.h:52
+#, fuzzy
+#| msgid "Windows link"
+msgctxt "comment"
+msgid "Windows link"
+msgstr "Ligazón de Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:53
+#, fuzzy
+#| msgid "KGet download list"
+msgctxt "comment"
+msgid "KGet download list"
+msgstr "Lista de descargas de KGet"
+
+#: kde5.xml.podir/kde5.xml.in.h:54
+#, fuzzy
+#| msgid "Kopete emoticons archive"
+msgctxt "comment"
+msgid "Kopete emoticons archive"
+msgstr "Arquivo de emoticonas de Kopete"
+
+#: kde5.xml.podir/kde5.xml.in.h:55
+#, fuzzy
+#| msgid "ICQ contact"
+msgctxt "comment"
+msgid "ICQ contact"
+msgstr "Contacto do ICQ"
+
+#: kde5.xml.podir/kde5.xml.in.h:57
+#, fuzzy
+#| msgid "Microsoft Media Format"
+msgctxt "comment"
+msgid "Microsoft Media Format"
+msgstr "Formato de medios de Microsoft"
+
+#: kde5.xml.podir/kde5.xml.in.h:59
+#, fuzzy
+#| msgid "Turtle RDF document"
+msgctxt "comment"
+msgid "Turtle RDF document"
+msgstr "Documento RDF de Turtle"
+
+#: kde5.xml.podir/kde5.xml.in.h:61
+#, fuzzy
+#| msgid "Softimage PIC image"
+msgctxt "comment"
+msgid "Softimage PIC image"
+msgstr "Imaxe PIC de Softimage"
+
+#: kde5.xml.podir/kde5.xml.in.h:63
+#, fuzzy
+#| msgid "Qt Markup Language file"
+msgctxt "comment"
+msgid "Qt Markup Language file"
+msgstr "Ficheiro na linguaxe de etiquetas de Qt"
+
+#: kde5.xml.podir/kde5.xml.in.h:64
+#, fuzzy
+#| msgid "KConfigXT Configuration Options"
+msgctxt "comment"
+msgid "KConfigXT Configuration Options"
+msgstr "Opcións de configuración de KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:65
+#, fuzzy
+#| msgid "KConfigXT Code Generation Options"
+msgctxt "comment"
+msgid "KConfigXT Code Generation Options"
+msgstr "Opcións de xeración de código de KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:66
+#, fuzzy
+#| msgid "KXMLGUI UI Declaration"
+msgctxt "comment"
+msgid "KXMLGUI UI Declaration"
+msgstr "Declaración de interface gráfica de KXMLGUI"
+
+#: kde5.xml.podir/kde5.xml.in.h:67
+#, fuzzy
+#| msgid "KNotification Declaration"
+msgctxt "comment"
+msgid "KNotification Declaration"
+msgstr "Declaración de KNotification"
+
+#: kde5.xml.podir/kde5.xml.in.h:68
+msgctxt "comment"
+msgid "KCrash Report"
+msgstr ""
