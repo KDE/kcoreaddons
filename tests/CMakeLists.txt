@@ -2,7 +2,7 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 
 find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG QUIET OPTIONAL_COMPONENTS Widgets)
 if(NOT TARGET Qt${QT_MAJOR_VERSION}::Widgets)
-    message(STATUS "Qt5Widgets not found, examples will not be built.")
+    message(STATUS "Qt${QT_MAJOR_VERSION}Widgets not found, examples will not be built.")
     return()
 endif()
 
