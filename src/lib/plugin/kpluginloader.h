@@ -120,7 +120,7 @@ public:
      * any JSON metadata that is embedded into the plugin binary.
      *
      * \returns The factory of the plugin or @c nullptr on error.
-     * @deprecated Since 5.86, use @ref KPluginMetaData::factory instead
+     * @deprecated Since 5.86, use @ref KPluginFactory::loadFactory or @ref KPluginFactory::instantiatePlugin instead
      */
     KCOREADDONS_DEPRECATED_VERSION(5, 86, "Use KPluginFactory::loadFactory or KPluginFactory::instantiatePlugin instead")
     KPluginFactory *factory();
