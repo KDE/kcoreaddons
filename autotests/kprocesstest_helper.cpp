@@ -27,6 +27,8 @@ int main(int argc, char **argv)
     fputs(ROUT, stdout);
     fputs(p.readAllStandardOutput().constData(), stdout);
     fputs(RERR, stdout);
-    fputs(p.readAllStandardError().constData(), stdout);
+    if (p.outputChannelMode() != KProcess::MergedChannels) {
+        fputs(p.readAllStandardError().constData(), stdout);
+    }
     return 0;
 }
