@@ -187,6 +187,7 @@ function(kcoreaddons_target_static_plugins app_target plugin_namespace)
     cmake_parse_arguments(ARGS "" "LINK_OPTION" "" ${ARGN})
     set(IMPORT_PLUGIN_STATEMENTS "#include <kstaticpluginhelpers.h>\n\n")
     string(REPLACE "/" "_" SANITIZED_PLUGIN_NAMESPACE ${plugin_namespace})
+    string(REPLACE "." "_" SANITIZED_PLUGIN_NAMESPACE ${SANITIZED_PLUGIN_NAMESPACE})
     set(TMP_PLUGIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_static_${SANITIZED_PLUGIN_NAMESPACE}_plugins_tmp.cpp")
     set(PLUGIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_static_${SANITIZED_PLUGIN_NAMESPACE}_plugins.cpp")
 
