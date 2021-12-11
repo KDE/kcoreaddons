@@ -185,7 +185,7 @@ target_include_directories(KF5CoreAddons PUBLIC "$<BUILD_INTERFACE:${kcoreaddons
 
 target_link_libraries(KF5CoreAddons
   PUBLIC
-    Qt::Core
+    Qt${QT_MAJOR_VERSION}::Core
 )
 
 if(WIN32)
