@@ -231,7 +231,11 @@ static void listGroupsForUser(const char *name, gid_t gid, uint maxCount, Func h
     int result = getgrouplist(name, gid, gid_buffer.data(), &numGroups);
     if (result < 0 && uint(numGroups) < maxCount) {
         // getgrouplist returns -1 if the buffer was too small to store all entries, the required size is in numGroups
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+        qCDebug(KCOREADDONS_DEBUG, "Buffer was too small: %lld, need %d", gid_buffer.size(), numGroups);
+#else
         qCDebug(KCOREADDONS_DEBUG, "Buffer was too small: %d, need %d", gid_buffer.size(), numGroups);
+#endif
         gid_buffer.resize(numGroups);
         numGroups = gid_buffer.size();
         getgrouplist(name, gid, gid_buffer.data(), &numGroups);
