@@ -365,7 +365,8 @@ void KFormatTest::formatRelativeDate()
     }
 
     QDateTime testDateTime = now.addSecs(-3600);
-    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("Today, %1").arg(testDateTime.toString(QStringLiteral("hh:mm:ss"))));
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat),
+             QStringLiteral("Today at %1").arg(testDateTime.toString(QStringLiteral("hh:mm:ss"))));
 
     // 1 second ago
     now = QDateTime::currentDateTime();
@@ -377,7 +378,23 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("5 minutes ago"));
 
     testDateTime = QDateTime(QDate::currentDate().addDays(8), QTime(3, 0, 0));
-    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QLocale::c().toString(testDateTime, QLocale::LongFormat));
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::LongFormat),
+             QStringLiteral("%1 at %2")
+                 .arg(QLocale::c().toString(testDateTime.date(), QLocale::LongFormat), QLocale::c().toString(testDateTime.time(), QLocale::ShortFormat)));
+
+    // 2021-10-03 07:33:57.000
+    testDateTime = QDateTime::fromMSecsSinceEpoch(1633239237000);
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::LongFormat),
+             QStringLiteral("%1 at %2")
+                 .arg(QLocale::c().toString(testDateTime.date(), QLocale::LongFormat), QLocale::c().toString(testDateTime.time(), QLocale::ShortFormat)));
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat),
+             QStringLiteral("%1 at %2")
+                 .arg(QLocale::c().toString(testDateTime.date(), QLocale::ShortFormat), QLocale::c().toString(testDateTime.time(), QLocale::ShortFormat)));
+
+    // With a different local for double check
+    QLocale englishLocal = QLocale::English;
+    KFormat formatEnglish(englishLocal);
+    QCOMPARE(formatEnglish.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QStringLiteral("Sunday, October 3, 2021 at 7:33 AM"));
 }
 
 QTEST_MAIN(KFormatTest)

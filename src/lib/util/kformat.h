@@ -313,13 +313,23 @@ public:
      *
      * If the @p dateTime falls within one week before or after the current date
      * then a relative date string will be returned, such as:
-     * * Yesterday, 3:00pm
-     * * Today, 3:00pm
-     * * Tomorrow, 3:00pm
-     * * Last Tuesday, 3:00pm
-     * * Next Wednesday, 3:00pm
+     * * Yesterday at 3:00pm
+     * * Today at 3:00pm
+     * * Tomorrow at 3:00pm
+     * * Last Tuesday at 3:00pm
+     * * Next Wednesday at 3:00pm
      *
-     * If the @p dateTime falls outside this period then the @p format is used.
+     * If the @p dateTime falls within one hour of the current time.
+     * Then a shorter version is displayed:
+     *  * Just a moment ago (for within the same minute)
+     *  * 15 minutes ago
+     *
+     * If the @p dateTime falls outside this period then the date is rendered as:
+     *  * Monday, 7 September, 2021 at 7:00 PM : date formatted @p format + " at " + time formatted with @p format
+     *
+     * With @p format LongFormat, time format used is set to ShortFormat (to omit timezone and seconds).
+     *
+     * First character is capitalized.
      *
      * @param dateTime the date to be formatted
      * @param format the date format to use
