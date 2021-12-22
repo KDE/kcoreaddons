@@ -31,6 +31,7 @@ macro(build_plugin pname)
 endmacro()
 
 # Build some sample plugins
+build_plugin(pluginwithoutmetadata pluginwithoutmetadata.cpp)
 build_plugin(jsonplugin jsonplugin.cpp)
 build_plugin(jsonplugin2 jsonplugin2.cpp)
 build_plugin(versionedplugin versionedplugin.cpp)

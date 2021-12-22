@@ -49,6 +49,15 @@ private Q_SLOTS:
 #endif
     }
 
+    void testPluginWithoutMetaData()
+    {
+        KPluginFactory::Result<KPluginFactory> factoryResult = KPluginFactory::loadFactory(KPluginMetaData(QStringLiteral("pluginwithoutmetadata")));
+        QVERIFY(factoryResult);
+        auto plugin = factoryResult.plugin->create<QObject>();
+        QVERIFY(plugin);
+        QCOMPARE(plugin->metaObject()->className(), "PluginWithoutMetaData");
+    }
+
     void testResultingCMakeMacroPlugin()
     {
         KPluginMetaData data(QStringLiteral("plugins/namespace/jsonplugin_cmake_macro"));

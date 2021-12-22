@@ -277,6 +277,23 @@ class KPluginMetaData;
 /**
  * @relates KPluginFactory
  *
+ * Creates a KPluginFactory subclass and exports it as the root plugin object.
+ * Unlike @ref K_PLUGIN_CLASS_WITH_JSON, this macro does not require json meta data.
+ *
+ * This macro does the same as K_PLUGIN_FACTORY, but you only have to pass the class name.
+ * The factory name and registerPlugin call are deduced from the class name.
+ * This is also useful if you want to use static plugins, see the kcoreaddons_add_plugin CMake method.
+ * @since 5.90
+ */
+#ifdef KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME
+#define K_PLUGIN_CLASS(classname) K_PLUGIN_FACTORY(KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME, registerPlugin<classname>();)
+#else
+#define K_PLUGIN_CLASS(classname) K_PLUGIN_FACTORY(classname##Factory, registerPlugin<classname>();)
+#endif
+
+/**
+ * @relates KPluginFactory
+ *
  * K_PLUGIN_FACTORY_DECLARATION declares the KPluginFactory subclass. This macro
  * can be used in a header file.
  *
