@@ -17,8 +17,8 @@
 #include <math.h>
 
 KFormatPrivate::KFormatPrivate(const QLocale &locale)
+    : m_locale(locale)
 {
-    m_locale = locale;
 }
 
 KFormatPrivate::~KFormatPrivate()
@@ -50,8 +50,8 @@ QString KFormatPrivate::formatValue(double value,
         multiplier = 1000.0;
     }
 
-    int power = 0;
     if (prefix == KFormat::UnitPrefix::AutoAdjust) {
+        int power = 0;
         double adjustValue = qAbs(value);
         while (adjustValue >= multiplier) {
             adjustValue /= multiplier;
