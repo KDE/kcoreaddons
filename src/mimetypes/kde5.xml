@@ -24,7 +24,7 @@ Notes:
   <mime-type type="application/relaxng">
     <sub-class-of type="application/xml"/>
     <comment>RELAX NG</comment>
-    <comment xml:lang="ar">RELAX NG</comment>
+    <comment xml:lang="ar">‏RELAX NG</comment>
     <comment xml:lang="az">RELAX NG</comment>
     <comment xml:lang="be">RELAX NG</comment>
     <comment xml:lang="ca">RELAX NG</comment>
@@ -1752,7 +1752,7 @@ Notes:
 
   <mime-type type="application/x-kcachegrind">
     <comment>Cachegrind/Callgrind profile dump</comment>
-    <comment xml:lang="ar">تشكيلة تفريغ Cachegrind/Callgrind </comment>
+    <comment xml:lang="ar">تشكيلة تفريغ Cachegrind/Callgrind</comment>
     <comment xml:lang="az">Cachegrind/Callgrind profil məlumatı</comment>
     <comment xml:lang="be">Дамп профілю Cachegrind / Callgrind</comment>
     <comment xml:lang="ca">Bolcat d'anàlisi de rendiment del Cachegrind/Callgrind</comment>
@@ -1790,7 +1790,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-uml">
     <comment>Umbrello UML Modeller file</comment>
-    <comment xml:lang="ar">ملف Umbrello UML Modeller </comment>
+    <comment xml:lang="ar">ملف Umbrello UML Modeller</comment>
     <comment xml:lang="az">Umbrello UML Modeller faylı</comment>
     <comment xml:lang="be">Файл Umbrello UML Modeller</comment>
     <comment xml:lang="ca">Fitxer del modelador UML Umbrello</comment>
@@ -1909,7 +1909,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kopete-emoticons">
     <comment>Kopete emoticons archive</comment>
-    <comment xml:lang="ar">أرشف إبتسامات Kopete</comment>
+    <comment xml:lang="ar">أرشف ابتسامات Kopete</comment>
     <comment xml:lang="az">Kopete ifadələr arxivi</comment>
     <comment xml:lang="be">Архіў смайлікаў Kopete</comment>
     <comment xml:lang="ca">Arxiu d'emoticones del Kopete</comment>
@@ -2313,7 +2313,7 @@ Notes:
   </mime-type>
   <mime-type type="text/vnd.kde.kcrash-report">
     <comment>KCrash Report</comment>
-    <comment xml:lang="ar">تقرير KCrash  </comment>
+    <comment xml:lang="ar">تقرير KCrash</comment>
     <comment xml:lang="az">KCrash Hesabatı</comment>
     <comment xml:lang="be">Справаздача KCrash</comment>
     <comment xml:lang="ca">Informe del KCrash</comment>
