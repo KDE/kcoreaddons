@@ -116,14 +116,19 @@ if(NOT CMAKE_CROSSCOMPILING)
     )
 endif()
 
-ecm_add_test(ktexttohtmltest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp
-    TEST_NAME ktexttohtmltest
-    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test autotests_static
-)
+add_library(ktexttohtmlteststatic STATIC ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp)
 # include the binary dir in order to get kcoreaddons_export.h
-target_include_directories(ktexttohtmltest PRIVATE ${KCoreAddons_BINARY_DIR}/src/lib)
+target_include_directories(ktexttohtmlteststatic PUBLIC ${KCoreAddons_BINARY_DIR}/src/lib)
 # fake static linking to prevent the export macros on Windows from kicking in
-target_compile_definitions(ktexttohtmltest PRIVATE -DKCOREADDONS_STATIC_DEFINE=1)
+target_compile_definitions(ktexttohtmlteststatic PUBLIC -DKCOREADDONS_STATIC_DEFINE=1)
+target_link_libraries(ktexttohtmlteststatic PUBLIC Qt${QT_MAJOR_VERSION}::Test autotests_static)
+ecm_add_test(ktexttohtmltest.cpp
+    TEST_NAME ktexttohtmltest
+    LINK_LIBRARIES ktexttohtmlteststatic
+)
+
+add_executable(ktexttohtmlbenchmarktest ktexttohtmlbenchmarktest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp)
+target_link_libraries(ktexttohtmlbenchmarktest PUBLIC ktexttohtmlteststatic)
 
 add_executable(kprocesstest_helper kprocesstest_helper.cpp)
 target_link_libraries(kprocesstest_helper KF5::CoreAddons)

@@ -480,29 +480,3 @@ void KTextToHTMLTest::testHtmlConvert()
     const QString actualHtml = KTextToHTML::convertToHtml(plainText, flags);
     QCOMPARE(actualHtml, htmlText);
 }
-
-void KTextToHTMLTest::benchHtmlConvert_data()
-{
-    QTest::addColumn<QString>("text");
-    QTest::addColumn<KTextToHTML::Options>("options");
-
-    auto text = QStringLiteral("foo bar asdf :)").repeated(1000);
-    QTest::newRow("plain") << text << KTextToHTML::Options();
-    QTest::newRow("preserve-spaces") << text << KTextToHTML::Options(KTextToHTML::PreserveSpaces);
-    QTest::newRow("highlight-text") << text << KTextToHTML::Options(KTextToHTML::HighlightText);
-    QTest::newRow("replace-smileys") << text << KTextToHTML::Options(KTextToHTML::ReplaceSmileys);
-    QTest::newRow("preserve-spaces+highlight-text") << text << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText);
-    QTest::newRow("preserve-spaces+highlight-text+replace-smileys")
-        << text << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText | KTextToHTML::ReplaceSmileys);
-}
-
-void KTextToHTMLTest::benchHtmlConvert()
-{
-    QFETCH(QString, text);
-    QFETCH(KTextToHTML::Options, options);
-
-    QBENCHMARK {
-        const QString html = KTextToHTML::convertToHtml(text, options);
-        Q_UNUSED(html);
-    }
-}
