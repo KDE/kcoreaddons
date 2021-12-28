@@ -123,13 +123,6 @@ set(kcoreaddons_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/util/
 )
 
-if (HAVE_PROCSTAT)
-    set(kcoreaddons_INCLUDE_DIRS
-        ${kcoreaddons_INCLUDE_DIRS}
-        ${PROCSTAT_INCLUDE_DIR}
-    )
-endif()
-
 ecm_qt_export_logging_category(
     IDENTIFIER KDIRWATCH
     CATEGORY_NAME kf.coreaddons.kdirwatch
@@ -193,7 +186,7 @@ if(WIN32)
 endif()
 
 if (HAVE_PROCSTAT)
-    target_link_libraries(KF5CoreAddons PRIVATE ${PROCSTAT_LIBRARIES})
+    target_link_libraries(KF5CoreAddons PRIVATE Procstat::Procstat)
 endif()
 
 target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons>" )
