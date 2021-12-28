@@ -8,6 +8,8 @@
 
 #include "kdelibs4configmigrator.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+
 #include <Kdelibs4Migration>
 #include <QDir>
 #include <QFile>
@@ -112,3 +114,4 @@ bool Kdelibs4ConfigMigrator::migrate()
 
     return true;
 }
+#endif

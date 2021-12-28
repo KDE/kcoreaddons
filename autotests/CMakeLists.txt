@@ -59,6 +59,13 @@ if (UNIX)
     )
 endif ()
 
+if (NOT ${QT_MAJOR_VERSION} STREQUAL "6")
+    set(autotests_OPTIONAL_SRCS
+        ${autotests_OPTIONAL_SRCS}
+        kdelibs4migrationtest.cpp
+        kdelibs4configmigratortest.cpp
+    )
+endif ()
 ecm_add_tests(
     kaboutdatatest.cpp
     kaboutdataapplicationdatatest.cpp
@@ -77,8 +84,6 @@ ecm_add_tests(
     kurlmimedatatest.cpp
     kstringhandlertest.cpp
     kusertest.cpp
-    kdelibs4migrationtest.cpp
-    kdelibs4configmigratortest.cpp
     kprocesslisttest.cpp
     kfileutilstest.cpp
     kfuzzymatchertest.cpp

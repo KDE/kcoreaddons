@@ -16,6 +16,8 @@
 
 #include <memory>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+
 class Kdelibs4MigrationPrivate;
 
 /**
@@ -56,6 +58,8 @@ class Kdelibs4MigrationPrivate;
   *
   * @short Class for migration of config files from kdelibs4
   * @since 5.0
+  * @deprecated This class exists for compatibility with the
+  * kde4 config files and will be removed in KF6
   */
 class KCOREADDONS_EXPORT Kdelibs4Migration Q_DECL_FINAL
 {
@@ -107,4 +111,5 @@ private:
     std::unique_ptr<Kdelibs4MigrationPrivate> const d;
 };
 
+#endif
 #endif // KFORMAT_H

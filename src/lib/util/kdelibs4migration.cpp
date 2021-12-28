@@ -8,6 +8,9 @@
 */
 
 #include "kdelibs4migration.h"
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+
 #include "config-util.h"
 #include "kcoreaddons_debug.h"
 #include <QDir>
@@ -113,3 +116,4 @@ QString Kdelibs4Migration::saveLocation(const char *type, const QString &suffix)
     qCWarning(KCOREADDONS_DEBUG) << "No such resource" << type;
     return QString();
 }
+#endif
