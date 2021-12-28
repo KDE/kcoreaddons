@@ -201,7 +201,7 @@ public:
     ~KPluginMetaData();
 
     /**
-     * Load a KPluginMetaData instace from a .desktop file. Unlike the constructor which takes
+     * Load a KPluginMetaData instance from a .desktop file. Unlike the constructor which takes
      * a single file parameter this method allows you to specify which service type files should
      * be parsed to determine the correct type for a given .desktop property.
      * This ensures that a e.g. comma-separated string list field in the .desktop file will correctly
