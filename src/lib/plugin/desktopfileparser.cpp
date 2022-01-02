@@ -282,12 +282,12 @@ bool tokenizeKeyValue(QFile &df, const QString &src, QByteArray &key, QString &v
     return true;
 }
 
-static constexpr const char KSERVICESTYPES_PATH[] = "kservicetypes" QT_STRINGIFY(QT_VERSION_MAJOR) "/";
+#define KSERVICETYPES_SUBDIR "kservicetypes" QT_STRINGIFY(QT_VERSION_MAJOR) "/"
 
 static QString locateRelativeServiceType(const QString &relPath, const QStringList &serviceTypeSearchPaths)
 {
     for (const auto &dir : serviceTypeSearchPaths) {
-        QString path = dir + QLatin1Char('/') + QLatin1String(KSERVICESTYPES_PATH) + relPath;
+        QString path = dir + QLatin1String("/" KSERVICETYPES_SUBDIR) + relPath;
         if (QFile::exists(path)) {
             return path;
         }
@@ -303,13 +303,13 @@ static ServiceTypeDefinition *parseServiceTypesFile(const QString &inputPath, co
         path = locateRelativeServiceType(path, serviceTypeSearchPaths);
         QString rcPath;
         if (path.isEmpty()) {
-            rcPath = QLatin1String(":/") + QLatin1String(KSERVICESTYPES_PATH) + inputPath;
+            rcPath = QLatin1String(":/" KSERVICETYPES_SUBDIR) + inputPath;
             if (QFileInfo::exists(rcPath)) {
                 path = rcPath;
             }
         }
         if (path.isEmpty()) {
-            qCWarning(DESKTOPPARSER).nospace() << "Could not locate service type file " << KSERVICESTYPES_PATH << qPrintable(inputPath) << ", tried "
+            qCWarning(DESKTOPPARSER).nospace() << "Could not locate service type file " << KSERVICETYPES_SUBDIR << qPrintable(inputPath) << ", tried "
                                                << serviceTypeSearchPaths << " and " << rcPath;
             return nullptr;
         }
