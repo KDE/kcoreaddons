@@ -502,6 +502,7 @@ public:
         KPluginFactory::Result<KPluginFactory> factoryResult = loadFactory(data);
         if (!factoryResult.plugin) {
             result.errorString = factoryResult.errorString;
+            result.errorText = factoryResult.errorText;
             result.errorReason = factoryResult.errorReason;
             return result;
         }
