@@ -1,6 +1,5 @@
 include(ECMAddTests)
 include(ConfigureChecks.cmake) #configure checks for QFileSystemWatcher
-set(ECM_GLOBAL_FIND_VERSION "5.88.0")
 include(../KF5CoreAddonsMacros.cmake)
 
 find_package(Qt${QT_MAJOR_VERSION}Test ${REQUIRED_QT_VERSION} CONFIG QUIET)

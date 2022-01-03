@@ -60,7 +60,7 @@ private Q_SLOTS:
 
     void testResultingCMakeMacroPlugin()
     {
-        KPluginMetaData data(QStringLiteral("plugins/namespace/jsonplugin_cmake_macro"));
+        KPluginMetaData data(QStringLiteral("namespace/jsonplugin_cmake_macro"));
         QVERIFY(data.isValid());
 
         auto instance = QPluginLoader(data.fileName()).instance();
