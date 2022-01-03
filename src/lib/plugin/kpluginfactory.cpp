@@ -37,6 +37,13 @@ KPluginFactory::Result<KPluginFactory> KPluginFactory::loadFactory(const KPlugin
     if (data.isStaticPlugin()) {
         obj = data.staticPlugin().instance();
     } else {
+        if (data.fileName().isEmpty()) {
+            result.errorString = tr("Could not find plugin %1").arg(data.requestedFileName());
+            result.errorText = QStringLiteral("Could not find plugin %1").arg(data.requestedFileName());
+            result.errorReason = INVALID_PLUGIN;
+            qCWarning(KCOREADDONS_DEBUG) << result.errorText;
+            return result;
+        }
         QPluginLoader loader(data.fileName());
         obj = loader.instance();
         if (!obj) {

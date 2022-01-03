@@ -574,6 +574,7 @@ private:
     QVariantList translatorsVariant() const;
     QVariantList otherContributorsVariant() const;
     QStaticPlugin staticPlugin() const;
+    QString requestedFileName() const;
 
     QJsonObject m_metaData;
     QString m_fileName;

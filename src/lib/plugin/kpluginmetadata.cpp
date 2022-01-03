@@ -32,6 +32,8 @@
 class KPluginMetaDataPrivate : public QSharedData
 {
 public:
+    // If we want to load a file, but it does not exist we want to keep the requested file name for logging
+    QString m_requestedFileName;
     QString metaDataFileName;
     std::optional<QStaticPlugin> staticPlugin = std::nullopt;
     static void forEachPlugin(const QString &directory, std::function<void(const QString &)> callback)
@@ -97,6 +99,7 @@ KPluginMetaData::~KPluginMetaData()
 }
 
 KPluginMetaData::KPluginMetaData(const QString &file)
+    : d(new KPluginMetaDataPrivate)
 {
     if (file.endsWith(QLatin1String(".desktop"))) {
         loadFromDesktopFile(file, QStringList());
@@ -118,6 +121,7 @@ KPluginMetaData::KPluginMetaData(const QString &file)
         d->metaDataFileName = file;
     } else {
         QPluginLoader loader(file);
+        d->m_requestedFileName = file;
         m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
         const auto qtMetaData = loader.metaData();
         if (!qtMetaData.isEmpty()) {
@@ -620,6 +624,11 @@ QVariantList KPluginMetaData::otherContributorsVariant() const
 bool KPluginMetaData::isStaticPlugin() const
 {
     return d && d->staticPlugin.has_value();
+}
+
+QString KPluginMetaData::requestedFileName() const
+{
+    return d ? d->m_requestedFileName : QString();
 }
 
 QStaticPlugin KPluginMetaData::staticPlugin() const

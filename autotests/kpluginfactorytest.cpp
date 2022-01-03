@@ -106,6 +106,16 @@ private Q_SLOTS:
 
         QVERIFY(KPluginFactory::instantiatePlugin<QObject>(plugins.first()));
     }
+
+    void testNonExistingPlugin()
+    {
+        KPluginMetaData data(QStringLiteral("does/not/exist"));
+        QVERIFY(!data.isValid());
+        const auto res = KPluginFactory::instantiatePlugin<QObject>(data);
+        QVERIFY(!res);
+        QCOMPARE(res.errorReason, KPluginFactory::INVALID_PLUGIN);
+        QCOMPARE(res.errorText, QStringLiteral("Could not find plugin does/not/exist"));
+    }
 };
 
 QTEST_MAIN(KPluginFactoryTest)
