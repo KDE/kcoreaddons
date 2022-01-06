@@ -14,6 +14,8 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "[Dd]ebug$")
 endif()
 
 add_library(autotests_static STATIC)
+# Needed to link this static lib to shared libs
+set_property(TARGET autotests_static PROPERTY POSITION_INDEPENDENT_CODE ON)
 ecm_qt_declare_logging_category(autotests_static
         HEADER kcoreaddons_debug.h
         IDENTIFIER KCOREADDONS_DEBUG
