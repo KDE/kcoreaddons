@@ -438,6 +438,55 @@ private Q_SLOTS:
         QVERIFY(md.value(QStringLiteral("DoesNotExist"), true));
     }
 
+    void testPathIsAbsolute_data()
+    {
+        QTest::addColumn<QString>("inputAbsolute");
+        QTest::addColumn<QString>("pluginPath");
+
+        // The .desktop file has X-KDE-Library, so .fileName() returns  different file
+        QTest::newRow("desktop") << QFINDTESTDATA("data/fakeplugin.desktop") << QStringLiteral("fakeplugin");
+        // But for the .json based plugin both are the same.
+        QTest::newRow("json") << QFINDTESTDATA("data/testmetadata.json") << QFINDTESTDATA("data/testmetadata.json");
+        // And also for the library with embedded JSON metadata.
+        QPluginLoader shlibLoader(QCoreApplication::applicationDirPath() + QStringLiteral("/jsonplugin"));
+        QVERIFY2(!shlibLoader.fileName().isEmpty(), "Could not find jsonplugin");
+        QString shlibPath = QFileInfo(shlibLoader.fileName()).absoluteFilePath();
+        QTest::newRow("library") << shlibPath << shlibPath;
+    }
+
+    void testPathIsAbsolute()
+    {
+        // Test that the fileName() accessor always returns an absolute path if it was used.
+        QFETCH(QString, inputAbsolute);
+        QVERIFY2(QDir::isAbsolutePath(inputAbsolute), qPrintable(inputAbsolute));
+        QFETCH(QString, pluginPath);
+
+        KPluginMetaData mdAbsolute(inputAbsolute);
+        QVERIFY(mdAbsolute.isValid());
+        QCOMPARE(mdAbsolute.metaDataFileName(), inputAbsolute);
+        QCOMPARE(mdAbsolute.fileName(), pluginPath);
+
+        // All files that have been opened should be stored as absolute paths.
+        QString inputRelative = QDir::current().relativeFilePath(inputAbsolute);
+        QVERIFY2(QDir::isRelativePath(inputRelative), qPrintable(inputRelative));
+        KPluginMetaData mdRelative(inputRelative);
+        QCOMPARE(mdRelative.metaDataFileName(), inputAbsolute);
+        QCOMPARE(mdRelative.fileName(), pluginPath);
+
+        // Check that creating it with the parsed JSON object and a path keeps the path unchanged
+        const QJsonObject json = mdAbsolute.rawData();
+        QString pluginRelative = QDir::current().relativeFilePath(pluginPath);
+        QVERIFY2(QDir::isRelativePath(pluginRelative), qPrintable(pluginRelative));
+        // TODO: KF6: no need to test both constructors once they are merged into one overload.
+        KPluginMetaData mdFromJson1(json, pluginRelative, inputRelative);
+        QCOMPARE(mdFromJson1.metaDataFileName(), inputRelative);
+        // We should not be normalizing files that have not been openened, so both arguments should be unchanged.
+        QCOMPARE(mdFromJson1.fileName(), pluginRelative);
+        KPluginMetaData mdFromJson2(json, inputRelative);
+        QCOMPARE(mdFromJson2.metaDataFileName(), inputRelative);
+        QCOMPARE(mdFromJson2.fileName(), inputRelative);
+    }
+
     void testFindPlugins()
     {
         QTemporaryDir temp;

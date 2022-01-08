@@ -117,8 +117,9 @@ KPluginMetaData::KPluginMetaData(const QString &file)
         if (error.error) {
             qCWarning(KCOREADDONS_DEBUG) << "error parsing" << file << error.errorString();
         }
-        m_fileName = file;
-        d->metaDataFileName = file;
+        QString abspath = QFileInfo(file).absoluteFilePath();
+        m_fileName = abspath;
+        d->metaDataFileName = abspath;
     } else {
         QPluginLoader loader(file);
         d->m_requestedFileName = file;
@@ -126,6 +127,7 @@ KPluginMetaData::KPluginMetaData(const QString &file)
         const auto qtMetaData = loader.metaData();
         if (!qtMetaData.isEmpty()) {
             m_metaData = qtMetaData.value(QStringLiteral("MetaData")).toObject();
+            d->metaDataFileName = m_fileName;
             if (m_metaData.isEmpty()) {
                 qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << file << "does not have a valid 'MetaData' object";
             }
