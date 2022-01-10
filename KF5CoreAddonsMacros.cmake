@@ -220,6 +220,11 @@ endfunction()
 # This macro imports the plugins for the given namespace that were
 # registered using the kcoreaddons_add_plugin function.
 # This includes the K_IMPORT_PLUGIN statements and linking the plugins to the given target.
+#
+# In case the plugins are used in both the executable and multiple autotests it it recommended to
+# bundle the static plugins in a shared lib for the autotests. In case of shared libs the plugin registrations
+# will take effect when the test link against it.
+#
 # Since 5.89
 function(kcoreaddons_target_static_plugins app_target plugin_namespace)
     cmake_parse_arguments(ARGS "" "LINK_OPTION" "" ${ARGN})
@@ -237,8 +242,15 @@ function(kcoreaddons_target_static_plugins app_target plugin_namespace)
     file(WRITE ${TMP_PLUGIN_FILE} ${IMPORT_PLUGIN_STATEMENTS})
     execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${TMP_PLUGIN_FILE} ${PLUGIN_FILE})
     file(REMOVE ${TMP_PLUGIN_FILE})
-     # in case of apps bundling their plugins in a small static lib the linking needs to be public
-    target_sources(${app_target} PUBLIC ${PLUGIN_FILE})
+    if(ECM_GLOBAL_FIND_VERSION VERSION_GREATER_EQUAL "5.91.0")
+        target_sources(${app_target} PRIVATE ${PLUGIN_FILE})
+    else()
+        # in case of apps bundling their plugins in a small static lib the linking needs to be public
+        # see API docs for a better solution in consumer's code.
+        # Because this will not change the behavior if the plugins are targeted directly to the executable, only
+        # an ECM version check is used and not an additional option.
+        target_sources(${app_target} PUBLIC ${PLUGIN_FILE})
+    endif()
 endfunction()
 
 # Clear previously set plugins, otherwise Q_IMPORT_PLUGIN statements
