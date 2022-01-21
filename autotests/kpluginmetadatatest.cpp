@@ -346,8 +346,11 @@ private Q_SLOTS:
         QVERIFY(!typesPath.isEmpty());
         const QString inputPath = QFINDTESTDATA("data/servicetypes/example-input.desktop");
         QVERIFY(!inputPath.isEmpty());
-        QTest::ignoreMessage(QtWarningMsg,
-                             qPrintable(QStringLiteral("Unable to find service type for service \"bar/foo\" listed in \"") + inputPath + QLatin1Char('"')));
+        QTest::ignoreMessage(
+            QtWarningMsg,
+            // We also print out a list of paths we searched in. With the ".+" we ensure that they are printed out,
+            // but don't make fragile assumptions on the exact message
+            QRegularExpression(QStringLiteral("Unable to find service type for service \"bar/foo\" listed in \"") + inputPath + QLatin1String("\" .+")));
         KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
         QVERIFY(md.isValid());
         QCOMPARE(md.name(), QStringLiteral("Example"));
