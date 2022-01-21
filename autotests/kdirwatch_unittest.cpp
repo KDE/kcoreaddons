@@ -20,51 +20,13 @@
 #include <unistd.h> // ::link()
 #endif
 
-#include "config-tests.h"
 #include "kcoreaddons_debug.h"
+#include "kdirwatch_test_utils.h"
+
+using namespace KDirWatchTestUtils;
 
 // Debugging notes: to see which inotify signals are emitted, either set s_verboseDebug=true
 // at the top of kdirwatch.cpp, or use the command-line tool "inotifywait -m /path"
-
-// Note that kdirlistertest and kdirmodeltest also exercise KDirWatch quite a lot.
-
-static const char *methodToString(KDirWatch::Method method)
-{
-    switch (method) {
-    case KDirWatch::FAM:
-        return "Fam";
-    case KDirWatch::INotify:
-        return "INotify";
-    case KDirWatch::Stat:
-        return "Stat";
-    case KDirWatch::QFSWatch:
-        return "QFSWatch";
-    }
-    return "ERROR!";
-}
-
-class StaticObject
-{
-public:
-    KDirWatch m_dirWatch;
-};
-Q_GLOBAL_STATIC(StaticObject, s_staticObject)
-
-class StaticObjectUsingSelf // like KSambaShare does, bug 353080
-{
-public:
-    StaticObjectUsingSelf()
-    {
-        KDirWatch::self();
-    }
-    ~StaticObjectUsingSelf()
-    {
-        if (KDirWatch::exists() && KDirWatch::self()->contains(QDir::homePath())) {
-            KDirWatch::self()->removeDir(QDir::homePath());
-        }
-    }
-};
-Q_GLOBAL_STATIC(StaticObjectUsingSelf, s_staticObjectUsingSelf)
 
 class KDirWatch_UnitTest : public QObject
 {
@@ -111,29 +73,25 @@ private Q_SLOTS: // test methods
     void nestedEventLoop();
     void testHardlinkChange();
     void stopAndRestart();
-    void benchCreateTree();
-    void benchCreateWatcher();
-    void benchNotifyWatcher();
     void testRefcounting();
 
 protected Q_SLOTS: // internal slots
     void nestedEventLoopSlot();
 
 private:
-    void waitUntilMTimeChange(const QString &path);
-    void waitUntilNewSecond();
-    void waitUntilAfter(const QDateTime &ctime);
     QList<QVariantList> waitForDirtySignal(KDirWatch &watch, int expected);
     QList<QVariantList> waitForDeletedSignal(KDirWatch &watch, int expected);
     bool waitForOneSignal(KDirWatch &watch, const char *sig, const QString &path);
     bool waitForRecreationSignal(KDirWatch &watch, const QString &path);
     bool verifySignalPath(QSignalSpy &spy, const char *sig, const QString &expectedPath);
-    void createFile(const QString &path);
     QString createFile(int num);
+    void createFile(const QString &file)
+    {
+        KDirWatchTestUtils::createFile(file, m_slow);
+    }
     void removeFile(int num);
     void appendToFile(const QString &path);
     void appendToFile(int num);
-    int createDirectoryTree(const QString &path, int depth = 4);
 
     QTemporaryDir m_tempDir;
     QString m_path;
@@ -143,33 +101,13 @@ private:
 
 QTEST_MAIN(KDirWatch_UnitTest)
 
-// Just to make the inotify packets bigger
-static const char s_filePrefix[] = "This_is_a_test_file_";
-
 static const int s_maxTries = 50;
-
-// helper method: create a file
-void KDirWatch_UnitTest::createFile(const QString &path)
-{
-    QFile file(path);
-    QVERIFY(file.open(QIODevice::WriteOnly));
-#ifdef Q_OS_FREEBSD
-    // FreeBSD has inotify implemented as user-space library over native kevent API.
-    // When using it, one has to open() a file to start watching it, so workaround
-    // test breakage by giving inotify time to react to file creation.
-    // Full context: https://github.com/libinotify-kqueue/libinotify-kqueue/issues/10
-    if (!m_slow)
-        QThread::msleep(1);
-#endif
-    file.write(QByteArray("foo"));
-    file.close();
-}
 
 // helper method: create a file (identified by number)
 QString KDirWatch_UnitTest::createFile(int num)
 {
     const QString fileName = QLatin1String(s_filePrefix) + QString::number(num);
-    createFile(m_path + fileName);
+    KDirWatchTestUtils::createFile(m_path + fileName, m_slow);
     return m_path + fileName;
 }
 
@@ -178,67 +116,6 @@ void KDirWatch_UnitTest::removeFile(int num)
 {
     const QString fileName = QLatin1String(s_filePrefix) + QString::number(num);
     QFile::remove(m_path + fileName);
-}
-
-int KDirWatch_UnitTest::createDirectoryTree(const QString &basePath, int depth)
-{
-    int filesCreated = 0;
-
-    const int numFiles = 10;
-    for (int i = 0; i < numFiles; ++i) {
-        createFile(basePath + QLatin1Char('/') + QLatin1String(s_filePrefix) + QString::number(i));
-        ++filesCreated;
-    }
-
-    if (depth <= 0) {
-        return filesCreated;
-    }
-
-    const int numFolders = 5;
-    for (int i = 0; i < numFolders; ++i) {
-        const QString childPath = basePath + QLatin1String("/subdir") + QString::number(i);
-        QDir().mkdir(childPath);
-        filesCreated += createDirectoryTree(childPath, depth - 1);
-    }
-
-    return filesCreated;
-}
-
-void KDirWatch_UnitTest::waitUntilMTimeChange(const QString &path)
-{
-    // Wait until the current second is more than the file's mtime
-    // otherwise this change will go unnoticed
-
-    QFileInfo fi(path);
-    QVERIFY(fi.exists());
-    const QDateTime ctime = fi.lastModified();
-    waitUntilAfter(ctime);
-}
-
-void KDirWatch_UnitTest::waitUntilNewSecond()
-{
-    QDateTime now = QDateTime::currentDateTime();
-    waitUntilAfter(now);
-}
-
-void KDirWatch_UnitTest::waitUntilAfter(const QDateTime &ctime)
-{
-    int totalWait = 0;
-    QDateTime now;
-    Q_FOREVER {
-        now = QDateTime::currentDateTime();
-        if (now.toMSecsSinceEpoch() / 1000 == ctime.toMSecsSinceEpoch() / 1000) // truncate milliseconds
-        {
-            totalWait += 50;
-            QTest::qWait(50);
-        } else {
-            QVERIFY(now > ctime); // can't go back in time ;)
-            QTest::qWait(50); // be safe
-            break;
-        }
-    }
-    // if (totalWait > 0)
-    qCDebug(KCOREADDONS_DEBUG) << "Waited" << totalWait << "ms so that now" << now.toString(Qt::ISODate) << "is >" << ctime.toString(Qt::ISODate);
 }
 
 // helper method: modifies a file
@@ -807,54 +684,6 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     QFile::remove(file2);
     QFile::remove(file3);
-}
-
-void KDirWatch_UnitTest::benchCreateTree()
-{
-#if !ENABLE_BENCHMARKS
-    QSKIP("Benchmarks are disabled in debug mode");
-#endif
-    QTemporaryDir dir;
-
-    QBENCHMARK {
-        createDirectoryTree(dir.path());
-    }
-}
-
-void KDirWatch_UnitTest::benchCreateWatcher()
-{
-#if !ENABLE_BENCHMARKS
-    QSKIP("Benchmarks are disabled in debug mode");
-#endif
-    QTemporaryDir dir;
-    createDirectoryTree(dir.path());
-
-    QBENCHMARK {
-        KDirWatch watch;
-        watch.addDir(dir.path(), KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
-    }
-}
-
-void KDirWatch_UnitTest::benchNotifyWatcher()
-{
-#if !ENABLE_BENCHMARKS
-    QSKIP("Benchmarks are disabled in debug mode");
-#endif
-    QTemporaryDir dir;
-    // create the dir once upfront
-    auto numFiles = createDirectoryTree(dir.path());
-    waitUntilMTimeChange(dir.path());
-
-    KDirWatch watch;
-    watch.addDir(dir.path(), KDirWatch::WatchSubDirs | KDirWatch::WatchFiles);
-
-    // now touch all the files repeatedly and wait for the dirty updates to come in
-    QSignalSpy spy(&watch, &KDirWatch::dirty);
-    QBENCHMARK {
-        createDirectoryTree(dir.path());
-        QTRY_COMPARE_WITH_TIMEOUT(spy.count(), numFiles, 30000);
-        spy.clear();
-    }
 }
 
 void KDirWatch_UnitTest::testRefcounting()
