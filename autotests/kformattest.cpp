@@ -15,13 +15,15 @@
 
 #include "kformat.h"
 
-#ifndef Q_OS_WIN
-void ignoreTranslations()
+void setupEnvironment()
 {
+#ifndef Q_OS_WIN
+    // ignore translations
     qputenv("XDG_DATA_DIRS", "does-not-exist");
-}
-Q_CONSTRUCTOR_FUNCTION(ignoreTranslations)
 #endif
+    qputenv("TZ", "Europe/Paris");
+}
+Q_CONSTRUCTOR_FUNCTION(setupEnvironment)
 
 void KFormatTest::formatByteSize()
 {
