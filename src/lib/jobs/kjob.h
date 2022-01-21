@@ -372,7 +372,7 @@ Q_SIGNALS:
      * Emitted when the job is finished, in any case. It is used to notify
      * observers that the job is terminated and that progress can be hidden.
      *
-     * @since 5.75: this signal is guaranteed to be emitted exactly once.
+     * Since 5.75 this signal is guaranteed to be emitted exactly once.
      *
      * This is a private signal, it can't be emitted directly by subclasses of
      * KJob, use emitResult() instead.
@@ -427,7 +427,7 @@ Q_SIGNALS:
     /**
      * Emitted when the job is finished (except when killed with KJob::Quietly).
      *
-     * @since 5.75: this signal is guaranteed to be emitted at most once.
+     * Since 5.75 this signal is guaranteed to be emitted at most once.
      *
      * Use error to know if the job was finished with error.
      *
