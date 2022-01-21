@@ -467,7 +467,15 @@ private Q_SLOTS:
         QCOMPARE(mdAbsolute.fileName(), pluginPath);
 
         // All files that have been opened should be stored as absolute paths.
-        QString inputRelative = QDir::current().relativeFilePath(inputAbsolute);
+        QString inputRelative;
+        if (QLibrary::isLibrary(inputAbsolute)) {
+            // We have a plugin without namespace, with the code path below we would end up with
+            // a path relative to the PWD, but we want to check a path relative to the plugin dir.
+            // Because of that we simply use the baseName of the file.
+            inputRelative = QFileInfo(inputAbsolute).baseName();
+        } else {
+            inputRelative = QDir::current().relativeFilePath(inputAbsolute);
+        }
         QVERIFY2(QDir::isRelativePath(inputRelative), qPrintable(inputRelative));
         KPluginMetaData mdRelative(inputRelative);
         QCOMPARE(mdRelative.metaDataFileName(), inputAbsolute);
