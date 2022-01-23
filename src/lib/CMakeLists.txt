@@ -6,6 +6,23 @@ configure_file(caching/config-caching.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config
 include(CheckSymbolExists)
 check_symbol_exists("getgrouplist" "grp.h" HAVE_GETGROUPLIST)
 
+if(UNIX)
+    function(check_dladdr) # use a function to scope the variables!
+        set(CMAKE_REQUIRED_FLAGS ${DLADDR_LINK_FLAGS})
+        set(CMAKE_REQUIRED_LIBRARIES ${DLADDR_LINK_LIBRARIES})
+        check_symbol_exists("dladdr" "dlfcn.h" HAVE_DLADDR)
+        set(HAVE_DLADDR ${HAVE_DLADDR} PARENT_SCOPE)
+    endfunction()
+
+    if(CMAKE_SYSTEM_NAME MATCHES "Linux") # on linux dladdr isn't part of libc, on freebsd and osx it is
+        set(DLADDR_LINK_FLAGS "-D_GNU_SOURCE")
+        set(DLADDR_LINK_LIBRARIES "dl")
+    endif()
+    check_dladdr()
+
+    add_feature_info(dladdr ${HAVE_DLADDR} "Can resolve shared library paths and by extension libexec paths at runtime using dladdr() API")
+endif()
+
 set (KDE4_DEFAULT_HOME ".kde${_KDE4_DEFAULT_HOME_POSTFIX}" CACHE STRING "The default KDE home directory" )
 set (ACCOUNTS_SERVICE_ICON_DIR "/var/lib/AccountsService/icons" CACHE STRING "Accounts Services icon storage directory")
 
@@ -108,6 +125,7 @@ target_sources(KF5CoreAddons PRIVATE
     util/kosrelease.cpp
     util/kprocesslist.cpp
     util/kshell.cpp
+    util/klibexec.cpp
 )
 
 
@@ -187,6 +205,11 @@ endif()
 
 if (HAVE_PROCSTAT)
     target_link_libraries(KF5CoreAddons PRIVATE Procstat::Procstat)
+endif()
+
+if(HAVE_DLADDR)
+    set_source_files_properties(SOURCE util/klibexec.cpp PROPERTIES COMPILE_FLAGS "${DLADDR_LINK_FLAGS}") # ensure _GNU_SOURCE on Linux
+    target_link_libraries(KF5CoreAddons PRIVATE ${DLADDR_LINK_LIBRARIES})
 endif()
 
 target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons>" )
@@ -270,6 +293,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KListOpenFilesJob
         Kdelibs4Migration
         Kdelibs4ConfigMigrator
+        KLibexec
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
