@@ -54,12 +54,12 @@ void KProcessListTest::testProcessInfoList()
     KProcessList::KProcessInfoList processInfoList = KProcessList::processInfoList();
     QVERIFY(processInfoList.empty() == false);
     auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(), [](const KProcessList::KProcessInfo &info) {
-        return info.command().endsWith(QLatin1String("/") + getTestExeName());
+        return QDir::fromNativeSeparators(info.command()).endsWith(QLatin1String("/") + getTestExeName());
     });
     QVERIFY(testProcessIterator != processInfoList.end());
     const auto &processInfo = *testProcessIterator;
     QVERIFY(processInfo.isValid() == true);
-    QVERIFY(processInfo.command().endsWith(QLatin1String("/") + getTestExeName()));
+    QVERIFY(QDir::fromNativeSeparators(processInfo.command()).endsWith(QLatin1String("/") + getTestExeName()));
     QCOMPARE(processInfo.name(), getTestExeName());
     QCOMPARE(processInfo.pid(), QCoreApplication::applicationPid());
     QCOMPARE(processInfo.user(), KUser().loginName());
@@ -70,7 +70,7 @@ void KProcessListTest::testProcessInfo()
     const qint64 testExePid = QCoreApplication::applicationPid();
     KProcessList::KProcessInfo processInfo = KProcessList::processInfo(testExePid);
     QVERIFY(processInfo.isValid() == true);
-    QVERIFY(processInfo.command().endsWith(QLatin1String("/") + getTestExeName()));
+    QVERIFY(QDir::fromNativeSeparators(processInfo.command()).endsWith(QLatin1String("/") + getTestExeName()));
     QCOMPARE(processInfo.pid(), testExePid);
     QCOMPARE(processInfo.user(), KUser().loginName());
 }
