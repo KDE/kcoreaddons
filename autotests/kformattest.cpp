@@ -21,7 +21,6 @@ void setupEnvironment()
     // ignore translations
     qputenv("XDG_DATA_DIRS", "does-not-exist");
 #endif
-    qputenv("TZ", "Europe/Paris");
 }
 Q_CONSTRUCTOR_FUNCTION(setupEnvironment)
 
@@ -385,7 +384,7 @@ void KFormatTest::formatRelativeDate()
                  .arg(QLocale::c().toString(testDateTime.date(), QLocale::LongFormat), QLocale::c().toString(testDateTime.time(), QLocale::ShortFormat)));
 
     // 2021-10-03 07:33:57.000
-    testDateTime = QDateTime::fromMSecsSinceEpoch(1633239237000);
+    testDateTime = QDateTime::fromMSecsSinceEpoch(1633239237000, Qt::UTC);
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::LongFormat),
              QStringLiteral("%1 at %2")
                  .arg(QLocale::c().toString(testDateTime.date(), QLocale::LongFormat), QLocale::c().toString(testDateTime.time(), QLocale::ShortFormat)));
@@ -396,7 +395,7 @@ void KFormatTest::formatRelativeDate()
     // With a different local for double check
     QLocale englishLocal = QLocale::English;
     KFormat formatEnglish(englishLocal);
-    QCOMPARE(formatEnglish.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QStringLiteral("Sunday, October 3, 2021 at 7:33 AM"));
+    QCOMPARE(formatEnglish.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QStringLiteral("Sunday, October 3, 2021 at 5:33 AM"));
 }
 
 QTEST_MAIN(KFormatTest)
