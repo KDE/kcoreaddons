@@ -69,7 +69,7 @@ static bool getChildRandSeq(intSequenceType &seq)
 
     char c;
     childStream >> c;
-    return c == '\n' && childStream.status() == QTextStream::Ok;
+    return c == '@' && childStream.status() == QTextStream::Ok;
 }
 #endif
 
@@ -258,7 +258,7 @@ static void childGenRandom(int count)
         std::cout << KRandom::random() << ' ';
     }
 
-    std::cout << KRandom::random() << '\n';
+    std::cout << KRandom::random() << '@';
     exit(0);
 }
 #endif
