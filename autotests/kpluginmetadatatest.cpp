@@ -283,6 +283,7 @@ private Q_SLOTS:
         QCOMPARE(data.value(QStringLiteral("Object"), QStringList()), QStringList());
     }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 91)
     void testFromDesktopFile()
     {
         const QString dfile = QFINDTESTDATA("data/fakeplugin.desktop");
@@ -418,6 +419,7 @@ private Q_SLOTS:
         QCOMPARE(md.rawData().value(QStringLiteral("InvalidType")), QJsonValue(QStringLiteral("18"))); // Type= is invalid -> fall back to string
         QCOMPARE(md.rawData().value(QStringLiteral("ThisIsOkayAgain")), QJsonValue(19)); // valid definition after invalid ones should still work -> integer
     }
+#endif
 
     void testJSONMetadata()
     {
@@ -446,8 +448,10 @@ private Q_SLOTS:
         QTest::addColumn<QString>("inputAbsolute");
         QTest::addColumn<QString>("pluginPath");
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 91)
         // The .desktop file has X-KDE-Library, so .fileName() returns  different file
         QTest::newRow("desktop") << QFINDTESTDATA("data/fakeplugin.desktop") << QStringLiteral("fakeplugin");
+#endif
         // But for the .json based plugin both are the same.
         QTest::newRow("json") << QFINDTESTDATA("data/testmetadata.json") << QFINDTESTDATA("data/testmetadata.json");
         // And also for the library with embedded JSON metadata.
@@ -470,8 +474,6 @@ private Q_SLOTS:
 #else
             if (path.endsWith(QLatin1String(".json"))) {
                 return KPluginMetaData::fromJsonFile(path);
-            } else if (path.endsWith(QLatin1String(".desktop"))) {
-                return KPluginMetaData::fromDesktopFile(path);
             } else {
                 return KPluginMetaData(path);
             }

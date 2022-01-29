@@ -219,6 +219,7 @@ public:
      */
     ~KPluginMetaData();
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 92)
     /**
      * Load a KPluginMetaData instance from a .desktop file. Unlike the constructor which takes
      * a single file parameter this method allows you to specify which service type files should
@@ -236,8 +237,11 @@ public:
      * will be read as the JSON string type.
      *
      * @since 5.16
+     * @deprecated Since 5.92, use json files or embedded json metadata directly.
      */
+    KCOREADDONS_DEPRECATED_VERSION(5, 92, "Use json files or embedded json metadata directly")
     static KPluginMetaData fromDesktopFile(const QString &file, const QStringList &serviceTypes = QStringList());
+#endif
 
     /**
      * Load a KPluginMetaData instance from a .json file. Unlike the constructor with a single file argument,
@@ -600,7 +604,9 @@ public:
 
 private:
     QJsonObject rootObject() const;
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 92)
     void loadFromDesktopFile(const QString &file, const QStringList &serviceTypes);
+#endif
     void loadFromJsonFile(const QString &file);
 
 private:
