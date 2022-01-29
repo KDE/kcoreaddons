@@ -286,7 +286,7 @@ private Q_SLOTS:
     void testFromDesktopFile()
     {
         const QString dfile = QFINDTESTDATA("data/fakeplugin.desktop");
-        KPluginMetaData md(dfile);
+        KPluginMetaData md = KPluginMetaData::fromDesktopFile(dfile);
         QVERIFY(md.isValid());
         QCOMPARE(md.pluginId(), QStringLiteral("fakeplugin"));
         QCOMPARE(md.fileName(), QStringLiteral("fakeplugin"));
@@ -311,7 +311,7 @@ private Q_SLOTS:
         QCOMPARE(md.formFactors(), QStringList() << QStringLiteral("mediacenter") << QStringLiteral("desktop"));
 
         const QString dfilehidden = QFINDTESTDATA("data/hiddenplugin.desktop");
-        KPluginMetaData mdhidden(dfilehidden);
+        KPluginMetaData mdhidden = KPluginMetaData::fromDesktopFile(dfilehidden);
         QVERIFY(mdhidden.isValid());
         QCOMPARE(mdhidden.isHidden(), true);
     }
@@ -464,7 +464,21 @@ private Q_SLOTS:
         QVERIFY2(QDir::isAbsolutePath(inputAbsolute), qPrintable(inputAbsolute));
         QFETCH(QString, pluginPath);
 
-        KPluginMetaData mdAbsolute(inputAbsolute);
+        const auto createMetaData = [](const QString &path) {
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 91)
+            return KPluginMetaData(path);
+#else
+            if (path.endsWith(QLatin1String(".json"))) {
+                return KPluginMetaData::fromJsonFile(path);
+            } else if (path.endsWith(QLatin1String(".desktop"))) {
+                return KPluginMetaData::fromDesktopFile(path);
+            } else {
+                return KPluginMetaData(path);
+            }
+#endif
+        };
+
+        KPluginMetaData mdAbsolute = createMetaData(inputAbsolute);
         QVERIFY(mdAbsolute.isValid());
         QCOMPARE(mdAbsolute.metaDataFileName(), inputAbsolute);
         QCOMPARE(mdAbsolute.fileName(), pluginPath);
@@ -480,7 +494,8 @@ private Q_SLOTS:
             inputRelative = QDir::current().relativeFilePath(inputAbsolute);
         }
         QVERIFY2(QDir::isRelativePath(inputRelative), qPrintable(inputRelative));
-        KPluginMetaData mdRelative(inputRelative);
+        KPluginMetaData mdRelative = createMetaData(inputRelative);
+        QVERIFY(mdRelative.isValid());
         QCOMPARE(mdRelative.metaDataFileName(), inputAbsolute);
         QCOMPARE(mdRelative.fileName(), pluginPath);
 
