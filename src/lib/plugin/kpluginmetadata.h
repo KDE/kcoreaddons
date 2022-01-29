@@ -158,8 +158,12 @@ public:
      *
      * If @p file ends with .json, the file will be loaded as the QJsonObject metadata.
      *
+     * @note Using this constructor for metadata files is deprecated..
+     * Use KPluginMetaData::fromDesktopFile or KPluginMetaData::fromJsonFile instead.
+     *
      * @see QPluginLoader::setFileName()
      * @see KPluginMetaData::fromDesktopFile()
+     * @see KPluginMetaData::fromJsonFile()
      */
     KPluginMetaData(const QString &file);
 
