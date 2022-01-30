@@ -37,7 +37,7 @@ KCOREADDONS_EXPORT QStringList pathCandidates(const QString &relativePath);
  * @param relativePath relative element to append (e.g. "libexec/foobar" resulting in /usr/lib/libexec/foobar/ as output)
  *   when called with an empty string you effectively get the directory of your binary artifact.
  * @return QString absolute libexec path or empty string if it cannot be resolved
- * @since 5.90
+ * @since 5.91
  */
 inline QString path(const QString &relativePath)
 {
@@ -57,7 +57,7 @@ inline QString path(const QString &relativePath)
  *
  * @param relativePath see path() - not all paths get this appended!
  * @return QStringList list of search paths
- * @since 5.90
+ * @since 5.91
  */
 inline QStringList kdeFrameworksPaths(const QString &relativePath)
 {
