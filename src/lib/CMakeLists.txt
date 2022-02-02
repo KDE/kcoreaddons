@@ -126,6 +126,7 @@ target_sources(KF5CoreAddons PRIVATE
     util/kprocesslist.cpp
     util/kshell.cpp
     util/klibexec.cpp
+    util/ksignalhandler.cpp
 )
 
 
@@ -294,6 +295,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         Kdelibs4Migration
         Kdelibs4ConfigMigrator
         KLibexec
+        KSignalHandler
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
@@ -341,6 +343,7 @@ if (PythonModuleGeneration_FOUND)
       util/kshell.h
       util/kdelibs4migration.h
       util/kdelibs4configmigrator.h
+      util/ksignalhandler.h
   )
 endif()
 
