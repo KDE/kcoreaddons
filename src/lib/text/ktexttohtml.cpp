@@ -32,7 +32,7 @@ static void loadEmoticonsPlugin()
         // because we cannot load the FrameworkIntegration plugin into a
         // QCoreApplication, as it would crash immediately
         if (qApp->metaObject()->indexOfProperty("platformName") > -1) {
-            QPluginLoader lib(QStringLiteral("kf5/KEmoticonsIntegrationPlugin"));
+            QPluginLoader lib(QStringLiteral("kf" QT_STRINGIFY(QT_VERSION_MAJOR) "/KEmoticonsIntegrationPlugin"));
             QObject *rootObj = lib.instance();
             if (rootObj) {
                 s_emoticonsInterface = rootObj->property(KTEXTTOHTMLEMOTICONS_PROPERTY).value<KTextToHTMLEmoticonsInterface *>();
