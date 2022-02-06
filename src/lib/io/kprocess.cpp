@@ -6,6 +6,7 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
+#include "kcoreaddons_debug.h"
 #include "kprocess_p.h"
 
 #include <QStandardPaths>
@@ -124,7 +125,12 @@ void KProcess::setProgram(const QStringList &argv)
 {
     Q_D(KProcess);
 
-    Q_ASSERT(!argv.isEmpty());
+    if (argv.isEmpty()) {
+        qCWarning(KCOREADDONS_DEBUG) << "KProcess::setProgram(const QStringList &argv) called on an empty string list, no process will be started.";
+        clearProgram();
+        return;
+    }
+
     d->args = argv;
     d->prog = d->args.takeFirst();
 #ifdef Q_OS_WIN
@@ -302,6 +308,11 @@ int KProcess::startDetached(const QString &exe, const QStringList &args)
 // static
 int KProcess::startDetached(const QStringList &argv)
 {
+    if (argv.isEmpty()) {
+        qCWarning(KCOREADDONS_DEBUG) << "KProcess::startDetached(const QStringList &argv) called on an empty string list, no process will be started.";
+        return 0;
+    }
+
     QStringList args = argv;
     QString prog = args.takeFirst();
     return startDetached(prog, args);
