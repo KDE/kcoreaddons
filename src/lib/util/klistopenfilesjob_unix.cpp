@@ -14,6 +14,7 @@
 #include <QDir>
 #include <QProcess>
 #include <QRegularExpression>
+#include <QStandardPaths>
 #include <QVector>
 
 class KListOpenFilesJobPrivate
@@ -37,8 +38,17 @@ public:
             emitResult(static_cast<int>(KListOpenFilesJob::Error::DoesNotExist), QObject::tr("Path %1 doesn't exist").arg(path.path()));
             return;
         }
-        lsofProcess.start(QStringLiteral("lsof"), {QStringLiteral("-t"), QStringLiteral("+d"), path.path()});
+
+        const QString lsofExec = QStandardPaths::findExecutable(QStringLiteral("lsof"));
+        if (lsofExec.isEmpty()) {
+            const QString envPath = QString::fromLocal8Bit(qgetenv("PATH"));
+            emitResult(static_cast<int>(KListOpenFilesJob::Error::InternalError), QObject::tr("Could not find lsof executable in PATH:").arg(envPath));
+            return;
+        }
+
+        lsofProcess.start(lsofExec, {QStringLiteral("-t"), QStringLiteral("+d"), path.path()});
     }
+
     KProcessList::KProcessInfoList getProcessInfoList() const
     {
         return processInfoList;
