@@ -1,3 +1,5 @@
+remove_definitions(-DQT_NO_CAST_FROM_ASCII)
+
 include(ECMAddTests)
 include(ConfigureChecks.cmake) #configure checks for QFileSystemWatcher
 include(../KF5CoreAddonsMacros.cmake)
