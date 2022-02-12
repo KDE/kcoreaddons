@@ -300,53 +300,6 @@ ecm_generate_headers(KCoreAddons_HEADERS
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
 
-find_package(PythonModuleGeneration)
-
-if (PythonModuleGeneration_FOUND)
-  ecm_generate_python_binding(
-    TARGET KF5::CoreAddons
-    PYTHONNAMESPACE PyKF5
-    MODULENAME KCoreAddons
-    RULES_FILE "${CMAKE_SOURCE_DIR}/cmake/rules_PyKF5.py"
-    SIP_DEPENDS
-      QtCore/QtCoremod.sip
-    HEADERS
-      kaboutdata.h
-      kcoreaddons.h
-      caching/kshareddatacache.h
-      io/kautosavefile.h
-      io/kdirwatch.h
-      io/kmessage.h
-      io/kprocess.h
-      io/kbackup.h
-      io/kurlmimedata.h
-      io/kfilesystemtype.h
-      jobs/kcompositejob.h
-      jobs/kjob.h
-      jobs/kjobtrackerinterface.h
-      jobs/kjobuidelegate.h
-      plugin/kexportplugin.h
-      plugin/kpluginfactory.h
-      plugin/kpluginloader.h
-      plugin/kpluginmetadata.h
-      randomness/krandom.h
-      randomness/krandomsequence.h
-      text/kmacroexpander.h
-      text/kstringhandler.h
-      text/ktexttohtml.h
-      text/ktexttohtmlemoticonsinterface.h
-      util/kformat.h
-      util/klistopenfilesjob.h
-      util/kosrelease.h
-      util/kprocesslist.h
-      util/kuser.h
-      util/kshell.h
-      util/kdelibs4migration.h
-      util/kdelibs4configmigrator.h
-      util/ksignalhandler.h
-  )
-endif()
-
 install(TARGETS KF5CoreAddons EXPORT KF5CoreAddonsTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
