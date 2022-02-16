@@ -1,7 +1,7 @@
 #
 # kcoreaddons_desktop_to_json(target desktopfile
 #                             DEFAULT_SERVICE_TYPE | SERVICE_TYPES <file> [<file> [...]]
-#                             [OUTPUT_DIR dir] [COMPAT_MODE])
+#                             [OUTPUT_DIR dir | OUTPUT_FILE file] [COMPAT_MODE])
 #
 # This macro uses desktoptojson to generate a json file from a plugin
 # description in a .desktop file. The generated file can be compiled
@@ -22,6 +22,9 @@
 # If OUTPUT_DIR is set the generated file will be created inside <dir> instead of in
 # ${CMAKE_CURRENT_BINARY_DIR}
 #
+# If OUTPUT_FILE is set the generated file will be <file> instead of the default
+# ${CMAKE_CURRENT_BINARY_DIR}/$(basename desktopfile).json
+#
 # Example:
 #
 #  kcoreaddons_desktop_to_json(plasma_engine_time plasma-dataengine-time.desktop
@@ -29,9 +32,11 @@
 
 function(kcoreaddons_desktop_to_json target desktop)
     get_filename_component(desktop_basename ${desktop} NAME_WE) # allow passing an absolute path to the .desktop
-    cmake_parse_arguments(DESKTOP_TO_JSON "COMPAT_MODE;DEFAULT_SERVICE_TYPE" "OUTPUT_DIR" "SERVICE_TYPES" ${ARGN})
+    cmake_parse_arguments(DESKTOP_TO_JSON "COMPAT_MODE;DEFAULT_SERVICE_TYPE" "OUTPUT_DIR;OUTPUT_FILE" "SERVICE_TYPES" ${ARGN})
 
-    if(DESKTOP_TO_JSON_OUTPUT_DIR)
+    if(DESKTOP_TO_JSON_OUTPUT_FILE)
+        set(json "${DESKTOP_TO_JSON_OUTPUT_FILE}")
+    elseif(DESKTOP_TO_JSON_OUTPUT_DIR)
         set(json "${DESKTOP_TO_JSON_OUTPUT_DIR}/${desktop_basename}.json")
     else()
         set(json "${CMAKE_CURRENT_BINARY_DIR}/${desktop_basename}.json")
