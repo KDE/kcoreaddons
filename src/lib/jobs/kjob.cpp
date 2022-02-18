@@ -389,4 +389,16 @@ void KJob::setAutoDelete(bool autodelete)
     d->isAutoDelete = autodelete;
 }
 
+void KJob::setFinishedNotificationHidden(bool hide)
+{
+    Q_D(KJob);
+    d->m_hideFinishedNotification = hide;
+}
+
+bool KJob::isFinishedNotificationHidden() const
+{
+    Q_D(const KJob);
+    return d->m_hideFinishedNotification;
+}
+
 #include "moc_kjob.cpp"

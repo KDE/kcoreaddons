@@ -53,6 +53,7 @@ public:
     KJob::Capabilities capabilities = KJob::NoCapabilities;
     bool suspended = false;
     bool isAutoDelete = true;
+    bool m_hideFinishedNotification = false;
 
     void speedTimeout();
 
