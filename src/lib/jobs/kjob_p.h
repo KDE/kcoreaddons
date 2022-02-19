@@ -30,6 +30,8 @@ public:
     KJobPrivate();
     virtual ~KJobPrivate();
 
+    void speedTimeout();
+
     KJob *q_ptr = nullptr;
 
     KJobUiDelegate *uiDelegate = nullptr;
@@ -54,9 +56,6 @@ public:
     bool suspended = false;
     bool isAutoDelete = true;
     bool m_hideFinishedNotification = false;
-
-    void speedTimeout();
-
     bool isFinished = false;
 
     Q_DECLARE_PUBLIC(KJob)
