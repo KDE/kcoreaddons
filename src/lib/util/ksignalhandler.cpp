@@ -7,9 +7,12 @@
 #include "ksignalhandler.h"
 #include "kcoreaddons_debug.h"
 #include <QSocketNotifier>
+
+#ifndef Q_OS_WIN
 #include <signal.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#endif
 
 class KSignalHandlerPrivate : public QObject
 {
@@ -29,6 +32,7 @@ KSignalHandler::KSignalHandler()
     : d(new KSignalHandlerPrivate)
 {
     d->q = this;
+#ifndef Q_OS_WIN
     if (::socketpair(AF_UNIX, SOCK_STREAM, 0, KSignalHandlerPrivate::signalFd)) {
         qCWarning(KCOREADDONS_DEBUG) << "Couldn't create a socketpair";
         return;
@@ -36,36 +40,45 @@ KSignalHandler::KSignalHandler()
 
     d->m_handler = new QSocketNotifier(KSignalHandlerPrivate::signalFd[1], QSocketNotifier::Read, this);
     connect(d->m_handler, &QSocketNotifier::activated, d.get(), &KSignalHandlerPrivate::handleSignal);
+#endif
 }
 
 KSignalHandler::~KSignalHandler()
 {
+#ifndef Q_OS_WIN
     for (int sig : std::as_const(d->m_signalsRegistered)) {
         signal(sig, nullptr);
     }
     close(KSignalHandlerPrivate::signalFd[0]);
     close(KSignalHandlerPrivate::signalFd[1]);
+#endif
 }
 
 void KSignalHandler::watchSignal(int signalToTrack)
 {
     d->m_signalsRegistered.insert(signalToTrack);
+#ifndef Q_OS_WIN
     signal(signalToTrack, KSignalHandlerPrivate::signalHandler);
+#endif
 }
 
 void KSignalHandlerPrivate::signalHandler(int signal)
 {
+#ifndef Q_OS_WIN
     ::write(signalFd[0], &signal, sizeof(signal));
+#endif
 }
 
 void KSignalHandlerPrivate::handleSignal()
 {
+#ifndef Q_OS_WIN
     m_handler->setEnabled(false);
     int signal;
     ::read(KSignalHandlerPrivate::signalFd[1], &signal, sizeof(signal));
     m_handler->setEnabled(true);
 
     Q_EMIT q->signalReceived(signal);
+#endif
 }
 
 KSignalHandler *KSignalHandler::self()
