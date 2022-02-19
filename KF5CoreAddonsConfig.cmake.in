@@ -14,7 +14,7 @@ if(CMAKE_CROSSCOMPILING AND KF5_HOST_TOOLING)
     # Check that the host tool version is the same to avoid incompatibilities.
     get_target_property(HOST_TOOL_VERSION KF5::desktoptojson TOOL_VERSION)
     if (NOT ("${HOST_TOOL_VERSION}" VERSION_EQUAL "@KF_VERSION@"))
-        message(FATAL_ERROR "Found incompatible host tool version ${HOST_TOOL_VERSION}, expected @KF_VERSION@")
+        message(WARNING "Found incompatible host tool version ${HOST_TOOL_VERSION}, expected @KF_VERSION@")
     endif()
 else()
     include("${CMAKE_CURRENT_LIST_DIR}/KF5CoreAddonsToolingTargets.cmake")
