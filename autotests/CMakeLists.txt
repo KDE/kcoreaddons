@@ -32,7 +32,6 @@ macro(build_plugin pname)
 endmacro()
 
 # Build some sample plugins
-build_plugin(pluginwithoutmetadata pluginwithoutmetadata.cpp)
 build_plugin(jsonplugin jsonplugin.cpp)
 build_plugin(jsonplugin2 jsonplugin2.cpp)
 build_plugin(versionedplugin versionedplugin.cpp)
@@ -44,6 +43,10 @@ build_plugin(qtplugin qtplugin.cpp)
 kcoreaddons_add_plugin(jsonplugin_cmake_macro SOURCES kpluginclass.cpp INSTALL_NAMESPACE "namespace")
 ecm_mark_as_test(jsonplugin_cmake_macro)
 target_link_libraries(jsonplugin_cmake_macro KF5::CoreAddons autotests_static)
+
+kcoreaddons_add_plugin(pluginwithoutmetadata SOURCES pluginwithoutmetadata.cpp INSTALL_NAMESPACE "namespace")
+ecm_mark_as_test(pluginwithoutmetadata)
+target_link_libraries(pluginwithoutmetadata KF5::CoreAddons autotests_static)
 
 add_definitions( -DKDELIBS4CONFIGMIGRATOR_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data" )
 
@@ -104,10 +107,15 @@ target_link_libraries(static_jsonplugin_cmake_macro KF5::CoreAddons autotests_st
 kcoreaddons_add_plugin(static_jsonplugin_cmake_macro_2 SOURCES statickpluginclass_2.cpp INSTALL_NAMESPACE "staticnamespace2" STATIC)
 target_link_libraries(static_jsonplugin_cmake_macro_2 KF5::CoreAddons autotests_static)
 
+kcoreaddons_add_plugin(static_plugin_without_metadata SOURCES staticpluginwithoutmetadata.cpp INSTALL_NAMESPACE "staticnamespace3" STATIC)
+target_link_libraries(static_plugin_without_metadata KF5::CoreAddons autotests_static)
+
+
 kcoreaddons_target_static_plugins(kpluginfactorytest "staticnamespace")
 kcoreaddons_target_static_plugins(kpluginfactorytest "staticnamespace2")
 kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace")
 kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace2")
+kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace3")
 
 if(NOT CMAKE_CROSSCOMPILING)
     ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF5::CoreAddons autotests_static)

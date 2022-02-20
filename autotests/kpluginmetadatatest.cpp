@@ -615,6 +615,36 @@ private Q_SLOTS:
         QCOMPARE(plugins.first().description(), QStringLiteral("This is a plugin"));
         QCOMPARE(plugins.first().fileName(), QStringLiteral("staticnamespace/static_jsonplugin_cmake_macro"));
     }
+
+    void testPluginsWithoutMetaData()
+    {
+        KPluginMetaData emptyMetaData(QStringLiteral("namespace/pluginwithoutmetadata"), KPluginMetaData::AllowEmptyMetaData);
+        QVERIFY(emptyMetaData.isValid());
+        QCOMPARE(emptyMetaData.pluginId(), QStringLiteral("pluginwithoutmetadata"));
+
+        const auto plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), {}, KPluginMetaData::AllowEmptyMetaData);
+        QCOMPARE(plugins.count(), 2);
+        for (auto plugin : plugins) {
+            if (plugin.pluginId() == QLatin1String("pluginwithoutmetadata")) {
+                QVERIFY(plugin.isValid());
+                QVERIFY(plugin.rawData().isEmpty());
+            } else if (plugin.pluginId() == QLatin1String("jsonplugin_cmake_macro")) {
+                QVERIFY(plugin.isValid());
+                QVERIFY(!plugin.rawData().isEmpty());
+            } else {
+                Q_UNREACHABLE();
+            }
+        }
+    }
+
+    void testStaticPluginsWithoutMetadata()
+    {
+        QVERIFY(KPluginMetaData::findPlugins(QStringLiteral("staticnamespace3")).isEmpty());
+        const auto plugins = KPluginMetaData::findPlugins(QStringLiteral("staticnamespace3"), {}, KPluginMetaData::AllowEmptyMetaData);
+        QCOMPARE(plugins.count(), 1);
+        QVERIFY(plugins.first().isValid());
+        QCOMPARE(plugins.first().pluginId(), QStringLiteral("static_plugin_without_metadata"));
+    }
 };
 
 QTEST_MAIN(KPluginMetaDataTest)
