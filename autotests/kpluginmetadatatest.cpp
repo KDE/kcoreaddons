@@ -645,6 +645,13 @@ private Q_SLOTS:
         QVERIFY(plugins.first().isValid());
         QCOMPARE(plugins.first().pluginId(), QStringLiteral("static_plugin_without_metadata"));
     }
+
+    void testReverseDomainNotationPluginId()
+    {
+        KPluginMetaData data(QStringLiteral("org.kde.test"));
+        QVERIFY(data.isValid());
+        QCOMPARE(data.pluginId(), QStringLiteral("org.kde.test"));
+    }
 };
 
 QTEST_MAIN(KPluginMetaDataTest)

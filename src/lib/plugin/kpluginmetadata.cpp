@@ -479,7 +479,7 @@ QString KPluginMetaData::pluginId() const
     if (m_fileName.isEmpty()) {
         return QString();
     }
-    return QFileInfo(m_fileName).baseName();
+    return QFileInfo(m_fileName).completeBaseName();
 }
 
 QString KPluginMetaData::version() const

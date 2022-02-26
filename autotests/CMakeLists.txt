@@ -48,6 +48,9 @@ kcoreaddons_add_plugin(pluginwithoutmetadata SOURCES pluginwithoutmetadata.cpp I
 ecm_mark_as_test(pluginwithoutmetadata)
 target_link_libraries(pluginwithoutmetadata KF5::CoreAddons autotests_static)
 
+add_library(org.kde.test MODULE jsonplugin.cpp)
+target_link_libraries(org.kde.test KF5::CoreAddons)
+
 add_definitions( -DKDELIBS4CONFIGMIGRATOR_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data" )
 
 if (WIN32)
