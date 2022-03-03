@@ -206,23 +206,13 @@ KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaDa
 KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId)
 
 {
-    KPluginMetaData metaData;
-    KPluginMetaDataPrivate::forEachPlugin(directory, [&](const QString &pluginPath) {
-        if (metaData.isValid()) {
-            return; // We have already found the match
-        }
-        if (QFileInfo(pluginPath).baseName() != pluginId) {
-            return;
-        }
+    QPluginLoader loader(directory + QLatin1Char('/') + pluginId);
+    if (loader.load()) {
         // Load the JSON metadata and make sure the pluginId matches
-        KPluginMetaData uncheckedMetadata(pluginPath);
-        if (uncheckedMetadata.isValid() && uncheckedMetadata.pluginId() == pluginId) {
-            metaData = uncheckedMetadata;
+        KPluginMetaData metaData(loader.metaData().value(QLatin1String("MetaData")).toObject(), loader.fileName());
+        if (metaData.isValid() && metaData.pluginId() == pluginId) {
+            return metaData;
         }
-    });
-
-    if (metaData.isValid()) {
-        return metaData;
     }
 
     // TODO KF6 remove, this is fallback logic if the pluginId is not the same as the file name
@@ -231,10 +221,10 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
     };
     const QVector<KPluginMetaData> metaDataVector = KPluginMetaData::findPlugins(directory, filter);
     if (!metaDataVector.isEmpty()) {
-        metaData = metaDataVector.first();
+        return metaDataVector.first();
     }
 
-    return metaData;
+    return KPluginMetaData{};
 }
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 92)
