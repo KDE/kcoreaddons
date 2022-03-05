@@ -1,0 +1,841 @@
+# translation of kdelibs4.po to Telugu
+#
+#
+# Purushottam Boyanapalli <boyanapalli@gmail.com>, 2005.
+# విజయ్ కిరణ్ కముజు <infyquest@gmail.com>, 2007.
+# pavithran <pavithran.s@gmail.com>, 2007.
+# Krishna Babu K <kkrothap@redhat.com>, 2008, 2009.
+# sreekalyanbapatla <sreekalyan3@gmail.com>, 2013.
+# GVS.Giri <gvs.giri@swecha.net>, 2013.
+# Bhuvan Krishna <bhuvan@swecha.org>,2013.
+# Naveen Kandimalla <naveen@swecha.net>,2013.
+# B Poojitha <bondalakuntapoojitha99@gmail.com>, 2019.
+# Sripath Roy Koganti <sripathroy@swecha.net>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdelibs4\n"
+"Report-Msgid-Bugs-To: http://bugs.kde.org\n"
+"POT-Creation-Date: 2014-03-23 01:50+0000\n"
+"PO-Revision-Date: 2019-03-06 12:12+0530\n"
+"Last-Translator: Sripath Roy Koganti <sripathroy@swecha.net>\n"
+"Language-Team: Telugu <reachus@swecha.net>\n"
+"Language: te\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Gtranslator 3.30.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Qt-Contexts: true\n"
+
+#: lib/io/kfilesystemtype.cpp:186
+msgctxt "KFileSystemType|"
+msgid "NFS"
+msgstr ""
+
+#: lib/io/kfilesystemtype.cpp:188
+msgctxt "KFileSystemType|"
+msgid "SMB"
+msgstr ""
+
+#: lib/io/kfilesystemtype.cpp:190
+msgctxt "KFileSystemType|"
+msgid "FAT"
+msgstr ""
+
+#: lib/io/kfilesystemtype.cpp:192
+msgctxt "KFileSystemType|"
+msgid "RAMFS"
+msgstr ""
+
+#: lib/io/kfilesystemtype.cpp:194
+#, fuzzy
+#| msgctxt "@item Text character set"
+#| msgid "Other"
+msgctxt "KFileSystemType|"
+msgid "Other"
+msgstr "ఇతర"
+
+#: lib/io/kfilesystemtype.cpp:196
+msgctxt "KFileSystemType|"
+msgid "NTFS"
+msgstr ""
+
+#: lib/io/kfilesystemtype.cpp:198
+msgctxt "KFileSystemType|"
+msgid "ExFAT"
+msgstr ""
+
+#: lib/io/kfilesystemtype.cpp:200
+#, fuzzy
+#| msgid "Unknown"
+msgctxt "KFileSystemType|"
+msgid "Unknown"
+msgstr "తెలియని"
+
+#: lib/kaboutdata.cpp:265
+msgctxt "KAboutLicense|"
+msgid ""
+"No licensing terms for this program have been specified.\n"
+"Please check the documentation or the source for any\n"
+"licensing terms.\n"
+msgstr ""
+"ఈ ప్రోగ్రామ్‌కు లైసెన్స్ షరతులు పేర్కొనలేవు.\n"
+"దయచేసి లైసెన్స్ షరతుల కొరకు పత్రరచన లేక మూలంను \n"
+"సంప్రదించండి.\n"
+
+#: lib/kaboutdata.cpp:273
+#, qt-format
+msgctxt "KAboutLicense|"
+msgid "This program is distributed under the terms of the %1."
+msgstr "ఈ ప్రోగ్రామ్ %1 షరతుల క్రింద పంచిపెట్టడమైనది."
+
+#: lib/kaboutdata.cpp:317
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v2"
+msgstr "జి పి ఎల్  వి 2"
+
+#: lib/kaboutdata.cpp:318
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 2"
+msgstr "జి యాన్ యూ  జనరల్ పబ్లిక్ లైసెన్స్ వెర్షన్ 2"
+
+#: lib/kaboutdata.cpp:321
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v2"
+msgstr "యల్ జి పి యల్  వి 2"
+
+#: lib/kaboutdata.cpp:322
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 2"
+msgstr "గ్ను లెస్సర్ జనరల్ పబ్లిక్ లైసెన్స్ వెర్షన్ 2"
+
+#: lib/kaboutdata.cpp:325
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "BSD License"
+msgstr "BSD లైసెన్స్"
+
+#: lib/kaboutdata.cpp:326
+msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "BSD లైసెన్స్"
+
+#: lib/kaboutdata.cpp:329
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "Artistic License"
+msgstr "ఆర్టిస్టిక్ లైసెన్స్"
+
+#: lib/kaboutdata.cpp:330
+msgctxt "KAboutLicense|@item license"
+msgid "Artistic License"
+msgstr "ఆర్టిస్టిక్ లైసెన్స్"
+
+#: lib/kaboutdata.cpp:333
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "QPL v1.0"
+msgstr "క్కు పి యల్  వి 1.0"
+
+#: lib/kaboutdata.cpp:334
+msgctxt "KAboutLicense|@item license"
+msgid "Q Public License"
+msgstr "క్యు పబ్లిక్ లైసెన్స్"
+
+#: lib/kaboutdata.cpp:337
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "GPL v3"
+msgstr "జి పి యల్  వి3"
+
+#: lib/kaboutdata.cpp:338
+msgctxt "KAboutLicense|@item license"
+msgid "GNU General Public License Version 3"
+msgstr "గ్ను సాధారణ పబ్లిక్ లైసెన్స్ వివరణం 3"
+
+#: lib/kaboutdata.cpp:341
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v3"
+msgstr "యల్ జి పి యల్  వి3"
+
+#: lib/kaboutdata.cpp:342
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 3"
+msgstr "గ్ను తక్కువ సాధారణ పబ్లిక్ లైసెన్స్ వివరణం 3"
+
+#: lib/kaboutdata.cpp:345
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "LGPL v2.1"
+msgstr "యల్ జి పి యల్  వి2.1"
+
+#: lib/kaboutdata.cpp:346
+msgctxt "KAboutLicense|@item license"
+msgid "GNU Lesser General Public License Version 2.1"
+msgstr "జి యాన్ యూ  లెస్సర్ జనరల్ పబ్లిక్ లైసెన్స్ వెర్షన్ 2"
+
+#: lib/kaboutdata.cpp:350
+msgctxt "KAboutLicense|@item license"
+msgid "Custom"
+msgstr "నిర్దేశితమైన"
+
+#: lib/kaboutdata.cpp:353
+msgctxt "KAboutLicense|@item license"
+msgid "Not specified"
+msgstr "ఏమి ఇవ్వబడలేదు"
+
+#: lib/kaboutdata.cpp:954
+msgctxt "KAboutData|replace this with information about your translation team"
+msgid ""
+"<p>KDE is translated into many languages thanks to the work of the "
+"translation teams all over the world.</p><p>For more information on KDE "
+"internationalization visit <a href=\"https://l10n.kde.org\">https://l10n.kde."
+"org</a></p>"
+msgstr ""
+"కెడిఈ తెలుగు అనువాదం జట్టు సమాచారం కొరకు ఈ వెబ్ సైట్ ను చూడండి<a href=\"http://www.swecha."
+"org\">స్వేచ్ఛ</a>"
+
+#: lib/kaboutdata.cpp:1212
+msgctxt "KAboutData CLI|"
+msgid "Show author information."
+msgstr "మూలకర్త సమాచారం చూపుము"
+
+#: lib/kaboutdata.cpp:1213
+msgctxt "KAboutData CLI|"
+msgid "Show license information."
+msgstr "లైసెన్స్ సమాచరం చూపుము"
+
+#: lib/kaboutdata.cpp:1215
+msgctxt "KAboutData CLI|"
+msgid "The base file name of the desktop entry for this application."
+msgstr "ఈ అనువర్తనం కోసం డెస్క్టాప్ ఎంట్రీ యొక్క మూల ఫైల్ పేరు."
+
+#: lib/kaboutdata.cpp:1216
+msgctxt "KAboutData CLI|"
+msgid "file name"
+msgstr "ఫైల్ పేరు"
+
+#: lib/kaboutdata.cpp:1226
+msgctxt "KAboutData CLI|"
+msgid "This application was written by somebody who wants to remain anonymous."
+msgstr "ఈ కార్యక్రమాన్ని వ్రాసినవారు అజ్ఞాతంగా వుండదలచుకున్నారు"
+
+#: lib/kaboutdata.cpp:1228
+#, fuzzy, qt-format
+#| msgctxt "KAboutData CLI|"
+#| msgid "%1 was written by:"
+msgctxt "KAboutData CLI|"
+msgid "%1 was written by:"
+msgstr ""
+"%1 ను వ్రాసింది\n"
+"%2"
+
+#: lib/kaboutdata.cpp:1239
+msgctxt "KAboutData CLI|"
+msgid "Please use https://bugs.kde.org to report bugs."
+msgstr "తప్పులను తెలియచేయుటకు http://bugs.kde.orgని వాడండి."
+
+#: lib/kaboutdata.cpp:1241
+#, qt-format
+msgctxt "KAboutData CLI|"
+msgid "Please report bugs to %1."
+msgstr "%1 కు తప్పులను తెలియచేయండి."
+
+#: lib/plugin/kpluginfactory.cpp:41
+#, fuzzy, qt-format
+#| msgid "Could not open file '%1'"
+msgctxt "KPluginFactory|"
+msgid "Could not find plugin %1"
+msgstr "'%1' దస్త్రాన్ని తెరువలేకపోయాను"
+
+#: lib/plugin/kpluginfactory.cpp:50
+#, fuzzy, qt-format
+#| msgid "Could not open file '%1'"
+msgctxt "KPluginFactory|"
+msgid "Could not load plugin from %1: %2"
+msgstr "'%1' దస్త్రాన్ని తెరువలేకపోయాను"
+
+#: lib/plugin/kpluginfactory.cpp:61
+#, fuzzy, qt-format
+#| msgctxt "KPluginLoader|"
+#| msgid "The library %1 does not offer a KPluginFactory."
+msgctxt "KPluginFactory|"
+msgid "The library %1 does not offer a KPluginFactory."
+msgstr "%1 లైబ్రరిలో కెడిఈ 4 కి సరిపడె ఫేక్టరి లేదు"
+
+#: lib/plugin/kpluginfactory.h:511
+#, qt-format
+msgctxt "KPluginFactory|"
+msgid "KPluginFactory could not load the plugin: %1"
+msgstr ""
+
+#: lib/plugin/kpluginloader.cpp:109
+#, qt-format
+msgctxt "KPluginLoader|"
+msgid "The library %1 does not offer a KPluginFactory."
+msgstr "%1 లైబ్రరిలో కెడిఈ 4 కి సరిపడె ఫేక్టరి లేదు"
+
+#: lib/util/kformatprivate.cpp:100
+msgctxt "KFormat|SI prefix for 10^⁻24"
+msgid "y"
+msgstr "వై "
+
+#: lib/util/kformatprivate.cpp:101
+msgctxt "KFormat|SI prefix for 10^⁻21"
+msgid "z"
+msgstr "జడ్"
+
+#: lib/util/kformatprivate.cpp:102
+msgctxt "KFormat|SI prefix for 10^⁻18"
+msgid "a"
+msgstr "పూర్వాహ్నము"
+
+#: lib/util/kformatprivate.cpp:103
+msgctxt "KFormat|SI prefix for 10^⁻15"
+msgid "f"
+msgstr "యఫ్ "
+
+#: lib/util/kformatprivate.cpp:104
+msgctxt "KFormat|SI prefix for 10^⁻12"
+msgid "p"
+msgstr "మధ్యాహ్నము"
+
+#: lib/util/kformatprivate.cpp:105
+msgctxt "KFormat|SI prefix for 10^⁻9"
+msgid "n"
+msgstr "యాన్  "
+
+#: lib/util/kformatprivate.cpp:106
+msgctxt "KFormat|SI prefix for 10^⁻6"
+msgid "µ"
+msgstr "మ్యు "
+
+#: lib/util/kformatprivate.cpp:107
+msgctxt "KFormat|SI prefix for 10^⁻3"
+msgid "m"
+msgstr "పూర్వాహ్నము"
+
+#: lib/util/kformatprivate.cpp:109
+msgctxt "KFormat|SI prefix for 10^3"
+msgid "k"
+msgstr "కే "
+
+#: lib/util/kformatprivate.cpp:109
+msgctxt "KFormat|IEC binary prefix for 2^10"
+msgid "Ki"
+msgstr "ఖా"
+
+#: lib/util/kformatprivate.cpp:110
+msgctxt "KFormat|SI prefix for 10^6"
+msgid "M"
+msgstr "ఎం"
+
+#: lib/util/kformatprivate.cpp:110
+msgctxt "KFormat|IEC binary prefix for 2^20"
+msgid "Mi"
+msgstr "ఎం ఐ "
+
+#: lib/util/kformatprivate.cpp:111
+msgctxt "KFormat|SI prefix for 10^9"
+msgid "G"
+msgstr "జి "
+
+#: lib/util/kformatprivate.cpp:111
+msgctxt "KFormat|IEC binary prefix for 2^30"
+msgid "Gi"
+msgstr "జి "
+
+#: lib/util/kformatprivate.cpp:112
+msgctxt "KFormat|SI prefix for 10^12"
+msgid "T"
+msgstr "టి "
+
+#: lib/util/kformatprivate.cpp:112
+msgctxt "KFormat|IEC binary prefix for 2^40"
+msgid "Ti"
+msgstr "టి "
+
+#: lib/util/kformatprivate.cpp:113
+msgctxt "KFormat|SI prefix for 10^15"
+msgid "P"
+msgstr "పి "
+
+#: lib/util/kformatprivate.cpp:113
+msgctxt "KFormat|IEC binary prefix for 2^50"
+msgid "Pi"
+msgstr "ఫై "
+
+#: lib/util/kformatprivate.cpp:114
+msgctxt "KFormat|SI prefix for 10^18"
+msgid "E"
+msgstr "ఈ "
+
+#: lib/util/kformatprivate.cpp:114
+msgctxt "KFormat|IEC binary prefix for 2^60"
+msgid "Ei"
+msgstr "ఈ ఐ "
+
+#: lib/util/kformatprivate.cpp:115
+msgctxt "KFormat|SI prefix for 10^21"
+msgid "Z"
+msgstr "జడ్"
+
+#: lib/util/kformatprivate.cpp:115
+msgctxt "KFormat|IEC binary prefix for 2^70"
+msgid "Zi"
+msgstr "జి "
+
+#: lib/util/kformatprivate.cpp:116
+msgctxt "KFormat|SI prefix for 10^24"
+msgid "Y"
+msgstr "వై "
+
+#: lib/util/kformatprivate.cpp:116
+msgctxt "KFormat|IEC binary prefix for 2^80"
+msgid "Yi"
+msgstr "యి "
+
+#: lib/util/kformatprivate.cpp:125
+msgctxt "KFormat|Symbol of binary digit"
+msgid "bit"
+msgstr "బిట్"
+
+#: lib/util/kformatprivate.cpp:128
+msgctxt "KFormat|Symbol of byte"
+msgid "B"
+msgstr "బి "
+
+#: lib/util/kformatprivate.cpp:131
+msgctxt "KFormat|Symbol of meter"
+msgid "m"
+msgstr "యమ "
+
+#: lib/util/kformatprivate.cpp:134
+msgctxt "KFormat|Symbol of hertz"
+msgid "Hz"
+msgstr "హెచ్  జడ్"
+
+#. value without prefix, format "<val> <unit>"
+#: lib/util/kformatprivate.cpp:143
+#, qt-format
+msgctxt "KFormat|no Prefix"
+msgid "%1 %2"
+msgstr "%1 %2"
+
+#. value with prefix, format "<val> <prefix><unit>"
+#: lib/util/kformatprivate.cpp:162
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 %2%3"
+msgstr "%1 %2%3"
+
+#. MetricBinaryDialect size in bytes
+#: lib/util/kformatprivate.cpp:212
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 B"
+msgstr "%1 బి "
+
+#. MetricBinaryDialect size in 1000 bytes
+#: lib/util/kformatprivate.cpp:215
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 kB"
+msgstr "%1 కె బి "
+
+#. MetricBinaryDialect size in 10^6 bytes
+#: lib/util/kformatprivate.cpp:218
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 MB"
+msgstr "%1 యంబి"
+
+#. MetricBinaryDialect size in 10^9 bytes
+#: lib/util/kformatprivate.cpp:221
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 GB"
+msgstr "%1 జిబి "
+
+#. MetricBinaryDialect size in 10^12 bytes
+#: lib/util/kformatprivate.cpp:224
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 TB"
+msgstr "%1 టిబి "
+
+#. MetricBinaryDialect size in 10^15 bytes
+#: lib/util/kformatprivate.cpp:227
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 PB"
+msgstr "%1 పిబి "
+
+#. MetricBinaryDialect size in 10^18 byte
+#: lib/util/kformatprivate.cpp:230
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 EB"
+msgstr "%1 ఇబి "
+
+#. MetricBinaryDialect size in 10^21 bytes
+#: lib/util/kformatprivate.cpp:233
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 ZB"
+msgstr "%1 జడ్ బి "
+
+#. MetricBinaryDialect size in 10^24 bytes
+#: lib/util/kformatprivate.cpp:236
+#, qt-format
+msgctxt "KFormat|MetricBinaryDialect"
+msgid "%1 YB"
+msgstr "%1 వై బి "
+
+#. JEDECBinaryDialect memory size in bytes
+#: lib/util/kformatprivate.cpp:242
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 B"
+msgstr "%1 బి "
+
+#. JEDECBinaryDialect memory size in 1024 bytes
+#: lib/util/kformatprivate.cpp:245
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 KB"
+msgstr "%1 కెబి "
+
+#. JEDECBinaryDialect memory size in 10^20 bytes
+#: lib/util/kformatprivate.cpp:248
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 MB"
+msgstr "%1 యంబి"
+
+#. JEDECBinaryDialect memory size in 10^30 bytes
+#: lib/util/kformatprivate.cpp:251
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 GB"
+msgstr "%1 జిబి "
+
+#. JEDECBinaryDialect memory size in 10^40 bytes
+#: lib/util/kformatprivate.cpp:254
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 TB"
+msgstr "%1 టిబి "
+
+#. JEDECBinaryDialect memory size in 10^50 bytes
+#: lib/util/kformatprivate.cpp:257
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 PB"
+msgstr "%1 పిబి "
+
+#. JEDECBinaryDialect memory size in 10^60 bytes
+#: lib/util/kformatprivate.cpp:260
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 EB"
+msgstr "%1 ఇబి "
+
+#. JEDECBinaryDialect memory size in 10^70 bytes
+#: lib/util/kformatprivate.cpp:263
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 ZB"
+msgstr "%1 జడ్ బి "
+
+#. JEDECBinaryDialect memory size in 10^80 bytes
+#: lib/util/kformatprivate.cpp:266
+#, qt-format
+msgctxt "KFormat|JEDECBinaryDialect"
+msgid "%1 YB"
+msgstr "%1 వై బి "
+
+#. IECBinaryDialect size in bytes
+#: lib/util/kformatprivate.cpp:272
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 B"
+msgstr "%1 బి "
+
+#. IECBinaryDialect size in 1024 bytes
+#: lib/util/kformatprivate.cpp:275
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 KiB"
+msgstr "%1 కె బి "
+
+#. IECBinaryDialect size in 10^20 bytes
+#: lib/util/kformatprivate.cpp:278
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 MiB"
+msgstr "%1 యం బి "
+
+#. IECBinaryDialect size in 10^30 bytes
+#: lib/util/kformatprivate.cpp:281
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 GiB"
+msgstr "%1 జిబి "
+
+#. IECBinaryDialect size in 10^40 bytes
+#: lib/util/kformatprivate.cpp:284
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 TiB"
+msgstr "%1 టిబి "
+
+#. IECBinaryDialect size in 10^50 bytes
+#: lib/util/kformatprivate.cpp:287
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 PiB"
+msgstr "%1 పిబి "
+
+#. IECBinaryDialect size in 10^60 bytes
+#: lib/util/kformatprivate.cpp:290
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 EiB"
+msgstr "%1 ఇఐబి"
+
+#. IECBinaryDialect size in 10^70 bytes
+#: lib/util/kformatprivate.cpp:293
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 ZiB"
+msgstr "%1 జ్ఐ బి "
+
+#. IECBinaryDialect size in 10^80 bytes
+#: lib/util/kformatprivate.cpp:296
+#, qt-format
+msgctxt "KFormat|IECBinaryDialect"
+msgid "%1 YiB"
+msgstr "%1 వై బి "
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: lib/util/kformatprivate.cpp:333
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2.%3s"
+msgstr " %1నిమిషల %2.%3సెకండ్లు"
+
+#. @item:intext Duration format minutes and seconds
+#: lib/util/kformatprivate.cpp:336
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1m%2s"
+msgstr "%1నిమిషల %2సెకండ్లు"
+
+#. @item:intext Duration format hours and minutes
+#: lib/util/kformatprivate.cpp:339
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m"
+msgstr "%1గంట %2నిమిషాలు "
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: lib/util/kformatprivate.cpp:342
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3.%4s"
+msgstr "%1గంట%2నిమిషల%3.%4సెకండ్లు "
+
+#. @item:intext Duration format hours, minutes, seconds
+#: lib/util/kformatprivate.cpp:349
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1h%2m%3s"
+msgstr "%1గంట%2నిమిషల  %3సెకండ్లు "
+
+#. @item:intext Duration format minutes, seconds and milliseconds
+#: lib/util/kformatprivate.cpp:355
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2.%3"
+msgstr "%1:%2.%3"
+
+#. @item:intext Duration format minutes and seconds
+#. ----------
+#. @item:intext Duration format hours and minutes
+#: lib/util/kformatprivate.cpp:358 lib/util/kformatprivate.cpp:361
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2"
+msgstr "%1:%2"
+
+#. @item:intext Duration format hours, minutes, seconds, milliseconds
+#: lib/util/kformatprivate.cpp:364
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3.%4"
+msgstr "%1:%2:%3.%4"
+
+#. @item:intext Duration format hours, minutes, seconds
+#: lib/util/kformatprivate.cpp:371
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1:%2:%3"
+msgstr "%1:%2:%3"
+
+#. @item:intext %1 is a real number, e.g. 1.23 days
+#: lib/util/kformatprivate.cpp:383
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 days"
+msgstr "%1 రోజులు"
+
+#. @item:intext %1 is a real number, e.g. 1.23 hours
+#: lib/util/kformatprivate.cpp:386
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 hours"
+msgstr "%1 గంటలు"
+
+#. @item:intext %1 is a real number, e.g. 1.23 minutes
+#: lib/util/kformatprivate.cpp:389
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 minutes"
+msgstr "%1 నిమిషాలు"
+
+#. @item:intext %1 is a real number, e.g. 1.23 seconds
+#: lib/util/kformatprivate.cpp:392
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 seconds"
+msgstr "%1 సెకన్లు"
+
+#. @item:intext %1 is a whole number
+#: lib/util/kformatprivate.cpp:397
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n millisecond(s)"
+msgid_plural "%n millisecond(s)"
+msgstr[0] "%n మిల్లీసెకండ్"
+msgstr[1] "%n మిల్లీసెకండ్లు"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:415
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n day(s)"
+msgid_plural "%n day(s)"
+msgstr[0] "%n రోజు"
+msgstr[1] "%n రోజులు"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:420
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n hour(s)"
+msgid_plural "%n hour(s)"
+msgstr[0] "%n గంట"
+msgstr[1] "%n గంటలు"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:425
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n minute(s)"
+msgid_plural "%n minute(s)"
+msgstr[0] "%n నిమిష"
+msgstr[1] "%n నిమిషాలు"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:430
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n second(s)"
+msgid_plural "%n second(s)"
+msgstr[0] "%n సెకను"
+msgstr[1] "%n సెకన్లు"
+
+#. @item:intext days and hours. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext hours and minutes. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#. ----------
+#. @item:intext minutes and seconds. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: lib/util/kformatprivate.cpp:455 lib/util/kformatprivate.cpp:461
+#: lib/util/kformatprivate.cpp:467
+#, qt-format
+msgctxt "KFormat|"
+msgid "%1 and %2"
+msgstr "%1 మరియు %2"
+
+#: lib/util/kformatprivate.cpp:478
+msgctxt ""
+"KFormat|used when a relative date string can't be generated because the date "
+"is invalid"
+msgid "Invalid date"
+msgstr "చెల్లని తేదీ"
+
+#: lib/util/kformatprivate.cpp:488
+#, fuzzy
+#| msgctxt "KFormat|"
+#| msgid "%n day(s)"
+#| msgid_plural "%n day(s)"
+msgctxt "KFormat|"
+msgid "In two days"
+msgstr "%n రోజు"
+
+#: lib/util/kformatprivate.cpp:490
+msgctxt "KFormat|"
+msgid "Tomorrow"
+msgstr "రేపు"
+
+#: lib/util/kformatprivate.cpp:492
+msgctxt "KFormat|"
+msgid "Today"
+msgstr "ఈరొజు"
+
+#: lib/util/kformatprivate.cpp:494
+msgctxt "KFormat|"
+msgid "Yesterday"
+msgstr "నిన్న"
+
+#: lib/util/kformatprivate.cpp:496
+msgctxt "KFormat|"
+msgid "Two days ago"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:510
+msgctxt "KFormat|"
+msgid "Just now"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:512
+#, fuzzy, qt-format
+#| msgctxt "KFormat|"
+#| msgid "%1 minutes"
+msgctxt "KFormat|"
+msgid "%1 minutes ago"
+msgstr "%1 నిమిషాలు"
+
+#. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
+#: lib/util/kformatprivate.cpp:528
+#, fuzzy, qt-format
+#| msgctxt "KFormat|"
+#| msgid "%1 and %2"
+msgctxt "KFormat|"
+msgid "%1 at %2"
+msgstr "%1 మరియు %2"
+
+#: lib/util/klistopenfilesjob_unix.cpp:36
+#, fuzzy, qt-format
+#| msgid "File %1 does not exist"
+msgctxt "QObject|"
+msgid "Path %1 doesn't exist"
+msgstr "%1 దస్త్రం లేదు"
+
+#: lib/util/klistopenfilesjob_unix.cpp:49
+#, qt-format
+msgctxt "QObject|"
+msgid "Failed to execute `lsof' error code %1"
+msgstr ""
+
+#: lib/util/klistopenfilesjob_win.cpp:27
+msgctxt "QObject|"
+msgid "KListOpenFilesJob is not supported on Windows"
+msgstr ""
