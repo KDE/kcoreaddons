@@ -953,9 +953,6 @@ Notes:
     <glob pattern="*.pnx"/>
     <glob pattern="*.rdc"/>
   </mime-type>
-  <mime-type type="text/plain"> <!-- As discussed on xdg list, *.doc is needed here for disambiguation -->
-    <glob pattern="*.doc"/>
-  </mime-type>
   <mime-type type="text/x-hex">
     <sub-class-of type="text/plain"/>
     <comment>Intel® hexadecimal object file</comment>
