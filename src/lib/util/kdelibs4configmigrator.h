@@ -13,6 +13,8 @@
 #include <kcoreaddons_export.h>
 #include <memory>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+
 /**
  * @class Kdelibs4ConfigMigrator kdelibs4configmigrator.h Kdelibs4ConfigMigrator
  *
@@ -22,6 +24,8 @@
  *
  * @short Class for migration of config files and ui file from kdelibs4.
  * @since 5.2
+ * @deprecated This class exists for compatibility with the
+ * kde4 config files and will be removed in KF6
  */
 class KCOREADDONS_EXPORT Kdelibs4ConfigMigrator
 {
@@ -74,4 +78,5 @@ private:
     std::unique_ptr<class Kdelibs4ConfigMigratorPrivate> const d;
 };
 
+#endif
 #endif // KDELIBS4CONFIGMIGRATOR_H
