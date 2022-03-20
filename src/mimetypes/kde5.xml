@@ -239,7 +239,7 @@ Notes:
     <comment xml:lang="az">KDE rəng sxemi</comment>
     <comment xml:lang="be">Каляровая схема KDE</comment>
     <comment xml:lang="ca">Esquema de color del KDE</comment>
-    <comment xml:lang="ca@valencia">Esquema de color del KDE</comment>
+    <comment xml:lang="ca@valencia">Esquema de color de KDE</comment>
     <comment xml:lang="cs">Barevné schéma KDE</comment>
     <comment xml:lang="de">KDE-Farbschema</comment>
     <comment xml:lang="el">Θέμα χρωμάτων KDE</comment>
@@ -929,7 +929,7 @@ Notes:
     <comment xml:lang="az">KDE raw şəkil formatı</comment>
     <comment xml:lang="be">Неапрацаваныя фарматы выяваў у KD</comment>
     <comment xml:lang="ca">Formats d'imatge RAW del KDE</comment>
-    <comment xml:lang="ca@valencia">Formats d'imatge RAW del KDE</comment>
+    <comment xml:lang="ca@valencia">Formats d'imatge RAW de KDE</comment>
     <comment xml:lang="cs">Formáty obrázků raw v KDE</comment>
     <comment xml:lang="de">KDE-Roh-Bildformate</comment>
     <comment xml:lang="el">Τύποι ακατέργαστων τύπων εικόνας του KDE</comment>
@@ -1246,7 +1246,7 @@ Notes:
     <comment xml:lang="az">KDE sistem izləyicisi</comment>
     <comment xml:lang="be">Сістэмны манітор KDE</comment>
     <comment xml:lang="ca">Monitor del sistema del KDE</comment>
-    <comment xml:lang="ca@valencia">Monitor del sistema del KDE</comment>
+    <comment xml:lang="ca@valencia">Monitor del sistema de KDE</comment>
     <comment xml:lang="cs">Monitor systému pro KDE</comment>
     <comment xml:lang="de">KDE-Systemüberwachung</comment>
     <comment xml:lang="el">Επόπτης συστήματος του KDE</comment>
@@ -1290,7 +1290,7 @@ Notes:
     <comment xml:lang="az">KDE mövzusu</comment>
     <comment xml:lang="be">Тэма KDE</comment>
     <comment xml:lang="ca">Tema del KDE</comment>
-    <comment xml:lang="ca@valencia">Tema del KDE</comment>
+    <comment xml:lang="ca@valencia">Tema de KDE</comment>
     <comment xml:lang="cs">Motiv KDE</comment>
     <comment xml:lang="de">KDE-Design</comment>
     <comment xml:lang="el">Θέμα του KDE</comment>
