@@ -11,6 +11,11 @@
 #include <kpluginfactory.h>
 #include <kpluginloader.h>
 
+// We do not have QWidgets as a dependency, this is a simple placeholder for the type to be fully qualified
+class QWidget : public QObject
+{
+};
+
 class KPluginFactoryTest : public QObject
 {
     Q_OBJECT
@@ -34,6 +39,11 @@ private Q_SLOTS:
         QVERIFY(obj != obj2);
         delete obj;
         delete obj2;
+
+        // Try creating a part without keyword/args
+        QObject *partTest = factory->create<QObject>(new QWidget(), this);
+        QVERIFY(partTest);
+        delete partTest;
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
         obj = factory->create<QObject>(QStringLiteral("secondary"), this, args);

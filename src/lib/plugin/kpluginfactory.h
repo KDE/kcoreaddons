@@ -558,11 +558,11 @@ public:
      * @param parentWidget an additional parent widget.
      * @param parent the parent of the object. If @p parent is a widget type, it will also passed
      *               to the parentWidget argument of the CreateInstanceFunction for the object.
-     * @param args additional arguments which will be passed to the object.
+     * @param args additional arguments which will be passed to the object. Since 5.93 this has a default arg.
      * @returns pointer to the created object is returned, or @c nullptr if an error occurred.
      */
     template<typename T>
-    T *create(QWidget *parentWidget, QObject *parent, const QVariantList &args);
+    T *create(QWidget *parentWidget, QObject *parent, const QVariantList &args = {});
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
     /**
@@ -572,7 +572,7 @@ public:
      */
     template<typename T>
     KCOREADDONS_DEPRECATED_VERSION(5, 89, "Use overload without keyword instead")
-    T *create(QWidget *parentWidget, QObject *parent, const QString &keyword = QString(), const QVariantList &args = QVariantList());
+    T *create(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args = QVariantList());
 #endif
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(4, 0)
