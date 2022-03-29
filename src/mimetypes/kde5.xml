@@ -514,7 +514,7 @@ Notes:
     <comment xml:lang="be">Дакумент кіравання праектам у Calligra Plan</comment>
     <comment xml:lang="bs">Calligra Plan dokument upravljanja projektima</comment>
     <comment xml:lang="ca">Document per a la gestió de projectes del Calligra Plan</comment>
-    <comment xml:lang="ca@valencia">Document per a la gestió de projectes del Calligra Plan</comment>
+    <comment xml:lang="ca@valencia">Document per a la gestió de projectes de Calligra Plan</comment>
     <comment xml:lang="cs">Dokument pro správu projektů Calligra Plan</comment>
     <comment xml:lang="de">Calligra-Plan-Projektverwaltungdokument</comment>
     <comment xml:lang="el">Έγγραφο διαχείρισης έργων Calligra Plan</comment>
@@ -557,7 +557,7 @@ Notes:
     <comment xml:lang="be">Дакумент, які змяшчае пачак прац Calligra Plan</comment>
     <comment xml:lang="bs">Calligra Plan dokument radnog paketa</comment>
     <comment xml:lang="ca">Document de paquet de treball del Calligra Plan</comment>
-    <comment xml:lang="ca@valencia">Document de paquet de treball del Calligra Plan</comment>
+    <comment xml:lang="ca@valencia">Document de paquet de treball de Calligra Plan</comment>
     <comment xml:lang="cs">Dokument pracovního balíčku Calligra Plan</comment>
     <comment xml:lang="de">Calligra-Plan-Arbeitspaketdokument</comment>
     <comment xml:lang="el">Έγγραφο πακέτου εργασίας Calligra Plan</comment>
@@ -600,7 +600,7 @@ Notes:
     <comment xml:lang="be">Дакумент кіравання праектам у KPlato</comment>
     <comment xml:lang="bs">KPlato dokument upravljanja projektom</comment>
     <comment xml:lang="ca">Document per a la gestió de projectes del KPlato</comment>
-    <comment xml:lang="ca@valencia">Document per a la gestió de projectes del KPlato</comment>
+    <comment xml:lang="ca@valencia">Document per a la gestió de projectes de KPlato</comment>
     <comment xml:lang="cs">Dokument řízení projektů v KPlato</comment>
     <comment xml:lang="de">KPlato-Projektverwaltungs-Dokument</comment>
     <comment xml:lang="el">Έγγραφα διαχείρισης έργων KPlato</comment>
@@ -643,7 +643,7 @@ Notes:
     <comment xml:lang="be">Пачак прац кіравання праектамі KPlato</comment>
     <comment xml:lang="bs">KPlato radni paket upravljanja projektom</comment>
     <comment xml:lang="ca">Paquet de treball per a la gestió de projectes del KPlato</comment>
-    <comment xml:lang="ca@valencia">Paquet de treball per a la gestió de projectes del KPlato</comment>
+    <comment xml:lang="ca@valencia">Paquet de treball per a la gestió de projectes de KPlato</comment>
     <comment xml:lang="cs">Pracovní balíček řízení projektů v KPlato</comment>
     <comment xml:lang="de">KPlato-Projektverwaltungs-Arbeitspaket</comment>
     <comment xml:lang="el">Πακέτο εργασιών διαχείρισης έργων KPlato</comment>
@@ -1048,7 +1048,7 @@ Notes:
     <comment xml:lang="be">Спіс убудоў загрузчыка файлаў Kate</comment>
     <comment xml:lang="bs">Kate lista fajlova za učitavanje liste dodataka</comment>
     <comment xml:lang="ca">Llista de connector carregador de la llista de fitxers del Kate</comment>
-    <comment xml:lang="ca@valencia">Llista de connector carregador de la llista de fitxers del Kate</comment>
+    <comment xml:lang="ca@valencia">Llista de connector carregador de la llista de fitxers de Kate</comment>
     <comment xml:lang="de">Kate-Dateilisten-Modul</comment>
     <comment xml:lang="el">Λίστα αρχείου φόρτωσης λίστας πρόσθετων Kate</comment>
     <comment xml:lang="en_GB">Kate file list loader plugin list</comment>
@@ -1594,7 +1594,7 @@ Notes:
     <comment xml:lang="be">Архіў дакументаў Okular</comment>
     <comment xml:lang="bs">Okular arhiva dokumenata</comment>
     <comment xml:lang="ca">Arxiu de document de l'Okular</comment>
-    <comment xml:lang="ca@valencia">Arxiu de document de l'Okular</comment>
+    <comment xml:lang="ca@valencia">Arxiu de document d'Okular</comment>
     <comment xml:lang="cs">Archiv dokumentu Okular</comment>
     <comment xml:lang="de">Okular-Dokumentarchiv</comment>
     <comment xml:lang="el">Αρχειοθήκη εγγράφων Okular</comment>
