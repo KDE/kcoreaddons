@@ -336,7 +336,7 @@ Notes:
     <comment xml:lang="be">Кашалёк KWallet</comment>
     <comment xml:lang="bs">KWallet novčanik</comment>
     <comment xml:lang="ca">Cartera del KWallet</comment>
-    <comment xml:lang="ca@valencia">Cartera del KWallet</comment>
+    <comment xml:lang="ca@valencia">Cartera de KWallet</comment>
     <comment xml:lang="cs">Schránka KWallet</comment>
     <comment xml:lang="de">KWallet-Passwortspeicher</comment>
     <comment xml:lang="el">Πορτοφόλι KWallet</comment>
@@ -860,7 +860,7 @@ Notes:
     <comment xml:lang="be">Імпарт KPhotoAlbum</comment>
     <comment xml:lang="bs">KPhotoAlbum uvoz</comment>
     <comment xml:lang="ca">Importació del KPhotoAlbum</comment>
-    <comment xml:lang="ca@valencia">Importació del KPhotoAlbum</comment>
+    <comment xml:lang="ca@valencia">Importació de KPhotoAlbum</comment>
     <comment xml:lang="cs">Import KPhotoAlbum</comment>
     <comment xml:lang="de">KPhotoAlbum-Import</comment>
     <comment xml:lang="el">Εισαγωγή KPhotoAlbum</comment>
@@ -1498,7 +1498,7 @@ Notes:
     <comment xml:lang="be">Захаваная гульня Kolf</comment>
     <comment xml:lang="bs">Kolf sačuvana igra</comment>
     <comment xml:lang="ca">Joc desat del Kolf</comment>
-    <comment xml:lang="ca@valencia">Joc guardat del Kolf</comment>
+    <comment xml:lang="ca@valencia">Joc guardat de Kolf</comment>
     <comment xml:lang="cs">Uložená hra Kolf</comment>
     <comment xml:lang="de">Kolf – gespeichertes Spiel</comment>
     <comment xml:lang="el">Αποθηκευμένο παιχνίδι Kolf</comment>
@@ -1545,7 +1545,7 @@ Notes:
     <comment xml:lang="be">Поле для гольфа Kolf</comment>
     <comment xml:lang="bs">Kolf teren</comment>
     <comment xml:lang="ca">Camp del Kolf</comment>
-    <comment xml:lang="ca@valencia">Camp del Kolf</comment>
+    <comment xml:lang="ca@valencia">Camp de Kolf</comment>
     <comment xml:lang="cs">Kurz Kolf</comment>
     <comment xml:lang="de">Kolf-Platz</comment>
     <comment xml:lang="el">Πίστα Kolf</comment>
@@ -1911,7 +1911,7 @@ Notes:
     <comment xml:lang="be">Файл KmPlot</comment>
     <comment xml:lang="bs">KmPlot fajl</comment>
     <comment xml:lang="ca">Fitxer del KmPlot</comment>
-    <comment xml:lang="ca@valencia">Fitxer del KmPlot</comment>
+    <comment xml:lang="ca@valencia">Fitxer de KmPlot</comment>
     <comment xml:lang="cs">Soubor KmPlot</comment>
     <comment xml:lang="de">KmPlot-Datei</comment>
     <comment xml:lang="el">Αρχείο KmPlot</comment>
@@ -1955,7 +1955,7 @@ Notes:
     <comment xml:lang="be">Слоўнік KWordQuiz</comment>
     <comment xml:lang="bs">KWordQuiz vokabular</comment>
     <comment xml:lang="ca">Vocabulari del KWordQuiz</comment>
-    <comment xml:lang="ca@valencia">Vocabulari del KWordQuiz</comment>
+    <comment xml:lang="ca@valencia">Vocabulari de KWordQuiz</comment>
     <comment xml:lang="cs">Slovní zásoba KWordQuiz</comment>
     <comment xml:lang="de">KWordQuiz-Vokabular</comment>
     <comment xml:lang="el">Λεξιλόγιο KWordQuiz</comment>
@@ -2180,7 +2180,7 @@ Notes:
     <comment xml:lang="be">Архіў смайлікаў Kopete</comment>
     <comment xml:lang="bs">Kopete arhiva emotikona</comment>
     <comment xml:lang="ca">Arxiu d'emoticones del Kopete</comment>
-    <comment xml:lang="ca@valencia">Arxiu d'emoticones del Kopete</comment>
+    <comment xml:lang="ca@valencia">Arxiu d'emoticones de Kopete</comment>
     <comment xml:lang="cs">Archiv emotikonů Kopete</comment>
     <comment xml:lang="de">Kopete-Emoticons-Archiv</comment>
     <comment xml:lang="el">Αρχειοθήκη εικονιδίων διάθεσης Kopete</comment>
