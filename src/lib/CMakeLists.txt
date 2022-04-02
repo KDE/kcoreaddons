@@ -83,6 +83,7 @@ if (UNIX)
         target_sources(KF5CoreAddons PRIVATE
             util/kprocesslist_unix_procstat.cpp
         )
+        target_compile_definitions(KF5CoreAddons PRIVATE HAVE_PROCSTAT=1)
     else ()
         target_sources(KF5CoreAddons PRIVATE
             util/kprocesslist_unix.cpp

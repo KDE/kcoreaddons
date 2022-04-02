@@ -10,6 +10,7 @@
 */
 
 #include "klistopenfilesjob.h"
+
 #include <QDir>
 #include <QProcess>
 #include <QRegularExpression>
@@ -61,12 +62,32 @@ private:
         const QVector<QStringRef> pidList = out.splitRef(QRegularExpression(QStringLiteral("\\s+")), Qt::SkipEmptyParts);
 #endif
 
+        // Define a lambda findInfoForPid that calls a suitable function.
+#ifdef HAVE_PROCSTAT
+        // If HAVE_PROCSTAT is defined, then we're on a BSD, and there is a KProcessList implementation
+        // that efficiently lists all processes, but KProcessList::processInfo() is slow because
+        // it recalculates the list-of-all-processes on each iteration.
+        const auto allProcesses = KProcessList::processInfoList();
+        auto findInfoForPid = [&allProcesses](qint64 pid) {
+            auto it = std::find_if(allProcesses.cbegin(), allProcesses.cend(), [pid](const KProcessList::KProcessInfo &info) {
+                return info.pid() == pid;
+            });
+            return it != allProcesses.cend() ? *it : KProcessList::KProcessInfo{};
+        };
+#else
+        // Presumably Linux: processInfo(pid) is fine because it goes
+        // straight to /proc/<pid> for information.
+        auto findInfoForPid =
+            [](qint64 pid) {
+                return KProcessList::processInfo(pid);
+            };
+#endif
         for (const auto &pidStr : pidList) {
             qint64 pid = pidStr.toLongLong();
             if (!pid) {
                 continue;
             }
-            processInfoList << KProcessList::processInfo(pid);
+            processInfoList << findInfoForPid(pid);
         }
         job->emitResult();
     }
