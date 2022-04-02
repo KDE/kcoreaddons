@@ -99,11 +99,13 @@ public:
             QString command;
             char pathname[PATH_MAX];
             struct kinfo_proc *proc = &processes.procs[pos];
-            if (procstat_getpathname(processes.parent.pstat, proc, pathname, sizeof(pathname)) != 0) {
-                command = QString::fromLocal8Bit(pathname);
-            } else {
-                command = QString::fromLocal8Bit(proc->ki_comm);
-            }
+
+            // Don't use procstat_getpathname() because:
+            // - it can fail, and then it spams a warning to stderr
+            // - it produces a full path, e.g. /tmp/kde/build/kcoreaddons/bin/kprocesslisttest
+            //   rather than the command-name, so it fails in tests that check for
+            //   a process name only.
+            command = QString::fromLocal8Bit(proc->ki_comm);
 
             char **args;
             args = procstat_getargv(processes.parent.pstat, proc, 0);
