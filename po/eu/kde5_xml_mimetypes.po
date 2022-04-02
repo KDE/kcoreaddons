@@ -1,0 +1,318 @@
+# Translation of xml_mimetypes5.po to Euskara/Basque (eu).
+# Copyright (C) 2009-2018, Free Software Foundation.
+# Copyright (C) 2019-2020, this file is copyright:
+# This file is distributed under the same license as the original file.
+# KDE euskaratzeko proiektuaren arduraduna <xalba@euskalnet.net>.
+#
+# Translators:
+# marcos <marcos@euskalgnu.org>, 2009.
+# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2010, 2011, 2017, 2018, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-07-14 00:15+0000\n"
+"PO-Revision-Date: 2020-10-28 22:34+0100\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.08.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kde5.xml.podir/kde5.xml.in.h:1
+msgctxt "comment"
+msgid "RELAX NG"
+msgstr "RELAX NG"
+
+#: kde5.xml.podir/kde5.xml.in.h:2
+msgctxt "comment"
+msgid "CD audio"
+msgstr "Audio CDa"
+
+#: kde5.xml.podir/kde5.xml.in.h:3
+msgctxt "comment"
+msgid "SNF bitmap font"
+msgstr "SNF bit-mapa letra-tipoa"
+
+#: kde5.xml.podir/kde5.xml.in.h:4
+msgctxt "comment"
+msgid "Java applet"
+msgstr "Java aplikaziotxoa"
+
+#: kde5.xml.podir/kde5.xml.in.h:5
+msgctxt "comment"
+msgid "KHTML Extension Adaptor"
+msgstr "KHTML hedapen-egokitzailea"
+
+#: kde5.xml.podir/kde5.xml.in.h:6
+msgctxt "comment"
+msgid "KDE color scheme"
+msgstr "KDE-ren kolore antolaera"
+
+#: kde5.xml.podir/kde5.xml.in.h:7
+msgctxt "comment"
+msgid "KNewStuff package"
+msgstr "KNewStuff-erako paketea"
+
+#: kde5.xml.podir/kde5.xml.in.h:9
+msgctxt "comment"
+msgid "KWallet wallet"
+msgstr "KWallet-eko zorroa"
+
+#: kde5.xml.podir/kde5.xml.in.h:10
+msgctxt "comment"
+msgid "Kugar report template"
+msgstr "Kugar-rerako txosten-txantiloia"
+
+#: kde5.xml.podir/kde5.xml.in.h:11
+msgctxt "comment"
+msgid "plasmoid"
+msgstr "plasmoidea"
+
+#: kde5.xml.podir/kde5.xml.in.h:12
+msgctxt "comment"
+msgid "SuperKaramba theme"
+msgstr "SuperKaramba-ko gaia"
+
+#: kde5.xml.podir/kde5.xml.in.h:13
+msgctxt "comment"
+msgid "Calligra Plan project management document"
+msgstr "Calligra Plan-eko proiektuak kudeatzeko dokumentua"
+
+#: kde5.xml.podir/kde5.xml.in.h:14
+msgctxt "comment"
+msgid "Calligra Plan work package document"
+msgstr "Calligra Plan-eko lanerako pakete-dokumentua"
+
+#: kde5.xml.podir/kde5.xml.in.h:15
+msgctxt "comment"
+msgid "KPlato project management document"
+msgstr "KPlato-ko proiektua kudeatzeko dokumentua"
+
+#: kde5.xml.podir/kde5.xml.in.h:16
+msgctxt "comment"
+msgid "KPlato project management work package"
+msgstr "KPlato-ko proiektuak kudeatzeko lan paketea"
+
+#: kde5.xml.podir/kde5.xml.in.h:17
+msgctxt "comment"
+msgid "Kugar archive"
+msgstr "Kugar-reko artxiboa"
+
+#: kde5.xml.podir/kde5.xml.in.h:18
+msgctxt "comment"
+msgid "web archive"
+msgstr "web-artxiboa"
+
+#: kde5.xml.podir/kde5.xml.in.h:19
+msgctxt "comment"
+msgid "W3C XML schema"
+msgstr "W3C XML eskema"
+
+#: kde5.xml.podir/kde5.xml.in.h:21
+msgctxt "comment"
+msgid "RealAudio plugin file"
+msgstr "RealAudio plugin-fitxategia"
+
+#: kde5.xml.podir/kde5.xml.in.h:23
+msgctxt "comment"
+msgid "KPhotoAlbum import"
+msgstr "KPhotoAlbum inportatzea"
+
+#: kde5.xml.podir/kde5.xml.in.h:25
+msgctxt "comment"
+msgid "HDR image"
+msgstr "HDR irudia"
+
+#: kde5.xml.podir/kde5.xml.in.h:26
+msgctxt "comment"
+msgid "KDE raw image formats"
+msgstr "KDE-ren RAW irudi formatuak"
+
+#: kde5.xml.podir/kde5.xml.in.h:27
+msgctxt "comment"
+msgid "Intel® hexadecimal object file"
+msgstr "Intel®-en objektu hamaseitarreko fitxategia"
+
+#: kde5.xml.podir/kde5.xml.in.h:28
+msgctxt "comment"
+msgid "Kate file list loader plugin list"
+msgstr "Kate-ko fitxategi-zerrenda zamatzeko plugin zerrenda"
+
+#: kde5.xml.podir/kde5.xml.in.h:29
+msgctxt "comment"
+msgid "abc musical notation file"
+msgstr "abc-ko musika-notazio fitxategia"
+
+#: kde5.xml.podir/kde5.xml.in.h:30
+msgctxt "comment"
+msgid "fonts package"
+msgstr "letra-tipoen paketea"
+
+#: kde5.xml.podir/kde5.xml.in.h:31
+msgctxt "comment"
+msgid "Windows server"
+msgstr "Windows zerbitzaria"
+
+#: kde5.xml.podir/kde5.xml.in.h:32
+msgctxt "comment"
+msgid "Windows workgroup"
+msgstr "Windows lantaldea"
+
+#: kde5.xml.podir/kde5.xml.in.h:34
+msgctxt "comment"
+msgid "KDE system monitor"
+msgstr "KDE-ren sistemako begiralea"
+
+#: kde5.xml.podir/kde5.xml.in.h:35
+msgctxt "comment"
+msgid "KDE theme"
+msgstr "KDE-ren gaia"
+
+#: kde5.xml.podir/kde5.xml.in.h:36
+msgctxt "comment"
+msgid "Quanta project"
+msgstr "Quanta-ko proiektua"
+
+#: kde5.xml.podir/kde5.xml.in.h:37
+msgctxt "comment"
+msgid "Kommander file"
+msgstr "Kommander-reko fitxategia"
+
+#: kde5.xml.podir/kde5.xml.in.h:38
+msgctxt "comment"
+msgid "potato"
+msgstr "potato"
+
+#: kde5.xml.podir/kde5.xml.in.h:39
+msgctxt "comment"
+msgid "Kolf saved game"
+msgstr "Kolf-en gordetako jokoa"
+
+#: kde5.xml.podir/kde5.xml.in.h:40
+msgctxt "comment"
+msgid "Kolf course"
+msgstr "Kolf zelaia"
+
+#: kde5.xml.podir/kde5.xml.in.h:41
+msgctxt "comment"
+msgid "Okular document archive"
+msgstr "Okular-reko dokumentu-artxiboa"
+
+#: kde5.xml.podir/kde5.xml.in.h:42
+msgctxt "comment"
+msgid "Cabri figure"
+msgstr "Cabri-ko irudia"
+
+#: kde5.xml.podir/kde5.xml.in.h:43
+msgctxt "comment"
+msgid "Dr. Geo figure"
+msgstr "Geo Dk. irudia"
+
+#: kde5.xml.podir/kde5.xml.in.h:44
+msgctxt "comment"
+msgid "KGeo figure"
+msgstr "KGeo-ko irudia"
+
+#: kde5.xml.podir/kde5.xml.in.h:45
+msgctxt "comment"
+msgid "Kig figure"
+msgstr "Kig-eko irudia"
+
+#: kde5.xml.podir/kde5.xml.in.h:46
+msgctxt "comment"
+msgid "KSeg document"
+msgstr "KSeg-eko dokumentua"
+
+#: kde5.xml.podir/kde5.xml.in.h:47
+msgctxt "comment"
+msgid "vocabulary trainer document"
+msgstr "hiztegi-trebatzaileko dokumentua"
+
+#: kde5.xml.podir/kde5.xml.in.h:48
+msgctxt "comment"
+msgid "KmPlot file"
+msgstr "KmPlot fitxategia"
+
+#: kde5.xml.podir/kde5.xml.in.h:49
+msgctxt "comment"
+msgid "KWordQuiz vocabulary"
+msgstr "KWordQuiz-eko hiztegia"
+
+#: kde5.xml.podir/kde5.xml.in.h:50
+msgctxt "comment"
+msgid "Cachegrind/Callgrind profile dump"
+msgstr "Cachegrind/Callgrind profil iraulketa"
+
+#: kde5.xml.podir/kde5.xml.in.h:51
+msgctxt "comment"
+msgid "Umbrello UML Modeller file"
+msgstr "Umbrello UML Modelatzailerako fitxategia"
+
+#: kde5.xml.podir/kde5.xml.in.h:52
+msgctxt "comment"
+msgid "Windows link"
+msgstr "Windows-eko esteka"
+
+#: kde5.xml.podir/kde5.xml.in.h:53
+msgctxt "comment"
+msgid "KGet download list"
+msgstr "KGet-en zama-jaisteko zerrenda"
+
+#: kde5.xml.podir/kde5.xml.in.h:54
+msgctxt "comment"
+msgid "Kopete emoticons archive"
+msgstr "Kopete-ko aurpegiera-artxiboa"
+
+#: kde5.xml.podir/kde5.xml.in.h:55
+msgctxt "comment"
+msgid "ICQ contact"
+msgstr "ICQ-ko kontaktua"
+
+#: kde5.xml.podir/kde5.xml.in.h:57
+msgctxt "comment"
+msgid "Microsoft Media Format"
+msgstr "Microsoft Media formatua"
+
+#: kde5.xml.podir/kde5.xml.in.h:59
+msgctxt "comment"
+msgid "Turtle RDF document"
+msgstr "Turtle RDF dokumentua"
+
+#: kde5.xml.podir/kde5.xml.in.h:61
+msgctxt "comment"
+msgid "Softimage PIC image"
+msgstr "Softimage PIC irudia"
+
+#: kde5.xml.podir/kde5.xml.in.h:63
+msgctxt "comment"
+msgid "Qt Markup Language file"
+msgstr "Qt markatzeko lengoaiako fitxategia"
+
+#: kde5.xml.podir/kde5.xml.in.h:64
+msgctxt "comment"
+msgid "KConfigXT Configuration Options"
+msgstr "KConfigXT konfiguratzeko aukerak"
+
+#: kde5.xml.podir/kde5.xml.in.h:65
+msgctxt "comment"
+msgid "KConfigXT Code Generation Options"
+msgstr "KConfigXT kodea sortzeko aukerak"
+
+#: kde5.xml.podir/kde5.xml.in.h:66
+msgctxt "comment"
+msgid "KXMLGUI UI Declaration"
+msgstr "KXMLGUI UI deklarazioa"
+
+#: kde5.xml.podir/kde5.xml.in.h:67
+msgctxt "comment"
+msgid "KNotification Declaration"
+msgstr "KNotification-eko deklarazioa"
+
+#: kde5.xml.podir/kde5.xml.in.h:68
+msgctxt "comment"
+msgid "KCrash Report"
+msgstr "KCrash-eko txostena"
