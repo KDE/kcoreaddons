@@ -55,6 +55,34 @@ void KFileUtilsTest::testSuggestName()
     QCOMPARE(KFileUtils::suggestName(baseUrl, oldName), expectedOutput);
 }
 
+// On Windows we can't use XDG_DATA_DIRS to force multiple data dirs, so use a modified test there
+#ifdef Q_OS_WIN
+void KFileUtilsTest::testfindAllUniqueFiles()
+{
+    QStandardPaths::setTestModeEnabled(true);
+
+    const QString testBaseDirPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/kfileutilstestdata");
+    QDir testDataBaseDir(testBaseDirPath);
+    testDataBaseDir.removeRecursively();
+    testDataBaseDir.mkpath(QStringLiteral("."));
+    testDataBaseDir.mkpath(QStringLiteral("testDirName"));
+
+    QFile file1(testBaseDirPath + QLatin1String("/testDirName/testfile.test"));
+    file1.open(QFile::WriteOnly);
+    QFile file2(testBaseDirPath + QLatin1String("/testDirName/differentfile.test"));
+    file2.open(QFile::WriteOnly);
+    QFile file3(testBaseDirPath + QLatin1String("/testDirName/nomatch.txt"));
+    file3.open(QFile::WriteOnly);
+
+    const QStringList dirs =
+        QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("kfileutilstestdata/testDirName"), QStandardPaths::LocateDirectory);
+    const QStringList expected = {testDataBaseDir.filePath(QStringLiteral("testDirName/differentfile.test")),
+                                  testDataBaseDir.filePath(QStringLiteral("testDirName/testfile.test"))};
+
+    const QStringList actual = KFileUtils::findAllUniqueFiles(dirs, QStringList{QStringLiteral("*.test")});
+    QCOMPARE(actual, expected);
+}
+#else
 void KFileUtilsTest::testfindAllUniqueFiles()
 {
     const QString testBaseDirPath = QDir::currentPath() + QLatin1String("/kfileutilstestdata/");
@@ -82,3 +110,4 @@ void KFileUtilsTest::testfindAllUniqueFiles()
     const QStringList actual = KFileUtils::findAllUniqueFiles(dirs, QStringList{QStringLiteral("*.test")});
     QCOMPARE(actual, expected);
 }
+#endif
