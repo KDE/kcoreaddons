@@ -2456,7 +2456,7 @@ Notes:
     <comment xml:lang="be">Налады KConfigXT</comment>
     <comment xml:lang="bs">KConfigXT Opcije za Konfigurisanje</comment>
     <comment xml:lang="ca">Opcions de configuració del KConfigXT</comment>
-    <comment xml:lang="ca@valencia">Opcions de configuració del KConfigXT</comment>
+    <comment xml:lang="ca@valencia">Opcions de configuració de KConfigXT</comment>
     <comment xml:lang="cs">Možnosti nastavení KConfigXT</comment>
     <comment xml:lang="de">KConfigXT-Einrichtungsoptionen</comment>
     <comment xml:lang="el">Επιλογές διαμόρφωσης KConfigXT</comment>
@@ -2505,7 +2505,7 @@ Notes:
     <comment xml:lang="be">Налады для стварэння кода KConfigXT</comment>
     <comment xml:lang="bs">KConfigXT Opcije za Generisanje Koda</comment>
     <comment xml:lang="ca">Opcions de generació de codi del KConfigXT</comment>
-    <comment xml:lang="ca@valencia">Opcions de generació de codi del KConfigXT</comment>
+    <comment xml:lang="ca@valencia">Opcions de generació de codi de KConfigXT</comment>
     <comment xml:lang="cs">Volby generování kódu KConfigXT</comment>
     <comment xml:lang="de">KConfigXT-Optionen zur Quelltexterzeugung</comment>
     <comment xml:lang="el">Επιλογές γεννήτρια κώδικα KConfigXT</comment>
