@@ -32,6 +32,7 @@ public:
             lsofFinished(exitCode, exitStatus);
         });
     }
+
     void start()
     {
         if (!path.exists()) {
@@ -49,76 +50,77 @@ public:
         lsofProcess.start(lsofExec, {QStringLiteral("-t"), QStringLiteral("+d"), path.path()});
     }
 
-    KProcessList::KProcessInfoList getProcessInfoList() const
-    {
-        return processInfoList;
-    }
-
 private:
     void lsofError(QProcess::ProcessError processError)
     {
         emitResult(static_cast<int>(KListOpenFilesJob::Error::InternalError), QObject::tr("Failed to execute `lsof' error code %1").arg(processError));
     }
-    void lsofFinished(int, QProcess::ExitStatus)
-    {
-        if (hasEmittedResult) {
-            return;
-        }
-        const QString out(QString::fromLocal8Bit(lsofProcess.readAll()));
 
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        const QVector<QStringView> pidList = QStringView(out).split(QRegularExpression(QStringLiteral("\\s+")), Qt::SkipEmptyParts);
-#else
-        const QVector<QStringRef> pidList = out.splitRef(QRegularExpression(QStringLiteral("\\s+")), Qt::SkipEmptyParts);
-#endif
-
-        // Define a lambda findInfoForPid that calls a suitable function.
-#ifdef HAVE_PROCSTAT
-        // If HAVE_PROCSTAT is defined, then we're on a BSD, and there is a KProcessList implementation
-        // that efficiently lists all processes, but KProcessList::processInfo() is slow because
-        // it recalculates the list-of-all-processes on each iteration.
-        const auto allProcesses = KProcessList::processInfoList();
-        auto findInfoForPid = [&allProcesses](qint64 pid) {
-            auto it = std::find_if(allProcesses.cbegin(), allProcesses.cend(), [pid](const KProcessList::KProcessInfo &info) {
-                return info.pid() == pid;
-            });
-            return it != allProcesses.cend() ? *it : KProcessList::KProcessInfo{};
-        };
-#else
-        // Presumably Linux: processInfo(pid) is fine because it goes
-        // straight to /proc/<pid> for information.
-        auto findInfoForPid =
-            [](qint64 pid) {
-                return KProcessList::processInfo(pid);
-            };
-#endif
-        for (const auto &pidStr : pidList) {
-            qint64 pid = pidStr.toLongLong();
-            if (!pid) {
-                continue;
-            }
-            processInfoList << findInfoForPid(pid);
-        }
-        job->emitResult();
-    }
-    void emitResult(int error, const QString &errorText)
-    {
-        if (hasEmittedResult) {
-            return;
-        }
-        job->setError(error);
-        job->setErrorText(errorText);
-        job->emitResult();
-        hasEmittedResult = true;
-    }
+    void lsofFinished(int, QProcess::ExitStatus);
+    void emitResult(int error, const QString &errorText);
 
 private:
     KListOpenFilesJob *job;
     const QDir path;
     bool hasEmittedResult = false;
     QProcess lsofProcess;
+
+    friend KListOpenFilesJob;
     KProcessList::KProcessInfoList processInfoList;
 };
+
+static KProcessList::KProcessInfo findInfoForPid(qint64 pid)
+{
+#ifdef HAVE_PROCSTAT
+    // If HAVE_PROCSTAT is defined, then we're on a BSD, and there is a KProcessList implementation
+    // that efficiently lists all processes, but KProcessList::processInfo() is slow because
+    // it recalculates the list-of-all-processes on each iteration.
+    const auto allProcesses = KProcessList::processInfoList();
+    auto it = std::find_if(allProcesses.cbegin(), allProcesses.cend(), [pid](const KProcessList::KProcessInfo &info) {
+        return info.pid() == pid;
+    });
+    return it != allProcesses.cend() ? *it : KProcessList::KProcessInfo{};
+#else
+    // Presumably Linux: processInfo(pid) is fine because it goes
+    // straight to /proc/<pid> for information.
+    return KProcessList::processInfo(pid);
+#endif
+}
+
+void KListOpenFilesJobPrivate::lsofFinished(int, QProcess::ExitStatus)
+{
+    if (hasEmittedResult) {
+        return;
+    }
+    const QString out(QString::fromLocal8Bit(lsofProcess.readAll()));
+
+    const QRegularExpression re(QStringLiteral("\\s+"));
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    const QVector<QStringView> pidList = QStringView(out).split(re, Qt::SkipEmptyParts);
+#else
+    const QVector<QStringRef> pidList = out.splitRef(re, Qt::SkipEmptyParts);
+#endif
+
+    for (const auto &pidStr : pidList) {
+        qint64 pid = pidStr.toLongLong();
+        if (!pid) {
+            continue;
+        }
+        processInfoList << findInfoForPid(pid);
+    }
+    job->emitResult();
+}
+
+void KListOpenFilesJobPrivate::emitResult(int error, const QString &errorText)
+{
+    if (hasEmittedResult) {
+        return;
+    }
+    job->setError(error);
+    job->setErrorText(errorText);
+    job->emitResult();
+    hasEmittedResult = true;
+}
 
 KListOpenFilesJob::KListOpenFilesJob(const QString &path)
     : d(new KListOpenFilesJobPrivate(this, path))
@@ -134,7 +136,7 @@ void KListOpenFilesJob::start()
 
 KProcessList::KProcessInfoList KListOpenFilesJob::processInfoList() const
 {
-    return d->getProcessInfoList();
+    return d->processInfoList;
 }
 
 #include "moc_klistopenfilesjob.cpp"
