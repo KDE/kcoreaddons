@@ -14,6 +14,11 @@
 #include <QTest>
 #include <algorithm>
 
+#ifdef Q_OS_FREEBSD
+// See implementation note in testOpenFiles()
+#include <QLocalServer>
+#endif
+
 QTEST_MAIN(KListOpenFilesJobTest)
 void initLocale()
 {
@@ -36,9 +41,22 @@ void KListOpenFilesJobTest::testOpenFiles()
     if (!hasLsofInstalled()) {
         QSKIP("lsof is not installed - skipping test");
     }
+
+    // Create a file and hold it open, so that lsof must report us
     QTemporaryDir tempDir;
     QFile tempFile(tempDir.path() + QStringLiteral("/file"));
     QVERIFY(tempFile.open(QIODevice::WriteOnly));
+#ifdef Q_OS_FREEBSD
+    // FIXME: On FreeBSD, lsof does not support zfs (as of 2022), see
+    // https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=253553
+    //
+    // This affects regular files only. So for FreeBSD, create
+    // a named socket as well: this **does** show up in lsof.
+    QLocalServer namedSocket;
+    const QString namedPath = tempDir.path() + QStringLiteral("/socket");
+    QVERIFY(namedSocket.listen(namedPath));
+#endif
+
     auto job = new KListOpenFilesJob(tempDir.path());
     QVERIFY2(job->exec(), qPrintable(job->errorString()));
     QCOMPARE(job->error(), KJob::NoError);

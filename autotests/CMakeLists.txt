@@ -103,6 +103,10 @@ ecm_add_tests(
     ${autotests_OPTIONAL_SRCS}
     LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF5::CoreAddons autotests_static
 )
+if(TARGET klistopenfilesjobtest_unix AND CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+    find_package(Qt${QT_MAJOR_VERSION}Network ${REQUIRED_QT_VERSION} CONFIG QUIET)
+    target_link_libraries(klistopenfilesjobtest_unix Qt${QT_MAJOR_VERSION}::Network)
+endif()
 
 kcoreaddons_add_plugin(static_jsonplugin_cmake_macro SOURCES statickpluginclass.cpp INSTALL_NAMESPACE "staticnamespace" STATIC)
 target_link_libraries(static_jsonplugin_cmake_macro KF5::CoreAddons autotests_static)
