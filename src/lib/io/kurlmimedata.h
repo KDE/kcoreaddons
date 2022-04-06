@@ -2,6 +2,7 @@
     This file is part of the KDE libraries
 
     SPDX-FileCopyrightText: 2005-2012 David Faure <faure@kde.org>
+    SPDX-FileCopyrightText: 2022 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -40,6 +41,17 @@ typedef QMap<QString, QString> MetaDataMap;
  * @param mimeData the QMimeData instance used to drag or copy this URL
  */
 KCOREADDONS_EXPORT void setUrls(const QList<QUrl> &urls, const QList<QUrl> &mostLocalUrls, QMimeData *mimeData);
+
+/**
+ * Export URLs through the XDG Documents Portal to allow interaction from/with sandbox code.
+ * This implements the application/vnd.portal.filetransfer mimetype extension.
+ * When built without dbus support or the portal isn't installed on the target system, then this
+ * is no-op and returns false.
+ * Remote URLs are automatically mounted into the file system using kio-fuse
+ * @returns whether all URLS were exported through the portal
+ */
+KCOREADDONS_EXPORT bool exportUrlsToPortal(QMimeData *mimeData);
+
 /**
  * @param metaData KIO metadata shipped in the mime data, which is used for instance to
  * set a correct HTTP referrer (some websites require it for downloading e.g. an image)
@@ -75,10 +87,14 @@ enum DecodeOptions {
  * Extract a list of urls from the contents of @p mimeData.
  *
  * Compared to QMimeData::urls(), this method has support for retrieving KDE-specific URLs
- * when urls() would retrieve "most local URLs" instead.
+ * when urls() would retrieve "most local URLs" instead as well as support for the XDG Documents Portal
+ * via the application/vnd.portal.filetransfer mimedata extension.
  *
  * Decoding will fail if @p mimeData does not contain any URLs, or if at
  * least one extracted URL is not valid.
+ *
+ * When application/vnd.portal.filetransfer is set you'll only receive URLs retrieved from the XDG Documents Portal.
+ * When the portal is not available application/vnd.portal.filetransfer gets ignored.
  *
  * @param mimeData the mime data to extract from; cannot be 0
  * @param decodeOptions options for decoding

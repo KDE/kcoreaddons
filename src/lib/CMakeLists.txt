@@ -91,6 +91,19 @@ if (UNIX)
     endif ()
 endif ()
 
+if(HAVE_QTDBUS)
+    set(_dbus_SRCS)
+
+    set_source_files_properties(io/org.freedesktop.portal.FileTransfer.xml PROPERTIES INCLUDE ${CMAKE_CURRENT_SOURCE_DIR}/io/dbustypes_p.h)
+    qt_add_dbus_interface(_dbus_SRCS io/org.freedesktop.portal.FileTransfer.xml io/org.freedesktop.portal.FileTransfer)
+
+    set_source_files_properties(io/org.kde.KIOFuse.VFS.xml PROPERTIES NO_NAMESPACE TRUE)
+    qt_add_dbus_interface(_dbus_SRCS io/org.kde.KIOFuse.VFS.xml io/org.kde.KIOFuse.VFS)
+
+    target_sources(KF5CoreAddons PRIVATE ${_dbus_SRCS})
+    target_link_libraries(KF5CoreAddons PRIVATE Qt${QT_MAJOR_VERSION}::DBus)
+endif()
+
 target_sources(KF5CoreAddons PRIVATE
     kaboutdata.cpp
     kcoreaddons.cpp

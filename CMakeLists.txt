@@ -86,6 +86,12 @@ if (BSDLIKE)
     endif()
 endif()
 
+if(NOT WIN32) # never relevant there
+    find_package(Qt${QT_MAJOR_VERSION}DBus ${QT_MIN_VERSION} CONFIG)
+    set(HAVE_QTDBUS ${Qt${QT_MAJOR_VERSION}DBus_FOUND})
+    add_feature_info(XDGPortalDragAndDrop HAVE_QTDBUS "Drag and Drop support via xdg-desktop-portal requies QtDBus")
+endif()
+
 # Generate io/config-kdirwatch.h
 configure_file(src/lib/io/config-kdirwatch.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/lib/io/config-kdirwatch.h)
 
