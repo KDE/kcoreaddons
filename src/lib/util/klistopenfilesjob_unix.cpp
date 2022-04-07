@@ -102,11 +102,10 @@ void KListOpenFilesJobPrivate::lsofFinished(int, QProcess::ExitStatus)
 #endif
 
     for (const auto &pidStr : pidList) {
-        qint64 pid = pidStr.toLongLong();
-        if (!pid) {
-            continue;
+        const qint64 pid = pidStr.toLongLong();
+        if (pid) {
+            processInfoList << findInfoForPid(pid);
         }
-        processInfoList << findInfoForPid(pid);
     }
     job->emitResult();
 }
