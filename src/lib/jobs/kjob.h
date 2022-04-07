@@ -392,6 +392,18 @@ public:
      */
     bool isFinishedNotificationHidden() const;
 
+    /**
+     * Returns @c true if this job was started with exec(), which starts a nested event-loop
+     * (with QEventLoop::ExcludeUserInputEvents, which blocks the GUI), otherwise returns
+     * @c false which indicates this job was started asynchronously with start().
+     *
+     * This is useful for code that for example shows a dialog to ask the user a question,
+     * and that would be no-op since the user cannot interact with the dialog.
+     *
+     * @since 5.95
+     */
+    bool isStartedWithExec() const;
+
 Q_SIGNALS:
     /**
      * Emitted when the job is finished, in any case. It is used to notify

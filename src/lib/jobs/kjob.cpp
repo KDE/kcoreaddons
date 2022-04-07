@@ -192,6 +192,7 @@ bool KJob::exec()
 
     start();
     if (!d->isFinished) {
+        d->m_startedWithExec = true;
         d->eventLoop->exec(QEventLoop::ExcludeUserInputEvents);
     }
     d->eventLoop = nullptr;
@@ -399,6 +400,12 @@ bool KJob::isFinishedNotificationHidden() const
 {
     Q_D(const KJob);
     return d->m_hideFinishedNotification;
+}
+
+bool KJob::isStartedWithExec() const
+{
+    Q_D(const KJob);
+    return d->m_startedWithExec;
 }
 
 #include "moc_kjob.cpp"

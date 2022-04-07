@@ -57,6 +57,7 @@ public:
     bool isAutoDelete = true;
     bool m_hideFinishedNotification = false;
     bool isFinished = false;
+    bool m_startedWithExec = false;
 
     Q_DECLARE_PUBLIC(KJob)
 };
