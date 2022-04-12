@@ -21,7 +21,7 @@ class QHash;
 class KMacroExpanderBasePrivate;
 
 /**
- * \class KMacroExpanderBase kmacroexpander.h <KMacroExpanderBase>
+ * \class KMacroExpanderBase kmacroexpander.h <KMacroExpander>
  *
  * Abstract base class for the worker classes behind the KMacroExpander namespace
  * and the KCharMacroExpander and KWordMacroExpander classes.
