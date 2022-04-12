@@ -227,7 +227,7 @@ protected:
      * @param str the macro to expand
      * @param ret return variable reference. It is guaranteed to be empty
      *  when expandMacro is entered.
-     * @return @c true iff @p chr was a recognized macro name
+     * @return @c true iff @p str was a recognized macro name
      */
     virtual bool expandMacro(const QString &str, QStringList &ret) = 0;
 };
