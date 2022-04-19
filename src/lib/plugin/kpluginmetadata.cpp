@@ -180,19 +180,18 @@ KPluginMetaData::KPluginMetaData(const KPluginLoader &loader)
 #endif
 
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &file)
+    : d(new KPluginMetaDataPrivate)
 {
     m_fileName = file;
     m_metaData = metaData;
 }
 
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile, const QString &metaDataFile)
+    : m_metaData(metaData)
+    , m_fileName(pluginFile)
+    , d(new KPluginMetaDataPrivate)
 {
-    m_fileName = pluginFile;
-    m_metaData = metaData;
-    if (!metaDataFile.isEmpty()) {
-        d = new KPluginMetaDataPrivate;
-        d->metaDataFileName = metaDataFile;
-    }
+    d->metaDataFileName = metaDataFile;
 }
 
 KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaData)
