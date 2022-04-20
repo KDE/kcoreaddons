@@ -119,6 +119,7 @@ private Q_SLOTS:
         QCOMPARE(fromKPluginLoader, fromRawData);
         QCOMPARE(fromFullPath, fromKPluginLoader);
         QCOMPARE(fromRawData, fromKPluginLoader);
+        QVERIFY(!KPluginMetaData(KPluginLoader(QStringLiteral("doesnotexist"))).isValid());
 #endif
 
         QVERIFY(fromQPluginLoader.isValid());
@@ -144,6 +145,9 @@ private Q_SLOTS:
 
         QCOMPARE(fromRawData, fromQPluginLoader);
         QCOMPARE(fromRawData, fromFullPath);
+
+        QVERIFY(!KPluginMetaData(QPluginLoader(QStringLiteral("doesnotexist"))).isValid());
+        QVERIFY(!KPluginMetaData(QJsonObject(), QString()).isValid());
     }
 
     void testAllKeys()

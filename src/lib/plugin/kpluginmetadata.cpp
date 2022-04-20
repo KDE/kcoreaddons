@@ -102,7 +102,7 @@ public:
 };
 
 KPluginMetaData::KPluginMetaData()
-    : d(new KPluginMetaDataPrivate)
+    : KPluginMetaData({}, {}, {})
 {
 }
 
@@ -166,24 +166,20 @@ KPluginMetaData::KPluginMetaData(const QString &file, KPluginMetaDataOption opti
 }
 
 KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
+    : KPluginMetaData(loader.metaData().value(QStringLiteral("MetaData")).toObject(), QFileInfo(loader.fileName()).absoluteFilePath())
 {
-    m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
-    m_metaData = loader.metaData().value(QStringLiteral("MetaData")).toObject();
 }
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 86)
 KPluginMetaData::KPluginMetaData(const KPluginLoader &loader)
+    : KPluginMetaData(loader.metaData().value(QStringLiteral("MetaData")).toObject(), QFileInfo(loader.fileName()).absoluteFilePath())
 {
-    m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
-    m_metaData = loader.metaData().value(QStringLiteral("MetaData")).toObject();
 }
 #endif
 
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &file)
-    : d(new KPluginMetaDataPrivate)
+    : KPluginMetaData(metaData, file, QString())
 {
-    m_fileName = file;
-    m_metaData = metaData;
 }
 
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile, const QString &metaDataFile)
