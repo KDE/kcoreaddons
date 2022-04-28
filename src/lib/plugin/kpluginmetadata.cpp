@@ -134,7 +134,6 @@ KPluginMetaData::KPluginMetaData(const QString &file, KPluginMetaDataOption opti
     : d(new KPluginMetaDataPrivate)
 {
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 92)
-    d->m_option = option;
     if (file.endsWith(QLatin1String(".desktop"))) {
         Q_ASSERT_X(option == DoNotAllowEmptyMetaData, Q_FUNC_INFO, "The AllowEmptyMetaData flag is only allowed for binary plugins");
         qCDebug(KCOREADDONS_DEBUG)
@@ -147,6 +146,7 @@ KPluginMetaData::KPluginMetaData(const QString &file, KPluginMetaDataOption opti
         loadFromJsonFile(file);
     } else {
 #endif
+        d->m_option = option;
         QPluginLoader loader(file);
         d->m_requestedFileName = file;
         m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
