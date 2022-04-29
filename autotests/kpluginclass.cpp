@@ -8,7 +8,7 @@ class SimplePluginClass : public QObject
     Q_OBJECT
 
 public:
-    explicit SimplePluginClass(QObject *parent, const QVariantList &args)
+    explicit SimplePluginClass(QObject * /*parent*/, const QVariantList & /*args*/)
     {
     }
 };

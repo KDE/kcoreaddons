@@ -265,7 +265,7 @@ static void childGenRandom(int count)
 
 // Manually implemented to dispatch to child process if needed to support
 // subtests
-int main(int argc, char *argv[])
+int main([[maybe_unused]] int argc, char *argv[])
 {
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 72)
     if (argc > 1) {
