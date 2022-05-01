@@ -19,7 +19,7 @@ public:
 
     KNetworkMounts *q;
 
-    QSettings *m_settings;
+    QSettings *m_settings = nullptr;
 
 private:
 };

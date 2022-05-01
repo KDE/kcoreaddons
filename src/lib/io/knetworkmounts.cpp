@@ -89,8 +89,9 @@ QStringList KNetworkMounts::paths(KNetworkMountsType type) const
     if (type == Any) {
         QStringList paths;
         paths.reserve(4);
-        for (const auto type : {KNetworkMounts::NfsPaths, KNetworkMounts::SmbPaths, KNetworkMounts::SymlinkDirectory, KNetworkMounts::SymlinkToNetworkMount}) {
-            paths.append(d->m_settings->value(enumToString(type), QStringList()).toStringList());
+        for (const auto networkMountType :
+             {KNetworkMounts::NfsPaths, KNetworkMounts::SmbPaths, KNetworkMounts::SymlinkDirectory, KNetworkMounts::SymlinkToNetworkMount}) {
+            paths.append(d->m_settings->value(enumToString(networkMountType), QStringList()).toStringList());
         }
         return paths;
     } else {
