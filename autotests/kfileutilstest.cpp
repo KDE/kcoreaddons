@@ -55,8 +55,15 @@ void KFileUtilsTest::testSuggestName()
     QCOMPARE(KFileUtils::suggestName(baseUrl, oldName), expectedOutput);
 }
 
+#if defined(Q_OS_UNIX) && !defined(Q_OS_MAC) && !defined(Q_OS_ANDROID)
+#define XDG_PLATFORM
+#endif
+
 void KFileUtilsTest::testfindAllUniqueFiles()
 {
+#ifndef XDG_PLATFORM
+    QSKIP("This test requires XDG_DATA_DIRS; no way to configure QStandardPaths on Windows");
+#endif
     const QString testBaseDirPath = QDir::currentPath() + QLatin1String("/kfileutilstestdata/");
     QDir testDataBaseDir(testBaseDirPath);
     testDataBaseDir.mkpath(QStringLiteral("."));
