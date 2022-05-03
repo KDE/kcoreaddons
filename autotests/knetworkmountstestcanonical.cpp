@@ -201,6 +201,10 @@ void KNetworkMountsTestCanonical::testCanonicalSymlinkPath()
     QFETCH(QString, relPath);
     QFETCH(QString, symlinkedRelPath);
 
+#ifdef Q_OS_WIN
+    QSKIP("QFile::link creates a shortcut on Windows, not a symlink, so no effect on canonical paths, skipped")
+#endif
+
     const QString path = m_tmpDir.path() + QLatin1Char('/') + relPath;
     const QString symlinkedPath = m_tmpDir.path() + QLatin1Char('/') + symlinkedRelPath;
     const QString canonicalPath = QFileInfo(symlinkedPath).canonicalFilePath();
