@@ -28,7 +28,7 @@ private Q_SLOTS:
 void Kdelibs4ConfigMigratorTest::initTestCase()
 {
     QStandardPaths::setTestModeEnabled(true);
-    const QString configHome = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation);
+    const QString configHome = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation);
     QDir(configHome).removeRecursively();
     const QString dataHome = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation);
     QDir(dataHome).removeRecursively();
@@ -62,22 +62,21 @@ void Kdelibs4ConfigMigratorTest::shouldMigrateConfigFiles()
     QDir().mkpath(configPath);
     QVERIFY(QDir(configPath).exists());
 
-    QStringList listConfig;
-    listConfig << QLatin1String("foorc") << QLatin1String("foo1rc");
-    for (const QString &config : std::as_const(listConfig)) {
+    const QStringList listConfig = {QLatin1String("foorc"), QLatin1String("foo1rc")};
+    for (const QString &config : listConfig) {
         QFile fooConfigFile(QLatin1String(KDELIBS4CONFIGMIGRATOR_DATA_DIR) + QLatin1Char('/') + config);
         QVERIFY(fooConfigFile.exists());
         const QString storedConfigFilePath = configPath + QLatin1Char('/') + config;
         QVERIFY(QFile::copy(fooConfigFile.fileName(), storedConfigFilePath));
-        QCOMPARE(QStandardPaths::locate(QStandardPaths::ConfigLocation, config), QString());
+        QCOMPARE(QStandardPaths::locate(QStandardPaths::GenericConfigLocation, config), QString());
     }
 
     Kdelibs4ConfigMigrator migration(QLatin1String("foo"));
-    migration.setConfigFiles(QStringList() << listConfig);
+    migration.setConfigFiles(listConfig);
     QVERIFY(migration.migrate());
 
-    for (const QString &config : std::as_const(listConfig)) {
-        const QString migratedConfigFile = QStandardPaths::locate(QStandardPaths::ConfigLocation, config);
+    for (const QString &config : listConfig) {
+        const QString migratedConfigFile = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, config);
         QVERIFY(!migratedConfigFile.isEmpty());
         QVERIFY(QFile(migratedConfigFile).exists());
         QFile::remove(migratedConfigFile);
