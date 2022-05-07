@@ -1,0 +1,426 @@
+# Translation of xml_mimetypes to Croatian
+#
+# Zarko Pintar <zarko.pintar@gmail.com>, 2009.
+# Andrej Dundovic <adundovi@gmail.com>, 2010.
+# Marko Dimjašević <marko@dimjasevic.net>, 2011.
+msgid ""
+msgstr ""
+"Project-Id-Version: xml_mimetypes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-07-14 00:15+0000\n"
+"PO-Revision-Date: 2011-07-22 16:17+0200\n"
+"Last-Translator: Marko Dimjašević <marko@dimjasevic.net>\n"
+"Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.2\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: \n"
+"X-Text-Markup: \n"
+
+#: kde5.xml.podir/kde5.xml.in.h:1
+#, fuzzy
+#| msgid "RELAX NG"
+msgctxt "comment"
+msgid "RELAX NG"
+msgstr "RELAX NG"
+
+#: kde5.xml.podir/kde5.xml.in.h:2
+#, fuzzy
+#| msgid "CD audio"
+msgctxt "comment"
+msgid "CD audio"
+msgstr "CD audio"
+
+#: kde5.xml.podir/kde5.xml.in.h:3
+#, fuzzy
+#| msgid "SNF bitmap font"
+msgctxt "comment"
+msgid "SNF bitmap font"
+msgstr "SNF bitmap pismo"
+
+#: kde5.xml.podir/kde5.xml.in.h:4
+#, fuzzy
+#| msgid "Java applet"
+msgctxt "comment"
+msgid "Java applet"
+msgstr "Java applet"
+
+#: kde5.xml.podir/kde5.xml.in.h:5
+#, fuzzy
+#| msgid "KHTML Extension Adaptor"
+msgctxt "comment"
+msgid "KHTML Extension Adaptor"
+msgstr "KHTML adapter proširenja"
+
+#: kde5.xml.podir/kde5.xml.in.h:6
+#, fuzzy
+#| msgid "KDE color scheme"
+msgctxt "comment"
+msgid "KDE color scheme"
+msgstr "KDE-ova paleta boja"
+
+#: kde5.xml.podir/kde5.xml.in.h:7
+#, fuzzy
+#| msgid "KNewStuff package"
+msgctxt "comment"
+msgid "KNewStuff package"
+msgstr "KNewStuff paket"
+
+#: kde5.xml.podir/kde5.xml.in.h:9
+#, fuzzy
+#| msgid "KWallet wallet"
+msgctxt "comment"
+msgid "KWallet wallet"
+msgstr "KWallet lisnica"
+
+#: kde5.xml.podir/kde5.xml.in.h:10
+#, fuzzy
+#| msgid "Kugar report template"
+msgctxt "comment"
+msgid "Kugar report template"
+msgstr "Kugar predložak izvještaja"
+
+#: kde5.xml.podir/kde5.xml.in.h:11
+#, fuzzy
+#| msgid "plasmoid"
+msgctxt "comment"
+msgid "plasmoid"
+msgstr "plasmoid"
+
+#: kde5.xml.podir/kde5.xml.in.h:12
+#, fuzzy
+#| msgid "SuperKaramba theme"
+msgctxt "comment"
+msgid "SuperKaramba theme"
+msgstr "tema za SuperKarambu"
+
+#: kde5.xml.podir/kde5.xml.in.h:13
+#, fuzzy
+#| msgid "Calligra Plan project management document"
+msgctxt "comment"
+msgid "Calligra Plan project management document"
+msgstr "Calligra Plan, dokument za upravljanje projektom"
+
+#: kde5.xml.podir/kde5.xml.in.h:14
+#, fuzzy
+#| msgid "Calligra Plan work package document"
+msgctxt "comment"
+msgid "Calligra Plan work package document"
+msgstr "Calligra Plan, dokument za radni paket"
+
+#: kde5.xml.podir/kde5.xml.in.h:15
+#, fuzzy
+#| msgid "KPlato project management document"
+msgctxt "comment"
+msgid "KPlato project management document"
+msgstr "KPlato dokument upravljanja projektom"
+
+#: kde5.xml.podir/kde5.xml.in.h:16
+#, fuzzy
+#| msgid "KPlato project management work package"
+msgctxt "comment"
+msgid "KPlato project management work package"
+msgstr "KPlato radni paket upravljanja projektom"
+
+#: kde5.xml.podir/kde5.xml.in.h:17
+#, fuzzy
+#| msgid "Kugar archive"
+msgctxt "comment"
+msgid "Kugar archive"
+msgstr "Kugar arhiva"
+
+#: kde5.xml.podir/kde5.xml.in.h:18
+#, fuzzy
+#| msgid "web archive"
+msgctxt "comment"
+msgid "web archive"
+msgstr "web arhiva"
+
+#: kde5.xml.podir/kde5.xml.in.h:19
+#, fuzzy
+#| msgid "W3C XML schema"
+msgctxt "comment"
+msgid "W3C XML schema"
+msgstr "W3C XML shema"
+
+#: kde5.xml.podir/kde5.xml.in.h:21
+#, fuzzy
+#| msgid "RealAudio plugin file"
+msgctxt "comment"
+msgid "RealAudio plugin file"
+msgstr "priključna datoteka za RealAudio"
+
+#: kde5.xml.podir/kde5.xml.in.h:23
+#, fuzzy
+#| msgid "KPhotoAlbum import"
+msgctxt "comment"
+msgid "KPhotoAlbum import"
+msgstr "KPhotoAlbum uvoz"
+
+#: kde5.xml.podir/kde5.xml.in.h:25
+#, fuzzy
+#| msgid "HDR image"
+msgctxt "comment"
+msgid "HDR image"
+msgstr "HDR slika"
+
+#: kde5.xml.podir/kde5.xml.in.h:26
+#, fuzzy
+#| msgid "KDE raw image formats"
+msgctxt "comment"
+msgid "KDE raw image formats"
+msgstr "KDE-ovi sirovi slikovni podaci"
+
+#: kde5.xml.podir/kde5.xml.in.h:27
+#, fuzzy
+#| msgid "Intel® hexadecimal object file"
+msgctxt "comment"
+msgid "Intel® hexadecimal object file"
+msgstr "Intelova® heksadecimalna objektna datoteka"
+
+#: kde5.xml.podir/kde5.xml.in.h:28
+#, fuzzy
+#| msgid "Kate file list loader plugin list"
+msgctxt "comment"
+msgid "Kate file list loader plugin list"
+msgstr "Kate lista od priključka učitavača liste datoteka"
+
+#: kde5.xml.podir/kde5.xml.in.h:29
+#, fuzzy
+#| msgid "abc musical notation file"
+msgctxt "comment"
+msgid "abc musical notation file"
+msgstr "abc muzičko notacijska datoteka"
+
+#: kde5.xml.podir/kde5.xml.in.h:30
+#, fuzzy
+#| msgid "fonts package"
+msgctxt "comment"
+msgid "fonts package"
+msgstr "paket pisama"
+
+#: kde5.xml.podir/kde5.xml.in.h:31
+#, fuzzy
+#| msgid "Windows server"
+msgctxt "comment"
+msgid "Windows server"
+msgstr "Windows poslužitelj"
+
+#: kde5.xml.podir/kde5.xml.in.h:32
+#, fuzzy
+#| msgid "Windows workgroup"
+msgctxt "comment"
+msgid "Windows workgroup"
+msgstr "Windows radna grupa"
+
+#: kde5.xml.podir/kde5.xml.in.h:34
+#, fuzzy
+#| msgid "KDE system monitor"
+msgctxt "comment"
+msgid "KDE system monitor"
+msgstr "KDE-ov monitor sustava"
+
+#: kde5.xml.podir/kde5.xml.in.h:35
+#, fuzzy
+#| msgid "KDE theme"
+msgctxt "comment"
+msgid "KDE theme"
+msgstr "KDE-ova tema"
+
+#: kde5.xml.podir/kde5.xml.in.h:36
+#, fuzzy
+#| msgid "Quanta project"
+msgctxt "comment"
+msgid "Quanta project"
+msgstr "Quanta projekt"
+
+#: kde5.xml.podir/kde5.xml.in.h:37
+#, fuzzy
+#| msgid "Kommander file"
+msgctxt "comment"
+msgid "Kommander file"
+msgstr "Kommander datoteka"
+
+#: kde5.xml.podir/kde5.xml.in.h:38
+#, fuzzy
+#| msgid "potato"
+msgctxt "comment"
+msgid "potato"
+msgstr "potato"
+
+#: kde5.xml.podir/kde5.xml.in.h:39
+#, fuzzy
+#| msgid "Kolf saved game"
+msgctxt "comment"
+msgid "Kolf saved game"
+msgstr "Kolf spremljena igra"
+
+#: kde5.xml.podir/kde5.xml.in.h:40
+#, fuzzy
+#| msgid "Kolf course"
+msgctxt "comment"
+msgid "Kolf course"
+msgstr "Kolf staza"
+
+#: kde5.xml.podir/kde5.xml.in.h:41
+#, fuzzy
+#| msgid "Okular document archive"
+msgctxt "comment"
+msgid "Okular document archive"
+msgstr "arhiva dokumenta za Okular"
+
+#: kde5.xml.podir/kde5.xml.in.h:42
+#, fuzzy
+#| msgid "Cabri figure"
+msgctxt "comment"
+msgid "Cabri figure"
+msgstr "Cabri figura"
+
+#: kde5.xml.podir/kde5.xml.in.h:43
+#, fuzzy
+#| msgid "Dr. Geo figure"
+msgctxt "comment"
+msgid "Dr. Geo figure"
+msgstr "Dr. Geo figura"
+
+#: kde5.xml.podir/kde5.xml.in.h:44
+#, fuzzy
+#| msgid "KGeo figure"
+msgctxt "comment"
+msgid "KGeo figure"
+msgstr "KGeo skica"
+
+#: kde5.xml.podir/kde5.xml.in.h:45
+#, fuzzy
+#| msgid "Kig figure"
+msgctxt "comment"
+msgid "Kig figure"
+msgstr "Kig figura"
+
+#: kde5.xml.podir/kde5.xml.in.h:46
+#, fuzzy
+#| msgid "KSeg document"
+msgctxt "comment"
+msgid "KSeg document"
+msgstr "KSeg dokument"
+
+#: kde5.xml.podir/kde5.xml.in.h:47
+#, fuzzy
+#| msgid "vocabulary trainer document"
+msgctxt "comment"
+msgid "vocabulary trainer document"
+msgstr "dokument vokabularskog trenera"
+
+#: kde5.xml.podir/kde5.xml.in.h:48
+#, fuzzy
+#| msgid "KmPlot file"
+msgctxt "comment"
+msgid "KmPlot file"
+msgstr "KmPlot datoteka"
+
+#: kde5.xml.podir/kde5.xml.in.h:49
+#, fuzzy
+#| msgid "KWordQuiz vocabulary"
+msgctxt "comment"
+msgid "KWordQuiz vocabulary"
+msgstr "KWordQuiz vokabular"
+
+#: kde5.xml.podir/kde5.xml.in.h:50
+#, fuzzy
+#| msgid "Cachegrind/Callgrind profile dump"
+msgctxt "comment"
+msgid "Cachegrind/Callgrind profile dump"
+msgstr "Cachegrind/Callgrind odbačeni profil"
+
+#: kde5.xml.podir/kde5.xml.in.h:51
+#, fuzzy
+#| msgid "Umbrello UML Modeller file"
+msgctxt "comment"
+msgid "Umbrello UML Modeller file"
+msgstr "Umbrello UML Modeller datoteka"
+
+#: kde5.xml.podir/kde5.xml.in.h:52
+#, fuzzy
+#| msgid "Windows link"
+msgctxt "comment"
+msgid "Windows link"
+msgstr "Windows veza"
+
+#: kde5.xml.podir/kde5.xml.in.h:53
+#, fuzzy
+#| msgid "KGet download list"
+msgctxt "comment"
+msgid "KGet download list"
+msgstr "KGet lista preuzimanja"
+
+#: kde5.xml.podir/kde5.xml.in.h:54
+#, fuzzy
+#| msgid "Kopete emoticons archive"
+msgctxt "comment"
+msgid "Kopete emoticons archive"
+msgstr "Kopete arhiva emotikona"
+
+#: kde5.xml.podir/kde5.xml.in.h:55
+#, fuzzy
+#| msgid "ICQ contact"
+msgctxt "comment"
+msgid "ICQ contact"
+msgstr "ICQ kontakt"
+
+#: kde5.xml.podir/kde5.xml.in.h:57
+#, fuzzy
+#| msgid "Microsoft Media Format"
+msgctxt "comment"
+msgid "Microsoft Media Format"
+msgstr "Microsoft Media Format"
+
+#: kde5.xml.podir/kde5.xml.in.h:59
+#, fuzzy
+#| msgid "Turtle RDF document"
+msgctxt "comment"
+msgid "Turtle RDF document"
+msgstr "Turtle RDF dokument"
+
+#: kde5.xml.podir/kde5.xml.in.h:61
+#, fuzzy
+#| msgid "Softimage PIC image"
+msgctxt "comment"
+msgid "Softimage PIC image"
+msgstr "Softimage PIC slika"
+
+#: kde5.xml.podir/kde5.xml.in.h:63
+#, fuzzy
+#| msgid "Qt Markup Language file"
+msgctxt "comment"
+msgid "Qt Markup Language file"
+msgstr "Datoteka Qt-ovog označnog jezika"
+
+#: kde5.xml.podir/kde5.xml.in.h:64
+msgctxt "comment"
+msgid "KConfigXT Configuration Options"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:65
+msgctxt "comment"
+msgid "KConfigXT Code Generation Options"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:66
+msgctxt "comment"
+msgid "KXMLGUI UI Declaration"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:67
+msgctxt "comment"
+msgid "KNotification Declaration"
+msgstr ""
+
+#: kde5.xml.podir/kde5.xml.in.h:68
+msgctxt "comment"
+msgid "KCrash Report"
+msgstr ""
