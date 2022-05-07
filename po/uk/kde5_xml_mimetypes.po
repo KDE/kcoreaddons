@@ -1,0 +1,316 @@
+# Translation of kde5_xml_mimetypes.po to Ukrainian
+# Copyright (C) 2020 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Yuri Chornoivan <yurchor@ukr.net>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: kde5_xml_mimetypes\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-07-14 00:15+0000\n"
+"PO-Revision-Date: 2020-10-26 10:18+0200\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Lokalize 20.11.70\n"
+
+#: kde5.xml.podir/kde5.xml.in.h:1
+msgctxt "comment"
+msgid "RELAX NG"
+msgstr "RELAX NG"
+
+#: kde5.xml.podir/kde5.xml.in.h:2
+msgctxt "comment"
+msgid "CD audio"
+msgstr "звуковий компакт-диск"
+
+#: kde5.xml.podir/kde5.xml.in.h:3
+msgctxt "comment"
+msgid "SNF bitmap font"
+msgstr "растровий файл SNF"
+
+#: kde5.xml.podir/kde5.xml.in.h:4
+msgctxt "comment"
+msgid "Java applet"
+msgstr "аплет Java"
+
+#: kde5.xml.podir/kde5.xml.in.h:5
+msgctxt "comment"
+msgid "KHTML Extension Adaptor"
+msgstr "адаптер розширень KHTML"
+
+#: kde5.xml.podir/kde5.xml.in.h:6
+msgctxt "comment"
+msgid "KDE color scheme"
+msgstr "схема кольорів KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:7
+msgctxt "comment"
+msgid "KNewStuff package"
+msgstr "пакунок KNewStuff"
+
+#: kde5.xml.podir/kde5.xml.in.h:9
+msgctxt "comment"
+msgid "KWallet wallet"
+msgstr "торбинка KWallet"
+
+#: kde5.xml.podir/kde5.xml.in.h:10
+msgctxt "comment"
+msgid "Kugar report template"
+msgstr "шаблон звіту Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:11
+msgctxt "comment"
+msgid "plasmoid"
+msgstr "плазмоїд"
+
+#: kde5.xml.podir/kde5.xml.in.h:12
+msgctxt "comment"
+msgid "SuperKaramba theme"
+msgstr "тема SuperKaramba"
+
+#: kde5.xml.podir/kde5.xml.in.h:13
+msgctxt "comment"
+msgid "Calligra Plan project management document"
+msgstr "документ керування роботами Plan зі складу Calligra"
+
+#: kde5.xml.podir/kde5.xml.in.h:14
+msgctxt "comment"
+msgid "Calligra Plan work package document"
+msgstr "пакунок роботи Plan зі складу Calligra"
+
+#: kde5.xml.podir/kde5.xml.in.h:15
+msgctxt "comment"
+msgid "KPlato project management document"
+msgstr "документ керування роботами KPlato"
+
+#: kde5.xml.podir/kde5.xml.in.h:16
+msgctxt "comment"
+msgid "KPlato project management work package"
+msgstr "пакунок проєкту керування роботами KPlato"
+
+#: kde5.xml.podir/kde5.xml.in.h:17
+msgctxt "comment"
+msgid "Kugar archive"
+msgstr "архів Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:18
+msgctxt "comment"
+msgid "web archive"
+msgstr "вебархів"
+
+#: kde5.xml.podir/kde5.xml.in.h:19
+msgctxt "comment"
+msgid "W3C XML schema"
+msgstr "схема XML W3C"
+
+#: kde5.xml.podir/kde5.xml.in.h:21
+msgctxt "comment"
+msgid "RealAudio plugin file"
+msgstr "файл додатка RealAudio"
+
+#: kde5.xml.podir/kde5.xml.in.h:23
+msgctxt "comment"
+msgid "KPhotoAlbum import"
+msgstr "файли імпортування KPhotoAlbum"
+
+#: kde5.xml.podir/kde5.xml.in.h:25
+msgctxt "comment"
+msgid "HDR image"
+msgstr "зображення HDR"
+
+#: kde5.xml.podir/kde5.xml.in.h:26
+msgctxt "comment"
+msgid "KDE raw image formats"
+msgstr "формати цифрових негативів KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:27
+msgctxt "comment"
+msgid "Intel® hexadecimal object file"
+msgstr "шістнадцятковий об'єктний файл Intel®"
+
+#: kde5.xml.podir/kde5.xml.in.h:28
+msgctxt "comment"
+msgid "Kate file list loader plugin list"
+msgstr "список файлів Kate"
+
+#: kde5.xml.podir/kde5.xml.in.h:29
+msgctxt "comment"
+msgid "abc musical notation file"
+msgstr "файл нотного стану abc"
+
+#: kde5.xml.podir/kde5.xml.in.h:30
+msgctxt "comment"
+msgid "fonts package"
+msgstr "пакунок шрифтів"
+
+#: kde5.xml.podir/kde5.xml.in.h:31
+msgctxt "comment"
+msgid "Windows server"
+msgstr "сервер Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:32
+msgctxt "comment"
+msgid "Windows workgroup"
+msgstr "робоча група Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:34
+msgctxt "comment"
+msgid "KDE system monitor"
+msgstr "монітор системи KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:35
+msgctxt "comment"
+msgid "KDE theme"
+msgstr "тема KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:36
+msgctxt "comment"
+msgid "Quanta project"
+msgstr "проєкт Quanta"
+
+#: kde5.xml.podir/kde5.xml.in.h:37
+msgctxt "comment"
+msgid "Kommander file"
+msgstr "файл Kommander"
+
+#: kde5.xml.podir/kde5.xml.in.h:38
+msgctxt "comment"
+msgid "potato"
+msgstr "картопля"
+
+#: kde5.xml.podir/kde5.xml.in.h:39
+msgctxt "comment"
+msgid "Kolf saved game"
+msgstr "збережена гра Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:40
+msgctxt "comment"
+msgid "Kolf course"
+msgstr "майданчик Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:41
+msgctxt "comment"
+msgid "Okular document archive"
+msgstr "архів документа Okular"
+
+#: kde5.xml.podir/kde5.xml.in.h:42
+msgctxt "comment"
+msgid "Cabri figure"
+msgstr "рисунок Cabri"
+
+#: kde5.xml.podir/kde5.xml.in.h:43
+msgctxt "comment"
+msgid "Dr. Geo figure"
+msgstr "рисунок Dr. Geo"
+
+#: kde5.xml.podir/kde5.xml.in.h:44
+msgctxt "comment"
+msgid "KGeo figure"
+msgstr "рисунок KGeo"
+
+#: kde5.xml.podir/kde5.xml.in.h:45
+msgctxt "comment"
+msgid "Kig figure"
+msgstr "рисунок Kig"
+
+#: kde5.xml.podir/kde5.xml.in.h:46
+msgctxt "comment"
+msgid "KSeg document"
+msgstr "документ KSeg"
+
+#: kde5.xml.podir/kde5.xml.in.h:47
+msgctxt "comment"
+msgid "vocabulary trainer document"
+msgstr "документ вправ зі словником"
+
+#: kde5.xml.podir/kde5.xml.in.h:48
+msgctxt "comment"
+msgid "KmPlot file"
+msgstr "файл KmPlot"
+
+#: kde5.xml.podir/kde5.xml.in.h:49
+msgctxt "comment"
+msgid "KWordQuiz vocabulary"
+msgstr "словник KWordQuiz"
+
+#: kde5.xml.podir/kde5.xml.in.h:50
+msgctxt "comment"
+msgid "Cachegrind/Callgrind profile dump"
+msgstr "дамп профілювання Cachegrind/Callgrind"
+
+#: kde5.xml.podir/kde5.xml.in.h:51
+msgctxt "comment"
+msgid "Umbrello UML Modeller file"
+msgstr "файл програми для моделювання UML Umbrello"
+
+#: kde5.xml.podir/kde5.xml.in.h:52
+msgctxt "comment"
+msgid "Windows link"
+msgstr "посилання Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:53
+msgctxt "comment"
+msgid "KGet download list"
+msgstr "список отримань KGet"
+
+#: kde5.xml.podir/kde5.xml.in.h:54
+msgctxt "comment"
+msgid "Kopete emoticons archive"
+msgstr "архів емоційок Kopete"
+
+#: kde5.xml.podir/kde5.xml.in.h:55
+msgctxt "comment"
+msgid "ICQ contact"
+msgstr "контакт ICQ"
+
+#: kde5.xml.podir/kde5.xml.in.h:57
+msgctxt "comment"
+msgid "Microsoft Media Format"
+msgstr "Microsoft Media Format"
+
+#: kde5.xml.podir/kde5.xml.in.h:59
+msgctxt "comment"
+msgid "Turtle RDF document"
+msgstr "документ RDF Turtle"
+
+#: kde5.xml.podir/kde5.xml.in.h:61
+msgctxt "comment"
+msgid "Softimage PIC image"
+msgstr "зображення PIC Softimage"
+
+#: kde5.xml.podir/kde5.xml.in.h:63
+msgctxt "comment"
+msgid "Qt Markup Language file"
+msgstr "файл мови розмітки Qt"
+
+#: kde5.xml.podir/kde5.xml.in.h:64
+msgctxt "comment"
+msgid "KConfigXT Configuration Options"
+msgstr "параметри налаштування KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:65
+msgctxt "comment"
+msgid "KConfigXT Code Generation Options"
+msgstr "параметри створення коду KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:66
+msgctxt "comment"
+msgid "KXMLGUI UI Declaration"
+msgstr "оголошення інтерфейсу KXMLGUI"
+
+#: kde5.xml.podir/kde5.xml.in.h:67
+msgctxt "comment"
+msgid "KNotification Declaration"
+msgstr "оголошення KNotification"
+
+#: kde5.xml.podir/kde5.xml.in.h:68
+msgctxt "comment"
+msgid "KCrash Report"
+msgstr "звіт KCrash"
