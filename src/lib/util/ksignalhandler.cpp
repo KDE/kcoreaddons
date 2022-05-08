@@ -65,7 +65,10 @@ void KSignalHandler::watchSignal(int signalToTrack)
 void KSignalHandlerPrivate::signalHandler(int signal)
 {
 #ifndef Q_OS_WIN
-    ::write(signalFd[0], &signal, sizeof(signal));
+    const int ret = ::write(signalFd[0], &signal, sizeof(signal));
+    if (ret != sizeof(signal)) {
+        qCWarning(KCOREADDONS_DEBUG) << "signalHandler couldn't write for signal" << strsignal(signal) << " Got error:" << strerror(errno);
+    }
 #endif
 }
 
@@ -74,7 +77,11 @@ void KSignalHandlerPrivate::handleSignal()
 #ifndef Q_OS_WIN
     m_handler->setEnabled(false);
     int signal;
-    ::read(KSignalHandlerPrivate::signalFd[1], &signal, sizeof(signal));
+    const int ret = ::read(KSignalHandlerPrivate::signalFd[1], &signal, sizeof(signal));
+    if (ret != sizeof(signal)) {
+        qCWarning(KCOREADDONS_DEBUG) << "handleSignal couldn't read signal for fd" << KSignalHandlerPrivate::signalFd[1] << " Got error:" << strerror(errno);
+        return;
+    }
     m_handler->setEnabled(true);
 
     Q_EMIT q->signalReceived(signal);
