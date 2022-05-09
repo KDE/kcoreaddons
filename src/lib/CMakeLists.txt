@@ -128,6 +128,7 @@ target_sources(KF5CoreAddons PRIVATE
     util/kshell.cpp
     util/klibexec.cpp
     util/ksignalhandler.cpp
+    util/ksandbox.cpp
 )
 
 
@@ -297,6 +298,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         Kdelibs4ConfigMigrator
         KLibexec
         KSignalHandler
+        KSandbox
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
