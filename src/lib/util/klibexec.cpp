@@ -60,8 +60,12 @@ static QString libraryPathFromAddress(void *address)
 QString KLibexec::pathFromAddress(const QString &relativePath, void *address)
 {
     const QString libraryPath = libraryPathFromAddress(address);
-    const QString absoluteDirPath = QFileInfo(libraryPath).absolutePath();
-    const QString libexecPath = QFileInfo(absoluteDirPath + QLatin1Char('/') + relativePath).absoluteFilePath();
+    // On usr-merged distros, /lib(64) links to /usr/lib(64) for instance.
+    // Libraries are installed into the directories below /usr, but glibc's builtin default means
+    // that they get loaded through /lib(64). This breaks some relative paths. canonicalPath()
+    // resolves that and should be more reliable.
+    const QString canonicalDirPath = QFileInfo(libraryPath).canonicalPath();
+    const QString libexecPath = QFileInfo(canonicalDirPath + QLatin1Char('/') + relativePath).absoluteFilePath();
     return libexecPath;
 }
 
