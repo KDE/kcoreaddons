@@ -281,6 +281,12 @@ void KDirWatchPrivate::inotifyEventReceived()
         int offsetCurrent = 0;
         while (bytesAvailable >= int(sizeof(struct inotify_event))) {
             const struct inotify_event *const event = reinterpret_cast<inotify_event *>(&buf[offsetCurrent]);
+
+            if (event->mask & IN_Q_OVERFLOW) {
+                qCWarning(KDIRWATCH) << "Inotify Event queue overflowed, check max_queued_events value";
+                return;
+            }
+
             const int eventSize = sizeof(struct inotify_event) + event->len;
             if (bytesAvailable < eventSize) {
                 break;
