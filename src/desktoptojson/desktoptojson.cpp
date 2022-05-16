@@ -38,7 +38,7 @@ int DesktopToJson::runMain()
         return 1;
     }
 
-#pragma message("TODO: make it an error if one of the service type files is invalid or not found")
+    // #pragma message("TODO: make it an error if one of the service type files is invalid or not found")
     const QStringList serviceTypes = m_parser->values(serviceTypesOption);
     QStringList searchPaths = m_parser->values(genericDataPathOption);
     if (!m_parser->isSet(strictPathMode)) {

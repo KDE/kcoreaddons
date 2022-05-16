@@ -38,7 +38,7 @@ typedef struct {
 
 using namespace KMacroExpander;
 
-#pragma message("TODO: Import these methods into Qt")
+// #pragma message("TODO: Import these methods into Qt")
 
 inline static bool isSpecial(QChar cUnicode)
 {
