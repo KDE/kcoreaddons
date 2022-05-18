@@ -321,7 +321,7 @@ protected:
 
 private:
     // hide those
-#if QT_DEPRECATED_SINCE(5, 13)
+#if QT_DEPRECATED_SINCE(5, 13) && QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     using QProcess::readChannelMode;
     using QProcess::setReadChannelMode;
 #endif
