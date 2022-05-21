@@ -23,7 +23,6 @@
 #include <QFile>
 #include <QMutex>
 #include <QRandomGenerator>
-#include <QSharedPointer>
 
 #include <stdlib.h>
 #include <sys/mman.h>
@@ -437,7 +436,7 @@ struct SharedMemory {
         }
 
         bool isProcessShared = false;
-        QSharedPointer<KSDCLock> tempLock(createLockFromId(shmLock.type, shmLock));
+        std::unique_ptr<KSDCLock> tempLock(createLockFromId(shmLock.type, shmLock));
 
         if (!tempLock->initialize(isProcessShared)) {
             qCCritical(KCOREADDONS_DEBUG) << "Unable to initialize the lock for the cache!";
@@ -773,7 +772,7 @@ struct SharedMemory {
         return -1; // Not found, or a different one found.
     }
 
-    // Function to use with QSharedPointer in removeUsedPages below...
+    // Function to use with std::unique_ptr in removeUsedPages below...
     static void deleteTable(IndexTableEntry *table)
     {
         delete[] table;
@@ -825,7 +824,7 @@ struct SharedMemory {
         // At this point we know we'll have to free some space up, so sort our
         // list of entries by whatever the current criteria are and start
         // killing expired entries.
-        QSharedPointer<IndexTableEntry> tablePtr(new IndexTableEntry[indexTableSize()], deleteTable);
+        std::unique_ptr<IndexTableEntry, decltype(deleteTable) *> tablePtr(new IndexTableEntry[indexTableSize()], deleteTable);
 
         if (!tablePtr) {
             qCCritical(KCOREADDONS_DEBUG) << "Unable to allocate temporary memory for sorting the cache!";
@@ -835,7 +834,7 @@ struct SharedMemory {
 
         // We use tablePtr to ensure the data is destroyed, but do the access
         // via a helper pointer to allow for array ops.
-        IndexTableEntry *table = tablePtr.data();
+        IndexTableEntry *table = tablePtr.get();
 
         ::memcpy(table, indexTable(), sizeof(IndexTableEntry) * indexTableSize());
 
@@ -983,7 +982,7 @@ public:
     {
         // The lock holds a reference into shared memory, so this must be
         // cleared before shm is removed.
-        m_lock.clear();
+        m_lock.reset();
 
         if (shm && 0 != ::munmap(shm, m_mapSize)) {
             qCCritical(KCOREADDONS_DEBUG) << "Unable to unmap shared memory segment" << static_cast<void *>(shm) << ":" << ::strerror(errno);
@@ -1143,7 +1142,7 @@ public:
         }
 
         m_expectedType = shm->shmLock.type;
-        m_lock = QSharedPointer<KSDCLock>(createLockFromId(m_expectedType, shm->shmLock));
+        m_lock = std::unique_ptr<KSDCLock>(createLockFromId(m_expectedType, shm->shmLock));
         bool isProcessSharingSupported = false;
 
         if (!m_lock->initialize(isProcessSharingSupported)) {
@@ -1290,7 +1289,7 @@ public:
 
     QString m_cacheName;
     SharedMemory *shm;
-    QSharedPointer<KSDCLock> m_lock;
+    std::unique_ptr<KSDCLock> m_lock;
     uint m_mapSize;
     uint m_defaultCacheSize;
     uint m_expectedItemSize;

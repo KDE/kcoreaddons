@@ -11,7 +11,6 @@
 
 #include <config-caching.h> // HAVE_SYS_MMAN_H
 
-#include <QSharedPointer>
 #include <qbasicatomic.h>
 
 #include "kcoreaddons_debug.h"
@@ -373,13 +372,13 @@ static SharedLockId findBestSharedLock()
 #ifdef KSDC_THREAD_PROCESS_SHARED_SUPPORTED
     {
         pthread_mutex_t tempMutex;
-        QSharedPointer<KSDCLock> tempLock;
+        std::unique_ptr<KSDCLock> tempLock;
         if (timeoutsSupported) {
 #ifdef KSDC_TIMEOUTS_SUPPORTED
-            tempLock = QSharedPointer<KSDCLock>(new pthreadTimedLock(tempMutex));
+            tempLock = std::make_unique<pthreadTimedLock>(tempMutex);
 #endif
         } else {
-            tempLock = QSharedPointer<KSDCLock>(new pthreadLock(tempMutex));
+            tempLock = std::make_unique<pthreadLock>(tempMutex);
         }
 
         tempLock->initialize(pthreadsProcessShared);
@@ -394,11 +393,11 @@ static SharedLockId findBestSharedLock()
 #ifdef KSDC_SEMAPHORES_SUPPORTED
     {
         sem_t tempSemaphore;
-        QSharedPointer<KSDCLock> tempLock;
+        std::unique_ptr<KSDCLock> tempLock;
         if (timeoutsSupported) {
-            tempLock = QSharedPointer<KSDCLock>(new semaphoreTimedLock(tempSemaphore));
+            tempLock = std::make_unique<semaphoreTimedLock>(tempSemaphore);
         } else {
-            tempLock = QSharedPointer<KSDCLock>(new semaphoreLock(tempSemaphore));
+            tempLock = std::make_unique<semaphoreLock>(tempSemaphore);
         }
 
         tempLock->initialize(semaphoresProcessShared);
