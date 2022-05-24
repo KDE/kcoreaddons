@@ -17,6 +17,12 @@ private Q_SLOTS:
     void preProcessWrap();
     void logicalLength_data();
     void logicalLength();
+    void lsqueeze();
+    void lsqueeze_data();
+    void csqueeze();
+    void csqueeze_data();
+    void rsqueeze();
+    void rsqueeze_data();
 
 private:
     static QString test;

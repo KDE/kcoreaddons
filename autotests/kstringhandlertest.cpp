@@ -194,3 +194,63 @@ void KStringHandlerTest::logicalLength()
     QFETCH(int, expected);
     QCOMPARE(KStringHandler::logicalLength(string), expected);
 }
+
+void KStringHandlerTest::lsqueeze_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<int>("length");
+    QTest::addColumn<QString>("expected");
+
+    QTest::newRow("kde_is_awesome") << "KDE is awesome" << 11 << "... awesome";
+    QTest::newRow("kde_is_really_awesome") << "KDE is really awesome" << 20 << "...is really awesome";
+    QTest::newRow("kde_is_really_awesome_full") << "KDE is really awesome" << 30 << "KDE is really awesome";
+}
+
+void KStringHandlerTest::lsqueeze()
+{
+    QFETCH(QString, string);
+    QFETCH(int, length);
+    QFETCH(QString, expected);
+
+    QCOMPARE(KStringHandler::lsqueeze(string, length), expected);
+}
+
+void KStringHandlerTest::csqueeze_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<int>("length");
+    QTest::addColumn<QString>("expected");
+
+    QTest::newRow("kde_is_awesome") << "KDE is awesome" << 11 << "KDE ...some";
+    QTest::newRow("kde_is_really_awesome") << "KDE is really awesome" << 20 << "KDE is r... awesome";
+    QTest::newRow("kde_is_really_awesome_full") << "KDE is really awesome" << 30 << "KDE is really awesome";
+}
+
+void KStringHandlerTest::csqueeze()
+{
+    QFETCH(QString, string);
+    QFETCH(int, length);
+    QFETCH(QString, expected);
+
+    QCOMPARE(KStringHandler::csqueeze(string, length), expected);
+}
+
+void KStringHandlerTest::rsqueeze_data()
+{
+    QTest::addColumn<QString>("string");
+    QTest::addColumn<int>("length");
+    QTest::addColumn<QString>("expected");
+
+    QTest::newRow("kde_is_awesome") << "KDE is awesome" << 11 << "KDE is a...";
+    QTest::newRow("kde_is_really_awesome") << "KDE is really awesome" << 20 << "KDE is really awe...";
+    QTest::newRow("kde_is_really_awesome_full") << "KDE is really awesome" << 30 << "KDE is really awesome";
+}
+
+void KStringHandlerTest::rsqueeze()
+{
+    QFETCH(QString, string);
+    QFETCH(int, length);
+    QFETCH(QString, expected);
+
+    QCOMPARE(KStringHandler::rsqueeze(string, length), expected);
+}
