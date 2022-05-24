@@ -275,6 +275,21 @@ class KPluginMetaData;
 #endif
 
 /**
+ * Utility macro to create a KPluginFactory that contains two plugins.
+ * @code
+ * K_PLUGIN_CLASSES_WITH_JSON(MyPlugin, MyPlugin2, "metadata.json")
+ * @endcode
+ * @since 5.95
+ */
+#ifdef KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME
+#define K_PLUGIN_CLASSES_WITH_JSON(classname1, classname2, jsonFile)                                                                                           \
+    K_PLUGIN_FACTORY_WITH_JSON(KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME, jsonFile, registerPlugin<classname1>(); registerPlugin<classname2>();)
+#else
+#define K_PLUGIN_CLASSES_WITH_JSON(classname1, classname2, jsonFile)                                                                                           \
+    K_PLUGIN_FACTORY_WITH_JSON(classname1##Factory, jsonFile, registerPlugin<classname1>(); registerPlugin<classname2>();)
+#endif
+
+/**
  * @relates KPluginFactory
  *
  * Creates a KPluginFactory subclass and exports it as the root plugin object.
