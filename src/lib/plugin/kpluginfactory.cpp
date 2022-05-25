@@ -176,6 +176,10 @@ void KPluginFactory::logFailedInstantiationMessage(KPluginMetaData data)
 {
     qCWarning(KCOREADDONS_DEBUG) << "KPluginFactory could not load the plugin" << data.fileName();
 }
+void KPluginFactory::logFailedInstantiationMessage(const char *className, KPluginMetaData data)
+{
+    qCWarning(KCOREADDONS_DEBUG) << "KPluginFactory could not create a" << className << "instance from" << data.fileName();
+}
 
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
 QObject *KPluginFactory::createObject(QObject *parent, const char *className, const QStringList &args)

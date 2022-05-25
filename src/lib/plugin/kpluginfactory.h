@@ -508,10 +508,11 @@ public:
         }
         T *instance = factoryResult.plugin->create<T>(parent, args);
         if (!instance) {
-            result.errorString = tr("KPluginFactory could not load the plugin: %1").arg(data.fileName());
-            result.errorText = QStringLiteral("KPluginFactory could not load the plugin: %1").arg(data.fileName());
+            const QLatin1String className(T::staticMetaObject.className());
+            result.errorString = tr("KPluginFactory could not create a %1 instance from %2").arg(className, data.fileName());
+            result.errorText = QStringLiteral("KPluginFactory could not create a %1 instance from %2").arg(className, data.fileName());
             result.errorReason = INVALID_KPLUGINFACTORY_INSTANTIATION;
-            logFailedInstantiationMessage(data);
+            logFailedInstantiationMessage(T::staticMetaObject.className(), data);
         } else {
             result.plugin = instance;
         }
@@ -904,6 +905,7 @@ private:
     void registerPlugin(const QString &keyword, const QMetaObject *metaObject, CreateInstanceWithMetaDataFunction instanceFunction);
     // The logging categories are not part of the public API, consequently this needs to be a private function
     static void logFailedInstantiationMessage(KPluginMetaData data);
+    static void logFailedInstantiationMessage(const char *className, KPluginMetaData data);
 };
 
 // Deprecation wrapper macro added only for 5.70, while backward typedef added in 4.0

@@ -106,6 +106,7 @@ private Q_SLOTS:
             auto result = KPluginFactory::instantiatePlugin<KPluginFactoryTest>(KPluginMetaData(QStringLiteral("jsonplugin")), nullptr, QVariantList());
             QVERIFY(!result.plugin);
             QCOMPARE(result.errorReason, KPluginFactory::INVALID_KPLUGINFACTORY_INSTANTIATION);
+            QVERIFY(result.errorText.contains("KPluginFactoryTest"));
         }
     }
 
