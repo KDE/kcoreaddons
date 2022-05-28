@@ -50,7 +50,6 @@ public:
         lsofProcess.start(lsofExec, {QStringLiteral("-t"), QStringLiteral("+d"), path.path()});
     }
 
-private:
     void lsofError(QProcess::ProcessError processError)
     {
         emitResult(static_cast<int>(KListOpenFilesJob::Error::InternalError), QObject::tr("Failed to execute `lsof' error code %1").arg(processError));
@@ -59,13 +58,11 @@ private:
     void lsofFinished(int, QProcess::ExitStatus);
     void emitResult(int error, const QString &errorText);
 
-private:
     KListOpenFilesJob *job;
     const QDir path;
     bool hasEmittedResult = false;
     QProcess lsofProcess;
 
-    friend KListOpenFilesJob;
     KProcessList::KProcessInfoList processInfoList;
 };
 
