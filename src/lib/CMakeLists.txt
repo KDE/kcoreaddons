@@ -129,6 +129,7 @@ target_sources(KF5CoreAddons PRIVATE
     util/klibexec.cpp
     util/ksignalhandler.cpp
     util/ksandbox.cpp
+    util/kmemoryinfo.cpp
 )
 
 
@@ -157,6 +158,12 @@ ecm_qt_export_logging_category(
     CATEGORY_NAME kf.coreaddons.kaboutdata
     OLD_CATEGORY_NAMES kf5.kcoreaddons.kaboutdata
     DESCRIPTION "KAboutData (KCoreAddons)"
+    EXPORT KCOREADDONS
+)
+ecm_qt_export_logging_category(
+    IDENTIFIER LOG_KMEMORYINFO
+    CATEGORY_NAME kf.coreaddons.kmemoryinfo
+    DESCRIPTION "KMemoryInfo (KCoreAddons)"
     EXPORT KCOREADDONS
 )
 ecm_qt_declare_logging_category(KF5CoreAddons
@@ -203,7 +210,11 @@ target_link_libraries(KF5CoreAddons
 )
 
 if(WIN32)
-    target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv)
+    target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv psapi)
+endif()
+
+if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+    target_link_libraries(KF5CoreAddons PRIVATE kvm)
 endif()
 
 if (HAVE_PROCSTAT)
