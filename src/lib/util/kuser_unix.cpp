@@ -48,26 +48,24 @@ static inline void endgrent()
 class KUserPrivate : public QSharedData
 {
 public:
-    uid_t uid;
-    gid_t gid;
+    uid_t uid = uid_t(-1);
+    gid_t gid = gid_t(-1);
     QString loginName;
     QString homeDir, shell;
     QMap<KUser::UserProperty, QVariant> properties;
 
     KUserPrivate()
-        : uid(uid_t(-1))
-        , gid(gid_t(-1))
     {
     }
     KUserPrivate(const char *name)
-        : uid(uid_t(-1))
-        , gid(gid_t(-1))
     {
         fillPasswd(name ? ::getpwnam(name) : nullptr);
     }
+    KUserPrivate(K_UID uid)
+    {
+        fillPasswd(::getpwuid(uid));
+    }
     KUserPrivate(const passwd *p)
-        : uid(uid_t(-1))
-        , gid(gid_t(-1))
     {
         fillPasswd(p);
     }
@@ -109,25 +107,25 @@ KUser::KUser(UIDMode mode)
     uid_t _uid = ::getuid();
     uid_t _euid;
     if (mode == UseEffectiveUID && (_euid = ::geteuid()) != _uid) {
-        d = new KUserPrivate(::getpwuid(_euid));
+        d = new KUserPrivate(_euid);
     } else {
         d = new KUserPrivate(qgetenv("LOGNAME").constData());
         if (d->uid != _uid) {
             d = new KUserPrivate(qgetenv("USER").constData());
             if (d->uid != _uid) {
-                d = new KUserPrivate(::getpwuid(_uid));
+                d = new KUserPrivate(_uid);
             }
         }
     }
 }
 
 KUser::KUser(K_UID _uid)
-    : d(new KUserPrivate(::getpwuid(_uid)))
+    : d(new KUserPrivate(_uid))
 {
 }
 
 KUser::KUser(KUserId _uid)
-    : d(new KUserPrivate(::getpwuid(_uid.nativeId())))
+    : d(new KUserPrivate(_uid.nativeId()))
 {
 }
 
