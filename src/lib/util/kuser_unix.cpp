@@ -269,7 +269,7 @@ static void listGroupsForUser(const char *name, gid_t gid, uint maxCount, Func h
         getgrouplist(name, gid, gid_buffer.data(), &numGroups);
     }
     for (int i = 0; i < numGroups && found < maxCount; ++i) {
-        struct group *g = getgrgid(gid_buffer[i]);
+        struct group *g = getgrgid(gid_buffer[i]); // ### not threadsafe
         // should never be null, but better be safe than crash
         if (g) {
             found++;
@@ -280,7 +280,7 @@ static void listGroupsForUser(const char *name, gid_t gid, uint maxCount, Func h
     // fall back to getgrent() and reading gr->gr_mem
     // This is slower than getgrouplist, but works as well
     // add the current gid, this is often not part of g->gr_mem (e.g. build.kde.org or my openSuSE 13.1 system)
-    struct group *g = getgrgid(gid);
+    struct group *g = getgrgid(gid); // ### not threadsafe
     if (g) {
         handleNextGroup(g);
         found++;
@@ -384,6 +384,10 @@ public:
     {
         fillGroup(_name ? ::getgrnam(_name) : nullptr);
     }
+    KUserGroupPrivate(K_GID gid)
+    {
+        fillGroup(getgrgid(gid));
+    }
     KUserGroupPrivate(const ::group *p)
     {
         fillGroup(p);
@@ -400,16 +404,16 @@ public:
 
 KUserGroup::KUserGroup(KUser::UIDMode mode)
 {
-    d = new KUserGroupPrivate(getgrgid(KUser(mode).groupId().nativeId()));
+    d = new KUserGroupPrivate(KUser(mode).groupId().nativeId());
 }
 
 KUserGroup::KUserGroup(K_GID _gid)
-    : d(new KUserGroupPrivate(getgrgid(_gid)))
+    : d(new KUserGroupPrivate(_gid))
 {
 }
 
 KUserGroup::KUserGroup(KGroupId _gid)
-    : d(new KUserGroupPrivate(getgrgid(_gid.nativeId())))
+    : d(new KUserGroupPrivate(_gid.nativeId()))
 {
 }
 
@@ -464,7 +468,7 @@ static void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd
     if (maxCount == 0) {
         return;
     }
-    struct group *g = getgrgid(gid);
+    struct group *g = getgrgid(gid); // ### not threadsafe
     if (!g) {
         return;
     }
@@ -472,7 +476,7 @@ static void listGroupMembers(gid_t gid, uint maxCount, std::function<void(passwd
     QVarLengthArray<uid_t> addedUsers;
     struct passwd *p = nullptr;
     for (char **user = g->gr_mem; *user; user++) {
-        if ((p = getpwnam(*user))) {
+        if ((p = getpwnam(*user))) { // ### not threadsafe
             addedUsers.append(p->pw_uid);
             handleNextGroupUser(p);
             found++;
