@@ -45,6 +45,18 @@ static inline void endgrent()
 }
 #endif
 
+// Only define os_pw_size() if it's going to be used
+#if defined(_POSIX_THREAD_SAFE_FUNCTIONS) && !defined(Q_OS_OPENBSD)
+static int os_pw_size() // hint for size of passwd struct
+{
+    const int size_max = sysconf(_SC_GETPW_R_SIZE_MAX);
+    if (size_max != -1) {
+        return size_max;
+    }
+    return 1024;
+}
+#endif
+
 class KUserPrivate : public QSharedData
 {
 public:
@@ -59,11 +71,33 @@ public:
     }
     KUserPrivate(const char *name)
     {
-        fillPasswd(name ? ::getpwnam(name) : nullptr);
+        if (!name) {
+            fillPasswd(nullptr);
+        } else {
+            struct passwd *pw = nullptr;
+#if defined(_POSIX_THREAD_SAFE_FUNCTIONS) && !defined(Q_OS_OPENBSD)
+            static const int bufsize = os_pw_size();
+            QVarLengthArray<char, 1024> buf(bufsize);
+            struct passwd entry;
+            getpwnam_r(name, &entry, buf.data(), buf.size(), &pw);
+#else
+            pw = getpwnam(name); // not thread-safe!
+#endif
+            fillPasswd(pw);
+        }
     }
     KUserPrivate(K_UID uid)
     {
-        fillPasswd(::getpwuid(uid));
+        struct passwd *pw = nullptr;
+#if defined(_POSIX_THREAD_SAFE_FUNCTIONS) && !defined(Q_OS_OPENBSD)
+        static const int bufsize = os_pw_size();
+        QVarLengthArray<char, 1024> buf(bufsize);
+        struct passwd entry;
+        getpwuid_r(uid, &entry, buf.data(), buf.size(), &pw);
+#else
+        pw = getpwuid(uid); // not thread-safe!
+#endif
+        fillPasswd(pw);
     }
     KUserPrivate(const passwd *p)
     {
