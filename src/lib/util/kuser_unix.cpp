@@ -374,20 +374,17 @@ KUser::~KUser()
 class KUserGroupPrivate : public QSharedData
 {
 public:
-    gid_t gid;
+    gid_t gid = gid_t(-1);
     QString name;
 
     KUserGroupPrivate()
-        : gid(gid_t(-1))
     {
     }
     KUserGroupPrivate(const char *_name)
-        : gid(gid_t(-1))
     {
         fillGroup(_name ? ::getgrnam(_name) : nullptr);
     }
     KUserGroupPrivate(const ::group *p)
-        : gid(gid_t(-1))
     {
         fillGroup(p);
     }
