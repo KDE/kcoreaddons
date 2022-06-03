@@ -689,7 +689,7 @@ protected:
      * @see finished()
      * @since 5.75
      */
-    bool isFinished() const;
+    bool isFinished() const; // KF6 TODO: make public. Useful at least for unittests that run multiple jobs in parallel.
 
     /**
      * Sets the error code.
