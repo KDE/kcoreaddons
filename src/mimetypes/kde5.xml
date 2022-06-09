@@ -686,7 +686,7 @@ Notes:
     <comment xml:lang="be">Архіў Kugar</comment>
     <comment xml:lang="bs">Kugar arhiva</comment>
     <comment xml:lang="ca">Arxiu del Kugar</comment>
-    <comment xml:lang="ca@valencia">Archiu del Kugar</comment>
+    <comment xml:lang="ca@valencia">Arxiu del Kugar</comment>
     <comment xml:lang="cs">Archiv Kugar</comment>
     <comment xml:lang="de">Kugar-Archiv</comment>
     <comment xml:lang="el">Αρχειοθήκη Kugar</comment>
@@ -730,7 +730,7 @@ Notes:
     <comment xml:lang="be">вэб-архіў</comment>
     <comment xml:lang="bs">veb arhiva</comment>
     <comment xml:lang="ca">Arxiu web</comment>
-    <comment xml:lang="ca@valencia">Archiu web</comment>
+    <comment xml:lang="ca@valencia">Arxiu web</comment>
     <comment xml:lang="cs">webový archiv</comment>
     <comment xml:lang="de">Web-Archiv</comment>
     <comment xml:lang="el">Αρχειοθήκη ιστού</comment>
@@ -818,7 +818,7 @@ Notes:
     <comment xml:lang="be">Файл убудовы RealAudio</comment>
     <comment xml:lang="bs">RealAudio dodatak fajla</comment>
     <comment xml:lang="ca">Fitxer de connector RealAudio</comment>
-    <comment xml:lang="ca@valencia">Ficher de conector RealAudio</comment>
+    <comment xml:lang="ca@valencia">Fitxer de conector RealAudio</comment>
     <comment xml:lang="cs">Soubor modulu RealAudio</comment>
     <comment xml:lang="de">RealAudio-Moduldatei</comment>
     <comment xml:lang="el">Αρχείο προσθέτου RealAudio</comment>
@@ -1004,7 +1004,7 @@ Notes:
     <comment xml:lang="az">Intel® HEX faylı</comment>
     <comment xml:lang="be">Шаснаццатковы файл аб'екта Intel®</comment>
     <comment xml:lang="ca">Fitxer objecte hexadecimal d'Intel®</comment>
-    <comment xml:lang="ca@valencia">Ficher objecte hexadecimal d'Intel®</comment>
+    <comment xml:lang="ca@valencia">Fitxer objecte hexadecimal d'Intel®</comment>
     <comment xml:lang="cs">Intel® hexadecimální objektový soubor</comment>
     <comment xml:lang="de">Intel®-Hexadezimal-Objektdatei</comment>
     <comment xml:lang="el">Δεκαεξαδικό μεταφρασμένο αρχείο Intel®</comment>
@@ -1048,7 +1048,7 @@ Notes:
     <comment xml:lang="be">Спіс убудоў загрузчыка файлаў Kate</comment>
     <comment xml:lang="bs">Kate lista fajlova za učitavanje liste dodataka</comment>
     <comment xml:lang="ca">Llista de connector carregador de la llista de fitxers del Kate</comment>
-    <comment xml:lang="ca@valencia">Llista de conector carregador de la llista de fichers de Kate</comment>
+    <comment xml:lang="ca@valencia">Llista de conector carregador de la llista de fitxers de Kate</comment>
     <comment xml:lang="de">Kate-Dateilisten-Modul</comment>
     <comment xml:lang="el">Λίστα αρχείου φόρτωσης λίστας πρόσθετων Kate</comment>
     <comment xml:lang="en_GB">Kate file list loader plugin list</comment>
@@ -1091,7 +1091,7 @@ Notes:
     <comment xml:lang="be">файл нот abc</comment>
     <comment xml:lang="bs">abc muzički notni fajl</comment>
     <comment xml:lang="ca">Fitxer de notació musical abc</comment>
-    <comment xml:lang="ca@valencia">Ficher de notació musical abc</comment>
+    <comment xml:lang="ca@valencia">Fitxer de notació musical abc</comment>
     <comment xml:lang="cs">Soubor hudební notace abc</comment>
     <comment xml:lang="de">abc-Musik-Notationsdatei</comment>
     <comment xml:lang="el">Αρχείο μουσικών συμβόλων abc</comment>
@@ -1409,7 +1409,7 @@ Notes:
     <comment xml:lang="be">Файл Kommander</comment>
     <comment xml:lang="bs">Kommander fajl</comment>
     <comment xml:lang="ca">Fitxer del Kommander</comment>
-    <comment xml:lang="ca@valencia">Ficher del Kommander</comment>
+    <comment xml:lang="ca@valencia">Fitxer del Kommander</comment>
     <comment xml:lang="cs">Soubor Kommanderu</comment>
     <comment xml:lang="de">Kommander-Datei</comment>
     <comment xml:lang="el">Αρχείο Kommander</comment>
@@ -1594,7 +1594,7 @@ Notes:
     <comment xml:lang="be">Архіў дакументаў Okular</comment>
     <comment xml:lang="bs">Okular arhiva dokumenata</comment>
     <comment xml:lang="ca">Arxiu de document de l'Okular</comment>
-    <comment xml:lang="ca@valencia">Archiu de document d'Okular</comment>
+    <comment xml:lang="ca@valencia">Arxiu de document d'Okular</comment>
     <comment xml:lang="cs">Archiv dokumentu Okular</comment>
     <comment xml:lang="de">Okular-Dokumentarchiv</comment>
     <comment xml:lang="el">Αρχειοθήκη εγγράφων Okular</comment>
@@ -1911,7 +1911,7 @@ Notes:
     <comment xml:lang="be">Файл KmPlot</comment>
     <comment xml:lang="bs">KmPlot fajl</comment>
     <comment xml:lang="ca">Fitxer del KmPlot</comment>
-    <comment xml:lang="ca@valencia">Ficher de KmPlot</comment>
+    <comment xml:lang="ca@valencia">Fitxer de KmPlot</comment>
     <comment xml:lang="cs">Soubor KmPlot</comment>
     <comment xml:lang="de">KmPlot-Datei</comment>
     <comment xml:lang="el">Αρχείο KmPlot</comment>
@@ -2043,7 +2043,7 @@ Notes:
     <comment xml:lang="be">Файл Umbrello UML Modeller</comment>
     <comment xml:lang="bs">Umbrello UML Modeller fajl</comment>
     <comment xml:lang="ca">Fitxer del modelador UML Umbrello</comment>
-    <comment xml:lang="ca@valencia">Ficher del modelador UML Umbrello</comment>
+    <comment xml:lang="ca@valencia">Fitxer del modelador UML Umbrello</comment>
     <comment xml:lang="cs">Soubor Umbrello UML Modeller</comment>
     <comment xml:lang="de">Umbrello-UML-Datei</comment>
     <comment xml:lang="el">Αρχείο μοντελοποίησης Umbrello UML</comment>
@@ -2180,7 +2180,7 @@ Notes:
     <comment xml:lang="be">Архіў смайлікаў Kopete</comment>
     <comment xml:lang="bs">Kopete arhiva emotikona</comment>
     <comment xml:lang="ca">Arxiu d'emoticones del Kopete</comment>
-    <comment xml:lang="ca@valencia">Archiu d'emoticones de Kopete</comment>
+    <comment xml:lang="ca@valencia">Arxiu d'emoticones de Kopete</comment>
     <comment xml:lang="cs">Archiv emotikonů Kopete</comment>
     <comment xml:lang="de">Kopete-Emoticons-Archiv</comment>
     <comment xml:lang="el">Αρχειοθήκη εικονιδίων διάθεσης Kopete</comment>
@@ -2408,7 +2408,7 @@ Notes:
     <comment xml:lang="be">Файл мовы разметкі Qt</comment>
     <comment xml:lang="bs">Fajl Qt Markup Jezika</comment>
     <comment xml:lang="ca">Fitxer de llenguatge de marques de les Qt</comment>
-    <comment xml:lang="ca@valencia">Ficher de llenguatge de marques de les Qt</comment>
+    <comment xml:lang="ca@valencia">Fitxer de llenguatge de marques de les Qt</comment>
     <comment xml:lang="cs">Soubor Qt Markup Language</comment>
     <comment xml:lang="de">Qt-Markup-Language-Datei</comment>
     <comment xml:lang="el">Αρχείο γλώσσας σήμανσης Qt</comment>
