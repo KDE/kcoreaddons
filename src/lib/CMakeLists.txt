@@ -310,6 +310,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KLibexec
         KSignalHandler
         KSandbox
+        KMemoryInfo
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
