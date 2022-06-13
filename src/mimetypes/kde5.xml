@@ -836,7 +836,7 @@ Notes:
     <comment xml:lang="be">Файл убудовы RealAudio</comment>
     <comment xml:lang="bs">RealAudio dodatak fajla</comment>
     <comment xml:lang="ca">Fitxer de connector RealAudio</comment>
-    <comment xml:lang="ca@valencia">Fitxer de conector RealAudio</comment>
+    <comment xml:lang="ca@valencia">Fitxer de connector RealAudio</comment>
     <comment xml:lang="cs">Soubor modulu RealAudio</comment>
     <comment xml:lang="de">RealAudio-Moduldatei</comment>
     <comment xml:lang="el">Αρχείο προσθέτου RealAudio</comment>
@@ -923,7 +923,7 @@ Notes:
     <comment xml:lang="be">HDR-выява</comment>
     <comment xml:lang="bs">HDR slika</comment>
     <comment xml:lang="ca">Imatge HDR</comment>
-    <comment xml:lang="ca@valencia">Image HDR</comment>
+    <comment xml:lang="ca@valencia">Imatge HDR</comment>
     <comment xml:lang="cs">HDR obrázek</comment>
     <comment xml:lang="de">HDR-Bild</comment>
     <comment xml:lang="el">Εικόνα HDR</comment>
@@ -972,7 +972,7 @@ Notes:
     <comment xml:lang="be">Неапрацаваныя фарматы выяваў у KD</comment>
     <comment xml:lang="bs">KDE formati sirovih slika</comment>
     <comment xml:lang="ca">Formats d'imatge RAW del KDE</comment>
-    <comment xml:lang="ca@valencia">Formats d'image RAW de KDE</comment>
+    <comment xml:lang="ca@valencia">Formats d'imatge RAW de KDE</comment>
     <comment xml:lang="cs">Formáty obrázků raw v KDE</comment>
     <comment xml:lang="de">KDE-Roh-Bildformate</comment>
     <comment xml:lang="el">Τύποι ακατέργαστων τύπων εικόνας του KDE</comment>
@@ -1071,7 +1071,7 @@ Notes:
     <comment xml:lang="be">Спіс убудоў загрузчыка файлаў Kate</comment>
     <comment xml:lang="bs">Kate lista fajlova za učitavanje liste dodataka</comment>
     <comment xml:lang="ca">Llista de connector carregador de la llista de fitxers del Kate</comment>
-    <comment xml:lang="ca@valencia">Llista de conector carregador de la llista de fitxers de Kate</comment>
+    <comment xml:lang="ca@valencia">Llista de connector carregador de la llista de fitxers de Kate</comment>
     <comment xml:lang="de">Kate-Dateilisten-Modul</comment>
     <comment xml:lang="el">Λίστα αρχείου φόρτωσης λίστας πρόσθετων Kate</comment>
     <comment xml:lang="en_GB">Kate file list loader plugin list</comment>
@@ -2319,7 +2319,7 @@ Notes:
     <comment xml:lang="be">Фармат Microsoft Media</comment>
     <comment xml:lang="bs">Majkrosoft Medija Format</comment>
     <comment xml:lang="ca">Format de suports de Microsoft</comment>
-    <comment xml:lang="ca@valencia">Format de soports de Microsoft</comment>
+    <comment xml:lang="ca@valencia">Format de suports de Microsoft</comment>
     <comment xml:lang="cs">Microsoft Media Format</comment>
     <comment xml:lang="de">Microsoft-Media-Format</comment>
     <comment xml:lang="el">Τύπος μέσων της Microsoft</comment>
@@ -2414,7 +2414,7 @@ Notes:
     <comment xml:lang="be">Выява Softimage PIC</comment>
     <comment xml:lang="bs">Softimage PIC slika</comment>
     <comment xml:lang="ca">Imatge PIC de Softimage</comment>
-    <comment xml:lang="ca@valencia">Image PIC de Softimage</comment>
+    <comment xml:lang="ca@valencia">Imatge PIC de Softimage</comment>
     <comment xml:lang="cs">Obrázek Softimage PIC</comment>
     <comment xml:lang="de">Softimage-PIC-Bild</comment>
     <comment xml:lang="el">Εικόνα Softimage PIC</comment>
