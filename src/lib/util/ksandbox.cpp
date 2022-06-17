@@ -3,6 +3,7 @@
 
 #include "ksandbox.h"
 
+#include <QDebug>
 #include <QFileInfo>
 
 bool KSandbox::isInside()
@@ -21,4 +22,35 @@ bool KSandbox::isSnap()
 {
     static const bool isSnap = qEnvironmentVariableIsSet("SNAP");
     return isSnap;
+}
+
+KSandbox::ProcessContext KSandbox::makeHostContext(const QProcess &process)
+{
+    if (!KSandbox::isFlatpak()) {
+        return {process.program(), process.arguments()};
+    }
+
+    QStringList args{QStringLiteral("--watch-bus"), QStringLiteral("--host"), QStringLiteral("--forward-fd=1"), QStringLiteral("--forward-fd=2")};
+    if (!process.workingDirectory().isEmpty()) {
+        args << QStringLiteral("--directory=%1").arg(process.workingDirectory());
+    }
+    const auto systemEnvironment = QProcessEnvironment::systemEnvironment().toStringList();
+    const auto processEnvironment = process.processEnvironment().toStringList();
+    for (const auto &variable : processEnvironment) {
+        if (systemEnvironment.contains(variable)) {
+            continue;
+        }
+        args << QStringLiteral("--env=%1").arg(variable);
+    }
+    if (!process.program().isEmpty()) { // some callers are cheeky and pass no program but put it into the arguments (e.g. konsole)
+        args << process.program();
+    }
+    args += process.arguments();
+    return {QStringLiteral("/usr/bin/flatpak-spawn"), args};
+}
+
+KCOREADDONS_EXPORT void KSandbox::startHostProcess(QProcess &process, QProcess::OpenMode mode)
+{
+    const auto context = makeHostContext(process);
+    process.start(context.program, context.arguments, mode);
 }
