@@ -9,6 +9,7 @@
 #include <QSocketNotifier>
 
 #ifndef Q_OS_WIN
+#include <cerrno>
 #include <signal.h>
 #include <sys/socket.h>
 #include <unistd.h>
