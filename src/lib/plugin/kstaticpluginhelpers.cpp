@@ -6,8 +6,6 @@
 #include "kstaticpluginhelpers.h"
 #include "kstaticpluginhelpers_p.h"
 
-#include <QPluginLoader>
-
 typedef QMultiHash<QString, QStaticPlugin> StaticPluginMap;
 Q_GLOBAL_STATIC(StaticPluginMap, s_staticPlugins)
 
