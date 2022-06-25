@@ -2043,7 +2043,7 @@ Notes:
     <comment xml:lang="be">Дамп профілю Cachegrind / Callgrind</comment>
     <comment xml:lang="bs">Cachegrind/Callgrind profil deponija</comment>
     <comment xml:lang="ca">Bolcat d'anàlisi de rendiment del Cachegrind/Callgrind</comment>
-    <comment xml:lang="ca@valencia">Bolcat d'anàlisi de rendiment del Cachegrind/Callgrind</comment>
+    <comment xml:lang="ca@valencia">Bolcat d'anàlisi de rendiment de Cachegrind/Callgrind</comment>
     <comment xml:lang="cs">Výpis profilu Cachegrind/Callgrind</comment>
     <comment xml:lang="de">Cachegrind/Callgrind-Profil-Ausgabe</comment>
     <comment xml:lang="el">Αποτύπωση προφίλ Cachegrind/Callgrind</comment>
