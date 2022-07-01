@@ -98,10 +98,14 @@ void KMacroExpanderTest::expandMacros()
     smap.insert("url", "https://www.kde.org/index.html");
     smap.insert("name", "Restaurant \"Chew It\"");
 
-    s = "Title: %foo - %file - %url - %name - %";
-    QCOMPARE(KMacroExpander::expandMacros(s, smap), QLatin1String("Title: %n - filename.txt - https://www.kde.org/index.html - Restaurant \"Chew It\" - %"));
+    s = "Title: %invalid - %foo - %file - %url - %name - %";
+    QCOMPARE(KMacroExpander::expandMacros(s, smap),
+             QLatin1String("Title: %invalid - %n - filename.txt - https://www.kde.org/index.html - Restaurant \"Chew It\" - %"));
     s = "%foo - %file - %url - %name";
     QCOMPARE(KMacroExpander::expandMacros(s, smap), QLatin1String("%n - filename.txt - https://www.kde.org/index.html - Restaurant \"Chew It\""));
+
+    s = "%%foo - %%file - %url - %name";
+    QCOMPARE(KMacroExpander::expandMacros(s, smap), QLatin1String("%foo - %file - https://www.kde.org/index.html - Restaurant \"Chew It\""));
 
     s = "Title: %{foo} - %{file} - %{url} - %{name} - %";
     QCOMPARE(KMacroExpander::expandMacros(s, smap), QLatin1String("Title: %n - filename.txt - https://www.kde.org/index.html - Restaurant \"Chew It\" - %"));
@@ -113,6 +117,9 @@ void KMacroExpanderTest::expandMacros()
 
     s = "Title: %{file} %{url";
     QCOMPARE(KMacroExpander::expandMacros(s, smap), QLatin1String("Title: filename.txt %{url"));
+
+    s = "%%USE_LOCAL_QT_LIBS%%";
+    QCOMPARE(KMacroExpander::expandMacros(s, smap), QLatin1String("%%USE_LOCAL_QT_LIBS%%"));
 
     s = " * Copyright (C) 2008 %{AUTHOR}";
     smap.clear();

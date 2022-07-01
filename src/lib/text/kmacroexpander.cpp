@@ -28,13 +28,15 @@ QChar KMacroExpanderBase::escapeChar() const
     return d->escapechar;
 }
 
-void KMacroExpanderBase::expandMacros(QString &str)
+int KMacroExpanderBase::expandMacros(QString &str)
 {
     int pos;
     int len;
     ushort ec = d->escapechar.unicode();
     QStringList rst;
     QString rsts;
+
+    int changedMacros = 0;
 
     for (pos = 0; pos < str.length();) {
         if (ec != 0) {
@@ -56,11 +58,17 @@ void KMacroExpanderBase::expandMacros(QString &str)
         rsts = rst.join(QLatin1Char(' '));
         rst.clear();
         str.replace(pos, len, rsts);
+
+        if (rsts.length() != 1 && rsts.unicode()[0].unicode() != ec) {
+            changedMacros++;
+        }
         pos += rsts.length();
         continue;
     nohit:
         pos++;
     }
+
+    return changedMacros;
 }
 
 bool KMacroExpanderBase::expandMacrosShellQuote(QString &str)
@@ -217,6 +225,7 @@ int KMacroMapExpander<QString, VT>::expandEscapedMacro(const QString &str, int p
         ret += QString(escapeChar());
         return 2;
     }
+
     int sl;
     int rsl;
     int rpos;
@@ -332,8 +341,8 @@ inline QString TexpandMacros(const QString &ostr, const QHash<KT, VT> &map, QCha
 {
     QString str(ostr);
     KMacroMapExpander<KT, VT> kmx(map, c);
-    kmx.expandMacros(str);
-    return str;
+    int changes = kmx.expandMacros(str);
+    return changes ? str : ostr;
 }
 
 template<typename KT, typename VT>

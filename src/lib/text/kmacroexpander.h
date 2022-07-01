@@ -46,8 +46,9 @@ public:
      * Perform safe macro expansion (substitution) on a string.
      *
      * @param str the string in which macros are expanded in-place
+     * @returns the number of found and replaced macros (since 5.96)
      */
-    void expandMacros(QString &str);
+    int expandMacros(QString &str);
 
     // TODO: This documentation is relevant for end-users. Where to put it?
     /**
