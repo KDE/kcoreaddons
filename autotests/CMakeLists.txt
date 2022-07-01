@@ -93,6 +93,7 @@ ecm_add_tests(
     kshelltest.cpp
     kurlmimedatatest.cpp
     kstringhandlertest.cpp
+    kmacroexpandertest.cpp
     kusertest.cpp
     kprocesslisttest.cpp
     kfileutilstest.cpp

@@ -35,7 +35,7 @@ public:
     }
 
 protected:
-    bool expandMacro(QChar ch, QStringList &ret)
+    bool expandMacro(QChar ch, QStringList &ret) override
     {
         if (ch == 'm') {
             ret = QStringList(exp);
@@ -57,7 +57,7 @@ public:
     }
 
 protected:
-    bool expandMacro(const QString &str, QStringList &ret)
+    bool expandMacro(const QString &str, QStringList &ret) override
     {
         if (str == QLatin1String("macro")) {
             ret = QStringList(exp);
@@ -219,11 +219,11 @@ public:
     }
 
 protected:
-    int expandPlainMacro(const QString &, int, QStringList &)
+    int expandPlainMacro(const QString &, int, QStringList &) override
     {
         return 0;
     }
-    int expandEscapedMacro(const QString &, int, QStringList &)
+    int expandEscapedMacro(const QString &, int, QStringList &) override
     {
         return 0;
     }
