@@ -1,0 +1,329 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Sergiu Bivol <sergiu@cip.md>, 2009, 2014, 2020, 2021.
+# Cristian Oneț <onet.cristian@gmail.com>, 2010, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-07-14 00:15+0000\n"
+"PO-Revision-Date: 2021-07-25 09:07+0100\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#: kde5.xml.podir/kde5.xml.in.h:1
+msgctxt "comment"
+msgid "RELAX NG"
+msgstr "RELAX NG"
+
+#: kde5.xml.podir/kde5.xml.in.h:2
+msgctxt "comment"
+msgid "CD audio"
+msgstr "CD audio"
+
+#: kde5.xml.podir/kde5.xml.in.h:3
+msgctxt "comment"
+msgid "SNF bitmap font"
+msgstr "font SNF hartă de biți"
+
+#: kde5.xml.podir/kde5.xml.in.h:4
+msgctxt "comment"
+msgid "Java applet"
+msgstr "miniaplicație Java"
+
+#: kde5.xml.podir/kde5.xml.in.h:5
+msgctxt "comment"
+msgid "KHTML Extension Adaptor"
+msgstr "adaptor de extensii KHTML"
+
+#: kde5.xml.podir/kde5.xml.in.h:6
+msgctxt "comment"
+msgid "KDE color scheme"
+msgstr "schemă de culori KDE"
+
+# well-spelled: KNewStuff
+#: kde5.xml.podir/kde5.xml.in.h:7
+msgctxt "comment"
+msgid "KNewStuff package"
+msgstr "pachet KNewStuff"
+
+# well-spelled: KWallet
+#: kde5.xml.podir/kde5.xml.in.h:9
+msgctxt "comment"
+msgid "KWallet wallet"
+msgstr "portofel KWallet"
+
+#: kde5.xml.podir/kde5.xml.in.h:10
+msgctxt "comment"
+msgid "Kugar report template"
+msgstr "șablon de raport Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:11
+msgctxt "comment"
+msgid "plasmoid"
+msgstr "plasmoid"
+
+#: kde5.xml.podir/kde5.xml.in.h:12
+msgctxt "comment"
+msgid "SuperKaramba theme"
+msgstr "tematică SuperKaramba"
+
+# well-spelled: KPlato
+#: kde5.xml.podir/kde5.xml.in.h:13
+msgctxt "comment"
+msgid "Calligra Plan project management document"
+msgstr "document management de proiect Calligra Plan"
+
+#: kde5.xml.podir/kde5.xml.in.h:14
+msgctxt "comment"
+msgid "Calligra Plan work package document"
+msgstr "sarcină de lucru management de proiect Calligra Plan"
+
+# well-spelled: KPlato
+#: kde5.xml.podir/kde5.xml.in.h:15
+msgctxt "comment"
+msgid "KPlato project management document"
+msgstr "document management de proiect KPlato"
+
+# well-spelled: KPlato
+#: kde5.xml.podir/kde5.xml.in.h:16
+msgctxt "comment"
+msgid "KPlato project management work package"
+msgstr "pachet de lucru pentru management de proiect KPlato"
+
+#: kde5.xml.podir/kde5.xml.in.h:17
+msgctxt "comment"
+msgid "Kugar archive"
+msgstr "arhivă Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:18
+msgctxt "comment"
+msgid "web archive"
+msgstr "arhivă web"
+
+#: kde5.xml.podir/kde5.xml.in.h:19
+msgctxt "comment"
+msgid "W3C XML schema"
+msgstr "Schemă XML W3C"
+
+#: kde5.xml.podir/kde5.xml.in.h:21
+msgctxt "comment"
+msgid "RealAudio plugin file"
+msgstr "fișier cu extensie RealAudio"
+
+# well-spelled: KPhotoAlbum
+#: kde5.xml.podir/kde5.xml.in.h:23
+msgctxt "comment"
+msgid "KPhotoAlbum import"
+msgstr "import KPhotoAlbum"
+
+# well-spelled: HDR
+#: kde5.xml.podir/kde5.xml.in.h:25
+msgctxt "comment"
+msgid "HDR image"
+msgstr "imagine HDR"
+
+#: kde5.xml.podir/kde5.xml.in.h:26
+msgctxt "comment"
+msgid "KDE raw image formats"
+msgstr "formate de imagine brute KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:27
+msgctxt "comment"
+msgid "Intel® hexadecimal object file"
+msgstr "fișier cu obiect hexazecimal Intel®"
+
+#: kde5.xml.podir/kde5.xml.in.h:28
+msgctxt "comment"
+msgid "Kate file list loader plugin list"
+msgstr "listă cu extensii pentru încărcător de liste de fișiere Kate"
+
+#: kde5.xml.podir/kde5.xml.in.h:29
+msgctxt "comment"
+msgid "abc musical notation file"
+msgstr "fișier cu notație muzicală abc"
+
+#: kde5.xml.podir/kde5.xml.in.h:30
+msgctxt "comment"
+msgid "fonts package"
+msgstr "pachet de fonturi"
+
+#: kde5.xml.podir/kde5.xml.in.h:31
+msgctxt "comment"
+msgid "Windows server"
+msgstr "server Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:32
+msgctxt "comment"
+msgid "Windows workgroup"
+msgstr "grup de lucru Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:34
+msgctxt "comment"
+msgid "KDE system monitor"
+msgstr "monitor de sistem KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:35
+msgctxt "comment"
+msgid "KDE theme"
+msgstr "tematică KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:36
+msgctxt "comment"
+msgid "Quanta project"
+msgstr "proiect Quanta"
+
+#: kde5.xml.podir/kde5.xml.in.h:37
+msgctxt "comment"
+msgid "Kommander file"
+msgstr "fișier Kommander"
+
+#: kde5.xml.podir/kde5.xml.in.h:38
+msgctxt "comment"
+msgid "potato"
+msgstr "cartof"
+
+#: kde5.xml.podir/kde5.xml.in.h:39
+msgctxt "comment"
+msgid "Kolf saved game"
+msgstr "joc salvat Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:40
+msgctxt "comment"
+msgid "Kolf course"
+msgstr "curs de Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:41
+msgctxt "comment"
+msgid "Okular document archive"
+msgstr "arhivă cu documente Okular"
+
+# well-spelled: Cabri
+#: kde5.xml.podir/kde5.xml.in.h:42
+msgctxt "comment"
+msgid "Cabri figure"
+msgstr "figură Cabri"
+
+#: kde5.xml.podir/kde5.xml.in.h:43
+msgctxt "comment"
+msgid "Dr. Geo figure"
+msgstr "figură Dr. Geo"
+
+# well-spelled: KGeo
+#: kde5.xml.podir/kde5.xml.in.h:44
+msgctxt "comment"
+msgid "KGeo figure"
+msgstr "figură KGeo"
+
+#: kde5.xml.podir/kde5.xml.in.h:45
+msgctxt "comment"
+msgid "Kig figure"
+msgstr "figură Kig"
+
+# well-spelled: KSeg
+#: kde5.xml.podir/kde5.xml.in.h:46
+msgctxt "comment"
+msgid "KSeg document"
+msgstr "document KSeg"
+
+#: kde5.xml.podir/kde5.xml.in.h:47
+msgctxt "comment"
+msgid "vocabulary trainer document"
+msgstr "document de antrenare a vocabularului"
+
+#: kde5.xml.podir/kde5.xml.in.h:48
+msgctxt "comment"
+msgid "KmPlot file"
+msgstr "fișier KmPlot"
+
+# well-spelled: KWordQuiz
+#: kde5.xml.podir/kde5.xml.in.h:49
+msgctxt "comment"
+msgid "KWordQuiz vocabulary"
+msgstr "vocabular KWordQuiz"
+
+# well-spelled: Cachegrind, Callgrind
+#: kde5.xml.podir/kde5.xml.in.h:50
+msgctxt "comment"
+msgid "Cachegrind/Callgrind profile dump"
+msgstr "informații de profilare Cachegrind/Callgrind"
+
+#: kde5.xml.podir/kde5.xml.in.h:51
+msgctxt "comment"
+msgid "Umbrello UML Modeller file"
+msgstr "fișier Modelator UML Umbrello"
+
+#: kde5.xml.podir/kde5.xml.in.h:52
+msgctxt "comment"
+msgid "Windows link"
+msgstr "legătură Windows"
+
+# well-spelled: KGet
+#: kde5.xml.podir/kde5.xml.in.h:53
+msgctxt "comment"
+msgid "KGet download list"
+msgstr "listă cu descărcări KGet"
+
+#: kde5.xml.podir/kde5.xml.in.h:54
+msgctxt "comment"
+msgid "Kopete emoticons archive"
+msgstr "arhivă cu emoticoni Kopete"
+
+# well-spelled: ICQ
+#: kde5.xml.podir/kde5.xml.in.h:55
+msgctxt "comment"
+msgid "ICQ contact"
+msgstr "contact ICQ"
+
+#: kde5.xml.podir/kde5.xml.in.h:57
+msgctxt "comment"
+msgid "Microsoft Media Format"
+msgstr "Microsoft Media Format"
+
+#: kde5.xml.podir/kde5.xml.in.h:59
+msgctxt "comment"
+msgid "Turtle RDF document"
+msgstr "document RDF Turtle"
+
+#: kde5.xml.podir/kde5.xml.in.h:61
+msgctxt "comment"
+msgid "Softimage PIC image"
+msgstr "imagine Softimage PIC"
+
+#: kde5.xml.podir/kde5.xml.in.h:63
+msgctxt "comment"
+msgid "Qt Markup Language file"
+msgstr "fișier cu limbaj de marcare Qt"
+
+#: kde5.xml.podir/kde5.xml.in.h:64
+msgctxt "comment"
+msgid "KConfigXT Configuration Options"
+msgstr "opțiuni de configurare KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:65
+msgctxt "comment"
+msgid "KConfigXT Code Generation Options"
+msgstr "opțiuni de generare a codului KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:66
+msgctxt "comment"
+msgid "KXMLGUI UI Declaration"
+msgstr "declarație KXMLGUI UI"
+
+#: kde5.xml.podir/kde5.xml.in.h:67
+msgctxt "comment"
+msgid "KNotification Declaration"
+msgstr "declarație KNotification"
+
+#: kde5.xml.podir/kde5.xml.in.h:68
+msgctxt "comment"
+msgid "KCrash Report"
+msgstr "raport KCrash"

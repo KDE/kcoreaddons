@@ -1,0 +1,311 @@
+# Janet Blackquill <uhhadd@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: ante-toki-pi-ilo-kde\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2021-07-14 00:15+0000\n"
+"PO-Revision-Date: 2022-02-12 00:24\n"
+"Last-Translator: Janet Blackquill <uhhadd@gmail.com>\n"
+"Language-Team: toki pona\n"
+"Language: tok\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
+"%100>=11 && n%100<=14 ? 2 : 3);\n"
+
+#: kde5.xml.podir/kde5.xml.in.h:1
+msgctxt "comment"
+msgid "RELAX NG"
+msgstr "poki pi ilo RELAX NG"
+
+#: kde5.xml.podir/kde5.xml.in.h:2
+msgctxt "comment"
+msgid "CD audio"
+msgstr "kalama CD"
+
+#: kde5.xml.podir/kde5.xml.in.h:3
+msgctxt "comment"
+msgid "SNF bitmap font"
+msgstr "poki pi nasin sitelen ilo SNF"
+
+#: kde5.xml.podir/kde5.xml.in.h:4
+msgctxt "comment"
+msgid "Java applet"
+msgstr "ilo lili Java"
+
+#: kde5.xml.podir/kde5.xml.in.h:5
+msgctxt "comment"
+msgid "KHTML Extension Adaptor"
+msgstr "ilo KHTML Extension Adaptor"
+
+#: kde5.xml.podir/kde5.xml.in.h:6
+msgctxt "comment"
+msgid "KDE color scheme"
+msgstr "poki kule KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:7
+msgctxt "comment"
+msgid "KNewStuff package"
+msgstr "poki KNewStuff"
+
+#: kde5.xml.podir/kde5.xml.in.h:9
+msgctxt "comment"
+msgid "KWallet wallet"
+msgstr "poki KWallet"
+
+#: kde5.xml.podir/kde5.xml.in.h:10
+msgctxt "comment"
+msgid "Kugar report template"
+msgstr "tan pi lipu pakala Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:11
+msgctxt "comment"
+msgid "plasmoid"
+msgstr "ilo lili"
+
+#: kde5.xml.podir/kde5.xml.in.h:12
+msgctxt "comment"
+msgid "SuperKaramba theme"
+msgstr "nasin lukin SuperKaramba"
+
+#: kde5.xml.podir/kde5.xml.in.h:13
+msgctxt "comment"
+msgid "Calligra Plan project management document"
+msgstr "lipu pi sona lawa tan ilo Calligra Plan"
+
+#: kde5.xml.podir/kde5.xml.in.h:14
+msgctxt "comment"
+msgid "Calligra Plan work package document"
+msgstr "poki pali pi ilo Calligra Plan"
+
+#: kde5.xml.podir/kde5.xml.in.h:15
+msgctxt "comment"
+msgid "KPlato project management document"
+msgstr "lipu pi sona lawa tan ilo KPlato"
+
+#: kde5.xml.podir/kde5.xml.in.h:16
+msgctxt "comment"
+msgid "KPlato project management work package"
+msgstr "poki pali pi sona lawa tan KPlato"
+
+#: kde5.xml.podir/kde5.xml.in.h:17
+msgctxt "comment"
+msgid "Kugar archive"
+msgstr "poki Kugar"
+
+#: kde5.xml.podir/kde5.xml.in.h:18
+msgctxt "comment"
+msgid "web archive"
+msgstr "poki awen pi lipu ilo"
+
+#: kde5.xml.podir/kde5.xml.in.h:19
+msgctxt "comment"
+msgid "W3C XML schema"
+msgstr "nasin pi lipu W3C XML"
+
+#: kde5.xml.podir/kde5.xml.in.h:21
+msgctxt "comment"
+msgid "RealAudio plugin file"
+msgstr "ilo lili pi ilo RealAudio"
+
+#: kde5.xml.podir/kde5.xml.in.h:23
+msgctxt "comment"
+msgid "KPhotoAlbum import"
+msgstr "kama insa pi KPhotoAlbum"
+
+#: kde5.xml.podir/kde5.xml.in.h:25
+msgctxt "comment"
+msgid "HDR image"
+msgstr "sitelen HDR"
+
+#: kde5.xml.podir/kde5.xml.in.h:26
+msgctxt "comment"
+msgid "KDE raw image formats"
+msgstr "sitelen lete KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:27
+msgctxt "comment"
+msgid "Intel® hexadecimal object file"
+msgstr "poki nanpa Intel®"
+
+#: kde5.xml.podir/kde5.xml.in.h:28
+msgctxt "comment"
+msgid "Kate file list loader plugin list"
+msgstr "lipu pi ilo lili pi ilo Kate"
+
+#: kde5.xml.podir/kde5.xml.in.h:29
+msgctxt "comment"
+msgid "abc musical notation file"
+msgstr "lipu kalama pi ilo abc"
+
+#: kde5.xml.podir/kde5.xml.in.h:30
+msgctxt "comment"
+msgid "fonts package"
+msgstr "poki pi nasin sitelen"
+
+#: kde5.xml.podir/kde5.xml.in.h:31
+msgctxt "comment"
+msgid "Windows server"
+msgstr "ilo kulupu Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:32
+msgctxt "comment"
+msgid "Windows workgroup"
+msgstr "kulupu pi ilo kulupu Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:34
+msgctxt "comment"
+msgid "KDE system monitor"
+msgstr "ilo pi oko ilo KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:35
+msgctxt "comment"
+msgid "KDE theme"
+msgstr "nasin lukin KDE"
+
+#: kde5.xml.podir/kde5.xml.in.h:36
+msgctxt "comment"
+msgid "Quanta project"
+msgstr "pali Quanta"
+
+#: kde5.xml.podir/kde5.xml.in.h:37
+msgctxt "comment"
+msgid "Kommander file"
+msgstr "poki Kommander"
+
+#: kde5.xml.podir/kde5.xml.in.h:38
+msgctxt "comment"
+msgid "potato"
+msgstr "kili ma"
+
+#: kde5.xml.podir/kde5.xml.in.h:39
+msgctxt "comment"
+msgid "Kolf saved game"
+msgstr "sona musi pi ilo Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:40
+msgctxt "comment"
+msgid "Kolf course"
+msgstr "ma pi ilo Kolf"
+
+#: kde5.xml.podir/kde5.xml.in.h:41
+msgctxt "comment"
+msgid "Okular document archive"
+msgstr "poki lipu pi ilo Okular"
+
+#: kde5.xml.podir/kde5.xml.in.h:42
+msgctxt "comment"
+msgid "Cabri figure"
+msgstr "sitelen Cabri"
+
+#: kde5.xml.podir/kde5.xml.in.h:43
+msgctxt "comment"
+msgid "Dr. Geo figure"
+msgstr "sitelen pi jan Dr. Geo"
+
+#: kde5.xml.podir/kde5.xml.in.h:44
+msgctxt "comment"
+msgid "KGeo figure"
+msgstr "sitelen KGeo"
+
+#: kde5.xml.podir/kde5.xml.in.h:45
+msgctxt "comment"
+msgid "Kig figure"
+msgstr "sitelen Kig"
+
+#: kde5.xml.podir/kde5.xml.in.h:46
+msgctxt "comment"
+msgid "KSeg document"
+msgstr "lipu KSeg"
+
+#: kde5.xml.podir/kde5.xml.in.h:47
+msgctxt "comment"
+msgid "vocabulary trainer document"
+msgstr "lipu pi kama sona nimi"
+
+#: kde5.xml.podir/kde5.xml.in.h:48
+msgctxt "comment"
+msgid "KmPlot file"
+msgstr "lipu KmPlot"
+
+#: kde5.xml.podir/kde5.xml.in.h:49
+msgctxt "comment"
+msgid "KWordQuiz vocabulary"
+msgstr "lipu nimi pi ilo KWordQuiz"
+
+#: kde5.xml.podir/kde5.xml.in.h:50
+msgctxt "comment"
+msgid "Cachegrind/Callgrind profile dump"
+msgstr "lipu pi insa ilo pi ilo Cachegrind anu ilo Callgrind"
+
+#: kde5.xml.podir/kde5.xml.in.h:51
+msgctxt "comment"
+msgid "Umbrello UML Modeller file"
+msgstr "lipu tan ilo Umbrella UML Modeller"
+
+#: kde5.xml.podir/kde5.xml.in.h:52
+msgctxt "comment"
+msgid "Windows link"
+msgstr "nasin tawa pi ilo Windows"
+
+#: kde5.xml.podir/kde5.xml.in.h:53
+msgctxt "comment"
+msgid "KGet download list"
+msgstr "lipu alasa pi ilo KGet"
+
+#: kde5.xml.podir/kde5.xml.in.h:54
+msgctxt "comment"
+msgid "Kopete emoticons archive"
+msgstr "poki pi sitelen sinpin pi ilo Kopete"
+
+#: kde5.xml.podir/kde5.xml.in.h:55
+msgctxt "comment"
+msgid "ICQ contact"
+msgstr "lipu pi jan lon ilo ICQ"
+
+#: kde5.xml.podir/kde5.xml.in.h:57
+msgctxt "comment"
+msgid "Microsoft Media Format"
+msgstr "poki Microsoft Media Format"
+
+#: kde5.xml.podir/kde5.xml.in.h:59
+msgctxt "comment"
+msgid "Turtle RDF document"
+msgstr "lipu pi ilo Turtle RDF"
+
+#: kde5.xml.podir/kde5.xml.in.h:61
+msgctxt "comment"
+msgid "Softimage PIC image"
+msgstr "sitelen Softimage PIC"
+
+#: kde5.xml.podir/kde5.xml.in.h:63
+msgctxt "comment"
+msgid "Qt Markup Language file"
+msgstr "lipu Qt Markup Language"
+
+#: kde5.xml.podir/kde5.xml.in.h:64
+msgctxt "comment"
+msgid "KConfigXT Configuration Options"
+msgstr "lipu pi ante wile pi ilo KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:65
+msgctxt "comment"
+msgid "KConfigXT Code Generation Options"
+msgstr "lipu pi pana wile pi ilo KConfigXT"
+
+#: kde5.xml.podir/kde5.xml.in.h:66
+msgctxt "comment"
+msgid "KXMLGUI UI Declaration"
+msgstr "lipu pi ilo KXMLGUI"
+
+#: kde5.xml.podir/kde5.xml.in.h:67
+msgctxt "comment"
+msgid "KNotification Declaration"
+msgstr "lipu KNotification"
+
+#: kde5.xml.podir/kde5.xml.in.h:68
+msgctxt "comment"
+msgid "KCrash Report"
+msgstr "lipu pakala ilo KCrash"
