@@ -394,10 +394,10 @@ public:
      * @p name default argument
      */
     explicit KAboutComponent(const QString &name = QString(),
-                          const QString &description = QString(),
-                          const QString &version = QString(),
-                          const QString &webAddress = QString(),
-                          enum KAboutLicense::LicenseKey licenseType = KAboutLicense::Unknown);
+                             const QString &description = QString(),
+                             const QString &version = QString(),
+                             const QString &webAddress = QString(),
+                             enum KAboutLicense::LicenseKey licenseType = KAboutLicense::Unknown);
 
     /**
      * Convenience constructor
@@ -416,10 +416,10 @@ public:
      * @p name default argument
      */
     explicit KAboutComponent(const QString &name,
-                          const QString &description,
-                          const QString &version,
-                          const QString &webAddress,
-                          const QString &pathToLicenseFile);
+                             const QString &description,
+                             const QString &version,
+                             const QString &webAddress,
+                             const QString &pathToLicenseFile);
 
     /**
      * Copy constructor. Performs a deep copy.
@@ -820,10 +820,10 @@ public:
      * @since 5.84
      */
     KAboutData &addComponent(const QString &name,
-                           const QString &description = QString(),
-                           const QString &version = QString(),
-                           const QString &webAddress = QString(),
-                           KAboutLicense::LicenseKey licenseKey = KAboutLicense::Unknown);
+                             const QString &description = QString(),
+                             const QString &version = QString(),
+                             const QString &webAddress = QString(),
+                             KAboutLicense::LicenseKey licenseKey = KAboutLicense::Unknown);
 
     /**
      * Defines a component that is used by the application with a custom license text file.
@@ -848,11 +848,8 @@ public:
      *
      * @since 5.84
      */
-    KAboutData &addComponent(const QString &name,
-                           const QString &description,
-                           const QString &version,
-                           const QString &webAddress,
-                           const QString &pathToLicenseFile);
+    KAboutData &
+    addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, const QString &pathToLicenseFile);
 
     /**
      * Defines a license text, which is translated.

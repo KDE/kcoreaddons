@@ -18,8 +18,8 @@
  * procstat-based code in `kprocesslist_unix_procstat.cpp`.
  */
 
-#include "kprocesslist.h"
 #include "kcoreaddons_debug.h"
+#include "kprocesslist.h"
 
 #include <QDebug>
 #include <QDir>

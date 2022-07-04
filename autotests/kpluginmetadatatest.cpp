@@ -139,7 +139,6 @@ private Q_SLOTS:
         QCOMPARE(fromQPluginLoader, fromFullPath);
         QCOMPARE(fromQPluginLoader, fromRawData);
 
-
         QCOMPARE(fromFullPath, fromQPluginLoader);
         QCOMPARE(fromFullPath, fromRawData);
 

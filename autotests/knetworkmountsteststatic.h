@@ -20,6 +20,7 @@ private Q_SLOTS:
     void testStaticKNetworkMountOptionToString();
     void testStaticKNetworkMountsTypeToString_data();
     void testStaticKNetworkMountsTypeToString();
+
 private:
     QString m_configFileName;
 };

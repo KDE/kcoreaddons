@@ -494,7 +494,7 @@ void KJobTest::slotResult(KJob *job)
 
     // Ensure the job has already emitted finished() if we are tracking from
     // setupErrorResultFinished
-    if(m_jobFinishCount.contains(job)) {
+    if (m_jobFinishCount.contains(job)) {
         QVERIFY(m_jobFinishCount.value(job) == 1);
         QVERIFY(m_jobFinishCount.remove(job) == 1 /* num items removed */);
     }

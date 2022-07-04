@@ -557,10 +557,13 @@ Q_SIGNALS:
      *
      * @since 5.80
      */
-    void totalAmountChanged(KJob *job, KJob::Unit unit, qulonglong amount
-    #if !defined(K_DOXYGEN)
-    , QPrivateSignal
-    #endif
+    void totalAmountChanged(KJob *job,
+                            KJob::Unit unit,
+                            qulonglong amount
+#if !defined(K_DOXYGEN)
+                            ,
+                            QPrivateSignal
+#endif
     );
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
@@ -597,10 +600,13 @@ Q_SIGNALS:
      *
      * @since 5.80
      */
-    void processedAmountChanged(KJob *job, KJob::Unit unit, qulonglong amount
-    #if !defined(K_DOXYGEN)
-    , QPrivateSignal
-    #endif
+    void processedAmountChanged(KJob *job,
+                                KJob::Unit unit,
+                                qulonglong amount
+#if !defined(K_DOXYGEN)
+                                ,
+                                QPrivateSignal
+#endif
     );
 
     /**
@@ -664,10 +670,12 @@ Q_SIGNALS:
      *
      * @since 5.80
      */
-    void percentChanged(KJob *job, unsigned long percent
-    #if !defined(K_DOXYGEN)
-    , QPrivateSignal
-    #endif
+    void percentChanged(KJob *job,
+                        unsigned long percent
+#if !defined(K_DOXYGEN)
+                        ,
+                        QPrivateSignal
+#endif
     );
 
     /**

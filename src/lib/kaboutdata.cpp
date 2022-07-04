@@ -413,7 +413,11 @@ public:
     KAboutLicense _license;
 };
 
-KAboutComponent::KAboutComponent(const QString &_name, const QString &_description, const QString &_version, const QString &_webAddress, enum KAboutLicense::LicenseKey licenseType)
+KAboutComponent::KAboutComponent(const QString &_name,
+                                 const QString &_description,
+                                 const QString &_version,
+                                 const QString &_webAddress,
+                                 enum KAboutLicense::LicenseKey licenseType)
     : d(new KAboutComponentPrivate)
 {
     d->_name = _name;
@@ -423,7 +427,11 @@ KAboutComponent::KAboutComponent(const QString &_name, const QString &_descripti
     d->_license = KAboutLicense(licenseType, nullptr);
 }
 
-KAboutComponent::KAboutComponent(const QString &_name, const QString &_description, const QString &_version, const QString &_webAddress, const QString &pathToLicenseFile)
+KAboutComponent::KAboutComponent(const QString &_name,
+                                 const QString &_description,
+                                 const QString &_version,
+                                 const QString &_webAddress,
+                                 const QString &pathToLicenseFile)
     : d(new KAboutComponentPrivate)
 {
     d->_name = _name;
@@ -646,13 +654,18 @@ KAboutData &KAboutData::setTranslator(const QString &name, const QString &emailA
     return *this;
 }
 
-KAboutData &KAboutData::addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, KAboutLicense::LicenseKey licenseKey)
+KAboutData &KAboutData::addComponent(const QString &name,
+                                     const QString &description,
+                                     const QString &version,
+                                     const QString &webAddress,
+                                     KAboutLicense::LicenseKey licenseKey)
 {
     d->_componentList.append(KAboutComponent(name, description, version, webAddress, licenseKey));
     return *this;
 }
 
-KAboutData &KAboutData::addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, const QString &pathToLicenseFile)
+KAboutData &
+KAboutData::addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, const QString &pathToLicenseFile)
 {
     d->_componentList.append(KAboutComponent(name, description, version, webAddress, pathToLicenseFile));
     return *this;

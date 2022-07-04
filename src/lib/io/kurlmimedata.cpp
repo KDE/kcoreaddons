@@ -106,20 +106,22 @@ static bool isKIOFuseAvailable()
 
 static bool isDocumentsPortalAvailable()
 {
-    static bool available = QDBusConnection::sessionBus().interface()
-        && QDBusConnection::sessionBus().interface()->activatableServiceNames().value().contains(portalServiceName());
+    static bool available =
+        QDBusConnection::sessionBus().interface() && QDBusConnection::sessionBus().interface()->activatableServiceNames().value().contains(portalServiceName());
     return available;
 }
 
-static QString portalFormat() { return QStringLiteral("application/vnd.portal.filetransfer"); }
+static QString portalFormat()
+{
+    return QStringLiteral("application/vnd.portal.filetransfer");
+}
 
 static QList<QUrl> extractPortalUriList(const QMimeData *mimeData)
 {
     const auto transferId = mimeData->data(portalFormat());
     qCDebug(KCOREADDONS_DEBUG) << "Picking up portal urls from transfer" << transferId;
-    auto iface = new OrgFreedesktopPortalFileTransferInterface(portalServiceName(),
-                                                                QStringLiteral("/org/freedesktop/portal/documents"),
-                                                                QDBusConnection::sessionBus());
+    auto iface =
+        new OrgFreedesktopPortalFileTransferInterface(portalServiceName(), QStringLiteral("/org/freedesktop/portal/documents"), QDBusConnection::sessionBus());
     const QStringList list = iface->RetrieveFiles(QString::fromUtf8(transferId), {});
     QList<QUrl> uris;
     uris.reserve(list.size());
@@ -233,9 +235,8 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
         return false;
     }
 
-    auto iface = new OrgFreedesktopPortalFileTransferInterface(portalServiceName(),
-                                                 QStringLiteral("/org/freedesktop/portal/documents"),
-                                                 QDBusConnection::sessionBus());
+    auto iface =
+        new OrgFreedesktopPortalFileTransferInterface(portalServiceName(), QStringLiteral("/org/freedesktop/portal/documents"), QDBusConnection::sessionBus());
 
     // Do not autostop, we'll stop once our mimedata disappears (i.e. the drag operation has finished);
     // Otherwise not-wellbehaved clients that read the urls multiple times will trip the automatic-transfer-

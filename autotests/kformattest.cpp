@@ -360,8 +360,7 @@ void KFormatTest::formatRelativeDate()
 
     // An hour ago is **usually** today, except after midnight; just bump
     // to after 2am to make the "today" test work.
-    if (now.time().hour() == 0)
-    {
+    if (now.time().hour() == 0) {
         now = now.addSecs(7201);
     }
 

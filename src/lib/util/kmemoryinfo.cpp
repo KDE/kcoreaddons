@@ -144,7 +144,7 @@ struct SwapInfo {
 BOOL __stdcall pageInfo(LPVOID pContext, PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCWSTR lpFilename)
 {
     Q_UNUSED(lpFilename)
-    if (auto sw = static_cast<SwapInfo*>(pContext)) {
+    if (auto sw = static_cast<SwapInfo *>(pContext)) {
         sw->totalPageFilePages += pPageFileInfo->TotalSize;
         sw->freePageFilePages += (pPageFileInfo->TotalSize - pPageFileInfo->TotalInUse);
         return true;

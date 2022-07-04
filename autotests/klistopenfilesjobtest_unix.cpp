@@ -46,7 +46,7 @@ void KListOpenFilesJobTest::testOpenFiles()
     QTemporaryDir tempDir;
     QFile tempFile(tempDir.path() + QStringLiteral("/file"));
     QVERIFY(tempFile.open(QIODevice::WriteOnly));
-    bool xfail_zfs = false;  // Expected failure because of ZFS
+    bool xfail_zfs = false; // Expected failure because of ZFS
 #ifdef Q_OS_FREEBSD
     // FIXME: On FreeBSD, lsof does not support zfs (as of 2022), see
     // https://bugs.freebsd.org/bugzilla/show_bug.cgi?id=253553
