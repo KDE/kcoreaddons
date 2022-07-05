@@ -113,8 +113,6 @@ void KProcess::unsetEnv(const QString &name)
 
 void KProcess::setProgram(const QString &exe, const QStringList &args)
 {
-    Q_D(KProcess);
-
     QProcess::setProgram(exe);
     QProcess::setArguments(args);
 #ifdef Q_OS_WIN
@@ -124,8 +122,6 @@ void KProcess::setProgram(const QString &exe, const QStringList &args)
 
 void KProcess::setProgram(const QStringList &argv)
 {
-    Q_D(KProcess);
-
     if (argv.isEmpty()) {
         qCWarning(KCOREADDONS_DEBUG) << "KProcess::setProgram(const QStringList &argv) called on an empty string list, no process will be started.";
         clearProgram();
@@ -142,8 +138,6 @@ void KProcess::setProgram(const QStringList &argv)
 
 KProcess &KProcess::operator<<(const QString &arg)
 {
-    Q_D(KProcess);
-
     if (QProcess::program().isEmpty()) {
         QProcess::setProgram(arg);
     } else {
@@ -154,8 +148,6 @@ KProcess &KProcess::operator<<(const QString &arg)
 
 KProcess &KProcess::operator<<(const QStringList &args)
 {
-    Q_D(KProcess);
-
     if (QProcess::program().isEmpty()) {
         setProgram(args);
     } else {
@@ -166,8 +158,6 @@ KProcess &KProcess::operator<<(const QStringList &args)
 
 void KProcess::clearProgram()
 {
-    Q_D(KProcess);
-
     QProcess::setProgram({});
     QProcess::setArguments({});
 #ifdef Q_OS_WIN
@@ -177,8 +167,6 @@ void KProcess::clearProgram()
 
 void KProcess::setShellCommand(const QString &cmd)
 {
-    Q_D(KProcess);
-
     KShell::Errors err = KShell::NoError;
     auto args = KShell::splitArgs(cmd, KShell::AbortOnMeta | KShell::TildeExpand, &err);
     if (err == KShell::NoError && !args.isEmpty()) {
@@ -201,25 +189,24 @@ void KProcess::setShellCommand(const QString &cmd)
     // If /bin/sh is a symlink, we can be pretty sure that it points to a
     // POSIX shell - the original bourne shell is about the only non-POSIX
     // shell still in use and it is always installed natively as /bin/sh.
-    QProcess::setProgram(QFile::symLinkTarget(QStringLiteral("/bin/sh"));
-    if (QProcess::program()) {
-        // Try some known POSIX shells.
-        QProcess::setProgram(QStandardPaths::findExecutable(QStringLiteral("ksh")));
-        if (QProcess::program()) {
-            QProcess::setProgram(QStandardPaths::findExecutable(QStringLiteral("ash")));
-            if (QProcess::program()) {
-                QProcess::setProgram(QStandardPaths::findExecutable(QStringLiteral("bash")));
-                if (QProcess::program()) {
-                    QProcess::setProgram(QStandardPaths::findExecutable(QStringLiteral("zsh")));
-                    if (QProcess::program())
-                    // We're pretty much screwed, to be honest ...
-                    {
-                        QProcess::setProgram(QStringLiteral("/bin/sh"));
-                    }
-                }
-            }
-        }
+    QString shell = QFile::symLinkTarget(QStringLiteral("/bin/sh"));
+    // Try some known POSIX shells.
+    if (shell.isEmpty()) {
+        shell = QStandardPaths::findExecutable(QStringLiteral("ksh"));
     }
+    if (shell.isEmpty()) {
+        shell = QStandardPaths::findExecutable(QStringLiteral("ash"));
+    }
+    if (shell.isEmpty()) {
+        shell = QStandardPaths::findExecutable(QStringLiteral("bash"));
+    }
+    if (shell.isEmpty()) {
+        shell = QStandardPaths::findExecutable(QStringLiteral("zsh"));
+    }
+    if (shell.isEmpty()) { // We're pretty much screwed, to be honest ...
+        shell = QStringLiteral("/bin/sh");
+    }
+    QProcess::setProgram(shell);
 #else
     QProcess::setProgram((QStringLiteral("/bin/sh")));
 #endif
@@ -244,8 +231,6 @@ void KProcess::setShellCommand(const QString &cmd)
 
 QStringList KProcess::program() const
 {
-    Q_D(const KProcess);
-
     QStringList argv = arguments();
     argv.prepend(QProcess::program());
     return argv;
