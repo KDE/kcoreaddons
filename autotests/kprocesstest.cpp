@@ -2,6 +2,7 @@
     This file is part of the KDE libraries
 
     SPDX-FileCopyrightText: 2007 Oswald Buddenhagen <ossi@kde.org>
+    SPDX-FileCopyrightText: 2022 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -24,6 +25,7 @@ class KProcessTest : public QObject
 private Q_SLOTS:
     void test_channels();
     void test_setShellCommand();
+    void test_inheritance();
 };
 
 // IOCCC nomination pending
@@ -78,9 +80,40 @@ void KProcessTest::test_setShellCommand()
     p.setShellCommand(QStringLiteral("cat"));
     QCOMPARE(p.program().count(), 1);
     QCOMPARE(p.program().at(0), QStandardPaths::findExecutable(QStringLiteral("cat")));
-    QVERIFY(p.program().at(0).endsWith(QLatin1String("/bin/cat")));
+    QVERIFY(p.program().at(0).endsWith(QLatin1String("/cat")));
     p.setShellCommand(QStringLiteral("true || false"));
     QCOMPARE(p.program(), QStringList() << QStringLiteral("/bin/sh") << QStringLiteral("-c") << QString::fromLatin1("true || false"));
+#endif
+}
+
+void KProcessTest::test_inheritance()
+{
+    KProcess kproc;
+    QProcess *qproc = &kproc;
+    const QString program = QStringLiteral("foobar");
+    const QStringList arguments{QStringLiteral("meow")};
+
+    kproc.setProgram(program, arguments);
+    QCOMPARE(qproc->program(), program);
+    QCOMPARE(qproc->arguments(), arguments);
+    kproc.clearProgram();
+    QCOMPARE(qproc->program(), QString());
+    QCOMPARE(qproc->arguments(), QStringList());
+
+    kproc << program << arguments;
+    QCOMPARE(qproc->program(), program);
+    QCOMPARE(qproc->arguments(), arguments);
+    kproc.clearProgram();
+    QCOMPARE(qproc->program(), QString());
+    QCOMPARE(qproc->arguments(), QStringList());
+
+#ifdef Q_OS_UNIX
+    kproc.setShellCommand(QStringLiteral("/bin/true meow"));
+    QCOMPARE(qproc->program(), QStringLiteral("/bin/true"));
+    QCOMPARE(qproc->arguments(), arguments);
+    kproc.clearProgram();
+    QCOMPARE(qproc->program(), QString());
+    QCOMPARE(qproc->arguments(), QStringList());
 #endif
 }
 

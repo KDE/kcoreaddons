@@ -21,8 +21,6 @@ protected:
     {
     }
 
-    QString prog;
-    QStringList args;
     QIODevice::OpenMode openMode;
 
     KProcess *q_ptr;
