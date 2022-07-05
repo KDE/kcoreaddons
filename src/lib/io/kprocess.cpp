@@ -165,6 +165,14 @@ void KProcess::clearProgram()
 #endif
 }
 
+// #ifdef NON_FREE // ... as they ship non-POSIX /bin/sh
+#if !defined(__linux__) && !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__) && !defined(__GNU__)              \
+    && !defined(__APPLE__)
+const static bool s_nonFreeUnix = true;
+#else
+const static bool s_nonFreeUnix = false;
+#endif
+
 void KProcess::setShellCommand(const QString &cmd)
 {
     KShell::Errors err = KShell::NoError;
@@ -183,33 +191,28 @@ void KProcess::setShellCommand(const QString &cmd)
     setArguments({});
 
 #ifdef Q_OS_UNIX
-// #ifdef NON_FREE // ... as they ship non-POSIX /bin/sh
-#if !defined(__linux__) && !defined(__FreeBSD__) && !defined(__NetBSD__) && !defined(__OpenBSD__) && !defined(__DragonFly__) && !defined(__GNU__)              \
-    && !defined(__APPLE__)
-    // If /bin/sh is a symlink, we can be pretty sure that it points to a
-    // POSIX shell - the original bourne shell is about the only non-POSIX
-    // shell still in use and it is always installed natively as /bin/sh.
-    QString shell = QFile::symLinkTarget(QStringLiteral("/bin/sh"));
-    // Try some known POSIX shells.
-    if (shell.isEmpty()) {
-        shell = QStandardPaths::findExecutable(QStringLiteral("ksh"));
+    if (s_nonFreeUnix) {
+        // If /bin/sh is a symlink, we can be pretty sure that it points to a
+        // POSIX shell - the original bourne shell is about the only non-POSIX
+        // shell still in use and it is always installed natively as /bin/sh.
+        QString shell = QFile::symLinkTarget(QStringLiteral("/bin/sh"));
+        if (shell.isEmpty()) {
+            // Try some known POSIX shells.
+            static const char *s_knownShells[] = {"ksh", "ash", "bash", "zsh"};
+            for (const auto str : s_knownShells) {
+                shell = QStandardPaths::findExecutable(QLatin1String(str));
+                if (!shell.isEmpty()) {
+                    break;
+                }
+            }
+        }
+        if (shell.isEmpty()) { // We're pretty much screwed, to be honest ...
+            shell = QStringLiteral("/bin/sh");
+        }
+        QProcess::setProgram(shell);
+    } else {
+        QProcess::setProgram((QStringLiteral("/bin/sh")));
     }
-    if (shell.isEmpty()) {
-        shell = QStandardPaths::findExecutable(QStringLiteral("ash"));
-    }
-    if (shell.isEmpty()) {
-        shell = QStandardPaths::findExecutable(QStringLiteral("bash"));
-    }
-    if (shell.isEmpty()) {
-        shell = QStandardPaths::findExecutable(QStringLiteral("zsh"));
-    }
-    if (shell.isEmpty()) { // We're pretty much screwed, to be honest ...
-        shell = QStringLiteral("/bin/sh");
-    }
-    QProcess::setProgram(shell);
-#else
-    QProcess::setProgram((QStringLiteral("/bin/sh")));
-#endif
 
     setArguments(arguments() << QStringLiteral("-c") << cmd);
 #else // Q_OS_UNIX
@@ -272,8 +275,6 @@ int KProcess::execute(const QStringList &argv, int msecs)
 
 int KProcess::startDetached()
 {
-    Q_D(KProcess);
-
     qint64 pid;
     if (!QProcess::startDetached(QProcess::program(), QProcess::arguments(), workingDirectory(), &pid)) {
         return 0;
