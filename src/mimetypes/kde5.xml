@@ -52,6 +52,7 @@ Notes:
     <comment xml:lang="my">RELAX NG</comment>
     <comment xml:lang="nl">RELAX NG</comment>
     <comment xml:lang="nn">RELAX NG</comment>
+    <comment xml:lang="pa">RELAX NG</comment>
     <comment xml:lang="pl">RELAX NG</comment>
     <comment xml:lang="pt">RELAX NG</comment>
     <comment xml:lang="pt_BR">RELAX NG</comment>
@@ -97,6 +98,7 @@ Notes:
     <comment xml:lang="my">စီဒီအသံဖိုင်လ်</comment>
     <comment xml:lang="nl">CD-audio</comment>
     <comment xml:lang="nn">CD-lyd</comment>
+    <comment xml:lang="pa">CD ਆਡੀਓ</comment>
     <comment xml:lang="pl">Płyta CD z dźwiękiem</comment>
     <comment xml:lang="pt">Áudio de CD</comment>
     <comment xml:lang="pt_BR">Áudio de CD</comment>
@@ -143,6 +145,7 @@ Notes:
     <comment xml:lang="my">အက်စ်အန်အက်ဖ် ဘစ်မတ်ပ် ဖောင့်</comment>
     <comment xml:lang="nl">SNF-bitmap-lettertype</comment>
     <comment xml:lang="nn">SNF-punktskrift</comment>
+    <comment xml:lang="pa">SNF ਬਿੱਟਮੈਪ ਫੋਂਟ</comment>
     <comment xml:lang="pl">Czcionka bitmapowa SNF</comment>
     <comment xml:lang="pt">Tipo de letra por imagens SNF</comment>
     <comment xml:lang="pt_BR">Fonte bitmap SNF</comment>
@@ -190,6 +193,7 @@ Notes:
     <comment xml:lang="my">ဂျာဗားအပ်ပလက်ပ်</comment>
     <comment xml:lang="nl">Java-applet</comment>
     <comment xml:lang="nn">Java-applett</comment>
+    <comment xml:lang="pa">ਜਾਵਾ ਐਪਲਿਟ</comment>
     <comment xml:lang="pl">Aplet Javy</comment>
     <comment xml:lang="pt">'Applet' de Java</comment>
     <comment xml:lang="pt_BR">Miniaplicativo Java</comment>
@@ -234,6 +238,7 @@ Notes:
     <comment xml:lang="my">ကေအိပ်ချ်တီအမ်အယ်လ် တိုးချဲ့စနစ် ကြားဆက်ကိရိယာ</comment>
     <comment xml:lang="nl">KHTML-extensie aanpassen</comment>
     <comment xml:lang="nn">KHTML-utvidingstilpassar</comment>
+    <comment xml:lang="pa">KHTML ਇਕਸਟੈਨਸ਼ਨ ਅਡੋਪਟਰ</comment>
     <comment xml:lang="pl">Adapter rozszerzeń KHTML</comment>
     <comment xml:lang="pt">Adaptador de Extensões do KHTML</comment>
     <comment xml:lang="pt_BR">Adaptador de extensões do KHTML</comment>
@@ -278,6 +283,7 @@ Notes:
     <comment xml:lang="my">ကေဒီအီအရောင် အစီအစဥ်ပုံ</comment>
     <comment xml:lang="nl">KDE-kleurenschema</comment>
     <comment xml:lang="nn">KDE-fargetema</comment>
+    <comment xml:lang="pa">KDE ਰੰਗ ਸਕੀਮ</comment>
     <comment xml:lang="pl">Zestaw kolorów KDE</comment>
     <comment xml:lang="pt">Esquema de cores do KDE</comment>
     <comment xml:lang="pt_BR">Esquema de cores do KDE</comment>
@@ -327,6 +333,7 @@ Notes:
     <comment xml:lang="my">ကေနယူးစတပ်ဖ် ပတ်ကေ့</comment>
     <comment xml:lang="nl">KNewStuff-pakket</comment>
     <comment xml:lang="nn">KNewStuff-pakke</comment>
+    <comment xml:lang="pa">KNewStuff ਪੈਕੇਜ</comment>
     <comment xml:lang="pl">Pakiet KNewStuff</comment>
     <comment xml:lang="pt">Pacote do KNewStuff</comment>
     <comment xml:lang="pt_BR">Pacote do KNewStuff</comment>
@@ -373,6 +380,7 @@ Notes:
     <comment xml:lang="my">ကေပိုက်ဆံအိတ် ပိုက်ဆံအိတ်</comment>
     <comment xml:lang="nl">KWallet-portefeuille</comment>
     <comment xml:lang="nn">KWallet-lommebok</comment>
+    <comment xml:lang="pa">KWallet ਵਾਲਟ</comment>
     <comment xml:lang="pl">Portfel KDE</comment>
     <comment xml:lang="pt">Carteira da KWallet</comment>
     <comment xml:lang="pt_BR">Carteira do KWallet</comment>
@@ -421,6 +429,7 @@ Notes:
     <comment xml:lang="my">ကူဂါ အစီရင်ခံစာ ပုံစံမူ</comment>
     <comment xml:lang="nl">Kugar-rapportsjabloon</comment>
     <comment xml:lang="nn">Rapportmal for Kugar</comment>
+    <comment xml:lang="pa">Kugar ਰਿਪੋਰਟ ਟੈਪਲੇਟ</comment>
     <comment xml:lang="pl">Szablon raportu Kugara</comment>
     <comment xml:lang="pt">Modelo de relatórios do Kugar</comment>
     <comment xml:lang="pt_BR">Modelo de relatório do Kugar</comment>
@@ -467,6 +476,7 @@ Notes:
     <comment xml:lang="my">ပလက်စမွိုက်</comment>
     <comment xml:lang="nl">plasmoid</comment>
     <comment xml:lang="nn">plasmoide</comment>
+    <comment xml:lang="pa">ਪਲਾਜ਼ਮੋਡ</comment>
     <comment xml:lang="pl">plazmoid</comment>
     <comment xml:lang="pt">plasmóide</comment>
     <comment xml:lang="pt_BR">plasmoide</comment>
@@ -514,6 +524,7 @@ Notes:
     <comment xml:lang="my">ဆူပါကရမ်းဘ အခင်းအကျင်း</comment>
     <comment xml:lang="nl">SuperKaramba-thema</comment>
     <comment xml:lang="nn">SuperKaramba-tema</comment>
+    <comment xml:lang="pa">ਸੁਪਰਕਰਾਮਬਾ ਥੀਮ</comment>
     <comment xml:lang="pl">Wygląd SuperKaramba</comment>
     <comment xml:lang="pt">Tema do SuperKaramba</comment>
     <comment xml:lang="pt_BR">Tema do SuperKaramba</comment>
@@ -559,6 +570,7 @@ Notes:
     <comment xml:lang="my">ကေားလီဂရာပလန် စီမံကိိန်းစီမံမှု မှတ်တမ်းစာအုပ်</comment>
     <comment xml:lang="nl">Calligra-plan projectbeheer-document</comment>
     <comment xml:lang="nn">Prosjekthandsamings­dokument for Calligra Plan</comment>
+    <comment xml:lang="pa">Calligra ਸਕੀਮ ਪ੍ਰੋਜੈਕਟ ਪਰਬੰਧ ਡੌਕੂਮੈਂਟ</comment>
     <comment xml:lang="pl">Dokument zarządzania projektami w Calligra Plan</comment>
     <comment xml:lang="pt">Documento de gestão de projectos do Plan para o Calligra</comment>
     <comment xml:lang="pt_BR">Documento de gerenciamento de projetos do Calligra Plan</comment>
@@ -604,6 +616,7 @@ Notes:
     <comment xml:lang="my">ကေားလီဂရာပလန် အလုပ်ပတ်ကေ့ မှတ်တမ်းစာအုပ်</comment>
     <comment xml:lang="nl">Calligra-plan werkpakket document</comment>
     <comment xml:lang="nn">Arbeidspakke­dokument for Calligra Plan</comment>
+    <comment xml:lang="pa">Calligra ਸਕੀਮ ਪ੍ਰੋਜੈਕਟ ਪਰਬੰਧ ਡੌਕੂਮੈਂਟ</comment>
     <comment xml:lang="pl">Dokument zawierający pakiet zadań Calligra Plan</comment>
     <comment xml:lang="pt">Documento de pacote de trabalho do Plan para o Calligra</comment>
     <comment xml:lang="pt_BR">Documento do pacote de trabalho do Calligra Plan</comment>
@@ -649,6 +662,7 @@ Notes:
     <comment xml:lang="my">ကေပလေးတိုး စီမံကိိန်းစီမံမှု မှတ်တမ်းစာအုပ်</comment>
     <comment xml:lang="nl">KPlato projectbeheer-document</comment>
     <comment xml:lang="nn">KPlato-prosjekthandsamings­dokument</comment>
+    <comment xml:lang="pa">KPlato ਪਰੋਜੈਕਟ ਪਰਬੰਧ ਡੌਕੂਮੈਂਟ</comment>
     <comment xml:lang="pl">Dokument zarządzania projektami w KPlato</comment>
     <comment xml:lang="pt">Documento de gestão de projectos do KPlato</comment>
     <comment xml:lang="pt_BR">Documento de gerenciamento de projetos do KPlato</comment>
@@ -694,6 +708,7 @@ Notes:
     <comment xml:lang="my">ကေပလေးတိုး စီမံကိိန်းစီမံမှု အလုပ်ပတ်ကေ့</comment>
     <comment xml:lang="nl">KPlato projectbeheer-werkpakket</comment>
     <comment xml:lang="nn">KPlato-prosjekthandsamings­arbeidspakke</comment>
+    <comment xml:lang="pa">KPlato ਪਰੋਜੈਕਟ ਮੈਨੇਜਮੈਂਟ ਵਰਕ ਪੈਕੇਜ</comment>
     <comment xml:lang="pl">Pakiet pracy dot. zarządzania projektami KPlato</comment>
     <comment xml:lang="pt">Pacote de trabalho de gestão de projectos do KPlato</comment>
     <comment xml:lang="pt_BR">Pacote de trabalho de gerenciamento de projetos do KPlato</comment>
@@ -739,6 +754,7 @@ Notes:
     <comment xml:lang="my">ကူဂါ အဟောင်းသိမ်းတိုက်</comment>
     <comment xml:lang="nl">Kugar-archief</comment>
     <comment xml:lang="nn">Kugar-arkiv</comment>
+    <comment xml:lang="pa">Kugar ਅਕਾਇਵ</comment>
     <comment xml:lang="pl">Archiwum Kugar</comment>
     <comment xml:lang="pt">Pacote do Kugar</comment>
     <comment xml:lang="pt_BR">Arquivo do Kugar</comment>
@@ -785,6 +801,7 @@ Notes:
     <comment xml:lang="my">ဝက်ဘ်ထိမ်းသိမ်းတိုက်</comment>
     <comment xml:lang="nl">webarchief</comment>
     <comment xml:lang="nn">vevarkiv</comment>
+    <comment xml:lang="pa">ਵੈੱਬ ਅਕਾਇਵ</comment>
     <comment xml:lang="pl">archiwum sieciowe</comment>
     <comment xml:lang="pt">pacote Web</comment>
     <comment xml:lang="pt_BR">Arquivo Web</comment>
@@ -832,6 +849,7 @@ Notes:
     <comment xml:lang="my">ဒဗလျူ၃စီ အိပ်စ်အမ်အယ်လ် စခီးမား</comment>
     <comment xml:lang="nl">W3C XML-schema</comment>
     <comment xml:lang="nn">W3C XML-skjema</comment>
+    <comment xml:lang="pa">W3C XML ਸਕੀਮਾ</comment>
     <comment xml:lang="pl">Schemat W3C XML</comment>
     <comment xml:lang="pt">Esquema XML da W3C</comment>
     <comment xml:lang="pt_BR">Esquema XML da W3C</comment>
@@ -877,6 +895,7 @@ Notes:
     <comment xml:lang="my">ရီးရယ်အော်ဒီယို ပလပ်ဂင် ဖိုင်လ်</comment>
     <comment xml:lang="nl">RealAudio-bestand</comment>
     <comment xml:lang="nn">RealAudio-programtilleggfil</comment>
+    <comment xml:lang="pa">RealAudio ਪਲੱਗਇਨ ਫਾਈਲ</comment>
     <comment xml:lang="pl">Plik wtyczki RealAudio</comment>
     <comment xml:lang="pt">Ficheiro de 'plugin' do RealAudio</comment>
     <comment xml:lang="pt_BR">Arquivo de plugin do RealAudio</comment>
@@ -921,6 +940,7 @@ Notes:
     <comment xml:lang="my">ကေဖိုတိုအယ်ဘမ် တင်သွင်း</comment>
     <comment xml:lang="nl">KPhotoAlbum-import</comment>
     <comment xml:lang="nn">KPhotoAlbum-import</comment>
+    <comment xml:lang="pa">KPhotoAlbum ਇੰਪੋਰਟ</comment>
     <comment xml:lang="pl">Import KPhotoAlbum</comment>
     <comment xml:lang="pt">Importação do KPhotoAlbum</comment>
     <comment xml:lang="pt_BR">Importação do KPhotoAlbum</comment>
@@ -966,6 +986,7 @@ Notes:
     <comment xml:lang="my">အိပ်ချ်ဒီအာ ပုံရိပ်</comment>
     <comment xml:lang="nl">HDR-image</comment>
     <comment xml:lang="nn">HDR-bilete</comment>
+    <comment xml:lang="pa">HDR ਚਿੱਤਰ</comment>
     <comment xml:lang="pl">Obraz HDR</comment>
     <comment xml:lang="pt">Imagem HDR</comment>
     <comment xml:lang="pt_BR">Imagem HDR</comment>
@@ -1016,6 +1037,7 @@ Notes:
     <comment xml:lang="my">ကေဒီအီး အစိမ်းပုံရိပ် စီစဉ်ဖွဲ့စည်းမှုပုံစံ</comment>
     <comment xml:lang="nl">KDE-rawimage-formats</comment>
     <comment xml:lang="nn">KDE-råbilete</comment>
+    <comment xml:lang="pa">KDE ਰਾਅ ਚਿੱਤਰ ਫਾਰਮੈਟ</comment>
     <comment xml:lang="pl">Formaty nieprzetworzonych obrazów w KDE</comment>
     <comment xml:lang="pt">Formatos de imagem em bruto do KDE</comment>
     <comment xml:lang="pt_BR">Formatos de imagem RAW do KDE</comment>
@@ -1071,6 +1093,7 @@ Notes:
     <comment xml:lang="my">အင်တယ်® ဆယ့်ခြောက်စုဂဏန်း အရာဝတ္တုဖိုင်လ်</comment>
     <comment xml:lang="nl">Intel® hexadecimaal objectbestand</comment>
     <comment xml:lang="nn">Intel®-heksobjektfil</comment>
+    <comment xml:lang="pa">Intel® ਹੈਕਸਾਡੈਸੀਮਲ ਆਬਜੈਕਟ ਫਾਈਲ</comment>
     <comment xml:lang="pl">Szesnastkowy plik obiektowy Intel®</comment>
     <comment xml:lang="pt">Ficheiro-objecto em hexadecimal da Intel®</comment>
     <comment xml:lang="pt_BR">Arquivo objeto em hexadecimal da Intel®</comment>
@@ -1116,6 +1139,7 @@ Notes:
     <comment xml:lang="my">ကိတ်ပ်ဖိုင်လ်စာရင်းတင်သွင်းမှုပလပ်ဂင်စာရင်း</comment>
     <comment xml:lang="nl">Kate bestandenlijstlader voor pluginlijst</comment>
     <comment xml:lang="nn">Programtillegg­liste for filliste-lastar i Kate</comment>
+    <comment xml:lang="pa">ਕੇਟ ਫਾਈਲ ਲਿਸਟ ਲੋਡਰ ਪਲੱਗਇਨ ਲਿਸਟ</comment>
     <comment xml:lang="pl">Lista wtyczki do wczytywania plików Kate</comment>
     <comment xml:lang="pt">Lista de 'plugins' de carregamento de listas de ficheiros do Kate</comment>
     <comment xml:lang="pt_BR">Lista de plugins de carregamento de listas de arquivos do Kate</comment>
@@ -1213,6 +1237,7 @@ Notes:
     <comment xml:lang="my">ဖောင့် ပတ်ကေ့များ</comment>
     <comment xml:lang="nl">lettertypenpakket</comment>
     <comment xml:lang="nn">skriftpakke</comment>
+    <comment xml:lang="pa">ਫੋਂਟ ਪੈਕੇਜ</comment>
     <comment xml:lang="pl">zestaw czcionek</comment>
     <comment xml:lang="pt">pacote de tipos de letra</comment>
     <comment xml:lang="pt_BR">pacote de fontes</comment>
@@ -1261,6 +1286,7 @@ Notes:
     <comment xml:lang="my">ဝင်းဒိုးစ် ဆာဗာ</comment>
     <comment xml:lang="nl">Windows-server</comment>
     <comment xml:lang="nn">Windows-tenar</comment>
+    <comment xml:lang="pa">ਵਿੰਡੋਜ਼ ਸਰਵਰ</comment>
     <comment xml:lang="pl">Serwer Windowsa</comment>
     <comment xml:lang="pt">Servidor do Windows</comment>
     <comment xml:lang="pt_BR">Servidor do Windows</comment>
@@ -1307,6 +1333,7 @@ Notes:
     <comment xml:lang="my">ဝင်းဒိုးစ် အလုပ်အုပ်စု</comment>
     <comment xml:lang="nl">Windows-werkgroep</comment>
     <comment xml:lang="nn">Windows-arbeidsgruppe</comment>
+    <comment xml:lang="pa">ਵਿੰਡੋਜ਼ ਵਰਕਗਰੁੱਪ</comment>
     <comment xml:lang="pl">Grupa robocza Windows</comment>
     <comment xml:lang="pt">Grupo de trabalho do Windows</comment>
     <comment xml:lang="pt_BR">Grupo de trabalho do Windows</comment>
@@ -1353,6 +1380,7 @@ Notes:
     <comment xml:lang="my">ကေဒီအီး စစ်စတမ် စောင့်ကြည့်သူ</comment>
     <comment xml:lang="nl">KDE systeembewaking</comment>
     <comment xml:lang="nn">KDE-systemovervaking</comment>
+    <comment xml:lang="pa">KDE ਸਿਸਟਮ ਮਾਨੀਟਰ</comment>
     <comment xml:lang="pl">Monitor systemowy KDE</comment>
     <comment xml:lang="pt">Monitor do sistema KDE</comment>
     <comment xml:lang="pt_BR">Monitor do sistema do KDE</comment>
@@ -1400,6 +1428,7 @@ Notes:
     <comment xml:lang="my">ကေဒီအီး အခင်းအကျင်း</comment>
     <comment xml:lang="nl">KDE-thema</comment>
     <comment xml:lang="nn">KDE-tema</comment>
+    <comment xml:lang="pa">KDE ਥੀਮ</comment>
     <comment xml:lang="pl">Wygląd KDE</comment>
     <comment xml:lang="pt">Tema do KDE</comment>
     <comment xml:lang="pt_BR">Tema do KDE</comment>
@@ -1448,6 +1477,7 @@ Notes:
     <comment xml:lang="my">ကွမ်တ စီမံကိန်း</comment>
     <comment xml:lang="nl">Quanta-project</comment>
     <comment xml:lang="nn">Quanta-prosjekt</comment>
+    <comment xml:lang="pa">ਕੁਆਂਟਾ ਪਰੋਜੈਕਟ</comment>
     <comment xml:lang="pl">Projekt Quanta</comment>
     <comment xml:lang="pt">Projecto do Quanta</comment>
     <comment xml:lang="pt_BR">Projeto do Quanta</comment>
@@ -1494,6 +1524,7 @@ Notes:
     <comment xml:lang="my">ကွန်မန်ဒါ ဖိုင်လ်</comment>
     <comment xml:lang="nl">Kommander-bestand</comment>
     <comment xml:lang="nn">Kommander-fil</comment>
+    <comment xml:lang="pa">Kommander ਫਾਈਲ</comment>
     <comment xml:lang="pl">Plik Kommander</comment>
     <comment xml:lang="pt">Ficheiro do Kommander</comment>
     <comment xml:lang="pt_BR">Arquivo do Kommander</comment>
@@ -1541,6 +1572,7 @@ Notes:
     <comment xml:lang="my">အာလူး</comment>
     <comment xml:lang="nl">aardappel</comment>
     <comment xml:lang="nn">potato</comment>
+    <comment xml:lang="pa">ਆਲੂ</comment>
     <comment xml:lang="pl">ziemniak</comment>
     <comment xml:lang="pt">batata</comment>
     <comment xml:lang="pt_BR">batata</comment>
@@ -1587,6 +1619,7 @@ Notes:
     <comment xml:lang="my">ဂေါ့ဖ် မှတ်ထားသည့်ဂိမ်း</comment>
     <comment xml:lang="nl">Opgeslagen Kolf-spel</comment>
     <comment xml:lang="nn">Lagra Kolf-runde</comment>
+    <comment xml:lang="pa">Kolf ਸੰਭਾਲੀ ਖੇਡ</comment>
     <comment xml:lang="pl">Zapisana gra Kolfa</comment>
     <comment xml:lang="pt">Jogo gravado do Kolf</comment>
     <comment xml:lang="pt_BR">Jogo salvo do Kolf</comment>
@@ -1636,6 +1669,7 @@ Notes:
     <comment xml:lang="my">ဂေါ့ဖ် သင်တန်း</comment>
     <comment xml:lang="nl">Kolf-baan</comment>
     <comment xml:lang="nn">Kolf-bane</comment>
+    <comment xml:lang="pa">Kolf ਕੋਰਸ</comment>
     <comment xml:lang="pl">Pole golfowe Kolfa</comment>
     <comment xml:lang="pt">Campo do Kolf</comment>
     <comment xml:lang="pt_BR">Campo de golfe</comment>
@@ -1687,6 +1721,7 @@ Notes:
     <comment xml:lang="my">ဥက္ကလာ မှတ်တမ်းစာအုပ်ဟောင်းသိမ်းတိုက်</comment>
     <comment xml:lang="nl">Okular-documentarchief</comment>
     <comment xml:lang="nn">Okular-dokumentarkiv</comment>
+    <comment xml:lang="pa">ਓਕੁਲਾਰ ਡੌਕੂਮੈਂਟ ਅਕਾਇਵ</comment>
     <comment xml:lang="pl">Archiwum dokumentu Okulara</comment>
     <comment xml:lang="pt">Pacote de documentos do Okular</comment>
     <comment xml:lang="pt_BR">Arquivo de documento do Okular</comment>
@@ -1734,6 +1769,7 @@ Notes:
     <comment xml:lang="my">ကက်ဘ်ဘရီရုပ်ပုံ</comment>
     <comment xml:lang="nl">Cabri-figuur</comment>
     <comment xml:lang="nn">Cabri-figur</comment>
+    <comment xml:lang="pa">Cabri ਸ਼ਕਲ</comment>
     <comment xml:lang="pl">Rysunek Cabri</comment>
     <comment xml:lang="pt">Imagem do Cabri</comment>
     <comment xml:lang="pt_BR">Imagem do Cabri</comment>
@@ -1784,6 +1820,7 @@ Notes:
     <comment xml:lang="my">ဒေါက်တာဂျီယို ရုပ်ပုံ</comment>
     <comment xml:lang="nl">Dr. Geo-figuur</comment>
     <comment xml:lang="nn">Dr. Geo-figur</comment>
+    <comment xml:lang="pa">Dr. Geo ਸ਼ਕਲ</comment>
     <comment xml:lang="pl">Rysunek Dr. Geo</comment>
     <comment xml:lang="pt">Imagem do Dr. Geo</comment>
     <comment xml:lang="pt_BR">Imagem do Dr. Geo</comment>
@@ -1833,6 +1870,7 @@ Notes:
     <comment xml:lang="my">ကေဂျီယို ရုပ်ပုံ</comment>
     <comment xml:lang="nl">KGeo-figuur</comment>
     <comment xml:lang="nn">KGeo-figur</comment>
+    <comment xml:lang="pa">KGeo ਸ਼ਕਲ</comment>
     <comment xml:lang="pl">Rysunek KGeo</comment>
     <comment xml:lang="pt">Imagem do KGeo</comment>
     <comment xml:lang="pt_BR">Imagem do KGeo</comment>
@@ -1879,6 +1917,7 @@ Notes:
     <comment xml:lang="my">ကေအိုင်ဂျီ ရုပ်ပုံ</comment>
     <comment xml:lang="nl">Kig-figuur</comment>
     <comment xml:lang="nn">Kig-figur</comment>
+    <comment xml:lang="pa">Kig ਸ਼ਕਲ</comment>
     <comment xml:lang="pl">Rysunek Kig</comment>
     <comment xml:lang="pt">Imagem do Kig</comment>
     <comment xml:lang="pt_BR">Imagem do Kig</comment>
@@ -1926,6 +1965,7 @@ Notes:
     <comment xml:lang="my">ကေဆက်ဂ် မှတ်တမ်းစာအုပ်</comment>
     <comment xml:lang="nl">KSeg-document</comment>
     <comment xml:lang="nn">KSeg-dokument</comment>
+    <comment xml:lang="pa">KSeg ਡੌਕੂਮੈਂਟ</comment>
     <comment xml:lang="pl">Dokument KSeg</comment>
     <comment xml:lang="pt">Documento do KSeg</comment>
     <comment xml:lang="pt_BR">Documento do KSeg</comment>
@@ -1973,6 +2013,7 @@ Notes:
     <comment xml:lang="my">ဝေါဟာရလေ့ကျင့်ရန်မှတ်တမ်းစာအုပ်</comment>
     <comment xml:lang="nl">document voor woordenschattrainer</comment>
     <comment xml:lang="nn">ordtreningsdokument</comment>
+    <comment xml:lang="pa">ਸ਼ਬਦਕੋਸ਼ ਟਰੇਨਰ ਡੌਕੂਮੈਂਟ</comment>
     <comment xml:lang="pl">dokument do ćwiczenia słownictwa</comment>
     <comment xml:lang="pt">documento de treino de vocabulários</comment>
     <comment xml:lang="pt_BR">documento de treino de vocabulários</comment>
@@ -2018,6 +2059,7 @@ Notes:
     <comment xml:lang="my">ကေအမ်ပလော့ ဖိုင်လ်</comment>
     <comment xml:lang="nl">KmPlot-bestand</comment>
     <comment xml:lang="nn">KmPlot-fil</comment>
+    <comment xml:lang="pa">KmPlot ਫਾਈਲ</comment>
     <comment xml:lang="pl">Plik KmPlot</comment>
     <comment xml:lang="pt">Ficheiro do KmPlot</comment>
     <comment xml:lang="pt_BR">Arquivo do KmPlot</comment>
@@ -2064,6 +2106,7 @@ Notes:
     <comment xml:lang="my">ကေစကားလုံးဉာဏ်စမ်း ဝေါဟာရ</comment>
     <comment xml:lang="nl">KWordQuiz-woordenschat</comment>
     <comment xml:lang="nn">KWordQuiz-vokabular</comment>
+    <comment xml:lang="pa">KWordQuiz ਸ਼ਬਦਾਵਲੀ</comment>
     <comment xml:lang="pl">Słownictwo KWordQuiz</comment>
     <comment xml:lang="pt">Vocabulário do KWordQuiz</comment>
     <comment xml:lang="pt_BR">Vocabulário do KWordQuiz</comment>
@@ -2110,6 +2153,7 @@ Notes:
     <comment xml:lang="my">ကေ့ချ်ဂရင်း/ကေားဂရင်း ပရိုဖိုင်လ် ဒေတာအကြမ်း</comment>
     <comment xml:lang="nl">Cachegrind/Callgrind profieldump</comment>
     <comment xml:lang="nn">Cachegrind/Callgrind-profildump</comment>
+    <comment xml:lang="pa">Cachegrind/Callgrind ਪਰੋਫਾਈਲ ਡੰਪ</comment>
     <comment xml:lang="pl">Zrzut profilu Cachegrinda/Callgrinda</comment>
     <comment xml:lang="pt">Resultado da análise do Cachegrind/Callgrind</comment>
     <comment xml:lang="pt_BR">Resultado da análise do Cachegrind/Callgrind</comment>
@@ -2204,6 +2248,7 @@ Notes:
     <comment xml:lang="my">ဝင်းဒိုးစ် လင့်ခ်</comment>
     <comment xml:lang="nl">Windows-koppeling</comment>
     <comment xml:lang="nn">Windows-lenkje</comment>
+    <comment xml:lang="pa">ਵਿੰਡੋਜ਼ ਲਿੰਕ</comment>
     <comment xml:lang="pl">Odnośnik Windows</comment>
     <comment xml:lang="pt">Hiperligação do Windows</comment>
     <comment xml:lang="pt_BR">Link do Windows</comment>
@@ -2253,6 +2298,7 @@ Notes:
     <comment xml:lang="my">ကေဂတ် ဒေါင်းလုတ်စာရင်း</comment>
     <comment xml:lang="nl">KGet-downloadlijst</comment>
     <comment xml:lang="nn">KGet-nedlastingsliste</comment>
+    <comment xml:lang="pa">KGet ਡਾਊਨਲੋਡ ਲਿਸਟ</comment>
     <comment xml:lang="pl">Lista pobierania KGet</comment>
     <comment xml:lang="pt">Lista de transferências do KGet</comment>
     <comment xml:lang="pt_BR">Lista de downloads do KGet</comment>
@@ -2299,6 +2345,7 @@ Notes:
     <comment xml:lang="my">ကေအိုးပိ ခံစားချက်ပြရုပ်ပုံများ ထိမ်းသိမ်းတိုက်</comment>
     <comment xml:lang="nl">Kopete emoticon-archief</comment>
     <comment xml:lang="nn">Fjesingtema for Kopete</comment>
+    <comment xml:lang="pa">ਕੋਪਟੀ ਈਮੋਸ਼ਨ ਅਕਾਇਵ</comment>
     <comment xml:lang="pl">Archiwum emotikon Kopete</comment>
     <comment xml:lang="pt">Pacote de ícones emotivos do Kopete</comment>
     <comment xml:lang="pt_BR">Arquivo de emoticons do Kopete</comment>
@@ -2344,6 +2391,7 @@ Notes:
     <comment xml:lang="my">အိုင်စီကျူ အဆက်အသွယ်</comment>
     <comment xml:lang="nl">ICQ-contact</comment>
     <comment xml:lang="nn">ICQ-kontakt</comment>
+    <comment xml:lang="pa">ICQ ਸੰਪਰਕ</comment>
     <comment xml:lang="pl">Kontakt ICQ</comment>
     <comment xml:lang="pt">Contacto de ICQ</comment>
     <comment xml:lang="pt_BR">Contato do ICQ</comment>
@@ -2392,6 +2440,7 @@ Notes:
     <comment xml:lang="my">မိုက်ခရိုဆော့ဖ်လ် မီဒီယာ စီစဉ်ဖွဲ့စည်းမှုပုံစံ</comment>
     <comment xml:lang="nl">Microsoft mediaformaat</comment>
     <comment xml:lang="nn">Microsoft Media-format</comment>
+    <comment xml:lang="pa">Microsoft ਮੀਡਿਆ ਫਾਰਮੈਟ</comment>
     <comment xml:lang="pl">Microsoft Media Format</comment>
     <comment xml:lang="pt">Formato Multimédia da Microsoft</comment>
     <comment xml:lang="pt_BR">Formato de mídia da Microsoft</comment>
@@ -2444,6 +2493,7 @@ Notes:
     <comment xml:lang="my">လိပ် အာဒီအက်ဖ် မှတ်တမ်းစာအုပ်</comment>
     <comment xml:lang="nl">Turtle RDF-document</comment>
     <comment xml:lang="nn">Turtle RDF-dokument</comment>
+    <comment xml:lang="pa">Turtle RDF ਡੌਕੂਮੈਂਟ</comment>
     <comment xml:lang="pl">Dokument Turtle RDF</comment>
     <comment xml:lang="pt">Documento RDF do Turtle</comment>
     <comment xml:lang="pt_BR">Documento RDF do Turtle</comment>
@@ -2489,6 +2539,7 @@ Notes:
     <comment xml:lang="my">ဆော့ဖ်အင်းမိတ်ဂျ် ပီအိုင်စီ ပုံရိပ်</comment>
     <comment xml:lang="nl">Softimage PIC-image</comment>
     <comment xml:lang="nn">Softimage PIC-bilete</comment>
+    <comment xml:lang="pa">Softimage PIC ਚਿੱਤਰ</comment>
     <comment xml:lang="pl">Obraz Softimage PIC</comment>
     <comment xml:lang="pt">Imagem PIC da Softimage</comment>
     <comment xml:lang="pt_BR">Imagem PIC da Softimage</comment>
@@ -2537,6 +2588,7 @@ Notes:
     <comment xml:lang="my">ကေကွန်ဖစ်အိပ်စ်တီ ပြင်ဆင်ရေး ရွေးချယ်မှုများ</comment>
     <comment xml:lang="nl">Configuratie-opties van KConfigXT</comment>
     <comment xml:lang="nn">KConfigXT-oppsett</comment>
+    <comment xml:lang="pa">KConfigXT ਸੰਰਚਨਾ ਚੋਣਾਂ</comment>
     <comment xml:lang="pl">Ustawienia KConfigXT</comment>
     <comment xml:lang="pt">Opções de Configuração do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de configuração do KConfigXT</comment>
@@ -2732,6 +2784,7 @@ Notes:
     <comment xml:lang="my">ကေခရက်ရှ်စ် အစီရင်ခံစာ</comment>
     <comment xml:lang="nl">Rapport van KCrash</comment>
     <comment xml:lang="nn">KCrash-rapport</comment>
+    <comment xml:lang="pa">ਕੇ-ਕਰੈਸ਼ ਰਿਪੋਰਟ</comment>
     <comment xml:lang="pl">Zgłoszenie KCrash</comment>
     <comment xml:lang="pt">Relatório do KCrash</comment>
     <comment xml:lang="pt_BR">Relatório do KCrash</comment>
