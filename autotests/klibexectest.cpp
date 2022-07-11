@@ -5,6 +5,7 @@
 
 #include <QObject>
 #include <QTest>
+#include <QFileInfo>
 
 #include <KLibexec>
 
@@ -31,6 +32,9 @@ private Q_SLOTS:
         QFile fixture(m_fixturePath);
         QVERIFY(fixture.open(QFile::ReadWrite));
         fixture.setPermissions(QFile::ReadOwner | QFile::WriteOwner | QFile::ExeOwner);
+
+        m_fixtureDir = QFileInfo(m_fixtureDir).canonicalFilePath();
+        m_fixturePath = QFileInfo(m_fixtureDir).canonicalFilePath();
     }
 
     void testPath()
