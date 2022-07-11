@@ -25,8 +25,8 @@ class KLibexecTest : public QObject
 private Q_SLOTS:
     void initTestCase()
     {
-        m_fixtureDir = QDir::cleanPath(QCoreApplication::applicationDirPath() + QDir::separator() + m_relative);
-        m_fixturePath = QDir::cleanPath(m_fixtureDir + QDir::separator() + m_fixtureName);
+        m_fixtureDir = QDir(QCoreApplication::applicationDirPath() + QDir::separator() + m_relative).canonicalPath();
+        m_fixturePath = QDir(m_fixtureDir + QDir::separator() + m_fixtureName).canonicalPath();
         QVERIFY(QDir().mkpath(m_fixtureDir));
         QFile fixture(m_fixturePath);
         QVERIFY(fixture.open(QFile::ReadWrite));
