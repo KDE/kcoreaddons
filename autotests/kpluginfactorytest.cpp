@@ -41,7 +41,8 @@ private Q_SLOTS:
         delete obj2;
 
         // Try creating a part without keyword/args
-        QObject *partTest = factory->create<QObject>(new QWidget(), this);
+        QWidget parentWidget;
+        QObject *partTest = factory->create<QObject>(&parentWidget, this);
         QVERIFY(partTest);
         delete partTest;
 
@@ -66,6 +67,7 @@ private Q_SLOTS:
         auto plugin = factoryResult.plugin->create<QObject>();
         QVERIFY(plugin);
         QCOMPARE(plugin->metaObject()->className(), "PluginWithoutMetaData");
+        delete plugin;
     }
 
     void testResultingCMakeMacroPlugin()
@@ -84,6 +86,7 @@ private Q_SLOTS:
         QCOMPARE(result.plugin->metaObject()->className(), "JsonPlugin");
         QVERIFY(result.errorString.isEmpty());
         QCOMPARE(result.errorReason, KPluginFactory::NO_PLUGIN_ERROR);
+        delete result.plugin;
     }
 
     void testCreateUsingUtilityMethodsErrorHandling()
@@ -115,7 +118,9 @@ private Q_SLOTS:
         const auto plugins = KPluginMetaData::findPlugins(QStringLiteral("staticnamespace"));
         QCOMPARE(plugins.count(), 1);
 
-        QVERIFY(KPluginFactory::instantiatePlugin<QObject>(plugins.first()));
+        auto result = KPluginFactory::instantiatePlugin<QObject>(plugins.first());
+        QVERIFY(result);
+        delete result.plugin;
     }
 
     void testNonExistingPlugin()
