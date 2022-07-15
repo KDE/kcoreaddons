@@ -104,6 +104,7 @@ ecm_add_tests(
     knetworkmountsteststatic.cpp
     klibexectest.cpp
     kmemoryinfotest.cpp
+    kruntimeplatformtest.cpp
     ${autotests_OPTIONAL_SRCS}
     LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF5::CoreAddons autotests_static
 )

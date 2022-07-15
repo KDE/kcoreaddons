@@ -143,6 +143,7 @@ target_sources(KF5CoreAddons PRIVATE
     util/ksignalhandler.cpp
     util/ksandbox.cpp
     util/kmemoryinfo.cpp
+    util/kruntimeplatform.cpp
 )
 
 
@@ -322,6 +323,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         Kdelibs4ConfigMigrator
         KLibexec
         KSignalHandler
+        KRuntimePlatform
         KSandbox
         KMemoryInfo
     RELATIVE util
