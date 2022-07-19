@@ -28,7 +28,7 @@ class KJobPrivate;
  * \code
  * void SomeClass::methodWithAsynchronousJobCall()
  * {
- *   KJob* job = someoperation(some parameters);
+ *   KJob* job = someOperation(some, parameters);
  *   connect(job, &KJob::result,
  *           this, &SomeClass::handleResult);
  *   job->start();
@@ -52,7 +52,7 @@ class KJobPrivate;
  * \code
  * void SomeClass::methodWithSynchronousJobCall()
  * {
- *   KJob *job = someoperation( some parameters );
+ *   KJob *job = someOperation(some, parameters);
  *   if (!job->exec()) {
  *       // An error occurred
  *   } else {
