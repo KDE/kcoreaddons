@@ -316,9 +316,9 @@ KCOREADDONS_EXPORT QString expandMacros(const QString &str, const QHash<QChar, Q
  * QHash<QChar,QString> map;
  * map.insert('u', "/tmp/myfile.txt");
  * map.insert('n', "My File");
- * QString s = "kedit --caption %n %u";
+ * QString s = "kwrite --qwindowtitle %n %u";
  * s = KMacroExpander::expandMacrosShellQuote(s, map);
- * // s is now "kedit --caption 'My File' '/tmp/myfile.txt'";
+ * // s is now "kwrite --qwindowtitle 'My File' '/tmp/myfile.txt'";
  * system(QFile::encodeName(s));
  * \endcode
  */
@@ -370,9 +370,9 @@ KCOREADDONS_EXPORT QString expandMacros(const QString &str, const QHash<QString,
  * QHash<QString,QString> map;
  * map.insert("url", "/tmp/myfile.txt");
  * map.insert("name", "My File");
- * QString s = "kedit --caption %name %{url}";
+ * QString s = "kwrite --qwindowtitle %name %{url}";
  * s = KMacroExpander::expandMacrosShellQuote(s, map);
- * // s is now "kedit --caption 'My File' '/tmp/myfile.txt'";
+ * // s is now "kwrite --qwindowtitle 'My File' '/tmp/myfile.txt'";
  * system(QFile::encodeName(s));
  * \endcode
  */
