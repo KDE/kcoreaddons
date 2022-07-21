@@ -9,6 +9,8 @@
 
 #include <iostream>
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 97)
+
 class StaticMessageHandler
 {
 public:
@@ -88,3 +90,5 @@ void KMessage::message(KMessage::MessageType messageType, const QString &text, c
         internalMessageFallback(messageType, text, title);
     }
 }
+
+#endif
