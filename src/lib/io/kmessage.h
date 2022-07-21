@@ -67,13 +67,13 @@ enum MessageType {
 
 /**
  * @brief Display a long message of a certain type.
- * A long message span on multiple lines and can have a caption.
+ * A long message span on multiple lines and can have a title.
  *
  * @param messageType Currrent type of message. See MessageType enum.
  * @param text Long message to be displayed.
- * @param caption Caption to be used. This is optional.
+ * @param title Title to be used. This is optional.
  */
-KCOREADDONS_EXPORT void message(KMessage::MessageType messageType, const QString &text, const QString &caption = QString());
+KCOREADDONS_EXPORT void message(KMessage::MessageType messageType, const QString &text, const QString &title = QString());
 
 /**
  * @brief Set the current KMessageHandler
@@ -106,13 +106,13 @@ public:
     } // KF6 TODO: de-inline (-Wweak-vtables)
     /**
      * @brief Display a long message of a certain type.
-     * A long message span on multiple lines and can have a caption.
+     * A long message span on multiple lines and can have a title.
      *
      * @param type Currrent type of message. See MessageType enum.
      * @param text Long message to be displayed.
-     * @param caption Caption to be used. This is optional.
+     * @param title Title to be used. This is optional.
      */
-    virtual void message(KMessage::MessageType type, const QString &text, const QString &caption) = 0;
+    virtual void message(KMessage::MessageType type, const QString &text, const QString &title) = 0;
 };
 
 #endif
