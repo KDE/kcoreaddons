@@ -500,7 +500,7 @@ Notes:
     <comment xml:lang="tr">plasmoid</comment>
     <comment xml:lang="uk">плазмоїд</comment>
     <comment xml:lang="vi">plasmoid</comment>
-    <comment xml:lang="zh_CN">Plasma 小部件</comment>
+    <comment xml:lang="zh_CN">Plasma 小程序</comment>
     <glob pattern="*.plasmoid"/>
   </mime-type>
   <mime-type type="application/x-superkaramba">
