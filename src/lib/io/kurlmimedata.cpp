@@ -234,6 +234,15 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
     if (!isDocumentsPortalAvailable() || !isKIOFuseAvailable()) {
         return false;
     }
+    QList<QUrl> urls = mimeData->urls();
+
+    // XDG Document Portal doesn't support directories and silently drops them.
+    bool hasDirs = std::any_of(urls.begin(), urls.end(), [](const QUrl url) {
+        return url.isLocalFile() && QFileInfo(url.toLocalFile()).isDir();
+    });
+    if (hasDirs) {
+        return false;
+    }
 
     auto iface =
         new OrgFreedesktopPortalFileTransferInterface(portalServiceName(), QStringLiteral("/org/freedesktop/portal/documents"), QDBusConnection::sessionBus());
@@ -244,7 +253,7 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
     const QString transferId = iface->StartTransfer({{QStringLiteral("autostop"), QVariant::fromValue(false)}});
     mimeData->setData(QStringLiteral("application/vnd.portal.filetransfer"), QFile::encodeName(transferId));
 
-    auto optionalPaths = fuseRedirect(mimeData->urls());
+    auto optionalPaths = fuseRedirect(urls);
     if (!optionalPaths.has_value()) {
         qCWarning(KCOREADDONS_DEBUG) << "Failed to mount with fuse!";
         return false;
