@@ -116,7 +116,7 @@ void KNetworkMounts::addPath(const QString &path, KNetworkMountsType type)
 }
 
 typedef QHash<QString /*symlink*/, QString /*canonical path*/> symlinkCanonicalPathHash;
-Q_GLOBAL_STATIC(symlinkCanonicalPathHash, s_canonicalLinkSpacePaths);
+Q_GLOBAL_STATIC(symlinkCanonicalPathHash, s_canonicalLinkSpacePaths)
 
 QString KNetworkMounts::canonicalSymlinkPath(const QString &path)
 {
