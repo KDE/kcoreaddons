@@ -25,7 +25,7 @@ struct ServiceTypeDefinitions {
      * @return @p value converted to the correct JSON type.
      * If there is no custom property definition for @p key this will simply return the string value
      */
-    QJsonValue parseValue(const QByteArray &key, const QString &value) const;
+    QJsonValue parseValue(const QByteArray &aKey, const QString &value) const;
 
     /**
      * Parses the service file in @p path and extracts its definitions

@@ -413,8 +413,16 @@ bool ServiceTypeDefinitions::addFile(const QString &path, const QStringList &ser
     return true;
 }
 
-QJsonValue ServiceTypeDefinitions::parseValue(const QByteArray &key, const QString &value) const
+QJsonValue ServiceTypeDefinitions::parseValue(const QByteArray &aKey, const QString &value) const
 {
+    QByteArray key = aKey;
+    // Remove translation markers "X-KDE-Keywords[en_GB]"
+    const int startIdx = key.indexOf('[');
+    if (startIdx != -1) {
+        Q_ASSERT(key.endsWith(']'));
+        key.truncate(startIdx);
+    }
+
     auto findKey = [&key](const ServiceTypeDefinition &def) {
         return std::find_if(def.m_propertyDefs.cbegin(), def.m_propertyDefs.cend(), [&key](const CustomPropertyDefinition &propertyDef) {
             return propertyDef.key == key;
