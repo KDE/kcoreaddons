@@ -1,4 +1,5 @@
 remove_definitions(-DQT_NO_CAST_FROM_ASCII)
+set(KCOREADDONS_INTERNAL_SKIP_PLUGIN_INSTALLATION ON)
 
 include(ECMAddTests)
 include(ConfigureChecks.cmake) #configure checks for QFileSystemWatcher
