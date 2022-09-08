@@ -28,6 +28,32 @@ enum Type {
     Other, ///< Ext3, Ext4, ReiserFs, and so on. "Normal" local filesystems.
     Ntfs, ///< NTFS filesystem @since 5.85
     Exfat, ///< ExFat filesystem @since 5.86
+    /**
+     * FUSE (Filesystem in USErspace), this is used for a variety of mounts,
+     * e.g. a network mount of a remote filesystem.
+     *
+     * @since 5.99
+     */
+    FuseBlk,
+    /**
+     * FUSE (Filesystem in USErspace) on a block device, e.g. FUSE used for a
+     * partition on a local disk.
+     *
+     * A block device in this context means a filesystem managed by the sd driver
+     * (driver for SCSI disk drives in the Linux kernel), so the device node is
+     * e.g. /dev/sde1.
+     *
+     * This is the case for NTFS partitions mounted with UDisks2 (which is the
+     * default backend used on most Linux distributions).
+     *
+     * The difference between this enumerator and FuseBlk is that the latter is
+     * usually considered a network (i.e. slow) filesystem, whereas FuseBlk_BlockDevice
+     * is typically a regualr/local filesystem. This makes a difference in
+     * how KIO handles the filesystem.
+     *
+     * @since 5.99
+     */
+    FuseBlk_BlockDevice,
 };
 
 /**

@@ -60,6 +60,8 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 
 #ifdef Q_OS_LINUX
 #include <linux/magic.h> // A lot of the filesystem superblock MAGIC numbers
+#include <sys/stat.h>
+#include <sys/sysmacros.h> // major(dev_t)
 #endif
 
 // From /usr/src/linux-5.13.2-1-vanilla/fs/ntfs/ntfs.h
@@ -108,6 +110,21 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #define RAMFS_MAGIC 0x858458F6
 #endif
 #endif
+static KFileSystemType::Type fuseBlkType(const QByteArray &path)
+{
+    // dev_t major is 8 for devices using the sd driver,
+    // https://man7.org/linux/man-pages/man4/sd.4.html
+    constexpr int sd_dev_major = 8;
+
+    using namespace KFileSystemType;
+
+    struct stat buf;
+    if (stat(path.constData(), &buf) == 0 && major(buf.st_dev) == sd_dev_major) {
+        return FuseBlk_BlockDevice;
+    }
+
+    return FuseBlk;
+}
 
 // Reverse-engineering without C++ code:
 // strace stat -f /mnt 2>&1|grep statfs|grep mnt, and look for f_type
@@ -116,6 +133,7 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 
 static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
+    using namespace KFileSystemType;
     struct statfs buf;
     if (statfs(path.constData(), &buf) != 0) {
         return KFileSystemType::Unknown;
@@ -125,8 +143,9 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
     case NFS_SUPER_MAGIC:
     case AUTOFS_SUPER_MAGIC:
     case AUTOFSNG_SUPER_MAGIC:
-    case FUSE_SUPER_MAGIC: // TODO could be anything. Need to use statfs() to find out more.
         return KFileSystemType::Nfs;
+    case FUSE_SUPER_MAGIC: // Could be anything
+        return fuseBlkType(path);
     case SMB_SUPER_MAGIC:
     case SMB2_MAGIC_NUMBER:
     case CIFS_MAGIC_NUMBER:
@@ -196,6 +215,10 @@ QString KFileSystemType::fileSystemName(KFileSystemType::Type type)
         return QCoreApplication::translate("KFileSystemType", "NTFS");
     case KFileSystemType::Exfat:
         return QCoreApplication::translate("KFileSystemType", "ExFAT");
+    case FuseBlk:
+        return QCoreApplication::translate("KFileSystemType", "FuseBlk");
+    case FuseBlk_BlockDevice:
+        return QCoreApplication::translate("KFileSystemType", "FuseBlk_BlockDevice");
     case KFileSystemType::Unknown:
         return QCoreApplication::translate("KFileSystemType", "Unknown");
     }
