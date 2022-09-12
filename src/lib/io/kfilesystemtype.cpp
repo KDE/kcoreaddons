@@ -12,33 +12,45 @@
 #include <QCoreApplication>
 #include <QFile>
 
+#include <array>
+
+struct FsInfo {
+    KFileSystemType::Type type = KFileSystemType::Unknown;
+    const char *name = nullptr;
+};
+
+// Used in fileSystemName() to return translated type names
+static const std::array<FsInfo, 18> s_fsMap = {{
+    {KFileSystemType::Nfs, "nfs"},
+    {KFileSystemType::Smb, "smb"},
+    {KFileSystemType::Fat, "fat"},
+    {KFileSystemType::Ramfs, "ramfs"},
+    {KFileSystemType::Other, "other"},
+    {KFileSystemType::Ntfs, "ntfs"},
+    {KFileSystemType::Exfat, "exfat"},
+    {KFileSystemType::Unknown, "unknown"},
+    {KFileSystemType::Nfs, "autofs"},
+    {KFileSystemType::Nfs, "cachefs"},
+    {KFileSystemType::Nfs, "fuse.sshfs"},
+    {KFileSystemType::Nfs, "xtreemfs@"}, // #178678
+    {KFileSystemType::Smb, "smbfs"},
+    {KFileSystemType::Smb, "cifs"},
+    {KFileSystemType::Fat, "vfat"},
+    {KFileSystemType::Fat, "msdos"},
+}};
+
 #ifndef Q_OS_WIN
-inline KFileSystemType::Type kde_typeFromName(const char *name)
+inline KFileSystemType::Type kde_typeFromName(const QLatin1String name)
 {
-    /* clang-format off */
-    if (qstrncmp(name, "nfs", 3) == 0
-        || qstrncmp(name, "autofs", 6) == 0
-        || qstrncmp(name, "cachefs", 7) == 0
-        || qstrncmp(name, "fuse.sshfs", 10) == 0
-        || qstrncmp(name, "xtreemfs@", 9) == 0) { // #178678
+    auto it = std::find_if(s_fsMap.cbegin(), s_fsMap.cend(), [name](const auto &fsInfo) {
+        return QLatin1String(fsInfo.name) == name;
+    });
+    return it != s_fsMap.cend() ? it->type : KFileSystemType::Other;
+}
 
-        return KFileSystemType::Nfs;
-    }
-    if (qstrncmp(name, "fat", 3) == 0
-        || qstrncmp(name, "vfat", 4) == 0
-        || qstrncmp(name, "msdos", 5) == 0) {
-        return KFileSystemType::Fat;
-    }
-    if (qstrncmp(name, "cifs", 4) == 0
-        || qstrncmp(name, "smbfs", 5) == 0) {
-        return KFileSystemType::Smb;
-    }
-    if (qstrncmp(name, "ramfs", 5) == 0) {
-        return KFileSystemType::Ramfs;
-    }
-    /* clang-format on */
-
-    return KFileSystemType::Other;
+inline KFileSystemType::Type kde_typeFromName(const char *c)
+{
+    return kde_typeFromName(QLatin1String(c));
 }
 
 #if defined(Q_OS_BSD4) && !defined(Q_OS_NETBSD)
