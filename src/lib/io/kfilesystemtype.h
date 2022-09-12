@@ -28,6 +28,13 @@ enum Type {
     Other, ///< Ext3, Ext4, ReiserFs, and so on. "Normal" local filesystems.
     Ntfs, ///< NTFS filesystem @since 5.85
     Exfat, ///< ExFat filesystem @since 5.86
+    /**
+     * FUSE (Filesystem in USErspace), this is used for a variety of underlying
+     * filesystems.
+     *
+     * @since 5.100
+     */
+    Fuse,
 };
 
 /**

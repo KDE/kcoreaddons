@@ -91,8 +91,14 @@ if(NOT WIN32) # never relevant there
     add_feature_info(XDGPortalDragAndDrop HAVE_QTDBUS "Drag and Drop support via xdg-desktop-portal requies QtDBus")
 endif()
 
-# Generate io/config-kdirwatch.h
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+    find_package(UDev) # Used by KFilesystemType
+    set(HAVE_UDEV ${UDev_FOUND})
+endif()
+
 configure_file(src/lib/io/config-kdirwatch.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/lib/io/config-kdirwatch.h)
+
+configure_file(src/lib/io/config-kfilesystemtype.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/src/lib/io/config-kfilesystemtype.h)
 
 include(ECMPoQmTools)
 

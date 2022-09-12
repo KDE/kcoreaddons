@@ -105,6 +105,10 @@ if(HAVE_QTDBUS)
     target_link_libraries(KF5CoreAddons PRIVATE Qt${QT_MAJOR_VERSION}::DBus)
 endif()
 
+if (TARGET UDev::UDev)
+    target_link_libraries(KF5CoreAddons PRIVATE UDev::UDev)
+endif()
+
 target_sources(KF5CoreAddons PRIVATE
     kaboutdata.cpp
     kcoreaddons.cpp
