@@ -19,8 +19,8 @@ class KSignalHandlerPrivate;
  *
  * \code
  * {
- *   KSignalHandler::self()->addSignal(SIGTERM);
- *   connect(*   KSignalHandler::self(), &KSignalHandler::signalReceived,
+ *   KSignalHandler::self()->watchSignal(SIGTERM);
+ *   connect(KSignalHandler::self(), &KSignalHandler::signalReceived,
  *           this, &SomeClass::handleSignal);
  *   job->start();
  * }
