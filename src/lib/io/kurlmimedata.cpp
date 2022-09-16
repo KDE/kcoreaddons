@@ -118,6 +118,12 @@ static QString portalFormat()
 
 static QList<QUrl> extractPortalUriList(const QMimeData *mimeData)
 {
+    Q_ASSERT(QCoreApplication::instance()->thread() == QThread::currentThread());
+    static QHash<const QMimeData*, QList<QUrl>> cache;
+    if (const auto uris = cache.constFind(mimeData); uris != cache.constEnd()) {
+        qCDebug(KCOREADDONS_DEBUG) << "Urls from portal cache" << *uris;
+        return *uris;
+    }
     const auto transferId = mimeData->data(portalFormat());
     qCDebug(KCOREADDONS_DEBUG) << "Picking up portal urls from transfer" << transferId;
     auto iface =
@@ -129,6 +135,10 @@ static QList<QUrl> extractPortalUriList(const QMimeData *mimeData)
         uris.append(QUrl::fromLocalFile(path));
     }
     qCDebug(KCOREADDONS_DEBUG) << "Urls from portal" << uris;
+    cache.insert(mimeData, uris);
+    QObject::connect(mimeData, &QObject::destroyed, [mimeData] {
+        cache.remove(mimeData);
+    });
     return uris;
 }
 #endif
