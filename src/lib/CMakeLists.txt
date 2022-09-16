@@ -330,7 +330,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
 
-install(TARGETS KF5CoreAddons EXPORT KF5CoreAddonsTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5CoreAddons EXPORT KF5CoreAddonsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     ${KCoreAddons_HEADERS}

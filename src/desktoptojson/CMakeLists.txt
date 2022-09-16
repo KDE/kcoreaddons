@@ -34,4 +34,4 @@ set_target_properties(desktoptojson PROPERTIES
         TOOL_VERSION "${KF_VERSION}"
         EXPORT_PROPERTIES TOOL_VERSION)
 
-install(TARGETS desktoptojson EXPORT KF5CoreAddonsToolingTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS desktoptojson EXPORT KF5CoreAddonsToolingTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
