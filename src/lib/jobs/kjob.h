@@ -28,9 +28,8 @@ class KJobPrivate;
  * \code
  * void SomeClass::methodWithAsynchronousJobCall()
  * {
- *   KJob* job = someoperation(some parameters);
- *   connect(job, &KJob::result,
- *           this, &SomeClass::handleResult);
+ *   KJob *job = someoperation(some parameters);
+ *   connect(job, &KJob::result, this, &SomeClass::handleResult);
  *   job->start();
  * }
  * \endcode
@@ -61,17 +60,15 @@ class KJobPrivate;
  * }
  * \endcode
  *
- * Subclasses must implement start(), which should trigger
- * the execution of the job (although the work should be
- * done asynchronously). errorString() should also be
- * reimplemented by any subclasses that introduce new
- * error codes.
+ * Subclasses must implement start(), which should trigger the execution of
+ * the job (although the work should be done asynchronously). errorString()
+ * should also be reimplemented by any subclasses that introduce new error
+ * codes.
  *
- * @note KJob and its subclasses are meant to be used
- * in a fire-and-forget way. Jobs will delete themselves
- * when they finish using deleteLater() (although this
- * behaviour can be changed), so a job instance will
- * disappear after the next event loop run.
+ * @note KJob and its subclasses are meant to be used in a fire-and-forget way.
+ * Jobs will delete themselves when they finish using deleteLater() (although
+ * this behaviour can be changed), so a job instance will disappear after the
+ * next event loop run.
  */
 class KCOREADDONS_EXPORT KJob : public QObject
 {
@@ -697,7 +694,8 @@ protected:
      * @see finished()
      * @since 5.75
      */
-    bool isFinished() const; // KF6 TODO: make public. Useful at least for unittests that run multiple jobs in parallel.
+    // KF6 TODO: make public. Useful at least for unittests that run multiple jobs in parallel.
+    bool isFinished() const;
 
     /**
      * Sets the error code.
