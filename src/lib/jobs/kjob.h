@@ -345,12 +345,19 @@ public:
     unsigned long percent() const;
 
     /**
-     * set the auto-delete property of the job. If @p autodelete is
-     * set to false the job will not delete itself once it is finished.
+     * Sets the auto-delete property of the job. If @p autodelete is
+     * set to @c false the job will not delete itself once it is finished.
      *
-     * The default for any KJob is to automatically delete itself.
+     * The default for any KJob is to automatically delete itself, which
+     * implies that the job was created on the heap (using <tt>new</tt>).
+     * If the job is created on the stack (which isn't the typical use-case
+     * for a job) then you must set auto-delete to @c false, otherwise you
+     * could get a crash when the job finishes and tries to delete itself.
      *
-     * @param autodelete set to false to disable automatic deletion
+     * @note If you set auto-delete to @c false then you need to kill the
+     * job manually, ideally by calling kill().
+     *
+     * @param autodelete set to @c false to disable automatic deletion
      * of the job.
      */
     void setAutoDelete(bool autodelete);
