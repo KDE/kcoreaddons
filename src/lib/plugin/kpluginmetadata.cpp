@@ -490,6 +490,11 @@ QString KPluginMetaData::website() const
     return rootObject()[QStringLiteral("Website")].toString();
 }
 
+QString KPluginMetaData::bugReportUrl() const
+{
+    return rootObject()[QStringLiteral("BugReportUrl")].toString();
+}
+
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
 QStringList KPluginMetaData::dependencies() const
 {

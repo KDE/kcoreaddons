@@ -52,6 +52,7 @@ class QStaticPlugin;
  * Id                 | pluginId()           | string
  * Version            | version()            | string
  * Website            | website()            | string
+ * BugReportUrl       | bugReportUrl()       | string
  * EnabledByDefault   | isEnabledByDefault() | bool
  * ServiceTypes       | serviceTypes()       | string array
  * MimeTypes          | mimeTypes()          | string array
@@ -107,6 +108,7 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(QString pluginId READ pluginId CONSTANT)
     Q_PROPERTY(QString version READ version CONSTANT)
     Q_PROPERTY(QString website READ website CONSTANT)
+    Q_PROPERTY(QString bugReportUrl READ bugReportUrl CONSTANT)
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 79)
     Q_PROPERTY(QStringList dependencies READ dependencies CONSTANT)
 #endif
@@ -421,6 +423,12 @@ public:
      * @return the website of the plugin.
      */
     QString website() const;
+
+    /**
+     * @return the website where people can report a bug found in this plugin
+     * @since 5.99
+     */
+    QString bugReportUrl() const;
 
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 79)
     /**
