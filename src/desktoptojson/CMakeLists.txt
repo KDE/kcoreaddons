@@ -16,6 +16,7 @@ ecm_qt_declare_logging_category(desktoptojson
 target_sources(desktoptojson PRIVATE
     main.cpp
     desktoptojson.cpp
+    desktoptojson.h
     ../lib/plugin/desktopfileparser.cpp
 )
 if(NOT CMAKE_TOOLCHAIN_FILE)
