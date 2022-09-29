@@ -7,7 +7,6 @@
 */
 
 #include "kfilesystemtype.h"
-#include "kcoreaddons_debug.h"
 #include "knetworkmounts.h"
 
 #include <QCoreApplication>

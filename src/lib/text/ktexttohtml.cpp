@@ -17,8 +17,6 @@
 
 #include <limits.h>
 
-#include "kcoreaddons_debug.h"
-
 static KTextToHTMLEmoticonsInterface *s_emoticonsInterface = nullptr;
 
 static void loadEmoticonsPlugin()
