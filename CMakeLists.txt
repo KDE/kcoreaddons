@@ -108,7 +108,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KCOREADDONS
                         SOVERSION 5)
 
 
-ecm_install_po_files_as_qm(po)
+ecm_install_po_files_as_qm(poqm)
 
 kde_enable_exceptions()
 
