@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-05-29 11:20+0200\n"
+"PO-Revision-Date: 2022-10-02 16:47+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -16,7 +16,7 @@ msgstr ""
 #: lib/io/kfilesystemtype.cpp:236
 msgctxt "KFileSystemType|"
 msgid "NFS"
-msgstr "NFS"
+msgstr "NFS "
 
 #: lib/io/kfilesystemtype.cpp:238
 msgctxt "KFileSystemType|"
@@ -51,7 +51,7 @@ msgstr "ExFAT"
 #: lib/io/kfilesystemtype.cpp:250
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "FUSE"
 
 #: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"

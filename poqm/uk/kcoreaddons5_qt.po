@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons5_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-05-27 09:22+0300\n"
+"PO-Revision-Date: 2022-10-02 09:25+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -63,7 +63,7 @@ msgstr "ExFAT"
 #: lib/io/kfilesystemtype.cpp:250
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "FUSE"
 
 #: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
