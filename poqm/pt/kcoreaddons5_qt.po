@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-06-03 18:01+0100\n"
+"PO-Revision-Date: 2022-10-04 10:25+0100\n"
 "Last-Translator: José Nuno Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -106,7 +106,7 @@ msgstr ""
 "X-POFile-SpellExtra: Reconstrói ii Del iii querê KPluginFactory Ki Ei Zi\n"
 "X-POFile-IgnoreConsistency: Update\n"
 "X-Qt-Contexts: true\n"
-"X-POFile-SpellExtra: Gi KListOpenFilesJob lsof FAT RAMFS NTFS ExFAT\n"
+"X-POFile-SpellExtra: Gi KListOpenFilesJob lsof FAT RAMFS NTFS ExFAT FUSE\n"
 
 #: lib/io/kfilesystemtype.cpp:236
 msgctxt "KFileSystemType|"
@@ -146,7 +146,7 @@ msgstr "ExFAT"
 #: lib/io/kfilesystemtype.cpp:250
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "FUSE"
 
 #: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
