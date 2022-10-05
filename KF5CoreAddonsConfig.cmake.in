@@ -19,6 +19,10 @@ if(NOT @BUILD_SHARED_LIBS@)
     if(@HAVE_QTDBUS@)
         find_dependency(Qt@QT_MAJOR_VERSION@DBus @REQUIRED_QT_VERSION@)
     endif()
+
+    if (@UDev_FOUND@)
+        find_dependency(UDev)
+    endif()
 endif()
 
 @PACKAGE_SETUP_AUTOMOC_VARIABLES@
