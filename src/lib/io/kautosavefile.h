@@ -53,10 +53,10 @@ class KAutoSaveFilePrivate;
  *       // check whether autosave files exist:
  *       const QList<KAutoSaveFile *> staleFiles = KAutoSaveFile::staleFiles(url);
  *       if (!staleFiles.isEmpty()) {
- *           if (KMessageBox::questionYesNo(parent,
- *                                          "Auto-saved files exist. Do you want to recover them now?",
- *                                          "File Recovery",
- *                                          "Recover", "Don't recover") == KMessage::Yes) {
+ *           if (KMessageBox::questionTwoActions(parent,
+ *                                               "Auto-saved files exist. Do you want to recover them now?",
+ *                                               "File Recovery",
+ *                                               KGuiItem("Recover"), KGuiItem("Do Not recover")) == KMessageBox::PrimaryAction) {
  *               recoverFiles(staleFiles);
  *               return;
  *           } else {
