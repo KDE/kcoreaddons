@@ -99,6 +99,17 @@ public:
         }
         return {fileName, metaDataObject};
     }
+    static void getPluginLoaderForPath(QPluginLoader &loader, const QString &path)
+    {
+        if (path.startsWith(QLatin1Char('/'))) { // Absolute path, use as it is
+            loader.setFileName(path);
+        } else {
+            loader.setFileName(QCoreApplication::applicationDirPath() + QLatin1Char('/') + path);
+            if (loader.fileName().isEmpty()) {
+                loader.setFileName(path);
+            }
+        }
+    }
 };
 
 KPluginMetaData::KPluginMetaData()
@@ -147,7 +158,8 @@ KPluginMetaData::KPluginMetaData(const QString &file, KPluginMetaDataOption opti
     } else {
 #endif
         d->m_option = option;
-        QPluginLoader loader(file);
+        QPluginLoader loader;
+        KPluginMetaDataPrivate::getPluginLoaderForPath(loader, file);
         d->m_requestedFileName = file;
         m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
         const auto qtMetaData = loader.metaData();
@@ -201,7 +213,8 @@ KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaDa
 KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId)
 
 {
-    QPluginLoader loader(directory + QLatin1Char('/') + pluginId);
+    QPluginLoader loader;
+    KPluginMetaDataPrivate::getPluginLoaderForPath(loader, directory + QLatin1Char('/') + pluginId);
     if (loader.load()) {
         // Load the JSON metadata and make sure the pluginId matches
         KPluginMetaData metaData(loader.metaData().value(QLatin1String("MetaData")).toObject(), loader.fileName());

@@ -672,6 +672,43 @@ private Q_SLOTS:
         QVERIFY(data.isValid());
         QCOMPARE(data.pluginId(), QStringLiteral("org.kde.test"));
     }
+
+    void testFindingPluginInAppDirFirst()
+    {
+        const QString originalPluginPath = QPluginLoader(QStringLiteral("namespace/jsonplugin_cmake_macro")).fileName();
+        const QString pluginFileName = QFileInfo(originalPluginPath).fileName();
+        const QString pluginNamespace = QStringLiteral("somepluginnamespace");
+        const QString pluginAppDir = QCoreApplication::applicationDirPath() + QLatin1Char('/') + pluginNamespace;
+        QDir(pluginAppDir).mkpath(QStringLiteral("."));
+        const QString pluginAppPath = pluginAppDir + QLatin1Char('/') + pluginFileName;
+        QFile::remove(pluginAppPath);
+
+        QVERIFY(QFile::copy(originalPluginPath, pluginAppPath));
+
+        QTemporaryDir temp;
+        QVERIFY(temp.isValid());
+        QDir dir(temp.path());
+        QVERIFY(dir.mkdir(pluginNamespace));
+        QVERIFY(dir.cd(pluginNamespace));
+
+        const QString pluginInNamespacePath = dir.absoluteFilePath(pluginFileName);
+        QVERIFY(QFile::copy(originalPluginPath, pluginInNamespacePath));
+
+        LibraryPathRestorer restorer(QCoreApplication::libraryPaths());
+        QCoreApplication::setLibraryPaths(QStringList() << temp.path());
+
+        // Our plugin in the applicationDirPath should come first
+        const QString relativePathWithNamespace = QStringLiteral("somepluginnamespace/jsonplugin_cmake_macro");
+        KPluginMetaData data(relativePathWithNamespace);
+        QVERIFY(data.isValid());
+        QCOMPARE(data.fileName(), pluginAppPath);
+
+        // The other one must be valid
+        QVERIFY(KPluginMetaData(pluginInNamespacePath).isValid());
+        // And after removing the plugin in the applicationDirPath, it should be found
+        QVERIFY(QFile::remove(pluginAppPath));
+        QCOMPARE(KPluginMetaData(relativePathWithNamespace).fileName(), pluginInNamespacePath);
+    }
 };
 
 QTEST_MAIN(KPluginMetaDataTest)
