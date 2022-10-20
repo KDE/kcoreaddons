@@ -174,6 +174,7 @@ Notes:
   <mime-type type="application/x-java-applet">
     <comment>Java applet</comment>
     <comment xml:lang="ar">بريمج جافا</comment>
+    <comment xml:lang="ast">Applet de Java</comment>
     <comment xml:lang="az">Java applet</comment>
     <comment xml:lang="be">Аплет Java</comment>
     <comment xml:lang="be@latin">Apliet Java</comment>
@@ -269,6 +270,7 @@ Notes:
   <mime-type type="application/x-kcsrc">
     <comment>KDE color scheme</comment>
     <comment xml:lang="ar">مخطط ألوان كدي</comment>
+    <comment xml:lang="ast">Esquema de colores de KDE</comment>
     <comment xml:lang="az">KDE rəng sxemi</comment>
     <comment xml:lang="be">Колеравая схема KDE</comment>
     <comment xml:lang="be@latin">Kolieravaja schiema KDE</comment>
@@ -321,6 +323,7 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>KNewStuff package</comment>
     <comment xml:lang="ar">حزمة KNewStuff</comment>
+    <comment xml:lang="ast">Paquete de KNewStuff</comment>
     <comment xml:lang="az">KNewStuff paketi</comment>
     <comment xml:lang="be">Пакунак KNewStuff</comment>
     <comment xml:lang="be@latin">Pakunak KNewStuff</comment>
@@ -370,6 +373,7 @@ Notes:
   <mime-type type="application/x-kwallet"> <!-- fdo #6326 rejected, will stay KDE-specific -->
     <comment>KWallet wallet</comment>
     <comment xml:lang="ar">حافظة KWallet</comment>
+    <comment xml:lang="ast">Cartera de KWallet</comment>
     <comment xml:lang="az">KWallet cüzdanı</comment>
     <comment xml:lang="be">Кашалёк KWallet</comment>
     <comment xml:lang="be@latin">Kašaliok KWallet</comment>
@@ -421,6 +425,7 @@ Notes:
   <mime-type type="application/x-kudesigner">
     <comment>Kugar report template</comment>
     <comment xml:lang="ar">قالب تقرير Kugar</comment>
+    <comment xml:lang="ast">Plantía d'informes de Kugar</comment>
     <comment xml:lang="az">Kugar hesabat nümunəsi</comment>
     <comment xml:lang="be">Шаблон справаздачы Kugar</comment>
     <comment xml:lang="be@latin">Šablon spravazdačy Kugar</comment>
@@ -520,6 +525,7 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>SuperKaramba theme</comment>
     <comment xml:lang="ar">سمة SuperKaramba</comment>
+    <comment xml:lang="ast">Estilu de Superkaramba</comment>
     <comment xml:lang="az">SuperKaramba mövzusu</comment>
     <comment xml:lang="be">Тэма SuperKaramba</comment>
     <comment xml:lang="be@latin">Tema SuperKaramba</comment>
@@ -568,6 +574,7 @@ Notes:
   <mime-type type="application/x-vnd.kde.plan">
     <comment>Calligra Plan project management document</comment>
     <comment xml:lang="ar">وثيقة إدارة مشاريع Calligra Plan</comment>
+    <comment xml:lang="ast">Documentu de xestión de proyeutos de Calligra Plan</comment>
     <comment xml:lang="az">Calligra Plan layihəsi darəetmə sənədi</comment>
     <comment xml:lang="be">Дакумент Calligra Plan</comment>
     <comment xml:lang="be@latin">Dakumient Calligra Plan</comment>
@@ -664,6 +671,7 @@ Notes:
   <mime-type type="application/x-vnd.kde.kplato">
     <comment>KPlato project management document</comment>
     <comment xml:lang="ar">وثيقة إدارة مشاريع KPlato</comment>
+    <comment xml:lang="ast">Documentu de xestión de proyeutos de KPlato</comment>
     <comment xml:lang="az">KPlato layihəsi idarəetmə sənədi</comment>
     <comment xml:lang="be">Дакумент KPlato</comment>
     <comment xml:lang="be@latin">Dakumient KPlato</comment>
@@ -760,6 +768,7 @@ Notes:
   <mime-type type="application/x-vnd.kde.kugar.mixed">
     <comment>Kugar archive</comment>
     <comment xml:lang="ar">أرشيف Kugar</comment>
+    <comment xml:lang="ast">Archivu de Kugar</comment>
     <comment xml:lang="az">Kugar arxivi</comment>
     <comment xml:lang="be">Архіў Kugar</comment>
     <comment xml:lang="be@latin">Archiŭ Kugar</comment>
@@ -859,6 +868,7 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>W3C XML schema</comment>
     <comment xml:lang="ar">مخطط W3C XML</comment>
+    <comment xml:lang="ast">Esquema XML del W3C</comment>
     <comment xml:lang="az">W3C XML sxemi</comment>
     <comment xml:lang="be">Схема XML W3C</comment>
     <comment xml:lang="be@latin">Schiema XML W3C</comment>
@@ -1002,6 +1012,7 @@ Notes:
   <mime-type type="image/x-hdr"> <!-- TODO fdo report -->
     <comment>HDR image</comment>
     <comment xml:lang="ar">صورة HDR</comment>
+    <comment xml:lang="ast">Imaxe HDR</comment>
     <comment xml:lang="az">HDR şəkili</comment>
     <comment xml:lang="be">HDR-выява</comment>
     <comment xml:lang="be@latin">HDR-vyjava</comment>
@@ -1314,6 +1325,7 @@ Notes:
     <sub-class-of type="inode/directory"/>
     <comment>Windows server</comment>
     <comment xml:lang="ar">خادم ويندوز</comment>
+    <comment xml:lang="ast">Sirvidor de Windows</comment>
     <comment xml:lang="az">Windows serveri</comment>
     <comment xml:lang="be">Сервер Windows</comment>
     <comment xml:lang="be@latin">Siervier Windows</comment>
@@ -1363,6 +1375,7 @@ Notes:
     <sub-class-of type="inode/directory"/>
     <comment>Windows workgroup</comment>
     <comment xml:lang="ar">مجموعة عمل ويندوز</comment>
+    <comment xml:lang="ast">Grupu de trabayu de Windows</comment>
     <comment xml:lang="az">Windows iş qrupu</comment>
     <comment xml:lang="be">Працоўная група Windows</comment>
     <comment xml:lang="be@latin">Pracoŭnaja hrupa Windows</comment>
@@ -1462,6 +1475,7 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>KDE theme</comment>
     <comment xml:lang="ar">سمة كدي</comment>
+    <comment xml:lang="ast">Estilu de KDE</comment>
     <comment xml:lang="az">KDE mövzusu</comment>
     <comment xml:lang="be">Тэма KDE</comment>
     <comment xml:lang="be@latin">Tema KDE</comment>
@@ -1513,6 +1527,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <comment>Quanta project</comment>
     <comment xml:lang="ar">مشروع  Quanta</comment>
+    <comment xml:lang="ast">Proyeutu de Quanta</comment>
     <comment xml:lang="az">Quanta layihəsi</comment>
     <comment xml:lang="be">Праект Quanta</comment>
     <comment xml:lang="be@latin">Prajekt Quanta</comment>
@@ -1562,6 +1577,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <comment>Kommander file</comment>
     <comment xml:lang="ar">ملف Kommander</comment>
+    <comment xml:lang="ast">Ficheru de Kommander</comment>
     <comment xml:lang="az">Kommander faylı</comment>
     <comment xml:lang="be">Файл Kommander</comment>
     <comment xml:lang="be@latin">Fajl Kommander</comment>
@@ -1661,6 +1677,7 @@ Notes:
   <mime-type type="application/x-kolf">
     <comment>Kolf saved game</comment>
     <comment xml:lang="ar">لعبة Kolf محفوظة</comment>
+    <comment xml:lang="ast">Partida guardada de Kolf</comment>
     <comment xml:lang="az">Kolf saxlanılan oyunu</comment>
     <comment xml:lang="be">Захаваная гульня Kolf</comment>
     <comment xml:lang="be@latin">Zachavanaja huĺnia Kolf</comment>
@@ -1767,6 +1784,7 @@ Notes:
   <mime-type type="application/vnd.kde.okular-archive">
     <comment>Okular document archive</comment>
     <comment xml:lang="ar">أرشيف مستند أوكلار</comment>
+    <comment xml:lang="ast">Archivu de documentos d'Okular</comment>
     <comment xml:lang="az">Okular sənəd arxivi</comment>
     <comment xml:lang="be">Архіў дакументаў Okular</comment>
     <comment xml:lang="be@latin">Archiŭ dakumientaŭ Okular</comment>
@@ -1817,6 +1835,7 @@ Notes:
   <mime-type type="application/x-cabri">
     <comment>Cabri figure</comment>
     <comment xml:lang="ar">صورة Cabri</comment>
+    <comment xml:lang="ast">Figura de Cabri</comment>
     <comment xml:lang="az">Cabri fiquru</comment>
     <comment xml:lang="be">Фігура Cabri</comment>
     <comment xml:lang="be@latin">Fihura Cabri</comment>
@@ -1870,6 +1889,7 @@ Notes:
   <mime-type type="application/x-drgeo">
     <comment>Dr. Geo figure</comment>
     <comment xml:lang="ar">صورة Dr. Geo</comment>
+    <comment xml:lang="ast">Figura de Dr. Geo</comment>
     <comment xml:lang="az">Dr. Geo fiquru</comment>
     <comment xml:lang="be">Фігура Dr. Geo</comment>
     <comment xml:lang="be@latin">Fihura Dr. Geo</comment>
@@ -1922,6 +1942,7 @@ Notes:
   <mime-type type="application/x-kgeo">
     <comment>KGeo figure</comment>
     <comment xml:lang="ar">صورة KGeo</comment>
+    <comment xml:lang="ast">Figura de KGeo</comment>
     <comment xml:lang="az">KGeo fiquru</comment>
     <comment xml:lang="be">Фігура KGeo</comment>
     <comment xml:lang="be@latin">Fihura KGeo</comment>
@@ -1971,6 +1992,7 @@ Notes:
   <mime-type type="application/x-kig">
     <comment>Kig figure</comment>
     <comment xml:lang="ar">صورة Kig</comment>
+    <comment xml:lang="ast">Figura de Kig</comment>
     <comment xml:lang="az">Kig fiquru</comment>
     <comment xml:lang="be">Фігура Kig</comment>
     <comment xml:lang="be@latin">Fihura Kig</comment>
@@ -2021,6 +2043,7 @@ Notes:
   <mime-type type="application/x-kseg">
     <comment>KSeg document</comment>
     <comment xml:lang="ar">وثيقة KSeg</comment>
+    <comment xml:lang="ast">Documentu de KSeg</comment>
     <comment xml:lang="az">KSeg sənədi</comment>
     <comment xml:lang="be">Дакумент KSeg</comment>
     <comment xml:lang="be@latin">Dakumient KSeg</comment>
@@ -2119,6 +2142,7 @@ Notes:
   <mime-type type="application/x-kmplot">
     <comment>KmPlot file</comment>
     <comment xml:lang="ar">ملف KmPlot</comment>
+    <comment xml:lang="ast">Ficheru de KmPlot</comment>
     <comment xml:lang="az">KmPlot faylı</comment>
     <comment xml:lang="be">Файл KmPlot</comment>
     <comment xml:lang="be@latin">Fajl KmPlot</comment>
@@ -2168,6 +2192,7 @@ Notes:
   <mime-type type="application/x-kwordquiz">
     <comment>KWordQuiz vocabulary</comment>
     <comment xml:lang="ar">مفردات KWordQuiz</comment>
+    <comment xml:lang="ast">Vocabulariu de KWordQuiz</comment>
     <comment xml:lang="az">KWordQuiz lüğəti</comment>
     <comment xml:lang="be">Слоўнік KWordQuiz</comment>
     <comment xml:lang="be@latin">Sloŭnik KWordQuiz</comment>
@@ -2316,6 +2341,7 @@ Notes:
   <mime-type type="application/x-ms-shortcut">
     <comment>Windows link</comment>
     <comment xml:lang="ar">وصلة ويندوز</comment>
+    <comment xml:lang="ast">Enllaz de Windows</comment>
     <comment xml:lang="az">Windows yarlığı</comment>
     <comment xml:lang="be">Спасылка Windows</comment>
     <comment xml:lang="be@latin">Spasylka Windows</comment>
@@ -2368,6 +2394,7 @@ Notes:
     <sub-class-of type="application/xml"/>
     <comment>KGet download list</comment>
     <comment xml:lang="ar">قائمة تنزيل KGet</comment>
+    <comment xml:lang="ast">Llista de descargues de KGet</comment>
     <comment xml:lang="az">KGet yükləmə siyahısı</comment>
     <comment xml:lang="be">Спіс спампоўванняў KGet</comment>
     <comment xml:lang="be@latin">Spis spampoŭvanniaŭ KGet</comment>
@@ -2465,6 +2492,7 @@ Notes:
   <mime-type type="application/x-icq">
     <comment>ICQ contact</comment>
     <comment xml:lang="ar">جهة اتصال ICQ</comment>
+    <comment xml:lang="ast">Contautu d'ICQ</comment>
     <comment xml:lang="az">ICQ əlaqəsi</comment>
     <comment xml:lang="be">Кантакт ICQ</comment>
     <comment xml:lang="be@latin">Kantakt ICQ</comment>
@@ -2516,6 +2544,7 @@ Notes:
   <mime-type type="video/x-ms-wmp"> <!-- fdo #19671, rejected because "not a file type, only a plugin type" -->
     <comment>Microsoft Media Format</comment>
     <comment xml:lang="ar">تنسيق وسائط مايكروسوفت</comment>
+    <comment xml:lang="ast">Formatu multimedia de Microsoft</comment>
     <comment xml:lang="az">Microsoft Media Format</comment>
     <comment xml:lang="be">Фармат Microsoft Media</comment>
     <comment xml:lang="be@latin">Farmat Microsoft Media</comment>
@@ -2670,6 +2699,7 @@ Notes:
   <mime-type type="application/vnd.kde.kcfg">
     <comment>KConfigXT Configuration Options</comment>
     <comment xml:lang="ar">خيارات ضبط KConfigXT</comment>
+    <comment xml:lang="ast">Opciones de configuración de KConfigXT</comment>
     <comment xml:lang="az">KConfigXT konfiqurasiya seçimləri</comment>
     <comment xml:lang="be">Параметры KConfigXT</comment>
     <comment xml:lang="be@latin">Paramietry KConfigXT</comment>
@@ -2724,6 +2754,7 @@ Notes:
   <mime-type type="application/vnd.kde.kcfgc">
     <comment>KConfigXT Code Generation Options</comment>
     <comment xml:lang="ar">خيارات توليد رمز KConfigXT</comment>
+    <comment xml:lang="ast">Opciones pa la xeneración de códigu de KConfigXT</comment>
     <comment xml:lang="az">KConfigXT kod yaratma seçimləri</comment>
     <comment xml:lang="be">Параметры для стварэння кода KConfigXT</comment>
     <comment xml:lang="be@latin">Paramietry dlia stvarennia koda KConfigXT</comment>
@@ -2827,6 +2858,7 @@ Notes:
   <mime-type type="application/vnd.kde.knotificationrc">
     <comment>KNotification Declaration</comment>
     <comment xml:lang="ar">تعريف KNotification</comment>
+    <comment xml:lang="ast">Declaración de KNotification</comment>
     <comment xml:lang="az">KNotification Deklarasiyası</comment>
     <comment xml:lang="be">Дэкларацыя KNotification</comment>
     <comment xml:lang="be@latin">Deklaracyja KNotification</comment>
@@ -2874,6 +2906,7 @@ Notes:
   <mime-type type="text/vnd.kde.kcrash-report">
     <comment>KCrash Report</comment>
     <comment xml:lang="ar">تقرير KCrash</comment>
+    <comment xml:lang="ast">Informe de KCrash</comment>
     <comment xml:lang="az">KCrash Hesabatı</comment>
     <comment xml:lang="be">Справаздача KCrash</comment>
     <comment xml:lang="be@latin">Spravazdača KCrash</comment>
