@@ -222,6 +222,7 @@ Notes:
   <mime-type type="application/x-khtml-adaptor">
     <comment>KHTML Extension Adaptor</comment>
     <comment xml:lang="ar">مكيف الامتدادات KHTML</comment>
+    <comment xml:lang="ast">Adautador d'estensiones de KHTML</comment>
     <comment xml:lang="az">KHTML Genişləndirici Uzlaşdırıcısı</comment>
     <comment xml:lang="be">Адаптар пашырэння KHTM</comment>
     <comment xml:lang="be@latin">Adaptar pašyrennia KHTM</comment>
@@ -475,6 +476,7 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>plasmoid</comment>
     <comment xml:lang="ar">بلازمود</comment>
+    <comment xml:lang="ast">Plasmoide</comment>
     <comment xml:lang="az">plasmoid</comment>
     <comment xml:lang="be">плазмоід</comment>
     <comment xml:lang="be@latin">plazmoid</comment>
@@ -720,6 +722,7 @@ Notes:
   <mime-type type="application/x-vnd.kde.kplato.work">
     <comment>KPlato project management work package</comment>
     <comment xml:lang="ar">حزمة عمل إدارة مشاريع KPlato</comment>
+    <comment xml:lang="ast">Paquete de trabayu de la xestión de proyeutos de KPlato</comment>
     <comment xml:lang="az">KPlato idarəetmə sənədi iş paketi</comment>
     <comment xml:lang="be">Пакунак работ KPlato</comment>
     <comment xml:lang="be@latin">Pakunak rabot KPlato</comment>
@@ -818,6 +821,7 @@ Notes:
     <sub-class-of type="application/x-compressed-tar"/>
     <comment>web archive</comment>
     <comment xml:lang="ar">أرشيف ويب</comment>
+    <comment xml:lang="ast">Archivu web</comment>
     <comment xml:lang="az">veb arxiv</comment>
     <comment xml:lang="be">вэб-архіў</comment>
     <comment xml:lang="be@latin">veb-archiŭ</comment>
@@ -1173,6 +1177,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <comment>Kate file list loader plugin list</comment>
     <comment xml:lang="ar">قائمة ملحقات محملات قائمة ملفات لكيت</comment>
+    <comment xml:lang="ast">Llista de plugins del cargador de la llista de ficheros de Kate</comment>
     <comment xml:lang="az">Kate fayllar siyahısı yükləyici qoşması</comment>
     <comment xml:lang="be">Спіс убудоў загрузчыка файлаў Kate</comment>
     <comment xml:lang="be@latin">Spis ubudoŭ zahruzčyka fajlaŭ Kate</comment>
@@ -1274,6 +1279,7 @@ Notes:
     <sub-class-of type="application/zip"/>
     <comment>fonts package</comment>
     <comment xml:lang="ar">حزمة خطوط</comment>
+    <comment xml:lang="ast">Paquete de fontes</comment>
     <comment xml:lang="az">şrift paketi</comment>
     <comment xml:lang="be">пакунак шрыфтоў</comment>
     <comment xml:lang="be@latin">pakunak šryftoŭ</comment>
@@ -1730,6 +1736,7 @@ Notes:
   <mime-type type="application/x-kourse">
     <comment>Kolf course</comment>
     <comment xml:lang="ar">دورة Kolf</comment>
+    <comment xml:lang="ast">Campu de Kolf</comment>
     <comment xml:lang="az">Kolf meydançası</comment>
     <comment xml:lang="be">Поле для гольфа Kolf</comment>
     <comment xml:lang="be@latin">Polie dlia hoĺfa Kolf</comment>
@@ -2242,6 +2249,7 @@ Notes:
   <mime-type type="application/x-kcachegrind">
     <comment>Cachegrind/Callgrind profile dump</comment>
     <comment xml:lang="ar">تشكيلة تفريغ Cachegrind/Callgrind</comment>
+    <comment xml:lang="ast">Volquiáu de perfiles de Cachegrind/Callgrind</comment>
     <comment xml:lang="az">Cachegrind/Callgrind profil məlumatı</comment>
     <comment xml:lang="be">Дамп профілю Cachegrind / Callgrind</comment>
     <comment xml:lang="be@latin">Damp profiliu Cachegrind / Callgrind</comment>
@@ -2804,6 +2812,7 @@ Notes:
   <mime-type type="application/vnd.kde.kxmlguirc">
     <comment>KXMLGUI UI Declaration</comment>
     <comment xml:lang="ar">تعريف عناصر واجهة KXMLGUI</comment>
+    <comment xml:lang="ast">Declaración de la IU de KXMLGUI</comment>
     <comment xml:lang="az">KXMLGUI UI Deklarasiyası</comment>
     <comment xml:lang="be">Дэкларацыя інтэрфейсу карыстальніка KXMLGUI</comment>
     <comment xml:lang="be@latin">Deklaracyja interfiejsu karystaĺnika KXMLGUI</comment>
