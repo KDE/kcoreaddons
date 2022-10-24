@@ -46,6 +46,7 @@ Notes:
     <comment xml:lang="hu">RELAX NG</comment>
     <comment xml:lang="ia">RELAX NG</comment>
     <comment xml:lang="id">RELAX NG</comment>
+    <comment xml:lang="ie">RELAX NG</comment>
     <comment xml:lang="is">RELAX NG</comment>
     <comment xml:lang="it">RELAX NG</comment>
     <comment xml:lang="ka">RELAX NG</comment>
@@ -95,6 +96,7 @@ Notes:
     <comment xml:lang="hu">CD-hang</comment>
     <comment xml:lang="ia">Audio CD</comment>
     <comment xml:lang="id">Audio CD</comment>
+    <comment xml:lang="ie">Audio CD</comment>
     <comment xml:lang="is">CD hljóð</comment>
     <comment xml:lang="it">Audio CD</comment>
     <comment xml:lang="ka">CD აუდიო</comment>
@@ -145,6 +147,7 @@ Notes:
     <comment xml:lang="hu">SNF-betűtípus</comment>
     <comment xml:lang="ia">font de bitmap SNF</comment>
     <comment xml:lang="id">Fon bitmap SNF</comment>
+    <comment xml:lang="ie">fonde bitmap SNF</comment>
     <comment xml:lang="is">SNF bitamyndaletur</comment>
     <comment xml:lang="it">Carattere bitmap SNF</comment>
     <comment xml:lang="ko">SNF 비트맵 글꼴</comment>
@@ -196,6 +199,7 @@ Notes:
     <comment xml:lang="hu">Java-kisalkalmazás</comment>
     <comment xml:lang="ia">Applet Java</comment>
     <comment xml:lang="id">Applet Java</comment>
+    <comment xml:lang="ie">applette Java</comment>
     <comment xml:lang="is">Java forritlingur</comment>
     <comment xml:lang="it">Applet Java</comment>
     <comment xml:lang="ko">자바 애플릿</comment>
@@ -244,6 +248,7 @@ Notes:
     <comment xml:lang="hu">KHTML-es kiterjesztéskezelő</comment>
     <comment xml:lang="ia">Adaptator pro KHTML Extension</comment>
     <comment xml:lang="id">Adaptor Ekstensi KHTML</comment>
+    <comment xml:lang="ie">adaptator de extension de KHTML</comment>
     <comment xml:lang="is">Aðlögun KHTML-endinga</comment>
     <comment xml:lang="it">Adattatore di estensioni di KHTML</comment>
     <comment xml:lang="ka">KHTML გაფართოების ადაპტერი</comment>
@@ -293,6 +298,7 @@ Notes:
     <comment xml:lang="hu">KDE-színséma</comment>
     <comment xml:lang="ia">Schema de color KDE</comment>
     <comment xml:lang="id">Skema warna KDE</comment>
+    <comment xml:lang="ie">schema de colores de KDE</comment>
     <comment xml:lang="is">KDE litastef</comment>
     <comment xml:lang="it">Schema di colori di KDE</comment>
     <comment xml:lang="ko">KDE 색 배열</comment>
@@ -346,6 +352,7 @@ Notes:
     <comment xml:lang="hu">KNewStuff-csomag</comment>
     <comment xml:lang="ia">Pacchetto de KNewStuff</comment>
     <comment xml:lang="id">Paket KNewStuff</comment>
+    <comment xml:lang="ie">paccage de KNewStuff</comment>
     <comment xml:lang="is">KNewStuff pakki</comment>
     <comment xml:lang="it">Pacchetto di KNewStuff</comment>
     <comment xml:lang="ko">KNewStuff 패키지</comment>
@@ -396,6 +403,7 @@ Notes:
     <comment xml:lang="hu">KWallet-jelszófájl</comment>
     <comment xml:lang="ia">Kwallet :portafolio</comment>
     <comment xml:lang="id">Wallet KWallet</comment>
+    <comment xml:lang="ie">porta-papere de KWallet</comment>
     <comment xml:lang="is">KWallet veski</comment>
     <comment xml:lang="it">Portafogli KWallet</comment>
     <comment xml:lang="ko">KWallet 지갑</comment>
@@ -448,6 +456,7 @@ Notes:
     <comment xml:lang="hu">Kugar-jelentéssablon</comment>
     <comment xml:lang="ia">Kugar : patrono de reporto</comment>
     <comment xml:lang="id">Template laporan Kugar</comment>
+    <comment xml:lang="ie">modelle de raporte de Kugar</comment>
     <comment xml:lang="is">Kugar skýrslugerðarforsnið</comment>
     <comment xml:lang="it">Modello di rapporto di Kugar</comment>
     <comment xml:lang="ko">Kugar 보고서 템플릿</comment>
@@ -498,6 +507,7 @@ Notes:
     <comment xml:lang="hu">plasmoid</comment>
     <comment xml:lang="ia">plasmoid</comment>
     <comment xml:lang="id">plasmoid</comment>
+    <comment xml:lang="ie">plasmoid</comment>
     <comment xml:lang="is">plasmíð</comment>
     <comment xml:lang="it">plasmoide</comment>
     <comment xml:lang="ko">plasmoid</comment>
@@ -549,6 +559,7 @@ Notes:
     <comment xml:lang="hu">SuperKaramba-téma</comment>
     <comment xml:lang="ia">Thema de SuperKaramba</comment>
     <comment xml:lang="id">Tema SuperKaramba</comment>
+    <comment xml:lang="ie">tema de SuperKaramba</comment>
     <comment xml:lang="is">SuperKaramba þema</comment>
     <comment xml:lang="it">Tema di SuperKaramba</comment>
     <comment xml:lang="ko">SuperKaramba 테마</comment>
@@ -598,6 +609,7 @@ Notes:
     <comment xml:lang="hu">Calligra Plan projektkezelő dokumentum</comment>
     <comment xml:lang="ia">Calligra Plan: Documento de gestion de projecto</comment>
     <comment xml:lang="id">Dokumen pengelolaan projek Calligra Plan</comment>
+    <comment xml:lang="ie">document de gerentie de projectes de Calligra Plan</comment>
     <comment xml:lang="is">Calligra Plan verkstjórnunarskjal</comment>
     <comment xml:lang="it">Documento di gestione dei progetti di Calligra Plan</comment>
     <comment xml:lang="ko">Caligra Plan 프로젝트 관리 문서</comment>
@@ -646,6 +658,7 @@ Notes:
     <comment xml:lang="hu">Calligra Plan munkacsomag dokumentum</comment>
     <comment xml:lang="ia">Documento de pacchetto de  labor de Calligra Plan</comment>
     <comment xml:lang="id">Dokumen pemaketan kerja Calligra Plan</comment>
+    <comment xml:lang="ie">document de labor de Calligra Plan</comment>
     <comment xml:lang="is">Calligra Plan verkpakkaskjal</comment>
     <comment xml:lang="it">Documento dei pacchetti di lavoro di Calligra Plan</comment>
     <comment xml:lang="ko">Caligra Plan 작업 패키지 문서</comment>
@@ -695,6 +708,7 @@ Notes:
     <comment xml:lang="hu">KPlato projektkezelő dokumentum</comment>
     <comment xml:lang="ia">KPlato: Documento de gestion de projecto</comment>
     <comment xml:lang="id">Dokumen pengelolaan projek KPlato</comment>
+    <comment xml:lang="ie">paccage de gerentie de projectes de KPlato</comment>
     <comment xml:lang="is">KPlato verkstjórnunarskjal</comment>
     <comment xml:lang="it">Documento di gestione dei progetti di KPlato</comment>
     <comment xml:lang="ko">KPlato 프로젝트 관리 문서</comment>
@@ -744,6 +758,7 @@ Notes:
     <comment xml:lang="hu">KPlato projektkezelő munkacsomag</comment>
     <comment xml:lang="ia">KPlato: Pacchetto de travalio de gestion de projecto</comment>
     <comment xml:lang="id">Paket kerja pengelolaan projek KPlato</comment>
+    <comment xml:lang="ie">paccage de labor de gerentie de projectes de KPlato</comment>
     <comment xml:lang="is">KPlato vinnupakki verkstjórnunar</comment>
     <comment xml:lang="it">Pacchetto di lavoro di gestione dei progetti di KPlato</comment>
     <comment xml:lang="ko">KPlato 프로젝트 관리 작업 패키지</comment>
@@ -793,6 +808,7 @@ Notes:
     <comment xml:lang="hu">Kugar-archívum</comment>
     <comment xml:lang="ia">Kugar : archivo</comment>
     <comment xml:lang="id">Arsip Kugar</comment>
+    <comment xml:lang="ie">Archive de Kugar</comment>
     <comment xml:lang="is">Kugar safnskrá</comment>
     <comment xml:lang="it">Archivio di Kugar</comment>
     <comment xml:lang="ko">Kugar 압축 파일</comment>
@@ -843,6 +859,7 @@ Notes:
     <comment xml:lang="hu">webes archívum</comment>
     <comment xml:lang="ia">archivo web</comment>
     <comment xml:lang="id">arsip web</comment>
+    <comment xml:lang="ie">Archive de web</comment>
     <comment xml:lang="is">vefsafnskrá</comment>
     <comment xml:lang="it">Archivio web</comment>
     <comment xml:lang="ko">웹 압축 파일</comment>
@@ -894,6 +911,7 @@ Notes:
     <comment xml:lang="hu">W3C XML-séma</comment>
     <comment xml:lang="ia">schema XML de W3C</comment>
     <comment xml:lang="id">Skema XML W3C</comment>
+    <comment xml:lang="ie">Schema XML W3C</comment>
     <comment xml:lang="is">W3C XML skema</comment>
     <comment xml:lang="it">Schema XML W3C</comment>
     <comment xml:lang="ko">W3C XML 스키마</comment>
@@ -942,6 +960,7 @@ Notes:
     <comment xml:lang="hu">RealAudio-bővítményfájl</comment>
     <comment xml:lang="ia">File de plugin de RealAudio</comment>
     <comment xml:lang="id">File Plugin RealAudio</comment>
+    <comment xml:lang="ie">file de plugin de RealAudio</comment>
     <comment xml:lang="is">RealAudio plugin skrá</comment>
     <comment xml:lang="it">File di estensioni RealAudio</comment>
     <comment xml:lang="ko">RealAudio 플러그인 파일</comment>
@@ -989,6 +1008,7 @@ Notes:
     <comment xml:lang="hu">KPhotoAlbum-import</comment>
     <comment xml:lang="ia">Importation de KPhotoAlbum</comment>
     <comment xml:lang="id">Impor KPhotoAlbum</comment>
+    <comment xml:lang="ie">importation de KPhotoAlbum</comment>
     <comment xml:lang="is">KPhotoAlbum innflutningur</comment>
     <comment xml:lang="it">Importazione di KPhotoAlbum</comment>
     <comment xml:lang="ko">KPhotoAlbum 가져오기</comment>
@@ -1038,6 +1058,7 @@ Notes:
     <comment xml:lang="hu">HDR-kép</comment>
     <comment xml:lang="ia">Imagine HDR</comment>
     <comment xml:lang="id">Citra HDR</comment>
+    <comment xml:lang="ie">Image HDR</comment>
     <comment xml:lang="is">HDR-mynd</comment>
     <comment xml:lang="it">Immagine HDR</comment>
     <comment xml:lang="ko">HDR 그림</comment>
@@ -1091,6 +1112,7 @@ Notes:
     <comment xml:lang="hu">KDE-s nyers képformátumok</comment>
     <comment xml:lang="ia">Formatos de imagines crude de KDE</comment>
     <comment xml:lang="id">Format citra raw KDE</comment>
+    <comment xml:lang="ie">formates de images RAW de KDE</comment>
     <comment xml:lang="is">KDE RAW myndskráasnið</comment>
     <comment xml:lang="it">Formati di immagine raw di KDE</comment>
     <comment xml:lang="ko">KDE RAW 그림 형식</comment>
@@ -1149,6 +1171,7 @@ Notes:
     <comment xml:lang="hu">Intel®-féle hexadecimális objektumfájl</comment>
     <comment xml:lang="ia">File objecto hexadecimal de Intel(c)</comment>
     <comment xml:lang="id">File objek heksadesimal Intel®</comment>
+    <comment xml:lang="ie">file hexadecimal de objecte de Intel®</comment>
     <comment xml:lang="is">Intel® hexadesimal hlutaskrá</comment>
     <comment xml:lang="it">File oggetto esadecimale Intel®</comment>
     <comment xml:lang="ko">Intel® 16진수 개체 파일</comment>
@@ -1198,6 +1221,7 @@ Notes:
     <comment xml:lang="hu">Kate-listafájl (fájllista vagy bővítménylista)</comment>
     <comment xml:lang="ia">Kate: Lista de plugin de cargator de lista de file</comment>
     <comment xml:lang="id">Daftar file Kate pemuat daftar plugin</comment>
+    <comment xml:lang="ie">liste de cargatores de liste de files de Kate</comment>
     <comment xml:lang="is">Kate skráahleðsluíforritalisti</comment>
     <comment xml:lang="it">Elenco delle estensioni del caricatore di elenchi di file di Kate</comment>
     <comment xml:lang="ko">Kate 파일 목록 로더 플러그인 목록</comment>
@@ -1247,6 +1271,7 @@ Notes:
     <comment xml:lang="hu">Abc-kottafájl</comment>
     <comment xml:lang="ia">file de notation musical abc</comment>
     <comment xml:lang="id">File notasi musikal abc</comment>
+    <comment xml:lang="ie">file de musical notation abc</comment>
     <comment xml:lang="is">abc nótnaskriftarskrá</comment>
     <comment xml:lang="it">File di notazione musicale abc</comment>
     <comment xml:lang="ko">abc 악보 파일</comment>
@@ -1301,6 +1326,7 @@ Notes:
     <comment xml:lang="hu">betűtípuscsomag</comment>
     <comment xml:lang="ia">pacchettos de fonts</comment>
     <comment xml:lang="id">Paket font</comment>
+    <comment xml:lang="ie">paccage de fondes</comment>
     <comment xml:lang="is">leturpakki</comment>
     <comment xml:lang="it">Pacchetto di caratteri</comment>
     <comment xml:lang="ko">글꼴 패키지</comment>
@@ -1353,6 +1379,7 @@ Notes:
     <comment xml:lang="hu">Windows-kiszolgáló</comment>
     <comment xml:lang="ia">Servitor de Windows</comment>
     <comment xml:lang="id">Server Windows</comment>
+    <comment xml:lang="ie">servitore de Windows</comment>
     <comment xml:lang="is">Windows miðlari</comment>
     <comment xml:lang="it">Server Windows</comment>
     <comment xml:lang="ko">Windows 서버</comment>
@@ -1403,6 +1430,7 @@ Notes:
     <comment xml:lang="hu">Windows munkacsoport</comment>
     <comment xml:lang="ia">Gruppo de travalio de Windows</comment>
     <comment xml:lang="id">Workgroup Windows</comment>
+    <comment xml:lang="ie">labor-gruppe de Windows</comment>
     <comment xml:lang="is">Windows vinnuhópur</comment>
     <comment xml:lang="it">Gruppo di lavoro di Windows</comment>
     <comment xml:lang="ko">Windows 작업 그룹</comment>
@@ -1452,6 +1480,7 @@ Notes:
     <comment xml:lang="hu">KDE rendszermonitor</comment>
     <comment xml:lang="ia">Monitor de Systema de KDE</comment>
     <comment xml:lang="id">Pemantau Sistem KDE</comment>
+    <comment xml:lang="ie">monitor del sistema de KDE</comment>
     <comment xml:lang="is">KDE kerfiseftirlit</comment>
     <comment xml:lang="it">Monitor di sistema di KDE</comment>
     <comment xml:lang="ko">KDE 시스템 모니터</comment>
@@ -1503,6 +1532,7 @@ Notes:
     <comment xml:lang="hu">KDE téma</comment>
     <comment xml:lang="ia">Thema de KDE</comment>
     <comment xml:lang="id">Tema KDE</comment>
+    <comment xml:lang="ie">Tema de KDE</comment>
     <comment xml:lang="is">KDE þema</comment>
     <comment xml:lang="it">Tema di KDE</comment>
     <comment xml:lang="ko">KDE 테마</comment>
@@ -1555,6 +1585,7 @@ Notes:
     <comment xml:lang="hu">Quanta-projekt</comment>
     <comment xml:lang="ia">Quanta : Projecto</comment>
     <comment xml:lang="id">Proyek Quanta</comment>
+    <comment xml:lang="ie">Projecte de Quanta</comment>
     <comment xml:lang="is">Quanta verkefni</comment>
     <comment xml:lang="it">Progetto Quanta</comment>
     <comment xml:lang="ko">Quanta 프로젝트</comment>
@@ -1605,6 +1636,7 @@ Notes:
     <comment xml:lang="hu">Kommander-fájl</comment>
     <comment xml:lang="ia">Kommander : file</comment>
     <comment xml:lang="id">File kommander</comment>
+    <comment xml:lang="ie">File de Kommander</comment>
     <comment xml:lang="is">Kommander skrá</comment>
     <comment xml:lang="it">File di Kommander</comment>
     <comment xml:lang="ko">Kommander 파일</comment>
@@ -1655,6 +1687,7 @@ Notes:
     <comment xml:lang="hu">potato</comment>
     <comment xml:lang="ia">patata</comment>
     <comment xml:lang="id">kentang</comment>
+    <comment xml:lang="ie">potato</comment>
     <comment xml:lang="is">kartafla (potato)</comment>
     <comment xml:lang="it">patata</comment>
     <comment xml:lang="ko">potato</comment>
@@ -1705,6 +1738,7 @@ Notes:
     <comment xml:lang="hu">Kolf mentett állás</comment>
     <comment xml:lang="ia">Joco salveguardate de Kolf</comment>
     <comment xml:lang="id">Simpanan permainan Kolf</comment>
+    <comment xml:lang="ie">partie gardat de Kolf</comment>
     <comment xml:lang="is">Vistaður Kolf-leikur</comment>
     <comment xml:lang="it">Partita salvata di Kolf</comment>
     <comment xml:lang="ko">Kolf 저장된 게임</comment>
@@ -1758,6 +1792,7 @@ Notes:
     <comment xml:lang="hu">Kolf-pálya</comment>
     <comment xml:lang="ia">Kolf : curso</comment>
     <comment xml:lang="id">Haluan Kolf</comment>
+    <comment xml:lang="ie">curse de Kolf</comment>
     <comment xml:lang="is">Kolf-braut</comment>
     <comment xml:lang="it">Campo di Kolf</comment>
     <comment xml:lang="ko">Kolf 코스</comment>
@@ -1813,6 +1848,7 @@ Notes:
     <comment xml:lang="hu">Okular-archívum</comment>
     <comment xml:lang="ia">Okular : archivo de documento</comment>
     <comment xml:lang="id">Arsip dokumen Okular</comment>
+    <comment xml:lang="ie">archive de document de Okular</comment>
     <comment xml:lang="is">Okular skjalasafnskrá</comment>
     <comment xml:lang="it">Archivio di documenti di Okular</comment>
     <comment xml:lang="ko">Okular 문서 압축 파일</comment>
@@ -1864,6 +1900,7 @@ Notes:
     <comment xml:lang="hu">Cabri-alakzat</comment>
     <comment xml:lang="ia">Cabri : Figura</comment>
     <comment xml:lang="id">Figur Cabri</comment>
+    <comment xml:lang="ie">figura de Cabri</comment>
     <comment xml:lang="is">Cabri teikning</comment>
     <comment xml:lang="it">Figura di Cabri</comment>
     <comment xml:lang="ko">Cabri 그림</comment>
@@ -1918,6 +1955,7 @@ Notes:
     <comment xml:lang="hu">Dr. Geo-alakzat</comment>
     <comment xml:lang="ia">Dr.Geo : Figura</comment>
     <comment xml:lang="id">Figur Dr. Geo</comment>
+    <comment xml:lang="ie">figura de Dr. Geo figure</comment>
     <comment xml:lang="is">Dr. Geo teikning</comment>
     <comment xml:lang="it">Figura di Dr. Geo</comment>
     <comment xml:lang="ko">Dr. Geo 그림</comment>
@@ -1971,6 +2009,7 @@ Notes:
     <comment xml:lang="hu">KGeo-alakzat</comment>
     <comment xml:lang="ia">KGeo : Figura</comment>
     <comment xml:lang="id">Figur KGeo</comment>
+    <comment xml:lang="ie">figura KGeo</comment>
     <comment xml:lang="is">KGeo teikning</comment>
     <comment xml:lang="it">Figura di KGeo</comment>
     <comment xml:lang="ko">KGeo 그림</comment>
@@ -2021,6 +2060,7 @@ Notes:
     <comment xml:lang="hu">Kig-alakzat</comment>
     <comment xml:lang="ia">Kig : figura</comment>
     <comment xml:lang="id">Figur Kig</comment>
+    <comment xml:lang="ie">figura de Kig</comment>
     <comment xml:lang="is">Kig teikning</comment>
     <comment xml:lang="it">Figura di Kig</comment>
     <comment xml:lang="ko">Kig 그림</comment>
@@ -2072,6 +2112,7 @@ Notes:
     <comment xml:lang="hu">KSeg-dokumentum</comment>
     <comment xml:lang="ia">KSeg :documento</comment>
     <comment xml:lang="id">Dokumen KSeg</comment>
+    <comment xml:lang="ie">document de KSeg</comment>
     <comment xml:lang="is">KSeg skjal</comment>
     <comment xml:lang="it">Documento di KSeg</comment>
     <comment xml:lang="ko">KSeg 문서</comment>
@@ -2122,6 +2163,7 @@ Notes:
     <comment xml:lang="hu">szógyűjtemény</comment>
     <comment xml:lang="ia">documento de instructor de vocabulario</comment>
     <comment xml:lang="id">dokumen pelatih kosakata</comment>
+    <comment xml:lang="ie">documente de exercitie de vocabularium</comment>
     <comment xml:lang="is">orðaforðaþjálfunarskjal</comment>
     <comment xml:lang="it">Documento di allenamento a vocabolario</comment>
     <comment xml:lang="ko">단어장</comment>
@@ -2171,6 +2213,7 @@ Notes:
     <comment xml:lang="hu">KmPlot-fájl</comment>
     <comment xml:lang="ia">KmPlot: file</comment>
     <comment xml:lang="id">File KmPlot</comment>
+    <comment xml:lang="ie">file de KmPlot</comment>
     <comment xml:lang="is">KmPlot skrá</comment>
     <comment xml:lang="it">File di KmPlot</comment>
     <comment xml:lang="ko">KmPlot 파일</comment>
@@ -2221,6 +2264,7 @@ Notes:
     <comment xml:lang="hu">KWordQuiz-szótár</comment>
     <comment xml:lang="ia">Vocabulario de KWordQuiz</comment>
     <comment xml:lang="id">Kosakata KWordQuiz</comment>
+    <comment xml:lang="ie">vocabularium de KWordQuiz</comment>
     <comment xml:lang="is">KWordQuiz orðaforði</comment>
     <comment xml:lang="it">Vocabolario di KWordQuiz</comment>
     <comment xml:lang="ko">KWordQuiz 단어장</comment>
@@ -2271,6 +2315,7 @@ Notes:
     <comment xml:lang="hu">Cachegrind/Callgrind-képfájl</comment>
     <comment xml:lang="ia">Cachegrind/Callgrind : Discargatorio de profilo</comment>
     <comment xml:lang="id">Gardu profil Cachegrind/Callgrind</comment>
+    <comment xml:lang="ie">dump de profil de Cachegrind/Callgrind</comment>
     <comment xml:lang="is">Cachegrind/Callgrind sniðdump</comment>
     <comment xml:lang="it">Dump di profilatura di Cachegrind/Callgrind</comment>
     <comment xml:lang="ko">Cachegrind/Callgrind 프로필 덤프</comment>
@@ -2320,6 +2365,7 @@ Notes:
     <comment xml:lang="hu">Umbrello UML-fájl</comment>
     <comment xml:lang="ia">Umbrello: file Modellator UML</comment>
     <comment xml:lang="id">File Umbrello UML Modeller</comment>
+    <comment xml:lang="ie">file de Umbrello UML Modeller</comment>
     <comment xml:lang="is">Umbrello UML Modeller skrá</comment>
     <comment xml:lang="it">File del modellatore UML Umbrello</comment>
     <comment xml:lang="ko">Umbrello UML 모델러 파일</comment>
@@ -2371,6 +2417,7 @@ Notes:
     <comment xml:lang="hu">Windows-link</comment>
     <comment xml:lang="ia">Ligamine de Windows</comment>
     <comment xml:lang="id">Tautan Windows</comment>
+    <comment xml:lang="ie">ligament de Windows</comment>
     <comment xml:lang="is">Windows tengill</comment>
     <comment xml:lang="it">Collegamento di Windows</comment>
     <comment xml:lang="ko">Windows 링크</comment>
@@ -2424,6 +2471,7 @@ Notes:
     <comment xml:lang="hu">KGet letöltési lista</comment>
     <comment xml:lang="ia">KGet : Lista de discargar</comment>
     <comment xml:lang="id">Daftar unduhan KGet</comment>
+    <comment xml:lang="ie">liste de descargas de KGet</comment>
     <comment xml:lang="is">KGet niðurhalslisti</comment>
     <comment xml:lang="it">Elenco di scaricamenti di KGet</comment>
     <comment xml:lang="ko">KGet 다운로드 목록</comment>
@@ -2473,6 +2521,7 @@ Notes:
     <comment xml:lang="hu">Kopete-emotikoncsomag</comment>
     <comment xml:lang="ia">Archivo de emoticones de Kopete</comment>
     <comment xml:lang="id">Arsip emosikon Kopete</comment>
+    <comment xml:lang="ie">archive de emoticones de Kopete</comment>
     <comment xml:lang="is">Kopete tjáningartáknasafn</comment>
     <comment xml:lang="it">Archivio di faccine di Kopete</comment>
     <comment xml:lang="ko">Kopete 이모티콘 압축 파일</comment>
@@ -2522,6 +2571,7 @@ Notes:
     <comment xml:lang="hu">ICQ-névjegy</comment>
     <comment xml:lang="ia">ICQ : Contacto</comment>
     <comment xml:lang="id">Kontak ICQ</comment>
+    <comment xml:lang="ie">contacte ICQ</comment>
     <comment xml:lang="is">ICQ tengiliður</comment>
     <comment xml:lang="it">Contatto ICQ</comment>
     <comment xml:lang="ko">ICQ 대화 상대</comment>
@@ -2574,6 +2624,7 @@ Notes:
     <comment xml:lang="hu">Microsoft-médiafájl</comment>
     <comment xml:lang="ia">Formato de Media de Microsoft</comment>
     <comment xml:lang="id">Format Media Microsoft</comment>
+    <comment xml:lang="ie">formate Microsoft Media</comment>
     <comment xml:lang="is">Microsoft Media Format</comment>
     <comment xml:lang="it">Formato multimediale di Microsoft</comment>
     <comment xml:lang="ko">Microsoft 미디어 포맷</comment>
@@ -2629,6 +2680,7 @@ Notes:
     <comment xml:lang="hu">Turtle RDF-dokumentum</comment>
     <comment xml:lang="ia">documento RDF de Turtle</comment>
     <comment xml:lang="id">Dokumen Turtle RDF</comment>
+    <comment xml:lang="ie">documente RDF de Turtle</comment>
     <comment xml:lang="is">Turtle RDF skjal</comment>
     <comment xml:lang="it">Documento Turtle RDF</comment>
     <comment xml:lang="ko">Turtle RDF 문서</comment>
@@ -2677,6 +2729,7 @@ Notes:
     <comment xml:lang="hu">Softimage PIC-kép</comment>
     <comment xml:lang="ia">Imagine PIC de SoftImage</comment>
     <comment xml:lang="id">Citra Softimage PIC </comment>
+    <comment xml:lang="ie">image PIC de Softimage</comment>
     <comment xml:lang="is">Softimage PIC mynd</comment>
     <comment xml:lang="it">Immagine Softimage PIC</comment>
     <comment xml:lang="ko">Softimage PIC 그림</comment>
@@ -2729,6 +2782,7 @@ Notes:
     <comment xml:lang="hu">KConfigXT konfigurációs beállítások</comment>
     <comment xml:lang="ia">KConfigXT Optiones de Configuration</comment>
     <comment xml:lang="id">Opsi Konfigurasi KConfigXT</comment>
+    <comment xml:lang="ie">parametres de configuration de KConfigXT</comment>
     <comment xml:lang="is">Stillingar á uppsetningu KConfigXT</comment>
     <comment xml:lang="it">Opzioni di configurazione KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 설정 옵션</comment>
@@ -2784,6 +2838,7 @@ Notes:
     <comment xml:lang="hu">KConfigXT kódgenerálási beállítások</comment>
     <comment xml:lang="ia">KConfigXT Optiones de Generation de Codice</comment>
     <comment xml:lang="id">Opsi Penghasilan Kode KConfigXT</comment>
+    <comment xml:lang="ie">parametres de code-generation de KConfigXT</comment>
     <comment xml:lang="is">Stillingar á kóðasmíði KConfigXT</comment>
     <comment xml:lang="it">Opzioni di generazione codice KConfigXT</comment>
     <comment xml:lang="ko">KConfigXT 코드 생성 옵션</comment>
@@ -2834,6 +2889,7 @@ Notes:
     <comment xml:lang="hu">KXMLGUI UI deklaráció</comment>
     <comment xml:lang="ia">KXMLGUI UI Declaration</comment>
     <comment xml:lang="id">Deklarasi KXMLGUI UI</comment>
+    <comment xml:lang="ie">declaration de IdU de KXMLGUI</comment>
     <comment xml:lang="is">KXMLGUI UI-skilgreining</comment>
     <comment xml:lang="it">Dichiarazione UI KXMLGUI</comment>
     <comment xml:lang="ko">KXMLGUI UI 선언</comment>
@@ -2887,6 +2943,7 @@ Notes:
     <comment xml:lang="hu">KNotification deklaráció</comment>
     <comment xml:lang="ia">KNotification Declaration</comment>
     <comment xml:lang="id">Deklarasi KNotification</comment>
+    <comment xml:lang="ie">declaration de KNotification</comment>
     <comment xml:lang="is">KNotification skilgreining</comment>
     <comment xml:lang="it">Dichiarazione KNotification</comment>
     <comment xml:lang="ko">KNotification 선언</comment>
@@ -2937,6 +2994,7 @@ Notes:
     <comment xml:lang="hu">KCrash jelentés</comment>
     <comment xml:lang="ia">KCrash Reporto</comment>
     <comment xml:lang="id">Laporan KCrash</comment>
+    <comment xml:lang="ie">raporta de KCrash</comment>
     <comment xml:lang="is">KCrash hrunskýrsla</comment>
     <comment xml:lang="it">Rapporto di KCrash</comment>
     <comment xml:lang="ko">KCrash 보고서</comment>
