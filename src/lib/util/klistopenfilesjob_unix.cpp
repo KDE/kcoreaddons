@@ -52,7 +52,7 @@ public:
 
     void lsofError(QProcess::ProcessError processError)
     {
-        emitResult(static_cast<int>(KListOpenFilesJob::Error::InternalError), QObject::tr("Failed to execute `lsof' error code %1").arg(processError));
+        emitResult(static_cast<int>(KListOpenFilesJob::Error::InternalError), QObject::tr("Failed to execute `lsof'. Error code %1").arg(processError));
     }
 
     void lsofFinished(int, QProcess::ExitStatus);
