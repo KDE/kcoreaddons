@@ -837,7 +837,7 @@ msgstr "Nie ŭdalosia znajsci vykanaĺny fajl lsof pa šliachu:"
 #| msgctxt "QObject|"
 #| msgid "Failed to execute `lsof error code %1"
 msgctxt "QObject|"
-msgid "Failed to execute `lsof' error code %1"
+msgid "Failed to execute `lsof'. Error code %1"
 msgstr "Nie atrymalsia vykanać `lsof. Kod pamylki %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27

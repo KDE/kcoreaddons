@@ -819,9 +819,11 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "Executabilul „lsof” nu a putut fi găsit în PATH:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, qt-format
+#, fuzzy, qt-format
+#| msgctxt "QObject|"
+#| msgid "Failed to execute `lsof' error code %1"
 msgctxt "QObject|"
-msgid "Failed to execute `lsof' error code %1"
+msgid "Failed to execute `lsof'. Error code %1"
 msgstr "Executarea „lsof” a eșuat, codul erorii: %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27

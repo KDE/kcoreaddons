@@ -801,9 +801,11 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "无法在 PATH 参数中找到 lsof 的可执行程序："
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, qt-format
+#, fuzzy, qt-format
+#| msgctxt "QObject|"
+#| msgid "Failed to execute `lsof' error code %1"
 msgctxt "QObject|"
-msgid "Failed to execute `lsof' error code %1"
+msgid "Failed to execute `lsof'. Error code %1"
 msgstr "执行 lsof 失败，错误代码 %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27

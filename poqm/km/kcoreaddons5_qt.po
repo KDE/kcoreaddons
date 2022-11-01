@@ -1026,7 +1026,7 @@ msgstr "រក​មិន​ឃើញ '%1' ដែល​អាច​ប្រត
 #: lib/util/klistopenfilesjob_unix.cpp:55
 #, qt-format
 msgctxt "QObject|"
-msgid "Failed to execute `lsof' error code %1"
+msgid "Failed to execute `lsof'. Error code %1"
 msgstr ""
 
 #: lib/util/klistopenfilesjob_win.cpp:27

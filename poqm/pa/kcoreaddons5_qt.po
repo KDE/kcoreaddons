@@ -821,9 +821,11 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "'%1' ਚੱਲਣਯੋਗ ਨਹੀ ਹੈ।"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, qt-format
+#, fuzzy, qt-format
+#| msgctxt "QObject|"
+#| msgid "Failed to execute `lsof' error code %1"
 msgctxt "QObject|"
-msgid "Failed to execute `lsof' error code %1"
+msgid "Failed to execute `lsof'. Error code %1"
 msgstr "`lsof' ਚਲਾਉਣ ਲਈ ਅਸਫ਼ਲ, ਗਲਤੀ ਕੋਡ %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27

@@ -813,9 +813,11 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "lsof நிரலை PATH-இல் கண்டுபிடிக்க முடியவில்லை:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, qt-format
+#, fuzzy, qt-format
+#| msgctxt "QObject|"
+#| msgid "Failed to execute `lsof' error code %1"
 msgctxt "QObject|"
-msgid "Failed to execute `lsof' error code %1"
+msgid "Failed to execute `lsof'. Error code %1"
 msgstr "'lsof'-ஐ இயக்க முடியவில்லை. பிழை குறியீடு %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27

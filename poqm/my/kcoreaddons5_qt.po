@@ -818,9 +818,11 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "%1မှ ပလပ်ဂင်မတင်သွင်းနိုင်ခဲ့ပါ"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, qt-format
+#, fuzzy, qt-format
+#| msgctxt "QObject|"
+#| msgid "Failed to execute `lsof' error code %1"
 msgctxt "QObject|"
-msgid "Failed to execute `lsof' error code %1"
+msgid "Failed to execute `lsof'. Error code %1"
 msgstr "'lsof'ကို မဆောင်ရွက်နိုင်ခဲ့ပါ၊ အမှားကုတ်နံပါတ် %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
