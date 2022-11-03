@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-10-02 07:38+0200\n"
+"PO-Revision-Date: 2022-11-02 05:46+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -829,12 +829,10 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "Ezin izan du «lsof» exekutagarria «PATH»ean aurkitu."
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, fuzzy, qt-format
-#| msgctxt "QObject|"
-#| msgid "Failed to execute `lsof' error code %1"
+#, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "Huts egin du  `lsof' exekutatzea, errore kodea %1"
+msgstr "`lsof' exekutatzea huts egin du. Errore kodea %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
