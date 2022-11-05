@@ -52,6 +52,7 @@ if(NOT WIN32)
         caching/kshareddatacache.cpp
         caching/kshareddatacache.h
         caching/ksdclock.cpp
+        caching/ksdcmemory.cpp
     )
 
     set_source_files_properties(caching/kshareddatacache.cpp

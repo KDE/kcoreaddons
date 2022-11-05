@@ -9,26 +9,11 @@
 #ifndef KSHAREDDATACACHE_P_H
 #define KSHAREDDATACACHE_P_H
 
-#include <config-caching.h> // HAVE_SYS_MMAN_H
-
 #include "kcoreaddons_debug.h"
 
 #include <cerrno>
 #include <fcntl.h>
 #include <unistd.h> // for _POSIX_ADVISORY_INFO
-
-#if defined(_POSIX_MAPPED_FILES) && ((_POSIX_MAPPED_FILES == 0) || (_POSIX_MAPPED_FILES >= 200112L))
-#define KSDC_MAPPED_FILES_SUPPORTED 1
-#endif
-
-#if defined(_POSIX_SYNCHRONIZED_IO) && ((_POSIX_SYNCHRONIZED_IO == 0) || (_POSIX_SYNCHRONIZED_IO >= 200112L))
-#define KSDC_SYNCHRONIZED_IO_SUPPORTED 1
-#endif
-
-// msync(2) requires both MAPPED_FILES and SYNCHRONIZED_IO POSIX options
-#if defined(KSDC_MAPPED_FILES_SUPPORTED) && defined(KSDC_SYNCHRONIZED_IO_SUPPORTED)
-#define KSDC_MSYNC_SUPPORTED
-#endif
 
 // posix_fallocate is used to ensure that the file used for the cache is
 // actually fully committed to disk before attempting to use the file.
@@ -38,14 +23,6 @@
 #ifdef Q_OS_OSX
 #include "posix_fallocate_mac.h"
 #define KSDC_POSIX_FALLOCATE_SUPPORTED 1
-#endif
-
-// BSD/Mac OS X compat
-#if HAVE_SYS_MMAN_H
-#include <sys/mman.h>
-#endif
-#if !defined(MAP_ANONYMOUS) && defined(MAP_ANON)
-#define MAP_ANONYMOUS MAP_ANON
 #endif
 
 static bool ensureFileAllocated(int fd, size_t fileSize)
