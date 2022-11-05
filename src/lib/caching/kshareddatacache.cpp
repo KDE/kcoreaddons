@@ -12,6 +12,7 @@
 
 #include "kshareddatacache.h"
 #include "kcoreaddons_debug.h"
+#include "ksdclock_p.h"
 #include "kshareddatacache_p.h" // Various auxiliary support code
 
 #include <QStandardPaths>

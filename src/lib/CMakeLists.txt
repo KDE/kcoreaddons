@@ -51,6 +51,7 @@ if(NOT WIN32)
     target_sources(KF6CoreAddons PRIVATE
         caching/kshareddatacache.cpp
         caching/kshareddatacache.h
+        caching/ksdclock.cpp
     )
 
     set_source_files_properties(caching/kshareddatacache.cpp
