@@ -326,9 +326,7 @@ bool SharedMemory::performInitialSetup(uint _cacheSize, uint _pageSize)
 
     // Unlock the mini-lock, and introduce a total memory barrier to make
     // sure all changes have propagated even without a mutex.
-    ready.ref();
-
-    return true;
+    return ready.ref();
 }
 
 void SharedMemory::clearInternalTables()

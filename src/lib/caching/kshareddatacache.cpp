@@ -9,22 +9,16 @@
 
 #include "kshareddatacache.h"
 #include "kcoreaddons_debug.h"
-#include "ksdclock_p.h"
+#include "ksdcmapping_p.h"
 #include "ksdcmemory_p.h"
 
 #include "kshareddatacache_p.h" // Various auxiliary support code
-
-#include <QStandardPaths>
-#include <qplatformdefs.h>
 
 #include <QByteArray>
 #include <QDir>
 #include <QFile>
 #include <QRandomGenerator>
-
-#include <stdlib.h>
-#include <sys/mman.h>
-#include <sys/types.h>
+#include <QStandardPaths>
 
 // The per-instance private data, such as map size, whether
 // attached or not, pointer to shared memory, etc.
@@ -34,38 +28,18 @@ public:
     Private(const QString &name, unsigned defaultCacheSize, unsigned expectedItemSize)
         : m_cacheName(name)
         , shm(nullptr)
-        , m_lock()
-        , m_mapSize(0)
+        , m_mapping(nullptr)
         , m_defaultCacheSize(defaultCacheSize)
         , m_expectedItemSize(expectedItemSize)
-        , m_expectedType(LOCKTYPE_INVALID)
     {
-        mapSharedMemory();
+        createMemoryMapping();
     }
 
-    // Put the cache in a condition to be able to call mapSharedMemory() by
-    // completely detaching from shared memory (such as to respond to an
-    // unrecoverable error).
-    // m_mapSize must already be set to the amount of memory mapped to shm.
-    void detachFromSharedMemory()
+    void createMemoryMapping()
     {
-        // The lock holds a reference into shared memory, so this must be
-        // cleared before shm is removed.
-        m_lock.reset();
-
-        if (shm && 0 != ::munmap(shm, m_mapSize)) {
-            qCCritical(KCOREADDONS_DEBUG) << "Unable to unmap shared memory segment" << static_cast<void *>(shm) << ":" << ::strerror(errno);
-        }
-
         shm = nullptr;
-        m_mapSize = 0;
-    }
+        m_mapping.reset();
 
-    // This function does a lot of the important work, attempting to connect to shared
-    // memory, a private anonymous mapping if that fails, and failing that, nothing (but
-    // the cache remains "valid", we just don't actually do anything).
-    void mapSharedMemory()
-    {
         // 0-sized caches are fairly useless.
         unsigned cacheSize = qMax(m_defaultCacheSize, uint(SharedMemory::MINIMUM_CACHE_SIZE));
         unsigned pageSize = SharedMemory::equivalentPageSize(m_expectedItemSize);
@@ -81,7 +55,7 @@ public:
         QFile file(cacheName);
         QFileInfo fileInfo(file);
         if (!QDir().mkpath(fileInfo.absolutePath())) {
-            return;
+            qCWarning(KCOREADDONS_DEBUG) << "Failed to create cache dir" << fileInfo.absolutePath();
         }
 
         // The basic idea is to open the file that we want to map into shared
@@ -92,131 +66,35 @@ public:
 
         // size accounts for the overhead over the desired cacheSize
         uint size = SharedMemory::totalSize(cacheSize, pageSize);
-        void *mapAddress = MAP_FAILED;
+        Q_ASSERT(size >= cacheSize);
 
-        if (size < cacheSize) {
-            qCCritical(KCOREADDONS_DEBUG) << "Asked for a cache size less than requested size somehow -- Logic Error :(";
-            return;
-        }
-
-        // We establish the shared memory mapping here, only if we will have appropriate
-        // mutex support (systemSupportsProcessSharing), then we:
         // Open the file and resize to some sane value if the file is too small.
         if (file.open(QIODevice::ReadWrite) && (file.size() >= size || (ensureFileAllocated(file.handle(), size) && file.resize(size)))) {
-            // Use mmap directly instead of QFile::map since the QFile (and its
-            // shared mapping) will disappear unless we hang onto the QFile for no
-            // reason (see the note below, we don't care about the file per se...)
-            mapAddress = QT_MMAP(nullptr, size, PROT_READ | PROT_WRITE, MAP_SHARED, file.handle(), 0);
+            try {
+                m_mapping.reset(new KSDCMapping(&file, size, cacheSize, pageSize));
+                shm = m_mapping->m_mapped;
+            } catch (KSDCCorrupted) {
+                shm = nullptr;
+                m_mapping.reset();
 
-            // So... it is possible that someone else has mapped this cache already
-            // with a larger size. If that's the case we need to at least match
-            // the size to be able to access every entry, so fixup the mapping.
-            if (mapAddress != MAP_FAILED) {
-                SharedMemory *mapped = reinterpret_cast<SharedMemory *>(mapAddress);
-
-                // First make sure that the version of the cache on disk is
-                // valid.  We also need to check that version != 0 to
-                // disambiguate against an uninitialized cache.
-                if (mapped->version != SharedMemory::PIXMAP_CACHE_VERSION && mapped->version > 0) {
-                    qCWarning(KCOREADDONS_DEBUG) << "Deleting wrong version of cache" << cacheName;
-
-                    // CAUTION: Potentially recursive since the recovery
-                    // involves calling this function again.
-                    m_mapSize = size;
-                    shm = mapped;
-                    recoverCorruptedCache();
-                    return;
-                } else if (mapped->cacheSize > cacheSize) {
-                    // This order is very important. We must save the cache size
-                    // before we remove the mapping, but unmap before overwriting
-                    // the previous mapping size...
-                    cacheSize = mapped->cacheSize;
-                    unsigned actualPageSize = mapped->cachePageSize();
-                    ::munmap(mapAddress, size);
-                    size = SharedMemory::totalSize(cacheSize, actualPageSize);
-                    mapAddress = QT_MMAP(nullptr, size, PROT_READ | PROT_WRITE, MAP_SHARED, file.handle(), 0);
+                qCWarning(KCOREADDONS_DEBUG) << "Deleting corrupted cache" << cacheName;
+                file.remove();
+                QFile file(cacheName);
+                if (file.open(QIODevice::ReadWrite) && ensureFileAllocated(file.handle(), size) && file.resize(size)) {
+                    try {
+                        m_mapping.reset(new KSDCMapping(&file, size, cacheSize, pageSize));
+                    } catch (KSDCCorrupted) {
+                        m_mapping.reset();
+                        qCCritical(KCOREADDONS_DEBUG) << "Even a brand-new cache starts off corrupted, something is"
+                                                      << "seriously wrong. :-(";
+                    }
                 }
             }
         }
 
-        // We could be here without the mapping established if:
-        // 1) Process-shared synchronization is not supported, either at compile or run time,
-        // 2) Unable to open the required file.
-        // 3) Unable to resize the file to be large enough.
-        // 4) Establishing the mapping failed.
-        // 5) The mapping succeeded, but the size was wrong and we were unable to map when
-        //    we tried again.
-        // 6) The incorrect version of the cache was detected.
-        // 7) The file could be created, but posix_fallocate failed to commit it fully to disk.
-        // In any of these cases, attempt to fallback to the
-        // better-supported anonymous private page style of mmap. This memory won't
-        // be shared, but our code will still work the same.
-        // NOTE: We never use the on-disk representation independently of the
-        // shared memory. If we don't get shared memory the disk info is ignored,
-        // if we do get shared memory we never look at disk again.
-        if (mapAddress == MAP_FAILED) {
-            qCWarning(KCOREADDONS_DEBUG) << "Failed to establish shared memory mapping, will fallback"
-                                         << "to private memory -- memory usage will increase";
-
-            mapAddress = QT_MMAP(nullptr, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-        }
-
-        // Well now we're really hosed. We can still work, but we can't even cache
-        // data.
-        if (mapAddress == MAP_FAILED) {
-            qCCritical(KCOREADDONS_DEBUG) << "Unable to allocate shared memory segment for shared data cache" << cacheName << "of size" << cacheSize;
-            return;
-        }
-
-        m_mapSize = size;
-
-        // We never actually construct shm, but we assign it the same address as the
-        // shared memory we just mapped, so effectively shm is now a SharedMemory that
-        // happens to be located at mapAddress.
-        shm = reinterpret_cast<SharedMemory *>(mapAddress);
-
-        // If we were first to create this memory map, all data will be 0.
-        // Therefore if ready == 0 we're not initialized.  A fully initialized
-        // header will have ready == 2.  Why?
-        // Because 0 means "safe to initialize"
-        //         1 means "in progress of initing"
-        //         2 means "ready"
-        uint usecSleepTime = 8; // Start by sleeping for 8 microseconds
-        while (shm->ready.loadRelaxed() != 2) {
-            if (Q_UNLIKELY(usecSleepTime >= (1 << 21))) {
-                // Didn't acquire within ~8 seconds?  Assume an issue exists
-                qCCritical(KCOREADDONS_DEBUG) << "Unable to acquire shared lock, is the cache corrupt?";
-
-                file.remove(); // Unlink the cache in case it's corrupt.
-                detachFromSharedMemory();
-                return; // Fallback to QCache (later)
-            }
-
-            if (shm->ready.testAndSetAcquire(0, 1)) {
-                if (!shm->performInitialSetup(cacheSize, pageSize)) {
-                    qCCritical(KCOREADDONS_DEBUG) << "Unable to perform initial setup, this system probably "
-                                                     "does not really support process-shared pthreads or "
-                                                     "semaphores, even though it claims otherwise.";
-
-                    file.remove();
-                    detachFromSharedMemory();
-                    return;
-                }
-            } else {
-                usleep(usecSleepTime); // spin
-
-                // Exponential fallback as in Ethernet and similar collision resolution methods
-                usecSleepTime *= 2;
-            }
-        }
-
-        m_expectedType = shm->shmLock.type;
-        m_lock = std::unique_ptr<KSDCLock>(createLockFromId(m_expectedType, shm->shmLock));
-        bool isProcessSharingSupported = false;
-
-        if (!m_lock->initialize(isProcessSharingSupported)) {
-            qCCritical(KCOREADDONS_DEBUG) << "Unable to setup shared cache lock, although it worked when created.";
-            detachFromSharedMemory();
+        if (!m_mapping) {
+            m_mapping.reset(new KSDCMapping(nullptr, size, cacheSize, pageSize));
+            shm = m_mapping->m_mapped;
         }
     }
 
@@ -226,52 +104,7 @@ public:
     {
         KSharedDataCache::deleteCache(m_cacheName);
 
-        detachFromSharedMemory();
-
-        // Do this even if we weren't previously cached -- it might work now.
-        mapSharedMemory();
-    }
-
-    // This should be called for any memory access to shared memory. This
-    // function will verify that the bytes [base, base+accessLength) are
-    // actually mapped to d->shm. The cache itself may have incorrect cache
-    // page sizes, incorrect cache size, etc. so this function should be called
-    // despite the cache data indicating it should be safe.
-    //
-    // If the access is /not/ safe then a KSDCCorrupted exception will be
-    // thrown, so be ready to catch that.
-    void verifyProposedMemoryAccess(const void *base, unsigned accessLength) const
-    {
-        quintptr startOfAccess = reinterpret_cast<quintptr>(base);
-        quintptr startOfShm = reinterpret_cast<quintptr>(shm);
-
-        if (Q_UNLIKELY(startOfAccess < startOfShm)) {
-            throw KSDCCorrupted();
-        }
-
-        quintptr endOfShm = startOfShm + m_mapSize;
-        quintptr endOfAccess = startOfAccess + accessLength;
-
-        // Check for unsigned integer wraparound, and then
-        // bounds access
-        if (Q_UNLIKELY((endOfShm < startOfShm) || (endOfAccess < startOfAccess) || (endOfAccess > endOfShm))) {
-            throw KSDCCorrupted();
-        }
-    }
-
-    bool lock() const
-    {
-        if (Q_LIKELY(shm && shm->shmLock.type == m_expectedType)) {
-            return m_lock->lock();
-        }
-
-        // No shm or wrong type --> corrupt!
-        throw KSDCCorrupted();
-    }
-
-    void unlock() const
-    {
-        m_lock->unlock();
+        createMemoryMapping();
     }
 
     class CacheLocker
@@ -285,10 +118,10 @@ public:
             // Locking can fail due to a timeout. If it happens too often even though
             // we're taking corrective action assume there's some disastrous problem
             // and give up.
-            while (!d->lock() && !isLockedCacheSafe()) {
+            while (!d->m_mapping->lock() && !d->m_mapping->isLockedCacheSafe()) {
                 d->recoverCorruptedCache();
 
-                if (!d->shm) {
+                if (!d->m_mapping->isValid()) {
                     qCWarning(KCOREADDONS_DEBUG) << "Lost the connection to shared memory for cache" << d->m_cacheName;
                     return false;
                 }
@@ -296,36 +129,8 @@ public:
                 if (lockCount++ > 4) {
                     qCCritical(KCOREADDONS_DEBUG) << "There is a very serious problem with the KDE data cache" << d->m_cacheName
                                                   << "giving up trying to access cache.";
-                    d->detachFromSharedMemory();
                     return false;
                 }
-            }
-
-            return true;
-        }
-
-        // Runs a quick battery of tests on an already-locked cache and returns
-        // false as soon as a sanity check fails. The cache remains locked in this
-        // situation.
-        bool isLockedCacheSafe() const
-        {
-            // Note that cachePageSize() itself runs a check that can throw.
-            uint testSize = SharedMemory::totalSize(d->shm->cacheSize, d->shm->cachePageSize());
-
-            if (Q_UNLIKELY(d->m_mapSize != testSize)) {
-                return false;
-            }
-            if (Q_UNLIKELY(d->shm->version != SharedMemory::PIXMAP_CACHE_VERSION)) {
-                return false;
-            }
-            switch (d->shm->evictionPolicy.loadRelaxed()) {
-            case NoEvictionPreference: // fallthrough
-            case EvictLeastRecentlyUsed: // fallthrough
-            case EvictLeastOftenUsed: // fallthrough
-            case EvictOldest:
-                break;
-            default:
-                return false;
             }
 
             return true;
@@ -335,15 +140,15 @@ public:
         CacheLocker(const Private *_d)
             : d(const_cast<Private *>(_d))
         {
-            if (Q_UNLIKELY(!d || !d->shm || !cautiousLock())) {
+            if (Q_UNLIKELY(!d || !cautiousLock())) {
                 d = nullptr;
             }
         }
 
         ~CacheLocker()
         {
-            if (d && d->shm) {
-                d->unlock();
+            if (d) {
+                d->m_mapping->unlock();
             }
         }
 
@@ -352,17 +157,15 @@ public:
 
         bool failed() const
         {
-            return !d || d->shm == nullptr;
+            return !d;
         }
     };
 
     QString m_cacheName;
     SharedMemory *shm;
-    std::unique_ptr<KSDCLock> m_lock;
-    uint m_mapSize;
+    std::unique_ptr<KSDCMapping> m_mapping;
     uint m_defaultCacheSize;
     uint m_expectedItemSize;
-    SharedLockId m_expectedType;
 };
 
 KSharedDataCache::KSharedDataCache(const QString &cacheName, unsigned defaultCacheSize, unsigned expectedItemSize)
@@ -371,37 +174,16 @@ KSharedDataCache::KSharedDataCache(const QString &cacheName, unsigned defaultCac
     try {
         d = new Private(cacheName, defaultCacheSize, expectedItemSize);
     } catch (KSDCCorrupted) {
-        KSharedDataCache::deleteCache(cacheName);
-
-        // Try only once more
-        try {
-            d = new Private(cacheName, defaultCacheSize, expectedItemSize);
-        } catch (KSDCCorrupted) {
-            qCCritical(KCOREADDONS_DEBUG) << "Even a brand-new cache starts off corrupted, something is"
-                                          << "seriously wrong. :-(";
-            d = nullptr; // Just in case
-        }
+        qCCritical(KCOREADDONS_DEBUG) << "Failed to initialize KSharedDataCache!";
+        d = nullptr; // Just in case
     }
 }
 
 KSharedDataCache::~KSharedDataCache()
 {
-    // Note that there is no other actions required to separate from the
-    // shared memory segment, simply unmapping is enough. This makes things
-    // *much* easier so I'd recommend maintaining this ideal.
     if (!d) {
         return;
     }
-
-    if (d->shm) {
-#ifdef KSDC_MSYNC_SUPPORTED
-        ::msync(d->shm, d->m_mapSize, MS_INVALIDATE | MS_ASYNC);
-#endif
-        ::munmap(d->shm, d->m_mapSize);
-    }
-
-    // Do not delete d->shm, it was never constructed, it's just an alias.
-    d->shm = nullptr;
 
     delete d;
 }
@@ -540,7 +322,7 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
         }
 
         // Verify it will all fit
-        d->verifyProposedMemoryAccess(dataPage, requiredSize);
+        d->m_mapping->verifyProposedMemoryAccess(dataPage, requiredSize);
 
         // Cast for byte-sized pointer arithmetic
         uchar *startOfPageData = reinterpret_cast<uchar *>(dataPage);
@@ -573,7 +355,7 @@ bool KSharedDataCache::find(const QString &key, QByteArray *destination) const
                 throw KSDCCorrupted();
             }
 
-            d->verifyProposedMemoryAccess(resultPage, header->totalItemSize);
+            d->m_mapping->verifyProposedMemoryAccess(resultPage, header->totalItemSize);
 
             header->useCount++;
             header->lastUsedTime = ::time(nullptr);
