@@ -1562,7 +1562,7 @@ bool KDirWatchPrivate::isNoisyFile(const char *filename)
             return true;
         }
         // fontconfig updates the cache on every KDE app start
-        // (inclusive kio_thumbnail slaves)
+        // as well as during kio_thumbnail worker execution
         if (strncmp(filename, ".fonts.cache", 12) == 0) {
             return true;
         }
