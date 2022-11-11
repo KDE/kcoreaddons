@@ -1563,6 +1563,7 @@ bool KDirWatchPrivate::isNoisyFile(const char *filename)
         }
         // fontconfig updates the cache on every KDE app start
         // as well as during kio_thumbnail worker execution
+        // TODO:; check which fontconfig version this file was deprecated and the check can be removed
         if (strncmp(filename, ".fonts.cache", 12) == 0) {
             return true;
         }
