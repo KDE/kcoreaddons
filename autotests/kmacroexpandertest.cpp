@@ -231,8 +231,6 @@ protected:
 
 void KMacroExpanderTest::expandMacrosShellQuoteParens()
 {
-    QHash<QChar, QStringList> map;
-    QStringList list;
     QString s;
 
     s = "( echo \"just testing (parens)\" ) ) after";

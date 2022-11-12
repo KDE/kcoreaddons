@@ -97,7 +97,6 @@ public:
         {
             QStringList command_line;
             QString command;
-            char pathname[PATH_MAX];
             struct kinfo_proc *proc = &processes.procs[pos];
 
             // Don't use procstat_getpathname() because:
