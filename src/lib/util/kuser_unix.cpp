@@ -432,8 +432,8 @@ public:
 };
 
 KUserGroup::KUserGroup(KUser::UIDMode mode)
+    : d(new KUserGroupPrivate(KUser(mode).groupId().nativeId()))
 {
-    d = new KUserGroupPrivate(KUser(mode).groupId().nativeId());
 }
 
 KUserGroup::KUserGroup(K_GID _gid)
