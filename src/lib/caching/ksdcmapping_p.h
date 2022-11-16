@@ -70,7 +70,7 @@ public:
         }
 
         // Wrong type --> corrupt!
-        throw KSDCCorrupted();
+        throw KSDCCorrupted("Invalid cache lock type!");
     }
 
     void unlock() const
@@ -194,10 +194,8 @@ private:
                 // valid.  We also need to check that version != 0 to
                 // disambiguate against an uninitialized cache.
                 if (mapped->version != SharedMemory::PIXMAP_CACHE_VERSION && mapped->version > 0) {
-                    qCWarning(KCOREADDONS_DEBUG) << "Wrong version of cache" << file->fileName();
-
                     detachFromSharedMemory(false);
-                    throw KSDCCorrupted();
+                    throw KSDCCorrupted(QLatin1String("Wrong version of cache ") + file->fileName());
                 } else if (mapped->cacheSize > cacheSize) {
                     // This order is very important. We must save the cache size
                     // before we remove the mapping, but unmap before overwriting
@@ -262,10 +260,8 @@ private:
         while (m_mapped->ready.loadRelaxed() != 2) {
             if (Q_UNLIKELY(usecSleepTime >= (1 << 21))) {
                 // Didn't acquire within ~8 seconds?  Assume an issue exists
-                qCCritical(KCOREADDONS_DEBUG) << "Unable to acquire shared lock, is the cache corrupt?";
-
                 detachFromSharedMemory(false);
-                throw KSDCCorrupted();
+                throw KSDCCorrupted("Unable to acquire shared lock, is the cache corrupt?");
             }
 
             if (m_mapped->ready.testAndSetAcquire(0, 1)) {

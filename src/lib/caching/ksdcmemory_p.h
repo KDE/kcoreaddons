@@ -25,7 +25,17 @@ class KSDCCorrupted
 public:
     KSDCCorrupted()
     {
-        qCCritical(KCOREADDONS_DEBUG) << "Error detected in cache, re-generating";
+        qCWarning(KCOREADDONS_DEBUG) << "Error detected in cache!";
+    }
+
+    KSDCCorrupted(const QString message)
+    {
+        qCWarning(KCOREADDONS_DEBUG).noquote() << message;
+    }
+
+    KSDCCorrupted(const char *message)
+    {
+        KSDCCorrupted(QLatin1String(message));
     }
 };
 

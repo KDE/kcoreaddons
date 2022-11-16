@@ -102,6 +102,8 @@ public:
     // lock the cache). In this situation it is safer just to destroy it all and try again.
     void recoverCorruptedCache()
     {
+        qCWarning(KCOREADDONS_DEBUG) << "Deleting corrupted cache" << m_cacheName;
+
         KSharedDataCache::deleteCache(m_cacheName);
 
         createMemoryMapping();
