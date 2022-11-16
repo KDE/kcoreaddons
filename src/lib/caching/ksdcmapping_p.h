@@ -17,6 +17,8 @@
 #include <QtGlobal>
 #include <qplatformdefs.h>
 
+#include <sys/resource.h>
+
 #if defined(_POSIX_MAPPED_FILES) && ((_POSIX_MAPPED_FILES == 0) || (_POSIX_MAPPED_FILES >= 200112L))
 #define KSDC_MAPPED_FILES_SUPPORTED 1
 #endif
@@ -188,6 +190,24 @@ private:
             // with a larger size. If that's the case we need to at least match
             // the size to be able to access every entry, so fixup the mapping.
             if (mapAddress != MAP_FAILED) {
+                // Successful mmap doesn't actually mean that whole range is readable so ensure it is
+                struct rlimit memlock;
+                if (getrlimit(RLIMIT_MEMLOCK, &memlock) == 0 && memlock.rlim_cur >= 2) {
+                    // Half of limit in case something else has already locked some mem
+                    uint lockSize = qMin(memlock.rlim_cur / 2, (rlim_t)size);
+                    // Note that lockSize might be less than what we need to mmap
+                    // and so this doesn't guarantee that later parts will be readable
+                    // but that's fine, at least we know we will succeed here
+                    if (mlock(mapAddress, lockSize)) {
+                        throw KSDCCorrupted(QLatin1String("Cache is inaccessible ") + file->fileName());
+                    }
+                    if (munlock(mapAddress, lockSize) != 0) {
+                        qCDebug(KCOREADDONS_DEBUG) << "Failed to munlock!";
+                    }
+                } else {
+                    qCWarning(KCOREADDONS_DEBUG) << "Failed to get RLIMIT_MEMLOCK!";
+                }
+
                 SharedMemory *mapped = reinterpret_cast<SharedMemory *>(mapAddress);
 
                 // First make sure that the version of the cache on disk is
