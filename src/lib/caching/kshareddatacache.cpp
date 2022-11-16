@@ -102,7 +102,7 @@ public:
         // We establish the shared memory mapping here, only if we will have appropriate
         // mutex support (systemSupportsProcessSharing), then we:
         // Open the file and resize to some sane value if the file is too small.
-        if (file.open(QIODevice::ReadWrite) && (file.size() >= size || (file.resize(size) && ensureFileAllocated(file.handle(), size)))) {
+        if (file.open(QIODevice::ReadWrite) && (file.size() >= size || (ensureFileAllocated(file.handle(), size) && file.resize(size)))) {
             // Use mmap directly instead of QFile::map since the QFile (and its
             // shared mapping) will disappear unless we hang onto the QFile for no
             // reason (see the note below, we don't care about the file per se...)
