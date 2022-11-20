@@ -1302,6 +1302,7 @@ Notes:
     <comment xml:lang="my">အေဘီစီ ဂီတဆိုင်ရာမှတ်သားချက်များ ဖိုင်လ်</comment>
     <comment xml:lang="nl">abc-muzieknotatiebestand</comment>
     <comment xml:lang="nn">abc-musikknotasjonsfil</comment>
+    <comment xml:lang="pa">ਓਬੀਸੀ ਸੰਗੀਤ ਨਿਸ਼ਾਨ ਫਾਈਲ</comment>
     <comment xml:lang="pl">plik zapisu muzyki abc</comment>
     <comment xml:lang="pt">Ficheiro de notação musical do 'abc'</comment>
     <comment xml:lang="pt_BR">arquivo de notação musical do abc</comment>
@@ -2211,7 +2212,7 @@ Notes:
     <comment xml:lang="my">ဝေါဟာရလေ့ကျင့်ရန်မှတ်တမ်းစာအုပ်</comment>
     <comment xml:lang="nl">document voor woordenschattrainer</comment>
     <comment xml:lang="nn">ordtreningsdokument</comment>
-    <comment xml:lang="pa">ਸ਼ਬਦਕੋਸ਼ ਟਰੇਨਰ ਡੌਕੂਮੈਂਟ</comment>
+    <comment xml:lang="pa">ਸ਼ਬਦਾਵਲੀ ਸਿਖਲਾਈ ਡੌਕੂਮੈਂਟ</comment>
     <comment xml:lang="pl">dokument do ćwiczenia słownictwa</comment>
     <comment xml:lang="pt">documento de treino de vocabulários</comment>
     <comment xml:lang="pt_BR">documento de treino de vocabulários</comment>
@@ -2417,6 +2418,7 @@ Notes:
     <comment xml:lang="my">အမ်ဘရီလို ယူအမ်အယ်လ် ပုံစံရေးဆွဲဖိုင်လ်</comment>
     <comment xml:lang="nl">Umbrello UML Modeller-bestand</comment>
     <comment xml:lang="nn">Umbrello UML Modeller-fil</comment>
+    <comment xml:lang="pa">ਉਮਬਰਿੱਲੋ UML ਮੋਡੇਲਰ ਫਾਈਲ</comment>
     <comment xml:lang="pl">Plik programu modelującego Umbrello UML</comment>
     <comment xml:lang="pt">Ficheiro de modelação em UML do Umbrello</comment>
     <comment xml:lang="pt_BR">Arquivo de modelador UML do Umbrello</comment>
@@ -2899,6 +2901,7 @@ Notes:
     <comment xml:lang="my">ကေကွန်ဖစ်အိပ်စ်တီ ကုတ်ထုတ်လုပ်ရေး ရွေးချယ်မှုများ</comment>
     <comment xml:lang="nl">Codegeneratie-opties van KConfigXT</comment>
     <comment xml:lang="nn">KConfigXT-kodegeneringsval</comment>
+    <comment xml:lang="pa">KConfigXT ਕੋਡ ਨਿਰਮਾਣ ਚੋਣਾਂ</comment>
     <comment xml:lang="pl">Ustawienia do tworzenia kodu KConfigXT</comment>
     <comment xml:lang="pt">Opções de Geração de Código do KConfigXT</comment>
     <comment xml:lang="pt_BR">Opções de geração de código do KConfigXT</comment>
@@ -2951,6 +2954,7 @@ Notes:
     <comment xml:lang="my">ကေအိပ်စ်အမ်အယ်လ်ဂျီယူအိုင် ယူအိုင် ကြေညာချက်</comment>
     <comment xml:lang="nl">Declaratie van KXMLGUI UI</comment>
     <comment xml:lang="nn">KXMLGUI UI-deklarasjon</comment>
+    <comment xml:lang="pa">KXMLGUI UI ਐਲਾਨ</comment>
     <comment xml:lang="pl">Deklaracja KXMLGUI UI</comment>
     <comment xml:lang="pt">Declaração de UI do KXMLGUI</comment>
     <comment xml:lang="pt_BR">Declaração UI do KXMLGUI</comment>
@@ -3006,6 +3010,7 @@ Notes:
     <comment xml:lang="my">ကေအကြောင်းကြားချက် ကြေညာချက်</comment>
     <comment xml:lang="nl">Declaratie van KNotification</comment>
     <comment xml:lang="nn">KNotification-deklarasjon</comment>
+    <comment xml:lang="pa">ਕੇ-ਨੋਟੀਫਿਕੇਸ਼ਨ ਐਲਾਨ</comment>
     <comment xml:lang="pl">Deklaracja KNotification</comment>
     <comment xml:lang="pt">Declaração do KNotification</comment>
     <comment xml:lang="pt_BR">Declaração do KNotification</comment>
