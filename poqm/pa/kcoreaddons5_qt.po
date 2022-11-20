@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-07-09 10:07-0700\n"
+"PO-Revision-Date: 2022-11-19 05:09-0800\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -63,7 +63,7 @@ msgstr "ExFAT"
 #: lib/io/kfilesystemtype.cpp:250
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "FUSE"
 
 #: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
@@ -246,23 +246,22 @@ msgid "Could not load plugin from %1: %2"
 msgstr "%1 ਤੋਂ ਪਲੱਗਇਨ ਲੋਡ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ: %2"
 
 #: lib/plugin/kpluginfactory.cpp:61
-#, fuzzy, qt-format
-#| msgid "The library does not export a factory for creating components."
+#, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
-msgstr "ਲਾਇਬਰੇਰੀ ਨੇ ਭਾਗ ਬਣਾਉਣ ਲਈ ਇੱਕ ਫੈਕਟਰੀ ਨਿਰਯਾਤ ਨਹੀਂ ਕੀਤੀ ਹੈ"
+msgstr "ਲਾਇਬਰੇਰੀ %1 KPluginFactory ਨਹੀਂ ਦਿੰਦੀ ਹੈ।"
 
 #: lib/plugin/kpluginfactory.h:512
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
-msgstr ""
+msgstr "KPluginFactory %2 ਤੋਂ %1 ਬਣਾ ਨਹੀਂ ਸਕੀ"
 
 #: lib/plugin/kpluginloader.cpp:109
 #, qt-format
 msgctxt "KPluginLoader|"
 msgid "The library %1 does not offer a KPluginFactory."
-msgstr ""
+msgstr "ਲਾਇਬਰੇਰੀ %1 KPluginFactory ਨਹੀਂ ਦਿੰਦੀ ਹੈ।"
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -814,19 +813,15 @@ msgid "Path %1 doesn't exist"
 msgstr "ਮਾਰਗ %1 ਮੌਜੂਦ ਨਹੀਂ ਹੈ"
 
 #: lib/util/klistopenfilesjob_unix.cpp:46
-#, fuzzy
-#| msgid "Could not find '%1' executable."
 msgctxt "QObject|"
 msgid "Could not find lsof executable in PATH:"
-msgstr "'%1' ਚੱਲਣਯੋਗ ਨਹੀ ਹੈ।"
+msgstr "PATH ਵਿੱਚ lsof ਚੱਲਣਯੋਗ ਲੱਭੀ ਨਹੀਂ ਜਾ ਸਕੀ:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, fuzzy, qt-format
-#| msgctxt "QObject|"
-#| msgid "Failed to execute `lsof' error code %1"
+#, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "`lsof' ਚਲਾਉਣ ਲਈ ਅਸਫ਼ਲ, ਗਲਤੀ ਕੋਡ %1"
+msgstr "`lsof' ਚਲਾਉਣ ਲਈ ਅਸਫ਼ਲ। ਗਲਤੀ ਕੋਡ %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"

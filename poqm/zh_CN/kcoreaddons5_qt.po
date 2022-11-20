@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2022-11-06 01:05\n"
+"PO-Revision-Date: 2022-11-19 14:48\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -804,7 +804,7 @@ msgstr "无法在 PATH 参数中找到 lsof 的可执行程序："
 #, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr ""
+msgstr "执行 `lsof' 失败。错误代码 %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
