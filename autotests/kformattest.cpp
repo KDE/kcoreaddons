@@ -375,7 +375,7 @@ void KFormatTest::formatRelativeDate()
 
     // 5 minutes ago
     testDateTime = now.addSecs(-300);
-    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("5 minutes ago"));
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("5 minute(s) ago"));
 
     testDateTime = QDateTime(QDate::currentDate().addDays(8), QTime(3, 0, 0));
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::LongFormat),

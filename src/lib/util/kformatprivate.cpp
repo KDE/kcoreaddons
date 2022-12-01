@@ -509,7 +509,10 @@ QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocal
         if (minutesToNow <= 1) {
             return tr("Just now");
         } else {
-            return tr("%1 minutes ago").arg(minutesToNow);
+            //: @item:intext %1 is a whole number
+            //~ singular %n minute ago
+            //~ plural %n minutes ago
+            return tr("%n minute(s) ago", nullptr, minutesToNow);
         }
     }
 
