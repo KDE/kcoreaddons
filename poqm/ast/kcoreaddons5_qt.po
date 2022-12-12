@@ -2,7 +2,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-10-19 23:39+0200\n"
+"PO-Revision-Date: 2022-10-30 13:47+0100\n"
 "Last-Translator: enolp <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -172,8 +172,8 @@ msgid ""
 "internationalization visit <a href=\"https://l10n.kde.org\">https://l10n.kde."
 "org</a></p>"
 msgstr ""
-"<p>KDE traduzse a munches llingües gracies al trabayu de los equipos "
-"detraducción de tol mundu.</p><p>Pa consiguir más información tocantea la "
+"<p>KDE traduzse a munches llingües gracies al trabayu de los equipos de "
+"traducción de tol mundu.</p><p>Pa consiguir más información tocante a la "
 "internacionalización de KDE, visita <a href=\"https://l10n.kde.org\">https://"
 "l10n.kde.org</a></p>"
 
@@ -207,7 +207,7 @@ msgstr "Esta aplicación escribióla daquién que quier quedar nel anonimatu."
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
-msgstr ""
+msgstr "«%1» escribiólu:"
 
 #: lib/kaboutdata.cpp:1252
 msgctxt "KAboutData CLI|"
@@ -741,7 +741,7 @@ msgstr[1] "%n segundos"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 and %2"
-msgstr "%1 y %2"
+msgstr "%1 ya %2"
 
 #: lib/util/kformatprivate.cpp:478
 msgctxt ""
@@ -791,7 +791,7 @@ msgstr "Hai %1 minutos"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 at %2"
-msgstr ""
+msgstr "%1 a les %2"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
@@ -808,9 +808,9 @@ msgstr "Nun se pudo atopar l'executable «lsof» en PATH:"
 #, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr ""
+msgstr "La execución de «lsof» falló. Códigu d'error %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
-msgstr "KListOpenFilesJob nun ye compatible con Windows"
+msgstr "KListOpenFilesJob nun ye compatible en Windows"
