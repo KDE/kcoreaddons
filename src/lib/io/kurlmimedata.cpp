@@ -119,13 +119,14 @@ static QString portalFormat()
 static QList<QUrl> extractPortalUriList(const QMimeData *mimeData)
 {
     Q_ASSERT(QCoreApplication::instance()->thread() == QThread::currentThread());
-    static QHash<const QMimeData*, QList<QUrl>> cache;
-    if (const auto uris = cache.constFind(mimeData); uris != cache.constEnd()) {
-        qCDebug(KCOREADDONS_DEBUG) << "Urls from portal cache" << *uris;
-        return *uris;
-    }
+    static std::pair<QByteArray, QList<QUrl>> cache;
     const auto transferId = mimeData->data(portalFormat());
     qCDebug(KCOREADDONS_DEBUG) << "Picking up portal urls from transfer" << transferId;
+    if (std::get<QByteArray>(cache) == transferId) {
+        const auto uris = std::get<QList<QUrl>>(cache);
+        qCDebug(KCOREADDONS_DEBUG) << "Urls from portal cache" << uris;
+        return uris;
+    }
     auto iface =
         new OrgFreedesktopPortalFileTransferInterface(portalServiceName(), QStringLiteral("/org/freedesktop/portal/documents"), QDBusConnection::sessionBus());
     const QStringList list = iface->RetrieveFiles(QString::fromUtf8(transferId), {});
@@ -135,10 +136,7 @@ static QList<QUrl> extractPortalUriList(const QMimeData *mimeData)
         uris.append(QUrl::fromLocalFile(path));
     }
     qCDebug(KCOREADDONS_DEBUG) << "Urls from portal" << uris;
-    cache.insert(mimeData, uris);
-    QObject::connect(mimeData, &QObject::destroyed, [mimeData] {
-        cache.remove(mimeData);
-    });
+    cache = std::make_pair(transferId, uris);
     return uris;
 }
 #endif
