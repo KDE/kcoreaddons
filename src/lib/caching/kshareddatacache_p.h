@@ -60,7 +60,7 @@ static bool ensureFileAllocated(int fd, size_t fileSize)
     // new file and not just mapping an existing cache.
 
     return true;
-#endif
+#endif // KSDC_POSIX_FALLOCATE_SUPPORTED
 }
 
 #endif /* KSHAREDDATACACHE_P_H */

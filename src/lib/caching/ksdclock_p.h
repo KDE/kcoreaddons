@@ -184,7 +184,7 @@ public:
 protected:
     pthread_mutex_t &m_mutex;
 };
-#endif
+#endif // KSDC_THREAD_PROCESS_SHARED_SUPPORTED
 
 #if defined(KSDC_THREAD_PROCESS_SHARED_SUPPORTED) && defined(KSDC_TIMEOUTS_SUPPORTED)
 class pthreadTimedLock : public pthreadLock
@@ -208,7 +208,7 @@ public:
         return pthread_mutex_timedlock(&m_mutex, &timeout) == 0;
     }
 };
-#endif
+#endif // defined(KSDC_THREAD_PROCESS_SHARED_SUPPORTED) && defined(KSDC_TIMEOUTS_SUPPORTED)
 
 #ifdef KSDC_SEMAPHORES_SUPPORTED
 class semaphoreLock : public KSDCLock
@@ -251,7 +251,7 @@ public:
 protected:
     sem_t &m_semaphore;
 };
-#endif
+#endif // KSDC_SEMAPHORES_SUPPORTED
 
 #if defined(KSDC_SEMAPHORES_SUPPORTED) && defined(KSDC_TIMEOUTS_SUPPORTED)
 class semaphoreTimedLock : public semaphoreLock
@@ -275,7 +275,7 @@ public:
         return sem_timedwait(&m_semaphore, &timeout) == 0;
     }
 };
-#endif
+#endif // defined(KSDC_SEMAPHORES_SUPPORTED) && defined(KSDC_TIMEOUTS_SUPPORTED)
 
 // This enum controls the type of the locking used for the cache to allow
 // for as much portability as possible. This value will be stored in the

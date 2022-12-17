@@ -45,7 +45,7 @@ SharedLockId findBestSharedLock()
 
         tempLock->initialize(pthreadsProcessShared);
     }
-#endif
+#endif // KSDC_THREAD_PROCESS_SHARED_SUPPORTED
 
     // Our first choice is pthread_mutex_t for compatibility.
     if (timeoutsSupported && pthreadsProcessShared) {
@@ -64,7 +64,7 @@ SharedLockId findBestSharedLock()
 
         tempLock->initialize(semaphoresProcessShared);
     }
-#endif
+#endif // KSDC_SEMAPHORES_SUPPORTED
 
     if (timeoutsSupported && semaphoresProcessShared) {
         return LOCKTYPE_SEMAPHORE;
@@ -91,7 +91,7 @@ KSDCLock *createLockFromId(SharedLockId id, SharedLock &lock)
         return new pthreadLock(lock.mutex);
 
         break;
-#endif
+#endif // KSDC_THREAD_PROCESS_SHARED_SUPPORTED
 
 #ifdef KSDC_SEMAPHORES_SUPPORTED
     case LOCKTYPE_SEMAPHORE:
@@ -103,7 +103,7 @@ KSDCLock *createLockFromId(SharedLockId id, SharedLock &lock)
         return new semaphoreLock(lock.semaphore);
 
         break;
-#endif
+#endif // KSDC_SEMAPHORES_SUPPORTED
 
     case LOCKTYPE_SPINLOCK:
         return new simpleSpinLock(lock.spinlock);
