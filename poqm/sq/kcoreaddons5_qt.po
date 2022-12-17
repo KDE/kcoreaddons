@@ -944,17 +944,20 @@ msgctxt "KFormat|"
 msgid "Just now"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:512
+#. @item:intext %1 is a whole number
+#: lib/util/kformatprivate.cpp:515
 #, fuzzy, qt-format
 #| msgctxt "@item:intext"
 #| msgid "1 minute"
 #| msgid_plural "%1 minutes"
 msgctxt "KFormat|"
-msgid "%1 minutes ago"
-msgstr "1 minutë"
+msgid "%n minute(s) ago"
+msgid_plural "%n minute(s) ago"
+msgstr[0] "1 minutë"
+msgstr[1] "1 minutë"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
-#: lib/util/kformatprivate.cpp:528
+#: lib/util/kformatprivate.cpp:531
 #, fuzzy, qt-format
 #| msgctxt ""
 #| "@item:intext days and hours. This uses the previous item:intext messages. "
