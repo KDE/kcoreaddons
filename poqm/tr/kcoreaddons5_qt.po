@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-11-01 12:45+0300\n"
+"PO-Revision-Date: 2022-12-17 17:58+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -31,7 +31,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:236
@@ -619,35 +619,35 @@ msgstr "%1 YiB"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2.%3s"
-msgstr "%1m%2.%3s"
+msgstr "%1dk%2.%3sn"
 
 #. @item:intext Duration format minutes and seconds
 #: lib/util/kformatprivate.cpp:336
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2s"
-msgstr "%1m%2s"
+msgstr "%1dk%2sn"
 
 #. @item:intext Duration format hours and minutes
 #: lib/util/kformatprivate.cpp:339
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m"
-msgstr "%1h%2m"
+msgstr "%1sa%2dk"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
 #: lib/util/kformatprivate.cpp:342
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3.%4s"
-msgstr "%1h%2m%3.%4s"
+msgstr "%1sa%2dk%3.%4sn"
 
 #. @item:intext Duration format hours, minutes, seconds
 #: lib/util/kformatprivate.cpp:349
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3s"
-msgstr "%1s%2d%3sn"
+msgstr "%1sa%2dk%3sn"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:355
@@ -803,21 +803,19 @@ msgstr "Şimdi"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:515
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%1 dakika önce"
-msgstr[1] "%1 dakika önce"
+msgstr[0] "%n dakika önce"
+msgstr[1] "%n dakika önce"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:531
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 at %2"
-msgstr "%1, %2 konumunda"
+msgstr "%2 konumundaki %1"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
