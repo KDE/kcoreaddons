@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-11-02 22:33+0100\n"
+"PO-Revision-Date: 2022-12-20 19:38+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -789,14 +789,12 @@ msgstr "Преди малко"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:515
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "Преди %1 минути"
-msgstr[1] "Преди %1 минути"
+msgstr[0] "Преди %n минути"
+msgstr[1] "Преди %n минути"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:531
