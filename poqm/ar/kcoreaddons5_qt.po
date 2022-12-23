@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-28 15:38+0300\n"
-"PO-Revision-Date: 2022-11-01 12:28+0400\n"
+"PO-Revision-Date: 2022-12-22 09:02+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -811,18 +811,16 @@ msgstr "الآن"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:515
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "قبل %1 دقيقة"
-msgstr[1] "قبل %1 دقيقة"
-msgstr[2] "قبل %1 دقيقة"
-msgstr[3] "قبل %1 دقيقة"
-msgstr[4] "قبل %1 دقيقة"
-msgstr[5] "قبل %1 دقيقة"
+msgstr[0] "قبل %n دقيقة"
+msgstr[1] "قبل دقيقة واحدة"
+msgstr[2] "قبل دقيقتين"
+msgstr[3] "قبل %n دقائق"
+msgstr[4] "قبل %n دقيقة"
+msgstr[5] "قبل %n دقيقة"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:531
