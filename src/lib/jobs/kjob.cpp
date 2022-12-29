@@ -332,14 +332,8 @@ void KJob::emitResult()
 
 void KJob::emitPercent(qulonglong processedAmount, qulonglong totalAmount)
 {
-    Q_D(KJob);
-    // calculate percents
-    if (totalAmount) {
-        unsigned long oldPercentage = d->percentage;
-        d->percentage = 100.0 * processedAmount / totalAmount;
-        if (d->percentage != oldPercentage) {
-            Q_EMIT percentChanged(this, d->percentage, QPrivateSignal{});
-        }
+    if (totalAmount != 0) {
+        setPercent(100.0 * processedAmount / totalAmount);
     }
 }
 
