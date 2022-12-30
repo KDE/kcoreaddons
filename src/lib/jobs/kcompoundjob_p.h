@@ -22,7 +22,7 @@ public:
     KCompoundJobPrivate();
     ~KCompoundJobPrivate() override;
 
-    QList<KJob *> subjobs;
+    QList<KJob *> m_subjobs;
 
     Q_DECLARE_PUBLIC(KCompoundJob)
 };
