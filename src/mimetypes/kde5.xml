@@ -38,6 +38,7 @@ Notes:
     <comment xml:lang="de">RELAX NG</comment>
     <comment xml:lang="el">RELAX NG</comment>
     <comment xml:lang="en_GB">RELAX NG</comment>
+    <comment xml:lang="eo">RELAX NG</comment>
     <comment xml:lang="es">RELAX NG</comment>
     <comment xml:lang="eu">RELAX NG</comment>
     <comment xml:lang="fi">RELAX NG</comment>
@@ -88,6 +89,7 @@ Notes:
     <comment xml:lang="de">CD-Audio</comment>
     <comment xml:lang="el">CD ήχου</comment>
     <comment xml:lang="en_GB">CD audio</comment>
+    <comment xml:lang="eo">KD aŭda</comment>
     <comment xml:lang="es">Audio CD</comment>
     <comment xml:lang="eu">Audio CDa</comment>
     <comment xml:lang="fi">CD-ääni</comment>
@@ -191,6 +193,7 @@ Notes:
     <comment xml:lang="de">Java-Miniprogramm</comment>
     <comment xml:lang="el">Μικροεφαρμογή Java</comment>
     <comment xml:lang="en_GB">Java applet</comment>
+    <comment xml:lang="eo">Ĝaja apleto</comment>
     <comment xml:lang="es">Miniaplicación Java</comment>
     <comment xml:lang="eu">Java aplikaziotxoa</comment>
     <comment xml:lang="fi">Java-sovelma</comment>
@@ -289,6 +292,7 @@ Notes:
     <comment xml:lang="de">KDE-Farbschema</comment>
     <comment xml:lang="el">Θέμα χρωμάτων KDE</comment>
     <comment xml:lang="en_GB">KDE colour scheme</comment>
+    <comment xml:lang="eo">KDE kolorreĝimo</comment>
     <comment xml:lang="es">Esquema de color de KDE</comment>
     <comment xml:lang="eu">KDE-ren kolore antolaera</comment>
     <comment xml:lang="fi">KDE-värimalli</comment>
@@ -343,6 +347,7 @@ Notes:
     <comment xml:lang="de">KNewStuff-Paket</comment>
     <comment xml:lang="el">Πακέτο KNewStuff</comment>
     <comment xml:lang="en_GB">KNewStuff package</comment>
+    <comment xml:lang="eo">KNewStuff pako</comment>
     <comment xml:lang="es">Paquete de KNewStuff</comment>
     <comment xml:lang="eu">KNewStuff-erako paketea</comment>
     <comment xml:lang="fi">KNewStuff-paketti</comment>
@@ -498,6 +503,7 @@ Notes:
     <comment xml:lang="de">Plasmoid</comment>
     <comment xml:lang="el">πλασμοειδές</comment>
     <comment xml:lang="en_GB">plasmoid</comment>
+    <comment xml:lang="eo">plasmoid</comment>
     <comment xml:lang="es">plasmoide</comment>
     <comment xml:lang="eu">plasmoidea</comment>
     <comment xml:lang="fi">sovelma</comment>
@@ -851,6 +857,7 @@ Notes:
     <comment xml:lang="de">Web-Archiv</comment>
     <comment xml:lang="el">Αρχειοθήκη ιστού</comment>
     <comment xml:lang="en_GB">web archive</comment>
+    <comment xml:lang="eo">reteja arkivo</comment>
     <comment xml:lang="es">archivo web</comment>
     <comment xml:lang="eu">web-artxiboa</comment>
     <comment xml:lang="fi">verkkoarkisto</comment>
