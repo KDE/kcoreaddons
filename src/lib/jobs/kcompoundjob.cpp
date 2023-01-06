@@ -9,13 +9,8 @@
 #include "kcompoundjob.h"
 #include "kcompoundjob_p.h"
 
-KCompoundJobPrivate::KCompoundJobPrivate()
-{
-}
-
-KCompoundJobPrivate::~KCompoundJobPrivate()
-{
-}
+KCompoundJobPrivate::KCompoundJobPrivate() = default;
+KCompoundJobPrivate::~KCompoundJobPrivate() = default;
 
 KCompoundJob::KCompoundJob(QObject *parent)
     : KJob(*new KCompoundJobPrivate, parent)
@@ -27,9 +22,7 @@ KCompoundJob::KCompoundJob(KCompoundJobPrivate &dd, QObject *parent)
 {
 }
 
-KCompoundJob::~KCompoundJob()
-{
-}
+KCompoundJob::~KCompoundJob() = default;
 
 bool KCompoundJob::addSubjob(KJob *job)
 {
