@@ -101,7 +101,7 @@ protected Q_SLOTS:
      * @param rich the info message in rich text version
      * @see infoMessage()
      */
-    virtual void slotInfoMessage(KJob *job, const QString &plain, const QString &rich);
+    virtual void subjobInfoMessage(KJob *job, const QString &plain, const QString &rich);
 
 protected:
     KCompoundJob(KCompoundJobPrivate &dd, QObject *parent);
