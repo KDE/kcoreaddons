@@ -44,7 +44,7 @@ protected:
      * is emitted. This has obviously to be called before
      * the result has been emitted by the job.
      *
-     * Note that the composite job takes ownership of \a job
+     * Note that the compound job takes ownership of \a job
      *
      * \a job the subjob to add
      *
