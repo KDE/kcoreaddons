@@ -103,7 +103,7 @@ protected Q_SLOTS:
      * \a rich the info message in rich text version
      * \sa infoMessage()
      */
-    virtual void slotInfoMessage(KJob *job, const QString &plain, const QString &rich);
+    virtual void subjobInfoMessage(KJob *job, const QString &plain, const QString &rich);
 
 protected:
     KCompoundJob(KCompoundJobPrivate &dd, QObject *parent);
