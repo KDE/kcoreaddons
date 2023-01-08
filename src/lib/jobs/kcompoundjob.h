@@ -42,7 +42,7 @@ protected:
     /**
      * Add a job that has to be finished before a result
      * is emitted. This has obviously to be called before
-     * the result has been emitted by the job.
+     * the finished() signal has been emitted by the job.
      *
      * Note that the compound job takes ownership of @p job
      *
@@ -91,7 +91,7 @@ protected Q_SLOTS:
      *
      * @param job the subjob
      */
-    virtual void slotResult(KJob *job);
+    virtual void subjobFinished(KJob *job);
 
     /**
      * Forward signal from subjob.
