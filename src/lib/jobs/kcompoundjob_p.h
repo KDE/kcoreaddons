@@ -21,7 +21,7 @@ public:
     KCompoundJobPrivate();
     ~KCompoundJobPrivate() override;
 
-    void disconnectSubjob(KJob *job);
+    virtual void disconnectSubjob(KJob *job);
 
     QList<KJob *> m_subjobs;
 
