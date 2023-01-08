@@ -83,7 +83,7 @@ protected:
      * Note that this will *not* delete the subjobs.
      * Ownership of the subjobs is passed on to the caller.
      */
-    void clearSubjobs();
+    virtual void clearSubjobs();
 
 protected Q_SLOTS:
     /*!
