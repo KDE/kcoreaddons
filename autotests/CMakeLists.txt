@@ -127,7 +127,7 @@ if(NOT CMAKE_CROSSCOMPILING)
     )
 endif()
 
-add_library(ktexttohtmlteststatic STATIC ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp)
+add_library(ktexttohtmlteststatic STATIC ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/kemoticonsparser.cpp)
 # include the binary dir in order to get kcoreaddons_export.h
 target_include_directories(ktexttohtmlteststatic PUBLIC ${KCoreAddons_BINARY_DIR}/src/lib)
 # fake static linking to prevent the export macros on Windows from kicking in
@@ -138,7 +138,7 @@ ecm_add_test(ktexttohtmltest.cpp
     LINK_LIBRARIES ktexttohtmlteststatic
 )
 
-add_executable(ktexttohtmlbenchmarktest ktexttohtmlbenchmarktest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp)
+add_executable(ktexttohtmlbenchmarktest ktexttohtmlbenchmarktest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/kemoticonsparser.cpp)
 target_link_libraries(ktexttohtmlbenchmarktest PUBLIC ktexttohtmlteststatic)
 
 add_executable(kprocesstest_helper kprocesstest_helper.cpp)

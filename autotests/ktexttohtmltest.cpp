@@ -480,3 +480,55 @@ void KTextToHTMLTest::testHtmlConvert()
     const QString actualHtml = KTextToHTML::convertToHtml(plainText, flags);
     QCOMPARE(actualHtml, htmlText);
 }
+
+#define s(x) QStringLiteral(x)
+
+void KTextToHTMLTest::testEmoticons_data()
+{
+    QTest::addColumn<QString>("input");
+    QTest::addColumn<QString>("output");
+    QTest::newRow("empty") << QString() << QString();
+    QTest::newRow("trailing") << s("Hello :-)") << s("Hello 🙂");
+    QTest::newRow("embedded") << s("Hello :-) How are you?") << s("Hello 🙂 How are you?");
+    QTest::newRow("leading") << s(":-( Bye") << s("🙁 Bye");
+    QTest::newRow("embedded-html") << s("<b>:(</b>") << s("&lt;b&gt;:(&lt;/b&gt;");
+    QTest::newRow("html-attribute") << s("<img src=\"...\" title=\":-)\" />") << s("&lt;img src=&quot;...&quot; title=&quot;:-)&quot; /&gt;");
+    QTest::newRow("broken-1") << s(":))") << s("😆");
+    QTest::newRow("broken-4") << s(":D and :-D are not the same as :d and :-d") << s("😀 and 😀 are not the same as :d and :-d");
+    QTest::newRow("broken-5") << s("4d:D>:)F:/&gt;:-(:Pu:d9") << s("4d:D&gt;:)F:/&amp;gt;:-(:Pu:d9");
+    QTest::newRow("broken-6") << s("&lt;::pvar:: test=1&gt;") << s("&amp;lt;::pvar:: test=1&amp;gt;");
+    QTest::newRow("working-5") << s("(&amp;)") << s("(&amp;amp;)");
+    QTest::newRow("working-6") << s("Bla (&nbsp;)") << s("Bla (&amp;nbsp;)");
+    QTest::newRow("working-7") << s("a non-breaking space (&nbsp;) character") << s("a non-breaking space (&amp;nbsp;) character");
+
+    QTest::newRow("angle-bracket-1") << s(">:)") << s("😈");
+    QTest::newRow("angle-bracket-2") << s("<b>:)") << s("&lt;b&gt;:)");
+}
+
+void KTextToHTMLTest::testEmoticons()
+{
+    QFETCH(QString, input);
+    QFETCH(QString, output);
+    QCOMPARE(KTextToHTML::convertToHtml(input, KTextToHTML::ReplaceSmileys | KTextToHTML::IgnoreUrls), output);
+}
+
+void KTextToHTMLTest::testEmoticonsNoReplace_data()
+{
+    QTest::addColumn<QString>("input");
+    QTest::newRow("empty") << QString();
+    QTest::newRow("no-space-spearator") << s("Very happy! :-):-)");
+    QTest::newRow("broken-2") << s("In a sentence:practical example");
+    QTest::newRow("broken-8") << s("-+-[-:-(-:-)-:-]-+-");
+    QTest::newRow("broken-9") << s("::shrugs::");
+    QTest::newRow("broken-10") << s(":Ptesting:P");
+    QTest::newRow("working-1") << s(":):)");
+    QTest::newRow("working-4") << s("http://www.kde.org");
+    QTest::newRow("working-3") << s("End of sentence:p");
+    QTest::newRow("xmpp-1") << s("an xmpp emoticon (%)");
+}
+
+void KTextToHTMLTest::testEmoticonsNoReplace()
+{
+    QFETCH(QString, input);
+    QCOMPARE(KTextToHTML::convertToHtml(input, KTextToHTML::ReplaceSmileys | KTextToHTML::IgnoreUrls), input);
+}

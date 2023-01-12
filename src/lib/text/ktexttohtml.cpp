@@ -6,41 +6,15 @@
 */
 
 #include "ktexttohtml.h"
+#include "kemoticonsparser_p.h"
 #include "ktexttohtml_p.h"
-#include "ktexttohtmlemoticonsinterface.h"
 
 #include <QCoreApplication>
 #include <QFile>
-#include <QPluginLoader>
 #include <QRegularExpression>
 #include <QStringList>
 
 #include <limits.h>
-
-static KTextToHTMLEmoticonsInterface *s_emoticonsInterface = nullptr;
-
-static void loadEmoticonsPlugin()
-{
-    static bool triedLoadPlugin = false;
-    if (!triedLoadPlugin) {
-        triedLoadPlugin = true;
-
-        // Check if QGuiApplication::platformName property exists. This is a
-        // hackish way of determining whether we are running QGuiApplication,
-        // because we cannot load the FrameworkIntegration plugin into a
-        // QCoreApplication, as it would crash immediately
-        if (qApp->metaObject()->indexOfProperty("platformName") > -1) {
-            QPluginLoader lib(QStringLiteral("kf" QT_STRINGIFY(QT_VERSION_MAJOR) "/KEmoticonsIntegrationPlugin"));
-            QObject *rootObj = lib.instance();
-            if (rootObj) {
-                s_emoticonsInterface = rootObj->property(KTEXTTOHTMLEMOTICONS_PROPERTY).value<KTextToHTMLEmoticonsInterface *>();
-            }
-        }
-    }
-    if (!s_emoticonsInterface) {
-        s_emoticonsInterface = new KTextToHTMLEmoticonsDummy();
-    }
-}
 
 KTextToHTMLHelper::KTextToHTMLHelper(const QString &plainText, int pos, int maxUrlLen, int maxAddressLen)
     : mText(plainText)
@@ -48,14 +22,6 @@ KTextToHTMLHelper::KTextToHTMLHelper(const QString &plainText, int pos, int maxU
     , mMaxAddressLen(maxAddressLen)
     , mPos(pos)
 {
-}
-
-KTextToHTMLEmoticonsInterface *KTextToHTMLHelper::emoticonsInterface() const
-{
-    if (!s_emoticonsInterface) {
-        loadEmoticonsPlugin();
-    }
-    return s_emoticonsInterface;
 }
 
 QString KTextToHTMLHelper::getEmailAddress()
@@ -584,16 +550,7 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
     }
 
     if (flags & ReplaceSmileys) {
-        const QStringList exclude = {QStringLiteral("(c)"), QStringLiteral("(C)"), QStringLiteral("&gt;:-("), QStringLiteral("&gt;:("), QStringLiteral("(B)"),
-                                     QStringLiteral("(b)"), QStringLiteral("(P)"), QStringLiteral("(p)"),     QStringLiteral("(O)"),    QStringLiteral("(o)"),
-                                     QStringLiteral("(D)"), QStringLiteral("(d)"), QStringLiteral("(E)"),     QStringLiteral("(e)"),    QStringLiteral("(K)"),
-                                     QStringLiteral("(k)"), QStringLiteral("(I)"), QStringLiteral("(i)"),     QStringLiteral("(L)"),    QStringLiteral("(l)"),
-                                     QStringLiteral("(8)"), QStringLiteral("(T)"), QStringLiteral("(t)"),     QStringLiteral("(G)"),    QStringLiteral("(g)"),
-                                     QStringLiteral("(F)"), QStringLiteral("(f)"), QStringLiteral("(H)"),     QStringLiteral("8)"),     QStringLiteral("(N)"),
-                                     QStringLiteral("(n)"), QStringLiteral("(Y)"), QStringLiteral("(y)"),     QStringLiteral("(U)"),    QStringLiteral("(u)"),
-                                     QStringLiteral("(W)"), QStringLiteral("(w)"), QStringLiteral("(6)")};
-
-        result = helper.emoticonsInterface()->parseEmoticons(result, true, exclude);
+        result = KEmoticonsParser::parseEmoticons(result);
     }
 
     return result;

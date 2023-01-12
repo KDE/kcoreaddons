@@ -9,25 +9,11 @@
 #define KTEXTTOHTML_P_H
 
 #include "kcoreaddons_export.h"
-#include "ktexttohtmlemoticonsinterface.h"
-
-class KTextToHTMLEmoticonsDummy : public KTextToHTMLEmoticonsInterface
-{
-public:
-    QString parseEmoticons(const QString &text, bool strictParse = false, const QStringList &exclude = QStringList()) override
-    {
-        Q_UNUSED(strictParse);
-        Q_UNUSED(exclude);
-        return text;
-    }
-};
 
 class KTextToHTMLHelper
 {
 public:
     KTextToHTMLHelper(const QString &plainText, int pos = 0, int maxUrlLen = 4096, int maxAddressLen = 255);
-
-    KTextToHTMLEmoticonsInterface *emoticonsInterface() const;
 
     QString getEmailAddress();
     QString getPhoneNumber();

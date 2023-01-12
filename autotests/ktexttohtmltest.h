@@ -17,6 +17,10 @@ private Q_SLOTS:
     void testGetUrl();
     void testHtmlConvert();
     void testHtmlConvert_data();
+    void testEmoticons_data();
+    void testEmoticons();
+    void testEmoticonsNoReplace_data();
+    void testEmoticonsNoReplace();
 
 private:
     void testGetUrl2(const QString &left, const QString &right);

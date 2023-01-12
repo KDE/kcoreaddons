@@ -129,6 +129,7 @@ target_sources(KF6CoreAddons PRIVATE
     plugin/kstaticpluginhelpers.cpp
     plugin/desktopfileparser.cpp
     randomness/krandom.cpp
+    text/kemoticonsparser.cpp
     text/kjsonutils.cpp
     text/kfuzzymatcher.cpp
     text/kmacroexpander.cpp
@@ -327,7 +328,6 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KMacroExpander
         KStringHandler
         KTextToHTML
-        KTextToHTMLEmoticonsInterface
     RELATIVE text
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
