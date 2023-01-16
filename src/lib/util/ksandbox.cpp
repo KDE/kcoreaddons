@@ -6,6 +6,8 @@
 #include <QDebug>
 #include <QFileInfo>
 
+#include <kcoreaddons_debug.h>
+
 bool KSandbox::isInside()
 {
     static const bool isInside = isFlatpak() || isSnap();
@@ -24,9 +26,25 @@ bool KSandbox::isSnap()
     return isSnap;
 }
 
+bool checkHasFlatpakSpawnPrivileges()
+{
+    QFile f(QStringLiteral("/.flatpak-info"));
+    if (!f.open(QIODevice::ReadOnly)) {
+        return false;
+    }
+
+    return f.readAll().contains("\norg.freedesktop.Flatpak=talk\n");
+}
+
 KSandbox::ProcessContext KSandbox::makeHostContext(const QProcess &process)
 {
     if (!KSandbox::isFlatpak()) {
+        return {process.program(), process.arguments()};
+    }
+
+    static const bool hasFlatpakSpawnPrivileges = checkHasFlatpakSpawnPrivileges();
+    if (!hasFlatpakSpawnPrivileges) {
+        qCWarning(KCOREADDONS_DEBUG) << "Process execution expects 'org.freedesktop.Flatpak=talk'" << process.program();
         return {process.program(), process.arguments()};
     }
 
