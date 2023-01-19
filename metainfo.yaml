@@ -13,8 +13,8 @@ deprecated: false
 release: true
 libraries:
  - qmake: KCoreAddons
-   cmake: "KF5::CoreAddons"
-cmakename: KF5CoreAddons
+   cmake: "KF6::CoreAddons"
+cmakename: KF6CoreAddons
 
 public_lib: true
 group: Frameworks

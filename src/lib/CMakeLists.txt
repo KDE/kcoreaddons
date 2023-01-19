@@ -28,27 +28,27 @@ set (ACCOUNTS_SERVICE_ICON_DIR "/var/lib/AccountsService/icons" CACHE STRING "Ac
 
 configure_file(util/config-util.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-util.h)
 
-add_library(KF5CoreAddons)
-add_library(KF5::CoreAddons ALIAS KF5CoreAddons)
+add_library(KF6CoreAddons)
+add_library(KF6::CoreAddons ALIAS KF6CoreAddons)
 
 if(NOT BUILD_SHARED_LIBS)
-    target_compile_definitions(KF5CoreAddons PUBLIC -DKCOREADDONS_STATIC)
+    target_compile_definitions(KF6CoreAddons PUBLIC -DKCOREADDONS_STATIC)
 endif()
 
-ecm_create_qm_loader(KF5CoreAddons kcoreaddons5_qt)
+ecm_create_qm_loader(KF6CoreAddons kcoreaddons5_qt)
 
 if (FAM_FOUND)
-    target_include_directories(KF5CoreAddons PRIVATE ${FAM_INCLUDE_DIR})
-    target_link_libraries(KF5CoreAddons PRIVATE ${FAM_LIBRARIES})
+    target_include_directories(KF6CoreAddons PRIVATE ${FAM_INCLUDE_DIR})
+    target_link_libraries(KF6CoreAddons PRIVATE ${FAM_LIBRARIES})
 endif ()
 
 if (Inotify_FOUND)
-    target_include_directories(KF5CoreAddons PRIVATE ${Inotify_INCLUDE_DIRS})
-    target_link_libraries(KF5CoreAddons PRIVATE ${Inotify_LIBRARIES})
+    target_include_directories(KF6CoreAddons PRIVATE ${Inotify_INCLUDE_DIRS})
+    target_link_libraries(KF6CoreAddons PRIVATE ${Inotify_LIBRARIES})
 endif ()
 
 if(NOT WIN32)
-    target_sources(KF5CoreAddons PRIVATE
+    target_sources(KF6CoreAddons PRIVATE
         caching/kshareddatacache.cpp
         caching/kshareddatacache.h
     )
@@ -56,15 +56,15 @@ if(NOT WIN32)
     set_source_files_properties(caching/kshareddatacache.cpp
         PROPERTIES COMPILE_FLAGS -fexceptions)
 
-    target_link_libraries(KF5CoreAddons PRIVATE Threads::Threads)
+    target_link_libraries(KF6CoreAddons PRIVATE Threads::Threads)
 else()
-    target_sources(KF5CoreAddons PRIVATE
+    target_sources(KF6CoreAddons PRIVATE
         caching/kshareddatacache_win.cpp
     )
 endif()
 
 if (WIN32)
-    target_sources(KF5CoreAddons PRIVATE
+    target_sources(KF6CoreAddons PRIVATE
         text/kmacroexpander_win.cpp
         util/klistopenfilesjob_win.cpp
         util/kprocesslist_win.cpp
@@ -74,19 +74,19 @@ if (WIN32)
 endif ()
 
 if (UNIX)
-    target_sources(KF5CoreAddons PRIVATE
+    target_sources(KF6CoreAddons PRIVATE
         text/kmacroexpander_unix.cpp
         util/klistopenfilesjob_unix.cpp
         util/kuser_unix.cpp
         util/kshell_unix.cpp
     )
     if (HAVE_PROCSTAT)
-        target_sources(KF5CoreAddons PRIVATE
+        target_sources(KF6CoreAddons PRIVATE
             util/kprocesslist_unix_procstat.cpp
         )
-        target_compile_definitions(KF5CoreAddons PRIVATE HAVE_PROCSTAT=1)
+        target_compile_definitions(KF6CoreAddons PRIVATE HAVE_PROCSTAT=1)
     else ()
-        target_sources(KF5CoreAddons PRIVATE
+        target_sources(KF6CoreAddons PRIVATE
             util/kprocesslist_unix.cpp
         )
     endif ()
@@ -101,15 +101,15 @@ if(HAVE_QTDBUS)
     set_source_files_properties(io/org.kde.KIOFuse.VFS.xml PROPERTIES NO_NAMESPACE TRUE)
     qt_add_dbus_interface(_dbus_SRCS io/org.kde.KIOFuse.VFS.xml io/org.kde.KIOFuse.VFS)
 
-    target_sources(KF5CoreAddons PRIVATE ${_dbus_SRCS})
-    target_link_libraries(KF5CoreAddons PRIVATE Qt${QT_MAJOR_VERSION}::DBus)
+    target_sources(KF6CoreAddons PRIVATE ${_dbus_SRCS})
+    target_link_libraries(KF6CoreAddons PRIVATE Qt${QT_MAJOR_VERSION}::DBus)
 endif()
 
 if (TARGET UDev::UDev)
-    target_link_libraries(KF5CoreAddons PRIVATE UDev::UDev)
+    target_link_libraries(KF6CoreAddons PRIVATE UDev::UDev)
 endif()
 
-target_sources(KF5CoreAddons PRIVATE
+target_sources(KF6CoreAddons PRIVATE
     kaboutdata.cpp
     kcoreaddons.cpp
     io/kautosavefile.cpp
@@ -223,7 +223,7 @@ ecm_qt_export_logging_category(
     DESCRIPTION "KMemoryInfo (KCoreAddons)"
     EXPORT KCOREADDONS
 )
-ecm_qt_declare_logging_category(KF5CoreAddons
+ecm_qt_declare_logging_category(KF6CoreAddons
     HEADER desktopfileparser_debug.h
     IDENTIFIER DESKTOPPARSER
     CATEGORY_NAME kf.coreaddons.desktopparser
@@ -241,7 +241,7 @@ ecm_qt_export_logging_category(
     EXPORT KCOREADDONS
 )
 
-ecm_qt_declare_logging_category(KF5CoreAddons
+ecm_qt_declare_logging_category(KF6CoreAddons
     HEADER kcoreaddons_debug.h
     IDENTIFIER KCOREADDONS_DEBUG
     CATEGORY_NAME kf.coreaddons
@@ -250,7 +250,7 @@ ecm_qt_declare_logging_category(KF5CoreAddons
     EXPORT KCOREADDONS
 )
 
-ecm_generate_export_header(KF5CoreAddons
+ecm_generate_export_header(KF6CoreAddons
     BASE_NAME KCoreAddons
     GROUP_BASE_NAME KF
     VERSION ${KF_VERSION}
@@ -259,35 +259,35 @@ ecm_generate_export_header(KF5CoreAddons
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
-target_include_directories(KF5CoreAddons PUBLIC "$<BUILD_INTERFACE:${kcoreaddons_INCLUDE_DIRS}>")
+target_include_directories(KF6CoreAddons PUBLIC "$<BUILD_INTERFACE:${kcoreaddons_INCLUDE_DIRS}>")
 
-target_link_libraries(KF5CoreAddons
+target_link_libraries(KF6CoreAddons
   PUBLIC
     Qt${QT_MAJOR_VERSION}::Core
 )
 
 if(WIN32)
-    target_link_libraries(KF5CoreAddons PRIVATE netapi32 userenv psapi)
+    target_link_libraries(KF6CoreAddons PRIVATE netapi32 userenv psapi)
 endif()
 
 if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
-    target_link_libraries(KF5CoreAddons PRIVATE kvm)
+    target_link_libraries(KF6CoreAddons PRIVATE kvm)
 endif()
 
 if (HAVE_PROCSTAT)
-    target_link_libraries(KF5CoreAddons PRIVATE Procstat::Procstat)
+    target_link_libraries(KF6CoreAddons PRIVATE Procstat::Procstat)
 endif()
 
 if(HAVE_DLADDR)
     set_source_files_properties(SOURCE util/klibexec.cpp PROPERTIES COMPILE_FLAGS "${DLADDR_LINK_FLAGS}") # ensure _GNU_SOURCE on Linux
-    target_link_libraries(KF5CoreAddons PRIVATE ${DLADDR_LINK_LIBRARIES})
+    target_link_libraries(KF6CoreAddons PRIVATE ${DLADDR_LINK_LIBRARIES})
 endif()
 
-target_include_directories(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons>" )
+target_include_directories(KF6CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons>" )
 
-target_compile_definitions(KF5CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
+target_compile_definitions(KF6CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
 
-set_target_properties(KF5CoreAddons PROPERTIES VERSION   ${KCOREADDONS_VERSION}
+set_target_properties(KF6CoreAddons PROPERTIES VERSION   ${KCOREADDONS_VERSION}
                                                SOVERSION ${KCOREADDONS_SOVERSION}
                                                EXPORT_NAME CoreAddons
 )
@@ -373,7 +373,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
 
-install(TARGETS KF5CoreAddons EXPORT KF5CoreAddonsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF6CoreAddons EXPORT KF6CoreAddonsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(FILES
     ${KCoreAddons_HEADERS}
@@ -386,9 +386,9 @@ add_subdirectory(licenses)
 
 if(BUILD_QCH)
     ecm_add_qch(
-        KF5CoreAddons_QCH
+        KF6CoreAddons_QCH
         NAME KCoreAddons
-        BASE_NAME KF5CoreAddons
+        BASE_NAME KF6CoreAddons
         VERSION ${KF_VERSION}
         ORG_DOMAIN org.kde
         SOURCES # using only public headers, to cover only public API
@@ -411,5 +411,5 @@ if(BUILD_QCH)
 endif()
 
 include(ECMGeneratePriFile)
-ecm_generate_pri_file(BASE_NAME KCoreAddons LIB_NAME KF5CoreAddons DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons)
+ecm_generate_pri_file(BASE_NAME KCoreAddons LIB_NAME KF6CoreAddons DEPS "core" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})

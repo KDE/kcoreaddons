@@ -3,7 +3,7 @@ set(KCOREADDONS_INTERNAL_SKIP_PLUGIN_INSTALLATION ON)
 
 include(ECMAddTests)
 include(ConfigureChecks.cmake) #configure checks for QFileSystemWatcher
-include(../KF5CoreAddonsMacros.cmake)
+include(../KF6CoreAddonsMacros.cmake)
 
 find_package(Qt${QT_MAJOR_VERSION}Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
 
@@ -31,7 +31,7 @@ configure_file(config-tests.h.in config-tests.h)
 macro(build_plugin pname)
     add_library(${pname} MODULE ${ARGN})
     ecm_mark_as_test(${pname})
-    target_link_libraries(${pname} KF5::CoreAddons autotests_static)
+    target_link_libraries(${pname} KF6::CoreAddons autotests_static)
 endmacro()
 
 # Build some sample plugins
@@ -45,14 +45,14 @@ build_plugin(qtplugin qtplugin.cpp)
 
 kcoreaddons_add_plugin(jsonplugin_cmake_macro SOURCES kpluginclass.cpp INSTALL_NAMESPACE "namespace")
 ecm_mark_as_test(jsonplugin_cmake_macro)
-target_link_libraries(jsonplugin_cmake_macro KF5::CoreAddons autotests_static)
+target_link_libraries(jsonplugin_cmake_macro KF6::CoreAddons autotests_static)
 
 kcoreaddons_add_plugin(pluginwithoutmetadata SOURCES pluginwithoutmetadata.cpp INSTALL_NAMESPACE "namespace")
 ecm_mark_as_test(pluginwithoutmetadata)
-target_link_libraries(pluginwithoutmetadata KF5::CoreAddons autotests_static)
+target_link_libraries(pluginwithoutmetadata KF6::CoreAddons autotests_static)
 
 add_library(org.kde.test MODULE jsonplugin.cpp)
-target_link_libraries(org.kde.test KF5::CoreAddons)
+target_link_libraries(org.kde.test KF6::CoreAddons)
 
 add_definitions( -DKDELIBS4CONFIGMIGRATOR_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data" )
 
@@ -107,7 +107,7 @@ ecm_add_tests(
     kmemoryinfotest.cpp
     kruntimeplatformtest.cpp
     ${autotests_OPTIONAL_SRCS}
-    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF5::CoreAddons autotests_static
+    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF6::CoreAddons autotests_static
 )
 if(TARGET klistopenfilesjobtest_unix AND CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     find_package(Qt${QT_MAJOR_VERSION}Network ${REQUIRED_QT_VERSION} CONFIG QUIET)
@@ -115,13 +115,13 @@ if(TARGET klistopenfilesjobtest_unix AND CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 endif()
 
 kcoreaddons_add_plugin(static_jsonplugin_cmake_macro SOURCES statickpluginclass.cpp INSTALL_NAMESPACE "staticnamespace" STATIC)
-target_link_libraries(static_jsonplugin_cmake_macro KF5::CoreAddons autotests_static)
+target_link_libraries(static_jsonplugin_cmake_macro KF6::CoreAddons autotests_static)
 
 kcoreaddons_add_plugin(static_jsonplugin_cmake_macro_2 SOURCES statickpluginclass_2.cpp INSTALL_NAMESPACE "staticnamespace2" STATIC)
-target_link_libraries(static_jsonplugin_cmake_macro_2 KF5::CoreAddons autotests_static)
+target_link_libraries(static_jsonplugin_cmake_macro_2 KF6::CoreAddons autotests_static)
 
 kcoreaddons_add_plugin(static_plugin_without_metadata SOURCES staticpluginwithoutmetadata.cpp INSTALL_NAMESPACE "staticnamespace3" STATIC)
-target_link_libraries(static_plugin_without_metadata KF5::CoreAddons autotests_static)
+target_link_libraries(static_plugin_without_metadata KF6::CoreAddons autotests_static)
 
 
 kcoreaddons_target_static_plugins(kpluginfactorytest "staticnamespace")
@@ -131,7 +131,7 @@ kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace2")
 kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace3")
 
 if(NOT CMAKE_CROSSCOMPILING)
-    ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF5::CoreAddons autotests_static)
+    ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF6::CoreAddons autotests_static)
     target_compile_definitions(desktoptojsontest PRIVATE
         DESKTOP_TO_JSON_EXE="$<TARGET_FILE:desktoptojson>"
     )
@@ -152,7 +152,7 @@ add_executable(ktexttohtmlbenchmarktest ktexttohtmlbenchmarktest.cpp ${CMAKE_SOU
 target_link_libraries(ktexttohtmlbenchmarktest PUBLIC ktexttohtmlteststatic)
 
 add_executable(kprocesstest_helper kprocesstest_helper.cpp)
-target_link_libraries(kprocesstest_helper KF5::CoreAddons)
+target_link_libraries(kprocesstest_helper KF6::CoreAddons)
 
 target_compile_definitions(kpluginloadertest PRIVATE
     JSONPLUGIN_FILE="$<TARGET_FILE:jsonplugin>"
@@ -181,7 +181,7 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
     set(BACKEND_TEST_TARGET kdirwatch_${_lowercaseBackendName}_unittest)
     set(BACKEND_BENCHMARK_TARGET kdirwatch_${_lowercaseBackendName}_benchmarktest)
     add_executable(${BACKEND_TEST_TARGET} kdirwatch_unittest.cpp)
-    target_link_libraries(${BACKEND_TEST_TARGET} Qt${QT_MAJOR_VERSION}::Test KF5::CoreAddons autotests_static)
+    target_link_libraries(${BACKEND_TEST_TARGET} Qt${QT_MAJOR_VERSION}::Test KF6::CoreAddons autotests_static)
 
     if(NOT WIN32)
         target_link_libraries(${BACKEND_TEST_TARGET} Threads::Threads)
@@ -193,7 +193,7 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
 
     add_executable(${BACKEND_BENCHMARK_TARGET} kdirwatch_benchmarktest.cpp)
     target_compile_definitions(${BACKEND_BENCHMARK_TARGET} PUBLIC -DKDIRWATCH_TEST_METHOD=\"${_backendName}\")
-    target_link_libraries(${BACKEND_BENCHMARK_TARGET} Qt${QT_MAJOR_VERSION}::Test KF5::CoreAddons autotests_static)
+    target_link_libraries(${BACKEND_BENCHMARK_TARGET} Qt${QT_MAJOR_VERSION}::Test KF6::CoreAddons autotests_static)
     if(NOT WIN32)
         target_link_libraries(${BACKEND_BENCHMARK_TARGET} Threads::Threads)
     endif()

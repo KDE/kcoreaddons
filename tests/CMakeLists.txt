@@ -7,10 +7,10 @@ if(NOT TARGET Qt${QT_MAJOR_VERSION}::Widgets)
 endif()
 
 add_executable(kdirwatchtest_gui kdirwatchtest_gui.cpp)
-target_link_libraries(kdirwatchtest_gui Qt${QT_MAJOR_VERSION}::Widgets KF5::CoreAddons)
+target_link_libraries(kdirwatchtest_gui Qt${QT_MAJOR_VERSION}::Widgets KF6::CoreAddons)
 
 add_executable(faceicontest faceicontest.cpp)
-target_link_libraries(faceicontest Qt${QT_MAJOR_VERSION}::Widgets KF5::CoreAddons)
+target_link_libraries(faceicontest Qt${QT_MAJOR_VERSION}::Widgets KF6::CoreAddons)
 
 add_executable(texttohtmltest ktexttohtmltest.cpp)
-target_link_libraries(texttohtmltest Qt${QT_MAJOR_VERSION}::Widgets KF5::CoreAddons)
+target_link_libraries(texttohtmltest Qt${QT_MAJOR_VERSION}::Widgets KF6::CoreAddons)

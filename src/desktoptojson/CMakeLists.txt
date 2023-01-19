@@ -20,7 +20,7 @@ target_sources(desktoptojson PRIVATE
     ../lib/plugin/desktopfileparser.cpp
 )
 if(NOT CMAKE_TOOLCHAIN_FILE)
-    add_executable(KF5::desktoptojson ALIAS desktoptojson)
+    add_executable(KF6::desktoptojson ALIAS desktoptojson)
 endif()
 
 set_property(TARGET desktoptojson PROPERTY CXX_STANDARD 14)
@@ -35,4 +35,4 @@ set_target_properties(desktoptojson PROPERTIES
         TOOL_VERSION "${KF_VERSION}"
         EXPORT_PROPERTIES TOOL_VERSION)
 
-install(TARGETS desktoptojson EXPORT KF5CoreAddonsToolingTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS desktoptojson EXPORT KF6CoreAddonsToolingTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
