@@ -51,7 +51,7 @@ function(kcoreaddons_desktop_to_json target desktop)
         return()
     endif()
     kcoreaddons_desktop_to_json_crosscompilation_args(_crosscompile_args)
-    set(command KF6::desktoptojson ${_crosscompile_args} -i ${desktop} -o ${json})
+    set(command KF5::desktoptojson ${_crosscompile_args} -i ${desktop} -o ${json})
     if(DESKTOP_TO_JSON_COMPAT_MODE)
       list(APPEND command -c)
     endif()
@@ -105,7 +105,7 @@ function(_desktop_to_json_cmake28 desktop json compat)
     # generated before moc is run, and there was no way until CMake 3.0.0 to
     # define a target as a dependency of the automoc target.
     message("Using CMake 2.8 way to call desktoptojson")
-    get_target_property(DESKTOPTOJSON_LOCATION KF6::desktoptojson LOCATION)
+    get_target_property(DESKTOPTOJSON_LOCATION KF5::desktoptojson LOCATION)
     if(compat)
         execute_process(
             COMMAND ${DESKTOPTOJSON_LOCATION} -i ${desktop} -o ${json} -c
