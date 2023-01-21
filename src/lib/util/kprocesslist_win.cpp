@@ -66,7 +66,7 @@ static inline ProcessInfo winProcessInfo(DWORD processId)
     TCHAR fullProcessPath[MAX_PATH] = {0};
     DWORD fullProcessPathLength = MAX_PATH;
     if (queryFullProcessImageName(handle, 0, fullProcessPath, &fullProcessPathLength)) {
-        pi.fullPath = QString::fromUtf16(reinterpret_cast<const ushort *>(fullProcessPath));
+        pi.fullPath = QString::fromUtf16(reinterpret_cast<const char16_t *>(fullProcessPath));
     }
 
     DWORD size = 0;
@@ -84,7 +84,7 @@ static inline ProcessInfo winProcessInfo(DWORD processId)
             DWORD domainNameLength = MAX_PATH;
 
             if (LookupAccountSid(NULL, userToken->User.Sid, user, &userNameLength, domain, &domainNameLength, &sidNameUse))
-                pi.processOwner = QString::fromUtf16(reinterpret_cast<const ushort *>(user));
+                pi.processOwner = QString::fromUtf16(reinterpret_cast<const char16_t *>(user));
         }
     }
 
@@ -105,7 +105,7 @@ KProcessInfoList KProcessList::processInfoList()
 
     for (bool hasNext = Process32First(snapshot, &pe); hasNext; hasNext = Process32Next(snapshot, &pe)) {
         const ProcessInfo processInf = winProcessInfo(pe.th32ProcessID);
-        const QString commandName = QString::fromUtf16(reinterpret_cast<ushort *>(pe.szExeFile));
+        const QString commandName = QString::fromUtf16(reinterpret_cast<char16_t *>(pe.szExeFile));
         if (processInf.fullPath.isEmpty()) {
             rc.push_back(KProcessInfo(pe.th32ProcessID, commandName, processInf.processOwner));
         } else {

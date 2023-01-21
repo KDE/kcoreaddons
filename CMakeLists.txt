@@ -114,7 +114,7 @@ kde_enable_exceptions()
 
 
 ecm_set_disabled_deprecation_versions(
-    QT 5.14.0 # Not 5.15 because of qsrand
+    QT 6.4.0
 )
 
 add_subdirectory(src)

@@ -67,7 +67,7 @@ QString KLibexec::pathFromAddress(const QString &relativePath, void *address)
 
 QStringList KLibexec::pathCandidates(const QString &relativePath)
 {
-    const QString qLibexec = QLibraryInfo::location(QLibraryInfo::LibraryExecutablesPath);
+    const QString qLibexec = QLibraryInfo::path(QLibraryInfo::LibraryExecutablesPath);
     const QString qLibexecKF5 = qLibexec + QLatin1String("/kf" QT_STRINGIFY(QT_VERSION_MAJOR));
 
     return {

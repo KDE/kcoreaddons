@@ -223,7 +223,7 @@ void KProcess::setShellCommand(const QString &cmd)
 #ifndef _WIN32_WCE
     WCHAR sysdir[MAX_PATH + 1];
     UINT size = GetSystemDirectoryW(sysdir, MAX_PATH + 1);
-    QProcess::setProgram(QString::fromUtf16((const ushort *)sysdir, size) + QLatin1String("\\cmd.exe"));
+    QProcess::setProgram(QString::fromUtf16((const char16_t *)sysdir, size) + QLatin1String("\\cmd.exe"));
     setNativeArguments(QLatin1String("/V:OFF /S /C \"") + cmd + QLatin1Char('"'));
 #else
     QProcess::setProgram(QStringLiteral("\\windows\\cmd.exe"));

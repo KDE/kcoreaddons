@@ -127,10 +127,10 @@ QByteArray DesktopFileParser::escapeValue(const QByteArray &input)
 struct CustomPropertyDefinition {
     // default ctor needed for QVector
     CustomPropertyDefinition()
-        : type(QVariant::String)
+        : type(QMetaType::QString)
     {
     }
-    CustomPropertyDefinition(const QByteArray &key, QVariant::Type type)
+    CustomPropertyDefinition(const QByteArray &key, QMetaType::Type type)
         : key(key)
         , type(type)
     {
@@ -138,11 +138,11 @@ struct CustomPropertyDefinition {
     QJsonValue fromString(const QString &str) const
     {
         switch (type) {
-        case QVariant::String:
+        case QMetaType::QString:
             return str;
-        case QVariant::StringList:
+        case QMetaType::QStringList:
             return QJsonArray::fromStringList(deserializeList(str));
-        case QVariant::Int: {
+        case QMetaType::Int: {
             bool ok = false;
             int result = str.toInt(&ok);
             if (!ok) {
@@ -151,7 +151,7 @@ struct CustomPropertyDefinition {
             }
             return QJsonValue(result);
         }
-        case QVariant::Double: {
+        case QMetaType::Double: {
             bool ok = false;
             double result = str.toDouble(&ok);
             if (!ok) {
@@ -160,7 +160,7 @@ struct CustomPropertyDefinition {
             }
             return QJsonValue(result);
         }
-        case QVariant::Bool: {
+        case QMetaType::Bool: {
             bool result = str.compare(QLatin1String("true"), Qt::CaseInsensitive) == 0;
             if (!result && str.compare(QLatin1String("false"), Qt::CaseInsensitive) != 0) {
                 qCWarning(DESKTOPPARSER) << "Invalid boolean value for key" << key << "-" << str;
@@ -169,12 +169,12 @@ struct CustomPropertyDefinition {
             return QJsonValue(result);
         }
         default:
-            // This was checked when parsing the file, no other QVariant::Type values are possible
+            // This was checked when parsing the file, no other QMetaType::Type values are possible
             Q_UNREACHABLE();
         }
     }
     QByteArray key;
-    QVariant::Type type;
+    QMetaType::Type type;
 };
 
 namespace
@@ -344,17 +344,17 @@ static ServiceTypeDefinition *parseServiceTypesFile(const QString &inputPath, co
             continue;
         }
         QByteArray propertyName = currentGroup.mid(qstrlen("PropertyDef::"));
-        QVariant::Type type = QVariant::nameToType(typeStr.constData());
+        const auto type = QMetaType::fromName(typeStr.constData()).id();
         switch (type) {
-        case QVariant::String:
-        case QVariant::StringList:
-        case QVariant::Int:
-        case QVariant::Double:
-        case QVariant::Bool:
+        case QMetaType::QString:
+        case QMetaType::QStringList:
+        case QMetaType::Int:
+        case QMetaType::Double:
+        case QMetaType::Bool:
             qCDebug(DESKTOPPARSER) << "Found property definition" << propertyName << "with type" << typeStr;
-            result.m_propertyDefs.push_back(CustomPropertyDefinition(propertyName, type));
+            result.m_propertyDefs.push_back(CustomPropertyDefinition(propertyName, static_cast<QMetaType::Type>(type)));
             break;
-        case QVariant::Invalid:
+        case QMetaType::UnknownType:
             qCWarning(DESKTOPPARSER) << "Property type" << typeStr
                                      << "is not a known QVariant type."
                                         " Found while parsing property definition for"
