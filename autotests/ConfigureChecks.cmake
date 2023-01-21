@@ -1,4 +1,4 @@
-set(CMAKE_REQUIRED_LIBRARIES Qt${QT_MAJOR_VERSION}::Core)
+set(CMAKE_REQUIRED_LIBRARIES Qt6::Core)
 check_cxx_source_compiles(
 "#include <QtCore/QFileSystemWatcher>
 int main()

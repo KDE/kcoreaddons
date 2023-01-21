@@ -31,7 +31,7 @@ option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, 
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
 set(REQUIRED_QT_VERSION 6.4.0)
-find_package(Qt${QT_MAJOR_VERSION} ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
+find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
 
 ecm_setup_qtplugin_macro_names(
     JSON_NONE
@@ -86,8 +86,8 @@ if (BSDLIKE)
 endif()
 
 if(NOT WIN32) # never relevant there
-    find_package(Qt${QT_MAJOR_VERSION}DBus ${QT_MIN_VERSION} CONFIG)
-    set(HAVE_QTDBUS ${Qt${QT_MAJOR_VERSION}DBus_FOUND})
+    find_package(Qt6DBus ${QT_MIN_VERSION} CONFIG)
+    set(HAVE_QTDBUS ${Qt6DBus_FOUND})
     add_feature_info(XDGPortalDragAndDrop HAVE_QTDBUS "Drag and Drop support via xdg-desktop-portal requies QtDBus")
 endif()
 

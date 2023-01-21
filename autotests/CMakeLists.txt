@@ -5,9 +5,9 @@ include(ECMAddTests)
 include(ConfigureChecks.cmake) #configure checks for QFileSystemWatcher
 include(../KF6CoreAddonsMacros.cmake)
 
-find_package(Qt${QT_MAJOR_VERSION}Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
+find_package(Qt6Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
 
-if(NOT TARGET Qt${QT_MAJOR_VERSION}::Test)
+if(NOT TARGET Qt6::Test)
     message(STATUS "QtTest not found, autotests will not be built.")
     return()
 endif()
@@ -24,7 +24,7 @@ ecm_qt_declare_logging_category(autotests_static
         IDENTIFIER KCOREADDONS_DEBUG
         CATEGORY_NAME kf.coreaddons
         )
-target_link_libraries(autotests_static Qt${QT_MAJOR_VERSION}::Core)
+target_link_libraries(autotests_static Qt6::Core)
 
 configure_file(config-tests.h.in config-tests.h)
 
@@ -107,11 +107,11 @@ ecm_add_tests(
     kmemoryinfotest.cpp
     kruntimeplatformtest.cpp
     ${autotests_OPTIONAL_SRCS}
-    LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF6::CoreAddons autotests_static
+    LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static
 )
 if(TARGET klistopenfilesjobtest_unix AND CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
-    find_package(Qt${QT_MAJOR_VERSION}Network ${REQUIRED_QT_VERSION} CONFIG QUIET)
-    target_link_libraries(klistopenfilesjobtest_unix Qt${QT_MAJOR_VERSION}::Network)
+    find_package(Qt6Network ${REQUIRED_QT_VERSION} CONFIG QUIET)
+    target_link_libraries(klistopenfilesjobtest_unix Qt6::Network)
 endif()
 
 kcoreaddons_add_plugin(static_jsonplugin_cmake_macro SOURCES statickpluginclass.cpp INSTALL_NAMESPACE "staticnamespace" STATIC)
@@ -131,7 +131,7 @@ kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace2")
 kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace3")
 
 if(NOT CMAKE_CROSSCOMPILING)
-    ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt${QT_MAJOR_VERSION}::Test KF6::CoreAddons autotests_static)
+    ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static)
     target_compile_definitions(desktoptojsontest PRIVATE
         DESKTOP_TO_JSON_EXE="$<TARGET_FILE:desktoptojson>"
     )
@@ -142,7 +142,7 @@ add_library(ktexttohtmlteststatic STATIC ${CMAKE_SOURCE_DIR}/src/lib/text/ktextt
 target_include_directories(ktexttohtmlteststatic PUBLIC ${KCoreAddons_BINARY_DIR}/src/lib)
 # fake static linking to prevent the export macros on Windows from kicking in
 target_compile_definitions(ktexttohtmlteststatic PUBLIC -DKCOREADDONS_STATIC_DEFINE=1)
-target_link_libraries(ktexttohtmlteststatic PUBLIC Qt${QT_MAJOR_VERSION}::Test autotests_static)
+target_link_libraries(ktexttohtmlteststatic PUBLIC Qt6::Test autotests_static)
 ecm_add_test(ktexttohtmltest.cpp
     TEST_NAME ktexttohtmltest
     LINK_LIBRARIES ktexttohtmlteststatic
@@ -181,7 +181,7 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
     set(BACKEND_TEST_TARGET kdirwatch_${_lowercaseBackendName}_unittest)
     set(BACKEND_BENCHMARK_TARGET kdirwatch_${_lowercaseBackendName}_benchmarktest)
     add_executable(${BACKEND_TEST_TARGET} kdirwatch_unittest.cpp)
-    target_link_libraries(${BACKEND_TEST_TARGET} Qt${QT_MAJOR_VERSION}::Test KF6::CoreAddons autotests_static)
+    target_link_libraries(${BACKEND_TEST_TARGET} Qt6::Test KF6::CoreAddons autotests_static)
 
     if(NOT WIN32)
         target_link_libraries(${BACKEND_TEST_TARGET} Threads::Threads)
@@ -193,7 +193,7 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
 
     add_executable(${BACKEND_BENCHMARK_TARGET} kdirwatch_benchmarktest.cpp)
     target_compile_definitions(${BACKEND_BENCHMARK_TARGET} PUBLIC -DKDIRWATCH_TEST_METHOD=\"${_backendName}\")
-    target_link_libraries(${BACKEND_BENCHMARK_TARGET} Qt${QT_MAJOR_VERSION}::Test KF6::CoreAddons autotests_static)
+    target_link_libraries(${BACKEND_BENCHMARK_TARGET} Qt6::Test KF6::CoreAddons autotests_static)
     if(NOT WIN32)
         target_link_libraries(${BACKEND_BENCHMARK_TARGET} Threads::Threads)
     endif()

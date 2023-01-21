@@ -102,7 +102,7 @@ if(HAVE_QTDBUS)
     qt_add_dbus_interface(_dbus_SRCS io/org.kde.KIOFuse.VFS.xml io/org.kde.KIOFuse.VFS)
 
     target_sources(KF6CoreAddons PRIVATE ${_dbus_SRCS})
-    target_link_libraries(KF6CoreAddons PRIVATE Qt${QT_MAJOR_VERSION}::DBus)
+    target_link_libraries(KF6CoreAddons PRIVATE Qt6::DBus)
 endif()
 
 if (TARGET UDev::UDev)
@@ -263,7 +263,7 @@ target_include_directories(KF6CoreAddons PUBLIC "$<BUILD_INTERFACE:${kcoreaddons
 
 target_link_libraries(KF6CoreAddons
   PUBLIC
-    Qt${QT_MAJOR_VERSION}::Core
+    Qt6::Core
 )
 
 if(WIN32)

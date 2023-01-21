@@ -28,7 +28,7 @@ set_property(TARGET desktoptojson PROPERTY CXX_STANDARD 14)
 # Mark it as non-gui so we won't create an app bundle on Mac OS X
 ecm_mark_nongui_executable(desktoptojson)
 
-target_link_libraries(desktoptojson Qt${QT_MAJOR_VERSION}::Core)
+target_link_libraries(desktoptojson Qt6::Core)
 target_compile_definitions(desktoptojson PRIVATE BUILDING_DESKTOPTOJSON_TOOL=1)
 # Note: we add a custom TOOL_VERSION property here to enable compatibility checks when cross-compiling.
 set_target_properties(desktoptojson PROPERTIES
