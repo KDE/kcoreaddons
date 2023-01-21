@@ -86,7 +86,6 @@ ecm_add_tests(
     kjobtest.cpp
     kosreleasetest.cpp
     kpluginfactorytest.cpp
-    kpluginloadertest.cpp
     kpluginmetadatatest.cpp
     kprocesstest.cpp
     krandomtest.cpp
@@ -153,14 +152,6 @@ target_link_libraries(ktexttohtmlbenchmarktest PUBLIC ktexttohtmlteststatic)
 
 add_executable(kprocesstest_helper kprocesstest_helper.cpp)
 target_link_libraries(kprocesstest_helper KF6::CoreAddons)
-
-target_compile_definitions(kpluginloadertest PRIVATE
-    JSONPLUGIN_FILE="$<TARGET_FILE:jsonplugin>"
-    VERSIONEDPLUGIN_FILE="$<TARGET_FILE:versionedplugin>"
-    UNVERSIONEDPLUGIN_FILE="$<TARGET_FILE:unversionedplugin>"
-    MULTIPLUGIN_FILE="$<TARGET_FILE:multiplugin>"
-    ALWAYSUNLOADPLUGIN_FILE="$<TARGET_FILE:alwaysunloadplugin>"
-)
 
 set(KDIRWATCH_BACKENDS_TO_TEST Stat)#Stat is always compiled
 

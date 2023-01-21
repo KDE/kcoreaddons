@@ -9,7 +9,6 @@
 
 #include <QPluginLoader>
 #include <kpluginfactory.h>
-#include <kpluginloader.h>
 
 // We do not have QWidgets as a dependency, this is a simple placeholder for the type to be fully qualified
 class QWidget : public QObject
@@ -45,19 +44,6 @@ private Q_SLOTS:
         QObject *partTest = factory->create<QObject>(&parentWidget, this);
         QVERIFY(partTest);
         delete partTest;
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
-        obj = factory->create<QObject>(QStringLiteral("secondary"), this, args);
-        QVERIFY(obj);
-        QCOMPARE(obj->objectName(), QString::fromLatin1("MultiPlugin2"));
-
-        obj2 = factory->create<QObject>(QStringLiteral("secondary"), this, args);
-        QVERIFY(obj2);
-        QCOMPARE(obj2->objectName(), QString::fromLatin1("MultiPlugin2"));
-        QVERIFY(obj != obj2);
-        delete obj;
-        delete obj2;
-#endif
     }
 
     void testPluginWithoutMetaData()

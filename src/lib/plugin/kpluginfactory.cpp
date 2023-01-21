@@ -13,6 +13,7 @@
 
 #include "kcoreaddons_debug.h"
 #include <QObjectCleanupHandler>
+#include <QPluginLoader>
 
 Q_GLOBAL_STATIC(QObjectCleanupHandler, factorycleanup)
 
@@ -181,48 +182,11 @@ void KPluginFactory::logFailedInstantiationMessage(const char *className, KPlugi
     qCWarning(KCOREADDONS_DEBUG) << "KPluginFactory could not create a" << className << "instance from" << data.fileName();
 }
 
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
-QObject *KPluginFactory::createObject(QObject *parent, const char *className, const QStringList &args)
-{
-    Q_UNUSED(parent);
-    Q_UNUSED(className);
-    Q_UNUSED(args);
-    return nullptr;
-}
-#endif
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
-KParts::Part *KPluginFactory::createPartObject(QWidget *parentWidget, QObject *parent, const char *classname, const QStringList &args)
-{
-    Q_UNUSED(parent);
-    Q_UNUSED(parentWidget);
-    Q_UNUSED(classname);
-    Q_UNUSED(args);
-    return nullptr;
-}
-#endif
-
 QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword)
 {
     Q_D(KPluginFactory);
 
     QObject *obj = nullptr;
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
-    if (keyword.isEmpty()) {
-        const QStringList argsStringList = variantListToStringList(args);
-
-        if ((obj = reinterpret_cast<QObject *>(createPartObject(parentWidget, parent, iface, argsStringList)))) {
-            Q_EMIT objectCreated(obj);
-            return obj;
-        }
-
-        if ((obj = createObject(parent, iface, argsStringList))) {
-            Q_EMIT objectCreated(obj);
-            return obj;
-        }
-    }
-#endif
 
     const QList<KPluginFactoryPrivate::Plugin> candidates(d->createInstanceHash.values(keyword));
     // for !keyword.isEmpty() candidates.count() is 0 or 1

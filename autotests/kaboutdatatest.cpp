@@ -31,9 +31,6 @@ private Q_SLOTS:
     void testLongFormConstructor();
     void testShortFormConstructor();
     void testSetAddLicense();
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
-    void testSetProgramIconName();
-#endif
     void testSetDesktopFileName();
     void testCopying();
 
@@ -47,9 +44,6 @@ private Q_SLOTS:
 
 static const char AppName[] = "app";
 static const char ProgramName[] = "ProgramName";
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
-static const char ProgramIconName[] = "program-icon";
-#endif
 static const char Version[] = "Version";
 static const char ShortDescription[] = "ShortDescription";
 static const char CopyrightStatement[] = "CopyrightStatement";
@@ -73,9 +67,6 @@ void KAboutDataTest::testLongFormConstructorWithDefaults()
     QCOMPARE(aboutData.componentName(), QString::fromLatin1(AppName));
     QCOMPARE(aboutData.productName(), QString::fromLatin1(AppName));
     QCOMPARE(aboutData.displayName(), QLatin1String(ProgramName));
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
-    QCOMPARE(aboutData.programIconName(), QString::fromLatin1(AppName));
-#endif
     QCOMPARE(aboutData.programLogo(), QVariant());
     QCOMPARE(aboutData.organizationDomain(), QString::fromLatin1("kde.org"));
     QCOMPARE(aboutData.version(), QString::fromLatin1(Version));
@@ -121,9 +112,6 @@ void KAboutDataTest::testLongFormConstructor()
     QCOMPARE(aboutData.componentName(), QLatin1String(AppName));
     QCOMPARE(aboutData.productName(), QLatin1String(AppName));
     QCOMPARE(aboutData.displayName(), QLatin1String(ProgramName));
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
-    QCOMPARE(aboutData.programIconName(), QLatin1String(AppName));
-#endif
     QCOMPARE(aboutData.programLogo(), QVariant());
     QCOMPARE(aboutData.organizationDomain(), QString::fromLatin1(OrganizationDomain));
     QCOMPARE(aboutData.version(), QString::fromLatin1(Version));
@@ -177,9 +165,6 @@ void KAboutDataTest::testShortFormConstructor()
     QCOMPARE(aboutData.componentName(), QString::fromLatin1(AppName));
     QCOMPARE(aboutData.productName(), QString::fromLatin1(AppName));
     QCOMPARE(aboutData.displayName(), QLatin1String(ProgramName));
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
-    QCOMPARE(aboutData.programIconName(), QString::fromLatin1(AppName));
-#endif
     QCOMPARE(aboutData.programLogo(), QVariant());
     QCOMPARE(aboutData.organizationDomain(), QString::fromLatin1("kde.org"));
     QCOMPARE(aboutData.version(), QString::fromLatin1(Version));
@@ -308,31 +293,6 @@ void KAboutDataTest::testSetAddLicense()
     QCOMPARE(aboutData.licenses().at(3).name(KAboutLicense::FullName), QString::fromLatin1("Custom"));
     QCOMPARE(aboutData.licenses().at(3).text(), QString(copyrightStatement + lineFeed + QLatin1String(LicenseFileText)));
 }
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
-void KAboutDataTest::testSetProgramIconName()
-{
-    const QString programIconName(QString::fromLatin1(ProgramIconName));
-
-    KAboutData aboutData(QString::fromLatin1(AppName),
-                         QLatin1String(ProgramName),
-                         QString::fromLatin1(Version),
-                         QLatin1String(ShortDescription),
-                         KAboutLicense::Unknown,
-                         QLatin1String(CopyrightStatement),
-                         QLatin1String(Text),
-                         QString::fromLatin1(HomePageAddress),
-                         QString::fromLatin1(BugsEmailAddress));
-
-    // Deprecated, still want to test this though. Silence GCC warnings.
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-    // set different iconname
-    aboutData.setProgramIconName(programIconName);
-#pragma GCC diagnostic pop
-    QCOMPARE(aboutData.programIconName(), programIconName);
-}
-#endif
 
 void KAboutDataTest::testCopying()
 {

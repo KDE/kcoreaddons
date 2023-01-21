@@ -26,7 +26,6 @@
 
 #include "kaboutdata.h"
 #include "kpluginfactory.h"
-#include "kpluginloader.h"
 
 #include <optional>
 
@@ -144,50 +143,27 @@ KPluginMetaData::KPluginMetaData(const QString &file)
 KPluginMetaData::KPluginMetaData(const QString &file, KPluginMetaDataOption option)
     : d(new KPluginMetaDataPrivate)
 {
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 92)
-    if (file.endsWith(QLatin1String(".desktop"))) {
-        Q_ASSERT_X(option == DoNotAllowEmptyMetaData, Q_FUNC_INFO, "The AllowEmptyMetaData flag is only allowed for binary plugins");
-        qCDebug(KCOREADDONS_DEBUG)
-            << "Using the KPluginMetaData(const QString &file) constructor for desktop files is deprcated, use KPluginMetaData::fromDesktopFile instead";
-        loadFromDesktopFile(file, QStringList());
-    } else if (file.endsWith(QLatin1String(".json"))) {
-        Q_ASSERT_X(option == DoNotAllowEmptyMetaData, Q_FUNC_INFO, "The AllowEmptyMetaData flag is only allowed for binary plugins");
-        qCDebug(KCOREADDONS_DEBUG)
-            << "Using the KPluginMetaData(const QString &file) constructor for json files is deprcated, use KPluginMetaData::fromJsonFile instead";
-        loadFromJsonFile(file);
-    } else {
-#endif
-        d->m_option = option;
-        QPluginLoader loader;
-        KPluginMetaDataPrivate::getPluginLoaderForPath(loader, file);
-        d->m_requestedFileName = file;
-        m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
-        const auto qtMetaData = loader.metaData();
-        if (!qtMetaData.isEmpty()) {
-            m_metaData = qtMetaData.value(QStringLiteral("MetaData")).toObject();
-            d->metaDataFileName = m_fileName;
-            if (m_metaData.isEmpty() && option == DoNotAllowEmptyMetaData) {
-                qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << file << "does not have a valid 'MetaData' object";
-            }
-        } else {
-            qCDebug(KCOREADDONS_DEBUG) << "no metadata found in" << file << loader.errorString();
+    d->m_option = option;
+    QPluginLoader loader;
+    KPluginMetaDataPrivate::getPluginLoaderForPath(loader, file);
+    d->m_requestedFileName = file;
+    m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
+    const auto qtMetaData = loader.metaData();
+    if (!qtMetaData.isEmpty()) {
+        m_metaData = qtMetaData.value(QStringLiteral("MetaData")).toObject();
+        d->metaDataFileName = m_fileName;
+        if (m_metaData.isEmpty() && option == DoNotAllowEmptyMetaData) {
+            qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << file << "does not have a valid 'MetaData' object";
         }
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 92)
+    } else {
+        qCDebug(KCOREADDONS_DEBUG) << "no metadata found in" << file << loader.errorString();
     }
-#endif
 }
 
 KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
     : KPluginMetaData(loader.metaData().value(QStringLiteral("MetaData")).toObject(), QFileInfo(loader.fileName()).absoluteFilePath())
 {
 }
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 86)
-KPluginMetaData::KPluginMetaData(const KPluginLoader &loader)
-    : KPluginMetaData(loader.metaData().value(QStringLiteral("MetaData")).toObject(), QFileInfo(loader.fileName()).absoluteFilePath())
-{
-}
-#endif
 
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &file)
     : KPluginMetaData(metaData, file, QString())
@@ -234,33 +210,6 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
 
     return KPluginMetaData{};
 }
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 92)
-KPluginMetaData KPluginMetaData::fromDesktopFile(const QString &file, const QStringList &serviceTypes)
-{
-    KPluginMetaData result;
-    result.loadFromDesktopFile(file, serviceTypes);
-    return result;
-}
-
-void KPluginMetaData::loadFromDesktopFile(const QString &file, const QStringList &serviceTypes)
-{
-    QString libraryPath;
-    if (!DesktopFileParser::convert(file, serviceTypes, m_metaData, &libraryPath, QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation))) {
-        Q_ASSERT(!isValid());
-        return; // file could not be parsed for some reason, leave this object invalid
-    }
-    d = new KPluginMetaDataPrivate;
-    d->metaDataFileName = QFileInfo(file).absoluteFilePath();
-    if (!libraryPath.isEmpty()) {
-        // this was a plugin with a shared library
-        m_fileName = libraryPath;
-    } else {
-        // no library, make filename point to the .desktop file
-        m_fileName = d->metaDataFileName;
-    }
-}
-#endif
 
 void KPluginMetaData::loadFromJsonFile(const QString &file)
 {
@@ -359,39 +308,6 @@ QJsonObject KPluginMetaData::rootObject() const
     return m_metaData[QStringLiteral("KPlugin")].toObject();
 }
 
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 88)
-QStringList KPluginMetaData::readStringList(const QJsonObject &obj, const QString &key)
-{
-    const QJsonValue value = obj.value(key);
-    if (value.isUndefined() || value.isObject() || value.isNull()) {
-        return QStringList();
-    } else if (value.isArray()) {
-        return value.toVariant().toStringList();
-    } else {
-        QString asString = value.isString() ? value.toString() : value.toVariant().toString();
-        if (asString.isEmpty()) {
-            return QStringList();
-        }
-        const QString id = obj.value(QStringLiteral("KPlugin")).toObject().value(QStringLiteral("Id")).toString();
-        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key
-                                     << "to be a string list."
-                                        " Treating it as a list with a single entry:"
-                                     << asString << id.toLatin1().constData();
-        return QStringList(asString);
-    }
-}
-
-QJsonValue KPluginMetaData::readTranslatedValue(const QJsonObject &jo, const QString &key, const QJsonValue &defaultValue)
-{
-    return KJsonUtils::readTranslatedValue(jo, key, defaultValue);
-}
-
-QString KPluginMetaData::readTranslatedString(const QJsonObject &jo, const QString &key, const QString &defaultValue)
-{
-    return readTranslatedValue(jo, key, defaultValue).toString(defaultValue);
-}
-#endif
-
 static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson> *out)
 {
     KAboutPerson person = KAboutPerson::fromJSON(obj);
@@ -469,13 +385,6 @@ QString KPluginMetaData::copyrightText() const
     return KJsonUtils::readTranslatedString(rootObject(), QStringLiteral("Copyright"));
 }
 
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 87)
-QString KPluginMetaData::extraInformation() const
-{
-    return KJsonUtils::readTranslatedString(rootObject(), QStringLiteral("ExtraInformation"));
-}
-#endif
-
 QString KPluginMetaData::pluginId() const
 {
     QJsonObject root = rootObject();
@@ -507,20 +416,6 @@ QString KPluginMetaData::bugReportUrl() const
 {
     return rootObject()[QStringLiteral("BugReportUrl")].toString();
 }
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
-QStringList KPluginMetaData::dependencies() const
-{
-    return readStringList(rootObject(), QStringLiteral("Dependencies"));
-}
-#endif
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
-QStringList KPluginMetaData::serviceTypes() const
-{
-    return rootObject().value(QStringLiteral("ServiceTypes")).toVariant().toStringList();
-}
-#endif
 
 QStringList KPluginMetaData::mimeTypes() const
 {
@@ -651,18 +546,6 @@ bool KPluginMetaData::operator==(const KPluginMetaData &other) const
 {
     return m_fileName == other.m_fileName && m_metaData == other.m_metaData;
 }
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 86)
-QObject *KPluginMetaData::instantiate() const
-{
-    QPluginLoader loader(m_fileName);
-    const auto ret = loader.instance();
-    if (!ret) {
-        qCWarning(KCOREADDONS_DEBUG) << "Could not create plugin" << name() << "error:" << loader.errorString();
-    }
-    return ret;
-}
-#endif
 
 template<class T>
 QVariantList listToVariant(const QList<T> &values)

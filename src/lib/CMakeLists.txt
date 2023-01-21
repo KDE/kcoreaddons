@@ -115,7 +115,6 @@ target_sources(KF6CoreAddons PRIVATE
     io/kautosavefile.cpp
     io/kdirwatch.cpp
     io/kfilesystemtype.cpp
-    io/kmessage.cpp
     io/kprocess.cpp
     io/kbackup.cpp
     io/kurlmimedata.cpp
@@ -126,12 +125,10 @@ target_sources(KF6CoreAddons PRIVATE
     jobs/kjobtrackerinterface.cpp
     jobs/kjobuidelegate.cpp
     plugin/kpluginfactory.cpp
-    plugin/kpluginloader.cpp
     plugin/kpluginmetadata.cpp
     plugin/kstaticpluginhelpers.cpp
     plugin/desktopfileparser.cpp
     randomness/krandom.cpp
-    randomness/krandomsequence.cpp
     text/kjsonutils.cpp
     text/kfuzzymatcher.cpp
     text/kmacroexpander.cpp
@@ -155,7 +152,6 @@ target_sources(KF6CoreAddons PRIVATE
     io/kautosavefile.h
     io/kdirwatch.h
     io/kfilesystemtype.h
-    io/kmessage.h
     io/kprocess.h
     io/kbackup.h
     io/kurlmimedata.h
@@ -166,11 +162,9 @@ target_sources(KF6CoreAddons PRIVATE
     jobs/kjobtrackerinterface.h
     jobs/kjobuidelegate.h
     plugin/kpluginfactory.h
-    plugin/kpluginloader.h
     plugin/kpluginmetadata.h
     plugin/kstaticpluginhelpers.h
     randomness/krandom.h
-    randomness/krandomsequence.h
     text/kjsonutils.h
     text/kfuzzymatcher.h
     text/kmacroexpander.h
@@ -255,7 +249,6 @@ ecm_generate_export_header(KF6CoreAddons
     GROUP_BASE_NAME KF
     VERSION ${KF_VERSION}
     DEPRECATED_BASE_VERSION 0
-    DEPRECATION_VERSIONS 4.0 5.0 5.2 5.65 5.67 5.70 5.72 5.75 5.76 5.78 5.79 5.80 5.84 5.86 5.87 5.88 5.89 5.92 5.95 5.97
     EXCLUDE_DEPRECATED_BEFORE_AND_AT ${EXCLUDE_DEPRECATED_BEFORE_AND_AT}
 )
 
@@ -307,7 +300,6 @@ ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
         KAutoSaveFile
         KDirWatch
-        KMessage
         KProcess
         KBackup
         KUrlMimeData
@@ -328,9 +320,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
 )
 ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
-        KExportPlugin
         KPluginFactory
-        KPluginLoader
         KPluginMetaData
         KStaticPluginHelpers
     RELATIVE plugin
@@ -339,7 +329,6 @@ ecm_generate_headers(KCoreAddons_HEADERS
 ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
         KRandom
-        KRandomSequence
     RELATIVE randomness
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )

@@ -82,12 +82,8 @@ void DesktopFileParser::convertToCompatibilityJson(const QString &key, const QSt
         QStringLiteral("Hidden"),
         QStringLiteral("X-KDE-PluginInfo-EnabledByDefault"),
     };
-    static const QStringList stringlistkeys = QStringList
-    {
+    static const QStringList stringlistkeys = QStringList{
         QStringLiteral("X-KDE-ServiceTypes"),
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
-            QStringLiteral("X-KDE-PluginInfo-Depends"),
-#endif
     };
     if (boolkeys.contains(key)) {
         // should only be lower case, but be tolerant here

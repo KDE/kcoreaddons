@@ -292,22 +292,6 @@ public:
      */
     static int startDetached(const QStringList &argv);
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 78)
-    /**
-     * Obtain the process' ID as known to the system.
-     *
-     * Unlike with QProcess::pid(), this is a real PID also on Windows.
-     *
-     * This function can be called only while the process is running.
-     * It cannot be applied to detached processes.
-     *
-     * @return the process ID
-     * @deprecated since 5.78, use processId()
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 78, "Use processId()")
-    int pid() const;
-#endif
-
 protected:
     /**
      * @internal

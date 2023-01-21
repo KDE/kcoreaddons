@@ -583,43 +583,6 @@ public:
      */
     static void setApplicationData(const KAboutData &aboutData);
 
-// BUILD, not ENABLE, as producers need to support the registry for backward-compat
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
-    /**
-     * Register the KAboutData information for a plugin.
-     * Call this from the constructor of the plugin.
-     * This will register the plugin's @p aboutData under the component name
-     * that was set in @p aboutData.
-     * @deprecated Since 5.76. The central registry is to be removed in the future
-     * in favour of plugin type specific local registries, using KPluginMetaData.
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 76, "See API docs")
-    static void registerPluginData(const KAboutData &aboutData);
-#endif
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 76)
-    /**
-     * Return the KAboutData for the given plugin identified by @p componentName.
-     * @deprecated Since 5.76. The central registry is to be removed in the future
-     * in favour of plugin type specific local registries, using KPluginMetaData.
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 76, "See API docs")
-    static KAboutData *pluginData(const QString &componentName);
-#endif
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 65)
-    /**
-     * Creates a @c KAboutData from the given @p plugin metadata
-     *
-     * @since 5.18
-     * @deprecated Since 5.65, use KAboutPluginDialog to show info about a plugin
-     * instead of KAboutApplicationDialog, with the latter having had been the
-     * only known need for this conversion.
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 65, "See API docs")
-    static KAboutData fromPluginMetaData(const KPluginMetaData &plugin);
-#endif
-
 public:
     /**
      * Constructor.
@@ -915,22 +878,6 @@ public:
      */
     KAboutData &setDisplayName(const QString &displayName);
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 2)
-    /**
-     * Obsolete method
-     *
-     * This method used to set the icon name but this is no longer
-     * possible in KDE Frameworks 5 because KCoreAddons does not
-     * depend on QtGui.
-     *
-     * @param iconName name of the icon. Example: "accessories-text-editor"
-     * @see programIconName()
-     *
-     * @deprecated since 5.2, use QApplication::setWindowIcon(QIcon::fromTheme()) instead.
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 2, "Use QApplication::setWindowIcon")
-    KAboutData &setProgramIconName(const QString &iconName);
-#endif
     /**
      * Defines the program logo.
      *
@@ -1140,21 +1087,6 @@ public:
      * Provided for use by KCrash
      */
     const char *internalProgramName() const;
-
-// Not using KCOREADDONS_ENABLE_DEPRECATED_SINCE because KXmlGui and KConfigWidgets need this, for compat
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 2)
-    /**
-     * Returns the program's icon name.
-     *
-     * The default value is componentName().
-     * @return the program's icon name.
-     *
-     * This is mostly for compatibility, given that setProgramIconName is deprecated.
-     * @deprecated Since 5.2, Use QGuiApplication::windowIcon instead
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 2, "Use QGuiApplication::windowIcon instead")
-    QString programIconName() const;
-#endif
 
     /**
      * Returns the program logo image.

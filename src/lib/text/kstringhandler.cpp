@@ -12,9 +12,6 @@
 
 #include <stdlib.h> // random()
 
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
-#include <QRegExp> // for the word ranges
-#endif
 #include <QRegularExpression>
 #include <QVector>
 
@@ -113,40 +110,6 @@ QStringList KStringHandler::perlSplit(const QChar &sep, const QString &str, int 
 {
     return perlSplit(QStringView(&sep, 1), QStringView(str), max);
 }
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 67)
-QStringList KStringHandler::perlSplit(const QRegExp &sep, const QString &s, const int max)
-{
-    // nothing to split
-    if (s.isEmpty()) {
-        return QStringList();
-    }
-
-    const bool ignoreMax = 0 == max;
-
-    QStringList l;
-
-    int searchStart = 0;
-    int tokenStart = sep.indexIn(s, searchStart);
-    int len = sep.matchedLength();
-
-    while (-1 != tokenStart && (ignoreMax || l.count() < max - 1)) {
-        if (!s.midRef(searchStart, tokenStart - searchStart).isEmpty()) {
-            l << s.mid(searchStart, tokenStart - searchStart);
-        }
-
-        searchStart = tokenStart + len;
-        tokenStart = sep.indexIn(s, searchStart);
-        len = sep.matchedLength();
-    }
-
-    if (!s.midRef(searchStart, s.length() - searchStart).isEmpty()) {
-        l << s.mid(searchStart, s.length() - searchStart);
-    }
-
-    return l;
-}
-#endif
 
 QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QString &str, int max)
 {

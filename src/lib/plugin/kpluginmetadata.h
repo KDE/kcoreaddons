@@ -94,9 +94,6 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(QJsonObject rawData READ rawData CONSTANT)
     Q_PROPERTY(QString name READ name CONSTANT)
     Q_PROPERTY(QString description READ description CONSTANT)
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 87)
-    Q_PROPERTY(QString extraInformation READ extraInformation CONSTANT)
-#endif
     Q_PROPERTY(QVariantList authors READ authorsVariant CONSTANT)
     Q_PROPERTY(QVariantList translators READ translatorsVariant CONSTANT)
     Q_PROPERTY(QVariantList otherContributors READ otherContributorsVariant CONSTANT)
@@ -109,12 +106,6 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(QString version READ version CONSTANT)
     Q_PROPERTY(QString website READ website CONSTANT)
     Q_PROPERTY(QString bugReportUrl READ bugReportUrl CONSTANT)
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 79)
-    Q_PROPERTY(QStringList dependencies READ dependencies CONSTANT)
-#endif
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-    Q_PROPERTY(QStringList serviceTypes READ serviceTypes CONSTANT)
-#endif
     Q_PROPERTY(QStringList mimeTypes READ mimeTypes CONSTANT)
     Q_PROPERTY(QStringList formFactors READ formFactors CONSTANT)
     Q_PROPERTY(bool isEnabledByDefault READ isEnabledByDefault CONSTANT)
@@ -132,15 +123,6 @@ public:
 
     /** Creates an invalid KPluginMetaData instance */
     KPluginMetaData();
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 86)
-    /**
-     * Reads the plugin metadata from a KPluginLoader instance. You must call KPluginLoader::setFileName()
-     * or use the appropriate constructor on @p loader before calling this.
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 86, "Use KPluginMetaData(QPluginLoader) instead")
-    KPluginMetaData(const KPluginLoader &loader);
-#endif
 
     /**
      * Reads the plugin metadata from a QPluginLoader instance. You must call QPluginLoader::setFileName()
@@ -221,30 +203,6 @@ public:
      */
     ~KPluginMetaData();
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 92)
-    /**
-     * Load a KPluginMetaData instance from a .desktop file. Unlike the constructor which takes
-     * a single file parameter this method allows you to specify which service type files should
-     * be parsed to determine the correct type for a given .desktop property.
-     * This ensures that a e.g. comma-separated string list field in the .desktop file will correctly
-     * be converted to a JSON string array.
-     *
-     * @note This function mostly exists for backwards-compatibility. It is recommended
-     * that new applications load JSON files directly instead of using .desktop files for plugin metadata.
-     *
-     * @param file the .desktop file to load
-     * @param serviceTypes a list of files to parse If one of these paths is a relative path it
-     * will be resolved relative to the "kservicetypes5" subdirectory in QStandardPaths::GenericDataLocation.
-     * If the list is empty only the default set of properties will be treated specially and all other entries
-     * will be read as the JSON string type.
-     *
-     * @since 5.16
-     * @deprecated Since 5.92, use json files or embedded json metadata directly.
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 92, "Use json files or embedded json metadata directly")
-    static KPluginMetaData fromDesktopFile(const QString &file, const QStringList &serviceTypes = QStringList());
-#endif
-
     /**
      * Load a KPluginMetaData instance from a .json file. Unlike the constructor with a single file argument,
      * this ensure that only JSON format plugins are loaded and any other type is rejected.
@@ -322,21 +280,6 @@ public:
      */
     QJsonObject rawData() const;
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 86)
-    /**
-     * Tries to instantiate this plugin using KPluginMetaData::fileName().
-     * @note The value of KPluginMetaData::dependencies() is not used here, dependencies must be
-     * resolved manually.
-     *
-     * @return The plugin root object or @c nullptr if it could not be loaded
-     * @see QPluginLoader::instance(), KPluginFactory::loadFactory, KPluginFactory::instantiatePlugin
-     * @deprecated Since 5.86, use @ref KPluginFactory::loadFactory or @ref KPluginFactory::instantiatePlugin when using
-     * KPluginFactory. Otherwise use QPluginLoader::instance() instead.
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 86, "See API docs")
-    QObject *instantiate() const;
-#endif
-
     /**
      * @return the user visible name of the plugin.
      */
@@ -346,17 +289,6 @@ public:
      * @return a short description of the plugin.
      */
     QString description() const;
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 87)
-    /**
-     * @return additional information about this plugin (e.g. for use in an "about plugin" dialog)
-     *
-     * @since 5.18
-     * @deprecated Since 5.87, deprecate for lack of usage. Use a meaningful custom key in the json metadata instead
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 87, "Deprecate for lack of usage, use a meaningful custom key in the json metadata instead")
-    QString extraInformation() const;
-#endif
 
     /**
      * @return the author(s) of this plugin.
@@ -430,34 +362,6 @@ public:
      */
     QString bugReportUrl() const;
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 79)
-    /**
-     * @return a list of plugins that this plugin depends on so that it can function properly
-     * @see KJsonPluginInfo::pluginId()
-     * @deprecated Since 5.79, plugin dependencies are deprecated and will be removed in KF6
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 79, "Plugin dependencies are deprecated and will be removed in KF6")
-    QStringList dependencies() const;
-#endif
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-    /**
-     * Returns the service types that this plugin implements.
-     *
-     * This is mostly for historical / compatibility purposes.
-     * As a general rule, instead of opening many plugins to then filter by servicetype,
-     * put all plugins of the same type in a subdirectory, that you can pass to findPlugins directly.
-     * No point in opening 20 plugins to pick out only 3, when the filesystem can do that filtering for you.
-     *
-     * @note Unlike KService this does not contain the MIME types. To get the handled MIME types
-     * use the KPluginMetaData::mimeTypes() function.
-     * @return a list of service types this plugin implements (e.g. "Plasma/DataEngine")
-     * @dprecated Since 5.89, use dedicated plugin namespaces instead to filter plugins of a specific type
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 89, "See API docs")
-    QStringList serviceTypes() const;
-#endif
-
     /**
      * @return a list of MIME types this plugin can handle (e.g. "application/pdf", "image/png", etc.)
      * @since 5.16
@@ -519,21 +423,7 @@ public:
      * @see KPluginMetaData::rawData() if QString is not the correct type for @p key
      */
     QString value(const QString &key, const QString &defaultValue = QString()) const;
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 88)
-    /**
-     * Overload to make sure the bool overload is not taken by accident
-     * @overload
-     * @since 5.88
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 88, "Construct a QString instead of using a char array, otherwise there the bool overload could be chosen by accident")
-    QString value(const QString &key, const char *ch) const
-    {
-        return value(key, QString::fromLatin1(ch));
-    }
-#else
     QString value(const QString &key, const char *ch) const = delete;
-#endif
 
     /**
      * @overload
@@ -554,40 +444,6 @@ public:
      * @since 5.88
      */
     QStringList value(const QString &key, const QStringList &defaultValue) const;
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 88)
-    /** @return the value for @p key inside @p jo as a string list. If the type of @p key is string, a list with containing
-     * just that string will be returned, if it is an array the list will contain one entry for each array member.
-     * If the key cannot be found an empty list will be returned.
-     * @deprecated Since 5.88, use @p value(QString, QStringList) on KPluginMetaData instance instead
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 88, "Use value(QString, QStringList) on KPluginMetaData instance instead")
-    static QStringList readStringList(const QJsonObject &jo, const QString &key);
-#endif
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 88)
-    /**
-     * Reads a value from @p jo but unlike QJsonObject::value() it allows different entries for each locale
-     * This is done by appending the locale identifier in brackets to the key (e.g. "[de_DE]" or "[es]")
-     * When looking for a key "foo" with German (Germany) locale we will first attempt to read "foo[de_DE]",
-     * if that does not exist "foo[de]", finally falling back to "foo" if that also doesn't exist.
-     * @return the translated value for @p key from @p jo or @p defaultValue if @p key was not found
-     * @deprecated Since 5.88, use KJsonUtils::readTranslatedValue instead
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 88, "Use KJsonUtils::readTranslatedValue instead")
-    static QJsonValue readTranslatedValue(const QJsonObject &jo, const QString &key, const QJsonValue &defaultValue = QJsonValue());
-#endif
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 88)
-    /**
-     * @return the translated value of @p key from @p jo as a string or @p defaultValue if @p key was not found
-     * or the value for @p key is not of type string
-     * @see KPluginMetaData::readTranslatedValue(const QJsonObject &jo, const QString &key)
-     * @deprecated Since 5.88, use KJsonUtils::readTranslatedString instead
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 88, "Use KJsonUtils::readTranslatedString instead")
-    static QString readTranslatedString(const QJsonObject &jo, const QString &key, const QString &defaultValue = QString());
-#endif
 
     /**
      * @return @c true if this object is equal to @p other, otherwise @c false
@@ -612,9 +468,6 @@ public:
 
 private:
     QJsonObject rootObject() const;
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 92)
-    void loadFromDesktopFile(const QString &file, const QStringList &serviceTypes);
-#endif
     void loadFromJsonFile(const QString &file);
 
 private:

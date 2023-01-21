@@ -14,7 +14,6 @@
 
 #include "kcoreaddons_debug.h"
 #include <kaboutdata.h>
-#include <kpluginloader.h>
 #include <kpluginmetadata.h>
 
 #include <QLocale>
@@ -108,20 +107,6 @@ private Q_SLOTS:
 
         auto description = QStringLiteral("This is a plugin");
 
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 86)
-        KPluginMetaData fromKPluginLoader(KPluginLoader(QStringLiteral("jsonplugin")));
-        QVERIFY(fromKPluginLoader.isValid());
-        QCOMPARE(fromKPluginLoader.description(), description);
-        QCOMPARE(fromKPluginLoader, fromKPluginLoader);
-        QCOMPARE(fromQPluginLoader, fromKPluginLoader);
-        QCOMPARE(fromKPluginLoader, fromQPluginLoader);
-        QCOMPARE(fromKPluginLoader, fromFullPath);
-        QCOMPARE(fromKPluginLoader, fromRawData);
-        QCOMPARE(fromFullPath, fromKPluginLoader);
-        QCOMPARE(fromRawData, fromKPluginLoader);
-        QVERIFY(!KPluginMetaData(KPluginLoader(QStringLiteral("doesnotexist"))).isValid());
-#endif
-
         QVERIFY(fromQPluginLoader.isValid());
         QCOMPARE(fromQPluginLoader.description(), description);
         QVERIFY(fromFullPath.isValid());
@@ -181,14 +166,8 @@ private Q_SLOTS:
         QCOMPARE(m.pluginId(), QStringLiteral("time"));
         QCOMPARE(m.name(), QStringLiteral("Date and Time"));
         QCOMPARE(m.description(), QStringLiteral("Date and time by timezone"));
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 87)
-        QCOMPARE(m.extraInformation(), QStringLiteral("Something else"));
-#endif
         QCOMPARE(m.iconName(), QStringLiteral("preferences-system-time"));
         QCOMPARE(m.category(), QStringLiteral("Date and Time"));
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
-        QCOMPARE(m.dependencies(), QStringList() << QStringLiteral("foo") << QStringLiteral("bar"));
-#endif
         QCOMPARE(m.authors().size(), 1);
         QCOMPARE(m.authors().constFirst().name(), QStringLiteral("Aaron Seigo"));
         QCOMPARE(m.authors().constFirst().emailAddress(), QStringLiteral("aseigo@kde.org"));
@@ -203,9 +182,6 @@ private Q_SLOTS:
         QCOMPARE(m.copyrightText(), QStringLiteral("(c) Alex Richardson 2015"));
         QCOMPARE(m.version(), QStringLiteral("1.0"));
         QCOMPARE(m.website(), QStringLiteral("https://plasma.kde.org/"));
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
-        QCOMPARE(m.serviceTypes(), QStringList() << QStringLiteral("Plasma/DataEngine"));
-#endif
         QCOMPARE(m.mimeTypes(), QStringList() << QStringLiteral("image/png"));
     }
 
@@ -286,144 +262,6 @@ private Q_SLOTS:
         QCOMPARE(data.value(QStringLiteral("Object"), QStringList()), QStringList());
     }
 
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 91)
-    void testFromDesktopFile()
-    {
-        const QString dfile = QFINDTESTDATA("data/fakeplugin.desktop");
-        KPluginMetaData md = KPluginMetaData::fromDesktopFile(dfile);
-        QVERIFY(md.isValid());
-        QCOMPARE(md.pluginId(), QStringLiteral("fakeplugin"));
-        QCOMPARE(md.fileName(), QStringLiteral("fakeplugin"));
-        QCOMPARE(md.metaDataFileName(), dfile);
-        QCOMPARE(md.iconName(), QStringLiteral("preferences-system-time"));
-        QCOMPARE(md.license(), QStringLiteral("LGPL"));
-        QCOMPARE(md.website(), QStringLiteral("https://kde.org/"));
-        QCOMPARE(md.category(), QStringLiteral("Examples"));
-        QCOMPARE(md.version(), QStringLiteral("1.0"));
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 79)
-        QCOMPARE(md.dependencies(), QStringList());
-#endif
-        QCOMPARE(md.isHidden(), false);
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
-        QCOMPARE(md.serviceTypes(), QStringList(QStringLiteral("KService/NSA")));
-#endif
-        QCOMPARE(md.mimeTypes(), QStringList() << QStringLiteral("image/png") << QStringLiteral("application/pdf"));
-
-        auto kp = md.rawData()[QStringLiteral("KPlugin")].toObject();
-        QStringList formFactors = kp.value(QStringLiteral("FormFactors")).toVariant().toStringList();
-        QCOMPARE(formFactors, QStringList() << QStringLiteral("mediacenter") << QStringLiteral("desktop"));
-        QCOMPARE(md.formFactors(), QStringList() << QStringLiteral("mediacenter") << QStringLiteral("desktop"));
-
-        const QString dfilehidden = QFINDTESTDATA("data/hiddenplugin.desktop");
-        KPluginMetaData mdhidden = KPluginMetaData::fromDesktopFile(dfilehidden);
-        QVERIFY(mdhidden.isValid());
-        QCOMPARE(mdhidden.isHidden(), true);
-    }
-
-    void twoStepsParseTest()
-    {
-        QStandardPaths::setTestModeEnabled(true);
-        const QString dfile = QFINDTESTDATA("data/twostepsparsetest.desktop");
-        const QString typesPath = QFINDTESTDATA("data/servicetypes/example-servicetype.desktop");
-        KPluginMetaData md = KPluginMetaData::fromDesktopFile(dfile, QStringList() << typesPath);
-        QVERIFY(md.isValid());
-        QStringList list = md.value(QStringLiteral("X-Test-List"), QStringList());
-        QCOMPARE(list, QStringList({QStringLiteral("first"), QStringLiteral("second")}));
-    }
-
-    void testServiceTypes_data()
-    {
-        const QString kdevServiceTypePath = QFINDTESTDATA("data/servicetypes/fake-kdevelopplugin.desktop");
-        const QString invalidServiceTypePath = QFINDTESTDATA("data/servicetypes/invalid-servicetype.desktop");
-        const QString exampleServiceTypePath = QFINDTESTDATA("data/servicetypes/example-servicetype.desktop");
-        QVERIFY(!kdevServiceTypePath.isEmpty());
-        QVERIFY(!invalidServiceTypePath.isEmpty());
-        QVERIFY(!exampleServiceTypePath.isEmpty());
-    }
-
-    void testServiceType()
-    {
-        if (!doMessagesWork()) {
-            return;
-        }
-        const QString typesPath = QFINDTESTDATA("data/servicetypes/example-servicetype.desktop");
-        QVERIFY(!typesPath.isEmpty());
-        const QString inputPath = QFINDTESTDATA("data/servicetypes/example-input.desktop");
-        QVERIFY(!inputPath.isEmpty());
-        QTest::ignoreMessage(
-            QtWarningMsg,
-            // We also print out a list of paths we searched in. With the ".+" we ensure that they are printed out,
-            // but don't make fragile assumptions on the exact message
-            QRegularExpression(QStringLiteral("Unable to find service type for service \"bar/foo\" listed in \"") + inputPath + QLatin1String("\" .+")));
-        KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
-        QVERIFY(md.isValid());
-        QCOMPARE(md.name(), QStringLiteral("Example"));
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
-        QCOMPARE(md.serviceTypes(), QStringList() << QStringLiteral("example/servicetype") << QStringLiteral("bar/foo"));
-#endif
-        QCOMPARE(md.rawData().size(), 8);
-        QVERIFY(md.rawData().value(QStringLiteral("KPlugin")).isObject());
-        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Integer")), QJsonValue(42));
-        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Bool")), QJsonValue(true));
-        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Double")), QJsonValue(42.42));
-        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-String")), QJsonValue(QStringLiteral("foobar")));
-        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-List")),
-                 QJsonValue(
-                     QJsonArray::fromStringList(QStringList() << QStringLiteral("a") << QStringLiteral("b") << QStringLiteral("c") << QStringLiteral("def"))));
-        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Size")), QJsonValue(QStringLiteral("10,20"))); // QSize no longer supported (and also no longer used)
-        QCOMPARE(md.rawData().value(QStringLiteral("X-Test-Unknown")), QJsonValue(QStringLiteral("true"))); // unknown property -> string
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 88)
-        const QString charOverloadVlaue = md.value(QStringLiteral("X-Test-Unknown"), "true");
-        QCOMPARE(charOverloadVlaue, QStringLiteral("true"));
-#endif
-    }
-
-    void testBadGroupsInServiceType()
-    {
-        if (!doMessagesWork()) {
-            return;
-        }
-        const QString typesPath = QFINDTESTDATA("data/servicetypes/bad-groups-servicetype.desktop");
-        QVERIFY(!typesPath.isEmpty());
-        const QString inputPath = QFINDTESTDATA("data/servicetypes/bad-groups-input.desktop");
-        QVERIFY(!inputPath.isEmpty());
-        QTest::ignoreMessage(QtWarningMsg, "Illegal .desktop group definition (does not end with ']'): \"[PropertyDef::MissingTerminator\"");
-        QTest::ignoreMessage(QtWarningMsg, "Illegal .desktop group definition (does not end with ']'): \"[PropertyDef::\"");
-        QTest::ignoreMessage(QtWarningMsg, "Illegal .desktop group definition (does not end with ']'): \"[\"");
-        QTest::ignoreMessage(QtWarningMsg, "Read empty .desktop file group name! Invalid file?");
-        QTest::ignoreMessage(QtWarningMsg,
-                             QRegularExpression(QStringLiteral("Skipping invalid group \"\" in service type \".*/bad-groups-servicetype.desktop\"")));
-        QTest::ignoreMessage(QtWarningMsg,
-                             QRegularExpression(QStringLiteral("Skipping invalid group \"DoesNotStartWithPropertyDef::SomeOtherProperty\" in service type "
-                                                               "\".+/data/servicetypes/bad-groups-servicetype.desktop\"")));
-        QTest::ignoreMessage(QtWarningMsg, "Could not find Type= key in group \"PropertyDef::MissingType\"");
-        QTest::ignoreMessage(QtWarningMsg,
-                             QRegularExpression(QStringLiteral("Property type \"integer\" is not a known QVariant type. Found while parsing property "
-                                                               "definition for \"InvalidType\" in \".+/data/servicetypes/bad-groups-servicetype.desktop\"")));
-        QTest::ignoreMessage(QtWarningMsg,
-                             QRegularExpression(QStringLiteral(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=11\"")));
-        QTest::ignoreMessage(QtWarningMsg,
-                             QRegularExpression(QStringLiteral(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=13\"")));
-        QTest::ignoreMessage(QtWarningMsg,
-                             QRegularExpression(QStringLiteral(".+/data/servicetypes/bad-groups-input.desktop:\\d+: Key name is missing: \"=14\"")));
-        KPluginMetaData md = KPluginMetaData::fromDesktopFile(inputPath, QStringList() << typesPath);
-        QVERIFY(md.isValid());
-        QCOMPARE(md.name(), QStringLiteral("Bad Groups"));
-        QCOMPARE(md.rawData().size(), 8);
-        QCOMPARE(md.rawData().value(QStringLiteral("ThisIsOkay")), QJsonValue(10)); // integer
-        // 11 is empty group
-        QCOMPARE(md.rawData().value(QStringLiteral("MissingTerminator")), QJsonValue(12)); // accept missing group terminator (for now) -> integer
-        // 13 is empty group name
-        // 14 is empty group name
-        QCOMPARE(md.rawData().value(QStringLiteral("SomeOtherProperty")),
-                 QJsonValue(QStringLiteral("15"))); // does not start with PropertyDef:: -> fall back to string
-        QCOMPARE(md.rawData().value(QStringLiteral("TrailingSpacesAreOkay")), QJsonValue(16)); // accept trailing spaces in group name -> integer
-        QCOMPARE(md.rawData().value(QStringLiteral("MissingType")), QJsonValue(QStringLiteral("17"))); // Type= missing -> fall back to string
-        QCOMPARE(md.rawData().value(QStringLiteral("InvalidType")), QJsonValue(QStringLiteral("18"))); // Type= is invalid -> fall back to string
-        QCOMPARE(md.rawData().value(QStringLiteral("ThisIsOkayAgain")), QJsonValue(19)); // valid definition after invalid ones should still work -> integer
-    }
-#endif
-
     void testJSONMetadata()
     {
         const QString inputPath = QFINDTESTDATA("data/testmetadata.json");
@@ -451,10 +289,6 @@ private Q_SLOTS:
         QTest::addColumn<QString>("inputAbsolute");
         QTest::addColumn<QString>("pluginPath");
 
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 91)
-        // The .desktop file has X-KDE-Library, so .fileName() returns  different file
-        QTest::newRow("desktop") << QFINDTESTDATA("data/fakeplugin.desktop") << QStringLiteral("fakeplugin");
-#endif
         // But for the .json based plugin both are the same.
         QTest::newRow("json") << QFINDTESTDATA("data/testmetadata.json") << QFINDTESTDATA("data/testmetadata.json");
         // And also for the library with embedded JSON metadata.
@@ -472,15 +306,11 @@ private Q_SLOTS:
         QFETCH(QString, pluginPath);
 
         const auto createMetaData = [](const QString &path) {
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 91)
-            return KPluginMetaData(path);
-#else
             if (path.endsWith(QLatin1String(".json"))) {
                 return KPluginMetaData::fromJsonFile(path);
             } else {
                 return KPluginMetaData(path);
             }
-#endif
         };
 
         KPluginMetaData mdAbsolute = createMetaData(inputAbsolute);

@@ -491,9 +491,6 @@ public:
     QList<KAboutPerson> _translatorList;
     QList<KAboutComponent> _componentList;
     QList<KAboutLicense> _licenseList;
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 2)
-    QString programIconName;
-#endif
     QVariant programLogo;
     QString customAuthorPlainText, customAuthorRichText;
     bool customAuthorTextEnabled;
@@ -614,27 +611,6 @@ KAboutData &KAboutData::operator=(const KAboutData &other)
     }
     return *this;
 }
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 65)
-KAboutData KAboutData::fromPluginMetaData(const KPluginMetaData &plugin)
-{
-    KAboutData ret(plugin.pluginId(),
-                   plugin.name(),
-                   plugin.version(),
-                   plugin.description(),
-                   KAboutLicense::byKeyword(plugin.license()).key(),
-                   plugin.copyrightText(),
-                   plugin.extraInformation(),
-                   plugin.website());
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 2)
-    ret.d->programIconName = plugin.iconName();
-#endif
-    ret.d->_authorList = plugin.authors();
-    ret.d->_translatorList = plugin.translators();
-    ret.d->_creditList = plugin.otherContributors();
-    return ret;
-}
-#endif
 
 KAboutData &KAboutData::addAuthor(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &ocsUsername)
 {
@@ -842,19 +818,6 @@ const char *KAboutData::internalProgramName() const
 {
     return d->_internalProgramName.constData();
 }
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 2)
-QString KAboutData::programIconName() const
-{
-    return d->programIconName.isEmpty() ? componentName() : d->programIconName;
-}
-
-KAboutData &KAboutData::setProgramIconName(const QString &iconName)
-{
-    d->programIconName = iconName;
-    return *this;
-}
-#endif
 
 QVariant KAboutData::programLogo() const
 {
@@ -1066,17 +1029,11 @@ public:
     ~KAboutDataRegistry()
     {
         delete m_appData;
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
-        qDeleteAll(m_pluginData);
-#endif
     }
     KAboutDataRegistry(const KAboutDataRegistry &) = delete;
     KAboutDataRegistry &operator=(const KAboutDataRegistry &) = delete;
 
     KAboutData *m_appData;
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
-    QHash<QString, KAboutData *> m_pluginData;
-#endif
 };
 
 Q_GLOBAL_STATIC(KAboutDataRegistry, s_registry)
@@ -1178,27 +1135,6 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
     // overlapping properties official shadow properties of their Q*Application countparts, though
     // that increases behavioural complexity a little.
 }
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
-void KAboutData::registerPluginData(const KAboutData &aboutData)
-{
-    auto &data = s_registry->m_pluginData[aboutData.componentName()];
-    if (data) {
-        // silently ignore double registration, assuming it's for the same plugin
-        // all of this is getting deprecated anyways, we just don't want to leak anything
-        return;
-    }
-    data = new KAboutData(aboutData);
-}
-#endif
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
-KAboutData *KAboutData::pluginData(const QString &componentName)
-{
-    KAboutData *ad = s_registry->m_pluginData.value(componentName);
-    return ad;
-}
-#endif
 
 // only for KCrash (no memory allocation allowed)
 const KAboutData *KAboutData::applicationDataPointer()

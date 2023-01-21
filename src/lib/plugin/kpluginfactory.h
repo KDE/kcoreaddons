@@ -17,7 +17,6 @@
 #include <QObject>
 #include <QStringList>
 #include <QVariant>
-#include <kexportplugin.h> // for source compat
 
 #include <memory>
 #include <type_traits>
@@ -533,24 +532,6 @@ public:
     template<typename T>
     T *create(QObject *parent = nullptr, const QVariantList &args = QVariantList());
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-    /**
-     * Use this method to create an object. It will try to create an object which inherits
-     * @p T and was registered with @p keyword.
-     *
-     * @tparam T the interface for which an object should be created. The object will inherit @p T.
-     * @param keyword the keyword of the object.
-     * @param parent the parent of the object. If @p parent is a widget type, it will also passed
-     *               to the parentWidget argument of the CreateInstanceFunction for the object.
-     * @param args additional arguments which will be passed to the object.
-     * @returns pointer to the created object is returned, or @c nullptr if an error occurred.
-     * @deprecated Since 5.89, use overload without keyword instead
-     */
-    template<typename T>
-    KCOREADDONS_DEPRECATED_VERSION(5, 89, "Use overload without keyword instead")
-    T *create(const QString &keyword, QObject *parent = nullptr, const QVariantList &args = QVariantList());
-#endif
-
     /**
      * Use this method to create an object. It will try to create an object which inherits @p T
      * This overload has an additional @p parentWidget argument, which is used by some plugins (e.g. Parts).
@@ -564,38 +545,6 @@ public:
      */
     template<typename T>
     T *create(QWidget *parentWidget, QObject *parent, const QVariantList &args = {});
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-    /**
-     * @overload
-     * @param keyword the keyword of the object.
-     * @deprecated Since 5.89, use overload without keyword instead
-     */
-    template<typename T>
-    KCOREADDONS_DEPRECATED_VERSION(5, 89, "Use overload without keyword instead")
-    T *create(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args = QVariantList());
-#endif
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(4, 0)
-    /**
-     * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
-     */
-    template<typename T>
-    KCOREADDONS_DEPRECATED_VERSION(4, 0, "Use KPluginFactory::create<T>(QObject *parent, const QVariantList &args)")
-    T *create(QObject *parent, const QStringList &args)
-    {
-        return create<T>(parent, stringListToVariantList(args));
-    }
-
-    /**
-     * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
-     */
-    KCOREADDONS_DEPRECATED_VERSION(4, 0, "Use KPluginFactory::create<T>(QObject *parent, const QVariantList &args)")
-    QObject *create(QObject *parent = nullptr, const char *classname = "QObject", const QStringList &args = QStringList())
-    {
-        return create(classname, nullptr, parent, stringListToVariantList(args), QString());
-    }
-#endif
 
     /**
      * @returns the metadata of the plugin
@@ -695,34 +644,6 @@ protected:
     template<bool B, class T = void>
     using enable_if_t = typename std::enable_if<B, T>::type;
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-    /**
-     * Registers a metadata-less plugin with the factory. Call this function from the constructor of the
-     * KPluginFactory subclass to make the create function able to instantiate the plugin when asked
-     * for an interface the plugin implements.
-     *
-     * You can register as many plugin classes as you want as long as either the plugin interface or
-     * the @p keyword makes it unique. E.g. it is possible to register a KCModule and a
-     * KParts::Part without having to specify keywords since their interfaces differ.
-     *
-     * @tparam T the name of the plugin class
-     *
-     * @param keyword an optional keyword as unique identifier for the plugin. This allows you to
-     * put more than one plugin with the same interface into the same library using the same
-     * factory. X-KDE-PluginKeyword is a convenient way to specify the keyword in a desktop file.
-     *
-     * @param instanceFunction A function pointer to a function that creates an instance of the
-     * plugin.
-     * @deprecated Since 5.89, providing a custom CreateInstanceFunction is deprecated. Use registerPlugin<T>() instead
-     */
-    template<class T>
-    KCOREADDONS_DEPRECATED_VERSION_BELATED(5, 89, 5, 95, "Use registerPlugin(CreateInstanceWithMetaDataFunction) instead")
-    void registerPlugin(const QString &keyword, CreateInstanceFunction instanceFunction)
-    {
-        registerPlugin(keyword, &T::staticMetaObject, instanceFunction);
-    }
-#endif
-
     /**
      * Overload for registerPlugin<T>(const QString &keyword, CreateInstanceFunction instanceFunction)
      *
@@ -749,48 +670,6 @@ protected:
         CreateInstanceFunction instanceFunction = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
         registerPlugin(QString(), &T::staticMetaObject, instanceFunction);
     }
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-    /**
-     * @overload
-     * @deprecated Since 5.89, use overload without keyword instead
-     */
-    template<class T, enable_if_t<InheritanceChecker<T>::enabled, int> = 0>
-    KCOREADDONS_DEPRECATED_VERSION(5, 89, "Use overload without keyword instead")
-    void registerPlugin(const QString &keyword)
-    {
-        CreateInstanceFunction instanceFunction = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
-        registerPlugin<T>(keyword, instanceFunction);
-    }
-#endif
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-    /**
-     * Registers a metadata-taking plugin with the factory. Call this function from the constructor of the
-     * KPluginFactory subclass to make the create function able to instantiate the plugin when asked
-     * for an interface the plugin implements.
-     *
-     * You can register as many plugin classes as you want as long as either the plugin interface or
-     * the @p keyword makes it unique. E.g. it is possible to register a KCModule and a
-     * KParts::Part without having to specify keywords since their interfaces differ.
-     *
-     * @tparam T the name of the plugin class
-     *
-     * @param keyword An optional keyword as unique identifier for the plugin. This allows you to
-     * put more than one plugin with the same interface into the same library using the same
-     * factory. X-KDE-PluginKeyword is a convenient way to specify the keyword in a desktop file.
-     *
-     * @param instanceFunction A function pointer to a function that creates an instance of the
-     * plugin.
-     * @deprecated Since 5.89, providing a custom CreateInstanceWithMetaDataFunction is deprecated. Use registerPlugin<T>() instead
-     */
-    template<class T>
-    KCOREADDONS_DEPRECATED_VERSION(5, 89, "Providing a custom CreateInstanceWithMetaDataFunction is deprecated. Use registerPlugin<T>() instead")
-    void registerPlugin(const QString &keyword, CreateInstanceWithMetaDataFunction instanceFunction)
-    {
-        registerPlugin(keyword, &T::staticMetaObject, instanceFunction);
-    }
-#endif
 
     /**
      * Uses a default instance creation function depending on the type of interface. If the
@@ -832,36 +711,7 @@ protected:
         registerPlugin(QString(), &T::staticMetaObject, instanceFunction);
     }
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-    /**
-     * @overload
-     * @deprecated Since 5.89, use overload without keyword instead
-     */
-    template<class T, enable_if_t<InheritanceWithMetaDataChecker<T>::enabled, int> = 0>
-    KCOREADDONS_DEPRECATED_VERSION(5, 89, "Use overload without keyword instead")
-    void registerPlugin(const QString &keyword)
-    {
-        CreateInstanceWithMetaDataFunction instanceFunction = InheritanceWithMetaDataChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
-        registerPlugin<T>(keyword, instanceFunction);
-    }
-#endif
     std::unique_ptr<KPluginFactoryPrivate> const d_ptr;
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(4, 0)
-    /**
-     * @deprecated since 4.0 use create<T>(QObject *parent, const QVariantList &args)
-     */
-    KCOREADDONS_DEPRECATED_VERSION(4, 0, "Use KPluginFactory::create<T>(QObject *parent, const QVariantList &args)")
-    virtual QObject *createObject(QObject *parent, const char *className, const QStringList &args);
-
-    /**
-     * @deprecated since 4.0 use create<T>(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)
-     */
-    KCOREADDONS_DEPRECATED_VERSION(4,
-                                   0,
-                                   "Use KPluginFactory::create<T>(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)")
-    virtual KParts::Part *createPartObject(QWidget *parentWidget, QObject *parent, const char *classname, const QStringList &args);
-#endif
 
     /**
      * This function is called when the factory asked to create an Object.
@@ -923,15 +773,6 @@ private:
     static void logFailedInstantiationMessage(const char *className, KPluginMetaData data);
 };
 
-// Deprecation wrapper macro added only for 5.70, while backward typedef added in 4.0
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 70)
-/**
- * Backward compatibility typedef for KPluginFactory
- * @deprecated since 4.0, use KPluginFactory
- */
-typedef KPluginFactory KLibFactory;
-#endif
-
 template<typename T>
 inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
 {
@@ -945,21 +786,6 @@ inline T *KPluginFactory::create(QObject *parent, const QVariantList &args)
     return t;
 }
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-template<typename T>
-inline T *KPluginFactory::create(const QString &keyword, QObject *parent, const QVariantList &args)
-{
-    QObject *o =
-        create(T::staticMetaObject.className(), parent && parent->isWidgetType() ? reinterpret_cast<QWidget *>(parent) : nullptr, parent, args, keyword);
-
-    T *t = qobject_cast<T *>(o);
-    if (!t) {
-        delete o;
-    }
-    return t;
-}
-#endif
-
 template<typename T>
 inline T *KPluginFactory::create(QWidget *parentWidget, QObject *parent, const QVariantList &args)
 {
@@ -971,20 +797,6 @@ inline T *KPluginFactory::create(QWidget *parentWidget, QObject *parent, const Q
     }
     return t;
 }
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 89)
-template<typename T>
-inline T *KPluginFactory::create(QWidget *parentWidget, QObject *parent, const QString &keyword, const QVariantList &args)
-{
-    QObject *o = create(T::staticMetaObject.className(), parentWidget, parent, args, keyword);
-
-    T *t = qobject_cast<T *>(o);
-    if (!t) {
-        delete o;
-    }
-    return t;
-}
-#endif
 
 Q_DECLARE_INTERFACE(KPluginFactory, KPluginFactory_iid)
 

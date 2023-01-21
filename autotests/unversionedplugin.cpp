@@ -8,7 +8,6 @@
 #include "unversionedplugin.h"
 #include "kcoreaddons_debug.h"
 #include <QDebug>
-#include <kexportplugin.h>
 #include <kpluginfactory.h>
 
 UnversionedPlugin::UnversionedPlugin(QObject *parent, const QVariantList &args)

@@ -20,9 +20,6 @@ class KAboutDataApplicationDataTest : public QObject
 
 private Q_SLOTS:
     void testInteractionWithQApplicationData();
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
-    void testRegisterPluginData();
-#endif
 };
 
 static const char AppName[] = "app";
@@ -80,26 +77,6 @@ void KAboutDataApplicationDataTest::testInteractionWithQApplicationData()
     QCOMPARE(applicationAboutData2.version(), QLatin1String(Version2));
     QCOMPARE(applicationAboutData2.desktopFileName(), QLatin1String(DesktopFileName2));
 }
-
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 76)
-void KAboutDataApplicationDataTest::testRegisterPluginData()
-{
-    for (const auto &name : {QStringLiteral("foo"), QStringLiteral("bar")}) {
-        QVERIFY(!KAboutData::pluginData(name));
-        KAboutData::registerPluginData(KAboutData(name));
-
-        auto v1 = KAboutData::pluginData(name);
-        QVERIFY(v1);
-        QCOMPARE(v1->componentName(), name);
-
-        // re-registering will overwrite and not trigger memory leaks (check LSAN)
-        KAboutData::registerPluginData(KAboutData(name));
-
-        // the pointer staid the same, as QHash is node based
-        QCOMPARE(KAboutData::pluginData(name), v1);
-    }
-}
-#endif
 
 QTEST_MAIN(KAboutDataApplicationDataTest)
 

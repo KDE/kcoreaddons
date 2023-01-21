@@ -8,7 +8,6 @@
 #include "alwaysunloadplugin.h"
 #include "kcoreaddons_debug.h"
 #include <QDebug>
-#include <kexportplugin.h>
 #include <kpluginfactory.h>
 
 AlwaysUnloadPlugin::AlwaysUnloadPlugin(QObject *parent, const QVariantList &args)

@@ -29,21 +29,6 @@
  */
 namespace KRandom
 {
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 72)
-/**
- * Generates a uniform random number.
- * @return A random number in the range [0, RAND_MAX). The RNG is seeded
- *   on first use.
- * @deprecated Since 5.72, use QRandomGenerator::global(). The 1:1 port is bounded(RAND_MAX) but check all the methods that QRandomGenerator provides.
- */
-KCOREADDONS_EXPORT
-KCOREADDONS_DEPRECATED_VERSION(
-    5,
-    72,
-    "Use QRandomGenerator::global(). The 1:1 port is bounded(RAND_MAX) but check see all the methods that QRandomGenerator provides.")
-int random();
-#endif
-
 /**
  * Generates a random string.  It operates in the range [A-Za-z0-9]
  * @param length Generate a string of this length.

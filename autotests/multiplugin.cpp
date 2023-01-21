@@ -8,7 +8,6 @@
 #include "multiplugin.h"
 #include "kcoreaddons_debug.h"
 #include <QDebug>
-#include <kexportplugin.h>
 #include <kpluginfactory.h>
 
 MultiPlugin1::MultiPlugin1(QObject *parent, const QVariantList &args)
@@ -25,13 +24,6 @@ MultiPlugin2::MultiPlugin2(QObject *parent, const QVariantList &args)
     setObjectName(QLatin1String("MultiPlugin2"));
 }
 
-#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 89)
-K_PLUGIN_FACTORY(MultiPluginFactory,
-                 registerPlugin<MultiPlugin1>();
-                 registerPlugin<MultiPlugin2>(QLatin1String("secondary")); // keyword
-)
-#else
 K_PLUGIN_FACTORY(MultiPluginFactory, registerPlugin<MultiPlugin1>();)
-#endif
 
 #include "multiplugin.moc"

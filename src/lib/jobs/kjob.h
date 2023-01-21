@@ -527,26 +527,6 @@ Q_SIGNALS:
 Q_SIGNALS:
     // These signals must be connected from KIO::KCoreDirLister (among others),
     // therefore they must be public.
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
-    /**
-     * Emitted when we know the amount the job will have to process. The unit of this
-     * amount is sent too. It can be emitted several times if the job manages several
-     * different units.
-     *
-     * @note This is a private signal, it shouldn't be emitted directly by subclasses of
-     * KJob, use setTotalAmount() instead.
-     *
-     * @param job the job that emitted this signal
-     * @param unit the unit of the total amount
-     * @param amount the total amount
-     *
-     * @deprecated since 5.80, use the KJob::totalAmountChanged(KJob *, KJob::Unit, qulonglong) signal instead
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 80, "Use KJob::totalAmountChanged(KJob *, KJob::Unit, qulonglong) signal")
-    void totalAmount(KJob *job, KJob::Unit unit, qulonglong amount); // clazy:exclude=overloaded-signal
-#endif
-
     /**
      * Emitted when we know the amount the job will have to process. The unit of this
      * amount is sent too. It can be emitted several times if the job manages several
@@ -569,26 +549,6 @@ Q_SIGNALS:
                             QPrivateSignal
 #endif
     );
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
-    /**
-     * Regularly emitted to show the progress of this job by giving the current amount.
-     * The unit of this amount is sent too. It can be emitted several times if the job
-     * manages several different units.
-     *
-     * @note This is a private signal, it shouldn't be emitted directly by subclasses of
-     * KJob, use setProcessedAmount() instead.
-     *
-     * @param job the job that emitted this signal
-     * @param unit the unit of the processed amount
-     * @param amount the processed amount
-     *
-     * @deprecated since 5.80, use the KJob::processedAmountChanged(KJob *, KJob::Unit, qulonglong)
-     * signal instead
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 80, "Use KJob::processedAmountChanged(KJob *, KJob::Unit, qulonglong) signal")
-    void processedAmount(KJob *job, KJob::Unit unit, qulonglong amount); // clazy:exclude=overloaded-signal
-#endif
 
     /**
      * Regularly emitted to show the progress of this job by giving the current amount.
@@ -636,27 +596,6 @@ Q_SIGNALS:
      * @param size the processed size
      */
     void processedSize(KJob *job, qulonglong size);
-
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 80)
-    /**
-     * Progress signal showing the overall progress of the job
-     * This is valid for any kind of job, and allows using a
-     * a progress bar very easily. (see KProgressBar).
-     * Note that this signal is not emitted for finished jobs.
-     *
-     * @note This is a private signal, it shouldn't be emitted directly by subclasses of
-     * KJob, use emitPercent(), setPercent() setTotalAmount() or
-     * setProcessedAmount() instead.
-     *
-     * @param job the job that emitted this signal
-     * @param percent the percentage
-     *
-     * @deprecated since 5.80, use the KJob::percentChanged(KJob *, unsigned long)
-     * signal instead.
-     */
-    KCOREADDONS_DEPRECATED_VERSION(5, 80, "Use KJob::percentChanged(KJob *, unsigned long) signal")
-    void percent(KJob *job, unsigned long percent); // clazy:exclude=overloaded-signal
-#endif
 
     /**
      * Progress signal showing the overall progress of the job. This is

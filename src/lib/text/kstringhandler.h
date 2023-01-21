@@ -146,32 +146,6 @@ KCOREADDONS_EXPORT QStringList perlSplit(const QString &sep, const QString &s, i
  */
 KCOREADDONS_EXPORT QStringList perlSplit(const QChar &sep, const QString &s, int max = 0);
 
-#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 67)
-/**
- * Split a QString into a QStringList in a similar fashion to the static
- * QStringList function in Qt, except you can specify a maximum number
- * of tokens. If max is specified (!= 0) then only that number of tokens
- * will be extracted. The final token will be the remainder of the string.
- *
- * Example:
- * \code
- * perlSplit(QRegExp("[! ]"), "Split me up ! I'm bored ! OK ?", 3)
- * QStringList contains: "Split", "me", "up ! I'm bored ! OK ?"
- * \endcode
- *
- * @param sep is the regular expression to use to delimit s.
- * @param s is the input string
- * @param max is the maximum number of extractions to perform, or 0.
- * @return A QStringList containing tokens extracted from s.
- *
- * @deprecated Since 5.67, use perlSplit(const QRegularExpression &sep,
- * const QString &s, int max = 0) instead.
- */
-KCOREADDONS_EXPORT
-KCOREADDONS_DEPRECATED_VERSION(5, 67, "Use KStringHandler::perlSplit(const QRegularExpression &, const QString &, int)")
-QStringList perlSplit(const QRegExp &sep, const QString &s, int max = 0);
-#endif
-
 /**
  * Split a QString into a QStringList in a similar fashion to the static
  * QStringList function in Qt, except you can specify a maximum number
