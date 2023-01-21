@@ -54,8 +54,6 @@ target_link_libraries(pluginwithoutmetadata KF6::CoreAddons autotests_static)
 add_library(org.kde.test MODULE jsonplugin.cpp)
 target_link_libraries(org.kde.test KF6::CoreAddons)
 
-add_definitions( -DKDELIBS4CONFIGMIGRATOR_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}/data" )
-
 if (WIN32)
     set(autotests_OPTIONAL_SRCS
         ${autotests_OPTIONAL_SRCS}
@@ -70,13 +68,6 @@ if (UNIX)
     )
 endif ()
 
-if (NOT ${QT_MAJOR_VERSION} STREQUAL "6")
-    set(autotests_OPTIONAL_SRCS
-        ${autotests_OPTIONAL_SRCS}
-        kdelibs4migrationtest.cpp
-        kdelibs4configmigratortest.cpp
-    )
-endif ()
 ecm_add_tests(
     kaboutdatatest.cpp
     kaboutdataapplicationdatatest.cpp

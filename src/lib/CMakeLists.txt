@@ -134,8 +134,6 @@ target_sources(KF6CoreAddons PRIVATE
     text/kmacroexpander.cpp
     text/kstringhandler.cpp
     text/ktexttohtml.cpp
-    util/kdelibs4migration.cpp
-    util/kdelibs4configmigrator.cpp
     util/kformat.cpp
     util/kformatprivate.cpp
     util/kosrelease.cpp
@@ -170,8 +168,6 @@ target_sources(KF6CoreAddons PRIVATE
     text/kmacroexpander.h
     text/kstringhandler.h
     text/ktexttohtml.h
-    util/kdelibs4migration.h
-    util/kdelibs4configmigrator.h
     util/kformat.h
     util/kosrelease.h
     util/kprocesslist.h
@@ -224,14 +220,6 @@ ecm_qt_declare_logging_category(KF6CoreAddons
     OLD_CATEGORY_NAMES kf5.kcoreaddons.desktopparser
     DEFAULT_SEVERITY Warning
     DESCRIPTION "DesktopParser (KCoreAddons)"
-    EXPORT KCOREADDONS
-)
-ecm_qt_export_logging_category(
-    IDENTIFIER MIGRATOR
-    CATEGORY_NAME kf.coreaddons.kdelibs4configmigrator
-    OLD_CATEGORY_NAMES kf5.kcoreaddons.kdelibs4configmigrator
-    DEFAULT_SEVERITY Warning
-    DESCRIPTION "Kdelibs4ConfigMigrator (KCoreAddons)"
     EXPORT KCOREADDONS
 )
 
@@ -351,8 +339,6 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KShell
         KProcessList
         KListOpenFilesJob
-        Kdelibs4Migration
-        Kdelibs4ConfigMigrator
         KLibexec
         KSignalHandler
         KRuntimePlatform
