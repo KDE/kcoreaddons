@@ -370,7 +370,7 @@ if(BUILD_QCH)
             ${KCoreAddons_HEADERS}
         MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
         LINK_QCHS
-            Qt5Core_QCH
+            Qt6Core_QCH
         INCLUDE_DIRS
             ${CMAKE_CURRENT_BINARY_DIR}
             ${kcoreaddons_INCLUDE_DIRS}
