@@ -224,7 +224,7 @@ KDirWatchPrivate::KDirWatchPrivate()
         (void)fcntl(m_inotify_fd, F_SETFD, FD_CLOEXEC);
 
         mSn = new QSocketNotifier(m_inotify_fd, QSocketNotifier::Read, this);
-        connect(mSn, SIGNAL(activated(int)), this, SLOT(inotifyEventReceived()));
+        connect(mSn, &QSocketNotifier::activated, this, &KDirWatchPrivate::inotifyEventReceived);
     }
 #endif
 #if HAVE_QFILESYSTEMWATCHER
@@ -232,9 +232,7 @@ KDirWatchPrivate::KDirWatchPrivate()
     fsWatcher = nullptr;
 #endif
 
-    if (s_verboseDebug) {
-        qCDebug(KDIRWATCH) << "Available methods: " << availableMethods << "preferred=" << methodToString(m_preferredMethod);
-    }
+    qCDebug(KDIRWATCH) << "Available methods: " << availableMethods << "preferred=" << methodToString(m_preferredMethod);
 }
 
 // This is called on app exit (deleted by QThreadStorage)
@@ -328,9 +326,8 @@ void KDirWatchPrivate::inotifyEventReceived()
             }
 
             if (event->mask & IN_DELETE_SELF) {
-                if (s_verboseDebug) {
-                    qCDebug(KDIRWATCH) << "-->got deleteself signal for" << e->path;
-                }
+                qCDebug(KDIRWATCH) << "-->got deleteself signal for" << e->path;
+
                 e->m_status = NonExistent;
                 m_inotify_wd_to_entry.remove(e->wd);
                 e->wd = -1;
@@ -351,10 +348,8 @@ void KDirWatchPrivate::inotifyEventReceived()
             if (event->mask & (IN_CREATE | IN_MOVED_TO)) {
                 Entry *sub_entry = e->findSubEntry(tpath);
 
-                if (s_verboseDebug) {
-                    qCDebug(KDIRWATCH) << "-->got CREATE signal for" << (tpath) << "sub_entry=" << sub_entry;
-                    qCDebug(KDIRWATCH) << *e;
-                }
+                qCDebug(KDIRWATCH) << "-->got CREATE signal for" << (tpath) << "sub_entry=" << sub_entry;
+                qCDebug(KDIRWATCH) << *e;
 
                 // The code below is very similar to the one in checkFAMEvent...
                 if (sub_entry) {
@@ -381,9 +376,8 @@ void KDirWatchPrivate::inotifyEventReceived()
                 }
             }
             if (event->mask & (IN_DELETE | IN_MOVED_FROM)) {
-                if (s_verboseDebug) {
-                    qCDebug(KDIRWATCH) << "-->got DELETE signal for" << tpath;
-                }
+                qCDebug(KDIRWATCH) << "-->got DELETE signal for" << tpath;
+
                 if ((e->isDir) && (!e->m_clients.empty())) {
                     // A file in this directory has been removed.  It wasn't an explicitly
                     // watched file as it would have its own watch descriptor, so
@@ -401,9 +395,8 @@ void KDirWatchPrivate::inotifyEventReceived()
             }
             if (event->mask & (IN_MODIFY | IN_ATTRIB)) {
                 if ((e->isDir) && (!e->m_clients.empty())) {
-                    if (s_verboseDebug) {
-                        qCDebug(KDIRWATCH) << "-->got MODIFY signal for" << (tpath);
-                    }
+                    qCDebug(KDIRWATCH) << "-->got MODIFY signal for" << (tpath);
+
                     // A file in this directory has been changed.  No
                     // addEntry/ removeEntry bookkeeping should be required.
                     // Add the path to the list of pending file changes if
@@ -1028,9 +1021,8 @@ void KDirWatchPrivate::removeWatch(Entry *e)
 
 void KDirWatchPrivate::removeEntry(KDirWatch *instance, const QString &_path, Entry *sub_entry)
 {
-    if (s_verboseDebug) {
-        qCDebug(KDIRWATCH) << "path=" << _path << "sub_entry:" << sub_entry;
-    }
+    qCDebug(KDIRWATCH) << "path=" << _path << "sub_entry:" << sub_entry;
+
     Entry *e = entry(_path);
     if (e) {
         removeEntry(instance, e, sub_entry);
