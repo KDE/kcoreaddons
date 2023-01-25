@@ -148,7 +148,7 @@ install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfig.cmake"
         COMPONENT Devel )
 
 install(EXPORT KF6CoreAddonsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF6CoreAddonsTargets.cmake NAMESPACE KF6:: )
-install(EXPORT KF5CoreAddonsToolingTargets DESTINATION "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5CoreAddons" FILE KF5CoreAddonsToolingTargets.cmake NAMESPACE KF5:: )
+install(EXPORT KF6CoreAddonsToolingTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF6CoreAddonsToolingTargets.cmake NAMESPACE KF6:: )
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_version.h
         DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel)
