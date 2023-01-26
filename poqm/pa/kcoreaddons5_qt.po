@@ -4,7 +4,7 @@
 #
 # Amanpreet Singh Alam <amanlinux@netscape.net>, 2004.
 # Amanpreet Singh Alam <amanlinux@netscpe.net>, 2004.
-# A S Alam <aalam@users.sf.net>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2022.
+# A S Alam <aalam@users.sf.net>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2022, 2023.
 # ASB <aalam@users.sf.net>, 2007.
 # Amanpreet Singh Alam <apreet.alam@gmail.com>, 2008.
 # Amanpreet Singh <aalam@users.sf.net>, 2008.
@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-11-19 05:09-0800\n"
+"PO-Revision-Date: 2023-01-25 07:36-0800\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -801,7 +801,7 @@ msgstr "ਹੁਣੇ ਹੀ"
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%1 ਮਿੰਟ ਪਹਿਲਾਂ"
+msgstr[0] "%n ਮਿੰਟ ਪਹਿਲਾਂ"
 msgstr[1] "%1 ਮਿੰਟ ਪਹਿਲਾਂ"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
