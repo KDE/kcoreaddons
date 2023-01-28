@@ -42,14 +42,6 @@ function(kcoreaddons_desktop_to_json target desktop)
         set(json "${CMAKE_CURRENT_BINARY_DIR}/${desktop_basename}.json")
     endif()
 
-    if(CMAKE_VERSION VERSION_LESS 2.8.12.20140127 OR "${target}" STREQUAL "")
-        _desktop_to_json_cmake28(${desktop} ${json} ${DESKTOP_TO_JSON_COMPAT_MODE})
-        return()
-    elseif(MSVC_IDE AND CMAKE_VERSION VERSION_LESS 3.0)
-        # autogen dependencies for visual studio generator are broken until cmake commit 2ed0d06
-        _desktop_to_json_cmake28(${desktop} ${json} ${DESKTOP_TO_JSON_COMPAT_MODE})
-        return()
-    endif()
     kcoreaddons_desktop_to_json_crosscompilation_args(_crosscompile_args)
     set(command KF6::desktoptojson ${_crosscompile_args} -i ${desktop} -o ${json})
     if(DESKTOP_TO_JSON_COMPAT_MODE)
@@ -97,32 +89,6 @@ function(kcoreaddons_desktop_to_json_crosscompilation_args output_var)
     set(_extra_args --strict-path-mode --generic-data-path "${CMAKE_SYSROOT}/${KDE_INSTALL_FULL_DATAROOTDIR}")
   endif()
   set(${output_var} ${_extra_args} PARENT_SCOPE)
-endfunction()
-
-function(_desktop_to_json_cmake28 desktop json compat)
-    # This function runs desktoptojson at *configure* time, ie, when CMake runs.
-    # This is necessary with CMake < 3.0.0 because the .json file must be
-    # generated before moc is run, and there was no way until CMake 3.0.0 to
-    # define a target as a dependency of the automoc target.
-    message("Using CMake 2.8 way to call desktoptojson")
-    get_target_property(DESKTOPTOJSON_LOCATION KF6::desktoptojson LOCATION)
-    if(compat)
-        execute_process(
-            COMMAND ${DESKTOPTOJSON_LOCATION} -i ${desktop} -o ${json} -c
-            RESULT_VARIABLE result
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        )
-    else()
-        execute_process(
-            COMMAND ${DESKTOPTOJSON_LOCATION} -i ${desktop} -o ${json}
-            RESULT_VARIABLE result
-            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-        )
-    endif()
-
-    if (NOT result EQUAL 0)
-        message(FATAL_ERROR "Generating ${json} failed")
-    endif()
 endfunction()
 
 #
