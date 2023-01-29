@@ -8,7 +8,6 @@
 */
 
 #include "kpluginmetadata.h"
-#include "desktopfileparser_p.h"
 #include "kstaticpluginhelpers_p.h"
 
 #include "kcoreaddons_debug.h"
@@ -25,7 +24,6 @@
 #include <QStandardPaths>
 
 #include "kaboutdata.h"
-#include "kpluginfactory.h"
 
 #include <optional>
 
