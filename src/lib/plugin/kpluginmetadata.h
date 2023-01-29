@@ -131,23 +131,12 @@ public:
     KPluginMetaData(const QPluginLoader &loader);
 
     /**
-     * Reads the plugin metadata from a plugin or .desktop which can be loaded from @p file.
+     * Reads the plugin metadata from a plugin which can be loaded from @p file.
      *
-     * For plugins, platform-specific library suffixes may be omitted since @p file will be resolved
+     * Platform-specific library suffixes may be omitted since @p file will be resolved
      * using the same logic as QPluginLoader.
      *
-     * If the file name ends with ".desktop", the .desktop file will be parsed instead of
-     * reading the metadata from the QPluginLoader. This is the same as calling
-     * KPluginMetaData::fromDesktopFile() without the serviceTypes parameter.
-     *
-     * If @p file ends with .json, the file will be loaded as the QJsonObject metadata.
-     *
-     * @note Using this constructor for metadata files is deprecated..
-     * Use KPluginMetaData::fromDesktopFile or KPluginMetaData::fromJsonFile instead.
-     *
      * @see QPluginLoader::setFileName()
-     * @see KPluginMetaData::fromDesktopFile()
-     * @see KPluginMetaData::fromJsonFile()
      */
     KPluginMetaData(const QString &file);
 
