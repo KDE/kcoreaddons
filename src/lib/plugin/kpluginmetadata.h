@@ -43,7 +43,6 @@ class QStaticPlugin;
  * -------------------| -------------------- | ---------------------
  * Name               | name()               | string
  * Description        | description()        | string
- * ExtraInformation   | extraInformation()   | string
  * Icon               | iconName()           | string
  * Authors            | authors()            | object array (KAboutPerson)
  * Category           | category()           | string
@@ -54,7 +53,6 @@ class QStaticPlugin;
  * Website            | website()            | string
  * BugReportUrl       | bugReportUrl()       | string
  * EnabledByDefault   | isEnabledByDefault() | bool
- * ServiceTypes       | serviceTypes()       | string array
  * MimeTypes          | mimeTypes()          | string array
  * FormFactors        | formFactors()        | string array
  * Translators        | translators()        | object array (KAboutPerson)
