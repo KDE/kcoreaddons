@@ -161,7 +161,7 @@ class KPluginMetaData;
  * @endcode
  * in the same source file when that one has the name "myplugin.cpp".
  *
- * Example (KF >= 5.77):
+ * Example:
  * @code
  * #include <KPluginFactory>
  * #include <plugininterface.h>
@@ -170,27 +170,6 @@ class KPluginMetaData;
  * {
  * public:
  *     MyPlugin(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
- *         : PluginInterface(parent)
- *     {}
- * };
- *
- * K_PLUGIN_FACTORY_WITH_JSON(MyPluginFactory,
- *                  "metadata.json",
- *                  registerPlugin<MyPlugin>();
- *                 )
- *
- * #include <myplugin.moc>
- * @endcode
- *
- * Example (backward-compatible with KF < 5.77):
- * @code
- * #include <KPluginFactory>
- * #include <plugininterface.h>
- *
- * class MyPlugin : public PluginInterface
- * {
- * public:
- *     MyPlugin(QObject *parent, const QVariantList &args)
  *         : PluginInterface(parent)
  *     {}
  * };
@@ -226,7 +205,7 @@ class KPluginMetaData;
  * @endcode
  * in the same source file when that one has the name "myplugin.cpp".
  *
- * Example (KF >= 5.77):
+ * Example:
  * @code
  * #include <KPluginFactory>
  * #include <plugininterface.h>
@@ -235,24 +214,6 @@ class KPluginMetaData;
  * {
  * public:
  *     MyPlugin(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
- *         : PluginInterface(parent)
- *     {}
- * };
- *
- * K_PLUGIN_CLASS_WITH_JSON(MyPlugin, "metadata.json")
- *
- * #include <myplugin.moc>
- * @endcode
- *
- * Example (backward-compatible with KF < 5.77):
- * @code
- * #include <KPluginFactory>
- * #include <plugininterface.h>
- *
- * class MyPlugin : public PluginInterface
- * {
- * public:
- *     MyPlugin(QObject *parent, const QVariantList &args)
  *         : PluginInterface(parent)
  *     {}
  * };
@@ -336,7 +297,7 @@ class KPluginMetaData;
  * @code
  * T(QWidget *parentWidget, QObject *parent, const QVariantList &args)
  * @endcode
- * or, since KF 5.77,
+ * or
  * @code
  * T(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
  * @endcode
@@ -344,7 +305,7 @@ class KPluginMetaData;
  * @code
  * T(QWidget *parent, const QVariantList &args)
  * @endcode
- * or, since KF 5.77,
+ * or
  * @code
  * T(QWidget *parent, const KPluginMetaData &metaData, const QVariantList &args)
  * @endcode
@@ -352,7 +313,7 @@ class KPluginMetaData;
  * @code
  * T(QObject *parent, const QVariantList &args)
  * @endcode
- * or, since KF 5.77,
+ * or
  * @code
  * T(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
  * @endcode
