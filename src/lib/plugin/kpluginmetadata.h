@@ -150,23 +150,14 @@ public:
      * Creates a KPluginMetaData from a QJsonObject holding the metadata and a file name
      * This can be used if the data is not retrieved from a Qt C++ plugin library but from some
      * other source.
-     * @see KPluginMetaData(const QJsonObject &, const QString &, const QString &)
-     */
-    KPluginMetaData(const QJsonObject &metaData, const QString &file);
-
-    // TODO: KF6: merge with the above and make metaDataFile default to QString()
-    /**
-     * Creates a KPluginMetaData
+     *
      * @param metaData the JSON metadata to use for this object
      * @param pluginFile the file that the plugin can be loaded from
      * @param metaDataFile the file that the JSON metadata was read from
      *
-     * This can be used if the data is not retrieved from a Qt C++ plugin library but from some
-     * other source.
-     *
-     * @since 5.5
+     * @since 6.0
      */
-    KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile, const QString &metaDataFile);
+    KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile, const QString &metaDataFile = QString());
 
     /*
      * Constructs a KPluginMetaData from the static plugin.

@@ -163,11 +163,6 @@ KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
 {
 }
 
-KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &file)
-    : KPluginMetaData(metaData, file, QString())
-{
-}
-
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile, const QString &metaDataFile)
     : m_metaData(metaData)
     , m_fileName(pluginFile)
