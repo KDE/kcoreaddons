@@ -245,7 +245,7 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
     QList<QUrl> urls = mimeData->urls();
 
     // XDG Document Portal doesn't support directories and silently drops them.
-    bool hasDirs = std::any_of(urls.begin(), urls.end(), [](const QUrl url) {
+    bool hasDirs = std::any_of(urls.begin(), urls.end(), [](const QUrl &url) {
         return url.isLocalFile() && QFileInfo(url.toLocalFile()).isDir();
     });
     if (hasDirs) {
