@@ -1027,10 +1027,6 @@ public:
      * component name "foo" the name of an installed D-Bus service file needs to be
      * "org.bar.foo.service" or the name of the installed desktop file "org.bar.foo.desktop"
      * (and the desktopFileName property accordingly set to "org.bar.foo").
-     * For still supporting the deprecated start of services via KToolInvocation,
-     * the desktop file needs to have an entry with the key "X-DBUS-ServiceName"
-     * and a value which matches the used D-Bus "well-known name" as just described,
-     * so with the above used values it needs a line "X-DBUS-ServiceName=org.bar.foo"
      *
      * @param domain the domain name, for instance kde.org, koffice.org, etc.
      *
