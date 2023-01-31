@@ -34,12 +34,6 @@ public:
     void _k_result();
 };
 
-KJobUiDelegate::KJobUiDelegate()
-    : QObject()
-    , d(new KJobUiDelegatePrivate(this))
-{
-}
-
 KJobUiDelegate::KJobUiDelegate(Flags flags)
     : QObject()
     , d(new KJobUiDelegatePrivate(this))

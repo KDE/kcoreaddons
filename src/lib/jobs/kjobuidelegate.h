@@ -50,16 +50,11 @@ public:
     Q_DECLARE_FLAGS(Flags, Flag)
 
     /**
-     * Constructs a new KJobUiDelegate.
-     */
-    KJobUiDelegate();
-
-    /**
      * Constructs a new KJobUiDelegate with a flags argument.
      * @param flags allows to enable automatic error/warning handling
      * @since 5.70
      */
-    explicit KJobUiDelegate(Flags flags); // KF6 TODO merge with default constructor, using AutoHandlingDisabled as default value
+    explicit KJobUiDelegate(Flags flags = {KJobUiDelegate::AutoHandlingDisabled});
 
     /**
      * Destroys a KJobUiDelegate.
