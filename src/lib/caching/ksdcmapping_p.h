@@ -243,15 +243,14 @@ private:
         // 6) The incorrect version of the cache was detected.
         // 7) The file could be created, but posix_fallocate failed to commit it fully to disk.
         // In any of these cases, attempt to fallback to the
-        // better-supported anonymous private page style of mmap. This memory won't
-        // be shared, but our code will still work the same.
+        // better-supported anonymous page style of mmap.
         // NOTE: We never use the on-disk representation independently of the
         // shared memory. If we don't get shared memory the disk info is ignored,
         // if we do get shared memory we never look at disk again.
         if (!file || mapAddress == MAP_FAILED) {
-            qCWarning(KCOREADDONS_DEBUG) << "Couldn't establish shared memory mapping, will fallback"
-                                         << "to private memory -- memory usage will increase";
-            mapAddress = QT_MMAP(nullptr, size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+            qCWarning(KCOREADDONS_DEBUG) << "Couldn't establish file backed memory mapping, will fallback"
+                                         << "to anonymous memory";
+            mapAddress = QT_MMAP(nullptr, size, PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
         }
 
         // Well now we're really hosed. We can still work, but we can't even cache
