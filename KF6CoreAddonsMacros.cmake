@@ -130,11 +130,7 @@ function(kcoreaddons_add_plugin plugin)
         message(FATAL_ERROR "Must specify INSTALL_NAMESPACE for ${plugin}")
     endif()
     if (KCA_ADD_PLUGIN_UNPARSED_ARGUMENTS)
-        if ("${ECM_GLOBAL_FIND_VERSION}" VERSION_GREATER_EQUAL "5.91.0")
             message(FATAL_ERROR "kcoreaddons_add_plugin method call recieved unexpected arguments: ${KCA_ADD_PLUGIN_UNPARSED_ARGUMENTS}")
-        else()
-            message(WARNING "kcoreaddons_add_plugin method call recieved unexpected arguments: ${KCA_ADD_PLUGIN_UNPARSED_ARGUMENTS}")
-        endif()
     endif()
 
     string(REPLACE "-" "_" SANITIZED_PLUGIN_NAME ${plugin})
@@ -152,33 +148,14 @@ function(kcoreaddons_add_plugin plugin)
         add_library(${plugin} MODULE ${KCA_ADD_PLUGIN_SOURCES})
     endif()
 
-    if ("${ECM_GLOBAL_FIND_VERSION}" VERSION_GREATER_EQUAL "5.85.0" AND KCA_ADD_PLUGIN_JSON)
-        message(WARNING "Setting the JSON parameter is deprecated, see function docs for details")
-    endif()
-    get_filename_component(json "${KCA_ADD_PLUGIN_JSON}" REALPATH)
-    set_property(TARGET ${plugin} APPEND PROPERTY AUTOGEN_TARGET_DEPENDS ${json})
-
-
-    if ("${ECM_GLOBAL_FIND_VERSION}" VERSION_GREATER_EQUAL "5.88.0")
-        target_compile_definitions(${plugin} PRIVATE KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME=${SANITIZED_PLUGIN_NAME}_factory)
-    endif()
+    target_compile_definitions(${plugin} PRIVATE KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME=${SANITIZED_PLUGIN_NAME}_factory)
 
     # If we have static plugins there are no plugins to install
     if (KCA_ADD_PLUGIN_STATIC)
         return()
     endif()
-    # If find_package(ECM 5.38) or higher is called, output the plugin in a INSTALL_NAMESPACE subfolder.
-    # See https://community.kde.org/Guidelines_and_HOWTOs/Making_apps_run_uninstalled
-    # From 5.90 we went back to putting the plugins in a INSTALL_NAMESPACE subfolder in the builddir, but
-    # without putting that in a "plugins/" dir as that broke running unittests directly on the command line
-    # (i.e. without using ctest, e.g. in gdb).
-    if(ECM_GLOBAL_FIND_VERSION VERSION_EQUAL "5.88.0" OR ECM_GLOBAL_FIND_VERSION VERSION_EQUAL "5.89.0")
-        set_target_properties(${plugin} PROPERTIES
-            LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/plugins/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}")
-    elseif(ECM_GLOBAL_FIND_VERSION VERSION_GREATER_EQUAL "5.38.0")
-        set_target_properties(${plugin} PROPERTIES
-            LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}")
-    endif()
+
+    set_target_properties(${plugin} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${KCA_ADD_PLUGIN_INSTALL_NAMESPACE}")
 
     if (NOT KCOREADDONS_INTERNAL_SKIP_PLUGIN_INSTALLATION)
         if(NOT ANDROID)
@@ -219,15 +196,7 @@ function(kcoreaddons_target_static_plugins app_target plugin_namespace)
     file(WRITE ${TMP_PLUGIN_FILE} ${IMPORT_PLUGIN_STATEMENTS})
     execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${TMP_PLUGIN_FILE} ${PLUGIN_FILE})
     file(REMOVE ${TMP_PLUGIN_FILE})
-    if(ECM_GLOBAL_FIND_VERSION VERSION_GREATER_EQUAL "5.91.0")
-        target_sources(${app_target} PRIVATE ${PLUGIN_FILE})
-    else()
-        # in case of apps bundling their plugins in a small static lib the linking needs to be public
-        # see API docs for a better solution in consumer's code.
-        # Because this will not change the behavior if the plugins are targeted directly to the executable, only
-        # an ECM version check is used and not an additional option.
-        target_sources(${app_target} PUBLIC ${PLUGIN_FILE})
-    endif()
+    target_sources(${app_target} PRIVATE ${PLUGIN_FILE})
 endfunction()
 
 # Clear previously set plugins, otherwise Q_IMPORT_PLUGIN statements
