@@ -24,6 +24,9 @@
 #
 # If OUTPUT_FILE is set the generated file will be <file> instead of the default
 # ${CMAKE_CURRENT_BINARY_DIR}/$(basename desktopfile).json
+# .. note::
+# This is only considered porting aid and will be removed in KF6. Please convert the desktop files
+# in-source to json using the desktoptojson executable
 #
 # Example:
 #
@@ -31,6 +34,7 @@
 #                              SERVICE_TYPES plasma-dataengine.desktop)
 
 function(kcoreaddons_desktop_to_json target desktop)
+    message(WARNING "kcoreaddons_desktop_to_json is deprecated and will be removed in KF6. Convert the desktop files to JSON in source using the desktoptojson executable")
     get_filename_component(desktop_basename ${desktop} NAME_WE) # allow passing an absolute path to the .desktop
     cmake_parse_arguments(DESKTOP_TO_JSON "COMPAT_MODE;DEFAULT_SERVICE_TYPE" "OUTPUT_DIR;OUTPUT_FILE" "SERVICE_TYPES" ${ARGN})
 
