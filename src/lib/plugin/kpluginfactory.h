@@ -678,10 +678,8 @@ protected:
     virtual QObject *create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args);
 
     template<class impl, class ParentType>
-    static QObject *createInstance(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    static QObject *createInstance(QWidget * /*parentWidget*/, QObject *parent, const KPluginMetaData & /*metaData*/, const QVariantList &args)
     {
-        Q_UNUSED(parentWidget)
-        Q_UNUSED(metaData)
         ParentType *p = nullptr;
         if (parent) {
             p = qobject_cast<ParentType *>(parent);
@@ -691,16 +689,14 @@ protected:
     }
 
     template<class impl>
-    static QObject *createPartInstance(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    static QObject *createPartInstance(QWidget *parentWidget, QObject *parent, const KPluginMetaData & /*metaData*/, const QVariantList &args)
     {
-        Q_UNUSED(metaData);
         return new impl(parentWidget, parent, args);
     }
 
     template<class impl, class ParentType>
-    static QObject *createWithMetaDataInstance(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    static QObject *createWithMetaDataInstance(QWidget * /*parentWidget*/, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     {
-        Q_UNUSED(parentWidget)
         ParentType *p = nullptr;
         if (parent) {
             p = qobject_cast<ParentType *>(parent);
