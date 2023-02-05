@@ -522,18 +522,6 @@ public:
      */
     void setMetaData(const KPluginMetaData &metaData);
 
-    /**
-     * @internal
-     * Converts a QStringList to a QVariantList
-     */
-    static QVariantList stringListToVariantList(const QStringList &list);
-
-    /**
-     * @internal
-     * Converts a QVariantList of strings to a QStringList
-     */
-    static QStringList variantListToStringList(const QVariantList &list);
-
 Q_SIGNALS:
     void objectCreated(QObject *object);
 
