@@ -15,20 +15,18 @@
 #include "kpluginmetadata.h"
 
 #include <QObject>
-#include <QStringList>
 #include <QVariant>
 
 #include <memory>
 #include <type_traits>
 
 class QWidget;
-
 class KPluginFactoryPrivate;
+
 namespace KParts
 {
 class Part;
 }
-class KPluginMetaData;
 
 #define KPluginFactory_iid "org.kde.KPluginFactory"
 

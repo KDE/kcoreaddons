@@ -20,8 +20,6 @@
 
 #include <functional>
 
-class KPluginLoader;
-class KPluginFactory;
 class QPluginLoader;
 class KPluginMetaDataPrivate;
 class KAboutPerson;

@@ -24,7 +24,6 @@
 class QCommandLineParser;
 class QJsonObject;
 class KAboutData;
-class KPluginMetaData;
 namespace KCrash
 {
 #ifdef KCOREADDONS_STATIC

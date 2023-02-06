@@ -17,7 +17,6 @@
 #include <qnamespace.h>
 
 class QChar;
-class QRegExp;
 class QRegularExpression;
 class QString;
 
