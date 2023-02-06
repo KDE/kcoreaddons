@@ -86,7 +86,6 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(bool isValid READ isValid CONSTANT)
     Q_PROPERTY(bool isHidden READ isHidden CONSTANT)
     Q_PROPERTY(QString fileName READ fileName CONSTANT)
-    Q_PROPERTY(QString metaDataFileName READ metaDataFileName CONSTANT)
     Q_PROPERTY(QJsonObject rawData READ rawData CONSTANT)
     Q_PROPERTY(QString name READ name CONSTANT)
     Q_PROPERTY(QString description READ description CONSTANT)
@@ -149,11 +148,10 @@ public:
      *
      * @param metaData the JSON metadata to use for this object
      * @param pluginFile the file that the plugin can be loaded from
-     * @param metaDataFile the file that the JSON metadata was read from
      *
      * @since 6.0
      */
-    KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile, const QString &metaDataFile = QString());
+    KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile);
 
     /*
      * Constructs a KPluginMetaData from the static plugin.
@@ -241,15 +239,6 @@ public:
      * by QPluginLoader) since the metadata could also refer to a non-C++ plugin.
      */
     QString fileName() const;
-
-    /**
-     * @return the file that the metadata was read from. This is not necessarily the same as
-     * fileName(), since not all plugins have the metadata embedded. The metadata could also be
-     * stored in a separate .desktop file.
-     *
-     * @since 5.5
-     */
-    QString metaDataFileName() const;
 
     /**
      * @return the full metadata stored inside the plugin file.

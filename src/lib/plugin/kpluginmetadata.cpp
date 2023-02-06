@@ -32,7 +32,6 @@ class KPluginMetaDataPrivate : public QSharedData
 public:
     // If we want to load a file, but it does not exist we want to keep the requested file name for logging
     QString m_requestedFileName;
-    QString metaDataFileName;
     KPluginMetaData::KPluginMetaDataOption m_option = KPluginMetaData::DoNotAllowEmptyMetaData;
     std::optional<QStaticPlugin> staticPlugin = std::nullopt;
     QJsonObject m_metaData;
@@ -111,7 +110,7 @@ public:
 };
 
 KPluginMetaData::KPluginMetaData()
-    : KPluginMetaData({}, {}, {})
+    : KPluginMetaData({}, {})
 {
 }
 
@@ -146,7 +145,6 @@ KPluginMetaData::KPluginMetaData(const QString &file, KPluginMetaDataOption opti
     const auto qtMetaData = loader.metaData();
     if (!qtMetaData.isEmpty()) {
         d->m_metaData = qtMetaData.value(QStringLiteral("MetaData")).toObject();
-        d->metaDataFileName = d->m_fileName;
         if (d->m_metaData.isEmpty() && option == DoNotAllowEmptyMetaData) {
             qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << file << "does not have a valid 'MetaData' object";
         }
@@ -160,12 +158,11 @@ KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
 {
 }
 
-KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile, const QString &metaDataFile)
+KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile)
     : d(new KPluginMetaDataPrivate)
 {
     d->m_metaData = metaData;
     d->m_fileName = pluginFile;
-    d->metaDataFileName = metaDataFile;
 }
 
 KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaData)
@@ -219,7 +216,6 @@ void KPluginMetaData::loadFromJsonFile(const QString &file)
     }
     QString abspath = QFileInfo(file).absoluteFilePath();
     d->m_fileName = abspath;
-    d->metaDataFileName = abspath;
 }
 
 KPluginMetaData KPluginMetaData::fromJsonFile(const QString &file)
@@ -237,11 +233,6 @@ QJsonObject KPluginMetaData::rawData() const
 QString KPluginMetaData::fileName() const
 {
     return d->m_fileName;
-}
-
-QString KPluginMetaData::metaDataFileName() const
-{
-    return d && !d->metaDataFileName.isEmpty() ? d->metaDataFileName : d->m_fileName;
 }
 
 QVector<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)

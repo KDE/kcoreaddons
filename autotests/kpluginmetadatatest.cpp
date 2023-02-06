@@ -315,7 +315,6 @@ private Q_SLOTS:
 
         KPluginMetaData mdAbsolute = createMetaData(inputAbsolute);
         QVERIFY(mdAbsolute.isValid());
-        QCOMPARE(mdAbsolute.metaDataFileName(), inputAbsolute);
         QCOMPARE(mdAbsolute.fileName(), pluginPath);
 
         // All files that have been opened should be stored as absolute paths.
@@ -331,20 +330,17 @@ private Q_SLOTS:
         QVERIFY2(QDir::isRelativePath(inputRelative), qPrintable(inputRelative));
         KPluginMetaData mdRelative = createMetaData(inputRelative);
         QVERIFY(mdRelative.isValid());
-        QCOMPARE(mdRelative.metaDataFileName(), inputAbsolute);
         QCOMPARE(mdRelative.fileName(), pluginPath);
 
         // Check that creating it with the parsed JSON object and a path keeps the path unchanged
         const QJsonObject json = mdAbsolute.rawData();
         QString pluginRelative = QDir::current().relativeFilePath(pluginPath);
         QVERIFY2(QDir::isRelativePath(pluginRelative), qPrintable(pluginRelative));
-        // TODO: KF6: no need to test both constructors once they are merged into one overload.
-        KPluginMetaData mdFromJson1(json, pluginRelative, inputRelative);
-        QCOMPARE(mdFromJson1.metaDataFileName(), inputRelative);
+
         // We should not be normalizing files that have not been openened, so both arguments should be unchanged.
-        QCOMPARE(mdFromJson1.fileName(), pluginRelative);
+        KPluginMetaData mdFromJson1(json, pluginRelative);
         KPluginMetaData mdFromJson2(json, inputRelative);
-        QCOMPARE(mdFromJson2.metaDataFileName(), inputRelative);
+        QCOMPARE(mdFromJson1.fileName(), pluginRelative);
         QCOMPARE(mdFromJson2.fileName(), inputRelative);
     }
 
