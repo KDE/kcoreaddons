@@ -453,9 +453,7 @@ private:
     QStaticPlugin staticPlugin() const;
     QString requestedFileName() const;
 
-    QJsonObject m_metaData;
-    QString m_fileName;
-    QExplicitlySharedDataPointer<KPluginMetaDataPrivate> d; // for future binary compatible extensions
+    QExplicitlySharedDataPointer<KPluginMetaDataPrivate> d;
     friend class KPluginFactory;
 };
 
