@@ -32,59 +32,20 @@ class KPluginMetaData;
 
 #define KPluginFactory_iid "org.kde.KPluginFactory"
 
-/**
- * @relates KPluginFactory
- *
- * Declare a KPluginFactory subclass of the given base factory.
- *
- * @param name the name of the KPluginFactory derived class.
- *
- * @param baseFactory the name of the base class (base factory) to use.
- *                    This must be a KPluginFactory subclass with
- *                    a default constructor.
- *
- * Additional parameters may be additional Qt properties, such as
- * Q_PLUGIN_METADATA.
- *
- * @note The base factory must be a subclass of KPluginFactory.
- * While this macro is largely an implementation detail, factories
- * that have a different create() interface can be declared through
- * this macro. Normal use through other K_PLUGIN_FACTORY macros
- * uses KPluginFactory as a base.
- *
- * @internal
- * @since 5.80
- *
- */
-#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, ...)                                                                             \
-    class name : public baseFactory                                                                                                                            \
+// Internal macro that generated the KPluginFactory subclass
+#define __K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations, ...)                                                                                          \
+    class name : public KPluginFactory                                                                                                                         \
     {                                                                                                                                                          \
         Q_OBJECT                                                                                                                                               \
         Q_INTERFACES(KPluginFactory)                                                                                                                           \
-        __VA_ARGS__                                                                                                                                            \
+        Q_PLUGIN_METADATA(IID KPluginFactory_iid __VA_ARGS__)                                                                                                  \
     public:                                                                                                                                                    \
-        explicit name();                                                                                                                                       \
-        ~name();                                                                                                                                               \
+        explicit name()                                                                                                                                        \
+        {                                                                                                                                                      \
+            pluginRegistrations                                                                                                                                \
+        }                                                                                                                                                      \
+        ~name(){};                                                                                                                                             \
     };
-
-#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, json)                                                                            \
-    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, Q_PLUGIN_METADATA(IID KPluginFactory_iid FILE json))
-
-#define K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory)                                                                                       \
-    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_SKEL(name, baseFactory, Q_PLUGIN_METADATA(IID KPluginFactory_iid))
-
-#define K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations)                                                                   \
-    name::name(){pluginRegistrations} name::~name()                                                                                                            \
-    {                                                                                                                                                          \
-    }
-
-#define K_PLUGIN_FACTORY_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations)                                                                              \
-    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, baseFactory)                                                                                           \
-    K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations)
-
-#define K_PLUGIN_FACTORY_WITH_BASEFACTORY_JSON(name, baseFactory, jsonFile, pluginRegistrations)                                                               \
-    K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON(name, baseFactory, jsonFile)                                                                            \
-    K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, baseFactory, pluginRegistrations)
 
 /**
  * @relates KPluginFactory
@@ -129,7 +90,7 @@ class KPluginMetaData;
  * @see K_PLUGIN_FACTORY_DECLARATION
  * @see K_PLUGIN_FACTORY_DEFINITION
  */
-#define K_PLUGIN_FACTORY(name, pluginRegistrations) K_PLUGIN_FACTORY_WITH_BASEFACTORY(name, KPluginFactory, pluginRegistrations)
+#define K_PLUGIN_FACTORY(name, pluginRegistrations) __K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations)
 
 /**
  * @relates KPluginFactory
@@ -183,8 +144,7 @@ class KPluginMetaData;
  *
  * @since 5.0
  */
-#define K_PLUGIN_FACTORY_WITH_JSON(name, jsonFile, pluginRegistrations)                                                                                        \
-    K_PLUGIN_FACTORY_WITH_BASEFACTORY_JSON(name, KPluginFactory, jsonFile, pluginRegistrations)
+#define K_PLUGIN_FACTORY_WITH_JSON(name, jsonFile, pluginRegistrations) __K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations, FILE jsonFile)
 
 /**
  * @relates KPluginFactory
@@ -245,34 +205,6 @@ class KPluginMetaData;
 #else
 #define K_PLUGIN_CLASS(classname) K_PLUGIN_FACTORY(classname##Factory, registerPlugin<classname>();)
 #endif
-
-/**
- * @relates KPluginFactory
- *
- * K_PLUGIN_FACTORY_DECLARATION declares the KPluginFactory subclass. This macro
- * can be used in a header file.
- *
- * @param name the name of the KPluginFactory derived class.
- *
- * @see K_PLUGIN_FACTORY
- * @see K_PLUGIN_FACTORY_DEFINITION
- */
-#define K_PLUGIN_FACTORY_DECLARATION(name) K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY(name, KPluginFactory)
-
-/**
- * @relates KPluginFactory
- * K_PLUGIN_FACTORY_DEFINITION defines the KPluginFactory subclass. This macro
- * can <b>not</b> be used in a header file.
- *
- * @param name the name of the KPluginFactory derived class.
- *
- * @param pluginRegistrations code to be inserted into the constructor of the
- * class. Usually a series of registerPlugin() calls.
- *
- * @see K_PLUGIN_FACTORY
- * @see K_PLUGIN_FACTORY_DECLARATION
- */
-#define K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations) K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY(name, KPluginFactory, pluginRegistrations)
 
 /**
  * @class KPluginFactory kpluginfactory.h <KPluginFactory>
