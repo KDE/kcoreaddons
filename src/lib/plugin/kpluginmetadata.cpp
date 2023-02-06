@@ -192,13 +192,15 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
         }
     }
 
-    // TODO KF6 remove, this is fallback logic if the pluginId is not the same as the file name
-    auto filter = [&pluginId](const KPluginMetaData &md) -> bool {
-        return md.pluginId() == pluginId;
-    };
-    const QVector<KPluginMetaData> metaDataVector = KPluginMetaData::findPlugins(directory, filter);
-    if (!metaDataVector.isEmpty()) {
-        return metaDataVector.first();
+    const auto staticPlugins = KStaticPluginHelpers::staticPlugins(directory);
+    for (QStaticPlugin p : staticPlugins) {
+        KPluginMetaData metaData;
+        const auto loadingResult = metaData.d->loadStaticPlugin(p, KPluginMetaData::DoNotAllowEmptyMetaData);
+        metaData.m_fileName = loadingResult.fileName;
+        metaData.m_metaData = loadingResult.metaData;
+        if (metaData.isValid() && metaData.pluginId() == pluginId) {
+            return metaData;
+        }
     }
 
     return KPluginMetaData{};
