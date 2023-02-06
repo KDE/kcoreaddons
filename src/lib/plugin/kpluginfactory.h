@@ -52,10 +52,7 @@ class KPluginMetaData;
  * this macro. Normal use through other K_PLUGIN_FACTORY macros
  * uses KPluginFactory as a base.
  *
- * @note This macro is usually only an implementation detail
- * for K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY or
- * K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY_JSON .
- *
+ * @internal
  * @since 5.80
  *
  */
@@ -121,9 +118,7 @@ class KPluginMetaData;
  *     {}
  * };
  *
- * K_PLUGIN_FACTORY(MyPluginFactory,
- *                  registerPlugin<MyPlugin>();
- *                 )
+ * K_PLUGIN_FACTORY(MyPluginFactory, registerPlugin<MyPlugin>();)
  *
  * #include <myplugin.moc>
  * @endcode
@@ -318,9 +313,9 @@ class KPluginMetaData;
  * T(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
  * @endcode
  *
- * You should typically use either K_PLUGIN_FACTORY() or
- * K_PLUGIN_FACTORY_WITH_JSON() in your plugin code to create the factory.  The
- * typical pattern is
+ * You should typically use either K_PLUGIN_CLASS() or
+ * K_PLUGIN_CLASS_WITH_JSON() in your plugin code to generate a factory.
+ * The typical pattern is:
  *
  * @code
  * #include <KPluginFactory>
@@ -334,15 +329,13 @@ class KPluginMetaData;
  *     {}
  * };
  *
- * K_PLUGIN_FACTORY(MyPluginFactory,
- *                  registerPlugin<MyPlugin>();
- *                 )
+ * K_PLUGIN_CLASS(MyPlugin)
  * #include <myplugin.moc>
  * @endcode
  *
  * If you want to write a custom KPluginFactory not using the standard macro(s)
  * you can reimplement the
- * create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword)
+ * create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args)
  * method.
  *
  * Example:
@@ -355,34 +348,22 @@ class KPluginMetaData;
  *     {}
  *
  * protected:
- *     virtual QObject *create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args, const QString &keyword)
+ *     virtual QObject *create(const char *iface, QWidget *parentWidget, QObject *parent, const QVariantList &args)
  *     {
- *         const QString identifier = QLatin1String(iface) + QLatin1Char('_') + keyword;
- *         // load scripting language module from the information in identifier
- *         // and return it:
+ *         // Create an identifier based on the iface and given pluginId
+ *         const QString identifier = QLatin1String(iface) + QLatin1Char('_') + metaData().pluginId();
+ *         // load scripting language module from the information in identifier and return it:
  *         return object;
  *     }
  * };
  * @endcode
  *
- * To use such a custom KPluginFactory, use the K_PLUGIN_FACTORY_DECLARATION_WITH_BASEFACTORY
- * and K_PLUGIN_FACTORY_DEFINITION_WITH_BASEFACTORY macros, passing in the
- * name of the custom subclass as @p baseFactory .
- *
- * If you want to load a library use KPluginLoader.
- * The application that wants to instantiate plugin classes can do the following:
- * @code
- * KPluginFactory *factory = KPluginLoader("libraryname").factory();
- * if (factory) {
- *     PluginInterface *p1 = factory->create<PluginInterface>(parent);
- *     OtherInterface *p2  = factory->create<OtherInterface>(parent);
- *     NextInterface *p3   = factory->create<NextInterface>("keyword1", parent);
- *     NextInterface *p3   = factory->create<NextInterface>("keyword2", parent);
- * }
- * @endcode
+ * To load the KPluginFactory from an installed plugin you can use @ref loadFactory and for
+ * directly creating a plugin instance from it @ref instantiatePlugin
  *
  * @author Matthias Kretz <kretz@kde.org>
  * @author Bernhard Loos <nhuh.put@web.de>
+ * @author Alexander Lohnau <alexander.lohnau@gmx.de>
  */
 class KCOREADDONS_EXPORT KPluginFactory : public QObject
 {
