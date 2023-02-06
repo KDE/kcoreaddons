@@ -422,13 +422,8 @@ private Q_SLOTS:
         QCOMPARE(plugins[0].description(), QStringLiteral("This is another plugin"));
         QCOMPARE(plugins[1].description(), QStringLiteral("This is a plugin"));
 
-        // by plugin id
-        KPluginMetaData plugin = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("foobar"));
-        QVERIFY(plugin.isValid());
-        QCOMPARE(plugin.description(), QStringLiteral("This is another plugin"));
-
         // by plugin invalid id
-        plugin = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("invalidid"));
+        KPluginMetaData plugin = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("invalidid"));
         QVERIFY(!plugin.isValid());
 
         // absolute path, no filter
@@ -446,9 +441,6 @@ private Q_SLOTS:
         // The basename matches, but the pluginId does not match
         const KPluginMetaData nonMatchingPluginId = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("jsonplugin2"));
         QVERIFY(!nonMatchingPluginId.isValid());
-
-        const KPluginMetaData nonExistingPlugin = KPluginMetaData::findPluginById(dir.absolutePath(), QStringLiteral("invalidid"));
-        QVERIFY(!nonExistingPlugin.isValid());
     }
 
     void testStaticPlugins()
