@@ -286,9 +286,9 @@ bool KPluginMetaData::isHidden() const
     return rootObject()[QStringLiteral("Hidden")].toBool();
 }
 
-QJsonObject KPluginMetaData::rootObject() const
+const QJsonObject KPluginMetaData::rootObject() const
 {
-    return d->m_metaData[QStringLiteral("KPlugin")].toObject();
+    return d->m_metaData.value(QStringLiteral("KPlugin")).toObject();
 }
 
 static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson> *out)

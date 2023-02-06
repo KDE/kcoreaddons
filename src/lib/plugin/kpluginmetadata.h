@@ -432,7 +432,7 @@ public:
     bool isStaticPlugin() const;
 
 private:
-    QJsonObject rootObject() const;
+    const QJsonObject rootObject() const;
     void loadFromJsonFile(const QString &file);
 
 private:
