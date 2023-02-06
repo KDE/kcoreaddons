@@ -120,13 +120,6 @@ kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace")
 kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace2")
 kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace3")
 
-if(NOT CMAKE_CROSSCOMPILING)
-    ecm_add_tests(desktoptojsontest.cpp LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static)
-    target_compile_definitions(desktoptojsontest PRIVATE
-        DESKTOP_TO_JSON_EXE="$<TARGET_FILE:desktoptojson>"
-    )
-endif()
-
 add_library(ktexttohtmlteststatic STATIC ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/kemoticonsparser.cpp)
 # include the binary dir in order to get kcoreaddons_export.h
 target_include_directories(ktexttohtmlteststatic PUBLIC ${KCoreAddons_BINARY_DIR}/src/lib)

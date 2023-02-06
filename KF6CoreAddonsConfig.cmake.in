@@ -32,24 +32,6 @@ endif()
 
 @PACKAGE_SETUP_AUTOMOC_VARIABLES@
 
-if(CMAKE_CROSSCOMPILING AND KF6_HOST_TOOLING)
-    find_file(KCOREADDONS_TARGETSFILE KF6CoreAddons/KF6CoreAddonsToolingTargets.cmake
-        PATHS ${KF6_HOST_TOOLING} ${CMAKE_CURRENT_LIST_DIR}
-        NO_DEFAULT_PATH
-        NO_CMAKE_FIND_ROOT_PATH)
-    include("${KCOREADDONS_TARGETSFILE}")
-    # Check that the host tool version is the same to avoid incompatibilities.
-    get_target_property(HOST_TOOL_VERSION KF6::desktoptojson TOOL_VERSION)
-    if (NOT ("${HOST_TOOL_VERSION}" VERSION_EQUAL "@KF_VERSION@"))
-        message(WARNING "Found incompatible host tool version ${HOST_TOOL_VERSION}, expected @KF_VERSION@")
-    endif()
-else()
-    include("${CMAKE_CURRENT_LIST_DIR}/KF6CoreAddonsToolingTargets.cmake")
-    if(CMAKE_CROSSCOMPILING AND DESKTOPTOJSON_EXECUTABLE)
-        set_target_properties(KF6::desktoptojson PROPERTIES IMPORTED_LOCATION_NONE ${DESKTOPTOJSON_EXECUTABLE})
-        set_target_properties(KF6::desktoptojson PROPERTIES IMPORTED_LOCATION ${DESKTOPTOJSON_EXECUTABLE})
-    endif()
-endif()
 include("${CMAKE_CURRENT_LIST_DIR}/KF6CoreAddonsTargets.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/KF6CoreAddonsMacros.cmake")
 @PACKAGE_INCLUDE_QCHTARGETS@
