@@ -522,9 +522,6 @@ public:
      */
     void setMetaData(const KPluginMetaData &metaData);
 
-Q_SIGNALS:
-    void objectCreated(QObject *object);
-
 protected:
     /**
      * Function pointer type to a function that instantiates a plugin
