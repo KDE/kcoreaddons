@@ -33,8 +33,6 @@ public:
     // If we want to load a file, but it does not exist we want to keep the requested file name for logging
     QString m_requestedFileName;
     QString metaDataFileName;
-    // TODO KF6, use std::optional for m_metaData, currently this is a member of the exported class
-    // see https://phabricator.kde.org/T14958
     KPluginMetaData::KPluginMetaDataOption m_option = KPluginMetaData::DoNotAllowEmptyMetaData;
     std::optional<QStaticPlugin> staticPlugin = std::nullopt;
     QJsonObject m_metaData;
