@@ -365,7 +365,7 @@ public:
 
     /**
      * Returns @c true if the plugin is enabled in @p config, otherwise returns isEnabledByDefault().
-     * This can be used in conjunctionwith KPluginWidget/KPluginSelector.
+     * This can be used in conjunction with KPluginWidget.
      *
      * The @p config param should be a KConfigGroup object, because KCoreAddons can not depend
      * on KConfig directly, this parameter is a template.
