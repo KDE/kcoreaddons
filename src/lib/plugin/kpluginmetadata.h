@@ -303,9 +303,10 @@ public:
     QString copyrightText() const;
 
     /**
-     * @return the internal name of the plugin
+     * @return the unique identifier within the namespace of the plugin
      * If the Id property is not set in the metadata, this will return the
      * plugin file name without the file extension.
+     * This is the recommended approach for Qt plugins.
      */
     QString pluginId() const;
 
