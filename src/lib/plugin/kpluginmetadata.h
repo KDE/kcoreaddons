@@ -231,8 +231,11 @@ public:
     bool isHidden() const;
 
     /**
-     * @return the path to the plugin. This string can be passed to the KPluginLoader
-     * or QPluginLoader constructors in order to attempt to load this plugin.
+     * @return the path to the plugin.
+     * When the KPluginMetaData(QJsonObject, QString) constructor is used, the string is not modified.
+     * Otherwise, the path is resolved using QPluginLoader.
+     * For static plugins the fileName is the namespace and pluginId concatenated
+     *
      * @note It is not guaranteed that this is a valid path to a shared library (i.e. loadable
      * by QPluginLoader) since the metadata could also refer to a non-C++ plugin.
      */
