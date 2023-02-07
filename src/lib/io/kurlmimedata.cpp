@@ -2,7 +2,7 @@
     This file is part of the KDE libraries
 
     SPDX-FileCopyrightText: 2005-2012 David Faure <faure@kde.org>
-    SPDX-FileCopyrightText: 2022 Harald Sitter <sitter@kde.org>
+    SPDX-FileCopyrightText: 2022-2023 Harald Sitter <sitter@kde.org>
 
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
@@ -190,9 +190,29 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData, DecodeOpti
 }
 
 #if HAVE_QTDBUS
-static std::optional<QStringList> fuseRedirect(QList<QUrl> urls)
+static QStringList urlListToStringList(const QList<QUrl> urls)
+{
+    QStringList list;
+    for (const auto &url : urls) {
+        list << url.toLocalFile();
+    }
+    return list;
+}
+
+static std::optional<QStringList> fuseRedirect(QList<QUrl> urls, bool onlyLocalFiles)
 {
     qCDebug(KCOREADDONS_DEBUG) << "mounting urls with fuse" << urls;
+
+    // Fuse redirection only applies if the list contains non-local files.
+    // &
+    // For the time being the fuse redirection is opt-in because we later need to open() the files
+    // and this is an insanely expensive operation involving a stat() for remote URLs that we can't
+    // really get rid of. We'll need a way to avoid the open().
+    // https://bugs.kde.org/show_bug.cgi?id=457529
+    // https://github.com/flatpak/xdg-desktop-portal/issues/961
+    if (onlyLocalFiles || !qEnvironmentVariableIntValue("KCOREADDONS_FUSE_REDIRECT")) {
+        return urlListToStringList(urls);
+    }
 
     OrgKdeKIOFuseVFSInterface kiofuse_iface(kioFuseServiceName(), QStringLiteral("/org/kde/KIOFuse"), QDBusConnection::sessionBus());
     struct MountRequest {
@@ -228,11 +248,7 @@ static std::optional<QStringList> fuseRedirect(QList<QUrl> urls)
 
     qCDebug(KCOREADDONS_DEBUG) << "mounted urls with fuse, maybe" << urls;
 
-    QStringList list;
-    for (const auto &url : urls) {
-        list << url.toLocalFile();
-    }
-    return list;
+    return urlListToStringList(urls);
 }
 #endif
 
@@ -244,12 +260,15 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
     }
     QList<QUrl> urls = mimeData->urls();
 
-    // XDG Document Portal doesn't support directories and silently drops them.
-    bool hasDirs = std::any_of(urls.begin(), urls.end(), [](const QUrl &url) {
-        return url.isLocalFile() && QFileInfo(url.toLocalFile()).isDir();
-    });
-    if (hasDirs) {
-        return false;
+    bool onlyLocalFiles = true;
+    for (const auto &url : urls) {
+        const auto isLocal = url.isLocalFile();
+        if (!isLocal) {
+            onlyLocalFiles = false;
+        } else if (isLocal && QFileInfo(url.toLocalFile()).isDir()) {
+            // XDG Document Portal doesn't support directories and silently drops them.
+            return false;
+        }
     }
 
     auto iface =
@@ -261,7 +280,7 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
     const QString transferId = iface->StartTransfer({{QStringLiteral("autostop"), QVariant::fromValue(false)}});
     mimeData->setData(QStringLiteral("application/vnd.portal.filetransfer"), QFile::encodeName(transferId));
 
-    auto optionalPaths = fuseRedirect(urls);
+    auto optionalPaths = fuseRedirect(urls, onlyLocalFiles);
     if (!optionalPaths.has_value()) {
         qCWarning(KCOREADDONS_DEBUG) << "Failed to mount with fuse!";
         return false;
