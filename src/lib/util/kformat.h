@@ -422,6 +422,16 @@ public:
      */
     QString formatValue(double value, const QString &unit, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const;
 
+    /**
+     * Format permissions to a more readable textual format "-rwxr--r--"
+     *
+     * @param perm the permissions as returned by stat/statx/QT_STAT
+     * @param mode the file mode as returned by stat/statx/QT_STAT, if omitted will assume regular file
+     * @param hasAcl whether the file has Acl
+     * @since 6.0
+     */
+    QString formatPermission(mode_t perm, mode_t mode = 0, bool hasAcl = false)  const;
+
 private:
     QSharedDataPointer<KFormatPrivate> d;
 };

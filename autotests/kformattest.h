@@ -26,6 +26,7 @@ private Q_SLOTS:
     void formatSpelloutDuration();
     void formatRelativeDate();
     void formatValue();
+    void formatPermission();
 };
 
 #endif // KFORMATTEST_H

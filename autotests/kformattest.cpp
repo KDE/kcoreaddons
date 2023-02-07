@@ -397,4 +397,20 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(formatEnglish.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QStringLiteral("Sunday, October 3, 2021 at 5:33 AM"));
 }
 
+#include <sys/stat.h>
+void KFormatTest::formatPermission()
+{
+    KFormat format(QLocale::c());
+
+    QCOMPARE(format.formatPermission(0), "----------");
+    QCOMPARE(format.formatPermission(0664), "-rw-rw-r--");
+    QCOMPARE(format.formatPermission(0777), "-rwxrwxrwx");
+    QCOMPARE(format.formatPermission(01777), "-rwxrwxrwt");
+    QCOMPARE(format.formatPermission(0664, S_IFREG, true), "-rw-rw-r--+");
+    QCOMPARE(format.formatPermission(0664, S_IFDIR, true), "drw-rw-r--+");
+    QCOMPARE(format.formatPermission(0664, S_IFDIR), "drw-rw-r--");
+    QCOMPARE(format.formatPermission(0667, S_IFBLK), "brw-rw-rwx");
+    QCOMPARE(format.formatPermission(0670, S_IFLNK), "lrw-rwx---");
+}
+
 QTEST_MAIN(KFormatTest)
