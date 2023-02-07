@@ -222,9 +222,7 @@ public:
     bool isValid() const;
 
     /**
-     * @return whether this object should be hidden, this is usually not used for binary
-     * plugins, when loading a KPluginMetaData from a .desktop file, this will reflect
-     * the value of the "Hidden" key.
+     * @return whether this object should be hidden
      *
      * @since 5.8
      */
