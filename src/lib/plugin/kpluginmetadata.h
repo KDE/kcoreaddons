@@ -32,6 +32,9 @@ class QStaticPlugin;
  * can be embedded into Qt plugins. Additional plugin-specific metadata can be retrieved by
  * directly reading from the QJsonObject returned by KPluginMetaData::rawData().
  *
+ * For embedded metadata, you should not specify an id manually. Instead the id will
+ * be derived from the file basename.
+ *
  * The following keys will be read from an object "KPlugin" inside the metadata JSON:
  *
  * Key                | Accessor function    | JSON Type
@@ -67,7 +70,6 @@ class QStaticPlugin;
         "Category": "Date and Time",
         "EnabledByDefault": "true",
         "License": "LGPL",
-        "Id": "time",
         "Version": "1.0",
         "Website": "https://plasma.kde.org/"
      }
