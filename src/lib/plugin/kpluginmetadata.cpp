@@ -458,11 +458,7 @@ QString KPluginMetaData::value(const QString &key, const QString &defaultValue) 
         qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key
                                      << "to be a single string."
                                         " but it is a stringlist";
-        const QStringList list = value.toVariant().toStringList();
-        if (list.isEmpty()) {
-            return defaultValue;
-        }
-        return list.join(QChar::fromLatin1(','));
+        return value.toVariant().toStringList().join(QChar::fromLatin1(','));
     } else if (value.isBool()) {
         qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key
                                      << "to be a single string."

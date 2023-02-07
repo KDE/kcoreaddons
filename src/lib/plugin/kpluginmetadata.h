@@ -23,7 +23,6 @@
 class QPluginLoader;
 class KPluginMetaDataPrivate;
 class KAboutPerson;
-class QObject;
 class QStaticPlugin;
 /**
  * @class KPluginMetaData kpluginmetadata.h KPluginMetaData
@@ -381,10 +380,9 @@ public:
     }
 
     /**
-     * @return the value for @p key from the metadata or @p defaultValue if the key does not exist
-     * or the value for @p key is not of type string
+     * @return the string value for @p key from the metadata or @p defaultValue if the key does not exist
      *
-     * @see KPluginMetaData::rawData() if QString is not the correct type for @p key
+     * if QString is not the correct type for @p key you should use the other overloeads or @ref KPluginMetaData::rawData
      */
     QString value(const QString &key, const QString &defaultValue = QString()) const;
     QString value(const QString &key, const char *ch) const = delete;
