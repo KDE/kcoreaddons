@@ -131,13 +131,13 @@ public:
      *
      * @see QPluginLoader::setFileName()
      */
-    KPluginMetaData(const QString &file);
+    KPluginMetaData(const QString &pluginFile);
 
     /**
      * Overload which takes an option parameter that gets used when creating the KPluginMetaData instances
      * @since 5.91
      */
-    KPluginMetaData(const QString &file, KPluginMetaDataOption option);
+    KPluginMetaData(const QString &pluginFile, KPluginMetaDataOption option);
 
     /**
      * Creates a KPluginMetaData from a QJsonObject holding the metadata and a file name
@@ -149,7 +149,7 @@ public:
      *
      * @since 6.0
      */
-    KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile);
+    KPluginMetaData(const QJsonObject &metaData, const QString &fileName);
 
     /*
      * Constructs a KPluginMetaData from the static plugin.

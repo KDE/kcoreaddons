@@ -129,27 +129,27 @@ KPluginMetaData::~KPluginMetaData()
 {
 }
 
-KPluginMetaData::KPluginMetaData(const QString &file)
-    : KPluginMetaData(file, DoNotAllowEmptyMetaData)
+KPluginMetaData::KPluginMetaData(const QString &pluginFile)
+    : KPluginMetaData(pluginFile, DoNotAllowEmptyMetaData)
 {
 }
 
-KPluginMetaData::KPluginMetaData(const QString &file, KPluginMetaDataOption option)
+KPluginMetaData::KPluginMetaData(const QString &pluginFile, KPluginMetaDataOption option)
     : d(new KPluginMetaDataPrivate)
 {
     d->m_option = option;
     QPluginLoader loader;
-    KPluginMetaDataPrivate::getPluginLoaderForPath(loader, file);
-    d->m_requestedFileName = file;
+    KPluginMetaDataPrivate::getPluginLoaderForPath(loader, pluginFile);
+    d->m_requestedFileName = pluginFile;
     d->m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
     const auto qtMetaData = loader.metaData();
     if (!qtMetaData.isEmpty()) {
         d->m_metaData = qtMetaData.value(QStringLiteral("MetaData")).toObject();
         if (d->m_metaData.isEmpty() && option == DoNotAllowEmptyMetaData) {
-            qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << file << "does not have a valid 'MetaData' object";
+            qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << pluginFile << "does not have a valid 'MetaData' object";
         }
     } else {
-        qCDebug(KCOREADDONS_DEBUG) << "no metadata found in" << file << loader.errorString();
+        qCDebug(KCOREADDONS_DEBUG) << "no metadata found in" << pluginFile << loader.errorString();
     }
 }
 
@@ -158,11 +158,11 @@ KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
 {
 }
 
-KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &pluginFile)
+KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &fileName)
     : d(new KPluginMetaDataPrivate)
 {
     d->m_metaData = metaData;
-    d->m_fileName = pluginFile;
+    d->m_fileName = fileName;
 }
 
 KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaData)
@@ -257,10 +257,10 @@ KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const 
         }
     }
     QSet<QString> addedPluginIds;
-    KPluginMetaDataPrivate::forEachPlugin(directory, [&](const QString &pluginPath) {
-        KPluginMetaData metadata(pluginPath, option);
+    KPluginMetaDataPrivate::forEachPlugin(directory, [&](const QString &pluginFile) {
+        KPluginMetaData metadata(pluginFile, option);
         if (!metadata.isValid()) {
-            qCDebug(KCOREADDONS_DEBUG) << pluginPath << "does not contain valid JSON metadata";
+            qCDebug(KCOREADDONS_DEBUG) << pluginFile << "does not contain valid JSON metadata";
             return;
         }
         if (addedPluginIds.contains(metadata.pluginId())) {
