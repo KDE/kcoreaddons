@@ -32,9 +32,6 @@ class QStaticPlugin;
  * can be embedded into Qt plugins. Additional plugin-specific metadata can be retrieved by
  * directly reading from the QJsonObject returned by KPluginMetaData::rawData().
  *
- * This class can be used instead of KPluginInfo from KService for applications that only load
- * Qt C++ plugins.
- *
  * The following keys will be read from an object "KPlugin" inside the metadata JSON:
  *
  * Key                | Accessor function    | JSON Type
