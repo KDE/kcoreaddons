@@ -342,9 +342,8 @@ public:
     bool supportsMimeType(const QString &mimeType) const;
 
     /**
-     * @return A string list of formfactors this plugin is useful for, e.g. desktop, tablet,
-     * handset, mediacenter, etc.
-     * The keys for this are not formally defined.
+     * @return A string list of formfactors this plugin is useful for, e.g. desktop, handset or mediacenter.
+     * The keys for this are not formally defined, though the above-mentioned values should be used when applicable.
      *
      * @since 5.12
      */
