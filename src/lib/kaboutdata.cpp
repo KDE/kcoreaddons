@@ -269,7 +269,7 @@ QString KAboutLicense::text() const
     }
 
     if (knownLicense) {
-        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf" QT_STRINGIFY(QT_VERSION_MAJOR) "/licenses/") + pathToFile);
+        pathToFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kf6/licenses/") + pathToFile);
         result += QCoreApplication::translate("KAboutLicense", "This program is distributed under the terms of the %1.").arg(name(KAboutLicense::ShortName));
         if (!pathToFile.isEmpty()) {
             result += lineFeed;

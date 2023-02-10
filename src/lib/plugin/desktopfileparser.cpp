@@ -282,7 +282,7 @@ bool tokenizeKeyValue(QFile &df, const QString &src, QByteArray &key, QString &v
     return true;
 }
 
-#define KSERVICETYPES_SUBDIR "kservicetypes" QT_STRINGIFY(QT_VERSION_MAJOR) "/"
+#define KSERVICETYPES_SUBDIR "kservicetypes6/"
 
 static QString locateRelativeServiceType(const QString &relPath, const QStringList &serviceTypeSearchPaths)
 {

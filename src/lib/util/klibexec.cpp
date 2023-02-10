@@ -68,12 +68,12 @@ QString KLibexec::pathFromAddress(const QString &relativePath, void *address)
 QStringList KLibexec::pathCandidates(const QString &relativePath)
 {
     const QString qLibexec = QLibraryInfo::path(QLibraryInfo::LibraryExecutablesPath);
-    const QString qLibexecKF5 = qLibexec + QLatin1String("/kf" QT_STRINGIFY(QT_VERSION_MAJOR));
+    const QString qLibexecKF6 = qLibexec + QLatin1String("/kf6");
 
     return {
         QCoreApplication::applicationDirPath(), // look where our application binary is located
         qLibexec, // look where libexec path is (can be set in qt.conf)
-        qLibexecKF5, // on !win32 we use a kf5 suffix
+        qLibexecKF6, // on !win32 we use a kf6 suffix
         relativePath,
     };
 }

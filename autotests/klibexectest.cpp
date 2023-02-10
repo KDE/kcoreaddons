@@ -13,7 +13,7 @@ class KLibexecTest : public QObject
 {
     Q_OBJECT
 
-    const QString m_relative = QStringLiteral("fakeexec/kf" QT_STRINGIFY(QT_VERSION_MAJOR));
+    const QString m_relative = QStringLiteral("fakeexec/kf6");
     const QString m_fixtureName =
 #ifdef Q_OS_WIN
         QStringLiteral("klibexectest-fixture-binary.exe");
