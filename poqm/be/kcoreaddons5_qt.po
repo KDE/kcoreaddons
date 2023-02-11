@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-09-04 07:04\n"
+"PO-Revision-Date: 2023-02-08 13:40\n"
 "Last-Translator: Alaksandr Suša <isushik94@gmail.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -59,7 +59,7 @@ msgstr "ExFAT"
 #: lib/io/kfilesystemtype.cpp:250
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "FUSE"
 
 #: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
@@ -801,16 +801,14 @@ msgstr "Зараз"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:515
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%1 хвілін(ы) таму"
-msgstr[1] "%1 хвілін(ы) таму"
-msgstr[2] "%1 хвілін(ы) таму"
-msgstr[3] "%1 хвілін(ы) таму"
+msgstr[0] "%n хвіліну таму"
+msgstr[1] "%n хвіліны таму"
+msgstr[2] "%n хвілін таму"
+msgstr[3] "%n хвіліны таму"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:531
@@ -831,12 +829,10 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "Не ўдалося знайсці выканальны файл lsof па шляху:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, fuzzy, qt-format
-#| msgctxt "QObject|"
-#| msgid "Failed to execute `lsof' error code %1"
+#, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "Не атрымался выканаць `lsof'. Код памылкі %1"
+msgstr "Не ўдалося выканаць \"lsof\". Код памылкі %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
