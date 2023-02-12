@@ -567,3 +567,23 @@ QStaticPlugin KPluginMetaData::staticPlugin() const
     Q_ASSERT(d->staticPlugin.has_value());
     return d->staticPlugin.value();
 }
+
+QDebug operator<<(QDebug debug, const KPluginMetaData &metaData)
+{
+    QDebugStateSaver saver(debug);
+    debug.nospace() << "KPluginMetaData(pluginId:" << metaData.pluginId() << ", fileName: " << metaData.fileName() << ')';
+    return debug;
+}
+
+QDebug operator<<(QDebug debug, const QVector<KPluginMetaData> &list)
+{
+    bool shouldPrintMultiline = list.size() > 1;
+    const char *endLine = shouldPrintMultiline ? "\n" : "";
+    QDebugStateSaver saver(debug);
+    debug.nospace() << "QVector<KPluginMetaData> {" << endLine;
+    for (const KPluginMetaData &md : list) {
+        debug << (shouldPrintMultiline ? "\t" : "") << md << "," << endLine;
+    }
+    debug << '}';
+    return debug;
+}
