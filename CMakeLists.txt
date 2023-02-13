@@ -102,8 +102,9 @@ configure_file(src/lib/io/config-kfilesystemtype.h.cmake ${CMAKE_CURRENT_BINARY_
 
 include(ECMPoQmTools)
 
+set(kcoreaddons_version_header "${CMAKE_CURRENT_BINARY_DIR}/src/lib/kcoreaddons_version.h")
 ecm_setup_version(PROJECT VARIABLE_PREFIX KCOREADDONS
-                        VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_version.h"
+                        VERSION_HEADER "${kcoreaddons_version_header}"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfigVersion.cmake"
                         SOVERSION 6)
 
@@ -149,8 +150,7 @@ install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfig.cmake"
 
 install(EXPORT KF6CoreAddonsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF6CoreAddonsTargets.cmake NAMESPACE KF6:: )
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_version.h
-        DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel)
+install(FILES ${kcoreaddons_version_header} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel)
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 

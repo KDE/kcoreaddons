@@ -189,7 +189,6 @@ target_sources(KF6CoreAddons PRIVATE
 
 
 set(kcoreaddons_INCLUDE_DIRS
-    ${CMAKE_CURRENT_BINARY_DIR}/../.. # for kcoreaddons_version.h
     ${CMAKE_CURRENT_SOURCE_DIR}/caching/
     ${CMAKE_CURRENT_BINARY_DIR}/io/
     ${CMAKE_CURRENT_SOURCE_DIR}/io/
