@@ -576,6 +576,8 @@ void DesktopFileParser::convertToJson(const QByteArray &key,
         DESKTOPTOJSON_VERBOSE_WARNING << "Hidden= key found in desktop file, this makes no sense"
                                          " with metadata inside the plugin.";
         kplugin[QString::fromUtf8(key)] = (value.toLower() == QLatin1String("true"));
+    } else if (key == "X-KDE-BugReportUrl") {
+        kplugin[QStringLiteral("BugReportUrl")] = value;
     } else if (key == "Exec" || key == "Type" || key == "Actions" || key == "X-KDE-Library" || key == "Encoding") {
         // Exec= doesn't make sense here, however some .desktop files (like e.g. in kdevelop) have a dummy value here
         // also the Type=Service entry is no longer needed
