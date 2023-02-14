@@ -102,7 +102,6 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(QStringList mimeTypes READ mimeTypes CONSTANT)
     Q_PROPERTY(QStringList formFactors READ formFactors CONSTANT)
     Q_PROPERTY(bool isEnabledByDefault READ isEnabledByDefault CONSTANT)
-    Q_PROPERTY(int initialPreference READ isEnabledByDefault CONSTANT)
 
 public:
     /**
@@ -354,15 +353,6 @@ public:
      * This is only a recommendation, applications can ignore this value if they want to.
      */
     bool isEnabledByDefault() const;
-
-    /**
-     * @return the initial preference of the plugin.
-     * This is the preference to associate with this plugin initially (before
-     * the user has had any chance to define preferences for it).
-     * Higher values indicate stronger preference.
-     * @since 5.67
-     */
-    int initialPreference() const;
 
     /**
      * Returns @c true if the plugin is enabled in @p config, otherwise returns isEnabledByDefault().

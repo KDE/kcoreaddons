@@ -444,11 +444,6 @@ bool KPluginMetaData::isEnabledByDefault() const
     return false;
 }
 
-int KPluginMetaData::initialPreference() const
-{
-    return rootObject()[QStringLiteral("InitialPreference")].toInt();
-}
-
 QString KPluginMetaData::value(const QString &key, const QString &defaultValue) const
 {
     const QJsonValue value = d->m_metaData.value(key);
