@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=ServiceType
-
-[PropertyDef::X-Test-Bool]
-Type=bool
-

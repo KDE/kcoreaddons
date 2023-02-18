@@ -127,7 +127,6 @@ target_sources(KF6CoreAddons PRIVATE
     plugin/kpluginfactory.cpp
     plugin/kpluginmetadata.cpp
     plugin/kstaticpluginhelpers.cpp
-    plugin/desktopfileparser.cpp
     randomness/krandom.cpp
     text/kemoticonsparser.cpp
     text/kjsonutils.cpp
@@ -212,15 +211,6 @@ ecm_qt_export_logging_category(
     IDENTIFIER LOG_KMEMORYINFO
     CATEGORY_NAME kf.coreaddons.kmemoryinfo
     DESCRIPTION "KMemoryInfo (KCoreAddons)"
-    EXPORT KCOREADDONS
-)
-ecm_qt_declare_logging_category(KF6CoreAddons
-    HEADER desktopfileparser_debug.h
-    IDENTIFIER DESKTOPPARSER
-    CATEGORY_NAME kf.coreaddons.desktopparser
-    OLD_CATEGORY_NAMES kf5.kcoreaddons.desktopparser
-    DEFAULT_SEVERITY Warning
-    DESCRIPTION "DesktopParser (KCoreAddons)"
     EXPORT KCOREADDONS
 )
 
