@@ -1,7 +1,6 @@
 #
 # kcoreaddons_add_plugin(plugin_name
 #     [SOURCES <src> [<src> [...]]] # optional since 5.83, required before
-#     [JSON "pluginname.json"]
 #     [STATIC]
 #     [INSTALL_NAMESPACE "servicename"]
 # )
@@ -11,11 +10,6 @@
 # It will create a plugin given the SOURCES list and the INSTALL_NAMESPACE so that
 # the plugin is installed with the rest of the plugins from the same sub-system,
 # within ${KDE_INSTALL_PLUGINDIR}.
-# The JSON parameter is deprecated since 5.85, because it is not needed when the project is properly set up using
-# the ECMSetupQtPluginMacroNames module. In case of plugin export macros provided by the KDE Frameworks this is already done and the parameter
-# can be dropped with any older KF5 requirement.
-# In case you generate the JSON files during the build it should be manually added to the AUTOGEN_TARGET_DEPENDS property,
-# the kcoreaddons_desktop_to_json already does this for the generated file.
 # Since 5.89 the macro supports static plugins by passing in the STATIC option.
 #
 # Example:
@@ -25,7 +19,7 @@
 
 function(kcoreaddons_add_plugin plugin)
     set(options STATIC)
-    set(oneValueArgs JSON INSTALL_NAMESPACE)
+    set(oneValueArgs INSTALL_NAMESPACE)
     set(multiValueArgs SOURCES)
     cmake_parse_arguments(KCA_ADD_PLUGIN "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
 
