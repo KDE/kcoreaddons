@@ -566,10 +566,12 @@ bool KPluginMetaData::isEnabledByDefault() const
     return false;
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 104)
 int KPluginMetaData::initialPreference() const
 {
     return rootObject()[QStringLiteral("InitialPreference")].toInt();
 }
+#endif
 
 QString KPluginMetaData::value(const QString &key, const QString &defaultValue) const
 {
