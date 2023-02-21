@@ -34,10 +34,9 @@ macro(build_plugin pname)
     target_link_libraries(${pname} KF6::CoreAddons autotests_static)
 endmacro()
 
-# Build some sample plugins
-build_plugin(jsonplugin jsonplugin.cpp)
-build_plugin(jsonplugin2 jsonplugin2.cpp)
-build_plugin(qtplugin qtplugin.cpp)
+kcoreaddons_add_plugin(qtplugin SOURCES qtplugin.cpp INSTALL_NAMESPACE "namespace")
+ecm_mark_as_test(qtplugin)
+target_link_libraries(qtplugin KF6::CoreAddons autotests_static)
 
 kcoreaddons_add_plugin(jsonplugin_cmake_macro SOURCES kpluginclass.cpp INSTALL_NAMESPACE "namespace")
 ecm_mark_as_test(jsonplugin_cmake_macro)
@@ -47,7 +46,7 @@ kcoreaddons_add_plugin(pluginwithoutmetadata SOURCES pluginwithoutmetadata.cpp I
 ecm_mark_as_test(pluginwithoutmetadata)
 target_link_libraries(pluginwithoutmetadata KF6::CoreAddons autotests_static)
 
-add_library(org.kde.test MODULE jsonplugin.cpp)
+add_library(org.kde.test MODULE kpluginclass.cpp)
 target_link_libraries(org.kde.test KF6::CoreAddons)
 
 if (WIN32)

@@ -7,6 +7,6 @@
         "Description[sv]": "Det här är ett insticksprogram", 
         "Description[uk]": "Це додаток", 
         "Description[x-test]": "xxThis is a pluginxx",
-        "MimeTypes": [ "text/plain", "image/png" ]
+        "MimeTypes": [ "text/plain"]
     }
 }
