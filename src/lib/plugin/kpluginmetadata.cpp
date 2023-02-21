@@ -539,12 +539,12 @@ QVariantList KPluginMetaData::otherContributorsVariant() const
 }
 bool KPluginMetaData::isStaticPlugin() const
 {
-    return d && d->staticPlugin.has_value();
+    return d->staticPlugin.has_value();
 }
 
 QString KPluginMetaData::requestedFileName() const
 {
-    return d ? d->m_requestedFileName : QString();
+    return d->m_requestedFileName;
 }
 
 QStaticPlugin KPluginMetaData::staticPlugin() const
