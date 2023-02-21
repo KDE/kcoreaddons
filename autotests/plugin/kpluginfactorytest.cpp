@@ -59,7 +59,7 @@ private Q_SLOTS:
 
     void testCreateUsingUtilityMethods()
     {
-        auto result = KPluginFactory::instantiatePlugin<MyPlugin>(KPluginMetaData(QStringLiteral("namespace/jsonplugin_cmake_macro")), nullptr, QVariantList());
+        auto result = KPluginFactory::instantiatePlugin<MyPlugin>(KPluginMetaData(QStringLiteral("namespace/jsonplugin_cmake_macro")));
         QVERIFY(result.plugin);
         QCOMPARE(result.plugin->metaObject()->className(), "SimplePluginClass");
         QVERIFY(result.errorString.isEmpty());
@@ -70,23 +70,21 @@ private Q_SLOTS:
     void testCreateUsingUtilityMethodsErrorHandling()
     {
         {
-            auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QFINDTESTDATA("data/jsonplugin.json")), nullptr, QVariantList());
+            auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QFINDTESTDATA("data/jsonplugin.json")));
             QVERIFY(!result.plugin);
             QCOMPARE(result.errorReason, KPluginFactory::INVALID_PLUGIN);
         }
         {
             // it is a valid plugin, but does not contain a KPluginFactory
             QVERIFY(QPluginLoader(QStringLiteral("namespace/qtplugin")).instance());
-            auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QStringLiteral("namespace/qtplugin")), nullptr, QVariantList());
+            auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QStringLiteral("namespace/qtplugin")));
             QVERIFY(!result.plugin);
             // But does not contain a valid plugin factory
             QCOMPARE(result.errorReason, KPluginFactory::INVALID_FACTORY);
         }
         {
             // it is a QObject, but not a KPluginFactoryTest instance
-            auto result = KPluginFactory::instantiatePlugin<KPluginFactoryTest>(KPluginMetaData(QStringLiteral("namespace/jsonplugin_cmake_macro")),
-                                                                                nullptr,
-                                                                                QVariantList());
+            auto result = KPluginFactory::instantiatePlugin<KPluginFactoryTest>(KPluginMetaData(QStringLiteral("namespace/jsonplugin_cmake_macro")));
             QVERIFY(!result.plugin);
             QCOMPARE(result.errorReason, KPluginFactory::INVALID_KPLUGINFACTORY_INSTANTIATION);
             QVERIFY(result.errorText.contains("KPluginFactoryTest"));
