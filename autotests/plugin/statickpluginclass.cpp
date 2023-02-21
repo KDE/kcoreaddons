@@ -3,16 +3,16 @@
 
 #include "kpluginfactory.h"
 
-class SimplePluginClass : public QObject
+class StaticSimplePluginClass : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit SimplePluginClass(QObject * /*parent*/, const QVariantList & /*args*/)
+    explicit StaticSimplePluginClass(QObject *, const QVariantList &)
     {
     }
 };
 
-K_PLUGIN_CLASS_WITH_JSON(SimplePluginClass, "jsonplugin.json")
+K_PLUGIN_CLASS_WITH_JSON(StaticSimplePluginClass, "data/jsonplugin.json")
 
-#include "kpluginclass.moc"
+#include "statickpluginclass.moc"

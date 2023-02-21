@@ -9,7 +9,7 @@
 class MyQtPlugin : public QObject
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "somepluginid" FILE "jsonplugin2.json")
+    Q_PLUGIN_METADATA(IID "somepluginid" FILE "data/jsonplugin2.json")
 };
 
 #include "qtplugin.moc"

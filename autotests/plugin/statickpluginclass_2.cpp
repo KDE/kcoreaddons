@@ -13,6 +13,6 @@ public:
     }
 };
 
-K_PLUGIN_CLASS_WITH_JSON(OtherStaticSimplePluginClass, "jsonplugin.json")
+K_PLUGIN_CLASS_WITH_JSON(OtherStaticSimplePluginClass, "data/jsonplugin.json")
 
 #include "statickpluginclass_2.moc"

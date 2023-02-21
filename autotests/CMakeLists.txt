@@ -28,26 +28,7 @@ target_link_libraries(autotests_static Qt6::Core)
 
 configure_file(config-tests.h.in config-tests.h)
 
-macro(build_plugin pname)
-    add_library(${pname} MODULE ${ARGN})
-    ecm_mark_as_test(${pname})
-    target_link_libraries(${pname} KF6::CoreAddons autotests_static)
-endmacro()
-
-kcoreaddons_add_plugin(qtplugin SOURCES qtplugin.cpp INSTALL_NAMESPACE "namespace")
-ecm_mark_as_test(qtplugin)
-target_link_libraries(qtplugin KF6::CoreAddons autotests_static)
-
-kcoreaddons_add_plugin(jsonplugin_cmake_macro SOURCES kpluginclass.cpp INSTALL_NAMESPACE "namespace")
-ecm_mark_as_test(jsonplugin_cmake_macro)
-target_link_libraries(jsonplugin_cmake_macro KF6::CoreAddons autotests_static)
-
-kcoreaddons_add_plugin(pluginwithoutmetadata SOURCES pluginwithoutmetadata.cpp INSTALL_NAMESPACE "namespace")
-ecm_mark_as_test(pluginwithoutmetadata)
-target_link_libraries(pluginwithoutmetadata KF6::CoreAddons autotests_static)
-
-add_library(org.kde.test MODULE kpluginclass.cpp)
-target_link_libraries(org.kde.test KF6::CoreAddons)
+add_subdirectory(plugin)
 
 if (WIN32)
     set(autotests_OPTIONAL_SRCS
@@ -71,8 +52,6 @@ ecm_add_tests(
     kformattest.cpp
     kjobtest.cpp
     kosreleasetest.cpp
-    kpluginfactorytest.cpp
-    kpluginmetadatatest.cpp
     kprocesstest.cpp
     krandomtest.cpp
     kshareddatacachetest.cpp
@@ -98,22 +77,6 @@ if(TARGET klistopenfilesjobtest_unix AND CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     find_package(Qt6Network ${REQUIRED_QT_VERSION} CONFIG QUIET)
     target_link_libraries(klistopenfilesjobtest_unix Qt6::Network)
 endif()
-
-kcoreaddons_add_plugin(static_jsonplugin_cmake_macro SOURCES statickpluginclass.cpp INSTALL_NAMESPACE "staticnamespace" STATIC)
-target_link_libraries(static_jsonplugin_cmake_macro KF6::CoreAddons autotests_static)
-
-kcoreaddons_add_plugin(static_jsonplugin_cmake_macro_2 SOURCES statickpluginclass_2.cpp INSTALL_NAMESPACE "staticnamespace2" STATIC)
-target_link_libraries(static_jsonplugin_cmake_macro_2 KF6::CoreAddons autotests_static)
-
-kcoreaddons_add_plugin(static_plugin_without_metadata SOURCES staticpluginwithoutmetadata.cpp INSTALL_NAMESPACE "staticnamespace3" STATIC)
-target_link_libraries(static_plugin_without_metadata KF6::CoreAddons autotests_static)
-
-
-kcoreaddons_target_static_plugins(kpluginfactorytest "staticnamespace")
-kcoreaddons_target_static_plugins(kpluginfactorytest "staticnamespace2")
-kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace")
-kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace2")
-kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace3")
 
 add_library(ktexttohtmlteststatic STATIC ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/kemoticonsparser.cpp)
 # include the binary dir in order to get kcoreaddons_export.h
