@@ -1,24 +1,27 @@
+add_library(plugins_STATIC STATIC plugins.cpp)
+target_link_libraries(plugins_STATIC Qt6::Core)
+
 kcoreaddons_add_plugin(qtplugin SOURCES qtplugin.cpp INSTALL_NAMESPACE "namespace")
 ecm_mark_as_test(qtplugin)
 target_link_libraries(qtplugin KF6::CoreAddons autotests_static)
 
 kcoreaddons_add_plugin(jsonplugin_cmake_macro SOURCES kpluginclass.cpp INSTALL_NAMESPACE "namespace")
 ecm_mark_as_test(jsonplugin_cmake_macro)
-target_link_libraries(jsonplugin_cmake_macro KF6::CoreAddons autotests_static)
+target_link_libraries(jsonplugin_cmake_macro KF6::CoreAddons autotests_static plugins_STATIC)
 
 kcoreaddons_add_plugin(pluginwithoutmetadata SOURCES pluginwithoutmetadata.cpp INSTALL_NAMESPACE "namespace")
 ecm_mark_as_test(pluginwithoutmetadata)
 target_link_libraries(pluginwithoutmetadata KF6::CoreAddons autotests_static)
 
 add_library(org.kde.test MODULE kpluginclass.cpp)
-target_link_libraries(org.kde.test KF6::CoreAddons)
+target_link_libraries(org.kde.test KF6::CoreAddons plugins_STATIC)
 
 
 ecm_add_tests(
     kpluginmetadatatest.cpp
     kpluginfactorytest.cpp
     ${autotests_OPTIONAL_SRCS}
-    LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static
+    LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static plugins_STATIC
 )
 
 kcoreaddons_add_plugin(static_jsonplugin_cmake_macro SOURCES statickpluginclass.cpp INSTALL_NAMESPACE "staticnamespace" STATIC)

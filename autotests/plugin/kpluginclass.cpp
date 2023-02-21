@@ -2,17 +2,27 @@
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 #include "kpluginfactory.h"
+#include "plugins.h"
 
-class SimplePluginClass : public QObject
+class SimplePluginClass : public MyPlugin
 {
     Q_OBJECT
-
 public:
-    explicit SimplePluginClass(QObject * /*parent*/, const QVariantList & /*args*/)
+    explicit SimplePluginClass(QObject *parent, const QVariantList & /*args*/)
+        : MyPlugin(parent)
+    {
+    }
+};
+class SimplePluginClass2 : public MyPlugin2
+{
+    Q_OBJECT
+public:
+    explicit SimplePluginClass2(QObject *parent, const QVariantList & /*args*/)
+        : MyPlugin2(parent)
     {
     }
 };
 
-K_PLUGIN_CLASS_WITH_JSON(SimplePluginClass, "data/jsonplugin.json")
+K_PLUGIN_FACTORY_WITH_JSON(MyFactory, "data/jsonplugin.json", registerPlugin<SimplePluginClass>(); registerPlugin<SimplePluginClass2>();)
 
 #include "kpluginclass.moc"
