@@ -36,6 +36,8 @@ public:
     std::optional<QStaticPlugin> staticPlugin = std::nullopt;
     QJsonObject m_metaData;
     QString m_fileName;
+    // We determine this once and reuse the value. It can never change during the lifetime of the KPluginMetaData object
+    QString m_pluginId;
 
     static void forEachPlugin(const QString &directory, std::function<void(const QString &)> callback)
     {
@@ -135,6 +137,12 @@ KPluginMetaData::KPluginMetaData(const QString &pluginFile, KPluginMetaDataOptio
     KPluginMetaDataPrivate::getPluginLoaderForPath(loader, pluginFile);
     d->m_requestedFileName = pluginFile;
     d->m_fileName = QFileInfo(loader.fileName()).absoluteFilePath();
+
+    // passing QFileInfo an empty string gives the CWD, which is not what we want
+    if (!d->m_fileName.isEmpty()) {
+        d->m_pluginId = QFileInfo(d->m_fileName).completeBaseName();
+    }
+
     const auto qtMetaData = loader.metaData();
     if (!qtMetaData.isEmpty()) {
         d->m_metaData = qtMetaData.value(QStringLiteral("MetaData")).toObject();
@@ -147,8 +155,14 @@ KPluginMetaData::KPluginMetaData(const QString &pluginFile, KPluginMetaDataOptio
 }
 
 KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
-    : KPluginMetaData(loader.metaData().value(QStringLiteral("MetaData")).toObject(), QFileInfo(loader.fileName()).absoluteFilePath())
+    : KPluginMetaData()
 {
+    d->m_metaData = loader.metaData().value(QStringLiteral("MetaData")).toObject();
+    if (!loader.fileName().isEmpty()) {
+        QFileInfo info(loader.fileName());
+        d->m_fileName = info.absoluteFilePath();
+        d->m_pluginId = info.completeBaseName();
+    }
 }
 
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &fileName)
@@ -156,14 +170,25 @@ KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &fil
 {
     d->m_metaData = metaData;
     d->m_fileName = fileName;
+    QJsonObject root = rootObject();
+    auto nameFromMetaData = root.constFind(QStringLiteral("Id"));
+    if (nameFromMetaData != root.constEnd()) {
+        d->m_pluginId = nameFromMetaData.value().toString();
+    }
+    if (d->m_pluginId.isEmpty()) {
+        d->m_pluginId = QFileInfo(d->m_fileName).completeBaseName();
+    }
 }
 
 KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaData)
     : d(new KPluginMetaDataPrivate)
 {
+    qWarning() << Q_FUNC_INFO;
     const auto result = d->loadStaticPlugin(plugin, DoNotAllowEmptyMetaData);
     d->m_fileName = result.fileName;
+    d->m_pluginId = QFileInfo(d->m_fileName).completeBaseName();
     d->m_metaData = result.metaData.isEmpty() ? metaData : result.metaData;
+    qWarning() << Q_FUNC_INFO << *this;
 }
 
 KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId)
@@ -181,10 +206,7 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
 
     const auto staticPlugins = KStaticPluginHelpers::staticPlugins(directory);
     for (QStaticPlugin p : staticPlugins) {
-        KPluginMetaData metaData;
-        const auto loadingResult = metaData.d->loadStaticPlugin(p, KPluginMetaData::DoNotAllowEmptyMetaData);
-        metaData.d->m_fileName = loadingResult.fileName;
-        metaData.d->m_metaData = loadingResult.metaData;
+        KPluginMetaData metaData(p);
         if (metaData.isValid() && metaData.pluginId() == pluginId) {
             return metaData;
         }
@@ -193,29 +215,21 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
     return KPluginMetaData{};
 }
 
-void KPluginMetaData::loadFromJsonFile(const QString &file)
+KPluginMetaData KPluginMetaData::fromJsonFile(const QString &file)
 {
-    d = new KPluginMetaDataPrivate;
     QFile f(file);
     bool b = f.open(QIODevice::ReadOnly);
     if (!b) {
         qCWarning(KCOREADDONS_DEBUG) << "Couldn't open" << file;
-        return;
+        return {};
     }
     QJsonParseError error;
-    d->m_metaData = QJsonDocument::fromJson(f.readAll(), &error).object();
+    const QJsonObject metaData = QJsonDocument::fromJson(f.readAll(), &error).object();
     if (error.error) {
         qCWarning(KCOREADDONS_DEBUG) << "error parsing" << file << error.errorString();
     }
-    QString abspath = QFileInfo(file).absoluteFilePath();
-    d->m_fileName = abspath;
-}
 
-KPluginMetaData KPluginMetaData::fromJsonFile(const QString &file)
-{
-    KPluginMetaData result;
-    result.loadFromJsonFile(file);
-    return result;
+    return KPluginMetaData(metaData, QFileInfo(file).absoluteFilePath());
 }
 
 QJsonObject KPluginMetaData::rawData() const
@@ -239,10 +253,7 @@ KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const 
     QVector<KPluginMetaData> ret;
     const auto staticPlugins = KStaticPluginHelpers::staticPlugins(directory);
     for (QStaticPlugin p : staticPlugins) {
-        KPluginMetaData metaData;
-        const auto loadingResult = metaData.d->loadStaticPlugin(p, option);
-        metaData.d->m_fileName = loadingResult.fileName;
-        metaData.d->m_metaData = loadingResult.metaData;
+        KPluginMetaData metaData(p);
         if (metaData.isValid()) {
             if (!filter || filter(metaData)) {
                 ret << metaData;
@@ -363,19 +374,7 @@ QString KPluginMetaData::copyrightText() const
 
 QString KPluginMetaData::pluginId() const
 {
-    QJsonObject root = rootObject();
-    auto nameFromMetaData = root.constFind(QStringLiteral("Id"));
-    if (nameFromMetaData != root.constEnd()) {
-        const QString id = nameFromMetaData.value().toString();
-        if (!id.isEmpty()) {
-            return id;
-        }
-    }
-    // passing QFileInfo an empty string gives the CWD, which is not what we want
-    if (d->m_fileName.isEmpty()) {
-        return QString();
-    }
-    return QFileInfo(d->m_fileName).completeBaseName();
+    return d->m_pluginId;
 }
 
 QString KPluginMetaData::version() const

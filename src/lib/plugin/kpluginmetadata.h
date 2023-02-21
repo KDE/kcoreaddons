@@ -415,7 +415,6 @@ public:
 
 private:
     const QJsonObject rootObject() const;
-    void loadFromJsonFile(const QString &file);
 
 private:
     QVariantList authorsVariant() const;
