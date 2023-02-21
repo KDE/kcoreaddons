@@ -125,14 +125,7 @@ KPluginMetaData &KPluginMetaData::operator=(const KPluginMetaData &other)
     return *this;
 }
 
-KPluginMetaData::~KPluginMetaData()
-{
-}
-
-KPluginMetaData::KPluginMetaData(const QString &pluginFile)
-    : KPluginMetaData(pluginFile, DoNotAllowEmptyMetaData)
-{
-}
+KPluginMetaData::~KPluginMetaData() = default;
 
 KPluginMetaData::KPluginMetaData(const QString &pluginFile, KPluginMetaDataOption option)
     : d(new KPluginMetaDataPrivate)
