@@ -21,9 +21,9 @@
 #include <functional>
 
 class QPluginLoader;
+class QStaticPlugin;
 class KPluginMetaDataPrivate;
 class KAboutPerson;
-class QStaticPlugin;
 /**
  * @class KPluginMetaData kpluginmetadata.h KPluginMetaData
  *
@@ -143,17 +143,6 @@ public:
      * @since 6.0
      */
     KPluginMetaData(const QJsonObject &metaData, const QString &fileName);
-
-    /*
-     * Constructs a KPluginMetaData from the static plugin.
-     * If it does not have any meta data the @p metaData value is used
-     *
-     * @see KPluginFactory::loadFactory
-     * @see KPluginFactory::instantiatePlugin
-     *
-     * @since 5.89
-     */
-    KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaData = {});
 
     /**
      * Copy contructor
@@ -417,6 +406,7 @@ private:
     const QJsonObject rootObject() const;
 
 private:
+    KPluginMetaData(QStaticPlugin plugin, KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData);
     QVariantList authorsVariant() const;
     QVariantList translatorsVariant() const;
     QVariantList otherContributorsVariant() const;

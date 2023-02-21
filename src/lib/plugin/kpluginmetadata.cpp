@@ -180,15 +180,14 @@ KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &fil
     }
 }
 
-KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, const QJsonObject &metaData)
+KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, KPluginMetaDataOption option)
     : d(new KPluginMetaDataPrivate)
 {
-    qWarning() << Q_FUNC_INFO;
     const auto result = d->loadStaticPlugin(plugin, DoNotAllowEmptyMetaData);
     d->m_fileName = result.fileName;
     d->m_pluginId = QFileInfo(d->m_fileName).completeBaseName();
-    d->m_metaData = result.metaData.isEmpty() ? metaData : result.metaData;
-    qWarning() << Q_FUNC_INFO << *this;
+    d->m_metaData = result.metaData;
+    d->m_option = option;
 }
 
 KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId)
@@ -253,7 +252,7 @@ KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const 
     QVector<KPluginMetaData> ret;
     const auto staticPlugins = KStaticPluginHelpers::staticPlugins(directory);
     for (QStaticPlugin p : staticPlugins) {
-        KPluginMetaData metaData(p);
+        KPluginMetaData metaData(p, option);
         if (metaData.isValid()) {
             if (!filter || filter(metaData)) {
                 ret << metaData;
