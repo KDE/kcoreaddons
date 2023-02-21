@@ -37,10 +37,6 @@ endmacro()
 # Build some sample plugins
 build_plugin(jsonplugin jsonplugin.cpp)
 build_plugin(jsonplugin2 jsonplugin2.cpp)
-build_plugin(versionedplugin versionedplugin.cpp)
-build_plugin(unversionedplugin unversionedplugin.cpp)
-build_plugin(multiplugin multiplugin.cpp)
-build_plugin(alwaysunloadplugin alwaysunloadplugin.cpp)
 build_plugin(qtplugin qtplugin.cpp)
 
 kcoreaddons_add_plugin(jsonplugin_cmake_macro SOURCES kpluginclass.cpp INSTALL_NAMESPACE "namespace")

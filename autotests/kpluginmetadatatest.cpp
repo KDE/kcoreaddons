@@ -351,7 +351,7 @@ private Q_SLOTS:
         QDir dir(temp.path());
         QVERIFY(dir.mkdir(QStringLiteral("kpluginmetadatatest")));
         QVERIFY(dir.cd(QStringLiteral("kpluginmetadatatest")));
-        for (const QString &name : {QStringLiteral("jsonplugin"), QStringLiteral("unversionedplugin"), QStringLiteral("jsonplugin2")}) {
+        for (const QString &name : {QStringLiteral("jsonplugin"), QStringLiteral("namespace/pluginwithoutmetadata"), QStringLiteral("jsonplugin2")}) {
             const QString pluginPath = QPluginLoader(name).fileName();
             QVERIFY2(!pluginPath.isEmpty(), qPrintable(pluginPath));
             QVERIFY2(QFile::copy(pluginPath, dir.absoluteFilePath(QFileInfo(pluginPath).fileName())),
