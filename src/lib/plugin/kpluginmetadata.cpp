@@ -206,9 +206,7 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
     QPluginLoader loader;
     KPluginMetaDataPrivate::getPluginLoaderForPath(loader, directory + QLatin1Char('/') + pluginId);
     if (loader.load()) {
-        // Load the JSON metadata and make sure the pluginId matches
-        KPluginMetaData metaData(loader.metaData().value(QLatin1String("MetaData")).toObject(), loader.fileName());
-        if (metaData.isValid() && metaData.pluginId() == pluginId) {
+        if (KPluginMetaData metaData(loader); metaData.isValid()) {
             return metaData;
         }
     }
