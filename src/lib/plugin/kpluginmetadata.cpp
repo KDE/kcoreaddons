@@ -149,6 +149,16 @@ KPluginMetaData::KPluginMetaData(const QString &pluginFile, KPluginMetaDataOptio
         if (d->m_metaData.isEmpty() && option == DoNotAllowEmptyMetaData) {
             qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << pluginFile << "does not have a valid 'MetaData' object";
         }
+        if (const QString id = rootObject()[QLatin1String("Id")].toString(); !id.isEmpty()) {
+            if (id != d->m_pluginId) {
+                qWarning(KCOREADDONS_DEBUG) << "The plugin" << pluginFile
+                                            << "explicitly states an Id in the embedded metadata, which is different from the one derived from the filename"
+                                            << "The Id field from the KPlugin object in the metadata should be removed";
+            } else {
+                qInfo(KCOREADDONS_DEBUG) << "The plugin" << pluginFile << "explicitly states an 'Id' in the embedded metadata."
+                                         << "This value should be removed, the resulting pluginId will not be affected by it";
+            }
+        }
     } else {
         qCDebug(KCOREADDONS_DEBUG) << "no metadata found in" << pluginFile << loader.errorString();
     }

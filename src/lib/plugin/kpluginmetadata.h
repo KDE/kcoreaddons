@@ -287,9 +287,13 @@ public:
 
     /**
      * @return the unique identifier within the namespace of the plugin
-     * If the Id property is not set in the metadata, this will return the
-     * plugin file name without the file extension.
-     * This is the recommended approach for Qt plugins.
+     *
+     * For C++ plugins, this ID is derived from the filename.
+     * It should not be set in the metadata explicitly.
+     *
+     * When using @ref KPluginMetaData::fromJsonFile or @ref KPluginMetaData(QJsonObject, QString),
+     * the "Id" of the "KPlugin" object will be used. If unset, it will be derived
+     * from the filename.
      */
     QString pluginId() const;
 
