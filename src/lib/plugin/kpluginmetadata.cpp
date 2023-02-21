@@ -145,7 +145,7 @@ KPluginMetaData::KPluginMetaData(const QString &pluginFile, KPluginMetaDataOptio
 
     const auto qtMetaData = loader.metaData();
     if (!qtMetaData.isEmpty()) {
-        d->m_metaData = qtMetaData.value(QStringLiteral("MetaData")).toObject();
+        d->m_metaData = qtMetaData.value(QLatin1String("MetaData")).toObject();
         if (d->m_metaData.isEmpty() && option == DoNotAllowEmptyMetaData) {
             qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << pluginFile << "does not have a valid 'MetaData' object";
         }
@@ -157,7 +157,7 @@ KPluginMetaData::KPluginMetaData(const QString &pluginFile, KPluginMetaDataOptio
 KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
     : KPluginMetaData()
 {
-    d->m_metaData = loader.metaData().value(QStringLiteral("MetaData")).toObject();
+    d->m_metaData = loader.metaData().value(QLatin1String("MetaData")).toObject();
     if (!loader.fileName().isEmpty()) {
         QFileInfo info(loader.fileName());
         d->m_fileName = info.absoluteFilePath();
@@ -286,12 +286,12 @@ bool KPluginMetaData::isValid() const
 
 bool KPluginMetaData::isHidden() const
 {
-    return rootObject()[QStringLiteral("Hidden")].toBool();
+    return rootObject()[QLatin1String("Hidden")].toBool();
 }
 
 const QJsonObject KPluginMetaData::rootObject() const
 {
-    return d->m_metaData.value(QStringLiteral("KPlugin")).toObject();
+    return d->m_metaData.value(QLatin1String("KPlugin")).toObject();
 }
 
 static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson> *out)
@@ -323,22 +323,22 @@ static QList<KAboutPerson> aboutPersonFromJSON(const QJsonValue &people)
 
 QList<KAboutPerson> KPluginMetaData::authors() const
 {
-    return aboutPersonFromJSON(rootObject()[QStringLiteral("Authors")]);
+    return aboutPersonFromJSON(rootObject()[QLatin1String("Authors")]);
 }
 
 QList<KAboutPerson> KPluginMetaData::translators() const
 {
-    return aboutPersonFromJSON(rootObject()[QStringLiteral("Translators")]);
+    return aboutPersonFromJSON(rootObject()[QLatin1String("Translators")]);
 }
 
 QList<KAboutPerson> KPluginMetaData::otherContributors() const
 {
-    return aboutPersonFromJSON(rootObject()[QStringLiteral("OtherContributors")]);
+    return aboutPersonFromJSON(rootObject()[QLatin1String("OtherContributors")]);
 }
 
 QString KPluginMetaData::category() const
 {
-    return rootObject()[QStringLiteral("Category")].toString();
+    return rootObject()[QLatin1String("Category")].toString();
 }
 
 QString KPluginMetaData::description() const
@@ -348,12 +348,12 @@ QString KPluginMetaData::description() const
 
 QString KPluginMetaData::iconName() const
 {
-    return rootObject()[QStringLiteral("Icon")].toString();
+    return rootObject()[QLatin1String("Icon")].toString();
 }
 
 QString KPluginMetaData::license() const
 {
-    return rootObject()[QStringLiteral("License")].toString();
+    return rootObject()[QLatin1String("License")].toString();
 }
 
 QString KPluginMetaData::licenseText() const
@@ -378,22 +378,22 @@ QString KPluginMetaData::pluginId() const
 
 QString KPluginMetaData::version() const
 {
-    return rootObject()[QStringLiteral("Version")].toString();
+    return rootObject()[QLatin1String("Version")].toString();
 }
 
 QString KPluginMetaData::website() const
 {
-    return rootObject()[QStringLiteral("Website")].toString();
+    return rootObject()[QLatin1String("Website")].toString();
 }
 
 QString KPluginMetaData::bugReportUrl() const
 {
-    return rootObject()[QStringLiteral("BugReportUrl")].toString();
+    return rootObject()[QLatin1String("BugReportUrl")].toString();
 }
 
 QStringList KPluginMetaData::mimeTypes() const
 {
-    return rootObject().value(QStringLiteral("MimeTypes")).toVariant().toStringList();
+    return rootObject()[QLatin1String("MimeTypes")].toVariant().toStringList();
 }
 
 bool KPluginMetaData::supportsMimeType(const QString &mimeType) const
@@ -421,12 +421,12 @@ bool KPluginMetaData::supportsMimeType(const QString &mimeType) const
 
 QStringList KPluginMetaData::formFactors() const
 {
-    return rootObject().value(QStringLiteral("FormFactors")).toVariant().toStringList();
+    return rootObject().value(QLatin1String("FormFactors")).toVariant().toStringList();
 }
 
 bool KPluginMetaData::isEnabledByDefault() const
 {
-    QJsonValue val = rootObject()[QStringLiteral("EnabledByDefault")];
+    QJsonValue val = rootObject()[QLatin1String("EnabledByDefault")];
     if (val.isBool()) {
         return val.toBool();
     } else if (val.isString()) {
