@@ -16,6 +16,7 @@
 
 #include <QSharedDataPointer>
 #include <QString>
+#include <QUrl>
 #include <QVariant>
 #include <kcoreaddons_export.h>
 #include <memory>
@@ -64,7 +65,7 @@ class KCOREADDONS_EXPORT KAboutPerson
     Q_PROPERTY(QString task READ task CONSTANT)
     Q_PROPERTY(QString emailAddress READ emailAddress CONSTANT)
     Q_PROPERTY(QString webAddress READ webAddress CONSTANT)
-    Q_PROPERTY(QString ocsUsername READ ocsUsername CONSTANT)
+    Q_PROPERTY(QUrl avatarUrl READ avatarUrl CONSTANT)
     friend class KAboutData;
     friend class KAboutDataPrivate;
 
@@ -80,7 +81,7 @@ public:
      *
      * @param webAddress Home page of the person.
      *
-     * @param ocsUsername Open Collaboration Services username of the person.
+     * @param avatarUrl URL to the avatar of the person, since 6.0
      *
      * @p name default argument @since 5.53
      */
@@ -88,7 +89,7 @@ public:
                           const QString &task = QString(),
                           const QString &emailAddress = QString(),
                           const QString &webAddress = QString(),
-                          const QString &ocsUsername = QString());
+                          const QUrl &avatarUrl = QUrl());
 
     /**
      * Copy constructor.  Performs a deep copy.
@@ -133,11 +134,10 @@ public:
     QString webAddress() const;
 
     /**
-     * The person's Open Collaboration Services username
-     * @return the persons OCS username (can be QString(), if it has been
-     *           constructed with an empty username)
+     * @return an URL pointing to the user's avatar
+     * @since 6.0
      */
-    QString ocsUsername() const;
+    QUrl avatarUrl() const;
 
     /**
      * Creates a @c KAboutPerson from a JSON object with the following structure:
@@ -148,9 +148,10 @@ public:
      * Email      | emailAddress()
      * Task       | task()
      * Website    | webAddress()
-     * UserName   | ocsUsername()
+     * AvatarUrl   | avatarUrl()
      *
      * The @c Name and @c Task key are translatable (by using e.g. a "Task[de_DE]" key)
+     * The AvatarUrl exists since version 6.0
      *
      * @since 5.18
      */
@@ -697,15 +698,13 @@ public:
      *        Start the address with "http://". "http://some.domain" is
      *        correct, "some.domain" is not. Can be left empty.
      *
-     * @param ocsUsername The person's Open Collaboration Services username.
-     *        The provider can be optionally specified with @see setOcsProvider.
-     *
+     * @param avatarUrl URL to the avatar of the person
      */
     KAboutData &addAuthor(const QString &name,
                           const QString &task = QString(),
                           const QString &emailAddress = QString(),
                           const QString &webAddress = QString(),
-                          const QString &ocsUsername = QString());
+                          const QUrl &avatarUrl = QUrl());
 
     /**
      * Defines a person that deserves credit.
@@ -726,15 +725,13 @@ public:
      *        Start the address with "http://". "http://some.domain" is
      *        is correct, "some.domain" is not. Can be left empty.
      *
-     * @param ocsUsername The person's Open Collaboration Services username.
-     *        The provider can be optionally specified with @see setOcsProvider.
-     *
+     * @param avatarUrl URL to the avatar of the person
      */
     KAboutData &addCredit(const QString &name,
                           const QString &task = QString(),
                           const QString &emailAddress = QString(),
                           const QString &webAddress = QString(),
-                          const QString &ocsUsername = QString());
+                          const QUrl &avatarUrl = QUrl());
 
     /**
      * @brief Sets the name(s) of the translator(s) of the GUI.

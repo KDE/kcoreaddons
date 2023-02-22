@@ -41,17 +41,17 @@ public:
     QString _task;
     QString _emailAddress;
     QString _webAddress;
-    QString _ocsUsername;
+    QUrl _avatarUrl;
 };
 
-KAboutPerson::KAboutPerson(const QString &_name, const QString &_task, const QString &_emailAddress, const QString &_webAddress, const QString &_ocsUsername)
+KAboutPerson::KAboutPerson(const QString &_name, const QString &_task, const QString &_emailAddress, const QString &_webAddress, const QUrl &avatarUrl)
     : d(new KAboutPersonPrivate)
 {
     d->_name = _name;
     d->_task = _task;
     d->_emailAddress = _emailAddress;
     d->_webAddress = _webAddress;
-    d->_ocsUsername = _ocsUsername;
+    d->_avatarUrl = avatarUrl;
 }
 
 KAboutPerson::KAboutPerson(const QString &_name, const QString &_email, bool)
@@ -85,9 +85,9 @@ QString KAboutPerson::webAddress() const
     return d->_webAddress;
 }
 
-QString KAboutPerson::ocsUsername() const
+QUrl KAboutPerson::avatarUrl() const
 {
-    return d->_ocsUsername;
+    return d->_avatarUrl;
 }
 
 KAboutPerson &KAboutPerson::operator=(const KAboutPerson &other) = default;
@@ -98,8 +98,8 @@ KAboutPerson KAboutPerson::fromJSON(const QJsonObject &obj)
     const QString task = KJsonUtils::readTranslatedString(obj, QStringLiteral("Task"));
     const QString email = obj[QStringLiteral("Email")].toString();
     const QString website = obj[QStringLiteral("Website")].toString();
-    const QString userName = obj[QStringLiteral("UserName")].toString();
-    return KAboutPerson(name, task, email, website, userName);
+    const QUrl avatarUrl = obj[QStringLiteral("AvatarUrl")].toVariant().toUrl();
+    return KAboutPerson(name, task, email, website, avatarUrl);
 }
 
 class KAboutLicensePrivate : public QSharedData
@@ -612,15 +612,15 @@ KAboutData &KAboutData::operator=(const KAboutData &other)
     return *this;
 }
 
-KAboutData &KAboutData::addAuthor(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &ocsUsername)
+KAboutData &KAboutData::addAuthor(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QUrl &avatarUrl)
 {
-    d->_authorList.append(KAboutPerson(name, task, emailAddress, webAddress, ocsUsername));
+    d->_authorList.append(KAboutPerson(name, task, emailAddress, webAddress, avatarUrl));
     return *this;
 }
 
-KAboutData &KAboutData::addCredit(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &ocsUsername)
+KAboutData &KAboutData::addCredit(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QUrl &avatarUrl)
 {
-    d->_creditList.append(KAboutPerson(name, task, emailAddress, webAddress, ocsUsername));
+    d->_creditList.append(KAboutPerson(name, task, emailAddress, webAddress, avatarUrl));
     return *this;
 }
 
