@@ -496,7 +496,6 @@ public:
     bool customAuthorTextEnabled;
 
     QString organizationDomain;
-    QString _ocsProviderUrl;
     QString desktopFileName;
 
     // Everything dr.konqi needs, we store as utf-8, so we
@@ -703,12 +702,6 @@ KAboutData &KAboutData::setDisplayName(const QString &_displayName)
     return *this;
 }
 
-KAboutData &KAboutData::setOcsProvider(const QString &_ocsProviderUrl)
-{
-    d->_ocsProviderUrl = _ocsProviderUrl;
-    return *this;
-}
-
 KAboutData &KAboutData::setVersion(const QByteArray &_version)
 {
     d->_version = _version;
@@ -828,11 +821,6 @@ KAboutData &KAboutData::setProgramLogo(const QVariant &image)
 {
     d->programLogo = image;
     return *this;
-}
-
-QString KAboutData::ocsProviderUrl() const
-{
-    return d->_ocsProviderUrl;
 }
 
 QString KAboutData::version() const

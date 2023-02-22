@@ -892,20 +892,6 @@ public:
     KAboutData &setProgramLogo(const QVariant &image);
 
     /**
-     * Specifies an Open Collaboration Services provider by URL.
-     * A provider file must be available for the chosen provider.
-     *
-     * Use this if you need to override the default provider.
-     *
-     * If this method is not used, all the KAboutPerson OCS usernames
-     * will be used with the openDesktop.org entry from the default
-     * provider file.
-     *
-     * @param providerUrl The provider URL as defined in the provider file.
-     */
-    KAboutData &setOcsProvider(const QString &providerUrl);
-
-    /**
      * Defines the program version string.
      *
      * @param version The program version.
@@ -1090,12 +1076,6 @@ public:
      *         no custom application logo defined.
      */
     QVariant programLogo() const;
-
-    /**
-     * Returns the chosen Open Collaboration Services provider URL.
-     * @return the provider URL.
-     */
-    QString ocsProviderUrl() const;
 
     /**
      * Returns the program's version.
