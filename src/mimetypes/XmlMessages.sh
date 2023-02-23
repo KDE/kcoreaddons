@@ -1,13 +1,13 @@
 function get_files
 {
-    echo kde5.xml
+    echo kde6.xml
 }
 
 function po_for_file
 {
     case "$1" in
-       kde5.xml)
-           echo kde5_xml_mimetypes.po
+       kde6.xml)
+           echo kde6_xml_mimetypes.po
        ;;
     esac
 }
@@ -15,7 +15,7 @@ function po_for_file
 function tags_for_file
 {
     case "$1" in
-       kde5.xml)
+       kde6.xml)
            echo comment
        ;;
     esac
