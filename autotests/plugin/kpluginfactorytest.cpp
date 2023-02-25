@@ -7,9 +7,11 @@
 
 #include <QTest>
 
-#include "plugins.h"
 #include <QPluginLoader>
 #include <kpluginfactory.h>
+#ifndef Q_OS_WIN
+#include "plugins.h"
+#endif
 
 // We do not have QWidgets as a dependency, this is a simple placeholder for the type to be fully qualified
 class QWidget : public QObject
@@ -23,6 +25,7 @@ class KPluginFactoryTest : public QObject
 private Q_SLOTS:
     void testCreate()
     {
+#ifndef Q_OS_WIN
         KPluginMetaData data(QStringLiteral("namespace/jsonplugin_cmake_macro"));
         QVERIFY(data.isValid());
         KPluginFactory::Result<KPluginFactory> factoryResult = KPluginFactory::loadFactory(data);
@@ -45,6 +48,7 @@ private Q_SLOTS:
         QObject *partTest = factory->create<QObject>(&parentWidget, this);
         QVERIFY(partTest);
         delete partTest;
+#endif
     }
 
     void testPluginWithoutMetaData()
@@ -59,7 +63,7 @@ private Q_SLOTS:
 
     void testCreateUsingUtilityMethods()
     {
-        auto result = KPluginFactory::instantiatePlugin<MyPlugin>(KPluginMetaData(QStringLiteral("namespace/jsonplugin_cmake_macro")));
+        auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QStringLiteral("namespace/jsonplugin_cmake_macro")));
         QVERIFY(result.plugin);
         QCOMPARE(result.plugin->metaObject()->className(), "SimplePluginClass");
         QVERIFY(result.errorString.isEmpty());

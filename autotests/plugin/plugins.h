@@ -2,7 +2,7 @@
 
 #include <QObject>
 
-class EXPORT_MACRO MyPlugin : public QObject
+class Q_DECL_EXPORT MyPlugin : public QObject
 {
     Q_OBJECT
 public:
@@ -10,7 +10,7 @@ public:
     ~MyPlugin() override;
 };
 
-class EXPORT_MACRO MyPlugin2 : public QObject
+class Q_DECL_EXPORT MyPlugin2 : public QObject
 {
     Q_OBJECT
 public:
