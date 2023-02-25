@@ -1,4 +1,12 @@
-add_library(plugins_STATIC STATIC plugins.cpp)
+# Generating export for a test is overkill, hence this little workaround
+if (NOT WIN32)
+    add_library(plugins_STATIC plugins.cpp)
+    target_compile_definitions(plugins_STATIC PUBLIC -DEXPORT_MACRO=Q_DECL_EXPORT)
+else()
+    add_library(plugins_STATIC STATIC plugins.cpp)
+    target_compile_definitions(plugins_STATIC PUBLIC -DEXPORT_MACRO=)
+    set_property(TARGET plugins_STATIC PROPERTY POSITION_INDEPENDENT_CODE ON)
+endif()
 target_link_libraries(plugins_STATIC Qt6::Core)
 
 kcoreaddons_add_plugin(qtplugin SOURCES qtplugin.cpp INSTALL_NAMESPACE "namespace")
