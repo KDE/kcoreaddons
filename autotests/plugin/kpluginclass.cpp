@@ -8,9 +8,10 @@ class SimplePluginClass : public MyPlugin
 {
     Q_OBJECT
 public:
-    explicit SimplePluginClass(QObject *parent, const QVariantList & /*args*/)
+    explicit SimplePluginClass(QObject *parent, const QVariantList &args)
         : MyPlugin(parent)
     {
+        setProperty("arg", args.isEmpty() ? QVariant() : args.first());
     }
 };
 class SimplePluginClass2 : public MyPlugin2

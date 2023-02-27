@@ -32,9 +32,11 @@ private Q_SLOTS:
         auto factory = factoryResult.plugin;
         QVERIFY(factory);
 
-        QObject *obj = factory->create<MyPlugin>(this);
+        const QString testProp = QStringLiteral("testme");
+        QObject *obj = factory->create<MyPlugin>(this, {testProp});
         QVERIFY(obj);
         QCOMPARE(obj->metaObject()->className(), "SimplePluginClass");
+        QCOMPARE(obj->property("arg").toString(), testProp);
 
         QObject *obj2 = factory->create<MyPlugin2>(this);
         QVERIFY(obj2);
