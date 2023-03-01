@@ -229,7 +229,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "ଦର୍ଶାଯାଇନାହିଁ"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -238,31 +238,31 @@ msgid ""
 "org</a></p>"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "ଲେଖକ ସୂଚନା ଦର୍ଶାନ୍ତୁ"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "ଅନୁମତି ପତ୍ର ସୂଚନା ଦର୍ଶାନ୍ତୁ"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -270,7 +270,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "ଏହି ପ୍ରୟୋଗଟି ଜଣକ ଦ୍ୱାରା ଲିଖିତ ଯିଏକି ଅଜ୍ଞାତ ହୋଇ ରହିବାକୁ ଚାହୁଁଅଛି।"
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -282,53 +282,46 @@ msgstr ""
 "%1 ଟି %2 ଦ୍ୱାରା \n"
 "ଲିଖିତ"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "ଦୟାକରି ତ୍ରୁଟି ପ୍ରକାଶ କରିବା ପାଇଁ http://bugs.kde.org କୁ ବ୍ୟବହାର କରନ୍ତୁ।\n"
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "ଦୟାକରି %1 ରେ ତ୍ରୁଟି ପ୍ରକାଶ କରନ୍ତୁ।\n"
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, fuzzy, qt-format
 #| msgid "Could not open file '%1'"
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "ଫାଇଲ '%1' ଖୋଲି ହେଲାନାହିଁ"
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, fuzzy, qt-format
 #| msgid "Could not open file '%1'"
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "ଫାଇଲ '%1' ଖୋଲି ହେଲାନାହିଁ"
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, fuzzy, qt-format
 #| msgid "The library %1 does not offer a KDE 4 compatible factory."
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "ଲାଇବ୍ରେରୀ %1 KDE 4 ସୁସଙ୍ଗତ କାରଖାନା ପ୍ରଦାନ କରେନାହିଁ।"
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr ""
-
-#: lib/plugin/kpluginloader.cpp:109
-#, fuzzy, qt-format
-#| msgid "The library %1 does not offer a KDE 4 compatible factory."
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
-msgstr "ଲାଇବ୍ରେରୀ %1 KDE 4 ସୁସଙ୍ଗତ କାରଖାନା ପ୍ରଦାନ କରେନାହିଁ।"
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -976,6 +969,12 @@ msgstr ""
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr ""
+
+#, fuzzy
+#~| msgid "The library %1 does not offer a KDE 4 compatible factory."
+#~ msgctxt "KPluginLoader|"
+#~ msgid "The library %1 does not offer a KPluginFactory."
+#~ msgstr "ଲାଇବ୍ରେରୀ %1 KDE 4 ସୁସଙ୍ଗତ କାରଖାନା ପ୍ରଦାନ କରେନାହିଁ।"
 
 #, fuzzy
 #~| msgctxt "concatenation of dates and time"

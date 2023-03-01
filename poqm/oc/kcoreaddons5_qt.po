@@ -198,7 +198,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Non especificat"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -207,36 +207,36 @@ msgid ""
 "org</a></p>"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Visualizar las informacions de l'autor"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Visualizar las informacions de licéncia"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -248,7 +248,7 @@ msgstr ""
 "%1 foguèt escrich per\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 #, fuzzy
 #| msgid ""
 #| "Please use <a href=\"http://bugs.kde.org\">http://bugs.kde.org</a> to "
@@ -259,14 +259,14 @@ msgstr ""
 "Utilizatz <a href=\"http://bugs.kde.org\">http://bugs.kde.org</a> per "
 "senhalar de bògues.\n"
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, fuzzy, qt-format
 #| msgid "Please report bugs to <a href=\"mailto:%1\">%2</a>.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "Senhalatz los bògues a <a href=\"mailto:%1\">%2</a>.\n"
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, fuzzy, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
@@ -275,7 +275,7 @@ msgstr ""
 "\n"
 "%1"
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, fuzzy, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
@@ -284,22 +284,16 @@ msgstr ""
 "\n"
 "%1"
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr ""
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
-msgstr ""
-
-#: lib/plugin/kpluginloader.cpp:109
-#, qt-format
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
 msgstr ""
 
 #: lib/util/kformatprivate.cpp:100

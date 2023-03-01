@@ -165,7 +165,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Ínspecificat"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -177,77 +177,71 @@ msgstr ""
 "tra li tot munde.</p><p>Por obtener plu information pri internationalisation "
 "de KDE visita <a href=\"https://l10n.kde.org\">https://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Monstrar information pri li autor."
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Monstrar information pri li licentie."
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Li basal nómine del file desktop por ti-ci application."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "nómine de file"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Ti programma esset scrit de un anonime."
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 esset scrit de:"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Ples usar https://bugs.kde.org por raportar defectes."
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "Ples raportar defectes a %1."
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "Ne successat trovar li plugin %1"
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "Ne successat cargar un plugin ex %1: %2"
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "Li biblioteca %1 ne oferta un KPluginFactory."
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "KPluginFactory ne successat crear un instantie de %1 ex %2"
-
-#: lib/plugin/kpluginloader.cpp:109
-#, qt-format
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
-msgstr "Li biblioteca %1 ne oferta un KPluginFactory."
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -820,3 +814,7 @@ msgstr "Ne successat executer `lsof', code de errore: %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob es ínsupportat in Windows"
+
+#~ msgctxt "KPluginLoader|"
+#~ msgid "The library %1 does not offer a KPluginFactory."
+#~ msgstr "Li biblioteca %1 ne oferta un KPluginFactory."

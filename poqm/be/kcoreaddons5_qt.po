@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-09-04 07:04\n"
+"PO-Revision-Date: 2023-02-08 13:40\n"
 "Last-Translator: Alaksandr Suša <isushik94@gmail.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -59,7 +59,7 @@ msgstr "ExFAT"
 #: lib/io/kfilesystemtype.cpp:250
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "FUSE"
 
 #: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
@@ -173,7 +173,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Не вызначана"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -186,78 +186,72 @@ msgstr ""
 "інтэрнацыяналізацыю KDE, наведайце <a href=\"https://l10n.kde.org\">https://"
 "l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Паказаць звесткі пра стваральніка."
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Паказаць звесткі пра ліцэнзію."
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Базавая назва файла элемента працоўнага стала для гэтай праграммы."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "назва файла"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Гэтая праграма створаная чалавекам, які захацеў застацца невядомым."
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 стварыў:"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr ""
 "Для адпраўлення справаздач пра хібы выкарыстоўвайце http://bugs.kde.org."
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "Паведамляйце пра хібы на %1."
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "Не ўдалося знайсці ўбудову %1"
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "Не ўдалося загрузіць убудову з %1: %2"
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "Бібліятэка %1 не прапаноўвае KPluginFactory."
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "KPluginFactory не ўдалося стварыць асобнік %1 з %2"
-
-#: lib/plugin/kpluginloader.cpp:109
-#, qt-format
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
-msgstr "Бібліятэка %1 не прапаноўвае KPluginFactory."
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -801,16 +795,14 @@ msgstr "Зараз"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:515
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%1 хвілін(ы) таму"
-msgstr[1] "%1 хвілін(ы) таму"
-msgstr[2] "%1 хвілін(ы) таму"
-msgstr[3] "%1 хвілін(ы) таму"
+msgstr[0] "%n хвіліну таму"
+msgstr[1] "%n хвіліны таму"
+msgstr[2] "%n хвілін таму"
+msgstr[3] "%n хвіліны таму"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:531
@@ -831,17 +823,19 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "Не ўдалося знайсці выканальны файл lsof па шляху:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, fuzzy, qt-format
-#| msgctxt "QObject|"
-#| msgid "Failed to execute `lsof' error code %1"
+#, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "Не атрымался выканаць `lsof'. Код памылкі %1"
+msgstr "Не ўдалося выканаць \"lsof\". Код памылкі %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob не падтрымліваецца ў Windows"
+
+#~ msgctxt "KPluginLoader|"
+#~ msgid "The library %1 does not offer a KPluginFactory."
+#~ msgstr "Бібліятэка %1 не прапаноўвае KPluginFactory."
 
 #~ msgctxt "KFormat|"
 #~ msgid "%1, %2"

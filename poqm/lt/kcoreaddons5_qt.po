@@ -176,7 +176,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Nenurodyta"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -189,49 +189,49 @@ msgstr ""
 "apsilankykite KDE vertimui skirtoje internetinėje svetainėje <a href="
 "\"http://l10n.kde.org\">http://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Rodyti informaciją apie autorių."
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Rodyti licencijos informaciją."
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Šios programos darbalaukio įrašo bazinis failo pavadinimas."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "failo pavadinimas"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Šią programą parašė asmuo, kuris panoro išlikti anonimu."
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 parašė:"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Norėdami pranešti apie klaida, naudokite http://bugs.kde.org."
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "Apie klaidas praneškite į %1."
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, fuzzy, qt-format
 #| msgctxt "KPluginFactory|"
 #| msgid "Could not load plugin from %1"
@@ -239,7 +239,7 @@ msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "Nepavyko įkelti papildinio iš %1"
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, fuzzy, qt-format
 #| msgctxt "KPluginFactory|"
 #| msgid "Could not load plugin from %1"
@@ -247,25 +247,19 @@ msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "Nepavyko įkelti papildinio iš %1"
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "%1 biblioteka nesiūlo KPluginFactory."
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, fuzzy, qt-format
 #| msgctxt "KPluginFactory|"
 #| msgid "KPluginFactory could not load the plugin: %1"
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "KPluginFactory nepavyko įkelti papildinio: %1"
-
-#: lib/plugin/kpluginloader.cpp:109
-#, qt-format
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
-msgstr "%1 biblioteka nesiūlo KPluginFactory."
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -855,6 +849,10 @@ msgstr "Nepavyko įvykdyti \"lsof\", klaidos kodas %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob nėra palaikoma Windows sistemose"
+
+#~ msgctxt "KPluginLoader|"
+#~ msgid "The library %1 does not offer a KPluginFactory."
+#~ msgstr "%1 biblioteka nesiūlo KPluginFactory."
 
 #~ msgctxt "KFormat|"
 #~ msgid "%1, %2"

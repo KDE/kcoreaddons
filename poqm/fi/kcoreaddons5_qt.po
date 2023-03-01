@@ -189,7 +189,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Ei määritelty"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -202,77 +202,71 @@ msgstr ""
 "community.kde.org/KDE_Localization/fi\">community.kde.org/KDE_Localization/"
 "fi</a>.</p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Näytä tekijätiedot."
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Näytä lisenssitiedot."
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Tämän sovelluksen desktop-tietueen tiedostonimi."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "tiedostonimi"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Tekijä haluaa pysyä tuntemattomana."
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "Tekijät – %1:"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Ilmoita vioista osoitteessa https://bugs.kde.org."
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "Ilmoita vioista osoitteeseen %1."
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "Liitännäistä %1 ei löytynyt"
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "Ei voitu ladata liitännäistä lähteestä %1: %2"
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "Kirjasto %1 ei tarjoa KPluginFactoryä."
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "KPluginFactory ei voinut luoda %1-instanssia lähteestä %2"
-
-#: lib/plugin/kpluginloader.cpp:109
-#, qt-format
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
-msgstr "Kirjasto %1 ei tarjoa KPluginFactoryä."
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -845,6 +839,10 @@ msgstr "lsof-komennon suoritus epäonnistui, virhekoodi %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob ei ole tuettu Windowsissa"
+
+#~ msgctxt "KPluginLoader|"
+#~ msgid "The library %1 does not offer a KPluginFactory."
+#~ msgstr "Kirjasto %1 ei tarjoa KPluginFactoryä."
 
 #~ msgctxt "KFormat|"
 #~ msgid "%1, %2"

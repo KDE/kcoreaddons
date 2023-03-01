@@ -2,21 +2,21 @@
 #
 # Gaute Hvoslef Kvalnes <gaute@verdsveven.com>, 2003, 2004, 2005, 2006.
 # Håvard Korsvoll <korsvoll@skulelinux.no>, 2003, 2005.
-# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2004, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 # Eirik U. Birkeland <eirbir@gmail.com>, 2008, 2009, 2010.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-02-28 03:44+0000\n"
-"PO-Revision-Date: 2022-10-30 09:41+0100\n"
+"PO-Revision-Date: 2023-02-19 21:29+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -175,7 +175,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Ikkje oppgjevne"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -186,89 +186,83 @@ msgstr ""
 "<p>KDE-programma er omsette til mange språk, og dei var nokre av dei første "
 "store programma som fanst på nynorsk.</p><p>Viss du finn skrive­feil, feil­"
 "omsetjingar eller omsetjingar som kan forbetrast, set me pris på om du <a "
-"href=\"https://bugs.kde.org/enter_bug.cgi?product=i18n&amp;"
-"component=nn\">melder det inn i feil­sporings­systemet vårt</a>. Du kan òg "
-"senda eit tips til <a href=\"mailto:l10n-no@lister.huftis.org\">diskusjons­"
-"lista</a> vår (<a href=\"http://lister.huftis.org/listinfo.cgi/l10n-no-"
-"huftis.org\">informasjon og arkiv</a>), eller direkte til <a href=\"mailto:"
+"href=\"https://bugs.kde.org/enter_bug.cgi?product=i18n&amp;component=nn"
+"\">melder det inn i feil­sporings­systemet vårt</a>. Du kan òg senda eit tips "
+"til <a href=\"mailto:l10n-no@lister.huftis.org\">diskusjons­lista</a> vår (<a "
+"href=\"http://lister.huftis.org/listinfo.cgi/l10n-no-huftis.org"
+"\">informasjon og arkiv</a>), eller direkte til omsetjaren <a href=\"mailto:"
 "karl@huftis.org\">Karl Ove Hufthammer</a> dersom du ikkje ønskjer at "
 "meldinga di skal verta offentleg­gjord på lista.</p><p>Bruk dei same "
 "adressene viss du ønskjer å delta aktivt i nynorsk­omsetjinga av programma. "
 "Me har alltid bruk for nye omsetjarar og korrektur­lesarar!</p><p>Du finn "
-"meir informasjon om internasjonalisering av KDE-programma på <a "
-"href=\"https://l10n.kde.org/\">https://l10n.kde.org/</a>.</p>"
+"meir informasjon om internasjonalisering av KDE-programma på <a href="
+"\"https://l10n.kde.org/\">https://l10n.kde.org/</a>.</p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Vis forfattarinformasjon."
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Vis lisensinformasjon."
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Filnamn-stamme til skrivebordsoppføringa til programmet."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "filnamn"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Dette programmet er skrive av nokon som vil vera anonyme."
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 er skrive av:"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Bruk https://bugs.kde.org/ for å melda frå om feil."
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "Send feilrapportar til %1."
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "Fann ikkje tillegget %1"
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "Klarte lasta tillegg frå %1: %2"
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "Biblioteket %1 tilbyr ikkje ein KPluginFactory."
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "KPluginFactory klarte ikkje oppretta ein %1-instans frå %2"
-
-#: lib/plugin/kpluginloader.cpp:109
-#, qt-format
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
-msgstr "Biblioteket %1 tilbyr ikkje ein KPluginFactory."
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -806,8 +800,8 @@ msgstr "Nett no"
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%n minutt sidan"
+msgstr[1] "%n minutt sidan"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:531
@@ -831,9 +825,13 @@ msgstr "Fann ikkje programfila «lsof» i PATH:"
 #, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr ""
+msgstr "Klarte ikkje køyra «lsof». Feilkode: %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob er ikkje støtta på Windows"
+
+#~ msgctxt "KPluginLoader|"
+#~ msgid "The library %1 does not offer a KPluginFactory."
+#~ msgstr "Biblioteket %1 tilbyr ikkje ein KPluginFactory."

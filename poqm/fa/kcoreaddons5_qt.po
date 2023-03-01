@@ -252,7 +252,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "نامعین"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 #, fuzzy
 #| msgctxt "replace this with information about your translation team"
 #| msgid ""
@@ -278,35 +278,35 @@ msgstr ""
 "پیشنهادات و یا اطلاعات بیشتر با آدرس mohi@linuxshop.ir<email>mohi@linuxshop."
 "ir</email> تماس بگیرید.</p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "نمایش اطلاعات نویسنده"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "نمایش اطلاعات مجوز"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 #, fuzzy
 #| msgid "Please choose language which should be used for this application:"
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "لطفاً زبانی را که باید برای این کاربردنامه استفاده شود را برگزینید:"
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 #, fuzzy
 #| msgid "Filename Error"
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "خطای نام پرونده"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -314,7 +314,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "این کاربرد توسط فردی نوشته شده که خواسته ناشناس باقی بماند"
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -326,53 +326,46 @@ msgstr ""
 "%1 توسط \n"
 "%2 نوشته شد"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "لطفاً، از http://bugs.kde.org برای گزارش اشکالها استفاده کنید.\n"
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "لطفاً، خطاها را به  %1 گزارش کنید.\n"
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, fuzzy, qt-format
 #| msgid "Could not open file '%1'"
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "پرونده »%1« را نتوانست باز کند."
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, fuzzy, qt-format
 #| msgid "Could not open file '%1'"
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "پرونده »%1« را نتوانست باز کند."
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, fuzzy, qt-format
 #| msgid "The library %1 does not offer a KDE 4 compatible factory."
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "کتابخانه %1 کارخانه همساز KDE 4 را ارائه نمی‌کند."
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr ""
-
-#: lib/plugin/kpluginloader.cpp:109
-#, fuzzy, qt-format
-#| msgid "The library %1 does not offer a KDE 4 compatible factory."
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
-msgstr "کتابخانه %1 کارخانه همساز KDE 4 را ارائه نمی‌کند."
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -1065,6 +1058,12 @@ msgstr ""
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr ""
+
+#, fuzzy
+#~| msgid "The library %1 does not offer a KDE 4 compatible factory."
+#~ msgctxt "KPluginLoader|"
+#~ msgid "The library %1 does not offer a KPluginFactory."
+#~ msgstr "کتابخانه %1 کارخانه همساز KDE 4 را ارائه نمی‌کند."
 
 # %1 %2
 #, fuzzy

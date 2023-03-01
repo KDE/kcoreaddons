@@ -4,7 +4,7 @@
 #
 # Amanpreet Singh Alam <amanlinux@netscape.net>, 2004.
 # Amanpreet Singh Alam <amanlinux@netscpe.net>, 2004.
-# A S Alam <aalam@users.sf.net>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2022.
+# A S Alam <aalam@users.sf.net>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2022, 2023.
 # ASB <aalam@users.sf.net>, 2007.
 # Amanpreet Singh Alam <apreet.alam@gmail.com>, 2008.
 # Amanpreet Singh <aalam@users.sf.net>, 2008.
@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-11-19 05:09-0800\n"
+"PO-Revision-Date: 2023-01-25 07:36-0800\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -177,7 +177,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "ਦਿੱਤਾ ਨਹੀਂ"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -191,77 +191,71 @@ msgstr ""
 "ਮਾਣ</p><p>ਵਧੇਰੇ ਜਾਣਕਾਰੀ ਲਈ <a href=\"https://satluj.org/\">ਪਰੋਜੈਕਟ ਸਾਇਟ</a> ਵੇਖੋ।</"
 "p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "ਲੇਖਕ ਜਾਣਕਾਰੀ ਵੇਖੋ"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "ਲਸੰਸ ਜਾਣਕਾਰੀ ਵੇਖੋ"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਡੈਸਕਟਾਪ ਐਂਟਰੀ ਦਾ ਬੇਸ ਫ਼ਾਈਲ ਨਾਂ ਹੈ।"
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "ਫ਼ਾਈਲ ਨਾਂ"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਨੂੰ ਉਸਨੇ ਲਿਖਿਆ ਹੈ, ਜੋ ਕਿ ਬੇਪਛਾਣ ਰਹਿਣਾ ਚਾਹੁੰਦਾ ਹੈ।"
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 ਨੂੰ ਵਲੋਂ ਲਿਖਿਆ:"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "ਬੱਗ ਦੀ ਜਾਣਕਾਰੀ ਦੇਣ ਲਈ https://bugs.kde.org ਵਰਤੋਂ।"
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "ਬੱਗ ਦੀ ਜਾਣਕਾਰੀ ਦੇਣ ਲਈ %1 ਵਰਤੋਂ।"
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "ਪਲੱਗਇਨ %1 ਲੱਭੀ ਨਹੀਂ ਜਾ ਸਕੀ"
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "%1 ਤੋਂ ਪਲੱਗਇਨ ਲੋਡ ਨਹੀਂ ਕੀਤੀ ਜਾ ਸਕੀ: %2"
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "ਲਾਇਬਰੇਰੀ %1 KPluginFactory ਨਹੀਂ ਦਿੰਦੀ ਹੈ।"
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "KPluginFactory %2 ਤੋਂ %1 ਬਣਾ ਨਹੀਂ ਸਕੀ"
-
-#: lib/plugin/kpluginloader.cpp:109
-#, qt-format
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
-msgstr "ਲਾਇਬਰੇਰੀ %1 KPluginFactory ਨਹੀਂ ਦਿੰਦੀ ਹੈ।"
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -801,7 +795,7 @@ msgstr "ਹੁਣੇ ਹੀ"
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%1 ਮਿੰਟ ਪਹਿਲਾਂ"
+msgstr[0] "%n ਮਿੰਟ ਪਹਿਲਾਂ"
 msgstr[1] "%1 ਮਿੰਟ ਪਹਿਲਾਂ"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
@@ -832,6 +826,10 @@ msgstr "`lsof' ਚਲਾਉਣ ਲਈ ਅਸਫ਼ਲ। ਗਲਤੀ ਕੋਡ 
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob ਵਿੰਡੋਜ਼ ਵਿੱਚ ਸਹਾਇਕ ਨਹੀਂ ਹੈ"
+
+#~ msgctxt "KPluginLoader|"
+#~ msgid "The library %1 does not offer a KPluginFactory."
+#~ msgstr "ਲਾਇਬਰੇਰੀ %1 KPluginFactory ਨਹੀਂ ਦਿੰਦੀ ਹੈ।"
 
 #~ msgctxt "KFormat|"
 #~ msgid "%1, %2"

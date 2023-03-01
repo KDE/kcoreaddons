@@ -202,7 +202,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "N'eo ket spisaet"
 
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:930
 #, fuzzy
 #| msgctxt "replace this with information about your translation team"
 #| msgid ""
@@ -221,38 +221,38 @@ msgstr ""
 "p><p>Gweladennit <a href=\"http://l10n.kde.org\">http://l10n.kde.org</a> "
 "evit muioc'h a ditouroù diwar-benn arraktres KDE</p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1161
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Diskouez titouroù diwar-benn an oberour"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1162
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Diskouez titouroù diwar-benn an aotre"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1164
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1165
 #, fuzzy
 #| msgid "Vietnamese"
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "Viet-Namek"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1177
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -264,50 +264,44 @@ msgstr ""
 "%1 a oa skrivet gant\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1188
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Implijit http://bugs.kde.org evit reiñ da c'houzout ur gudenn.\n"
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1190
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "Mar plij kemennit an drein kavet da %1.\n"
 
-#: lib/plugin/kpluginfactory.cpp:41
+#: lib/plugin/kpluginfactory.cpp:37
 #, fuzzy, qt-format
 #| msgid "Could not open file '%1'"
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "N'hellan ket digeriñ ar restr '%1'"
 
-#: lib/plugin/kpluginfactory.cpp:50
+#: lib/plugin/kpluginfactory.cpp:46
 #, fuzzy, qt-format
 #| msgid "Could not open file '%1'"
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "N'hellan ket digeriñ ar restr '%1'"
 
-#: lib/plugin/kpluginfactory.cpp:61
+#: lib/plugin/kpluginfactory.cpp:57
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr ""
 
-#: lib/plugin/kpluginfactory.h:512
+#: lib/plugin/kpluginfactory.h:382
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
-msgstr ""
-
-#: lib/plugin/kpluginloader.cpp:109
-#, qt-format
-msgctxt "KPluginLoader|"
-msgid "The library %1 does not offer a KPluginFactory."
 msgstr ""
 
 #: lib/util/kformatprivate.cpp:100
