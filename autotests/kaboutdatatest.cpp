@@ -141,6 +141,15 @@ void KAboutDataTest::testLongFormConstructor()
     QCOMPARE(aboutData.internalBugAddress(), BugsEmailAddress);
     QCOMPARE(aboutData.internalProductName(), nullptr);
 
+    aboutData.addAuthor(QStringLiteral("John"),
+                        QStringLiteral("Stuff"),
+                        QStringLiteral("john@john.com"),
+                        QStringLiteral("john.com"),
+                        QStringLiteral("ocsjohn"));
+    QCOMPARE(aboutData.authors().length(), 1);
+    QCOMPARE(aboutData.credits().length(), 0);
+    QCOMPARE(aboutData.authors().at(0).avatarUrl(), QUrl(QStringLiteral("https://store.kde.org/avatar/ocsjohn")));
+
     // We support http and https protocols on the homepage address, ensure they
     // give the same org. domain and desktop file name.
     KAboutData aboutDataSecure(QString::fromLatin1(AppName),

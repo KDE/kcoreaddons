@@ -707,6 +707,15 @@ public:
                           const QUrl &avatarUrl = QUrl());
 
     /**
+     * @overload
+     * @since 6.0
+     */
+    KAboutData &addAuthor(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &kdeStoreUsername)
+    {
+        return addAuthor(name, task, emailAddress, webAddress, QUrl(QStringLiteral("https://store.kde.org/avatar/") + kdeStoreUsername));
+    }
+
+    /**
      * Defines a person that deserves credit.
      *
      * You can call this function as many times as you need. Each entry
@@ -732,6 +741,15 @@ public:
                           const QString &emailAddress = QString(),
                           const QString &webAddress = QString(),
                           const QUrl &avatarUrl = QUrl());
+
+    /**
+     * @overload
+     * @since 6.0
+     */
+    KAboutData &addCredit(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &kdeStoreUsername)
+    {
+        return addCredit(name, task, emailAddress, webAddress, QUrl(QStringLiteral("https://store.kde.org/avatar/") + kdeStoreUsername));
+    }
 
     /**
      * @brief Sets the name(s) of the translator(s) of the GUI.
