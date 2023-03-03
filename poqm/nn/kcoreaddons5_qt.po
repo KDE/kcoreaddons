@@ -831,7 +831,3 @@ msgstr "Klarte ikkje køyra «lsof». Feilkode: %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob er ikkje støtta på Windows"
-
-#~ msgctxt "KPluginLoader|"
-#~ msgid "The library %1 does not offer a KPluginFactory."
-#~ msgstr "Biblioteket %1 tilbyr ikkje ein KPluginFactory."
