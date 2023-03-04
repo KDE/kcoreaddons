@@ -243,7 +243,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Nav norādīta"
 
-#: lib/kaboutdata.cpp:930
+#: lib/kaboutdata.cpp:918
 #, fuzzy
 #| msgctxt "replace this with information about your translation team"
 #| msgid ""
@@ -262,31 +262,31 @@ msgstr ""
 "visas pasaules.</p><p>Papildu informācijai par KDE internacionalizāciju "
 "apmeklējiet <a href=\"http://l10n.kde.org\">http://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1149
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Parādīt autoru informāciju"
 
-#: lib/kaboutdata.cpp:1162
+#: lib/kaboutdata.cpp:1150
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Parādīt licences informāciju"
 
-#: lib/kaboutdata.cpp:1164
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1165
+#: lib/kaboutdata.cpp:1153
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1175
+#: lib/kaboutdata.cpp:1163
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -294,7 +294,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Programmas autors vēlas palikt anonīms."
 
-#: lib/kaboutdata.cpp:1177
+#: lib/kaboutdata.cpp:1165
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -306,14 +306,14 @@ msgstr ""
 "%1 uzrakstīja\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1188
+#: lib/kaboutdata.cpp:1176
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Lūdzu, izmantojiet http://bugs.kde.org, lai ziņotu par kļūdām.\n"
 
-#: lib/kaboutdata.cpp:1190
+#: lib/kaboutdata.cpp:1178
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"

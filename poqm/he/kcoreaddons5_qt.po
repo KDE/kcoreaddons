@@ -201,7 +201,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "לא צוין"
 
-#: lib/kaboutdata.cpp:930
+#: lib/kaboutdata.cpp:918
 #, fuzzy
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
@@ -216,35 +216,35 @@ msgstr ""
 "כללי על בנאום KDE, בקר באתר <a href=\"http://i10n.kde.org\">http://i10n.kde."
 "org</a></p >"
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1149
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "הצג מידע על הכותב"
 
-#: lib/kaboutdata.cpp:1162
+#: lib/kaboutdata.cpp:1150
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "הצג מידע אודות הרישיון"
 
-#: lib/kaboutdata.cpp:1164
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1165
+#: lib/kaboutdata.cpp:1153
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1175
+#: lib/kaboutdata.cpp:1163
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "התוכנית נכתבה על ידי מישהו שמעוניין להישאר בעילום שם."
 
-#: lib/kaboutdata.cpp:1177
+#: lib/kaboutdata.cpp:1165
 #, fuzzy, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
@@ -252,13 +252,13 @@ msgstr ""
 "‏%1 נכתב על ידי\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1188
+#: lib/kaboutdata.cpp:1176
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "אנא השתמש ב־http://bugs.kde.org כדי לדווח על באגים.\n"
 
-#: lib/kaboutdata.cpp:1190
+#: lib/kaboutdata.cpp:1178
 #, fuzzy, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

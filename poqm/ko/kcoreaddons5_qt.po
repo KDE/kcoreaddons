@@ -170,7 +170,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "지정하지 않음"
 
-#: lib/kaboutdata.cpp:930
+#: lib/kaboutdata.cpp:918
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -184,43 +184,43 @@ msgstr ""
 "자세한 정보는 <a href=\"http://www.kde.or.kr\">http://www.kde.or.kr</a>(한국 "
 "KDE 사용자 모임)을 방문해 주십시오.</p>"
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1149
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "작성자 정보를 표시합니다."
 
-#: lib/kaboutdata.cpp:1162
+#: lib/kaboutdata.cpp:1150
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "라이선스 정보를 표시합니다."
 
-#: lib/kaboutdata.cpp:1164
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "이 프로그램의 desktop 항목의 기본 파일 이름입니다."
 
-#: lib/kaboutdata.cpp:1165
+#: lib/kaboutdata.cpp:1153
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "파일 이름"
 
-#: lib/kaboutdata.cpp:1175
+#: lib/kaboutdata.cpp:1163
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "이 프로그램은 익명으로 남고 싶은 사람이 작성했습니다."
 
-#: lib/kaboutdata.cpp:1177
+#: lib/kaboutdata.cpp:1165
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 프로그램의 작성자:"
 
-#: lib/kaboutdata.cpp:1188
+#: lib/kaboutdata.cpp:1176
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "https://bugs.kde.org 사이트에 버그를 보고해 주십시오."
 
-#: lib/kaboutdata.cpp:1190
+#: lib/kaboutdata.cpp:1178
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

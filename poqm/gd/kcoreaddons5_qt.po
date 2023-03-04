@@ -173,7 +173,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Gun sònrachadh"
 
-#: lib/kaboutdata.cpp:930
+#: lib/kaboutdata.cpp:918
 #, fuzzy
 #| msgctxt ""
 #| "KAboutData|replace this with information about your translation team"
@@ -194,40 +194,40 @@ msgstr ""
 "barrachd fiosrachaidh mu eadar-theangachadh aig KDE, tadhail air <a href="
 "\"http://l10n.kde.org\">http://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1149
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Seall fiosrachadh ùghdair."
 
-#: lib/kaboutdata.cpp:1162
+#: lib/kaboutdata.cpp:1150
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Seall fiosrachadh a' cheadachais."
 
-#: lib/kaboutdata.cpp:1164
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Ainm faidhle bunaiteach an innteirt desktop airson na h-aplacaid seo."
 
-#: lib/kaboutdata.cpp:1165
+#: lib/kaboutdata.cpp:1153
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "ainm an fhaidhle"
 
-#: lib/kaboutdata.cpp:1175
+#: lib/kaboutdata.cpp:1163
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr ""
 "Chaidh an aplacaid seo a sgrìobhadh le cuideigin nach eil airson ainm "
 "foillseachadh."
 
-#: lib/kaboutdata.cpp:1177
+#: lib/kaboutdata.cpp:1165
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "Chaidh %1 a sgrìobhadh le:"
 
-#: lib/kaboutdata.cpp:1188
+#: lib/kaboutdata.cpp:1176
 #, fuzzy
 #| msgctxt "KAboutData CLI|"
 #| msgid "Please use http://bugs.kde.org to report bugs."
@@ -235,7 +235,7 @@ msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Cleachd http://bugs.kde.org gus aithris a dhèanamh air bugaichean."
 
-#: lib/kaboutdata.cpp:1190
+#: lib/kaboutdata.cpp:1178
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
