@@ -182,7 +182,7 @@ KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
  * Example with the first method:
  * @code
  *       auto ranges = KFuzzyMatcher::matchedRanges(pattern, string);
- *       QVector<QTextLayout::FormatRange> out;
+ *       QList<QTextLayout::FormatRange> out;
  *       std::transform(ranges.begin(), ranges.end(), std::back_inserter(out), [](const KFuzzyMatcher::Range &fr){
  *          return QTextLayout::FormatRange{fr.start, fr.length, QTextCharFormat()};
  *       });
@@ -218,7 +218,7 @@ KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
  *
  * @since 5.84
  */
-KCOREADDONS_EXPORT QVector<KFuzzyMatcher::Range> matchedRanges(QStringView pattern, QStringView str, RangeType type = RangeType::FullyMatched);
+KCOREADDONS_EXPORT QList<KFuzzyMatcher::Range> matchedRanges(QStringView pattern, QStringView str, RangeType type = RangeType::FullyMatched);
 
 } // namespace KFuzzyMatcher
 

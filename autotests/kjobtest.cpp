@@ -7,11 +7,11 @@
 
 #include "kjobtest.h"
 
+#include <QList>
 #include <QMetaEnum>
 #include <QSignalSpy>
 #include <QTest>
 #include <QTimer>
-#include <QVector>
 
 #include <string>
 
@@ -294,7 +294,7 @@ void KJobTest::testDestroy()
 void KJobTest::testEmitAtMostOnce_data()
 {
     QTest::addColumn<bool>("autoDelete");
-    QTest::addColumn<QVector<Action>>("actions");
+    QTest::addColumn<QList<Action>>("actions");
 
     const auto actionName = [](Action action) {
         return QMetaEnum::fromType<Action>().valueToKey(static_cast<int>(action));
@@ -304,7 +304,7 @@ void KJobTest::testEmitAtMostOnce_data()
         for (Action a : {Action::Start, Action::KillQuietly, Action::KillVerbosely}) {
             for (Action b : {Action::Start, Action::KillQuietly, Action::KillVerbosely}) {
                 const auto dataTag = std::string{actionName(a)} + '-' + actionName(b) + (autoDelete ? "-autoDelete" : "");
-                QTest::newRow(dataTag.c_str()) << autoDelete << QVector<Action>{a, b};
+                QTest::newRow(dataTag.c_str()) << autoDelete << QList<Action>{a, b};
             }
         }
     }
@@ -318,7 +318,7 @@ void KJobTest::testEmitAtMostOnce()
     QFETCH(bool, autoDelete);
     job->setAutoDelete(autoDelete);
 
-    QFETCH(QVector<Action>, actions);
+    QFETCH(QList<Action>, actions);
     for (auto action : actions) {
         switch (action) {
         case Action::Start:

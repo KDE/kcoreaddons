@@ -8,9 +8,9 @@
 */
 #include "kfuzzymatcher.h"
 
+#include <QList>
 #include <QString>
 #include <QStringView>
-#include <QVector>
 
 /**
  * Custom toLower function which is much faster than
@@ -258,9 +258,9 @@ KFuzzyMatcher::Result KFuzzyMatcher::match(QStringView pattern, QStringView str)
     return result;
 }
 
-QVector<KFuzzyMatcher::Range> KFuzzyMatcher::matchedRanges(QStringView pattern, QStringView str, RangeType type)
+QList<KFuzzyMatcher::Range> KFuzzyMatcher::matchedRanges(QStringView pattern, QStringView str, RangeType type)
 {
-    QVector<KFuzzyMatcher::Range> ranges;
+    QList<KFuzzyMatcher::Range> ranges;
     if (pattern.isEmpty()) {
         return ranges;
     }

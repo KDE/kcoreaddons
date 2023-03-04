@@ -249,15 +249,14 @@ QString KPluginMetaData::fileName() const
     return d->m_fileName;
 }
 
-QVector<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)
+QList<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)
 {
     return findPlugins(directory, filter, KPluginMetaData::DoNotAllowEmptyMetaData);
 }
 
-QVector<KPluginMetaData>
-KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter, KPluginMetaDataOption option)
+QList<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter, KPluginMetaDataOption option)
 {
-    QVector<KPluginMetaData> ret;
+    QList<KPluginMetaData> ret;
     const auto staticPlugins = KStaticPluginHelpers::staticPlugins(directory);
     for (QStaticPlugin p : staticPlugins) {
         KPluginMetaData metaData(p, option);
@@ -569,12 +568,12 @@ QDebug operator<<(QDebug debug, const KPluginMetaData &metaData)
     return debug;
 }
 
-QDebug operator<<(QDebug debug, const QVector<KPluginMetaData> &list)
+QDebug operator<<(QDebug debug, const QList<KPluginMetaData> &list)
 {
     bool shouldPrintMultiline = list.size() > 1;
     const char *endLine = shouldPrintMultiline ? "\n" : "";
     QDebugStateSaver saver(debug);
-    debug.nospace() << "QVector<KPluginMetaData> {" << endLine;
+    debug.nospace() << "QList<KPluginMetaData> {" << endLine;
     for (const KPluginMetaData &md : list) {
         debug << (shouldPrintMultiline ? "\t" : "") << md << "," << endLine;
     }

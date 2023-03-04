@@ -59,8 +59,8 @@ void KRandomTest::test_shuffle()
 
     {
         QRandomGenerator rg(1);
-        QVector<int> vector = {1, 2, 3, 4, 5};
-        const QVector<int> shuffled = {5, 2, 4, 3, 1};
+        QList<int> vector = {1, 2, 3, 4, 5};
+        const QList<int> shuffled = {5, 2, 4, 3, 1};
         KRandom::shuffle(vector, &rg);
         QCOMPARE(vector, shuffled);
     }

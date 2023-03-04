@@ -190,12 +190,12 @@ public:
      * @return all plugins found in @p directory that fulfil the constraints of @p filter
      * @since 5.86
      */
-    static QVector<KPluginMetaData> findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter = {});
+    static QList<KPluginMetaData> findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter = {});
 
     /**
      * @since 5.91
      */
-    static QVector<KPluginMetaData> findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter, KPluginMetaDataOption option);
+    static QList<KPluginMetaData> findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter, KPluginMetaDataOption option);
 
     /**
      * @return whether this object holds valid information about a plugin.
@@ -430,7 +430,7 @@ inline size_t qHash(const KPluginMetaData &md, size_t seed)
 KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const KPluginMetaData &metaData);
 
 /// @since 6.0
-KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const QVector<KPluginMetaData> &list);
+KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const QList<KPluginMetaData> &list);
 
 Q_DECLARE_METATYPE(KPluginMetaData)
 

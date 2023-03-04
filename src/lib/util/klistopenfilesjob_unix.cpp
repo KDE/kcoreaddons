@@ -12,10 +12,10 @@
 #include "klistopenfilesjob.h"
 
 #include <QDir>
+#include <QList>
 #include <QProcess>
 #include <QRegularExpression>
 #include <QStandardPaths>
-#include <QVector>
 
 class KListOpenFilesJobPrivate
 {
@@ -92,7 +92,7 @@ void KListOpenFilesJobPrivate::lsofFinished(int, QProcess::ExitStatus)
     const QString out(QString::fromLocal8Bit(lsofProcess.readAll()));
 
     const QRegularExpression re(QStringLiteral("\\s+"));
-    const QVector<QStringView> pidList = QStringView(out).split(re, Qt::SkipEmptyParts);
+    const QList<QStringView> pidList = QStringView(out).split(re, Qt::SkipEmptyParts);
 
     for (const auto &pidStr : pidList) {
         const qint64 pid = pidStr.toLongLong();

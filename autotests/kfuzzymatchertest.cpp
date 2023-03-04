@@ -164,7 +164,7 @@ void KFuzzyMatcherTest::testMatch_data()
 
 static QStringList matchHelper(const QString &pattern, const QStringList &input)
 {
-    QVector<QPair<QString, int>> actual;
+    QList<QPair<QString, int>> actual;
     for (int i = 0; i < input.size(); ++i) {
         KFuzzyMatcher::Result res = KFuzzyMatcher::match(pattern, input.at(i));
         if (res.matched) {
@@ -203,16 +203,16 @@ void KFuzzyMatcherTest::testMatchedRanges_data()
     QTest::addColumn<QString>("string");
 
     using Range = QPair<int, int>;
-    QTest::addColumn<QVector<Range>>("expectedRanges");
+    QTest::addColumn<QList<Range>>("expectedRanges");
 
     QTest::addColumn<bool>("matchingOnly");
 
-    QTest::newRow("Emtpy") << QString("") << QString("") << QVector<Range>{} << true;
-    QTest::newRow("Hello") << QStringLiteral("Hlo") << QStringLiteral("Hello") << QVector<Range>{{0, 1}, {3, 2}} << true;
-    QTest::newRow("lll") << QStringLiteral("lll") << QStringLiteral("SVisualLoggerLogsList") << QVector<Range>{{7, 1}, {13, 1}, {17, 1}} << true;
-    QTest::newRow("Sort") << QStringLiteral("sort") << QStringLiteral("SorT") << QVector<Range>{{0, 4}} << true;
-    QTest::newRow("Unmatching") << QStringLiteral("git") << QStringLiteral("gti") << QVector<Range>{} << true;
-    QTest::newRow("UnmatchingWithAllMatches") << QStringLiteral("git") << QStringLiteral("gti") << QVector<Range>{{0, 1}, {2, 1}} << false;
+    QTest::newRow("Emtpy") << QString("") << QString("") << QList<Range>{} << true;
+    QTest::newRow("Hello") << QStringLiteral("Hlo") << QStringLiteral("Hello") << QList<Range>{{0, 1}, {3, 2}} << true;
+    QTest::newRow("lll") << QStringLiteral("lll") << QStringLiteral("SVisualLoggerLogsList") << QList<Range>{{7, 1}, {13, 1}, {17, 1}} << true;
+    QTest::newRow("Sort") << QStringLiteral("sort") << QStringLiteral("SorT") << QList<Range>{{0, 4}} << true;
+    QTest::newRow("Unmatching") << QStringLiteral("git") << QStringLiteral("gti") << QList<Range>{} << true;
+    QTest::newRow("UnmatchingWithAllMatches") << QStringLiteral("git") << QStringLiteral("gti") << QList<Range>{{0, 1}, {2, 1}} << false;
 }
 
 void KFuzzyMatcherTest::testMatchedRanges()
@@ -221,7 +221,7 @@ void KFuzzyMatcherTest::testMatchedRanges()
     QFETCH(QString, string);
     QFETCH(bool, matchingOnly);
     using Range = QPair<int, int>;
-    QFETCH(QVector<Range>, expectedRanges);
+    QFETCH(QList<Range>, expectedRanges);
 
     const auto matchMode = matchingOnly ? KFuzzyMatcher::RangeType::FullyMatched : KFuzzyMatcher::RangeType::All;
 

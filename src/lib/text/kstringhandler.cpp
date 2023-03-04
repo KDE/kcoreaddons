@@ -12,8 +12,8 @@
 
 #include <stdlib.h> // random()
 
+#include <QList>
 #include <QRegularExpression>
-#include <QVector>
 
 //
 // Capitalization routines
