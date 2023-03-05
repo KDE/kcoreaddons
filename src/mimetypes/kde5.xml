@@ -280,7 +280,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kcsrc">
     <comment>KDE color scheme</comment>
-    <comment xml:lang="ar">مخطط ألوان كدي</comment>
+    <comment xml:lang="ar">مخطط ألوان كِيدِي</comment>
     <comment xml:lang="ast">Esquema de colores de KDE</comment>
     <comment xml:lang="az">KDE rəng sxemi</comment>
     <comment xml:lang="be">Колеравая схема KDE</comment>
@@ -1114,7 +1114,7 @@ Notes:
   <mime-type type="image/x-kde-raw">
     <sub-class-of type="image/x-dcraw"/>
     <comment>KDE raw image formats</comment>
-    <comment xml:lang="ar">تنسيقات صورة خامة لكدي</comment>
+    <comment xml:lang="ar">تنسيقات صورة خامة لكِيدِي</comment>
     <comment xml:lang="ast">Formatos d'imaxe en bruto de KDE</comment>
     <comment xml:lang="az">KDE raw şəkil formatı</comment>
     <comment xml:lang="be">Фарматы неапрацаваных выяў KDE</comment>
@@ -1493,7 +1493,7 @@ Notes:
   <mime-type type="application/x-ksysguard">
     <!-- <sub-class-of type="application/xml"/> -->
     <comment>KDE system monitor</comment>
-    <comment xml:lang="ar">نظام مراقبة كدي</comment>
+    <comment xml:lang="ar">نظام مراقبة كِيدِي</comment>
     <comment xml:lang="ast">Monitor del sistema de KDE</comment>
     <comment xml:lang="az">KDE sistem izləyicisi</comment>
     <comment xml:lang="be">Сістэмны назіральнік KDE</comment>
@@ -1546,7 +1546,7 @@ Notes:
   <mime-type type="application/x-ktheme">
     <sub-class-of type="application/zip"/>
     <comment>KDE theme</comment>
-    <comment xml:lang="ar">سمة كدي</comment>
+    <comment xml:lang="ar">سمة كِيدِي</comment>
     <comment xml:lang="ast">Estilu de KDE</comment>
     <comment xml:lang="az">KDE mövzusu</comment>
     <comment xml:lang="be">Тэма KDE</comment>
