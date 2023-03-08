@@ -34,7 +34,7 @@ KSignalHandler::KSignalHandler()
 {
     d->q = this;
 #ifndef Q_OS_WIN
-    if (::socketpair(AF_UNIX, SOCK_STREAM, 0, KSignalHandlerPrivate::signalFd)) {
+    if (::socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, KSignalHandlerPrivate::signalFd)) {
         qCWarning(KCOREADDONS_DEBUG) << "Couldn't create a socketpair";
         return;
     }
