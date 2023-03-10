@@ -826,7 +826,3 @@ msgstr "Spuštění `lsof' selhalo s chybou %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob není na Windows podporováno"
-
-#~ msgctxt "KPluginLoader|"
-#~ msgid "The library %1 does not offer a KPluginFactory."
-#~ msgstr "Knihovna '%1' neposkytuje KPluginFactory."
