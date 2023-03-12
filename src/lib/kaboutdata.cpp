@@ -798,10 +798,7 @@ const char *KAboutData::internalProductName() const
 
 QString KAboutData::displayName() const
 {
-    if (!d->_displayName.isEmpty()) {
-        return d->_displayName;
-    }
-    return componentName();
+    return d->_displayName;
 }
 
 /// @internal
