@@ -35,7 +35,7 @@ if(NOT BUILD_SHARED_LIBS)
     target_compile_definitions(KF6CoreAddons PUBLIC -DKCOREADDONS_STATIC)
 endif()
 
-ecm_create_qm_loader(KF6CoreAddons kcoreaddons5_qt)
+ecm_create_qm_loader(KF6CoreAddons kcoreaddons6_qt)
 
 if (FAM_FOUND)
     target_include_directories(KF6CoreAddons PRIVATE ${FAM_INCLUDE_DIR})
