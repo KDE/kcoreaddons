@@ -813,7 +813,8 @@ protected:
 
 protected:
     std::unique_ptr<KJobPrivate> const d_ptr;
-    KJob(KJobPrivate &dd, QObject *parent);
+
+    KCOREADDONS_NO_EXPORT KJob(KJobPrivate &dd, QObject *parent);
 
 private:
     void finishJob(bool emitResult);
