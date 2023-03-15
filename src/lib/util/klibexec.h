@@ -11,11 +11,17 @@
 #include <QString>
 #include <QStringList>
 
+/**
+ * @brief Utility functions around libexec.
+ */
 namespace KLibexec
 {
+
+#ifndef K_DOXYGEN
 // Internal helpers. Do not use these but the inline variants.
 KCOREADDONS_EXPORT QString pathFromAddress(const QString &relativePath, void *address);
 KCOREADDONS_EXPORT QStringList pathCandidates(const QString &relativePath);
+#endif
 
 /**
  * @brief Absolute libexec path resolved in relative relation to the current shared object.
