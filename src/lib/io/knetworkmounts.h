@@ -13,7 +13,7 @@
 #include <kcoreaddons_export.h>
 
 /**
- * \class KNetworkMounts knetworkmounts.h <KCoreAddons/KNetworkMounts>
+ * \class KNetworkMounts knetworkmounts.h <KNetworkMounts>
  *
  * Performance control on network mounts.
  *
