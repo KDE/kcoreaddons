@@ -296,7 +296,7 @@ protected:
     /**
      * @internal
      */
-    KProcess(KProcessPrivate *d, QObject *parent);
+    KCOREADDONS_NO_EXPORT KProcess(KProcessPrivate *d, QObject *parent);
 
     /**
      * @internal

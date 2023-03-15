@@ -104,7 +104,7 @@ protected Q_SLOTS:
     virtual void slotInfoMessage(KJob *job, const QString &plain, const QString &rich);
 
 protected:
-    KCompositeJob(KCompositeJobPrivate &dd, QObject *parent);
+    KCOREADDONS_NO_EXPORT KCompositeJob(KCompositeJobPrivate &dd, QObject *parent);
 
 private:
     Q_DECLARE_PRIVATE(KCompositeJob)
