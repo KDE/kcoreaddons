@@ -410,7 +410,7 @@ private:
     const QJsonObject rootObject() const;
 
 private:
-    KPluginMetaData(QStaticPlugin plugin, KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData);
+    KCOREADDONS_NO_EXPORT KPluginMetaData(QStaticPlugin plugin, KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData);
     QVariantList authorsVariant() const;
     QVariantList translatorsVariant() const;
     QVariantList otherContributorsVariant() const;

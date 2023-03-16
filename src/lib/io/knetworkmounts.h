@@ -273,10 +273,10 @@ public:
 
 private:
     /// Creates a new KNetworkMounts object
-    KNetworkMounts();
+    KCOREADDONS_NO_EXPORT KNetworkMounts();
 
     /// Destructor
-    ~KNetworkMounts() override;
+    KCOREADDONS_NO_EXPORT ~KNetworkMounts() override;
 
     std::unique_ptr<class KNetworkMountsPrivate> const d;
 };
