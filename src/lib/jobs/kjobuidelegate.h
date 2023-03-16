@@ -143,7 +143,7 @@ protected Q_SLOTS:
     virtual void slotWarning(KJob *job, const QString &plain, const QString &rich);
 
 private:
-    void connectJob(KJob *job);
+    KCOREADDONS_NO_EXPORT void connectJob(KJob *job);
 
 private:
     std::unique_ptr<class KJobUiDelegatePrivate> const d;

@@ -407,15 +407,15 @@ public:
     bool isStaticPlugin() const;
 
 private:
-    const QJsonObject rootObject() const;
+    KCOREADDONS_NO_EXPORT const QJsonObject rootObject() const;
 
 private:
     KCOREADDONS_NO_EXPORT KPluginMetaData(QStaticPlugin plugin, KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData);
-    QVariantList authorsVariant() const;
-    QVariantList translatorsVariant() const;
-    QVariantList otherContributorsVariant() const;
-    QStaticPlugin staticPlugin() const;
-    QString requestedFileName() const;
+    KCOREADDONS_NO_EXPORT QVariantList authorsVariant() const;
+    KCOREADDONS_NO_EXPORT QVariantList translatorsVariant() const;
+    KCOREADDONS_NO_EXPORT QVariantList otherContributorsVariant() const;
+    KCOREADDONS_NO_EXPORT QStaticPlugin staticPlugin() const;
+    KCOREADDONS_NO_EXPORT QString requestedFileName() const;
 
     QExplicitlySharedDataPointer<KPluginMetaDataPrivate> d;
     friend class KPluginFactory;

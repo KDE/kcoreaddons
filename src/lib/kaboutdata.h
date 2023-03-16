@@ -329,11 +329,11 @@ private:
     /**
      * @internal Used by KAboutData to construct license by given text
      */
-    void setLicenseFromPath(const QString &pathToFile);
+    KCOREADDONS_NO_EXPORT void setLicenseFromPath(const QString &pathToFile);
     /**
      * @internal Used by KAboutData to construct license by given text
      */
-    void setLicenseFromText(const QString &licenseText);
+    KCOREADDONS_NO_EXPORT void setLicenseFromText(const QString &licenseText);
 
 private:
     QSharedDataPointer<class KAboutLicensePrivate> d;
@@ -1294,13 +1294,14 @@ public:
     QString desktopFileName() const;
 
 private:
-    QVariantList licensesVariant() const;
-    QVariantList authorsVariant() const;
-    QVariantList creditsVariant() const;
-    QVariantList translatorsVariant() const;
-    QVariantList componentsVariant() const;
+    KCOREADDONS_NO_EXPORT QVariantList licensesVariant() const;
+    KCOREADDONS_NO_EXPORT QVariantList authorsVariant() const;
+    KCOREADDONS_NO_EXPORT QVariantList creditsVariant() const;
+    KCOREADDONS_NO_EXPORT QVariantList translatorsVariant() const;
+    KCOREADDONS_NO_EXPORT QVariantList componentsVariant() const;
 
     friend void KCrash::defaultCrashHandler(int sig);
+    // exported for KCrash, no other users intended
     static const KAboutData *applicationDataPointer();
 
 private:
