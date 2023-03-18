@@ -18,7 +18,7 @@ class SimplePluginClass2 : public MyPlugin2
 {
     Q_OBJECT
 public:
-    explicit SimplePluginClass2(QObject *parent, const QVariantList & /*args*/)
+    explicit SimplePluginClass2(QObject *parent)
         : MyPlugin2(parent)
     {
     }

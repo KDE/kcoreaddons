@@ -545,6 +545,19 @@ protected:
     }
 
     /**
+     * Utility overload that allows registering a plugin without a KPluginMetaData and QVariantList parameter
+     * This can be used in case the mentioned parameters are not needed, like config modules of plugins
+     *
+     * @since 6.0
+     */
+    template<class T, typename = std::enable_if_t<std::is_constructible_v<T, QObject *>>>
+    void registerPlugin()
+    {
+        auto instanceFunction = createInstanceWithoutArgs<T>;
+        registerPlugin(&T::staticMetaObject, instanceFunction);
+    }
+
+    /**
      * Registers a plugin with the factory. Call this function from the constructor of the
      * KPluginFactory subclass to make the create function able to instantiate the plugin when asked
      * for an interface the plugin implements.
@@ -582,6 +595,12 @@ protected:
             Q_ASSERT(p);
         }
         return new impl(p, args);
+    }
+
+    template<class impl>
+    static QObject *createInstanceWithoutArgs(QWidget * /*parentWidget*/, QObject *parent, const KPluginMetaData & /*metaData*/, const QVariantList & /*args*/)
+    {
+        return new impl(parent);
     }
 
     template<class impl>

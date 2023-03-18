@@ -8,7 +8,7 @@ class StaticPluginWithoutMetaData : public QObject
     Q_OBJECT
 
 public:
-    explicit StaticPluginWithoutMetaData(QObject *, const QVariantList &)
+    explicit StaticPluginWithoutMetaData(QObject *)
     {
     }
 };

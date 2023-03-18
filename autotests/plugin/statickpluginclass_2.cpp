@@ -8,7 +8,7 @@ class OtherStaticSimplePluginClass : public QObject
     Q_OBJECT
 
 public:
-    explicit OtherStaticSimplePluginClass(QObject *, const QVariantList &)
+    explicit OtherStaticSimplePluginClass(QObject *)
     {
     }
 };
