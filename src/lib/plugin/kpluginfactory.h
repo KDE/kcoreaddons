@@ -550,7 +550,7 @@ protected:
      *
      * @since 6.0
      */
-    template<class T, typename = std::enable_if_t<std::is_constructible_v<T, QObject *>>>
+    template<class T, typename = std::enable_if_t<std::is_constructible_v<T, QObject *> && !std::is_constructible_v<T, QObject *, QVariantList>>>
     void registerPlugin()
     {
         auto instanceFunction = createInstanceWithoutArgs<T>;

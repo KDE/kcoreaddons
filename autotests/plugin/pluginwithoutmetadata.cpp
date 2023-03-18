@@ -9,10 +9,12 @@ class PluginWithoutMetaData : public QObject
 {
     Q_OBJECT
 public:
-    PluginWithoutMetaData(const QObject *, const QVariantList &)
-        : QObject(){
-
-        };
+    // Add a default arg to make sure we do not get an ambiguity compiler error
+    PluginWithoutMetaData(const QObject *, const QVariantList &args = {})
+        : QObject()
+    {
+        Q_UNUSED(args)
+    };
 };
 
 K_PLUGIN_CLASS(PluginWithoutMetaData)
