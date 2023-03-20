@@ -830,7 +830,3 @@ msgstr "Ha fallat en executar «lsof». Codi d'error %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "Windows no admet KListOpenFilesJob"
-
-#~ msgctxt "KPluginLoader|"
-#~ msgid "The library %1 does not offer a KPluginFactory."
-#~ msgstr "La biblioteca %1 no ofereix cap KPluginFactory."
