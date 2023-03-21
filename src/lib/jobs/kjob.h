@@ -817,7 +817,7 @@ protected:
     KCOREADDONS_NO_EXPORT KJob(KJobPrivate &dd, QObject *parent);
 
 private:
-    void finishJob(bool emitResult);
+    KCOREADDONS_NO_EXPORT void finishJob(bool emitResult);
 
     Q_DECLARE_PRIVATE(KJob)
 };

@@ -617,18 +617,18 @@ public:
     bool isStaticPlugin() const;
 
 private:
-    QJsonObject rootObject() const;
+    KCOREADDONS_NO_EXPORT QJsonObject rootObject() const;
 #if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 92)
-    void loadFromDesktopFile(const QString &file, const QStringList &serviceTypes);
+    KCOREADDONS_NO_EXPORT void loadFromDesktopFile(const QString &file, const QStringList &serviceTypes);
 #endif
-    void loadFromJsonFile(const QString &file);
+    KCOREADDONS_NO_EXPORT void loadFromJsonFile(const QString &file);
 
 private:
-    QVariantList authorsVariant() const;
-    QVariantList translatorsVariant() const;
-    QVariantList otherContributorsVariant() const;
-    QStaticPlugin staticPlugin() const;
-    QString requestedFileName() const;
+    KCOREADDONS_NO_EXPORT QVariantList authorsVariant() const;
+    KCOREADDONS_NO_EXPORT QVariantList translatorsVariant() const;
+    KCOREADDONS_NO_EXPORT QVariantList otherContributorsVariant() const;
+    KCOREADDONS_NO_EXPORT QStaticPlugin staticPlugin() const;
+    KCOREADDONS_NO_EXPORT QString requestedFileName() const;
 
     QJsonObject m_metaData;
     QString m_fileName;

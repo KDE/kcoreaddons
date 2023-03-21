@@ -126,7 +126,7 @@ private:
      * @brief update Refresh the memory information.
      * @return @c true on success, otherwise @c false.
      */
-    bool update();
+    KCOREADDONS_NO_EXPORT bool update();
 
     QSharedDataPointer<KMemoryInfoPrivate> d;
 };
