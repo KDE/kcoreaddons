@@ -161,7 +161,7 @@ private:
     /**
      * @internal Used by KAboutData to construct translator data.
      */
-    explicit KAboutPerson(const QString &name, const QString &email, bool disambiguation);
+    KCOREADDONS_NO_EXPORT explicit KAboutPerson(const QString &name, const QString &email, bool disambiguation);
 
 private:
     QSharedDataPointer<class KAboutPersonPrivate> d;
@@ -315,15 +315,17 @@ private:
     /**
      * @internal Used by KAboutData to construct a predefined license.
      */
-    explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType, enum KAboutLicense::VersionRestriction versionRestriction, const KAboutData *aboutData);
+    KCOREADDONS_NO_EXPORT explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType,
+                                                 enum KAboutLicense::VersionRestriction versionRestriction,
+                                                 const KAboutData *aboutData);
     /**
      * @internal Used by KAboutData to construct a predefined license.
      */
-    explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType, const KAboutData *aboutData);
+    KCOREADDONS_NO_EXPORT explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType, const KAboutData *aboutData);
     /**
      * @internal Used by KAboutData to construct a KAboutLicense
      */
-    explicit KAboutLicense(const KAboutData *aboutData);
+    KCOREADDONS_NO_EXPORT explicit KAboutLicense(const KAboutData *aboutData);
     /**
      * @internal Used by KAboutData to construct license by given text
      */

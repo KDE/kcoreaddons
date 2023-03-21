@@ -58,7 +58,7 @@ Q_SIGNALS:
     void signalReceived(int signal);
 
 private:
-    KSignalHandler();
+    KCOREADDONS_NO_EXPORT KSignalHandler();
 
     QScopedPointer<KSignalHandlerPrivate> d;
 };
