@@ -551,10 +551,28 @@ protected:
      *
      * @since 6.0
      */
-    template<class T, typename = std::enable_if_t<std::is_constructible_v<T, QObject *> && !std::is_constructible_v<T, QObject *, QVariantList>>>
+    template<class T,
+             typename = std::enable_if_t<
+                 std::is_constructible_v<T, QObject *> // Disable all other possible constructors
+                 && !std::is_constructible_v<T, QObject *, QVariantList> //
+                 && !std::is_constructible_v<T, QObject *, KPluginMetaData> && !std::is_constructible_v<T, QObject *, KPluginMetaData, QVariantList>>>
     void registerPlugin()
     {
         auto instanceFunction = createInstanceWithoutArgs<T>;
+        registerPlugin(&T::staticMetaObject, instanceFunction);
+    }
+
+    /**
+     * @since 6.0
+     */
+    template<class T,
+             typename Dummy = void, // function overloading based on the number of template parameters.
+             typename = std::enable_if_t<
+                 std::is_constructible_v<T, QObject *, KPluginMetaData> // Disable all other possible constructors
+                 && !std::is_constructible_v<T, QObject *, QVariantList> && !std::is_constructible_v<T, QObject *, KPluginMetaData, QVariantList>>>
+    void registerPlugin()
+    {
+        auto instanceFunction = createInstanceWithMetadataWithoutArgs<T>;
         registerPlugin(&T::staticMetaObject, instanceFunction);
     }
 
@@ -625,6 +643,13 @@ protected:
     static QObject *createPartWithMetaDataInstance(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     {
         return new impl(parentWidget, parent, metaData, args);
+    }
+
+    template<class impl>
+    static QObject *
+    createInstanceWithMetadataWithoutArgs(QWidget * /*parentWidget*/, QObject *parent, const KPluginMetaData &metaData, const QVariantList & /*args*/)
+    {
+        return new impl(parent, metaData);
     }
 
 private:

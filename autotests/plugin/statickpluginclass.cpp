@@ -8,8 +8,12 @@ class StaticSimplePluginClass : public QObject
     Q_OBJECT
 
 public:
-    explicit StaticSimplePluginClass(QObject *)
+    // Next to the assertion below, ensure that we have no ambiguity!
+    explicit StaticSimplePluginClass(QObject *parent, const KPluginMetaData &data = {})
+        : QObject(parent)
     {
+        // We have added a default arg, but KPluginFactory should still provide the valid metadata instead of the default one
+        Q_ASSERT(data.isValid());
     }
 };
 
