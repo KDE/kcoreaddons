@@ -36,7 +36,7 @@ class Part;
     {                                                                                                                                                          \
         Q_OBJECT                                                                                                                                               \
         Q_INTERFACES(KPluginFactory)                                                                                                                           \
-        Q_PLUGIN_METADATA(IID KPluginFactory_iid __VA_ARGS__)                                                                                                  \
+        Q_PLUGIN_METADATA(__VA_ARGS__)                                                                                                                         \
     public:                                                                                                                                                    \
         explicit name()                                                                                                                                        \
         {                                                                                                                                                      \
@@ -88,7 +88,7 @@ class Part;
  * @see K_PLUGIN_FACTORY_DECLARATION
  * @see K_PLUGIN_FACTORY_DEFINITION
  */
-#define K_PLUGIN_FACTORY(name, pluginRegistrations) __K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations)
+#define K_PLUGIN_FACTORY(name, pluginRegistrations) __K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations, IID KPluginFactory_iid)
 
 /**
  * @relates KPluginFactory
@@ -142,7 +142,8 @@ class Part;
  *
  * @since 5.0
  */
-#define K_PLUGIN_FACTORY_WITH_JSON(name, jsonFile, pluginRegistrations) __K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations, FILE jsonFile)
+#define K_PLUGIN_FACTORY_WITH_JSON(name, jsonFile, pluginRegistrations)                                                                                        \
+    __K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations, IID KPluginFactory_iid FILE jsonFile)
 
 /**
  * @relates KPluginFactory
