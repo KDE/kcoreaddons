@@ -235,7 +235,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "بەلگىلەنمىگەن"
 
-#: lib/kaboutdata.cpp:918
+#: lib/kaboutdata.cpp:915
 #, fuzzy
 #| msgctxt "replace this with information about your translation team"
 #| msgid ""
@@ -256,31 +256,31 @@ msgstr ""
 "internationalization visit <a href=\"http://l10n.kde.org\">http://l10n.kde."
 "org</a></p>"
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1146
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "يازغۇچى ئۇچۇرىنى كۆرسەت"
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1147
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "ئىجازەت ئۇچۇرىنى كۆرسەت"
 
-#: lib/kaboutdata.cpp:1152
+#: lib/kaboutdata.cpp:1149
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1153
+#: lib/kaboutdata.cpp:1150
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1163
+#: lib/kaboutdata.cpp:1160
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -288,7 +288,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "بۇ پروگرامما ئاتىنى ئاشكارىلاشنى خالىمىغان كىشى تەرىپىدىن يېزىلغان."
 
-#: lib/kaboutdata.cpp:1165
+#: lib/kaboutdata.cpp:1162
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -300,14 +300,14 @@ msgstr ""
 "%1 نى يازغانلار\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1176
+#: lib/kaboutdata.cpp:1173
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "كەمتۈكلەرنى http://bugs.kde.org غا  مەلۇم قىلىڭ.\n"
 
-#: lib/kaboutdata.cpp:1178
+#: lib/kaboutdata.cpp:1175
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"
