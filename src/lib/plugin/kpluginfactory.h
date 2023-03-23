@@ -299,6 +299,7 @@ class Part;
 class KCOREADDONS_EXPORT KPluginFactory : public QObject
 {
     Q_OBJECT
+
 public:
     /**
      * This constructor creates a factory for a plugin.
@@ -449,13 +450,9 @@ protected:
     template<class impl>
     struct InheritanceChecker {
         /// property to control the availability of the registerPlugin overload taking default values
-        static constexpr bool enabled = std::is_constructible<impl, QWidget *, QObject *, const QVariantList &>::value
-            || std::is_constructible<impl, QWidget *, const QVariantList &>::value || std::is_constructible<impl, QObject *, const QVariantList &>::value;
+        static constexpr bool enabled =
+            std::is_constructible<impl, QWidget *, const QVariantList &>::value || std::is_constructible<impl, QObject *, const QVariantList &>::value;
 
-        CreateInstanceWithMetaDataFunction createInstanceFunction(KParts::Part *)
-        {
-            return &createPartInstance<impl>;
-        }
         CreateInstanceWithMetaDataFunction createInstanceFunction(QWidget *)
         {
             return &createInstance<impl, QWidget>;
@@ -473,7 +470,8 @@ protected:
     template<class impl>
     struct InheritanceWithMetaDataChecker {
         /// property to control the availability of the registerPlugin overload taking default values
-        static constexpr bool enabled = std::is_constructible<impl, QWidget *, QObject *, const KPluginMetaData &, const QVariantList &>::value
+        static constexpr bool enabled = std::is_constructible<impl, QWidget *, QObject *, KPluginMetaData, QVariantList>::value
+            || std::is_constructible<impl, QWidget *, QObject *, KPluginMetaData>::value // KPart without args
             || std::is_constructible<impl, QWidget *, const KPluginMetaData &, const QVariantList &>::value
             || std::is_constructible<impl, QObject *, const KPluginMetaData &, const QVariantList &>::value;
 
@@ -622,12 +620,6 @@ protected:
         return new impl(parent);
     }
 
-    template<class impl>
-    static QObject *createPartInstance(QWidget *parentWidget, QObject *parent, const KPluginMetaData & /*metaData*/, const QVariantList &args)
-    {
-        return new impl(parentWidget, parent, args);
-    }
-
     template<class impl, class ParentType>
     static QObject *createWithMetaDataInstance(QWidget * /*parentWidget*/, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     {
@@ -642,7 +634,10 @@ protected:
     template<class impl>
     static QObject *createPartWithMetaDataInstance(QWidget *parentWidget, QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     {
-        return new impl(parentWidget, parent, metaData, args);
+        if constexpr (std::is_constructible<impl, QWidget *, QObject *, KPluginMetaData, QVariantList>::value) {
+            return new impl(parentWidget, parent, metaData, args);
+        }
+        return new impl(parentWidget, parent, metaData);
     }
 
     template<class impl>
