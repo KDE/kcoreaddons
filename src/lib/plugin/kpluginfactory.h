@@ -450,8 +450,9 @@ protected:
     template<class impl>
     struct InheritanceChecker {
         /// property to control the availability of the registerPlugin overload taking default values
-        static constexpr bool enabled =
-            std::is_constructible<impl, QWidget *, const QVariantList &>::value || std::is_constructible<impl, QObject *, const QVariantList &>::value;
+        static constexpr bool enabled = std::is_constructible<impl, QWidget *, QVariantList>::value // QWidget plugin
+            || std::is_constructible<impl, QWidget *>::value //
+            || std::is_constructible<impl, QObject *, const QVariantList &>::value;
 
         CreateInstanceWithMetaDataFunction createInstanceFunction(QWidget *)
         {
@@ -612,7 +613,11 @@ protected:
             p = qobject_cast<ParentType *>(parent);
             Q_ASSERT(p);
         }
-        return new impl(p, args);
+        if constexpr (std::is_constructible<impl, ParentType, QVariantList>::value) {
+            return new impl(p, args);
+        } else {
+            return new impl(p);
+        }
     }
 
     template<class impl>
@@ -631,8 +636,9 @@ protected:
         }
         if constexpr (std::is_constructible<impl, ParentType *, KPluginMetaData, QVariantList>::value) {
             return new impl(p, metaData, args);
+        } else {
+            return new impl(p, metaData);
         }
-        return new impl(p, metaData);
     }
 
     template<class impl>
@@ -640,8 +646,9 @@ protected:
     {
         if constexpr (std::is_constructible<impl, QWidget *, QObject *, KPluginMetaData, QVariantList>::value) {
             return new impl(parentWidget, parent, metaData, args);
+        } else {
+            return new impl(parentWidget, parent, metaData);
         }
-        return new impl(parentWidget, parent, metaData);
     }
 
     template<class impl>
