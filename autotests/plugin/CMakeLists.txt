@@ -1,3 +1,8 @@
+find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG QUIET OPTIONAL_COMPONENTS Widgets)
+if (NOT TARGET Qt6::Widgets)
+    return()
+endif()
+
 if (NOT WIN32)
     add_library(plugin_classes)
     # Generating export for a test is overkill, thus we skip this bit on windows
@@ -17,6 +22,10 @@ kcoreaddons_add_plugin(pluginwithoutmetadata SOURCES pluginwithoutmetadata.cpp I
 ecm_mark_as_test(pluginwithoutmetadata)
 target_link_libraries(pluginwithoutmetadata KF6::CoreAddons autotests_static)
 
+kcoreaddons_add_plugin(widgetsplugin SOURCES widgetsplugin.cpp INSTALL_NAMESPACE "widgets")
+ecm_mark_as_test(widgetsplugin)
+target_link_libraries(widgetsplugin KF6::CoreAddons Qt6::Widgets)
+
 add_library(org.kde.test MODULE qtplugin.cpp)
 target_link_libraries(org.kde.test KF6::CoreAddons)
 
@@ -25,7 +34,7 @@ ecm_add_tests(
     kpluginmetadatatest.cpp
     kpluginfactorytest.cpp
     ${autotests_OPTIONAL_SRCS}
-    LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static
+    LINK_LIBRARIES Qt6::Test Qt6::Widgets KF6::CoreAddons autotests_static
 )
 if (NOT WIN32)
    target_link_libraries(kpluginfactorytest plugin_classes)

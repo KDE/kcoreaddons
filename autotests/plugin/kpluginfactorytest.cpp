@@ -13,11 +13,6 @@
 #include "plugins.h"
 #endif
 
-// We do not have QWidgets as a dependency, this is a simple placeholder for the type to be fully qualified
-class QWidget : public QObject
-{
-};
-
 class KPluginFactoryTest : public QObject
 {
     Q_OBJECT
@@ -116,6 +111,20 @@ private Q_SLOTS:
         QVERIFY(!res);
         QCOMPARE(res.errorReason, KPluginFactory::INVALID_PLUGIN);
         QCOMPARE(res.errorText, QStringLiteral("Could not find plugin does/not/exist"));
+    }
+
+    void testInstantiateWidget()
+    {
+        KPluginMetaData data(QStringLiteral("widgets/widgetsplugin"), KPluginMetaData::AllowEmptyMetaData);
+        QVERIFY(data.isValid());
+        auto factory = KPluginFactory::loadFactory(data).plugin;
+        QVERIFY(factory);
+
+        // This has two constructors, make sure we choose the first one that takes args
+        auto obj = factory->create<QWidget>(nullptr, QVariantList{true});
+        QVERIFY(obj);
+        QVERIFY(obj->property("firstarg").toBool());
+        delete obj;
     }
 };
 
