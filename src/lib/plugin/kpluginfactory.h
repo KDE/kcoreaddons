@@ -444,27 +444,6 @@ protected:
     using CreateInstanceWithMetaDataFunction = QObject *(*)(QWidget *, QObject *, const KPluginMetaData &, const QVariantList &);
 
     /**
-     * This is used to detect the arguments need for the constructor of metadata-less plugin classes.
-     * You can inherit it, if you want to add new classes and still keep support for the old ones.
-     */
-    template<class impl>
-    struct InheritanceChecker {
-        /// property to control the availability of the registerPlugin overload taking default values
-        static constexpr bool enabled = std::is_constructible<impl, QWidget *, QVariantList>::value // QWidget plugin
-            || std::is_constructible<impl, QWidget *>::value //
-            || std::is_constructible<impl, QObject *, const QVariantList &>::value;
-
-        CreateInstanceWithMetaDataFunction createInstanceFunction(QWidget *)
-        {
-            return &createInstance<impl, QWidget>;
-        }
-        CreateInstanceWithMetaDataFunction createInstanceFunction(...)
-        {
-            return &createInstance<impl, QObject>;
-        }
-    };
-
-    /**
      * This is used to detect the arguments need for the constructor of metadata-taking plugin classes.
      * You can inherit it, if you want to add new classes and still keep support for the old ones.
      */
@@ -473,9 +452,10 @@ protected:
         /// property to control the availability of the registerPlugin overload taking default values
         static constexpr bool enabled = std::is_constructible<impl, QWidget *, QObject *, KPluginMetaData, QVariantList>::value // KParts
             || std::is_constructible<impl, QWidget *, QObject *, KPluginMetaData>::value
-            || std::is_constructible<impl, QWidget *, KPluginMetaData>::value // QWidgets
-            || std::is_constructible<impl, QWidget *, KPluginMetaData, QVariantList>::value
-            || std::is_constructible<impl, QObject *, const KPluginMetaData &, const QVariantList &>::value; // Nomal QObjects
+            || std::is_constructible<impl, QWidget *, KPluginMetaData, QVariantList>::value // QWidgets
+            || std::is_constructible<impl, QWidget *, KPluginMetaData>::value
+            || std::is_constructible<impl, QObject *, KPluginMetaData, QVariantList>::value // Nomal QObjects
+            || std::is_constructible<impl, QObject *, KPluginMetaData>::value;
 
         CreateInstanceWithMetaDataFunction createInstanceFunction(KParts::Part *)
         {
@@ -488,6 +468,29 @@ protected:
         CreateInstanceWithMetaDataFunction createInstanceFunction(...)
         {
             return &createWithMetaDataInstance<impl, QObject>;
+        }
+    };
+
+    /**
+     * This is used to detect the arguments need for the constructor of metadata-less plugin classes.
+     * You can inherit it, if you want to add new classes and still keep support for the old ones.
+     */
+    template<class impl>
+    struct InheritanceChecker {
+        /// property to control the availability of the registerPlugin overload taking default values
+        static constexpr bool _canConstruct = std::is_constructible<impl, QWidget *, QVariantList>::value // QWidget plugin
+            || std::is_constructible<impl, QWidget *>::value //
+            || std::is_constructible<impl, QObject *, QVariantList>::value // QObject plugins
+            || std::is_constructible<impl, QObject *>::value;
+        static constexpr bool enabled = _canConstruct && !InheritanceWithMetaDataChecker<impl>::enabled; // Avoid ambiguity in case of default arguments
+
+        CreateInstanceWithMetaDataFunction createInstanceFunction(QWidget *)
+        {
+            return &createInstance<impl, QWidget>;
+        }
+        CreateInstanceWithMetaDataFunction createInstanceFunction(...)
+        {
+            return &createInstance<impl, QObject>;
         }
     };
 
@@ -546,37 +549,6 @@ protected:
     }
 
     /**
-     * Utility overload that allows registering a plugin without a KPluginMetaData and QVariantList parameter
-     * This can be used in case the mentioned parameters are not needed, like config modules of plugins
-     *
-     * @since 6.0
-     */
-    template<class T,
-             typename = std::enable_if_t<
-                 std::is_constructible_v<T, QObject *> // Disable all other possible constructors
-                 && !std::is_constructible_v<T, QObject *, QVariantList> //
-                 && !std::is_constructible_v<T, QObject *, KPluginMetaData> && !std::is_constructible_v<T, QObject *, KPluginMetaData, QVariantList>>>
-    void registerPlugin()
-    {
-        auto instanceFunction = createInstanceWithoutArgs<T>;
-        registerPlugin(&T::staticMetaObject, instanceFunction);
-    }
-
-    /**
-     * @since 6.0
-     */
-    template<class T,
-             typename Dummy = void, // function overloading based on the number of template parameters.
-             typename = std::enable_if_t<
-                 std::is_constructible_v<T, QObject *, KPluginMetaData> // Disable all other possible constructors
-                 && !std::is_constructible_v<T, QObject *, QVariantList> && !std::is_constructible_v<T, QObject *, KPluginMetaData, QVariantList>>>
-    void registerPlugin()
-    {
-        auto instanceFunction = createInstanceWithMetadataWithoutArgs<T>;
-        registerPlugin(&T::staticMetaObject, instanceFunction);
-    }
-
-    /**
      * Registers a plugin with the factory. Call this function from the constructor of the
      * KPluginFactory subclass to make the create function able to instantiate the plugin when asked
      * for an interface the plugin implements.
@@ -613,17 +585,11 @@ protected:
             p = qobject_cast<ParentType *>(parent);
             Q_ASSERT(p);
         }
-        if constexpr (std::is_constructible<impl, ParentType, QVariantList>::value) {
+        if constexpr (std::is_constructible<impl, ParentType *, QVariantList>::value) {
             return new impl(p, args);
         } else {
             return new impl(p);
         }
-    }
-
-    template<class impl>
-    static QObject *createInstanceWithoutArgs(QWidget * /*parentWidget*/, QObject *parent, const KPluginMetaData & /*metaData*/, const QVariantList & /*args*/)
-    {
-        return new impl(parent);
     }
 
     template<class impl, class ParentType>
@@ -649,13 +615,6 @@ protected:
         } else {
             return new impl(parentWidget, parent, metaData);
         }
-    }
-
-    template<class impl>
-    static QObject *
-    createInstanceWithMetadataWithoutArgs(QWidget * /*parentWidget*/, QObject *parent, const KPluginMetaData &metaData, const QVariantList & /*args*/)
-    {
-        return new impl(parent, metaData);
     }
 
 private:
