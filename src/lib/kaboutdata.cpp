@@ -1193,39 +1193,3 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         ::exit(EXIT_SUCCESS);
     }
 }
-
-template<class T>
-QVariantList listToVariant(const QList<T> &values)
-{
-    QVariantList ret;
-    ret.reserve(values.count());
-    for (const auto &value : values) {
-        ret << QVariant::fromValue(value);
-    }
-    return ret;
-}
-
-QVariantList KAboutData::licensesVariant() const
-{
-    return listToVariant(d->_licenseList);
-}
-
-QVariantList KAboutData::authorsVariant() const
-{
-    return listToVariant(d->_authorList);
-}
-
-QVariantList KAboutData::creditsVariant() const
-{
-    return listToVariant(d->_creditList);
-}
-
-QVariantList KAboutData::translatorsVariant() const
-{
-    return listToVariant(d->_translatorList);
-}
-
-QVariantList KAboutData::componentsVariant() const
-{
-    return listToVariant(d->_componentList);
-}

@@ -519,31 +519,6 @@ bool KPluginMetaData::operator==(const KPluginMetaData &other) const
     return d->m_fileName == other.d->m_fileName && d->m_metaData == other.d->m_metaData;
 }
 
-template<class T>
-QVariantList listToVariant(const QList<T> &values)
-{
-    QVariantList ret;
-    ret.reserve(values.count());
-    std::transform(values.cbegin(), values.cend(), std::back_inserter(ret), [](const T &license) {
-        return QVariant::fromValue(license);
-    });
-    return ret;
-}
-
-QVariantList KPluginMetaData::authorsVariant() const
-{
-    return listToVariant(authors());
-}
-
-QVariantList KPluginMetaData::translatorsVariant() const
-{
-    return listToVariant(translators());
-}
-
-QVariantList KPluginMetaData::otherContributorsVariant() const
-{
-    return listToVariant(otherContributors());
-}
 bool KPluginMetaData::isStaticPlugin() const
 {
     return d->staticPlugin.has_value();

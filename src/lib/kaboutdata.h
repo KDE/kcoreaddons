@@ -545,11 +545,11 @@ class KCOREADDONS_EXPORT KAboutData
     Q_PROPERTY(QString bugAddress READ bugAddress CONSTANT)
     Q_PROPERTY(QString version READ version CONSTANT)
     Q_PROPERTY(QString otherText READ otherText CONSTANT)
-    Q_PROPERTY(QVariantList authors READ authorsVariant CONSTANT) // constant in practice as addAuthor is not exposed to Q_GADGET
-    Q_PROPERTY(QVariantList credits READ creditsVariant CONSTANT)
-    Q_PROPERTY(QVariantList translators READ translatorsVariant CONSTANT)
-    Q_PROPERTY(QVariantList components READ componentsVariant CONSTANT)
-    Q_PROPERTY(QVariantList licenses READ licensesVariant CONSTANT)
+    Q_PROPERTY(QList<KAboutPerson> authors READ authors CONSTANT) // constant in practice as addAuthor is not exposed to Q_GADGET
+    Q_PROPERTY(QList<KAboutPerson> credits READ credits CONSTANT)
+    Q_PROPERTY(QList<KAboutPerson> translators READ translators CONSTANT)
+    Q_PROPERTY(QList<KAboutComponent> components READ components CONSTANT)
+    Q_PROPERTY(QList<KAboutLicense> licenses READ licenses CONSTANT)
     Q_PROPERTY(QString copyrightStatement READ copyrightStatement CONSTANT)
     Q_PROPERTY(QString desktopFileName READ desktopFileName CONSTANT)
 public:
@@ -1294,12 +1294,6 @@ public:
     QString desktopFileName() const;
 
 private:
-    KCOREADDONS_NO_EXPORT QVariantList licensesVariant() const;
-    KCOREADDONS_NO_EXPORT QVariantList authorsVariant() const;
-    KCOREADDONS_NO_EXPORT QVariantList creditsVariant() const;
-    KCOREADDONS_NO_EXPORT QVariantList translatorsVariant() const;
-    KCOREADDONS_NO_EXPORT QVariantList componentsVariant() const;
-
     friend void KCrash::defaultCrashHandler(int sig);
     // exported for KCrash, no other users intended
     static const KAboutData *applicationDataPointer();

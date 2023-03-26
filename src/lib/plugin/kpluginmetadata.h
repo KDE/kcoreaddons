@@ -87,9 +87,9 @@ class KCOREADDONS_EXPORT KPluginMetaData
     Q_PROPERTY(QJsonObject rawData READ rawData CONSTANT)
     Q_PROPERTY(QString name READ name CONSTANT)
     Q_PROPERTY(QString description READ description CONSTANT)
-    Q_PROPERTY(QVariantList authors READ authorsVariant CONSTANT)
-    Q_PROPERTY(QVariantList translators READ translatorsVariant CONSTANT)
-    Q_PROPERTY(QVariantList otherContributors READ otherContributorsVariant CONSTANT)
+    Q_PROPERTY(QList<KAboutPerson> authors READ authors CONSTANT)
+    Q_PROPERTY(QList<KAboutPerson> translators READ translators CONSTANT)
+    Q_PROPERTY(QList<KAboutPerson> otherContributors READ otherContributors CONSTANT)
     Q_PROPERTY(QString category READ category CONSTANT)
     Q_PROPERTY(QString iconName READ iconName CONSTANT)
     Q_PROPERTY(QString license READ license CONSTANT)
@@ -411,9 +411,6 @@ private:
 
 private:
     KCOREADDONS_NO_EXPORT KPluginMetaData(QStaticPlugin plugin, KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData);
-    KCOREADDONS_NO_EXPORT QVariantList authorsVariant() const;
-    KCOREADDONS_NO_EXPORT QVariantList translatorsVariant() const;
-    KCOREADDONS_NO_EXPORT QVariantList otherContributorsVariant() const;
     KCOREADDONS_NO_EXPORT QStaticPlugin staticPlugin() const;
     KCOREADDONS_NO_EXPORT QString requestedFileName() const;
 
