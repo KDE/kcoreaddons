@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2023 Alexander Lohnau <alexander.lohnau@gmx.de>
+# SPDX-License-Identifier: BSD-2-Clause
 #
 # kcoreaddons_add_plugin(plugin_name
 #     [SOURCES <src> [<src> [...]]] # optional since 5.83, required before
