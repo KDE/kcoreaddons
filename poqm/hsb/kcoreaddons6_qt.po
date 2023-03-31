@@ -337,7 +337,7 @@ msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "Biblioteka '%1' njeposkića factory, kiž je z KDE 4 kompatibelny."
 
-#: lib/plugin/kpluginfactory.h:382
+#: lib/plugin/kpluginfactory.h:384
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"

@@ -253,7 +253,7 @@ msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "%1 ലൈബ്രറി ഒരു KPluginFactory വാഗ്ദാനം ചെയ്യുന്നില്ല."
 
-#: lib/plugin/kpluginfactory.h:382
+#: lib/plugin/kpluginfactory.h:384
 #, fuzzy, qt-format
 #| msgctxt "KPluginFactory|"
 #| msgid "KPluginFactory could not load the plugin: %1"

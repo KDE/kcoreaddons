@@ -244,7 +244,7 @@ msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "Le bibliotheca %1 non offere un KPluginFactory"
 
-#: lib/plugin/kpluginfactory.h:382
+#: lib/plugin/kpluginfactory.h:384
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
