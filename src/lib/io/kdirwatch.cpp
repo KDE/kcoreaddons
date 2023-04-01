@@ -321,13 +321,10 @@ void KDirWatchPrivate::inotifyEventReceived()
 
             const QString tpath = e->path + QLatin1Char('/') + path;
 
-            if (s_verboseDebug) {
-                qCDebug(KDIRWATCH).nospace() << "got event 0x" << qPrintable(QString::number(event->mask, 16)) << " for " << e->path;
-            }
+            qCDebug(KDIRWATCH).nospace() << "got event " << inotifyEventName(event) << " for entry " << e->path
+                                         << (event->mask & IN_ISDIR ? " [directory] " : " [file] ") << path;
 
             if (event->mask & IN_DELETE_SELF) {
-                qCDebug(KDIRWATCH) << "-->got deleteself signal for" << e->path;
-
                 e->m_status = NonExistent;
                 m_inotify_wd_to_entry.remove(e->wd);
                 e->wd = -1;
@@ -349,7 +346,6 @@ void KDirWatchPrivate::inotifyEventReceived()
                 Entry *sub_entry = e->findSubEntry(tpath);
 
                 qCDebug(KDIRWATCH) << "-->got CREATE signal for" << (tpath) << "sub_entry=" << sub_entry;
-                qCDebug(KDIRWATCH) << *e;
 
                 // The code below is very similar to the one in checkFAMEvent...
                 if (sub_entry) {
@@ -376,8 +372,6 @@ void KDirWatchPrivate::inotifyEventReceived()
                 }
             }
             if (event->mask & (IN_DELETE | IN_MOVED_FROM)) {
-                qCDebug(KDIRWATCH) << "-->got DELETE signal for" << tpath;
-
                 if ((e->isDir) && (!e->m_clients.empty())) {
                     // A file in this directory has been removed.  It wasn't an explicitly
                     // watched file as it would have its own watch descriptor, so
@@ -395,8 +389,6 @@ void KDirWatchPrivate::inotifyEventReceived()
             }
             if (event->mask & (IN_MODIFY | IN_ATTRIB)) {
                 if ((e->isDir) && (!e->m_clients.empty())) {
-                    qCDebug(KDIRWATCH) << "-->got MODIFY signal for" << (tpath);
-
                     // A file in this directory has been changed.  No
                     // addEntry/ removeEntry bookkeeping should be required.
                     // Add the path to the list of pending file changes if
@@ -1576,6 +1568,42 @@ void KDirWatchPrivate::unref()
         destroyPrivate();
     }
 }
+
+#if HAVE_SYS_INOTIFY_H
+QString KDirWatchPrivate::inotifyEventName(const inotify_event *event) const
+{
+    if (event->mask & IN_OPEN)
+        return QStringLiteral("OPEN");
+    else if (event->mask & IN_CLOSE_NOWRITE)
+        return QStringLiteral("CLOSE_NOWRITE");
+    else if (event->mask & IN_CLOSE_WRITE)
+        return QStringLiteral("CLOSE_WRITE");
+    else if (event->mask & IN_MOVED_TO)
+        return QStringLiteral("MOVED_TO");
+    else if (event->mask & IN_MOVED_FROM)
+        return QStringLiteral("MOVED_FROM");
+    else if (event->mask & IN_MOVE)
+        return QStringLiteral("MOVE");
+    else if (event->mask & IN_CREATE)
+        return QStringLiteral("CREATE");
+    else if (event->mask & IN_DELETE)
+        return QStringLiteral("DELETE");
+    else if (event->mask & IN_DELETE_SELF)
+        return QStringLiteral("DELETE_SELF");
+    else if (event->mask & IN_MOVE_SELF)
+        return QStringLiteral("MOVE_SELF");
+    else if (event->mask & IN_ATTRIB)
+        return QStringLiteral("ATTRIB");
+    else if (event->mask & IN_MODIFY)
+        return QStringLiteral("MODIFY");
+    if (event->mask & IN_ACCESS)
+        return QStringLiteral("ACCESS");
+    if (event->mask & IN_IGNORED)
+        return QStringLiteral("IGNORED");
+    else
+        return QStringLiteral("UNKWOWN");
+}
+#endif
 
 #if HAVE_FAM
 void KDirWatchPrivate::famEventReceived()

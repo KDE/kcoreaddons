@@ -48,6 +48,10 @@ class QSocketNotifier;
 #include <QFileSystemWatcher>
 #endif // HAVE_QFILESYSTEMWATCHER
 
+#if HAVE_SYS_INOTIFY_H
+struct inotify_event;
+#endif
+
 /* KDirWatchPrivate is a singleton and does the watching
  * for every KDirWatch instance in the application.
  */
@@ -196,6 +200,10 @@ public:
 
     void ref();
     void unref();
+
+#if HAVE_SYS_INOTIFY_H
+    QString inotifyEventName(const inotify_event *event) const;
+#endif
 
 public Q_SLOTS:
     void slotRescan();
