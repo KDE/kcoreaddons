@@ -31,6 +31,12 @@ configure_file(util/config-util.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-util.
 add_library(KF6CoreAddons)
 add_library(KF6::CoreAddons ALIAS KF6CoreAddons)
 
+set_target_properties(KF6CoreAddons PROPERTIES
+    VERSION     ${KCOREADDONS_VERSION}
+    SOVERSION   ${KCOREADDONS_SOVERSION}
+    EXPORT_NAME CoreAddons
+)
+
 if(NOT BUILD_SHARED_LIBS)
     target_compile_definitions(KF6CoreAddons PUBLIC -DKCOREADDONS_STATIC)
 endif()
@@ -260,11 +266,6 @@ endif()
 target_include_directories(KF6CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons>" )
 
 target_compile_definitions(KF6CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
-
-set_target_properties(KF6CoreAddons PROPERTIES VERSION   ${KCOREADDONS_VERSION}
-                                               SOVERSION ${KCOREADDONS_SOVERSION}
-                                               EXPORT_NAME CoreAddons
-)
 
 ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
