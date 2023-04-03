@@ -348,7 +348,7 @@ void KDirWatch_UnitTest::watchNonExistent()
 
     QVERIFY(waitForOneSignal(watch, SIGNAL(created(QString)), subdir));
 
-    KDirWatch::statistics();
+    qCDebug(KCOREADDONS_DEBUG) << &watch;
 
     // Play with addDir/removeDir, just for fun
     watch.addDir(subdir);
@@ -362,7 +362,7 @@ void KDirWatch_UnitTest::watchNonExistent()
     watch.addFile(file1); // doesn't exist yet
     watch.removeFile(file1); // forget it again
 
-    KDirWatch::statistics();
+    qCDebug(KCOREADDONS_DEBUG) << &watch;
 
     QVERIFY(!QFile::exists(file));
     // Now create it, KDirWatch should emit created
@@ -400,7 +400,7 @@ void KDirWatch_UnitTest::testDelete()
     KDirWatch watch;
     watch.addFile(file1);
 
-    KDirWatch::statistics();
+    qCDebug(KCOREADDONS_DEBUG) << &watch;
 
     QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
     QFile::remove(file1);
@@ -669,7 +669,7 @@ void KDirWatch_UnitTest::stopAndRestart()
     // comparison ("trust QFSW since the mtime of dirs isn't modified")
 #endif
 
-    KDirWatch::statistics();
+    qCDebug(KCOREADDONS_DEBUG) << &watch;
 
     waitUntilMTimeChange(m_path); // necessary for the mtime comparison in scanEntry
 

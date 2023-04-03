@@ -209,17 +209,14 @@ KDirWatchPrivate::KDirWatchPrivate()
 #endif
 
 #if HAVE_SYS_INOTIFY_H
-    supports_inotify = true;
-
     m_inotify_fd = inotify_init();
+    supports_inotify = m_inotify_fd > 0;
 
-    if (m_inotify_fd <= 0) {
+    if (!supports_inotify) {
         qCDebug(KDIRWATCH) << "Can't use Inotify, kernel doesn't support it:" << strerror(errno);
-        supports_inotify = false;
     }
-
     // qCDebug(KDIRWATCH) << "INotify available: " << supports_inotify;
-    if (supports_inotify) {
+    else {
         availableMethods << "INotify";
         (void)fcntl(m_inotify_fd, F_SETFD, FD_CLOEXEC);
 
@@ -522,6 +519,60 @@ QList<const KDirWatchPrivate::Client *> KDirWatchPrivate::Entry::inotifyClientsF
         }
     }
     return ret;
+}
+
+QDebug operator<<(QDebug debug, const KDirWatch & /* watch */)
+{
+    if (!dwp_self.hasLocalData()) {
+        debug << "KDirWatch not used";
+        return debug;
+    }
+    debug << dwp_self.localData();
+    return debug;
+}
+
+QDebug operator<<(QDebug debug, const KDirWatchPrivate &dwp)
+{
+    debug << "Entries watched:";
+    if (dwp.m_mapEntries.count() == 0) {
+        debug << "  None.";
+    } else {
+        auto it = dwp.m_mapEntries.cbegin();
+        for (; it != dwp.m_mapEntries.cend(); ++it) {
+            const KDirWatchPrivate::Entry *e = &(*it);
+            debug << "  " << *e;
+
+            for (const KDirWatchPrivate::Client &c : e->m_clients) {
+                QByteArray pending;
+                if (c.watchingStopped) {
+                    if (c.pending & KDirWatchPrivate::Deleted) {
+                        pending += "deleted ";
+                    }
+                    if (c.pending & KDirWatchPrivate::Created) {
+                        pending += "created ";
+                    }
+                    if (c.pending & KDirWatchPrivate::Changed) {
+                        pending += "changed ";
+                    }
+                    if (!pending.isEmpty()) {
+                        pending = " (pending: " + pending + ')';
+                    }
+                    pending = ", stopped" + pending;
+                }
+                debug << "    by " << c.instance->objectName() << " (" << c.count << " times)" << pending;
+            }
+            if (!e->m_entries.isEmpty()) {
+                debug << "    dependent entries:";
+                for (KDirWatchPrivate::Entry *d : std::as_const(e->m_entries)) {
+                    debug << "      " << d << d->path << (d->m_status == KDirWatchPrivate::NonExistent ? "NonExistent" : "EXISTS this is an ERROR!");
+                    if (s_verboseDebug) {
+                        Q_ASSERT(d->m_status == KDirWatchPrivate::NonExistent); // it doesn't belong here otherwise
+                    }
+                }
+            }
+        }
+    }
+    return debug;
 }
 
 QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry)
@@ -1757,51 +1808,6 @@ void KDirWatchPrivate::famEventReceived()
 }
 #endif
 
-void KDirWatchPrivate::statistics()
-{
-    EntryMap::Iterator it;
-
-    qCDebug(KDIRWATCH) << "Entries watched:";
-    if (m_mapEntries.count() == 0) {
-        qCDebug(KDIRWATCH) << "  None.";
-    } else {
-        it = m_mapEntries.begin();
-        for (; it != m_mapEntries.end(); ++it) {
-            Entry *e = &(*it);
-            qCDebug(KDIRWATCH) << "  " << *e;
-
-            for (const Client &c : e->m_clients) {
-                QByteArray pending;
-                if (c.watchingStopped) {
-                    if (c.pending & Deleted) {
-                        pending += "deleted ";
-                    }
-                    if (c.pending & Created) {
-                        pending += "created ";
-                    }
-                    if (c.pending & Changed) {
-                        pending += "changed ";
-                    }
-                    if (!pending.isEmpty()) {
-                        pending = " (pending: " + pending + ')';
-                    }
-                    pending = ", stopped" + pending;
-                }
-                qCDebug(KDIRWATCH) << "    by " << c.instance->objectName() << " (" << c.count << " times)" << pending;
-            }
-            if (!e->m_entries.isEmpty()) {
-                qCDebug(KDIRWATCH) << "    dependent entries:";
-                for (Entry *d : std::as_const(e->m_entries)) {
-                    qCDebug(KDIRWATCH) << "      " << d << d->path << (d->m_status == NonExistent ? "NonExistent" : "EXISTS!!! ERROR!");
-                    if (s_verboseDebug) {
-                        Q_ASSERT(d->m_status == NonExistent); // it doesn't belong here otherwise
-                    }
-                }
-            }
-        }
-    }
-}
-
 #if HAVE_QFILESYSTEMWATCHER
 // Slot for QFileSystemWatcher
 void KDirWatchPrivate::fswEventReceived(const QString &path)
@@ -1997,15 +2003,6 @@ bool KDirWatch::contains(const QString &_path) const
     }
 
     return false;
-}
-
-void KDirWatch::statistics()
-{
-    if (!dwp_self.hasLocalData()) {
-        qCDebug(KDIRWATCH) << "KDirWatch not used";
-        return;
-    }
-    dwp_self.localData()->statistics();
 }
 
 void KDirWatch::setCreated(const QString &_file)

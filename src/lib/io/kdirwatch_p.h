@@ -188,7 +188,6 @@ public:
     void startScan(KDirWatch *instance, bool notify, bool skippedToo);
 
     void removeEntries(KDirWatch *instance);
-    void statistics();
 
     void addWatch(Entry *entry);
     void removeWatch(Entry *entry);
@@ -259,6 +258,7 @@ private:
     uint m_references;
 };
 
+QDebug operator<<(QDebug debug, const KDirWatchPrivate &dwp);
 QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry);
 
 #endif // KDIRWATCH_P_H
