@@ -1652,6 +1652,8 @@ QString KDirWatchPrivate::inotifyEventName(const inotify_event *event) const
         return QStringLiteral("ACCESS");
     if (event->mask & IN_IGNORED)
         return QStringLiteral("IGNORED");
+    if (event->mask & IN_UNMOUNT)
+        return QStringLiteral("IN_UNMOUNT");
     else
         return QStringLiteral("UNKWOWN");
 }
