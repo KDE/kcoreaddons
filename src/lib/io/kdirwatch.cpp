@@ -214,9 +214,7 @@ KDirWatchPrivate::KDirWatchPrivate()
 
     if (!supports_inotify) {
         qCDebug(KDIRWATCH) << "Can't use Inotify, kernel doesn't support it:" << strerror(errno);
-    }
-    // qCDebug(KDIRWATCH) << "INotify available: " << supports_inotify;
-    else {
+    } else {
         availableMethods << "INotify";
         (void)fcntl(m_inotify_fd, F_SETFD, FD_CLOEXEC);
 
