@@ -1018,21 +1018,23 @@ void KDirWatchPrivate::addWatch(Entry *e)
     // Failing that try in order INotify, FAM, QFSWatch, Stat
     if (!entryAdded) {
 #if HAVE_SYS_INOTIFY_H
-        if (useINotify(e)) {
+        if (preferredMethod != KDirWatch::INotify && useINotify(e)) {
             return;
         }
 #endif
 #if HAVE_FAM
-        if (useFAM(e)) {
+        if (preferredMethod != KDirWatch::FAM && useFAM(e)) {
             return;
         }
 #endif
 #if HAVE_QFILESYSTEMWATCHER
-        if (useQFSWatch(e)) {
+        if (preferredMethod != KDirWatch::QFSWatch && useQFSWatch(e)) {
             return;
         }
 #endif
-        useStat(e);
+        if (preferredMethod != KDirWatch::Stat) {
+            useStat(e);
+        }
     }
 }
 
