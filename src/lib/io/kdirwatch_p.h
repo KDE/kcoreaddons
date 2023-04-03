@@ -212,7 +212,7 @@ public Q_SLOTS:
     void fswEventReceived(const QString &path); // for QFileSystemWatcher
 
 public:
-    QTimer timer;
+    QTimer m_statRescanTimer;
     EntryMap m_mapEntries;
 
     KDirWatch::Method m_preferredMethod, m_nfsPreferredMethod;

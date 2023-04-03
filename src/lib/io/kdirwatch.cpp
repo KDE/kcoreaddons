@@ -164,7 +164,7 @@ static const char s_envNfsMethod[] = "KDIRWATCH_NFSMETHOD";
  */
 
 KDirWatchPrivate::KDirWatchPrivate()
-    : timer()
+    : m_statRescanTimer()
     , freq(3600000)
     , // 1 hour as upper bound
     statEntries(0)
@@ -183,8 +183,8 @@ KDirWatchPrivate::KDirWatchPrivate()
     if (qAppName() == QLatin1String("kservicetest") || qAppName() == QLatin1String("filetypestest")) {
         s_verboseDebug = true;
     }
-    timer.setObjectName(QStringLiteral("KDirWatchPrivate::timer"));
-    connect(&timer, &QTimer::timeout, this, &KDirWatchPrivate::slotRescan);
+    m_statRescanTimer.setObjectName(QStringLiteral("KDirWatchPrivate::timer"));
+    connect(&m_statRescanTimer, &QTimer::timeout, this, &KDirWatchPrivate::slotRescan);
 
     m_nfsPollInterval = qEnvironmentVariableIsSet(s_envNfsPoll) ? qEnvironmentVariableIntValue(s_envNfsPoll) : 5000;
     m_PollInterval = qEnvironmentVariableIsSet(s_envPoll) ? qEnvironmentVariableIntValue(s_envPoll) : 500;
@@ -233,7 +233,7 @@ KDirWatchPrivate::KDirWatchPrivate()
 // This is called on app exit (deleted by QThreadStorage)
 KDirWatchPrivate::~KDirWatchPrivate()
 {
-    timer.stop();
+    m_statRescanTimer.stop();
 
 #if HAVE_FAM
     if (use_fam && sn) {
@@ -627,8 +627,8 @@ void KDirWatchPrivate::useFreq(Entry *e, int newFreq)
     // a reasonable frequency for the global polling timer
     if (e->freq < freq) {
         freq = e->freq;
-        if (timer.isActive()) {
-            timer.start(freq);
+        if (m_statRescanTimer.isActive()) {
+            m_statRescanTimer.start(freq);
         }
         qCDebug(KDIRWATCH) << "Global Poll Freq is now" << freq << "msec";
     }
@@ -797,7 +797,7 @@ bool KDirWatchPrivate::useStat(Entry *e)
 
         if (statEntries == 1) {
             // if this was first STAT entry (=timer was stopped)
-            timer.start(freq); // then start the timer
+            m_statRescanTimer.start(freq); // then start the timer
             qCDebug(KDIRWATCH) << " Started Polling Timer, freq " << freq;
         }
     }
@@ -1107,7 +1107,7 @@ void KDirWatchPrivate::removeEntry(KDirWatch *instance, Entry *e, Entry *sub_ent
     if (e->m_mode == StatMode) {
         statEntries--;
         if (statEntries == 0) {
-            timer.stop(); // stop timer if lists are empty
+            m_statRescanTimer.stop(); // stop timer if lists are empty
             qCDebug(KDIRWATCH) << " Stopped Polling Timer";
         }
     }
@@ -1150,8 +1150,8 @@ void KDirWatchPrivate::removeEntries(KDirWatch *instance)
     if (minfreq > freq) {
         // we can decrease the global polling frequency
         freq = minfreq;
-        if (timer.isActive()) {
-            timer.start(freq);
+        if (m_statRescanTimer.isActive()) {
+            m_statRescanTimer.start(freq);
         }
         qCDebug(KDIRWATCH) << "Poll Freq now" << freq << "msec";
     }
@@ -1476,9 +1476,9 @@ void KDirWatchPrivate::slotRescan()
     // like showing a message box. We don't want to keep polling during
     // that time, otherwise the value of 'delayRemove' will be reset.
     // ### TODO: now the emitEvent delays emission, this can be cleaned up
-    bool timerRunning = timer.isActive();
+    bool timerRunning = m_statRescanTimer.isActive();
     if (timerRunning) {
-        timer.stop();
+        m_statRescanTimer.stop();
     }
 
     // We delay deletions of entries this way.
@@ -1574,7 +1574,7 @@ void KDirWatchPrivate::slotRescan()
     }
 
     if (timerRunning) {
-        timer.start(freq);
+        m_statRescanTimer.start(freq);
     }
 
 #if HAVE_SYS_INOTIFY_H
