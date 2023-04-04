@@ -26,7 +26,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-02-26 16:24+0200\n"
+"PO-Revision-Date: 2023-03-12 18:16+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -34,7 +34,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 "X-POT-Import-Date: 2013-01-13 20:43:21+0000\n"
 "X-Qt-Contexts: true\n"
 
@@ -806,14 +806,12 @@ msgstr "Juuri nyt"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:515
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%1 minuuttia sitten"
-msgstr[1] "%1 minuuttia sitten"
+msgstr[0] "%n minuutti sitten"
+msgstr[1] "%n minuuttia sitten"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:531
@@ -834,12 +832,10 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "lsof-ohjelmatiedostoa ei löytynyt hakupolusta:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, fuzzy, qt-format
-#| msgctxt "QObject|"
-#| msgid "Failed to execute `lsof' error code %1"
+#, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "lsof-komennon suoritus epäonnistui, virhekoodi %1"
+msgstr "”lsof”-komennon suoritus epäonnistui. Virhekoodi %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
