@@ -335,7 +335,7 @@ void KDirWatchPrivate::inotifyEventReceived()
                 m_inotify_wd_to_entry.remove(e->wd);
                 e->wd = -1;
                 e->m_ctime = invalid_ctime;
-                emitEvent(e, Deleted, e->path);
+                emitEvent(e, Deleted);
                 // If the parent dir was already watched, tell it something changed
                 Entry *parentEntry = entry(e->parentDirectory());
                 if (parentEntry) {
