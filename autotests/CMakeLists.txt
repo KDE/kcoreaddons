@@ -1,4 +1,5 @@
 set(KCOREADDONS_INTERNAL_SKIP_PLUGIN_INSTALLATION ON)
+add_definitions(-DQT_FORCE_ASSERTS=1)
 
 include(ECMAddTests)
 include(ConfigureChecks.cmake) #configure checks for QFileSystemWatcher

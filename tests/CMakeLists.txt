@@ -13,7 +13,9 @@ target_link_libraries(faceicontest Qt6::Widgets KF6::CoreAddons)
 add_executable(texttohtmltest ktexttohtmltest.cpp)
 target_link_libraries(texttohtmltest Qt6::Widgets KF6::CoreAddons)
 
-if (ENABLE_PCH AND NOT WIN32)
+# With GCC, -Winvalid-pch warnings are there due to missing defines
+# so just limit this to clang
+if (ENABLE_PCH AND NOT WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
     target_precompile_headers(kdirwatchtest_gui REUSE_FROM KF6CoreAddons)
     target_precompile_headers(faceicontest REUSE_FROM KF6CoreAddons)
     target_precompile_headers(texttohtmltest REUSE_FROM KF6CoreAddons)
