@@ -29,7 +29,7 @@ void KFuzzyMatcherTest::testMatchSimple_data()
     QTest::newRow("WithSep") << QStringLiteral("tf") << QStringLiteral("the_file") << true;
     QTest::newRow("Umlaut") << QStringLiteral("Häu") << QStringLiteral("Häuser") << true;
     QTest::newRow("Unmatched") << QStringLiteral("Name") << QStringLiteral("Nam") << false;
-    QTest::newRow("Empty Pattern") << QString("") << QStringLiteral("Nam") << true;
+    QTest::newRow("Empty Pattern") << QStringLiteral("") << QStringLiteral("Nam") << true;
 }
 
 void KFuzzyMatcherTest::testMatchSimple()
@@ -147,7 +147,7 @@ void KFuzzyMatcherTest::testMatch_data()
                              }
                           << 5;
 
-    QTest::newRow("pattern=") << QString("")
+    QTest::newRow("pattern=") << QStringLiteral("")
                           << QStringList{
                                 QStringLiteral("th"),
                                 QStringLiteral("ths"),
@@ -207,7 +207,7 @@ void KFuzzyMatcherTest::testMatchedRanges_data()
 
     QTest::addColumn<bool>("matchingOnly");
 
-    QTest::newRow("Emtpy") << QString("") << QString("") << QList<Range>{} << true;
+    QTest::newRow("Emtpy") << QStringLiteral("") << QStringLiteral("") << QList<Range>{} << true;
     QTest::newRow("Hello") << QStringLiteral("Hlo") << QStringLiteral("Hello") << QList<Range>{{0, 1}, {3, 2}} << true;
     QTest::newRow("lll") << QStringLiteral("lll") << QStringLiteral("SVisualLoggerLogsList") << QList<Range>{{7, 1}, {13, 1}, {17, 1}} << true;
     QTest::newRow("Sort") << QStringLiteral("sort") << QStringLiteral("SorT") << QList<Range>{{0, 4}} << true;

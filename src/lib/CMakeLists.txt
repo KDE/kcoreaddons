@@ -187,6 +187,14 @@ target_sources(KF6CoreAddons PRIVATE
     util/kruntimeplatform.h
 )
 
+if (ENABLE_PCH)
+    target_precompile_headers(KF6CoreAddons PRIVATE
+        <QObject>
+        <QLoggingCategory>
+        <QString>
+    )
+endif()
+
 
 set(kcoreaddons_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/caching/

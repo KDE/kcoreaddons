@@ -88,7 +88,7 @@ private Q_SLOTS:
             auto result = KPluginFactory::instantiatePlugin<KPluginFactoryTest>(KPluginMetaData(QStringLiteral("namespace/jsonplugin_cmake_macro")));
             QVERIFY(!result.plugin);
             QCOMPARE(result.errorReason, KPluginFactory::INVALID_KPLUGINFACTORY_INSTANTIATION);
-            QVERIFY(result.errorText.contains("KPluginFactoryTest"));
+            QVERIFY(result.errorText.contains(QStringLiteral("KPluginFactoryTest")));
         }
     }
 

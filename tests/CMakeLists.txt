@@ -1,5 +1,3 @@
-remove_definitions(-DQT_NO_CAST_FROM_ASCII)
-
 find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG QUIET OPTIONAL_COMPONENTS Widgets)
 if(NOT TARGET Qt6::Widgets)
     message(STATUS "Qt6Widgets not found, examples will not be built.")
@@ -14,3 +12,9 @@ target_link_libraries(faceicontest Qt6::Widgets KF6::CoreAddons)
 
 add_executable(texttohtmltest ktexttohtmltest.cpp)
 target_link_libraries(texttohtmltest Qt6::Widgets KF6::CoreAddons)
+
+if (ENABLE_PCH AND NOT WIN32)
+    target_precompile_headers(kdirwatchtest_gui REUSE_FROM KF6CoreAddons)
+    target_precompile_headers(faceicontest REUSE_FROM KF6CoreAddons)
+    target_precompile_headers(texttohtmltest REUSE_FROM KF6CoreAddons)
+endif()

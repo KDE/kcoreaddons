@@ -1,4 +1,3 @@
-remove_definitions(-DQT_NO_CAST_FROM_ASCII)
 set(KCOREADDONS_INTERNAL_SKIP_PLUGIN_INSTALLATION ON)
 
 include(ECMAddTests)
@@ -26,53 +25,66 @@ ecm_qt_declare_logging_category(autotests_static
         )
 target_link_libraries(autotests_static Qt6::Core)
 
+if(ENABLE_PCH)
+    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp "/*empty file*/")
+    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/pch.h
+        "#pragma once\n"
+        "#include <QObject>\n"
+        "#include <QTest>\n"
+        "#include <QString>\n"
+        "#include <QDateTime>\n"
+    )
+    add_library(tests_pch STATIC ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp)
+    target_link_libraries(tests_pch Qt6::Core Qt6::Test)
+    target_precompile_headers(tests_pch PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/pch.h)
+endif()
+
+
 configure_file(config-tests.h.in config-tests.h)
 
 add_subdirectory(plugin)
 
+macro(add_unit_test testname)
+  ecm_add_test(${testname}.cpp ${ARGN}
+               TEST_NAME ${testname}
+               LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static)
+  if(ENABLE_PCH)
+    target_precompile_headers(${testname} REUSE_FROM tests_pch)
+  endif()
+endmacro()
+
+add_unit_test(kaboutdatatest)
+add_unit_test(kaboutdataapplicationdatatest)
+add_unit_test(kautosavefiletest)
+add_unit_test(kcompositejobtest)
+add_unit_test(kformattest)
+add_unit_test(kjobtest)
+add_unit_test(kosreleasetest)
+add_unit_test(kprocesstest)
+add_unit_test(krandomtest)
+add_unit_test(kshareddatacachetest)
+add_unit_test(kshelltest)
+add_unit_test(kurlmimedatatest)
+add_unit_test(kstringhandlertest)
+add_unit_test(kmacroexpandertest)
+add_unit_test(kusertest)
+add_unit_test(kprocesslisttest)
+add_unit_test(kfileutilstest)
+add_unit_test(kfuzzymatchertest)
+add_unit_test(knetworkmountstestcanonical)
+add_unit_test(knetworkmountstestnoconfig)
+add_unit_test(knetworkmountstestpaths)
+add_unit_test(knetworkmountsteststatic)
+add_unit_test(klibexectest)
+add_unit_test(kmemoryinfotest)
+add_unit_test(kruntimeplatformtest)
 if (WIN32)
-    set(autotests_OPTIONAL_SRCS
-        ${autotests_OPTIONAL_SRCS}
-        klistopenfilesjobtest_win.cpp
-    )
+    add_unit_test(klistopenfilesjobtest_win)
 endif ()
-
 if (UNIX)
-    set(autotests_OPTIONAL_SRCS
-        ${autotests_OPTIONAL_SRCS}
-        klistopenfilesjobtest_unix.cpp
-    )
+    add_unit_test(klistopenfilesjobtest_unix)
 endif ()
 
-ecm_add_tests(
-    kaboutdatatest.cpp
-    kaboutdataapplicationdatatest.cpp
-    kautosavefiletest.cpp
-    kcompositejobtest.cpp
-    kformattest.cpp
-    kjobtest.cpp
-    kosreleasetest.cpp
-    kprocesstest.cpp
-    krandomtest.cpp
-    kshareddatacachetest.cpp
-    kshelltest.cpp
-    kurlmimedatatest.cpp
-    kstringhandlertest.cpp
-    kmacroexpandertest.cpp
-    kusertest.cpp
-    kprocesslisttest.cpp
-    kfileutilstest.cpp
-    kfuzzymatchertest.cpp
-    knetworkmountstestcanonical.cpp
-    knetworkmountstestnoconfig.cpp
-    knetworkmountstestpaths.cpp
-    knetworkmountsteststatic.cpp
-    klibexectest.cpp
-    kmemoryinfotest.cpp
-    kruntimeplatformtest.cpp
-    ${autotests_OPTIONAL_SRCS}
-    LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static
-)
 if(TARGET klistopenfilesjobtest_unix AND CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     find_package(Qt6Network ${REQUIRED_QT_VERSION} CONFIG QUIET)
     target_link_libraries(klistopenfilesjobtest_unix Qt6::Network)
@@ -129,6 +141,11 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
     target_link_libraries(${BACKEND_BENCHMARK_TARGET} Qt6::Test KF6::CoreAddons autotests_static)
     if(NOT WIN32)
         target_link_libraries(${BACKEND_BENCHMARK_TARGET} Threads::Threads)
+    endif()
+
+    if(ENABLE_PCH AND NOT WIN32)
+        target_precompile_headers(${BACKEND_TEST_TARGET} REUSE_FROM tests_pch)
+        target_precompile_headers(${BACKEND_BENCHMARK_TARGET} REUSE_FROM tests_pch)
     endif()
 
 endforeach()
