@@ -818,7 +818,3 @@ msgstr "Неуспешно изпълнение на`lsof'. Код на греш
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob не се поддържа на Windows"
-
-#~ msgctxt "KPluginLoader|"
-#~ msgid "The library %1 does not offer a KPluginFactory."
-#~ msgstr "Библиотеката %1 не предлага KPluginFactory."
