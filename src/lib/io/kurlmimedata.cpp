@@ -204,13 +204,7 @@ static std::optional<QStringList> fuseRedirect(QList<QUrl> urls, bool onlyLocalF
     qCDebug(KCOREADDONS_DEBUG) << "mounting urls with fuse" << urls;
 
     // Fuse redirection only applies if the list contains non-local files.
-    // &
-    // For the time being the fuse redirection is opt-in because we later need to open() the files
-    // and this is an insanely expensive operation involving a stat() for remote URLs that we can't
-    // really get rid of. We'll need a way to avoid the open().
-    // https://bugs.kde.org/show_bug.cgi?id=457529
-    // https://github.com/flatpak/xdg-desktop-portal/issues/961
-    if (onlyLocalFiles || !qEnvironmentVariableIntValue("KCOREADDONS_FUSE_REDIRECT")) {
+    if (onlyLocalFiles) {
         return urlListToStringList(urls);
     }
 
@@ -265,6 +259,16 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
         const auto isLocal = url.isLocalFile();
         if (!isLocal) {
             onlyLocalFiles = false;
+
+            // For the time being the fuse redirection is opt-in because we later need to open() the files
+            // and this is an insanely expensive operation involving a stat() for remote URLs that we can't
+            // really get rid of. We'll need a way to avoid the open().
+            // https://bugs.kde.org/show_bug.cgi?id=457529
+            // https://github.com/flatpak/xdg-desktop-portal/issues/961
+            static const auto fuseRedirect = qEnvironmentVariableIntValue("KCOREADDONS_FUSE_REDIRECT");
+            if (!fuseRedirect) {
+                return false;
+            }
         } else if (isLocal && QFileInfo(url.toLocalFile()).isDir()) {
             // XDG Document Portal doesn't support directories and silently drops them.
             return false;
