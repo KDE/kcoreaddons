@@ -249,7 +249,7 @@ static std::optional<QStringList> fuseRedirect(QList<QUrl> urls, bool onlyLocalF
 bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
 {
 #if HAVE_QTDBUS
-    if (!isDocumentsPortalAvailable() || !isKIOFuseAvailable()) {
+    if (!isDocumentsPortalAvailable()) {
         return false;
     }
     QList<QUrl> urls = mimeData->urls();
@@ -267,6 +267,12 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
             // https://github.com/flatpak/xdg-desktop-portal/issues/961
             static const auto fuseRedirect = qEnvironmentVariableIntValue("KCOREADDONS_FUSE_REDIRECT");
             if (!fuseRedirect) {
+                return false;
+            }
+
+            // some remotes, fusing is enabled, but kio-fuse is unavailable -> cannot run this url list through the portal
+            if (!isKIOFuseAvailable()) {
+                qWarning() << "kio-fuse is missing";
                 return false;
             }
         } else if (isLocal && QFileInfo(url.toLocalFile()).isDir()) {
