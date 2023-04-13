@@ -112,7 +112,7 @@ public:
 };
 
 KPluginMetaData::KPluginMetaData()
-    : KPluginMetaData({}, {})
+    : d(new KPluginMetaDataPrivate)
 {
 }
 
