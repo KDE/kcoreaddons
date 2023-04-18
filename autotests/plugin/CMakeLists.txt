@@ -3,16 +3,13 @@ if (NOT TARGET Qt6::Widgets)
     return()
 endif()
 
-if (NOT WIN32)
-    add_library(plugin_classes)
-    # Generating export for a test is overkill, thus we skip this bit on windows
-    target_sources(plugin_classes PRIVATE plugins.cpp)
+add_library(plugin_classes plugins.cpp)
+generate_export_header(plugin_classes)
 
-    kcoreaddons_add_plugin(jsonplugin_cmake_macro SOURCES kpluginclass.cpp INSTALL_NAMESPACE "namespace")
-    ecm_mark_as_test(jsonplugin_cmake_macro)
-    target_link_libraries(jsonplugin_cmake_macro KF6::CoreAddons autotests_static plugin_classes)
-    target_link_libraries(plugin_classes Qt6::Core)
-endif()
+kcoreaddons_add_plugin(jsonplugin_cmake_macro SOURCES kpluginclass.cpp INSTALL_NAMESPACE "namespace")
+ecm_mark_as_test(jsonplugin_cmake_macro)
+target_link_libraries(jsonplugin_cmake_macro KF6::CoreAddons autotests_static plugin_classes)
+target_link_libraries(plugin_classes Qt6::Core)
 
 kcoreaddons_add_plugin(qtplugin SOURCES qtplugin.cpp INSTALL_NAMESPACE "namespace")
 ecm_mark_as_test(qtplugin)

@@ -9,6 +9,7 @@ MyPlugin::MyPlugin(QObject *parent)
 }
 MyPlugin::~MyPlugin() = default;
 MyPlugin2::~MyPlugin2() = default;
+
 MyPlugin2::MyPlugin2(QObject *parent)
     : QObject(parent)
 {

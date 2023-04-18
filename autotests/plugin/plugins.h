@@ -2,9 +2,10 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 #pragma once
 
+#include "plugin_classes_export.h"
 #include <QObject>
 
-class Q_DECL_EXPORT MyPlugin : public QObject
+class PLUGIN_CLASSES_EXPORT MyPlugin : public QObject
 {
     Q_OBJECT
 public:
@@ -12,7 +13,7 @@ public:
     ~MyPlugin() override;
 };
 
-class Q_DECL_EXPORT MyPlugin2 : public QObject
+class PLUGIN_CLASSES_EXPORT MyPlugin2 : public QObject
 {
     Q_OBJECT
 public:
