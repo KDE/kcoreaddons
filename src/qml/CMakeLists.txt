@@ -5,15 +5,13 @@ set(kcoreaddonsplugin_SRCS
     kcoreaddonsplugin.h
     kuserproxy.cpp
     kuserproxy.h
-
-    )
+)
 
 add_library(kcoreaddonsplugin ${kcoreaddonsplugin_SRCS})
 target_link_libraries(kcoreaddonsplugin
-        Qt6::Core
-        Qt6::Quick
-        Qt6::Qml
-        KF6::CoreAddons
+    Qt6::Core
+    Qt6::Qml
+    KF6::CoreAddons
 )
 
 if(WIN32 AND BUILD_SHARED_LIBS)
