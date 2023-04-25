@@ -1,4 +1,5 @@
-set(kcoreaddonsplugin_SRCS
+ecm_add_qml_module(kcoreaddonsplugin URI org.kde.kcoreaddons CLASSNAME KCoreAddonsPlugin)
+target_sources(kcoreaddonsplugin PRIVATE
     formats.cpp
     formats.h
     kcoreaddonsplugin.cpp
@@ -6,19 +7,10 @@ set(kcoreaddonsplugin_SRCS
     kuserproxy.cpp
     kuserproxy.h
 )
-
-add_library(kcoreaddonsplugin ${kcoreaddonsplugin_SRCS})
 target_link_libraries(kcoreaddonsplugin
     Qt6::Core
     Qt6::Qml
     KF6::CoreAddons
 )
 
-if(WIN32 AND BUILD_SHARED_LIBS)
-    set_target_properties(kcoreaddonsplugin PROPERTIES PREFIX "")
-endif()
-
-install(TARGETS kcoreaddonsplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kcoreaddons)
-
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/kcoreaddons)
-
+ecm_finalize_qml_module(kcoreaddonsplugin DESTINATION ${KDE_INSTALL_QMLDIR})
