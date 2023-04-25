@@ -1,4 +1,4 @@
-ecm_add_qml_module(kcoreaddonsplugin URI org.kde.kcoreaddons CLASSNAME KCoreAddonsPlugin)
+ecm_add_qml_module(kcoreaddonsplugin URI org.kde.coreaddons CLASSNAME KCoreAddonsPlugin)
 target_sources(kcoreaddonsplugin PRIVATE
     formats.cpp
     formats.h
