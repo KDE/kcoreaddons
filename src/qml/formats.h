@@ -8,6 +8,7 @@
 #define FORMATS_H
 
 #include <KFormat>
+#include <QObject>
 
 class Formats : public QObject
 {

@@ -9,6 +9,7 @@
 #define KUSERPROXY_H
 
 #include <QObject>
+#include <QUrl>
 
 #include <KDirWatch>
 #include <KUser>

@@ -3,7 +3,6 @@ target_sources(kcoreaddonsplugin PRIVATE
     formats.cpp
     formats.h
     kcoreaddonsplugin.cpp
-    kcoreaddonsplugin.h
     kuserproxy.cpp
     kuserproxy.h
 )
