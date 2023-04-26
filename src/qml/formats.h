@@ -15,8 +15,6 @@ class Formats : public QObject
     Q_OBJECT
 
 public:
-    explicit Formats(QObject *parent = nullptr);
-
     /**
      * Converts size from bytes to the appropriate string representation
      */
@@ -93,7 +91,7 @@ public:
     Q_INVOKABLE QString formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const;
 
 private:
-    KFormat m_format;
+    const KFormat m_format;
 };
 
 Q_DECLARE_METATYPE(QLocale::FormatType)

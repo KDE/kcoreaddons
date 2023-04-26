@@ -6,12 +6,6 @@
 
 #include "formats.h"
 
-Formats::Formats(QObject *parent)
-    : QObject(parent)
-    , m_format()
-{
-}
-
 QString Formats::formatByteSize(double size, int precision) const
 {
     return m_format.formatByteSize(size, precision);
