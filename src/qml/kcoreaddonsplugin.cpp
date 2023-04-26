@@ -13,11 +13,6 @@
 #include "kuserproxy.h"
 #include <KFormat>
 
-static QObject *formats_singletontype_provider(QQmlEngine *, QJSEngine *)
-{
-    return new Formats();
-}
-
 class KCoreAddonsPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
@@ -26,11 +21,11 @@ class KCoreAddonsPlugin : public QQmlExtensionPlugin
 public:
     void registerTypes(const char *uri) override
     {
-        qmlRegisterSingletonType<Formats>(uri, 1, 0, "Format", formats_singletontype_provider);
+        qmlRegisterSingletonType<Formats>(uri, 1, 0, "Format", [](QQmlEngine *, QJSEngine *) {
+            return new Formats();
+        });
         qRegisterMetaType<QLocale::FormatType>();
-
-        qmlRegisterUncreatableType<KFormat>(uri, 1, 0, "FormatTypes", QString());
-
+        qmlRegisterUncreatableMetaObject(KFormat::staticMetaObject, uri, 1, 0, "FormatTypes", QString());
         qmlRegisterType<KUserProxy>(uri, 1, 0, "KUser");
     }
 };
