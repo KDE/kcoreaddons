@@ -55,7 +55,7 @@ class KFormatPrivate;
  * @short Class for formatting numbers and datetimes.
  * @since 5.0
  */
-class KCOREADDONS_EXPORT KFormat Q_DECL_FINAL
+class KCOREADDONS_EXPORT KFormat final
 {
     Q_GADGET
 

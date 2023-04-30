@@ -24,7 +24,7 @@
  *
  * @since 5.58.0
  */
-class KCOREADDONS_EXPORT KOSRelease Q_DECL_FINAL
+class KCOREADDONS_EXPORT KOSRelease final
 {
 public:
     /**
