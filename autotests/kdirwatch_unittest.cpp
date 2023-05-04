@@ -155,11 +155,11 @@ QList<QVariantList> KDirWatch_UnitTest::waitForDirtySignal(KDirWatch &watch, int
     while (spyDirty.count() < expected) {
         if (++numTries > s_maxTries) {
             qWarning() << "Timeout waiting for KDirWatch. Got" << spyDirty.count() << "dirty() signals, expected" << expected;
-            return std::move(spyDirty);
+            return spyDirty;
         }
         spyDirty.wait(50);
     }
-    return std::move(spyDirty);
+    return spyDirty;
 }
 
 bool KDirWatch_UnitTest::waitForOneSignal(KDirWatch &watch, const char *sig, const QString &path)
@@ -243,11 +243,11 @@ QList<QVariantList> KDirWatch_UnitTest::waitForDeletedSignal(KDirWatch &watch, i
     while (spyDeleted.count() < expected) {
         if (++numTries > s_maxTries) {
             qWarning() << "Timeout waiting for KDirWatch. Got" << spyDeleted.count() << "deleted() signals, expected" << expected;
-            return std::move(spyDeleted);
+            return spyDeleted;
         }
         spyDeleted.wait(50);
     }
-    return std::move(spyDeleted);
+    return spyDeleted;
 }
 
 void KDirWatch_UnitTest::touchOneFile() // watch a dir, create a file in it
