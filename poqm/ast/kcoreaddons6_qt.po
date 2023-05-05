@@ -1,9 +1,9 @@
-# enolp <enolp@softastur.org>, 2022.
+# enolp <enolp@softastur.org>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2022-10-30 13:47+0100\n"
-"Last-Translator: enolp <enolp@softastur.org>\n"
+"PO-Revision-Date: 2023-05-04 14:55+0200\n"
+"Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
 "MIME-Version: 1.0\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: lib/io/kfilesystemtype.cpp:236
 msgctxt "KFileSystemType|"
@@ -242,7 +242,7 @@ msgstr "La biblioteca «%1» nun forne KPluginFactory."
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
-msgstr "KPluginFactory nun pudo crear una instancia «%1» de: %2"
+msgstr "KPluginFactory nun pudo crear una instancia «%1» a partir de: %2"
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -767,7 +767,7 @@ msgstr "Ayeri"
 #: lib/util/kformatprivate.cpp:496
 msgctxt "KFormat|"
 msgid "Two days ago"
-msgstr "Hai dos díes"
+msgstr "Antieri"
 
 #: lib/util/kformatprivate.cpp:510
 msgctxt "KFormat|"
@@ -776,13 +776,11 @@ msgstr "Puramente agora"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:515
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "Hai %1 minutos"
+msgstr[0] "Hai %1 minutu"
 msgstr[1] "Hai %1 minutos"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
