@@ -392,9 +392,9 @@ void KFormatTest::formatRelativeDate()
                  .arg(QLocale::c().toString(testDateTime.date(), QLocale::ShortFormat), QLocale::c().toString(testDateTime.time(), QLocale::ShortFormat)));
 
     // With a different local for double check
-    QLocale englishLocal = QLocale::French;
-    KFormat formatEnglish(englishLocal);
-    QCOMPARE(formatEnglish.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QStringLiteral("Dimanche 3 octobre 2021 at 05:33"));
+    QLocale frenchLocal = QLocale::French;
+    KFormat formatFrench(frenchLocal);
+    QCOMPARE(formatFrench.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QStringLiteral("Dimanche 3 octobre 2021 at 05:33"));
 }
 
 QTEST_MAIN(KFormatTest)
