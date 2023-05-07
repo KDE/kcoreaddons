@@ -21,7 +21,7 @@
  *
  * Example usage:
  * @code
-    import org.kde.kcoreaddons as KCoreAddons
+    import org.kde.coreaddons as KCoreAddons
     [...]
 
     Item {
