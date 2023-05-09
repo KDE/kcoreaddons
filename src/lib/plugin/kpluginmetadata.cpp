@@ -305,7 +305,7 @@ static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson>
 {
     KAboutPerson person = KAboutPerson::fromJSON(obj);
     if (person.name().isEmpty()) {
-        qCWarning(KCOREADDONS_DEBUG) << "Invalid plugin metadata: Attempting to create a KAboutPerson from json without 'Name' property:" << obj;
+        qCWarning(KCOREADDONS_DEBUG) << "Invalid plugin metadata: Attempting to create a KAboutPerson from JSON without 'Name' property:" << obj;
         return;
     }
     out->append(person);
@@ -433,10 +433,12 @@ QStringList KPluginMetaData::formFactors() const
 
 bool KPluginMetaData::isEnabledByDefault() const
 {
-    QJsonValue val = rootObject()[QLatin1String("EnabledByDefault")];
+    const QLatin1String key("EnabledByDefault");
+    const QJsonValue val = rootObject()[key];
     if (val.isBool()) {
         return val.toBool();
     } else if (val.isString()) {
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "in" << d->m_fileName << "to be boolean, but it was a string";
         return val.toString() == QLatin1String("true");
     }
     return false;
@@ -448,14 +450,10 @@ QString KPluginMetaData::value(const QString &key, const QString &defaultValue) 
     if (value.isString()) {
         return value.toString(defaultValue);
     } else if (value.isArray()) {
-        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key
-                                     << "to be a single string."
-                                        " but it is a stringlist";
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "in" << d->m_fileName << "to be a single string, but it is an array";
         return value.toVariant().toStringList().join(QChar::fromLatin1(','));
     } else if (value.isBool()) {
-        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key
-                                     << "to be a single string."
-                                        " but it is a bool";
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "in" << d->m_fileName << "to be a single string, but it is a bool";
         return value.toBool() ? QStringLiteral("true") : QStringLiteral("false");
     }
     return defaultValue;
@@ -485,7 +483,7 @@ int KPluginMetaData::value(const QString &key, int defaultValue) const
         if (ok) {
             return convertedIntValue;
         } else {
-            qCWarning(KCOREADDONS_DEBUG) << "Expected" << key << "to be an int, instead" << intString << "was specified in the json metadata" << d->m_fileName;
+            qCWarning(KCOREADDONS_DEBUG) << "Expected" << key << "to be an int, instead" << intString << "was specified in the JSON metadata" << d->m_fileName;
             return defaultValue;
         }
     } else {
@@ -498,8 +496,7 @@ QStringList KPluginMetaData::value(const QString &key, const QStringList &defaul
     if (value.isUndefined() || value.isNull()) {
         return defaultValue;
     } else if (value.isObject()) {
-        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a string list, instead an object was specified in the json metadata"
-                                     << d->m_fileName;
+        qCWarning(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a string list, instead an object was specified in" << d->m_fileName;
         return defaultValue;
     } else if (value.isArray()) {
         return value.toVariant().toStringList();
@@ -508,7 +505,7 @@ QStringList KPluginMetaData::value(const QString &key, const QStringList &defaul
         if (asString.isEmpty()) {
             return defaultValue;
         }
-        qCDebug(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a string list in the json metadata" << d->m_fileName
+        qCDebug(KCOREADDONS_DEBUG) << "Expected JSON property" << key << "to be a string list in" << d->m_fileName
                                    << "Treating it as a list with a single entry:" << asString;
         return QStringList(asString);
     }
