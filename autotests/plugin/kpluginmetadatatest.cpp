@@ -165,7 +165,7 @@ private Q_SLOTS:
         QCOMPARE(m.copyrightText(), QStringLiteral("(c) Alex Richardson 2015"));
         QCOMPARE(m.version(), QStringLiteral("1.0"));
         QCOMPARE(m.website(), QStringLiteral("https://plasma.kde.org/"));
-        QCOMPARE(m.mimeTypes(), QStringList() << QStringLiteral("image/png"));
+        QCOMPARE(m.mimeTypes(), QStringList(QStringLiteral("image/png")));
     }
 
     void testTranslations()

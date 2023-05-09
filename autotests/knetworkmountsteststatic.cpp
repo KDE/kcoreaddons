@@ -29,27 +29,23 @@ void KNetworkMountsTestStatic::testStaticFunctions_data()
     QTest::addColumn<QString>("expected_matching");
 
     QTest::newRow("empty1") << QString() << QStringList() << false << "" << false << QStringList() << QString();
-    QTest::newRow("empty2") << "" << (QStringList() << QString() << QString()) << false << "" << false << (QStringList() << QString() << QString())
-                            << QString();
+    QTest::newRow("empty2") << "" << QStringList{QString(), QString()} << false << "" << false << QStringList{QString(), QString()} << QString();
 
     QTest::newRow("/1") << "/" << QStringList() << false << "/" << false << QStringList() << QString();
-    QTest::newRow("/2") << "/" << (QStringList() << QString() << QString()) << false << "/" << false << (QStringList() << QString() << QString()) << QString();
-    QTest::newRow("/3") << "/" << (QStringList() << QStringLiteral("/")) << false << "/" << false << (QStringList() << QStringLiteral("/")) << "/";
-    QTest::newRow("/4") << "/" << (QStringList() << QStringLiteral("/") << QString()) << false << "/" << false
-                        << (QStringList() << QStringLiteral("/") << QString()) << "/";
+    QTest::newRow("/2") << "/" << QStringList{QString(), QString()} << false << "/" << false << QStringList{QString(), QString()} << QString();
+    QTest::newRow("/3") << "/" << (QStringList{QStringLiteral("/")}) << false << "/" << false << QStringList{QStringLiteral("/")} << "/";
+    QTest::newRow("/4") << "/" << QStringList{QStringLiteral("/"), QString()} << false << "/" << false << QStringList{QStringLiteral("/"), QString()} << "/";
 
     QTest::newRow("/mnt1") << "/mnt" << QStringList() << true << "/mnt/" << false << QStringList() << QString();
-    QTest::newRow("/mnt2") << "/mnt" << (QStringList() << QStringLiteral("/mnt")) << true << "/mnt/" << true << (QStringList() << QStringLiteral("/mnt/"))
-                           << "/mnt";
-    QTest::newRow("/mnt3") << "/mnt" << (QStringList() << QStringLiteral("/mnt/")) << true << "/mnt/" << false << (QStringList() << QStringLiteral("/mnt/"))
-                           << "/mnt/";
+    QTest::newRow("/mnt2") << "/mnt" << QStringList{QStringLiteral("/mnt")} << true << "/mnt/" << true << QStringList{QStringLiteral("/mnt/")} << "/mnt";
+    QTest::newRow("/mnt3") << "/mnt" << QStringList{QStringLiteral("/mnt/")} << true << "/mnt/" << false << QStringList{QStringLiteral("/mnt/")} << "/mnt/";
 
     QTest::newRow("/mnt/test1") << "/mnt" << (QStringList() << QStringLiteral("/mnt/test1") << QStringLiteral("/mnt/test2/")) << true << "/mnt/" << true
-                                << (QStringList() << QStringLiteral("/mnt/test1/") << QStringLiteral("/mnt/test2/")) << "";
-    QTest::newRow("/mnt/test2") << "/mnt/test2" << (QStringList() << QStringLiteral("/mnt/test1/") << QStringLiteral("/mnt/test2/")) << true << "/mnt/test2/"
-                                << false << (QStringList() << QStringLiteral("/mnt/test1/") << QStringLiteral("/mnt/test2/")) << "/mnt/test2/";
+                                << QStringList{QStringLiteral("/mnt/test1/"), QStringLiteral("/mnt/test2/")} << "";
+    QTest::newRow("/mnt/test2") << "/mnt/test2" << QStringList{QStringLiteral("/mnt/test1/"), QStringLiteral("/mnt/test2/")} << true << "/mnt/test2/" << false
+                                << QStringList{QStringLiteral("/mnt/test1/"), QStringLiteral("/mnt/test2/")} << "/mnt/test2/";
     QTest::newRow("/mnt/test3") << "/mnt/test2/" << (QStringList() << QStringLiteral("/mnt/test1/") << QStringLiteral("/mnt/test2/")) << false << "/mnt/test2/"
-                                << false << (QStringList() << QStringLiteral("/mnt/test1/") << QStringLiteral("/mnt/test2/")) << "/mnt/test2/";
+                                << false << QStringList{QStringLiteral("/mnt/test1/"), QStringLiteral("/mnt/test2/")} << "/mnt/test2/";
 }
 
 void KNetworkMountsTestStatic::testStaticFunctions()
