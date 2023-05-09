@@ -19,18 +19,6 @@
 #include <QLocale>
 #include <QLoggingCategory>
 
-namespace QTest
-{
-template<>
-inline char *toString(const QJsonValue &val)
-{
-    // simply reuse the QDebug representation
-    QString result;
-    QDebug(&result) << val;
-    return QTest::toString(result);
-}
-}
-
 class LibraryPathRestorer
 {
 public:
@@ -50,11 +38,8 @@ private:
 class KPluginMetaDataTest : public QObject
 {
     Q_OBJECT
-    bool m_canMessage = false;
 
-    void doMessagesWorkInternal()
-    {
-    }
+    bool m_canMessage = false;
 
     Q_REQUIRED_RESULT bool doMessagesWork()
     {
@@ -147,7 +132,6 @@ private Q_SLOTS:
                              " \"Translators\": { \"Name\": \"No One\", \"Email\": \"no.one@kde.org\" },\n"
                              " \"OtherContributors\": { \"Name\": \"No One\", \"Email\": \"no.one@kde.org\" },\n"
                              " \"Category\": \"Date and Time\",\n"
-                             " \"Dependencies\": [ \"foo\", \"bar\"],\n"
                              " \"EnabledByDefault\": \"true\",\n"
                              " \"ExtraInformation\": \"Something else\",\n"
                              " \"License\": \"LGPL\",\n"
@@ -155,8 +139,7 @@ private Q_SLOTS:
                              " \"Id\": \"time\",\n"
                              " \"Version\": \"1.0\",\n"
                              " \"Website\": \"https://plasma.kde.org/\",\n"
-                             " \"MimeTypes\": [ \"image/png\" ],\n"
-                             " \"ServiceTypes\": [\"Plasma/DataEngine\"]\n"
+                             " \"MimeTypes\": [ \"image/png\" ]\n"
                              " }\n}\n",
                              &e)
                              .object();
