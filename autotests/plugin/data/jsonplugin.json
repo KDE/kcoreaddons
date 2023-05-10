@@ -15,7 +15,7 @@
         "Description[x-test]": "xxThis is a pluginxx",
         "Authors": [
             {
-                "NName": "Alex"
+                "nNName": "Alex"
             }
         ],
         "MimeTypes": [

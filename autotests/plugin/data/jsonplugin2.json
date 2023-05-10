@@ -1,6 +1,8 @@
 {
     "KPlugin": {
-        "Description": "This is another plugin", 
-        "MimeTypes": [ "text/html" ]
+        "dDescription": "This is another plugin",
+        "MimeTypes": [
+            "text/html"
+        ]
     }
 }
