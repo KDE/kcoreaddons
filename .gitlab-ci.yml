@@ -1,22 +1,2 @@
-
-linting:
-  stage: build
-  image: invent-registry.kde.org/sysadmin/ci-images/suse-qt65:latest
-  tags:
-    - Linux
-  variables:
-    KDECI_GITLAB_SERVER: https://invent.kde.org/
-    KDECI_PACKAGE_PROJECT: teams/ci-artifacts/linting
-  interruptible: true
-  before_script:
-    - git clone https://invent.kde.org/alex/ci-utilities --branch work/alex/jsonlinting
-    - git clone https://invent.kde.org/sysadmin/repo-metadata ci-utilities/repo-metadata/
-    - pip install check-jsonschema --user # Should be put in a proper image
-  script:
-    - export PATH="$PATH:$HOME/.local/bin"
-    - git config --global --add safe.directory $CI_PROJECT_DIR
-    - echo $PWD $CI_PROJECT_DIR
-    - ./ci-utilities/resources/validate_changed_json_files.sh
-  rules:
-    - changes:
-      - "**/*.json"
+include:
+  - https://invent.kde.org/alex/ci-utilities/-/raw/39b223299833846a955d652fa57c8132455e52c0/gitlab-templates/linting.yml

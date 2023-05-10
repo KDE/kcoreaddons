@@ -6,7 +6,7 @@
         "Description[nl]": [
             "Dit d sfdsafsais eeeeeeeeen plug-infdsfd  s",
             "Dit d kfldsjfkldsfsfdsafsais eeeeeeeeen plug-infdsfd  s",
-            "Dit d sfdsafsais eeeeeeeeen plug-infdsfd  s"
+            "Dit d sfdsafsais eeeeeeeeen plug-infdsfdfdsfdsafdsa  s"
         ],
         "Description[pt]": "Isto é um 'plugin'",
         "Description[pt_BR]": "Isto é um plugin",
@@ -15,7 +15,7 @@
         "Description[x-test]": "xxThis is a pluginxx",
         "Authors": [
             {
-                "Name": "Alex"
+                "NName": "Alex"
             }
         ],
         "MimeTypes": [
