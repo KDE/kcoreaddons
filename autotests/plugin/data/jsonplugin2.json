@@ -2,7 +2,7 @@
     "KPlugin": {
         "dDescription": "This is another plugin",
         "MimeTypes": [
-            []
+            [],
         ]
     }
 }
