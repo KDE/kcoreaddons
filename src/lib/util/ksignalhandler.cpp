@@ -10,6 +10,7 @@
 
 #ifndef Q_OS_WIN
 #include <cerrno>
+#include <fcntl.h>
 #include <signal.h>
 #include <sys/socket.h>
 #include <unistd.h>
@@ -34,10 +35,14 @@ KSignalHandler::KSignalHandler()
 {
     d->q = this;
 #ifndef Q_OS_WIN
-    if (::socketpair(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0, KSignalHandlerPrivate::signalFd)) {
+    if (::socketpair(AF_UNIX, SOCK_STREAM, 0, KSignalHandlerPrivate::signalFd)) {
         qCWarning(KCOREADDONS_DEBUG) << "Couldn't create a socketpair";
         return;
     }
+
+    // ensure the sockets are not leaked to child processes, SOCK_CLOEXEC not supported on macOS
+    fcntl(KSignalHandlerPrivate::signalFd[0], F_SETFD, FD_CLOEXEC);
+    fcntl(KSignalHandlerPrivate::signalFd[1], F_SETFD, FD_CLOEXEC);
 
     d->m_handler = new QSocketNotifier(KSignalHandlerPrivate::signalFd[1], QSocketNotifier::Read, this);
     connect(d->m_handler, &QSocketNotifier::activated, d.get(), &KSignalHandlerPrivate::handleSignal);
