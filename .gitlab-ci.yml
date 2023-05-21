@@ -1,2 +1,2 @@
 include:
-  - https://invent.kde.org/alex/ci-utilities/-/raw/e6add98e07c63c8056b2ff4f7010badd2c9368d2/gitlab-templates/json-validation.yml
+  - https://invent.kde.org/alex/ci-utilities/-/raw/3930023becbe5b1338567f25e7413682369093f0/gitlab-templates/json-validation.yml
