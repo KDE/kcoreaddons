@@ -201,11 +201,9 @@ public:
         LGPL_V2 = LGPL, ///< LGPL_V2, this has the same value as LicenseKey::LGPL, see https://spdx.org/licenses/LGPL-2.0-only.html
         BSDL = 3, ///< BSDL, see https://spdx.org/licenses/BSD-2-Clause.html
         Artistic = 4, ///< Artistic, see https://spdx.org/licenses/Artistic-2.0.html
-        QPL = 5, ///< QPL
-        QPL_V1_0 = QPL, ///< QPL_V1_0, this has the same value as LicenseKey::QPL, see https://spdx.org/licenses/QPL-1.0.html
-        GPL_V3 = 6, ///< GPL_V3, see https://spdx.org/licenses/GPL-3.0.html
-        LGPL_V3 = 7, ///< LGPL_V3, see https://spdx.org/licenses/LGPL-3.0-only.html
-        LGPL_V2_1 = 8, ///< LGPL_V2_1 @since 5.25, see https://spdx.org/licenses/LGPL-2.1-only.html
+        GPL_V3 = 5, ///< GPL_V3, see https://spdx.org/licenses/GPL-3.0.html
+        LGPL_V3 = 6, ///< LGPL_V3, see https://spdx.org/licenses/LGPL-3.0-only.html
+        LGPL_V2_1 = 7, ///< LGPL_V2_1 @since 5.25, see https://spdx.org/licenses/LGPL-2.1-only.html
     };
     Q_ENUM(LicenseKey)
 

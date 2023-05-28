@@ -149,8 +149,6 @@ QString KAboutLicensePrivate::spdxID() const
         return QStringLiteral("BSD-2-Clause");
     case KAboutLicense::Artistic:
         return QStringLiteral("Artistic-1.0");
-    case KAboutLicense::QPL_V1_0:
-        return QStringLiteral("QPL-1.0");
     case KAboutLicense::GPL_V3:
         return QStringLiteral("GPL-3.0");
     case KAboutLicense::LGPL_V3:
@@ -237,10 +235,6 @@ QString KAboutLicense::text() const
     case KAboutLicense::Artistic:
         knownLicense = true;
         pathToFile = QStringLiteral("ARTISTIC");
-        break;
-    case KAboutLicense::QPL_V1_0:
-        knownLicense = true;
-        pathToFile = QStringLiteral("QPL_V1.0");
         break;
     case KAboutLicense::GPL_V3:
         knownLicense = true;
@@ -329,10 +323,6 @@ QString KAboutLicense::name(KAboutLicense::NameFormat formatName) const
         licenseShort = QCoreApplication::translate("KAboutLicense", "Artistic License", "@item license (short name)");
         licenseFull = QCoreApplication::translate("KAboutLicense", "Artistic License", "@item license");
         break;
-    case KAboutLicense::QPL_V1_0:
-        licenseShort = QCoreApplication::translate("KAboutLicense", "QPL v1.0", "@item license (short name)");
-        licenseFull = QCoreApplication::translate("KAboutLicense", "Q Public License", "@item license");
-        break;
     case KAboutLicense::GPL_V3:
         licenseShort = QCoreApplication::translate("KAboutLicense", "GPL v3", "@item license (short name)");
         licenseFull = QCoreApplication::translate("KAboutLicense", "GNU General Public License Version 3", "@item license");
@@ -381,8 +371,6 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
         {"lgpl20", KAboutLicense::LGPL_V2},    {"lgpl20+", KAboutLicense::LGPL_V2},
         {"bsd", KAboutLicense::BSDL},          {"bsd2clause", KAboutLicense::BSDL},
         {"artistic", KAboutLicense::Artistic}, {"artistic10", KAboutLicense::Artistic},
-        {"qpl", KAboutLicense::QPL},           {"qplv1", KAboutLicense::QPL_V1_0},
-        {"qplv10", KAboutLicense::QPL_V1_0},   {"qpl10", KAboutLicense::QPL_V1_0},
         {"gplv3", KAboutLicense::GPL_V3},      {"gplv3+", KAboutLicense::GPL_V3},
         {"gpl30", KAboutLicense::GPL_V3},      {"gpl30+", KAboutLicense::GPL_V3},
         {"lgplv3", KAboutLicense::LGPL_V3},    {"lgplv3+", KAboutLicense::LGPL_V3},
