@@ -68,7 +68,7 @@ msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr ""
 
-#: lib/kaboutdata.cpp:265
+#: lib/kaboutdata.cpp:259
 msgctxt "KAboutLicense|"
 msgid ""
 "No licensing terms for this program have been specified.\n"
@@ -79,103 +79,93 @@ msgstr ""
 "Проверите да ли су услови лиценцирања наведени у\n"
 "документацији или изворном коду.\n"
 
-#: lib/kaboutdata.cpp:273
+#: lib/kaboutdata.cpp:267
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
 msgstr "Услови за дистрибуирање програма: %1."
 
-#: lib/kaboutdata.cpp:317
+#: lib/kaboutdata.cpp:311
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "ОЈЛ в2"
 
-#: lib/kaboutdata.cpp:318
+#: lib/kaboutdata.cpp:312
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr "Гнуова Општа јавна лиценца, верзија 2"
 
-#: lib/kaboutdata.cpp:321
+#: lib/kaboutdata.cpp:315
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "МОЈЛ в3"
 
-#: lib/kaboutdata.cpp:322
+#: lib/kaboutdata.cpp:316
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr "Гнуова Мања општа јавна лиценца, верзија 2"
 
-#: lib/kaboutdata.cpp:325
+#: lib/kaboutdata.cpp:319
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD License"
 msgstr "БСД"
 
-#: lib/kaboutdata.cpp:326
+#: lib/kaboutdata.cpp:320
 msgctxt "KAboutLicense|@item license"
 msgid "BSD License"
 msgstr "БСД"
 
-#: lib/kaboutdata.cpp:329
+#: lib/kaboutdata.cpp:323
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Artistic License"
 msgstr "Уметничка"
 
-#: lib/kaboutdata.cpp:330
+#: lib/kaboutdata.cpp:324
 msgctxt "KAboutLicense|@item license"
 msgid "Artistic License"
 msgstr "Уметничка"
 
-#: lib/kaboutdata.cpp:333
-msgctxt "KAboutLicense|@item license (short name)"
-msgid "QPL v1.0"
-msgstr "КуПЛ 1.0"
-
-#: lib/kaboutdata.cpp:334
-msgctxt "KAboutLicense|@item license"
-msgid "Q Public License"
-msgstr "Ку јавна лиценца"
-
-#: lib/kaboutdata.cpp:337
+#: lib/kaboutdata.cpp:327
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "ОЈЛ в3"
 
-#: lib/kaboutdata.cpp:338
+#: lib/kaboutdata.cpp:328
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr "Гнуова Општа јавна лиценца, верзија 3"
 
-#: lib/kaboutdata.cpp:341
+#: lib/kaboutdata.cpp:331
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "МОЈЛ в3"
 
-#: lib/kaboutdata.cpp:342
+#: lib/kaboutdata.cpp:332
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr "Гнуова Мања општа јавна лиценца, верзија 3"
 
-#: lib/kaboutdata.cpp:345
+#: lib/kaboutdata.cpp:335
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr "МОЈЛ в2.1"
 
-#: lib/kaboutdata.cpp:346
+#: lib/kaboutdata.cpp:336
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr "Гнуова Мања општа јавна лиценца, верзија 2.1"
 
-#: lib/kaboutdata.cpp:350
+#: lib/kaboutdata.cpp:340
 msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "(посебна)"
 
-#: lib/kaboutdata.cpp:353
+#: lib/kaboutdata.cpp:343
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "(није наведена)"
 
-#: lib/kaboutdata.cpp:915
+#: lib/kaboutdata.cpp:903
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -191,43 +181,43 @@ msgstr ""
 "затреба.</p><p>За детаљније информације о локализацији КДЕ‑а уопште, "
 "посетите <a href='https://l10n.kde.org'>https://l10n.kde.org</a>.</p></html>"
 
-#: lib/kaboutdata.cpp:1146
+#: lib/kaboutdata.cpp:1134
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Прикажи податке о ауторима."
 
-#: lib/kaboutdata.cpp:1147
+#: lib/kaboutdata.cpp:1135
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Прикажи податке о лиценци."
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1137
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Основно име фајла ставке површи за овај програм."
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1138
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "Име фајла"
 
-#: lib/kaboutdata.cpp:1160
+#: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Овај програм је написао неко ко жели да остане анониман."
 
-#: lib/kaboutdata.cpp:1162
+#: lib/kaboutdata.cpp:1150
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 написали:"
 
-#: lib/kaboutdata.cpp:1173
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Користите https://bugs.kde.org за пријаву грешака."
 
-#: lib/kaboutdata.cpp:1175
+#: lib/kaboutdata.cpp:1163
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
@@ -841,6 +831,14 @@ msgstr ""
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr ""
+
+#~ msgctxt "KAboutLicense|@item license (short name)"
+#~ msgid "QPL v1.0"
+#~ msgstr "КуПЛ 1.0"
+
+#~ msgctxt "KAboutLicense|@item license"
+#~ msgid "Q Public License"
+#~ msgstr "Ку јавна лиценца"
 
 #~ msgctxt "KFormat|"
 #~ msgid "%1, %2"
