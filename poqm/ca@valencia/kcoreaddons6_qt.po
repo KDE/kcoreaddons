@@ -820,11 +820,3 @@ msgstr "No s'ha pogut executar «lsof». Codi d'error %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "Windows no admet KListOpenFilesJob"
-
-#~ msgctxt "KAboutLicense|@item license (short name)"
-#~ msgid "QPL v1.0"
-#~ msgstr "QPL v1.0"
-
-#~ msgctxt "KAboutLicense|@item license"
-#~ msgid "Q Public License"
-#~ msgstr "Llicència pública Q"
