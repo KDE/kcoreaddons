@@ -194,12 +194,12 @@ msgstr ""
 #: lib/kaboutdata.cpp:1225
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
-msgstr "Mostrar información do autor."
+msgstr "Amosar información do autor."
 
 #: lib/kaboutdata.cpp:1226
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
-msgstr "Mostrar información da licenza."
+msgstr "Amosar información da licenza."
 
 #: lib/kaboutdata.cpp:1228
 msgctxt "KAboutData CLI|"
