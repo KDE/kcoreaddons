@@ -164,9 +164,10 @@ KPluginMetaData::KPluginMetaData(const QString &pluginFile, KPluginMetaDataOptio
     }
 }
 
-KPluginMetaData::KPluginMetaData(const QPluginLoader &loader)
+KPluginMetaData::KPluginMetaData(const QPluginLoader &loader, KPluginMetaDataOption option)
     : KPluginMetaData()
 {
+    d->m_option = option;
     d->m_metaData = loader.metaData().value(QLatin1String("MetaData")).toObject();
     if (!loader.fileName().isEmpty()) {
         QFileInfo info(loader.fileName());
@@ -200,13 +201,13 @@ KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, KPluginMetaDataOption opt
     d->m_option = option;
 }
 
-KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId)
+KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId, KPluginMetaDataOption option)
 
 {
     QPluginLoader loader;
     KPluginMetaDataPrivate::getPluginLoaderForPath(loader, directory + QLatin1Char('/') + pluginId);
     if (loader.load()) {
-        if (KPluginMetaData metaData(loader); metaData.isValid()) {
+        if (KPluginMetaData metaData(loader, option); metaData.isValid()) {
             return metaData;
         }
     }

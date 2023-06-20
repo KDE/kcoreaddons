@@ -425,6 +425,12 @@ private Q_SLOTS:
                 QVERIFY2(false, "should not be reachable");
             }
         }
+        const auto pluginInvalid = KPluginMetaData::findPluginById(QStringLiteral("namespace"), QStringLiteral("pluginwithoutmetadata"));
+        const auto pluginValid = KPluginMetaData::findPluginById(QStringLiteral("namespace"), //
+                                                                 QStringLiteral("pluginwithoutmetadata"),
+                                                                 KPluginMetaData::AllowEmptyMetaData);
+        QVERIFY(!pluginInvalid.isValid());
+        QVERIFY(pluginValid.isValid());
     }
 
     void testStaticPluginsWithoutMetadata()

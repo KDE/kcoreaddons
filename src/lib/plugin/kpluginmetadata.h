@@ -119,8 +119,9 @@ public:
     /**
      * Reads the plugin metadata from a QPluginLoader instance. You must call QPluginLoader::setFileName()
      * or use the appropriate constructor on @p loader before calling this.
+     * @param option Added in 6.0, see enum docs
      */
-    KPluginMetaData(const QPluginLoader &loader);
+    KPluginMetaData(const QPluginLoader &loader, KPluginMetaDataOption option = KPluginMetaDataOption::DoNotAllowEmptyMetaData);
 
     /**
      * Reads the plugin metadata from a plugin which can be loaded from @p file.
@@ -173,9 +174,11 @@ public:
      * @note Check if the returned KPluginMetaData is valid before continuing to use it.
      *
      * @param pluginId The Id of the plugin. The id should be the same as the filename, see KPluginMetaData::pluginId()
+     * @param option Added in 6.0, see enum docs
      * @since 5.84
      */
-    static KPluginMetaData findPluginById(const QString &directory, const QString &pluginId);
+    static KPluginMetaData
+    findPluginById(const QString &directory, const QString &pluginId, KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData);
 
     /**
      * Find all plugins inside @p directory. Only plugins which have JSON metadata will be considered.
