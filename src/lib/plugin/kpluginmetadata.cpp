@@ -249,11 +249,6 @@ QString KPluginMetaData::fileName() const
     return d->m_fileName;
 }
 
-QList<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter)
-{
-    return findPlugins(directory, filter, KPluginMetaData::DoNotAllowEmptyMetaData);
-}
-
 QList<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter, KPluginMetaDataOption option)
 {
     QList<KPluginMetaData> ret;
