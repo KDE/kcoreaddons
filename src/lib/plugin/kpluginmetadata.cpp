@@ -539,16 +539,3 @@ QDebug operator<<(QDebug debug, const KPluginMetaData &metaData)
     debug.nospace() << "KPluginMetaData(pluginId:" << metaData.pluginId() << ", fileName: " << metaData.fileName() << ')';
     return debug;
 }
-
-QDebug operator<<(QDebug debug, const QList<KPluginMetaData> &list)
-{
-    bool shouldPrintMultiline = list.size() > 1;
-    const char *endLine = shouldPrintMultiline ? "\n" : "";
-    QDebugStateSaver saver(debug);
-    debug.nospace() << "QList<KPluginMetaData> {" << endLine;
-    for (const KPluginMetaData &md : list) {
-        debug << (shouldPrintMultiline ? "\t" : "") << md << "," << endLine;
-    }
-    debug << '}';
-    return debug;
-}

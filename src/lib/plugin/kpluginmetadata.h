@@ -426,9 +426,6 @@ inline size_t qHash(const KPluginMetaData &md, size_t seed)
 /// @since 6.0
 KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const KPluginMetaData &metaData);
 
-/// @since 6.0
-KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const QList<KPluginMetaData> &list);
-
 Q_DECLARE_METATYPE(KPluginMetaData)
 
 #endif // KPLUGINMETADATA_H
