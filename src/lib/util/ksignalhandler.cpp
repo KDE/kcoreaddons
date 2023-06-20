@@ -7,6 +7,7 @@
 #include "ksignalhandler.h"
 #include "kcoreaddons_debug.h"
 #include <QSocketNotifier>
+#include <QTimer>
 
 #ifndef Q_OS_WIN
 #include <cerrno>
@@ -44,8 +45,10 @@ KSignalHandler::KSignalHandler()
     fcntl(KSignalHandlerPrivate::signalFd[0], F_SETFD, FD_CLOEXEC);
     fcntl(KSignalHandlerPrivate::signalFd[1], F_SETFD, FD_CLOEXEC);
 
-    d->m_handler = new QSocketNotifier(KSignalHandlerPrivate::signalFd[1], QSocketNotifier::Read, this);
-    connect(d->m_handler, &QSocketNotifier::activated, d.get(), &KSignalHandlerPrivate::handleSignal);
+    QTimer::singleShot(0, [this] {
+        d->m_handler = new QSocketNotifier(KSignalHandlerPrivate::signalFd[1], QSocketNotifier::Read, this);
+        connect(d->m_handler, &QSocketNotifier::activated, d.get(), &KSignalHandlerPrivate::handleSignal);
+    });
 #endif
 }
 
