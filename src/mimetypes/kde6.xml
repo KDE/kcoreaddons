@@ -1089,7 +1089,7 @@ Notes:
     <comment xml:lang="sl">Uvoz v KPhotoAlbum</comment>
     <comment xml:lang="sv">Kfotoalbum-import</comment>
     <comment xml:lang="tok">kama insa pi KPhotoAlbum</comment>
-    <comment xml:lang="tr">KPhotoAlbum içe aktar</comment>
+    <comment xml:lang="tr">K Fotoğraf Albümü içe aktar</comment>
     <comment xml:lang="uk">файли імпортування KPhotoAlbum</comment>
     <comment xml:lang="vi">phần nhập khẩu KPhotoAlbum</comment>
     <comment xml:lang="zh_CN">KPhotoAlbum 导入文件</comment>
@@ -1143,7 +1143,7 @@ Notes:
     <comment xml:lang="sv">HDR-bild</comment>
     <comment xml:lang="ta">HDR படம்</comment>
     <comment xml:lang="tok">sitelen HDR</comment>
-    <comment xml:lang="tr">HDR resmi</comment>
+    <comment xml:lang="tr">HDR görsel</comment>
     <comment xml:lang="uk">зображення HDR</comment>
     <comment xml:lang="vi">ảnh HDR</comment>
     <comment xml:lang="zh_CN">HDR 图像</comment>
@@ -1594,7 +1594,7 @@ Notes:
     <comment xml:lang="sv">KDE-systemövervakare</comment>
     <comment xml:lang="ta">கே.டீ.யீ. கணினி மேற்பார்வை</comment>
     <comment xml:lang="tok">ilo pi oko ilo KDE</comment>
-    <comment xml:lang="tr">KDE sistem izleyici</comment>
+    <comment xml:lang="tr">KDE sistem izleyicisi</comment>
     <comment xml:lang="uk">монітор системи KDE</comment>
     <comment xml:lang="vi">trình giám sát hệ thống KDE</comment>
     <comment xml:lang="zh_CN">KDE 系统监视器</comment>
@@ -3091,7 +3091,7 @@ Notes:
     <comment xml:lang="sl">Deklaracija uporabniškega vmesnika KXMLGUI</comment>
     <comment xml:lang="sv">KXMLGUI-användargränssnittsdeklaration</comment>
     <comment xml:lang="tok">lipu pi ilo KXMLGUI</comment>
-    <comment xml:lang="tr">KXMLGUI UI Bildirimi</comment>
+    <comment xml:lang="tr">KXMLGUI Arayüz Bildirimi</comment>
     <comment xml:lang="uk">оголошення інтерфейсу KXMLGUI</comment>
     <comment xml:lang="vi">khai báo UI KXMLGUI</comment>
     <comment xml:lang="zh_CN">KXMLGUI 界面声明</comment>
