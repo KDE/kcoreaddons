@@ -22,7 +22,6 @@ public:
     ~TestJob() override;
 
     void start() override;
-    using KJob::isFinished;
     using KJob::setProgressUnit;
 
 protected:

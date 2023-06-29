@@ -407,6 +407,15 @@ public:
      */
     bool isStartedWithExec() const;
 
+    /**
+     * Returns if the job has been finished and has emitted the finished() signal.
+     *
+     * @return if the job has been finished
+     * @see finished()
+     * @since 5.240
+     */
+    bool isFinished() const;
+
 Q_SIGNALS:
     /**
      * Emitted when the job is finished, in any case. It is used to notify
@@ -632,16 +641,6 @@ Q_SIGNALS:
     void speed(KJob *job, unsigned long speed);
 
 protected:
-    /**
-     * Returns if the job has been finished and has emitted the finished() signal.
-     *
-     * @return if the job has been finished
-     * @see finished()
-     * @since 5.75
-     */
-    // KF6 TODO: make public. Useful at least for unittests that run multiple jobs in parallel.
-    bool isFinished() const;
-
     /**
      * Sets the error code.
      *
