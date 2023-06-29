@@ -275,9 +275,17 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
                 qWarning() << "kio-fuse is missing";
                 return false;
             }
-        } else if (isLocal && QFileInfo(url.toLocalFile()).isDir()) {
-            // XDG Document Portal doesn't support directories and silently drops them.
-            return false;
+        } else {
+            const QFileInfo info(url.toLocalFile());
+            if (info.isDir()) {
+                // XDG Document Portal doesn't support directories and silently drops them.
+                return false;
+            }
+            if (info.isSymbolicLink()) {
+                // XDG Document Portal also doesn't support symlinks since it doesn't let us open the fd O_NOFOLLOW.
+                // https://github.com/flatpak/xdg-desktop-portal/issues/961#issuecomment-1573646299
+                return false;
+            }
         }
     }
 
