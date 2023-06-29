@@ -39,3 +39,5 @@ FaceIconTest::FaceIconTest()
         item->setData(Qt::DecorationRole, pixmap);
     }
 }
+
+#include "moc_faceicontest.cpp"

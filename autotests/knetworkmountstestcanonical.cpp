@@ -231,3 +231,5 @@ void KNetworkMountsTestCanonical::testCanonicalSymlinkPath()
 
     QCOMPARE(KNetworkMounts::self()->canonicalSymlinkPath(symlinkedPath), canonicalPath);
 }
+
+#include "moc_knetworkmountstestcanonical.cpp"

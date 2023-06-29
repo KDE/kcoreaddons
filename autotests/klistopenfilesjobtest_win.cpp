@@ -22,3 +22,5 @@ void KListOpenFilesJobTest::testNotSupported()
     QCOMPARE(job->errorText(), QStringLiteral("KListOpenFilesJob is not supported on Windows"));
     QVERIFY(job->processInfoList().empty());
 }
+
+#include "moc_klistopenfilesjobtest_win.cpp"

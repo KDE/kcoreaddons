@@ -120,3 +120,5 @@ QString KUserProxy::host() const
 {
     return QHostInfo::localHostName();
 }
+
+#include "moc_kuserproxy.cpp"

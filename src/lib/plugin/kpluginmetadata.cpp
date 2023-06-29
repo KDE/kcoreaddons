@@ -535,3 +535,5 @@ QDebug operator<<(QDebug debug, const KPluginMetaData &metaData)
     debug.nospace() << "KPluginMetaData(pluginId:" << metaData.pluginId() << ", fileName: " << metaData.fileName() << ')';
     return debug;
 }
+
+#include "moc_kpluginmetadata.cpp"

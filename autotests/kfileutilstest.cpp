@@ -89,3 +89,5 @@ void KFileUtilsTest::testfindAllUniqueFiles()
     const QStringList actual = KFileUtils::findAllUniqueFiles(dirs, QStringList{QStringLiteral("*.test")});
     QCOMPARE(actual, expected);
 }
+
+#include "moc_kfileutilstest.cpp"

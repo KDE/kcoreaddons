@@ -126,3 +126,5 @@ QObject *KPluginFactory::create(const char *iface, QWidget *parentWidget, QObjec
 
     return nullptr;
 }
+
+#include "moc_kpluginfactory.cpp"

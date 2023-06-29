@@ -532,3 +532,5 @@ void KTextToHTMLTest::testEmoticonsNoReplace()
     QFETCH(QString, input);
     QCOMPARE(KTextToHTML::convertToHtml(input, KTextToHTML::ReplaceSmileys | KTextToHTML::IgnoreUrls), input);
 }
+
+#include "moc_ktexttohtmltest.cpp"

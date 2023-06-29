@@ -1181,3 +1181,5 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         ::exit(EXIT_SUCCESS);
     }
 }
+
+#include "moc_kaboutdata.cpp"

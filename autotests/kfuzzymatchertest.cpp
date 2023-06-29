@@ -233,3 +233,5 @@ void KFuzzyMatcherTest::testMatchedRanges()
     });
     QVERIFY(res);
 }
+
+#include "moc_kfuzzymatchertest.cpp"

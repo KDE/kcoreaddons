@@ -140,3 +140,5 @@ void KNetworkMountsTestNoConfig::testNoConfigOptions()
 
     QCOMPARE(KNetworkMounts::self()->isOptionEnabled(option, default_value), expected_value);
 }
+
+#include "moc_knetworkmountstestnoconfig.cpp"

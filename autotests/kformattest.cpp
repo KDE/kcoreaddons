@@ -398,3 +398,5 @@ void KFormatTest::formatRelativeDate()
 }
 
 QTEST_MAIN(KFormatTest)
+
+#include "moc_kformattest.cpp"
