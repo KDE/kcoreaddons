@@ -35,3 +35,5 @@ K_PLUGIN_FACTORY(MultiPluginFactory, registerPlugin<MultiPlugin1>();)
 #endif
 
 #include "multiplugin.moc"
+
+#include "moc_multiplugin.cpp"

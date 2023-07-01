@@ -215,3 +215,5 @@ void KNetworkMounts::sync()
 {
     d->m_settings->sync();
 }
+
+#include "moc_knetworkmounts.cpp"

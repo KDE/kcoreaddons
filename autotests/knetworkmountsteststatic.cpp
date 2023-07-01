@@ -108,3 +108,5 @@ void KNetworkMountsTestStatic::testStaticKNetworkMountsTypeToString()
 
     QCOMPARE(enumToString(type), string);
 }
+
+#include "moc_knetworkmountsteststatic.cpp"

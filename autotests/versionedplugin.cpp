@@ -23,3 +23,5 @@ K_EXPORT_PLUGIN_VERSION(5)
 #endif
 
 #include "versionedplugin.moc"
+
+#include "moc_versionedplugin.cpp"

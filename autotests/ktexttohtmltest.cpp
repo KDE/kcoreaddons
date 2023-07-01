@@ -480,3 +480,5 @@ void KTextToHTMLTest::testHtmlConvert()
     const QString actualHtml = KTextToHTML::convertToHtml(plainText, flags);
     QCOMPARE(actualHtml, htmlText);
 }
+
+#include "moc_ktexttohtmltest.cpp"

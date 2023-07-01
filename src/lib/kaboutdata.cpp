@@ -1308,3 +1308,5 @@ QVariantList KAboutData::componentsVariant() const
 {
     return listToVariant(d->_componentList);
 }
+
+#include "moc_kaboutdata.cpp"

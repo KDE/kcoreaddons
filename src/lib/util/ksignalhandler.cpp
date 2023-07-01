@@ -99,3 +99,5 @@ KSignalHandler *KSignalHandler::self()
     static KSignalHandler s_self;
     return &s_self;
 }
+
+#include "moc_ksignalhandler.cpp"

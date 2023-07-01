@@ -158,3 +158,5 @@ void KUrlMimeDataTest::testMostLocalUrlList()
 
     delete mimeData;
 }
+
+#include "moc_kurlmimedatatest.cpp"

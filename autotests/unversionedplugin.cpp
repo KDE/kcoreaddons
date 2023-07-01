@@ -20,3 +20,5 @@ UnversionedPlugin::UnversionedPlugin(QObject *parent, const QVariantList &args)
 K_PLUGIN_FACTORY(UnversionedPluginFactory, registerPlugin<UnversionedPlugin>();)
 
 #include "unversionedplugin.moc"
+
+#include "moc_unversionedplugin.cpp"

@@ -16,3 +16,5 @@ JsonPlugin2::JsonPlugin2(QObject *parent, const QVariantList &args)
 K_PLUGIN_FACTORY_WITH_JSON(jsonplugin2, "jsonplugin2.json", registerPlugin<JsonPlugin2>();)
 
 #include "jsonplugin2.moc"
+
+#include "moc_jsonplugin2.cpp"

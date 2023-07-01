@@ -35,3 +35,5 @@ void KMemoryInfoTest::operators()
     QVERIFY(m.totalPhysical() != 0);
     QCOMPARE(m.totalPhysical(), m1.totalPhysical());
 }
+
+#include "moc_kmemoryinfotest.cpp"

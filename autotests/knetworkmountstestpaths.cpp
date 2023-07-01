@@ -153,3 +153,5 @@ void KNetworkMountsTestPaths::testPaths()
 
     QCOMPARE(KNetworkMounts::self()->isSlowPath(path, KNetworkMounts::SmbPaths), expected_smb);
 }
+
+#include "moc_knetworkmountstestpaths.cpp"

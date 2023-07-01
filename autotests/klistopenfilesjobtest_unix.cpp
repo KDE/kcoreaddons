@@ -145,3 +145,5 @@ void KListOpenFilesJobTest::testLsofNotFound()
     QCOMPARE(job->error(), static_cast<int>(KListOpenFilesJob::Error::InternalError));
     QVERIFY(job->processInfoList().empty());
 }
+
+#include "moc_klistopenfilesjobtest_unix.cpp"

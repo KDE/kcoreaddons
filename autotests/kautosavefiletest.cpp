@@ -154,3 +154,5 @@ void KAutoSaveFileTest::test_locking()
 
     qDeleteAll(staleFiles);
 }
+
+#include "moc_kautosavefiletest.cpp"

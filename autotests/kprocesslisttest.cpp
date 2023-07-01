@@ -80,3 +80,5 @@ void KProcessListTest::testProcessInfoNotFound()
     KProcessList::KProcessInfo processInfo = KProcessList::processInfo(-1);
     QVERIFY(processInfo.isValid() == false);
 }
+
+#include "moc_kprocesslisttest.cpp"

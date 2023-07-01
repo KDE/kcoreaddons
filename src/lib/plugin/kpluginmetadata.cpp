@@ -707,3 +707,5 @@ QStaticPlugin KPluginMetaData::staticPlugin() const
     Q_ASSERT(d->staticPlugin.has_value());
     return d->staticPlugin.value();
 }
+
+#include "moc_kpluginmetadata.cpp"

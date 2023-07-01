@@ -316,4 +316,6 @@ QList<QObject *> KPluginLoader::instantiatePlugins(const QString &directory, std
     return ret;
 }
 
+#include "moc_kpluginloader.cpp"
+
 #endif

@@ -254,3 +254,5 @@ void KStringHandlerTest::rsqueeze()
 
     QCOMPARE(KStringHandler::rsqueeze(string, length), expected);
 }
+
+#include "moc_kstringhandlertest.cpp"

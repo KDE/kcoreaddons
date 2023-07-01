@@ -20,3 +20,5 @@ AlwaysUnloadPlugin::AlwaysUnloadPlugin(QObject *parent, const QVariantList &args
 K_PLUGIN_FACTORY(AlwaysUnloadPluginFactory, registerPlugin<AlwaysUnloadPlugin>();)
 
 #include "alwaysunloadplugin.moc"
+
+#include "moc_alwaysunloadplugin.cpp"
