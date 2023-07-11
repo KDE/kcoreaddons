@@ -13,6 +13,8 @@
 #include "kformatprivate_p.h"
 
 #include <QDateTime>
+#include <QSettings>
+#include <QStandardPaths>
 
 #include <math.h>
 
@@ -165,8 +167,12 @@ QString KFormatPrivate::formatValue(double value,
 QString KFormatPrivate::formatByteSize(double size, int precision, KFormat::BinaryUnitDialect dialect, KFormat::BinarySizeUnits units) const
 {
     // Current KDE default is IECBinaryDialect
-    if (dialect <= KFormat::DefaultBinaryDialect || dialect > KFormat::LastBinaryDialect) {
-        dialect = KFormat::IECBinaryDialect;
+    const auto fallbackDialect = KFormat::IECBinaryDialect;
+
+    if (dialect == KFormat::DefaultBinaryDialect) {
+        const auto kdeglobals = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, QStringLiteral("kdeglobals"));
+        QSettings settings(kdeglobals, QSettings::IniFormat);
+        dialect = static_cast<KFormat::BinaryUnitDialect>(settings.value("Locale/BinaryUnitDialect", fallbackDialect).toInt());
     }
 
     // Current KDE default is to auto-adjust so the size falls in the range 0 to 1000/1024
