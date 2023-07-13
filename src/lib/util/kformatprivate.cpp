@@ -169,7 +169,7 @@ QString KFormatPrivate::formatByteSize(double size, int precision, KFormat::Bina
     // Current KDE default is IECBinaryDialect
     const auto fallbackDialect = KFormat::IECBinaryDialect;
 
-    if (dialect == KFormat::DefaultBinaryDialect) {
+    if (dialect <= KFormat::DefaultBinaryDialect || dialect > KFormat::LastBinaryDialect) {
         const auto kdeglobals = QStandardPaths::locate(QStandardPaths::GenericConfigLocation, QStringLiteral("kdeglobals"));
         QSettings settings(kdeglobals, QSettings::IniFormat);
         dialect = static_cast<KFormat::BinaryUnitDialect>(settings.value("Locale/BinaryUnitDialect", fallbackDialect).toInt());
