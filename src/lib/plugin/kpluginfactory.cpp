@@ -12,16 +12,12 @@
 #include "kpluginfactory_p.h"
 
 #include "kcoreaddons_debug.h"
-#include <QObjectCleanupHandler>
 #include <QPluginLoader>
 #include <algorithm>
-
-Q_GLOBAL_STATIC(QObjectCleanupHandler, factorycleanup)
 
 KPluginFactory::KPluginFactory()
     : d(new KPluginFactoryPrivate)
 {
-    factorycleanup()->add(this);
 }
 
 KPluginFactory::~KPluginFactory() = default;
