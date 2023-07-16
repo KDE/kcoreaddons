@@ -24,13 +24,14 @@ struct FsInfo {
     const char *name = nullptr;
 };
 
-static const std::array<FsInfo, 18> s_fsMap = {{
+static const std::array<FsInfo, 19> s_fsMap = {{
     {KFileSystemType::Nfs, "nfs"},
     {KFileSystemType::Smb, "smb"},
     {KFileSystemType::Fat, "fat"},
     {KFileSystemType::Ramfs, "ramfs"},
     {KFileSystemType::Other, "other"},
     {KFileSystemType::Ntfs, "ntfs"},
+    {KFileSystemType::Ntfs, "ntfs3"},
     {KFileSystemType::Exfat, "exfat"},
     {KFileSystemType::Unknown, "unknown"},
     {KFileSystemType::Nfs, "autofs"},
@@ -82,6 +83,11 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 // From /usr/src/linux-5.13.2-1-vanilla/fs/ntfs/ntfs.h
 #ifndef NTFS_SB_MAGIC
 #define NTFS_SB_MAGIC 0x5346544e
+#endif
+
+// From /ntfs3/blob/master/super.c#L945
+#ifndef NTFS3_MAGIC
+#define NTFS3_MAGIC 0x7366746E
 #endif
 
 // From /usr/src/linux-5.13.2-1-vanilla/fs/exfat/exfat_fs.h
@@ -184,6 +190,7 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
     case MSDOS_SUPER_MAGIC:
         return KFileSystemType::Fat;
     case NTFS_SB_MAGIC:
+    case NTFS3_MAGIC:
         return KFileSystemType::Ntfs;
     case EXFAT_SUPER_MAGIC:
         return KFileSystemType::Exfat;
