@@ -325,63 +325,63 @@ msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:100
+#: lib/util/kformatprivate.cpp:102
 msgctxt "KFormat|SI prefix for 10^⁻24"
 msgid "y"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:101
+#: lib/util/kformatprivate.cpp:103
 msgctxt "KFormat|SI prefix for 10^⁻21"
 msgid "z"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:102
+#: lib/util/kformatprivate.cpp:104
 #, fuzzy
 #| msgid "am"
 msgctxt "KFormat|SI prefix for 10^⁻18"
 msgid "a"
 msgstr "چ ب"
 
-#: lib/util/kformatprivate.cpp:103
+#: lib/util/kformatprivate.cpp:105
 msgctxt "KFormat|SI prefix for 10^⁻15"
 msgid "f"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:104
+#: lib/util/kformatprivate.cpp:106
 #, fuzzy
 #| msgid "pm"
 msgctxt "KFormat|SI prefix for 10^⁻12"
 msgid "p"
 msgstr "چ ك"
 
-#: lib/util/kformatprivate.cpp:105
+#: lib/util/kformatprivate.cpp:107
 msgctxt "KFormat|SI prefix for 10^⁻9"
 msgid "n"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:106
+#: lib/util/kformatprivate.cpp:108
 msgctxt "KFormat|SI prefix for 10^⁻6"
 msgid "µ"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:107
+#: lib/util/kformatprivate.cpp:109
 #, fuzzy
 #| msgid "am"
 msgctxt "KFormat|SI prefix for 10^⁻3"
 msgid "m"
 msgstr "چ ب"
 
-#: lib/util/kformatprivate.cpp:109
+#: lib/util/kformatprivate.cpp:111
 msgctxt "KFormat|SI prefix for 10^3"
 msgid "k"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:109
+#: lib/util/kformatprivate.cpp:111
 msgctxt "KFormat|IEC binary prefix for 2^10"
 msgid "Ki"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:110
+#: lib/util/kformatprivate.cpp:112
 #, fuzzy
 #| msgctxt "Before Noon KLocale::ShortName"
 #| msgid "AM"
@@ -389,7 +389,7 @@ msgctxt "KFormat|SI prefix for 10^6"
 msgid "M"
 msgstr "چ ب"
 
-#: lib/util/kformatprivate.cpp:110
+#: lib/util/kformatprivate.cpp:112
 #, fuzzy
 #| msgctxt "@action"
 #| msgid "Mail"
@@ -397,22 +397,22 @@ msgctxt "KFormat|IEC binary prefix for 2^20"
 msgid "Mi"
 msgstr "خەت"
 
-#: lib/util/kformatprivate.cpp:111
+#: lib/util/kformatprivate.cpp:113
 msgctxt "KFormat|SI prefix for 10^9"
 msgid "G"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:111
+#: lib/util/kformatprivate.cpp:113
 msgctxt "KFormat|IEC binary prefix for 2^30"
 msgid "Gi"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:112
+#: lib/util/kformatprivate.cpp:114
 msgctxt "KFormat|SI prefix for 10^12"
 msgid "T"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:112
+#: lib/util/kformatprivate.cpp:114
 #, fuzzy
 #| msgctxt "@item Text character set"
 #| msgid "Thai"
@@ -420,7 +420,7 @@ msgctxt "KFormat|IEC binary prefix for 2^40"
 msgid "Ti"
 msgstr "تايلاندچە"
 
-#: lib/util/kformatprivate.cpp:113
+#: lib/util/kformatprivate.cpp:115
 #, fuzzy
 #| msgctxt "After Noon KLocale::NarrowName"
 #| msgid "P"
@@ -428,7 +428,7 @@ msgctxt "KFormat|SI prefix for 10^15"
 msgid "P"
 msgstr "P"
 
-#: lib/util/kformatprivate.cpp:113
+#: lib/util/kformatprivate.cpp:115
 #, fuzzy
 #| msgctxt "After Noon KLocale::NarrowName"
 #| msgid "P"
@@ -436,64 +436,64 @@ msgctxt "KFormat|IEC binary prefix for 2^50"
 msgid "Pi"
 msgstr "P"
 
-#: lib/util/kformatprivate.cpp:114
+#: lib/util/kformatprivate.cpp:116
 msgctxt "KFormat|SI prefix for 10^18"
 msgid "E"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:114
+#: lib/util/kformatprivate.cpp:116
 #, fuzzy
 #| msgid "Edit"
 msgctxt "KFormat|IEC binary prefix for 2^60"
 msgid "Ei"
 msgstr "تەھرىرلەش"
 
-#: lib/util/kformatprivate.cpp:115
+#: lib/util/kformatprivate.cpp:117
 msgctxt "KFormat|SI prefix for 10^21"
 msgid "Z"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:115
+#: lib/util/kformatprivate.cpp:117
 msgctxt "KFormat|IEC binary prefix for 2^70"
 msgid "Zi"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:116
+#: lib/util/kformatprivate.cpp:118
 msgctxt "KFormat|SI prefix for 10^24"
 msgid "Y"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:116
+#: lib/util/kformatprivate.cpp:118
 msgctxt "KFormat|IEC binary prefix for 2^80"
 msgid "Yi"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:125
+#: lib/util/kformatprivate.cpp:127
 #, fuzzy
 #| msgid "Submit"
 msgctxt "KFormat|Symbol of binary digit"
 msgid "bit"
 msgstr "تاپشۇر"
 
-#: lib/util/kformatprivate.cpp:128
+#: lib/util/kformatprivate.cpp:130
 msgctxt "KFormat|Symbol of byte"
 msgid "B"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:131
+#: lib/util/kformatprivate.cpp:133
 #, fuzzy
 #| msgid "am"
 msgctxt "KFormat|Symbol of meter"
 msgid "m"
 msgstr "چ ب"
 
-#: lib/util/kformatprivate.cpp:134
+#: lib/util/kformatprivate.cpp:136
 msgctxt "KFormat|Symbol of hertz"
 msgid "Hz"
 msgstr ""
 
 #. value without prefix, format "<val> <unit>"
-#: lib/util/kformatprivate.cpp:143
+#: lib/util/kformatprivate.cpp:145
 #, fuzzy, qt-format
 #| msgctxt "concatenation of dates and time"
 #| msgid "%1 %2"
@@ -502,7 +502,7 @@ msgid "%1 %2"
 msgstr "%1 %2"
 
 #. value with prefix, format "<val> <prefix><unit>"
-#: lib/util/kformatprivate.cpp:162
+#: lib/util/kformatprivate.cpp:164
 #, fuzzy, qt-format
 #| msgid "%1 %2, %3"
 msgctxt "KFormat|MetricBinaryDialect"
@@ -510,7 +510,7 @@ msgid "%1 %2%3"
 msgstr "%1 %2, %3"
 
 #. MetricBinaryDialect size in bytes
-#: lib/util/kformatprivate.cpp:212
+#: lib/util/kformatprivate.cpp:218
 #, fuzzy, qt-format
 #| msgctxt "size in bytes"
 #| msgid "%1 B"
@@ -519,7 +519,7 @@ msgid "%1 B"
 msgstr "%1 بايت"
 
 #. MetricBinaryDialect size in 1000 bytes
-#: lib/util/kformatprivate.cpp:215
+#: lib/util/kformatprivate.cpp:221
 #, fuzzy, qt-format
 #| msgctxt "size in 1000 bytes"
 #| msgid "%1 kB"
@@ -528,7 +528,7 @@ msgid "%1 kB"
 msgstr "%1 كىلوبايت"
 
 #. MetricBinaryDialect size in 10^6 bytes
-#: lib/util/kformatprivate.cpp:218
+#: lib/util/kformatprivate.cpp:224
 #, fuzzy, qt-format
 #| msgctxt "size in 10^6 bytes"
 #| msgid "%1 MB"
@@ -537,7 +537,7 @@ msgid "%1 MB"
 msgstr "%1 مېگابايت"
 
 #. MetricBinaryDialect size in 10^9 bytes
-#: lib/util/kformatprivate.cpp:221
+#: lib/util/kformatprivate.cpp:227
 #, fuzzy, qt-format
 #| msgctxt "size in 10^9 bytes"
 #| msgid "%1 GB"
@@ -546,7 +546,7 @@ msgid "%1 GB"
 msgstr "%1 گ ب"
 
 #. MetricBinaryDialect size in 10^12 bytes
-#: lib/util/kformatprivate.cpp:224
+#: lib/util/kformatprivate.cpp:230
 #, fuzzy, qt-format
 #| msgctxt "size in 10^12 bytes"
 #| msgid "%1 TB"
@@ -555,7 +555,7 @@ msgid "%1 TB"
 msgstr "%1 تېرابايت"
 
 #. MetricBinaryDialect size in 10^15 bytes
-#: lib/util/kformatprivate.cpp:227
+#: lib/util/kformatprivate.cpp:233
 #, fuzzy, qt-format
 #| msgctxt "size in 10^15 bytes"
 #| msgid "%1 PB"
@@ -564,7 +564,7 @@ msgid "%1 PB"
 msgstr "%1 پېتابايت"
 
 #. MetricBinaryDialect size in 10^18 byte
-#: lib/util/kformatprivate.cpp:230
+#: lib/util/kformatprivate.cpp:236
 #, fuzzy, qt-format
 #| msgctxt "size in 10^18 bytes"
 #| msgid "%1 EB"
@@ -573,7 +573,7 @@ msgid "%1 EB"
 msgstr "%1 ئېكسابايت"
 
 #. MetricBinaryDialect size in 10^21 bytes
-#: lib/util/kformatprivate.cpp:233
+#: lib/util/kformatprivate.cpp:239
 #, fuzzy, qt-format
 #| msgctxt "size in 10^21 bytes"
 #| msgid "%1 ZB"
@@ -582,7 +582,7 @@ msgid "%1 ZB"
 msgstr "%1 ZB"
 
 #. MetricBinaryDialect size in 10^24 bytes
-#: lib/util/kformatprivate.cpp:236
+#: lib/util/kformatprivate.cpp:242
 #, fuzzy, qt-format
 #| msgctxt "size in 10^24 bytes"
 #| msgid "%1 YB"
@@ -591,7 +591,7 @@ msgid "%1 YB"
 msgstr "%1 YB"
 
 #. JEDECBinaryDialect memory size in bytes
-#: lib/util/kformatprivate.cpp:242
+#: lib/util/kformatprivate.cpp:248
 #, fuzzy, qt-format
 #| msgctxt "size in bytes"
 #| msgid "%1 B"
@@ -600,7 +600,7 @@ msgid "%1 B"
 msgstr "%1 بايت"
 
 #. JEDECBinaryDialect memory size in 1024 bytes
-#: lib/util/kformatprivate.cpp:245
+#: lib/util/kformatprivate.cpp:251
 #, fuzzy, qt-format
 #| msgctxt "memory size in 1024 bytes"
 #| msgid "%1 KB"
@@ -609,7 +609,7 @@ msgid "%1 KB"
 msgstr "%1 ك​ب"
 
 #. JEDECBinaryDialect memory size in 10^20 bytes
-#: lib/util/kformatprivate.cpp:248
+#: lib/util/kformatprivate.cpp:254
 #, fuzzy, qt-format
 #| msgctxt "size in 10^6 bytes"
 #| msgid "%1 MB"
@@ -618,7 +618,7 @@ msgid "%1 MB"
 msgstr "%1 مېگابايت"
 
 #. JEDECBinaryDialect memory size in 10^30 bytes
-#: lib/util/kformatprivate.cpp:251
+#: lib/util/kformatprivate.cpp:257
 #, fuzzy, qt-format
 #| msgctxt "size in 10^9 bytes"
 #| msgid "%1 GB"
@@ -627,7 +627,7 @@ msgid "%1 GB"
 msgstr "%1 گ ب"
 
 #. JEDECBinaryDialect memory size in 10^40 bytes
-#: lib/util/kformatprivate.cpp:254
+#: lib/util/kformatprivate.cpp:260
 #, fuzzy, qt-format
 #| msgctxt "size in 10^12 bytes"
 #| msgid "%1 TB"
@@ -636,7 +636,7 @@ msgid "%1 TB"
 msgstr "%1 تېرابايت"
 
 #. JEDECBinaryDialect memory size in 10^50 bytes
-#: lib/util/kformatprivate.cpp:257
+#: lib/util/kformatprivate.cpp:263
 #, fuzzy, qt-format
 #| msgctxt "size in 10^15 bytes"
 #| msgid "%1 PB"
@@ -645,7 +645,7 @@ msgid "%1 PB"
 msgstr "%1 پېتابايت"
 
 #. JEDECBinaryDialect memory size in 10^60 bytes
-#: lib/util/kformatprivate.cpp:260
+#: lib/util/kformatprivate.cpp:266
 #, fuzzy, qt-format
 #| msgctxt "size in 10^18 bytes"
 #| msgid "%1 EB"
@@ -654,7 +654,7 @@ msgid "%1 EB"
 msgstr "%1 ئېكسابايت"
 
 #. JEDECBinaryDialect memory size in 10^70 bytes
-#: lib/util/kformatprivate.cpp:263
+#: lib/util/kformatprivate.cpp:269
 #, fuzzy, qt-format
 #| msgctxt "size in 10^21 bytes"
 #| msgid "%1 ZB"
@@ -663,7 +663,7 @@ msgid "%1 ZB"
 msgstr "%1 ZB"
 
 #. JEDECBinaryDialect memory size in 10^80 bytes
-#: lib/util/kformatprivate.cpp:266
+#: lib/util/kformatprivate.cpp:272
 #, fuzzy, qt-format
 #| msgctxt "size in 10^24 bytes"
 #| msgid "%1 YB"
@@ -672,7 +672,7 @@ msgid "%1 YB"
 msgstr "%1 YB"
 
 #. IECBinaryDialect size in bytes
-#: lib/util/kformatprivate.cpp:272
+#: lib/util/kformatprivate.cpp:278
 #, fuzzy, qt-format
 #| msgctxt "size in bytes"
 #| msgid "%1 B"
@@ -681,7 +681,7 @@ msgid "%1 B"
 msgstr "%1 بايت"
 
 #. IECBinaryDialect size in 1024 bytes
-#: lib/util/kformatprivate.cpp:275
+#: lib/util/kformatprivate.cpp:281
 #, fuzzy, qt-format
 #| msgctxt "size in 1024 bytes"
 #| msgid "%1 KiB"
@@ -690,7 +690,7 @@ msgid "%1 KiB"
 msgstr "%1 كىلوبايت‏"
 
 #. IECBinaryDialect size in 10^20 bytes
-#: lib/util/kformatprivate.cpp:278
+#: lib/util/kformatprivate.cpp:284
 #, fuzzy, qt-format
 #| msgctxt "size in 2^20 bytes"
 #| msgid "%1 MiB"
@@ -699,7 +699,7 @@ msgid "%1 MiB"
 msgstr "%1 مېگابايت"
 
 #. IECBinaryDialect size in 10^30 bytes
-#: lib/util/kformatprivate.cpp:281
+#: lib/util/kformatprivate.cpp:287
 #, fuzzy, qt-format
 #| msgctxt "size in 2^30 bytes"
 #| msgid "%1 GiB"
@@ -708,7 +708,7 @@ msgid "%1 GiB"
 msgstr "%1 گىگابايت"
 
 #. IECBinaryDialect size in 10^40 bytes
-#: lib/util/kformatprivate.cpp:284
+#: lib/util/kformatprivate.cpp:290
 #, fuzzy, qt-format
 #| msgctxt "size in 2^40 bytes"
 #| msgid "%1 TiB"
@@ -717,7 +717,7 @@ msgid "%1 TiB"
 msgstr "%1 تېرابايت"
 
 #. IECBinaryDialect size in 10^50 bytes
-#: lib/util/kformatprivate.cpp:287
+#: lib/util/kformatprivate.cpp:293
 #, fuzzy, qt-format
 #| msgctxt "size in 2^50 bytes"
 #| msgid "%1 PiB"
@@ -726,7 +726,7 @@ msgid "%1 PiB"
 msgstr "%1 پېتابايت"
 
 #. IECBinaryDialect size in 10^60 bytes
-#: lib/util/kformatprivate.cpp:290
+#: lib/util/kformatprivate.cpp:296
 #, fuzzy, qt-format
 #| msgctxt "size in 2^60 bytes"
 #| msgid "%1 EiB"
@@ -735,7 +735,7 @@ msgid "%1 EiB"
 msgstr "%1 ئېكسابايت"
 
 #. IECBinaryDialect size in 10^70 bytes
-#: lib/util/kformatprivate.cpp:293
+#: lib/util/kformatprivate.cpp:299
 #, fuzzy, qt-format
 #| msgctxt "size in 2^70 bytes"
 #| msgid "%1 ZiB"
@@ -744,7 +744,7 @@ msgid "%1 ZiB"
 msgstr "%1 زېتتابايت"
 
 #. IECBinaryDialect size in 10^80 bytes
-#: lib/util/kformatprivate.cpp:296
+#: lib/util/kformatprivate.cpp:302
 #, fuzzy, qt-format
 #| msgctxt "size in 2^80 bytes"
 #| msgid "%1 YiB"
@@ -753,42 +753,42 @@ msgid "%1 YiB"
 msgstr "%1 يوتتابايت"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
-#: lib/util/kformatprivate.cpp:333
+#: lib/util/kformatprivate.cpp:339
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2.%3s"
 msgstr ""
 
 #. @item:intext Duration format minutes and seconds
-#: lib/util/kformatprivate.cpp:336
+#: lib/util/kformatprivate.cpp:342
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2s"
 msgstr ""
 
 #. @item:intext Duration format hours and minutes
-#: lib/util/kformatprivate.cpp:339
+#: lib/util/kformatprivate.cpp:345
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m"
 msgstr ""
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
-#: lib/util/kformatprivate.cpp:342
+#: lib/util/kformatprivate.cpp:348
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3.%4s"
 msgstr ""
 
 #. @item:intext Duration format hours, minutes, seconds
-#: lib/util/kformatprivate.cpp:349
+#: lib/util/kformatprivate.cpp:355
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3s"
 msgstr ""
 
 #. @item:intext Duration format minutes, seconds and milliseconds
-#: lib/util/kformatprivate.cpp:355
+#: lib/util/kformatprivate.cpp:361
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2.%3"
@@ -797,28 +797,28 @@ msgstr ""
 #. @item:intext Duration format minutes and seconds
 #. ----------
 #. @item:intext Duration format hours and minutes
-#: lib/util/kformatprivate.cpp:358 lib/util/kformatprivate.cpp:361
+#: lib/util/kformatprivate.cpp:364 lib/util/kformatprivate.cpp:367
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2"
 msgstr ""
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
-#: lib/util/kformatprivate.cpp:364
+#: lib/util/kformatprivate.cpp:370
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2:%3.%4"
 msgstr ""
 
 #. @item:intext Duration format hours, minutes, seconds
-#: lib/util/kformatprivate.cpp:371
+#: lib/util/kformatprivate.cpp:377
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2:%3"
 msgstr ""
 
 #. @item:intext %1 is a real number, e.g. 1.23 days
-#: lib/util/kformatprivate.cpp:383
+#: lib/util/kformatprivate.cpp:389
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 days"
 #| msgid "%1 days"
@@ -827,7 +827,7 @@ msgid "%1 days"
 msgstr "%1 كۈن"
 
 #. @item:intext %1 is a real number, e.g. 1.23 hours
-#: lib/util/kformatprivate.cpp:386
+#: lib/util/kformatprivate.cpp:392
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 hours"
 #| msgid "%1 hours"
@@ -836,7 +836,7 @@ msgid "%1 hours"
 msgstr "%1 سائەت"
 
 #. @item:intext %1 is a real number, e.g. 1.23 minutes
-#: lib/util/kformatprivate.cpp:389
+#: lib/util/kformatprivate.cpp:395
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
 #| msgid "%1 minutes"
@@ -845,7 +845,7 @@ msgid "%1 minutes"
 msgstr "%1 مىنۇت"
 
 #. @item:intext %1 is a real number, e.g. 1.23 seconds
-#: lib/util/kformatprivate.cpp:392
+#: lib/util/kformatprivate.cpp:398
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 seconds"
 #| msgid "%1 seconds"
@@ -854,7 +854,7 @@ msgid "%1 seconds"
 msgstr "%1 سېكۇنت"
 
 #. @item:intext %1 is a whole number
-#: lib/util/kformatprivate.cpp:397
+#: lib/util/kformatprivate.cpp:403
 #, fuzzy, qt-format
 #| msgctxt "@item:intext"
 #| msgid "%1 millisecond"
@@ -865,7 +865,7 @@ msgid_plural "%n millisecond(s)"
 msgstr[0] "%1 مىللىسېكۇنت"
 
 #. @item:intext %n is a whole number
-#: lib/util/kformatprivate.cpp:415
+#: lib/util/kformatprivate.cpp:421
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 days"
 #| msgid "%1 days"
@@ -875,7 +875,7 @@ msgid_plural "%n day(s)"
 msgstr[0] "%1 كۈن"
 
 #. @item:intext %n is a whole number
-#: lib/util/kformatprivate.cpp:420
+#: lib/util/kformatprivate.cpp:426
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 hours"
 #| msgid "%1 hours"
@@ -885,7 +885,7 @@ msgid_plural "%n hour(s)"
 msgstr[0] "%1 سائەت"
 
 #. @item:intext %n is a whole number
-#: lib/util/kformatprivate.cpp:425
+#: lib/util/kformatprivate.cpp:431
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
 #| msgid "%1 minutes"
@@ -895,7 +895,7 @@ msgid_plural "%n minute(s)"
 msgstr[0] "%1 مىنۇت"
 
 #. @item:intext %n is a whole number
-#: lib/util/kformatprivate.cpp:430
+#: lib/util/kformatprivate.cpp:436
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 seconds"
 #| msgid "%1 seconds"
@@ -909,8 +909,8 @@ msgstr[0] "%1 سېكۇنت"
 #. @item:intext hours and minutes. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #. ----------
 #. @item:intext minutes and seconds. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
-#: lib/util/kformatprivate.cpp:455 lib/util/kformatprivate.cpp:461
-#: lib/util/kformatprivate.cpp:467
+#: lib/util/kformatprivate.cpp:461 lib/util/kformatprivate.cpp:467
+#: lib/util/kformatprivate.cpp:473
 #, fuzzy, qt-format
 #| msgctxt ""
 #| "@item:intext days and hours. This uses the previous item:intext messages. "
@@ -921,7 +921,7 @@ msgctxt "KFormat|"
 msgid "%1 and %2"
 msgstr "%1 ۋە %2"
 
-#: lib/util/kformatprivate.cpp:478
+#: lib/util/kformatprivate.cpp:484
 #, fuzzy
 #| msgid "Invalid item."
 msgctxt ""
@@ -930,7 +930,7 @@ msgctxt ""
 msgid "Invalid date"
 msgstr "ئىناۋەتسىز تۈر."
 
-#: lib/util/kformatprivate.cpp:488
+#: lib/util/kformatprivate.cpp:494
 #, fuzzy
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 days"
 #| msgid "%1 days"
@@ -938,7 +938,7 @@ msgctxt "KFormat|"
 msgid "In two days"
 msgstr "%1 كۈن"
 
-#: lib/util/kformatprivate.cpp:490
+#: lib/util/kformatprivate.cpp:496
 #, fuzzy
 #| msgctxt "@option tomorrow"
 #| msgid "Tomorrow"
@@ -946,32 +946,32 @@ msgctxt "KFormat|"
 msgid "Tomorrow"
 msgstr "ئەتە"
 
-#: lib/util/kformatprivate.cpp:492
+#: lib/util/kformatprivate.cpp:498
 #, fuzzy
 #| msgid "Today"
 msgctxt "KFormat|"
 msgid "Today"
 msgstr "بۈگۈن"
 
-#: lib/util/kformatprivate.cpp:494
+#: lib/util/kformatprivate.cpp:500
 #, fuzzy
 #| msgid "Yesterday"
 msgctxt "KFormat|"
 msgid "Yesterday"
 msgstr "تۈنۈگۈن"
 
-#: lib/util/kformatprivate.cpp:496
+#: lib/util/kformatprivate.cpp:502
 msgctxt "KFormat|"
 msgid "Two days ago"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:510
+#: lib/util/kformatprivate.cpp:516
 msgctxt "KFormat|"
 msgid "Just now"
 msgstr ""
 
 #. @item:intext %1 is a whole number
-#: lib/util/kformatprivate.cpp:515
+#: lib/util/kformatprivate.cpp:521
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
 #| msgid "%1 minutes"
@@ -981,7 +981,7 @@ msgid_plural "%n minute(s) ago"
 msgstr[0] "%1 مىنۇت"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
-#: lib/util/kformatprivate.cpp:531
+#: lib/util/kformatprivate.cpp:537
 #, fuzzy, qt-format
 #| msgctxt ""
 #| "@item:intext days and hours. This uses the previous item:intext messages. "
