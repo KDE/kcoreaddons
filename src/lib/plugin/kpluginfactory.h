@@ -403,7 +403,7 @@ public:
      * @returns pointer to the created object is returned, or @c nullptr if an error occurred.
      */
     template<typename T>
-    T *create(QObject *parent = nullptr, const QVariantList &args = QVariantList());
+    T *create(QObject *parent = nullptr, const QVariantList &args = {});
 
     /**
      * Use this method to create an object. It will try to create an object which inherits @p T
