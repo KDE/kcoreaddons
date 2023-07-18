@@ -349,21 +349,23 @@ public:
 
     /**
      * Attempts to load the KPluginFactory and create a @p T instance from the given metadata
+     * KCoreAddons will log error messages automatically, meaning you only need to implement your
+     * own logging in case you want to give it more context info or have a custom category.
      * @code
-        KPluginFactory::Result<MyClass> pluginResult = KPluginFactory::instantiatePlugin<MyClass>(metaData, parent, args);
-        if (pluginResult) {
-            // The plugin is valid and can be accessed
+        if (auto result = KPluginFactory::instantiatePlugin<MyClass>(metaData, parent, args)) {
+            // The plugin is valid and result.plugin contains the object
         } else {
-            // The pluginResult object contains information about the error
+            // We can access the error related properties, but result.plugin is a nullptr
+            qCWarning(MYCATEGORY) << result.errorString;
         }
      * @endcode
      * If there is no extra error handling needed the plugin can be directly accessed and checked if it is a nullptr
      * @code
         if (auto plugin = KPluginFactory::instantiatePlugin<MyClass>(metaData, parent, args).plugin) {
-            // The plugin is valid and can be accessed
         }
      * @endcode
      * @param data KPluginMetaData from which the plugin should be loaded
+     * @param args arguments which get passed to the plugin's constructor
      * @return Result object which contains the plugin instance and potentially error information
      * @since 5.86
      */
