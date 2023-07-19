@@ -298,28 +298,28 @@ msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "कृपया %1 मा बग प्रतिवेदन गर्नुहोस् ।\n"
 
-#: lib/plugin/kpluginfactory.cpp:37
+#: lib/plugin/kpluginfactory.cpp:33
 #, fuzzy, qt-format
 #| msgid "Could not open file '%1'"
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "'%1' फाइल खोल्न सकेन"
 
-#: lib/plugin/kpluginfactory.cpp:46
+#: lib/plugin/kpluginfactory.cpp:42
 #, fuzzy, qt-format
 #| msgid "Could not open file '%1'"
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "'%1' फाइल खोल्न सकेन"
 
-#: lib/plugin/kpluginfactory.cpp:57
+#: lib/plugin/kpluginfactory.cpp:53
 #, fuzzy, qt-format
 #| msgid "The library %1 does not offer a KDE 4 compatible factory."
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "%1 लाइब्रेरीले केडीई ४ मिल्दो कारखाना प्रस्ताव गर्दैन ।"
 
-#: lib/plugin/kpluginfactory.h:384
+#: lib/plugin/kpluginfactory.h:386
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"

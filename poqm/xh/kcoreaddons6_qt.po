@@ -262,7 +262,7 @@ msgstr ""
 "Nceda sebenzisa i http://bugs.kde.org ukuchaza amagciwane, ungabhaleli "
 "ababhali nkqo.\n"
 
-#: lib/plugin/kpluginfactory.cpp:37
+#: lib/plugin/kpluginfactory.cpp:33
 #, fuzzy, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
@@ -270,7 +270,7 @@ msgstr ""
 "Ayinaku dlopen ilayibrari '%1'.\n"
 "%2"
 
-#: lib/plugin/kpluginfactory.cpp:46
+#: lib/plugin/kpluginfactory.cpp:42
 #, fuzzy, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
@@ -278,13 +278,13 @@ msgstr ""
 "Ayinaku dlopen ilayibrari '%1'.\n"
 "%2"
 
-#: lib/plugin/kpluginfactory.cpp:57
+#: lib/plugin/kpluginfactory.cpp:53
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr ""
 
-#: lib/plugin/kpluginfactory.h:384
+#: lib/plugin/kpluginfactory.h:386
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"

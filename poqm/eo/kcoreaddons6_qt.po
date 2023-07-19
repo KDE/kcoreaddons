@@ -224,25 +224,25 @@ msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "Bonvolu raporti erarojn al %1."
 
-#: lib/plugin/kpluginfactory.cpp:37
+#: lib/plugin/kpluginfactory.cpp:33
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "Ne eblis trovi kromprogramon %1"
 
-#: lib/plugin/kpluginfactory.cpp:46
+#: lib/plugin/kpluginfactory.cpp:42
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "Ne eblis ŝargi kromprogramon de %1: %2"
 
-#: lib/plugin/kpluginfactory.cpp:57
+#: lib/plugin/kpluginfactory.cpp:53
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "La biblioteko %1 ne provizas KPluginFactory."
 
-#: lib/plugin/kpluginfactory.h:384
+#: lib/plugin/kpluginfactory.h:386
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"

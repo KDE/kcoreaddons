@@ -216,25 +216,25 @@ msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "%1(으)로 버그를 보고해 주십시오."
 
-#: lib/plugin/kpluginfactory.cpp:37
+#: lib/plugin/kpluginfactory.cpp:33
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
 msgstr "%1 플러그인을 찾을 수 없음"
 
-#: lib/plugin/kpluginfactory.cpp:46
+#: lib/plugin/kpluginfactory.cpp:42
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
 msgstr "%1에서 플러그인을 불러올 수 없음: %2"
 
-#: lib/plugin/kpluginfactory.cpp:57
+#: lib/plugin/kpluginfactory.cpp:53
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "%1 라이브러리에서 KPluginFactory를 제공하지 않습니다."
 
-#: lib/plugin/kpluginfactory.h:384
+#: lib/plugin/kpluginfactory.h:386
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"

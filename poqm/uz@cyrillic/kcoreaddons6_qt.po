@@ -268,7 +268,7 @@ msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
 msgstr "Илтимос, хато ҳақида қуйидагига хабар беринг. %1\n"
 
-#: lib/plugin/kpluginfactory.cpp:37
+#: lib/plugin/kpluginfactory.cpp:33
 #, fuzzy, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
@@ -276,7 +276,7 @@ msgstr ""
 "Кутубхонани (%1) очиб бўлмади.\n"
 "%2"
 
-#: lib/plugin/kpluginfactory.cpp:46
+#: lib/plugin/kpluginfactory.cpp:42
 #, fuzzy, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
@@ -284,14 +284,14 @@ msgstr ""
 "Кутубхонани (%1) очиб бўлмади.\n"
 "%2"
 
-#: lib/plugin/kpluginfactory.cpp:57
+#: lib/plugin/kpluginfactory.cpp:53
 #, fuzzy, qt-format
 #| msgid "The library %1 does not offer an %2 function."
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "%1 кутубхонасида %2 функцияси мавжуд эмас."
 
-#: lib/plugin/kpluginfactory.h:384
+#: lib/plugin/kpluginfactory.h:386
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
