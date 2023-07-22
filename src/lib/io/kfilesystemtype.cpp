@@ -80,32 +80,36 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #include <sys/stat.h>
 #endif
 
-// From /usr/src/linux-5.13.2-1-vanilla/fs/ntfs/ntfs.h
+// Add known missig magics
+// Can use https://github.com/systemd/systemd/blob/main/src/basic/missing_magic.h
+// as reference
+
+// From linux/fs/ntfs/ntfs.h
 #ifndef NTFS_SB_MAGIC
 #define NTFS_SB_MAGIC 0x5346544e
 #endif
 
-// From /ntfs3/blob/master/super.c#L945
+// From linux/fs/ntfs3/super.c
 #ifndef NTFS3_MAGIC
 #define NTFS3_MAGIC 0x7366746E
 #endif
 
-// From /usr/src/linux-5.13.2-1-vanilla/fs/exfat/exfat_fs.h
+// From linux/fs/exfat/exfat_fs.h
 #ifndef EXFAT_SUPER_MAGIC
 #define EXFAT_SUPER_MAGIC 0x2011BAB0UL
 #endif
 
-// From /usr/src/linux-5.13.2-1-vanilla/fs/cifs/smb2glob.h
+// From linux/fs/cifs/smb2glob.h
 #ifndef SMB2_MAGIC_NUMBER
 #define SMB2_MAGIC_NUMBER 0xFE534D42
 #endif
 
-// From /usr/src/linux-5.13.2-1-vanilla/fs/cifs/cifsglob.h
+// From linux/fs/cifs/cifsglob.h
 #ifndef CIFS_MAGIC_NUMBER
 #define CIFS_MAGIC_NUMBER 0xFF534D42
 #endif
 
-// From /usr/src/linux-5.13.2-1-vanilla/fs/fuse/inode.c
+// From linux/fs/fuse/inode.c
 #ifndef FUSE_SUPER_MAGIC
 #define FUSE_SUPER_MAGIC 0x65735546
 #endif
