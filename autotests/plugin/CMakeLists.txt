@@ -47,8 +47,9 @@ kcoreaddons_add_plugin(static_plugin_without_metadata SOURCES staticpluginwithou
 target_link_libraries(static_plugin_without_metadata KF6::CoreAddons autotests_static)
 
 
-kcoreaddons_target_static_plugins(kpluginfactorytest "staticnamespace")
-kcoreaddons_target_static_plugins(kpluginfactorytest "staticnamespace2")
-kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace")
-kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace2")
-kcoreaddons_target_static_plugins(kpluginmetadatatest "staticnamespace3")
+kcoreaddons_target_static_plugins(kpluginfactorytest NAMESPACE "staticnamespace")
+kcoreaddons_target_static_plugins(kpluginfactorytest NAMESPACE "staticnamespace2")
+kcoreaddons_target_static_plugins(kpluginmetadatatest NAMESPACE "staticnamespace")
+kcoreaddons_target_static_plugins(kpluginmetadatatest NAMESPACE "staticnamespace2")
+# Make the last one use the target by targets list instead of namespace
+kcoreaddons_target_static_plugins(kpluginmetadatatest TARGETS static_plugin_without_metadata)
