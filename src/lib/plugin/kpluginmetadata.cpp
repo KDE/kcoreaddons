@@ -212,12 +212,8 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
         }
     }
 
-    const auto staticPlugins = KStaticPluginHelpers::staticPlugins(directory);
-    for (QStaticPlugin p : staticPlugins) {
-        KPluginMetaData metaData(p);
-        if (metaData.isValid() && metaData.pluginId() == pluginId) {
-            return metaData;
-        }
+    if (const auto staticOptional = KStaticPluginHelpers::findById(directory, pluginId)) {
+        return KPluginMetaData(staticOptional.value());
     }
 
     return KPluginMetaData{};

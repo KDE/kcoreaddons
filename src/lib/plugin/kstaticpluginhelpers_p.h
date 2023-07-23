@@ -5,6 +5,7 @@
 */
 
 #include <QPluginLoader>
+#include <optional>
 
 namespace KStaticPluginHelpers
 {
@@ -12,5 +13,6 @@ namespace KStaticPluginHelpers
  * This is an implementations detail since consumers should only interact with KPluginMetaData::findPlugin*
  * to query the available plugins!
  */
+std::optional<QStaticPlugin> findById(const QString &directory, const QString &pluginId);
 QList<QStaticPlugin> staticPlugins(const QString &directory);
 }

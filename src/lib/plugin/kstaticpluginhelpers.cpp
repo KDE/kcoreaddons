@@ -6,15 +6,22 @@
 #include "kstaticpluginhelpers.h"
 #include "kstaticpluginhelpers_p.h"
 
-typedef QMultiHash<QString, QStaticPlugin> StaticPluginMap;
+typedef QHash<QString, QMap<QString, QStaticPlugin>> StaticPluginMap;
 Q_GLOBAL_STATIC(StaticPluginMap, s_staticPlugins)
 
 QList<QStaticPlugin> KStaticPluginHelpers::staticPlugins(const QString &directory)
 {
-    return s_staticPlugins->values(directory);
+    return s_staticPlugins->value(directory).values();
 }
 
-void kRegisterStaticPluginFunction(const QString &directory, QStaticPlugin plugin)
+std::optional<QStaticPlugin> KStaticPluginHelpers::findById(const QString &directory, const QString &pluginId)
 {
-    s_staticPlugins->insert(directory, plugin);
+    const auto staticPlugins = s_staticPlugins->value(directory);
+    const auto it = staticPlugins.constFind(pluginId);
+    return it == staticPlugins.end() ? std::nullopt : std::optional(it.value());
+}
+
+void kRegisterStaticPluginFunction(const QString &pluginId, const QString &directory, QStaticPlugin plugin)
+{
+    (*s_staticPlugins)[directory].insert(pluginId, plugin);
 }

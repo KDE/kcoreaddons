@@ -11,8 +11,9 @@
  * @internal
  * @since 5.89
  */
-void KCOREADDONS_EXPORT kRegisterStaticPluginFunction(const QString &directory, QStaticPlugin plugin);
+void KCOREADDONS_EXPORT kRegisterStaticPluginFunction(const QString &pluginId, const QString &directory, QStaticPlugin plugin);
 
+#define KCOREADDONS_PRIVATE_CONCAT_HELPER(a, b) a##b
 /**
  * This macro imports the plugin that corresponds with the name of the class
  * that declares metadata for the plugin with Q_PLUGIN_METADATA().
@@ -24,13 +25,15 @@ void KCOREADDONS_EXPORT kRegisterStaticPluginFunction(const QString &directory, 
  * @since 5.89
  */
 #define K_IMPORT_PLUGIN(NAMESPACE, PLUGIN)                                                                                                                     \
-    extern const QT_PREPEND_NAMESPACE(QStaticPlugin) qt_static_plugin_##PLUGIN();                                                                              \
+    extern const QT_PREPEND_NAMESPACE(QStaticPlugin) KCOREADDONS_PRIVATE_CONCAT_HELPER(qt_static_plugin_##PLUGIN, _factory)();                                 \
     class Static##PLUGIN##PluginInstance                                                                                                                       \
     {                                                                                                                                                          \
     public:                                                                                                                                                    \
         Static##PLUGIN##PluginInstance()                                                                                                                       \
         {                                                                                                                                                      \
-            kRegisterStaticPluginFunction(NAMESPACE, qt_static_plugin_##PLUGIN());                                                                             \
+            kRegisterStaticPluginFunction(QStringLiteral(QT_STRINGIFY(PLUGIN)),                                                                                \
+                                          NAMESPACE,                                                                                                           \
+                                          KCOREADDONS_PRIVATE_CONCAT_HELPER(qt_static_plugin_##PLUGIN, _factory)());                                           \
         }                                                                                                                                                      \
     };                                                                                                                                                         \
     static Static##PLUGIN##PluginInstance static##PLUGIN##Instance;
