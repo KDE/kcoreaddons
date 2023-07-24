@@ -197,7 +197,7 @@ msgstr "라이선스 정보를 표시합니다."
 #: lib/kaboutdata.cpp:1228
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
-msgstr "이 프로그램의 desktop 항목의 기본 파일 이름입니다."
+msgstr "이 앱의 desktop 항목의 기본 파일 이름입니다."
 
 #: lib/kaboutdata.cpp:1229
 msgctxt "KAboutData CLI|"
@@ -207,7 +207,7 @@ msgstr "파일 이름"
 #: lib/kaboutdata.cpp:1239
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
-msgstr "이 프로그램은 익명으로 남고 싶은 사람이 작성했습니다."
+msgstr "이 앱은 익명으로 남고 싶은 사람이 작성했습니다."
 
 #: lib/kaboutdata.cpp:1241
 #, qt-format
