@@ -1300,9 +1300,4 @@ private:
     std::unique_ptr<class KAboutDataPrivate> const d;
 };
 
-Q_DECLARE_METATYPE(KAboutData)
-Q_DECLARE_METATYPE(KAboutLicense)
-Q_DECLARE_METATYPE(KAboutPerson)
-Q_DECLARE_METATYPE(KAboutComponent)
-
 #endif

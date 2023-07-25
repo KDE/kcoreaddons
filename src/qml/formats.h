@@ -94,6 +94,4 @@ private:
     const KFormat m_format;
 };
 
-Q_DECLARE_METATYPE(QLocale::FormatType)
-
 #endif
