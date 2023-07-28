@@ -167,6 +167,8 @@ private:
     QSharedDataPointer<class KAboutPersonPrivate> d;
 };
 
+Q_DECLARE_TYPEINFO(KAboutPerson, Q_RELOCATABLE_TYPE);
+
 /**
  * This class is used to store information about a license.
  * The license can be one of some predefined, one given as text or one
@@ -337,6 +339,8 @@ private:
     QSharedDataPointer<class KAboutLicensePrivate> d;
 };
 
+Q_DECLARE_TYPEINFO(KAboutLicense, Q_RELOCATABLE_TYPE);
+
 /**
  * This class is used to store information about a third party component.
  * It can store the component's name, a description, a link to a website
@@ -469,6 +473,8 @@ public:
 private:
     QSharedDataPointer<class KAboutComponentPrivate> d;
 };
+
+Q_DECLARE_TYPEINFO(KAboutComponent, Q_RELOCATABLE_TYPE);
 
 /**
  * @class KAboutData kaboutdata.h KAboutData

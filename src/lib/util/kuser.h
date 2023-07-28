@@ -406,6 +406,8 @@ private:
     QExplicitlySharedDataPointer<class KUserPrivate> d;
 };
 
+Q_DECLARE_TYPEINFO(KUser, Q_RELOCATABLE_TYPE);
+
 /**
  * \class KUserGroup kuser.h <KUserGroup>
  *
@@ -546,6 +548,8 @@ public:
 private:
     QSharedDataPointer<class KUserGroupPrivate> d;
 };
+
+Q_DECLARE_TYPEINFO(KUserGroup, Q_RELOCATABLE_TYPE);
 
 #if !defined(Q_OS_WIN)
 // inline UNIX implementation of KUserOrGroupId

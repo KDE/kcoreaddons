@@ -222,4 +222,6 @@ KCOREADDONS_EXPORT QList<KFuzzyMatcher::Range> matchedRanges(QStringView pattern
 
 } // namespace KFuzzyMatcher
 
+Q_DECLARE_TYPEINFO(KFuzzyMatcher::Range, Q_PRIMITIVE_TYPE);
+
 #endif // KFUZZYMATCHER_H

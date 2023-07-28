@@ -82,4 +82,6 @@ KCOREADDONS_EXPORT KProcessInfo processInfo(qint64 pid);
 
 } // KProcessList namespace
 
+Q_DECLARE_TYPEINFO(KProcessList::KProcessInfo, Q_RELOCATABLE_TYPE);
+
 #endif // KPROCESSLIST_H
