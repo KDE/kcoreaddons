@@ -44,7 +44,7 @@ function(kcoreaddons_add_plugin plugin)
         string(REPLACE "/" "_" SANITIZED_PLUGIN_NAMESPACE ${ARGS_INSTALL_NAMESPACE})
 
         if (NOT ${SANITIZED_PLUGIN_NAME} IN_LIST KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE})
-            set(KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE} "${KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE}};${SANITIZED_PLUGIN_NAME}" CACHE INTERNAL "list of known static plugins for ${ARGS_INSTALL_NAMESPACE} namespace, used to generate Q_IMPORT_PLUGIN macros")
+            set(KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE} "${KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE}};${SANITIZED_PLUGIN_NAME}" CACHE INTERNAL "list of known static plugins for ${ARGS_INSTALL_NAMESPACE} namespace")
         endif()
         set_target_properties(${plugin} PROPERTIES PLUGIN_INSTALL_NAMESPACE "${ARGS_INSTALL_NAMESPACE}" PLUGIN_NAME "${SANITIZED_PLUGIN_NAME}")
         set_property(TARGET ${plugin} APPEND PROPERTY EXPORT_PROPERTIES "PLUGIN_INSTALL_NAMESPACE;PLUGIN_NAME")
@@ -77,7 +77,7 @@ endfunction()
 
 # This macro imports the plugins for the given namespace that were
 # registered using the kcoreaddons_add_plugin function.
-# This includes the K_IMPORT_PLUGIN statements and linking the plugins to the given target.
+# This includes the initailization statements and linking the plugins to the given target.
 #
 # In case the plugins are used in both the executable and multiple autotests it it recommended to
 # bundle the static plugins in a shared lib for the autotests. In case of shared libs the plugin registrations
@@ -86,16 +86,41 @@ endfunction()
 # Since 5.89
 function(kcoreaddons_target_static_plugins app_target)
     cmake_parse_arguments(ARGS "" "LINK_OPTION;NAMESPACE;TARGETS" "" ${ARGN})
-    set(IMPORT_PLUGIN_STATEMENTS "#include <kstaticpluginhelpers.h>\n\n")
+    if ((ARGS_LINK_OPTION AND ARGS_NAMESPACE) OR (NOT ARGS_NAMESPACE AND NOT ARGS_TARGETS))
+        message(FATAL_ERROR "Either NAMESPACE or TARGETS must be set")
+    endif()
+
+    # We access this as extern, because then we don't even have to install the header file for it
+    set(PLUGIN_REGISTRATION_AUTOGEN "#include <QPluginLoader>\nextern void kRegisterStaticPluginFunction(const QString &, const QString &, QStaticPlugin)\;\n\n")
+
+    macro(generate_plugin_registration PLUGIN_NAME PLUGIN_NAMESPACE)
+        set(REGISTER_PLUGIN_CALL "
+extern const QT_PREPEND_NAMESPACE(QStaticPlugin) qt_static_plugin_${PLUGIN_NAME}_factory()\;
+class Static${PLUGIN_NAME}PluginInstance
+{
+public:
+Static${PLUGIN_NAME}PluginInstance()
+{
+kRegisterStaticPluginFunction(
+    QStringLiteral(\"${PLUGIN_NAME}\"),
+    QStringLiteral(\"${PLUGIN_NAMESPACE}\"),
+    qt_static_plugin_${PLUGIN_NAME}_factory()
+)\;
+}
+}\;
+static Static${PLUGIN_NAME}PluginInstance static${PLUGIN_NAME}Instance\;")
+    set(PLUGIN_REGISTRATION_AUTOGEN "${PLUGIN_REGISTRATION_AUTOGEN}${REGISTER_PLUGIN_CALL}\n")
+endmacro()
+
     if(ARGS_NAMESPACE)
         string(REPLACE "/" "_" SANITIZED_PLUGIN_NAMESPACE ${ARGS_NAMESPACE})
         set(TMP_PLUGIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_static_${SANITIZED_PLUGIN_NAMESPACE}_plugins_tmp.cpp")
         set(PLUGIN_FILE "${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_static_${SANITIZED_PLUGIN_NAMESPACE}_plugins.cpp")
 
-        foreach(PLUGIN_TARGET_NAME IN LISTS KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE})
-            if (PLUGIN_TARGET_NAME)
-                set(IMPORT_PLUGIN_STATEMENTS "${IMPORT_PLUGIN_STATEMENTS}K_IMPORT_PLUGIN(QStringLiteral(\"${ARGS_NAMESPACE}\"), ${PLUGIN_TARGET_NAME})\;\n")
-                target_link_libraries(${app_target} ${ARGS_LINK_OPTION} ${PLUGIN_TARGET_NAME})
+        foreach(PLUGIN_NAME IN LISTS KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE})
+            if (PLUGIN_NAME)
+                generate_plugin_registration(${PLUGIN_NAME} ${ARGS_NAMESPACE})
+                target_link_libraries(${app_target} ${ARGS_LINK_OPTION} ${PLUGIN_NAME})
             endif()
         endforeach()
     elseif(ARGS_TARGETS)
@@ -104,21 +129,18 @@ function(kcoreaddons_target_static_plugins app_target)
         foreach(ARG_TARGET IN LISTS ARGS_TARGETS)
             get_target_property(PLUGIN_NAME ${ARG_TARGET} PLUGIN_NAME)
             get_target_property(PLUGIN_INSTALL_NAMESPACE ${ARG_TARGET} PLUGIN_INSTALL_NAMESPACE)
-            set(IMPORT_PLUGIN_STATEMENTS "${IMPORT_PLUGIN_STATEMENTS}K_IMPORT_PLUGIN(QStringLiteral(\"${PLUGIN_INSTALL_NAMESPACE}\"), ${PLUGIN_NAME})\;\n")
+            generate_plugin_registration(${PLUGIN_NAME} ${PLUGIN_INSTALL_NAMESPACE})
             target_link_libraries(${app_target} ${ARGS_LINK_OPTION} ${ARG_TARGET})
         endforeach()
-    else()
-        message(FATAL_ERROR "Neiter NAMESPACE or TARGETS parameters given")
     endif()
 
-    file(WRITE ${TMP_PLUGIN_FILE} ${IMPORT_PLUGIN_STATEMENTS})
+    file(WRITE ${TMP_PLUGIN_FILE} ${PLUGIN_REGISTRATION_AUTOGEN})
     execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different ${TMP_PLUGIN_FILE} ${PLUGIN_FILE})
     file(REMOVE ${TMP_PLUGIN_FILE})
     target_sources(${app_target} PRIVATE ${PLUGIN_FILE})
 endfunction()
 
-# Clear previously set plugins, otherwise Q_IMPORT_PLUGIN statements
-# will fail to compile if plugins got removed from the build
+# Clear previously set plugins, otherwise the linker will fail due to the symbols of a removed pugin being missing
 get_directory_property(_cache_vars CACHE_VARIABLES)
 foreach(CACHED_VAR IN LISTS _cache_vars)
     if (CACHED_VAR MATCHES "^KCOREADDONS_STATIC_PLUGINS")
