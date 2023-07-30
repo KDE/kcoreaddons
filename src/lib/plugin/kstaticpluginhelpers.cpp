@@ -9,9 +9,9 @@
 typedef QHash<QString, QMap<QString, QStaticPlugin>> StaticPluginMap;
 Q_GLOBAL_STATIC(StaticPluginMap, s_staticPlugins)
 
-QList<QStaticPlugin> KStaticPluginHelpers::staticPlugins(const QString &directory)
+QMap<QString, QStaticPlugin> KStaticPluginHelpers::staticPlugins(const QString &directory)
 {
-    return s_staticPlugins->value(directory).values();
+    return s_staticPlugins->value(directory);
 }
 
 std::optional<QStaticPlugin> KStaticPluginHelpers::findById(const QString &directory, const QString &pluginId)

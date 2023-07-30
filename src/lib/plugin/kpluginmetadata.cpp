@@ -86,17 +86,18 @@ public:
     };
     // This is only relevant in the findPlugins context and thus internal API.
     // If one has a static plugin from QPluginLoader::staticPlugins and does not want it to have metadata, using KPluginMetaData makes no sense
-    StaticPluginLoadResult loadStaticPlugin(QStaticPlugin plugin, KPluginMetaData::KPluginMetaDataOption option)
+    static KPluginMetaData
+    ofStaticPlugin(const QString &pluginNamespace, const QString &fileName, KPluginMetaData::KPluginMetaDataOption option, QStaticPlugin plugin)
     {
-        staticPlugin = plugin;
-        auto metaDataObject = plugin.metaData().value(QLatin1String("MetaData")).toObject();
-        m_option = option;
-        auto names = plugin.metaData().value(QLatin1String("X-KDE-FileName")).toVariant().toStringList();
-        QString fileName;
-        if (!names.isEmpty()) {
-            fileName = names.constFirst();
-        }
-        return {fileName, metaDataObject};
+        auto d = new KPluginMetaDataPrivate();
+        d->staticPlugin = plugin;
+        d->m_option = option;
+        d->m_metaData = plugin.metaData().value(QLatin1String("MetaData")).toObject();
+        d->m_fileName = pluginNamespace + u'/' + fileName;
+        d->m_pluginId = fileName;
+        KPluginMetaData data;
+        data.d = d;
+        return data;
     }
     static void getPluginLoaderForPath(QPluginLoader &loader, const QString &path)
     {
@@ -191,21 +192,11 @@ KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &fil
     }
 }
 
-KPluginMetaData::KPluginMetaData(QStaticPlugin plugin, KPluginMetaDataOption option)
-    : d(new KPluginMetaDataPrivate)
-{
-    const auto result = d->loadStaticPlugin(plugin, DoNotAllowEmptyMetaData);
-    d->m_fileName = result.fileName;
-    d->m_pluginId = QFileInfo(d->m_fileName).completeBaseName();
-    d->m_metaData = result.metaData;
-    d->m_option = option;
-}
-
 KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const QString &pluginId, KPluginMetaDataOption option)
-
 {
     QPluginLoader loader;
-    KPluginMetaDataPrivate::getPluginLoaderForPath(loader, directory + QLatin1Char('/') + pluginId);
+    const QString fileName = directory + QLatin1Char('/') + pluginId;
+    KPluginMetaDataPrivate::getPluginLoaderForPath(loader, fileName);
     if (loader.load()) {
         if (KPluginMetaData metaData(loader, option); metaData.isValid()) {
             return metaData;
@@ -213,7 +204,9 @@ KPluginMetaData KPluginMetaData::findPluginById(const QString &directory, const 
     }
 
     if (const auto staticOptional = KStaticPluginHelpers::findById(directory, pluginId)) {
-        return KPluginMetaData(staticOptional.value());
+        KPluginMetaData data = KPluginMetaDataPrivate::ofStaticPlugin(directory, pluginId, option, staticOptional.value());
+        Q_ASSERT(data.fileName() == fileName);
+        return data;
     }
 
     return KPluginMetaData{};
@@ -250,8 +243,8 @@ QList<KPluginMetaData> KPluginMetaData::findPlugins(const QString &directory, st
 {
     QList<KPluginMetaData> ret;
     const auto staticPlugins = KStaticPluginHelpers::staticPlugins(directory);
-    for (QStaticPlugin p : staticPlugins) {
-        KPluginMetaData metaData(p, option);
+    for (auto it = staticPlugins.begin(); it != staticPlugins.end(); ++it) {
+        KPluginMetaData metaData = KPluginMetaDataPrivate::ofStaticPlugin(directory, it.key(), option, it.value());
         if (metaData.isValid()) {
             if (!filter || filter(metaData)) {
                 ret << metaData;

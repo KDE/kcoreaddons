@@ -411,12 +411,12 @@ private:
     KCOREADDONS_NO_EXPORT const QJsonObject rootObject() const;
 
 private:
-    KCOREADDONS_NO_EXPORT KPluginMetaData(QStaticPlugin plugin, KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData);
     KCOREADDONS_NO_EXPORT QStaticPlugin staticPlugin() const;
     KCOREADDONS_NO_EXPORT QString requestedFileName() const;
 
     QExplicitlySharedDataPointer<KPluginMetaDataPrivate> d;
     friend class KPluginFactory;
+    friend class KPluginMetaDataPrivate;
 };
 
 inline size_t qHash(const KPluginMetaData &md, size_t seed)

@@ -14,5 +14,6 @@ namespace KStaticPluginHelpers
  * to query the available plugins!
  */
 std::optional<QStaticPlugin> findById(const QString &directory, const QString &pluginId);
-QList<QStaticPlugin> staticPlugins(const QString &directory);
+/// Map of pluginId and actual plugin
+QMap<QString, QStaticPlugin> staticPlugins(const QString &directory);
 }

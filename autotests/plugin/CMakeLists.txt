@@ -46,10 +46,13 @@ target_link_libraries(static_jsonplugin_cmake_macro_2 KF6::CoreAddons autotests_
 kcoreaddons_add_plugin(static_plugin_without_metadata SOURCES staticpluginwithoutmetadata.cpp INSTALL_NAMESPACE "staticnamespace3" STATIC)
 target_link_libraries(static_plugin_without_metadata KF6::CoreAddons autotests_static)
 
+kcoreaddons_add_plugin(org.kde.test-staticplugin SOURCES statickpluginclass_3.cpp INSTALL_NAMESPACE "rdnstatic" STATIC)
+target_link_libraries(org.kde.test-staticplugin KF6::CoreAddons autotests_static)
 
 kcoreaddons_target_static_plugins(kpluginfactorytest NAMESPACE "staticnamespace")
 kcoreaddons_target_static_plugins(kpluginfactorytest NAMESPACE "staticnamespace2")
 kcoreaddons_target_static_plugins(kpluginmetadatatest NAMESPACE "staticnamespace")
 kcoreaddons_target_static_plugins(kpluginmetadatatest NAMESPACE "staticnamespace2")
+kcoreaddons_target_static_plugins(kpluginmetadatatest NAMESPACE "rdnstatic")
 # Make the last one use the target by targets list instead of namespace
 kcoreaddons_target_static_plugins(kpluginmetadatatest TARGETS static_plugin_without_metadata)

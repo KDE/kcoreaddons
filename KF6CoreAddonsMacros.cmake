@@ -35,24 +35,23 @@ function(kcoreaddons_add_plugin plugin)
         set(ARGS_STATIC ON)
     endif()
 
-    string(REPLACE "-" "_" SANITIZED_PLUGIN_NAME ${plugin})
-    string(REPLACE "." "_" SANITIZED_PLUGIN_NAME ${SANITIZED_PLUGIN_NAME})
     if (ARGS_STATIC)
         add_library(${plugin} STATIC ${ARGS_SOURCES})
         target_compile_definitions(${plugin} PRIVATE QT_STATICPLUGIN)
-        set_property(TARGET ${plugin} PROPERTY AUTOMOC_MOC_OPTIONS -MX-KDE-FileName=${ARGS_INSTALL_NAMESPACE}/${plugin})
         string(REPLACE "/" "_" SANITIZED_PLUGIN_NAMESPACE ${ARGS_INSTALL_NAMESPACE})
 
-        if (NOT ${SANITIZED_PLUGIN_NAME} IN_LIST KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE})
-            set(KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE} "${KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE}};${SANITIZED_PLUGIN_NAME}" CACHE INTERNAL "list of known static plugins for ${ARGS_INSTALL_NAMESPACE} namespace")
+        if (NOT ${plugin} IN_LIST KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE})
+            set(KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE} "${KCOREADDONS_STATIC_PLUGINS${SANITIZED_PLUGIN_NAMESPACE}};${plugin}" CACHE INTERNAL "list of known static plugins for ${ARGS_INSTALL_NAMESPACE} namespace")
         endif()
-        set_target_properties(${plugin} PROPERTIES PLUGIN_INSTALL_NAMESPACE "${ARGS_INSTALL_NAMESPACE}" PLUGIN_NAME "${SANITIZED_PLUGIN_NAME}")
+        set_target_properties(${plugin} PROPERTIES PLUGIN_INSTALL_NAMESPACE "${ARGS_INSTALL_NAMESPACE}" PLUGIN_NAME "${plugin}")
         set_property(TARGET ${plugin} APPEND PROPERTY EXPORT_PROPERTIES "PLUGIN_INSTALL_NAMESPACE;PLUGIN_NAME")
     else()
         add_library(${plugin} MODULE ${ARGS_SOURCES})
     endif()
 
-    target_compile_definitions(${plugin} PRIVATE KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME=${SANITIZED_PLUGIN_NAME}_factory)
+    string(REPLACE "." "_" PLUGIN_FACTORY_NAME ${plugin}_factory)
+    string(REPLACE "-" "_" PLUGIN_FACTORY_NAME ${PLUGIN_FACTORY_NAME})
+    target_compile_definitions(${plugin} PRIVATE KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME=${PLUGIN_FACTORY_NAME})
 
     # If we have static plugins there are no plugins to install
     if (ARGS_STATIC)
@@ -94,21 +93,23 @@ function(kcoreaddons_target_static_plugins app_target)
     set(PLUGIN_REGISTRATION_AUTOGEN "#include <QPluginLoader>\nextern void kRegisterStaticPluginFunction(const QString &, const QString &, QStaticPlugin)\;\n\n")
 
     macro(generate_plugin_registration PLUGIN_NAME PLUGIN_NAMESPACE)
+        string(REPLACE "." "_" PLUGIN_FACTORY_NAME ${PLUGIN_NAME}_factory)
+        string(REPLACE "-" "_" PLUGIN_FACTORY_NAME ${PLUGIN_FACTORY_NAME})
         set(REGISTER_PLUGIN_CALL "
-extern const QT_PREPEND_NAMESPACE(QStaticPlugin) qt_static_plugin_${PLUGIN_NAME}_factory()\;
-class Static${PLUGIN_NAME}PluginInstance
+extern const QT_PREPEND_NAMESPACE(QStaticPlugin) qt_static_plugin_${PLUGIN_FACTORY_NAME}()\;
+class Static${PLUGIN_FACTORY_NAME}PluginInstance
 {
 public:
-Static${PLUGIN_NAME}PluginInstance()
+Static${PLUGIN_FACTORY_NAME}PluginInstance()
 {
 kRegisterStaticPluginFunction(
     QStringLiteral(\"${PLUGIN_NAME}\"),
     QStringLiteral(\"${PLUGIN_NAMESPACE}\"),
-    qt_static_plugin_${PLUGIN_NAME}_factory()
+    qt_static_plugin_${PLUGIN_FACTORY_NAME}()
 )\;
 }
 }\;
-static Static${PLUGIN_NAME}PluginInstance static${PLUGIN_NAME}Instance\;")
+static Static${PLUGIN_FACTORY_NAME}PluginInstance static${PLUGIN_FACTORY_NAME}Instance\;")
     set(PLUGIN_REGISTRATION_AUTOGEN "${PLUGIN_REGISTRATION_AUTOGEN}${REGISTER_PLUGIN_CALL}\n")
 endmacro()
 

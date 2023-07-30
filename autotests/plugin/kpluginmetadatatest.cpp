@@ -449,6 +449,14 @@ private Q_SLOTS:
         QCOMPARE(data.pluginId(), QStringLiteral("org.kde.test"));
     }
 
+    // We can't use the plain pluginId as a classname, thus check if the replacement compiles and the original identifies it used for lookup
+    void testReverseDomanNotationStaticPlugin()
+    {
+        KPluginMetaData data = KPluginMetaData::findPluginById(QStringLiteral("rdnstatic"), QStringLiteral("org.kde.test-staticplugin"));
+        QVERIFY(data.isValid());
+        QCOMPARE(data.pluginId(), QStringLiteral("org.kde.test-staticplugin"));
+    }
+
     void testFindingPluginInAppDirFirst()
     {
         const QString originalPluginPath = QPluginLoader(QStringLiteral("namespace/jsonplugin_cmake_macro")).fileName();
