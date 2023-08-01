@@ -2,6 +2,4 @@
 
 #cmakedefine01 HAVE_GETGROUPLIST
 
-#define KDE4_DEFAULT_HOME "${KDE4_DEFAULT_HOME}"
-
 #cmakedefine01 HAVE_DLADDR
