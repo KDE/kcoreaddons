@@ -92,11 +92,7 @@ void KListOpenFilesJobPrivate::lsofFinished(int, QProcess::ExitStatus)
     const QString out(QString::fromLocal8Bit(lsofProcess.readAll()));
 
     const QRegularExpression re(QStringLiteral("\\s+"));
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    const QVector<QStringView> pidList = QStringView(out).split(re, Qt::SkipEmptyParts);
-#else
     const QVector<QStringRef> pidList = out.splitRef(re, Qt::SkipEmptyParts);
-#endif
 
     for (const auto &pidStr : pidList) {
         const qint64 pid = pidStr.toLongLong();

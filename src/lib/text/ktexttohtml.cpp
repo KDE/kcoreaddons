@@ -137,15 +137,7 @@ QString KTextToHTMLHelper::getPhoneNumber()
 
     // this isn't 100% accurate, we filter stuff below that is too hard to capture with a regexp
     static const QRegularExpression telPattern(QStringLiteral(R"([+0](( |( ?[/-] ?)?)\(?\d+\)?+){6,30})"));
-    const auto match = telPattern.match(mText,
-                                        mPos,
-                                        QRegularExpression::NormalMatch,
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-                                        QRegularExpression::AnchoredMatchOption
-#else
-                                        QRegularExpression::AnchorAtOffsetMatchOption
-#endif
-    );
+    const auto match = telPattern.match(mText, mPos, QRegularExpression::NormalMatch, QRegularExpression::AnchoredMatchOption);
     if (match.hasMatch()) {
         QStringView matchedText = match.capturedView();
         // check for maximum number of digits (15), see https://en.wikipedia.org/wiki/Telephone_numbering_plan
@@ -417,15 +409,7 @@ QString KTextToHTMLHelper::highlightedText()
 
     QRegularExpression re(QStringLiteral("\\%1([^\\s|^\\%1].*[^\\s|^\\%1])\\%1").arg(ch));
     re.setPatternOptions(QRegularExpression::InvertedGreedinessOption);
-    const auto match = re.match(mText,
-                                mPos,
-                                QRegularExpression::NormalMatch,
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-                                QRegularExpression::AnchoredMatchOption
-#else
-                                QRegularExpression::AnchorAtOffsetMatchOption
-#endif
-    );
+    const auto match = re.match(mText, mPos, QRegularExpression::NormalMatch, QRegularExpression::AnchoredMatchOption);
 
     if (match.hasMatch()) {
         if (match.capturedStart() == mPos) {

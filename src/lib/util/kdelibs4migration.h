@@ -16,8 +16,6 @@
 
 #include <memory>
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-
 class Kdelibs4MigrationPrivate;
 
 /**
@@ -111,5 +109,4 @@ private:
     std::unique_ptr<Kdelibs4MigrationPrivate> const d;
 };
 
-#endif
 #endif // KFORMAT_H

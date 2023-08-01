@@ -20,9 +20,6 @@ Q_LOGGING_CATEGORY(LOG_KMEMORYINFO, "kf.coreaddons.kmemoryinfo", QtWarningMsg)
 #elif defined(Q_OS_LINUX) || defined(Q_OS_ANDROID)
     #include <QByteArray>
     #include <QFile>
-    #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        #include <QByteArrayView>
-    #endif
 #elif defined(Q_OS_MACOS)
     #include <mach/mach.h>
     #include <sys/sysctl.h>
@@ -187,11 +184,7 @@ bool KMemoryInfo::update()
  * GNU/Linux
  ****************************************************************************/
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 using ByteArrayView = QByteArray;
-#else
-using ByteArrayView = QByteArrayView;
-#endif
 
 bool extractBytes(quint64 &value, const QByteArray &buffer, const ByteArrayView &beginPattern, qsizetype &from)
 {

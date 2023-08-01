@@ -148,11 +148,7 @@ bool numberedBackupFile(const QString &qFilename, const QString &backupDir, cons
             int idex = sTemp.lastIndexOf(QLatin1Char('.'));
             if (idex > 0) {
                 bool ok;
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-                const uint num = QStringView(sTemp).mid(idex + 1).toUInt(&ok);
-#else
                 const uint num = sTemp.midRef(idex + 1).toUInt(&ok);
-#endif
                 if (ok) {
                     if (num >= maxBackups) {
                         QFile::remove(fi.filePath());
