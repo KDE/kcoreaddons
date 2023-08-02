@@ -361,7 +361,7 @@ public:
     /**
      * @return the string value for @p key from the metadata or @p defaultValue if the key does not exist
      *
-     * if QString is not the correct type for @p key you should use the other overloeads or @ref KPluginMetaData::rawData
+     * if QString is not the correct type for @p key you should use the other overloads or @ref KPluginMetaData::rawData
      */
     QString value(const QString &key, const QString &defaultValue = QString()) const;
     QString value(const QString &key, const char *ch) const = delete;
