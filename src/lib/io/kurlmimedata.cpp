@@ -304,15 +304,44 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
         return false;
     }
 
+    // Prevent running into "too many open files" errors.
+    // Because submission of calls happens on the qdbus thread we may be feeding
+    // it QDBusUnixFileDescriptors faster than it can submit them over the wire, this would eventually
+    // lead to running into the open file cap since the QDBusUnixFileDescriptor hold
+    // an open FD until their call has been made.
+    // To prevent this from happening we collect a submission batch, make the call and **wait** for
+    // the call to succeed.
+    FDList pendingFds;
+    static constexpr decltype(pendingFds.size()) maximumBatchSize = 16;
+    pendingFds.reserve(maximumBatchSize);
+
+    const auto addFilesAndClear = [transferId, &iface, &pendingFds]() {
+        if (pendingFds.isEmpty()) {
+            return;
+        }
+        auto reply = iface->AddFiles(transferId, pendingFds, {});
+        reply.waitForFinished();
+        if (reply.isError()) {
+            qCWarning(KCOREADDONS_DEBUG) << "Some files could not be exported. " << reply.error();
+        }
+        pendingFds.clear();
+    };
+
     for (const auto &path : optionalPaths.value()) {
         const int fd = open(QFile::encodeName(path).constData(), O_RDONLY | O_CLOEXEC | O_NONBLOCK);
         if (fd == -1) {
             const int error = errno;
             qCWarning(KCOREADDONS_DEBUG) << "Failed to open" << path << strerror(error);
         }
-        iface->AddFiles(transferId, {QDBusUnixFileDescriptor(fd)}, {});
+        pendingFds << QDBusUnixFileDescriptor(fd);
         close(fd);
+
+        if (pendingFds.size() >= maximumBatchSize) {
+            addFilesAndClear();
+        }
     }
+    addFilesAndClear();
+
     QObject::connect(mimeData, &QObject::destroyed, iface, [transferId, iface] {
         iface->StopTransfer(transferId);
         iface->deleteLater();
