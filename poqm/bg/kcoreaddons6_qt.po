@@ -808,11 +808,3 @@ msgstr "Неуспешно изпълнение на`lsof'. Код на греш
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob не се поддържа на Windows"
-
-#~ msgctxt "KAboutLicense|@item license (short name)"
-#~ msgid "QPL v1.0"
-#~ msgstr "QPL v1.0"
-
-#~ msgctxt "KAboutLicense|@item license"
-#~ msgid "Q Public License"
-#~ msgstr "Q Публичен лиценз"
