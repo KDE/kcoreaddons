@@ -51,9 +51,9 @@ Q_SIGNALS:
     /**
      * Notifies that @p signal is emitted.
      *
-     * To catch a signal, we need to make sure it's registered using @m addSignal.
+     * To catch a signal, we need to make sure it's registered using @m watchSignal.
      *
-     * @see addSignal
+     * @see watchSignal
      */
     void signalReceived(int signal);
 
