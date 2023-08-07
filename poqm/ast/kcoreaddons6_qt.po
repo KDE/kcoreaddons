@@ -766,7 +766,7 @@ msgstr "Puramente agora"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:521
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
