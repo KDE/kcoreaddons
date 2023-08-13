@@ -155,6 +155,8 @@ QString KAboutLicensePrivate::spdxID() const
         return QStringLiteral("LGPL-3.0");
     case KAboutLicense::LGPL_V2_1:
         return QStringLiteral("LGPL-2.1");
+    case KAboutLicense::MIT:
+        return QStringLiteral("MIT");
     case KAboutLicense::Custom:
     case KAboutLicense::File:
     case KAboutLicense::Unknown:
@@ -248,6 +250,10 @@ QString KAboutLicense::text() const
         knownLicense = true;
         pathToFile = QStringLiteral("LGPL_V21");
         break;
+    case KAboutLicense::MIT:
+        knownLicense = true;
+        pathToFile = QStringLiteral("MIT");
+        break;
     case KAboutLicense::Custom:
         if (!d->_licenseText.isEmpty()) {
             result = d->_licenseText;
@@ -335,6 +341,10 @@ QString KAboutLicense::name(KAboutLicense::NameFormat formatName) const
         licenseShort = QCoreApplication::translate("KAboutLicense", "LGPL v2.1", "@item license (short name)");
         licenseFull = QCoreApplication::translate("KAboutLicense", "GNU Lesser General Public License Version 2.1", "@item license");
         break;
+    case KAboutLicense::MIT:
+        licenseShort = QCoreApplication::translate("KAboutLicense", "MIT License", "@item license (short name)");
+        licenseFull = QCoreApplication::translate("KAboutLicense", "MIT License", "@item license");
+        break;
     case KAboutLicense::Custom:
     case KAboutLicense::File:
         licenseShort = licenseFull = QCoreApplication::translate("KAboutLicense", "Custom", "@item license");
@@ -377,6 +387,7 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
         {"lgpl30", KAboutLicense::LGPL_V3},    {"lgpl30+", KAboutLicense::LGPL_V3},
         {"lgplv21", KAboutLicense::LGPL_V2_1}, {"lgplv21+", KAboutLicense::LGPL_V2_1},
         {"lgpl21", KAboutLicense::LGPL_V2_1},  {"lgpl21+", KAboutLicense::LGPL_V2_1},
+        {"mit", KAboutLicense::MIT},
     };
 
     // Normalize keyword.

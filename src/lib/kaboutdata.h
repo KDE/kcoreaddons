@@ -206,6 +206,7 @@ public:
         GPL_V3 = 5, ///< GPL_V3, see https://spdx.org/licenses/GPL-3.0.html
         LGPL_V3 = 6, ///< LGPL_V3, see https://spdx.org/licenses/LGPL-3.0-only.html
         LGPL_V2_1 = 7, ///< LGPL_V2_1 @since 5.25, see https://spdx.org/licenses/LGPL-2.1-only.html
+        MIT = 8, ///< MIT @since 6.0, see https://spdx.org/licenses/MIT.html
     };
     Q_ENUM(LicenseKey)
 
