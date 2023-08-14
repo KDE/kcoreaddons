@@ -299,7 +299,7 @@ private:
  * Dump debug information about the KDirWatch::self() instance.
  * This checks for consistency, too.
  */
-QDebug operator<<(QDebug debug, const KDirWatch &watch);
+KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const KDirWatch &watch);
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KDirWatch::WatchModes)
 
