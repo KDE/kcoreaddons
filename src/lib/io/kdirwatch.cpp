@@ -537,10 +537,10 @@ QDebug operator<<(QDebug debug, const KDirWatchPrivate &dwp)
     } else {
         auto it = dwp.m_mapEntries.cbegin();
         for (; it != dwp.m_mapEntries.cend(); ++it) {
-            const KDirWatchPrivate::Entry *e = &(*it);
-            debug << "  " << *e;
+            const KDirWatchPrivate::Entry &e = it.value();
+            debug << "  " << e;
 
-            for (const KDirWatchPrivate::Client &c : e->m_clients) {
+            for (const KDirWatchPrivate::Client &c : e.m_clients) {
                 QByteArray pending;
                 if (c.watchingStopped) {
                     if (c.pending & KDirWatchPrivate::Deleted) {
@@ -559,9 +559,9 @@ QDebug operator<<(QDebug debug, const KDirWatchPrivate &dwp)
                 }
                 debug << "    by " << c.instance->objectName() << " (" << c.count << " times)" << pending;
             }
-            if (!e->m_entries.isEmpty()) {
+            if (!e.m_entries.isEmpty()) {
                 debug << "    dependent entries:";
-                for (KDirWatchPrivate::Entry *d : std::as_const(e->m_entries)) {
+                for (KDirWatchPrivate::Entry *d : e.m_entries) {
                     debug << "      " << d << d->path << (d->m_status == KDirWatchPrivate::NonExistent ? "NonExistent" : "EXISTS this is an ERROR!");
                     if (s_verboseDebug) {
                         Q_ASSERT(d->m_status == KDirWatchPrivate::NonExistent); // it doesn't belong here otherwise
