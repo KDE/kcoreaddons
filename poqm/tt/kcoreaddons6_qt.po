@@ -68,7 +68,7 @@ msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "Билгесез"
 
-#: lib/kaboutdata.cpp:259
+#: lib/kaboutdata.cpp:265
 #, fuzzy
 #| msgid ""
 #| "No licensing terms for this program have been specified.\n"
@@ -84,14 +84,14 @@ msgstr ""
 "Бәлки, ул кушымтаның документациясендә яки чыганаклы текстларында "
 "күрсәтелгәндер.\n"
 
-#: lib/kaboutdata.cpp:267
+#: lib/kaboutdata.cpp:273
 #, fuzzy, qt-format
 #| msgid "This program is distributed under the terms of the %1."
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
 msgstr "Кушымта %1 шартларында таратыла."
 
-#: lib/kaboutdata.cpp:311
+#: lib/kaboutdata.cpp:317
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "GPL v2"
@@ -99,7 +99,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "GPL v2"
 
-#: lib/kaboutdata.cpp:312
+#: lib/kaboutdata.cpp:318
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU General Public License Version 2"
@@ -107,7 +107,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr "GNU General Public License, 2-нче юрамасы"
 
-#: lib/kaboutdata.cpp:315
+#: lib/kaboutdata.cpp:321
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "LGPL v2"
@@ -115,7 +115,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "LGPL v2"
 
-#: lib/kaboutdata.cpp:316
+#: lib/kaboutdata.cpp:322
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU Lesser General Public License Version 2"
@@ -123,7 +123,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr "GNU Lesser General Public License, 2-нче юрамасы"
 
-#: lib/kaboutdata.cpp:319
+#: lib/kaboutdata.cpp:325
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "BSD License"
@@ -131,7 +131,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD License"
 msgstr "BSD лицензиясе"
 
-#: lib/kaboutdata.cpp:320
+#: lib/kaboutdata.cpp:326
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "BSD License"
@@ -139,7 +139,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "BSD License"
 msgstr "BSD лицензиясе"
 
-#: lib/kaboutdata.cpp:323
+#: lib/kaboutdata.cpp:329
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "Artistic License"
@@ -147,7 +147,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "Artistic License"
 msgstr "Artistic License"
 
-#: lib/kaboutdata.cpp:324
+#: lib/kaboutdata.cpp:330
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "Artistic License"
@@ -155,7 +155,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Artistic License"
 msgstr "Artistic License"
 
-#: lib/kaboutdata.cpp:327
+#: lib/kaboutdata.cpp:333
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "GPL v3"
@@ -163,7 +163,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "GPL v3"
 
-#: lib/kaboutdata.cpp:328
+#: lib/kaboutdata.cpp:334
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU General Public License Version 3"
@@ -171,7 +171,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr "GNU General Public License, 3-нче юрамасы"
 
-#: lib/kaboutdata.cpp:331
+#: lib/kaboutdata.cpp:337
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "LGPL v3"
@@ -179,7 +179,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "LGPL v3"
 
-#: lib/kaboutdata.cpp:332
+#: lib/kaboutdata.cpp:338
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU Lesser General Public License Version 3"
@@ -187,7 +187,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr "GNU Lesser General Public License, 3-нче юрамасы"
 
-#: lib/kaboutdata.cpp:335
+#: lib/kaboutdata.cpp:341
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "LGPL v2"
@@ -195,7 +195,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr "LGPL v2"
 
-#: lib/kaboutdata.cpp:336
+#: lib/kaboutdata.cpp:342
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU Lesser General Public License Version 2"
@@ -203,7 +203,21 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU Lesser General Public License, 2-нче юрамасы"
 
-#: lib/kaboutdata.cpp:340
+#: lib/kaboutdata.cpp:345
+#, fuzzy
+#| msgid "License:"
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "MIT License"
+msgstr "Лицензия:"
+
+#: lib/kaboutdata.cpp:346
+#, fuzzy
+#| msgid "License:"
+msgctxt "KAboutLicense|@item license"
+msgid "MIT License"
+msgstr "Лицензия:"
+
+#: lib/kaboutdata.cpp:350
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "Custom"
@@ -211,7 +225,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "Өстәмә"
 
-#: lib/kaboutdata.cpp:343
+#: lib/kaboutdata.cpp:353
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "Not specified"
@@ -219,7 +233,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Лицензия күрсәтелмәгән"
 
-#: lib/kaboutdata.cpp:903
+#: lib/kaboutdata.cpp:914
 #, fuzzy
 #| msgctxt "replace this with information about your translation team"
 #| msgid ""
@@ -239,31 +253,31 @@ msgstr ""
 "турында күбрәк мәгълумат алу өчен <a href=\"http://l10n.kde.org\">l10n.kde."
 "org</a> сәхифәсенә мөрәҗәгать итегез.</p>"
 
-#: lib/kaboutdata.cpp:1134
+#: lib/kaboutdata.cpp:1145
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Автор турында мәгълүматны күрсәтү"
 
-#: lib/kaboutdata.cpp:1135
+#: lib/kaboutdata.cpp:1146
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Лицензия турында мәгълүматны күрсәтү"
 
-#: lib/kaboutdata.cpp:1137
+#: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1138
+#: lib/kaboutdata.cpp:1149
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1159
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -271,7 +285,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Кушымтаның авторы билгесез булып калырга теләде."
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1161
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -283,14 +297,14 @@ msgstr ""
 "%1 яздылар:\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1172
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Хаталар турында хәбәрләр өчен http://bugs.kde.org белән кулланыгыз.\n"
 
-#: lib/kaboutdata.cpp:1163
+#: lib/kaboutdata.cpp:1174
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"
@@ -9290,9 +9304,6 @@ msgstr ""
 
 #~ msgid "Email address:"
 #~ msgstr "E-Mail адресы:"
-
-#~ msgid "License:"
-#~ msgstr "Лицензия:"
 
 #~ msgid "GPL"
 #~ msgstr "GPL"
