@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-01-09 12:18+0100\n"
+"PO-Revision-Date: 2023-08-17 23:04+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -151,18 +151,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "Licentia GNU Lesser General Public Version 2.1"
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "Licentia:"
+msgstr "Licentia de MIT"
 
 #: lib/kaboutdata.cpp:346
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "Licentia:"
+msgstr "Licentia de MIT"
 
 #: lib/kaboutdata.cpp:350
 msgctxt "KAboutLicense|@item license"
