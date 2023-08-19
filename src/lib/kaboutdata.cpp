@@ -1102,6 +1102,8 @@ KAboutData KAboutData::applicationData()
     if (!aboutData) {
         // init from current Q*Application data
         aboutData = new KAboutData(QCoreApplication::applicationName(), QString(), QString());
+        // Unset the default (KDE) bug address, this is likely a third-party app. https://bugs.kde.org/show_bug.cgi?id=473517
+        aboutData->setBugAddress(QByteArray());
         // For applicationDisplayName & desktopFileName, which are only properties of QGuiApplication,
         // we have to try to get them via the property system, as the static getter methods are
         // part of QtGui only. Disadvantage: requires an app instance.
