@@ -157,16 +157,12 @@ msgstr "GNU Lesser General Public License versjon 2.1"
 
 #: lib/kaboutdata.cpp:345
 #, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
 msgstr "BSD-lisensen"
 
 #: lib/kaboutdata.cpp:346
 #, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
 msgstr "BSD-lisensen"

@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-01-20 07:02+0100\n"
+"PO-Revision-Date: 2023-08-20 19:52+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -160,20 +160,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU Leĝerigita Ĝenerala Publika Licenco Versio 2.1"
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "Licenco BSD"
+msgstr "Licenco MIT"
 
 #: lib/kaboutdata.cpp:346
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "Licenco BSD"
+msgstr "Licenco MIT"
 
 #: lib/kaboutdata.cpp:350
 msgctxt "KAboutLicense|@item license"
@@ -831,15 +825,3 @@ msgstr "Malsukcesis lanĉi `lsof'. Erarkodo %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob ne estas subtenata en Vindozo"
-
-#~ msgctxt "KAboutLicense|@item license (short name)"
-#~ msgid "QPL v1.0"
-#~ msgstr "QPL v1.0"
-
-#~ msgctxt "KAboutLicense|@item license"
-#~ msgid "Q Public License"
-#~ msgstr "Q Publika Permesilo"
-
-#~ msgctxt "KPluginLoader|"
-#~ msgid "The library %1 does not offer a KPluginFactory."
-#~ msgstr "La biblioteko %1 ne provizas KPluginFactory."
