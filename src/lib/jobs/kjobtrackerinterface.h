@@ -121,19 +121,17 @@ protected Q_SLOTS:
      * Examples of message are "Resolving host", "Connecting to host...", etc.
      *
      * @param job the job that emitted this signal
-     * @param plain the info message
-     * @param rich the rich text version of the message, or QString() is none is available
+     * @param message the info message
      */
-    virtual void infoMessage(KJob *job, const QString &plain, const QString &rich);
+    virtual void infoMessage(KJob *job, const QString &message);
 
     /**
      * Emitted to display a warning about a job.
      *
      * @param job the job that emitted this signal
-     * @param plain the warning message
-     * @param rich the rich text version of the message, or QString() is none is available
+     * @param message the warning message
      */
-    virtual void warning(KJob *job, const QString &plain, const QString &rich);
+    virtual void warning(KJob *job, const QString &message);
 
     /**
      * Called when we know the amount a job will have to process. The unit of this

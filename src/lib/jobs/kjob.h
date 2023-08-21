@@ -509,19 +509,17 @@ Q_SIGNALS:
      * Examples of message are "Resolving host", "Connecting to host...", etc.
      *
      * @param job the job that emitted this signal
-     * @param plain the info message
-     * @param rich the rich text version of the message, or QString() is none is available -- do not use, it's ignored
+     * @param message the info message
      */
-    void infoMessage(KJob *job, const QString &plain, const QString &rich = QString()); // KF6 TODO remove the 'rich' argument
+    void infoMessage(KJob *job, const QString &message);
 
     /**
      * Emitted to display a warning about this job.
      *
      * @param job the job that emitted this signal
-     * @param plain the warning message
-     * @param rich the rich text version of the message, or QString() is none is available
+     * @param message the warning message
      */
-    void warning(KJob *job, const QString &plain, const QString &rich = QString());
+    void warning(KJob *job, const QString &message);
 
 Q_SIGNALS:
     // These signals must be connected from KIO::KCoreDirLister (among others),

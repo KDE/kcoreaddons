@@ -97,11 +97,10 @@ protected Q_SLOTS:
      * Forward signal from subjob.
      *
      * @param job the subjob
-     * @param plain the info message in plain text version
-     * @param rich the info message in rich text version
+     * @param message the info message
      * @see infoMessage()
      */
-    virtual void slotInfoMessage(KJob *job, const QString &plain, const QString &rich);
+    virtual void slotInfoMessage(KJob *job, const QString &message);
 
 protected:
     KCOREADDONS_NO_EXPORT KCompositeJob(KCompositeJobPrivate &dd, QObject *parent);

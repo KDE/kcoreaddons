@@ -75,18 +75,16 @@ void KJobTrackerInterface::description(KJob *job, const QString &title, const QP
     Q_UNUSED(field2)
 }
 
-void KJobTrackerInterface::infoMessage(KJob *job, const QString &plain, const QString &rich)
+void KJobTrackerInterface::infoMessage(KJob *job, const QString &text)
 {
     Q_UNUSED(job)
-    Q_UNUSED(plain)
-    Q_UNUSED(rich)
+    Q_UNUSED(text)
 }
 
-void KJobTrackerInterface::warning(KJob *job, const QString &plain, const QString &rich)
+void KJobTrackerInterface::warning(KJob *job, const QString &message)
 {
     Q_UNUSED(job)
-    Q_UNUSED(plain)
-    Q_UNUSED(rich)
+    Q_UNUSED(message)
 }
 
 void KJobTrackerInterface::totalAmount(KJob *job, KJob::Unit unit, qulonglong amount)

@@ -94,11 +94,10 @@ bool KJobUiDelegate::isAutoWarningHandlingEnabled() const
     return d->autoWarningHandling;
 }
 
-void KJobUiDelegate::slotWarning(KJob *job, const QString &plain, const QString &rich)
+void KJobUiDelegate::slotWarning(KJob *job, const QString &message)
 {
     Q_UNUSED(job)
-    Q_UNUSED(plain)
-    Q_UNUSED(rich)
+    Q_UNUSED(message)
 }
 
 void KJobUiDelegate::connectJob(KJob *job)

@@ -140,7 +140,7 @@ public:
     bool isAutoWarningHandlingEnabled() const;
 
 protected Q_SLOTS:
-    virtual void slotWarning(KJob *job, const QString &plain, const QString &rich);
+    virtual void slotWarning(KJob *job, const QString &message);
 
 private:
     KCOREADDONS_NO_EXPORT void connectJob(KJob *job);

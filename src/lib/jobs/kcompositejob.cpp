@@ -97,9 +97,9 @@ void KCompositeJob::slotResult(KJob *job)
     removeSubjob(job);
 }
 
-void KCompositeJob::slotInfoMessage(KJob *job, const QString &plain, const QString &rich)
+void KCompositeJob::slotInfoMessage(KJob *job, const QString &message)
 {
-    Q_EMIT infoMessage(job, plain, rich);
+    Q_EMIT infoMessage(job, message);
 }
 
 #include "moc_kcompositejob.cpp"
