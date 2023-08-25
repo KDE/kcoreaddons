@@ -10,13 +10,13 @@
 # Pino Toscano <toscano.pino@tiscali.it>, 2008.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2008, 2012, 2013, 2014, 2015.
 # Innocenzo Ventre <innocenzo.ventre@gmail.com>, 2012.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2014, 2017, 2018, 2019, 2020, 2021, 2022.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2014, 2017, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-12-18 10:20+0100\n"
+"PO-Revision-Date: 2023-08-17 15:03+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 23.04.3\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:247
@@ -160,18 +160,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "Licenza Pubblica Generica Attenuata GNU, versione 2.1"
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "Licenza:"
+msgstr "Licenza MIT"
 
 #: lib/kaboutdata.cpp:346
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "Licenza:"
+msgstr "Licenza MIT"
 
 #: lib/kaboutdata.cpp:350
 msgctxt "KAboutLicense|@item license"
