@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-03-01 01:22+0100\n"
+"PO-Revision-Date: 2023-08-25 22:27+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:247
@@ -151,20 +151,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU 일반 약소 공중 라이선스 버전 2.1"
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "BSD 라이선스"
+msgstr "MIT 라이선스"
 
 #: lib/kaboutdata.cpp:346
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "BSD 라이선스"
+msgstr "MIT 라이선스"
 
 #: lib/kaboutdata.cpp:350
 msgctxt "KAboutLicense|@item license"
