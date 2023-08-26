@@ -355,6 +355,7 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel
 )
+install(FILES plugin/kpluginmetadata.schema.json DESTINATION ${KDE_INSTALL_DATADIR}/kf6/jsonschema COMPONENT Devel)
 
 # Includes CMake code to install open-source license texts for KAboutData.
 add_subdirectory(licenses)
