@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-06-11 14:23+0200\n"
+"PO-Revision-Date: 2023-08-26 04:18+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 23.04.3\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:243
@@ -79,7 +79,7 @@ msgid ""
 "Please check the documentation or the source for any\n"
 "licensing terms.\n"
 msgstr ""
-"Non se especificou a licenza deste programa.\n"
+"Non se indicou a licenza deste programa.\n"
 "Comprobe a documentación ou o código fonte se a necesita.\n"
 
 #: lib/kaboutdata.cpp:273
@@ -176,7 +176,7 @@ msgstr "Personalizada"
 #: lib/kaboutdata.cpp:353
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
-msgstr "Non especificada"
+msgstr "Non se indicou"
 
 #: lib/kaboutdata.cpp:967
 msgctxt "KAboutData|replace this with information about your translation team"
@@ -194,7 +194,7 @@ msgstr ""
 #: lib/kaboutdata.cpp:1225
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
-msgstr "Amosar información do autor."
+msgstr "Amosar a información de autoría."
 
 #: lib/kaboutdata.cpp:1226
 msgctxt "KAboutData CLI|"
