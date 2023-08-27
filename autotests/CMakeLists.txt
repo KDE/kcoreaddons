@@ -27,14 +27,19 @@ ecm_qt_declare_logging_category(autotests_static
 target_link_libraries(autotests_static Qt6::Core)
 
 if(ENABLE_PCH)
-    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp "/*empty file*/")
-    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/pch.h
+    if (NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp)
+        file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp "/*empty file*/")
+    endif()
+    file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/pch_tmp.h
         "#pragma once\n"
         "#include <QObject>\n"
         "#include <QTest>\n"
         "#include <QString>\n"
         "#include <QDateTime>\n"
     )
+    # avoid rebuilding if there was no change
+    execute_process(COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_BINARY_DIR}/pch_tmp.h" "${CMAKE_CURRENT_BINARY_DIR}/pch.h")
+
     add_library(tests_pch STATIC ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp)
     target_link_libraries(tests_pch Qt6::Core Qt6::Test)
     target_precompile_headers(tests_pch PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/pch.h)
@@ -46,12 +51,12 @@ configure_file(config-tests.h.in config-tests.h)
 add_subdirectory(plugin)
 
 macro(add_unit_test testname)
-  ecm_add_test(${testname}.cpp ${ARGN}
+    ecm_add_test(${testname}.cpp ${ARGN}
                TEST_NAME ${testname}
                LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static)
-  if(ENABLE_PCH)
-    target_precompile_headers(${testname} REUSE_FROM tests_pch)
-  endif()
+    if(ENABLE_PCH)
+        target_precompile_headers(${testname} REUSE_FROM tests_pch)
+    endif()
 endmacro()
 
 add_unit_test(kaboutdatatest)
