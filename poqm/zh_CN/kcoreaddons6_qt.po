@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
-"PO-Revision-Date: 2023-08-02 12:38\n"
+"PO-Revision-Date: 2023-08-27 03:38\n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -148,20 +148,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU 宽通用公共许可证 第 2.1 版"
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "BSD 许可证"
+msgstr "MIT 许可证"
 
 #: lib/kaboutdata.cpp:346
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "BSD 许可证"
+msgstr "MIT 许可证"
 
 #: lib/kaboutdata.cpp:350
 msgctxt "KAboutLicense|@item license"
