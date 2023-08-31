@@ -21,6 +21,7 @@
 #include <kcoreaddons_export.h>
 #include <memory>
 #include <qcontainerfwd.h>
+#include <qtmetamacros.h>
 
 class QCommandLineParser;
 class QJsonObject;
@@ -557,6 +558,14 @@ class KCOREADDONS_EXPORT KAboutData
     Q_PROPERTY(QList<KAboutLicense> licenses READ licenses CONSTANT)
     Q_PROPERTY(QString copyrightStatement READ copyrightStatement CONSTANT)
     Q_PROPERTY(QString desktopFileName READ desktopFileName CONSTANT)
+    Q_PROPERTY(QList<KAboutData::EcoCertification> ecoCertifications READ ecoCertifications CONSTANT)
+    Q_PROPERTY(QString energyEfficiencyDataLink READ energyEfficiencyDataLink CONSTANT)
+    Q_PROPERTY(QString minimalSystemRequirementsLink READ minimalSystemRequirementsLink CONSTANT)
+    Q_PROPERTY(QString openLicenseLink READ openLicenseLink CONSTANT)
+    Q_PROPERTY(QString sourceCodeLink READ sourceCodeLink CONSTANT)
+    Q_PROPERTY(QString apiDocumentationLink READ apiDocumentationLink CONSTANT)
+    Q_PROPERTY(QString dataFormatDocumentationLink READ dataFormatDocumentationLink CONSTANT)
+    Q_PROPERTY(QString installDocumentationLink READ installDocumentationLink CONSTANT)
 public:
     /**
      * Returns the KAboutData for the application.
@@ -684,6 +693,12 @@ public:
     KAboutData &operator=(const KAboutData &other);
 
     ~KAboutData();
+
+    /**
+     * A sustainability certification the software has received.
+     */
+    enum EcoCertification { KDEEco, BlueAngel };
+    Q_ENUM(EcoCertification)
 
     /**
      * Defines an author.
@@ -1014,6 +1029,78 @@ public:
     KAboutData &setBugAddress(const QByteArray &bugAddress);
 
     /**
+     * Defines the eco certifications the software has received.
+     *
+     * If not set, the field will not be shown.
+     *
+     * @param ecoCertifications A list of eco certifications.
+     */
+    KAboutData &setEcoCertifications(const QList<KAboutData::EcoCertification> &ecoCertifications);
+
+    /**
+     * Defines the link where information about energy efficiency data can be found.
+     *
+     * If not set, the field will not be shown.
+     *
+     * @param energyEfficiencyDataLink A URL to the energy efficiency data.
+     */
+    KAboutData &setEnergyEfficiencyDataLink(const QString &energyEfficiencyDataLink);
+
+    /**
+     * Defines the link where information about minimal system requirements can be found.
+     *
+     * If not set, the field will not be shown.
+     *
+     * @param minimalSystemRequirementsLink A URL to the minimal system requirements.
+     */
+    KAboutData &setMinimalSystemRequirementsLink(const QString &minimalSystemRequirementsLink);
+
+    /**
+     * Defines the link where the open license can be found.
+     *
+     * If not set, the field will not be shown.
+     *
+     * @param openLicenseLink A URL to the open license.
+     */
+    KAboutData &setOpenLicenseLink(const QString &openLicenseLink);
+
+    /**
+     * Defines the link where the source code can be found.
+     *
+     * If not set, the field will not be shown.
+     *
+     * @param sourceCodeLink A URL to the source code.
+     */
+    KAboutData &setSourceCodeLink(const QString &sourceCodeLink);
+
+    /**
+     * Defines the link where the API documentation can be found.
+     *
+     * If not set, the field will not be shown.
+     *
+     * @param apiDocumentationLink A URL to the API documentation.
+     */
+    KAboutData &setApiDocumentationLink(const QString &apiDocumentationLink);
+
+    /**
+     * Defines the link where the data format documentation can be found.
+     *
+     * If not set, the field will not be shown.
+     *
+     * @param dataFormatDocumentationLink A URL to the data format documentation.
+     */
+    KAboutData &setDataFormatDocumentationLink(const QString &dataFormatDocumentationlink);
+
+    /**
+     * Defines the link where the install/uninstall documentation can be found.
+     *
+     * If not set, the field will not be shown.
+     *
+     * @param installDocumentationLink A URL to the install/uninstall documentation.
+     */
+    KAboutData &setInstallDocumentationLink(const QString &installDocumentationLink);
+
+    /**
      * Defines the domain of the organization that wrote this application.
      * The domain is set to kde.org by default, or the domain of the homePageAddress constructor argument,
      * if set.
@@ -1236,6 +1323,46 @@ public:
      * bugAddress().
      */
     KAboutData &unsetCustomAuthorText();
+
+    /**
+     * A list of eco certifications the software has received.
+     */
+    QList<EcoCertification> ecoCertifications() const;
+
+    /**
+     * A link to information about energy efficiency data for the software.
+     */
+    QString energyEfficiencyDataLink() const;
+
+    /**
+     * A link to information about minimal system requirements to run the software.
+     */
+    QString minimalSystemRequirementsLink() const;
+
+    /**
+     * A link to the software's open license.
+     */
+    QString openLicenseLink() const;
+
+    /**
+     * A link to the software's source code.
+     */
+    QString sourceCodeLink() const;
+
+    /**
+     * A link to the software's API documentation.
+     */
+    QString apiDocumentationLink() const;
+
+    /**
+     * A link to the software's data format documentation.
+     */
+    QString dataFormatDocumentationLink() const;
+
+    /**
+     * A link to information about how to install and unninstall the software.
+     */
+    QString installDocumentationLink() const;
 
     /**
      * Configures the @p parser command line parser to provide an authors entry with

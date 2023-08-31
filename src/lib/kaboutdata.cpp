@@ -494,6 +494,15 @@ public:
     QString customAuthorPlainText, customAuthorRichText;
     bool customAuthorTextEnabled;
 
+    QList<KAboutData::EcoCertification> _ecoCertificationsList;
+    QString _energyEfficiencyDataLink;
+    QString _minimalSystemRequirementsLink;
+    QString _openLicenseLink;
+    QString _sourceCodeLink;
+    QString _apiDocumentationLink;
+    QString _dataFormatDocumentationLink;
+    QString _installDocumentationLink;
+
     QString organizationDomain;
     QString desktopFileName;
 
@@ -777,6 +786,54 @@ KAboutData &KAboutData::setProductName(const QByteArray &_productName)
     return *this;
 }
 
+KAboutData &KAboutData::setEcoCertifications(const QList<KAboutData::EcoCertification> &ecoCertifications)
+{
+    d->_ecoCertificationsList = ecoCertifications;
+    return *this;
+}
+
+KAboutData &KAboutData::setEnergyEfficiencyDataLink(const QString &energyEfficiencyDataLink)
+{
+    d->_energyEfficiencyDataLink = energyEfficiencyDataLink;
+    return *this;
+}
+
+KAboutData &KAboutData::setMinimalSystemRequirementsLink(const QString &minimalSystemRequirementsLink)
+{
+    d->_minimalSystemRequirementsLink = minimalSystemRequirementsLink;
+    return *this;
+}
+
+KAboutData &KAboutData::setOpenLicenseLink(const QString &openLicenseLink)
+{
+    d->_openLicenseLink = openLicenseLink;
+    return *this;
+}
+
+KAboutData &KAboutData::setSourceCodeLink(const QString &sourceCodeLink)
+{
+    d->_sourceCodeLink = sourceCodeLink;
+    return *this;
+}
+
+KAboutData &KAboutData::setApiDocumentationLink(const QString &apiDocumentationLink)
+{
+    d->_apiDocumentationLink = apiDocumentationLink;
+    return *this;
+}
+
+KAboutData &KAboutData::setDataFormatDocumentationLink(const QString &dataFormatDocumentationLink)
+{
+    d->_dataFormatDocumentationLink = dataFormatDocumentationLink;
+    return *this;
+}
+
+KAboutData &KAboutData::setInstallDocumentationLink(const QString &installDocumentationLink)
+{
+    d->_installDocumentationLink = installDocumentationLink;
+    return *this;
+}
+
 QString KAboutData::componentName() const
 {
     return d->_componentName;
@@ -972,6 +1029,46 @@ KAboutData &KAboutData::unsetCustomAuthorText()
     d->customAuthorTextEnabled = false;
 
     return *this;
+}
+
+QList<KAboutData::EcoCertification> KAboutData::ecoCertifications() const
+{
+    return d->_ecoCertificationsList;
+}
+
+QString KAboutData::energyEfficiencyDataLink() const
+{
+    return d->_energyEfficiencyDataLink;
+}
+
+QString KAboutData::minimalSystemRequirementsLink() const
+{
+    return d->_minimalSystemRequirementsLink;
+}
+
+QString KAboutData::openLicenseLink() const
+{
+    return d->_openLicenseLink;
+}
+
+QString KAboutData::sourceCodeLink() const
+{
+    return d->_sourceCodeLink;
+}
+
+QString KAboutData::apiDocumentationLink() const
+{
+    return d->_apiDocumentationLink;
+}
+
+QString KAboutData::dataFormatDocumentationLink() const
+{
+    return d->_dataFormatDocumentationLink;
+}
+
+QString KAboutData::installDocumentationLink() const
+{
+    return d->_installDocumentationLink;
 }
 
 KAboutData &KAboutData::setDesktopFileName(const QString &desktopFileName)
