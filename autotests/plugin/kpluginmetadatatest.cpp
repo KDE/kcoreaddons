@@ -508,12 +508,14 @@ private Q_SLOTS:
         QBENCHMARK {
             for (int i = 0; i < loopIterations; ++i) {
                 const auto plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), {}, KPluginMetaData::AllowEmptyMetaData);
+                Q_UNUSED(plugins)
             }
         }
+        QList<KPluginMetaData> plugins =
+            KPluginMetaData::findPlugins(QStringLiteral("namespace"), {}, KPluginMetaData::AllowEmptyMetaData | KPluginMetaData::CacheMetaData);
         QBENCHMARK {
-            QList<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), {}, KPluginMetaData::AllowEmptyMetaData);
-            for (int i = 0; i < loopIterations - 1; ++i) {
-                plugins = KPluginMetaData::findNewPlugins(QStringLiteral("namespace"), {}, KPluginMetaData::AllowEmptyMetaData, plugins);
+            for (int i = 0; i < loopIterations; ++i) {
+                plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), {}, KPluginMetaData::AllowEmptyMetaData | KPluginMetaData::CacheMetaData);
             }
         }
     }

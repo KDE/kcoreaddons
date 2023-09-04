@@ -109,9 +109,15 @@ public:
      * @since 5.91
      */
     enum KPluginMetaDataOption {
-        DoNotAllowEmptyMetaData, /// Plugins with empty metaData are considered invalid
-        AllowEmptyMetaData, /// Plugins with empty metaData are considered valid
+        AllowEmptyMetaData = 1, /// Plugins with empty metaData are considered valid
+        /**
+         * If KCoreAddons should keep metadata in cache. This makes querying the namespace again faster. Consider using this if you need revalidation of plugins
+         * @since 6.0
+         */
+        CacheMetaData = 2,
     };
+    Q_DECLARE_FLAGS(KPluginMetaDataOptions, KPluginMetaDataOption)
+    Q_FLAG(KPluginMetaDataOption)
 
     /** Creates an invalid KPluginMetaData instance */
     KPluginMetaData();
@@ -121,7 +127,7 @@ public:
      * or use the appropriate constructor on @p loader before calling this.
      * @param option Added in 6.0, see enum docs
      */
-    KPluginMetaData(const QPluginLoader &loader, KPluginMetaDataOption option = KPluginMetaDataOption::DoNotAllowEmptyMetaData);
+    KPluginMetaData(const QPluginLoader &loader, KPluginMetaDataOptions options = {});
 
     /**
      * Reads the plugin metadata from a plugin which can be loaded from @p file.
@@ -131,7 +137,7 @@ public:
      *
      * @see QPluginLoader::setFileName()
      */
-    KPluginMetaData(const QString &pluginFile, KPluginMetaDataOption option = KPluginMetaDataOption::DoNotAllowEmptyMetaData);
+    KPluginMetaData(const QString &pluginFile, KPluginMetaDataOptions options = {});
 
     /**
      * Creates a KPluginMetaData from a QJsonObject holding the metadata and a file name
@@ -177,8 +183,7 @@ public:
      * @param option Added in 6.0, see enum docs
      * @since 5.84
      */
-    static KPluginMetaData
-    findPluginById(const QString &directory, const QString &pluginId, KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData);
+    static KPluginMetaData findPluginById(const QString &directory, const QString &pluginId, KPluginMetaDataOptions options = {});
 
     /**
      * Find all plugins inside @p directory. Only plugins which have JSON metadata will be considered.
@@ -194,9 +199,8 @@ public:
      * @return all plugins found in @p directory that fulfil the constraints of @p filter
      * @since 5.86
      */
-    static QList<KPluginMetaData> findPlugins(const QString &directory,
-                                              std::function<bool(const KPluginMetaData &)> filter = {},
-                                              KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData);
+    static QList<KPluginMetaData>
+    findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter = {}, KPluginMetaDataOptions options = {});
 
     /**
      * @return whether this object holds valid information about a plugin.
@@ -425,5 +429,6 @@ inline size_t qHash(const KPluginMetaData &md, size_t seed)
 KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const KPluginMetaData &metaData);
 
 Q_DECLARE_TYPEINFO(KPluginMetaData, Q_RELOCATABLE_TYPE);
+Q_DECLARE_OPERATORS_FOR_FLAGS(KPluginMetaData::KPluginMetaDataOptions)
 
 #endif // KPLUGINMETADATA_H
