@@ -34,11 +34,13 @@ public:
                            const QString &fileName,
                            KPluginMetaData::KPluginMetaDataOption option = KPluginMetaData::DoNotAllowEmptyMetaData)
         : m_metaData(obj)
+        , m_rootObj(obj.value(QLatin1String("KPlugin")).toObject())
         , m_fileName(fileName)
         , m_option(option)
     {
     }
     const QJsonObject m_metaData;
+    const QJsonObject m_rootObj;
     // If we want to load a file, but it does not exist we want to keep the requested file name for logging
     QString m_requestedFileName;
     const QString m_fileName;
@@ -161,7 +163,7 @@ KPluginMetaData::KPluginMetaData(const QString &pluginFile, KPluginMetaDataOptio
     if (d->m_metaData.isEmpty() && option == DoNotAllowEmptyMetaData) {
         qCDebug(KCOREADDONS_DEBUG) << "plugin metadata in" << pluginFile << "does not have a valid 'MetaData' object";
     }
-    if (const QString id = rootObject()[QLatin1String("Id")].toString(); !id.isEmpty()) {
+    if (const QString id = d->m_rootObj[QLatin1String("Id")].toString(); !id.isEmpty()) {
         if (id != d->m_pluginId) {
             qWarning(KCOREADDONS_DEBUG) << "The plugin" << pluginFile
                                         << "explicitly states an Id in the embedded metadata, which is different from the one derived from the filename"
@@ -185,9 +187,8 @@ KPluginMetaData::KPluginMetaData(const QPluginLoader &loader, KPluginMetaDataOpt
 KPluginMetaData::KPluginMetaData(const QJsonObject &metaData, const QString &fileName)
     : d(new KPluginMetaDataPrivate(metaData, fileName))
 {
-    QJsonObject root = rootObject();
-    auto nameFromMetaData = root.constFind(QStringLiteral("Id"));
-    if (nameFromMetaData != root.constEnd()) {
+    auto nameFromMetaData = d->m_rootObj.constFind(QStringLiteral("Id"));
+    if (nameFromMetaData != d->m_rootObj.constEnd()) {
         d->m_pluginId = nameFromMetaData.value().toString();
     }
     if (d->m_pluginId.isEmpty()) {
@@ -281,12 +282,7 @@ bool KPluginMetaData::isValid() const
 
 bool KPluginMetaData::isHidden() const
 {
-    return rootObject()[QLatin1String("Hidden")].toBool();
-}
-
-const QJsonObject KPluginMetaData::rootObject() const
-{
-    return d->m_metaData.value(QLatin1String("KPlugin")).toObject();
+    return d->m_rootObj[QLatin1String("Hidden")].toBool();
 }
 
 static inline void addPersonFromJson(const QJsonObject &obj, QList<KAboutPerson> *out)
@@ -318,37 +314,37 @@ static QList<KAboutPerson> aboutPersonFromJSON(const QJsonValue &people)
 
 QList<KAboutPerson> KPluginMetaData::authors() const
 {
-    return aboutPersonFromJSON(rootObject()[QLatin1String("Authors")]);
+    return aboutPersonFromJSON(d->m_rootObj[QLatin1String("Authors")]);
 }
 
 QList<KAboutPerson> KPluginMetaData::translators() const
 {
-    return aboutPersonFromJSON(rootObject()[QLatin1String("Translators")]);
+    return aboutPersonFromJSON(d->m_rootObj[QLatin1String("Translators")]);
 }
 
 QList<KAboutPerson> KPluginMetaData::otherContributors() const
 {
-    return aboutPersonFromJSON(rootObject()[QLatin1String("OtherContributors")]);
+    return aboutPersonFromJSON(d->m_rootObj[QLatin1String("OtherContributors")]);
 }
 
 QString KPluginMetaData::category() const
 {
-    return rootObject()[QLatin1String("Category")].toString();
+    return d->m_rootObj[QLatin1String("Category")].toString();
 }
 
 QString KPluginMetaData::description() const
 {
-    return KJsonUtils::readTranslatedString(rootObject(), QStringLiteral("Description"));
+    return KJsonUtils::readTranslatedString(d->m_rootObj, QStringLiteral("Description"));
 }
 
 QString KPluginMetaData::iconName() const
 {
-    return rootObject()[QLatin1String("Icon")].toString();
+    return d->m_rootObj[QLatin1String("Icon")].toString();
 }
 
 QString KPluginMetaData::license() const
 {
-    return rootObject()[QLatin1String("License")].toString();
+    return d->m_rootObj[QLatin1String("License")].toString();
 }
 
 QString KPluginMetaData::licenseText() const
@@ -358,12 +354,12 @@ QString KPluginMetaData::licenseText() const
 
 QString KPluginMetaData::name() const
 {
-    return KJsonUtils::readTranslatedString(rootObject(), QStringLiteral("Name"));
+    return KJsonUtils::readTranslatedString(d->m_rootObj, QStringLiteral("Name"));
 }
 
 QString KPluginMetaData::copyrightText() const
 {
-    return KJsonUtils::readTranslatedString(rootObject(), QStringLiteral("Copyright"));
+    return KJsonUtils::readTranslatedString(d->m_rootObj, QStringLiteral("Copyright"));
 }
 
 QString KPluginMetaData::pluginId() const
@@ -373,22 +369,22 @@ QString KPluginMetaData::pluginId() const
 
 QString KPluginMetaData::version() const
 {
-    return rootObject()[QLatin1String("Version")].toString();
+    return d->m_rootObj[QLatin1String("Version")].toString();
 }
 
 QString KPluginMetaData::website() const
 {
-    return rootObject()[QLatin1String("Website")].toString();
+    return d->m_rootObj[QLatin1String("Website")].toString();
 }
 
 QString KPluginMetaData::bugReportUrl() const
 {
-    return rootObject()[QLatin1String("BugReportUrl")].toString();
+    return d->m_rootObj[QLatin1String("BugReportUrl")].toString();
 }
 
 QStringList KPluginMetaData::mimeTypes() const
 {
-    return rootObject()[QLatin1String("MimeTypes")].toVariant().toStringList();
+    return d->m_rootObj[QLatin1String("MimeTypes")].toVariant().toStringList();
 }
 
 bool KPluginMetaData::supportsMimeType(const QString &mimeType) const
@@ -416,13 +412,13 @@ bool KPluginMetaData::supportsMimeType(const QString &mimeType) const
 
 QStringList KPluginMetaData::formFactors() const
 {
-    return rootObject().value(QLatin1String("FormFactors")).toVariant().toStringList();
+    return d->m_rootObj.value(QLatin1String("FormFactors")).toVariant().toStringList();
 }
 
 bool KPluginMetaData::isEnabledByDefault() const
 {
     const QLatin1String key("EnabledByDefault");
-    const QJsonValue val = rootObject()[key];
+    const QJsonValue val = d->m_rootObj[key];
     if (val.isBool()) {
         return val.toBool();
     } else if (val.isString()) {

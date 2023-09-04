@@ -408,9 +408,6 @@ public:
     bool isStaticPlugin() const;
 
 private:
-    KCOREADDONS_NO_EXPORT const QJsonObject rootObject() const;
-
-private:
     KCOREADDONS_NO_EXPORT QStaticPlugin staticPlugin() const;
     KCOREADDONS_NO_EXPORT QString requestedFileName() const;
 
