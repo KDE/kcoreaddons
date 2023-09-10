@@ -95,9 +95,9 @@ KAboutPerson KAboutPerson::fromJSON(const QJsonObject &obj)
 {
     const QString name = KJsonUtils::readTranslatedString(obj, QStringLiteral("Name"));
     const QString task = KJsonUtils::readTranslatedString(obj, QStringLiteral("Task"));
-    const QString email = obj[QStringLiteral("Email")].toString();
-    const QString website = obj[QStringLiteral("Website")].toString();
-    const QUrl avatarUrl = obj[QStringLiteral("AvatarUrl")].toVariant().toUrl();
+    const QString email = obj.value(QLatin1String("Email")).toString();
+    const QString website = obj.value(QLatin1String("Website")).toString();
+    const QUrl avatarUrl = obj.value(QLatin1String("AvatarUrl")).toVariant().toUrl();
     return KAboutPerson(name, task, email, website, avatarUrl);
 }
 
