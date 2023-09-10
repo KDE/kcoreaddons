@@ -13,7 +13,6 @@
 
 #include "kaboutdata.h"
 #include "kjsonutils.h"
-#include "kpluginmetadata.h"
 
 #include <QCommandLineOption>
 #include <QCommandLineParser>
