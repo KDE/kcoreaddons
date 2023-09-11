@@ -197,44 +197,44 @@ msgstr ""
 "foutje tegen in een vertaling? Meld dit op <a href=\"https://www.kde.nl/bugs"
 "\">https://www.kde.nl/bugs</a></p>"
 
-#: lib/kaboutdata.cpp:1145
+#: lib/kaboutdata.cpp:1147
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Auteurinformatie tonen."
 
-#: lib/kaboutdata.cpp:1146
+#: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Licentie-informatie tonen."
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1150
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "De basis bestandsnaam van het desktop-item voor deze toepassing."
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "bestandsnaam"
 
-#: lib/kaboutdata.cpp:1159
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr ""
 "Deze toepassing werd geschreven door iemand die anoniem wenst te blijven."
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1163
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 werd geschreven door:"
 
-#: lib/kaboutdata.cpp:1172
+#: lib/kaboutdata.cpp:1174
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Gebruik https://bugs.kde.org om bugs (programmafouten) te rapporteren."
 
-#: lib/kaboutdata.cpp:1174
+#: lib/kaboutdata.cpp:1176
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

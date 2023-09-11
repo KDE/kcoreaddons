@@ -189,45 +189,45 @@ msgstr ""
 "limba română.</p><p>Pentru informații suplimentare, vizitați <a href="
 "\"https://ro.kde.org/\">https://ro.kde.org/</a>.</p>"
 
-#: lib/kaboutdata.cpp:1145
+#: lib/kaboutdata.cpp:1147
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Arată informații despre autor."
 
-#: lib/kaboutdata.cpp:1146
+#: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Arată informații despre licență."
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1150
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 "Denumirea de fișier de bază pentru înregistrarea de birou a acestei "
 "aplicații."
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "denumire fișier"
 
-#: lib/kaboutdata.cpp:1159
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Acestă aplicație a fost scrisă de cineva care vrea să rămână anonim."
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1163
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 a fost scris de:"
 
-#: lib/kaboutdata.cpp:1172
+#: lib/kaboutdata.cpp:1174
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Folosiți https://bugs.kde.org pentru a raporta defecte."
 
-#: lib/kaboutdata.cpp:1174
+#: lib/kaboutdata.cpp:1176
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

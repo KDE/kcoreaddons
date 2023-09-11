@@ -186,43 +186,43 @@ msgid ""
 "org</a></p>"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1145
+#: lib/kaboutdata.cpp:1147
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Sken talɣut n umeskar."
 
-#: lib/kaboutdata.cpp:1146
+#: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Sken talɣut n turagt."
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1150
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Isem n ufaylu azadur n unekcam n tnarirt i usnas-a."
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "isem n ufaylu"
 
-#: lib/kaboutdata.cpp:1159
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Asnas-a yura-t yiwen i yebɣan ad yeqqim d udrig."
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1163
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 yura-t:"
 
-#: lib/kaboutdata.cpp:1172
+#: lib/kaboutdata.cpp:1174
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Ttxil-k·m seqdec https://bugs.kde.org i tuzna n wabugen."
 
-#: lib/kaboutdata.cpp:1174
+#: lib/kaboutdata.cpp:1176
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

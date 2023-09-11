@@ -185,43 +185,43 @@ msgstr ""
 "ဘာသာပြန်နိုင်ခဲ့သည်။</p> <p>နိုင်ငံတကာသုံးကေဒီအီးဖြစ်ရန်ဆောင်ရွက်နေမှုများအကြောင်းသိလိုပါက <a href="
 "\"https://l10n.kde.org\">https://l10n.kde.org</a>တွင် သွားရောက်လေ့လာနိုင်သည်။</p>"
 
-#: lib/kaboutdata.cpp:1145
+#: lib/kaboutdata.cpp:1147
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "ရေးသားသူ၏အချက်အလက်များပြမည်။"
 
-#: lib/kaboutdata.cpp:1146
+#: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "လိုင်စင်၏အချက်အလက်များပြမည်။"
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1150
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "ဤအပ္ပလီကေးရှင်းအတွက် ဒက်စတော့ပ်စာရင်းမှတ်ချက်၏ အခြေခံဖိုင်အမည်။"
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "ဖိုင်လ်အမည်"
 
-#: lib/kaboutdata.cpp:1159
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "အမည်အသိမခံလိုသော တစ်စုံတစ်ယောက်မှ ဤအပ္ပလီကေးရှင်းကို ရေးသားခဲ့သည်။"
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1163
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1အား ရေးသူ -"
 
-#: lib/kaboutdata.cpp:1172
+#: lib/kaboutdata.cpp:1174
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "ဆော့ဖ်လ်ဝဲလ်ပြစ်ချက်အစီရင်ခံရန် https://bugs.kde.org ကို အသုံးပြုပါ။"
 
-#: lib/kaboutdata.cpp:1174
+#: lib/kaboutdata.cpp:1176
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
