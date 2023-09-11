@@ -193,43 +193,43 @@ msgstr ""
 "p><p>KDE の国際化対応の詳細については <a href=\"https://l10n.kde.org"
 "\">https://l10n.kde.org</a> をご覧ください。</p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1227
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "作者に関する情報を表示します。"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1228
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "ライセンス情報を表示します。"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "このアプリケーションのデスクトップエントリのベースファイル名です。"
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1231
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "ファイル名"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1241
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "このアプリケーションは匿名でありたい誰かによって書かれました。"
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1243
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 の作者:"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1254
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "バグは https://bugs.kde.org へ報告してください。"
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1256
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

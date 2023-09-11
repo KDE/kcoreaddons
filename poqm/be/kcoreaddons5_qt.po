@@ -186,44 +186,44 @@ msgstr ""
 "інтэрнацыяналізацыю KDE, наведайце <a href=\"https://l10n.kde.org\">https://"
 "l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1227
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Паказаць звесткі пра стваральніка."
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1228
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Паказаць звесткі пра ліцэнзію."
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Базавая назва файла элемента працоўнага стала для гэтай праграммы."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1231
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "назва файла"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1241
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Гэтая праграма створаная чалавекам, які захацеў застацца невядомым."
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1243
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 стварыў:"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1254
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr ""
 "Для адпраўлення справаздач пра хібы выкарыстоўвайце http://bugs.kde.org."
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1256
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

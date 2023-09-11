@@ -239,33 +239,33 @@ msgstr ""
 "等) 和管理者 (包括 shyue, kenduest lee, seventeen, jouston, acelan 等人)，沒"
 "有他們以往的辛勞工作，就沒有現在的繁體中文翻譯。</p></blockquote>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1227
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "顯示作者資訊"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1228
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "顯示版權資訊"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1231
 #, fuzzy
 #| msgid "Vietnamese"
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "越南文"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1241
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -273,7 +273,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "這個應用程式是由某個不願透露姓名的人編寫。"
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1243
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -285,14 +285,14 @@ msgstr ""
 "%1 的作者是：\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1254
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "請使用 http://bugs.kde.org 報告問題。\n"
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1256
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"

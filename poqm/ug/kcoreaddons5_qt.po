@@ -256,31 +256,31 @@ msgstr ""
 "internationalization visit <a href=\"http://l10n.kde.org\">http://l10n.kde."
 "org</a></p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1227
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "يازغۇچى ئۇچۇرىنى كۆرسەت"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1228
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "ئىجازەت ئۇچۇرىنى كۆرسەت"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1231
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1241
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -288,7 +288,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "بۇ پروگرامما ئاتىنى ئاشكارىلاشنى خالىمىغان كىشى تەرىپىدىن يېزىلغان."
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1243
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -300,14 +300,14 @@ msgstr ""
 "%1 نى يازغانلار\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1254
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "كەمتۈكلەرنى http://bugs.kde.org غا  مەلۇم قىلىڭ.\n"
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1256
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"

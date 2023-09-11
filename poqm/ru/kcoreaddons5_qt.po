@@ -203,43 +203,43 @@ msgstr ""
 "вы сможете узнать о работе команды, переводившей KDE на русский язык, и, "
 "возможно, сами захотите участвовать в этой работе.</p>"
 
-#: lib/kaboutdata.cpp:1225
+#: lib/kaboutdata.cpp:1227
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Показать сведения об авторе."
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1228
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Показать сведения о лицензии."
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Имя файла .desktop (без пути) для этого приложения."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1231
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "имя файла"
 
-#: lib/kaboutdata.cpp:1239
+#: lib/kaboutdata.cpp:1241
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Автор программы пожелал остаться неизвестным."
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1243
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 написали:"
 
-#: lib/kaboutdata.cpp:1252
+#: lib/kaboutdata.cpp:1254
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Используйте https://bugs.kde.org для отправки сообщений об ошибках."
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1256
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
