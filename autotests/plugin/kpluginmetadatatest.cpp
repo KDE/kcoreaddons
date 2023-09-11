@@ -501,6 +501,22 @@ private Q_SLOTS:
         qDebug() << list;
         qDebug() << (QList<KPluginMetaData>() << list << list << list);
     }
+    void benchmarkFindPlugins()
+    {
+        QSKIP("Skipped by default");
+        int loopIterations = 10;
+        QBENCHMARK {
+            for (int i = 0; i < loopIterations; ++i) {
+                const auto plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), {}, KPluginMetaData::AllowEmptyMetaData);
+            }
+        }
+        QBENCHMARK {
+            QList<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), {}, KPluginMetaData::AllowEmptyMetaData);
+            for (int i = 0; i < loopIterations - 1; ++i) {
+                plugins = KPluginMetaData::findNewPlugins(QStringLiteral("namespace"), {}, KPluginMetaData::AllowEmptyMetaData, plugins);
+            }
+        }
+    }
 };
 
 QTEST_MAIN(KPluginMetaDataTest)
