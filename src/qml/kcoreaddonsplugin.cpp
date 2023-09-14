@@ -11,6 +11,7 @@
 
 #include "formats.h"
 #include "kuserproxy.h"
+#include <KAboutData>
 #include <KFormat>
 
 class KCoreAddonsPlugin : public QQmlExtensionPlugin
@@ -27,6 +28,9 @@ public:
         qRegisterMetaType<QLocale::FormatType>();
         qmlRegisterUncreatableMetaObject(KFormat::staticMetaObject, uri, 1, 0, "FormatTypes", QString());
         qmlRegisterType<KUserProxy>(uri, 1, 0, "KUser");
+        qmlRegisterSingletonType(uri, 1, 0, "AboutData", [](QQmlEngine *engine, QJSEngine *) -> QJSValue {
+            return engine->toScriptValue(KAboutData::applicationData());
+        });
     }
 };
 
