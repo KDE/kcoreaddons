@@ -245,65 +245,41 @@ msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "KPluginFactory %2 तः %1 दृष्टान्तं निर्मातुं न शक्तवान्"
 
 #: lib/util/kformatprivate.cpp:102
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»24"
-#| msgid "y"
 msgctxt "KFormat|SI prefix for 10^⁻24"
 msgid "y"
 msgstr "y"
 
 #: lib/util/kformatprivate.cpp:103
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»21"
-#| msgid "z"
 msgctxt "KFormat|SI prefix for 10^⁻21"
 msgid "z"
 msgstr "z"
 
 #: lib/util/kformatprivate.cpp:104
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»18"
-#| msgid "a"
 msgctxt "KFormat|SI prefix for 10^⁻18"
 msgid "a"
 msgstr "a"
 
 #: lib/util/kformatprivate.cpp:105
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»15"
-#| msgid "f"
 msgctxt "KFormat|SI prefix for 10^⁻15"
 msgid "f"
 msgstr "f"
 
 #: lib/util/kformatprivate.cpp:106
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»12"
-#| msgid "p"
 msgctxt "KFormat|SI prefix for 10^⁻12"
 msgid "p"
 msgstr "p"
 
 #: lib/util/kformatprivate.cpp:107
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»9"
-#| msgid "n"
 msgctxt "KFormat|SI prefix for 10^⁻9"
 msgid "n"
 msgstr "n"
 
 #: lib/util/kformatprivate.cpp:108
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»6"
-#| msgid "Âµ"
 msgctxt "KFormat|SI prefix for 10^⁻6"
 msgid "µ"
-msgstr "Âµ"
+msgstr "µ"
 
 #: lib/util/kformatprivate.cpp:109
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»3"
-#| msgid "m"
 msgctxt "KFormat|SI prefix for 10^⁻3"
 msgid "m"
 msgstr "m"
