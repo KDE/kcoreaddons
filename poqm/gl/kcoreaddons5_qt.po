@@ -237,13 +237,13 @@ msgstr "Informe dos fallos a %1."
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
-msgstr "Non se puido atopar o complemento %1."
+msgstr "Non foi posíbel atopar o complemento %1."
 
 #: lib/plugin/kpluginfactory.cpp:50
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
-msgstr "Non se puido cargar o complemento de %1: %2"
+msgstr "Non foi posíbel cargar o complemento de %1: %2"
 
 #: lib/plugin/kpluginfactory.cpp:61
 #, qt-format
@@ -818,13 +818,13 @@ msgstr "A ruta %1 non existe"
 #: lib/util/klistopenfilesjob_unix.cpp:46
 msgctxt "QObject|"
 msgid "Could not find lsof executable in PATH:"
-msgstr "Non se puido atopar o executábel «lsof» en PATH:"
+msgstr "Non foi posíbel atopar o executábel «lsof» en PATH:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
 #, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "Non se puido executar «lsof». Código de erro %1."
+msgstr "Non foi posíbel executar «lsof». Código de erro %1."
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
