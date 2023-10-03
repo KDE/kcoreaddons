@@ -41,10 +41,9 @@ QString KFileUtils::makeSuggestedName(const QString &oldName)
     }
 
     // check if (number) exists at the end of the oldName and increment that number
-    const QRegularExpression re(QStringLiteral("\\((\\d+)\\)"));
+    const static QRegularExpression re(QStringLiteral("\\((\\d+)\\)"));
     QRegularExpressionMatch rmatch;
-    oldName.lastIndexOf(re, -1, &rmatch);
-    if (rmatch.hasMatch()) {
+    if (oldName.lastIndexOf(re, -1, &rmatch) != -1) {
         const int currentNum = rmatch.captured(1).toInt();
         const QString number = QString::number(currentNum + 1);
         basename.replace(rmatch.capturedStart(1), rmatch.capturedLength(1), number);
