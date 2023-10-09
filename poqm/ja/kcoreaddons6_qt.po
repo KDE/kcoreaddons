@@ -830,15 +830,3 @@ msgstr "'lsof' の実行に失敗しました エラーコード %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob は Windows でサポートされていません"
-
-#~ msgctxt "KAboutLicense|@item license (short name)"
-#~ msgid "QPL v1.0"
-#~ msgstr "QPL v1.0"
-
-#~ msgctxt "KAboutLicense|@item license"
-#~ msgid "Q Public License"
-#~ msgstr "Q Public License"
-
-#~ msgctxt "KPluginLoader|"
-#~ msgid "The library %1 does not offer a KPluginFactory."
-#~ msgstr "ライブラリ %1 は KPluginFactory を提供していません。"
