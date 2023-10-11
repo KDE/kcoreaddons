@@ -12,6 +12,7 @@
 #include <kcoreaddons_export.h>
 
 #include <QtContainerFwd>
+#include <QtGlobal>
 
 class QString;
 class QStringView;
