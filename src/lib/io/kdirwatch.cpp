@@ -1800,6 +1800,23 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
             }
         }
     } break;
+
+    case FAMChanged: {
+        // This code is very similar to the one in inotifyEventReceived...
+
+        // check for creation of a directory we have to watch
+        QString tpath(e->path + QLatin1Char('/') + QFile::decodeName(fe->filename));
+
+        if ((e->isDir) && (!e->m_clients.empty())) {
+            // The API doc is somewhat vague as to whether we should emit
+            // dirty() for implicitly watched files when WatchFiles has
+            // not been specified - we'll assume they are always interested,
+            // regardless.
+            // Don't worry about duplicates for the time
+            // being; this is handled in slotRescan.
+            e->m_pendingFileChanges.append(tpath);
+        }
+    } break;
     default:
         break;
     }
