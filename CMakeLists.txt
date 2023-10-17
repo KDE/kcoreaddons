@@ -4,7 +4,7 @@ set(KF_VERSION "5.246.0") # handled by release scripts
 project(KCoreAddons VERSION ${KF_VERSION})
 
 include(FeatureSummary)
-find_package(ECM 5.240.0  NO_MODULE)
+find_package(ECM 5.240.0 NO_MODULE)
 set_package_properties(ECM PROPERTIES TYPE REQUIRED DESCRIPTION "Extra CMake Modules." URL "https://commits.kde.org/extra-cmake-modules")
 feature_summary(WHAT REQUIRED_PACKAGES_NOT_FOUND FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
@@ -102,11 +102,11 @@ configure_file(src/lib/io/config-kfilesystemtype.h.cmake ${CMAKE_CURRENT_BINARY_
 
 include(ECMPoQmTools)
 
-set(kcoreaddons_version_header "${CMAKE_CURRENT_BINARY_DIR}/src/lib/kcoreaddons_version.h")
 ecm_setup_version(PROJECT VARIABLE_PREFIX KCOREADDONS
-                        VERSION_HEADER "${kcoreaddons_version_header}"
-                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfigVersion.cmake"
-                        SOVERSION 6)
+    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/lib/kcoreaddons_version.h"
+    PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfigVersion.cmake"
+    SOVERSION 6
+)
 
 
 ecm_install_po_files_as_qm(poqm)
@@ -138,17 +138,19 @@ if (BUILD_QCH)
 endif()
 
 configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KF6CoreAddonsConfig.cmake.in"
-                              "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfig.cmake"
-                              INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-                              )
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfig.cmake"
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
 
-install(FILES  "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfig.cmake"
-               "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfigVersion.cmake"
-               "${CMAKE_CURRENT_SOURCE_DIR}/KF6CoreAddonsMacros.cmake"
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel )
+install(FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfigVersion.cmake"
+    "${CMAKE_CURRENT_SOURCE_DIR}/KF6CoreAddonsMacros.cmake"
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    COMPONENT Devel
+)
 
-install(EXPORT KF6CoreAddonsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF6CoreAddonsTargets.cmake NAMESPACE KF6:: )
+install(EXPORT KF6CoreAddonsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF6CoreAddonsTargets.cmake NAMESPACE KF6::)
 
 install(FILES ${kcoreaddons_version_header} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel)
 

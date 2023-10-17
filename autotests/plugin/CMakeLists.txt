@@ -34,7 +34,7 @@ ecm_add_tests(
     LINK_LIBRARIES Qt6::Test Qt6::Widgets KF6::CoreAddons autotests_static
 )
 if (NOT WIN32)
-   target_link_libraries(kpluginfactorytest plugin_classes)
+    target_link_libraries(kpluginfactorytest plugin_classes)
 endif()
 
 kcoreaddons_add_plugin(static_jsonplugin_cmake_macro SOURCES statickpluginclass.cpp INSTALL_NAMESPACE "staticnamespace" STATIC)

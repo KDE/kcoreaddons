@@ -2,7 +2,7 @@ set(KCOREADDONS_INTERNAL_SKIP_PLUGIN_INSTALLATION ON)
 add_definitions(-DQT_FORCE_ASSERTS=1)
 
 include(ECMAddTests)
-include(ConfigureChecks.cmake) #configure checks for QFileSystemWatcher
+include(ConfigureChecks.cmake) # configure checks for QFileSystemWatcher
 include(../KF6CoreAddonsMacros.cmake)
 
 find_package(Qt6Test ${REQUIRED_QT_VERSION} CONFIG QUIET)
@@ -20,10 +20,10 @@ add_library(autotests_static STATIC)
 # Needed to link this static lib to shared libs
 set_property(TARGET autotests_static PROPERTY POSITION_INDEPENDENT_CODE ON)
 ecm_qt_declare_logging_category(autotests_static
-        HEADER kcoreaddons_debug.h
-        IDENTIFIER KCOREADDONS_DEBUG
-        CATEGORY_NAME kf.coreaddons
-        )
+    HEADER kcoreaddons_debug.h
+    IDENTIFIER KCOREADDONS_DEBUG
+    CATEGORY_NAME kf.coreaddons
+)
 target_link_libraries(autotests_static Qt6::Core)
 
 if(ENABLE_PCH)
@@ -52,8 +52,8 @@ add_subdirectory(plugin)
 
 macro(add_unit_test testname)
     ecm_add_test(${testname}.cpp ${ARGN}
-               TEST_NAME ${testname}
-               LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static)
+        TEST_NAME ${testname}
+        LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static)
     if(ENABLE_PCH)
         target_precompile_headers(${testname} REUSE_FROM tests_pch)
     endif()
@@ -113,7 +113,7 @@ target_link_libraries(ktexttohtmlbenchmarktest PUBLIC ktexttohtmlteststatic)
 add_executable(kprocesstest_helper kprocesstest_helper.cpp)
 target_link_libraries(kprocesstest_helper KF6::CoreAddons)
 
-set(KDIRWATCH_BACKENDS_TO_TEST Stat)#Stat is always compiled
+set(KDIRWATCH_BACKENDS_TO_TEST Stat) #Stat is always compiled
 
 if (HAVE_SYS_INOTIFY_H)
     list(APPEND KDIRWATCH_BACKENDS_TO_TEST INotify)
