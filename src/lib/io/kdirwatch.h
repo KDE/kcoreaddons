@@ -301,6 +301,7 @@ Q_SIGNALS:
 
 private:
     KDirWatchPrivate *d;
+    friend class KDirWatchPrivate;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(KDirWatch::WatchModes)

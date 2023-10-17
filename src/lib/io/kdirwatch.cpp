@@ -247,6 +247,16 @@ KDirWatchPrivate::~KDirWatchPrivate()
         FAMClose(&fc);
     }
 #endif
+
+    // Unset us as d pointer. This indicates to the KDirWatch that the private has already been destroyed and therefore
+    // needs no additional cleanup from its destructor.
+    for (auto it = m_mapEntries.begin(); it != m_mapEntries.end(); it++) {
+        auto &entry = it.value();
+        for (auto &client : entry.m_clients) {
+            client.instance->d = nullptr;
+        }
+    }
+
 #if HAVE_SYS_INOTIFY_H
     if (supports_inotify) {
         QT_CLOSE(m_inotify_fd);
@@ -1875,7 +1885,7 @@ KDirWatch::KDirWatch(QObject *parent)
 
 KDirWatch::~KDirWatch()
 {
-    if (d && dwp_self.hasLocalData()) { // skip this after app destruction
+    if (d) {
         d->removeEntries(this);
         d->unref();
     }
