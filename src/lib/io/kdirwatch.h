@@ -291,6 +291,7 @@ Q_SIGNALS:
 
 private:
     KDirWatchPrivate *d;
+    friend class KDirWatchPrivate;
 };
 
 /**
