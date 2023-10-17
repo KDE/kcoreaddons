@@ -1807,7 +1807,7 @@ void KDirWatchPrivate::checkFAMEvent(FAMEvent *fe)
         // check for creation of a directory we have to watch
         QString tpath(e->path + QLatin1Char('/') + QFile::decodeName(fe->filename));
 
-        if ((e->isDir) && (!e->m_clients.empty())) {
+        if (e->isDir && !e->m_clients.empty()) {
             // The API doc is somewhat vague as to whether we should emit
             // dirty() for implicitly watched files when WatchFiles has
             // not been specified - we'll assume they are always interested,
