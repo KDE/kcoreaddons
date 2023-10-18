@@ -34,11 +34,6 @@
 #include <QTimer>
 class QSocketNotifier;
 
-#if HAVE_FAM
-#include <fam.h>
-#include <limits.h>
-#endif
-
 #include <ctime>
 #include <sys/types.h> // time_t, ino_t
 
@@ -67,7 +62,6 @@ public:
         UnknownMode = 0,
         StatMode,
         INotifyMode,
-        FAMMode,
         QFSWatchMode,
     };
     enum {
@@ -156,11 +150,6 @@ public:
             });
         }
 
-#if HAVE_FAM
-        FAMRequest fr;
-        bool m_famReportedSeen;
-#endif
-
 #if HAVE_SYS_INOTIFY_H
         int wd;
         // Creation and Deletion of files happens infrequently, so
@@ -206,7 +195,6 @@ public:
 
 public Q_SLOTS:
     void slotRescan();
-    void famEventReceived(); // for FAM
     void inotifyEventReceived(); // for inotify
     void slotRemoveDelayed();
     void fswEventReceived(const QString &path); // for QFileSystemWatcher
@@ -227,16 +215,6 @@ public:
 
     bool rescan_all;
     QTimer rescan_timer;
-
-#if HAVE_FAM
-    QSocketNotifier *sn;
-    FAMConnection fc;
-    bool use_fam;
-
-    void checkFAMEvent(FAMEvent *fe);
-    bool useFAM(Entry *e);
-    void disableFAM();
-#endif
 
 #if HAVE_SYS_INOTIFY_H
     QSocketNotifier *mSn;

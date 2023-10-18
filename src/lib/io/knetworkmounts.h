@@ -91,7 +91,6 @@ public:
                                         ///< Don't search for .kateconfig recursively<br>
                                         ///< Ignore recent files on slow paths
         StrongSideEffectsOptimizations, ///< Turn off symbolic link resolution
-        KDirWatchUseINotify, ///< Use Inotify on the path (instead of FAM on NFS mounts). Inotify detects changes only locally, FAM works also remotely with NFS
         KDirWatchDontAddWatches, ///< Disables dir watching completely for slow paths, avoids stat() calls on added dirs and subdirs
         SymlinkPathsUseCache ///< Cache resolved symlink paths
     };

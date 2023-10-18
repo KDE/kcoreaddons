@@ -56,13 +56,6 @@ if(NOT WIN32)
 endif()
 
 # Configure checks for kdirwatch
-find_package(FAM)
-
-set_package_properties(FAM PROPERTIES
-     PURPOSE "Provides file alteration notification facilities using a separate service. FAM provides additional support for NFS.")
-
-set(HAVE_FAM ${FAM_FOUND})
-
 option(ENABLE_INOTIFY "Try to use inotify for directory monitoring" ON)
 if(ENABLE_INOTIFY)
     # Find libinotify

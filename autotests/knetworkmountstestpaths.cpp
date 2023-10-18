@@ -135,7 +135,6 @@ void KNetworkMountsTestPaths::testPaths()
     QFETCH(bool, expected_smb);
 
     QCOMPARE(KNetworkMounts::self()->isOptionEnabledForPath(path, KNetworkMounts::SymlinkPathsUseCache), expected_path_option);
-    QCOMPARE(KNetworkMounts::self()->isOptionEnabledForPath(path, KNetworkMounts::KDirWatchUseINotify), expected_path_option);
     QCOMPARE(KNetworkMounts::self()->isOptionEnabledForPath(path, KNetworkMounts::KDirWatchDontAddWatches), expected_path_option);
     QCOMPARE(KNetworkMounts::self()->isOptionEnabledForPath(path, KNetworkMounts::LowSideEffectsOptimizations), expected_path_option);
     QCOMPARE(KNetworkMounts::self()->isOptionEnabledForPath(path, KNetworkMounts::MediumSideEffectsOptimizations), expected_path_option);

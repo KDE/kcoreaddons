@@ -47,8 +47,6 @@ static const char s_filePrefix[] = "This_is_a_test_file_";
 static const char *methodToString(KDirWatch::Method method)
 {
     switch (method) {
-    case KDirWatch::FAM:
-        return "Fam";
     case KDirWatch::INotify:
         return "INotify";
     case KDirWatch::Stat:

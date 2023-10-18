@@ -42,7 +42,7 @@ public:
         m_path = m_tempDir.path() + QLatin1Char('/');
         KDirWatch *dirW = &s_staticObject()->m_dirWatch;
         m_stat = dirW->internalMethod() == KDirWatch::Stat;
-        m_slow = (dirW->internalMethod() == KDirWatch::FAM || m_stat);
+        m_slow = m_stat;
         qCDebug(KCOREADDONS_DEBUG) << "Using method" << methodToString(dirW->internalMethod());
     }
 
@@ -323,7 +323,7 @@ void KDirWatch_UnitTest::removeAndReAdd()
     watch.removeDir(m_path);
     watch.addDir(m_path);
     if (watch.internalMethod() != KDirWatch::INotify) {
-        waitUntilMTimeChange(m_path); // necessary for FAM and QFSWatcher
+        waitUntilMTimeChange(m_path); // necessary for QFSWatcher
     }
     createFile(1);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
@@ -382,8 +382,8 @@ void KDirWatch_UnitTest::watchNonExistentWithSingleton()
 {
     const QString file = QLatin1String("/root/.ssh/authorized_keys");
     KDirWatch::self()->addFile(file);
-    // When running this test in KDIRWATCH_METHOD=QFSWatch, or when FAM is not available
-    // and we fallback to qfswatch when inotify fails above, we end up creating the fsWatch
+    // When running this test in KDIRWATCH_METHOD=QFSWatch, or when we fallback to qfswatch
+    // when inotify fails above, we end up creating the fsWatch
     // in the kdirwatch singleton. Bug 261541 discovered that Qt hanged when deleting fsWatch
     // once QCoreApp was gone, this is what this test is about.
 }
@@ -618,7 +618,7 @@ void KDirWatch_UnitTest::testHardlinkChange()
     // described on kde-core-devel (2009-07-03).
     // It shows that watching a specific file doesn't inform us that the file is
     // being recreated. Better watch the directory, for that.
-    // Well, it works with inotify (and fam - which uses inotify I guess?)
+    // Well, it works with inotify
 
     const QString existingFile = m_path + QLatin1String("ExistingFile");
     KDirWatch watch;

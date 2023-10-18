@@ -42,11 +42,6 @@ endif()
 
 ecm_create_qm_loader(KF6CoreAddons kcoreaddons6_qt)
 
-if (FAM_FOUND)
-    target_include_directories(KF6CoreAddons PRIVATE ${FAM_INCLUDE_DIR})
-    target_link_libraries(KF6CoreAddons PRIVATE ${FAM_LIBRARIES})
-endif ()
-
 if (Inotify_FOUND)
     target_include_directories(KF6CoreAddons PRIVATE ${Inotify_INCLUDE_DIRS})
     target_link_libraries(KF6CoreAddons PRIVATE ${Inotify_LIBRARIES})

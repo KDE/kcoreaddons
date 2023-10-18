@@ -80,21 +80,18 @@ void KNetworkMountsTestNoConfig::testNoConfigPathOptions_data()
     QTest::newRow("LowSideEffectsOptimizations/") << "/" << KNetworkMounts::LowSideEffectsOptimizations;
     QTest::newRow("MediumSideEffectsOptimizations/") << "/" << KNetworkMounts::MediumSideEffectsOptimizations;
     QTest::newRow("StrongSideEffectsOptimizations/") << "/" << KNetworkMounts::StrongSideEffectsOptimizations;
-    QTest::newRow("KDirWatchUseINotify/") << "/" << KNetworkMounts::KDirWatchUseINotify;
     QTest::newRow("KDirWatchDontAddWatches/") << "/" << KNetworkMounts::KDirWatchDontAddWatches;
     QTest::newRow("SymlinkPathsUseCache/") << "/" << KNetworkMounts::SymlinkPathsUseCache;
 
     QTest::newRow("LowSideEffectsOptimizations/mnt") << "/mnt" << KNetworkMounts::LowSideEffectsOptimizations;
     QTest::newRow("MediumSideEffectsOptimizations/mnt") << "/mnt" << KNetworkMounts::MediumSideEffectsOptimizations;
     QTest::newRow("StrongSideEffectsOptimizations/mnt") << "/mnt" << KNetworkMounts::StrongSideEffectsOptimizations;
-    QTest::newRow("KDirWatchUseINotify/mnt") << "/mnt" << KNetworkMounts::KDirWatchUseINotify;
     QTest::newRow("KDirWatchDontAddWatches/mnt") << "/mnt" << KNetworkMounts::KDirWatchDontAddWatches;
     QTest::newRow("SymlinkPathsUseCache/mnt") << "/mnt" << KNetworkMounts::SymlinkPathsUseCache;
 
     QTest::newRow("LowSideEffectsOptimizations/mnt/") << "/mnt/" << KNetworkMounts::LowSideEffectsOptimizations;
     QTest::newRow("MediumSideEffectsOptimizations/mnt/") << "/mnt/" << KNetworkMounts::MediumSideEffectsOptimizations;
     QTest::newRow("StrongSideEffectsOptimizations/mnt/") << "/mnt/" << KNetworkMounts::StrongSideEffectsOptimizations;
-    QTest::newRow("KDirWatchUseINotify/mnt/") << "/mnt/" << KNetworkMounts::KDirWatchUseINotify;
     QTest::newRow("KDirWatchDontAddWatches/mnt/") << "/mnt/" << KNetworkMounts::KDirWatchDontAddWatches;
     QTest::newRow("SymlinkPathsUseCache/mnt/") << "/mnt/" << KNetworkMounts::SymlinkPathsUseCache;
 }
@@ -121,9 +118,6 @@ void KNetworkMountsTestNoConfig::testNoConfigOptions_data()
 
     QTest::newRow("StrongSideEffectsOptimizations_false") << KNetworkMounts::StrongSideEffectsOptimizations << false << false;
     QTest::newRow("StrongSideEffectsOptimizationss_true") << KNetworkMounts::StrongSideEffectsOptimizations << true << true;
-
-    QTest::newRow("KDirWatchUseINotify_false") << KNetworkMounts::KDirWatchUseINotify << false << false;
-    QTest::newRow("KDirWatchUseINotifys_true") << KNetworkMounts::KDirWatchUseINotify << true << true;
 
     QTest::newRow("KDirWatchDontAddWatches_false") << KNetworkMounts::KDirWatchDontAddWatches << false << false;
     QTest::newRow("KDirWatchDontAddWatches_true") << KNetworkMounts::KDirWatchDontAddWatches << true << true;

@@ -74,7 +74,6 @@ void KNetworkMountsTestStatic::testStaticKNetworkMountOptionToString_data()
     QTest::newRow("LowSideEffectsOptimizations") << KNetworkMounts::LowSideEffectsOptimizations << "LowSideEffectsOptimizations";
     QTest::newRow("MediumSideEffectsOptimizations") << KNetworkMounts::MediumSideEffectsOptimizations << "MediumSideEffectsOptimizations";
     QTest::newRow("StrongSideEffectsOptimizations") << KNetworkMounts::StrongSideEffectsOptimizations << "StrongSideEffectsOptimizations";
-    QTest::newRow("KDirWatchUseINotify") << KNetworkMounts::KDirWatchUseINotify << "KDirWatchUseINotify";
     QTest::newRow("KDirWatchDontAddWatches") << KNetworkMounts::KDirWatchDontAddWatches << "KDirWatchDontAddWatches";
     QTest::newRow("SymlinkPathsUseCache") << KNetworkMounts::SymlinkPathsUseCache << "SymlinkPathsUseCache";
 }
