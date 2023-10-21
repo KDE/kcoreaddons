@@ -27,7 +27,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Zanata 3.9.6\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:247
@@ -732,6 +733,8 @@ msgid "%n millisecond(s)"
 msgid_plural "%n millisecond(s)"
 msgstr[0] "%1 אלפית שנייה"
 msgstr[1] "%1 אלפית שנייה"
+msgstr[2] ""
+msgstr[3] ""
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:421
@@ -741,6 +744,8 @@ msgid "%n day(s)"
 msgid_plural "%n day(s)"
 msgstr[0] "%1 ימים"
 msgstr[1] "%1 ימים"
+msgstr[2] ""
+msgstr[3] ""
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:426
@@ -750,6 +755,8 @@ msgid "%n hour(s)"
 msgid_plural "%n hour(s)"
 msgstr[0] "%1 שעות"
 msgstr[1] "%1 שעות"
+msgstr[2] ""
+msgstr[3] ""
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:431
@@ -759,6 +766,8 @@ msgid "%n minute(s)"
 msgid_plural "%n minute(s)"
 msgstr[0] "%1 דקות"
 msgstr[1] "%1 דקות"
+msgstr[2] ""
+msgstr[3] ""
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:436
@@ -768,6 +777,8 @@ msgid "%n second(s)"
 msgid_plural "%n second(s)"
 msgstr[0] "%1 שניות"
 msgstr[1] "%1 שניות"
+msgstr[2] ""
+msgstr[3] ""
 
 #. @item:intext days and hours. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #. ----------
@@ -831,6 +842,8 @@ msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
 msgstr[0] "%1 דקות"
 msgstr[1] "%1 דקות"
+msgstr[2] ""
+msgstr[3] ""
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:537
