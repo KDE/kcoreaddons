@@ -878,11 +878,12 @@ QList<KAboutPerson> KAboutDataPrivate::parseTranslators(const QString &translato
         return {};
     }
 
-    const QStringList nameList(translatorName.split(QLatin1Char(',')));
+    // use list of string views to delay creating new QString instances after the white-space trimming
+    const QList<QStringView> nameList = QStringView(translatorName).split(QLatin1Char(','));
 
-    QStringList emailList;
+    QList<QStringView> emailList;
     if (!translatorEmail.isEmpty() && translatorEmail != QLatin1String("Your emails")) {
-        emailList = translatorEmail.split(QLatin1Char(','), Qt::KeepEmptyParts);
+        emailList = QStringView(translatorEmail).split(QLatin1Char(','), Qt::KeepEmptyParts);
     }
 
     QList<KAboutPerson> personList;
@@ -890,14 +891,14 @@ QList<KAboutPerson> KAboutDataPrivate::parseTranslators(const QString &translato
 
     auto eit = emailList.constBegin();
 
-    for (const QString &name : nameList) {
-        QString email;
+    for (const QStringView &name : nameList) {
+        QStringView email;
         if (eit != emailList.constEnd()) {
             email = *eit;
             ++eit;
         }
 
-        personList.append(KAboutPerson(name.trimmed(), email.trimmed(), true));
+        personList.append(KAboutPerson(name.trimmed().toString(), email.trimmed().toString(), true));
     }
 
     return personList;
