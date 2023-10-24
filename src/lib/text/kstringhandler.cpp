@@ -211,6 +211,7 @@ QString KStringHandler::obscure(const QString &str)
     return result;
 }
 
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 112)
 bool KStringHandler::isUtf8(const char *buf)
 {
     int i;
@@ -303,6 +304,9 @@ done:
 #undef I
 #undef X
 
+#endif
+
+#if KCOREADDONS_BUILD_DEPRECATED_SINCE(5, 112)
 QString KStringHandler::from8Bit(const char *str)
 {
     if (!str) {
@@ -314,6 +318,7 @@ QString KStringHandler::from8Bit(const char *str)
     }
     return KStringHandler::isUtf8(str) ? QString::fromUtf8(str) : QString::fromLocal8Bit(str);
 }
+#endif
 
 QString KStringHandler::preProcessWrap(const QString &text)
 {

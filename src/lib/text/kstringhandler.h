@@ -215,14 +215,20 @@ KCOREADDONS_EXPORT QString tagUrls(const QString &text);
 */
 KCOREADDONS_EXPORT QString obscure(const QString &str);
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 112)
 /**
   Guess whether a string is UTF8 encoded.
 
   @param str the string to check
   @return true if UTF8. If false, the string is probably in Local8Bit.
+  @deprecated Since 5.112, no known users.
  */
-KCOREADDONS_EXPORT bool isUtf8(const char *str);
+KCOREADDONS_EXPORT
+KCOREADDONS_DEPRECATED_VERSION(5, 112, "No known users")
+bool isUtf8(const char *str);
+#endif
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(5, 112)
 /**
   Construct QString from a c string, guessing whether it is UTF8- or
   Local8Bit-encoded.
@@ -230,9 +236,12 @@ KCOREADDONS_EXPORT bool isUtf8(const char *str);
   @param str the input string
   @return the (hopefully correctly guessed) QString representation of @p str
   @see KEncodingProber
-
+  @deprecated Since 5.112, no known users.
  */
-KCOREADDONS_EXPORT QString from8Bit(const char *str);
+KCOREADDONS_EXPORT
+KCOREADDONS_DEPRECATED_VERSION(5, 112, "No known users")
+QString from8Bit(const char *str);
+#endif
 
 /**
   Preprocesses the given string in order to provide additional line breaking
