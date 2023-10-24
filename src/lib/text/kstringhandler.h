@@ -189,25 +189,6 @@ KCOREADDONS_EXPORT QString tagUrls(const QString &text);
 KCOREADDONS_EXPORT QString obscure(const QString &str);
 
 /**
-  Guess whether a string is UTF8 encoded.
-
-  @param str the string to check
-  @return true if UTF8. If false, the string is probably in Local8Bit.
- */
-KCOREADDONS_EXPORT bool isUtf8(const char *str);
-
-/**
-  Construct QString from a c string, guessing whether it is UTF8- or
-  Local8Bit-encoded.
-
-  @param str the input string
-  @return the (hopefully correctly guessed) QString representation of @p str
-  @see KEncodingProber
-
- */
-KCOREADDONS_EXPORT QString from8Bit(const char *str);
-
-/**
   Preprocesses the given string in order to provide additional line breaking
   opportunities for QTextLayout.
 
