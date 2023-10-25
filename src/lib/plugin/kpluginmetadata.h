@@ -109,7 +109,7 @@ public:
      * @since 5.91
      */
     enum KPluginMetaDataOption {
-        AllowEmptyMetaData = 1, /// Plugins with empty metaData are considered valid
+        AllowEmptyMetaData = 1, ///< Plugins with empty metaData are considered valid
         /**
          * If KCoreAddons should keep metadata in cache. This makes querying the namespace again faster. Consider using this if you need revalidation of plugins
          * @since 6.0
