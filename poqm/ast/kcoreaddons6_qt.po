@@ -1,8 +1,8 @@
-# enolp <enolp@softastur.org>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 enolp <enolp@softastur.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-05-04 14:55+0200\n"
+"PO-Revision-Date: 2023-10-25 01:56+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: lib/io/kfilesystemtype.cpp:247
 msgctxt "KFileSystemType|"
@@ -145,20 +145,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "Llicencia pública xeneral amenorgada de GNU versión 2.1"
 
 #: lib/kaboutdata.cpp:344
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "Llicencia BSD"
+msgstr "Llicencia MIT"
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "Llicencia BSD"
+msgstr "Llicencia MIT"
 
 #: lib/kaboutdata.cpp:349
 msgctxt "KAboutLicense|@item license"
@@ -782,12 +776,12 @@ msgstr "Puramente agora"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:521
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "Hai %1 minutu"
-msgstr[1] "Hai %1 minutos"
+msgstr[0] "Hai %n minutu"
+msgstr[1] "Hai %n minutos"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:537
