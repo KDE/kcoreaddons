@@ -128,8 +128,8 @@ public:
      * @since 5.91
      */
     enum KPluginMetaDataOption {
-        DoNotAllowEmptyMetaData, /// Plugins with empty metaData are considered invalid
-        AllowEmptyMetaData, /// Plugins with empty metaData are considered valid
+        DoNotAllowEmptyMetaData, ///< Plugins with empty metaData are considered invalid
+        AllowEmptyMetaData, ///< Plugins with empty metaData are considered valid
     };
 
     /** Creates an invalid KPluginMetaData instance */
