@@ -1,7 +1,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Lukáš Tinkl <lukas@kde.org>, 2010, 2011, 2012.
-# Vít Pelčák <vit@pelcak.org>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020.
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2023 Vít Pelčák <vit@pelcak.org>
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012, 2013.
 # Vit Pelcak <vit@pelcak.org>, 2021, 2022, 2023.
 #
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-01-03 16:07+0100\n"
+"PO-Revision-Date: 2023-10-19 14:27+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 "X-Language: cs_CZ\n"
 "X-Source-Language: en_US\n"
 "X-Qt-Contexts: true\n"
@@ -158,12 +158,12 @@ msgstr "GNU Lesser General Public licence verze 2.1"
 #: lib/kaboutdata.cpp:344
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr ""
+msgstr "Licence MIT"
 
 #: lib/kaboutdata.cpp:345
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr ""
+msgstr "Licence MIT"
 
 #: lib/kaboutdata.cpp:349
 msgctxt "KAboutLicense|@item license"
