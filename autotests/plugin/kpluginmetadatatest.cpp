@@ -356,7 +356,7 @@ private Q_SLOTS:
 
         // mimetype filter. Only one match, jsonplugin2 is specific to text/html.
         auto supportTextPlain = [](const KPluginMetaData &metaData) {
-            return metaData.supportsMimeType(QLatin1String("text/plain"));
+            return metaData.supportsMimeType(QStringLiteral("text/plain"));
         };
         plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), supportTextPlain);
         QCOMPARE(plugins.size(), 1);
@@ -364,7 +364,7 @@ private Q_SLOTS:
 
         // mimetype filter. Two matches, both support text/html, via inheritance.
         auto supportTextHtml = [](const KPluginMetaData &metaData) {
-            return metaData.supportsMimeType(QLatin1String("text/html"));
+            return metaData.supportsMimeType(QStringLiteral("text/html"));
         };
         plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), supportTextHtml);
         std::sort(plugins.begin(), plugins.end(), sortPlugins);
@@ -374,7 +374,7 @@ private Q_SLOTS:
 
         // mimetype filter with invalid mimetype
         auto supportDoesNotExist = [](const KPluginMetaData &metaData) {
-            return metaData.supportsMimeType(QLatin1String("does/not/exist"));
+            return metaData.supportsMimeType(QStringLiteral("does/not/exist"));
         };
         plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), supportDoesNotExist);
         QCOMPARE(plugins.size(), 0);
