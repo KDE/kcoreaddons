@@ -202,7 +202,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Non especificat"
 
-#: lib/kaboutdata.cpp:913
+#: lib/kaboutdata.cpp:914
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -211,36 +211,36 @@ msgid ""
 "org</a></p>"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1146
+#: lib/kaboutdata.cpp:1147
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Visualizar las informacions de l'autor"
 
-#: lib/kaboutdata.cpp:1147
+#: lib/kaboutdata.cpp:1148
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Visualizar las informacions de licéncia"
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1150
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1160
+#: lib/kaboutdata.cpp:1161
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1162
+#: lib/kaboutdata.cpp:1163
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -252,7 +252,7 @@ msgstr ""
 "%1 foguèt escrich per\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1173
+#: lib/kaboutdata.cpp:1174
 #, fuzzy
 #| msgid ""
 #| "Please use <a href=\"http://bugs.kde.org\">http://bugs.kde.org</a> to "
@@ -263,7 +263,7 @@ msgstr ""
 "Utilizatz <a href=\"http://bugs.kde.org\">http://bugs.kde.org</a> per "
 "senhalar de bògues.\n"
 
-#: lib/kaboutdata.cpp:1175
+#: lib/kaboutdata.cpp:1176
 #, fuzzy, qt-format
 #| msgid "Please report bugs to <a href=\"mailto:%1\">%2</a>.\n"
 msgctxt "KAboutData CLI|"

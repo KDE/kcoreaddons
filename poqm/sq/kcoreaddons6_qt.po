@@ -231,7 +231,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "I papërcaktuar"
 
-#: lib/kaboutdata.cpp:913
+#: lib/kaboutdata.cpp:914
 #, fuzzy
 #| msgctxt "replace this with information about your translation team"
 #| msgid ""
@@ -250,33 +250,33 @@ msgstr ""
 "kudo nëpër botë.</p><p>Për më tepër informacion rreth ndërkombëtarizimit të "
 "KDE vizitoni <a href=\"http://l10n.kde.org\">http://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1146
+#: lib/kaboutdata.cpp:1147
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Shfaq informacion për autorin"
 
-#: lib/kaboutdata.cpp:1147
+#: lib/kaboutdata.cpp:1148
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Shfaq informacion për liçensën"
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1150
 #, fuzzy
 #| msgid "Enter the user name you want to run the application as."
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Vendosni emrin e përdoruesit që dëshironi për të nisur këtë program."
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1160
+#: lib/kaboutdata.cpp:1161
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -284,7 +284,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Programi u shkruajt nga dikush që dëshiron të ngelet anonim."
 
-#: lib/kaboutdata.cpp:1162
+#: lib/kaboutdata.cpp:1163
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -296,14 +296,14 @@ msgstr ""
 "%1 u shkruajt nga\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1173
+#: lib/kaboutdata.cpp:1174
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Ju lutemi përdorni http://bugs.kde.org për të raportuar gabimet.\n"
 
-#: lib/kaboutdata.cpp:1175
+#: lib/kaboutdata.cpp:1176
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"
