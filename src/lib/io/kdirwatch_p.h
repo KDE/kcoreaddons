@@ -186,8 +186,8 @@ public:
 
     static bool isNoisyFile(const char *filename);
 
-    void ref();
-    void unref();
+    void ref(KDirWatch *watch);
+    void unref(KDirWatch *watch);
 
 #if HAVE_SYS_INOTIFY_H
     QString inotifyEventName(const inotify_event *event) const;
@@ -233,7 +233,7 @@ public:
 
 private:
     // Public objects that reference this thread-local private instance.
-    uint m_references;
+    QList<KDirWatch *> m_referencesObjects;
 };
 
 QDebug operator<<(QDebug debug, const KDirWatchPrivate &dwp);
