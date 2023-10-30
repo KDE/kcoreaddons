@@ -194,8 +194,8 @@ public:
 
     static bool isNoisyFile(const char *filename);
 
-    void ref();
-    void unref();
+    void ref(KDirWatch *watch);
+    void unref(KDirWatch *watch);
 
 public Q_SLOTS:
     void slotRescan();
@@ -248,7 +248,7 @@ public:
 
 private:
     // Public objects that reference this thread-local private instance.
-    uint m_references;
+    QList<KDirWatch *> m_referencesObjects;
 };
 
 QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry);

@@ -177,7 +177,6 @@ KDirWatchPrivate::KDirWatchPrivate()
     ,
 #endif
     _isStopped(false)
-    , m_references(0)
 {
     // Debug unittest on CI
     if (qAppName() == QLatin1String("kservicetest") || qAppName() == QLatin1String("filetypestest")) {
@@ -255,6 +254,10 @@ KDirWatchPrivate::~KDirWatchPrivate()
         for (auto &client : entry.m_clients) {
             client.instance->d = nullptr;
         }
+    }
+    // Also cover all instance that hold a reference to us (even when they don't have an entry)
+    for (auto &referenceObject : m_referencesObjects) {
+        referenceObject->d = nullptr;
     }
 
 #if HAVE_SYS_INOTIFY_H
@@ -1582,15 +1585,15 @@ bool KDirWatchPrivate::isNoisyFile(const char *filename)
     return false;
 }
 
-void KDirWatchPrivate::ref()
+void KDirWatchPrivate::ref(KDirWatch *watch)
 {
-    ++m_references;
+    m_referencesObjects.push_back(watch);
 }
 
-void KDirWatchPrivate::unref()
+void KDirWatchPrivate::unref(KDirWatch *watch)
 {
-    --m_references;
-    if (m_references == 0) {
+    m_referencesObjects.removeOne(watch);
+    if (m_referencesObjects.isEmpty()) {
         destroyPrivate();
     }
 }
@@ -1872,7 +1875,7 @@ KDirWatch::KDirWatch(QObject *parent)
     : QObject(parent)
     , d(createPrivate())
 {
-    d->ref();
+    d->ref(this);
     static QBasicAtomicInt nameCounter = Q_BASIC_ATOMIC_INITIALIZER(1);
     const int counter = nameCounter.fetchAndAddRelaxed(1); // returns the old value
     setObjectName(QStringLiteral("KDirWatch-%1").arg(counter));
@@ -1887,7 +1890,7 @@ KDirWatch::~KDirWatch()
 {
     if (d) {
         d->removeEntries(this);
-        d->unref();
+        d->unref(this);
     }
 }
 
