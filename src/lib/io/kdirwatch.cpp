@@ -583,8 +583,7 @@ QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry)
 
 KDirWatchPrivate::Entry *KDirWatchPrivate::entry(const QString &_path)
 {
-    // we only support absolute paths
-    if (_path.isEmpty() || QDir::isRelativePath(_path)) {
+    if (_path.isEmpty()) {
         return nullptr;
     }
 
