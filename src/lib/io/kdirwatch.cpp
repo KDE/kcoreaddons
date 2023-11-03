@@ -1792,6 +1792,36 @@ KDirWatch::Method KDirWatch::internalMethod() const
 #endif
 }
 
+bool KDirWatch::event(QEvent *event)
+{
+    if (Q_LIKELY(event->type() != QEvent::ThreadChange)) {
+        return QObject::event(event);
+    }
+
+    qCCritical(KDIRWATCH) << "KDirwatch is moving its thread. This is not supported at this time; your watch will not watch anything anymore!"
+                          << "Create and use watches on the correct thread"
+                          << "Watch:" << this;
+
+    // We are still in the old thread when the event runs, so this is safe.
+    Q_ASSERT(thread() == d->thread());
+    d->removeEntries(this);
+    d->unref(this);
+    d = nullptr;
+
+    // Schedule the creation of the new private in the new thread.
+    QMetaObject::invokeMethod(
+        this,
+        [this] {
+            d = createPrivate();
+        },
+        Qt::QueuedConnection);
+
+    // NOTE: to actually support moving watches across threads we'd have to make Entry copyable and schedule a complete
+    // re-installation of watches on the new thread after createPrivate.
+
+    return QObject::event(event);
+}
+
 #include "moc_kdirwatch.cpp"
 #include "moc_kdirwatch_p.cpp"
 
