@@ -26,7 +26,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-03-12 18:16+0200\n"
+"PO-Revision-Date: 2023-09-26 10:38+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -170,18 +170,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU Lesser General Public License (LGPL), versio 2.1"
 
 #: lib/kaboutdata.cpp:344
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "Lisenssi:"
+msgstr "MIT-lisenssi"
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "Lisenssi:"
+msgstr "MIT-lisenssi"
 
 #: lib/kaboutdata.cpp:349
 msgctxt "KAboutLicense|@item license"
