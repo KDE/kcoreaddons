@@ -183,6 +183,11 @@ foreach(_backendName ${KDIRWATCH_BACKENDS_TO_TEST})
     add_executable(${BACKEND_TEST_TARGET} kdirwatch_unittest.cpp)
     target_link_libraries(${BACKEND_TEST_TARGET} Qt${QT_MAJOR_VERSION}::Test KF5::CoreAddons autotests_static)
 
+    if(FAM_FOUND)
+        target_include_directories(${BACKEND_TEST_TARGET} PRIVATE ${FAM_INCLUDE_DIR})
+        target_link_libraries(${BACKEND_TEST_TARGET} ${FAM_LIBRARIES})
+    endif()
+
     if(NOT WIN32)
         target_link_libraries(${BACKEND_TEST_TARGET} Threads::Threads)
     endif()
