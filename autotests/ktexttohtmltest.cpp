@@ -145,6 +145,7 @@ void KTextToHTMLTest::testGetUrl2(const QString &left, const QString &right)
     urls << QStringLiteral("user:pass@www.kde.org:1234/sub/path:with:colon/special(123)?a=1#anchor[bla]");
     urls << QStringLiteral("user:pass@www.kde.org:1234/\nsub/path:with:colon/\nspecial(123)?\na=1#anchor[bla]");
     urls << QStringLiteral("user:pass@www.kde.org:1234/  \n  sub/path:with:colon/  \n\t   \t   special(123)?") + QStringLiteral("\n\t  \n\t   a=1#anchor[bla]");
+    urls << QStringLiteral("en.wikipedia.org/wiki/%C3%98_(disambiguation)");
 
     for (const QString &schema : std::as_const(schemas)) {
         for (QString url : std::as_const(urls)) {
