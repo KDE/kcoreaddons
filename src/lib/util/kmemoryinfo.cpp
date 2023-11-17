@@ -438,32 +438,32 @@ bool KMemoryInfo::update()
 static int
 swap_usage(int *used, int *total)
 {
-	struct swapent *swdev;
-	int nswap, rnswap, i;
+    struct swapent *swdev;
+    int nswap, rnswap, i;
 
-	nswap = swapctl(SWAP_NSWAP, nullptr, 0);
-	if (nswap == 0)
-		return 0;
+    nswap = swapctl(SWAP_NSWAP, nullptr, 0);
+    if (nswap == 0)
+        return 0;
 
-	swdev = static_cast<struct swapent*>(calloc(nswap, sizeof(*swdev)));
-	if (swdev == NULL)
-		return 0;
+    swdev = static_cast<struct swapent*>(calloc(nswap, sizeof(*swdev)));
+    if (swdev == NULL)
+        return 0;
 
-	rnswap = swapctl(SWAP_STATS, swdev, nswap);
-	if (rnswap == -1) {
-		free(swdev);
-		return 0;
-	}
-	/* Total things up */
-	*total = *used = 0;
-	for (i = 0; i < nswap; i++) {
-		if (swdev[i].se_flags & SWF_ENABLE) {
-			*used += (swdev[i].se_inuse / (1024 / DEV_BSIZE));
-			*total += (swdev[i].se_nblks / (1024 / DEV_BSIZE));
-		}
-	}
-	free(swdev);
-	return 1;
+    rnswap = swapctl(SWAP_STATS, swdev, nswap);
+    if (rnswap == -1) {
+        free(swdev);
+        return 0;
+    }
+    /* Total things up */
+    *total = *used = 0;
+    for (i = 0; i < nswap; i++) {
+        if (swdev[i].se_flags & SWF_ENABLE) {
+            *used += (swdev[i].se_inuse / (1024 / DEV_BSIZE));
+            *total += (swdev[i].se_nblks / (1024 / DEV_BSIZE));
+        }
+    }
+    free(swdev);
+    return 1;
 }
 
 bool KMemoryInfo::update()
@@ -502,7 +502,6 @@ bool KMemoryInfo::update()
 
     return true;
 }
-
 #else
 /*****************************************************************************
  * Unsupported platform
