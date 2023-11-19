@@ -468,11 +468,13 @@ swap_usage(int *used, int *total)
 
 bool KMemoryInfo::update()
 {
-    // total available phsycial memory
+    // TODO: compute m_availablePhysical on OpenBSD
+
+    // tota phsycial memory
     const long phys_pages = sysconf(_SC_PHYS_PAGES);
     const long pagesize = sysconf(_SC_PAGESIZE);
     if (phys_pages != -1 && pagesize != -1)
-        d->m_availablePhysical = ((uint64_t)phys_pages * (uint64_t)pagesize / 1024);
+        d->m_totalPhysical = ((uint64_t)phys_pages * (uint64_t)pagesize / 1024);
 
     int swap_free = 0;
     int swap_tot = 0;
