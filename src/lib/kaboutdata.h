@@ -35,6 +35,8 @@ Q_DECL_IMPORT void defaultCrashHandler(int sig);
 }
 
 /**
+ * @class KAboutPerson kaboutdata.h KAboutPerson
+ *
  * This class is used to store information about a person or developer.
  * It can store the person's name, a task, an email address and a
  * link to a home page. This class is intended for use in the
@@ -170,6 +172,8 @@ private:
 Q_DECLARE_TYPEINFO(KAboutPerson, Q_RELOCATABLE_TYPE);
 
 /**
+ * @class KAboutLicense kaboutdata.h KAboutLicense
+ *
  * This class is used to store information about a license.
  * The license can be one of some predefined, one given as text or one
  * that can be loaded from a file. This class is used in the KAboutData class.
@@ -343,6 +347,8 @@ private:
 Q_DECLARE_TYPEINFO(KAboutLicense, Q_RELOCATABLE_TYPE);
 
 /**
+ * @class KAboutComponent kaboutdata.h KAboutComponent
+ *
  * This class is used to store information about a third party component.
  * It can store the component's name, a description, a link to a website
  * and the license of the libary. This class is intended for use in the

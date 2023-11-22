@@ -270,7 +270,7 @@ target_compile_definitions(KF6CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADD
 
 ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
-        KAboutData
+        KAboutData,KAboutPerson,KAboutLicense,KAboutComponent
         KCoreAddons
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
