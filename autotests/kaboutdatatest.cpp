@@ -385,6 +385,9 @@ void KAboutDataTest::testLicenseSPDXID()
     // Input without should output without.
     license = KAboutLicense::byKeyword(QStringLiteral("GPLv2"));
     QCOMPARE(license.spdx(), QStringLiteral("GPL-2.0"));
+    // Input of spdx with or-later should also work
+    license = KAboutLicense::byKeyword(QStringLiteral("GPL-2.0-or-later"));
+    QCOMPARE(license.spdx(), QStringLiteral("GPL-2.0+")); // TODO: should not return the deprecatd version
 
     // we should be able to match by spdx too
     // create a KAboutLicense from enum, then make sure going to spdx and back gives the same enum
