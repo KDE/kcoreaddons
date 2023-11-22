@@ -392,6 +392,7 @@ KAboutLicense KAboutLicense::byKeyword(const QString &rawKeyword)
     // Normalize keyword.
     QString keyword = rawKeyword;
     keyword = keyword.toLower();
+    keyword.replace(QLatin1StringView("-or-later"), QLatin1StringView("+"));
     keyword.remove(QLatin1Char(' '));
     keyword.remove(QLatin1Char('.'));
     keyword.remove(QLatin1Char('-'));
