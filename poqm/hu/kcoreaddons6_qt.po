@@ -174,7 +174,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Nincs megadva"
 
-#: lib/kaboutdata.cpp:914
+#: lib/kaboutdata.cpp:915
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -188,44 +188,44 @@ msgstr ""
 "lokalizációjáról további információ található itt: <a href=\"https://l10n."
 "kde.org\">https://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1147
+#: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "A szerző(k) nevének megjelenítése."
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1149
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "A licencinformáció megjelenítése."
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Az alkamazás asztali bejegyzésének fájlneve."
 
-#: lib/kaboutdata.cpp:1151
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "fájlnév"
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1162
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Az alkalmazás szerzője nem kívánta feltüntetni a nevét."
 
-#: lib/kaboutdata.cpp:1163
+#: lib/kaboutdata.cpp:1164
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "A(z) %1 készítőinek névsora:"
 
-#: lib/kaboutdata.cpp:1174
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr ""
 "Kérjük, hogy a talált hibákat jelentse be a https://bugs.kde.org címen."
 
-#: lib/kaboutdata.cpp:1176
+#: lib/kaboutdata.cpp:1177
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

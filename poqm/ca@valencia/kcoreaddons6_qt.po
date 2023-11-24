@@ -179,7 +179,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Sense especificar"
 
-#: lib/kaboutdata.cpp:914
+#: lib/kaboutdata.cpp:915
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -195,44 +195,44 @@ msgstr ""
 "infos.php?teamcode=ca@valencia\">https://l10n.kde.org/team-infos.php?"
 "teamcode=ca@valencia</a></p>"
 
-#: lib/kaboutdata.cpp:1147
+#: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Mostra informació sobre l'autoria."
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1149
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Mostra informació sobre la llicència."
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 "El nom del fitxer base de l'entrada de l'escriptori per a esta aplicació."
 
-#: lib/kaboutdata.cpp:1151
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "nom del fitxer"
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1162
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Esta aplicació la va escriure algú que vol quedar en l'anonimat."
 
-#: lib/kaboutdata.cpp:1163
+#: lib/kaboutdata.cpp:1164
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 el va escriure:"
 
-#: lib/kaboutdata.cpp:1174
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Utilitzeu https://bugs.kde.org per a informar dels errors."
 
-#: lib/kaboutdata.cpp:1176
+#: lib/kaboutdata.cpp:1177
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

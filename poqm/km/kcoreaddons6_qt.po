@@ -231,7 +231,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "មិនបាន​បញ្ជាក់"
 
-#: lib/kaboutdata.cpp:914
+#: lib/kaboutdata.cpp:915
 #, fuzzy
 #| msgctxt "replace this with information about your translation team"
 #| msgid ""
@@ -250,31 +250,31 @@ msgstr ""
 "ព័ត៌មាន​បន្ថែម​អំពី​គម្រោង សូម​ទស្សនា <a href=\"http://www.khmeros.info\">www.khmeros."
 "info</a></p>"
 
-#: lib/kaboutdata.cpp:1147
+#: lib/kaboutdata.cpp:1148
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "បង្ហាញ​ព័ត៌មាន​របស់​​អ្នក​និពន្ធ"
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1149
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "បង្ហាញ​ព័ត៌មាន​អាជ្ញាបណ្ណ"
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1151
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1162
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -282,7 +282,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "កម្មវិធី​នេះ​ត្រូវ​បាន​សរសេរ​ដោយ​អ្នក​ដែល​មិន​ចង់​នៅជា​អនាមិក​ ។"
 
-#: lib/kaboutdata.cpp:1163
+#: lib/kaboutdata.cpp:1164
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -294,14 +294,14 @@ msgstr ""
 "%1 ត្រូវ​បាន​សរសេរ​ដោយ\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1174
+#: lib/kaboutdata.cpp:1175
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "សូម​ប្រើ http://bugs.kde.org ដើម្បី​រាយការណ៍​កំហុស ។\n"
 
-#: lib/kaboutdata.cpp:1176
+#: lib/kaboutdata.cpp:1177
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"

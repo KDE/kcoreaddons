@@ -237,7 +237,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "ยังไม่ระบุ"
 
-#: lib/kaboutdata.cpp:914
+#: lib/kaboutdata.cpp:915
 #, fuzzy
 #| msgctxt "replace this with information about your translation team"
 #| msgid ""
@@ -256,31 +256,31 @@ msgstr ""
 "p> <p>สำหรับรายละเอียดเพิ่มเติมเกี่ยวกับการทำให้ KDE เป็นภาษาชาติต่าง ๆ สามารถดูได้ที่เว็บไซต์ "
 "<a href=\"http://l10n.kde.org\">http://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1147
+#: lib/kaboutdata.cpp:1148
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "แสดงข้อมูลของผู้เขียน"
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1149
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "แสดงข้อมูลสัญญาอนุญาต"
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1151
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1161
+#: lib/kaboutdata.cpp:1162
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -288,7 +288,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "โปรแกรมนี้เขียนขึ้นโดยผู้ไม่ประสงค์จะออกนาม"
 
-#: lib/kaboutdata.cpp:1163
+#: lib/kaboutdata.cpp:1164
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -300,14 +300,14 @@ msgstr ""
 "%1 ถูกเขียนขึ้นโดย\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1174
+#: lib/kaboutdata.cpp:1175
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "โปรดไปยังเว็บไซต์ http://bugs.kde.org เพื่อรายงานข้อผิดพลาด\n"
 
-#: lib/kaboutdata.cpp:1176
+#: lib/kaboutdata.cpp:1177
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"
