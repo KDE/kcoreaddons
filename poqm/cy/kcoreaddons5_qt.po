@@ -183,7 +183,7 @@ msgid "Not specified"
 msgstr "Nid penodwyd"
 
 # kyfieithu.co.uk</p>
-#: lib/kaboutdata.cpp:967
+#: lib/kaboutdata.cpp:968
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -195,43 +195,43 @@ msgstr ""
 "byd i gyd.</p><p>Am ragor o wybodaeth ar rhyngwledeiddio KDE, ymwelwch â <a "
 "href=\"https://l10n.kde.org\">https://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1227
+#: lib/kaboutdata.cpp:1228
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Dangos gwybodaeth awdur."
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1229
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Dangos gwybodaeth trwydded."
 
-#: lib/kaboutdata.cpp:1230
+#: lib/kaboutdata.cpp:1231
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Yr enw ffeil sail o'r doddiad desgfrig ar gyfer y cymhwysiad yma."
 
-#: lib/kaboutdata.cpp:1231
+#: lib/kaboutdata.cpp:1232
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "enw ffeil"
 
-#: lib/kaboutdata.cpp:1241
+#: lib/kaboutdata.cpp:1242
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Ysgrifennwyd %1 gan berson sy'n dymuno aros yn anhysbys."
 
-#: lib/kaboutdata.cpp:1243
+#: lib/kaboutdata.cpp:1244
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "ysgrifennwyd %1 gan:"
 
-#: lib/kaboutdata.cpp:1254
+#: lib/kaboutdata.cpp:1255
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Defnyddiwch atolwg https://bugs.kde.org er mwyn adrodd namau."
 
-#: lib/kaboutdata.cpp:1256
+#: lib/kaboutdata.cpp:1257
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
