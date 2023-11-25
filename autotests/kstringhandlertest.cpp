@@ -145,6 +145,15 @@ void KStringHandlerTest::preProcessWrap_data()
 
     // Should insert a ZWSP between sub-words, but not before first (upper case) letter
     QTest::newRow("PascalCase") << "PascalCase" << QString(QStringLiteral("Pascal") + ZWSP + QStringLiteral("Case"));
+
+    // But if a string already contains whitespaces, no need to insert ZWSPs
+    QTest::newRow("camelCase with whitespaces") << "camelCase PascalCase"
+                                                << "camelCase PascalCase";
+
+    // However, single quote and other tricks should still work.
+    QTest::newRow("single quote with whitespaces") << "foo(bar) PascalCase'camelCase"
+                                                   << QString(QStringLiteral("foo") + ZWSP + QStringLiteral("(bar) PascalCase") + WJ
+                                                              + QStringLiteral("'camelCase"));
 }
 
 // Little helper function to make tests diagnostics more readable by humans

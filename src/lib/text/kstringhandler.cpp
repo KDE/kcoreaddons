@@ -174,6 +174,17 @@ QString KStringHandler::obscure(const QString &str)
     return result;
 }
 
+static inline bool containsSpaces(const QString &text)
+{
+    for (int i = 0; i < text.length(); i++) {
+        const QChar c = text[i];
+        if (c.isSpace()) {
+            return true;
+        }
+    }
+    return false;
+}
+
 QString KStringHandler::preProcessWrap(const QString &text)
 {
     const QChar zwsp(0x200b);
@@ -181,8 +192,11 @@ QString KStringHandler::preProcessWrap(const QString &text)
     QString result;
     result.reserve(text.length());
 
+    const bool containsSpaces = ::containsSpaces(text);
+
     for (int i = 0; i < text.length(); i++) {
         const QChar c = text[i];
+
         const bool openingParens = (c == QLatin1Char('(') || c == QLatin1Char('{') || c == QLatin1Char('['));
         const bool singleQuote = (c == QLatin1Char('\''));
         const bool closingParens = (c == QLatin1Char(')') || c == QLatin1Char('}') || c == QLatin1Char(']'));
@@ -205,8 +219,9 @@ QString KStringHandler::preProcessWrap(const QString &text)
 
         result += c;
 
-        // Provide a breaking opportunity between camelCase and PascalCase sub-words
-        const bool isCamelCase = isLower && nextIsUpper;
+        // Provide a breaking opportunity between camelCase and PascalCase sub-words;
+        // but if source string contains whitespaces, then it should be sufficiently wrappable on its own
+        const bool isCamelCase = !containsSpaces && isLower && nextIsUpper;
 
         if (isCamelCase || (breakAfter && !openingParens && !nextIsSpace && !singleQuote)) {
             result += zwsp;
