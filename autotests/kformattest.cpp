@@ -383,7 +383,7 @@ void KFormatTest::formatRelativeDate()
                  .arg(QLocale::c().toString(testDateTime.date(), QLocale::LongFormat), QLocale::c().toString(testDateTime.time(), QLocale::ShortFormat)));
 
     // 2021-10-03 07:33:57.000
-    testDateTime = QDateTime::fromMSecsSinceEpoch(1633239237000, Qt::UTC);
+    testDateTime = QDateTime::fromMSecsSinceEpoch(1633239237000, QTimeZone::utc());
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::LongFormat),
              QStringLiteral("%1 at %2")
                  .arg(QLocale::c().toString(testDateTime.date(), QLocale::LongFormat), QLocale::c().toString(testDateTime.time(), QLocale::ShortFormat)));
