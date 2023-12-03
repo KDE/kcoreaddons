@@ -102,8 +102,9 @@ configure_file(src/lib/io/config-kfilesystemtype.h.cmake ${CMAKE_CURRENT_BINARY_
 
 include(ECMPoQmTools)
 
+set(kcoreaddons_version_header "${CMAKE_CURRENT_BINARY_DIR}/src/lib/kcoreaddons_version.h")
 ecm_setup_version(PROJECT VARIABLE_PREFIX KCOREADDONS
-    VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/src/lib/kcoreaddons_version.h"
+    VERSION_HEADER "${kcoreaddons_version_header}"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfigVersion.cmake"
     SOVERSION 6
 )
