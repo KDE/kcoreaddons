@@ -69,103 +69,103 @@ msgstr ""
 "jan ala li pana e sona lawa tawa ilo.\n"
 "sina wile lawa la o alasa lon lipu lon tan.\n"
 
-#: lib/kaboutdata.cpp:273
+#: lib/kaboutdata.cpp:277
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
 msgstr "lipu %1 li lawa e ilo ni."
 
-#: lib/kaboutdata.cpp:317
+#: lib/kaboutdata.cpp:321
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "lipu GPL nanpa tu"
 
-#: lib/kaboutdata.cpp:318
+#: lib/kaboutdata.cpp:322
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr "lipu \"GNU General Public License\" nanpa tu"
 
-#: lib/kaboutdata.cpp:321
+#: lib/kaboutdata.cpp:325
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "lipu LGPL nanpa tu"
 
-#: lib/kaboutdata.cpp:322
+#: lib/kaboutdata.cpp:326
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr "lipu \"GNU Lesser General Public License\" nanpa tu"
 
-#: lib/kaboutdata.cpp:325
-msgctxt "KAboutLicense|@item license (short name)"
-msgid "BSD License"
-msgstr "lipu lawa BSD"
-
-#: lib/kaboutdata.cpp:326
-msgctxt "KAboutLicense|@item license"
-msgid "BSD License"
-msgstr "lipu lawa BSD"
-
 #: lib/kaboutdata.cpp:329
 msgctxt "KAboutLicense|@item license (short name)"
-msgid "Artistic License"
-msgstr "lipu \"Artistic License\""
+msgid "BSD License"
+msgstr "lipu lawa BSD"
 
 #: lib/kaboutdata.cpp:330
 msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "lipu lawa BSD"
+
+#: lib/kaboutdata.cpp:333
+msgctxt "KAboutLicense|@item license (short name)"
 msgid "Artistic License"
 msgstr "lipu \"Artistic License\""
 
-#: lib/kaboutdata.cpp:333
+#: lib/kaboutdata.cpp:334
+msgctxt "KAboutLicense|@item license"
+msgid "Artistic License"
+msgstr "lipu \"Artistic License\""
+
+#: lib/kaboutdata.cpp:337
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "QPL v1.0"
 msgstr "lipu QPL nanpa wan"
 
-#: lib/kaboutdata.cpp:334
+#: lib/kaboutdata.cpp:338
 msgctxt "KAboutLicense|@item license"
 msgid "Q Public License"
 msgstr "lipu \"Q Public License\" nanpa wan"
 
-#: lib/kaboutdata.cpp:337
+#: lib/kaboutdata.cpp:341
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "lipu GPL nanpa 3"
 
-#: lib/kaboutdata.cpp:338
+#: lib/kaboutdata.cpp:342
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr "lipu \"GNU General Public License\" nanpa 3"
 
-#: lib/kaboutdata.cpp:341
+#: lib/kaboutdata.cpp:345
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "lawa LGPL nanpa 3"
 
-#: lib/kaboutdata.cpp:342
+#: lib/kaboutdata.cpp:346
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr "lipu \"GNU Lesser General Public License\" nanpa 3"
 
-#: lib/kaboutdata.cpp:345
+#: lib/kaboutdata.cpp:349
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr "lawa LGPL nanpa 2.1"
 
-#: lib/kaboutdata.cpp:346
+#: lib/kaboutdata.cpp:350
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr "lipu \"GNU Lesser General Public License\" nanpa 2.1"
 
-#: lib/kaboutdata.cpp:350
+#: lib/kaboutdata.cpp:354
 msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "lipu ante"
 
-#: lib/kaboutdata.cpp:353
+#: lib/kaboutdata.cpp:357
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "sona ala"
 
-#: lib/kaboutdata.cpp:968
+#: lib/kaboutdata.cpp:972
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -177,43 +177,43 @@ msgstr ""
 "sona e nasin pi ante toki pi kulupu KDE la, o tawa<a href=\"https://l10n.kde."
 "org\">https://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1232
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "o toki e jan pali pi ilo ni"
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "o toki e lipu lawa pi ilo ni"
 
-#: lib/kaboutdata.cpp:1231
+#: lib/kaboutdata.cpp:1235
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "nimi nasin pi lipu \".desktop\" pi ilo ni"
 
-#: lib/kaboutdata.cpp:1232
+#: lib/kaboutdata.cpp:1236
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "nimi nasin"
 
-#: lib/kaboutdata.cpp:1242
+#: lib/kaboutdata.cpp:1246
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "jan pali pi ilo ni li wile ala e ni: sina sona e ona."
 
-#: lib/kaboutdata.cpp:1244
+#: lib/kaboutdata.cpp:1248
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "ilo %1 li tan:"
 
-#: lib/kaboutdata.cpp:1255
+#: lib/kaboutdata.cpp:1259
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "ilo ni li pakala la o tawa nasin https://bugs.kde.org."
 
-#: lib/kaboutdata.cpp:1257
+#: lib/kaboutdata.cpp:1261
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
