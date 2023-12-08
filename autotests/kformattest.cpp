@@ -12,6 +12,7 @@
 #include "kformattest.h"
 
 #include <QTest>
+#include <QTimeZone>
 
 #include "kformat.h"
 
