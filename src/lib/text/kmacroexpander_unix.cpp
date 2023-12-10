@@ -105,10 +105,12 @@ bool KMacroExpanderBase::expandMacrosShellQuote(QString &str, int &pos)
         }
         if (state.dquote) {
             rsts = rst.join(QLatin1Char(' '));
-            rsts.replace(QRegularExpression(QStringLiteral("([$`\"\\\\])")), QStringLiteral("\\\\1"));
+            const static QRegularExpression regex(QStringLiteral("([$`\"\\\\])"));
+            rsts.replace(regex, QStringLiteral("\\\\1"));
         } else if (state.current == dollarquote) {
             rsts = rst.join(QLatin1Char(' '));
-            rsts.replace(QRegularExpression(QStringLiteral("(['\\\\])")), QStringLiteral("\\\\1"));
+            const static QRegularExpression regex(QStringLiteral("(['\\\\])"));
+            rsts.replace(regex, QStringLiteral("\\\\1"));
         } else if (state.current == singlequote) {
             rsts = rst.join(QLatin1Char(' '));
             rsts.replace(QLatin1Char('\''), QLatin1String("'\\''"));
