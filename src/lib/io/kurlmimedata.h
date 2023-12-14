@@ -11,6 +11,7 @@
 #define KURLMIMEDATA_H
 
 #include "kcoreaddons_export.h"
+#include <QFlags>
 #include <QMap>
 #include <QUrl>
 QT_BEGIN_NAMESPACE
@@ -66,22 +67,24 @@ KCOREADDONS_EXPORT QStringList mimeDataTypes();
 /**
  * Flags to be used in urlsFromMimeData.
  */
-enum DecodeOptions {
-    /**
-     * When the mimedata contains both KDE-style URLs (eg: desktop:/foo) and
-     * the "most local" version of the URLs (eg: file:///home/dfaure/Desktop/foo),
-     * decode it as local urls. Useful in paste/drop operations that end up calling KIO,
-     * so that urls from other users work as well.
-     */
-    PreferLocalUrls,
+enum DecodeOption {
     /**
      * When the mimedata contains both KDE-style URLs (eg: desktop:/foo) and
      * the "most local" version of the URLs (eg: file:///home/dfaure/Desktop/foo),
      * decode it as the KDE-style URL. Useful in DnD code e.g. when moving icons,
      * and the kde-style url is used as identifier for the icons.
      */
-    PreferKdeUrls,
+    PreferKdeUrls = 0,
+    /**
+     * When the mimedata contains both KDE-style URLs (eg: desktop:/foo) and
+     * the "most local" version of the URLs (eg: file:///home/dfaure/Desktop/foo),
+     * decode it as local urls. Useful in paste/drop operations that end up calling KIO,
+     * so that urls from other users work as well.
+     */
+    PreferLocalUrls = 1,
 };
+Q_DECLARE_FLAGS(DecodeOptions, DecodeOption)
+Q_DECLARE_OPERATORS_FOR_FLAGS(DecodeOptions)
 
 /**
  * Extract a list of urls from the contents of @p mimeData.
@@ -102,7 +105,6 @@ enum DecodeOptions {
  * @return the list of urls
  */
 KCOREADDONS_EXPORT QList<QUrl> urlsFromMimeData(const QMimeData *mimeData, DecodeOptions decodeOptions = PreferKdeUrls, MetaDataMap *metaData = nullptr);
-
 }
 
 #endif /* KURLMIMEDATA_H */

@@ -152,7 +152,7 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData, DecodeOpti
 #endif
 
     if (uris.isEmpty()) {
-        if (decodeOptions == PreferLocalUrls) {
+        if (decodeOptions.testFlag(PreferLocalUrls)) {
             // Extracting uris from text/uri-list, use the much faster QMimeData method urls()
             uris = mimeData->urls();
             if (uris.isEmpty()) {
