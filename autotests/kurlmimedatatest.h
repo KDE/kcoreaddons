@@ -8,6 +8,7 @@
 #ifndef KURLMIMEDATATEST_H
 #define KURLMIMEDATATEST_H
 
+#include "config-kdirwatch.h"
 #include <QObject>
 
 class KUrlMimeDataTest : public QObject
@@ -19,6 +20,9 @@ private Q_SLOTS:
     void testFromQUrl();
     void testMostLocalUrlList_data();
     void testMostLocalUrlList();
+#if HAVE_QTDBUS
+    void testSameProcessCopyPaste();
+#endif
 };
 
 #endif

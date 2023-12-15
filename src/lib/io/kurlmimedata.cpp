@@ -28,6 +28,8 @@
 #include "org.kde.KIOFuse.VFS.h"
 #endif
 
+#include "kurlmimedata_p.h"
+
 static QString kdeUriListMime()
 {
     return QStringLiteral("application/x-kde4-urilist");
@@ -104,7 +106,7 @@ static bool isKIOFuseAvailable()
     return available;
 }
 
-static bool isDocumentsPortalAvailable()
+bool KUrlMimeData::isDocumentsPortalAvailable()
 {
     static bool available =
         QDBusConnection::sessionBus().interface() && QDBusConnection::sessionBus().interface()->activatableServiceNames().value().contains(portalServiceName());
@@ -139,6 +141,27 @@ static QList<QUrl> extractPortalUriList(const QMimeData *mimeData)
     cache = std::make_pair(transferId, uris);
     return uris;
 }
+
+static QString sourceIdMime()
+{
+    return QStringLiteral("application/x-kde-source-id");
+}
+
+static QString sourceId()
+{
+    return QDBusConnection::sessionBus().baseService();
+}
+
+void KUrlMimeData::setSourceId(QMimeData *mimeData)
+{
+    mimeData->setData(sourceIdMime(), sourceId().toUtf8());
+}
+
+static bool hasSameSourceId(const QMimeData *mimeData)
+{
+    return mimeData->hasFormat(sourceIdMime()) && mimeData->data(sourceIdMime()) == sourceId().toUtf8();
+}
+
 #endif
 
 QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData, DecodeOptions decodeOptions, MetaDataMap *metaData)
@@ -146,7 +169,7 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData, DecodeOpti
     QList<QUrl> uris;
 
 #if HAVE_QTDBUS
-    if (isDocumentsPortalAvailable() && mimeData->hasFormat(portalFormat())) {
+    if (!hasSameSourceId(mimeData) && isDocumentsPortalAvailable() && mimeData->hasFormat(portalFormat())) {
         uris = extractPortalUriList(mimeData);
     }
 #endif
@@ -297,6 +320,7 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
     // closing-upon-read inside the portal and have any reads, but the first, not properly resolve anymore.
     const QString transferId = iface->StartTransfer({{QStringLiteral("autostop"), QVariant::fromValue(false)}});
     mimeData->setData(QStringLiteral("application/vnd.portal.filetransfer"), QFile::encodeName(transferId));
+    setSourceId(mimeData);
 
     auto optionalPaths = fuseRedirect(urls, onlyLocalFiles);
     if (!optionalPaths.has_value()) {

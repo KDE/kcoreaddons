@@ -9,6 +9,8 @@
 #include <QMimeData>
 #include <QTest>
 #include <kurlmimedata.h>
+#include <kurlmimedata_p.h>
+#include <memory>
 
 QTEST_MAIN(KUrlMimeDataTest)
 
@@ -158,5 +160,37 @@ void KUrlMimeDataTest::testMostLocalUrlList()
 
     delete mimeData;
 }
+
+#if HAVE_QTDBUS
+
+void KUrlMimeDataTest::testSameProcessCopyPaste()
+{
+    if (!KUrlMimeData::isDocumentsPortalAvailable()) {
+        QSKIP("Documents portal not available");
+    }
+
+    std::unique_ptr<QMimeData> mimeData(new QMimeData());
+    QList<QUrl> urls{QUrl(QStringLiteral("desktop:/foo")), QUrl(QStringLiteral("desktop:/bar"))};
+
+    KUrlMimeData::setUrls(urls, {}, mimeData.get());
+    mimeData->setData(QStringLiteral("application/vnd.portal.filetransfer"), QFile::encodeName(QStringLiteral("bad-transfer-id")));
+
+    // Should fail because the transfer id is invalid
+    QList<QUrl> decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData.get());
+    QVERIFY(decodedURLs.length() != 2);
+
+    // Should succeed because we put in the source id, so the portal is skipped
+    KUrlMimeData::setSourceId(mimeData.get());
+    decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData.get());
+    QVERIFY(!decodedURLs.isEmpty());
+    QCOMPARE(decodedURLs, urls);
+
+    // Should fail because we put in a bad source id, so the portal is not skipped
+    mimeData->setData(QStringLiteral("application/x-kde-source-id"), QStringLiteral("bad-source-id").toUtf8());
+    decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData.get());
+    QVERIFY(decodedURLs.length() != 2);
+}
+
+#endif // HAVE_QTDBUS
 
 #include "moc_kurlmimedatatest.cpp"
