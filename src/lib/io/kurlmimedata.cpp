@@ -310,10 +310,6 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
             }
         } else {
             const QFileInfo info(url.toLocalFile());
-            if (info.isDir()) {
-                // XDG Document Portal doesn't support directories and silently drops them.
-                return false;
-            }
             if (info.isSymbolicLink()) {
                 // XDG Document Portal also doesn't support symlinks since it doesn't let us open the fd O_NOFOLLOW.
                 // https://github.com/flatpak/xdg-desktop-portal/issues/961#issuecomment-1573646299
@@ -329,8 +325,10 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
     // Otherwise not-wellbehaved clients that read the urls multiple times will trip the automatic-transfer-
     // closing-upon-read inside the portal and have any reads, but the first, not properly resolve anymore.
     const QString transferId = iface->StartTransfer({{QStringLiteral("autostop"), QVariant::fromValue(false)}});
-    mimeData->setData(QStringLiteral("application/vnd.portal.filetransfer"), QFile::encodeName(transferId));
-    setSourceId(mimeData);
+    auto cleanup = qScopeGuard([transferId, iface] {
+        iface->StopTransfer(transferId);
+        iface->deleteLater();
+    });
 
     auto optionalPaths = fuseRedirect(urls, onlyLocalFiles);
     if (!optionalPaths.has_value()) {
@@ -351,14 +349,16 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
 
     const auto addFilesAndClear = [transferId, &iface, &pendingFds]() {
         if (pendingFds.isEmpty()) {
-            return;
+            return true;
         }
         auto reply = iface->AddFiles(transferId, pendingFds, {});
         reply.waitForFinished();
         if (reply.isError()) {
             qCWarning(KCOREADDONS_DEBUG) << "Some files could not be exported. " << reply.error();
+            return false;
         }
         pendingFds.clear();
+        return true;
     };
 
     for (const auto &path : optionalPaths.value()) {
@@ -366,24 +366,29 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
         if (fd == -1) {
             const int error = errno;
             qCWarning(KCOREADDONS_DEBUG) << "Failed to open" << path << strerror(error);
+            return false;
         }
         pendingFds << QDBusUnixFileDescriptor(fd);
         close(fd);
 
         if (pendingFds.size() >= maximumBatchSize) {
-            addFilesAndClear();
+            if (!addFilesAndClear()) {
+                return false;
+            }
         }
     }
-    addFilesAndClear();
 
-    QObject::connect(mimeData, &QObject::destroyed, iface, [transferId, iface] {
-        iface->StopTransfer(transferId);
-        iface->deleteLater();
-    });
+    if (!addFilesAndClear()) {
+        return false;
+    }
+
+    QObject::connect(mimeData, &QObject::destroyed, iface, [cleanup = std::move(cleanup)] {});
     QObject::connect(iface, &OrgFreedesktopPortalFileTransferInterface::TransferClosed, mimeData, [iface]() {
         iface->deleteLater();
     });
 
+    mimeData->setData(QStringLiteral("application/vnd.portal.filetransfer"), QFile::encodeName(transferId));
+    setSourceId(mimeData);
     return true;
 #else
     Q_UNUSED(mimeData);
