@@ -46,11 +46,19 @@ KProcessInfoList unixProcessListPS()
     KProcessInfoList rc;
     QProcess psProcess;
     const QStringList args{
+#ifdef Q_OS_OPENBSD
+        QStringLiteral("-ww"),
+        QStringLiteral("-x"),
+#endif
         QStringLiteral("-e"),
         QStringLiteral("-o"),
 #ifdef Q_OS_MAC
         // command goes last, otherwise it is cut off
         QStringLiteral("pid state user comm command"),
+#elif defined(Q_OS_OPENBSD)
+        // On OpenBSD "login" is user who started the process in difference to
+        // Linux where it is the effective user "ename" name.
+        QStringLiteral("pid,state,login,comm,args"),
 #else
         QStringLiteral("pid,state,user,comm,cmd"),
 #endif
