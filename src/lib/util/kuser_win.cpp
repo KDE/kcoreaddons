@@ -899,7 +899,7 @@ KGroupId KGroupId::currentEffectiveGroupId()
     return currentGroupId();
 }
 
-KCOREADDONS_EXPORT uint qHash(const KUserId &id, uint seed)
+KCOREADDONS_EXPORT size_t qHash(const KUserId &id, size_t seed)
 {
     if (!id.isValid()) {
         return seed;
@@ -909,7 +909,7 @@ KCOREADDONS_EXPORT uint qHash(const KUserId &id, uint seed)
     return qHash(QByteArray::fromRawData(sid, GetLengthSid(sid)), seed);
 }
 
-KCOREADDONS_EXPORT uint qHash(const KGroupId &id, uint seed)
+KCOREADDONS_EXPORT size_t qHash(const KGroupId &id, size_t seed)
 {
     if (!id.isValid()) {
         return seed;

@@ -196,18 +196,18 @@ struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
 };
 
 #ifndef Q_OS_WIN
-inline uint qHash(const KUserId &id, uint seed = 0)
+inline size_t qHash(const KUserId &id, size_t seed = 0)
 {
     return qHash(id.nativeId(), seed);
 }
-inline uint qHash(const KGroupId &id, uint seed = 0)
+inline size_t qHash(const KGroupId &id, size_t seed = 0)
 {
     return qHash(id.nativeId(), seed);
 }
 #else
 // can't be inline on windows, because we would need to include windows.h (which can break code)
-KCOREADDONS_EXPORT uint qHash(const KUserId &id, uint seed = 0);
-KCOREADDONS_EXPORT uint qHash(const KGroupId &id, uint seed = 0);
+KCOREADDONS_EXPORT size_t qHash(const KUserId &id, size_t seed = 0);
+KCOREADDONS_EXPORT size_t qHash(const KGroupId &id, size_t seed = 0);
 #endif
 
 /**
