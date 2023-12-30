@@ -1,10 +1,10 @@
-#
+# Godlove Kyando <godlove.kyando@tie.go.tz>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Project-Id-Version: kdelibs4\n"
+"POT-Creation-Date: 2014-03-23 01:50+0000\n"
+"PO-Revision-Date: 2023-12-29 15:03+0200\n"
+"Last-Translator: Godlove Kyando <godlove.kyando@tie.go.tz>\n"
 "Language-Team: Swahili <kde-l10n-sw@kde.org>\n"
 "Language: sw\n"
 "MIME-Version: 1.0\n"
