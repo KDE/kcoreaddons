@@ -7,6 +7,7 @@ include(CheckSymbolExists)
 check_symbol_exists("getgrouplist" "grp.h" HAVE_GETGROUPLIST)
 
 if(UNIX)
+    set(HAVE_DLADDR OFF)
     function(check_dladdr) # use a function to scope the variables!
         set(CMAKE_REQUIRED_FLAGS ${DLADDR_LINK_FLAGS})
         set(CMAKE_REQUIRED_LIBRARIES ${DLADDR_LINK_LIBRARIES})
