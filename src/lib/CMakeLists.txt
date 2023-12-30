@@ -47,7 +47,7 @@ if (Inotify_FOUND)
     target_link_libraries(KF6CoreAddons PRIVATE ${Inotify_LIBRARIES})
 endif ()
 
-if(NOT WIN32)
+if(NOT WIN32 AND NOT EMSCRIPTEN)
     target_sources(KF6CoreAddons PRIVATE
         caching/kshareddatacache.cpp
         caching/kshareddatacache.h
@@ -75,7 +75,7 @@ if (WIN32)
     )
 endif ()
 
-if (UNIX)
+if (UNIX AND NOT EMSCRIPTEN)
     target_sources(KF6CoreAddons PRIVATE
         text/kmacroexpander_unix.cpp
         util/klistopenfilesjob_unix.cpp
