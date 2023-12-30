@@ -45,7 +45,12 @@ static const std::array<FsInfo, 19> s_fsMap = {{
     {KFileSystemType::Fuse, "fuseblk"},
 }};
 
-#ifndef Q_OS_WIN
+#if defined(Q_OS_WIN) || defined(Q_OS_WASM)
+KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
+{
+    return KFileSystemType::Unknown;
+}
+#else
 inline KFileSystemType::Type kde_typeFromName(const QLatin1String name)
 {
     auto it = std::find_if(s_fsMap.cbegin(), s_fsMap.cend(), [name](const auto &fsInfo) {
@@ -222,11 +227,6 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #endif
 }
 #endif
-#else
-KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
-{
-    return KFileSystemType::Unknown;
-}
 #endif
 
 KFileSystemType::Type KFileSystemType::fileSystemType(const QString &path)
