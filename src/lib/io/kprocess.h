@@ -15,6 +15,8 @@
 
 #include <memory>
 
+#if QT_CONFIG(process)
+
 class KProcessPrivate;
 
 /**
@@ -309,4 +311,5 @@ private:
     using QProcess::setProcessChannelMode;
 };
 
+#endif
 #endif

@@ -8,6 +8,8 @@
 
 #include <kcoreaddons_debug.h>
 
+#if QT_CONFIG(process)
+
 bool KSandbox::isInside()
 {
     static const bool isInside = isFlatpak() || isSnap();
@@ -72,3 +74,5 @@ KCOREADDONS_EXPORT void KSandbox::startHostProcess(QProcess &process, QProcess::
     const auto context = makeHostContext(process);
     process.start(context.program, context.arguments, mode);
 }
+
+#endif

@@ -8,6 +8,8 @@
 
 #include <kcoreaddons_export.h>
 
+#if QT_CONFIG(process)
+
 /**
  * @brief Utility functions for use inside application sandboxes such as flatpak or snap.
  * @since 5.95
@@ -47,4 +49,5 @@ KCOREADDONS_EXPORT void startHostProcess(QProcess &process, QProcess::OpenMode m
 
 } // namespace KSandbox
 
+#endif
 #endif // KSANDBOX_H

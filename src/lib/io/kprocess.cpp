@@ -20,6 +20,8 @@
 
 #include <QFile>
 
+#if QT_CONFIG(process)
+
 /////////////////////////////
 // public member functions //
 /////////////////////////////
@@ -305,4 +307,5 @@ int KProcess::startDetached(const QStringList &argv)
     return startDetached(prog, args);
 }
 
+#endif
 #include "moc_kprocess.cpp"

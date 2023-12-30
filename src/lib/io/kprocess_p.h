@@ -11,6 +11,8 @@
 
 #include "kprocess.h"
 
+#if QT_CONFIG(process)
+
 class KProcessPrivate
 {
     Q_DECLARE_PUBLIC(KProcess)
@@ -26,4 +28,5 @@ protected:
     KProcess *q_ptr;
 };
 
+#endif
 #endif
