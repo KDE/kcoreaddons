@@ -886,11 +886,15 @@ void KDirWatchPrivate::addWatch(Entry *e)
     }
 
     // Try the appropriate preferred method from the config first
+    bool inotifyFailed = false;
     bool entryAdded = false;
     switch (preferredMethod) {
 #if HAVE_SYS_INOTIFY_H
     case KDirWatch::INotify:
         entryAdded = useINotify(e);
+        if (!entryAdded) {
+            inotifyFailed = true;
+        }
         break;
 #else
     case KDirWatch::INotify:
@@ -919,7 +923,9 @@ void KDirWatchPrivate::addWatch(Entry *e)
         }
 #endif
 #if HAVE_QFILESYSTEMWATCHER
-        if (preferredMethod != KDirWatch::QFSWatch && useQFSWatch(e)) {
+        // QFileSystemWatcher uses inotify internally if it's supported by the platform, so
+        // if useInotify() already failed, don't try inotify again through useQFSWatch().
+        if (preferredMethod != KDirWatch::QFSWatch && !inotifyFailed && useQFSWatch(e)) {
             return;
         }
 #endif
