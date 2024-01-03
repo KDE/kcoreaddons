@@ -3,7 +3,7 @@
 
     SPDX-FileCopyrightText: 2019 David Hallas <david@davidhallas.dk>
 
-    SPDX-License-Identifier: LGPL-2.0-only
+    SPDX-License-Identifier: LGPL-2.1-or-later
 */
 
 #include "klistopenfilesjob.h"
