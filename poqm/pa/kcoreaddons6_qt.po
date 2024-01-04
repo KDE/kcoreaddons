@@ -4,7 +4,7 @@
 #
 # Amanpreet Singh Alam <amanlinux@netscape.net>, 2004.
 # Amanpreet Singh Alam <amanlinux@netscpe.net>, 2004.
-# A S Alam <aalam@users.sf.net>, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2022, 2023.
+# SPDX-FileCopyrightText: 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2022, 2023, 2024 A S Alam <aalam@users.sf.net>
 # ASB <aalam@users.sf.net>, 2007.
 # Amanpreet Singh Alam <apreet.alam@gmail.com>, 2008.
 # Amanpreet Singh <aalam@users.sf.net>, 2008.
@@ -14,14 +14,14 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-01-25 07:36-0800\n"
-"Last-Translator: A S Alam <aalam@satluj.org>\n"
-"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"PO-Revision-Date: 2024-01-03 14:01-0600\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -208,12 +208,12 @@ msgstr "ਲਸੰਸ ਜਾਣਕਾਰੀ ਵੇਖੋ"
 #: lib/kaboutdata.cpp:1155
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
-msgstr "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਡੈਸਕਟਾਪ ਐਂਟਰੀ ਦਾ ਬੇਸ ਫ਼ਾਈਲ ਨਾਂ ਹੈ।"
+msgstr "ਇਸ ਐਪਲੀਕੇਸ਼ਨ ਲਈ ਡੈਸਕਟਾਪ ਐਂਟਰੀ ਦਾ ਬੇਸ ਫਾਇਲ ਨਾਂ ਹੈ।"
 
 #: lib/kaboutdata.cpp:1156
 msgctxt "KAboutData CLI|"
 msgid "file name"
-msgstr "ਫ਼ਾਈਲ ਨਾਂ"
+msgstr "ਫਾਇਲ ਨਾਂ"
 
 #: lib/kaboutdata.cpp:1166
 msgctxt "KAboutData CLI|"
