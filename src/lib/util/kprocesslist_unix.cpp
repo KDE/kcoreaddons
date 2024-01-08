@@ -164,16 +164,22 @@ bool getProcessInfo(const QString &procId, KProcessInfo &processInfo)
     return true;
 }
 
+bool isProcExists()
+{
+    static const bool procExists = QDir(QStringLiteral("/proc/")).exists();
+    return procExists;
+}
+
 } // unnamed namespace
 
 // Determine UNIX processes by reading "/proc". Default to ps if
 // it does not exist
 KProcessInfoList KProcessList::processInfoList()
 {
-    const QDir procDir(QStringLiteral("/proc/"));
-    if (!procDir.exists()) {
+    if (!isProcExists()) {
         return unixProcessListPS();
     }
+    const QDir procDir(QStringLiteral("/proc/"));
     const QStringList procIds = procDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
     KProcessInfoList rc;
     rc.reserve(procIds.size());
@@ -190,8 +196,7 @@ KProcessInfoList KProcessList::processInfoList()
 KProcessInfo KProcessList::processInfo(qint64 pid)
 {
     KProcessInfo processInfo;
-    const QDir procDir(QStringLiteral("/proc/"));
-    if (procDir.exists()) {
+    if (isProcExists()) {
         getProcessInfo(QString::number(pid), processInfo);
     } else {
         getUnixProcessInfo(pid, processInfo);
