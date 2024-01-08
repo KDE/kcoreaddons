@@ -1,13 +1,13 @@
 # Kiszel Kristóf <ulysses@kubuntu.org>, 2010.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2011, 2012, 2014.
 # Balázs Úr <urbalazs@gmail.com>, 2012, 2013.
-# Kristof Kiszel <kiszel.kristof@gmail.com>, 2018, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2018, 2020, 2021, 2022, 2024 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-02-08 09:26+0100\n"
+"PO-Revision-Date: 2024-01-07 22:42+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.07.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:247
@@ -56,7 +56,7 @@ msgstr "ExFAT"
 #: lib/io/kfilesystemtype.cpp:261
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "FUSE"
 
 #: lib/io/kfilesystemtype.cpp:263
 msgctxt "KFileSystemType|"
@@ -151,18 +151,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU Lesser General Public License 2.1-es verzió"
 
 #: lib/kaboutdata.cpp:348
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "Licenc:"
+msgstr "MIT licenc"
 
 #: lib/kaboutdata.cpp:349
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "Licenc:"
+msgstr "MIT licenc"
 
 #: lib/kaboutdata.cpp:353
 msgctxt "KAboutLicense|@item license"
@@ -250,12 +246,10 @@ msgid "The library %1 does not offer a KPluginFactory."
 msgstr "A(z) %1 programkönyvtár nem tartalmaz KPluginFactoryt."
 
 #: lib/plugin/kpluginfactory.h:386
-#, fuzzy, qt-format
-#| msgctxt "KPluginFactory|"
-#| msgid "KPluginFactory could not load the plugin: %1"
+#, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
-msgstr "A KPluginfactory nem tudta betölteni a bővítményt: %1"
+msgstr "A KPluginfactory nem tudott létrehozni egy %1 példányt ebből: %2"
 
 #: lib/util/kformatprivate.cpp:102
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -789,14 +783,12 @@ msgstr "Épp most"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:521
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%1 perccel ezelőtt"
-msgstr[1] "%1 perccel ezelőtt"
+msgstr[0] "%n perccel ezelőtt"
+msgstr[1] "%n perccel ezelőtt"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:537
@@ -812,19 +804,15 @@ msgid "Path %1 doesn't exist"
 msgstr "A(z) %1 elérési út nem létezik"
 
 #: lib/util/klistopenfilesjob_unix.cpp:46
-#, fuzzy
-#| msgid "Could not find '%1' executable."
 msgctxt "QObject|"
 msgid "Could not find lsof executable in PATH:"
-msgstr "A(z) „%1” program nem található."
+msgstr "Az lsof program nem található a PATH-ban:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, fuzzy, qt-format
-#| msgctxt "QObject|"
-#| msgid "Failed to execute `lsof' error code %1"
+#, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "Az „lsof” végrehajtása meghiúsult, hibakód: %1"
+msgstr "Az „lsof” végrehajtása meghiúsult. Hibakód: %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
