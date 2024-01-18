@@ -1,11 +1,11 @@
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2014, 2017, 2018.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022.
+# SPDX-FileCopyrightText: 2021, 2022, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-28 15:38+0300\n"
-"PO-Revision-Date: 2022-12-22 09:02+0400\n"
+"PO-Revision-Date: 2024-01-17 19:08+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:247
@@ -150,20 +150,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "رخصة غنو العمومية الصغرى إصدارة 2٫1"
 
 #: lib/kaboutdata.cpp:348
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "رخصة بي‌إس‌دي"
+msgstr "رخصة إم أي تي"
 
 #: lib/kaboutdata.cpp:349
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "رخصة بي‌إس‌دي"
+msgstr "رخصة إم أي تي"
 
 #: lib/kaboutdata.cpp:353
 msgctxt "KAboutLicense|@item license"
