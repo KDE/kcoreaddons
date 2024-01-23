@@ -19,6 +19,7 @@ struct Emoticon {
     const char *match;
     const char *replacement;
 };
+// clang-format off
 static constexpr const Emoticon emoticons_map[] = {
     {"&gt;-(", "😠"},
     {"&gt;:(", "😠"},
@@ -143,6 +144,7 @@ static constexpr const Emoticon emoticons_map[] = {
     {"|-O", "🥱"},
     {"}:-)", "😈"},
 };
+// clang-format on
 
 static const Emoticon *findEmoticon(QStringView s)
 {

@@ -3,9 +3,9 @@
     SPDX-FileCopyrightText: 2021 Harald Sitter <sitter@kde.org>
 */
 
+#include <QFileInfo>
 #include <QObject>
 #include <QTest>
-#include <QFileInfo>
 
 #include <KLibexec>
 

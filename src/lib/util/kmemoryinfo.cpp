@@ -435,8 +435,7 @@ bool KMemoryInfo::update()
  * OpenBSD
  ****************************************************************************/
 // From src/usr.bin/top/machine.c
-static int
-swap_usage(int *used, int *total)
+static int swap_usage(int *used, int *total)
 {
     struct swapent *swdev;
     int nswap, rnswap, i;
@@ -445,7 +444,7 @@ swap_usage(int *used, int *total)
     if (nswap == 0)
         return 0;
 
-    swdev = static_cast<struct swapent*>(calloc(nswap, sizeof(*swdev)));
+    swdev = static_cast<struct swapent *>(calloc(nswap, sizeof(*swdev)));
     if (swdev == NULL)
         return 0;
 
@@ -478,15 +477,14 @@ bool KMemoryInfo::update()
 
     int swap_free = 0;
     int swap_tot = 0;
-    if (swap_usage(&swap_free, &swap_tot))
-    {
+    if (swap_usage(&swap_free, &swap_tot)) {
         d->m_totalSwapFile = swap_tot;
         d->m_freeSwapFile = swap_free;
     }
 
     int uvmexp_mib[] = {CTL_VM, VM_UVMEXP};
     struct uvmexp uvmexp;
-    size_t size= sizeof(uvmexp);
+    size_t size = sizeof(uvmexp);
     if (sysctl(uvmexp_mib, 2, &uvmexp, &size, NULL, 0) == -1) {
         bzero(&uvmexp, sizeof(uvmexp));
         return false;
