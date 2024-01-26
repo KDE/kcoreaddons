@@ -155,6 +155,7 @@ install(EXPORT KF6CoreAddonsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FIL
 
 install(FILES ${kcoreaddons_version_header} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel)
 
-feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+include(ECMFeatureSummary)
+ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
