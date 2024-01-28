@@ -158,7 +158,8 @@ KFileSystemType::Type probeFuseBlkType(const QByteArray &path)
     // 'b' for block devices
     auto devPtr = UDevicePtr(udev_device_new_from_devnum(udevP.get(), 'b', buf.st_dev), udev_device_unref);
     if (!devPtr) {
-        return Fuse;
+        // If is not block device, assume conservatively it is a remote FS under FUSE.
+        return Nfs;
     }
 
     const QLatin1String fsType(udev_device_get_property_value(devPtr.get(), "ID_FS_TYPE"));
