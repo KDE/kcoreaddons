@@ -13,49 +13,49 @@ msgstr ""
 "X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: lib/io/kfilesystemtype.cpp:247
+#: lib/io/kfilesystemtype.cpp:248
 msgctxt "KFileSystemType|"
 msgid "NFS"
 msgstr "အန်အက်ဖ်အက်စ်"
 
-#: lib/io/kfilesystemtype.cpp:249
+#: lib/io/kfilesystemtype.cpp:250
 msgctxt "KFileSystemType|"
 msgid "SMB"
 msgstr "အက်စ်အမ်ဘီ"
 
-#: lib/io/kfilesystemtype.cpp:251
+#: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
 msgid "FAT"
 msgstr "အက်ဖ်အေတီ"
 
-#: lib/io/kfilesystemtype.cpp:253
+#: lib/io/kfilesystemtype.cpp:254
 msgctxt "KFileSystemType|"
 msgid "RAMFS"
 msgstr "ရမ်အက်ဖ်အက်စ်"
 
-#: lib/io/kfilesystemtype.cpp:255
+#: lib/io/kfilesystemtype.cpp:256
 msgctxt "KFileSystemType|"
 msgid "Other"
 msgstr "အခြား"
 
-#: lib/io/kfilesystemtype.cpp:257
+#: lib/io/kfilesystemtype.cpp:258
 msgctxt "KFileSystemType|"
 msgid "NTFS"
 msgstr "အန်တီအက်ဖ်အက်စ်"
 
 # extended file allocation table
 # တစ်နည်းအားဖြင့် fat ဖိုင်လ်စနစ်၏ 64ဘစ် ဗားရှင်း
-#: lib/io/kfilesystemtype.cpp:259
+#: lib/io/kfilesystemtype.cpp:260
 msgctxt "KFileSystemType|"
 msgid "ExFAT"
 msgstr "အီးအိပ်စ်အက်ဖ်အေတီ"
 
-#: lib/io/kfilesystemtype.cpp:261
+#: lib/io/kfilesystemtype.cpp:262
 msgctxt "KFileSystemType|"
 msgid "FUSE"
 msgstr ""
 
-#: lib/io/kfilesystemtype.cpp:263
+#: lib/io/kfilesystemtype.cpp:264
 msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "မသိ"

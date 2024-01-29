@@ -22,27 +22,27 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Qt-Contexts: true\n"
 
-#: lib/io/kfilesystemtype.cpp:247
+#: lib/io/kfilesystemtype.cpp:248
 msgctxt "KFileSystemType|"
 msgid "NFS"
 msgstr ""
 
-#: lib/io/kfilesystemtype.cpp:249
+#: lib/io/kfilesystemtype.cpp:250
 msgctxt "KFileSystemType|"
 msgid "SMB"
 msgstr ""
 
-#: lib/io/kfilesystemtype.cpp:251
+#: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
 msgid "FAT"
 msgstr ""
 
-#: lib/io/kfilesystemtype.cpp:253
+#: lib/io/kfilesystemtype.cpp:254
 msgctxt "KFileSystemType|"
 msgid "RAMFS"
 msgstr ""
 
-#: lib/io/kfilesystemtype.cpp:255
+#: lib/io/kfilesystemtype.cpp:256
 #, fuzzy
 #| msgctxt "@item Text character set"
 #| msgid "Other"
@@ -50,22 +50,22 @@ msgctxt "KFileSystemType|"
 msgid "Other"
 msgstr "Այլ"
 
-#: lib/io/kfilesystemtype.cpp:257
+#: lib/io/kfilesystemtype.cpp:258
 msgctxt "KFileSystemType|"
 msgid "NTFS"
 msgstr ""
 
-#: lib/io/kfilesystemtype.cpp:259
+#: lib/io/kfilesystemtype.cpp:260
 msgctxt "KFileSystemType|"
 msgid "ExFAT"
 msgstr ""
 
-#: lib/io/kfilesystemtype.cpp:261
+#: lib/io/kfilesystemtype.cpp:262
 msgctxt "KFileSystemType|"
 msgid "FUSE"
 msgstr ""
 
-#: lib/io/kfilesystemtype.cpp:263
+#: lib/io/kfilesystemtype.cpp:264
 #, fuzzy
 #| msgid "Unknown"
 msgctxt "KFileSystemType|"
