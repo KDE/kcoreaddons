@@ -78,6 +78,8 @@ void KSignalHandlerPrivate::signalHandler(int signal)
     if (ret != sizeof(signal)) {
         qCWarning(KCOREADDONS_DEBUG) << "signalHandler couldn't write for signal" << strsignal(signal) << " Got error:" << strerror(errno);
     }
+#else
+    Q_UNUSED(signal);
 #endif
 }
 

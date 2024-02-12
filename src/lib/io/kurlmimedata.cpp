@@ -376,6 +376,7 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
 
     return true;
 #else
+    Q_UNUSED(mimeData);
     return false;
 #endif
 }

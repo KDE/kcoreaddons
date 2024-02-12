@@ -243,7 +243,7 @@ public:
         }
         // now get the server name to query (could be null for local machine)
         LPWSTR servernameTmp = nullptr;
-        NET_API_STATUS status = NetGetAnyDCName(nullptr, 0, (LPBYTE *)&servernameTmp);
+        NET_API_STATUS status = NetGetAnyDCName(nullptr, nullptr, (LPBYTE *)&servernameTmp);
         if (status != NERR_Success) {
             // this always fails on my desktop system, don't spam the output
             // qDebug("NetGetAnyDCName failed with error %d", status);
@@ -536,7 +536,7 @@ static QString nameFromGroupId(KGroupId gid)
     WCHAR domainBuffer[UNLEN + 1];
     SID_NAME_USE eUse;
     QString name;
-    if (LookupAccountSidW(NULL, gid.nativeId(), buffer, &bufferLen, domainBuffer, &domainBufferLen, &eUse)) {
+    if (LookupAccountSidW(nullptr, gid.nativeId(), buffer, &bufferLen, domainBuffer, &domainBufferLen, &eUse)) {
         if (eUse == SidTypeGroup || eUse == SidTypeWellKnownGroup) {
             name = QString::fromWCharArray(buffer);
         } else {

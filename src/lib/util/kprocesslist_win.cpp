@@ -35,7 +35,7 @@ static inline BOOL queryFullProcessImageName(HANDLE h, DWORD flags, LPWSTR buffe
 {
     // Resolve required symbols from the kernel32.dll
     typedef BOOL(WINAPI * QueryFullProcessImageNameWProtoType)(HANDLE, DWORD, LPWSTR, PDWORD);
-    static QueryFullProcessImageNameWProtoType queryFullProcessImageNameW = 0;
+    static QueryFullProcessImageNameWProtoType queryFullProcessImageNameW = nullptr;
     if (!queryFullProcessImageNameW) {
         QLibrary kernel32Lib(QLatin1String("kernel32.dll"), 0);
         if (kernel32Lib.isLoaded() || kernel32Lib.load()) {
@@ -59,7 +59,7 @@ static inline ProcessInfo winProcessInfo(DWORD processId)
     HANDLE handle = OpenProcess(PROCESS_QUERY_INFORMATION, TOKEN_READ, processId);
     if (handle == INVALID_HANDLE_VALUE)
         return pi;
-    HANDLE processTokenHandle = NULL;
+    HANDLE processTokenHandle = nullptr;
     if (!OpenProcessToken(handle, TOKEN_READ, &processTokenHandle) || !processTokenHandle)
         return pi;
 
@@ -70,7 +70,7 @@ static inline ProcessInfo winProcessInfo(DWORD processId)
     }
 
     DWORD size = 0;
-    GetTokenInformation(processTokenHandle, TokenUser, NULL, 0, &size);
+    GetTokenInformation(processTokenHandle, TokenUser, nullptr, 0, &size);
 
     if (GetLastError() == ERROR_INSUFFICIENT_BUFFER) {
         QByteArray buf;
@@ -83,7 +83,8 @@ static inline ProcessInfo winProcessInfo(DWORD processId)
             TCHAR domain[MAX_PATH] = {0};
             DWORD domainNameLength = MAX_PATH;
 
-            if (LookupAccountSid(NULL, userToken->User.Sid, user, &userNameLength, domain, &domainNameLength, &sidNameUse))
+            if (LookupAccountSid(nullptr, userToken->User.Sid, user, &userNameLength, domain, &domainNameLength,
+                &sidNameUse))
                 pi.processOwner = QString::fromUtf16(reinterpret_cast<const char16_t *>(user));
         }
     }

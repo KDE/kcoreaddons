@@ -103,4 +103,5 @@ unsigned KSharedDataCache::timestamp() const
 
 void KSharedDataCache::setTimestamp(unsigned newTimestamp)
 {
+    Q_UNUSED(newTimestamp);
 }
