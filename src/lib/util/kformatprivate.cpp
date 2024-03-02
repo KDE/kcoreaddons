@@ -386,16 +386,16 @@ QString KFormatPrivate::formatDecimalDuration(quint64 msecs, int decimalPlaces) 
 {
     if (msecs >= MSecsInDay) {
         //: @item:intext %1 is a real number, e.g. 1.23 days
-        return tr("%1 days").arg(m_locale.toString(msecs / (MSecsInDay * 1.0), 'f', decimalPlaces));
+        return tr("%1 days").arg(m_locale.toString(msecs / (+MSecsInDay * 1.0), 'f', decimalPlaces));
     } else if (msecs >= MSecsInHour) {
         //: @item:intext %1 is a real number, e.g. 1.23 hours
-        return tr("%1 hours").arg(m_locale.toString(msecs / (MSecsInHour * 1.0), 'f', decimalPlaces));
+        return tr("%1 hours").arg(m_locale.toString(msecs / (+MSecsInHour * 1.0), 'f', decimalPlaces));
     } else if (msecs >= MSecsInMinute) {
         //: @item:intext %1 is a real number, e.g. 1.23 minutes
-        return tr("%1 minutes").arg(m_locale.toString(msecs / (MSecsInMinute * 1.0), 'f', decimalPlaces));
+        return tr("%1 minutes").arg(m_locale.toString(msecs / (+MSecsInMinute * 1.0), 'f', decimalPlaces));
     } else if (msecs >= MSecsInSecond) {
         //: @item:intext %1 is a real number, e.g. 1.23 seconds
-        return tr("%1 seconds").arg(m_locale.toString(msecs / (MSecsInSecond * 1.0), 'f', decimalPlaces));
+        return tr("%1 seconds").arg(m_locale.toString(msecs / (+MSecsInSecond * 1.0), 'f', decimalPlaces));
     }
     //: @item:intext %1 is a whole number
     //~ singular %n millisecond
