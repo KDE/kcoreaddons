@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2024-03-08 17:40+0100\n"
+"PO-Revision-Date: 2024-03-13 17:15+0100\n"
 "Last-Translator: Jure Repinc <jlp@holodeck1.com>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -53,7 +53,7 @@ msgstr "RAMFS"
 #: lib/io/kfilesystemtype.cpp:257
 msgctxt "KFileSystemType|"
 msgid "Other"
-msgstr "Drugo"
+msgstr "Drugi"
 
 #: lib/io/kfilesystemtype.cpp:259
 msgctxt "KFileSystemType|"
@@ -73,7 +73,7 @@ msgstr "FUSE"
 #: lib/io/kfilesystemtype.cpp:265
 msgctxt "KFileSystemType|"
 msgid "Unknown"
-msgstr "Neznano"
+msgstr "Neznani"
 
 #: lib/kaboutdata.cpp:264
 msgctxt "KAboutLicense|"
@@ -90,7 +90,7 @@ msgstr ""
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
-msgstr "Ta program se razširja pod pogoji %1."
+msgstr "Ta program se razširja pod pogoji licence %1."
 
 #: lib/kaboutdata.cpp:320
 msgctxt "KAboutLicense|@item license (short name)"
@@ -100,7 +100,7 @@ msgstr "GPL v2"
 #: lib/kaboutdata.cpp:321
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
-msgstr "Splošno dovoljenje GNU različica 2"
+msgstr "Splošna licenca GNU različica 2"
 
 #: lib/kaboutdata.cpp:324
 msgctxt "KAboutLicense|@item license (short name)"
@@ -110,7 +110,7 @@ msgstr "LGPL v2"
 #: lib/kaboutdata.cpp:325
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
-msgstr "Manj splošno dovoljenje GNU različica 2"
+msgstr "Šibkejša splošna licenca GNU različica 2"
 
 #: lib/kaboutdata.cpp:328
 msgctxt "KAboutLicense|@item license (short name)"
@@ -140,7 +140,7 @@ msgstr "GPL v3"
 #: lib/kaboutdata.cpp:337
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
-msgstr "Splošno dovoljenje GNU različica 3"
+msgstr "Splošna licenca GNU različica 3"
 
 #: lib/kaboutdata.cpp:340
 msgctxt "KAboutLicense|@item license (short name)"
@@ -150,7 +150,7 @@ msgstr "LGPL v3"
 #: lib/kaboutdata.cpp:341
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
-msgstr "Manj splošno dovoljenje GNU različica 3"
+msgstr "Šibkejša splošna licenca GNU različica 3"
 
 #: lib/kaboutdata.cpp:344
 msgctxt "KAboutLicense|@item license (short name)"
@@ -160,7 +160,7 @@ msgstr "LGPL v2.1"
 #: lib/kaboutdata.cpp:345
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
-msgstr "Manj splošno dovoljenje GNU različica 2.1"
+msgstr "Šibkejša splošna licenca GNU različica 2.1"
 
 #: lib/kaboutdata.cpp:348
 msgctxt "KAboutLicense|@item license (short name)"
@@ -234,13 +234,13 @@ msgstr "%1 je napisal(a):"
 #: lib/kaboutdata.cpp:1179
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
-msgstr "Za poročanje o hroščih uporabite https://bugs.kde.org."
+msgstr "Za poročanje o napakah in željah uporabite https://bugs.kde.org."
 
 #: lib/kaboutdata.cpp:1181
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
-msgstr "Za poročanje o hroščih uporabite %1."
+msgstr "Za poročanje o napakah in željah uporabite %1."
 
 #: lib/plugin/kpluginfactory.cpp:33
 #, qt-format
@@ -264,7 +264,7 @@ msgstr "Knjižnica %1 ne nudi KPluginFactory."
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
-msgstr "KPluginFactory ni mogla ustvariti %1 pojavka iz %2"
+msgstr "KPluginFactory ni mogla ustvariti primerka %1 iz %2"
 
 #: lib/util/kformatprivate.cpp:102
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -411,238 +411,238 @@ msgstr "Hz"
 #, qt-format
 msgctxt "KFormat|no Prefix"
 msgid "%1 %2"
-msgstr "%1 %2"
+msgstr "%1 %2"
 
 #. value with prefix, format "<val> <prefix><unit>"
 #: lib/util/kformatprivate.cpp:164
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 %2%3"
-msgstr "%1 %2%3"
+msgstr "%1 %2%3"
 
 #. MetricBinaryDialect size in bytes
 #: lib/util/kformatprivate.cpp:218
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 B"
-msgstr "%1 B"
+msgstr "%1 B"
 
 #. MetricBinaryDialect size in 1000 bytes
 #: lib/util/kformatprivate.cpp:221
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 kB"
-msgstr "%1 kB"
+msgstr "%1 kB"
 
 #. MetricBinaryDialect size in 10^6 bytes
 #: lib/util/kformatprivate.cpp:224
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 MB"
-msgstr "%1 MB"
+msgstr "%1 MB"
 
 #. MetricBinaryDialect size in 10^9 bytes
 #: lib/util/kformatprivate.cpp:227
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 GB"
-msgstr "%1 GB"
+msgstr "%1 GB"
 
 #. MetricBinaryDialect size in 10^12 bytes
 #: lib/util/kformatprivate.cpp:230
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 TB"
-msgstr "%1 TB"
+msgstr "%1 TB"
 
 #. MetricBinaryDialect size in 10^15 bytes
 #: lib/util/kformatprivate.cpp:233
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 PB"
-msgstr "%1 PB"
+msgstr "%1 PB"
 
 #. MetricBinaryDialect size in 10^18 byte
 #: lib/util/kformatprivate.cpp:236
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 EB"
-msgstr "%1 EB"
+msgstr "%1 EB"
 
 #. MetricBinaryDialect size in 10^21 bytes
 #: lib/util/kformatprivate.cpp:239
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 ZB"
-msgstr "%1 ZB"
+msgstr "%1 ZB"
 
 #. MetricBinaryDialect size in 10^24 bytes
 #: lib/util/kformatprivate.cpp:242
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 YB"
-msgstr "%1 YB"
+msgstr "%1 YB"
 
 #. JEDECBinaryDialect memory size in bytes
 #: lib/util/kformatprivate.cpp:248
 #, qt-format
 msgctxt "KFormat|JEDECBinaryDialect"
 msgid "%1 B"
-msgstr "%1 B"
+msgstr "%1 B"
 
 #. JEDECBinaryDialect memory size in 1024 bytes
 #: lib/util/kformatprivate.cpp:251
 #, qt-format
 msgctxt "KFormat|JEDECBinaryDialect"
 msgid "%1 KB"
-msgstr "%1 KB"
+msgstr "%1 KB"
 
 #. JEDECBinaryDialect memory size in 10^20 bytes
 #: lib/util/kformatprivate.cpp:254
 #, qt-format
 msgctxt "KFormat|JEDECBinaryDialect"
 msgid "%1 MB"
-msgstr "%1 MB"
+msgstr "%1 MB"
 
 #. JEDECBinaryDialect memory size in 10^30 bytes
 #: lib/util/kformatprivate.cpp:257
 #, qt-format
 msgctxt "KFormat|JEDECBinaryDialect"
 msgid "%1 GB"
-msgstr "%1 GB"
+msgstr "%1 GB"
 
 #. JEDECBinaryDialect memory size in 10^40 bytes
 #: lib/util/kformatprivate.cpp:260
 #, qt-format
 msgctxt "KFormat|JEDECBinaryDialect"
 msgid "%1 TB"
-msgstr "%1 TB"
+msgstr "%1 TB"
 
 #. JEDECBinaryDialect memory size in 10^50 bytes
 #: lib/util/kformatprivate.cpp:263
 #, qt-format
 msgctxt "KFormat|JEDECBinaryDialect"
 msgid "%1 PB"
-msgstr "%1 PB"
+msgstr "%1 PB"
 
 #. JEDECBinaryDialect memory size in 10^60 bytes
 #: lib/util/kformatprivate.cpp:266
 #, qt-format
 msgctxt "KFormat|JEDECBinaryDialect"
 msgid "%1 EB"
-msgstr "%1 EB"
+msgstr "%1 EB"
 
 #. JEDECBinaryDialect memory size in 10^70 bytes
 #: lib/util/kformatprivate.cpp:269
 #, qt-format
 msgctxt "KFormat|JEDECBinaryDialect"
 msgid "%1 ZB"
-msgstr "%1 ZB"
+msgstr "%1 ZB"
 
 #. JEDECBinaryDialect memory size in 10^80 bytes
 #: lib/util/kformatprivate.cpp:272
 #, qt-format
 msgctxt "KFormat|JEDECBinaryDialect"
 msgid "%1 YB"
-msgstr "%1 YB"
+msgstr "%1 YB"
 
 #. IECBinaryDialect size in bytes
 #: lib/util/kformatprivate.cpp:278
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 B"
-msgstr "%1 B"
+msgstr "%1 B"
 
 #. IECBinaryDialect size in 1024 bytes
 #: lib/util/kformatprivate.cpp:281
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 KiB"
-msgstr "%1 KiB"
+msgstr "%1 KiB"
 
 #. IECBinaryDialect size in 10^20 bytes
 #: lib/util/kformatprivate.cpp:284
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 MiB"
-msgstr "%1 MiB"
+msgstr "%1 MiB"
 
 #. IECBinaryDialect size in 10^30 bytes
 #: lib/util/kformatprivate.cpp:287
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 GiB"
-msgstr "%1 GiB"
+msgstr "%1 GiB"
 
 #. IECBinaryDialect size in 10^40 bytes
 #: lib/util/kformatprivate.cpp:290
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 TiB"
-msgstr "%1 TiB"
+msgstr "%1 TiB"
 
 #. IECBinaryDialect size in 10^50 bytes
 #: lib/util/kformatprivate.cpp:293
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 PiB"
-msgstr "%1 PiB"
+msgstr "%1 PiB"
 
 #. IECBinaryDialect size in 10^60 bytes
 #: lib/util/kformatprivate.cpp:296
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 EiB"
-msgstr "%1 EiB"
+msgstr "%1 EiB"
 
 #. IECBinaryDialect size in 10^70 bytes
 #: lib/util/kformatprivate.cpp:299
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 ZiB"
-msgstr "%1 ZiB"
+msgstr "%1 ZiB"
 
 #. IECBinaryDialect size in 10^80 bytes
 #: lib/util/kformatprivate.cpp:302
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 YiB"
-msgstr "%1 YiB"
+msgstr "%1 YiB"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:339
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2.%3s"
-msgstr "%1 min %2.%3 s"
+msgstr "%1 m %2.%3 s"
 
 #. @item:intext Duration format minutes and seconds
 #: lib/util/kformatprivate.cpp:342
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2s"
-msgstr "%1 min %2 s"
+msgstr "%1 m %2 s"
 
 #. @item:intext Duration format hours and minutes
 #: lib/util/kformatprivate.cpp:345
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m"
-msgstr "%1 u %2 min"
+msgstr "%1 u %2 m"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
 #: lib/util/kformatprivate.cpp:348
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3.%4s"
-msgstr "%1 u %2 min %3.%4 s"
+msgstr "%1 u %2 m %3.%4 s"
 
 #. @item:intext Duration format hours, minutes, seconds
 #: lib/util/kformatprivate.cpp:355
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3s"
-msgstr "%1 u %2 min %3 s"
+msgstr "%1 u %2 m %3 s"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:361
@@ -822,7 +822,7 @@ msgstr[3] "pred %n minutami"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 at %2"
-msgstr "%1 na %2"
+msgstr "%1 ob %2"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
@@ -833,7 +833,7 @@ msgstr "Pot %1 ne obstaja"
 #: lib/util/klistopenfilesjob_unix.cpp:46
 msgctxt "QObject|"
 msgid "Could not find lsof executable in PATH:"
-msgstr "Ni bilo mogoče najti izvedljivega programa lsof na poti PATH:"
+msgstr "Ni bilo mogoče najti izvedljivega programa »lsof« na poti PATH:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
 #, qt-format
