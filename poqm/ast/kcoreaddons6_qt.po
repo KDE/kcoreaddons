@@ -1,8 +1,8 @@
-# SPDX-FileCopyrightText: 2022, 2023 enolp <enolp@softastur.org>
+# SPDX-FileCopyrightText: 2022, 2023, 2024 enolp <enolp@softastur.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-12-15 14:11+0100\n"
+"PO-Revision-Date: 2024-03-15 01:17+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Assamese <alministradores@softastur.org>\n"
 "Language: ast\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #: lib/io/kfilesystemtype.cpp:249
 msgctxt "KFileSystemType|"
@@ -735,7 +735,7 @@ msgstr[1] "%n segundos"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 and %2"
-msgstr "%1 ya %2"
+msgstr "%1 y %2"
 
 #: lib/util/kformatprivate.cpp:484
 msgctxt ""
