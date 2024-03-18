@@ -498,6 +498,7 @@ public:
     QString customAuthorPlainText, customAuthorRichText;
     bool customAuthorTextEnabled;
 
+    QString organizationName;
     QString organizationDomain;
     QString desktopFileName;
 
@@ -554,6 +555,9 @@ KAboutData::KAboutData(const QString &_componentName,
         hostComponents.removeFirst();
     }
 
+    // default org name to uppercased second-level-domain name
+    d->organizationName = hostComponents.value(hostComponents.size() - 2).toUpper();
+
     d->organizationDomain = hostComponents.join(dotChar);
 
     // KF6: do not set a default desktopFileName value here, but remove this code and leave it empty
@@ -584,6 +588,7 @@ KAboutData::KAboutData(const QString &_componentName, const QString &_displayNam
     // match behaviour of other constructors
     d->_licenseList.append(KAboutLicense(KAboutLicense::Unknown, this));
     d->_bugAddress = "submit@bugs.kde.org";
+    d->organizationName = QStringLiteral("KDE");
     d->organizationDomain = QStringLiteral("kde.org");
     // KF6: do not set a default desktopFileName value here, but remove this code and leave it empty
     // see KAboutData::desktopFileName() for details
@@ -769,6 +774,12 @@ KAboutData &KAboutData::setBugAddress(const QByteArray &_bugAddress)
     return *this;
 }
 
+KAboutData &KAboutData::setOrganizationName(const QString &name)
+{
+    d->organizationName = name;
+    return *this;
+}
+
 KAboutData &KAboutData::setOrganizationDomain(const QByteArray &domain)
 {
     d->organizationDomain = QString::fromLatin1(domain.data());
@@ -849,6 +860,11 @@ QString KAboutData::homepage() const
 QString KAboutData::bugAddress() const
 {
     return QString::fromUtf8(d->_bugAddress.constData());
+}
+
+QString KAboutData::organizationName() const
+{
+    return d->organizationName;
 }
 
 QString KAboutData::organizationDomain() const
@@ -1055,6 +1071,7 @@ KAboutData KAboutData::applicationData()
         // part of QtGui only. Disadvantage: requires an app instance.
         // Either get all or none of the properties & warn about it
         if (app) {
+            aboutData->setOrganizationName(QCoreApplication::organizationName());
             aboutData->setOrganizationDomain(QCoreApplication::organizationDomain().toUtf8());
             aboutData->setVersion(QCoreApplication::applicationVersion().toUtf8());
             aboutData->setDisplayName(app->property("applicationDisplayName").toString());
@@ -1076,6 +1093,10 @@ KAboutData KAboutData::applicationData()
                         aboutData->version(),
                         "QCoreApplication::applicationVersion",
                         QCoreApplication::applicationVersion());
+        warnIfOutOfSync("KAboutData::applicationData().organizationName",
+                        aboutData->organizationName(),
+                        "QCoreApplication::organizationName",
+                        QCoreApplication::organizationName());
         warnIfOutOfSync("KAboutData::applicationData().organizationDomain",
                         aboutData->organizationDomain(),
                         "QCoreApplication::organizationDomain",
@@ -1111,6 +1132,7 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
     if (app) {
         app->setApplicationVersion(aboutData.version());
         app->setApplicationName(aboutData.componentName());
+        app->setOrganizationName(aboutData.organizationName());
         app->setOrganizationDomain(aboutData.organizationDomain());
         app->setProperty("applicationDisplayName", aboutData.displayName());
         app->setProperty("desktopFileName", aboutData.desktopFileName());

@@ -516,7 +516,8 @@ Q_DECLARE_TYPEINFO(KAboutComponent, Q_RELOCATABLE_TYPE);
  *                      KAboutLicense::LGPL,
  *                      i18n("Copyright 2017 Bar Foundation"), QString(),
  *                      "https://www.foo-the-app.net");
- * // overwrite default-generated values of organizationDomain & desktopFileName
+ * // overwrite default-generated values of organizationName, organizationDomain & desktopFileName
+ * aboutData.setOrganizationName("Bar Foundation");
  * aboutData.setOrganizationDomain("barfoundation.org");
  * aboutData.setDesktopFileName("org.barfoundation.foo");
  *
@@ -563,6 +564,7 @@ class KCOREADDONS_EXPORT KAboutData
     Q_PROPERTY(QList<KAboutLicense> licenses READ licenses CONSTANT)
     Q_PROPERTY(QString copyrightStatement READ copyrightStatement CONSTANT)
     Q_PROPERTY(QString desktopFileName READ desktopFileName CONSTANT)
+    Q_PROPERTY(QString organizationName READ organizationName CONSTANT) ///< @since 6.1
 public:
     /**
      * Returns the KAboutData for the application.
@@ -588,6 +590,7 @@ public:
        <ul>
        <li>QCoreApplication::applicationName</li>
        <li>QCoreApplication::applicationVersion</li>
+       <li>QCoreApplication::organizationName (since 6.1)</li>
        <li>QCoreApplication::organizationDomain</li>
        <li>QGuiApplication::applicationDisplayName</li>
        <li>QGuiApplication::desktopFileName (since 5.16)</li>
@@ -642,8 +645,11 @@ public:
      * the first component, unless there are less than three (e.g. "www.kde.org" -> "kde.org").
      * Use both setOrganizationDomain(const QByteArray&) and setDesktopFileName() if their default values
      * do not have proper values.
+     * Since 6.1, it is also used to derive a default organization name, by taking the
+     * second-level-domain of the host name in the uppercase variant (e.g. "www.kde.org" -> "KDE").
+     * Use setOrganizationName(const QString& if the default does not have the proper value.
      *
-     * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
+     * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&), setOrganizationName(const QString&)
      */
     // KF6: remove constructor that includes catalogName, and put default
     //      values back in for shortDescription and licenseType
@@ -668,12 +674,12 @@ public:
      *
      * @param version The component version string.
      *
-     * Sets the property desktopFileName to "org.kde."+componentName and
-     * the property organizationDomain to "kde.org".
+     * Sets the property desktopFileName to "org.kde."+componentName,
+     * the property organizationDomain to "kde.org" and (since 6.1) the property organizationName to "KDE".
      *
      * Default arguments @since 5.53
      *
-     * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
+     * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&), setOrganizationName(const QString&)
      */
     explicit KAboutData(const QString &componentName = {}, const QString &displayName = {}, const QString &version = {});
 
@@ -1048,6 +1054,22 @@ public:
     KAboutData &setOrganizationDomain(const QByteArray &domain);
 
     /**
+     * Defines the name of the organization that wrote this application.
+     * The name is set to "KDE" by default, or the upper-case version
+     * of the second-level-domain of the homePageAddress constructor argument,
+     * if set ("www.kde.org" -> "KDE").
+     *
+     * Make sure to call setOrganizationName(const QString&) if your product
+     * is not developed inside the KDE community.
+     *
+     * @param name the name, for instance "KDE"
+     *
+     * @see setOrganizationDomain(const QByteArray&)
+     * @since 6.1
+     */
+    KAboutData &setOrganizationName(const QString &name);
+
+    /**
      * Defines the product name which will be used in the KBugReport dialog.
      * By default it's the componentName, but you can overwrite it here to provide
      * support for special components e.g. in the form 'product/component',
@@ -1083,6 +1105,14 @@ public:
      * @return the program name (translated).
      */
     QString displayName() const;
+
+    /**
+     * Returns the name of the organization that wrote this application.
+     *
+     * @see setOrganizationName(const QString&)
+     * @since 6.1
+     */
+    QString organizationName() const;
 
     /**
      * Returns the domain name of the organization that wrote this application.

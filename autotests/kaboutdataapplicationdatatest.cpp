@@ -25,12 +25,14 @@ private Q_SLOTS:
 static const char AppName[] = "app";
 static const char ProgramName[] = "ProgramName";
 static const char Version[] = "Version";
+static const char OrganizationName[] = "No Org";
 static const char OrganizationDomain[] = "no.where";
 static const char DesktopFileName[] = "org.kde.someapp";
 
 static const char AppName2[] = "otherapp";
 static const char ProgramName2[] = "OtherProgramName";
 static const char Version2[] = "OtherVersion";
+static const char OrganizationName2[] = "Other No Org";
 static const char OrganizationDomain2[] = "other.no.where";
 static const char DesktopFileName2[] = "org.kde.otherapp";
 
@@ -41,6 +43,7 @@ void KAboutDataApplicationDataTest::testInteractionWithQApplicationData()
     app->setApplicationName(QLatin1String(AppName));
     app->setProperty("applicationDisplayName", QLatin1String(ProgramName));
     app->setApplicationVersion(QLatin1String(Version));
+    app->setOrganizationName(QLatin1String(OrganizationName));
     app->setOrganizationDomain(QLatin1String(OrganizationDomain));
     app->setProperty("desktopFileName", QLatin1String(DesktopFileName));
 
@@ -50,12 +53,14 @@ void KAboutDataApplicationDataTest::testInteractionWithQApplicationData()
     // should be initialized with Q*Application metadata
     QCOMPARE(applicationAboutData.componentName(), QLatin1String(AppName));
     QCOMPARE(applicationAboutData.displayName(), QLatin1String(ProgramName));
+    QCOMPARE(applicationAboutData.organizationName(), QLatin1String(OrganizationName));
     QCOMPARE(applicationAboutData.organizationDomain(), QLatin1String(OrganizationDomain));
     QCOMPARE(applicationAboutData.version(), QLatin1String(Version));
     QCOMPARE(applicationAboutData.desktopFileName(), QLatin1String(DesktopFileName));
 
     // now set some new KAboutData, with different values
     KAboutData aboutData2(QString::fromLatin1(AppName2), QString::fromLatin1(ProgramName2), QString::fromLatin1(Version2));
+    aboutData2.setOrganizationName(QLatin1String(OrganizationName2));
     aboutData2.setOrganizationDomain(OrganizationDomain2);
     aboutData2.setDesktopFileName(QLatin1String(DesktopFileName2));
 
@@ -64,6 +69,7 @@ void KAboutDataApplicationDataTest::testInteractionWithQApplicationData()
     // check that Q*Application metadata has been updated, as expected per API definition
     QCOMPARE(app->applicationName(), QLatin1String(AppName2));
     QCOMPARE(app->property("applicationDisplayName").toString(), QLatin1String(ProgramName2));
+    QCOMPARE(app->organizationName(), QLatin1String(OrganizationName2));
     QCOMPARE(app->organizationDomain(), QLatin1String(OrganizationDomain2));
     QCOMPARE(app->applicationVersion(), QLatin1String(Version2));
     QCOMPARE(app->property("desktopFileName").toString(), QLatin1String(DesktopFileName2));
@@ -73,6 +79,7 @@ void KAboutDataApplicationDataTest::testInteractionWithQApplicationData()
 
     QCOMPARE(applicationAboutData2.componentName(), QLatin1String(AppName2));
     QCOMPARE(applicationAboutData2.displayName(), QLatin1String(ProgramName2));
+    QCOMPARE(applicationAboutData2.organizationName(), QLatin1String(OrganizationName2));
     QCOMPARE(applicationAboutData2.organizationDomain(), QLatin1String(OrganizationDomain2));
     QCOMPARE(applicationAboutData2.version(), QLatin1String(Version2));
     QCOMPARE(applicationAboutData2.desktopFileName(), QLatin1String(DesktopFileName2));
