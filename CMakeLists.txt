@@ -85,7 +85,7 @@ if (BSDLIKE)
     endif()
 endif()
 
-if(NOT WIN32) # never relevant there
+if (UNIX AND NOT APPLE AND NOT ANDROID) # never relevant there
     find_package(Qt6DBus ${QT_MIN_VERSION} CONFIG)
     set(HAVE_QTDBUS ${Qt6DBus_FOUND})
     add_feature_info(XDGPortalDragAndDrop HAVE_QTDBUS "Drag and Drop support via xdg-desktop-portal requies QtDBus")
