@@ -492,7 +492,7 @@ Q_DECLARE_TYPEINFO(KAboutComponent, Q_RELOCATABLE_TYPE);
  * (using KAboutPerson), license and copyright information.
  *
  * Currently, the values set here are shown by the "About" box
- * (see KAboutDialog), used by the bug report dialog (see KBugReport),
+ * (see KAboutApplicationDialog), used by the bug report dialog (see KBugReport),
  * and by the help shown on command line (see KAboutData::setupCommandLine()).
  *
  * Porting Notes: Since KDE Frameworks 5.0, the translation catalog mechanism
