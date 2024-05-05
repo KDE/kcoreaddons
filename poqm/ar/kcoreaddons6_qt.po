@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-28 15:38+0300\n"
-"PO-Revision-Date: 2024-05-02 10:43+0400\n"
+"PO-Revision-Date: 2024-05-04 11:42+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -307,7 +307,7 @@ msgstr "كيبي"
 #: lib/util/kformatprivate.cpp:112
 msgctxt "KFormat|SI prefix for 10^6"
 msgid "M"
-msgstr "ميجا"
+msgstr "ميغا"
 
 #: lib/util/kformatprivate.cpp:112
 msgctxt "KFormat|IEC binary prefix for 2^20"
