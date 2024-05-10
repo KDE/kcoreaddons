@@ -25,8 +25,10 @@ struct FsInfo {
 };
 
 #ifndef Q_OS_WIN
+// clang-format off
 static const std::array<FsInfo, 19> s_fsMap = {{
     {KFileSystemType::Nfs, "nfs"},
+    {KFileSystemType::Nfs, "nfs4"},
     {KFileSystemType::Smb, "smb"},
     {KFileSystemType::Fat, "fat"},
     {KFileSystemType::Ramfs, "ramfs"},
@@ -45,6 +47,7 @@ static const std::array<FsInfo, 19> s_fsMap = {{
     {KFileSystemType::Fat, "msdos"},
     {KFileSystemType::Fuse, "fuseblk"},
 }};
+// clang-format on
 
 inline KFileSystemType::Type kde_typeFromName(const QLatin1String name)
 {
