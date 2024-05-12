@@ -14,6 +14,12 @@ bool KSandbox::isInside()
     return isInside;
 }
 
+bool KSandbox::isAppImage()
+{
+    static const bool isAppImage = qEnvironmentVariableIsSet("APPIMAGE");
+    return isAppImage;
+}
+
 bool KSandbox::isFlatpak()
 {
     static const bool isFlatpak = QFileInfo::exists(QStringLiteral("/.flatpak-info"));

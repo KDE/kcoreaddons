@@ -15,8 +15,11 @@
 namespace KSandbox
 {
 
-/// @returns whether the application is inside one of the supported sandboxes
+/// @returns whether the application is inside one of the supported sandboxes.
 KCOREADDONS_EXPORT bool isInside();
+
+/// @returns whether the application is inside an AppImage. Note that AppImage is not considered to be a real sandbox
+KCOREADDONS_EXPORT bool isAppImage();
 
 /// @returns whether the application is inside a flatpak sandbox
 KCOREADDONS_EXPORT bool isFlatpak();
