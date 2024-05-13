@@ -18,47 +18,47 @@ msgstr ""
 "X-Generator: Lokalize 23.08.4\n"
 "X-Qt-Contexts: true\n"
 
-#: lib/io/kfilesystemtype.cpp:249
+#: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
 msgid "NFS"
 msgstr "NFS"
 
-#: lib/io/kfilesystemtype.cpp:251
+#: lib/io/kfilesystemtype.cpp:254
 msgctxt "KFileSystemType|"
 msgid "SMB"
 msgstr "SMB"
 
-#: lib/io/kfilesystemtype.cpp:253
+#: lib/io/kfilesystemtype.cpp:256
 msgctxt "KFileSystemType|"
 msgid "FAT"
 msgstr "FAT"
 
-#: lib/io/kfilesystemtype.cpp:255
+#: lib/io/kfilesystemtype.cpp:258
 msgctxt "KFileSystemType|"
 msgid "RAMFS"
 msgstr "RAMFS"
 
-#: lib/io/kfilesystemtype.cpp:257
+#: lib/io/kfilesystemtype.cpp:260
 msgctxt "KFileSystemType|"
 msgid "Other"
 msgstr "Egyéb"
 
-#: lib/io/kfilesystemtype.cpp:259
+#: lib/io/kfilesystemtype.cpp:262
 msgctxt "KFileSystemType|"
 msgid "NTFS"
 msgstr "NTFS"
 
-#: lib/io/kfilesystemtype.cpp:261
+#: lib/io/kfilesystemtype.cpp:264
 msgctxt "KFileSystemType|"
 msgid "ExFAT"
 msgstr "ExFAT"
 
-#: lib/io/kfilesystemtype.cpp:263
+#: lib/io/kfilesystemtype.cpp:266
 msgctxt "KFileSystemType|"
 msgid "FUSE"
 msgstr "FUSE"
 
-#: lib/io/kfilesystemtype.cpp:265
+#: lib/io/kfilesystemtype.cpp:268
 msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "Ismeretlen"
