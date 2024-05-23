@@ -17,20 +17,21 @@
 # Meni Livne <livne@kde.org>, 2007.
 # tahmar1900 <tahmar1900@gmail.com>, 2008, 2009.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-10-26 21:17+0300\n"
+"PO-Revision-Date: 2024-05-22 21:46+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Lokalize 24.02.2\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -193,7 +194,7 @@ msgid ""
 "internationalization visit <a href=\"https://l10n.kde.org\">https://l10n.kde."
 "org</a></p>"
 msgstr ""
-"<p>התוכנות של KDE מתורגמים למגוון רחב של שפות הודות לעבודתם של צוותי תרגום "
+"<p>התוכנות של KDE מתורגמות למגוון רחב של שפות הודות לעבודתם של צוותי תרגום "
 "מכל רחבי העולם.</p><p>למידע נוסף על בינאום ב־KDE ניתן לפנות אל <a href="
 "\"https://l10n.kde.org\">https://l10n.kde.org</a></p>"
 
