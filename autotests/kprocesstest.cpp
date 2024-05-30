@@ -108,6 +108,11 @@ void KProcessTest::test_inheritance()
     QCOMPARE(qproc->arguments(), QStringList());
 
 #ifdef Q_OS_UNIX
+    // not all distros have /bin/true, e.g. NixOS lacks it
+    if (!QFile::exists(QStringLiteral("/bin/true"))) {
+        QSKIP("This test needs /bin/true");
+    }
+
     kproc.setShellCommand(QStringLiteral("/bin/true meow"));
     QCOMPARE(qproc->program(), QStringLiteral("/bin/true"));
     QCOMPARE(qproc->arguments(), arguments);
