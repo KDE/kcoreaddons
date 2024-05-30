@@ -112,6 +112,7 @@ if (TARGET UDev::UDev)
 endif()
 
 target_sources(KF6CoreAddons PRIVATE
+    licenses/licenses.qrc
     kaboutdata.cpp
     kcoreaddons.cpp
     io/kautosavefile.cpp
@@ -349,9 +350,6 @@ install(FILES
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel
 )
 install(FILES plugin/kpluginmetadata.schema.json DESTINATION ${KDE_INSTALL_DATADIR}/kf6/jsonschema COMPONENT Devel)
-
-# Includes CMake code to install open-source license texts for KAboutData.
-add_subdirectory(licenses)
 
 if(BUILD_QCH)
     ecm_add_qch(
