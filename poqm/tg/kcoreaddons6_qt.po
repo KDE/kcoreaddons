@@ -85,107 +85,107 @@ msgstr ""
 "ҳуҷҷатҳои барномаро\n"
 "истифода баред.\n"
 
-#: lib/kaboutdata.cpp:276
+#: lib/kaboutdata.cpp:272
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
 msgstr "Ин барнома дар асоси шарту шароитҳои %1 паҳн карда шудааст."
 
-#: lib/kaboutdata.cpp:320
+#: lib/kaboutdata.cpp:316
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "GPL v2"
 
-#: lib/kaboutdata.cpp:321
+#: lib/kaboutdata.cpp:317
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr "Иҷозатномаи ҷамъиятии умумии GNU, Нашри 2"
 
-#: lib/kaboutdata.cpp:324
+#: lib/kaboutdata.cpp:320
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "LGPL v2"
 
-#: lib/kaboutdata.cpp:325
+#: lib/kaboutdata.cpp:321
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr "Иҷозатномаи ҷамъиятии умумии мухтасаршудаи GNU, Нашри 2"
 
-#: lib/kaboutdata.cpp:328
+#: lib/kaboutdata.cpp:324
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD License"
 msgstr "Иҷозатномаи BSD"
+
+#: lib/kaboutdata.cpp:325
+msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "Иҷозатномаи BSD"
+
+#: lib/kaboutdata.cpp:328
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "Artistic License"
+msgstr "Иҷозатномаи бадеӣ"
 
 #: lib/kaboutdata.cpp:329
 msgctxt "KAboutLicense|@item license"
-msgid "BSD License"
-msgstr "Иҷозатномаи BSD"
+msgid "Artistic License"
+msgstr "Иҷозатномаи бадеӣ"
 
 #: lib/kaboutdata.cpp:332
-msgctxt "KAboutLicense|@item license (short name)"
-msgid "Artistic License"
-msgstr "Иҷозатномаи бадеӣ"
-
-#: lib/kaboutdata.cpp:333
-msgctxt "KAboutLicense|@item license"
-msgid "Artistic License"
-msgstr "Иҷозатномаи бадеӣ"
-
-#: lib/kaboutdata.cpp:336
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "GPL v3"
 
-#: lib/kaboutdata.cpp:337
+#: lib/kaboutdata.cpp:333
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr "Иҷозатномаи ҷамъиятии умумии GNU, Нашри 3"
 
-#: lib/kaboutdata.cpp:340
+#: lib/kaboutdata.cpp:336
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "LGPL v3"
 
-#: lib/kaboutdata.cpp:341
+#: lib/kaboutdata.cpp:337
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr "Иҷозатномаи ҷамъиятии умумии мухтасаршудаи GNU, Нашри 3"
 
-#: lib/kaboutdata.cpp:344
+#: lib/kaboutdata.cpp:340
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr "LGPL v2.1"
 
-#: lib/kaboutdata.cpp:345
+#: lib/kaboutdata.cpp:341
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr "Иҷозатномаи ҷамъиятии умумии мухтасаршудаи GNU, Нашри 2.1"
 
-#: lib/kaboutdata.cpp:348
+#: lib/kaboutdata.cpp:344
 #, fuzzy
 #| msgid "License:"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
 msgstr "Шартнома:"
 
-#: lib/kaboutdata.cpp:349
+#: lib/kaboutdata.cpp:345
 #, fuzzy
 #| msgid "License:"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
 msgstr "Шартнома:"
 
-#: lib/kaboutdata.cpp:353
+#: lib/kaboutdata.cpp:349
 msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "Фармоишӣ"
 
-#: lib/kaboutdata.cpp:356
+#: lib/kaboutdata.cpp:352
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Муайян нашудааст"
 
-#: lib/kaboutdata.cpp:919
+#: lib/kaboutdata.cpp:915
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -198,47 +198,47 @@ msgstr ""
 "тарҷумаҳои байналмилалии низоми KDE ба <a href=\"https://l10n.kde.org"
 "\">https://l10n.kde.org</a> гузаред</p>"
 
-#: lib/kaboutdata.cpp:1152
+#: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Намоиш додани маълумоти муаллиф"
 
-#: lib/kaboutdata.cpp:1153
+#: lib/kaboutdata.cpp:1149
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Намоиш додани маълумоти иҷозатнома."
 
-#: lib/kaboutdata.cpp:1155
+#: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Номи файли аслии воридшуда ба мизи корӣ барои ин барнома."
 
-#: lib/kaboutdata.cpp:1156
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "номи файл"
 
-#: lib/kaboutdata.cpp:1166
+#: lib/kaboutdata.cpp:1162
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr ""
 "Ин барнома аз тарафи шахсе навишта шудааст, ки намехоҳад номи худро ошкор "
 "намояд."
 
-#: lib/kaboutdata.cpp:1168
+#: lib/kaboutdata.cpp:1164
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 аз ҷониби барномасози зерин навишта шудааст:"
 
-#: lib/kaboutdata.cpp:1179
+#: lib/kaboutdata.cpp:1175
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr ""
 "Барои фиристодани гузориш дар бораи хато, лутфан, аз сомонаи https://bugs."
 "kde.org истифода баред."
 
-#: lib/kaboutdata.cpp:1181
+#: lib/kaboutdata.cpp:1177
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
