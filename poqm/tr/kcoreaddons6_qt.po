@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2024-02-09 17:45+0300\n"
+"PO-Revision-Date: 2024-06-04 01:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -31,7 +31,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.01.95\n"
+"X-Generator: Lokalize 24.07.70\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -87,8 +87,8 @@ msgid ""
 "licensing terms.\n"
 msgstr ""
 "Bu program için bir lisans koşulu verilmemiş.\n"
-"Lütfen lisans bilgisi için belgelendirmeyi veya kaynak kodu\n"
-"kontrol edin.\n"
+"Lütfen lisans bilgisi için belgelendirmeye veya\n"
+"kaynak koduna bir bakın.\n"
 
 #: lib/kaboutdata.cpp:272
 #, qt-format
@@ -195,24 +195,24 @@ msgid ""
 "org</a></p>"
 msgstr ""
 "<p>KDE birçok dile çevrilmiştir; dünyanın dört bir yanındaki çeviri "
-"ekiplerine çalışmaları için teşekkür ederiz.</p><p>KDE "
+"takımlarına çalışmaları için teşekkür ederiz.</p><p>KDE’nin "
 "uluslararasılaştırılması hakkında daha fazla bilgi almak için <a href="
 "\"http://l10n.kde.org\">http://l10n.kde.org</a> adresini ziyaret edin.</p>"
 
 #: lib/kaboutdata.cpp:1148
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
-msgstr "Yazar bilgisini göster."
+msgstr "Yazar bilgisini gösterin."
 
 #: lib/kaboutdata.cpp:1149
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
-msgstr "Lisans bilgisini göster."
+msgstr "Lisans bilgisini gösterin."
 
 #: lib/kaboutdata.cpp:1151
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
-msgstr "Bu uygulama için masaüstü girdisinin temel dosya adı."
+msgstr "Bu uygulama için olan masaüstü girdisinin temel dosya adı."
 
 #: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
@@ -613,35 +613,35 @@ msgstr "%1 YiB"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2.%3s"
-msgstr "%1dk%2.%3sn"
+msgstr "%1 dk %2.%3 sn"
 
 #. @item:intext Duration format minutes and seconds
 #: lib/util/kformatprivate.cpp:342
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2s"
-msgstr "%1dk%2sn"
+msgstr "%1 dk %2 sn"
 
 #. @item:intext Duration format hours and minutes
 #: lib/util/kformatprivate.cpp:345
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m"
-msgstr "%1sa%2dk"
+msgstr "%1 sa %2 dk"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
 #: lib/util/kformatprivate.cpp:348
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3.%4s"
-msgstr "%1sa%2dk%3.%4sn"
+msgstr "%1 sa %2 dk %3.%4 sn"
 
 #. @item:intext Duration format hours, minutes, seconds
 #: lib/util/kformatprivate.cpp:355
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3s"
-msgstr "%1sa%2dk%3sn"
+msgstr "%1 sa %2 dk %3 sn"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:361
@@ -832,15 +832,3 @@ msgstr "'lsof' yürütülemedi. Hata kodu: %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob, Windows’ta desteklenmez"
-
-#~ msgctxt "KAboutLicense|@item license (short name)"
-#~ msgid "QPL v1.0"
-#~ msgstr "QPL v1.0"
-
-#~ msgctxt "KAboutLicense|@item license"
-#~ msgid "Q Public License"
-#~ msgstr "Q Kamu Lisansı"
-
-#~ msgctxt "KPluginLoader|"
-#~ msgid "The library %1 does not offer a KPluginFactory."
-#~ msgstr "%1 kitaplığı bir KPluginFactory sunmuyor."
