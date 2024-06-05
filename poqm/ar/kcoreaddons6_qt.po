@@ -15,7 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.1\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -297,7 +296,7 @@ msgstr "مـ"
 #: lib/util/kformatprivate.cpp:111
 msgctxt "KFormat|SI prefix for 10^3"
 msgid "k"
-msgstr "ك"
+msgstr "كـ"
 
 #: lib/util/kformatprivate.cpp:111
 msgctxt "KFormat|IEC binary prefix for 2^10"
@@ -307,7 +306,7 @@ msgstr "كيبي"
 #: lib/util/kformatprivate.cpp:112
 msgctxt "KFormat|SI prefix for 10^6"
 msgid "M"
-msgstr "ميغا"
+msgstr "ميجا"
 
 #: lib/util/kformatprivate.cpp:112
 msgctxt "KFormat|IEC binary prefix for 2^20"
@@ -546,56 +545,56 @@ msgstr "%1 بايت"
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 KiB"
-msgstr "%1 كي.بايت"
+msgstr "%1 ك.بايت"
 
 #. IECBinaryDialect size in 10^20 bytes
 #: lib/util/kformatprivate.cpp:284
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 MiB"
-msgstr "%1 مي.بايت"
+msgstr "%1 م.بايت"
 
 #. IECBinaryDialect size in 10^30 bytes
 #: lib/util/kformatprivate.cpp:287
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 GiB"
-msgstr "%1 غي.بايت"
+msgstr "%1 غ.بايت"
 
 #. IECBinaryDialect size in 10^40 bytes
 #: lib/util/kformatprivate.cpp:290
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 TiB"
-msgstr "%1 تي.بايت"
+msgstr "%1 ت.بايت"
 
 #. IECBinaryDialect size in 10^50 bytes
 #: lib/util/kformatprivate.cpp:293
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 PiB"
-msgstr "%1 بي.بايت"
+msgstr "%1 ب.بايت"
 
 #. IECBinaryDialect size in 10^60 bytes
 #: lib/util/kformatprivate.cpp:296
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 EiB"
-msgstr "%1 إي.بايت"
+msgstr "%1 إ.بايت"
 
 #. IECBinaryDialect size in 10^70 bytes
 #: lib/util/kformatprivate.cpp:299
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 ZiB"
-msgstr "%1 زي.بايت"
+msgstr "%1 ز.بايت"
 
 #. IECBinaryDialect size in 10^80 bytes
 #: lib/util/kformatprivate.cpp:302
 #, qt-format
 msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 YiB"
-msgstr "%1 يي.بايت"
+msgstr "%1 ي.بايت"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:339
