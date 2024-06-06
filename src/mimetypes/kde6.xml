@@ -313,7 +313,7 @@ Notes:
     <comment xml:lang="ar">حزمة KNewStuff</comment>
     <comment xml:lang="ast">Paquete de KNewStuff</comment>
     <comment xml:lang="az">KNewStuff paketi</comment>
-    <comment xml:lang="be">Пакунак KNewStuff</comment>
+    <comment xml:lang="be">Пакет KNewStuff</comment>
     <comment xml:lang="be@latin">Pakunak KNewStuff</comment>
     <comment xml:lang="bg">Пакет KNewStuff</comment>
     <comment xml:lang="bs">KNewStuff paket</comment>
@@ -600,7 +600,7 @@ Notes:
     <comment xml:lang="ar">وثيقة حزمة عمل Calligra Plan</comment>
     <comment xml:lang="ast">Documentu del paquete llaboral de Calligra Plan</comment>
     <comment xml:lang="az">Calligra Plan iş paketi sənədi</comment>
-    <comment xml:lang="be">Пакунак работ Calligra Plan</comment>
+    <comment xml:lang="be">Пакет работ Calligra Plan</comment>
     <comment xml:lang="be@latin">Pakunak rabot Calligra Plan</comment>
     <comment xml:lang="bg">Документ за работния пакет на Calligra Plan</comment>
     <comment xml:lang="bs">Calligra Plan dokument radnog paketa</comment>
@@ -712,7 +712,7 @@ Notes:
     <comment xml:lang="ar">حزمة عمل إدارة مشاريع KPlato</comment>
     <comment xml:lang="ast">Paquete de trabayu de la xestión de proyeutos de KPlato</comment>
     <comment xml:lang="az">KPlato idarəetmə sənədi iş paketi</comment>
-    <comment xml:lang="be">Пакунак работ KPlato</comment>
+    <comment xml:lang="be">Пакет работ KPlato</comment>
     <comment xml:lang="be@latin">Pakunak rabot KPlato</comment>
     <comment xml:lang="bg">KPlato работен пакет за управление на проекти</comment>
     <comment xml:lang="bs">KPlato radni paket upravljanja projektom</comment>
@@ -1297,7 +1297,7 @@ Notes:
     <comment xml:lang="ar">حزمة خطوط</comment>
     <comment xml:lang="ast">Paquete de fontes</comment>
     <comment xml:lang="az">şrift paketi</comment>
-    <comment xml:lang="be">пакунак шрыфтоў</comment>
+    <comment xml:lang="be">пакет</comment>
     <comment xml:lang="be@latin">pakunak šryftoŭ</comment>
     <comment xml:lang="bg">пакет шрифтове</comment>
     <comment xml:lang="bs">paket fontova</comment>
