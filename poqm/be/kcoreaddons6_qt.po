@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
+"Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-02-08 13:40\n"
+"PO-Revision-Date: 2024-06-05 07:01\n"
 "Last-Translator: Alaksandr Suša <isushik94@gmail.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -15,11 +15,12 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
 "%100>=11 && n%100<=14 ? 2 : 3);\n"
 "X-Qt-Contexts: true\n"
-"X-Crowdin-Project: 86ff119b1606fcaa910d6b44fc14b611\n"
-"X-Crowdin-Project-ID: 127\n"
+"X-Crowdin-Project: fc57ad16a28d02dea100ceb1c60de14e\n"
+"X-Crowdin-Project-ID: 136\n"
 "X-Crowdin-Language: be\n"
-"X-Crowdin-File: /main/be/kcoreaddons/kcoreaddons5_qt.po\n"
-"X-Crowdin-File-ID: 7803\n"
+"X-Crowdin-File: /[antikruk.KDE] main/KDE6/be/messages/kcoreaddons/"
+"kcoreaddons6_qt.po\n"
+"X-Crowdin-File-ID: 9952\n"
 
 #: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
@@ -154,18 +155,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU Lesser General Public License версія 2.1"
 
 #: lib/kaboutdata.cpp:344
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "Ліцэнзія:"
+msgstr ""
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
-#| msgid "License:"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "Ліцэнзія:"
+msgstr ""
 
 #: lib/kaboutdata.cpp:349
 msgctxt "KAboutLicense|@item license"
