@@ -118,7 +118,7 @@ public:
         QStringList parts;
         while (!file.atEnd()) {
             // Trimmed to handle indented comment lines properly
-            line = QString::fromLatin1(file.readLine()).trimmed();
+            line = QString::fromUtf8(file.readLine()).trimmed();
 
             if (line.startsWith(QLatin1Char('#'))) {
                 // Comment line

@@ -21,7 +21,7 @@ private Q_SLOTS:
         QCOMPARE(r.idLike(), QStringList({QStringLiteral("otherid"), QStringLiteral("otherotherid")}));
         QCOMPARE(r.versionCodename(), QStringLiteral("versioncodename"));
         QCOMPARE(r.versionId(), QStringLiteral("500.1"));
-        QCOMPARE(r.prettyName(), QStringLiteral("Pretty Name #1"));
+        QCOMPARE(r.prettyName(), QStringLiteral("Vicuña — Pretty Name #1"));
         QCOMPARE(r.ansiColor(), QStringLiteral("1;34"));
         QCOMPARE(r.cpeName(), QStringLiteral("cpe:/o:foo:bar:100"));
         QCOMPARE(r.homeUrl(), QStringLiteral("https://url.home"));
