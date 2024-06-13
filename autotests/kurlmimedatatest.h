@@ -23,6 +23,7 @@ private Q_SLOTS:
 #if HAVE_QTDBUS
     void testSameProcessCopyPaste();
 #endif
+    void initTestCase();
 };
 
 #endif

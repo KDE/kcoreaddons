@@ -12,6 +12,8 @@
 #include <kurlmimedata_p.h>
 #include <memory>
 
+using namespace Qt::StringLiterals;
+
 QTEST_MAIN(KUrlMimeDataTest)
 
 void KUrlMimeDataTest::testURLList()
@@ -177,7 +179,7 @@ void KUrlMimeDataTest::testSameProcessCopyPaste()
 
     // Should fail because the transfer id is invalid
     QList<QUrl> decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData.get());
-    QVERIFY(decodedURLs.length() != 2);
+    QVERIFY(decodedURLs.isEmpty());
 
     // Should succeed because we put in the source id, so the portal is skipped
     KUrlMimeData::setSourceId(mimeData.get());
@@ -188,9 +190,16 @@ void KUrlMimeDataTest::testSameProcessCopyPaste()
     // Should fail because we put in a bad source id, so the portal is not skipped
     mimeData->setData(QStringLiteral("application/x-kde-source-id"), QStringLiteral("bad-source-id").toUtf8());
     decodedURLs = KUrlMimeData::urlsFromMimeData(mimeData.get());
-    QVERIFY(decodedURLs.length() != 2);
+    QVERIFY(decodedURLs.isEmpty());
 }
 
 #endif // HAVE_QTDBUS
+
+void KUrlMimeDataTest::initTestCase()
+{
+#if HAVE_QTDBUS
+    qputenv("KCOREADDONS_FORCE_DOCUMENTS_PORTAL", "1"_ba);
+#endif
+}
 
 #include "moc_kurlmimedatatest.cpp"

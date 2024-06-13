@@ -131,7 +131,12 @@ static QList<QUrl> extractPortalUriList(const QMimeData *mimeData)
     }
     auto iface =
         new OrgFreedesktopPortalFileTransferInterface(portalServiceName(), QStringLiteral("/org/freedesktop/portal/documents"), QDBusConnection::sessionBus());
-    const QStringList list = iface->RetrieveFiles(QString::fromUtf8(transferId), {});
+    const QDBusReply<QStringList> reply = iface->RetrieveFiles(QString::fromUtf8(transferId), {});
+    if (!reply.isValid()) {
+        qCWarning(KCOREADDONS_DEBUG) << "Failed to retrieve files from portal:" << reply.error();
+        return {};
+    }
+    const QStringList list = reply.value();
     QList<QUrl> uris;
     uris.reserve(list.size());
     for (const auto &path : list) {
@@ -171,6 +176,11 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData, DecodeOpti
 #if HAVE_QTDBUS
     if (!hasSameSourceId(mimeData) && isDocumentsPortalAvailable() && mimeData->hasFormat(portalFormat())) {
         uris = extractPortalUriList(mimeData);
+        if (static const auto force = qEnvironmentVariableIntValue("KCOREADDONS_FORCE_DOCUMENTS_PORTAL"); force == 1) {
+            // The environment variable is FOR TESTING ONLY!
+            // It is used to prevent the fallback logic from running.
+            return uris;
+        }
     }
 #endif
 
