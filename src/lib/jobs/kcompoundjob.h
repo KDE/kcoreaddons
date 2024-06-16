@@ -99,11 +99,10 @@ protected Q_SLOTS:
      * Forward signal from subjob.
      *
      * \a job the subjob
-     * \a plain the info message in plain text version
-     * \a rich the info message in rich text version
+     * \a message the info message
      * \sa infoMessage()
      */
-    virtual void subjobInfoMessage(KJob *job, const QString &plain, const QString &rich);
+    virtual void subjobInfoMessage(KJob *job, const QString &message);
 
 protected:
     KCompoundJob(KCompoundJobPrivate &dd, QObject *parent);
