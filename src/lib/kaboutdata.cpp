@@ -1142,7 +1142,7 @@ bool KAboutData::setupCommandLine(QCommandLineParser *parser)
 
     QCoreApplication *app = QCoreApplication::instance();
     if (app && !app->applicationVersion().isEmpty()) {
-        parser->addVersionOption();
+        parser->addOption(QCommandLineOption(QStringLiteral("version"), QCoreApplication::translate("KAboutData CLI", "Displays version information.")));
     }
 
     return parser->addOption(QCommandLineOption(QStringLiteral("author"), QCoreApplication::translate("KAboutData CLI", "Show author information.")))
@@ -1184,6 +1184,15 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
         for (const KAboutLicense &license : std::as_const(d->_licenseList)) {
             printf("%s\n", qPrintable(license.text()));
         }
+    } else if (parser->isSet(QStringLiteral("version"))) {
+        foundArgument = true;
+        printf(qPrintable(QCoreApplication::translate("KAboutData CLI, Operating System name and version", "Operating System: %s\n")),
+               qPrintable(QSysInfo::prettyProductName()));
+        printf(qPrintable(QCoreApplication::translate("KAboutData CLI, Application version", "%s Version: %s\n")),
+               qPrintable(d->_displayName),
+               d->_version.constData());
+        printf(qPrintable(QCoreApplication::translate("KAboutData CLI", "KDE Frameworks Version: %s\n")), KCOREADDONS_VERSION_STRING);
+        printf(qPrintable(QCoreApplication::translate("KAboutData CLI", "Qt Version: %s\n")), QT_VERSION_STR);
     }
 
     const QString desktopFileName = parser->value(QStringLiteral("desktopfile"));
