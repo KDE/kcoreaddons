@@ -1,9 +1,10 @@
 # Xəyyam <xxmn77@gmail.com>, 2020, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2024 Kheyyam Godjayev <xxmn77gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2023-02-18 20:49+0400\n"
-"Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
+"PO-Revision-Date: 2024-06-25 14:28+0400\n"
+"Last-Translator: Kheyyam Godjayev <xxmn77gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
@@ -11,7 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Qt-Contexts: true\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 24.07.70\n"
 
 #: lib/io/kfilesystemtype.cpp:252
 msgctxt "KFileSystemType|"
@@ -146,20 +147,14 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU Lesser General Public License Versiya 2.1"
 
 #: lib/kaboutdata.cpp:344
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "BSD Lisenziyası"
+msgstr "MİT Lisenziyası"
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "BSD Lisenziyası"
+msgstr "MİT Lisenziyası"
 
 #: lib/kaboutdata.cpp:349
 msgctxt "KAboutLicense|@item license"
