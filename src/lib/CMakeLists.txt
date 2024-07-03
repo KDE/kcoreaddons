@@ -351,6 +351,8 @@ install(FILES
 )
 install(FILES plugin/kpluginmetadata.schema.json DESTINATION ${KDE_INSTALL_DATADIR}/kf6/jsonschema COMPONENT Devel)
 
+ecm_generate_qdoc(KF6CoreAddons kcoreaddons.qdocconf)
+
 if(BUILD_QCH)
     ecm_add_qch(
         KF6CoreAddons_QCH

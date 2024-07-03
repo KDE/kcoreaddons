@@ -14,16 +14,18 @@
 #include <QString>
 #include <QUrl>
 
-/**
- * @short A namespace for KFileUtils globals
+/*!
+ * \namespace KFileUtils
+ * \inmodule KCoreAddons
+ * \brief A namespace for KFileUtils globals
  *
  */
 namespace KFileUtils
 {
-/**
+/*!
  * Given a directory path and a string representing a file or directory
  * (which usually exist already), this function returns a suggested name
- * for a file/directory that doesn't exist in @p baseURL.
+ * for a file/directory that doesn't exist in \a baseURL.
  *
  * The suggested file name is of the form "foo (1)", "foo (2)" etc.
  *
@@ -35,11 +37,11 @@ namespace KFileUtils
  * as local files by the upstream QFile code. An alternative is to use makeSuggestedName()
  * and use KIO to stat the new file/directory in an asynchronous way.
  *
- * @since 5.61
+ * \since KCoreAddons 5.61
  */
 KCOREADDONS_EXPORT QString suggestName(const QUrl &baseURL, const QString &oldName);
 
-/**
+/*!
  * Given a string, "foo", representing a file/directory (which usually exists already),
  * this function returns a suggested name for a file/directory in the form "foo (1)",
  * "foo (2)" etc.
@@ -49,25 +51,25 @@ KCOREADDONS_EXPORT QString suggestName(const QUrl &baseURL, const QString &oldNa
  * the caller, e.g. one can use KIO::stat() to check asynchronously whether the new
  * name already exists (in its parent directory) or not.
  *
- * @since 5.76
+ * \since KCoreAddons 5.76
  */
 KCOREADDONS_EXPORT QString makeSuggestedName(const QString &oldName);
 
-/**
- * Locates all files matching the @p nameFilters in the given @p dirs
+/*!
+ * Locates all files matching the \a nameFilters in the given \a dirs
  * The returned list does not contain duplicate file names.
  * In case there are multiple files the one which comes first in the dirs list is returned.
  * For example:
- * @code
-    QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("krunner/dbusplugins"), QStandardPaths::LocateDirectory);
-    KFileUtils::findAllUniqueFiles(dirs, QStringList{QStringLiteral("*.desktop")});
- * @endcode
- * @param location standard location for the dir
- * @param dir directory in which the files are located
- * @param nameFilters filters that get passed to the QDirIterator that is used internally to
+ * \code
+ *  QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QStringLiteral("krunner/dbusplugins"), QStandardPaths::LocateDirectory);
+ *  KFileUtils::findAllUniqueFiles(dirs, QStringList{QStringLiteral("*.desktop")});
+ * \endcode
+ * \a location standard location for the dir
+ * \a dir directory in which the files are located
+ * \a nameFilters filters that get passed to the QDirIterator that is used internally to
  * iterate over the files in each dir in the list
- * @return list of absolute file paths
- * @since 5.85
+ * Returns list of absolute file paths
+ * \since KCoreAddons 5.85
  */
 KCOREADDONS_EXPORT QStringList findAllUniqueFiles(const QStringList &dirs, const QStringList &nameFilters = {});
 }

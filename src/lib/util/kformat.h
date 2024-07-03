@@ -24,10 +24,6 @@ class QDateTime;
 
 class KFormatPrivate;
 
-/**
- * \file kformat.h
- */
-
 /*
    The code in this class was copied from the old KLocale and modified
    by John Layt (and also Alex Merry) in the KDELIBS 4 to KDE
@@ -42,25 +38,20 @@ class KFormatPrivate;
    originally part of KFormat::formatDate().
 */
 
-/**
- * @class KFormat kformat.h KFormat
+/*!
+ * \class KFormat
  *
  * KFormat provides support for formatting numbers and datetimes in
  * formats that are not supported by QLocale.
- *
- * @author John Layt <jlayt@kde.org>,
- *         Michael Pyne <mpyne@kde.org>,
- *         Albert Astals Cid <aacid@kde.org>,
- *
- * @short Class for formatting numbers and datetimes.
- * @since 5.0
+ * \brief Class for formatting numbers and datetimes.
+ * \since KCoreAddons 5.0
  */
 class KCOREADDONS_EXPORT KFormat final
 {
     Q_GADGET
 
 public:
-    /**
+    /*!
      * These binary units are used in KDE by the formatByteSize()
      * function.
      *
@@ -78,79 +69,118 @@ public:
      * unit would be pointless.  Use BinaryUnitDialect to control the exact
      * units returned.
      *
-     * @see BinaryUnitDialect
-     * @see formatByteSize
+     * \sa BinaryUnitDialect
+     * \sa formatByteSize
+     *
+     * \value DefaultBinaryUnits Auto-choose a unit such that the result is in the range [0, 1000 or 1024)
+     * \value UnitByte B         1 byte
+     * \value UnitKiloByte KiB/KB/kB 1024/1000 bytes
+     * \value UnitMegaByte MiB/MB/MB 2^20/10^06 bytes
+     * \value UnitGigaByte GiB/GB/GB 2^30/10^09 bytes
+     * \value UnitTeraByte TiB/TB/TB 2^40/10^12 bytes
+     * \value UnitPetaByte PiB/PB/PB 2^50/10^15 bytes
+     * \value UnitExaByte EiB/EB/EB 2^60/10^18 bytes
+     * \value UnitZettaByte ZiB/ZB/ZB 2^70/10^21 bytes
+     * \value UnitYottaByte YiB/YB/YB 2^80/10^24 bytes
      */
     enum BinarySizeUnits {
-        /// Auto-choose a unit such that the result is in the range [0, 1000 or 1024)
         DefaultBinaryUnits = -1,
 
         // The first real unit must be 0 for the current implementation!
-        UnitByte, ///<  B         1 byte
-        UnitKiloByte, ///<  KiB/KB/kB 1024/1000 bytes.
-        UnitMegaByte, ///<  MiB/MB/MB 2^20/10^06 bytes.
-        UnitGigaByte, ///<  GiB/GB/GB 2^30/10^09 bytes.
-        UnitTeraByte, ///<  TiB/TB/TB 2^40/10^12 bytes.
-        UnitPetaByte, ///<  PiB/PB/PB 2^50/10^15 bytes.
-        UnitExaByte, ///<  EiB/EB/EB 2^60/10^18 bytes.
-        UnitZettaByte, ///<  ZiB/ZB/ZB 2^70/10^21 bytes.
-        UnitYottaByte, ///<  YiB/YB/YB 2^80/10^24 bytes.
+        UnitByte,
+        UnitKiloByte,
+        UnitMegaByte,
+        UnitGigaByte,
+        UnitTeraByte,
+        UnitPetaByte,
+        UnitExaByte,
+        UnitZettaByte,
+        UnitYottaByte,
         UnitLastUnit = UnitYottaByte,
     };
 
-    /**
+    /*!
      * These units are used in KDE by the formatValue() function.
      *
-     * @see formatValue
-     * @since 5.49
+     * \sa formatValue
+     * \since KCoreAddons 5.49
+     *
+     * \value Other other
+     * \value Bit bit
+     * \value Byte B
+     * \value Meter m
+     * \value Hertz Hz
+     *
      */
     enum class Unit {
         Other,
-        Bit, ///< "bit"
-        Byte, ///< "B"
-        Meter, ///< "m"
-        Hertz, ///< "Hz"
+        Bit,
+        Byte,
+        Meter,
+        Hertz,
     };
 
-    /**
+    /*!
      * These prefixes are used in KDE by the formatValue()
      * function.
      *
      * IEC prefixes are only defined for integral units of information, e.g.
      * bits and bytes.
      *
-     * @see BinarySizeUnits
-     * @see formatValue
-     * @since 5.49
+     * \sa BinarySizeUnits
+     * \sa formatValue
+     * \since KCoreAddons 5.49
+     *
+     * \value AutoAdjust Auto-choose a unit such that the result is in the range [0, 1000 or 1024)
+     * \value Yocto --/-/y  10^-24
+     * \value Zepto --/-/z  10^-21
+     * \value Atto --/-/a  10^-18
+     * \value Femto --/-/f  10^-15
+     * \value Pico --/-/p  10^-12
+     * \value Nano --/-/n  10^-9
+     * \value Micro --/-/µ  10^-6
+     * \value Milli --/-/m  10^-3
+     * \value Centi --/-/c  0.01
+     * \value Deci --/-/d  0.1
+     * \value Unity  ""      1
+     * \value Deca --/-/da 10
+     * \value Hecto --/-/h  100
+     * \value Kilo Ki/K/k  1024/1000
+     * \value Mega Mi/M/M  2^20/10^06
+     * \value Giga Gi/G/G  2^30/10^09
+     * \value Tera Ti/T/T  2^40/10^12
+     * \value Peta Pi/P/P  2^50/10^15
+     * \value Exa Ei/E/E  2^60/10^18
+     * \value Zetta Zi/Z/Z  2^70/10^21
+     * \value Yotta Yi/Y/Y  2^80/10^24
      */
     enum class UnitPrefix {
-        /// Auto-choose a unit such that the result is in the range [0, 1000 or 1024)
         AutoAdjust = -128,
 
-        Yocto = 0, ///<  --/-/y  10^-24
-        Zepto, ///<  --/-/z  10^-21
-        Atto, ///<  --/-/a  10^-18
-        Femto, ///<  --/-/f  10^-15
-        Pico, ///<  --/-/p  10^-12
-        Nano, ///<  --/-/n  10^-9
-        Micro, ///<  --/-/µ  10^-6
-        Milli, ///<  --/-/m  10^-3
-        Centi, ///<  --/-/c  0.01
-        Deci, ///<  --/-/d  0.1
-        Unity, ///<  ""      1
-        Deca, ///<  --/-/da 10
-        Hecto, ///<  --/-/h  100
-        Kilo, ///<  Ki/K/k  1024/1000
-        Mega, ///<  Mi/M/M  2^20/10^06
-        Giga, ///<  Gi/G/G  2^30/10^09
-        Tera, ///<  Ti/T/T  2^40/10^12
-        Peta, ///<  Pi/P/P  2^50/10^15
-        Exa, ///<  Ei/E/E  2^60/10^18
-        Zetta, ///<  Zi/Z/Z  2^70/10^21
-        Yotta, ///<  Yi/Y/Y  2^80/10^24
+        Yocto = 0,
+        Zepto,
+        Atto,
+        Femto,
+        Pico,
+        Nano,
+        Micro,
+        Milli,
+        Centi,
+        Deci,
+        Unity,
+        Deca,
+        Hecto,
+        Kilo,
+        Mega,
+        Giga,
+        Tera,
+        Peta,
+        Exa,
+        Zetta,
+        Yotta,
     };
 
-    /**
+    /*!
      * This enum chooses what dialect is used for binary units.
      *
      * Note: Although JEDEC abuses the metric prefixes and can therefore be
@@ -165,82 +195,87 @@ public:
      * the user's selection for units.  If the user has not selected a preference,
      * IECBinaryDialect will typically be used.
      *
-     * @see BinarySizeUnits
-     * @see formatByteSize
+     * \value DefaultBinaryDialect Used if no specific preference
+     * \value IECBinaryDialect KiB, MiB, etc. 2^(10*n)
+     * \value JEDECBinaryDialect KB, MB, etc. 2^(10*n)
+     * \value MetricBinaryDialect SI Units, kB, MB, etc. 10^(3*n)
+     *
+     * \sa BinarySizeUnits
+     * \sa formatByteSize
      */
     enum BinaryUnitDialect {
-        DefaultBinaryDialect = -1, ///< Used if no specific preference
-        IECBinaryDialect, ///< KiB, MiB, etc. 2^(10*n)
-        JEDECBinaryDialect, ///< KB, MB, etc. 2^(10*n)
-        MetricBinaryDialect, ///< SI Units, kB, MB, etc. 10^(3*n)
+        DefaultBinaryDialect = -1,
+        IECBinaryDialect,
+        JEDECBinaryDialect,
+        MetricBinaryDialect,
         LastBinaryDialect = MetricBinaryDialect,
     };
 
-    /**
+    /*!
      * Format flags for formatDuration()
-     * @see DurationFormatOptions
+     *
+     * \value DefaultDuration Default formatting in localized 1:23:45 format
+     * \value InitialDuration Default formatting in localized 1h23m45s format
+     * \value ShowMilliseconds Include milliseconds in format, e.g. 1:23:45.678
+     * \value HideSeconds Hide the seconds, e.g. 1:23 or 1h23m, overrides ShowMilliseconds
+     * \value FoldHours Fold the hours into the minutes, e.g. 83:45 or 83m45s, overrides HideSeconds
      */
     enum DurationFormatOption {
-        DefaultDuration = 0x0, ///< Default formatting in localized 1:23:45 format
-        InitialDuration = 0x1, ///< Default formatting in localized 1h23m45s format
-        ShowMilliseconds = 0x2, ///< Include milliseconds in format, e.g. 1:23:45.678
-        HideSeconds = 0x4, ///< Hide the seconds, e.g. 1:23 or 1h23m, overrides ShowMilliseconds
-        FoldHours = 0x8, ///< Fold the hours into the minutes, e.g. 83:45 or 83m45s, overrides HideSeconds
+        DefaultDuration = 0x0,
+        InitialDuration = 0x1,
+        ShowMilliseconds = 0x2,
+        HideSeconds = 0x4,
+        FoldHours = 0x8,
     };
-    /**
-     * Stores a combination of #DurationFormatOption values.
-     */
     Q_DECLARE_FLAGS(DurationFormatOptions, DurationFormatOption)
     Q_FLAG(DurationFormatOption)
 
-    /**
+    /*!
      * Constructs a KFormat.
      *
-     * @param locale the locale to use, defaults to the system locale
+     * \a locale the locale to use, defaults to the system locale
      */
     explicit KFormat(const QLocale &locale = QLocale());
 
-    /**
-     * Copy constructor
-     */
     KFormat(const KFormat &other);
 
     KFormat &operator=(const KFormat &other);
 
-    /**
-     * Destructor
-     */
     ~KFormat();
 
-    /**
-     * Converts @p size from bytes to the appropriate string representation
-     * using the binary unit dialect @p dialect and the specific units @p units.
+    /*!
+     * Converts \a size from bytes to the appropriate string representation
+     * using the binary unit dialect \a dialect and the specific units \a units.
      *
      * Example:
-     * @code
+     * \code
      * QString metric, iec, jedec, small;
      * metric = formatByteSize(1000, 1, KFormat::MetricBinaryDialect, KFormat::UnitKiloByte);
      * iec    = formatByteSize(1024, 1, KFormat::IECBinaryDialect, KFormat::UnitKiloByte);
      * jedec  = formatByteSize(1024, 1, KFormat::JEDECBinaryDialect, KFormat::UnitKiloByte);
      * small  = formatByteSize(100);
      * // metric == "1.0 kB", iec == "1.0 KiB", jedec == "1.0 KB", small == "100 B"
-     * @endcode
+     * \endcode
      *
-     * @param size size in bytes
-     * @param precision number of places after the decimal point to use.  KDE uses
+     * \a size size in bytes
+     *
+     * \a precision number of places after the decimal point to use.  KDE uses
      *        1 by default so when in doubt use 1.  Whenever KFormat::UnitByte is used
      *        (either explicitly or autoselected from KFormat::DefaultBinaryUnits),
      *        the fractional part is always omitted.
-     * @param dialect binary unit standard to use.  Use DefaultBinaryDialect to
+     *
+     * \a dialect binary unit standard to use.  Use DefaultBinaryDialect to
      *        use the localized user selection unless you need to use a specific
      *        unit type (such as displaying a flash memory size in JEDEC).
-     * @param units specific unit size to use in result.  Use
+     *
+     * \a units specific unit size to use in result.  Use
      *        DefaultBinaryUnits to automatically select a unit that will return
      *        a sanely-sized number.
-     * @return converted size as a translated string including the units.
+     *
+     * Returns converted size as a translated string including the units.
      *         E.g. "1.23 KiB", "2 GB" (JEDEC), "4.2 kB" (Metric).
-     * @see BinarySizeUnits
-     * @see BinaryUnitDialect
+     * \sa BinarySizeUnits
+     * \sa BinaryUnitDialect
      */
 
     QString formatByteSize(double size,
@@ -248,31 +283,35 @@ public:
                            KFormat::BinaryUnitDialect dialect = KFormat::DefaultBinaryDialect,
                            KFormat::BinarySizeUnits units = KFormat::DefaultBinaryUnits) const;
 
-    /**
+    /*!
      * Given a number of milliseconds, converts that to a string containing
      * the localized equivalent, e.g. 1:23:45
      *
-     * @param msecs Time duration in milliseconds
-     * @param options options to use in the duration format
-     * @return converted duration as a string - e.g. "1:23:45" "1h23m"
+     * \a msecs Time duration in milliseconds
+     *
+     * \a options options to use in the duration format
+     *
+     * Returns converted duration as a string - e.g. "1:23:45" "1h23m"
      */
 
     QString formatDuration(quint64 msecs, KFormat::DurationFormatOptions options = KFormat::DefaultDuration) const;
 
-    /**
+    /*!
      * Given a number of milliseconds, converts that to a string containing
      * the localized equivalent to the requested decimal places.
      *
      * e.g. given formatDuration(60000), returns "1.0 minutes"
      *
-     * @param msecs Time duration in milliseconds
-     * @param decimalPlaces Decimal places to round off to, defaults to 2
-     * @return converted duration as a string - e.g. "5.5 seconds" "23.0 minutes"
+     * \a msecs Time duration in milliseconds
+     *
+     * \a decimalPlaces Decimal places to round off to, defaults to 2
+     *
+     * Returns converted duration as a string - e.g. "5.5 seconds" "23.0 minutes"
      */
 
     QString formatDecimalDuration(quint64 msecs, int decimalPlaces = 2) const;
 
-    /**
+    /*!
      * Given a number of milliseconds, converts that to a spell-out string containing
      * the localized equivalent.
      *
@@ -280,18 +319,19 @@ public:
      *      given formatSpelloutDuration(62005) returns "1 minute and 2 seconds"
      *      given formatSpelloutDuration(90060000) returns "1 day and 1 hour"
      *
-     * @param msecs Time duration in milliseconds
-     * @return converted duration as a string.
+     * \a msecs Time duration in milliseconds
+     *
+     * Returns converted duration as a string.
      *         Units not interesting to the user, for example seconds or minutes when the first
      *         unit is day, are not returned because they are irrelevant. The same applies for
      *         seconds when the first unit is hour.
      */
     QString formatSpelloutDuration(quint64 msecs) const;
 
-    /**
+    /*!
      * Returns a string formatted to a relative date style.
      *
-     * If the @p date falls within one week before or after the current date
+     * If the \a date falls within one week before or after the current date
      * then a relative date string will be returned, such as:
      * * Yesterday
      * * Today
@@ -299,19 +339,20 @@ public:
      * * Last Tuesday
      * * Next Wednesday
      *
-     * If the @p date falls outside this period then the @p format is used.
+     * If the \a date falls outside this period then the \a format is used.
      *
-     * @param date the date to be formatted
-     * @param format the date format to use
+     * \a date the date to be formatted
      *
-     * @return the date as a string
+     * \a format the date format to use
+     *
+     * Returns the date as a string
      */
     QString formatRelativeDate(const QDate &date, QLocale::FormatType format) const;
 
-    /**
+    /*!
      * Returns a string formatted to a relative datetime style.
      *
-     * If the @p dateTime falls within one week before or after the current date
+     * If the \a dateTime falls within one week before or after the current date
      * then a relative date string will be returned, such as:
      * * Yesterday at 3:00pm
      * * Today at 3:00pm
@@ -319,50 +360,56 @@ public:
      * * Last Tuesday at 3:00pm
      * * Next Wednesday at 3:00pm
      *
-     * If the @p dateTime falls within one hour of the current time.
+     * If the \a dateTime falls within one hour of the current time.
      * Then a shorter version is displayed:
      *  * Just a moment ago (for within the same minute)
      *  * 15 minutes ago
      *
-     * If the @p dateTime falls outside this period then the date is rendered as:
-     *  * Monday, 7 September, 2021 at 7:00 PM : date formatted @p format + " at " + time formatted with @p format
+     * If the \a dateTime falls outside this period then the date is rendered as:
+     *  * Monday, 7 September, 2021 at 7:00 PM : date formatted \a format + " at " + time formatted with \a format
      *
-     * With @p format LongFormat, time format used is set to ShortFormat (to omit timezone and seconds).
+     * With \a format LongFormat, time format used is set to ShortFormat (to omit timezone and seconds).
      *
      * First character is capitalized.
      *
-     * @param dateTime the date to be formatted
-     * @param format the date format to use
+     * \a dateTime the date to be formatted
      *
-     * @return the date as a string
+     * \a format the date format to use
+     *
+     * Returns the date as a string
      */
     QString formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const;
 
-    /**
-     * Converts @p value to the appropriate string representation
+    /*!
+     * Converts \a value to the appropriate string representation
      *
      * Example:
-     * @code
+     * \code
      * // sets formatted to "1.0 kbit"
      * auto formatted = format.formatValue(1000, KFormat::Unit::Bit, 1, KFormat::UnitPrefix::Kilo);
-     * @endcode
+     * \endcode
      *
-     * @param value value to be formatted
-     * @param precision number of places after the decimal point to use.  KDE uses
+     * \a value value to be formatted
+     *
+     * \a precision number of places after the decimal point to use.  KDE uses
      *        1 by default so when in doubt use 1.
-     * @param unit unit to use in result.
-     * @param prefix specific prefix to use in result.  Use UnitPrefix::AutoAdjust
+     *
+     * \a unit unit to use in result.
+     *
+     * \a prefix specific prefix to use in result.  Use UnitPrefix::AutoAdjust
      *        to automatically select an appropriate prefix.
-     * @param dialect prefix standard to use.  Use DefaultBinaryDialect to
+     *
+     * \a dialect prefix standard to use.  Use DefaultBinaryDialect to
      *        use the localized user selection unless you need to use a specific
      *        unit type. Only meaningful for KFormat::Unit::Byte, and ignored for
      *        all other units.
-     * @return converted size as a translated string including prefix and unit.
+     *
+     * Returns converted size as a translated string including prefix and unit.
      *         E.g. "1.23 KiB", "2 GB" (JEDEC), "4.2 kB" (Metric), "1.2 kbit".
-     * @see Unit
-     * @see UnitPrefix
-     * @see BinaryUnitDialect
-     * @since 5.49
+     * \sa Unit
+     * \sa UnitPrefix
+     * \sa BinaryUnitDialect
+     * \since KCoreAddons 5.49
      */
     QString formatValue(double value,
                         KFormat::Unit unit,
@@ -370,55 +417,64 @@ public:
                         KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust,
                         KFormat::BinaryUnitDialect dialect = KFormat::DefaultBinaryDialect) const;
 
-    /**
-     * Converts @p value to the appropriate string representation
+    /*!
+     * Converts \a value to the appropriate string representation
      *
      * Example:
-     * @code
+     * \code
      * QString bits, slow, fast;
      * // sets bits to "1.0 kbit", slow to "1.0 kbit/s" and fast to "12.3 Mbit/s".
      * bits = format.formatValue(1000, QStringLiteral("bit"), 1, KFormat::UnitPrefix::Kilo);
      * slow = format.formatValue(1000, QStringLiteral("bit/s");
      * fast = format.formatValue(12.3e6, QStringLiteral("bit/s");
-     * @endcode
+     * \endcode
      *
-     * @param value value to be formatted
-     * @param precision number of places after the decimal point to use.  KDE uses
+     * \a value value to be formatted
+     *
+     * \a precision number of places after the decimal point to use.  KDE uses
      *        1 by default so when in doubt use 1.
-     * @param unit unit to use in result.
-     * @param prefix specific prefix to use in result.  Use UnitPrefix::AutoAdjust
+     *
+     * \a unit unit to use in result.
+     *
+     * \a prefix specific prefix to use in result.  Use UnitPrefix::AutoAdjust
      *        to automatically select an appropriate prefix.
-     * @return converted size as a translated string including prefix and unit.
+     *
+     * Returns converted size as a translated string including prefix and unit.
      *         E.g. "1.2 kbit", "2.4 kB", "12.3 Mbit/s"
-     * @see UnitPrefix
-     * @since 5.49
+     * \sa UnitPrefix
+     * \since KCoreAddons 5.49
      */
     QString formatValue(double value, const QString &unit, int precision = 1, KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust) const;
-    /**
-     * Converts @p value to the appropriate string representation.
+    /*!
+     * Converts \a value to the appropriate string representation.
      *
      * Example:
-     * @code
+     * \code
      * QString iec, jedec, metric;
      * // Sets iec to "1.0 KiB/s", jedec to "1.0 KB/s" and metric to "1.0 kB/s"
      * iec = format.formatValue(1024, QStringLiteral("B/s"), 1, KFormat::UnitPrefix::AutoAdjust, KFormat::IECBinaryDialect);
      * jedec = format.formatValue(1024, QStringLiteral("B/s"), 1, KFormat::UnitPrefix::AutoAdjust, KFormat::JEDECBinaryDialect);
      * metric = format.formatValue(1000, QStringLiteral("B/s"), 1, KFormat::UnitPrefix::AutoAdjust, KFormat::MetricBinaryDialect);
-     * @endcode
+     * \endcode
      *
-     * @param value value to be formatted
-     * @param precision number of places after the decimal point to use. 1 is used by default; when
+     * \a value value to be formatted
+     *
+     * \a precision number of places after the decimal point to use. 1 is used by default; when
      *        in doubt use 1
-     * @param unit unit to use in result
-     * @param prefix specific prefix to use in result. Use UnitPrefix::AutoAdjust
+     *
+     * \a unit unit to use in result
+     *
+     * \a prefix specific prefix to use in result. Use UnitPrefix::AutoAdjust
      *        to automatically select an appropriate prefix
-     * @param dialect prefix standard to use. Use DefaultBinaryDialect to
+     *
+     * \a dialect prefix standard to use. Use DefaultBinaryDialect to
      *        use the localized user selection unless you need to use a specific
      *        unit type
-     * @return converted size as a translated string including prefix and unit.
+     *
+     * Returns converted size as a translated string including prefix and unit.
      *         E.g. "1.2 kbit", "2.4 kB", "12.3 Mbit/s"
-     * @see UnitPrefix
-     * @since 5.74
+     * \sa UnitPrefix
+     * \since KCoreAddons 5.74
      */
     QString formatValue(double value, const QString &unit, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const;
 

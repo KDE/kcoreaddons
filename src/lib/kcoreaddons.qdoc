@@ -1,0 +1,11 @@
+/*!
+    \module KCoreAddons
+    \title KCoreAddons C++ Classes
+    \ingroup modules
+    \cmakepackage KF6
+    \cmakecomponent CoreAddons
+
+    \brief Provides core non-GUI functionality.
+
+    Stuff
+*/

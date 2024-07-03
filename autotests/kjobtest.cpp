@@ -166,7 +166,7 @@ void KJobTest::testProgressTracking()
     totalChanged_spy.clear();
     percentChanged_spy.clear();
 
-    /**
+    /*!
      * Try again with Files as the progress unit
      */
     testJob->setProgressUnit(KJob::Files);

@@ -14,87 +14,77 @@
 
 class QString;
 
-/**
+/*!
  * \namespace KShell
+ * \inmodule KCoreAddons
  * Emulates some basic system shell functionality.
- * @see KStringHandler
+ * \sa KStringHandler
  */
 namespace KShell
 {
-/**
+/*!
  * Flags for splitArgs().
- * @see Options
+ * \sa Options
+ * \value NoOptions No options
+ * \value TildeExpand
+ * Perform tilde expansion.
+ * On Windows, this flag is ignored, as the Windows shell has no
+ * equivalent functionality.
+ * \value AbortOnMeta
+ * Put the parser into full shell mode and bail out if a too complex
+ * construct is encountered.
+ * A particular purpose of this flag is finding out whether the
+ * command line being split would be executable directly (via
+ * KProcess::setProgram()) or whether it needs to be run through
+ * a real shell (via KProcess::setShellCommand()). Note, however,
+ * that shell builtins are @em not recognized - you need to do that
+ * yourself (compare with a list of known commands or verify that an
+ * executable exists for the named command).
+ *
+ * Meta characters that cause a bail-out are the command separators
+ * \c semicolon and \c ampersand, the redirection symbols \c less-than,
+ * \c greater-than and the \c pipe \c symbol and the grouping symbols
+ * opening and closing \c parentheses.
+ *
+ * Further meta characters on *NIX are the grouping symbols
+ * opening and closing \c braces, the command substitution symbol
+ * \c backquote, the generic substitution symbol \c dollar (if
+ * not followed by an apostrophe), the wildcards \c asterisk,
+ * \c question \c mark and opening and closing \c square \c brackets
+ * and the comment symbol \c hash \c mark.
+ * Additionally, a variable assignment in the first word is recognized.
+ *
+ * A further meta character on Windows is the environment variable
+ * expansion symbol \c percent. Occurrences of \c \%PERCENT_SIGN% as
+ * inserted by quoteArg() are converted back and cause no bail-out,
+ * though.
  */
 enum Option {
     NoOptions = 0,
-
-    /**
-     * Perform tilde expansion.
-     * On Windows, this flag is ignored, as the Windows shell has no
-     * equivalent functionality.
-     */
     TildeExpand = 1,
-
-    /**
-     * Put the parser into full shell mode and bail out if a too complex
-     * construct is encountered.
-     * A particular purpose of this flag is finding out whether the
-     * command line being split would be executable directly (via
-     * KProcess::setProgram()) or whether it needs to be run through
-     * a real shell (via KProcess::setShellCommand()). Note, however,
-     * that shell builtins are @em not recognized - you need to do that
-     * yourself (compare with a list of known commands or verify that an
-     * executable exists for the named command).
-     *
-     * Meta characters that cause a bail-out are the command separators
-     * @c semicolon and @c ampersand, the redirection symbols @c less-than,
-     * @c greater-than and the @c pipe @c symbol and the grouping symbols
-     * opening and closing @c parentheses.
-     *
-     * Further meta characters on *NIX are the grouping symbols
-     * opening and closing @c braces, the command substitution symbol
-     * @c backquote, the generic substitution symbol @c dollar (if
-     * not followed by an apostrophe), the wildcards @c asterisk,
-     * @c question @c mark and opening and closing @c square @c brackets
-     * and the comment symbol @c hash @c mark.
-     * Additionally, a variable assignment in the first word is recognized.
-     *
-     * A further meta character on Windows is the environment variable
-     * expansion symbol @c percent. Occurrences of @c \%PERCENT_SIGN% as
-     * inserted by quoteArg() are converted back and cause no bail-out,
-     * though.
-     */
     AbortOnMeta = 2,
 };
-/**
+/*!
  * Stores a combination of #Option values.
  */
 Q_DECLARE_FLAGS(Options, Option)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Options)
 
-/**
+/*!
  * Status codes from splitArgs()
+ *
+ * \value NoError Success
+ * \value BadQuoting Indicates a parsing error, like an unterminated quoted string
+ * \value FoundMeta The AbortOnMeta flag was set and an unhandled shell meta character was encountered
  */
 enum Errors {
-    /**
-     * Success.
-     */
     NoError = 0,
-
-    /**
-     * Indicates a parsing error, like an unterminated quoted string.
-     */
     BadQuoting,
-
-    /**
-     * The AbortOnMeta flag was set and an unhandled shell meta character
-     * was encountered.
-     */
     FoundMeta,
 };
 
-/**
- * Splits @p cmd according to system shell word splitting and quoting rules.
+/*!
+ * Splits \a cmd according to system shell word splitting and quoting rules.
  * Can optionally perform tilde expansion and/or abort if it finds shell
  * meta characters it cannot process.
  *
@@ -126,32 +116,36 @@ enum Errors {
  * - Cmd ignores @em all special chars between double quotes.
  *   Note that the quotes are @em not removed at this stage - the
  *   tokenization rules described above still apply.
- * - The @c circumflex is the escape char for everything including
+ * - The \c circumflex is the escape char for everything including
  *   itself.
  *
- * @param cmd the command to split
- * @param flags operation flags, see \ref Option
- * @param err if not NULL, a status code will be stored at the pointer
- *  target, see \ref Errors
- * @return a list of unquoted words or an empty list if an error occurred
+ * \a cmd the command to split
+ *
+ * \a flags operation flags, see Option
+ *
+ * \a err if not NULL, a status code will be stored at the pointer
+ *  target, see Errors
+ *
+ * Returns a list of unquoted words or an empty list if an error occurred
  */
 KCOREADDONS_EXPORT QStringList splitArgs(const QString &cmd, Options flags = NoOptions, Errors *err = nullptr);
 
-/**
- * Quotes and joins @p args together according to system shell rules.
+/*!
+ * Quotes and joins \a args together according to system shell rules.
  *
  * If the output is fed back into splitArgs(), the AbortOnMeta flag
  * needs to be used on Windows. On *NIX, no such requirement exists.
  *
  * See quoteArg() for more info.
  *
- * @param args a list of strings to quote and join
- * @return a command suitable for shell execution
+ * \a args a list of strings to quote and join
+ *
+ * Returns a command suitable for shell execution
  */
 KCOREADDONS_EXPORT QString joinArgs(const QStringList &args);
 
-/**
- * Quotes @p arg according to system shell rules.
+/*!
+ * Quotes \a arg according to system shell rules.
  *
  * This function can be used to quote an argument string such that
  * the shell processes it properly. This is e.g. necessary for
@@ -161,36 +155,39 @@ KCOREADDONS_EXPORT QString joinArgs(const QStringList &args);
  * On *NIX, the output is POSIX shell compliant.
  * On Windows, it is compliant with the argument splitting code of the
  * Microsoft C runtime and the cmd shell used together.
- * Occurrences of the @c percent @c sign are replaced with
- * @c \%PERCENT_SIGN% to prevent spurious variable expansion;
+ * Occurrences of the \c percent \c sign are replaced with
+ * \c % to prevent spurious variable expansion;
  * related KDE functions are prepared for this.
  *
- * @param arg the argument to quote
- * @return the quoted argument
+ * \a arg the argument to quote
+ *
+ * Returns the quoted argument
  */
 KCOREADDONS_EXPORT QString quoteArg(const QString &arg);
 
-/**
- * Performs tilde expansion on @p path. Interprets "~/path" and
+/*!
+ * Performs tilde expansion on \a path. Interprets "~/path" and
  * "~user/path". If the path starts with an escaped tilde ("\~" on UNIX,
  * "^~" on Windows), the escape char is removed and the path is returned
  * as is.
  *
- * Note that if @p path starts with a tilde but cannot be properly expanded,
+ * Note that if \a path starts with a tilde but cannot be properly expanded,
  * this function will return an empty string.
  *
- * @param path the path to tilde-expand
- * @return the expanded path
+ * \a path the path to tilde-expand
+ *
+ * Returns the expanded path
  */
 KCOREADDONS_EXPORT QString tildeExpand(const QString &path);
 
-/**
- * Performs tilde collapse on @p path. If path did not start by the user
+/*!
+ * Performs tilde collapse on \a path. If path did not start by the user
  * homedir returns path unchanged.
  *
- * @param path the path to tilde-collpase
- * @return the collapsed path
- * @since 5.67
+ * \a path the path to tilde-collpase
+ *
+ * Returns the collapsed path
+ * \since KCoreAddons 5.67
  */
 KCOREADDONS_EXPORT QString tildeCollapse(const QString &path);
 }

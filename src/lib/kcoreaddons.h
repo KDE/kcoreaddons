@@ -12,20 +12,21 @@
 #include <QString>
 #include <kcoreaddons_export.h>
 
-/**
- * @namespace KCoreAddons
+/*!
+ * \namespace KCoreAddons
+ * \inmodule KCoreAddons
  * Provides utility functions for metadata about the KCoreAddons library.
  */
 namespace KCoreAddons
 {
-/**
+/*!
  * Returns the version number of KCoreAddons at run-time as a string (for example, "5.19.0").
  * This may be a different version than the version the application was compiled against.
- * @since 5.20
+ * \since KCoreAddons 5.20
  */
 KCOREADDONS_EXPORT QString versionString();
 
-/**
+/*!
  * Returns a numerical version number of KCoreAddons at run-time in the form 0xMMNNPP
  * (MM = major, NN = minor, PP = patch)
  * This can be compared using the macro QT_VERSION_CHECK.
@@ -36,7 +37,7 @@ KCOREADDONS_EXPORT QString versionString();
  * \endcode
  *
  * This may be a different version than the version the application was compiled against.
- * @since 5.20
+ * \since KCoreAddons 5.20
  */
 KCOREADDONS_EXPORT unsigned int version();
 }

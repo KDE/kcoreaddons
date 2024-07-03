@@ -13,3 +13,5 @@ target_link_libraries(kcoreaddonsplugin PRIVATE
 )
 
 ecm_finalize_qml_module(kcoreaddonsplugin DESTINATION ${KDE_INSTALL_QMLDIR})
+
+ecm_generate_qdoc(kcoreaddonsplugin kcoreaddonsqml.qdocconf)

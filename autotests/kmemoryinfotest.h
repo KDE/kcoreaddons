@@ -10,9 +10,6 @@
 
 #include <QObject>
 
-/**
- * @brief The KMemoryInfoTest class
- */
 class KMemoryInfoTest : public QObject
 {
     Q_OBJECT

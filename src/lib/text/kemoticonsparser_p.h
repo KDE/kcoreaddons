@@ -12,15 +12,15 @@
 
 class QString;
 
-/** ASCII art smily replacement with Unicode emojis.
+/* ASCII art smily replacement with Unicode emojis.
  *  Taken from former KEmoticons, which has been deprecated for KF6.
  */
 namespace KEmoticonsParser
 {
-/**
+/*
  * Parses emoticons in text @p text.
- * @param text the text to parse
- * @return the text with emoticons replaced by Unicode emojis
+ * \a text the text to parse
+ * Returns the text with emoticons replaced by Unicode emojis
  */
 QString parseEmoticons(const QString &text);
 }
