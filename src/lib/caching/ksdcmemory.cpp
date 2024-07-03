@@ -131,7 +131,7 @@ static unsigned int MurmurHashAligned(const void *key, int len, unsigned int see
     return h;
 }
 
-/**
+/*
  * This is the hash function used for our data to hopefully make the
  * hashing used to place the QByteArrays as efficient as possible.
  */
@@ -184,11 +184,11 @@ T *alignTo(const void *start, uint size = ALIGNOF(T))
     return reinterpret_cast<T *>(basePointer);
 }
 
-/**
- * Returns a pointer to a const object of type T, assumed to be @p offset
+/*
+ * Returns a pointer to a const object of type T, assumed to be offset
  * *BYTES* greater than the base address. Note that in order to meet alignment
  * requirements for T, it is possible that the returned pointer points greater
- * than @p offset into @p base.
+ * than offset into base.
  */
 template<class T>
 const T *offsetAs(const void *const base, qint32 offset)
@@ -205,10 +205,10 @@ T *offsetAs(void *const base, qint32 offset)
     return alignTo<T>(ptr + offset);
 }
 
-/**
- * @return the smallest integer greater than or equal to (@p a / @p b).
- * @param a Numerator, should be ≥ 0.
- * @param b Denominator, should be > 0.
+/*
+ * Returns the smallest integer greater than or equal to (a / b).
+ * a Numerator, should be ≥ 0.
+ * b Denominator, should be > 0.
  */
 unsigned SharedMemory::intCeil(unsigned a, unsigned b)
 {
@@ -220,8 +220,8 @@ unsigned SharedMemory::intCeil(unsigned a, unsigned b)
     return (a + b - 1) / b;
 }
 
-/**
- * @return number of set bits in @p value (see also "Hamming weight")
+/*
+ * Returns number of set bits in value (see also "Hamming weight")
  */
 static unsigned countSetBits(unsigned value)
 {
@@ -235,7 +235,7 @@ static unsigned countSetBits(unsigned value)
     return count;
 }
 
-/**
+/*
  * Converts the given average item size into an appropriate page size.
  */
 unsigned SharedMemory::equivalentPageSize(unsigned itemSize)
@@ -271,7 +271,7 @@ unsigned SharedMemory::cachePageSize() const
     return _pageSize;
 }
 
-/**
+/*
  * This is effectively the class ctor.  But since we're in shared memory,
  * there's a few rules:
  *
@@ -430,9 +430,9 @@ uint SharedMemory::indexTableSize() const
     return pageTableSize() / 2;
 }
 
-/**
- * @return the index of the first page, for the set of contiguous
- * pages that can hold @p pagesNeeded PAGES.
+/*
+ * Returns the index of the first page, for the set of contiguous
+ * pages that can hold pagesNeeded PAGES.
  */
 pageID SharedMemory::findEmptyPages(uint pagesNeeded) const
 {
@@ -596,10 +596,10 @@ void SharedMemory::defragment()
     }
 }
 
-/**
+/*
  * Finds the index entry for a given key.
- * @param key UTF-8 encoded key to search for.
- * @return The index of the entry in the cache named by @p key. Returns
+ * key UTF-8 encoded key to search for.
+ * Returns The index of the entry in the cache named by key. Returns
  *         <0 if no such entry is present.
  */
 qint32 SharedMemory::findNamedEntry(const QByteArray &key) const
@@ -643,12 +643,12 @@ void SharedMemory::deleteTable(IndexTableEntry *table)
     delete[] table;
 }
 
-/**
+/*
  * Removes the requested number of pages.
  *
- * @param numberNeeded the number of pages required to fulfill a current request.
+ * numberNeeded the number of pages required to fulfill a current request.
  *        This number should be <0 and <= the number of pages in the cache.
- * @return The identifier of the beginning of a consecutive block of pages able
+ * Returns The identifier of the beginning of a consecutive block of pages able
  *         to fill the request. Returns a value >= pageTableSize() if no such
  *         request can be filled.
  * @internal

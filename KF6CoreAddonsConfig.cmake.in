@@ -34,4 +34,3 @@ endif()
 
 include("${CMAKE_CURRENT_LIST_DIR}/KF6CoreAddonsTargets.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/KF6CoreAddonsMacros.cmake")
-@PACKAGE_INCLUDE_QCHTARGETS@

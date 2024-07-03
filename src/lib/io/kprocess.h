@@ -17,10 +17,11 @@
 
 class KProcessPrivate;
 
-/**
- * \class KProcess kprocess.h <KProcess>
+/*!
+ * \class KProcess
+ * \inmodule KCoreAddons
  *
- * Child process invocation, monitoring and control.
+ * \brief Child process invocation, monitoring and control.
  *
  * This class extends QProcess by some useful functionality, overrides
  * some defaults with saner values and wraps parts of the API into a more
@@ -28,7 +29,6 @@ class KProcessPrivate;
  * Only use KProcess if you need the extra features, otherwise QProcess
  * is the preferred way of spawning child processes.
  *
- * @author Oswald Buddenhagen <ossi@kde.org>
  **/
 class KCOREADDONS_EXPORT KProcess : public QProcess
 {
@@ -36,36 +36,31 @@ class KCOREADDONS_EXPORT KProcess : public QProcess
     Q_DECLARE_PRIVATE(KProcess)
 
 public:
-    /**
+    /*!
      * Modes in which the output channels can be opened.
+     *
+     * \value SeparateChannels  Standard output and standard error are handled by KProcess as separate channels
+     * \value MergedChannels  Standard output and standard error are handled by KProcess as one channel
+     * \value ForwardedChannels Both standard output and standard error are forwarded to the parent process' respective channel
+     * \value OnlyStdoutChannel Only standard output is handled; standard error is forwarded
+     * \value OnlyStderrChannel Only standard error is handled; standard output is forwarded
      */
     enum OutputChannelMode {
         SeparateChannels = QProcess::SeparateChannels,
-        /**< Standard output and standard error are handled by KProcess
-             as separate channels */
         MergedChannels = QProcess::MergedChannels,
-        /**< Standard output and standard error are handled by KProcess
-             as one channel */
         ForwardedChannels = QProcess::ForwardedChannels,
-        /**< Both standard output and standard error are forwarded
-             to the parent process' respective channel */
         OnlyStdoutChannel = QProcess::ForwardedErrorChannel,
-        /**< Only standard output is handled; standard error is forwarded */
         OnlyStderrChannel = QProcess::ForwardedOutputChannel,
-        /**< Only standard error is handled; standard output is forwarded */
     };
 
-    /**
+    /*!
      * Constructor
      */
     explicit KProcess(QObject *parent = nullptr);
 
-    /**
-     * Destructor
-     */
     ~KProcess() override;
 
-    /**
+    /*!
      * Set how to handle the output channels of the child process.
      *
      * The default is ForwardedChannels, which is unlike in QProcess.
@@ -74,50 +69,53 @@ public:
      *
      * This function must be called before starting the process.
      *
-     * @param mode the output channel handling mode
+     * \a mode the output channel handling mode
      */
     void setOutputChannelMode(OutputChannelMode mode);
 
-    /**
+    /*!
      * Query how the output channels of the child process are handled.
      *
-     * @return the output channel handling mode
+     * Returns the output channel handling mode
      */
     OutputChannelMode outputChannelMode() const;
 
-    /**
+    /*!
      * Set the QIODevice open mode the process will be opened in.
      *
      * This function must be called before starting the process, obviously.
      *
-     * @param mode the open mode. Note that this mode is automatically
+     * \a mode the open mode. Note that this mode is automatically
      *   "reduced" according to the channel modes and redirections.
+     *
      *   The default is QIODevice::ReadWrite.
      */
     void setNextOpenMode(QIODevice::OpenMode mode);
 
-    /**
-     * Adds the variable @p name to the process' environment.
+    /*!
+     * Adds the variable \a name to the process' environment.
      *
      * This function must be called before starting the process.
      *
-     * @param name the name of the environment variable
-     * @param value the new value for the environment variable
-     * @param overwrite if @c false and the environment variable is already
+     * \a name the name of the environment variable
+     *
+     * \a value the new value for the environment variable
+     *
+     * \a overwrite if \c false and the environment variable is already
      *   set, the old value will be preserved
      */
     void setEnv(const QString &name, const QString &value, bool overwrite = true);
 
-    /**
-     * Removes the variable @p name from the process' environment.
+    /*!
+     * Removes the variable \a name from the process' environment.
      *
      * This function must be called before starting the process.
      *
-     * @param name the name of the environment variable
+     * \a name the name of the environment variable
      */
     void unsetEnv(const QString &name);
 
-    /**
+    /*!
      * Empties the process' environment.
      *
      * Note that LD_LIBRARY_PATH/DYLD_LIBRARY_PATH is automatically added
@@ -127,26 +125,27 @@ public:
      */
     void clearEnvironment();
 
-    /**
+    /*!
      * Set the program and the command line arguments.
      *
      * This function must be called before starting the process, obviously.
      *
-     * @param exe the program to execute
-     * @param args the command line arguments for the program,
+     * \a exe the program to execute
+     *
+     * \a args the command line arguments for the program,
      *   one per list element
      */
     void setProgram(const QString &exe, const QStringList &args = QStringList());
 
-    /**
-     * @overload
+    /*!
+     * \overload
      *
-     * @param argv the program to execute and the command line arguments
+     * \a argv the program to execute and the command line arguments
      *   for the program, one per list element
      */
     void setProgram(const QStringList &argv);
 
-    /**
+    /*!
      * Append an element to the command line argument list for this process.
      *
      * If no executable is set yet, it will be set instead.
@@ -160,25 +159,27 @@ public:
      *
      * This function must be called before starting the process, obviously.
      *
-     * @param arg the argument to add
-     * @return a reference to this KProcess
+     * \a arg the argument to add
+     *
+     * Returns a reference to this KProcess
      */
     KProcess &operator<<(const QString &arg);
 
-    /**
-     * @overload
+    /*!
+     * \overload
      *
-     * @param args the arguments to add
-     * @return a reference to this KProcess
+     * \a args the arguments to add
+     *
+     * Returns a reference to this KProcess
      */
     KProcess &operator<<(const QStringList &args);
 
-    /**
+    /*!
      * Clear the program and command line argument list.
      */
     void clearProgram();
 
-    /**
+    /*!
      * Set a command to execute through a shell (a POSIX sh on *NIX
      * and cmd.exe on Windows).
      *
@@ -193,114 +194,119 @@ public:
      *
      * This function must be called before starting the process, obviously.
      *
-     * @param cmd the command to execute through a shell.
+     * \a cmd the command to execute through a shell.
+     *
      *   The caller must make sure that all filenames etc. are properly
      *   quoted when passed as argument. Failure to do so often results in
      *   serious security holes. See KShell::quoteArg().
      */
     void setShellCommand(const QString &cmd);
 
-    /**
+    /*!
      * Obtain the currently set program and arguments.
      *
-     * @return a list, the first element being the program, the remaining ones
+     * Returns a list, the first element being the program, the remaining ones
      *  being command line arguments to the program.
      */
     QStringList program() const;
 
-    /**
+    /*!
      * Start the process.
      *
-     * @see QProcess::start(const QString &, const QStringList &, OpenMode)
+     * \sa QProcess::start(const QString &, const QStringList &, OpenMode)
      */
     void start();
 
-    /**
+    /*!
      * Start the process, wait for it to finish, and return the exit code.
      *
      * This method is roughly equivalent to the sequence:
-     * @code
+     * \code
      *   start();
      *   waitForFinished(msecs);
      *   return exitCode();
-     * @endcode
+     * \endcode
      *
      * Unlike the other execute() variants this method is not static,
      * so the process can be parametrized properly and talked to.
      *
-     * @param msecs time to wait for process to exit before killing it
-     * @return -2 if the process could not be started, -1 if it crashed,
+     * \a msecs time to wait for process to exit before killing it
+     *
+     * Returns -2 if the process could not be started, -1 if it crashed,
      *  otherwise its exit code
      */
     int execute(int msecs = -1);
 
-    /**
-     * @overload
+    /*!
+     * \overload
      *
-     * @param exe the program to execute
-     * @param args the command line arguments for the program,
+     * \a exe the program to execute
+     *
+     * \a args the command line arguments for the program,
      *   one per list element
-     * @param msecs time to wait for process to exit before killing it
-     * @return -2 if the process could not be started, -1 if it crashed,
+     *
+     * \a msecs time to wait for process to exit before killing it
+     *
+     * Returns -2 if the process could not be started, -1 if it crashed,
      *  otherwise its exit code
      */
     static int execute(const QString &exe, const QStringList &args = QStringList(), int msecs = -1);
 
-    /**
-     * @overload
+    /*!
+     * \overload
      *
-     * @param argv the program to execute and the command line arguments
+     * \a argv the program to execute and the command line arguments
      *   for the program, one per list element
-     * @param msecs time to wait for process to exit before killing it
-     * @return -2 if the process could not be started, -1 if it crashed,
+     *
+     * \a msecs time to wait for process to exit before killing it
+     *
+     * Returns -2 if the process could not be started, -1 if it crashed,
      *  otherwise its exit code
      */
     static int execute(const QStringList &argv, int msecs = -1);
 
-    /**
+    /*!
      * Start the process and detach from it. See QProcess::startDetached()
      * for details.
      *
      * Unlike the other startDetached() variants this method is not static,
      * so the process can be parametrized properly.
-     * @note Currently, only the setProgram()/setShellCommand() and
+     *
+     * \note Currently, only the setProgram()/setShellCommand() and
      * setWorkingDirectory() parametrizations are supported.
      *
      * The KProcess object may be re-used immediately after calling this
      * function.
      *
-     * @return the PID of the started process or 0 on error
+     * Returns the PID of the started process or 0 on error
      */
     int startDetached();
 
-    /**
-     * @overload
+    /*!
+     * \overload
      *
-     * @param exe the program to start
-     * @param args the command line arguments for the program,
+     * \a exe the program to start
+     *
+     * \a args the command line arguments for the program,
      *   one per list element
-     * @return the PID of the started process or 0 on error
+     *
+     * Returns the PID of the started process or 0 on error
      */
     static int startDetached(const QString &exe, const QStringList &args = QStringList());
 
-    /**
-     * @overload
+    /*!
+     * \overload
      *
-     * @param argv the program to start and the command line arguments
+     * \a argv the program to start and the command line arguments
      *   for the program, one per list element
-     * @return the PID of the started process or 0 on error
+     *
+     * Returns the PID of the started process or 0 on error
      */
     static int startDetached(const QStringList &argv);
 
 protected:
-    /**
-     * @internal
-     */
     KCOREADDONS_NO_EXPORT KProcess(KProcessPrivate *d, QObject *parent);
 
-    /**
-     * @internal
-     */
     std::unique_ptr<KProcessPrivate> const d_ptr;
 
 private:

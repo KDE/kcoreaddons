@@ -113,7 +113,7 @@ void KListOpenFilesJobTest::testNonExistingDir()
     QVERIFY(job->processInfoList().empty());
 }
 
-/**
+/*!
  * @brief Helper class to temporarily set an environment variable and reset it on destruction
  */
 class ScopedEnvVariable

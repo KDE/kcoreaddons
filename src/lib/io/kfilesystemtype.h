@@ -13,43 +13,49 @@
 
 #include <QString>
 
-/**
- * @namespace KFileSystemType
+/*!
+ * \namespace KFileSystemType
+ * \inmodule KCoreAddons
  * Provides utility functions for the type of file systems.
  */
 namespace KFileSystemType
 {
+/*!
+ * \value Unknown Unknown
+ * \value Nfs NFS or other full-featured networked filesystems (autofs, subfs, cachefs, sshfs)
+ * \value Smb SMB/CIFS mount (networked but with some FAT-like behavior)
+ * \value Fat FAT or similar (msdos, FAT, VFAT)
+ * \value Ramfs RAMDISK mount
+ * \value Other Ext3, Ext4, ReiserFs, and so on. "Normal" local filesystems.
+ * \value [since 5.85] Ntfs NTFS filesystem
+ * \value [since 5.86] Exfat ExFat filesystem
+ * \value [since 5.100] Fuse (Filesystem in USErspace), this is used for a variety of underlying filesystems.
+ */
 enum Type {
     Unknown,
-    Nfs, ///< NFS or other full-featured networked filesystems (autofs, subfs, cachefs, sshfs)
-    Smb, ///< SMB/CIFS mount (networked but with some FAT-like behavior)
-    Fat, ///< FAT or similar (msdos, FAT, VFAT)
-    Ramfs, ///< RAMDISK mount
-    Other, ///< Ext3, Ext4, ReiserFs, and so on. "Normal" local filesystems.
-    Ntfs, ///< NTFS filesystem @since 5.85
-    Exfat, ///< ExFat filesystem @since 5.86
-    /**
-     * FUSE (Filesystem in USErspace), this is used for a variety of underlying
-     * filesystems.
-     *
-     * @since 5.100
-     */
+    Nfs,
+    Smb,
+    Fat,
+    Ramfs,
+    Other,
+    Ntfs,
+    Exfat,
     Fuse,
 };
 
-/**
- * For a given @p path, returns the filesystem type, one of @ref KFileSystemType::Type
- * values. If the type can't be determined, @c KFileSystemType::Unknown is returned.
+/*!
+ * For a given \a path, returns the filesystem type, one of KFileSystemType::Type
+ * values. If the type can't be determined, KFileSystemType::Unknown is returned.
  *
- * @since 5.0
+ * \since 5.0
  */
 KCOREADDONS_EXPORT Type fileSystemType(const QString &path);
 
-/**
+/*!
  * Returns the possibly translated name of a filesystem corresponding to a
- * value from @ref KFileSystemType::Type.
+ * value from KFileSystemType::Type.
  *
- * @since 5.86
+ * \since 5.86
  */
 KCOREADDONS_EXPORT QString fileSystemName(KFileSystemType::Type type);
 }

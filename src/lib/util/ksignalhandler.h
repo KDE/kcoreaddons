@@ -12,8 +12,11 @@
 
 class KSignalHandlerPrivate;
 
-/**
- * Allows getting ANSI C signals and forward them onto the Qt eventloop.
+/*!
+ * \class KSignalHandler
+ * \inmodule KCoreAddons
+ *
+ * \brief Allows getting ANSI C signals and forward them onto the Qt eventloop.
  *
  * It's a singleton as it relies on static data getting defined.
  *
@@ -26,7 +29,7 @@ class KSignalHandlerPrivate;
  * }
  * \endcode
  *
- * @since 5.92
+ * \since 5.92
  */
 class KCOREADDONS_EXPORT KSignalHandler : public QObject
 {
@@ -34,26 +37,26 @@ class KCOREADDONS_EXPORT KSignalHandler : public QObject
 public:
     ~KSignalHandler() override;
 
-    /**
-     * Adds @p signal to be watched for. Once the process is notified about this signal, @m signalReceived will be emitted with the same @p signal as an
+    /*!
+     * Adds \a signal to be watched for. Once the process is notified about this signal, @m signalReceived will be emitted with the same \a signal as an
      * argument.
      *
-     * @see signalReceived
+     * \sa signalReceived
      */
     void watchSignal(int signal);
 
-    /**
+    /*!
      * Fetches an instance we can use to register our signals.
      */
     static KSignalHandler *self();
 
 Q_SIGNALS:
-    /**
-     * Notifies that @p signal is emitted.
+    /*!
+     * Notifies that \a signal is emitted.
      *
      * To catch a signal, we need to make sure it's registered using @m watchSignal.
      *
-     * @see watchSignal
+     * \sa watchSignal
      */
     void signalReceived(int signal);
 

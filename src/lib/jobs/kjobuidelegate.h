@@ -17,66 +17,68 @@
 
 class KJob;
 
-/**
- * @class KJobUiDelegate kjobuidelegate.h KJobUiDelegate
+/*!
+ * \class KJobUiDelegate
+ * \inmodule KCoreAddons
  *
- * The base class for all KJob UI delegate.
+ * \brief The base class for all KJob UI delegate.
  *
  * A UI delegate is responsible for the events of a
  * job and provides a UI for them (an error message
  * box or warning etc.).
  *
- * @see KJob
+ * \sa KJob
  */
 class KCOREADDONS_EXPORT KJobUiDelegate : public QObject
 {
     Q_OBJECT
 
 public:
-    /**
+    /*!
      * Flags for the constructor, to enable automatic handling of errors and/or warnings
-     * @see Flags
-     * @since 5.70
+     *
+     * \value AutoHandlingDisabled No automatic handling (default)
+     * \value AutoErrorHandlingEnabled Equivalent to setAutoErrorHandlingEnabled(true)
+     * \value AutoWarningHandlingEnabled Equivalent to setAutoWarningHandlingEnabled(true)
+     * \value AutoHandlingEnabled Enables both error and warning handling
+     *
+     * \since 5.70
      */
     enum Flag {
-        AutoHandlingDisabled = 0, ///< No automatic handling (default)
-        AutoErrorHandlingEnabled = 1, ///< Equivalent to setAutoErrorHandlingEnabled(true)
-        AutoWarningHandlingEnabled = 2, ///< Equivalent to setAutoWarningHandlingEnabled(true)
-        AutoHandlingEnabled = AutoErrorHandlingEnabled | AutoWarningHandlingEnabled, ///< Enables both error and warning handling
+        AutoHandlingDisabled = 0,
+        AutoErrorHandlingEnabled = 1,
+        AutoWarningHandlingEnabled = 2,
+        AutoHandlingEnabled = AutoErrorHandlingEnabled | AutoWarningHandlingEnabled,
     };
-    /**
-     * Stores a combination of #Flag values.
-     */
     Q_DECLARE_FLAGS(Flags, Flag)
 
-    /**
+    /*!
      * Constructs a new KJobUiDelegate with a flags argument.
-     * @param flags allows to enable automatic error/warning handling
-     * @since 5.70
+     *
+     * \a flags allows to enable automatic error/warning handling
+     *
+     * \since 5.70
      */
     explicit KJobUiDelegate(Flags flags = {KJobUiDelegate::AutoHandlingDisabled});
 
-    /**
-     * Destroys a KJobUiDelegate.
-     */
     ~KJobUiDelegate() override;
 
 protected:
-    /**
+    /*!
      * Attach this UI delegate to a job. Once attached it'll track the job events.
      *
-     * @return @c true if this UI delegate was successfully attached to @p job, @c false otherwise
+     * Returns \c true if this UI delegate was successfully attached to \a job, \c false otherwise
      *
-     * @note if this UI delegate is already attached to a job, calling this method will return
-     * @c false.
+     * \note if this UI delegate is already attached to a job, calling this method will return
+     * \c false.
      */
     virtual bool setJob(KJob *job);
 
 protected:
-    /**
+    /*!
      * Retrieves the current job this UI delegate is attached to.
      *
-     * @return current job this UI delegate is attached to, or @c nullptr if
+     * Returns the current job this UI delegate is attached to, or \c nullptr if
      * this UI delegate is not tracking any job
      */
     KJob *job() const;
@@ -84,7 +86,7 @@ protected:
     friend class KJob;
 
 public:
-    /**
+    /*!
      * Display to the user the error given by this job.
      * The default implementation uses qWarning(). Subclasses
      * reimplement this to use something more user-visible such
@@ -95,51 +97,48 @@ public:
      */
     virtual void showErrorMessage();
 
-    /**
+    /*!
      * Enable or disable the automatic error handling. When automatic
      * error handling is enabled and an error occurs, then showErrorDialog()
      * is called, right before the emission of the result signal.
      *
-     * The default is false.
+     * The default is \c false.
      *
-     * See also isAutoErrorHandlingEnabled , showErrorDialog
+     * \a enable enable or disable automatic error handling
      *
-     * @param enable enable or disable automatic error handling
-     * @see isAutoErrorHandlingEnabled()
+     * \sa isAutoErrorHandlingEnabled()
      */
     void setAutoErrorHandlingEnabled(bool enable);
 
-    /**
+    /*!
      * Returns whether automatic error handling is enabled or disabled.
-     * See also setAutoErrorHandlingEnabled .
-     * @return true if automatic error handling is enabled
-     * @see setAutoErrorHandlingEnabled()
+     * \sa setAutoErrorHandlingEnabled()
      */
     bool isAutoErrorHandlingEnabled() const;
 
-    /**
+    /*!
      * Enable or disable the automatic warning handling. When automatic
      * warning handling is enabled and an error occurs, then a message box
      * is displayed with the warning message
      *
-     * The default is true.
+     * The default is \c true.
      *
-     * See also isAutoWarningHandlingEnabled , showErrorDialog
+     * \a enable enable or disable automatic warning handling
      *
-     * @param enable enable or disable automatic warning handling
-     * @see isAutoWarningHandlingEnabled()
+     * \sa isAutoWarningHandlingEnabled()
      */
     void setAutoWarningHandlingEnabled(bool enable);
 
-    /**
+    /*!
      * Returns whether automatic warning handling is enabled or disabled.
-     * See also setAutoWarningHandlingEnabled .
-     * @return true if automatic warning handling is enabled
-     * @see setAutoWarningHandlingEnabled()
+     * \sa setAutoWarningHandlingEnabled()
      */
     bool isAutoWarningHandlingEnabled() const;
 
 protected Q_SLOTS:
+    /*!
+     *
+     */
     virtual void slotWarning(KJob *job, const QString &message);
 
 private:

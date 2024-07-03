@@ -11,7 +11,7 @@
 
 #include <memory>
 
-/**
+/*!
  * This is a method to determine the best lock type to use for a
  * shared cache, based on local support. An identifier to the appropriate
  * SharedLockId is returned, which can be passed to createLockFromId().

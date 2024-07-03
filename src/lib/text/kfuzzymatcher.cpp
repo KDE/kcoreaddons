@@ -12,7 +12,7 @@
 #include <QString>
 #include <QStringView>
 
-/**
+/*
  * Custom toLower function which is much faster than
  * c.toLower() directly
  */
@@ -211,7 +211,7 @@ static bool match_internal(QStringView pattern, QStringView str, int &outScore, 
 bool KFuzzyMatcher::matchSimple(QStringView pattern, QStringView str)
 {
     auto patternIt = pattern.cbegin();
-    /**
+    /*
      * Instead of doing
      *
      *      strIt.toLower() == patternIt.toLower()
@@ -236,7 +236,7 @@ bool KFuzzyMatcher::matchSimple(QStringView pattern, QStringView str)
 
 KFuzzyMatcher::Result KFuzzyMatcher::match(QStringView pattern, QStringView str)
 {
-    /**
+    /*
      * Simple substring matching to flush out non-matching strings
      */
     const bool simpleMatch = matchSimple(pattern, str);
@@ -284,7 +284,7 @@ QList<KFuzzyMatcher::Range> KFuzzyMatcher::matchedRanges(QStringView pattern, QS
     int previousMatch = 0;
     for (int i = 0; i < totalMatches; ++i) {
         auto matchPos = matches[i];
-        /**
+        /*
          * Check if this match is part of the previous
          * match. If it is, we increase the length of
          * the last range.
@@ -292,7 +292,7 @@ QList<KFuzzyMatcher::Range> KFuzzyMatcher::matchedRanges(QStringView pattern, QS
         if (!ranges.isEmpty() && matchPos == previousMatch + 1) {
             ranges.last().length++;
         } else {
-            /**
+            /*
              * This is a new match inside the string
              */
             ranges.push_back({/* start: */ matchPos, /* length: */ 1});

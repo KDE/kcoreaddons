@@ -15,48 +15,70 @@
 #include <QString>
 #include <kcoreaddons_export.h>
 
+/*!
+ * \namespace KProcessList
+ * \inmodule KCoreAddons
+ */
 namespace KProcessList
 {
 class KProcessInfoPrivate;
 
-/**
- * @brief Contains information about a process. This class is usually not used alone but rather returned by
+/*!
+ * \class KProcessList::KProcessInfo
+ * \inmodule KCoreAddons
+ *
+ * \brief Contains information about a process.
+ *
+ * This class is usually not used alone but rather returned by
  * processInfoList and processInfo. To check if the data contained in this class is valid use the isValid method.
- * @since 5.58
+ * \since 5.58
  */
 class KCOREADDONS_EXPORT KProcessInfo
 {
 public:
+    /*!
+     *
+     */
     KProcessInfo();
+
+    /*!
+     *
+     */
     KProcessInfo(qint64 pid, const QString &command, const QString &user);
+
+    /*!
+     *
+     */
     KProcessInfo(qint64 pid, const QString &command, const QString &name, const QString &user);
 
     KProcessInfo(const KProcessInfo &other);
     ~KProcessInfo();
     KProcessInfo &operator=(const KProcessInfo &other);
-    /**
-     * @brief If the KProcessInfo contains valid information. If it returns true the pid, name and user function
+    /*!
+     * If the KProcessInfo contains valid information. If it returns true the pid, name and user function
      * returns valid information, otherwise they return value is undefined.
      */
     bool isValid() const;
-    /**
-     * @brief The pid of the process
+    /*!
+     * The pid of the process
      */
     qint64 pid() const;
-    /**
-     * @brief The name of the process. The class will try to get the full path to the executable file for the process
+    /*!
+     * The name of the process.
+     *
+     * The class will try to get the full path to the executable file for the process
      * but if it is not available the name of the process will be used instead.
      * e.g /bin/ls
      */
     QString name() const;
-    /**
-     * @brief The username the process is running under.
+    /*!
+     * The username the process is running under.
      */
     QString user() const;
-    /**
-     * @brief The command line running this process
+    /*!
+     * The command line running this process
      * e.g /bin/ls /some/path -R
-     * @since 5.61
+     * \since 5.61
      */
     QString command() const;
 
@@ -64,19 +86,24 @@ private:
     QSharedDataPointer<KProcessInfoPrivate> d_ptr;
 };
 
+/*!
+ * \typedef KProcessList::KProcessInfoList
+ */
 typedef QList<KProcessInfo> KProcessInfoList;
 
-/**
- * @brief Retrieves the list of currently active processes.
- * @since 5.58
+/*!
+ * Retrieves the list of currently active processes.
+ * \since 5.58
  */
 KCOREADDONS_EXPORT KProcessInfoList processInfoList();
 
-/**
- * @brief Retrieves process information for a specific process-id. If the process is not found a KProcessInfo with
+/*!
+ * Retrieves process information for a specific process-id. If the process is not found a KProcessInfo with
  * isValid == false will be returned.
- * @param pid The process-id to retrieve information for.
- * @since 5.58
+ *
+ * \a pid The process-id to retrieve information for.
+ *
+ * \since 5.58
  */
 KCOREADDONS_EXPORT KProcessInfo processInfo(qint64 pid);
 

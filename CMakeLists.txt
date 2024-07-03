@@ -22,15 +22,12 @@ include(ECMSetupVersion)
 include(ECMGenerateHeaders)
 include(ECMGeneratePkgConfigFile)
 include(ECMQtDeclareLoggingCategory)
-include(ECMAddQch)
 include(ECMSetupQtPluginMacroNames)
 include(ECMDeprecationSettings)
 include(CMakeDependentOption)
+include(ECMGenerateQDoc)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
-
-option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
-add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
 
 option(ENABLE_PCH "Enable precompile headers for faster builds" ON)
 option(KCOREADDONS_USE_QML "Build the QML plugin" ON)
@@ -157,16 +154,6 @@ endif()
 
 # create a Config.cmake and a ConfigVersion.cmake file and install them
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF6CoreAddons")
-
-if (BUILD_QCH)
-    ecm_install_qch_export(
-        TARGETS KF6CoreAddons_QCH
-        FILE KF6CoreAddonsQchTargets.cmake
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel
-    )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KF6CoreAddonsQchTargets.cmake\")")
-endif()
 
 configure_package_config_file("${CMAKE_CURRENT_SOURCE_DIR}/KF6CoreAddonsConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KF6CoreAddonsConfig.cmake"
