@@ -4,7 +4,7 @@
     SPDX-FileCopyrightText: 1999 Ian Zepp <icszepp@islc.net>
     SPDX-FileCopyrightText: 2000 Rik Hemsley (rikkus) <rik@kde.org>
     SPDX-FileCopyrightText: 2006 Dominic Battre <dominic@battre.de>
-    SPDX-FileCopyrightText: 2006 Martin Pool <mbp@canonical.com>
+    SPDX-FileCopyrightText: 2006 Martin Pool <mbp\canonical.com>
 
     SPDX-License-Identifier: LGPL-2.0-only
 */
@@ -20,7 +20,10 @@ class QChar;
 class QRegularExpression;
 class QString;
 
-/**
+/*!
+ * \namespace KStringHandler
+ * \inmodule KCoreAddons
+ *
  * This namespace contains utility functions for handling strings.
  *
  * The functions here are intended to provide an easy way to
@@ -42,72 +45,87 @@ class QString;
  * The methods here are completely stateless.  All strings are cut
  * on the fly and returned as new qstrings/qstringlists.
  *
- * @short Namespace for manipulating words and sentences in strings
- * @author Ian Zepp <icszepp@islc.net>
- * @see KShell
+ * \brief Namespace for manipulating words and sentences in strings
+ * \sa KShell
  */
 namespace KStringHandler
 {
-/** Capitalizes each word in the string
+/*! Capitalizes each word in the string
  * "hello there" becomes "Hello There"        (string)
- * @param text the text to capitalize
- * @return the resulting string
+ *
+ * \a text the text to capitalize
+ *
+ * Returns the resulting string
  */
 KCOREADDONS_EXPORT QString capwords(const QString &text);
 
-/** Capitalizes each word in the list
+/*! Capitalizes each word in the list
  * [hello, there] becomes [Hello, There]    (list)
- * @param list the list to capitalize
- * @return the resulting list
+ *
+ * \a list the list to capitalize
+ *
+ * Returns the resulting list
  */
 KCOREADDONS_EXPORT QStringList capwords(const QStringList &list);
 
-/** Substitute characters at the beginning of a string by "...".
- * @param str is the string to modify
- * @param maxlen is the maximum length the modified string will have
+/*! Substitute characters at the beginning of a string by "...".
+ *
+ * \a str is the string to modify
+ *
+ * \a maxlen is the maximum length the modified string will have
+ *
  * If the original string is shorter than "maxlen", it is returned verbatim
- * @return the modified string
+ * Returns the modified string
  */
 KCOREADDONS_EXPORT QString lsqueeze(const QString &str, int maxlen = 40);
 
-/** Substitute characters at the middle of a string by "...".
- * @param str is the string to modify
- * @param maxlen is the maximum length the modified string will have
+/*! Substitute characters at the middle of a string by "...".
+ *
+ * \a str is the string to modify
+ *
+ * \a maxlen is the maximum length the modified string will have
+ *
  * If the original string is shorter than "maxlen", it is returned verbatim
- * @return the modified string
+ * Returns the modified string
  */
 KCOREADDONS_EXPORT QString csqueeze(const QString &str, int maxlen = 40);
 
-/** Substitute characters at the end of a string by "...".
- * @param str is the string to modify
- * @param maxlen is the maximum length the modified string will have
+/*! Substitute characters at the end of a string by "...".
+ *
+ * \a str is the string to modify
+ *
+ * \a maxlen is the maximum length the modified string will have
+ *
  * If the original string is shorter than "maxlen", it is returned verbatim
- * @return the modified string
+ * Returns the modified string
  */
 KCOREADDONS_EXPORT QString rsqueeze(const QString &str, int maxlen = 40);
 
-/**
+/*!
  * Split a string into a QStringList in a similar fashion to the static
  * QStringList function in Qt, except you can specify a maximum number
  * of tokens. If max is specified (!= 0) then only that number of tokens
  * will be extracted. The final token will be the remainder of the string.
  *
  * Example:
- * @code
+ * \code
  * perlSplit("__", "some__string__for__you__here", 4)
  * QStringList contains: "some", "string", "for", "you__here"
- * @endcode
+ * \endcode
  *
- * @param sep is the string to use to delimit @p str
- * @param str the string to split
- * @param max the maximum number of extractions to perform, or 0
- * @return A QStringList containing tokens extracted from @p str
+ * \a sep is the string to use to delimit \a str
  *
- * @since 5.87
+ * \a str the string to split
+ *
+ * \a max the maximum number of extractions to perform, or 0
+ *
+ * Returns A QStringList containing tokens extracted from \a str
+ *
+ * \since KCoreAddons 5.87
  */
 KCOREADDONS_EXPORT QStringList perlSplit(const QStringView sep, const QStringView str, int max);
 
-/**
+/*!
  * Split a QString into a QStringList in a similar fashion to the static
  * QStringList function in Qt, except you can specify a maximum number
  * of tokens. If max is specified (!= 0) then only that number of tokens
@@ -119,14 +137,17 @@ KCOREADDONS_EXPORT QStringList perlSplit(const QStringView sep, const QStringVie
  * QStringList contains: "some", "string", "for", "you__here"
  * \endcode
  *
- * @param sep is the string to use to delimit s.
- * @param s is the input string
- * @param max is the maximum number of extractions to perform, or 0.
- * @return A QStringList containing tokens extracted from s.
+ * \a sep is the string to use to delimit s.
+ *
+ * \a s is the input string
+ *
+ * \a max is the maximum number of extractions to perform, or 0.
+ *
+ * Returns A QStringList containing tokens extracted from s.
  */
 KCOREADDONS_EXPORT QStringList perlSplit(const QString &sep, const QString &s, int max = 0);
 
-/**
+/*!
  * Split a QString into a QStringList in a similar fashion to the static
  * QStringList function in Qt, except you can specify a maximum number
  * of tokens. If max is specified (!= 0) then only that number of tokens
@@ -138,14 +159,17 @@ KCOREADDONS_EXPORT QStringList perlSplit(const QString &sep, const QString &s, i
  * QStringList contains: "kparts", "reaches", "the parts other parts can't"
  * \endcode
  *
- * @param sep is the character to use to delimit s.
- * @param s is the input string
- * @param max is the maximum number of extractions to perform, or 0.
- * @return A QStringList containing tokens extracted from s.
+ * \a sep is the character to use to delimit s.
+ *
+ * \a s is the input string
+ *
+ * \a max is the maximum number of extractions to perform, or 0.
+ *
+ * Returns A QStringList containing tokens extracted from s.
  */
 KCOREADDONS_EXPORT QStringList perlSplit(const QChar &sep, const QString &s, int max = 0);
 
-/**
+/*!
  * Split a QString into a QStringList in a similar fashion to the static
  * QStringList function in Qt, except you can specify a maximum number
  * of tokens. If max is specified (!= 0) then only that number of tokens
@@ -157,24 +181,29 @@ KCOREADDONS_EXPORT QStringList perlSplit(const QChar &sep, const QString &s, int
  * QStringList contains: "Split", "me", "up ! I'm bored ! OK ?"
  * \endcode
  *
- * @param sep is the regular expression to use to delimit s.
- * @param s is the input string
- * @param max is the maximum number of extractions to perform, or 0.
- * @return A QStringList containing tokens extracted from s.
+ * \a sep is the regular expression to use to delimit s.
  *
- * @since 5.67
+ * \a s is the input string
+ *
+ * \a max is the maximum number of extractions to perform, or 0.
+ *
+ * Returns A QStringList containing tokens extracted from s.
+ *
+ * \since KCoreAddons 5.67
  */
 KCOREADDONS_EXPORT QStringList perlSplit(const QRegularExpression &sep, const QString &s, int max = 0);
 
-/**
+/*!
  * This method auto-detects URLs in strings, and adds HTML markup to them
  * so that richtext or HTML-enabled widgets will display the URL correctly.
- * @param text the string which may contain URLs
- * @return the resulting text
+ *
+ * \a text the string which may contain URLs
+ *
+ * Returns the resulting text
  */
 KCOREADDONS_EXPORT QString tagUrls(const QString &text);
 
-/**
+/*!
   Obscure string by using a simple symmetric encryption. Applying the
   function to a string obscured by this function will result in the original
   string.
@@ -183,12 +212,13 @@ KCOREADDONS_EXPORT QString tagUrls(const QString &text);
   files. Note that this won't give you any more security than preventing
   that the password is directly copied and pasted.
 
-  @param str string to be obscured
-  @return obscured string
+  \a str string to be obscured
+
+  Returns obscured string
 */
 KCOREADDONS_EXPORT QString obscure(const QString &str);
 
-/**
+/*!
   Preprocesses the given string in order to provide additional line breaking
   opportunities for QTextLayout.
 
@@ -199,16 +229,16 @@ KCOREADDONS_EXPORT QString obscure(const QString &str);
   Examples of such points includes after punctuation signs, underscores and
   dashes, that aren't followed by spaces.
 
-  @since 4.4
+  \since KCoreAddons 4.4
 */
 KCOREADDONS_EXPORT QString preProcessWrap(const QString &text);
 
-/**
+/*!
   Returns the length that reflects the density of information in the text. In
   general the character from CJK languages are assigned with weight 2, while
   other Latin characters are assigned with 1.
 
-  @since 5.41
+  \since KCoreAddons 5.41
 */
 KCOREADDONS_EXPORT int logicalLength(const QString &text);
 

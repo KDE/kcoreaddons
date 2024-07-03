@@ -18,10 +18,12 @@
 #include <memory>
 
 class KAutoSaveFilePrivate;
-/**
- * \class KAutoSaveFile kautosavefile.h <KAutoSaveFile>
+/*!
+ * \class KAutoSaveFile
+ * \inmodule KCoreAddons
  *
- * @brief Creates and manages a temporary "auto-save" file.
+ * \brief Creates and manages a temporary "auto-save" file.
+ *
  * Autosave files are temporary files that applications use to store
  * the unsaved data in a file they have open for
  * editing. KAutoSaveFile allows you to easily create and manage such
@@ -47,7 +49,7 @@ class KAutoSaveFilePrivate;
  *
  * Examples:
  * Opening a new file:
- * @code
+ * \code
  *   void Document::open(const QUrl &url)
  *   {
  *       // check whether autosave files exist:
@@ -74,10 +76,10 @@ class KAutoSaveFilePrivate;
  *       // continue the process of opening file 'url'
  *       ...
  *   }
- * @endcode
+ * \endcode
  *
  * The function recoverFiles could loop over the list of files and do this:
- * @code
+ * \code
  *   for (KAutoSaveFile *stale : staleFiles) {
  *       if (!stale->open(QIODevice::ReadWrite)) {
  *           // show an error message; we could not steal the lockfile
@@ -95,59 +97,58 @@ class KAutoSaveFilePrivate;
  *
  *       documentManager->addDocument(doc);
  *   }
- * @endcode
+ * \endcode
  *
  * If the file is unsaved, periodically write the contents to the save file:
- * @code
+ * \code
  *   if (!m_autosave->isOpen() && !m_autosave->open(QIODevice::ReadWrite)) {
  *       // show error: could not open the autosave file
  *   }
  *   m_autosave->write(contents());
- * @endcode
+ * \endcode
  *
  * When the user saves the file, the autosaved file is no longer
  * necessary and can be removed or emptied.
- * @code
+ * \code
  *    m_autosave->resize(0);    // leaves the file open
- * @endcode
+ * \endcode
  *
- * @code
+ * \code
  *    m_autosave->remove();     // closes the file
- * @endcode
+ * \endcode
  *
- * @author Jacob R Rideout <kde@jacobrideout.net>
  */
 class KCOREADDONS_EXPORT KAutoSaveFile : public QFile
 {
     Q_OBJECT
 public:
-    /**
-     * Constructs a KAutoSaveFile for file @p filename. The temporary
+    /*!
+     * Constructs a KAutoSaveFile for file \a filename. The temporary
      * file is not opened or created until actually needed. The file
-     * @p filename does not have to exist for KAutoSaveFile to be
+     * \a filename does not have to exist for KAutoSaveFile to be
      * constructed (if it exists, it will not be touched).
      *
-     * @param filename the filename that this KAutoSaveFile refers to
-     * @param parent the parent object
+     * \a filename the filename that this KAutoSaveFile refers to
+     * \a parent the parent object
      */
     explicit KAutoSaveFile(const QUrl &filename, QObject *parent = nullptr);
 
-    /**
-     * @overload
+    /*!
+     * \overload
      * Constructs a KAutoSaveFile object. Note that you need to call
      * setManagedFile() before calling open().
      *
-     * @param parent the parent object
+     * \a parent the parent object
      */
     explicit KAutoSaveFile(QObject *parent = nullptr);
 
-    /**
+    /*!
      * Destroys the KAutoSaveFile object, removes the autosave
      * file and drops the lock being held (if any).
      */
     ~KAutoSaveFile() override;
 
-    /**
+    /*!
      * Retrieves the URL of the file managed by KAutoSaveFile. This
      * is the same URL that was given to setManagedFile() or the
      * KAutoSaveFile constructor.
@@ -158,16 +159,16 @@ public:
      */
     QUrl managedFile() const;
 
-    /**
+    /*!
      * Sets the URL of the file managed by KAutoSaveFile. This should
      * be the name of the real file being edited by the application.
      * If the file was previously set, this function calls releaseLock().
      *
-     * @param filename the filename that this KAutoSaveFile refers to
+     * \a filename the filename that this KAutoSaveFile refers to
      */
     void setManagedFile(const QUrl &filename);
 
-    /**
+    /*!
      * Closes the autosave file resource and removes the lock
      * file. The file name returned by fileName() will no longer be
      * protected and can be overwritten by another application at any
@@ -178,7 +179,7 @@ public:
      */
     virtual void releaseLock();
 
-    /**
+    /*!
      * Opens the autosave file and locks it if it wasn't already
      * locked. The name of the temporary file where data can be saved
      * to will be set by this function and can be retrieved with
@@ -186,15 +187,16 @@ public:
      * other application will attempt to edit such a file either while
      * the lock is held.
      *
-     * @param openmode the mode that should be used to open the file,
+     * \a openmode the mode that should be used to open the file,
      *        probably QIODevice::ReadWrite
-     * @returns true if the file could be opened (= locked and
+     *
+     * Returns true if the file could be opened (= locked and
      * created), false if the operation failed
      */
     bool open(OpenMode openmode) override;
 
-    /**
-     * Checks for stale autosave files for the file @p url. Returns a list
+    /*!
+     * Checks for stale autosave files for the file \a url. Returns a list
      * of autosave files that contain autosaved data left behind by
      * other instances of the application, due to crashing or
      * otherwise uncleanly exiting.
@@ -220,7 +222,7 @@ public:
      */
     static QList<KAutoSaveFile *> staleFiles(const QUrl &url, const QString &applicationName = QString());
 
-    /**
+    /*!
      * Returns all stale autosave files left behind by crashed or
      * otherwise gone instances of this application.
      *
