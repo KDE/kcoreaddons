@@ -59,7 +59,7 @@ KCompositeJobTest::KCompositeJobTest()
 {
 }
 
-/**
+/*
  * In case a composite job is deleted during execution
  * we still want to assure that we don't crash
  *

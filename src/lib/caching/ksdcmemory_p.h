@@ -12,7 +12,7 @@
 #include "ksdclock_p.h"
 #include "kshareddatacache.h"
 
-/**
+/*
  * A very simple class whose only purpose is to be thrown as an exception from
  * underlying code to indicate that the shared cache is apparently corrupt.
  * This must be caught by top-level library code and used to unlink the cache
@@ -102,7 +102,7 @@ struct PageTableEntry {
 // contained within form the header, data contained afterwards is pointed to
 // by using special accessor functions.
 struct SharedMemory {
-    /**
+    /*
      * Note to downstream packagers: This version flag is intended to be
      * machine-specific. The KDE-provided source code will not set the lower
      * two bits to allow for distribution-specific needs, with the exception
@@ -141,7 +141,7 @@ struct SharedMemory {
     // written to, to allow clients to detect a changed cache quickly.
     QAtomicInt cacheTimestamp;
 
-    /**
+    /*
      * Converts the given average item size into an appropriate page size.
      */
     static unsigned equivalentPageSize(unsigned itemSize);
@@ -149,7 +149,7 @@ struct SharedMemory {
     // Returns pageSize in unsigned format.
     unsigned cachePageSize() const;
 
-    /**
+    /*
      * This is effectively the class ctor.  But since we're in shared memory,
      * there's a few rules:
      *
@@ -180,7 +180,7 @@ struct SharedMemory {
     uint pageTableSize() const;
     uint indexTableSize() const;
 
-    /**
+    /*
      * @return the index of the first page, for the set of contiguous
      * pages that can hold @p pagesNeeded PAGES.
      */
@@ -197,7 +197,7 @@ struct SharedMemory {
 
     void defragment();
 
-    /**
+    /*
      * Finds the index entry for a given key.
      * @param key UTF-8 encoded key to search for.
      * @return The index of the entry in the cache named by @p key. Returns
@@ -208,7 +208,7 @@ struct SharedMemory {
     // Function to use with std::unique_ptr in removeUsedPages below...
     static void deleteTable(IndexTableEntry *table);
 
-    /**
+    /*
      * Removes the requested number of pages.
      *
      * @param numberNeeded the number of pages required to fulfill a current request.
@@ -229,7 +229,7 @@ struct SharedMemory {
 
     static quint32 generateHash(const QByteArray &buffer);
 
-    /**
+    /*
      * @return the smallest integer greater than or equal to (@p a / @p b).
      * @param a Numerator, should be ≥ 0.
      * @param b Denominator, should be > 0.

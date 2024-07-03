@@ -8,40 +8,58 @@
 
 #include <kcoreaddons_export.h>
 
-/**
- * @brief Utility functions for use inside application sandboxes such as flatpak or snap.
- * @since 5.95
+/*!
+ * \namespace KSandbox
+ * \inmodule KCoreAddons
+ * \brief Utility functions for use inside application sandboxes such as flatpak or snap.
+ * \since 5.95
  */
 namespace KSandbox
 {
 
-/// @returns whether the application is inside one of the supported sandboxes
+/*!
+ * Returns whether the application is inside one of the supported sandboxes
+ */
 KCOREADDONS_EXPORT bool isInside();
 
-/// @returns whether the application is inside a flatpak sandbox
+/*!
+ * Returns whether the application is inside a flatpak sandbox
+ */
 KCOREADDONS_EXPORT bool isFlatpak();
 
-/// @returns whether the application is inside a snap sandbox
+/*!
+ * Returns whether the application is inside a snap sandbox
+ */
 KCOREADDONS_EXPORT bool isSnap();
 
-/**
- * @brief Container for host process startup context
- * @since 5.97
+/*!
+ * \struct KSandbox::ProcessContext
+ * \brief Container for host process startup context.
+ * \since 5.97
  */
 struct ProcessContext {
+    /*!
+     * \variable KSandbox::ProcessContext::program
+     * the program
+     */
     const QString program;
+
+    /*!
+     * \variable KSandbox::ProcessContext::arguments
+     * the arguments
+     */
     const QStringList arguments;
 };
 
-/**
- * @returns the actual program and arguments for running the QProcess on the host (e.g. a flatpak-spawn-wrapped argument list)
- * @since 5.97
+/*!
+ * Returns the actual program and arguments for running the QProcess on the host (e.g. a flatpak-spawn-wrapped argument list)
+ * \since 5.97
  */
 KCOREADDONS_EXPORT KSandbox::ProcessContext makeHostContext(const QProcess &process);
 
-/**
+/*!
  * Starts the QProcess on the host (if the current context is inside a sandbox, otherwise it simply runs QProcess::start)
- * @since 5.97
+ * \since 5.97
  */
 KCOREADDONS_EXPORT void startHostProcess(QProcess &process, QProcess::OpenMode mode = QProcess::ReadWrite);
 

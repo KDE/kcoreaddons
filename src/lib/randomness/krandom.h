@@ -18,10 +18,11 @@
 
 #include <limits>
 
-/**
- * \headerfile krandom.h <KRandom>
+/*!
+ * \namespace KRandom
+ * \inmodule KCoreAddons
  *
- * @short Helper class to create random data
+ * \brief Helper to create random data.
  *
  * This namespace provides methods which generate random data.
  * KRandom is not recommended for serious random-number generation needs,
@@ -29,19 +30,21 @@
  */
 namespace KRandom
 {
-/**
+/*!
  * Generates a random string.  It operates in the range [A-Za-z0-9]
- * @param length Generate a string of this length.
- * @return the random string
+ *
+ * \a length Generate a string of this length.
+ *
+ * Returns the random string
  */
 KCOREADDONS_EXPORT QString randomString(int length);
 
-/**
+/*!
  * Reorders the elements of the given container randomly using the given random number generator.
  *
  * The container needs to implement size() and T &operator[]
  *
- * @since 5.73
+ * \since 5.73
  */
 template<typename T>
 void shuffle(T &container, QRandomGenerator *generator)
@@ -54,12 +57,12 @@ void shuffle(T &container, QRandomGenerator *generator)
     }
 }
 
-/**
+/*!
  * Reorders the elements of the given container randomly.
  *
  * The container needs to implement size() and T &operator[]
  *
- * @since 5.73
+ * \since 5.73
  */
 template<typename T>
 void shuffle(T &container)
