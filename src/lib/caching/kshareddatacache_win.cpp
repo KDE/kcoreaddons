@@ -6,7 +6,7 @@
     SPDX-License-Identifier: LGPL-2.0-only
 */
 
-/**
+/*
  * This is a horrifically simple implementation of KSharedDataCache that is
  * basically missing the "shared" part to it, for use on Windows or other platforms
  * that don't support POSIX.

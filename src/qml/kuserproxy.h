@@ -15,95 +15,93 @@
 #include <KDirWatch>
 #include <KUser>
 
-/**
- * KUserProxy (exposed as KUser to the QML runtime) is an object allowing
+/*!
+ * \qmltype KUser
+ * \inqmlmodule org.kde.coreaddons
+ *
+ * KUser is an object allowing
  * read-only access to the user's name, os and version and the configured
  * user image. This object can be used to personalize user interfaces.
  *
  * Example usage:
- * @code
-    import org.kde.coreaddons as KCoreAddons
-    [...]
-
-    Item {
-        [...]
-        KCoreAddons.KUser {
-            id: kuser
-        }
-
-        Image {
-            id: faceIcon
-            source: kuser.faceIconUrl
-            [...]
-        }
-
-        Text {
-            text: kuser.fullName
-            [...]
-        }
-    }
-    @endcode
-
- * @short KUser provides read-only access to the user's personal information
- * @see KUser
+ * \code
+ *  import org.kde.coreaddons as KCoreAddons
+ *  [...]
+ *
+ *  Item {
+ *      [...]
+ *      KCoreAddons.KUser {
+ *          id: kuser
+ *      }
+ *
+ *      Image {
+ *          id: faceIcon
+ *          source: kuser.faceIconUrl
+ *          [...]
+ *      }
+ *
+ *      Text {
+ *          text: kuser.fullName
+ *          [...]
+ *      }
+ *  }
+ *  \endcode
+ *
+ * \brief User provides read-only access to the user's personal information.
+ * \sa KUser
  */
 class KUserProxy : public QObject
 {
     Q_OBJECT
     QML_NAMED_ELEMENT(KUser)
 
+    /*!
+     * \qmlproperty string KUser::fullName
+     * The user's full name
+     */
     Q_PROPERTY(QString fullName READ fullName NOTIFY nameChanged)
+
+    /*!
+     * \qmlproperty string KUser::loginName
+     * The user's login name
+     */
     Q_PROPERTY(QString loginName READ loginName NOTIFY nameChanged)
+
+    /*!
+     * \qmlproperty url KUser::faceIconUrl
+     * The url of the user's configured image (including file:/)
+     */
     Q_PROPERTY(QUrl faceIconUrl READ faceIconUrl NOTIFY faceIconUrlChanged)
+
+    /*!
+     * \qmlproperty string KUser::os
+     * The pretty name indicating operating system and version
+     */
     Q_PROPERTY(QString os READ os CONSTANT)
+
+    /*!
+     * \qmlproperty string KUser::host
+     * The user's the system's hostname
+     */
     Q_PROPERTY(QString host READ host CONSTANT)
 
 public:
     KUserProxy(QObject *parent = nullptr);
     ~KUserProxy() override;
 
-    /**
-     * @return the full name of the user
-     * @see nameChanged
-     */
     QString fullName() const;
 
-    /**
-     * @return the user's login name
-     * @see nameChanged
-     *
-     */
     QString loginName() const;
 
-    /**
-     * @return the url of the user's configured image (including file:/)
-     * @see faceIconUrlChanged
-     */
     QUrl faceIconUrl() const;
 
-    /**
-     * @return pretty name indicating operating system and version
-     * @see nameChanged
-     */
     QString os();
 
-    /**
-     * @return the system's hostname
-     * @see nameChanged
-     */
     QString host() const;
 
 Q_SIGNALS:
-    /**
-     * signal that the user's name or login name changed
-     * @see fullName
-     * @see loginName
-     */
     void nameChanged();
-    /**
-     * signal that the user image changed
-     * @see faceIconUrl
-     */
+
     void faceIconUrlChanged();
 
 private:
