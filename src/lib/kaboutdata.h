@@ -34,10 +34,13 @@ Q_DECL_IMPORT void defaultCrashHandler(int sig);
 #endif
 }
 
-/**
- * @class KAboutPerson kaboutdata.h KAboutPerson
+/*!
+ * \class KAboutPerson
+ * \inheaderfile KAboutData
+ * \inmodule KCoreAddons
  *
- * This class is used to store information about a person or developer.
+ * \brief This class is used to store information about a person or developer.
+ *
  * It can store the person's name, a task, an email address and a
  * link to a home page. This class is intended for use in the
  * KAboutData class, but it can be used elsewhere as well.
@@ -49,7 +52,7 @@ Q_DECL_IMPORT void defaultCrashHandler(int sig);
  * Example usage within a main(), retrieving the list of people involved
  * with a program and re-using data from one of them:
  *
- * @code
+ * \code
  * KAboutData about("khello", i18n("KHello"), "0.1",
  *                   i18n("A KDE version of Hello, world!"),
  *                   KAboutLicense::LGPL,
@@ -58,34 +61,54 @@ Q_DECL_IMPORT void defaultCrashHandler(int sig);
  * about.addAuthor(i18n("Joe Developer"), i18n("developer"), "joe@host.com", 0);
  * QList<KAboutPerson> people = about.authors();
  * about.addCredit(people[0].name(), people[0].task());
- * @endcode
+ * \endcode
  */
 class KCOREADDONS_EXPORT KAboutPerson
 {
     Q_GADGET
+
+    /*!
+     * \property KAboutPerson::name
+     */
     Q_PROPERTY(QString name READ name CONSTANT)
+
+    /*!
+     * \property KAboutPerson::task
+     */
     Q_PROPERTY(QString task READ task CONSTANT)
+
+    /*!
+     * \property KAboutPerson::emailAddress
+     */
     Q_PROPERTY(QString emailAddress READ emailAddress CONSTANT)
+
+    /*!
+     * \property KAboutPerson::webAddress
+     */
     Q_PROPERTY(QString webAddress READ webAddress CONSTANT)
+
+    /*!
+     * \property KAboutPerson::avatarUrl
+     */
     Q_PROPERTY(QUrl avatarUrl READ avatarUrl CONSTANT)
     friend class KAboutData;
     friend class KAboutDataPrivate;
 
 public:
-    /**
+    /*!
      * Convenience constructor
      *
-     * @param name The name of the person.
+     * \a name The name of the person.
      *
-     * @param task The task of this person.
+     * \a task The task of this person.
      *
-     * @param emailAddress The email address of the person.
+     * \a emailAddress The email address of the person.
      *
-     * @param webAddress Home page of the person.
+     * \a webAddress Home page of the person.
      *
-     * @param avatarUrl URL to the avatar of the person, since 6.0
+     * \a avatarUrl URL to the avatar of the person, since 6.0
      *
-     * @p name default argument @since 5.53
+     * \a name default argument, since 5.53
      */
     explicit KAboutPerson(const QString &name = QString(),
                           const QString &task = QString(),
@@ -93,75 +116,86 @@ public:
                           const QString &webAddress = QString(),
                           const QUrl &avatarUrl = QUrl());
 
-    /**
+    /*!
      * Copy constructor.  Performs a deep copy.
-     * @param other object to copy
+     *
+     * \a other object to copy
      */
     KAboutPerson(const KAboutPerson &other);
 
     ~KAboutPerson();
 
-    /**
+    /*!
      * Assignment operator.  Performs a deep copy.
-     * @param other object to copy
+     *
+     * \a other object to copy
      */
     KAboutPerson &operator=(const KAboutPerson &other);
 
-    /**
-     * The person's name
-     * @return the person's name (can be QString(), if it has been
+    /*!
+     * Returns the person's name (can be QString(), if it has been
      *           constructed with an empty name)
      */
     QString name() const;
 
-    /**
-     * The person's task
-     * @return the person's task (can be QString(), if it has been
+    /*!
+     * Returns the person's task (can be QString(), if it has been
      *           constructed with an empty task)
      */
     QString task() const;
 
-    /**
-     * The person's email address
-     * @return the person's email address (can be QString(), if it has been
+    /*!
+     * Returns the person's email address (can be QString(), if it has been
      *           constructed with an empty email)
      */
     QString emailAddress() const;
 
-    /**
-     * The home page or a relevant link
-     * @return the persons home page (can be QString(), if it has been
+    /*!
+     * Returns the persons home page (can be QString(), if it has been
      *           constructed with an empty home page)
      */
     QString webAddress() const;
 
-    /**
-     * @return an URL pointing to the user's avatar
-     * @since 6.0
+    /*!
+     * Returns an URL pointing to the user's avatar
+     * \since 6.0
      */
     QUrl avatarUrl() const;
 
-    /**
-     * Creates a @c KAboutPerson from a JSON object with the following structure:
-     *
-     * Key        | Accessor
-     * -----------| ----------------------------
-     * Name       | name()
-     * Email      | emailAddress()
-     * Task       | task()
-     * Website    | webAddress()
-     * AvatarUrl   | avatarUrl()
-     *
-     * The @c Name and @c Task key are translatable (by using e.g. a "Task[de_DE]" key)
-     * The AvatarUrl exists since version 6.0
-     *
-     * @since 5.18
+    /*!
+      Creates a \c KAboutPerson from a JSON object with the following structure:
+
+     \table
+        \header
+            \li Key
+            \li Accessor
+        \row
+            \li Name
+            \li name()
+        \row
+            \li EMail
+            \li emailAddress()
+        \row
+            \li Task
+            \li task()
+        \row
+            \li Website
+            \li webAddress()
+        \row
+            \li AvatarUrl
+            \li avatarUrl()
+        \endtable
+
+      The \c Name and \c Task key are translatable (by using e.g. a "Task[de_DE]" key)
+      The AvatarUrl exists since version 6.0
+
+      \since 5.18
      */
     static KAboutPerson fromJSON(const QJsonObject &obj);
 
 private:
-    /**
-     * @internal Used by KAboutData to construct translator data.
+    /*!
+     * \internal Used by KAboutData to construct translator data.
      */
     KCOREADDONS_NO_EXPORT explicit KAboutPerson(const QString &name, const QString &email, bool disambiguation);
 
@@ -171,10 +205,13 @@ private:
 
 Q_DECLARE_TYPEINFO(KAboutPerson, Q_RELOCATABLE_TYPE);
 
-/**
- * @class KAboutLicense kaboutdata.h KAboutLicense
+/*!
+ * \class KAboutLicense
+ * \inmodule KCoreAddons
+ * \inheaderfile KAboutData
  *
- * This class is used to store information about a license.
+ * \brief This class is used to store information about a license.
+ *
  * The license can be one of some predefined, one given as text or one
  * that can be loaded from a file. This class is used in the KAboutData class.
  * Explicitly creating a KAboutLicense object is not possible.
@@ -186,46 +223,88 @@ Q_DECLARE_TYPEINFO(KAboutPerson, Q_RELOCATABLE_TYPE);
 class KCOREADDONS_EXPORT KAboutLicense
 {
     Q_GADGET
+
+    /*!
+     * \property KAboutLicense::name
+     */
     Q_PROPERTY(QString name READ name CONSTANT)
+
+    /*!
+     * \property KAboutLicense::text
+     */
     Q_PROPERTY(QString text READ text CONSTANT)
+
+    /*!
+     * \property KAboutLicense::key
+     */
     Q_PROPERTY(KAboutLicense::LicenseKey key READ key CONSTANT)
+
+    /*!
+     * \property KAboutLicense::spdx
+     */
     Q_PROPERTY(QString spdx READ spdx CONSTANT)
     friend class KAboutData;
     friend class KAboutComponent;
 
 public:
-    /**
-     * Describes the license of the software; for more information see: https://spdx.org/licenses/
+    /*!
+      Describes the license of the software; for more information see: https://spdx.org/licenses/
+
+      \value Custom Custom license
+      \value File License set from text file, see setLicenseFromPath()
+      \value Unknown Unknown license
+      \value GPL GPL
+      \value GPL_V2 GPL_V2, this has the same value as LicenseKey::GPL, see https://spdx.org/licenses/GPL-2.0.html
+      \value LGPL LGPL
+      \value LGPL_V2 LGPL_V2, this has the same value as LicenseKey::LGPL, see https://spdx.org/licenses/LGPL-2.0-only.html
+      \value BSDL BSDL, see https://spdx.org/licenses/BSD-2-Clause.html. Deprecated, use BSD_2_Clause
+      \value BSD_2_Clause = BSD_2_CLAUSE, see https://spdx.org/licenses/BSD-2-Clause.html
+      \value Artistic Artistic, see https://spdx.org/licenses/Artistic-2.0.html
+      \value GPL_V3 GPL_V3, see https://spdx.org/licenses/GPL-3.0.html
+      \value LGPL_V3 LGPL_V3, see https://spdx.org/licenses/LGPL-3.0-only.html
+      \value [since 5.25] LGPL_V2_1 LGPL_V2_1, see https://spdx.org/licenses/LGPL-2.1-only.html
+      \value [since 6.0] MIT, see https://spdx.org/licenses/MIT.html
+      \value [since 6.9] ODbL_V1 ODbL_V1, see https://spdx.org/licenses/ODbL-1.0.html
+      \value [since 6.9] Apache_V2 Apache_V2, see https://spdx.org/licenses/Apache-2.0.html
+      \value [since 6.9] FTL FTL, see https://spdx.org/licenses/FTL.html
+      \value [since 6.9] BSL_V1 BSL_V1, see https://spdx.org/licenses/BSL-1.0.html
+      \value [since 6.9] BSD_3_Clause BSD_3_CLAUSE, see https://spdx.org/licenses/BSD-3-Clause.html
+      \value [since 6.9] CC0_V1 CC0_V1, see https://spdx.org/licenses/CC0-1.0.html
+      \value [since 6.11] MPL_V2 MPL_V2, see https://spdx.org/licenses/MPL-2.0.html
      */
     enum LicenseKey {
-        Custom = -2, ///< Custom license
-        File = -1, ///< License set from text file, see setLicenseFromPath()
-        Unknown = 0, ///< Unknown license
-        GPL = 1, ///< GPL
-        GPL_V2 = GPL, ///< GPL_V2, this has the same value as LicenseKey::GPL, see https://spdx.org/licenses/GPL-2.0.html
-        LGPL = 2, ///< LGPL
-        LGPL_V2 = LGPL, ///< LGPL_V2, this has the same value as LicenseKey::LGPL, see https://spdx.org/licenses/LGPL-2.0-only.html
+        Custom = -2,
+        File = -1,
+        Unknown = 0,
+        GPL = 1,
+        GPL_V2 = GPL,
+        LGPL = 2,
+        LGPL_V2 = LGPL,
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(6, 9)
-        BSDL KCOREADDONS_ENUMERATOR_DEPRECATED_VERSION(6, 9, "Use BSD_2_Clause") = 3, ///< BSDL, see https://spdx.org/licenses/BSD-2-Clause.html
+        BSDL KCOREADDONS_ENUMERATOR_DEPRECATED_VERSION(6, 9, "Use BSD_2_Clause") = 3,
 #endif
-        BSD_2_Clause = 3, ///< BSD_2_CLAUSE, see https://spdx.org/licenses/BSD-2-Clause.html
-        Artistic = 4, ///< Artistic, see https://spdx.org/licenses/Artistic-2.0.html
-        GPL_V3 = 5, ///< GPL_V3, see https://spdx.org/licenses/GPL-3.0.html
-        LGPL_V3 = 6, ///< LGPL_V3, see https://spdx.org/licenses/LGPL-3.0-only.html
-        LGPL_V2_1 = 7, ///< LGPL_V2_1 @since 5.25, see https://spdx.org/licenses/LGPL-2.1-only.html
-        MIT = 8, ///< MIT @since 6.0, see https://spdx.org/licenses/MIT.html
-        ODbL_V1 = 9, ///< ODbL_V1 @since 6.9, see https://spdx.org/licenses/ODbL-1.0.html
-        Apache_V2 = 10, ///< Apache_V2 @since 6.9, see https://spdx.org/licenses/Apache-2.0.html
-        FTL = 11, ///< FTL @since 6.9, see https://spdx.org/licenses/FTL.html
-        BSL_V1 = 12, ///< BSL_V1 @since 6.9, see https://spdx.org/licenses/BSL-1.0.html
-        BSD_3_Clause = 13, ///< BSD_3_CLAUSE @since 6.9, see https://spdx.org/licenses/BSD-3-Clause.html
-        CC0_V1 = 14, ///< CC0_V1 @since 6.9, see https://spdx.org/licenses/CC0-1.0.html
-        MPL_V2 = 15, ///< MPL_V2 @since 6.11, see https://spdx.org/licenses/MPL-2.0.html
+        BSD_2_Clause = 3,
+        Artistic = 4,
+        GPL_V3 = 5,
+        LGPL_V3 = 6,
+        LGPL_V2_1 = 7,
+        MIT = 8,
+        ODbL_V1 = 9,
+        Apache_V2 = 10,
+        FTL = 11,
+        BSL_V1 = 12,
+        BSD_3_Clause = 13,
+        CC0_V1 = 14,
+        MPL_V2 = 15,
     };
     Q_ENUM(LicenseKey)
 
-    /**
+    /*!
+     * \since 6.0
      * Format of the license name.
+     *
+     * \value ShortName Short format
+     * \value FullName Full name
      */
     enum NameFormat {
         ShortName,
@@ -233,8 +312,13 @@ public:
     };
     Q_ENUM(NameFormat)
 
-    /**
+    /*!
+     * \since 6.0
      * Whether later versions of the license are allowed.
+     *
+     * \value OnlyThisVersion Only this version of the license is allowed
+     * \value OrLaterVersions Any later version of the license is allowed
+     *
      */
     enum VersionRestriction {
         OnlyThisVersion,
@@ -242,68 +326,61 @@ public:
     };
     Q_ENUM(VersionRestriction)
 
-    /**
-     * @since 5.53
+    /*!
+     * \since 5.53
      */
     explicit KAboutLicense();
 
-    /**
-     * Copy constructor.  Performs a deep copy.
-     * @param other object to copy
+    /*!
+     * Copy constructor. Performs a deep copy.
+     *
+     * \a other object to copy
      */
     KAboutLicense(const KAboutLicense &other);
 
     ~KAboutLicense();
 
-    /**
-     * Assignment operator.  Performs a deep copy.
-     * @param other object to copy
-     */
     KAboutLicense &operator=(const KAboutLicense &other);
 
-    /**
+    /*!
      * Returns the full license text. If the licenseType argument of the
      * constructor has been used, any text defined by setLicenseText is ignored,
      * and the standard text for the chosen license will be returned.
-     *
-     * @return The license text.
      */
     QString text() const;
 
-    /**
+    /*!
      * Returns the license name.
      *
-     * Default argument @since 5.53
-     *
-     * @return The license name as a string.
+     * Default argument since 5.53
      */
     QString name(KAboutLicense::NameFormat formatName = ShortName) const;
 
-    /**
-     * Returns the license key.
-     *
-     * @return The license key as element of KAboutLicense::LicenseKey enum.
+    /*!
+     * Returns The license key as element of KAboutLicense::LicenseKey enum.
      */
     KAboutLicense::LicenseKey key() const;
 
-    /**
+    /*!
      * Returns the SPDX license expression of this license.
      * If the underlying license cannot be expressed as a SPDX expression a null string is returned.
      *
-     * @note SPDX expression are expansive constructs. If you parse the return value, do it in a
+     * \note SPDX expression are expansive constructs. If you parse the return value, do it in a
      *   SPDX specification compliant manner by splitting on whitespaces to discard unwanted
      *   information or by using a complete SPDX license expression parser.
-     * @note SPDX identifiers are case-insensitive. Do not use case-sensitive checks on the return
+     *
+     * \note SPDX identifiers are case-insensitive. Do not use case-sensitive checks on the return
      *   value.
-     * @see https://spdx.org/licenses
-     * @return SPDX license expression or QString() if the license has no identifier. Compliant
+     *
+     * See \l https://spdx.org/licenses
+     * Returns SPDX license expression or QString() if the license has no identifier. Compliant
      *   with SPDX 2.1.
      *
-     * @since 5.37
+     * \since 5.37
      */
     QString spdx() const;
 
-    /**
+    /*!
      * Fetch a known license by a keyword/spdx ID
      *
      * Frequently the license data is provided by a terse keyword-like string,
@@ -319,34 +396,35 @@ public:
      * returned, with its name and text informing about a custom license,
      * and its key equal to KAboutLicense::Custom.
      *
-     * @param keyword The license keyword.
-     * @return The license object.
+     * \a keyword The license keyword.
      *
-     * @see KAboutLicense::LicenseKey
+     * Returns the license object.
+     *
+     * \sa KAboutLicense::LicenseKey
      */
     static KAboutLicense byKeyword(const QString &keyword);
 
 private:
-    /**
-     * @internal Used by KAboutData to construct a predefined license.
+    /*!
+     * \internal Used by KAboutData to construct a predefined license.
      */
-    KCOREADDONS_NO_EXPORT explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType,
-                                                 enum KAboutLicense::VersionRestriction versionRestriction,
+    KCOREADDONS_NO_EXPORT explicit KAboutLicense(KAboutLicense::LicenseKey licenseType,
+                                                 KAboutLicense::VersionRestriction versionRestriction,
                                                  const KAboutData *aboutData);
-    /**
-     * @internal Used by KAboutData to construct a predefined license.
+    /*!
+     * \internal Used by KAboutData to construct a predefined license.
      */
     KCOREADDONS_NO_EXPORT explicit KAboutLicense(enum KAboutLicense::LicenseKey licenseType, const KAboutData *aboutData);
-    /**
-     * @internal Used by KAboutData to construct a KAboutLicense
+    /*!
+     * \internal Used by KAboutData to construct a KAboutLicense
      */
     KCOREADDONS_NO_EXPORT explicit KAboutLicense(const KAboutData *aboutData);
-    /**
-     * @internal Used by KAboutData to construct license by given text
+    /*!
+     * \internal Used by KAboutData to construct license by given text
      */
     KCOREADDONS_NO_EXPORT void setLicenseFromPath(const QString &pathToFile);
-    /**
-     * @internal Used by KAboutData to construct license by given text
+    /*!
+     * \internal Used by KAboutData to construct license by given text
      */
     KCOREADDONS_NO_EXPORT void setLicenseFromText(const QString &licenseText);
 
@@ -356,10 +434,13 @@ private:
 
 Q_DECLARE_TYPEINFO(KAboutLicense, Q_RELOCATABLE_TYPE);
 
-/**
- * @class KAboutComponent kaboutdata.h KAboutComponent
+/*!
+ * \class KAboutComponent
+ * \inheaderfile KAboutData
+ * \inmodule KCoreAddons
  *
- * This class is used to store information about a third party component.
+ * \brief This class is used to store information about a third party component.
+ *
  * It can store the component's name, a description, a link to a website
  * and the license of the libary. This class is intended for use in the
  * KAboutData class, but it can be used elsewhere as well.
@@ -371,7 +452,7 @@ Q_DECLARE_TYPEINFO(KAboutLicense, Q_RELOCATABLE_TYPE);
  * Example usage within a main(), retrieving the list of components used
  * by a program and re-using data from one of them:
  *
- * @code
+ * \code
  * KAboutData about("khello", i18n("KHello"), "0.1",
  *                   i18n("A KDE version of Hello, world!"),
  *                   KAboutLicense::LGPL,
@@ -383,36 +464,54 @@ Q_DECLARE_TYPEINFO(KAboutLicense, Q_RELOCATABLE_TYPE);
  *                  "http://example.com",
  *                  KAboutLicense::LGPL);
  * QList<KAboutComponent> components = about.components();
- * @endcode
+ * \endcode
  *
- * @since 5.84
+ * \since 5.84
  */
 class KCOREADDONS_EXPORT KAboutComponent
 {
     Q_GADGET
+    /*!
+     * \property KAboutComponent::name
+     */
     Q_PROPERTY(QString name READ name CONSTANT)
+
+    /*!
+     * \property KAboutComponent::description
+     */
     Q_PROPERTY(QString description READ description CONSTANT)
+
+    /*!
+     * \property KAboutComponent::webAddress
+     */
     Q_PROPERTY(QString webAddress READ webAddress CONSTANT)
+
+    /*!
+     * \property KAboutComponent::licenses
+     */
     Q_PROPERTY(KAboutLicense licenses READ license CONSTANT)
+
+    /*!
+     * \property KAboutComponent::version
+     */
     Q_PROPERTY(QString version READ version CONSTANT)
     friend class KAboutData;
     friend class KAboutDataPrivate;
 
 public:
-    /**
+    /*!
      * Convenience constructor
      *
-     * @param name The name of the component.
+     * \a name The name of the component.
      *
-     * @param description The description of this component.
+     * \a description The description of this component.
      *
-     * @param version The version of this component.
+     * \a version The version of this component.
      *
-     * @param webAddress Website of the component.
+     * \a webAddress Website of the component.
      *
-     * @param licenseType The license identifier of the component.
+     * \a licenseType The license identifier of the component.
      *
-     * @p name default argument
      */
     explicit KAboutComponent(const QString &name = QString(),
                              const QString &description = QString(),
@@ -420,21 +519,19 @@ public:
                              const QString &webAddress = QString(),
                              enum KAboutLicense::LicenseKey licenseType = KAboutLicense::Unknown);
 
-    /**
+    /*!
      * Convenience constructor
      *
-     * @param name The name of the component.
+     * \a name The name of the component.
      *
-     * @param description The description of this component.
+     * \a description The description of this component.
      *
-     * @param version The version of this component.
+     * \a version The version of this component.
      *
-     * @param webAddress Website of the component.
+     * \a webAddress Website of the component.
      *
-     * @param pathToLicenseFile Path to the file in the local filesystem containing the license text.
+     * \a pathToLicenseFile Path to the file in the local filesystem containing the license text.
      *        The file format has to be plain text in an encoding compatible to the local.
-     *
-     * @p name default argument
      */
     explicit KAboutComponent(const QString &name,
                              const QString &description,
@@ -442,48 +539,45 @@ public:
                              const QString &webAddress,
                              const QString &pathToLicenseFile);
 
-    /**
+    /*!
      * Copy constructor. Performs a deep copy.
-     * @param other object to copy
+     *
+     * \a other object to copy
      */
     KAboutComponent(const KAboutComponent &other);
 
     ~KAboutComponent();
 
-    /**
+    /*!
      * Assignment operator. Performs a deep copy.
-     * @param other object to copy
+     *
+     * \a other object to copy
      */
     KAboutComponent &operator=(const KAboutComponent &other);
 
-    /**
-     * The component's name
-     * @return the component's name (can be QString(), if it has been
+    /*!
+     * Returns the component's name (can be QString(), if it has been
      *           constructed with an empty name)
      */
     QString name() const;
 
-    /**
-     * The component's description
-     * @return the component's description (can be empty)
+    /*!
+     * Returns the component's description (can be empty)
      */
     QString description() const;
 
-    /**
-     * The component's version
-     * @return the component's task (can be empty)
+    /*!
+     * Returns the component's task (can be empty)
      */
     QString version() const;
 
-    /**
-     * The website or a relevant link
-     * @return the component's website (can be empty)
+    /*!
+     * Returns the component's website (can be empty)
      */
     QString webAddress() const;
 
-    /**
-     * The component's license
-     * @return the component's KAboutLicense
+    /*!
+     * Returns the component's KAboutLicense
      */
     KAboutLicense license() const;
 
@@ -493,10 +587,12 @@ private:
 
 Q_DECLARE_TYPEINFO(KAboutComponent, Q_RELOCATABLE_TYPE);
 
-/**
- * @class KAboutData kaboutdata.h KAboutData
+/*!
+ * \class KAboutData
+ * \inmodule KCoreAddons
  *
- * This class is used to store information about a program or plugin.
+ * \brief This class is used to store information about a program or plugin.
+ *
  * It can store such values as version number, program name, home page, address
  * for bug reporting, multiple authors and contributors
  * (using KAboutPerson), license and copyright information.
@@ -515,7 +611,7 @@ Q_DECLARE_TYPEINFO(KAboutComponent, Q_RELOCATABLE_TYPE);
  * Example:
  * Setting the metadata of an application using KAboutData in code also relying
  * on the KDE Framework modules KI18n and KDBusAddons:
- * @code
+ * \code
  * // create QApplication instance
  * QApplication app(argc, argv);
  * // setup translation string domain for the i18n calls
@@ -547,34 +643,97 @@ Q_DECLARE_TYPEINFO(KAboutComponent, Q_RELOCATABLE_TYPE);
  *
  * // with the application metadata set, register to the D-Bus session
  * KDBusService programDBusService(KDBusService::Multiple | KDBusService::NoExitOnFailure);
- * @endcode
+ * \endcode
  *
- * @short Holds information needed by the "About" box and other
+ * \brief Holds information needed by the "About" box and other
  * classes.
- * @author Espen Sand (espen@kde.org), David Faure (faure@kde.org)
  *
  */
 class KCOREADDONS_EXPORT KAboutData
 {
     Q_GADGET
+
+    /*!
+     * \property KAboutData::displayName
+     */
     Q_PROPERTY(QString displayName READ displayName CONSTANT)
+
+    /*!
+     * \property KAboutData::productName
+     */
     Q_PROPERTY(QString productName READ productName CONSTANT)
+
+    /*!
+     * \property KAboutData::componentName
+     */
     Q_PROPERTY(QString componentName READ componentName CONSTANT)
+
+    /*!
+     * \property KAboutData::programLogo
+     */
     Q_PROPERTY(QVariant programLogo READ programLogo CONSTANT)
+
+    /*!
+     * \property KAboutData::shortDescription
+     */
     Q_PROPERTY(QString shortDescription READ shortDescription CONSTANT)
+
+    /*!
+     * \property KAboutData::homepage
+     */
     Q_PROPERTY(QString homepage READ homepage CONSTANT)
+
+    /*!
+     * \property KAboutData::bugAddress
+     */
     Q_PROPERTY(QString bugAddress READ bugAddress CONSTANT)
+
+    /*!
+     * \property KAboutData::version
+     */
     Q_PROPERTY(QString version READ version CONSTANT)
+
+    /*!
+     * \property KAboutData::otherText
+     */
     Q_PROPERTY(QString otherText READ otherText CONSTANT)
+
+    /*!
+     * \property KAboutData::authors
+     */
     Q_PROPERTY(QList<KAboutPerson> authors READ authors CONSTANT) // constant in practice as addAuthor is not exposed to Q_GADGET
+
+    /*!
+     * \property KAboutData::credits
+     */
     Q_PROPERTY(QList<KAboutPerson> credits READ credits CONSTANT)
+
+    /*!
+     * \property KAboutData::translators
+     */
     Q_PROPERTY(QList<KAboutPerson> translators READ translators CONSTANT)
+
+    /*!
+     * \property KAboutData::components
+     */
     Q_PROPERTY(QList<KAboutComponent> components READ components CONSTANT)
+
+    /*!
+     * \property KAboutData::licenses
+     */
     Q_PROPERTY(QList<KAboutLicense> licenses READ licenses CONSTANT)
+
+    /*!
+     * \property KAboutData::copyrightStatement
+     */
     Q_PROPERTY(QString copyrightStatement READ copyrightStatement CONSTANT)
+
+    /*!
+     * \property KAboutData::desktopFileName
+     */
     Q_PROPERTY(QString desktopFileName READ desktopFileName CONSTANT)
 public:
-    /**
+    /*!
      * Returns the KAboutData for the application.
      *
      * This contains information such as authors, license, etc.,
@@ -584,79 +743,79 @@ public:
      * if an instance of that already exists.
      * For the list of such properties see setApplicationData
      * (before 5.22: limited to QCoreApplication::applicationName).
-     * @see setApplicationData
+     * \sa setApplicationData
      */
     static KAboutData applicationData();
 
-    /**
+    /*!
      * Sets the application data for this application.
      *
-     * In addition to changing the result of applicationData(), this initializes
+     * In addition to changing the result of applicationData, this initializes
      * the equivalent properties of QCoreApplication (and its subclasses) with
-     * information from @p aboutData, if an instance of that already exists.
+     * information from \a aboutData, if an instance of that already exists.
      * Those properties are:
-       <ul>
-       <li>QCoreApplication::applicationName</li>
-       <li>QCoreApplication::applicationVersion</li>
-       <li>QCoreApplication::organizationDomain</li>
-       <li>QGuiApplication::applicationDisplayName</li>
-       <li>QGuiApplication::desktopFileName (since 5.16)</li>
-       </ul>
-     * @see applicationData
+     *  \list
+     *  \li QCoreApplication::applicationName
+     *  \li QCoreApplication::applicationVersion
+     *  \li QCoreApplication::organizationDomain
+     *  \li QGuiApplication::applicationDisplayName
+     *  \li QGuiApplication::desktopFileName (since 5.16)
+     *  \endlist
+     * \sa applicationData
      */
     static void setApplicationData(const KAboutData &aboutData);
 
 public:
-    /**
+    // KF6: remove constructor that includes catalogName, and put default
+    //      values back in for shortDescription and licenseType
+    /*!
      * Constructor.
      *
-     * Porting Note: The @p catalogName parameter present in KDE4 was
+     * Porting Note: The \a catalogName parameter present in KDE4 was
      * deprecated and removed. See also K4AboutData
      * in kde4support if this feature is needed for compatibility purposes, or
      * consider using componentName() instead.
      *
-     * @param componentName The program name or plugin name used internally.
+     * \a componentName The program name or plugin name used internally.
      * Example: QStringLiteral("kwrite"). This should never be translated.
      *
-     * @param displayName A displayable name for the program or plugin. This string
+     * \a displayName A displayable name for the program or plugin. This string
      *        should be translated. Example: i18n("KWrite")
      *
-     * @param version The component version string. Example: QStringLiteral("1.0").
+     * \a version The component version string. Example: QStringLiteral("1.0").
      *
-     * @param shortDescription A short description of what the component does.
+     * \a shortDescription A short description of what the component does.
      *        This string should be translated.
      *        Example: i18n("A simple text editor.")
      *
-     * @param licenseType The license identifier. Use setLicenseText or
-              setLicenseTextFile if you use a license not predefined here.
+     * \a licenseType The license identifier. Use setLicenseText or
+     *        setLicenseTextFile if you use a license not predefined here.
      *
-     * @param copyrightStatement A copyright statement, that can look like this:
+     * \a copyrightStatement A copyright statement, that can look like this:
      *        i18n("Copyright (C) 1999-2000 Name"). The string specified here is
      *        taken verbatim; the author information from addAuthor is not used.
      *
-     * @param otherText Some free form text, that can contain any kind of
+     * \a otherText Some free form text, that can contain any kind of
      *        information. The text can contain newlines. This string
      *        should be translated.
      *
-     * @param homePageAddress The URL to the component's homepage, including
+     * \a homePageAddress The URL to the component's homepage, including
      *        URL scheme. "http://some.domain" is correct, "some.domain" is
      *        not. Since KDE Frameworks 5.17, https and other valid URL schemes
      *        are also valid. See also the note below.
      *
-     * @param bugAddress The bug report address string, an email address or a URL.
+     * \a bugAddress The bug report address string, an email address or a URL.
      *        This defaults to the kde.org bug system.
      *
-     * @note The @p homePageAddress argument is used to derive a default organization
+     * \note The \a homePageAddress argument is used to derive a default organization
      * domain for the application (which is used to register on the session D-Bus,
      * locate the appropriate desktop file, etc.), by taking the host name and dropping
      * the first component, unless there are less than three (e.g. "www.kde.org" -> "kde.org").
      * Use both setOrganizationDomain(const QByteArray&) and setDesktopFileName() if their default values
      * do not have proper values.
      *
-     * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
+     * \sa setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
      */
-    // KF6: remove constructor that includes catalogName, and put default
-    //      values back in for shortDescription and licenseType
     KAboutData(const QString &componentName,
                const QString &displayName,
                const QString &version,
@@ -667,72 +826,69 @@ public:
                const QString &homePageAddress = QString(),
                const QString &bugAddress = QStringLiteral("submit@bugs.kde.org"));
 
-    /**
+    /*!
      * Constructor.
      *
-     * @param componentName The program name or plugin name used internally.
+     * \a componentName The program name or plugin name used internally.
      * Example: "kwrite".
      *
-     * @param displayName A displayable name for the program or plugin. This string
+     * \a displayName A displayable name for the program or plugin. This string
      *        should be translated. Example: i18n("KWrite")
      *
-     * @param version The component version string.
+     * \a version The component version string.
      *
      * Sets the property desktopFileName to "org.kde."+componentName and
      * the property organizationDomain to "kde.org".
      *
-     * Default arguments @since 5.53
+     * Default arguments since 5.53
      *
-     * @see setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
+     * \sa setOrganizationDomain(const QByteArray&), setDesktopFileName(const QString&)
      */
     explicit KAboutData(const QString &componentName = {}, const QString &displayName = {}, const QString &version = {});
 
-    /**
+    /*!
      * Copy constructor.  Performs a deep copy.
-     * @param other object to copy
+     *
+     * \a other object to copy
      */
     KAboutData(const KAboutData &other);
 
-    /**
-     * Assignment operator.  Performs a deep copy.
-     * @param other object to copy
-     */
     KAboutData &operator=(const KAboutData &other);
 
     ~KAboutData();
 
-    /**
+    /*!
      * Add an author.
      *
      * You can call this function as many times as you need. Each entry
      * is appended to a list.
      *
-     * @param author The author.
-     * @since 6.9
+     * \a author the author.
+     * \since 6.9
      */
     KAboutData &addAuthor(const KAboutPerson &author);
 
-    /**
+    /*!
      * Defines an author.
      *
      * You can call this function as many times as you need. Each entry is
      * appended to a list. The person in the first entry is assumed to be
      * the leader of the project.
      *
-     * @param name The developer's name. It should be translated.
+     * \a name The developer's name. It should be translated.
      *
-     * @param task What the person is responsible for. This text can contain
+     * \a task What the person is responsible for. This text can contain
      *             newlines. It should be translated.
      *             Can be left empty.
      *
-     * @param emailAddress An Email address where the person can be reached.
+     * \a emailAddress An Email address where the person can be reached.
      *                     Can be left empty.
      *
-     * @param webAddress The person's homepage or a relevant link.
+     * \a webAddress The person's homepage or a relevant link.
      *        Start the address with "http://". "http://some.domain" is
      *        correct, "some.domain" is not. Can be left empty.
      *
-     * @param avatarUrl URL to the avatar of the person
+     * \a avatarUrl URL to the avatar of the person
      */
     KAboutData &addAuthor(const QString &name,
                           const QString &task = QString(),
@@ -740,46 +896,46 @@ public:
                           const QString &webAddress = QString(),
                           const QUrl &avatarUrl = QUrl());
 
-    /**
-     * @overload
-     * @since 6.0
+    /*!
+     * \overload
+     * \since 6.0
      */
     KAboutData &addAuthor(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &kdeStoreUsername)
     {
         return addAuthor(name, task, emailAddress, webAddress, QUrl(QStringLiteral("https://store.kde.org/avatar/") + kdeStoreUsername));
     }
 
-    /**
+    /*!
      * Add a person that deserves credit.
      *
      * You can call this function as many times as you need. Each entry
      * is appended to a list.
      *
-     * @param person The person.
-     * @since 6.9
+     * \a person The person.
+     * \since 6.9
      */
     KAboutData &addCredit(const KAboutPerson &person);
 
-    /**
+    /*!
      * Defines a person that deserves credit.
      *
      * You can call this function as many times as you need. Each entry
      * is appended to a list.
      *
-     * @param name The person's name. It should be translated.
+     * \a name The person's name. It should be translated.
      *
-     * @param task What the person has done to deserve the honor. The
+     * \a task What the person has done to deserve the honor. The
      *        text can contain newlines. It should be translated.
      *        Can be left empty.
      *
-     * @param emailAddress An email address when the person can be reached.
+     * \a emailAddress An email address when the person can be reached.
      *        Can be left empty.
      *
-     * @param webAddress The person's homepage or a relevant link.
+     * \a webAddress The person's homepage or a relevant link.
      *        Start the address with "http://". "http://some.domain" is
      *        is correct, "some.domain" is not. Can be left empty.
      *
-     * @param avatarUrl URL to the avatar of the person
+     * \a avatarUrl URL to the avatar of the person
      */
     KAboutData &addCredit(const QString &name,
                           const QString &task = QString(),
@@ -787,17 +943,17 @@ public:
                           const QString &webAddress = QString(),
                           const QUrl &avatarUrl = QUrl());
 
-    /**
-     * @overload
-     * @since 6.0
+    /*!
+     * \overload
+     * \since 6.0
      */
     KAboutData &addCredit(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &kdeStoreUsername)
     {
         return addCredit(name, task, emailAddress, webAddress, QUrl(QStringLiteral("https://store.kde.org/avatar/") + kdeStoreUsername));
     }
 
-    /**
-     * @brief Sets the name(s) of the translator(s) of the GUI.
+    /*!
+     * \brief Sets the name(s) of the translator(s) of the GUI.
      *
      * The canonical use with the ki18n framework is:
      *
@@ -813,45 +969,45 @@ public:
      * If the strings are empty or "Your names"/"Your emails"
      * respectively they will be ignored.
      *
-     * @param name the name(s) of the translator(s)
-     * @param emailAddress the email address(es) of the translator(s)
-     * @see KAboutTranslator
+     * \a name the name(s) of the translator(s)
+     *
+     * \a emailAddress the email address(es) of the translator(s)
      */
     KAboutData &setTranslator(const QString &name, const QString &emailAddress);
 
-    /**
+    /*!
      * Add a component that is used by the application.
      *
      * You can call this function as many times as you need. Each entry is
      * appended to a list.
      *
-     * @param component The component
+     * \a component The component
      *
-     * @since 6.9
+     * \since 6.9
      */
     KAboutData &addComponent(const KAboutComponent &component);
 
-    /**
+    /*!
      * Defines a component that is used by the application.
      *
      * You can call this function as many times as you need. Each entry is
      * appended to a list.
      *
-     * @param name The component's name. It should be translated.
+     * \a name The component's name. It should be translated.
      *
-     * @param description Short description of the component and maybe
+     * \a description Short description of the component and maybe
      *        copyright info. This text can contain newlines. It should
      *        be translated. Can be left empty.
      *
-     * @param version The version of the component. Can be left empty.
+     * \a version The version of the component. Can be left empty.
      *
-     * @param webAddress The component's homepage or a relevant link.
+     * \a webAddress The component's homepage or a relevant link.
      *        Start the address with "http://". "http://some.domain" is
      *        correct, "some.domain" is not. Can be left empty.
      *
-     * @param licenseKey The component's license identifier. Can be left empty (i.e. KAboutLicense::Unknown)
+     * \a licenseKey The component's license identifier. Can be left empty (i.e. KAboutLicense::Unknown)
      *
-     * @since 5.84
+     * \since 5.84
      */
     KAboutData &addComponent(const QString &name,
                              const QString &description = QString(),
@@ -859,33 +1015,33 @@ public:
                              const QString &webAddress = QString(),
                              KAboutLicense::LicenseKey licenseKey = KAboutLicense::Unknown);
 
-    /**
+    /*!
      * Defines a component that is used by the application with a custom license text file.
      *
      * You can call this function as many times as you need. Each entry is
      * appended to a list.
      *
-     * @param name The component's name. It should be translated.
+     * \a name The component's name. It should be translated.
      *
-     * @param description Short description of the component and maybe
+     * \a description Short description of the component and maybe
      *        copyright info. This text can contain newlines. It should
      *        be translated. Can be left empty.
      *
-     * @param version The version of the component. Can be left empty.
+     * \a version The version of the component. Can be left empty.
      *
-     * @param webAddress The component's homepage or a relevant link.
+     * \a webAddress The component's homepage or a relevant link.
      *        Start the address with "http://". "http://some.domain" is
      *        correct, "some.domain" is not. Can be left empty.
      *
-     * @param pathToLicenseFile Path to the file in the local filesystem containing the license text.
+     * \a pathToLicenseFile Path to the file in the local filesystem containing the license text.
      *        The file format has to be plain text in an encoding compatible to the local.
      *
-     * @since 5.84
+     * \since 5.84
      */
     KAboutData &
     addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, const QString &pathToLicenseFile);
 
-    /**
+    /*!
      * Defines a license text, which is translated.
      *
      * Example:
@@ -893,11 +1049,11 @@ public:
      * setLicenseText( i18n("This is my license") );
      * \endcode
      *
-     * @param license The license text.
+     * \a license The license text.
      */
     KAboutData &setLicenseText(const QString &license);
 
-    /**
+    /*!
      * Adds a license text, which is translated.
      *
      * If there is only one unknown license set, e.g. by using the default
@@ -908,48 +1064,48 @@ public:
      * addLicenseText( i18n("This is my license") );
      * \endcode
      *
-     * @param license The license text.
-     * @see setLicenseText, addLicense, addLicenseTextFile
+     * \a license The license text.
+     * \sa setLicenseText, addLicense, addLicenseTextFile
      */
     KAboutData &addLicenseText(const QString &license);
 
-    /**
+    /*!
      * Defines a license text by pointing to a file where it resides.
      * The file format has to be plain text in an encoding compatible to the locale.
      *
-     * @param file Path to the file in the local filesystem containing the license text.
+     * \a file Path to the file in the local filesystem containing the license text.
      */
     KAboutData &setLicenseTextFile(const QString &file);
 
-    /**
+    /*!
      * Adds a license text by pointing to a file where it resides.
      * The file format has to be plain text in an encoding compatible to the locale.
      *
      * If there is only one unknown license set, e.g. by using the default
      * parameter in the constructor, that one is replaced.
      *
-     * @param file Path to the file in the local filesystem containing the license text.
-     * @see addLicenseText, addLicense, setLicenseTextFile
+     * \a file path to the file in the local filesystem containing the license text.
+     * \sa addLicenseText, addLicense, setLicenseTextFile
      */
     KAboutData &addLicenseTextFile(const QString &file);
 
-    /**
+    /*!
      * Defines the component name used internally.
      *
-     * @param componentName The application or plugin name. Example: "kate".
+     * \a componentName the application or plugin name. Example: "kate".
      */
     KAboutData &setComponentName(const QString &componentName);
 
-    /**
+    /*!
      * Defines the displayable component name string.
      *
-     * @param displayName The display name. This string should be
+     * \a displayName the display name. This string should be
      *        translated.
      *        Example: i18n("Advanced Text Editor").
      */
     KAboutData &setDisplayName(const QString &displayName);
 
-    /**
+    /*!
      * Defines the program logo.
      *
      * Use this if you need to have an application logo
@@ -961,109 +1117,112 @@ public:
      * QIcon should be preferred, to be able to properly handle HiDPI scaling.
      * If a QIcon is provided, it will be used at a typical size of 48x48.
      *
-     * @param image logo image.
-     * @see programLogo()
+     * \a image logo image.
+     * \sa programLogo()
      */
     KAboutData &setProgramLogo(const QVariant &image);
 
-    /**
+    /*!
      * Defines the program version string.
      *
-     * @param version The program version.
+     * \a version the program version.
      */
     KAboutData &setVersion(const QByteArray &version);
 
-    /**
+    /*!
      * Defines a short description of what the program does.
      *
-     * @param shortDescription The program description. This string should
+     * \a shortDescription the program description. This string should
      *        be translated. Example: i18n("An advanced text
      *        editor with syntax highlighting support.").
      */
     KAboutData &setShortDescription(const QString &shortDescription);
 
-    /**
+    /*!
      * Defines the license identifier.
      *
-     * @param licenseKey The license identifier.
-     * @see addLicenseText, setLicenseText, setLicenseTextFile
+     * \a licenseKey the license identifier.
+     * \sa addLicenseText, setLicenseText, setLicenseTextFile
      */
     KAboutData &setLicense(KAboutLicense::LicenseKey licenseKey);
 
-    /**
+    /*!
      * Defines the license identifier.
      *
-     * @param licenseKey The license identifier.
-     * @param versionRestriction Whether later versions of the license are also allowed.
-     *    e.g. licensed under "GPL 2.0 or at your option later versions" would be OrLaterVersions.
-     * @see addLicenseText, setLicenseText, setLicenseTextFile
+     * \a licenseKey the license identifier.
      *
-     * @since 5.37
+     * \a versionRestriction Whether later versions of the license are also allowed.
+     *    e.g. licensed under "GPL 2.0 or at your option later versions" would be OrLaterVersions.
+     * \sa addLicenseText, setLicenseText, setLicenseTextFile
+     *
+     * \since 5.37
      */
     KAboutData &setLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction);
 
-    /**
+    /*!
      * Adds a license identifier.
      *
      * If there is only one unknown license set, e.g. by using the default
      * parameter in the constructor, that one is replaced.
      *
-     * @param licenseKey The license identifier.
-     * @see setLicenseText, addLicenseText, addLicenseTextFile
+     * \a licenseKey the license identifier.
+     * \sa setLicenseText, addLicenseText, addLicenseTextFile
      */
     KAboutData &addLicense(KAboutLicense::LicenseKey licenseKey);
 
-    /**
+    /*!
      * Adds a license identifier.
      *
      * If there is only one unknown license set, e.g. by using the default
      * parameter in the constructor, that one is replaced.
      *
-     * @param licenseKey The license identifier.
-     * @param versionRestriction Whether later versions of the license are also allowed.
-     *    e.g. licensed under "GPL 2.0 or at your option later versions" would be OrLaterVersions.
-     * @see setLicenseText, addLicenseText, addLicenseTextFile
+     * \a licenseKey the license identifier.
      *
-     * @since 5.37
+     * \a versionRestriction Whether later versions of the license are also allowed.
+     *    e.g. licensed under "GPL 2.0 or at your option later versions" would be OrLaterVersions.
+     *
+     * \sa setLicenseText, addLicenseText, addLicenseTextFile
+     *
+     * \since 5.37
      */
     KAboutData &addLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction);
 
-    /**
+    /*!
      * Defines the copyright statement to show when displaying the license.
      *
-     * @param copyrightStatement A copyright statement, that can look like
+     * \a copyrightStatement a copyright statement, that can look like
      *        this: i18n("Copyright (C) 1999-2000 Name"). The string specified here is
      *        taken verbatim; the author information from addAuthor is not used.
      */
     KAboutData &setCopyrightStatement(const QString &copyrightStatement);
 
-    /**
+    /*!
      * Defines the additional text to show in the about dialog.
      *
-     * @param otherText Some free form text, that can contain any kind of
+     * \a otherText some free form text, that can contain any kind of
      *        information. The text can contain newlines. This string
      *        should be translated.
      */
     KAboutData &setOtherText(const QString &otherText);
 
-    /**
+    /*!
      * Defines the program homepage.
      *
-     * @param homepage The program homepage string.
+     * \a homepage the program homepage string.
      *        Start the address with "http://". "http://kate.kde.org"
      *        is correct but "kate.kde.org" is not.
      */
     KAboutData &setHomepage(const QString &homepage);
 
-    /**
+    /*!
      * Defines the address where bug reports should be sent.
      *
-     * @param bugAddress The bug report email address or URL.
+     * \a bugAddress The bug report email address or URL.
      *        This defaults to the kde.org bug system.
      */
     KAboutData &setBugAddress(const QByteArray &bugAddress);
 
-    /**
+    /*!
      * Defines the domain of the organization that wrote this application.
      * The domain is set to kde.org by default, or the domain of the homePageAddress constructor argument,
      * if set.
@@ -1076,7 +1235,7 @@ public:
      *
      * Calling this method has no effect on the value of the desktopFileName property.
      *
-     * @note If your program should work as a D-Bus activatable service, the base name
+     * \note If your program should work as a D-Bus activatable service, the base name
      * of the D-Bus service description file or of the desktop file you install must match
      * the D-Bus "well-known name" for which the program will register.
      * For example, KDBusService will use a name created from the reversed organization domain
@@ -1085,194 +1244,165 @@ public:
      * "org.bar.foo.service" or the name of the installed desktop file "org.bar.foo.desktop"
      * (and the desktopFileName property accordingly set to "org.bar.foo").
      *
-     * @param domain the domain name, for instance kde.org, koffice.org, etc.
+     * \a domain the domain name, for instance kde.org, koffice.org, etc.
      *
-     * @see setDesktopFileName(const QString&)
+     * \sa setDesktopFileName(const QString&)
      */
     KAboutData &setOrganizationDomain(const QByteArray &domain);
 
-    /**
+    /*!
      * Defines the product name which will be used in the KBugReport dialog.
      * By default it's the componentName, but you can overwrite it here to provide
      * support for special components e.g. in the form 'product/component',
      * such as 'kontact/summary'.
      *
-     * @param name The name of product
+     * \a name the name of product
      */
     KAboutData &setProductName(const QByteArray &name);
 
-    /**
+    /*!
      * Returns the application's internal name.
-     * @return the internal program name.
      */
     QString componentName() const;
 
-    /**
+    /*!
      * Returns the application's product name, which will be used in KBugReport
      * dialog. By default it returns componentName(), otherwise the one which is set
      * with setProductName()
-     *
-     * @return the product name.
      */
     QString productName() const;
 
-    /**
-     * @internal
+    /*!
+     * \internal
      * Provided for use by KCrash
      */
     const char *internalProductName() const;
 
-    /**
+    /*!
      * Returns the translated program name.
-     * @return the program name (translated).
      */
     QString displayName() const;
 
-    /**
+    /*!
      * Returns the domain name of the organization that wrote this application.
      *
-     * @see setOrganizationDomain(const QByteArray&)
+     * \sa setOrganizationDomain(const QByteArray&)
      */
     QString organizationDomain() const;
 
-    /**
-     * @internal
+    /*!
+     * \internal
      * Provided for use by KCrash
      */
     const char *internalProgramName() const;
 
-    /**
-     * Returns the program logo image.
+    /*!
+     * Returns the program logo data, or a null image if there is
+     *         no custom application logo defined.
      *
      * Because KAboutData is a core class it cannot use QImage/QPixmap/QIcon directly,
      * so this is a QVariant containing a QImage/QPixmap/QIcon.
-     *
-     * @return the program logo data, or a null image if there is
-     *         no custom application logo defined.
      */
     QVariant programLogo() const;
 
-    /**
+    /*!
      * Returns the program's version.
-     * @return the version string.
      */
     QString version() const;
 
-    /**
-     * @internal
+    /*!
+     * \internal
      * Provided for use by KCrash
      */
     const char *internalVersion() const;
 
-    /**
+    /*!
      * Returns a short, translated description.
-     * @return the short description (translated). Can be
-     *         QString() if not set.
      */
     QString shortDescription() const;
 
-    /**
+    /*!
      * Returns the application homepage.
-     * @return the application homepage URL. Can be QString() if
-     *         not set.
      */
     QString homepage() const;
 
-    /**
+    /*!
      * Returns the email address or URL for bugs.
-     * @return the address where to report bugs.
      */
     QString bugAddress() const;
 
-    /**
-     * @internal
+    /*!
+     * \internal
      * Provided for use by KCrash
      */
     const char *internalBugAddress() const;
 
-    /**
+    /*!
      * Returns a list of authors.
-     * @return author information (list of persons).
      */
     QList<KAboutPerson> authors() const;
 
-    /**
+    /*!
      * Returns a list of persons who contributed.
-     * @return credit information (list of persons).
      */
     QList<KAboutPerson> credits() const;
 
-    /**
+    /*!
      * Returns a list of translators.
-     * @return translators information (list of persons)
      */
     QList<KAboutPerson> translators() const;
 
-    /**
+    /*!
      * Returns a message about the translation team.
-     * @return a message about the translation team
      */
     static QString aboutTranslationTeam();
 
-    /**
+    /*!
      * Returns a list of components.
-     * @return component information (list of components).
-     * @since 5.84
+     * \since 5.84
      */
     QList<KAboutComponent> components() const;
 
-    /**
+    /*!
      * Returns a translated, free form text.
-     * @return the free form text (translated). Can be QString() if not set.
      */
     QString otherText() const;
 
-    /**
+    /*!
      * Returns a list of licenses.
-     *
-     * @return licenses information (list of licenses)
      */
     QList<KAboutLicense> licenses() const;
 
-    /**
+    /*!
      * Returns the copyright statement.
-     * @return the copyright statement. Can be QString() if not set.
      */
     QString copyrightStatement() const;
 
-    /**
+    /*!
      * Returns the plain text displayed around the list of authors instead
      * of the default message telling users to send bug reports to bugAddress().
-     *
-     * @return the plain text displayed around the list of authors instead
-     *         of the default message.  Can be QString().
      */
     QString customAuthorPlainText() const;
 
-    /**
+    /*!
      * Returns the rich text displayed around the list of authors instead
      * of the default message telling users to send bug reports to bugAddress().
-     *
-     * @return the rich text displayed around the list of authors instead
-     *         of the default message.  Can be QString().
      */
     QString customAuthorRichText() const;
 
-    /**
+    /*!
      * Returns whether custom text should be displayed around the list of
      * authors.
-     *
-     * @return whether custom text should be displayed around the list of
-     *         authors.
      */
     bool customAuthorTextEnabled() const;
 
-    /**
+    /*!
      * Sets the custom text displayed around the list of authors instead
      * of the default message telling users to send bug reports to bugAddress().
      *
-     * @param plainText The plain text.
-     * @param richText The rich text.
+     * \a plainText the plain text.
+     *
+     * \a richText the rich text.
      *
      * Setting both to parameters to QString() will cause no message to be
      * displayed at all.  Call unsetCustomAuthorText() to revert to the default
@@ -1280,15 +1410,15 @@ public:
      */
     KAboutData &setCustomAuthorText(const QString &plainText, const QString &richText);
 
-    /**
+    /*!
      * Clears any custom text displayed around the list of authors and falls
      * back to the default message telling users to send bug reports to
      * bugAddress().
      */
     KAboutData &unsetCustomAuthorText();
 
-    /**
-     * Configures the @p parser command line parser to provide an authors entry with
+    /*!
+     * Configures the \a parser command line parser to provide an authors entry with
      * information about the developers of the application and an entry specifying the license.
      *
      * Additionally, it will set the description to the command line parser, will add the help
@@ -1297,21 +1427,21 @@ public:
      *
      * Since 5.16 it also adds an option to set the desktop file name.
      *
-     * @returns true if adding the options was successful; otherwise returns false.
+     * Returns true if adding the options was successful; otherwise returns false.
      *
-     * @sa processCommandLine()
+     * \sa processCommandLine
      */
     bool setupCommandLine(QCommandLineParser *parser);
 
-    /**
-     * Reads the processed @p parser and sees if any of the arguments are the ones set
+    /*!
+     * Reads the processed \a parser and sees if any of the arguments are the ones set
      * up from setupCommandLine().
      *
-     * @sa setupCommandLine()
+     * \sa setupCommandLine()
      */
     void processCommandLine(QCommandLineParser *parser);
 
-    /**
+    /*!
      * Sets the base name of the desktop entry for this application.
      *
      * This is the file name, without the full path and without extension,
@@ -1320,31 +1450,31 @@ public:
      *
      * A default desktop file name is constructed when the KAboutData
      * object is created, using the reverse domain name of the
-     * organizationDomain() and the componentName() as they are at the time
+     * organizationDomain and the componentName as they are at the time
      * of the KAboutData object creation.
      * Call this method to override that default name. Typically this is
-     * done when also setOrganizationDomain(const QByteArray&) or setComponentName(const QString&)
+     * done when also setOrganizationDomain or setComponentName
      * need to be called to override the initial values.
      *
      * The desktop file name can also be passed to the application at runtime through
-     * the @c desktopfile command line option which is added by setupCommandLine(QCommandLineParser*).
+     * the \c desktopfile command line option which is added by setupCommandLine.
      * This is useful if an application supports multiple desktop files with different runtime
      * settings.
      *
-     * @param desktopFileName The desktop file name of this application
+     * \a desktopFileName the desktop file name of this application
      *
-     * @sa desktopFileName()
-     * @sa organizationDomain()
-     * @sa componentName()
-     * @sa setupCommandLine(QCommandLineParser*)
-     * @since 5.16
+     * \sa desktopFileName()
+     * \sa organizationDomain()
+     * \sa componentName()
+     * \sa setupCommandLine()
+     * \since 5.16
      **/
     KAboutData &setDesktopFileName(const QString &desktopFileName);
 
-    /**
-     * @returns The desktop file name of this application (e.g. "org.kde.foo")
-     * @sa setDesktopFileName(const QString&)
-     * @since 5.16
+    /*!
+     * Returns the desktop file name of this application (e.g. "org.kde.foo")
+     * \sa setDesktopFileName(const QString&)
+     * \since 5.16
      **/
     QString desktopFileName() const;
 

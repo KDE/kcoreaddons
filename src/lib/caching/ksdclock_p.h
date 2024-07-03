@@ -39,7 +39,7 @@
 #warning "No system support claimed for process-shared synchronization, KSharedDataCache will be mostly useless."
 #endif
 
-/**
+/*
  * This class defines an interface used by KSharedDataCache::Private to offload
  * proper locking and unlocking depending on what the platform supports at
  * runtime and compile-time.
@@ -69,7 +69,7 @@ public:
     }
 };
 
-/**
+/*
  * This is a very basic lock that should work on any system where GCC atomic
  * intrinsics are supported. It can waste CPU so better primitives should be
  * used if available on the system.
@@ -310,7 +310,7 @@ struct SharedLock {
     SharedLockId type;
 };
 
-/**
+/*
  * This is a method to determine the best lock type to use for a
  * shared cache, based on local support. An identifier to the appropriate
  * SharedLockId is returned, which can be passed to createLockFromId().

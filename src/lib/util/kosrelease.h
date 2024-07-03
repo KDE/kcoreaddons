@@ -14,86 +14,79 @@
 
 #include <memory>
 
-/**
- * @brief The OSRelease class parses /etc/os-release files
+/*!
+ * \class KOSRelease
+ * \inmodule KCoreAddons
+ *
+ * \brief The OSRelease class parses /etc/os-release files.
  *
  * https://www.freedesktop.org/software/systemd/man/os-release.html
  *
  * os-release is a free desktop standard for describing an operating system.
  * This class parses and models os-release files.
  *
- * A singleton of this data is available to QtQuick code since version 6.11.
- *
- * @code
- * import QtQuick
- * import org.kde.coreaddons
- * Item {
- *     Component.onCompleted: console.log(KOSRelease.name)
- * }
- * @endcode
- *
- * @since 5.58.0
+ * \since 5.58.0
  */
 class KCOREADDONS_EXPORT KOSRelease final
 {
 public:
-    /**
+    /*!
      * Constructs a new OSRelease instance. Parsing happens in the constructor
      * and the data is not cached across instances.
      *
-     * @note The format specification makes no assertions about trailing #
+     * \note The format specification makes no assertions about trailing #
      *   comments being supported. They result in undefined behavior.
      *
-     * @param filePath The path to the os-release file. By default the first
+     * \a filePath The path to the os-release file. By default the first
      *   available file of the paths specified in the os-release manpage is
      *   parsed.
      */
     explicit KOSRelease(const QString &filePath = QString());
     ~KOSRelease();
 
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#NAME= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#NAME= */
     QString name() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#VERSION= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#VERSION= */
     QString version() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#ID= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#ID= */
     QString id() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#ID_LIKE= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#ID_LIKE= */
     QStringList idLike() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#VERSION_CODENAME= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#VERSION_CODENAME= */
     QString versionCodename() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#VERSION_ID= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#VERSION_ID= */
     QString versionId() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#PRETTY_NAME= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#PRETTY_NAME= */
     QString prettyName() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#ANSI_COLOR= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#ANSI_COLOR= */
     QString ansiColor() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#CPE_NAME= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#CPE_NAME= */
     QString cpeName() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
     QString homeUrl() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
     QString documentationUrl() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
     QString supportUrl() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
     QString bugReportUrl() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#HOME_URL= */
     QString privacyPolicyUrl() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#BUILD_ID= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#BUILD_ID= */
     QString buildId() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#VARIANT= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#VARIANT= */
     QString variant() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#VARIANT_ID= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#VARIANT_ID= */
     QString variantId() const;
-    /** @see https://www.freedesktop.org/software/systemd/man/os-release.html#LOGO= */
+    /*! See \l https://www.freedesktop.org/software/systemd/man/os-release.html#LOGO= */
     QString logo() const;
 
-    /**
+    /*!
      * Extra keys are keys that are unknown or specified by a vendor.
      */
     QStringList extraKeys() const;
 
-    /** Extra values are values associated with keys that are unknown. */
+    /*! Extra values are values associated with keys that are unknown. */
     QString extraValue(const QString &key) const;
 
 private:

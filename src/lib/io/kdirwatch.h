@@ -16,10 +16,11 @@
 
 class KDirWatchPrivate;
 
-/**
- * @class KDirWatch kdirwatch.h KDirWatch
+/*!
+ * \class KDirWatch
+ * \inmodule KCoreAddons
  *
- * @short Class for watching directory and file changes.
+ * \brief Class for watching directory and file changes.
  *
  * Watch directories and files for changes.
  * The watched directories or files don't have to exist yet.
@@ -49,175 +50,191 @@ class KDirWatchPrivate;
  * The choice of implementation can be adjusted by the user, with the key
  * [DirWatch] PreferredMethod={Stat|QFSWatch|inotify}
  *
- * @see self()
- * @author Sven Radej (in 1998)
  */
 class KCOREADDONS_EXPORT KDirWatch : public QObject
 {
     Q_OBJECT
 
 public:
-    /**
+    /*!
      * Available watch modes for directory monitoring
-     * @see WatchModes
+     *
+     * \value WatchDirOnly Watch just the specified directory
+     * \value WatchFiles Watch also all files contained by the directory
+     * \value WatchSubDirs Watch also all the subdirs contained by the directory
+     *
      **/
     enum WatchMode {
-        WatchDirOnly = 0, ///< Watch just the specified directory
-        WatchFiles = 0x01, ///< Watch also all files contained by the directory
-        WatchSubDirs = 0x02, ///< Watch also all the subdirs contained by the directory
+        WatchDirOnly = 0,
+        WatchFiles = 0x01,
+        WatchSubDirs = 0x02,
     };
-    /**
-     * Stores a combination of #WatchMode values.
-     */
     Q_DECLARE_FLAGS(WatchModes, WatchMode)
 
-    /**
+    /*!
      * Constructor.
      *
      * Scanning begins immediately when a dir/file watch
      * is added.
-     * @param parent the parent of the QObject (or @c nullptr for parent-less KDataTools)
+     *
+     * \a parent the parent of the QObject (or \c nullptr for parent-less KDataTools)
      */
     explicit KDirWatch(QObject *parent = nullptr);
 
-    /**
+    /*!
      * Destructor.
      *
      * Stops scanning and cleans up.
      */
     ~KDirWatch() override;
 
-    /**
+    /*!
      * Adds a directory to be watched.
      *
-     * The directory does not have to exist. When @p watchModes is set to
+     * The directory does not have to exist. When \a watchModes is set to
      * WatchDirOnly (the default), the signals dirty(), created(), deleted()
      * can be emitted, all for the watched directory.
-     * When @p watchModes is set to WatchFiles, all files in the watched
+     * When \a watchModes is set to WatchFiles, all files in the watched
      * directory are watched for changes, too. Thus, the signals dirty(),
      * created(), deleted() can be emitted.
-     * When @p watchModes is set to WatchSubDirs, all subdirs are watched using
-     * the same flags specified in @p watchModes (symlinks aren't followed).
-     * If the @p path points to a symlink to a directory, the target directory
-     * is watched instead. If you want to watch the link, use @p addFile().
+     * When \a watchModes is set to WatchSubDirs, all subdirs are watched using
+     * the same flags specified in \a watchModes (symlinks aren't followed).
+     * If the \a path points to a symlink to a directory, the target directory
+     * is watched instead. If you want to watch the link, use \a addFile().
      *
-     * @param path the path to watch
-     * @param watchModes watch modes
+     * \a path the path to watch
      *
-     * @sa  KDirWatch::WatchMode
+     * \a watchModes watch modes
+     *
+     * \sa  KDirWatch::WatchMode
      */
     void addDir(const QString &path, WatchModes watchModes = WatchDirOnly);
 
-    /**
+    /*!
      * Adds a file to be watched.
      * If it's a symlink to a directory, it watches the symlink itself.
-     * @param file the file to watch
+     *
+     * \a file the file to watch
      */
     void addFile(const QString &file);
 
-    /**
+    /*!
      * Returns the time the directory/file was last changed.
-     * @param path the file to check
-     * @return the date of the last modification
+     *
+     * \a path the file to check
+     *
+     * Returns the date of the last modification
      */
     QDateTime ctime(const QString &path) const;
 
-    /**
+    /*!
      * Removes a directory from the list of scanned directories.
      *
      * If specified path is not in the list this does nothing.
-     * @param path the path of the dir to be removed from the list
+     *
+     * \a path the path of the dir to be removed from the list
      */
     void removeDir(const QString &path);
 
-    /**
+    /*!
      * Removes a file from the list of watched files.
      *
      * If specified path is not in the list this does nothing.
-     * @param file the file to be removed from the list
+     *
+     * \a file the file to be removed from the list
      */
     void removeFile(const QString &file);
 
-    /**
+    /*!
      * Stops scanning the specified path.
      *
-     * The @p path is not deleted from the internal list, it is just skipped.
+     * The \a path is not deleted from the internal list, it is just skipped.
      * Call this function when you perform an huge operation
      * on this directory (copy/move big files or many files). When finished,
      * call restartDirScan(path).
      *
-     * @param path the path to skip
-     * @return true if the @p path is being watched, otherwise false
-     * @see restartDirScan()
+     * \a path the path to skip
+     *
+     * Returns true if the \a path is being watched, otherwise false
+     * \sa restartDirScan()
      */
     bool stopDirScan(const QString &path);
 
-    /**
+    /*!
      * Restarts scanning for specified path.
      *
      * It doesn't notify about the changes (by emitting a signal).
      * The ctime value is reset.
      *
      * Call it when you are finished with big operations on that path,
-     * @em and when @em you have refreshed that path.
+     * \e and when \e you have refreshed that path.
      *
-     * @param path the path to restart scanning
-     * @return true if the @p path is being watched, otherwise false
-     * @see stopDirScan()
+     * \a path the path to restart scanning
+     *
+     * Returns \c true if the \a path is being watched, otherwise false
+     * \sa stopDirScan()
      */
     bool restartDirScan(const QString &path);
 
-    /**
+    /*!
      * Starts scanning of all dirs in list.
      *
-     * @param notify If true, all changed directories (since
+     * \a notify If true, all changed directories (since
      * stopScan() call) will be notified for refresh. If notify is
      * false, all ctimes will be reset (except those who are stopped,
-     * but only if @p skippedToo is false) and changed dirs won't be
+     * but only if \a skippedToo is false) and changed dirs won't be
      * notified. You can start scanning even if the list is
-     * empty. First call should be called with @p false or else all
+     * empty. First call should be called with \a false or else all
      * directories
      * in list will be notified.
-     * @param skippedToo if true, the skipped directories (scanning of which was
+     *
+     * \a skippedToo if true, the skipped directories (scanning of which was
      * stopped with stopDirScan() ) will be reset and notified
      * for change. Otherwise, stopped directories will continue to be
      * unnotified.
      */
     void startScan(bool notify = false, bool skippedToo = false);
 
-    /**
+    /*!
      * Stops scanning of all directories in internal list.
      *
      * The timer is stopped, but the list is not cleared.
      */
     void stopScan();
 
-    /**
+    /*!
      * Is scanning stopped?
      * After creation of a KDirWatch instance, this is false.
-     * @return true when scanning stopped
+     * Returns true when scanning stopped
      */
     bool isStopped();
 
-    /**
+    /*!
      * Check if a directory is being watched by this KDirWatch instance
-     * @param path the directory to check
-     * @return true if the directory is being watched
+     * \a path the directory to check
+     * Returns true if the directory is being watched
      */
     bool contains(const QString &path) const;
 
+    /*!
+        \enum KDirWatch::Method
+
+        \value INotify INotify
+        \value Stat Stat
+        \value QFSWatch QFileSystemWatcher
+     */
     enum Method {
         INotify,
         Stat,
         QFSWatch,
     };
-    /**
+    /*!
      * Returns the preferred internal method to
      * watch for changes.
      */
     Method internalMethod() const;
 
-    /**
+    /*!
      * The KDirWatch instance usually globally used in an application.
      * It is automatically deleted when the application exits.
      *
@@ -227,44 +244,43 @@ public:
      * This function returns an instance of KDirWatch. If there is none, it
      * will be created.
      *
-     * @return a KDirWatch instance
+     * Returns a KDirWatch instance
      */
     static KDirWatch *self();
-    /**
+    /*!
      * Returns true if there is an instance of KDirWatch.
-     * @return true if there is an instance of KDirWatch.
-     * @see KDirWatch::self()
+     * \sa KDirWatch::self()
      */
     static bool exists();
 
-    /**
-     * @brief Trivial override. See QObject::event.
-     */
     bool event(QEvent *event) override;
 
 public Q_SLOTS:
 
-    /**
+    /*!
      * Emits created().
-     * @param path the path of the file or directory
+     *
+     * \a path the path of the file or directory
      */
     void setCreated(const QString &path);
 
-    /**
+    /*!
      * Emits dirty().
-     * @param path the path of the file or directory
+     *
+     * \a path the path of the file or directory
      */
     void setDirty(const QString &path);
 
-    /**
+    /*!
      * Emits deleted().
-     * @param path the path of the file or directory
+     *
+     * \a path the path of the file or directory
      */
     void setDeleted(const QString &path);
 
 Q_SIGNALS:
 
-    /**
+    /*!
      * Emitted when a watched object is changed.
      * For a directory this signal is emitted when files
      * therein are created or deleted.
@@ -275,22 +291,25 @@ Q_SIGNALS:
      * depending on which backend is used by KDirWatch.
      *
      * The new ctime is set before the signal is emitted.
-     * @param path the path of the file or directory
+     *
+     * \a path the path of the file or directory
      */
     void dirty(const QString &path);
 
-    /**
+    /*!
      * Emitted when a file or directory (being watched explicitly) is created.
      * This is not emitted when creating a file is created in a watched directory.
-     * @param path the path of the file or directory
+     *
+     * \a path the path of the file or directory
      */
     void created(const QString &path);
 
-    /**
+    /*!
      * Emitted when a file or directory is deleted.
      *
      * The object is still watched for new creation.
-     * @param path the path of the file or directory
+     *
+     * \a path the path of the file or directory
      */
     void deleted(const QString &path);
 
@@ -300,9 +319,10 @@ private:
     friend class KDirWatch_UnitTest;
 };
 
-/**
+/*!
  * Dump debug information about the KDirWatch::self() instance.
  * This checks for consistency, too.
+ * \relates KDirWatch
  */
 KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const KDirWatch &watch);
 

@@ -9,7 +9,7 @@
 
 namespace KStaticPluginHelpers
 {
-/**
+/*
  * This is an implementations detail since consumers should only interact with KPluginMetaData::findPlugin*
  * to query the available plugins!
  */

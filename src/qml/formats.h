@@ -18,6 +18,15 @@ QML_NAMED_ELEMENT(FormatTypes)
 QML_FOREIGN_NAMESPACE(KFormat)
 }
 
+/*!
+ * \qmltype Format
+ * \inqmlmodule org.kde.coreaddons
+ *
+ * \brief Provides support for formatting numbers and datetimes in
+ * formats that are not supported by QLocale.
+ *
+ * \sa KFormat
+ */
 class Formats : public QObject
 {
     Q_OBJECT
@@ -25,18 +34,24 @@ class Formats : public QObject
     QML_SINGLETON
 
 public:
-    /**
-     * Converts size from bytes to the appropriate string representation
+    /*!
+     * \qmlmethod string Format::formatByteSize(double size, int precision = 1)
+     *
+     * Converts \a size from bytes to the appropriate string representation
      */
     Q_INVOKABLE QString formatByteSize(double size, int precision = 1) const;
 
-    /**
+    /*!
+     * \qmlmethod string Format::formatDuration(int msecs, KFormat::DurationFormatOptions options = KFormat::DefaultDuration)
+     *
      * Given a number of milliseconds, converts that to a string containing
      * the localized equivalent, e.g. 1:23:45
      */
     Q_INVOKABLE QString formatDuration(quint64 msecs, KFormat::DurationFormatOptions options = KFormat::DefaultDuration) const;
 
-    /**
+    /*!
+     * \qmlmethod string Format::formatDecimalDuration(int msecs, int decimalPlaces = 2)
+     *
      * Given a number of milliseconds, converts that to a string containing
      * the localized equivalent to the requested decimal places.
      *
@@ -44,7 +59,9 @@ public:
      */
     Q_INVOKABLE QString formatDecimalDuration(quint64 msecs, int decimalPlaces = 2) const;
 
-    /**
+    /*!
+     * \qmlmethod string Format::formatSpelloutDuration(int msecs)
+     *
      * Given a number of milliseconds, converts that to a spell-out string containing
      * the localized equivalent.
      *
@@ -59,37 +76,46 @@ public:
      */
     Q_INVOKABLE QString formatSpelloutDuration(quint64 msecs) const;
 
-    /**
+    /*!
+     * \qmlmethod string Format::formatRelativeDate(date date, format)
+     *
      * Returns a string formatted to a relative date style.
      *
      * If the date falls within one week before or after the current date
      * then a relative date string will be returned, such as:
-     * * Yesterday
-     * * Today
-     * * Tomorrow
-     * * Last Tuesday
-     * * Next Wednesday
-     *
+     * \list
+     * \li Yesterday
+     * \li Today
+     * \li Tomorrow
+     * \li Last Tuesday
+     * \li Next Wednesday
+     * \endlist
      * If the date falls outside this period then the format is used
      */
     Q_INVOKABLE QString formatRelativeDate(const QDate &date, QLocale::FormatType format) const;
 
-    /**
+    /*!
+     * \qmlmethod string Format::formatRelativeDate(QDateTime date, format)
+     *
      * Returns a string formatted to a relative datetime style.
      *
      * If the dateTime falls within one week before or after the current date
      * then a relative date string will be returned, such as:
-     * * Yesterday, 3:00pm
-     * * Today, 3:00pm
-     * * Tomorrow, 3:00pm
-     * * Last Tuesday, 3:00pm
-     * * Next Wednesday, 3:00pm
+     * \list
+     * \li Yesterday, 3:00pm
+     * \li Today, 3:00pm
+     * \li Tomorrow, 3:00pm
+     * \li Last Tuesday, 3:00pm
+     * \li Next Wednesday, 3:00pm
+     * \endlist
      *
      * If the datetime falls outside this period then the format is used
      */
     Q_INVOKABLE QString formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const;
 
-    /**
+    /*!
+     * \qmlmethod string Format::formatDistance(real distance, enumeration options)
+     *
      * Formats a distance value given in meters in appropriate units for
      * displaying.
      *

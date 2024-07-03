@@ -54,7 +54,7 @@ const auto handleCloser = [](HANDLE h) {
 };
 typedef std::unique_ptr<std::remove_pointer<HANDLE>::type, decltype(handleCloser)> ScopedHANDLE;
 
-/** Make sure the NetApi functions are called with the correct level argument (for template functions)
+/* Make sure the NetApi functions are called with the correct level argument (for template functions)
  * This argument can be retrieved by using NetApiTypeInfo<T>::level. In order to do so the type must be
  * registered by writing e.g. NETAPI_TYPE_INFO(GROUP_INFO, 0) for GROUP_INFO_0
  */
@@ -92,7 +92,7 @@ ScopedNetApiBuffer<T> getUserInfo(LPCWSTR server, const QString &userName, NET_A
 }
 
 // enumeration functions
-/** simplify calling the Net*Enum functions to prevent copy and paste for allUsers(), allUserNames(), allGroups(), allGroupNames()
+/* simplify calling the Net*Enum functions to prevent copy and paste for allUsers(), allUserNames(), allGroups(), allGroupNames()
  * @tparam T The type that is enumerated (e.g. USER_INFO_11) Must be registered using NETAPI_TYPE_INFO.
  * @param callback Callback for each listed object. Signature: void(const T&)
  * @param enumFunc This function enumerates the data using a Net* function.
@@ -220,7 +220,7 @@ public:
     QString homeDir;
     bool isAdmin;
 
-    /** Creates a user info from a SID (never returns null) */
+    /* Creates a user info from a SID (never returns null) */
     static Ptr create(KUserId uid)
     {
         if (!uid.isValid()) {
@@ -714,7 +714,7 @@ static QString sidToString(void *sid)
 
 struct WindowsSIDWrapper : public QSharedData {
     char sidBuffer[SECURITY_MAX_SID_SIZE];
-    /** @return a copy of @p sid or null if sid is not valid or an error occurs */
+    /* @return a copy of @p sid or null if sid is not valid or an error occurs */
     static WindowsSIDWrapper *copySid(PSID sid)
     {
         if (!sid || !IsValidSid(sid)) {
@@ -801,7 +801,7 @@ QString KUserOrGroupId<void *>::toString() const
     return sidToString(data ? data->sidBuffer : nullptr);
 }
 
-/** T must be either KUserId or KGroupId, Callback has signature T(PSID, SID_NAME_USE) */
+/* T must be either KUserId or KGroupId, Callback has signature T(PSID, SID_NAME_USE) */
 template<class T, class Callback>
 static T sidFromName(const QString &name, Callback callback)
 {
