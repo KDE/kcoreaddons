@@ -9,3 +9,10 @@ Dependencies:
 Options:
   test-before-installing: True
   require-passing-tests-on: [ 'Linux' ]
+  cppcheck-arguments:
+    - --enable=warning,style,performance
+    - --suppress-xml=cppcheck-suppressions.xml
+  #  - --library=cppcheck-qt-extra-defines.xml
+  #  - --library=cppcheck-kio-defines.xml
+  cppcheck-ignore-files:
+    - autotests
