@@ -129,7 +129,7 @@ QStringList KStringHandler::perlSplit(const QRegularExpression &sep, const QStri
     QRegularExpression separator(sep);
     separator.setPatternOptions(QRegularExpression::UseUnicodePropertiesOption);
 
-    QRegularExpressionMatchIterator iter = separator.globalMatch(strView);
+    QRegularExpressionMatchIterator iter = separator.globalMatchView(strView);
     QRegularExpressionMatch match;
     while (iter.hasNext() && (ignoreMax || list.count() < max - 1)) {
         match = iter.next();
