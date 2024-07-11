@@ -35,6 +35,7 @@ Notes:
     <comment xml:lang="ca@valencia">RELAX NG</comment>
     <comment xml:lang="cs">RELAX NG</comment>
     <comment xml:lang="cy">RELAX NG</comment>
+    <comment xml:lang="da">RELAX NG</comment>
     <comment xml:lang="de">RELAX NG</comment>
     <comment xml:lang="el">RELAX NG</comment>
     <comment xml:lang="en_GB">RELAX NG</comment>
@@ -91,6 +92,7 @@ Notes:
     <comment xml:lang="ca@valencia">CD d'àudio</comment>
     <comment xml:lang="cs">Audio CD</comment>
     <comment xml:lang="cy">Clywedol CD</comment>
+    <comment xml:lang="da">Cd-lyd</comment>
     <comment xml:lang="de">CD-Audio</comment>
     <comment xml:lang="el">CD ήχου</comment>
     <comment xml:lang="en_GB">CD audio</comment>
@@ -148,6 +150,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fonts de mapa de bits SNF</comment>
     <comment xml:lang="cs">Bitmapový font SNF</comment>
     <comment xml:lang="cy">Wynebfath didfap SNF</comment>
+    <comment xml:lang="da">SNF bitmap-skrifttype</comment>
     <comment xml:lang="de">SNF-Bitmap-Schriftart</comment>
     <comment xml:lang="el">Γραμματοσειρά bitmap SNF</comment>
     <comment xml:lang="en_GB">SNF bitmap font</comment>
@@ -206,6 +209,7 @@ Notes:
     <comment xml:lang="ca@valencia">Miniaplicació Java</comment>
     <comment xml:lang="cs">Java applet</comment>
     <comment xml:lang="cy">Apled Java</comment>
+    <comment xml:lang="da">Java applet</comment>
     <comment xml:lang="de">Java-Miniprogramm</comment>
     <comment xml:lang="el">Μικροεφαρμογή Java</comment>
     <comment xml:lang="en_GB">Java applet</comment>
@@ -261,6 +265,7 @@ Notes:
     <comment xml:lang="ca@valencia">Esquema de color de KDE</comment>
     <comment xml:lang="cs">Barevné schéma KDE</comment>
     <comment xml:lang="cy">Cynllun lliw KDE</comment>
+    <comment xml:lang="da">KDE farvetema</comment>
     <comment xml:lang="de">KDE-Farbschema</comment>
     <comment xml:lang="el">Θέμα χρωμάτων KDE</comment>
     <comment xml:lang="en_GB">KDE colour scheme</comment>
@@ -321,6 +326,7 @@ Notes:
     <comment xml:lang="ca@valencia">Paquet de KNewStuff</comment>
     <comment xml:lang="cs">Balíček KNewStuff</comment>
     <comment xml:lang="cy">Pecyn KNEWStuff</comment>
+    <comment xml:lang="da">KNewStuff-pakke</comment>
     <comment xml:lang="de">KNewStuff-Paket</comment>
     <comment xml:lang="el">Πακέτο KNewStuff</comment>
     <comment xml:lang="en_GB">KNewStuff package</comment>
@@ -378,6 +384,7 @@ Notes:
     <comment xml:lang="ca@valencia">Cartera de KWallet</comment>
     <comment xml:lang="cs">Schránka KWallet</comment>
     <comment xml:lang="cy">Ysgrepan KWallet</comment>
+    <comment xml:lang="da">Tegnebog til KWallet</comment>
     <comment xml:lang="de">KWallet-Passwortspeicher</comment>
     <comment xml:lang="el">Πορτοφόλι KWallet</comment>
     <comment xml:lang="en_GB">KWallet wallet</comment>
@@ -438,6 +445,7 @@ Notes:
     <comment xml:lang="ca@valencia">Plasmoide</comment>
     <comment xml:lang="cs">plasmoid</comment>
     <comment xml:lang="cy">plasmoid</comment>
+    <comment xml:lang="da">plasmoid</comment>
     <comment xml:lang="de">Plasmoid</comment>
     <comment xml:lang="el">πλασμοειδές</comment>
     <comment xml:lang="en_GB">plasmoid</comment>
@@ -496,6 +504,7 @@ Notes:
     <comment xml:lang="ca@valencia">Tema del SuperKaramba</comment>
     <comment xml:lang="cs">Motiv Superkaramba</comment>
     <comment xml:lang="cy">Thema SuperKaramba</comment>
+    <comment xml:lang="da">SuperKaramba-tema</comment>
     <comment xml:lang="de">SuperKaramba-Design</comment>
     <comment xml:lang="el">Θέμα SuperKaramba</comment>
     <comment xml:lang="en_GB">SuperKaramba theme</comment>
@@ -552,6 +561,7 @@ Notes:
     <comment xml:lang="ca@valencia">Document per a la gestió de projectes de Calligra Plan</comment>
     <comment xml:lang="cs">Dokument pro správu projektů Calligra Plan</comment>
     <comment xml:lang="cy">Dogfen rheoliwr eddyl Calligra Plan</comment>
+    <comment xml:lang="da">Calligra Plan projekthåndteringsdokument</comment>
     <comment xml:lang="de">Calligra-Plan-Projektverwaltungdokument</comment>
     <comment xml:lang="el">Έγγραφο διαχείρισης έργων Calligra Plan</comment>
     <comment xml:lang="en_GB">Calligra Plan project management document</comment>
@@ -608,6 +618,7 @@ Notes:
     <comment xml:lang="ca@valencia">Document de paquet de treball de Calligra Plan</comment>
     <comment xml:lang="cs">Dokument pracovního balíčku Calligra Plan</comment>
     <comment xml:lang="cy">Dogfen pecyn gwaith Calligra Plan</comment>
+    <comment xml:lang="da">Calligra Plan Work Package-dokument</comment>
     <comment xml:lang="de">Calligra-Plan-Arbeitspaketdokument</comment>
     <comment xml:lang="el">Έγγραφο πακέτου εργασίας Calligra Plan</comment>
     <comment xml:lang="en_GB">Calligra Plan work package document</comment>
@@ -664,6 +675,7 @@ Notes:
     <comment xml:lang="ca@valencia">Document per a la gestió de projectes de KPlato</comment>
     <comment xml:lang="cs">Dokument řízení projektů v KPlato</comment>
     <comment xml:lang="cy">Dogfen goruchwyliaeth eddyl KPlato</comment>
+    <comment xml:lang="da">KPlato projekthåndteringsdokument</comment>
     <comment xml:lang="de">KPlato-Projektverwaltungs-Dokument</comment>
     <comment xml:lang="el">Έγγραφα διαχείρισης έργων KPlato</comment>
     <comment xml:lang="en_GB">KPlato project management document</comment>
@@ -720,6 +732,7 @@ Notes:
     <comment xml:lang="ca@valencia">Paquet de treball per a la gestió de projectes de KPlato</comment>
     <comment xml:lang="cs">Pracovní balíček řízení projektů v KPlato</comment>
     <comment xml:lang="cy">Pecyn gwaith rheoliadaeth eddyl KPlato</comment>
+    <comment xml:lang="da">KPlato work-pakke til projekthåndtering</comment>
     <comment xml:lang="de">KPlato-Projektverwaltungs-Arbeitspaket</comment>
     <comment xml:lang="el">Πακέτο εργασιών διαχείρισης έργων KPlato</comment>
     <comment xml:lang="en_GB">KPlato project management work package</comment>
@@ -776,6 +789,7 @@ Notes:
     <comment xml:lang="ca@valencia">Arxiu del Kugar</comment>
     <comment xml:lang="cs">Archiv Kugar</comment>
     <comment xml:lang="cy">Archif Kugar</comment>
+    <comment xml:lang="da">Kugar-arkiv</comment>
     <comment xml:lang="de">Kugar-Archiv</comment>
     <comment xml:lang="el">Αρχειοθήκη Kugar</comment>
     <comment xml:lang="en_GB">Kugar archive</comment>
@@ -833,6 +847,7 @@ Notes:
     <comment xml:lang="ca@valencia">Arxiu web</comment>
     <comment xml:lang="cs">webový archiv</comment>
     <comment xml:lang="cy">archif gwe</comment>
+    <comment xml:lang="da">Webarkiv</comment>
     <comment xml:lang="de">Web-Archiv</comment>
     <comment xml:lang="el">αρχειοθήκη ιστού</comment>
     <comment xml:lang="en_GB">web archive</comment>
@@ -891,6 +906,7 @@ Notes:
     <comment xml:lang="ca@valencia">Esquema XML del W3C</comment>
     <comment xml:lang="cs">W3C XML schéma</comment>
     <comment xml:lang="cy">Cynllun XML W3C</comment>
+    <comment xml:lang="da">W3C XML-skema</comment>
     <comment xml:lang="de">W3C-XML-Schema</comment>
     <comment xml:lang="el">Σχήμα W3C XML</comment>
     <comment xml:lang="en_GB">W3C XML schema</comment>
@@ -947,6 +963,7 @@ Notes:
     <comment xml:lang="ca@valencia">Importeu KPhotoAlbum</comment>
     <comment xml:lang="cs">Import KPhotoAlbum</comment>
     <comment xml:lang="cy">Mewnforio KPhotoAlbum</comment>
+    <comment xml:lang="da">KPhotoAlbum import</comment>
     <comment xml:lang="de">KPhotoAlbum-Import</comment>
     <comment xml:lang="el">Εισαγωγή KPhotoAlbum</comment>
     <comment xml:lang="en_GB">KPhotoAlbum import</comment>
@@ -1003,6 +1020,7 @@ Notes:
     <comment xml:lang="ca@valencia">Imatge HDR</comment>
     <comment xml:lang="cs">HDR obrázek</comment>
     <comment xml:lang="cy">Delw HDR</comment>
+    <comment xml:lang="da">HDR-billede</comment>
     <comment xml:lang="de">HDR-Bild</comment>
     <comment xml:lang="el">Εικόνα HDR</comment>
     <comment xml:lang="en_GB">HDR image</comment>
@@ -1064,6 +1082,7 @@ Notes:
     <comment xml:lang="ca@valencia">Formats d'imatge RAW de KDE</comment>
     <comment xml:lang="cs">Formáty obrázků raw v KDE</comment>
     <comment xml:lang="cy">Ffurfiadaethau delw amrwd KDE</comment>
+    <comment xml:lang="da">KDE raw-billedformater</comment>
     <comment xml:lang="de">KDE-Roh-Bildformate</comment>
     <comment xml:lang="el">Τύποι ακατέργαστων τύπων εικόνας του KDE</comment>
     <comment xml:lang="en_GB">KDE raw image formats</comment>
@@ -1130,6 +1149,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxer objecte hexadecimal d'Intel®</comment>
     <comment xml:lang="cs">Intel® hexadecimální objektový soubor</comment>
     <comment xml:lang="cy">Ffeil gwrthrych hecsadegol Intel®</comment>
+    <comment xml:lang="da">Intel® hexadecimal objektfil</comment>
     <comment xml:lang="de">Intel®-Hexadezimal-Objektdatei</comment>
     <comment xml:lang="el">Δεκαεξαδικό μεταφρασμένο αρχείο Intel®</comment>
     <comment xml:lang="en_GB">Intel® hexadecimal object file</comment>
@@ -1186,6 +1206,7 @@ Notes:
     <comment xml:lang="ca">Llista de connector carregador de la llista de fitxers del Kate</comment>
     <comment xml:lang="ca@valencia">Llista de connector carregador de la llista de fitxers de Kate</comment>
     <comment xml:lang="cy">Rhestr mewnbillgyn llwythwr rhestr ffeil Kate</comment>
+    <comment xml:lang="da">Liste over plugins til fillisteindlæsning i Kate</comment>
     <comment xml:lang="de">Kate-Dateilisten-Modul</comment>
     <comment xml:lang="el">Λίστα αρχείου φόρτωσης λίστας πρόσθετων Kate</comment>
     <comment xml:lang="en_GB">Kate file list loader plugin list</comment>
@@ -1243,6 +1264,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxer de notació musical abc</comment>
     <comment xml:lang="cs">Soubor hudební notace abc</comment>
     <comment xml:lang="cy">ffeil nodiadaeth cerddoriaethol abc</comment>
+    <comment xml:lang="da">abc musiknode-fil</comment>
     <comment xml:lang="de">abc-Musik-Notationsdatei</comment>
     <comment xml:lang="el">αρχείο μουσικών συμβόλων abc</comment>
     <comment xml:lang="en_GB">abc musical notation file</comment>
@@ -1305,6 +1327,7 @@ Notes:
     <comment xml:lang="ca@valencia">Paquet de fonts</comment>
     <comment xml:lang="cs">balíček písem</comment>
     <comment xml:lang="cy">pecyn wynebfath</comment>
+    <comment xml:lang="da">skrifttypepakke</comment>
     <comment xml:lang="de">Schriftartenpaket</comment>
     <comment xml:lang="el">πακέτο γραμματοσειρών</comment>
     <comment xml:lang="en_GB">fonts package</comment>
@@ -1364,6 +1387,7 @@ Notes:
     <comment xml:lang="ca@valencia">Servidor de Windows</comment>
     <comment xml:lang="cs">Windows server</comment>
     <comment xml:lang="cy">Gweiniwr Ffenestri</comment>
+    <comment xml:lang="da">Windows-server</comment>
     <comment xml:lang="de">Windows-Server</comment>
     <comment xml:lang="el">Εξυπηρετητής Windows</comment>
     <comment xml:lang="en_GB">Windows server</comment>
@@ -1421,6 +1445,7 @@ Notes:
     <comment xml:lang="ca@valencia">Treball en grup de Windows</comment>
     <comment xml:lang="cs">Pracovní skupina Windows</comment>
     <comment xml:lang="cy">Gwaithgarfan Ffenestri</comment>
+    <comment xml:lang="da">Windows-arbejdsgruppe</comment>
     <comment xml:lang="de">Windows-Arbeitsgruppe</comment>
     <comment xml:lang="el">Ομάδα εργασίας Windows</comment>
     <comment xml:lang="en_GB">Windows workgroup</comment>
@@ -1478,6 +1503,7 @@ Notes:
     <comment xml:lang="ca@valencia">Monitor del sistema de KDE</comment>
     <comment xml:lang="cs">Monitor systému pro KDE</comment>
     <comment xml:lang="cy">Gwyliwr cyfundrefn KDE</comment>
+    <comment xml:lang="da">KDE systemovervågning</comment>
     <comment xml:lang="de">KDE-Systemüberwachung</comment>
     <comment xml:lang="el">Επόπτης συστήματος του KDE</comment>
     <comment xml:lang="en_GB">KDE system monitor</comment>
@@ -1536,6 +1562,7 @@ Notes:
     <comment xml:lang="ca@valencia">Tema de KDE</comment>
     <comment xml:lang="cs">Motiv KDE</comment>
     <comment xml:lang="cy">Thema KDE</comment>
+    <comment xml:lang="da">KDE-tema</comment>
     <comment xml:lang="de">KDE-Design</comment>
     <comment xml:lang="el">Θέμα του KDE</comment>
     <comment xml:lang="en_GB">KDE theme</comment>
@@ -1595,6 +1622,7 @@ Notes:
     <comment xml:lang="ca@valencia">Projecte del Quanta</comment>
     <comment xml:lang="cs">Projekt Quanta</comment>
     <comment xml:lang="cy">Eddyl Quanta</comment>
+    <comment xml:lang="da">Quanta-projekt</comment>
     <comment xml:lang="de">Quanta-Projekt</comment>
     <comment xml:lang="el">Έργο Quanta</comment>
     <comment xml:lang="en_GB">Quanta project</comment>
@@ -1652,6 +1680,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxer del Kommander</comment>
     <comment xml:lang="cs">Soubor Kommanderu</comment>
     <comment xml:lang="cy">Ffeil Kommander</comment>
+    <comment xml:lang="da">Kommander-fil</comment>
     <comment xml:lang="de">Kommander-Datei</comment>
     <comment xml:lang="el">Αρχείο Kommander</comment>
     <comment xml:lang="en_GB">Kommander file</comment>
@@ -1710,6 +1739,7 @@ Notes:
     <comment xml:lang="ca@valencia">Creïlla</comment>
     <comment xml:lang="cs">brambora</comment>
     <comment xml:lang="cy">tatws</comment>
+    <comment xml:lang="da">potato</comment>
     <comment xml:lang="de">potato</comment>
     <comment xml:lang="el">πατάτα</comment>
     <comment xml:lang="en_GB">potato</comment>
@@ -1767,6 +1797,7 @@ Notes:
     <comment xml:lang="ca@valencia">Joc guardat de Kolf</comment>
     <comment xml:lang="cs">Uložená hra Kolf</comment>
     <comment xml:lang="cy">Chwarae Kolf achubwyd</comment>
+    <comment xml:lang="da">Gemt spil til Kolf</comment>
     <comment xml:lang="de">Kolf – gespeichertes Spiel</comment>
     <comment xml:lang="el">Αποθηκευμένο παιχνίδι Kolf</comment>
     <comment xml:lang="en_GB">Kolf saved game</comment>
@@ -1827,6 +1858,7 @@ Notes:
     <comment xml:lang="ca@valencia">Camp de Kolf</comment>
     <comment xml:lang="cs">Kurz Kolf</comment>
     <comment xml:lang="cy">Cwrs Kolf</comment>
+    <comment xml:lang="da">Kolf-bane</comment>
     <comment xml:lang="de">Kolf-Platz</comment>
     <comment xml:lang="el">Πίστα Kolf</comment>
     <comment xml:lang="en_GB">Kolf course</comment>
@@ -1889,6 +1921,7 @@ Notes:
     <comment xml:lang="ca@valencia">Arxiu de document d'Okular</comment>
     <comment xml:lang="cs">Archiv dokumentu Okular</comment>
     <comment xml:lang="cy">Archif dogfen Okular</comment>
+    <comment xml:lang="da">Okular dokumentarkiv</comment>
     <comment xml:lang="de">Okular-Dokumentarchiv</comment>
     <comment xml:lang="el">Αρχειοθήκη εγγράφων Okular</comment>
     <comment xml:lang="en_GB">Okular document archive</comment>
@@ -1947,6 +1980,7 @@ Notes:
     <comment xml:lang="ca@valencia">Figura del Cabri</comment>
     <comment xml:lang="cs">Obrázek Cabri</comment>
     <comment xml:lang="cy">Ffigur Cabri</comment>
+    <comment xml:lang="da">Cabri-figur</comment>
     <comment xml:lang="de">Cabri-Zeichnung</comment>
     <comment xml:lang="el">Σχήμα Cabri</comment>
     <comment xml:lang="en_GB">Cabri figure</comment>
@@ -2008,6 +2042,7 @@ Notes:
     <comment xml:lang="ca@valencia">Figura del Dr. Geo</comment>
     <comment xml:lang="cs">Obrázek Dr. Geo</comment>
     <comment xml:lang="cy">Ffigur Dr. Geo</comment>
+    <comment xml:lang="da">Dr. Geo-figur</comment>
     <comment xml:lang="de">Dr.-Geo-Zeichnung</comment>
     <comment xml:lang="el">Σχήμα Dr. Geo</comment>
     <comment xml:lang="en_GB">Dr. Geo figure</comment>
@@ -2068,6 +2103,7 @@ Notes:
     <comment xml:lang="ca@valencia">Figura del KGeo</comment>
     <comment xml:lang="cs">Obrázek KGeo</comment>
     <comment xml:lang="cy">Ffigur KGeo</comment>
+    <comment xml:lang="da">KGeo-figur</comment>
     <comment xml:lang="de">KGeo-Zeichnung</comment>
     <comment xml:lang="el">Σχήμα KGeo</comment>
     <comment xml:lang="en_GB">KGeo figure</comment>
@@ -2125,6 +2161,7 @@ Notes:
     <comment xml:lang="ca@valencia">Figura de Kig</comment>
     <comment xml:lang="cs">Obrázek Kig</comment>
     <comment xml:lang="cy">Ffigur Kig</comment>
+    <comment xml:lang="da">Kig-figur</comment>
     <comment xml:lang="de">Kig-Zeichnung</comment>
     <comment xml:lang="el">Σχήμα Kig</comment>
     <comment xml:lang="en_GB">Kig figure</comment>
@@ -2183,6 +2220,7 @@ Notes:
     <comment xml:lang="ca@valencia">Document del KSeg</comment>
     <comment xml:lang="cs">Dokument KSeg</comment>
     <comment xml:lang="cy">Dogfen KSeg</comment>
+    <comment xml:lang="da">KSeg-dokument</comment>
     <comment xml:lang="de">KSeg-Dokument</comment>
     <comment xml:lang="el">Έγγραφο KSeg</comment>
     <comment xml:lang="en_GB">KSeg document</comment>
@@ -2241,6 +2279,7 @@ Notes:
     <comment xml:lang="ca@valencia">Document de l'entrenador de vocabulari</comment>
     <comment xml:lang="cs">Dokument tréninku slovní zásoby</comment>
     <comment xml:lang="cy">dogfen hyfforddwr geirfa</comment>
+    <comment xml:lang="da">ordforrådstræningsdokument</comment>
     <comment xml:lang="de">Vokabeltrainer-Dokument</comment>
     <comment xml:lang="el">έγγραφο εκπαιδευτή λεξιλογίου</comment>
     <comment xml:lang="en_GB">vocabulary trainer document</comment>
@@ -2297,6 +2336,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxer de KmPlot</comment>
     <comment xml:lang="cs">Soubor KmPlot</comment>
     <comment xml:lang="cy">Ffeil KmPlot</comment>
+    <comment xml:lang="da">KmPlot-fil</comment>
     <comment xml:lang="de">KmPlot-Datei</comment>
     <comment xml:lang="el">Αρχείο KmPlot</comment>
     <comment xml:lang="en_GB">KmPlot file</comment>
@@ -2354,6 +2394,7 @@ Notes:
     <comment xml:lang="ca@valencia">Vocabulari de KWordQuiz</comment>
     <comment xml:lang="cs">Slovní zásoba KWordQuiz</comment>
     <comment xml:lang="cy">Geirfa KWordQuiz</comment>
+    <comment xml:lang="da">Ordforråd til KWordQuiz</comment>
     <comment xml:lang="de">KWordQuiz-Vokabular</comment>
     <comment xml:lang="el">Λεξιλόγιο KWordQuiz</comment>
     <comment xml:lang="en_GB">KWordQuiz vocabulary</comment>
@@ -2411,6 +2452,7 @@ Notes:
     <comment xml:lang="ca@valencia">Bolcat d'anàlisi de rendiment de Cachegrind/Callgrind</comment>
     <comment xml:lang="cs">Výpis profilu Cachegrind/Callgrind</comment>
     <comment xml:lang="cy">Tomen ystlyswyneb Cachegrind/Callgrind</comment>
+    <comment xml:lang="da">Cachegrind/Callgrind profil-dump</comment>
     <comment xml:lang="de">Cachegrind/Callgrind-Profil-Ausgabe</comment>
     <comment xml:lang="el">Αποτύπωση προφίλ Cachegrind/Callgrind</comment>
     <comment xml:lang="en_GB">Cachegrind/Callgrind profile dump</comment>
@@ -2468,6 +2510,7 @@ Notes:
     <comment xml:lang="ca@valencia">Fitxer del modelador UML Umbrello</comment>
     <comment xml:lang="cs">Soubor Umbrello UML Modeller</comment>
     <comment xml:lang="cy">Ffeil Cynffurfiwr UML Umbrello</comment>
+    <comment xml:lang="da">Umbrello UML modelleringsfil</comment>
     <comment xml:lang="de">Umbrello-UML-Datei</comment>
     <comment xml:lang="el">Αρχείο μοντελοποίησης Umbrello UML</comment>
     <comment xml:lang="en_GB">Umbrello UML Modeller file</comment>
@@ -2527,6 +2570,7 @@ Notes:
     <comment xml:lang="ca@valencia">Enllaç de Windows</comment>
     <comment xml:lang="cs">Odkaz Windows</comment>
     <comment xml:lang="cy">Cysylltiad Windows</comment>
+    <comment xml:lang="da">Windows-link</comment>
     <comment xml:lang="de">Windows-Verknüpfung</comment>
     <comment xml:lang="el">Αρχείο δεσμού Windows</comment>
     <comment xml:lang="en_GB">Windows link</comment>
@@ -2587,6 +2631,7 @@ Notes:
     <comment xml:lang="ca@valencia">Llista de baixades de KGet</comment>
     <comment xml:lang="cs">Seznam stahování KGet</comment>
     <comment xml:lang="cy">Rhestr llawrlwytho KGet</comment>
+    <comment xml:lang="da">KGet downloadliste</comment>
     <comment xml:lang="de">KGet-Downloadliste</comment>
     <comment xml:lang="el">Λίστα λήψης KGet</comment>
     <comment xml:lang="en_GB">KGet download list</comment>
@@ -2644,6 +2689,7 @@ Notes:
     <comment xml:lang="ca@valencia">Arxiu d'emoticones de Kopete</comment>
     <comment xml:lang="cs">Archiv emotikonů Kopete</comment>
     <comment xml:lang="cy">Archif teimladeiconau Kopete</comment>
+    <comment xml:lang="da">Kopete emotikon-arkiv</comment>
     <comment xml:lang="de">Kopete-Emoticons-Archiv</comment>
     <comment xml:lang="el">Αρχειοθήκη εικονιδίων διάθεσης Kopete</comment>
     <comment xml:lang="en_GB">Kopete emoticons archive</comment>
@@ -2700,6 +2746,7 @@ Notes:
     <comment xml:lang="ca@valencia">Contacte d'ICQ</comment>
     <comment xml:lang="cs">Kontakt ICQ</comment>
     <comment xml:lang="cy">Cysylltiad ICQ</comment>
+    <comment xml:lang="da">ICQ-kontakt</comment>
     <comment xml:lang="de">ICQ-Kontakt</comment>
     <comment xml:lang="el">Επαφή ICQ</comment>
     <comment xml:lang="en_GB">ICQ contact</comment>
@@ -2759,6 +2806,7 @@ Notes:
     <comment xml:lang="ca@valencia">Format de suports de Microsoft</comment>
     <comment xml:lang="cs">Microsoft Media Format</comment>
     <comment xml:lang="cy">Ffurfiadaeth Cyfryngau Microsoft</comment>
+    <comment xml:lang="da">Microsoft medieformat</comment>
     <comment xml:lang="de">Microsoft-Media-Format</comment>
     <comment xml:lang="el">Τύπος μέσων της Microsoft</comment>
     <comment xml:lang="en_GB">Microsoft Media Format</comment>
@@ -2822,6 +2870,7 @@ Notes:
     <comment xml:lang="ca@valencia">Document RDF del Turtle</comment>
     <comment xml:lang="cs">Dokument Turtle RDF</comment>
     <comment xml:lang="cy">Dogfen Turtle RDF</comment>
+    <comment xml:lang="da">Turtle RDF-dokument</comment>
     <comment xml:lang="de">Turtle-RDF-Dokument</comment>
     <comment xml:lang="el">Έγγραφο Turtle RDF</comment>
     <comment xml:lang="en_GB">Turtle RDF document</comment>
@@ -2878,6 +2927,7 @@ Notes:
     <comment xml:lang="ca@valencia">Imatge PIC de Softimage</comment>
     <comment xml:lang="cs">Obrázek Softimage PIC</comment>
     <comment xml:lang="cy">Delw Softimage PIC</comment>
+    <comment xml:lang="da">Softimage PIC-billede</comment>
     <comment xml:lang="de">Softimage-PIC-Bild</comment>
     <comment xml:lang="el">Εικόνα Softimage PIC</comment>
     <comment xml:lang="en_GB">Softimage PIC image</comment>
@@ -2937,6 +2987,7 @@ Notes:
     <comment xml:lang="ca@valencia">Opcions de configuració del KConfigXT</comment>
     <comment xml:lang="cs">Možnosti nastavení KConfigXT</comment>
     <comment xml:lang="cy">Dewisiadau Cytffiguriadaeth KConfigXT</comment>
+    <comment xml:lang="da">Konfigurationsmuligheder til KConfigXT</comment>
     <comment xml:lang="de">KConfigXT-Einrichtungsoptionen</comment>
     <comment xml:lang="el">Επιλογές διαμόρφωσης KConfigXT</comment>
     <comment xml:lang="en_GB">KConfigXT Configuration Options</comment>
@@ -2999,6 +3050,7 @@ Notes:
     <comment xml:lang="ca@valencia">Opcions de generació de codi del KConfigXT</comment>
     <comment xml:lang="cs">Volby generování kódu KConfigXT</comment>
     <comment xml:lang="cy">Dewisiadau Cenhedliad Côd KConfigXT</comment>
+    <comment xml:lang="da">Kodegenereringsmuligheder til KConfigXT</comment>
     <comment xml:lang="de">KConfigXT-Optionen zur Quelltexterzeugung</comment>
     <comment xml:lang="el">Επιλογές γεννήτρια κώδικα KConfigXT</comment>
     <comment xml:lang="en_GB">KConfigXT Code Generation Options</comment>
@@ -3057,6 +3109,7 @@ Notes:
     <comment xml:lang="ca@valencia">Declaració d'IU del KXMLGUI</comment>
     <comment xml:lang="cs">Deklarace KXMLGUI UI</comment>
     <comment xml:lang="cy">Datganiad KXMLGUI UI</comment>
+    <comment xml:lang="da">KXMLGUI UI-erklæring</comment>
     <comment xml:lang="de">KXMLGUI-UI-Deklaration</comment>
     <comment xml:lang="el">Δήλωση KXMLGUI UI</comment>
     <comment xml:lang="en_GB">KXMLGUI UI Declaration</comment>
@@ -3119,6 +3172,7 @@ Notes:
     <comment xml:lang="ca">Declaració del KNotification</comment>
     <comment xml:lang="ca@valencia">Declaració del KNotification</comment>
     <comment xml:lang="cy">Datganiad KNotification</comment>
+    <comment xml:lang="da">KNotification-erklæring</comment>
     <comment xml:lang="de">KNotification-Deklaration</comment>
     <comment xml:lang="el">Δήλωση KNotification</comment>
     <comment xml:lang="en_GB">KNotification Declaration</comment>
@@ -3177,6 +3231,7 @@ Notes:
     <comment xml:lang="ca@valencia">Informe del KCrash</comment>
     <comment xml:lang="cs">Report KCrash</comment>
     <comment xml:lang="cy">Adroddiad KCrash</comment>
+    <comment xml:lang="da">KCrash-rapport</comment>
     <comment xml:lang="de">KCrash-Bericht</comment>
     <comment xml:lang="el">Αναφορά KCrash</comment>
     <comment xml:lang="en_GB">KCrash Report</comment>
