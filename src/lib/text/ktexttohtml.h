@@ -29,10 +29,6 @@ enum Option {
 
     /**
      * Replace text emoticons smileys by emoticons images.
-     *
-     * @note
-     * This option works only when KEmoticons framework is available at runtime,
-     * and requires QGuiApplication, otherwise the flag is simply ignored.
      */
     ReplaceSmileys = 1 << 2,
 
