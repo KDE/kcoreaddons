@@ -16,11 +16,6 @@ QString Formats::formatDuration(quint64 msecs, KFormat::DurationFormatOptions op
     return m_format.formatDuration(msecs, options);
 }
 
-QString Formats::formatDuration(quint64 msecs, int options) const
-{
-    return m_format.formatDuration(msecs, static_cast<KFormat::DurationFormatOptions>(options));
-}
-
 QString Formats::formatDecimalDuration(quint64 msecs, int decimalPlaces) const
 {
     return m_format.formatDecimalDuration(msecs, decimalPlaces);

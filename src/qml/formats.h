@@ -26,17 +26,6 @@ public:
      */
     Q_INVOKABLE QString formatDuration(quint64 msecs, KFormat::DurationFormatOptions options = KFormat::DefaultDuration) const;
 
-    Q_DECLARE_FLAGS(DurationFormatOptions, KFormat::DurationFormatOption)
-
-    /**
-     * This overload exists so it can be called from QML, which does
-     * not support calling Q_INVOKABLEs with Q_ENUMS from different classes
-     *
-     * This is mentioned in the docs and also in https://bugreports.qt.io/browse/QTBUG-20639
-     * Until that bug is fixed, we'll need this
-     */
-    Q_INVOKABLE QString formatDuration(quint64 msecs, int options) const;
-
     /**
      * Given a number of milliseconds, converts that to a string containing
      * the localized equivalent to the requested decimal places.
