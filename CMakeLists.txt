@@ -24,7 +24,6 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMAddQch)
 include(ECMSetupQtPluginMacroNames)
 include(ECMDeprecationSettings)
-include(ECMQmlModule)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
@@ -38,6 +37,7 @@ set(REQUIRED_QT_VERSION 6.5.0)
 find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
 if (KCOREADDONS_USE_QML)
     find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Qml)
+    include(ECMQmlModule)
 endif()
 
 ecm_setup_qtplugin_macro_names(
