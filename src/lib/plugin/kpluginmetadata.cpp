@@ -128,10 +128,13 @@ public:
     {
         QPluginLoader loader;
         pluginLoaderForPath(loader, path);
-        if (loader.metaData().isEmpty()) {
+
+        const QJsonObject metaData = loader.metaData();
+
+        if (metaData.isEmpty()) {
             qCDebug(KCOREADDONS_DEBUG) << "no metadata found in" << loader.fileName() << loader.errorString();
         }
-        auto ret = new KPluginMetaDataPrivate(loader.metaData().value(QLatin1String("MetaData")).toObject(), //
+        auto ret = new KPluginMetaDataPrivate(metaData.value(QLatin1String("MetaData")).toObject(), //
                                               QFileInfo(loader.fileName()).absoluteFilePath(),
                                               options);
         ret->m_requestedFileName = path;
