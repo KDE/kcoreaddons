@@ -9,16 +9,13 @@
 #include "kcompositejob.h"
 #include "kcompositejob_p.h"
 
-KCompositeJobPrivate::KCompositeJobPrivate()
-{
-}
-
-KCompositeJobPrivate::~KCompositeJobPrivate()
-{
-}
-
 KCompositeJob::KCompositeJob(QObject *parent)
-    : KJob(*new KCompositeJobPrivate, parent)
+    : KJob(*new KCompositeJobPrivate(std::make_unique<QEventLoopLocker>()), parent)
+{
+}
+
+KCompositeJob::KCompositeJob([[maybe_unused]] KJob::EventLoopLock lock, QObject *parent)
+    : KJob(*new KCompositeJobPrivate(nullptr), parent)
 {
 }
 

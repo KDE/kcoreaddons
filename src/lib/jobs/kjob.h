@@ -111,12 +111,44 @@ public:
     Q_DECLARE_FLAGS(Capabilities, Capability)
     Q_FLAG(Capabilities)
 
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(6, 12)
     /**
      * Creates a new KJob object.
      *
      * @param parent the parent QObject
      */
+    KCOREADDONS_DEPRECATED_VERSION(6, 12, "Use explicit EventLoopLock constructor")
     explicit KJob(QObject *parent = nullptr);
+#endif
+
+    enum class EventLoopLock : std::uint8_t {
+        No
+    }; // intentionally only one option
+
+    /**
+     * Creates a new KJob object **without** internal QEventLoopLocker.
+     *
+     * Previously KJob implicitly created a locker which had the unfortunate side effect, in Qt 6, that an application
+     * would automatically quit if it used any KJob and had no QWindow to hold the Q*Application open.
+     * As this caused a number of unobvious, hard to track down issues, no QEventLoopLocker is being created any more.
+     *
+     * Should you need to do work before the application closes, then explicitly propagate that requirement to your
+     * caller.
+     * For example you might require a constructor argument of type QEventLoopLocker.
+     * The overall design goal should always be to have the application author themselves create the locker and pass it
+     * into your job, and thus be aware of there being a locker and the need to possibly influence the locker behavior.
+     * When subclassing a job this requirement should be carried forward to uphold the design.
+     *
+     * As an application author you may need to set quitLockEnabled on your Q*Application if you have to provide a
+     * a locker to a KJob derived class.
+     *
+     * Furthermore you can let the job manage the locker for you by calling setEventLocker(true).
+     *
+     * To repeat: when using this constructor there will be no implicit QEventLoopLocker created!
+     *
+     * @since 6.12
+     */
+    explicit KJob(EventLoopLock lock, QObject *parent = nullptr);
 
     /**
      * Destroys a KJob object.
@@ -186,6 +218,12 @@ public:
         EmitResult,
     };
     Q_ENUM(KillVerbosity)
+
+    /**
+     * The job will hold a QEventLoopLocker internally. Mind the altered quit semantics of your application!
+     * @since 6.12
+     */
+    void setEventLocker(bool lock);
 
 public Q_SLOTS:
     /**

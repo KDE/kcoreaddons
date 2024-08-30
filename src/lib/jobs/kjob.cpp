@@ -18,7 +18,8 @@
 #include <QEventLoop>
 #include <QTimer>
 
-KJobPrivate::KJobPrivate()
+KJobPrivate::KJobPrivate(std::unique_ptr<QEventLoopLocker> &&locker)
+    : eventLoopLocker(std::move(locker))
 {
 }
 
@@ -28,9 +29,16 @@ KJobPrivate::~KJobPrivate()
 
 KJob::KJob(QObject *parent)
     : QObject(parent)
-    , d_ptr(new KJobPrivate)
+    , d_ptr(new KJobPrivate(std::make_unique<QEventLoopLocker>()))
 {
-    d_ptr->q_ptr = this;
+    // EventLoopLock Yes (deprecated)
+}
+
+KJob::KJob([[maybe_unused]] EventLoopLock lock, QObject *parent)
+    : QObject(parent)
+    , d_ptr(new KJobPrivate(nullptr))
+{
+    // EventLoopLock No
 }
 
 KJob::KJob(KJobPrivate &dd, QObject *parent)
@@ -416,6 +424,15 @@ bool KJob::isStartedWithExec() const
 {
     Q_D(const KJob);
     return d->m_startedWithExec;
+}
+
+void KJob::setEventLocker(bool lock)
+{
+    Q_D(KJob);
+    if (bool(d->eventLoopLocker) == lock) {
+        return;
+    }
+    d->eventLoopLocker = lock ? std::make_unique<QEventLoopLocker>() : nullptr;
 }
 
 #include "moc_kjob.cpp"

@@ -26,12 +26,22 @@ class KCOREADDONS_EXPORT KCompositeJob : public KJob
     Q_OBJECT
 
 public:
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(6, 12)
     /**
      * Creates a new KCompositeJob object.
      *
      * @param parent the parent QObject
      */
+    KCOREADDONS_DEPRECATED_VERSION(6, 12, "Use explicit EventLoopLock constructor")
     explicit KCompositeJob(QObject *parent = nullptr);
+#endif
+
+    /**
+     * Creates a new KCompositeJob object **without** internal QEventLoopLocker.
+     * @see KJob::KJob(EventLoopLock, QObject*)
+     * @since 6.12
+     */
+    explicit KCompositeJob(KJob::EventLoopLock lock, QObject *parent = nullptr);
 
     /**
      * Destroys a KCompositeJob object.
