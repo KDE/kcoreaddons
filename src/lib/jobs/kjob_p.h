@@ -49,9 +49,8 @@ public:
     unsigned long percentage = 0;
     QTimer *speedTimer = nullptr;
     QEventLoop *eventLoop = nullptr;
-    // eventLoopLocker prevents QCoreApplication from exiting when the last
-    // window is closed until the job has finished running
-    QEventLoopLocker eventLoopLocker;
+    // NOTE: Do not use a QEventLoopLocker. If the caller wants to not have the job aborted, it should handle it on
+    // their level. Implicit locking is wrong half the time.
     KJob::Capabilities capabilities = KJob::NoCapabilities;
     bool suspended = false;
     bool isAutoDelete = true;
