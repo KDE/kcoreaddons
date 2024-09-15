@@ -6,8 +6,7 @@ description = Additions to Qt Core
 documentationinheaders = true
 
 headerdirs = .
-
-headers.fileextensions = "*.qdoc *.h"
+sourcedirs = .
 
 outputdir  = doc/html
 outputformats = HTML

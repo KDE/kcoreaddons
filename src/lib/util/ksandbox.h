@@ -9,7 +9,7 @@
 #include <kcoreaddons_export.h>
 
 /*!
- * \class KSandbox
+ * \namespace KSandbox
  * \inmodule KCoreAddons
  * \brief Utility functions for use inside application sandboxes such as flatpak or snap.
  * \since 5.95
