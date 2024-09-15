@@ -128,7 +128,7 @@ class KAboutPerson;
   \endcode
 
   \sa KAboutPerson::fromJSON()
-  \since KCoreAddons 5.1
+  \since 5.1
  */
 class KCOREADDONS_EXPORT KPluginMetaData
 {
@@ -158,7 +158,7 @@ class KCOREADDONS_EXPORT KPluginMetaData
 public:
     /*!
      * Options for creating a KPluginMetaData object.
-     * \since KCoreAddons 5.91
+     * \since 5.91
      *
      * \value AllowEmptyMetaData Plugins with empty metaData are considered valid
      * \value [since KCoreAddons 6.0] CacheMetaData If KCoreAddons should keep metadata in cache. This makes querying the namespace again faster. Consider using
@@ -202,7 +202,7 @@ public:
      *
      * \a pluginFile the file that the plugin can be loaded from
      *
-     * \since KCoreAddons 6.0
+     * \since 6.0
      */
     KPluginMetaData(const QJsonObject &metaData, const QString &fileName);
 
@@ -217,7 +217,7 @@ public:
      * this ensure that only JSON format plugins are loaded and any other type is rejected.
      *
      * \a jsonFile the .json file to load
-     * \since KCoreAddons 5.91
+     * \since 5.91
      */
     static KPluginMetaData fromJsonFile(const QString &jsonFile);
 
@@ -231,7 +231,7 @@ public:
      *
      * \a option Added in 6.0, see enum docs
      *
-     * \since KCoreAddons 5.84
+     * \since 5.84
      */
     static KPluginMetaData findPluginById(const QString &directory, const QString &pluginId, KPluginMetaDataOptions options = {});
 
@@ -248,7 +248,7 @@ public:
      * \a option Weather or not allow plugins with empty metadata to be considered valid
      *
      * Returns all plugins found in \a directory that fulfil the constraints of \a filter
-     * \since KCoreAddons 5.86
+     * \since 5.86
      */
     static QList<KPluginMetaData>
     findPlugins(const QString &directory, std::function<bool(const KPluginMetaData &)> filter = {}, KPluginMetaDataOptions options = {});
@@ -262,7 +262,7 @@ public:
     /*!
      * Returns whether this object should be hidden
      *
-     * \since KCoreAddons 5.8
+     * \since 5.8
      */
     bool isHidden() const;
 
@@ -300,14 +300,14 @@ public:
     /*!
      * Returns the translator(s) of this plugin.
      *
-     * \since KCoreAddons 5.18
+     * \since 5.18
      */
     QList<KAboutPerson> translators() const;
 
     /*!
      * Returns a list of people that contributed to this plugin (other than the authors and translators).
      *
-     * \since KCoreAddons 5.18
+     * \since 5.18
      */
     QList<KAboutPerson> otherContributors() const;
 
@@ -330,14 +330,14 @@ public:
 
     /*!
      * Returns the text of the license, equivalent to KAboutLicense::byKeyword(license()).text()
-     * \since KCoreAddons 5.73
+     * \since 5.73
      */
     QString licenseText() const;
 
     /*!
      * Returns a short copyright statement
      *
-     * \since KCoreAddons 5.18
+     * \since 5.18
      */
     QString copyrightText() const;
 
@@ -365,13 +365,13 @@ public:
 
     /*!
      * Returns the website where people can report a bug found in this plugin
-     * \since KCoreAddons 5.99
+     * \since 5.99
      */
     QString bugReportUrl() const;
 
     /*!
      * Returns a list of MIME types this plugin can handle (e.g. "application/pdf", "image/png", etc.)
-     * \since KCoreAddons 5.16
+     * \since 5.16
      */
     QStringList mimeTypes() const;
 
@@ -379,7 +379,7 @@ public:
      * Returns true if this plugin can handle the given mimetype
      * This is more accurate than mimeTypes().contains(mimeType) because it also
      * takes MIME type inheritance into account.
-     * \since KCoreAddons 5.66
+     * \since 5.66
      */
     bool supportsMimeType(const QString &mimeType) const;
 
@@ -387,7 +387,7 @@ public:
      * Returns A string list of formfactors this plugin is useful for, e.g. desktop, handset or mediacenter.
      * The keys for this are not formally defined, though the above-mentioned values should be used when applicable.
      *
-     * \since KCoreAddons 5.12
+     * \since 5.12
      */
     QStringList formFactors() const;
 
@@ -406,7 +406,7 @@ public:
      *
      * \a config KConfigGroup where the enabled state is stored
      *
-     * \since KCoreAddons 5.89
+     * \since 5.89
      */
     template<typename T>
     bool isEnabled(const T &config) const
@@ -425,13 +425,13 @@ public:
 
     /*!
      * \overload
-     * \since KCoreAddons 5.88
+     * \since 5.88
      */
     bool value(const QString &key, bool defaultValue) const;
 
     /*!
      * \overload
-     * \since KCoreAddons 5.88
+     * \since 5.88
      */
     int value(const QString &key, int defaultValue) const;
 
@@ -439,7 +439,7 @@ public:
      * If the type of \a key is string, a list containing just that string will be returned.
      * If the type is array, the list will contain one entry for each array member.
      * \overload
-     * \since KCoreAddons 5.88
+     * \since 5.88
      */
     QStringList value(const QString &key, const QStringList &defaultValue) const;
 
@@ -454,7 +454,7 @@ public:
      * Returns true if the instance represents a static plugin
      * \note for loading plugin the plugin independently of it being static/dynamic
      * use KPluginFactory::loadFactory or KPluginFactory::instantiatePlugin.
-     * \since KCoreAddons 5.89
+     * \since 5.89
      */
     bool isStaticPlugin() const;
 
@@ -472,7 +472,7 @@ inline size_t qHash(const KPluginMetaData &md, size_t seed)
     return qHash(md.pluginId(), seed);
 }
 
-/*! \since KCoreAddons 6.0 */
+/*! \since 6.0 */
 KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const KPluginMetaData &metaData);
 
 Q_DECLARE_TYPEINFO(KPluginMetaData, Q_RELOCATABLE_TYPE);

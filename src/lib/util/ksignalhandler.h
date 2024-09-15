@@ -29,7 +29,7 @@ class KSignalHandlerPrivate;
  * }
  * \endcode
  *
- * \since KCoreAddons 5.92
+ * \since 5.92
  */
 class KCOREADDONS_EXPORT KSignalHandler : public QObject
 {

@@ -22,7 +22,7 @@ namespace KCoreAddons
 /*!
  * Returns the version number of KCoreAddons at run-time as a string (for example, "5.19.0").
  * This may be a different version than the version the application was compiled against.
- * \since KCoreAddons 5.20
+ * \since 5.20
  */
 KCOREADDONS_EXPORT QString versionString();
 
@@ -37,7 +37,7 @@ KCOREADDONS_EXPORT QString versionString();
  * \endcode
  *
  * This may be a different version than the version the application was compiled against.
- * \since KCoreAddons 5.20
+ * \since 5.20
  */
 KCOREADDONS_EXPORT unsigned int version();
 }

@@ -26,7 +26,7 @@ namespace KJsonUtils
  * When looking for a key "foo" with German (Germany) locale we will first attempt to read "foo[de_DE]",
  * if that does not exist "foo[de]", finally falling back to "foo" if that also doesn't exist.
  * Returns the translated value for \a key from \a jo or \a defaultValue if \a key was not found
- * \since KCoreAddons 5.88
+ * \since 5.88
  */
 KCOREADDONS_EXPORT QJsonValue readTranslatedValue(const QJsonObject &jo, const QString &key, const QJsonValue &defaultValue = QJsonValue());
 
@@ -34,7 +34,7 @@ KCOREADDONS_EXPORT QJsonValue readTranslatedValue(const QJsonObject &jo, const Q
  * Returns the translated value of \a key from \a jo as a string or \a defaultValue if \a key was not found
  * or the value for \a key is not of type string
  * \sa KPluginMetaData::readTranslatedValue(const QJsonObject &jo, const QString &key)
- * \since KCoreAddons 5.88
+ * \since 5.88
  */
 KCOREADDONS_EXPORT QString readTranslatedString(const QJsonObject &jo, const QString &key, const QString &defaultValue = QString());
 }

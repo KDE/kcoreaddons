@@ -42,7 +42,7 @@ KCOREADDONS_EXPORT QString randomString(int length);
  *
  * The container needs to implement size() and T &operator[]
  *
- * \since KCoreAddons 5.73
+ * \since 5.73
  */
 template<typename T>
 void shuffle(T &container, QRandomGenerator *generator)
@@ -60,7 +60,7 @@ void shuffle(T &container, QRandomGenerator *generator)
  *
  * The container needs to implement size() and T &operator[]
  *
- * \since KCoreAddons 5.73
+ * \since 5.73
  */
 template<typename T>
 void shuffle(T &container)

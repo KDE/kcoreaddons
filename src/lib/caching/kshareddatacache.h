@@ -44,7 +44,7 @@ class QByteArray;
  * \endcode
  *
  * \sa KImageCache
- * \since KCoreAddons 4.5
+ * \since 4.5
  */
 class KCOREADDONS_EXPORT KSharedDataCache
 {
@@ -177,7 +177,7 @@ public:
      *         on cache creation, but KSharedDataCache will not touch the
      *         timestamp again.
      * \sa setTimestamp()
-     * \since KCoreAddons 4.6
+     * \since 4.6
      */
     unsigned timestamp() const;
 
@@ -210,7 +210,7 @@ public:
      *
      * \a newTimestamp The new timestamp to mark the shared cache with.
      * \sa timestamp()
-     * \since KCoreAddons 4.6
+     * \since 4.6
      */
     void setTimestamp(unsigned newTimestamp);
 

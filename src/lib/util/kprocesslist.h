@@ -27,7 +27,7 @@ class KProcessInfoPrivate;
  *
  * This class is usually not used alone but rather returned by
  * processInfoList and processInfo. To check if the data contained in this class is valid use the isValid method.
- * \since KCoreAddons 5.58
+ * \since 5.58
  */
 class KCOREADDONS_EXPORT KProcessInfo
 {
@@ -63,7 +63,7 @@ public:
     /*!
      * The command line running this process
      * e.g /bin/ls /some/path -R
-     * \since KCoreAddons 5.61
+     * \since 5.61
      */
     QString command() const;
 
@@ -75,7 +75,7 @@ typedef QList<KProcessInfo> KProcessInfoList;
 
 /*!
  * Retrieves the list of currently active processes.
- * \since KCoreAddons 5.58
+ * \since 5.58
  */
 KCOREADDONS_EXPORT KProcessInfoList processInfoList();
 
@@ -85,7 +85,7 @@ KCOREADDONS_EXPORT KProcessInfoList processInfoList();
  *
  * \a pid The process-id to retrieve information for.
  *
- * \since KCoreAddons 5.58
+ * \since 5.58
  */
 KCOREADDONS_EXPORT KProcessInfo processInfo(qint64 pid);
 

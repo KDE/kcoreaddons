@@ -187,7 +187,7 @@ KCOREADDONS_EXPORT QString tildeExpand(const QString &path);
  * \a path the path to tilde-collpase
  *
  * Returns the collapsed path
- * \since KCoreAddons 5.67
+ * \since 5.67
  */
 KCOREADDONS_EXPORT QString tildeCollapse(const QString &path);
 }

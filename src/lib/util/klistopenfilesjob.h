@@ -34,7 +34,7 @@ class KListOpenFilesJobPrivate;
  * On Unix like systems the lsof utility is used to get the list of processes.
  * On Windows the listing always fails with error code NotSupported.
  *
- * \since KCoreAddons 5.63
+ * \since 5.63
  */
 class KCOREADDONS_EXPORT KListOpenFilesJob : public KJob
 {

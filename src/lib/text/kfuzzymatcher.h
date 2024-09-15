@@ -102,7 +102,7 @@ struct KCOREADDONS_EXPORT Result {
  * \brief A range representing a matched sequence in a string
  * \inmodule KCoreAddons
  *
- * \since KCoreAddons 5.84
+ * \since 5.84
  */
 struct KCOREADDONS_EXPORT Range {
     /*! \variable KFuzzyMatcher::Range::start
@@ -122,7 +122,7 @@ struct KCOREADDONS_EXPORT Range {
  * \value FullyMatched We want ranges only where the pattern fully matches the user supplied string
  * \value All We want ranges for all matches, even if the pattern partially matched the user supplied string
  *
- * \since KCoreAddons 5.84
+ * \since 5.84
  */
 enum class RangeType : unsigned char { FullyMatched, All };
 
@@ -141,7 +141,7 @@ enum class RangeType : unsigned char { FullyMatched, All };
  *
  * Returns \c true on sucessful match
  *
- * \since KCoreAddons 5.79
+ * \since 5.79
  */
 KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
 
@@ -162,7 +162,7 @@ KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
  * successful. If there is no match, score is zero. If the match is successful,
  * score must be used to sort the results.
  *
- * \since KCoreAddons 5.79
+ * \since 5.79
  */
 KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
 
@@ -230,7 +230,7 @@ KCOREADDONS_EXPORT Result match(QStringView pattern, QStringView str);
  * Returns A vector of ranges containing positions and lengths where the pattern
  * matched. If there was no match, the vector will be empty
  *
- * \since KCoreAddons 5.84
+ * \since 5.84
  */
 KCOREADDONS_EXPORT QList<KFuzzyMatcher::Range> matchedRanges(QStringView pattern, QStringView str, RangeType type = RangeType::FullyMatched);
 

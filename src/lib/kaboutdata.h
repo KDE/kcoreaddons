@@ -141,7 +141,7 @@ public:
 
     /*!
      * Returns an URL pointing to the user's avatar
-     * \since KCoreAddons 6.0
+     * \since 6.0
      */
     QUrl avatarUrl() const;
 
@@ -172,7 +172,7 @@ public:
       The \c Name and \c Task key are translatable (by using e.g. a "Task[de_DE]" key)
       The AvatarUrl exists since version 6.0
 
-      \since KCoreAddons 5.18
+      \since 5.18
      */
     static KAboutPerson fromJSON(const QJsonObject &obj);
 
@@ -242,13 +242,13 @@ public:
         Artistic = 4, ///< Artistic, see https://spdx.org/licenses/Artistic-2.0.html
         GPL_V3 = 5, ///< GPL_V3, see https://spdx.org/licenses/GPL-3.0.html
         LGPL_V3 = 6, ///< LGPL_V3, see https://spdx.org/licenses/LGPL-3.0-only.html
-        LGPL_V2_1 = 7, ///< LGPL_V2_1 \since KCoreAddons 5.25, see https://spdx.org/licenses/LGPL-2.1-only.html
-        MIT = 8, ///< MIT \since KCoreAddons 6.0, see https://spdx.org/licenses/MIT.html
+        LGPL_V2_1 = 7, ///< LGPL_V2_1 \since 5.25, see https://spdx.org/licenses/LGPL-2.1-only.html
+        MIT = 8, ///< MIT \since 6.0, see https://spdx.org/licenses/MIT.html
     };
     Q_ENUM(LicenseKey)
 
     /*!
-     * \since KCoreAddons 6.0
+     * \since 6.0
      * Format of the license name.
      *
      * \value ShortFormat Short format
@@ -262,7 +262,7 @@ public:
     Q_ENUM(NameFormat)
 
     /*!
-     * \since KCoreAddons 6.0
+     * \since 6.0
      * Whether later versions of the license are allowed.
      *
      * \value OnlyThisVersion Only this version of the license is allowed
@@ -276,7 +276,7 @@ public:
     Q_ENUM(VersionRestriction)
 
     /*!
-     * \since KCoreAddons 5.53
+     * \since 5.53
      */
     explicit KAboutLicense();
 
@@ -308,7 +308,7 @@ public:
     /*!
      * Returns the license name.
      *
-     * Default argument \since KCoreAddons 5.53
+     * Default argument \since 5.53
      *
      * Returns The license name as a string.
      */
@@ -335,7 +335,7 @@ public:
      * Returns SPDX license expression or QString() if the license has no identifier. Compliant
      *   with SPDX 2.1.
      *
-     * \since KCoreAddons 5.37
+     * \since 5.37
      */
     QString spdx() const;
 
@@ -424,7 +424,7 @@ Q_DECLARE_TYPEINFO(KAboutLicense, Q_RELOCATABLE_TYPE);
  * QList<KAboutComponent> components = about.components();
  * \endcode
  *
- * \since KCoreAddons 5.84
+ * \since 5.84
  */
 class KCOREADDONS_EXPORT KAboutComponent
 {
@@ -773,7 +773,7 @@ public:
 
     /*!
      * \overload
-     * \since KCoreAddons 6.0
+     * \since 6.0
      */
     KAboutData &addAuthor(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &kdeStoreUsername)
     {
@@ -809,7 +809,7 @@ public:
 
     /*!
      * \overload
-     * \since KCoreAddons 6.0
+     * \since 6.0
      */
     KAboutData &addCredit(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QString &kdeStoreUsername)
     {
@@ -861,7 +861,7 @@ public:
      *
      * \a licenseKey The component's license identifier. Can be left empty (i.e. KAboutLicense::Unknown)
      *
-     * \since KCoreAddons 5.84
+     * \since 5.84
      */
     KAboutData &addComponent(const QString &name,
                              const QString &description = QString(),
@@ -890,7 +890,7 @@ public:
      * \a pathToLicenseFile Path to the file in the local filesystem containing the license text.
      *        The file format has to be plain text in an encoding compatible to the local.
      *
-     * \since KCoreAddons 5.84
+     * \since 5.84
      */
     KAboutData &
     addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, const QString &pathToLicenseFile);
@@ -1009,7 +1009,7 @@ public:
      *    e.g. licensed under "GPL 2.0 or at your option later versions" would be OrLaterVersions.
      * \sa addLicenseText, setLicenseText, setLicenseTextFile
      *
-     * \since KCoreAddons 5.37
+     * \since 5.37
      */
     KAboutData &setLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction);
 
@@ -1037,7 +1037,7 @@ public:
      *
      * \sa setLicenseText, addLicenseText, addLicenseTextFile
      *
-     * \since KCoreAddons 5.37
+     * \since 5.37
      */
     KAboutData &addLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction);
 
@@ -1230,7 +1230,7 @@ public:
     /*!
      * Returns a list of components.
      * Returns component information (list of components).
-     * \since KCoreAddons 5.84
+     * \since 5.84
      */
     QList<KAboutComponent> components() const;
 
@@ -1351,14 +1351,14 @@ public:
      * \sa organizationDomain
      * \sa componentName
      * \sa setupCommandLine
-     * \since KCoreAddons 5.16
+     * \since 5.16
      **/
     KAboutData &setDesktopFileName(const QString &desktopFileName);
 
     /*!
      * Returns The desktop file name of this application (e.g. "org.kde.foo")
      * \sa setDesktopFileName(const QString&)
-     * \since KCoreAddons 5.16
+     * \since 5.16
      **/
     QString desktopFileName() const;
 
