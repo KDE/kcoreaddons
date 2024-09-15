@@ -30,7 +30,7 @@ QT_END_NAMESPACE
  * - Store KIO metadata, such as the HTTP referrer for a given URL (some websites
  *     require it for downloading e.g. an image)
  *
- * \since KCoreAddons 5.0
+ * \since 5.0
  */
 namespace KUrlMimeData
 {

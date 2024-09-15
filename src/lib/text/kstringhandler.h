@@ -121,7 +121,7 @@ KCOREADDONS_EXPORT QString rsqueeze(const QString &str, int maxlen = 40);
  *
  * Returns A QStringList containing tokens extracted from \a str
  *
- * \since KCoreAddons 5.87
+ * \since 5.87
  */
 KCOREADDONS_EXPORT QStringList perlSplit(const QStringView sep, const QStringView str, int max);
 
@@ -189,7 +189,7 @@ KCOREADDONS_EXPORT QStringList perlSplit(const QChar &sep, const QString &s, int
  *
  * Returns A QStringList containing tokens extracted from s.
  *
- * \since KCoreAddons 5.67
+ * \since 5.67
  */
 KCOREADDONS_EXPORT QStringList perlSplit(const QRegularExpression &sep, const QString &s, int max = 0);
 
@@ -229,7 +229,7 @@ KCOREADDONS_EXPORT QString obscure(const QString &str);
   Examples of such points includes after punctuation signs, underscores and
   dashes, that aren't followed by spaces.
 
-  \since KCoreAddons 4.4
+  \since 4.4
 */
 KCOREADDONS_EXPORT QString preProcessWrap(const QString &text);
 
@@ -238,7 +238,7 @@ KCOREADDONS_EXPORT QString preProcessWrap(const QString &text);
   general the character from CJK languages are assigned with weight 2, while
   other Latin characters are assigned with 1.
 
-  \since KCoreAddons 5.41
+  \since 5.41
 */
 KCOREADDONS_EXPORT int logicalLength(const QString &text);
 

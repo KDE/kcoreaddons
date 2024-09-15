@@ -44,7 +44,7 @@ KCOREADDONS_EXPORT QStringList pathCandidates(const QString &relativePath);
  *   when called with an empty string you effectively get the directory of your binary artifact.
  *
  * Returns QString absolute libexec path or empty string if it cannot be resolved
- * \since KCoreAddons 5.91
+ * \since 5.91
  */
 inline QString path(const QString &relativePath)
 {
@@ -65,7 +65,7 @@ inline QString path(const QString &relativePath)
  * \a relativePath see path() - not all paths get this appended!
  *
  * Returns QStringList list of search paths
- * \since KCoreAddons 5.91
+ * \since 5.91
  */
 inline QStringList kdeFrameworksPaths(const QString &relativePath)
 {

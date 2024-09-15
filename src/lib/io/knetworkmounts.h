@@ -52,7 +52,7 @@
  * the config file. Subsequent calls just use this instance without reading
  * the config file again.
  *
- * \since KCoreAddons 5.85
+ * \since 5.85
  **/
 class KCOREADDONS_EXPORT KNetworkMounts : public QObject
 {

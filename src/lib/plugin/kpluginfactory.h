@@ -138,7 +138,7 @@ class Part;
  *
  * \sa K_PLUGIN_FACTORY
  *
- * \since KCoreAddons 5.0
+ * \since 5.0
  */
 #define K_PLUGIN_FACTORY_WITH_JSON(name, jsonFile, pluginRegistrations)                                                                                        \
     __K_PLUGIN_FACTORY_DEFINITION(name, pluginRegistrations, IID KPluginFactory_iid FILE jsonFile)
@@ -178,7 +178,7 @@ class Part;
  *
  * \sa K_PLUGIN_FACTORY_WITH_JSON
  *
- * \since KCoreAddons 5.44
+ * \since 5.44
  */
 #ifdef KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME
 #define K_PLUGIN_CLASS_WITH_JSON(classname, jsonFile)                                                                                                          \
@@ -197,7 +197,7 @@ class Part;
  * This macro does the same as K_PLUGIN_FACTORY, but you only have to pass the class name.
  * The factory name and registerPlugin call are deduced from the class name.
  * This is also useful if you want to use static plugins, see the kcoreaddons_add_plugin CMake method.
- * \since KCoreAddons 5.90
+ * \since 5.90
  */
 #ifdef KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME
 #define K_PLUGIN_CLASS(classname) K_PLUGIN_FACTORY(KPLUGINFACTORY_PLUGIN_CLASS_INTERNAL_NAME, registerPlugin<classname>();)
@@ -304,7 +304,7 @@ public:
 
     ~KPluginFactory() override;
 
-    /*! \since KCoreAddons 5.86
+    /*! \since 5.86
      *
      * \value NO_PLUGIN_ERROR No error
      * \value INVALID_PLUGIN The plugin could not be loaded
@@ -321,7 +321,7 @@ public:
      * \class KPluginFactory::Result
      * \inmodule KCoreAddons
      * Holds the result of a plugin load operation, i.e. the loaded plugin on success or information about the error on failure
-     * \since KCoreAddons 5.86
+     * \since 5.86
      */
     template<typename T>
     class Result
@@ -358,7 +358,7 @@ public:
      * The errors will be logged using the `kf.coreaddons` debug category.
      * \a data KPluginMetaData from which the plugin should be loaded
      * Returns Result object which contains the plugin instance and potentially error information
-     * \since KCoreAddons 5.86
+     * \since 5.86
      */
     static Result<KPluginFactory> loadFactory(const KPluginMetaData &data);
 
@@ -386,7 +386,7 @@ public:
      * \a data KPluginMetaData from which the plugin should be loaded
      * \a args arguments which get passed to the plugin's constructor
      * Returns a Result object which contains the plugin instance and potentially error information
-     * \since KCoreAddons 5.86
+     * \since 5.86
      */
     template<typename T>
     static Result<T> instantiatePlugin(const KPluginMetaData &data, QObject *parent = nullptr, const QVariantList &args = {})
@@ -445,7 +445,7 @@ public:
     /*!
      * Returns the metadata of the plugin
      *
-     * \since KCoreAddons 5.77
+     * \since 5.77
      */
     KPluginMetaData metaData() const;
 
@@ -454,7 +454,7 @@ public:
      *
      * \a metaData  the metadata about the plugin
      *
-     * \since KCoreAddons 5.77
+     * \since 5.77
      */
     void setMetaData(const KPluginMetaData &metaData);
 
@@ -462,7 +462,7 @@ protected:
     /*!
      * Function pointer type to a function that instantiates a plugin
      * For plugins that don't support a KPluginMetaData parameter it is discarded
-     * \since KCoreAddons 5.77
+     * \since 5.77
      */
     using CreateInstanceWithMetaDataFunction = QObject *(*)(QWidget *, QObject *, const KPluginMetaData &, const QVariantList &);
 
@@ -578,7 +578,7 @@ protected:
      *
      * \a T the name of the plugin class
      * \a instanceFunction A function pointer to a function that creates an instance of the plugin.
-     * \since KCoreAddons 5.96
+     * \since 5.96
      */
     template<class T>
     void registerPlugin(CreateInstanceWithMetaDataFunction instanceFunction)

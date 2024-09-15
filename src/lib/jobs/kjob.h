@@ -386,7 +386,7 @@ public:
      * finished isn't of much interest, because the user can see the application that invoked
      * the job opening the actual file that was downloaded.
      *
-     * \since KCoreAddons 5.92
+     * \since 5.92
      */
     void setFinishedNotificationHidden(bool hide = true);
 
@@ -396,7 +396,7 @@ public:
      *
      * \sa setFinishedNotificationHidden()
      *
-     * \since KCoreAddons 5.92
+     * \since 5.92
      */
     bool isFinishedNotificationHidden() const;
 
@@ -408,7 +408,7 @@ public:
      * This is useful for code that for example shows a dialog to ask the user a question,
      * and that would be no-op since the user cannot interact with the dialog.
      *
-     * \since KCoreAddons 5.95
+     * \since 5.95
      */
     bool isStartedWithExec() const;
 
@@ -516,7 +516,7 @@ Q_SIGNALS:
      * \a unit the unit of the total amount
      * \a amount the total amount
      *
-     * \since KCoreAddons 5.80
+     * \since 5.80
      */
     void totalAmountChanged(KJob *job, KJob::Unit unit, qulonglong amount, QPrivateSignal);
 
@@ -532,7 +532,7 @@ Q_SIGNALS:
      * \a unit the unit of the processed amount
      * \a amount the processed amount
      *
-     * \since KCoreAddons 5.80
+     * \since 5.80
      */
     void processedAmountChanged(KJob *job, KJob::Unit unit, qulonglong amount, QPrivateSignal);
 
@@ -574,7 +574,7 @@ Q_SIGNALS:
      * \a job the job that emitted this signal
      * \a percent the percentage
      *
-     * \since KCoreAddons 5.80
+     * \since 5.80
      */
     void percentChanged(KJob *job, unsigned long percent, QPrivateSignal);
 
@@ -595,7 +595,7 @@ protected:
      *
      * Returns if the job has been finished
      * \sa finished()
-     * \since KCoreAddons 5.75
+     * \since 5.75
      */
     // KF6 TODO: make public. Useful at least for unittests that run multiple jobs in parallel.
     bool isFinished() const;
@@ -662,7 +662,7 @@ protected:
      * Sets the unit that will be used internally to calculate
      * the progress percentage.
      * The default progress unit is Bytes.
-     * \since KCoreAddons 5.76
+     * \since 5.76
      */
     void setProgressUnit(Unit unit);
 

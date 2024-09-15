@@ -37,7 +37,7 @@ namespace KFileUtils
  * as local files by the upstream QFile code. An alternative is to use makeSuggestedName()
  * and use KIO to stat the new file/directory in an asynchronous way.
  *
- * \since KCoreAddons 5.61
+ * \since 5.61
  */
 KCOREADDONS_EXPORT QString suggestName(const QUrl &baseURL, const QString &oldName);
 
@@ -51,7 +51,7 @@ KCOREADDONS_EXPORT QString suggestName(const QUrl &baseURL, const QString &oldNa
  * the caller, e.g. one can use KIO::stat() to check asynchronously whether the new
  * name already exists (in its parent directory) or not.
  *
- * \since KCoreAddons 5.76
+ * \since 5.76
  */
 KCOREADDONS_EXPORT QString makeSuggestedName(const QString &oldName);
 
@@ -69,7 +69,7 @@ KCOREADDONS_EXPORT QString makeSuggestedName(const QString &oldName);
  * \a nameFilters filters that get passed to the QDirIterator that is used internally to
  * iterate over the files in each dir in the list
  * Returns list of absolute file paths
- * \since KCoreAddons 5.85
+ * \since 5.85
  */
 KCOREADDONS_EXPORT QStringList findAllUniqueFiles(const QStringList &dirs, const QStringList &nameFilters = {});
 }

@@ -19,7 +19,7 @@
 namespace KTextToHTML
 {
 /*!
- * \since KCoreAddons 5.5.0
+ * \since 5.5.0
  *
  * \value PreserveSpaces Preserve white-space formatting of the text
  * \value ReplaceSmileys Replace text emoticons smileys by emoticons images
@@ -57,7 +57,7 @@ Q_DECLARE_OPERATORS_FOR_FLAGS(Options)
  * Returns an HTML version of the text supplied in the 'plainText'
  * parameter, suitable for inclusion in the BODY of an HTML document.
  *
- * \since KCoreAddons 5.5.0
+ * \since 5.5.0
  */
 KCOREADDONS_EXPORT QString convertToHtml(const QString &plainText, const KTextToHTML::Options &options, int maxUrlLen = 4096, int maxAddressLen = 255);
 

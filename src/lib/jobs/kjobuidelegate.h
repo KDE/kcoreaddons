@@ -37,7 +37,7 @@ public:
     /*!
      * Flags for the constructor, to enable automatic handling of errors and/or warnings
      * \sa Flags
-     * \since KCoreAddons 5.70
+     * \since 5.70
      *
      * \value AutoHandlingDisabled No automatic handling (default)
      * \value AutoErrorHandlingEnabled Equivalent to setAutoErrorHandlingEnabled(true)
@@ -55,7 +55,7 @@ public:
     /*!
      * Constructs a new KJobUiDelegate with a flags argument.
      * \a flags allows to enable automatic error/warning handling
-     * \since KCoreAddons 5.70
+     * \since 5.70
      */
     explicit KJobUiDelegate(Flags flags = {KJobUiDelegate::AutoHandlingDisabled});
 

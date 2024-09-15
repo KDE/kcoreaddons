@@ -47,7 +47,7 @@ enum Type {
  * For a given \a path, returns the filesystem type, one of KFileSystemType::Type
  * values. If the type can't be determined, KFileSystemType::Unknown is returned.
  *
- * \since KCoreAddons 5.0
+ * \since 5.0
  */
 KCOREADDONS_EXPORT Type fileSystemType(const QString &path);
 
@@ -55,7 +55,7 @@ KCOREADDONS_EXPORT Type fileSystemType(const QString &path);
  * Returns the possibly translated name of a filesystem corresponding to a
  * value from KFileSystemType::Type.
  *
- * \since KCoreAddons 5.86
+ * \since 5.86
  */
 KCOREADDONS_EXPORT QString fileSystemName(KFileSystemType::Type type);
 }

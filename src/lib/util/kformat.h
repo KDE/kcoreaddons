@@ -44,7 +44,7 @@ class KFormatPrivate;
  * KFormat provides support for formatting numbers and datetimes in
  * formats that are not supported by QLocale.
  * \brief Class for formatting numbers and datetimes.
- * \since KCoreAddons 5.0
+ * \since 5.0
  */
 class KCOREADDONS_EXPORT KFormat final
 {
@@ -103,7 +103,7 @@ public:
      * These units are used in KDE by the formatValue() function.
      *
      * \sa formatValue
-     * \since KCoreAddons 5.49
+     * \since 5.49
      *
      * \value Other other
      * \value Bit bit
@@ -129,7 +129,7 @@ public:
      *
      * \sa BinarySizeUnits
      * \sa formatValue
-     * \since KCoreAddons 5.49
+     * \since 5.49
      *
      * \value AutoAdjust Auto-choose a unit such that the result is in the range [0, 1000 or 1024)
      * \value Yocto --/-/y  10^-24
@@ -409,7 +409,7 @@ public:
      * \sa Unit
      * \sa UnitPrefix
      * \sa BinaryUnitDialect
-     * \since KCoreAddons 5.49
+     * \since 5.49
      */
     QString formatValue(double value,
                         KFormat::Unit unit,
@@ -442,7 +442,7 @@ public:
      * Returns converted size as a translated string including prefix and unit.
      *         E.g. "1.2 kbit", "2.4 kB", "12.3 Mbit/s"
      * \sa UnitPrefix
-     * \since KCoreAddons 5.49
+     * \since 5.49
      */
     QString formatValue(double value, const QString &unit, int precision = 1, KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust) const;
     /*!
@@ -474,7 +474,7 @@ public:
      * Returns converted size as a translated string including prefix and unit.
      *         E.g. "1.2 kbit", "2.4 kB", "12.3 Mbit/s"
      * \sa UnitPrefix
-     * \since KCoreAddons 5.74
+     * \since 5.74
      */
     QString formatValue(double value, const QString &unit, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const;
 

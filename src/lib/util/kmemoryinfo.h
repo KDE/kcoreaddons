@@ -28,7 +28,7 @@ class KMemoryInfoPrivate;
  * }
  * \endcode
  *
- * \since KCoreAddons 5.95
+ * \since 5.95
  */
 class KCOREADDONS_EXPORT KMemoryInfo
 {

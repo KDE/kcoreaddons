@@ -25,7 +25,7 @@
  * os-release is a free desktop standard for describing an operating system.
  * This class parses and models os-release files.
  *
- * \since KCoreAddons 5.58.0
+ * \since 5.58.0
  */
 class KCOREADDONS_EXPORT KOSRelease final
 {
