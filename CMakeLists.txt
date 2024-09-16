@@ -36,7 +36,7 @@ option(KCOREADDONS_USE_QML "Build the QML plugin" ON)
 set(REQUIRED_QT_VERSION 6.5.0)
 find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
 if (KCOREADDONS_USE_QML)
-    find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Qml)
+    find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Qml Network)
     include(ECMQmlModule)
 endif()
 

@@ -9,6 +9,7 @@ target_sources(kcoreaddonsplugin PRIVATE
 target_link_libraries(kcoreaddonsplugin PRIVATE
     Qt6::Core
     Qt6::Qml
+    Qt6::Network
     KF6::CoreAddons
 )
 
