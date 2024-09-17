@@ -20,6 +20,9 @@ class KPluginFactoryTest : public QObject
 private Q_SLOTS:
     void testCreate()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
 #ifndef Q_OS_WIN
         KPluginMetaData data(QStringLiteral("namespace/jsonplugin_cmake_macro"));
         QVERIFY(data.isValid());
@@ -50,6 +53,9 @@ private Q_SLOTS:
 
     void testPluginWithoutMetaData()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         KPluginFactory::Result<KPluginFactory> factoryResult = KPluginFactory::loadFactory(KPluginMetaData(QStringLiteral("namespace/pluginwithoutmetadata")));
         QVERIFY(factoryResult);
         auto plugin = factoryResult.plugin->create<QObject>();
@@ -60,6 +66,9 @@ private Q_SLOTS:
 
     void testCreateUsingUtilityMethods()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QStringLiteral("namespace/jsonplugin_cmake_macro")));
         QVERIFY(result.plugin);
         QCOMPARE(result.plugin->metaObject()->className(), "SimplePluginClass");
@@ -70,6 +79,9 @@ private Q_SLOTS:
 
     void testCreateUsingUtilityMethodsErrorHandling()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         {
             auto result = KPluginFactory::instantiatePlugin<QObject>(KPluginMetaData(QFINDTESTDATA("data/jsonplugin.json")));
             QVERIFY(!result.plugin);
@@ -115,6 +127,9 @@ private Q_SLOTS:
 
     void testInstantiateWidget()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         KPluginMetaData data(QStringLiteral("widgets/widgetsplugin"), KPluginMetaData::AllowEmptyMetaData);
         QVERIFY(data.isValid());
         auto factory = KPluginFactory::loadFactory(data).plugin;

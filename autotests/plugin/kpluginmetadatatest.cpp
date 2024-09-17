@@ -70,6 +70,9 @@ private Q_SLOTS:
 
     void testFromPluginLoader()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         QString location;
         location = QPluginLoader(QStringLiteral("namespace/jsonplugin_cmake_macro")).fileName();
         QVERIFY2(!location.isEmpty(), "Could not find jsonplugin");
@@ -269,6 +272,9 @@ private Q_SLOTS:
 
     void testPathIsAbsolute_data()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         QTest::addColumn<QString>("inputAbsolute");
         QTest::addColumn<QString>("pluginPath");
 
@@ -329,6 +335,9 @@ private Q_SLOTS:
 
     void testFindPlugins()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         auto sortPlugins = [](const KPluginMetaData &a, const KPluginMetaData &b) {
             return a.pluginId() < b.pluginId();
         };
@@ -398,8 +407,10 @@ private Q_SLOTS:
 
     void testStaticPlugins()
     {
+#if defined(QT_SHARED)
+        // in a static Qt build we can already have other built-in static plugins here
         QCOMPARE(QPluginLoader::staticPlugins().count(), 0);
-
+#endif
         const auto plugins = KPluginMetaData::findPlugins(QStringLiteral("staticnamespace"));
         QCOMPARE(plugins.count(), 1);
 
@@ -409,6 +420,9 @@ private Q_SLOTS:
 
     void testPluginsWithoutMetaData()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         KPluginMetaData emptyMetaData(QStringLiteral("namespace/pluginwithoutmetadata"), KPluginMetaData::AllowEmptyMetaData);
         QVERIFY(emptyMetaData.isValid());
         QCOMPARE(emptyMetaData.pluginId(), QStringLiteral("pluginwithoutmetadata"));
@@ -444,6 +458,9 @@ private Q_SLOTS:
 
     void testReverseDomainNotationPluginId()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         KPluginMetaData data(QStringLiteral("org.kde.test"));
         QVERIFY(data.isValid());
         QCOMPARE(data.pluginId(), QStringLiteral("org.kde.test"));
@@ -459,6 +476,9 @@ private Q_SLOTS:
 
     void testFindingPluginInAppDirFirst()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         const QString originalPluginPath = QPluginLoader(QStringLiteral("namespace/jsonplugin_cmake_macro")).fileName();
         const QString pluginFileName = QFileInfo(originalPluginPath).fileName();
         const QString pluginNamespace = QStringLiteral("somepluginnamespace");
@@ -496,6 +516,9 @@ private Q_SLOTS:
 
     void testMetaDataQDebugOperator()
     {
+#if !defined(QT_SHARED)
+        QSKIP("Dynamic plugin loading not supported with a static Qt build");
+#endif
         const auto list = KPluginMetaData::findPlugins(QStringLiteral("namespace"));
         qDebug() << list.first();
         qDebug() << list;
