@@ -66,7 +66,6 @@ add_unit_test(kcompositejobtest)
 add_unit_test(kformattest)
 add_unit_test(kjobtest)
 add_unit_test(kosreleasetest)
-add_unit_test(kprocesstest)
 add_unit_test(krandomtest)
 add_unit_test(kshareddatacachetest)
 add_unit_test(kshelltest)
@@ -91,6 +90,10 @@ if (UNIX)
     add_unit_test(klistopenfilesjobtest_unix)
 endif ()
 
+if(NOT IOS AND NOT ANDROID)
+    add_unit_test(kprocesstest)
+endif()
+
 if(TARGET klistopenfilesjobtest_unix AND CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     find_package(Qt6Network ${REQUIRED_QT_VERSION} CONFIG QUIET)
     target_link_libraries(klistopenfilesjobtest_unix Qt6::Network)
@@ -110,8 +113,10 @@ ecm_add_test(ktexttohtmltest.cpp
 add_executable(ktexttohtmlbenchmarktest ktexttohtmlbenchmarktest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/kemoticonsparser.cpp)
 target_link_libraries(ktexttohtmlbenchmarktest PUBLIC ktexttohtmlteststatic)
 
-add_executable(kprocesstest_helper kprocesstest_helper.cpp)
-target_link_libraries(kprocesstest_helper KF6::CoreAddons)
+if(NOT IOS AND NOT ANDROID)
+    add_executable(kprocesstest_helper kprocesstest_helper.cpp)
+    target_link_libraries(kprocesstest_helper KF6::CoreAddons)
+endif()
 
 set(KDIRWATCH_BACKENDS_TO_TEST Stat) #Stat is always compiled
 
