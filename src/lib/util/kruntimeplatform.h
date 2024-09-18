@@ -19,4 +19,5 @@ namespace KRuntimePlatform
  * @since 5.97
  */
 KCOREADDONS_EXPORT QStringList runtimePlatform();
+KCOREADDONS_EXPORT bool isMobile();
 }

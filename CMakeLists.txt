@@ -32,6 +32,7 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 
 option(ENABLE_PCH "Enable precompile headers for faster builds" ON)
 option(KCOREADDONS_USE_QML "Build the QML plugin" ON)
+option(UBUNTU_TOUCH "Build for Ubuntu Touch" OFF)
 
 set(REQUIRED_QT_VERSION 6.5.0)
 find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
