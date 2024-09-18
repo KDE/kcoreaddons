@@ -75,7 +75,7 @@ if (WIN32)
     )
 endif ()
 
-if (UNIX)
+if (UNIX AND NOT IOS)
     target_sources(KF6CoreAddons PRIVATE
         text/kmacroexpander_unix.cpp
         util/klistopenfilesjob_unix.cpp
@@ -118,7 +118,6 @@ target_sources(KF6CoreAddons PRIVATE
     io/kautosavefile.cpp
     io/kdirwatch.cpp
     io/kfilesystemtype.cpp
-    io/kprocess.cpp
     io/kbackup.cpp
     io/kurlmimedata.cpp
     io/kfileutils.cpp
@@ -144,7 +143,6 @@ target_sources(KF6CoreAddons PRIVATE
     util/kshell.cpp
     util/klibexec.cpp
     util/ksignalhandler.cpp
-    util/ksandbox.cpp
     util/kmemoryinfo.cpp
     util/kruntimeplatform.cpp
 
@@ -153,7 +151,6 @@ target_sources(KF6CoreAddons PRIVATE
     io/kautosavefile.h
     io/kdirwatch.h
     io/kfilesystemtype.h
-    io/kprocess.h
     io/kbackup.h
     io/kurlmimedata.h
     io/kfileutils.h
@@ -176,10 +173,19 @@ target_sources(KF6CoreAddons PRIVATE
     util/kshell.h
     util/klibexec.h
     util/ksignalhandler.h
-    util/ksandbox.h
     util/kmemoryinfo.h
     util/kruntimeplatform.h
 )
+
+if(NOT IOS AND NOT ANDROID)
+    target_sources(KF6CoreAddons PRIVATE
+        io/kprocess.cpp
+        util/ksandbox.cpp
+
+        io/kprocess.h
+        util/ksandbox.h
+    )
+endif()
 
 if (ENABLE_PCH)
     target_precompile_headers(KF6CoreAddons PRIVATE
