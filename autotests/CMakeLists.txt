@@ -90,7 +90,7 @@ if (UNIX)
     add_unit_test(klistopenfilesjobtest_unix)
 endif ()
 
-if(NOT IOS AND NOT ANDROID)
+if(NOT IOS)
     add_unit_test(kprocesstest)
 endif()
 
@@ -113,7 +113,7 @@ ecm_add_test(ktexttohtmltest.cpp
 add_executable(ktexttohtmlbenchmarktest ktexttohtmlbenchmarktest.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/ktexttohtml.cpp ${CMAKE_SOURCE_DIR}/src/lib/text/kemoticonsparser.cpp)
 target_link_libraries(ktexttohtmlbenchmarktest PUBLIC ktexttohtmlteststatic)
 
-if(NOT IOS AND NOT ANDROID)
+if(NOT IOS)
     add_executable(kprocesstest_helper kprocesstest_helper.cpp)
     target_link_libraries(kprocesstest_helper KF6::CoreAddons)
 endif()

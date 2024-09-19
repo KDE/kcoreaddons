@@ -177,7 +177,7 @@ target_sources(KF6CoreAddons PRIVATE
     util/kruntimeplatform.h
 )
 
-if(NOT IOS AND NOT ANDROID)
+if(NOT IOS)
     target_sources(KF6CoreAddons PRIVATE
         io/kprocess.cpp
         util/ksandbox.cpp
