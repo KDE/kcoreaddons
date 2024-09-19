@@ -20,6 +20,7 @@ include(ECMGenerateExportHeader)
 include(CMakePackageConfigHelpers)
 include(ECMSetupVersion)
 include(ECMGenerateHeaders)
+include(ECMGeneratePkgConfigFile)
 include(ECMQtDeclareLoggingCategory)
 include(ECMAddQch)
 include(ECMSetupQtPluginMacroNames)
@@ -183,6 +184,14 @@ install(FILES
 install(EXPORT KF6CoreAddonsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF6CoreAddonsTargets.cmake NAMESPACE KF6::)
 
 install(FILES ${kcoreaddons_version_header} DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel)
+
+if (NOT WIN32)
+    ecm_generate_pkgconfig_file(BASE_NAME KF6CoreAddons
+        INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons
+        DEPS Qt6Core
+        INSTALL
+    )
+endif()
 
 include(ECMFeatureSummary)
 ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
