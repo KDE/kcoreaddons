@@ -382,7 +382,11 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
         return false;
     }
 
-    QObject::connect(mimeData, &QObject::destroyed, iface, [cleanup = std::move(cleanup)] {});
+    cleanup.dismiss();
+    QObject::connect(mimeData, &QObject::destroyed, iface, [transferId, iface] {
+        iface->StopTransfer(transferId);
+        iface->deleteLater();
+    });
     QObject::connect(iface, &OrgFreedesktopPortalFileTransferInterface::TransferClosed, mimeData, [iface]() {
         iface->deleteLater();
     });
