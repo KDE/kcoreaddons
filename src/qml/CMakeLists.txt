@@ -1,4 +1,4 @@
-ecm_add_qml_module(kcoreaddonsplugin URI org.kde.coreaddons CLASS_NAME KCoreAddonsPlugin)
+ecm_add_qml_module(kcoreaddonsplugin URI org.kde.coreaddons CLASS_NAME KCoreAddonsPlugin INSTALLED_PLUGIN_TARGET KF6::kcoreaddonsplugin)
 target_sources(kcoreaddonsplugin PRIVATE
     formats.cpp
     formats.h
@@ -13,4 +13,4 @@ target_link_libraries(kcoreaddonsplugin PRIVATE
     KF6::CoreAddons
 )
 
-ecm_finalize_qml_module(kcoreaddonsplugin DESTINATION ${KDE_INSTALL_QMLDIR})
+ecm_finalize_qml_module(kcoreaddonsplugin DESTINATION ${KDE_INSTALL_QMLDIR} EXPORT KF6CoreAddonsTargets)
