@@ -422,8 +422,15 @@ public:
      */
     QString formatValue(double value, const QString &unit, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const;
 
+    void swap(KFormat &other) noexcept
+    {
+        d.swap(other.d);
+    }
+
 private:
     QSharedDataPointer<KFormatPrivate> d;
 };
+
+Q_DECLARE_SHARED(KFormat)
 
 #endif // KFORMAT_H
