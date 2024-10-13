@@ -271,3 +271,34 @@ QString KFileSystemType::fileSystemName(KFileSystemType::Type type)
     Q_UNREACHABLE();
     return {};
 }
+
+KFileSystemType::BusType KFileSystemType::fileSystemDeviceBusType(const QString &path)
+{
+    using KFileSystemType::BusType;
+#if HAVE_UDEV
+    struct stat buf;
+    if (::stat(QFile::encodeName(path).constData(), &buf) != 0) {
+        return Internal;
+    }
+
+    using UdevPtr = std::unique_ptr<struct udev, decltype(&udev_unref)>;
+    using UDevicePtr = std::unique_ptr<struct udev_device, decltype(&udev_device_unref)>;
+
+    // Code originally copied from util-linux/misc-utils/lsblk.c
+    auto udevP = UdevPtr(udev_new(), udev_unref);
+    if (!udevP) {
+        return Internal;
+    }
+
+    auto devPtr = UDevicePtr(udev_device_new_from_devnum(udevP.get(), 'b', buf.st_dev), udev_device_unref);
+    if (!devPtr) {
+        return Internal;
+    }
+
+    const char *value = udev_device_get_property_value(devPtr.get(), "ID_BUS");
+    if (value && (strcmp(value, "usb") == 0 || strcmp(value, "ieee1394") == 0)) {
+        return External;
+    }
+#endif
+    return Internal;
+}

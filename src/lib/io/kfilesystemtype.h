@@ -37,6 +37,11 @@ enum Type {
     Fuse,
 };
 
+enum BusType {
+    Internal, /// ide, sata, scsi...
+    External, /// usb, ieee1394
+};
+
 /**
  * For a given @p path, returns the filesystem type, one of @ref KFileSystemType::Type
  * values. If the type can't be determined, @c KFileSystemType::Unknown is returned.
@@ -44,6 +49,13 @@ enum Type {
  * @since 5.0
  */
 KCOREADDONS_EXPORT Type fileSystemType(const QString &path);
+
+/**
+ * @return whether or not the filesystem is a removable media
+ *
+ * @since 6.8
+ */
+KCOREADDONS_EXPORT KFileSystemType::BusType fileSystemDeviceBusType(const QString &path);
 
 /**
  * Returns the possibly translated name of a filesystem corresponding to a
