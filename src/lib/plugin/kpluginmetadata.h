@@ -367,20 +367,23 @@ public:
      *
      * if QString is not the correct type for @p key you should use the other overloads or @ref KPluginMetaData::rawData
      */
-    QString value(const QString &key, const QString &defaultValue = QString()) const;
+    QString value(QStringView key, const QString &defaultValue = QString()) const;
+    QString value(const QString &key, const QString &defaultValue = QString()) const; // TODO KF7: remove
     QString value(const QString &key, const char *ch) const = delete;
 
     /**
      * @overload
      * @since 5.88
      */
-    bool value(const QString &key, bool defaultValue) const;
+    bool value(QStringView key, bool defaultValue) const;
+    bool value(const QString &key, bool defaultValue) const; // TODO KF7: remove
 
     /**
      * @overload
      * @since 5.88
      */
-    int value(const QString &key, int defaultValue) const;
+    int value(QStringView key, int defaultValue) const;
+    int value(const QString &key, int defaultValue) const; // TODO KF7: remove
 
     /** @return the value for @p key from the metadata or @p defaultValue if the key does not exist.
      * If the type of @p key is string, a list containing just that string will be returned.
@@ -388,7 +391,8 @@ public:
      * @overload
      * @since 5.88
      */
-    QStringList value(const QString &key, const QStringList &defaultValue) const;
+    QStringList value(QStringView key, const QStringList &defaultValue) const;
+    QStringList value(const QString &key, const QStringList &defaultValue) const; // TODO KF7: remove
 
     /**
      * @return @c true if this object is equal to @p other, otherwise @c false

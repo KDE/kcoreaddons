@@ -460,7 +460,7 @@ bool KPluginMetaData::isEnabledByDefault() const
     return false;
 }
 
-QString KPluginMetaData::value(const QString &key, const QString &defaultValue) const
+QString KPluginMetaData::value(QStringView key, const QString &defaultValue) const
 {
     const QJsonValue value = d->m_metaData.value(key);
     if (value.isString()) {
@@ -475,7 +475,12 @@ QString KPluginMetaData::value(const QString &key, const QString &defaultValue) 
     return defaultValue;
 }
 
-bool KPluginMetaData::value(const QString &key, bool defaultValue) const
+QString KPluginMetaData::value(const QString &key, const QString &defaultValue) const
+{
+    return value(QStringView(key), defaultValue);
+}
+
+bool KPluginMetaData::value(QStringView key, bool defaultValue) const
 {
     const QJsonValue value = d->m_metaData.value(key);
     if (value.isBool()) {
@@ -487,7 +492,12 @@ bool KPluginMetaData::value(const QString &key, bool defaultValue) const
     }
 }
 
-int KPluginMetaData::value(const QString &key, int defaultValue) const
+bool KPluginMetaData::value(const QString &key, bool defaultValue) const
+{
+    return value(QStringView(key), defaultValue);
+}
+
+int KPluginMetaData::value(QStringView key, int defaultValue) const
 {
     const QJsonValue value = d->m_metaData.value(key);
     if (value.isDouble()) {
@@ -506,7 +516,13 @@ int KPluginMetaData::value(const QString &key, int defaultValue) const
         return defaultValue;
     }
 }
-QStringList KPluginMetaData::value(const QString &key, const QStringList &defaultValue) const
+
+int KPluginMetaData::value(const QString &key, int defaultValue) const
+{
+    return value(QStringView(key), defaultValue);
+}
+
+QStringList KPluginMetaData::value(QStringView key, const QStringList &defaultValue) const
 {
     const QJsonValue value = d->m_metaData.value(key);
     if (value.isUndefined() || value.isNull()) {
@@ -525,6 +541,11 @@ QStringList KPluginMetaData::value(const QString &key, const QStringList &defaul
                                    << "Treating it as a list with a single entry:" << asString;
         return QStringList(asString);
     }
+}
+
+QStringList KPluginMetaData::value(const QString &key, const QStringList &defaultValue) const
+{
+    return value(QStringView(key), defaultValue);
 }
 
 bool KPluginMetaData::operator==(const KPluginMetaData &other) const
