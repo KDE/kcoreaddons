@@ -51,7 +51,7 @@ enum BusType {
 KCOREADDONS_EXPORT Type fileSystemType(const QString &path);
 
 /**
- * @return whether or not the filesystem is a removable media
+ * @return The bus type used by the filesystem
  *
  * @since 6.8
  */
