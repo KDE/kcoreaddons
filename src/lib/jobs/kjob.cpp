@@ -14,6 +14,7 @@
 #include "kcoreaddons_debug.h"
 #include "kjobuidelegate.h"
 
+#include <QElapsedTimer>
 #include <QEventLoop>
 #include <QTimer>
 
@@ -64,6 +65,22 @@ void KJob::setUiDelegate(KJobUiDelegate *delegate)
         d->uiDelegate = delegate;
         d->uiDelegate->connectJob(this);
     }
+}
+
+qint64 KJob::elapsedTime()
+{
+    Q_D(KJob);
+    return d->accumulatedElapsedTime + (d->elapsedTimer ? d->elapsedTimer->elapsed() : 0);
+}
+
+void KJob::startElapsedTimer()
+{
+    Q_D(KJob);
+    if (!d->elapsedTimer) {
+        d->elapsedTimer = std::make_unique<QElapsedTimer>();
+    }
+    d->elapsedTimer->start();
+    d->accumulatedElapsedTime = 0;
 }
 
 KJobUiDelegate *KJob::uiDelegate() const
@@ -129,6 +146,10 @@ bool KJob::suspend()
     if (!d->suspended) {
         if (doSuspend()) {
             d->suspended = true;
+            if (d->elapsedTimer) {
+                d->accumulatedElapsedTime += d->elapsedTimer->elapsed();
+            }
+            d->elapsedTimer.reset();
             Q_EMIT suspended(this, QPrivateSignal());
 
             return true;
@@ -144,6 +165,13 @@ bool KJob::resume()
     if (d->suspended) {
         if (doResume()) {
             d->suspended = false;
+
+            // If the timer was never started previously, the reported time is wrong, so we rather keep it at zero.
+            if (d->accumulatedElapsedTime > 0) {
+                d->elapsedTimer = std::make_unique<QElapsedTimer>();
+                d->elapsedTimer->start();
+            }
+
             Q_EMIT resumed(this, QPrivateSignal());
 
             return true;

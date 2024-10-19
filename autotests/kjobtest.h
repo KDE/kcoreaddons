@@ -80,6 +80,8 @@ private Q_SLOTS:
     void testEmitAtMostOnce();
     void testDelegateUsage();
     void testNestedExec();
+    void testElapseTime();
+    void testElapseTimeSuspendResume();
 
     void slotResult(KJob *job);
     void slotFinished(KJob *job);
@@ -103,6 +105,10 @@ class WaitJob : public KJob
     Q_OBJECT
 public:
     void start() override;
+    bool doResume() override;
+    bool doSuspend() override;
+
+public Q_SLOTS:
     void makeItFinish();
 };
 

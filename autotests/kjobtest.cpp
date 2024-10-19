@@ -392,6 +392,49 @@ void KJobTest::testNestedExec()
     m_outerJob->exec();
 }
 
+void KJobTest::testElapseTime()
+{
+    m_innerJob = new WaitJob();
+    QTimer::singleShot(10, m_innerJob, &WaitJob::makeItFinish);
+    QVERIFY(m_innerJob->exec());
+
+    QCOMPARE_GE(m_innerJob->elapsedTime(), 10);
+    QCOMPARE_LE(m_innerJob->elapsedTime(), 14);
+}
+
+void KJobTest::testElapseTimeSuspendResume()
+{
+    m_innerJob = new WaitJob();
+
+    QSignalSpy suspended_spy(m_innerJob, &KJob::suspended);
+    QSignalSpy resume_spy(m_innerJob, &KJob::resumed);
+
+    QTimer::singleShot(5, m_innerJob, [this]() {
+        m_innerJob->suspend();
+        QCOMPARE_GE(m_innerJob->elapsedTime(), 5);
+        QCOMPARE_LE(m_innerJob->elapsedTime(), 8);
+    });
+    QTimer::singleShot(10, m_innerJob, &KJob::resume);
+
+    QTimer::singleShot(15, m_innerJob, [this]() {
+        m_innerJob->suspend();
+        QCOMPARE_GE(m_innerJob->elapsedTime(), 10);
+        QCOMPARE_LE(m_innerJob->elapsedTime(), 14);
+    });
+    QTimer::singleShot(20, m_innerJob, [this]() {
+        m_innerJob->resume();
+        m_innerJob->makeItFinish();
+    });
+
+    QVERIFY(m_innerJob->exec());
+
+    QCOMPARE_GE(m_innerJob->elapsedTime(), 10);
+    QCOMPARE_LE(m_innerJob->elapsedTime(), 14);
+
+    QCOMPARE(suspended_spy.count(), 2);
+    QCOMPARE(resume_spy.count(), 2);
+}
+
 void KJobTest::slotStartInnerJob()
 {
     QTimer::singleShot(100, this, &KJobTest::slotFinishOuterJob);
@@ -522,6 +565,17 @@ void TestJob::setPercent(unsigned long percentage)
 
 void WaitJob::start()
 {
+    startElapsedTimer();
+}
+
+bool WaitJob::doResume()
+{
+    return true;
+}
+
+bool WaitJob::doSuspend()
+{
+    return true;
 }
 
 void WaitJob::makeItFinish()
