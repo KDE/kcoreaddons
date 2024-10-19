@@ -392,6 +392,61 @@ void KJobTest::testNestedExec()
     m_outerJob->exec();
 }
 
+void KJobTest::testElapseTime()
+{
+    m_innerJob = new WaitJob();
+    m_innerJob->setStart([this] {
+        QTest::qWait(10);
+        m_innerJob->makeItFinish();
+    });
+    QVERIFY(m_innerJob->exec());
+
+    QCOMPARE_GE(m_innerJob->elapsedTime(), 10);
+    QCOMPARE_LE(m_innerJob->elapsedTime(), 11);
+}
+
+void KJobTest::testElapseTimeSuspendResume()
+{
+    m_innerJob = new WaitJob();
+    m_innerJob->setStart([this] {
+        QTest::qWait(20);
+        m_innerJob->makeItFinish();
+    });
+
+    QTimer::singleShot(10, m_innerJob, &KJob::suspend);
+    QTimer::singleShot(20, m_innerJob, &KJob::resume);
+
+    QVERIFY(m_innerJob->exec());
+
+    QCOMPARE_GE(m_innerJob->elapsedTime(), 20);
+    QCOMPARE_LE(m_innerJob->elapsedTime(), 22);
+}
+
+void KJobTest::testElapseTimeRestart()
+{
+    m_innerJob = new WaitJob();
+    m_innerJob->setAutoDelete(false);
+    m_innerJob->setStart([this] {
+        QTest::qWait(10);
+        m_innerJob->makeItFinish();
+    });
+    QTimer::singleShot(5, m_innerJob, &KJob::suspend);
+    QTimer::singleShot(10, m_innerJob, &KJob::resume);
+    QVERIFY(m_innerJob->exec());
+
+    QCOMPARE_GE(m_innerJob->elapsedTime(), 10);
+    QCOMPARE_LE(m_innerJob->elapsedTime(), 11);
+
+    m_innerJob->setStart([this] {
+        QTest::qWait(5);
+        m_innerJob->makeItFinish();
+    });
+    QVERIFY(m_innerJob->exec());
+
+    QCOMPARE_GE(m_innerJob->elapsedTime(), 5);
+    QCOMPARE_LE(m_innerJob->elapsedTime(), 6);
+}
+
 void KJobTest::slotStartInnerJob()
 {
     QTimer::singleShot(100, this, &KJobTest::slotFinishOuterJob);
@@ -522,6 +577,16 @@ void TestJob::setPercent(unsigned long percentage)
 
 void WaitJob::start()
 {
+    startElapsedTimer();
+
+    if (m_startFunc.has_value()) {
+        (*m_startFunc)();
+    }
+}
+
+void WaitJob::setStart(std::function<void()> func)
+{
+    m_startFunc = func;
 }
 
 void WaitJob::makeItFinish()
