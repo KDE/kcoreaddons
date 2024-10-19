@@ -20,6 +20,7 @@
 class KJobUiDelegate;
 class QTimer;
 class QEventLoop;
+class QElapsedTimer;
 
 // This is a private class, but it's exported for
 // KIO::Job's usage. Other Job classes in kdelibs may
@@ -48,6 +49,10 @@ public:
 
     unsigned long percentage = 0;
     QTimer *speedTimer = nullptr;
+
+    std::unique_ptr<QElapsedTimer> elapsedTimer;
+    qint64 accumulatedElapsedTime = 0;
+
     QEventLoop *eventLoop = nullptr;
     // eventLoopLocker prevents QCoreApplication from exiting when the last
     // window is closed until the job has finished running
