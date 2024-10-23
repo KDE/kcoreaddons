@@ -238,7 +238,6 @@ void KAboutDataTest::testSetAddLicense()
     licenseFileStream << LicenseFileText;
     licenseFile.close();
 
-    const QString copyrightStatement = QLatin1String(CopyrightStatement);
     const QString lineFeed = QString::fromLatin1("\n\n");
 
     KAboutData aboutData(QString::fromLatin1(AppName),
@@ -300,7 +299,7 @@ void KAboutDataTest::testSetAddLicense()
     QCOMPARE(aboutData.licenses().at(2).text(), QLatin1String(LicenseText));
     QCOMPARE(aboutData.licenses().at(3).name(KAboutLicense::ShortName), QString::fromLatin1("Custom"));
     QCOMPARE(aboutData.licenses().at(3).name(KAboutLicense::FullName), QString::fromLatin1("Custom"));
-    QCOMPARE(aboutData.licenses().at(3).text(), QString(copyrightStatement + lineFeed + QLatin1String(LicenseFileText)));
+    QCOMPARE(aboutData.licenses().at(3).text(), QLatin1String(LicenseFileText));
 }
 
 void KAboutDataTest::testCopying()
