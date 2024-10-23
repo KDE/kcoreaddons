@@ -211,7 +211,7 @@ QString KAboutLicense::text() const
 
     const QString lineFeed = QStringLiteral("\n\n");
 
-    if (d->_aboutData && !d->_aboutData->copyrightStatement().isEmpty()) {
+    if (d->_aboutData && !d->_aboutData->copyrightStatement().isEmpty() && d->_licenseKey == KAboutLicense::BSDL) {
         result = d->_aboutData->copyrightStatement() + lineFeed;
     }
 
