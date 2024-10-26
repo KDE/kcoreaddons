@@ -64,7 +64,9 @@ struct NetApiTypeInfo {
 #define NETAPI_TYPE_INFO(prefix, n)                                                                                                                            \
     template<>                                                                                                                                                 \
     struct NetApiTypeInfo<prefix##_##n> {                                                                                                                      \
-        enum { level = n };                                                                                                                                    \
+        enum {                                                                                                                                                 \
+            level = n                                                                                                                                          \
+        };                                                                                                                                                     \
     };
 NETAPI_TYPE_INFO(GROUP_INFO, 0)
 NETAPI_TYPE_INFO(GROUP_INFO, 3)

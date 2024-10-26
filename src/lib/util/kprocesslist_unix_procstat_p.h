@@ -78,7 +78,7 @@ public:
     public:
         ProcessIterator(const ProcStatProcesses &processes, unsigned int pos)
             : processes(processes)
-            , pos(pos){};
+            , pos(pos) { };
 
         bool operator!=(const ProcessIterator &other) const
         {

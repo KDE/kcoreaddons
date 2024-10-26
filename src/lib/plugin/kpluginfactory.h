@@ -42,7 +42,7 @@ class Part;
         {                                                                                                                                                      \
             pluginRegistrations                                                                                                                                \
         }                                                                                                                                                      \
-        ~name(){};                                                                                                                                             \
+        ~name() { };                                                                                                                                           \
     };
 
 /**

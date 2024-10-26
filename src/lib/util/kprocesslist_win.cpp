@@ -83,8 +83,7 @@ static inline ProcessInfo winProcessInfo(DWORD processId)
             TCHAR domain[MAX_PATH] = {0};
             DWORD domainNameLength = MAX_PATH;
 
-            if (LookupAccountSid(nullptr, userToken->User.Sid, user, &userNameLength, domain, &domainNameLength,
-                &sidNameUse))
+            if (LookupAccountSid(nullptr, userToken->User.Sid, user, &userNameLength, domain, &domainNameLength, &sidNameUse))
                 pi.processOwner = QString::fromUtf16(reinterpret_cast<const char16_t *>(user));
         }
     }
