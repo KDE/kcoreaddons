@@ -419,7 +419,7 @@ public:
      *
      * @since 6.8
      */
-    qint64 elapsedTime();
+    qint64 elapsedTime() const;
 
 Q_SIGNALS:
     /**

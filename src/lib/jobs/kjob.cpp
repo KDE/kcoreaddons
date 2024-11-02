@@ -67,9 +67,9 @@ void KJob::setUiDelegate(KJobUiDelegate *delegate)
     }
 }
 
-qint64 KJob::elapsedTime()
+qint64 KJob::elapsedTime() const
 {
-    Q_D(KJob);
+    Q_D(const KJob);
     return d->accumulatedElapsedTime + (d->elapsedTimer ? d->elapsedTimer->elapsed() : 0);
 }
 
