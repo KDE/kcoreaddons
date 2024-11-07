@@ -63,7 +63,7 @@ msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: lib/kaboutdata.cpp:264
+#: lib/kaboutdata.cpp:265
 msgctxt "KAboutLicense|"
 msgid ""
 "No licensing terms for this program have been specified.\n"
@@ -74,103 +74,103 @@ msgstr ""
 "acest program. Verificați dacă există asemenea\n"
 "termeni în documentație sau în codul sursă.\n"
 
-#: lib/kaboutdata.cpp:272
+#: lib/kaboutdata.cpp:273
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
 msgstr "Acest program este distribuit sub termenii %1."
 
-#: lib/kaboutdata.cpp:316
+#: lib/kaboutdata.cpp:317
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "GPL v2"
 
-#: lib/kaboutdata.cpp:317
+#: lib/kaboutdata.cpp:318
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr "Licența Publică Generală GNU versiunea 2"
 
-#: lib/kaboutdata.cpp:320
+#: lib/kaboutdata.cpp:321
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "LGPL v2"
 
-#: lib/kaboutdata.cpp:321
+#: lib/kaboutdata.cpp:322
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr "Licența „GNU Lesser General Public License Version 2”"
 
-#: lib/kaboutdata.cpp:324
+#: lib/kaboutdata.cpp:325
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD License"
 msgstr "Licența BSD"
 
-#: lib/kaboutdata.cpp:325
+#: lib/kaboutdata.cpp:326
 msgctxt "KAboutLicense|@item license"
 msgid "BSD License"
 msgstr "Licența BSD"
-
-#: lib/kaboutdata.cpp:328
-msgctxt "KAboutLicense|@item license (short name)"
-msgid "Artistic License"
-msgstr "Licența Artistică"
 
 #: lib/kaboutdata.cpp:329
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "Artistic License"
+msgstr "Licența Artistică"
+
+#: lib/kaboutdata.cpp:330
 msgctxt "KAboutLicense|@item license"
 msgid "Artistic License"
 msgstr "Licența Artistică"
 
-#: lib/kaboutdata.cpp:332
+#: lib/kaboutdata.cpp:333
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "GPL v3"
 
-#: lib/kaboutdata.cpp:333
+#: lib/kaboutdata.cpp:334
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr "Licența Publică Generală GNU versiunea 3"
 
-#: lib/kaboutdata.cpp:336
+#: lib/kaboutdata.cpp:337
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "LGPL v3"
 
-#: lib/kaboutdata.cpp:337
+#: lib/kaboutdata.cpp:338
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr "Licența „GNU Lesser General Public License Version 3”"
 
-#: lib/kaboutdata.cpp:340
+#: lib/kaboutdata.cpp:341
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr "LGPL v2.1"
 
-#: lib/kaboutdata.cpp:341
+#: lib/kaboutdata.cpp:342
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr "Licența „GNU Lesser General Public License Version 2.1”"
 
-#: lib/kaboutdata.cpp:344
+#: lib/kaboutdata.cpp:345
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
 msgstr "Licența MIT"
 
-#: lib/kaboutdata.cpp:345
+#: lib/kaboutdata.cpp:346
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
 msgstr "Licența MIT"
 
-#: lib/kaboutdata.cpp:349
+#: lib/kaboutdata.cpp:350
 msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "Personalizată"
 
-#: lib/kaboutdata.cpp:352
+#: lib/kaboutdata.cpp:353
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Nespecificată"
 
-#: lib/kaboutdata.cpp:915
+#: lib/kaboutdata.cpp:916
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -183,45 +183,45 @@ msgstr ""
 "limba română.</p><p>Pentru informații suplimentare, vizitați <a href="
 "\"https://ro.kde.org/\">https://ro.kde.org/</a>.</p>"
 
-#: lib/kaboutdata.cpp:1148
+#: lib/kaboutdata.cpp:1149
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Arată informații despre autor."
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1150
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Arată informații despre licență."
 
-#: lib/kaboutdata.cpp:1151
+#: lib/kaboutdata.cpp:1152
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 "Denumirea de fișier de bază pentru înregistrarea de birou a acestei "
 "aplicații."
 
-#: lib/kaboutdata.cpp:1152
+#: lib/kaboutdata.cpp:1153
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "denumire fișier"
 
-#: lib/kaboutdata.cpp:1162
+#: lib/kaboutdata.cpp:1163
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Acestă aplicație a fost scrisă de cineva care vrea să rămână anonim."
 
-#: lib/kaboutdata.cpp:1164
+#: lib/kaboutdata.cpp:1165
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 a fost scris de:"
 
-#: lib/kaboutdata.cpp:1175
+#: lib/kaboutdata.cpp:1176
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Folosiți https://bugs.kde.org pentru a raporta defecte."
 
-#: lib/kaboutdata.cpp:1177
+#: lib/kaboutdata.cpp:1178
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
