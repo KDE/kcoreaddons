@@ -267,6 +267,8 @@ if (HAVE_PROCSTAT)
 endif()
 
 if(HAIKU)
+    # socketpair should be part of the C library according to POSIX.1-2008,
+    # but Haiku has it in a separate library
     target_link_libraries(KF6CoreAddons PRIVATE network)
 endif()
 
