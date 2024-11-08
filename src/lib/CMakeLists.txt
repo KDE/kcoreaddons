@@ -266,6 +266,10 @@ if (HAVE_PROCSTAT)
     target_link_libraries(KF6CoreAddons PRIVATE Procstat::Procstat)
 endif()
 
+if(HAIKU)
+    target_link_libraries(KF6CoreAddons PRIVATE network)
+endif()
+
 if(HAVE_DLADDR)
     set_source_files_properties(SOURCE util/klibexec.cpp PROPERTIES COMPILE_FLAGS "${DLADDR_LINK_FLAGS}") # ensure _GNU_SOURCE on Linux
     target_link_libraries(KF6CoreAddons PRIVATE ${DLADDR_LINK_LIBRARIES})
