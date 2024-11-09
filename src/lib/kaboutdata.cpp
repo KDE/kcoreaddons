@@ -617,6 +617,18 @@ KAboutData &KAboutData::addAuthor(const QString &name, const QString &task, cons
     return *this;
 }
 
+KAboutData &KAboutData::addAuthor(const KAboutPerson &author)
+{
+    d->_authorList.append(author);
+    return *this;
+}
+
+KAboutData &KAboutData::addCredit(const KAboutPerson &person)
+{
+    d->_creditList.append(person);
+    return *this;
+}
+
 KAboutData &KAboutData::addCredit(const QString &name, const QString &task, const QString &emailAddress, const QString &webAddress, const QUrl &avatarUrl)
 {
     d->_creditList.append(KAboutPerson(name, task, emailAddress, webAddress, avatarUrl));
@@ -626,6 +638,12 @@ KAboutData &KAboutData::addCredit(const QString &name, const QString &task, cons
 KAboutData &KAboutData::setTranslator(const QString &name, const QString &emailAddress)
 {
     d->_translatorList = KAboutDataPrivate::parseTranslators(name, emailAddress);
+    return *this;
+}
+
+KAboutData &KAboutData::addComponent(const KAboutComponent &component)
+{
+    d->_componentList.append(component);
     return *this;
 }
 

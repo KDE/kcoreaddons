@@ -692,6 +692,17 @@ public:
     ~KAboutData();
 
     /**
+     * Add an author.
+     *
+     * You can call this function as many times as you need. Each entry
+     * is appended to a list.
+     *
+     * @param author The author.
+     * @since 6.9
+     */
+    KAboutData &addAuthor(const KAboutPerson &author);
+
+    /**
      * Defines an author.
      *
      * You can call this function as many times as you need. Each entry is
@@ -727,6 +738,17 @@ public:
     {
         return addAuthor(name, task, emailAddress, webAddress, QUrl(QStringLiteral("https://store.kde.org/avatar/") + kdeStoreUsername));
     }
+
+    /**
+     * Add a person that deserves credit.
+     *
+     * You can call this function as many times as you need. Each entry
+     * is appended to a list.
+     *
+     * @param person The person.
+     * @since 6.9
+     */
+    KAboutData &addCredit(const KAboutPerson &person);
 
     /**
      * Defines a person that deserves credit.
@@ -786,6 +808,18 @@ public:
      * @see KAboutTranslator
      */
     KAboutData &setTranslator(const QString &name, const QString &emailAddress);
+
+    /**
+     * Add a component that is used by the application.
+     *
+     * You can call this function as many times as you need. Each entry is
+     * appended to a list.
+     *
+     * @param component The component
+     *
+     * @since 6.9
+     */
+    KAboutData &addComponent(const KAboutComponent &component);
 
     /**
      * Defines a component that is used by the application.
