@@ -40,10 +40,10 @@ QString KFileUtils::makeSuggestedName(const QString &oldName)
         basename = oldName.left(oldName.length() - nameSuffix.length());
     }
 
-    // check if (number) exists at the end of the oldName and increment that number
-    const static QRegularExpression re(QStringLiteral("\\((\\d+)\\)"));
+    // check if (number) exists at the end of the basename and increment that number
+    const static QRegularExpression re(QStringLiteral(" \\((\\d+)\\)"));
     QRegularExpressionMatch rmatch;
-    if (oldName.lastIndexOf(re, -1, &rmatch) != -1) {
+    if (basename.lastIndexOf(re, -1, &rmatch) != -1) {
         const int currentNum = rmatch.captured(1).toInt();
         const QString number = QString::number(currentNum + 1);
         basename.replace(rmatch.capturedStart(1), rmatch.capturedLength(1), number);

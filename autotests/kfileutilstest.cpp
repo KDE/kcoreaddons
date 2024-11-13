@@ -38,6 +38,7 @@ void KFileUtilsTest::testSuggestName_data()
     QTest::newRow("empty_basename_2dots") << "..txt" << QStringList() << ". (1).txt";
     QTest::newRow("basename_with_dots") << "filename.5.3.2.tar.gz" << QStringList() << "filename.5.3.2 (1).tar.gz";
     QTest::newRow("unknown_extension_trashinfo") << "fileFromHome.trashinfo" << QStringList() << "fileFromHome (1).trashinfo";
+    QTest::newRow("filename_with_numbers_parentheses") << "super.weird.filename(123).txt(54321)" << QStringList() << "super.weird.filename(123) (1).txt(54321)";
 }
 
 void KFileUtilsTest::testSuggestName()
