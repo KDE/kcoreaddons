@@ -29,6 +29,7 @@ configure_file(util/config-util.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-util.
 
 add_library(KF6CoreAddons)
 add_library(KF6::CoreAddons ALIAS KF6CoreAddons)
+ecm_kf_set_target_info_properties(KF6CoreAddons)
 
 set_target_properties(KF6CoreAddons PROPERTIES
     VERSION     ${KCOREADDONS_VERSION}
@@ -62,18 +63,17 @@ if(NOT WIN32)
 else()
     target_sources(KF6CoreAddons PRIVATE
         caching/kshareddatacache_win.cpp
-    )
-endif()
-
-if (WIN32)
-    target_sources(KF6CoreAddons PRIVATE
         text/kmacroexpander_win.cpp
         util/klistopenfilesjob_win.cpp
         util/kprocesslist_win.cpp
         util/kshell_win.cpp
         util/kuser_win.cpp
     )
-endif ()
+
+    if (BUILD_SHARED_LIBS)
+        ecm_generate_win32_rc_file(KF6CoreAddons)
+    endif()
+endif()
 
 if (UNIX AND NOT IOS)
     target_sources(KF6CoreAddons PRIVATE
@@ -194,7 +194,6 @@ if (ENABLE_PCH)
         <QString>
     )
 endif()
-
 
 set(kcoreaddons_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/caching/
