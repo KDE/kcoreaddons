@@ -186,7 +186,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "לא צוין"
 
-#: lib/kaboutdata.cpp:916
+#: lib/kaboutdata.cpp:934
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -198,43 +198,43 @@ msgstr ""
 "מכל רחבי העולם.</p><p>למידע נוסף על בינאום ב־KDE ניתן לפנות אל <a href="
 "\"https://l10n.kde.org\">https://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1149
+#: lib/kaboutdata.cpp:1167
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "הצגת פרטי היוצר."
 
-#: lib/kaboutdata.cpp:1150
+#: lib/kaboutdata.cpp:1168
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "הצגת פרטי הרישיון."
 
-#: lib/kaboutdata.cpp:1152
+#: lib/kaboutdata.cpp:1170
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "שם קובץ הבסיס של רשומת שולחן העבודה ליישום הזה."
 
-#: lib/kaboutdata.cpp:1153
+#: lib/kaboutdata.cpp:1171
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "שם קובץ"
 
-#: lib/kaboutdata.cpp:1163
+#: lib/kaboutdata.cpp:1181
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "יישום זה נכתב על ידי מישהו או מישהי שלא רוצים להיחשף."
 
-#: lib/kaboutdata.cpp:1165
+#: lib/kaboutdata.cpp:1183
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 נוצר על ידי:"
 
-#: lib/kaboutdata.cpp:1176
+#: lib/kaboutdata.cpp:1194
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "נא להשתמש ב־https://bugs.kde.org כדי לדווח על תקלות."
 
-#: lib/kaboutdata.cpp:1178
+#: lib/kaboutdata.cpp:1196
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
