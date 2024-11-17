@@ -24,6 +24,7 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMAddQch)
 include(ECMSetupQtPluginMacroNames)
 include(ECMDeprecationSettings)
+include(CMakeDependentOption)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
@@ -85,6 +86,20 @@ if (BSDLIKE)
     endif()
 endif()
 
+# For the Python bindings
+find_package(Python3 3.10 COMPONENTS Interpreter Development)
+find_package(Shiboken6)
+find_package(PySide6)
+
+# Python Bindings
+cmake_dependent_option(BUILD_PYTHON_BINDINGS "Generate Python Bindings" ON "TARGET Shiboken6::libshiboken AND TARGET PySide6::pyside6" OFF)
+add_feature_info(PYTHON_BINDINGS ${BUILD_PYTHON_BINDINGS} "Python bindings")
+
+# FreeBSD CI is missing required packages
+if (CMAKE_SYSTEM_NAME MATCHES FreeBSD)
+    set(BUILD_PYTHON_BINDINGS OFF)
+endif()
+
 # shall we use DBus?
 # enabled per default on Linux & BSD systems
 set(USE_DBUS_DEFAULT OFF)
@@ -127,6 +142,12 @@ ecm_set_disabled_deprecation_versions(
 )
 
 add_subdirectory(src)
+
+if (BUILD_PYTHON_BINDINGS)
+    include(ECMGeneratePythonBindings)
+    add_subdirectory(python)
+endif()
+
 if (BUILD_TESTING)
     add_subdirectory(autotests)
     add_subdirectory(tests)
