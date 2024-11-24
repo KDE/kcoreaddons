@@ -129,6 +129,7 @@ Notes:
     <comment xml:lang="sa">CD श्रव्य</comment>
     <comment xml:lang="sk">Audio CD</comment>
     <comment xml:lang="sl">Zvočni CD</comment>
+    <comment xml:lang="sq">CD audio</comment>
     <comment xml:lang="sv">Cd-ljud</comment>
     <comment xml:lang="ta">CD ஒலிக்கோப்பை</comment>
     <comment xml:lang="tok">kalama CD</comment>
@@ -188,6 +189,7 @@ Notes:
     <comment xml:lang="sa">SNF bitmap font</comment>
     <comment xml:lang="sk">Bitmapové písmo SNF</comment>
     <comment xml:lang="sl">Bitna pisava SNF</comment>
+    <comment xml:lang="sq">Shkronja bitmap SNF</comment>
     <comment xml:lang="sv">SNF punktavbildat teckensnitt</comment>
     <comment xml:lang="tok">poki pi nasin sitelen ilo SNF</comment>
     <comment xml:lang="tr">SNF biteşlem yazıtipi</comment>
@@ -248,6 +250,7 @@ Notes:
     <comment xml:lang="sa">Java applet</comment>
     <comment xml:lang="sk">Aplet jazyka Java</comment>
     <comment xml:lang="sl">Aplet Java</comment>
+    <comment xml:lang="sq">Aplikacionth Java</comment>
     <comment xml:lang="sv">Java-miniprogram</comment>
     <comment xml:lang="tok">ilo lili Java</comment>
     <comment xml:lang="tr">Java programcığı</comment>
@@ -305,6 +308,7 @@ Notes:
     <comment xml:lang="sa">KDE रङ्ग योजना</comment>
     <comment xml:lang="sk">Farebná schéma prostredia KDE</comment>
     <comment xml:lang="sl">Barvna shema KDE</comment>
+    <comment xml:lang="sq">Skemë ngjyrash KDE</comment>
     <comment xml:lang="sv">KDE-färgschema</comment>
     <comment xml:lang="ta">கே.டீ.யீ. நிறத் திட்டம்</comment>
     <comment xml:lang="tok">poki kule KDE</comment>
@@ -367,6 +371,7 @@ Notes:
     <comment xml:lang="sa">KNewStuff सम्पुट</comment>
     <comment xml:lang="sk">Balík KNewStuff</comment>
     <comment xml:lang="sl">Paket KNewStuff</comment>
+    <comment xml:lang="sq">Paketë KNewStuff</comment>
     <comment xml:lang="sv">Heta nyheter-paket</comment>
     <comment xml:lang="ta">KNewStuff தொகுப்பு</comment>
     <comment xml:lang="tok">poki KNewStuff</comment>
@@ -426,6 +431,7 @@ Notes:
     <comment xml:lang="sa">KWallet धनस्यूत</comment>
     <comment xml:lang="sk">Peňaženka aplikácia KWallet</comment>
     <comment xml:lang="sl">Listnica Kwallet</comment>
+    <comment xml:lang="sq">Kuletë KWallet</comment>
     <comment xml:lang="sv">Kwallet-plånbok</comment>
     <comment xml:lang="tok">poki KWallet</comment>
     <comment xml:lang="tr">K Cüzdan cüzdanı</comment>
@@ -548,6 +554,7 @@ Notes:
     <comment xml:lang="sa">SuperKaramba रचनाधार</comment>
     <comment xml:lang="sk">Téma SuperKaramba</comment>
     <comment xml:lang="sl">Tema SuperKaramba</comment>
+    <comment xml:lang="sq">Temë SuperKaramba</comment>
     <comment xml:lang="sv">Superkaramba-tema</comment>
     <comment xml:lang="tok">nasin lukin SuperKaramba</comment>
     <comment xml:lang="tr">SuperKaramba teması</comment>
@@ -606,6 +613,7 @@ Notes:
     <comment xml:lang="sa">Calligra Plan परियोजना प्रबंधन प्रलेखः</comment>
     <comment xml:lang="sk">Dokument riadenia projektu Calligra Plan</comment>
     <comment xml:lang="sl">Dokument upravljanja projektov Calligra Plan</comment>
+    <comment xml:lang="sq">Dokument administrimi projekti Calligra Plan</comment>
     <comment xml:lang="sv">Calligra Plan-projekthanteringsdokument</comment>
     <comment xml:lang="tok">lipu pi sona lawa tan ilo Calligra Plan</comment>
     <comment xml:lang="tr">Calligra Plan proje yönetimi belgesi</comment>
@@ -664,6 +672,7 @@ Notes:
     <comment xml:lang="sa">Calligra Plan कार्य सम्पुट प्रलेखः</comment>
     <comment xml:lang="sk">Dokument pracovného balíka Calligra Plan</comment>
     <comment xml:lang="sl">Dokument delovnega paketa Calligra Plan</comment>
+    <comment xml:lang="sq">Dokumentin pakete pune Calligra Plan</comment>
     <comment xml:lang="sv">Calligra Plan-arbetspaketsdokument</comment>
     <comment xml:lang="tok">poki pali pi ilo Calligra Plan</comment>
     <comment xml:lang="tr">Calligra Plan iş paketi belgesi</comment>
@@ -722,6 +731,7 @@ Notes:
     <comment xml:lang="sa">KPlato परियोजना प्रबंधन प्रलेखः</comment>
     <comment xml:lang="sk">Dokument riadenia projektov v KPlato</comment>
     <comment xml:lang="sl">Dokument upravljanja projektov KPlato</comment>
+    <comment xml:lang="sq">Dokument administrimi projekti KPlato</comment>
     <comment xml:lang="sv">Kplato-projekthantering dokument</comment>
     <comment xml:lang="tok">lipu pi sona lawa tan ilo KPlato</comment>
     <comment xml:lang="tr">KPlato proje yönetimi belgesi</comment>
@@ -780,6 +790,7 @@ Notes:
     <comment xml:lang="sa">KPlato परियोजना प्रबंधन कार्य सम्पुतः</comment>
     <comment xml:lang="sk">Pracovný balík riadenia projektov v KPlato</comment>
     <comment xml:lang="sl">Delovni paket upravljanja projektov KPlato</comment>
+    <comment xml:lang="sq">Paketë pune administrimi projektesh KPlato</comment>
     <comment xml:lang="sv">Kplato-projekthantering arbetspaket</comment>
     <comment xml:lang="tok">poki pali pi sona lawa tan KPlato</comment>
     <comment xml:lang="tr">KPlato proje yönetimi çalışma paketi</comment>
@@ -838,6 +849,7 @@ Notes:
     <comment xml:lang="sa">Kugar संग्रहः</comment>
     <comment xml:lang="sk">Archív Kugar</comment>
     <comment xml:lang="sl">Arhiv Kugar</comment>
+    <comment xml:lang="sq">Arkiv Kugar</comment>
     <comment xml:lang="sv">Kugar-arkiv</comment>
     <comment xml:lang="tok">poki Kugar</comment>
     <comment xml:lang="tr">Kugar arşivi</comment>
@@ -897,6 +909,7 @@ Notes:
     <comment xml:lang="sa">जाल संग्रहः</comment>
     <comment xml:lang="sk">webový archív</comment>
     <comment xml:lang="sl">spletni arhiv</comment>
+    <comment xml:lang="sq">arkiv web</comment>
     <comment xml:lang="sv">webbarkiv</comment>
     <comment xml:lang="ta">இணைய காப்பகம்</comment>
     <comment xml:lang="tok">poki awen pi lipu ilo</comment>
@@ -957,6 +970,7 @@ Notes:
     <comment xml:lang="sa">W3C XML प्रबन्धिका</comment>
     <comment xml:lang="sk">Schéma W3C XML</comment>
     <comment xml:lang="sl">Shema W3C XML</comment>
+    <comment xml:lang="sq">Skemë W3C XML</comment>
     <comment xml:lang="sv">W3C XML-schema</comment>
     <comment xml:lang="tok">nasin pi lipu W3C XML</comment>
     <comment xml:lang="tr">W3C XML şeması</comment>
@@ -1015,6 +1029,7 @@ Notes:
     <comment xml:lang="sa">KPhotoAlbum आयात</comment>
     <comment xml:lang="sk">Import KPhotoAlbum</comment>
     <comment xml:lang="sl">Uvoz v KPhotoAlbum</comment>
+    <comment xml:lang="sq">Importo KPhotoAlbum</comment>
     <comment xml:lang="sv">Kfotoalbum-import</comment>
     <comment xml:lang="tok">kama insa pi KPhotoAlbum</comment>
     <comment xml:lang="tr">K Fotoğraf Albümü içe aktar</comment>
@@ -1073,6 +1088,7 @@ Notes:
     <comment xml:lang="sa">HDR मानसचित्र</comment>
     <comment xml:lang="sk">Obrázok HDR</comment>
     <comment xml:lang="sl">Slika HDR</comment>
+    <comment xml:lang="sq">Figurë HDR</comment>
     <comment xml:lang="sv">HDR-bild</comment>
     <comment xml:lang="ta">HDR படம்</comment>
     <comment xml:lang="tok">sitelen HDR</comment>
@@ -1136,6 +1152,7 @@ Notes:
     <comment xml:lang="sa">KDE कच्चे चित्रस्वरूपाः</comment>
     <comment xml:lang="sk">Formáty surových obrázkov prostredia KDE</comment>
     <comment xml:lang="sl">KDE surovi formati slik</comment>
+    <comment xml:lang="sq">Formate figurash të papërpunuara KDE</comment>
     <comment xml:lang="sv">KDE-obehandlade bildformat</comment>
     <comment xml:lang="tok">sitelen lete KDE</comment>
     <comment xml:lang="tr">KDE ham görsel biçimleri</comment>
@@ -1204,6 +1221,7 @@ Notes:
     <comment xml:lang="sa">Intel® षट्दशमलववस्तुसञ्चिका</comment>
     <comment xml:lang="sk">Intel® hexadecimálny objektový súbor</comment>
     <comment xml:lang="sl">Intel® šestnajstiška predmetna datoteka</comment>
+    <comment xml:lang="sq">Kartelë objekti gjashtëmbëdhjetësh Intel®</comment>
     <comment xml:lang="sv">Intel® hexadecimal objektfil</comment>
     <comment xml:lang="tok">poki nanpa Intel®</comment>
     <comment xml:lang="tr">Intel® onaltılık nesne dosyası</comment>
@@ -1262,6 +1280,7 @@ Notes:
     <comment xml:lang="sa">Kate सञ्चिकासूची लोडर प्लगिन् सूची</comment>
     <comment xml:lang="sk">Zoznam doplnkov na načítanie zoznamu súborov Kate</comment>
     <comment xml:lang="sl">Seznam vstavka nalagalnika seznamov datotek za Kate</comment>
+    <comment xml:lang="sq">Listë shtojcash ngarkuesi liste kartelash për Kate</comment>
     <comment xml:lang="sv">Kate insticksprogramlista för laddning av fillistor</comment>
     <comment xml:lang="tok">lipu pi ilo lili pi ilo Kate</comment>
     <comment xml:lang="tr">Kate dosya listesi yükleyici eklentisi listesi</comment>
@@ -1321,6 +1340,7 @@ Notes:
     <comment xml:lang="sa">abc संगीतसंकेतनसञ्चिका</comment>
     <comment xml:lang="sk">Súbor hudobnej notácie abc</comment>
     <comment xml:lang="sl">Datoteka glasbenega zapisa abc</comment>
+    <comment xml:lang="sq">kartelë pentagrami abc</comment>
     <comment xml:lang="sv">abc-musiknotationsfil</comment>
     <comment xml:lang="ta">abc பாடல் குறிப்பு கோப்பு</comment>
     <comment xml:lang="tok">lipu kalama pi ilo abc</comment>
@@ -1385,6 +1405,7 @@ Notes:
     <comment xml:lang="sa">fonts संकुलम्</comment>
     <comment xml:lang="sk">balík písiem</comment>
     <comment xml:lang="sl">paket pisav</comment>
+    <comment xml:lang="sq">paketë shkronjash</comment>
     <comment xml:lang="sv">teckensnittspaket</comment>
     <comment xml:lang="ta">எழுத்துரு தொகுப்பு</comment>
     <comment xml:lang="tok">poki pi nasin sitelen</comment>
@@ -1446,6 +1467,7 @@ Notes:
     <comment xml:lang="sa">Windows server</comment>
     <comment xml:lang="sk">Server Windows</comment>
     <comment xml:lang="sl">Strežnik Windows</comment>
+    <comment xml:lang="sq">Shërbyes Windows</comment>
     <comment xml:lang="sv">Windows-server</comment>
     <comment xml:lang="ta">விண்டோஸ் சேவையகம்</comment>
     <comment xml:lang="tok">ilo kulupu Windows</comment>
@@ -1505,6 +1527,7 @@ Notes:
     <comment xml:lang="sa">Windows कार्यसमूहः</comment>
     <comment xml:lang="sk">Pracovná skupina Windows</comment>
     <comment xml:lang="sl">Delovna skupina Windows</comment>
+    <comment xml:lang="sq">Grup pune Windows</comment>
     <comment xml:lang="sv">Windows-arbetsgrupp</comment>
     <comment xml:lang="ta">விண்டோஸ் பணிக்குழு</comment>
     <comment xml:lang="tok">kulupu pi ilo kulupu Windows</comment>
@@ -1564,6 +1587,7 @@ Notes:
     <comment xml:lang="sa">KDE सङ्गणकतन्त्रस्य निरीक्षकः</comment>
     <comment xml:lang="sk">Monitor systému pre KDE</comment>
     <comment xml:lang="sl">Sistemski nadzornik KDE</comment>
+    <comment xml:lang="sq">Mbikëqyrës sistemi KDE</comment>
     <comment xml:lang="sv">KDE-systemövervakare</comment>
     <comment xml:lang="ta">கே.டீ.யீ. கணினி மேற்பார்வை</comment>
     <comment xml:lang="tok">ilo pi oko ilo KDE</comment>
@@ -1624,6 +1648,7 @@ Notes:
     <comment xml:lang="sa">KDE रचनाधार</comment>
     <comment xml:lang="sk">Téma KDE</comment>
     <comment xml:lang="sl">Tema KDE</comment>
+    <comment xml:lang="sq">Temë KDE</comment>
     <comment xml:lang="sv">KDE-tema</comment>
     <comment xml:lang="ta">கே.டீ.யீ. திட்டமுறை</comment>
     <comment xml:lang="tok">nasin lukin KDE</comment>
@@ -1685,6 +1710,7 @@ Notes:
     <comment xml:lang="sa">Quanta प्रकल्प</comment>
     <comment xml:lang="sk">Projekt Quanta</comment>
     <comment xml:lang="sl">Projekt Quanta</comment>
+    <comment xml:lang="sq">Projekti Quanta</comment>
     <comment xml:lang="sv">Quanta-projekt</comment>
     <comment xml:lang="tok">pali Quanta</comment>
     <comment xml:lang="tr">Quanta projesi</comment>
@@ -1744,6 +1770,7 @@ Notes:
     <comment xml:lang="sa">Kommander सञ्चिका</comment>
     <comment xml:lang="sk">Súbor Kommander</comment>
     <comment xml:lang="sl">Datoteka Kommanderja</comment>
+    <comment xml:lang="sq">Kartelë Kommander</comment>
     <comment xml:lang="sv">Kommander-fil</comment>
     <comment xml:lang="ta">Kommander கோப்பு</comment>
     <comment xml:lang="tok">poki Kommander</comment>
@@ -1863,6 +1890,7 @@ Notes:
     <comment xml:lang="sa">Kolf रक्षितः क्रीडा</comment>
     <comment xml:lang="sk">Uložená hra Kolf</comment>
     <comment xml:lang="sl">Shranjena igra Kolf</comment>
+    <comment xml:lang="sq">Lojë Kolf e ruajtur</comment>
     <comment xml:lang="sv">Kolf sparat spel</comment>
     <comment xml:lang="ta">Kolf சேமிக்கப்பட்ட ஆட்டம்</comment>
     <comment xml:lang="tok">sona musi pi ilo Kolf</comment>
@@ -1925,6 +1953,7 @@ Notes:
     <comment xml:lang="sa">Kolf वर्गः</comment>
     <comment xml:lang="sk">Trať pre Kolf</comment>
     <comment xml:lang="sl">Igrišče Kolf</comment>
+    <comment xml:lang="sq">Kurs Kolf</comment>
     <comment xml:lang="sv">Kolfbana</comment>
     <comment xml:lang="tok">ma pi ilo Kolf</comment>
     <comment xml:lang="tr">Kolf etabı</comment>
@@ -1989,6 +2018,7 @@ Notes:
     <comment xml:lang="sa">Okular दस्तावेज संग्रह</comment>
     <comment xml:lang="sk">Archív dokumentu Okular</comment>
     <comment xml:lang="sl">Arhiv dokumentov za Okular</comment>
+    <comment xml:lang="sq">Arkiv dokumentesh Okular</comment>
     <comment xml:lang="sv">Okular-dokumentarkiv</comment>
     <comment xml:lang="ta">ஆக்குலர் ஆவணக் காப்பகம்</comment>
     <comment xml:lang="tok">poki lipu pi ilo Okular</comment>
@@ -2049,6 +2079,7 @@ Notes:
     <comment xml:lang="sa">काब्रि फिगर</comment>
     <comment xml:lang="sk">Obrázok Cabri</comment>
     <comment xml:lang="sl">Lik Cabri</comment>
+    <comment xml:lang="sq">Figurë Cabri</comment>
     <comment xml:lang="sv">Cabri-figur</comment>
     <comment xml:lang="ta">Cabri படம்</comment>
     <comment xml:lang="tok">sitelen Cabri</comment>
@@ -2112,6 +2143,7 @@ Notes:
     <comment xml:lang="sa">डॉ. जियो फिगर</comment>
     <comment xml:lang="sk">Obrázok Dr. Geo</comment>
     <comment xml:lang="sl">Lik Dr. Geo</comment>
+    <comment xml:lang="sq">Figurë Dr. Geo</comment>
     <comment xml:lang="sv">Dr. Geo-figur</comment>
     <comment xml:lang="ta">Dr. Geo படம்</comment>
     <comment xml:lang="tok">sitelen pi jan Dr. Geo</comment>
@@ -2174,6 +2206,7 @@ Notes:
     <comment xml:lang="sa">KGeo आकृतिः</comment>
     <comment xml:lang="sk">Obrázok KGeo</comment>
     <comment xml:lang="sl">Lik KGeo</comment>
+    <comment xml:lang="sq">Figurë KGeo</comment>
     <comment xml:lang="sv">Kgeo-figur</comment>
     <comment xml:lang="ta">KGeo படம்</comment>
     <comment xml:lang="tok">sitelen KGeo</comment>
@@ -2233,6 +2266,7 @@ Notes:
     <comment xml:lang="sa">Kig आकृतिः</comment>
     <comment xml:lang="sk">Obrázok Kig</comment>
     <comment xml:lang="sl">Lik Kig</comment>
+    <comment xml:lang="sq">Figurë Kig</comment>
     <comment xml:lang="sv">Kig-figur</comment>
     <comment xml:lang="ta">Kig படம்</comment>
     <comment xml:lang="tok">sitelen Kig</comment>
@@ -2293,6 +2327,7 @@ Notes:
     <comment xml:lang="sa">KSeg प्रलेख</comment>
     <comment xml:lang="sk">Dokument KSeg</comment>
     <comment xml:lang="sl">Dokument KSeg</comment>
+    <comment xml:lang="sq">Dokument KSeg</comment>
     <comment xml:lang="sv">Kseg-dokument</comment>
     <comment xml:lang="ta">KSeg ஆவணம்</comment>
     <comment xml:lang="tok">lipu KSeg</comment>
@@ -2353,6 +2388,7 @@ Notes:
     <comment xml:lang="sa">शब्दावली प्रशिक्षक प्रलेख</comment>
     <comment xml:lang="sk">Dokument tréningu slovnej zásoby</comment>
     <comment xml:lang="sl">dokument za vadbo besedišča</comment>
+    <comment xml:lang="sq">dokument stërvitësi fjalorthi</comment>
     <comment xml:lang="sv">dokument för ordförrådsövning</comment>
     <comment xml:lang="tok">lipu pi kama sona nimi</comment>
     <comment xml:lang="tr">Söz dağarcığı çalışma belgesi</comment>
@@ -2411,6 +2447,7 @@ Notes:
     <comment xml:lang="sa">KmPlot सञ्चिका</comment>
     <comment xml:lang="sk">Súbor KmPlot</comment>
     <comment xml:lang="sl">Datoteka KmPlot</comment>
+    <comment xml:lang="sq">Kartelë KmPlot</comment>
     <comment xml:lang="sv">Kmplot-fil</comment>
     <comment xml:lang="ta">KmPlot கோப்பு</comment>
     <comment xml:lang="tok">lipu KmPlot</comment>
@@ -2470,6 +2507,7 @@ Notes:
     <comment xml:lang="sa">KWordQuiz शब्दावली</comment>
     <comment xml:lang="sk">Slovná zásoba KWordQuiz</comment>
     <comment xml:lang="sl">Besedišče KWordQuiz</comment>
+    <comment xml:lang="sq">Fjalorth KWordQuiz</comment>
     <comment xml:lang="sv">Kwordquiz-ordförråd</comment>
     <comment xml:lang="tok">lipu nimi pi ilo KWordQuiz</comment>
     <comment xml:lang="tr">K Sözcük Oyunu söz dağarcığı</comment>
@@ -2588,6 +2626,7 @@ Notes:
     <comment xml:lang="sa">Umbrello UML Modeller सञ्चिका</comment>
     <comment xml:lang="sk">Súbor Umbrello UML Modeller</comment>
     <comment xml:lang="sl">Datoteka UML modelirnika Umbrello</comment>
+    <comment xml:lang="sq">Kartelë Modeluesi Umbrello UML</comment>
     <comment xml:lang="sv">Umbrello UML-modelleringsfil</comment>
     <comment xml:lang="tok">lipu tan ilo Umbrella UML Modeller</comment>
     <comment xml:lang="tr">Umbrello UML Modelleyici dosyası</comment>
@@ -2649,6 +2688,7 @@ Notes:
     <comment xml:lang="sa">Windows लिङ्क्</comment>
     <comment xml:lang="sk">Odkaz Windows</comment>
     <comment xml:lang="sl">Povezava v Windows</comment>
+    <comment xml:lang="sq">Lidhje Windows</comment>
     <comment xml:lang="sv">Windows-länk</comment>
     <comment xml:lang="ta">விண்டோஸ் இணைப்பு</comment>
     <comment xml:lang="tok">nasin tawa pi ilo Windows</comment>
@@ -2711,6 +2751,7 @@ Notes:
     <comment xml:lang="sa">KGet अवाहरति सूची</comment>
     <comment xml:lang="sk">Zoznam sťahovania KGet</comment>
     <comment xml:lang="sl">Seznam prejemov KGet</comment>
+    <comment xml:lang="sq">Listë shkarkimesh KGet</comment>
     <comment xml:lang="sv">Kget-nerladdningslista</comment>
     <comment xml:lang="ta">KGet பதிவிறக்க பட்டியல்</comment>
     <comment xml:lang="tok">lipu alasa pi ilo KGet</comment>
@@ -2770,6 +2811,7 @@ Notes:
     <comment xml:lang="sa">Kopete भावचिह्न संग्रह</comment>
     <comment xml:lang="sk">Archív emotikonov Kopete</comment>
     <comment xml:lang="sl">Arhiv z izraznimi ikonami za Kopete</comment>
+    <comment xml:lang="sq">Arkiv emotikonesh Kopete</comment>
     <comment xml:lang="sv">Kopete-smilisarkiv</comment>
     <comment xml:lang="tok">poki pi sitelen sinpin pi ilo Kopete</comment>
     <comment xml:lang="tr">Kopete duygu simgeleri arşivi</comment>
@@ -2828,6 +2870,7 @@ Notes:
     <comment xml:lang="sa">ICQ संपर्कः</comment>
     <comment xml:lang="sk">Kontakt ICQ</comment>
     <comment xml:lang="sl">Stik ICQ</comment>
+    <comment xml:lang="sq">Kontakt ICQ</comment>
     <comment xml:lang="sv">ICQ-kontakt</comment>
     <comment xml:lang="ta">ICQ தொடர்பு</comment>
     <comment xml:lang="tok">lipu pi jan lon ilo ICQ</comment>
@@ -2889,6 +2932,7 @@ Notes:
     <comment xml:lang="sa">Microsoft Media Format</comment>
     <comment xml:lang="sk">Microsoft Media Format</comment>
     <comment xml:lang="sl">Microsoft Media Format</comment>
+    <comment xml:lang="sq">Format Media Microsoft</comment>
     <comment xml:lang="sv">Microsoft mediaformat</comment>
     <comment xml:lang="ta">மைக்ரோசாப்ட் ஊடகப் படிவம்</comment>
     <comment xml:lang="tok">poki Microsoft Media Format</comment>
@@ -2954,6 +2998,7 @@ Notes:
     <comment xml:lang="sa">Turtle RDF प्रलेख</comment>
     <comment xml:lang="sk">Dokument Turtle RDF</comment>
     <comment xml:lang="sl">Dokument Turtle RDF</comment>
+    <comment xml:lang="sq">Dokument Turtle RDF</comment>
     <comment xml:lang="sv">Turtle RDF-dokument</comment>
     <comment xml:lang="tok">lipu pi ilo Turtle RDF</comment>
     <comment xml:lang="tr">Turtle RDF belgesi</comment>
@@ -3012,6 +3057,7 @@ Notes:
     <comment xml:lang="sa">Softimage PIC मानसचित्र</comment>
     <comment xml:lang="sk">Softimage PIC obrázok</comment>
     <comment xml:lang="sl">Slika Softimage PIC</comment>
+    <comment xml:lang="sq">Figurë Softimage PIC</comment>
     <comment xml:lang="sv">Softimage PIC-bild</comment>
     <comment xml:lang="tok">sitelen Softimage PIC</comment>
     <comment xml:lang="tr">Softimage PIC resmi</comment>
@@ -3073,6 +3119,7 @@ Notes:
     <comment xml:lang="sa">KConfigXT विन्यासविकल्पाः</comment>
     <comment xml:lang="sk">Možnosti konfigurácie KConfigXT</comment>
     <comment xml:lang="sl">Nastavitvene možnosti KConfigXT</comment>
+    <comment xml:lang="sq">Mundësi Formësimi KConfigXT</comment>
     <comment xml:lang="sv">KConfigXT-inställningsalternativ</comment>
     <comment xml:lang="tok">lipu pi ante wile pi ilo KConfigXT</comment>
     <comment xml:lang="tr">KConfigXT Yapılandırma Seçenekleri</comment>
@@ -3137,6 +3184,7 @@ Notes:
     <comment xml:lang="sa">KConfigXT कोडजनन विकल्पाः</comment>
     <comment xml:lang="sk">Možnosti generovania kódu KConfigXT</comment>
     <comment xml:lang="sl">Možnosti ustvarjanja kode KConfigXT</comment>
+    <comment xml:lang="sq">Mundësi Prodhimi Kodi KConfigXT</comment>
     <comment xml:lang="sv">KConfigXT-kodgenereringsalternativ</comment>
     <comment xml:lang="tok">lipu pi pana wile pi ilo KConfigXT</comment>
     <comment xml:lang="tr">KConfigXT Kod Oluşturma Seçenekleri</comment>
@@ -3197,6 +3245,7 @@ Notes:
     <comment xml:lang="sa">KXMLGUI UI उद्धोषणा</comment>
     <comment xml:lang="sk">Deklarácia KXMLGUI UI</comment>
     <comment xml:lang="sl">Deklaracija uporabniškega vmesnika KXMLGUI</comment>
+    <comment xml:lang="sq">Pohim UI KXMLGUI</comment>
     <comment xml:lang="sv">KXMLGUI-användargränssnittsdeklaration</comment>
     <comment xml:lang="tok">lipu pi ilo KXMLGUI</comment>
     <comment xml:lang="tr">KXMLGUI Arayüz Bildirimi</comment>
@@ -3261,6 +3310,7 @@ Notes:
     <comment xml:lang="sa">KNotification उद्धोषणा</comment>
     <comment xml:lang="sk">Deklarácia KNotification</comment>
     <comment xml:lang="sl">Deklaracija KNotification</comment>
+    <comment xml:lang="sq">Pohim KNotification</comment>
     <comment xml:lang="sv">KNotification-deklaration</comment>
     <comment xml:lang="tok">lipu KNotification</comment>
     <comment xml:lang="tr">KNotification Beyanı</comment>
@@ -3321,6 +3371,7 @@ Notes:
     <comment xml:lang="sa">KCrash वृत्तान्त</comment>
     <comment xml:lang="sk">Hlásenie aplikácie KCrash</comment>
     <comment xml:lang="sl">Poročilo KCrash</comment>
+    <comment xml:lang="sq">Raport KCrash</comment>
     <comment xml:lang="sv">KCrash-rapport</comment>
     <comment xml:lang="ta">KCrash அறிக்கை</comment>
     <comment xml:lang="tok">lipu pakala ilo KCrash</comment>
