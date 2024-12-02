@@ -205,12 +205,21 @@ public:
         GPL_V2 = GPL, ///< GPL_V2, this has the same value as LicenseKey::GPL, see https://spdx.org/licenses/GPL-2.0.html
         LGPL = 2, ///< LGPL
         LGPL_V2 = LGPL, ///< LGPL_V2, this has the same value as LicenseKey::LGPL, see https://spdx.org/licenses/LGPL-2.0-only.html
-        BSDL = 3, ///< BSDL, see https://spdx.org/licenses/BSD-2-Clause.html
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(6, 9)
+        BSDL KCOREADDONS_ENUMERATOR_DEPRECATED_VERSION(6, 9, "Use BSD_2_Clause") = 3, ///< BSDL, see https://spdx.org/licenses/BSD-2-Clause.html
+#endif
+        BSD_2_Clause = 3, ///< BSD_2_CLAUSE, see https://spdx.org/licenses/BSD-2-Clause.html
         Artistic = 4, ///< Artistic, see https://spdx.org/licenses/Artistic-2.0.html
         GPL_V3 = 5, ///< GPL_V3, see https://spdx.org/licenses/GPL-3.0.html
         LGPL_V3 = 6, ///< LGPL_V3, see https://spdx.org/licenses/LGPL-3.0-only.html
         LGPL_V2_1 = 7, ///< LGPL_V2_1 @since 5.25, see https://spdx.org/licenses/LGPL-2.1-only.html
         MIT = 8, ///< MIT @since 6.0, see https://spdx.org/licenses/MIT.html
+        ODbL_V1 = 9, ///< ODbL_V1 @since 6.9, see https://spdx.org/licenses/ODbL-1.0.html
+        Apache_V2 = 10, ///< Apache_V2 @since 6.9, see https://spdx.org/licenses/Apache-2.0.html
+        FTL = 11, ///< FTL @since 6.9, see https://spdx.org/licenses/FTL.html
+        BSL_V1 = 12, ///< BSL_V1 @since 6.9, see https://spdx.org/licenses/BSL-1.0.html
+        BSD_3_Clause = 13, ///< BSD_3_CLAUSE @since 6.9, see https://spdx.org/licenses/BSD-3-Clause.html
+        CC0_V1 = 14, ///< CC0_V1 @since 6.9, see https://spdx.org/licenses/CC0-1.0.html
     };
     Q_ENUM(LicenseKey)
 
