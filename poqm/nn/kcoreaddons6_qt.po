@@ -205,8 +205,6 @@ msgstr ""
 
 #: lib/kaboutdata.cpp:388
 #, fuzzy
-#| msgctxt "KFileSystemType|"
-#| msgid "FAT"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
 msgstr "FAT"
@@ -218,8 +216,6 @@ msgstr ""
 
 #: lib/kaboutdata.cpp:392
 #, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
 msgstr "BSD-lisensen"
