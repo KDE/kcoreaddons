@@ -1,6 +1,7 @@
 # translation of kdelibs4.po to Polish
 # translation of kdelibs4.po to
 # Version: $Revision: 685926 $
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 # Ostatnie poprawki przed 2.0 Jacek Stolarczyk <jstolarz@kde.org>
 # Jacek Stolarczyk <jstolarz@kde.org>, 2001.
 # Piotr Roszatycki <dexter@debian.org>, 1997-2000.
@@ -11,13 +12,12 @@
 # Marta Rybczyńska <kde-i18n@rybczynska.net>, 2007, 2008, 2009, 2010, 2011, 2012, 2013.
 # Michal Rudolf <michal@rudolf.waw.pl>, 2010.
 # Artur Chłond <eugenewolfe@o2.pl>, 2010.
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-09-24 08:02+0200\n"
+"PO-Revision-Date: 2024-12-07 13:06+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -26,6 +26,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 24.08.3\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -86,6 +87,8 @@ msgid ""
 "You can find the full term <a href=\"https://spdx.org/licenses/%1.html\">the "
 "SPDX website</a>"
 msgstr ""
+"Pełne warunki możesz znaleźć na <a href=\"https://spdx.org/licenses/%1.html"
+"\">stronie SPDX</a>"
 
 #: lib/kaboutdata.cpp:292
 msgctxt "KAboutLicense|"
@@ -181,71 +184,62 @@ msgstr "Licencja MIT"
 #: lib/kaboutdata.cpp:376
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
-msgstr ""
+msgstr "CC0"
 
 #: lib/kaboutdata.cpp:377
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr ""
+msgstr "Creative Commons Zero"
 
 #: lib/kaboutdata.cpp:380
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "QPL v1.0"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
-msgstr "QPL v1.0"
+msgstr "ODbL v1.0"
 
 #: lib/kaboutdata.cpp:381
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Open Data Commons Open Database License v1.0"
 
 #: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "Apache 2.0"
 
 #: lib/kaboutdata.cpp:385
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "Licencja Apache 2.0"
 
 #: lib/kaboutdata.cpp:388
-#, fuzzy
-#| msgctxt "KFileSystemType|"
-#| msgid "FAT"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
-msgstr "FAT"
+msgstr "FTL"
 
 #: lib/kaboutdata.cpp:389
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Licencja Projektu Freetype"
 
 #: lib/kaboutdata.cpp:392
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
-msgstr "Licencja BSD"
+msgstr "Licencja Boost"
 
 #: lib/kaboutdata.cpp:393
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Licencja Oprogramowania Boost 1.0"
 
 #: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "BSD-3-Clause"
 
 #: lib/kaboutdata.cpp:397
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "Licencja \"Nowa\" lub \"Uaktualniona\" BSD 3-Clause"
 
 #: lib/kaboutdata.cpp:401
 msgctxt "KAboutLicense|@item license"
@@ -265,15 +259,9 @@ msgid ""
 "internationalization visit <a href=\"https://l10n.kde.org\">https://l10n.kde."
 "org</a></p>"
 msgstr ""
-"<p>KDE jest tłumaczone na polski w czasie wolnym ludzi, chcących ten czas "
-"poświecić.</p><p>Tłumaczenie może zawierać <b>błędy</b>.  Jeśli znalazłaś/"
-"znalazłeś taki błąd, to powiadom nas o tym, wysyłając wiadomość na adres <a "
-"href=\"mailto:kdei18n-pl-uwagi@lists.sourceforge.net\"> kdei18n-pl-"
-"uwagi@lists.sourceforge.net</a> (wystarczy, że wyślesz wiadomość; nie musisz "
-"się nigdzie zapisywać).</p><p>Zapraszamy również do współudziału w "
-"tłumaczeniu! Aby się zgłosić wyślij wiadomość na adres <a href=\"mailto:"
-"kdei18n-pl-devel@lists.sourceforge.net\"> kdei18n-pl-devel@lists.sourceforge."
-"net</a>.</p>"
+"<p>KDE jest tłumaczone na wiele języków dzięki pracy zespołów tłumaczących "
+"na całym świecie.</p><p>Po więcej szczegółów nt. tłumaczenia KDE odwiedź <a "
+"href=\"https://l10n.kde.org\">https://l10n.kde.org</a></p>"
 
 #: lib/kaboutdata.cpp:1219
 msgctxt "KAboutData CLI|"
