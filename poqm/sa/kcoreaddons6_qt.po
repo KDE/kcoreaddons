@@ -72,6 +72,8 @@ msgid ""
 "You can find the full term <a href=\"https://spdx.org/licenses/%1.html\">the "
 "SPDX website</a>"
 msgstr ""
+"भवन्तः पूर्णपदं <a href=\"https://spdx.org/licenses/%1.html\">SPDX वेबसाइट्</a> "
+"द्रष्टुं शक्नुवन्ति"
 
 #: lib/kaboutdata.cpp:292
 msgctxt "KAboutLicense|"
@@ -167,32 +169,32 @@ msgstr "MIT अनुज्ञापत्रम्"
 #: lib/kaboutdata.cpp:376
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
-msgstr ""
+msgstr "सीसी०"
 
 #: lib/kaboutdata.cpp:377
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr ""
+msgstr "क्रिएटिव कॉमन्स शून्य"
 
 #: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
-msgstr ""
+msgstr "ODbL v1.0"
 
 #: lib/kaboutdata.cpp:381
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "ओपन डाटा कॉमन्स् ओपन डाटाबेस लाइसेंस v1.0"
 
 #: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "अपाचे २.०"
 
 #: lib/kaboutdata.cpp:385
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "अपाचे अनुज्ञापत्र 2.0"
 
 #: lib/kaboutdata.cpp:388
 #, fuzzy
@@ -205,7 +207,7 @@ msgstr "FAT"
 #: lib/kaboutdata.cpp:389
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Freetype परियोजना अनुज्ञापत्रम्"
 
 #: lib/kaboutdata.cpp:392
 #, fuzzy
@@ -218,17 +220,17 @@ msgstr "BSD अनुज्ञापत्रम्"
 #: lib/kaboutdata.cpp:393
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "सॉफ्टवेयर अनुज्ञापत्रं वर्धयन्तु 1.0"
 
 #: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "BSD-3-खण्डः"
 
 #: lib/kaboutdata.cpp:397
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "BSD 3-खण्डः \"नवः\" अथवा \"संशोधितः\" अनुज्ञापत्रः"
 
 #: lib/kaboutdata.cpp:401
 msgctxt "KAboutLicense|@item license"
