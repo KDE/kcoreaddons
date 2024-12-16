@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -197,12 +197,9 @@ msgid "Apache License 2.0"
 msgstr "अपाचे अनुज्ञापत्र 2.0"
 
 #: lib/kaboutdata.cpp:388
-#, fuzzy
-#| msgctxt "KFileSystemType|"
-#| msgid "FAT"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
-msgstr "FAT"
+msgstr "FTL"
 
 #: lib/kaboutdata.cpp:389
 msgctxt "KAboutLicense|@item license"
@@ -210,12 +207,9 @@ msgid "Freetype Project License"
 msgstr "Freetype परियोजना अनुज्ञापत्रम्"
 
 #: lib/kaboutdata.cpp:392
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
-msgstr "BSD अनुज्ञापत्रम्"
+msgstr "Boost अनुज्ञापत्रम्"
 
 #: lib/kaboutdata.cpp:393
 msgctxt "KAboutLicense|@item license"
