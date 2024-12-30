@@ -26,7 +26,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2024-01-29 17:52+0200\n"
+"PO-Revision-Date: 2024-12-09 21:11+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -34,6 +34,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.12.3\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -94,6 +95,8 @@ msgid ""
 "You can find the full term <a href=\"https://spdx.org/licenses/%1.html\">the "
 "SPDX website</a>"
 msgstr ""
+"Täydet ehdot löydät <a href=\"https://spdx.org/licenses/%1.html\">SPDX:n "
+"sivustolta</a>"
 
 #: lib/kaboutdata.cpp:292
 msgctxt "KAboutLicense|"
@@ -188,71 +191,62 @@ msgstr "MIT-lisenssi"
 #: lib/kaboutdata.cpp:376
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
-msgstr ""
+msgstr "CC0"
 
 #: lib/kaboutdata.cpp:377
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr ""
+msgstr "Creative Commons Zero"
 
 #: lib/kaboutdata.cpp:380
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "QPL v1.0"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
-msgstr "QPL v1.0"
+msgstr "ODbL v1.0"
 
 #: lib/kaboutdata.cpp:381
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Open Data Commons Open Database License v1.0"
 
 #: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "Apache 2.0"
 
 #: lib/kaboutdata.cpp:385
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "Apache License 2.0"
 
 #: lib/kaboutdata.cpp:388
-#, fuzzy
-#| msgctxt "KFileSystemType|"
-#| msgid "FAT"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
-msgstr "FAT"
+msgstr "FTL"
 
 #: lib/kaboutdata.cpp:389
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Freetype Project License"
 
 #: lib/kaboutdata.cpp:392
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
-msgstr "BSD-lisenssi"
+msgstr "Boost-lisenssi"
 
 #: lib/kaboutdata.cpp:393
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Boost Software License 1.0"
 
 #: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "BSD-3-Clause"
 
 #: lib/kaboutdata.cpp:397
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "BSD:n 3-lausekkeinen ”uusi” tai ”uudistettu” lisenssi"
 
 #: lib/kaboutdata.cpp:401
 msgctxt "KAboutLicense|@item license"
