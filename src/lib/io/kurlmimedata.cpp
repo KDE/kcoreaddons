@@ -285,7 +285,7 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
     if (!isDocumentsPortalAvailable()) {
         return false;
     }
-    QList<QUrl> urls = mimeData->urls();
+    const QList<QUrl> urls = mimeData->urls();
 
     bool onlyLocalFiles = true;
     for (const auto &url : urls) {
@@ -361,7 +361,8 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
         return true;
     };
 
-    for (const auto &path : optionalPaths.value()) {
+    const QStringList paths = optionalPaths.value();
+    for (const auto &path : paths) {
         const int fd = open(QFile::encodeName(path).constData(), O_RDONLY | O_CLOEXEC | O_NONBLOCK);
         if (fd == -1) {
             const int error = errno;
