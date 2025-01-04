@@ -53,7 +53,7 @@ public:
     QString m_pluginId;
     qint64 m_lastQueriedTs = 0;
 
-    static void forEachPlugin(const QString &directory, std::function<void(const QFileInfo &)> callback)
+    static void forEachPlugin(const QString &directory, const std::function<void(const QFileInfo &)> &callback)
     {
         QStringList dirsToCheck;
 #ifdef Q_OS_ANDROID

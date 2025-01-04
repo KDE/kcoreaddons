@@ -28,7 +28,7 @@ public:
         qCWarning(KCOREADDONS_DEBUG) << "Error detected in cache!";
     }
 
-    KSDCCorrupted(const QString message)
+    KSDCCorrupted(const QString &message)
     {
         qCWarning(KCOREADDONS_DEBUG).noquote() << message;
     }

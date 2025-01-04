@@ -418,7 +418,10 @@ QString KTextToHTMLHelper::highlightedText()
     return QString();
 }
 
-QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::Options &flags, int maxUrlLen, int maxAddressLen)
+QString KTextToHTML::convertToHtml(const QString &plainText,
+                                   const KTextToHTML::Options &flags, // clazy:exclude=function-args-by-value
+                                   int maxUrlLen,
+                                   int maxAddressLen)
 {
     KTextToHTMLHelper helper(plainText, 0, maxUrlLen, maxAddressLen);
 
