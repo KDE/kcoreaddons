@@ -196,11 +196,9 @@ bool KMemoryInfo::update()
  * GNU/Linux
  ****************************************************************************/
 
-using ByteArrayView = QByteArrayView;
-
-bool extractBytes(quint64 &value, const QByteArray &buffer, const ByteArrayView &beginPattern, qsizetype &from)
+bool extractBytes(quint64 &value, const QByteArray &buffer, const QByteArrayView beginPattern, qsizetype &from)
 {
-    ByteArrayView endPattern("kB");
+    QByteArrayView endPattern("kB");
     auto beginIdx = buffer.indexOf(beginPattern, from);
     if (beginIdx > -1) {
         auto start = beginIdx + beginPattern.size();
