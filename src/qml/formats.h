@@ -9,10 +9,20 @@
 
 #include <KFormat>
 #include <QObject>
+#include <QQmlEngine>
+
+namespace FormatTypes
+{
+Q_NAMESPACE
+QML_NAMED_ELEMENT(FormatTypes)
+QML_FOREIGN_NAMESPACE(KFormat)
+}
 
 class Formats : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Format)
+    QML_SINGLETON
 
 public:
     /**

@@ -29,6 +29,7 @@ configure_file(util/config-util.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-util.
 
 add_library(KF6CoreAddons)
 add_library(KF6::CoreAddons ALIAS KF6CoreAddons)
+qt_extract_metatypes(KF6CoreAddons)
 
 set_target_properties(KF6CoreAddons PROPERTIES
     VERSION     ${KCOREADDONS_VERSION}

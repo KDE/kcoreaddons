@@ -9,6 +9,7 @@
 #define KUSERPROXY_H
 
 #include <QObject>
+#include <QQmlEngine>
 #include <QUrl>
 
 #include <KDirWatch>
@@ -49,6 +50,7 @@
 class KUserProxy : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(KUser)
 
     Q_PROPERTY(QString fullName READ fullName NOTIFY nameChanged)
     Q_PROPERTY(QString loginName READ loginName NOTIFY nameChanged)

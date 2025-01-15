@@ -56,7 +56,7 @@ Column {
     }
 
     Text {
-        text: "Format.formatRelativeDate(new Date(), Qt.LongFormat): %1".arg(Format.formatRelativeDate(new Date(), Qt.LongFormat))
+        text: "Format.formatRelativeDate(new Date(), Qt.LongFormat): %1".arg(Format.formatRelativeDate(new Date(), Locale.LongFormat))
     }
 
 }
