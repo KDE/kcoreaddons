@@ -23,7 +23,7 @@ class KFormatPrivate : public QSharedData
 
 public:
     explicit KFormatPrivate(const QLocale &locale);
-    virtual ~KFormatPrivate();
+    ~KFormatPrivate();
 
     QString formatByteSize(double size, int precision, KFormat::BinaryUnitDialect dialect, KFormat::BinarySizeUnits units) const;
 

@@ -23,9 +23,7 @@ KFormatPrivate::KFormatPrivate(const QLocale &locale)
 {
 }
 
-KFormatPrivate::~KFormatPrivate()
-{
-}
+KFormatPrivate::~KFormatPrivate() = default;
 
 constexpr double bpow(int exp)
 {

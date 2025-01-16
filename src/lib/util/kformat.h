@@ -393,6 +393,7 @@ public:
      * @see UnitPrefix
      * @since 5.49
      */
+    // TODO KF7: remove in favor of the method below
     QString formatValue(double value, const QString &unit, int precision = 1, KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust) const;
     /**
      * Converts @p value to the appropriate string representation.
