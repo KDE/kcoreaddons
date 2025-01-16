@@ -6,33 +6,48 @@
 
 #include "formats.h"
 
+static void markCurrentFunctionAsTranslationBinding(const QObject *obj)
+{
+#if QT_VERSION > QT_VERSION_CHECK(6, 6, 0)
+    if (auto engine = qmlEngine(obj); engine) {
+        engine->markCurrentFunctionAsTranslationBinding();
+    }
+#endif
+}
+
 QString Formats::formatByteSize(double size, int precision) const
 {
+    markCurrentFunctionAsTranslationBinding(this);
     return m_format.formatByteSize(size, precision);
 }
 
 QString Formats::formatDuration(quint64 msecs, KFormat::DurationFormatOptions options) const
 {
+    markCurrentFunctionAsTranslationBinding(this);
     return m_format.formatDuration(msecs, options);
 }
 
 QString Formats::formatDecimalDuration(quint64 msecs, int decimalPlaces) const
 {
+    markCurrentFunctionAsTranslationBinding(this);
     return m_format.formatDecimalDuration(msecs, decimalPlaces);
 }
 
 QString Formats::formatSpelloutDuration(quint64 msecs) const
 {
+    markCurrentFunctionAsTranslationBinding(this);
     return m_format.formatSpelloutDuration(msecs);
 }
 
 QString Formats::formatRelativeDate(const QDate &date, QLocale::FormatType format) const
 {
+    markCurrentFunctionAsTranslationBinding(this);
     return m_format.formatRelativeDate(date, format);
 }
 
 QString Formats::formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const
 {
+    markCurrentFunctionAsTranslationBinding(this);
     return m_format.formatRelativeDateTime(dateTime, format);
 }
 
