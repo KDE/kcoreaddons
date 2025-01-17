@@ -73,13 +73,13 @@ void KFileUtilsTest::testfindAllUniqueFiles()
     testDataBaseDir.mkpath(QStringLiteral("testdir3/testDirName"));
 
     QFile file1(testBaseDirPath + QLatin1String("/testdir1/testDirName/testfile.test"));
-    file1.open(QFile::WriteOnly);
+    QVERIFY(file1.open(QFile::WriteOnly));
     QFile file2(testBaseDirPath + QLatin1String("/testdir2/testDirName/testfile.test"));
-    file2.open(QFile::WriteOnly);
+    QVERIFY(file2.open(QFile::WriteOnly));
     QFile file3(testBaseDirPath + QLatin1String("/testdir3/testDirName/differentfile.test"));
-    file3.open(QFile::WriteOnly);
+    QVERIFY(file3.open(QFile::WriteOnly));
     QFile file4(testBaseDirPath + QLatin1String("/testdir3/testDirName/nomatch.txt"));
-    file4.open(QFile::WriteOnly);
+    QVERIFY(file4.open(QFile::WriteOnly));
 
     qputenv("XDG_DATA_DIRS", qPrintable(QStringLiteral("%1testdir1:%1testdir2:%1testdir3").arg(testBaseDirPath)));
 

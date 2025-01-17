@@ -233,7 +233,7 @@ void KAboutDataTest::testSetAddLicense()
 {
     // prepare a file with a license text
     QFile licenseFile(QString::fromLatin1(LicenseFileName));
-    licenseFile.open(QIODevice::WriteOnly);
+    QVERIFY(licenseFile.open(QIODevice::WriteOnly));
     QTextStream licenseFileStream(&licenseFile);
     licenseFileStream << LicenseFileText;
     licenseFile.close();

@@ -113,7 +113,10 @@ public:
         //       we have sort of expected default values to use.
         // TODO: it might still be handy to indicate to the outside whether
         //       fallback values are being used or not.
-        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            qCWarning(KCOREADDONS_DEBUG) << "Failed to open os-release file!" << file.errorString();
+            return;
+        }
         QString line;
         QStringList parts;
         while (!file.atEnd()) {

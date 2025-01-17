@@ -56,7 +56,7 @@ void KAutoSaveFileTest::test_readWrite()
 
     {
         QFile testReader(saveFile.fileName());
-        testReader.open(QIODevice::ReadWrite);
+        QVERIFY(testReader.open(QIODevice::ReadWrite));
         QTextStream ts(&testReader);
 
         QString outText = ts.readAll();
