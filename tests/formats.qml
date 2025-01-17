@@ -59,4 +59,14 @@ Column {
         text: "Format.formatRelativeDate(new Date(), Qt.LongFormat): %1".arg(Format.formatRelativeDate(new Date(), Locale.LongFormat))
     }
 
+    TextInput {
+        id: durationMsecs
+        text: "46740"
+    }
+    Text {
+        text: "Format.formatDuration(FormatTypes.AbbreivatedDuration): " + Format.formatDuration(durationMsecs.text * 1000, FormatTypes.AbbreviatedDuration)
+    }
+    Text {
+        text: "Format.formatDuration(FormatTypes.AbbreivatedDuration|FormatTypes.HideSecconds): " + Format.formatDuration(durationMsecs.text * 1000, FormatTypes.AbbreviatedDuration | FormatTypes.HideSeconds)
+    }
 }

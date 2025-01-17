@@ -186,6 +186,8 @@ public:
         ShowMilliseconds = 0x2, ///< Include milliseconds in format, e.g. 1:23:45.678
         HideSeconds = 0x4, ///< Hide the seconds, e.g. 1:23 or 1h23m, overrides ShowMilliseconds
         FoldHours = 0x8, ///< Fold the hours into the minutes, e.g. 83:45 or 83m45s, overrides HideSeconds
+        AbbreviatedDuration = 0x10, ///< Use abbreviated units (e.g. 1 hr 23 min), as a middle ground between just unit initials (InitialDuration) and fully
+                                    ///< spelled out units (formatSpelloutDuration). Added in 6.11.
     };
     /**
      * Stores a combination of #DurationFormatOption values.

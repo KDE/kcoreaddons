@@ -16,6 +16,8 @@
 
 #include "kformat.h"
 
+using namespace Qt::Literals;
+
 void setupEnvironment()
 {
 #ifndef Q_OS_WIN
@@ -274,6 +276,22 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708m03.700s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("179m59.900s"));
     QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("166666m39.999s"));
+}
+
+void KFormatTest::formatAbbreviatedDuration()
+{
+    KFormat fmt(QLocale::c());
+    KFormat::DurationFormatOptions opt = KFormat::AbbreviatedDuration;
+
+    QCOMPARE(fmt.formatDuration(0, opt), "0 sec"_L1);
+    QCOMPARE(fmt.formatDuration(0, opt | KFormat::HideSeconds), "0 min"_L1);
+    QCOMPARE(fmt.formatDuration(MSecsInSecond, opt), "1 sec"_L1);
+    QCOMPARE(fmt.formatDuration(MSecsInMinute, opt), "1 min 0 sec"_L1);
+    QCOMPARE(fmt.formatDuration(MSecsInMinute, opt | KFormat::HideSeconds), "1 min"_L1);
+    QCOMPARE(fmt.formatDuration(MSecsInHour, opt), "1 hr 0 min 0 sec"_L1);
+    QCOMPARE(fmt.formatDuration(MSecsInHour, opt | KFormat::HideSeconds), "1 hr 0 min"_L1);
+    QCOMPARE(fmt.formatDuration(MSecsInHour, opt | KFormat::HideSeconds | KFormat::FoldHours), "60 min"_L1);
+    QCOMPARE(fmt.formatDuration(12 * MSecsInHour + 59 * MSecsInMinute, opt | KFormat::HideSeconds), "12 hr 59 min"_L1);
 }
 
 void KFormatTest::formatDecimalDuration()
