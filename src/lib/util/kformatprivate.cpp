@@ -313,6 +313,32 @@ enum TimeConstants {
     MSecsInSecond = 1000,
 };
 
+enum DurationUnits {
+    Days = 0,
+    Hours,
+    Minutes,
+    Seconds,
+};
+
+static QString formatSingleAbbreviatedDuration(DurationUnits units, int n)
+{
+    switch (units) {
+    case Days:
+        //: @item:intext abbreviated amount of days
+        return KFormatPrivate::tr("%n d", nullptr, n);
+    case Hours:
+        //: @item:intext abbreviated amount of hours
+        return KFormatPrivate::tr("%n hr", nullptr, n);
+    case Minutes:
+        //: @item:intext abbreviated amount of minutes
+        return KFormatPrivate::tr("%n min", nullptr, n);
+    case Seconds:
+        //: @item:intext abbreviated amount of seconds
+        return KFormatPrivate::tr("%n sec", nullptr, n);
+    }
+    Q_ASSERT(false);
+    return QString();
+}
 QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOptions options) const
 {
     quint64 ms = msecs;
@@ -352,6 +378,35 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
             //: @item:intext Duration format hours, minutes, seconds
             return tr("%1h%2m%3s").arg(hours, 1, 10, QLatin1Char('0')).arg(minutes, 2, 10, QLatin1Char('0')).arg(seconds, 2, 10, QLatin1Char('0'));
         }
+
+    } else if (options & KFormat::AbbreviatedDuration) {
+        if (options & KFormat::FoldHours) {
+            minutes += 60 * hours;
+            hours = 0;
+        }
+
+        if (hours == 0 && minutes == 0) {
+            return (options & KFormat::HideSeconds) ? formatSingleAbbreviatedDuration(Minutes, minutes) : formatSingleAbbreviatedDuration(Seconds, seconds);
+        }
+
+        if (hours == 0) {
+            if (options & KFormat::HideSeconds) {
+                return formatSingleAbbreviatedDuration(Minutes, minutes);
+            }
+            //: @item:intext abbreviated amount of minutes and abbreviated amount of seconds
+            return tr("%1 %2").arg(formatSingleAbbreviatedDuration(Minutes, minutes), formatSingleAbbreviatedDuration(Seconds, seconds));
+        }
+
+        if (options & KFormat::HideSeconds) {
+            //: @item:intext abbreviated amount of hours and abbreviated amount of minutes
+            return tr("%1 %2").arg(formatSingleAbbreviatedDuration(Hours, hours), formatSingleAbbreviatedDuration(Minutes, minutes));
+        }
+
+        //: @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
+        return tr("%1 %2 %3")
+            .arg(formatSingleAbbreviatedDuration(Hours, hours),
+                 formatSingleAbbreviatedDuration(Minutes, minutes),
+                 formatSingleAbbreviatedDuration(Seconds, seconds));
 
     } else {
         if ((options & KFormat::FoldHours) == KFormat::FoldHours && (options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
@@ -400,13 +455,6 @@ QString KFormatPrivate::formatDecimalDuration(quint64 msecs, int decimalPlaces) 
     //~ plural %n milliseconds
     return tr("%n millisecond(s)", nullptr, msecs);
 }
-
-enum DurationUnits {
-    Days = 0,
-    Hours,
-    Minutes,
-    Seconds,
-};
 
 static QString formatSingleDuration(DurationUnits units, int n)
 {

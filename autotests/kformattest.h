@@ -22,6 +22,7 @@ private Q_SLOTS:
 
     void formatByteSize();
     void formatDuration();
+    void formatAbbreviatedDuration();
     void formatDecimalDuration();
     void formatSpelloutDuration();
     void formatRelativeDate();
