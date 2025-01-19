@@ -77,4 +77,9 @@ QString KFormat::formatRelativeDateTime(const QDateTime &dateTime, QLocale::Form
     return d->formatRelativeDateTime(dateTime, format);
 }
 
+QString KFormat::formatDistance(double distance, KFormat::DistanceFormatOptions options) const
+{
+    return d->formatDistance(distance, options);
+}
+
 #include "moc_kformat.cpp"
