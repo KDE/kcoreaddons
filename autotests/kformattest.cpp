@@ -416,6 +416,39 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(formatFrench.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QStringLiteral("Dimanche 3 octobre 2021 at 05:33"));
 }
 
+void KFormatTest::formatDistance()
+{
+    {
+        KFormat fmt(QLocale(u"en_US"));
+        QCOMPARE(fmt.formatDistance(0.0), "0 ft"_L1);
+        QCOMPARE(fmt.formatDistance(0.1), "0 ft"_L1);
+        QCOMPARE(fmt.formatDistance(0.3), "1 ft"_L1);
+        QCOMPARE(fmt.formatDistance(152.3), "500 ft"_L1);
+        QCOMPARE(fmt.formatDistance(152.5), "0.1 mi"_L1);
+        QCOMPARE(fmt.formatDistance(2414.6), "1.5 mi"_L1);
+        QCOMPARE(fmt.formatDistance(16100.0), "10 mi"_L1);
+        QCOMPARE(fmt.formatDistance(1610000.0), "1,000 mi"_L1);
+
+        QCOMPARE(fmt.formatDistance(0.0, KFormat::MetricDistanceUnits), "0 m"_L1);
+        QCOMPARE(fmt.formatDistance(0.1, KFormat::MetricDistanceUnits), "0 m"_L1);
+        QCOMPARE(fmt.formatDistance(0.5, KFormat::MetricDistanceUnits), "1 m"_L1);
+        QCOMPARE(fmt.formatDistance(123.4, KFormat::MetricDistanceUnits), "123 m"_L1);
+        QCOMPARE(fmt.formatDistance(1234.5, KFormat::MetricDistanceUnits), "1.2 km"_L1);
+        QCOMPARE(fmt.formatDistance(12345.6, KFormat::MetricDistanceUnits), "12 km"_L1);
+        QCOMPARE(fmt.formatDistance(1234567.8, KFormat::MetricDistanceUnits), "1,235 km"_L1);
+    }
+    {
+        KFormat fmt(QLocale(u"de_DE"));
+        QCOMPARE(fmt.formatDistance(0.0), "0 m"_L1);
+        QCOMPARE(fmt.formatDistance(0.1), "0 m"_L1);
+        QCOMPARE(fmt.formatDistance(0.5), "1 m"_L1);
+        QCOMPARE(fmt.formatDistance(123.4), "123 m"_L1);
+        QCOMPARE(fmt.formatDistance(1234.5), "1,2 km"_L1);
+        QCOMPARE(fmt.formatDistance(12345.6), "12 km"_L1);
+        QCOMPARE(fmt.formatDistance(1234567.8, KFormat::MetricDistanceUnits), "1.235 km"_L1);
+    }
+}
+
 QTEST_MAIN(KFormatTest)
 
 #include "moc_kformattest.cpp"

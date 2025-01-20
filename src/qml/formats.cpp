@@ -51,4 +51,10 @@ QString Formats::formatRelativeDateTime(const QDateTime &dateTime, QLocale::Form
     return m_format.formatRelativeDateTime(dateTime, format);
 }
 
+QString Formats::formatDistance(double value, KFormat::DistanceFormatOptions options) const
+{
+    markCurrentFunctionAsTranslationBinding(this);
+    return m_format.formatDistance(value, options);
+}
+
 #include "moc_formats.cpp"

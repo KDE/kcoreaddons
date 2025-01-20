@@ -196,6 +196,16 @@ public:
     Q_FLAG(DurationFormatOption)
 
     /**
+     * Formatting options for formatDistance()
+     */
+    enum DistanceFormatOption {
+        LocaleDistanceUnits = 0x0, ///< Automatically select metric or imperial units based on the current locale
+        MetricDistanceUnits = 0x1, ///< Force the use of metric unites regardless of the current locale
+    };
+    Q_DECLARE_FLAGS(DistanceFormatOptions, DistanceFormatOption)
+    Q_FLAG(DistanceFormatOptions)
+
+    /**
      * Constructs a KFormat.
      *
      * @param locale the locale to use, defaults to the system locale
@@ -424,6 +434,21 @@ public:
      * @since 5.74
      */
     QString formatValue(double value, const QString &unit, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const;
+
+    /**
+     * Format @p distance given in meters in a suitable unit for displaying.
+     *
+     * For locales using metric units (or when forcing metric units explicitly)
+     * this will use meters and kilometers depending on the distance, for locales
+     * using imperial units this wil use miles and feet.
+     *
+     * @param distance Distance value to be formatted, in meters.
+     * @param options Formatting options.
+     * @return Formatted distance using locale- and distance-appropirate units.
+     *
+     * @since 6.11
+     */
+    [[nodiscard]] QString formatDistance(double distance, KFormat::DistanceFormatOptions = LocaleDistanceUnits) const;
 
 private:
     QSharedDataPointer<KFormatPrivate> d;

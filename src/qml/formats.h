@@ -89,6 +89,15 @@ public:
      */
     Q_INVOKABLE QString formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const;
 
+    /**
+     * Formats a distance value given in meters in appropriate units for
+     * displaying.
+     *
+     * Unless explicitly forced to metric units this uses units approrpiate for
+     * the current locale.
+     */
+    Q_INVOKABLE [[nodiscard]] QString formatDistance(double distance, KFormat::DistanceFormatOptions options = KFormat::LocaleDistanceUnits) const;
+
 private:
     const KFormat m_format;
 };

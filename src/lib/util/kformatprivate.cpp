@@ -584,3 +584,36 @@ QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocal
 
     return formattedDate.replace(0, 1, formattedDate.at(0).toUpper());
 }
+
+QString KFormatPrivate::formatDistance(double distance, KFormat::DistanceFormatOptions options) const
+{
+    if (((options & KFormat::MetricDistanceUnits) == 0)
+        && (m_locale.measurementSystem() == QLocale::ImperialUSSystem || m_locale.measurementSystem() == QLocale::ImperialUSSystem)) {
+        return formatImperialDistance(distance);
+    }
+    return formatMetricDistance(distance);
+}
+
+[[nodiscard]] QString KFormatPrivate::formatImperialDistance(double distance) const
+{
+    const auto feet = distance / 0.3048;
+    if (feet < 500.0) {
+        return KFormatPrivate::tr("%1 ft", "distance in feet").arg(m_locale.toString((int)std::round(feet)));
+    }
+    const auto miles = distance / 1609.344;
+    if (miles < 10.0) {
+        return KFormatPrivate::tr("%1 mi", "distance in miles").arg(m_locale.toString((int)(std::round(miles * 10.0)) / 10.0));
+    }
+    return KFormatPrivate::tr("%1 mi", "distance in miles").arg(m_locale.toString((int)std::round(miles)));
+}
+
+[[nodiscard]] QString KFormatPrivate::formatMetricDistance(double distance) const
+{
+    if (distance < 1000.0) {
+        return KFormatPrivate::tr("%1 m", "distance in meter").arg(m_locale.toString((int)std::round(distance)));
+    }
+    if (distance < 10000.0) {
+        return KFormatPrivate::tr("%1 km", "distance in kilometer").arg(m_locale.toString((int)(std::round(distance / 100.0)) / 10.0));
+    }
+    return KFormatPrivate::tr("%1 km", "distance in kilometer").arg(m_locale.toString((int)std::round(distance / 1000.0)));
+}

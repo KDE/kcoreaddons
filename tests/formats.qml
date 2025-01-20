@@ -69,4 +69,15 @@ Column {
     Text {
         text: "Format.formatDuration(FormatTypes.AbbreivatedDuration|FormatTypes.HideSecconds): " + Format.formatDuration(durationMsecs.text * 1000, FormatTypes.AbbreviatedDuration | FormatTypes.HideSeconds)
     }
+
+    TextInput {
+        id: distance
+        text: "1234"
+    }
+    Text {
+        text: "Format.formatDistance(FormatTypes.LocaleDistanceUnits): " + Format.formatDistance(distance.text)
+    }
+    Text {
+        text: "Format.formatDistance(FormatTypes.MetricDistanceUnits): " + Format.formatDistance(distance.text, FormatTypes.MetricDistanceUnits)
+    }
 }

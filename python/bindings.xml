@@ -46,6 +46,7 @@ SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accept
     <object-type name="KFormat">
         <enum-type name="BinarySizeUnits" />
         <enum-type name="BinaryUnitDialect" />
+        <enum-type name="DistanceFormatOption" flags="DistanceFormatOptions" />
         <enum-type name="DurationFormatOption" flags="DurationFormatOptions" />
         <enum-type name="Unit" />
         <enum-type name="UnitPrefix" />
