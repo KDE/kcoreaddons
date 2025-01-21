@@ -170,6 +170,8 @@ QString KAboutLicensePrivate::spdxID() const
         return QStringLiteral("BSL-1.0");
     case KAboutLicense::CC0_V1:
         return QStringLiteral("CC0-1.0");
+    case KAboutLicense::MPL_V2:
+        return QStringLiteral("MPL-2.0");
     case KAboutLicense::Custom:
     case KAboutLicense::File:
     case KAboutLicense::Unknown:
@@ -275,6 +277,7 @@ QString KAboutLicense::text() const
     case KAboutLicense::BSL_V1:
     case KAboutLicense::BSD_3_Clause:
     case KAboutLicense::CC0_V1:
+    case KAboutLicense::MPL_V2:
         knownLicense = true;
         result += QCoreApplication::translate("KAboutLicense", "This program is distributed under the terms of the %1.").arg(name(KAboutLicense::ShortName))
             + u"\n\n"_s
@@ -395,6 +398,10 @@ QString KAboutLicense::name(KAboutLicense::NameFormat formatName) const
     case KAboutLicense::BSD_3_Clause:
         licenseShort = QCoreApplication::translate("KAboutLicense", "BSD-3-Clause", "@item license (short name)");
         licenseFull = QCoreApplication::translate("KAboutLicense", "BSD 3-Clause \"New\" or \"Revised\" License", "@item license");
+    case KAboutLicense::MPL_V2:
+        licenseShort = QCoreApplication::translate("KAboutLicense", "MPL 2.0", "@item license (short name)");
+        licenseFull = QCoreApplication::translate("KAboutLicense", "Mozilla Public License 2.0", "@item license");
+        break;
         break;
     case KAboutLicense::Custom:
     case KAboutLicense::File:

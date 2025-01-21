@@ -220,6 +220,7 @@ public:
         BSL_V1 = 12, ///< BSL_V1 @since 6.9, see https://spdx.org/licenses/BSL-1.0.html
         BSD_3_Clause = 13, ///< BSD_3_CLAUSE @since 6.9, see https://spdx.org/licenses/BSD-3-Clause.html
         CC0_V1 = 14, ///< CC0_V1 @since 6.9, see https://spdx.org/licenses/CC0-1.0.html
+        MPL_V2 = 15, ///< MPL_V2 @since 6.11, see https://spdx.org/licenses/MPL-2.0.html
     };
     Q_ENUM(LicenseKey)
 
