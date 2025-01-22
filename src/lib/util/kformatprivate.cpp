@@ -325,15 +325,23 @@ static QString formatSingleAbbreviatedDuration(DurationUnits units, int n)
     switch (units) {
     case Days:
         //: @item:intext abbreviated amount of days
+        //~ singular %n d
+        //~ plural %n d
         return KFormatPrivate::tr("%n d", nullptr, n);
     case Hours:
         //: @item:intext abbreviated amount of hours
+        //~ singular %n hr
+        //~ plural %n hr
         return KFormatPrivate::tr("%n hr", nullptr, n);
     case Minutes:
         //: @item:intext abbreviated amount of minutes
+        //~ singular %n min
+        //~ plural %n min
         return KFormatPrivate::tr("%n min", nullptr, n);
     case Seconds:
         //: @item:intext abbreviated amount of seconds
+        //~ singular %n sec
+        //~ plural %n sec
         return KFormatPrivate::tr("%n sec", nullptr, n);
     }
     Q_ASSERT(false);
