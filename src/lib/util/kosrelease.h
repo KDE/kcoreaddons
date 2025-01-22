@@ -22,6 +22,16 @@
  * os-release is a free desktop standard for describing an operating system.
  * This class parses and models os-release files.
  *
+ * A singleton of this data is available to QtQuick code since version 6.11.
+ *
+ * @code
+ * import QtQuick
+ * import org.kde.coreaddons
+ * Item {
+ *     Component.onCompleted: console.log(KOSRelease.name)
+ * }
+ * @endcode
+ *
  * @since 5.58.0
  */
 class KCOREADDONS_EXPORT KOSRelease final

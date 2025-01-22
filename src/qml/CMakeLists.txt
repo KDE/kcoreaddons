@@ -5,6 +5,7 @@ target_sources(kcoreaddonsplugin PRIVATE
     kcoreaddonsplugin.cpp
     kuserproxy.cpp
     kuserproxy.h
+    kosreleaseproxy.cpp
 )
 target_link_libraries(kcoreaddonsplugin PRIVATE
     Qt6::Core
