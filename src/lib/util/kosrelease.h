@@ -83,7 +83,7 @@ public:
      */
     QStringList extraKeys() const;
 
-    /** Extra values are values assoicated with keys that are unknown. */
+    /** Extra values are values associated with keys that are unknown. */
     QString extraValue(const QString &key) const;
 
 private:
