@@ -1,26 +1,26 @@
 # Translation for kcoreaddons6_qt.po to Euskara/Basque (eu)
-# Copyright (C) 1999-2024 This file is copyright:
+# Copyright (C) 1999-2025 This file is copyright:
 # This file is distributed under the same license as the original file.
-# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024, 2025 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Marcos <marcos@euskalgnu.org>, 2002,2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010.
 # Ion Gaztañaga <igaztanaga@gmail.com>, 2005.
 # Iñaki Larrañaga Murgoitio <dooteo@euskalgnu.org>, 2009.
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2012, 2013, 2014, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2010, 2011, 2012, 2013, 2014, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcoreaddons\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2024-12-03 16:55+0100\n"
+"PO-Revision-Date: 2025-01-21 06:44+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
 
@@ -69,13 +69,13 @@ msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: lib/kaboutdata.cpp:279 lib/kaboutdata.cpp:300
+#: lib/kaboutdata.cpp:282 lib/kaboutdata.cpp:303
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
 msgstr "Programa hau %1 lizentziapean banatzen da."
 
-#: lib/kaboutdata.cpp:281
+#: lib/kaboutdata.cpp:284
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
@@ -85,7 +85,7 @@ msgstr ""
 "Baldintza osoak <a href=\"https://spdx.org/licenses/%1.html\">SPDX "
 "webgunean</a> aurki ditzakezu"
 
-#: lib/kaboutdata.cpp:292
+#: lib/kaboutdata.cpp:295
 msgctxt "KAboutLicense|"
 msgid ""
 "No licensing terms for this program have been specified.\n"
@@ -96,167 +96,180 @@ msgstr ""
 "Aztertu dokumentazioa edo iturburua lizentzia baldintza\n"
 "bila.\n"
 
-#: lib/kaboutdata.cpp:344
+#: lib/kaboutdata.cpp:347
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "GPL v2"
 
-#: lib/kaboutdata.cpp:345
+#: lib/kaboutdata.cpp:348
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr ""
 "GNU General Public License Version 2 - GNUren Lizentzia Publiko Orokorraren "
 "2. bertsioa"
 
-#: lib/kaboutdata.cpp:348
+#: lib/kaboutdata.cpp:351
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "LGPL v2"
 
-#: lib/kaboutdata.cpp:349
+#: lib/kaboutdata.cpp:352
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr ""
 "GNU Lesser General Public License Version 2 - GNUren Lizentzia Publiko Ez "
 "hain Orokorraren 2. bertsioa"
 
-#: lib/kaboutdata.cpp:352
+#: lib/kaboutdata.cpp:355
 msgctxt "KAboutLicense|@item license (short name)"
-msgid "BSD License"
-msgstr "BSD lizentzia"
-
-#: lib/kaboutdata.cpp:353
-msgctxt "KAboutLicense|@item license"
 msgid "BSD License"
 msgstr "BSD lizentzia"
 
 #: lib/kaboutdata.cpp:356
-msgctxt "KAboutLicense|@item license (short name)"
-msgid "Artistic License"
-msgstr "Artistic License - Lizentzia Artistikoa"
-
-#: lib/kaboutdata.cpp:357
 msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "BSD lizentzia"
+
+#: lib/kaboutdata.cpp:359
+msgctxt "KAboutLicense|@item license (short name)"
 msgid "Artistic License"
 msgstr "Artistic License - Lizentzia Artistikoa"
 
 #: lib/kaboutdata.cpp:360
+msgctxt "KAboutLicense|@item license"
+msgid "Artistic License"
+msgstr "Artistic License - Lizentzia Artistikoa"
+
+#: lib/kaboutdata.cpp:363
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "GPL v3"
 
-#: lib/kaboutdata.cpp:361
+#: lib/kaboutdata.cpp:364
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr ""
 "GNU General Public License Version 3 - GNUren Lizentzia Publiko Orokorraren "
 "3. bertsioa"
 
-#: lib/kaboutdata.cpp:364
+#: lib/kaboutdata.cpp:367
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "LGPL v3"
 
-#: lib/kaboutdata.cpp:365
+#: lib/kaboutdata.cpp:368
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr ""
 "GNU Lesser General Public License Version 3 - GNUren Lizentzia Publiko Ez "
 "hain Orokorraren 3. bertsioa"
 
-#: lib/kaboutdata.cpp:368
+#: lib/kaboutdata.cpp:371
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr "LGPL v2.1"
 
-#: lib/kaboutdata.cpp:369
+#: lib/kaboutdata.cpp:372
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr ""
 "GNU Lesser General Public License Version 2.1 - GNUren Lizentzia Publiko Ez "
 "hain Orokorraren 2.1 bertsioa"
 
-#: lib/kaboutdata.cpp:372
+#: lib/kaboutdata.cpp:375
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
 msgstr "MIT lizentzia:"
 
-#: lib/kaboutdata.cpp:373
+#: lib/kaboutdata.cpp:376
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
 msgstr "MIT lizentzia"
 
-#: lib/kaboutdata.cpp:376
+#: lib/kaboutdata.cpp:379
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
 msgstr "CC0"
 
-#: lib/kaboutdata.cpp:377
+#: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
 msgstr "Creative Commons Zero"
 
-#: lib/kaboutdata.cpp:380
+#: lib/kaboutdata.cpp:383
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
 msgstr "ODbL v1.0"
 
-#: lib/kaboutdata.cpp:381
+#: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
 msgstr "Open Data Commons Open Database License v1.0"
 
-#: lib/kaboutdata.cpp:384
+#: lib/kaboutdata.cpp:387
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
 msgstr "Apache 2.0"
 
-#: lib/kaboutdata.cpp:385
+#: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
 msgstr "Apache Lizentzia 2.0"
 
-#: lib/kaboutdata.cpp:388
+#: lib/kaboutdata.cpp:391
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
 msgstr "FTL"
 
-#: lib/kaboutdata.cpp:389
+#: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
 msgstr "Freetype proiektuaren lizentzia"
 
-#: lib/kaboutdata.cpp:392
+#: lib/kaboutdata.cpp:395
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
 msgstr "Boost lizentzia"
 
-#: lib/kaboutdata.cpp:393
+#: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
 msgstr "Boost software lizentzia 1.0"
 
-#: lib/kaboutdata.cpp:396
+#: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
 msgstr "BSD-3-Clause"
 
-#: lib/kaboutdata.cpp:397
+#: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
 msgstr "BSD 3-Clause \"Berria\" edo \"Berrikusia\""
 
-#: lib/kaboutdata.cpp:401
+#: lib/kaboutdata.cpp:402
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "MPL 2.0"
+msgstr ""
+
+#: lib/kaboutdata.cpp:403
+#, fuzzy
+#| msgctxt "KAboutLicense|@item license"
+#| msgid "Q Public License"
+msgctxt "KAboutLicense|@item license"
+msgid "Mozilla Public License 2.0"
+msgstr "Q Public License - Q lizentzia publikoa"
+
+#: lib/kaboutdata.cpp:408
 msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "Pertsonalizatua"
 
-#: lib/kaboutdata.cpp:404
+#: lib/kaboutdata.cpp:411
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Zehaztu gabe"
 
-#: lib/kaboutdata.cpp:986
+#: lib/kaboutdata.cpp:993
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -271,44 +284,44 @@ msgstr ""
 "\"https://l10n.kde.org/team-infos.php?teamcode=eu\">hemen</a>. Etorkizun "
 "hurbilean informazioa hobetzea gure asmoen artean dago.</p>"
 
-#: lib/kaboutdata.cpp:1219
+#: lib/kaboutdata.cpp:1226
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Erakutsi egileari buruzko informazioa."
 
-#: lib/kaboutdata.cpp:1220
+#: lib/kaboutdata.cpp:1227
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Erakutsi lizentziari buruzko informazioa."
 
-#: lib/kaboutdata.cpp:1222
+#: lib/kaboutdata.cpp:1229
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Aplikazio honentzako mahaigain-sarreraren oinarri fitxategi-izena."
 
-#: lib/kaboutdata.cpp:1223
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "Fitxategi-izena"
 
-#: lib/kaboutdata.cpp:1233
+#: lib/kaboutdata.cpp:1240
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr ""
 "Aplikazio hau bere burua anonimo gisa mantendu nahi duen batek idatzi zuen."
 
-#: lib/kaboutdata.cpp:1235
+#: lib/kaboutdata.cpp:1242
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 honek idatzi zuen:"
 
-#: lib/kaboutdata.cpp:1246
+#: lib/kaboutdata.cpp:1253
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Erabili http://bugs.kde.org akatsen berri emateko."
 
-#: lib/kaboutdata.cpp:1248
+#: lib/kaboutdata.cpp:1255
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
@@ -683,51 +696,39 @@ msgstr "%1 YiB"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:328
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
-msgstr[0] "egun %n"
-msgstr[1] "%n egun"
+msgstr[0] "e %n"
+msgstr[1] "%n e"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:331
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
-msgstr[0] "ordu %n"
-msgstr[1] "%n ordu"
+msgstr[0] "h %n"
+msgstr[1] "%n h"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:334
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
-msgstr[0] "minutu %n"
-msgstr[1] "%n minutu"
+msgstr[0] "min %n"
+msgstr[1] "%n min"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:337
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
-msgstr[0] "segundo %n"
-msgstr[1] "%n segundo"
+msgstr[0] "seg %n"
+msgstr[1] "%n seg"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:363
@@ -768,21 +769,17 @@ msgstr "%1 h %2 m %3 s"
 #. ----------
 #. @item:intext abbreviated amount of hours and abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:397 lib/util/kformatprivate.cpp:402
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
 
 #. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:406
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 %2%3"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2 %3"
-msgstr "%1 %2%3"
+msgstr "%1 %2 %3"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:414
@@ -952,6 +949,36 @@ msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 %2(e)tan"
 
+#: lib/util/kformatprivate.cpp:601
+#, fuzzy, qt-format
+#| msgid "%1 file"
+#| msgid_plural "%1 files"
+msgctxt "KFormat|distance in feet"
+msgid "%1 ft"
+msgstr "Fitxategi %1"
+
+#: lib/util/kformatprivate.cpp:605 lib/util/kformatprivate.cpp:607
+#, fuzzy, qt-format
+#| msgctxt "KFormat|"
+#| msgid "%1 minutes"
+msgctxt "KFormat|distance in miles"
+msgid "%1 mi"
+msgstr "%1 minutu"
+
+#: lib/util/kformatprivate.cpp:613
+#, qt-format
+msgctxt "KFormat|distance in meter"
+msgid "%1 m"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:616 lib/util/kformatprivate.cpp:618
+#, fuzzy, qt-format
+#| msgctxt "KFormat|MetricBinaryDialect"
+#| msgid "%1 kB"
+msgctxt "KFormat|distance in kilometer"
+msgid "%1 km"
+msgstr "%1 kB"
+
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
 msgctxt "QObject|"
@@ -973,10 +1000,6 @@ msgstr "`lsof' exekutatzea huts egin du. Errore kodea %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob ez da onartzen Windows-en"
-
-#~ msgctxt "KAboutLicense|@item license"
-#~ msgid "Q Public License"
-#~ msgstr "Q Public License - Q lizentzia publikoa"
 
 #~ msgctxt "KPluginLoader|"
 #~ msgid "The library %1 does not offer a KPluginFactory."
@@ -5333,11 +5356,6 @@ msgstr "KListOpenFilesJob ez da onartzen Windows-en"
 #~ msgid_plural "%1 folders"
 #~ msgstr[0] "Karpeta %1"
 #~ msgstr[1] "%1 karpeta"
-
-#~ msgid "%1 file"
-#~ msgid_plural "%1 files"
-#~ msgstr[0] "Fitxategi %1"
-#~ msgstr[1] "%1 fitxategi"
 
 #~ msgid "Click this to collapse the dialog, to hide details"
 #~ msgstr "Egin klik elkarrizketa-koadroa tolesteko, xehetasunak ezkutatzeko"

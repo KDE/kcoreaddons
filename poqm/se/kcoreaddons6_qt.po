@@ -65,13 +65,13 @@ msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr ""
 
-#: lib/kaboutdata.cpp:279 lib/kaboutdata.cpp:300
+#: lib/kaboutdata.cpp:282 lib/kaboutdata.cpp:303
 #, fuzzy, qt-format
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
 msgstr "Dát prográmma juhkkojuvvo %1 eavttuid mielde."
 
-#: lib/kaboutdata.cpp:281
+#: lib/kaboutdata.cpp:284
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
@@ -79,7 +79,7 @@ msgid ""
 "SPDX website</a>"
 msgstr ""
 
-#: lib/kaboutdata.cpp:292
+#: lib/kaboutdata.cpp:295
 #, fuzzy
 msgctxt "KAboutLicense|"
 msgid ""
@@ -90,181 +90,191 @@ msgstr ""
 "Dán prográmma liseansaeavttut eai leat almmuhuvvon.\n"
 "Iskka liseansaeavttuid veahketeavsttas dahje gáldokodas.\n"
 
-#: lib/kaboutdata.cpp:344
+#: lib/kaboutdata.cpp:347
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "GPL v2"
 
-#: lib/kaboutdata.cpp:345
+#: lib/kaboutdata.cpp:348
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr "GNU General Public License veršuvdna 2"
 
-#: lib/kaboutdata.cpp:348
+#: lib/kaboutdata.cpp:351
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "LGPL v2"
 
-#: lib/kaboutdata.cpp:349
+#: lib/kaboutdata.cpp:352
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr "GNU Lesser General Public liseansa, veršuvdna 2"
 
 # unreviewed-context
-#: lib/kaboutdata.cpp:352
+#: lib/kaboutdata.cpp:355
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
-msgid "BSD License"
-msgstr "BSD-liseansa"
-
-# unreviewed-context
-#: lib/kaboutdata.cpp:353
-#, fuzzy
-msgctxt "KAboutLicense|@item license"
 msgid "BSD License"
 msgstr "BSD-liseansa"
 
 # unreviewed-context
 #: lib/kaboutdata.cpp:356
 #, fuzzy
+msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "BSD-liseansa"
+
+# unreviewed-context
+#: lib/kaboutdata.cpp:359
+#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Artistic License"
 msgstr "Artisttalaš-liseansa"
 
 # unreviewed-context
-#: lib/kaboutdata.cpp:357
+#: lib/kaboutdata.cpp:360
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Artistic License"
 msgstr "Artisttalaš-liseansa"
 
-#: lib/kaboutdata.cpp:360
+#: lib/kaboutdata.cpp:363
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "GPL v3"
 
-#: lib/kaboutdata.cpp:361
+#: lib/kaboutdata.cpp:364
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr "GNU General Public liseansa, veršuvdna 3"
 
-#: lib/kaboutdata.cpp:364
+#: lib/kaboutdata.cpp:367
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "LGPL v3"
 
-#: lib/kaboutdata.cpp:365
+#: lib/kaboutdata.cpp:368
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr "GNU Lesser General Public liseansa, veršuvdna 3"
 
-#: lib/kaboutdata.cpp:368
+#: lib/kaboutdata.cpp:371
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr ""
 
-#: lib/kaboutdata.cpp:369
+#: lib/kaboutdata.cpp:372
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr ""
 
 # unreviewed-context
-#: lib/kaboutdata.cpp:372
+#: lib/kaboutdata.cpp:375
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
 msgstr "BSD-liseansa"
 
 # unreviewed-context
-#: lib/kaboutdata.cpp:373
+#: lib/kaboutdata.cpp:376
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
 msgstr "BSD-liseansa"
 
-#: lib/kaboutdata.cpp:376
+#: lib/kaboutdata.cpp:379
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:377
+#: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
 msgstr ""
 
-#: lib/kaboutdata.cpp:380
+#: lib/kaboutdata.cpp:383
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:381
+#: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:384
+#: lib/kaboutdata.cpp:387
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:385
+#: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:388
+#: lib/kaboutdata.cpp:391
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
 msgstr ""
 
-#: lib/kaboutdata.cpp:389
+#: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
 msgstr ""
 
 # unreviewed-context
-#: lib/kaboutdata.cpp:392
+#: lib/kaboutdata.cpp:395
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
 msgstr "BSD-liseansa"
 
-#: lib/kaboutdata.cpp:393
+#: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:396
+#: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
 msgstr ""
 
-#: lib/kaboutdata.cpp:397
+#: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
 msgstr ""
 
-#: lib/kaboutdata.cpp:401
+#: lib/kaboutdata.cpp:402
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "MPL 2.0"
+msgstr ""
+
+#: lib/kaboutdata.cpp:403
+msgctxt "KAboutLicense|@item license"
+msgid "Mozilla Public License 2.0"
+msgstr ""
+
+#: lib/kaboutdata.cpp:408
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "Iešdefinerejuvvon"
 
-#: lib/kaboutdata.cpp:404
+#: lib/kaboutdata.cpp:411
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Ii meroštuvvon"
 
-#: lib/kaboutdata.cpp:986
+#: lib/kaboutdata.cpp:993
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -273,46 +283,46 @@ msgid ""
 "org</a></p>"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1219
+#: lib/kaboutdata.cpp:1226
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Čájet dieđuid čálli birra"
 
-#: lib/kaboutdata.cpp:1220
+#: lib/kaboutdata.cpp:1227
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Čájet dieđu liseanssa birra"
 
-#: lib/kaboutdata.cpp:1222
+#: lib/kaboutdata.cpp:1229
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1223
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1233
+#: lib/kaboutdata.cpp:1240
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Olmmoš gii háliida leat namakeahttá lea čállán dán prográmma."
 
-#: lib/kaboutdata.cpp:1235
+#: lib/kaboutdata.cpp:1242
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1246
+#: lib/kaboutdata.cpp:1253
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1248
+#: lib/kaboutdata.cpp:1255
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
@@ -942,6 +952,30 @@ msgstr[1] ""
 msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr ""
+
+#: lib/util/kformatprivate.cpp:601
+#, qt-format
+msgctxt "KFormat|distance in feet"
+msgid "%1 ft"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:605 lib/util/kformatprivate.cpp:607
+#, fuzzy, qt-format
+msgctxt "KFormat|distance in miles"
+msgid "%1 mi"
+msgstr "%1 minuhta"
+
+#: lib/util/kformatprivate.cpp:613
+#, qt-format
+msgctxt "KFormat|distance in meter"
+msgid "%1 m"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:616 lib/util/kformatprivate.cpp:618
+#, fuzzy, qt-format
+msgctxt "KFormat|distance in kilometer"
+msgid "%1 km"
+msgstr "%1 kS"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format

@@ -69,14 +69,14 @@ msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "অজ্ঞাত"
 
-#: lib/kaboutdata.cpp:279 lib/kaboutdata.cpp:300
+#: lib/kaboutdata.cpp:282 lib/kaboutdata.cpp:303
 #, fuzzy, qt-format
 #| msgid "This program is distributed under the terms of the %1."
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
 msgstr "%1 ৰ শৰ্তাধীন এই প্ৰোগ্ৰাম বিতৰণ কৰা হৈছে ।"
 
-#: lib/kaboutdata.cpp:281
+#: lib/kaboutdata.cpp:284
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
@@ -84,7 +84,7 @@ msgid ""
 "SPDX website</a>"
 msgstr ""
 
-#: lib/kaboutdata.cpp:292
+#: lib/kaboutdata.cpp:295
 #, fuzzy
 #| msgid ""
 #| "No licensing terms for this program have been specified.\n"
@@ -100,7 +100,7 @@ msgstr ""
 "অনুগ্ৰহ কৰি, প্ৰমাণপত্ৰ সংক্ৰান্ত কোনো তথ্যৰ বাবে প্ৰোগ্ৰামৰ সৈতে প্ৰাপ্ত নথিপত্ৰ বা মূল "
 "উৎস পৰীক্ষা কৰক ।\n"
 
-#: lib/kaboutdata.cpp:344
+#: lib/kaboutdata.cpp:347
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "GPL v2"
@@ -108,7 +108,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "GPL v2"
 
-#: lib/kaboutdata.cpp:345
+#: lib/kaboutdata.cpp:348
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU General Public License Version 2"
@@ -116,7 +116,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr "GNU General Public License Version 2"
 
-#: lib/kaboutdata.cpp:348
+#: lib/kaboutdata.cpp:351
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "LGPL v2"
@@ -124,7 +124,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "LGPL v2"
 
-#: lib/kaboutdata.cpp:349
+#: lib/kaboutdata.cpp:352
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU Lesser General Public License Version 2"
@@ -132,31 +132,31 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr "GNU Lesser General Public License Version 2"
 
-#: lib/kaboutdata.cpp:352
+#: lib/kaboutdata.cpp:355
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
-msgid "BSD License"
-msgstr "BSD License"
-
-#: lib/kaboutdata.cpp:353
-#, fuzzy
-#| msgctxt "@item license (short name)"
-#| msgid "BSD License"
-msgctxt "KAboutLicense|@item license"
 msgid "BSD License"
 msgstr "BSD License"
 
 #: lib/kaboutdata.cpp:356
 #, fuzzy
+#| msgctxt "@item license (short name)"
+#| msgid "BSD License"
+msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "BSD License"
+
+#: lib/kaboutdata.cpp:359
+#, fuzzy
 #| msgctxt "@item license"
 #| msgid "Artistic License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Artistic License"
 msgstr "শিল্পকাৰ্য্য সংক্ৰান্ত প্ৰমাণপত্ৰ"
 
-#: lib/kaboutdata.cpp:357
+#: lib/kaboutdata.cpp:360
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "Artistic License"
@@ -164,7 +164,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Artistic License"
 msgstr "শিল্পকাৰ্য্য সংক্ৰান্ত প্ৰমাণপত্ৰ"
 
-#: lib/kaboutdata.cpp:360
+#: lib/kaboutdata.cpp:363
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "GPL v3"
@@ -172,7 +172,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "GPL v3"
 
-#: lib/kaboutdata.cpp:361
+#: lib/kaboutdata.cpp:364
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU General Public License Version 3"
@@ -180,7 +180,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr "GNU General Public License Version 3"
 
-#: lib/kaboutdata.cpp:364
+#: lib/kaboutdata.cpp:367
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "LGPL v3"
@@ -188,7 +188,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "LGPL v3"
 
-#: lib/kaboutdata.cpp:365
+#: lib/kaboutdata.cpp:368
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU Lesser General Public License Version 3"
@@ -196,7 +196,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr "GNU Lesser General Public License Version 3"
 
-#: lib/kaboutdata.cpp:368
+#: lib/kaboutdata.cpp:371
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "LGPL v2"
@@ -204,7 +204,7 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr "LGPL v2"
 
-#: lib/kaboutdata.cpp:369
+#: lib/kaboutdata.cpp:372
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "GNU Lesser General Public License Version 2"
@@ -212,31 +212,31 @@ msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU Lesser General Public License Version 2"
 
-#: lib/kaboutdata.cpp:372
+#: lib/kaboutdata.cpp:375
 #, fuzzy
 #| msgid "License:"
 msgctxt "KAboutLicense|@item license (short name)"
-msgid "MIT License"
-msgstr "প্ৰমাণপত্ৰ:"
-
-#: lib/kaboutdata.cpp:373
-#, fuzzy
-#| msgid "License:"
-msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
 msgstr "প্ৰমাণপত্ৰ:"
 
 #: lib/kaboutdata.cpp:376
+#, fuzzy
+#| msgid "License:"
+msgctxt "KAboutLicense|@item license"
+msgid "MIT License"
+msgstr "প্ৰমাণপত্ৰ:"
+
+#: lib/kaboutdata.cpp:379
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:377
+#: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
 msgstr ""
 
-#: lib/kaboutdata.cpp:380
+#: lib/kaboutdata.cpp:383
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "QPL v1.0"
@@ -244,32 +244,32 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
 msgstr "QPL v1.0"
 
-#: lib/kaboutdata.cpp:381
+#: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:384
+#: lib/kaboutdata.cpp:387
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:385
+#: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:388
+#: lib/kaboutdata.cpp:391
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
 msgstr ""
 
-#: lib/kaboutdata.cpp:389
+#: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
 msgstr ""
 
-#: lib/kaboutdata.cpp:392
+#: lib/kaboutdata.cpp:395
 #, fuzzy
 #| msgctxt "@item license (short name)"
 #| msgid "BSD License"
@@ -277,22 +277,35 @@ msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
 msgstr "BSD License"
 
-#: lib/kaboutdata.cpp:393
+#: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:396
+#: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
 msgstr ""
 
-#: lib/kaboutdata.cpp:397
+#: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
 msgstr ""
 
-#: lib/kaboutdata.cpp:401
+#: lib/kaboutdata.cpp:402
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "MPL 2.0"
+msgstr ""
+
+#: lib/kaboutdata.cpp:403
+#, fuzzy
+#| msgctxt "@item license"
+#| msgid "Q Public License"
+msgctxt "KAboutLicense|@item license"
+msgid "Mozilla Public License 2.0"
+msgstr "Q Public License"
+
+#: lib/kaboutdata.cpp:408
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "Custom"
@@ -300,7 +313,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "স্বনিৰ্ধাৰিত"
 
-#: lib/kaboutdata.cpp:404
+#: lib/kaboutdata.cpp:411
 #, fuzzy
 #| msgctxt "@item license"
 #| msgid "Not specified"
@@ -308,7 +321,7 @@ msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "উল্লেখিত নহয়"
 
-#: lib/kaboutdata.cpp:986
+#: lib/kaboutdata.cpp:993
 #, fuzzy
 #| msgctxt "replace this with information about your translation team"
 #| msgid ""
@@ -327,31 +340,31 @@ msgstr ""
 "হৈছে ।</p><p>KDE ৰ আন্তৰ্জাতীয়কৰণৰ সম্বন্ধে অধিক জনাৰ বাবে <a href=\"http://l10n."
 "kde.org\">http://l10n.kde.org</a></p> চাওক ।"
 
-#: lib/kaboutdata.cpp:1219
+#: lib/kaboutdata.cpp:1226
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "লেখকৰ তথ্য প্ৰদৰ্শন কৰা হ'ব"
 
-#: lib/kaboutdata.cpp:1220
+#: lib/kaboutdata.cpp:1227
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "প্ৰমাণপত্ৰ সংক্ৰান্ত তথ্য প্ৰদৰ্শন কৰা হয়"
 
-#: lib/kaboutdata.cpp:1222
+#: lib/kaboutdata.cpp:1229
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1223
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1233
+#: lib/kaboutdata.cpp:1240
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -359,7 +372,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "এই অনুপ্ৰয়োগৰ নিৰ্মাতা অজ্ঞাত থাকিব ইচ্ছুক ।"
 
-#: lib/kaboutdata.cpp:1235
+#: lib/kaboutdata.cpp:1242
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -371,14 +384,14 @@ msgstr ""
 "%1 লিখা হৈছে\n"
 "%2 ৰ দ্বাৰা"
 
-#: lib/kaboutdata.cpp:1246
+#: lib/kaboutdata.cpp:1253
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "অনুগ্ৰহ কৰি http://bugs.kde.org ত বাগ প্ৰতিবেদন কৰক ।\n"
 
-#: lib/kaboutdata.cpp:1248
+#: lib/kaboutdata.cpp:1255
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"
@@ -1093,6 +1106,34 @@ msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 আৰু %2"
 
+#: lib/util/kformatprivate.cpp:601
+#, fuzzy, qt-format
+#| msgid "%1 file"
+#| msgid_plural "%1 files"
+msgctxt "KFormat|distance in feet"
+msgid "%1 ft"
+msgstr "%1 নথিপত্ৰ"
+
+#: lib/util/kformatprivate.cpp:605 lib/util/kformatprivate.cpp:607
+#, fuzzy, qt-format
+#| msgid "%1 minutes"
+msgctxt "KFormat|distance in miles"
+msgid "%1 mi"
+msgstr "%1 minutes"
+
+#: lib/util/kformatprivate.cpp:613
+#, qt-format
+msgctxt "KFormat|distance in meter"
+msgid "%1 m"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:616 lib/util/kformatprivate.cpp:618
+#, fuzzy, qt-format
+#| msgid "%1 B"
+msgctxt "KFormat|distance in kilometer"
+msgid "%1 km"
+msgstr "%1 B"
+
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, fuzzy, qt-format
 #| msgid "File %1 does not exist"
@@ -1117,13 +1158,6 @@ msgstr ""
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr ""
-
-#, fuzzy
-#~| msgctxt "@item license"
-#~| msgid "Q Public License"
-#~ msgctxt "KAboutLicense|@item license"
-#~ msgid "Q Public License"
-#~ msgstr "Q Public License"
 
 #, fuzzy
 #~| msgid "The library %1 does not offer a KDE 4 compatible factory."
@@ -4999,11 +5033,6 @@ msgstr ""
 #~ msgid_plural "%1 folders"
 #~ msgstr[0] "%1 ফোল্ডাৰ"
 #~ msgstr[1] "%1 folders"
-
-#~ msgid "%1 file"
-#~ msgid_plural "%1 files"
-#~ msgstr[0] "%1 নথিপত্ৰ"
-#~ msgstr[1] "%1 নথিপত্ৰ"
 
 #~ msgid "The style '%1' was not found"
 #~ msgstr "'%1' বিন্যাস পোৱা নাযায়"

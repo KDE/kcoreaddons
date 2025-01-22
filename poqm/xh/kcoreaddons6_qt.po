@@ -72,14 +72,14 @@ msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "Engaziwayo"
 
-#: lib/kaboutdata.cpp:279 lib/kaboutdata.cpp:300
+#: lib/kaboutdata.cpp:282 lib/kaboutdata.cpp:303
 #, fuzzy, qt-format
 #| msgid "This program is distributed under the terms of the %1."
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
 msgstr "Oludweliso lwenkqubo lunikezelwe phantsi kweemeko ze %1."
 
-#: lib/kaboutdata.cpp:281
+#: lib/kaboutdata.cpp:284
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
@@ -87,7 +87,7 @@ msgid ""
 "SPDX website</a>"
 msgstr ""
 
-#: lib/kaboutdata.cpp:292
+#: lib/kaboutdata.cpp:295
 #, fuzzy
 #| msgid ""
 #| "No licensing terms for this program have been specified.\n"
@@ -103,173 +103,185 @@ msgstr ""
 "Nceda khangela uxwebhu okanye imvelaphi yazo\n"
 "naziphi na izinto ezinelayisenisi.\n"
 
-#: lib/kaboutdata.cpp:344
+#: lib/kaboutdata.cpp:347
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "PGP"
 
-#: lib/kaboutdata.cpp:345
+#: lib/kaboutdata.cpp:348
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr ""
 
-#: lib/kaboutdata.cpp:348
+#: lib/kaboutdata.cpp:351
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "PGP"
 
-#: lib/kaboutdata.cpp:349
+#: lib/kaboutdata.cpp:352
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr ""
 
-#: lib/kaboutdata.cpp:352
+#: lib/kaboutdata.cpp:355
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
-msgid "BSD License"
-msgstr "Umsinga wesandi Phezulu"
-
-#: lib/kaboutdata.cpp:353
-#, fuzzy
-msgctxt "KAboutLicense|@item license"
 msgid "BSD License"
 msgstr "Umsinga wesandi Phezulu"
 
 #: lib/kaboutdata.cpp:356
 #, fuzzy
-#| msgid "Public Key"
-msgctxt "KAboutLicense|@item license (short name)"
-msgid "Artistic License"
-msgstr "Isitshixo Sikawonke wonke"
+msgctxt "KAboutLicense|@item license"
+msgid "BSD License"
+msgstr "Umsinga wesandi Phezulu"
 
-#: lib/kaboutdata.cpp:357
+#: lib/kaboutdata.cpp:359
 #, fuzzy
 #| msgid "Public Key"
-msgctxt "KAboutLicense|@item license"
+msgctxt "KAboutLicense|@item license (short name)"
 msgid "Artistic License"
 msgstr "Isitshixo Sikawonke wonke"
 
 #: lib/kaboutdata.cpp:360
 #, fuzzy
+#| msgid "Public Key"
+msgctxt "KAboutLicense|@item license"
+msgid "Artistic License"
+msgstr "Isitshixo Sikawonke wonke"
+
+#: lib/kaboutdata.cpp:363
+#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "PGP"
 
-#: lib/kaboutdata.cpp:361
+#: lib/kaboutdata.cpp:364
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr ""
 
-#: lib/kaboutdata.cpp:364
+#: lib/kaboutdata.cpp:367
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "PGP"
 
-#: lib/kaboutdata.cpp:365
+#: lib/kaboutdata.cpp:368
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr ""
 
-#: lib/kaboutdata.cpp:368
+#: lib/kaboutdata.cpp:371
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr "PGP"
 
-#: lib/kaboutdata.cpp:369
+#: lib/kaboutdata.cpp:372
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr ""
 
-#: lib/kaboutdata.cpp:372
+#: lib/kaboutdata.cpp:375
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
-msgid "MIT License"
-msgstr "Umsinga wesandi Phezulu"
-
-#: lib/kaboutdata.cpp:373
-#, fuzzy
-msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
 msgstr "Umsinga wesandi Phezulu"
 
 #: lib/kaboutdata.cpp:376
+#, fuzzy
+msgctxt "KAboutLicense|@item license"
+msgid "MIT License"
+msgstr "Umsinga wesandi Phezulu"
+
+#: lib/kaboutdata.cpp:379
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:377
+#: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
 msgstr ""
 
-#: lib/kaboutdata.cpp:380
+#: lib/kaboutdata.cpp:383
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:381
+#: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:384
+#: lib/kaboutdata.cpp:387
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:385
+#: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:388
+#: lib/kaboutdata.cpp:391
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
 msgstr ""
 
-#: lib/kaboutdata.cpp:389
+#: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
 msgstr ""
 
-#: lib/kaboutdata.cpp:392
+#: lib/kaboutdata.cpp:395
 #, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
 msgstr "Umsinga wesandi Phezulu"
 
-#: lib/kaboutdata.cpp:393
+#: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:396
+#: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
 msgstr ""
 
-#: lib/kaboutdata.cpp:397
+#: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
 msgstr ""
 
-#: lib/kaboutdata.cpp:401
+#: lib/kaboutdata.cpp:402
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "MPL 2.0"
+msgstr ""
+
+#: lib/kaboutdata.cpp:403
+#, fuzzy
+#| msgid "Public Key"
+msgctxt "KAboutLicense|@item license"
+msgid "Mozilla Public License 2.0"
+msgstr "Isitshixo Sikawonke wonke"
+
+#: lib/kaboutdata.cpp:408
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "I&siko"
 
-#: lib/kaboutdata.cpp:404
+#: lib/kaboutdata.cpp:411
 #, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "Akukho thuba likhethiweyo"
 
-#: lib/kaboutdata.cpp:986
+#: lib/kaboutdata.cpp:993
 #, fuzzy
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
@@ -284,38 +296,38 @@ msgstr ""
 "kwihlabathi lonke.</p><p> Xa ufuna ulwazi oluphangaleleyo nge KDE "
 "ngokujikelele ndwendwela i-http://i18n.kde.org</p>"
 
-#: lib/kaboutdata.cpp:1219
+#: lib/kaboutdata.cpp:1226
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Bonisa ulwazi lombhali"
 
-#: lib/kaboutdata.cpp:1220
+#: lib/kaboutdata.cpp:1227
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Bonisa ulwazi lwelayisenisi"
 
-#: lib/kaboutdata.cpp:1222
+#: lib/kaboutdata.cpp:1229
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1223
+#: lib/kaboutdata.cpp:1230
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "Igama Elinikiweyo"
 
-#: lib/kaboutdata.cpp:1233
+#: lib/kaboutdata.cpp:1240
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "%1 yabhalwa ngumntu ofuna ukuhlala engaziwa."
 
-#: lib/kaboutdata.cpp:1235
+#: lib/kaboutdata.cpp:1242
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -327,7 +339,7 @@ msgstr ""
 "%1 yabhalwa ngu\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1246
+#: lib/kaboutdata.cpp:1253
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
@@ -335,7 +347,7 @@ msgstr ""
 "Nceda sebenzisa i http://bugs.kde.org ukuchaza amagciwane, ungabhaleli "
 "ababhali nkqo.\n"
 
-#: lib/kaboutdata.cpp:1248
+#: lib/kaboutdata.cpp:1255
 #, fuzzy, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
@@ -1016,6 +1028,30 @@ msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 %2"
 
+#: lib/util/kformatprivate.cpp:601
+#, fuzzy, qt-format
+msgctxt "KFormat|distance in feet"
+msgid "%1 ft"
+msgstr "Ifayile entsha."
+
+#: lib/util/kformatprivate.cpp:605 lib/util/kformatprivate.cpp:607
+#, fuzzy, qt-format
+msgctxt "KFormat|distance in miles"
+msgid "%1 mi"
+msgstr "%1 iinketho"
+
+#: lib/util/kformatprivate.cpp:613
+#, qt-format
+msgctxt "KFormat|distance in meter"
+msgid "%1 m"
+msgstr ""
+
+#: lib/util/kformatprivate.cpp:616 lib/util/kformatprivate.cpp:618
+#, fuzzy, qt-format
+msgctxt "KFormat|distance in kilometer"
+msgid "%1 km"
+msgstr "%1 %2"
+
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, fuzzy, qt-format
 msgctxt "QObject|"
@@ -1039,12 +1075,6 @@ msgstr ""
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Public Key"
-#~ msgctxt "KAboutLicense|@item license"
-#~ msgid "Q Public License"
-#~ msgstr "Isitshixo Sikawonke wonke"
 
 #, fuzzy
 #~| msgctxt "concatenation of dates and time"
@@ -4529,12 +4559,6 @@ msgstr ""
 #, fuzzy
 #~ msgid "Open &Destination"
 #~ msgstr "Uhlengahlengiso"
-
-#, fuzzy
-#~ msgid "%1 file"
-#~ msgid_plural "%1 files"
-#~ msgstr[0] "Ifayile entsha."
-#~ msgstr[1] "Ifayile entsha."
 
 #, fuzzy
 #~ msgid "The style '%1' was not found"
