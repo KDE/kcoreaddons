@@ -12,7 +12,7 @@ portingAid: false
 deprecated: false
 release: true
 libraries:
- - cmake: "KF6::CoreAddons"
+    - cmake: "KF6::CoreAddons"
 cmakename: KF6CoreAddons
 
 public_lib: true
