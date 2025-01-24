@@ -230,12 +230,12 @@ msgstr "BSD 三句版 (新版、修订版) 许可证"
 #: lib/kaboutdata.cpp:402
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:403
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr ""
+msgstr "Mozilla 公共许可证 2.0"
 
 #: lib/kaboutdata.cpp:408
 msgctxt "KAboutLicense|@item license"
@@ -917,25 +917,25 @@ msgstr "%1 %2"
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr ""
+msgstr "%1 英尺"
 
 #: lib/util/kformatprivate.cpp:613 lib/util/kformatprivate.cpp:615
 #, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr ""
+msgstr "%1 英里"
 
 #: lib/util/kformatprivate.cpp:621
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 米"
 
 #: lib/util/kformatprivate.cpp:624 lib/util/kformatprivate.cpp:626
 #, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr ""
+msgstr "%1 公里"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
