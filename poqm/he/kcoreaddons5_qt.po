@@ -21,79 +21,79 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"PO-Revision-Date: 2024-04-08 19:11+0300\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2025-01-24 09:32+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.5\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:243
 msgctxt "KFileSystemType|"
 msgid "NFS"
-msgstr ""
+msgstr "NFS"
 
 #: lib/io/kfilesystemtype.cpp:245
 msgctxt "KFileSystemType|"
 msgid "SMB"
-msgstr ""
+msgstr "SMB"
 
 #: lib/io/kfilesystemtype.cpp:247
 msgctxt "KFileSystemType|"
 msgid "FAT"
-msgstr ""
+msgstr "FAT"
 
 #: lib/io/kfilesystemtype.cpp:249
 msgctxt "KFileSystemType|"
 msgid "RAMFS"
-msgstr ""
+msgstr "RAMFS"
 
 #: lib/io/kfilesystemtype.cpp:251
 msgctxt "KFileSystemType|"
 msgid "Other"
-msgstr ""
+msgstr "אחרת"
 
 #: lib/io/kfilesystemtype.cpp:253
 msgctxt "KFileSystemType|"
 msgid "NTFS"
-msgstr ""
+msgstr "NTFS"
 
 #: lib/io/kfilesystemtype.cpp:255
 msgctxt "KFileSystemType|"
 msgid "ExFAT"
-msgstr ""
+msgstr "ExFAT"
 
 #: lib/io/kfilesystemtype.cpp:257
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "FUSE"
 
 #: lib/io/kfilesystemtype.cpp:259
 msgctxt "KFileSystemType|"
 msgid "Unknown"
-msgstr ""
+msgstr "לא ידועה"
 
 #: lib/kaboutdata.cpp:265
-#, fuzzy
 msgctxt "KAboutLicense|"
 msgid ""
 "No licensing terms for this program have been specified.\n"
 "Please check the documentation or the source for any\n"
 "licensing terms.\n"
 msgstr ""
-"לא צוינו תנאי רישיון כלשהם לתוכנית זו.\n"
-"בדוק אם ישנם תנאי רישיון כלשהם\n"
+"לא צוינו תנאי רישוי כלשהם לתוכנית הזאת.\n"
+"כדאי לבדוק אם ישנם תנאי רישוי כלשהם\n"
 "בתיעוד או בקוד המקור.\n"
 
 #: lib/kaboutdata.cpp:277
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
-msgstr "תוכנית זו מופצת תחת התנאים של %1."
+msgstr "תוכנית זו כפופה לתנאים של %1."
 
 #: lib/kaboutdata.cpp:321
 #, fuzzy
@@ -192,13 +192,11 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU Lesser General Public License Version 2"
 
 #: lib/kaboutdata.cpp:354
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Custom"
-msgstr "מותאם־אישית"
+msgstr "מותאם אישית"
 
 #: lib/kaboutdata.cpp:357
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "לא צוין"
@@ -219,82 +217,76 @@ msgstr ""
 "org</a></p >"
 
 #: lib/kaboutdata.cpp:1232
-#, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
-msgstr "הצג מידע על הכותב"
+msgstr "הצגת פרטי היוצר."
 
 #: lib/kaboutdata.cpp:1233
-#, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
-msgstr "הצג מידע אודות הרישיון"
+msgstr "הצגת פרטי רישיון."
 
 #: lib/kaboutdata.cpp:1235
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
-msgstr ""
+msgstr "שם קובץ הבסיס של רשומת שולחן העבודה ליישום הזה."
 
 #: lib/kaboutdata.cpp:1236
 msgctxt "KAboutData CLI|"
 msgid "file name"
-msgstr ""
+msgstr "שם קובץ"
 
 #: lib/kaboutdata.cpp:1246
-#, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
-msgstr "התוכנית נכתבה על ידי מישהו שמעוניין להישאר בעילום שם."
+msgstr "יישום זה נכתב על ידי מישהו או מישהי שלא רוצים להיחשף."
 
 #: lib/kaboutdata.cpp:1248
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
-msgstr ""
-"‏%1 נכתב על ידי\n"
-"%2"
+msgstr "‏%1 נכתב על ידי:"
 
 #: lib/kaboutdata.cpp:1259
-#, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
-msgstr "אנא השתמש ב־http://bugs.kde.org כדי לדווח על באגים.\n"
+msgstr "נא להשתמש ב־https://bugs.kde.org כדי לדווח על תקלות."
 
 #: lib/kaboutdata.cpp:1261
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
-msgstr "דווח על באגים אל: %1.\n"
+msgstr "נא לדווח על תקלות מול %1."
 
 #: lib/plugin/kpluginfactory.cpp:41
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
-msgstr ""
+msgstr "לא ניתן לאתר את התוסף %1"
 
 #: lib/plugin/kpluginfactory.cpp:50
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
-msgstr ""
+msgstr "לא ניתן לטעון את התוסף מתוך %1: %2"
 
 #: lib/plugin/kpluginfactory.cpp:61
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
-msgstr "הספרייה %1 לא מספקת מפעל תואם KDE 4."
+msgstr "הספרייה %1 לא מציעה KPluginFactory."
 
 #: lib/plugin/kpluginfactory.h:512
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
-msgstr ""
+msgstr "KPluginFactory לא הצליח ליצור עותק של %1 מתוך %2"
 
 #: lib/plugin/kpluginloader.cpp:109
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KPluginLoader|"
 msgid "The library %1 does not offer a KPluginFactory."
-msgstr "הספרייה %1 לא מספקת מפעל תואם KDE 4."
+msgstr "הספרייה %1 לא מציעה KPluginFactory."
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -419,36 +411,36 @@ msgstr ""
 #: lib/util/kformatprivate.cpp:125
 msgctxt "KFormat|Symbol of binary digit"
 msgid "bit"
-msgstr ""
+msgstr "סיבית"
 
 #: lib/util/kformatprivate.cpp:128
 msgctxt "KFormat|Symbol of byte"
 msgid "B"
-msgstr ""
+msgstr "ב׳"
 
 #: lib/util/kformatprivate.cpp:131
 msgctxt "KFormat|Symbol of meter"
 msgid "m"
-msgstr ""
+msgstr "מ׳"
 
 #: lib/util/kformatprivate.cpp:134
 msgctxt "KFormat|Symbol of hertz"
 msgid "Hz"
-msgstr ""
+msgstr "הרץ"
 
 #. value without prefix, format "<val> <unit>"
 #: lib/util/kformatprivate.cpp:143
 #, qt-format
 msgctxt "KFormat|no Prefix"
 msgid "%1 %2"
-msgstr ""
+msgstr "%1 %2"
 
 #. value with prefix, format "<val> <prefix><unit>"
 #: lib/util/kformatprivate.cpp:162
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 %2%3"
-msgstr ""
+msgstr "%1 %2%3"
 
 #. MetricBinaryDialect size in bytes
 #: lib/util/kformatprivate.cpp:212
@@ -644,42 +636,42 @@ msgstr "%1 YiB"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2.%3s"
-msgstr ""
+msgstr "%1דק׳%2.%3שנ׳"
 
 #. @item:intext Duration format minutes and seconds
 #: lib/util/kformatprivate.cpp:336
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2s"
-msgstr ""
+msgstr "%1דק׳%2s"
 
 #. @item:intext Duration format hours and minutes
 #: lib/util/kformatprivate.cpp:339
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m"
-msgstr ""
+msgstr "%1שע׳%2דק׳"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
 #: lib/util/kformatprivate.cpp:342
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3.%4s"
-msgstr ""
+msgstr "%1שע׳%2דק׳%3.%4שנ׳"
 
 #. @item:intext Duration format hours, minutes, seconds
 #: lib/util/kformatprivate.cpp:349
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3s"
-msgstr ""
+msgstr "%1שע׳%2דק׳%3שנ׳"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:355
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2.%3"
-msgstr ""
+msgstr "%1:%2.%3"
 
 #. @item:intext Duration format minutes and seconds
 #. ----------
@@ -688,21 +680,21 @@ msgstr ""
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2"
-msgstr ""
+msgstr "%1:%2"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
 #: lib/util/kformatprivate.cpp:364
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2:%3.%4"
-msgstr ""
+msgstr "%1:%2:%3.%4"
 
 #. @item:intext Duration format hours, minutes, seconds
 #: lib/util/kformatprivate.cpp:371
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2:%3"
-msgstr ""
+msgstr "%1:%2:%3"
 
 #. @item:intext %1 is a real number, e.g. 1.23 days
 #: lib/util/kformatprivate.cpp:383
@@ -734,48 +726,48 @@ msgstr "%1 שניות"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:397
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n millisecond(s)"
 msgid_plural "%n millisecond(s)"
-msgstr[0] "%1 אלפית שנייה"
-msgstr[1] "%1 אלפית שנייה"
+msgstr[0] "אלפית שנייה"
+msgstr[1] "%n אלפית שנייה"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:415
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n day(s)"
 msgid_plural "%n day(s)"
-msgstr[0] "%1 ימים"
-msgstr[1] "%1 ימים"
+msgstr[0] "יום"
+msgstr[1] "%n ימים"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:420
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hour(s)"
 msgid_plural "%n hour(s)"
-msgstr[0] "%1 שעות"
-msgstr[1] "%1 שעות"
+msgstr[0] "שעה"
+msgstr[1] "%n שעות"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:425
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s)"
 msgid_plural "%n minute(s)"
-msgstr[0] "%1 דקות"
-msgstr[1] "%1 דקות"
+msgstr[0] "דקה"
+msgstr[1] "%n דקות"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:430
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n second(s)"
 msgid_plural "%n second(s)"
-msgstr[0] "%1 שניות"
-msgstr[1] "%1 שניות"
+msgstr[0] "שנייה"
+msgstr[1] "%n שניות"
 
 #. @item:intext days and hours. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #. ----------
@@ -784,39 +776,34 @@ msgstr[1] "%1 שניות"
 #. @item:intext minutes and seconds. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:455 lib/util/kformatprivate.cpp:461
 #: lib/util/kformatprivate.cpp:467
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 and %2"
 msgstr "%1 ו־%2"
 
 #: lib/util/kformatprivate.cpp:478
-#, fuzzy
 msgctxt ""
 "KFormat|used when a relative date string can't be generated because the date "
 "is invalid"
 msgid "Invalid date"
-msgstr "פריט שגוי."
+msgstr "תאריך שגוי"
 
 #: lib/util/kformatprivate.cpp:488
-#, fuzzy
 msgctxt "KFormat|"
 msgid "In two days"
-msgstr "%1 ימים"
+msgstr "בעוד יומיים"
 
 #: lib/util/kformatprivate.cpp:490
-#, fuzzy
 msgctxt "KFormat|"
 msgid "Tomorrow"
 msgstr "מחר"
 
 #: lib/util/kformatprivate.cpp:492
-#, fuzzy
 msgctxt "KFormat|"
 msgid "Today"
 msgstr "היום"
 
 #: lib/util/kformatprivate.cpp:494
-#, fuzzy
 msgctxt "KFormat|"
 msgid "Yesterday"
 msgstr "אתמול"
@@ -824,50 +811,50 @@ msgstr "אתמול"
 #: lib/util/kformatprivate.cpp:496
 msgctxt "KFormat|"
 msgid "Two days ago"
-msgstr ""
+msgstr "לפני יומיים"
 
 #: lib/util/kformatprivate.cpp:510
 msgctxt "KFormat|"
 msgid "Just now"
-msgstr ""
+msgstr "כרגע"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:515
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%1 דקות"
-msgstr[1] "%1 דקות"
+msgstr[0] "לפני דקה"
+msgstr[1] "לפני %n דקות"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:531
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 at %2"
-msgstr "%1 ו־%2"
+msgstr "%1 ב־%2"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
 msgctxt "QObject|"
 msgid "Path %1 doesn't exist"
-msgstr ""
+msgstr "הנתיב %1 לא קיים"
 
 #: lib/util/klistopenfilesjob_unix.cpp:46
 msgctxt "QObject|"
 msgid "Could not find lsof executable in PATH:"
-msgstr ""
+msgstr "לא ניתן לאתר קובץ הפעלה של lsof ב־PATH:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
 #, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr ""
+msgstr "הפעלת `lsof` נכשלה. קוד השגיאה %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
-msgstr ""
+msgstr "אין תמיכה ב־KListOpenFilesJob ב־Windows"
 
 #, fuzzy
 #~ msgctxt "KFormat|"
