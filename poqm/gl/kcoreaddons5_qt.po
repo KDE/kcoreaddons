@@ -9,14 +9,14 @@
 # Xosé <xosecalvo@gmail.com>, 2010.
 # Marce Villarino <mvillarino@kde-espana.es>, 2011, 2012, 2013, 2014.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2016, 2017.
-# SPDX-FileCopyrightText: 2024 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2024, 2025 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-08-26 04:18+0200\n"
+"PO-Revision-Date: 2025-01-25 12:03+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:243
@@ -611,35 +611,35 @@ msgstr "%1 YiB"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2.%3s"
-msgstr "%1m %2.%3s"
+msgstr "%1 m %2.%3 s"
 
 #. @item:intext Duration format minutes and seconds
 #: lib/util/kformatprivate.cpp:336
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2s"
-msgstr "%1m %2s"
+msgstr "%1 m %2 s"
 
 #. @item:intext Duration format hours and minutes
 #: lib/util/kformatprivate.cpp:339
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m"
-msgstr "%1h %2m"
+msgstr "%1 h %2 m"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
 #: lib/util/kformatprivate.cpp:342
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3.%4s"
-msgstr "%1h %2m %3.%4s"
+msgstr "%1 h %2 m %3.%4 s"
 
 #. @item:intext Duration format hours, minutes, seconds
 #: lib/util/kformatprivate.cpp:349
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3s"
-msgstr "%1h %2m %3s"
+msgstr "%1 h %2 m %3 s"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:355

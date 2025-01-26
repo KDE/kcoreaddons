@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-24 09:32+0200\n"
+"PO-Revision-Date: 2025-01-25 14:35+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Lokalize 24.12.0\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:243
@@ -96,100 +96,84 @@ msgid "This program is distributed under the terms of the %1."
 msgstr "תוכנית זו כפופה לתנאים של %1."
 
 #: lib/kaboutdata.cpp:321
-#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "GPL v2"
 
 #: lib/kaboutdata.cpp:322
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
-msgstr "GNU General Public License Version 2"
+msgstr "הרישיון הציבורי הכללי של גנו בגרסה 2"
 
 #: lib/kaboutdata.cpp:325
-#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "LGPL v2"
 
 #: lib/kaboutdata.cpp:326
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
-msgstr "GNU Lesser General Public License Version 2"
+msgstr "הרישיון הציבורי הכללי המוקטן של גנו בגרסה 2"
 
 #: lib/kaboutdata.cpp:329
-#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD License"
-msgstr "BSD License"
+msgstr "רישיון BSD"
 
 #: lib/kaboutdata.cpp:330
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "BSD License"
-msgstr "BSD License"
+msgstr "רישיון BSD"
 
 #: lib/kaboutdata.cpp:333
-#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Artistic License"
-msgstr "Artistic License"
+msgstr "רישיון אומנותי"
 
 #: lib/kaboutdata.cpp:334
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Artistic License"
-msgstr "Artistic License"
+msgstr "רישיון אומנותי"
 
 #: lib/kaboutdata.cpp:337
-#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "QPL v1.0"
 msgstr "QPL v1.0"
 
 #: lib/kaboutdata.cpp:338
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Q Public License"
-msgstr "Q Public License"
+msgstr "הרישיון הציבורי Q"
 
 #: lib/kaboutdata.cpp:341
-#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "GPL v3"
 
 #: lib/kaboutdata.cpp:342
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
-msgstr "GNU General Public License Version 3"
+msgstr "הרישיון הציבורי הכללי של גנו בגרסה 3"
 
 #: lib/kaboutdata.cpp:345
-#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "LGPL v3"
 
 #: lib/kaboutdata.cpp:346
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
-msgstr "GNU Lesser General Public License Version 3"
+msgstr "הרישיון הציבורי הכללי המוקטן של גנו בגרסה 3"
 
 #: lib/kaboutdata.cpp:349
-#, fuzzy
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
-msgstr "LGPL v2"
+msgstr "LGPL v2.1"
 
 #: lib/kaboutdata.cpp:350
-#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
-msgstr "GNU Lesser General Public License Version 2"
+msgstr "הרישיון הציבורי הכללי המוקטן של גנו בגרסה 2.1"
 
 #: lib/kaboutdata.cpp:354
 msgctxt "KAboutLicense|@item license"
@@ -202,7 +186,6 @@ msgid "Not specified"
 msgstr "לא צוין"
 
 #: lib/kaboutdata.cpp:972
-#, fuzzy
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -210,11 +193,9 @@ msgid ""
 "internationalization visit <a href=\"https://l10n.kde.org\">https://l10n.kde."
 "org</a></p>"
 msgstr ""
-"<p> סביבת שולחן העבודה KDE תורגמה לשפות רבות הודות למאמציהם של צוותי תרגום "
-"מכל רחבי העולם. </p> <p> למידע נוסף על עברית ב־KDE, בקר באתר של KDE ישראל "
-"בכתובת <a href=\"http://kde.org.il\">http://kde.org.il</a>.</p><p> למידע "
-"כללי על בנאום KDE, בקר באתר <a href=\"http://i10n.kde.org\">http://i10n.kde."
-"org</a></p >"
+"<p>התוכנות של KDE מתורגמות למגוון רחב של שפות הודות לעבודתם של צוותי תרגום "
+"מכל רחבי העולם.</p><p>למידע נוסף על בינאום ב־KDE ניתן לפנות אל <a href="
+"\"https://l10n.kde.org\">https://l10n.kde.org</a></p>"
 
 #: lib/kaboutdata.cpp:1232
 msgctxt "KAboutData CLI|"
