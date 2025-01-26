@@ -6,14 +6,14 @@
 # Sahachart Anukulkitch <drrider@gmail.com>, 2006, 2007.
 # Narachai Sakorn <narachai@gmail.com>, 2008.
 # Phuwanat Sakornsakolpat <narachai@gmail.com>, 2010.
-# SPDX-FileCopyrightText: 2025 Xerusion <kde@xerusion.me>
+# SPDX-FileCopyrightText: 2025 Pongsakorn S. <kde@xerusion.me>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcoreaddons6_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-01-13 19:39+0700\n"
-"Last-Translator: Xerusion <kde@xerusion.me>\n"
+"PO-Revision-Date: 2025-01-25 15:12+0700\n"
+"Last-Translator: Pongsakorn S. <kde@xerusion.me>\n"
 "Language-Team: Thai <kde-i18n-doc@kde.org>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
@@ -238,15 +238,12 @@ msgstr "BSD 3-Clause \"New\" or \"Revised\" License"
 #: lib/kaboutdata.cpp:402
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:403
-#, fuzzy
-#| msgctxt "@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "สัญญาอนุญาตสาธารณะแบบ Q"
+msgstr "Mozilla Public License 2.0"
 
 #: lib/kaboutdata.cpp:408
 msgctxt "KAboutLicense|@item license"
@@ -681,10 +678,7 @@ msgstr "%1 YiB"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:330
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
@@ -692,10 +686,7 @@ msgstr[0] "%n วัน"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:335
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
@@ -703,10 +694,7 @@ msgstr[0] "%n ชั่วโมง"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:340
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
@@ -714,10 +702,7 @@ msgstr[0] "%n นาที"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:345
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
@@ -762,21 +747,17 @@ msgstr "%1ชม.%2น.%3วิ."
 #. ----------
 #. @item:intext abbreviated amount of hours and abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:405 lib/util/kformatprivate.cpp:410
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
 
 #. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 %2%3"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2 %3"
-msgstr "%1 %2%3"
+msgstr "%1 %2 %3"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:422
@@ -941,34 +922,28 @@ msgid "%1 at %2"
 msgstr "%1 เวลา %2"
 
 #: lib/util/kformatprivate.cpp:609
-#, fuzzy, qt-format
-#| msgid "%1 file"
-#| msgid_plural "%1 files"
+#, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr "%1 แฟ้ม"
+msgstr "%1 ฟุต"
 
 #: lib/util/kformatprivate.cpp:613 lib/util/kformatprivate.cpp:615
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1 นาที"
+msgstr "%1 ไมล์"
 
 #: lib/util/kformatprivate.cpp:621
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 เมตร"
 
 #: lib/util/kformatprivate.cpp:624 lib/util/kformatprivate.cpp:626
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 KB"
+msgstr "%1 กม."
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
