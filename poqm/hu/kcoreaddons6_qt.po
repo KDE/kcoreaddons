@@ -1,13 +1,13 @@
 # Kiszel Kristóf <ulysses@kubuntu.org>, 2010.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2011, 2012, 2014.
 # Balázs Úr <urbalazs@gmail.com>, 2012, 2013.
-# SPDX-FileCopyrightText: 2018, 2020, 2021, 2022, 2024 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2018, 2020, 2021, 2022, 2024, 2025 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2024-01-07 22:42+0100\n"
+"PO-Revision-Date: 2025-01-30 10:37+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.12.1\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -76,6 +76,8 @@ msgid ""
 "You can find the full term <a href=\"https://spdx.org/licenses/%1.html\">the "
 "SPDX website</a>"
 msgstr ""
+"A teljes felhasználási feltételeket megtalálhatja az <a href=\"https://spdx."
+"org/licenses/%1.html\">SPDX weboldalán</a>"
 
 #: lib/kaboutdata.cpp:295
 msgctxt "KAboutLicense|"
@@ -171,84 +173,72 @@ msgstr "MIT licenc"
 #: lib/kaboutdata.cpp:379
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
-msgstr ""
+msgstr "CC0"
 
 #: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr ""
+msgstr "Creative Commons Zero"
 
 #: lib/kaboutdata.cpp:383
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "QPL v1.0"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
-msgstr "QPL v1.0"
+msgstr "ODbL v1.0"
 
 #: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Open Data Commons Open Database License v1.0"
 
 #: lib/kaboutdata.cpp:387
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "Apache 2.0"
 
 #: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "Apache License 2.0"
 
 #: lib/kaboutdata.cpp:391
-#, fuzzy
-#| msgctxt "KFileSystemType|"
-#| msgid "FAT"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
-msgstr "FAT"
+msgstr "FTL"
 
 #: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Freetype Project License"
 
 #: lib/kaboutdata.cpp:395
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
-msgstr "BSD licenc"
+msgstr "Boost License"
 
 #: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Boost Software License 1.0"
 
 #: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "BSD-3-Clause"
 
 #: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "BSD 3-Clause „New” or „Revised” License"
 
 #: lib/kaboutdata.cpp:402
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:403
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Q nyilvános licenc"
+msgstr "Mozilla Public License 2.0"
 
 #: lib/kaboutdata.cpp:408
 msgctxt "KAboutLicense|@item license"
@@ -686,10 +676,7 @@ msgstr "%1 YiB"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:330
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
@@ -698,10 +685,7 @@ msgstr[1] "%n nap"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:335
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
@@ -710,10 +694,7 @@ msgstr[1] "%n óra"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:340
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
@@ -722,15 +703,12 @@ msgstr[1] "%n perc"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:345
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
-msgstr[0] "%n másodperc"
-msgstr[1] "%n másodperc"
+msgstr[0] "%n s"
+msgstr[1] "%n s"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:371
@@ -771,21 +749,17 @@ msgstr "%1h%2m%3s"
 #. ----------
 #. @item:intext abbreviated amount of hours and abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:405 lib/util/kformatprivate.cpp:410
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
 
 #. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 %2%3"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2 %3"
-msgstr "%1 %2%3"
+msgstr "%1 %2 %3"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:422
@@ -956,34 +930,28 @@ msgid "%1 at %2"
 msgstr "%1, %2"
 
 #: lib/util/kformatprivate.cpp:609
-#, fuzzy, qt-format
-#| msgid "%1 file"
-#| msgid_plural "%1 files"
+#, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr "%1 fájl"
+msgstr "%1 láb"
 
 #: lib/util/kformatprivate.cpp:613 lib/util/kformatprivate.cpp:615
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1 perc"
+msgstr "%1 mil"
 
 #: lib/util/kformatprivate.cpp:621
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 m"
 
 #: lib/util/kformatprivate.cpp:624 lib/util/kformatprivate.cpp:626
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 kB"
+msgstr "%1 km"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
