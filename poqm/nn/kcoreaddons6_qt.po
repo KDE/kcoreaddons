@@ -690,9 +690,6 @@ msgstr "%1 YiB"
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:330
 #, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
@@ -702,9 +699,6 @@ msgstr[1] "%n dagar"
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:335
 #, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
@@ -714,9 +708,6 @@ msgstr[1] "%n timar"
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:340
 #, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
@@ -726,9 +717,6 @@ msgstr[1] "%n minutt"
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:345
 #, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
@@ -775,8 +763,6 @@ msgstr "%1t%2m%3s"
 #. @item:intext abbreviated amount of hours and abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:405 lib/util/kformatprivate.cpp:410
 #, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
@@ -784,8 +770,6 @@ msgstr "%1 %2"
 #. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:414
 #, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 %2%3"
 msgctxt "KFormat|"
 msgid "%1 %2 %3"
 msgstr "%1 %2%3"
@@ -966,8 +950,6 @@ msgstr ""
 
 #: lib/util/kformatprivate.cpp:613 lib/util/kformatprivate.cpp:615
 #, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
 msgstr "%1 minutt"
@@ -980,8 +962,6 @@ msgstr ""
 
 #: lib/util/kformatprivate.cpp:624 lib/util/kformatprivate.cpp:626
 #, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
 msgstr "%1 kB"
