@@ -1,6 +1,5 @@
 # Translation of kcoreaddons6_qt to Norwegian Bokmål
 #
-# SPDX-FileCopyrightText: 2025 Karl Ove Hufthammer <karl@huftis.org>
 # Knut Yrvin <knut.yrvin@gmail.com>, 2002, 2003, 2004, 2005.
 # Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2002, 2003, 2004, 2005, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015.
 # Eskild Hustvedt <zerodogg@skolelinux.no>, 2004, 2005.
@@ -187,20 +186,20 @@ msgid ""
 "org</a></p>"
 msgstr ""
 "<p>KDE-programmene er oversatt til mange språk takket være arbeidet til de "
-"mange oversettelses­gruppene over hele verden.</p><p>Hvis du finner "
-"skrive­feil, feil­oversettelser eller oversettelser som kan forbedres, "
-"setter vi pris på om du <a href=\"https://bugs.kde.org/enter_bug."
-"cgi?product=i18n&amp;component=nb\">melder det inn i feil­sporings­systemet "
-"vårt</a>. Du kan også sende et tips til <a href=\"mailto:l10n-no@lister."
-"huftis.org\">diskusjons­lista</a> vår (<a href=\"http://lister.huftis.org/"
-"listinfo.cgi/l10n-no-huftis.org\">informasjon og arkiv</a>), eller direkte "
-"til oversettelses­koordinatoren <a href=\"mailto:karl@huftis.org\">Karl Ove "
-"Hufthammer</a> dersom du ikke ønsker at meldinga di skal bli offentlig­gjort "
-"på lista.</p><p>Bruk de samme adressene hvis du ønsker å delta aktivt i "
-"bokmåls­oversettelsen av programmene. Vi har alltid bruk for nye oversettere "
-"og korrektur­lesere!</p><p>Du finner mer informasjon om internasjonalisering "
-"av KDE-programmene på <a href=\"https://l10n.kde.org/\">https://l10n.kde.org/"
-"</a>.</p>>"
+"mange oversettelses­gruppene over hele verden.</p><p>Hvis du finner skrive­"
+"feil, feil­oversettelser eller oversettelser som kan forbedres, setter vi "
+"pris på om du <a href=\"https://bugs.kde.org/enter_bug.cgi?product=i18n&amp;"
+"component=nb\">melder det inn i feil­sporings­systemet vårt</a>. Du kan også "
+"sende et tips til <a href=\"mailto:l10n-no@lister.huftis.org\">diskusjons­"
+"lista</a> vår (<a href=\"http://lister.huftis.org/listinfo.cgi/l10n-no-"
+"huftis.org\">informasjon og arkiv</a>), eller direkte til oversettelses­"
+"koordinatoren <a href=\"mailto:karl@huftis.org\">Karl Ove Hufthammer</a> "
+"dersom du ikke ønsker at meldinga di skal bli offentlig­gjort på lista.</"
+"p><p>Bruk de samme adressene hvis du ønsker å delta aktivt i bokmåls­"
+"oversettelsen av programmene. Vi har alltid bruk for nye oversettere og "
+"korrektur­lesere!</p><p>Du finner mer informasjon om internasjonalisering av "
+"KDE-programmene på <a href=\"https://l10n.kde.org/\">https://l10n.kde.org/</"
+"a>.</p>>"
 
 #: lib/kaboutdata.cpp:1232
 msgctxt "KAboutData CLI|"
