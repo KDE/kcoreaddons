@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2024-12-27 17:40+0100\n"
+"PO-Revision-Date: 2025-02-14 21:25+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -681,51 +681,39 @@ msgstr "%1 YiB"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:330
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
-msgstr[0] "%n tago"
-msgstr[1] "%n tagoj"
+msgstr[0] "%n tg"
+msgstr[1] "%n tg"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:335
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
-msgstr[0] "%n horo"
-msgstr[1] "%n horoj"
+msgstr[0] "%n hr"
+msgstr[1] "%n hr"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:340
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
-msgstr[0] "%n minuto"
-msgstr[1] "%n minutoj"
+msgstr[0] "%n min"
+msgstr[1] "%n min"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:345
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
-msgstr[0] "%n sekundo"
-msgstr[1] "%n sekundoj"
+msgstr[0] "%n sek"
+msgstr[1] "%n sek"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:371
@@ -766,21 +754,17 @@ msgstr "%1h%2m%3s"
 #. ----------
 #. @item:intext abbreviated amount of hours and abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:405 lib/util/kformatprivate.cpp:410
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
 
 #. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 %2%3"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2 %3"
-msgstr "%1 %2%3"
+msgstr "%1 %2 %3"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:422
@@ -954,29 +938,25 @@ msgstr "%1 ĉe %2"
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr ""
+msgstr "%1 ft"
 
 #: lib/util/kformatprivate.cpp:613 lib/util/kformatprivate.cpp:615
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1 minutoj"
+msgstr "%1 mjl"
 
 #: lib/util/kformatprivate.cpp:621
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 m"
 
 #: lib/util/kformatprivate.cpp:624 lib/util/kformatprivate.cpp:626
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 kB"
+msgstr "%1 km"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
