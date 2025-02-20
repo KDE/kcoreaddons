@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-02-28 03:44+0000\n"
-"PO-Revision-Date: 2025-02-03 21:16+0100\n"
-"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
+"PO-Revision-Date: 2025-02-16 17:52+0100\n"
+"Last-Translator: Martin Hansen <mh306602@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -240,12 +240,12 @@ msgstr "BSD 3-Clause «Ny» eller «Revidert» lisens"
 #: lib/kaboutdata.cpp:402
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:403
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr ""
+msgstr "Mozilla Public License 2.0"
 
 #: lib/kaboutdata.cpp:408
 msgctxt "KAboutLicense|@item license"
@@ -284,7 +284,7 @@ msgstr ""
 #: lib/kaboutdata.cpp:1226
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
-msgstr "Vis forfatterinformasjon."
+msgstr "Vis opphaverinformasjon."
 
 #: lib/kaboutdata.cpp:1227
 msgctxt "KAboutData CLI|"
@@ -692,39 +692,39 @@ msgstr "%1 YiB"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:330
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
-msgstr[0] "%n dag(er)"
-msgstr[1] "%n dag(er)"
+msgstr[0] "%n d"
+msgstr[1] "%n d"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:335
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
-msgstr[0] "%n time(r)"
-msgstr[1] "%n time(r)"
+msgstr[0] "%n t"
+msgstr[1] "%n t"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:340
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
-msgstr[0] "%n minutt(er)"
-msgstr[1] "%n minutt(er)"
+msgstr[0] "%n min"
+msgstr[1] "%n min"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:345
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
-msgstr[0] "%n sekund(er)"
-msgstr[1] "%n sekund(er)"
+msgstr[0] "%n sek"
+msgstr[1] "%n sek"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:371
@@ -768,14 +768,14 @@ msgstr "%1t%2m%3s"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
-msgstr ""
+msgstr "%1 %2"
 
 #. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:414
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2 %3"
-msgstr ""
+msgstr "%1 %2 %3"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:422
@@ -949,25 +949,25 @@ msgstr "%1 klokken %2"
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr ""
+msgstr "%1 fot"
 
 #: lib/util/kformatprivate.cpp:613 lib/util/kformatprivate.cpp:615
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1 minutter"
+msgstr "%1 mile"
 
 #: lib/util/kformatprivate.cpp:621
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 m"
 
 #: lib/util/kformatprivate.cpp:624 lib/util/kformatprivate.cpp:626
-#, fuzzy, qt-format
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 kB"
+msgstr "%1 km"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
