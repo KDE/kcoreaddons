@@ -398,10 +398,10 @@ QString KAboutLicense::name(KAboutLicense::NameFormat formatName) const
     case KAboutLicense::BSD_3_Clause:
         licenseShort = QCoreApplication::translate("KAboutLicense", "BSD-3-Clause", "@item license (short name)");
         licenseFull = QCoreApplication::translate("KAboutLicense", "BSD 3-Clause \"New\" or \"Revised\" License", "@item license");
+        break;
     case KAboutLicense::MPL_V2:
         licenseShort = QCoreApplication::translate("KAboutLicense", "MPL 2.0", "@item license (short name)");
         licenseFull = QCoreApplication::translate("KAboutLicense", "Mozilla Public License 2.0", "@item license");
-        break;
         break;
     case KAboutLicense::Custom:
     case KAboutLicense::File:
