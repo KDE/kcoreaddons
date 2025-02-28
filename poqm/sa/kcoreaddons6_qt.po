@@ -226,12 +226,12 @@ msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
 msgstr "BSD 3-खण्डः \"नवः\" अथवा \"संशोधितः\" अनुज्ञापत्रः"
 
-#: lib/kaboutdata.cpp:402
+#: lib/kaboutdata.cpp:403
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:403
+#: lib/kaboutdata.cpp:404
 #, fuzzy
 #| msgctxt "KAboutLicense|@item license"
 #| msgid "Apache License 2.0"

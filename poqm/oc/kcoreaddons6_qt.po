@@ -256,12 +256,12 @@ msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
 msgstr ""
 
-#: lib/kaboutdata.cpp:402
+#: lib/kaboutdata.cpp:403
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
 msgstr ""
 
-#: lib/kaboutdata.cpp:403
+#: lib/kaboutdata.cpp:404
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
 msgstr ""
