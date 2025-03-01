@@ -193,7 +193,7 @@ public:
      * Stores a combination of #DurationFormatOption values.
      */
     Q_DECLARE_FLAGS(DurationFormatOptions, DurationFormatOption)
-    Q_FLAG(DurationFormatOption)
+    Q_FLAG(DurationFormatOptions)
 
     /**
      * Formatting options for formatDistance()
@@ -455,5 +455,8 @@ public:
 private:
     QSharedDataPointer<KFormatPrivate> d;
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(KFormat::DurationFormatOptions)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KFormat::DistanceFormatOptions)
 
 #endif // KFORMAT_H

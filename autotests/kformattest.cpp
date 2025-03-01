@@ -276,6 +276,9 @@ void KFormatTest::formatDuration()
     QCOMPARE(format.formatDuration(doubleDay, options), QStringLiteral("14708m03.700s"));
     QCOMPARE(format.formatDuration(roundingIssues, options), QStringLiteral("179m59.900s"));
     QCOMPARE(format.formatDuration(largeValue, options), QStringLiteral("166666m39.999s"));
+
+    // ensure inline options work
+    QCOMPARE(format.formatDuration(12 * MSecsInHour + 59 * MSecsInMinute, KFormat::AbbreviatedDuration | KFormat::HideSeconds), "12 hr 59 min"_L1);
 }
 
 void KFormatTest::formatAbbreviatedDuration()
