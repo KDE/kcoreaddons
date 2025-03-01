@@ -16,19 +16,20 @@
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2020, 2021, 2022, 2023.
 # Мария Шикунова <translation-team@basealt.ru>, 2022.
+# SPDX-FileCopyrightText: 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-12-27 10:15+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"PO-Revision-Date: 2025-02-28 15:45+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Environment: kde\n"
@@ -94,6 +95,8 @@ msgid ""
 "You can find the full term <a href=\"https://spdx.org/licenses/%1.html\">the "
 "SPDX website</a>"
 msgstr ""
+"Полные условия доступны на <a href=\"https://spdx.org/licenses/%1.html\">веб-"
+"сайте SPDX</a>"
 
 #: lib/kaboutdata.cpp:295
 msgctxt "KAboutLicense|"
@@ -188,84 +191,72 @@ msgstr "Лицензия MIT"
 #: lib/kaboutdata.cpp:379
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
-msgstr ""
+msgstr "CC0"
 
 #: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr ""
+msgstr "Creative Commons Zero"
 
 #: lib/kaboutdata.cpp:383
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "QPL v1.0"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
-msgstr "QPL v1.0"
+msgstr "ODbL v1.0"
 
 #: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Open Data Commons Open Database License, версия 1.0"
 
 #: lib/kaboutdata.cpp:387
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "Apache 2.0"
 
 #: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "Лицензия Apache 2.0"
 
 #: lib/kaboutdata.cpp:391
-#, fuzzy
-#| msgctxt "KFileSystemType|"
-#| msgid "FAT"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
-msgstr "FAT"
+msgstr "FTL"
 
 #: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Лицензия проекта Freetype"
 
 #: lib/kaboutdata.cpp:395
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
-msgstr "Лицензия BSD"
+msgstr "Лицензия Boost"
 
 #: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Лицензия на программное обеспечение Boost 1.0"
 
 #: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "BSD из трёх пунктов"
 
 #: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "Лицензия BSD из трёх пунктов, «новая» или «скорректированная»"
 
 #: lib/kaboutdata.cpp:403
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:404
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Q Public License"
+msgstr "Mozilla Public License 2.0"
 
 #: lib/kaboutdata.cpp:408
 msgctxt "KAboutLicense|@item license"
@@ -707,55 +698,43 @@ msgstr "%1 ЙиБ"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:330
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
-msgstr[0] "%n день"
-msgstr[1] "%n дня"
-msgstr[2] "%n дней"
+msgstr[0] "%n дн."
+msgstr[1] "%n дн."
+msgstr[2] "%n дн."
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:335
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
-msgstr[0] "%n час"
-msgstr[1] "%n часа"
-msgstr[2] "%n часов"
+msgstr[0] "%n ч."
+msgstr[1] "%n ч."
+msgstr[2] "%n ч."
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:340
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
-msgstr[0] "%n минута"
-msgstr[1] "%n минуты"
-msgstr[2] "%n минут"
+msgstr[0] "%n мин."
+msgstr[1] "%n мин."
+msgstr[2] "%n мин."
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:345
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
-msgstr[0] "%n секунда"
-msgstr[1] "%n секунды"
-msgstr[2] "%n секунд"
+msgstr[0] "%n сек."
+msgstr[1] "%n сек."
+msgstr[2] "%n сек."
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:371
@@ -796,21 +775,17 @@ msgstr "%1ч%2м%3с"
 #. ----------
 #. @item:intext abbreviated amount of hours and abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:405 lib/util/kformatprivate.cpp:410
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
 
 #. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 %2%3"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2 %3"
-msgstr "%1 %2%3"
+msgstr "%1 %2 %3"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:422
@@ -987,34 +962,28 @@ msgid "%1 at %2"
 msgstr "%1 в %2"
 
 #: lib/util/kformatprivate.cpp:609
-#, fuzzy, qt-format
-#| msgid "%1 file"
-#| msgid_plural "%1 files"
+#, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr "%1 файл"
+msgstr "%1 фут/футов/фута"
 
 #: lib/util/kformatprivate.cpp:613 lib/util/kformatprivate.cpp:615
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1 минуты"
+msgstr "%1 миля/миль/мили"
 
 #: lib/util/kformatprivate.cpp:621
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 м"
 
 #: lib/util/kformatprivate.cpp:624 lib/util/kformatprivate.cpp:626
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 КБ"
+msgstr "%1 км"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
