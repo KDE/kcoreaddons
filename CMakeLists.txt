@@ -64,6 +64,12 @@ if(ENABLE_INOTIFY)
     set_package_properties(Inotify PROPERTIES
         PURPOSE "Filesystem alteration notifications using inotify")
     set(HAVE_SYS_INOTIFY_H ${Inotify_FOUND})
+    # If we're using libinotify-kqueue, check for the direct mode support
+    if(Inotify_FOUND)
+        set(CMAKE_REQUIRED_INCLUDES ${Inotify_INCLUDE_DIRS})
+        set(CMAKE_REQUIRED_LIBRARIES Inotify::Inotify)
+        check_symbol_exists(libinotify_direct_readv "sys/inotify.h" HAVE_INOTIFY_DIRECT_READV)
+    endif()
 else()
     set(HAVE_SYS_INOTIFY_H FALSE)
 endif()
