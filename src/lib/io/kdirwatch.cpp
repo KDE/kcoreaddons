@@ -198,7 +198,11 @@ KDirWatchPrivate::KDirWatchPrivate()
     connect(&rescan_timer, &QTimer::timeout, this, &KDirWatchPrivate::slotRescan);
 
 #if HAVE_SYS_INOTIFY_H
+#if HAVE_INOTIFY_DIRECT_READV
+    m_inotify_fd = inotify_init1(IN_DIRECT);
+#else
     m_inotify_fd = inotify_init();
+#endif
     supports_inotify = m_inotify_fd > 0;
 
     if (!supports_inotify) {
@@ -239,7 +243,16 @@ KDirWatchPrivate::~KDirWatchPrivate()
 
 #if HAVE_SYS_INOTIFY_H
     if (supports_inotify) {
+#if HAVE_INOTIFY_DIRECT_READV
+        // We need to call a special closing function instead of the usual close(),
+        // so reimplement QT_CLOSE here
+        int ret;
+        do {
+            ret = libinotify_direct_close(m_inotify_fd);
+        } while (ret == -1 && errno == EINTR);
+#else
         QT_CLOSE(m_inotify_fd);
+#endif
     }
 #endif
 #if HAVE_QFILESYSTEMWATCHER
@@ -254,10 +267,150 @@ void KDirWatchPrivate::inotifyEventReceived()
         return;
     }
 
+    assert(m_inotify_fd > -1);
+
+    auto processEvent = [this](const struct inotify_event *const event)
+    {
+        QString path;
+        // strip trailing null chars, see inotify_event documentation
+        // these must not end up in the final QString version of path
+        int len = event->len;
+        while (len > 1 && !event->name[len - 1]) {
+            --len;
+        }
+        QByteArray cpath(event->name, len);
+        if (len) {
+            path = QFile::decodeName(cpath);
+        }
+
+        if (!path.isEmpty() && isNoisyFile(cpath.data())) {
+            return;
+        }
+
+        // Is set to true if the new event is a directory, false otherwise. This prevents a stat call in clientsForFileOrDir
+        const bool isDir = (event->mask & (IN_ISDIR));
+
+        Entry *e = m_inotify_wd_to_entry.value(event->wd);
+        if (!e) {
+            return;
+        }
+        const bool wasDirty = e->dirty;
+        e->dirty = true;
+
+        const QString tpath = e->path + QLatin1Char('/') + path;
+
+        qCDebug(KDIRWATCH).nospace() << "got event " << inotifyEventName(event) << " for entry " << e->path
+                                        << (event->mask & IN_ISDIR ? " [directory] " : " [file] ") << path;
+
+        if (event->mask & IN_DELETE_SELF) {
+            e->m_status = NonExistent;
+            m_inotify_wd_to_entry.remove(e->wd);
+            e->wd = -1;
+            e->m_ctime = invalid_ctime;
+            emitEvent(e, Deleted);
+            // If the parent dir was already watched, tell it something changed
+            Entry *parentEntry = entry(e->parentDirectory());
+            if (parentEntry) {
+                parentEntry->dirty = true;
+            }
+            // Add entry to parent dir to notice if the entry gets recreated
+            addEntry(nullptr, e->parentDirectory(), e, true /*isDir*/);
+        }
+        if (event->mask & IN_IGNORED) {
+            // Causes bug #207361 with kernels 2.6.31 and 2.6.32!
+            // e->wd = -1;
+        }
+        if (event->mask & (IN_CREATE | IN_MOVED_TO)) {
+            Entry *sub_entry = e->findSubEntry(tpath);
+
+            qCDebug(KDIRWATCH) << "-->got CREATE signal for" << (tpath) << "sub_entry=" << sub_entry;
+
+            if (sub_entry) {
+                // We were waiting for this new file/dir to be created
+                sub_entry->dirty = true;
+                rescan_timer.start(0); // process this asap, to start watching that dir
+            } else if (e->isDir && !e->m_clients.empty()) {
+                const QList<const Client *> clients = e->inotifyClientsForFileOrDir(isDir);
+                // See discussion in addEntry for why we don't addEntry for individual
+                // files in WatchFiles mode with inotify.
+                if (isDir) {
+                    for (const Client *client : clients) {
+                        addEntry(client->instance, tpath, nullptr, isDir, isDir ? client->m_watchModes : KDirWatch::WatchDirOnly);
+                    }
+                }
+                if (!clients.isEmpty()) {
+                    emitEvent(e, Created, tpath);
+                    qCDebug(KDIRWATCH).nospace() << clients.count() << " instance(s) monitoring the new " << (isDir ? "dir " : "file ") << tpath;
+                }
+                e->m_pendingFileChanges.append(e->path);
+                if (!rescan_timer.isActive()) {
+                    rescan_timer.start(m_PollInterval); // singleshot
+                }
+            }
+        }
+        if (event->mask & (IN_DELETE | IN_MOVED_FROM)) {
+            if ((e->isDir) && (!e->m_clients.empty())) {
+                // A file in this directory has been removed.  It wasn't an explicitly
+                // watched file as it would have its own watch descriptor, so
+                // no addEntry/ removeEntry bookkeeping should be required.  Emit
+                // the event immediately if any clients are interested.
+                const KDirWatch::WatchModes flag = isDir ? KDirWatch::WatchSubDirs : KDirWatch::WatchFiles;
+                int counter = std::count_if(e->m_clients.cbegin(), e->m_clients.cend(), [flag](const Client &client) {
+                    return client.m_watchModes & flag;
+                });
+
+                if (counter != 0) {
+                    emitEvent(e, Deleted, tpath);
+                }
+            }
+        }
+        if (event->mask & (IN_MODIFY | IN_ATTRIB)) {
+            if ((e->isDir) && (!e->m_clients.empty())) {
+                // A file in this directory has been changed.  No
+                // addEntry/ removeEntry bookkeeping should be required.
+                // Add the path to the list of pending file changes if
+                // there are any interested clients.
+                // QT_STATBUF stat_buf;
+                // QByteArray tpath = QFile::encodeName(e->path+'/'+path);
+                // QT_STAT(tpath, &stat_buf);
+                // bool isDir = S_ISDIR(stat_buf.st_mode);
+
+                // The API doc is somewhat vague as to whether we should emit
+                // dirty() for implicitly watched files when WatchFiles has
+                // not been specified - we'll assume they are always interested,
+                // regardless.
+                // Don't worry about duplicates for the time
+                // being; this is handled in slotRescan.
+                e->m_pendingFileChanges.append(tpath);
+                // Avoid stat'ing the directory if only an entry inside it changed.
+                e->dirty = (wasDirty || (path.isEmpty() && (event->mask & IN_ATTRIB)));
+            }
+        }
+
+        if (!rescan_timer.isActive()) {
+            rescan_timer.start(m_PollInterval); // singleshot
+        }
+    };
+
+#if HAVE_INOTIFY_DIRECT_READV
+    struct iovec *received[10];
+    int num_events = libinotify_direct_readv(m_inotify_fd, received, (sizeof (received) / sizeof ((received)[0])), /* no_block=*/ 0);
+    for (int i = 0; i < num_events; i++) {
+        struct iovec *cur_event = received[i];
+        while (cur_event->iov_base) {
+            const struct inotify_event *const event = (struct inotify_event *) cur_event->iov_base;
+
+            processEvent(event);
+
+            cur_event++;
+        }
+        libinotify_free_iovec(received[i]);
+    }
+#else
     int pending = -1;
     int offsetStartRead = 0; // where we read into buffer
     char buf[8192];
-    assert(m_inotify_fd > -1);
+
     ioctl(m_inotify_fd, FIONREAD, &pending);
 
     while (pending > 0) {
@@ -285,125 +438,7 @@ void KDirWatchPrivate::inotifyEventReceived()
             bytesAvailable -= eventSize;
             offsetCurrent += eventSize;
 
-            QString path;
-            // strip trailing null chars, see inotify_event documentation
-            // these must not end up in the final QString version of path
-            int len = event->len;
-            while (len > 1 && !event->name[len - 1]) {
-                --len;
-            }
-            QByteArray cpath(event->name, len);
-            if (len) {
-                path = QFile::decodeName(cpath);
-            }
-
-            if (!path.isEmpty() && isNoisyFile(cpath.data())) {
-                continue;
-            }
-
-            // Is set to true if the new event is a directory, false otherwise. This prevents a stat call in clientsForFileOrDir
-            const bool isDir = (event->mask & (IN_ISDIR));
-
-            Entry *e = m_inotify_wd_to_entry.value(event->wd);
-            if (!e) {
-                continue;
-            }
-            const bool wasDirty = e->dirty;
-            e->dirty = true;
-
-            const QString tpath = e->path + QLatin1Char('/') + path;
-
-            qCDebug(KDIRWATCH).nospace() << "got event " << inotifyEventName(event) << " for entry " << e->path
-                                         << (event->mask & IN_ISDIR ? " [directory] " : " [file] ") << path;
-
-            if (event->mask & IN_DELETE_SELF) {
-                e->m_status = NonExistent;
-                m_inotify_wd_to_entry.remove(e->wd);
-                e->wd = -1;
-                e->m_ctime = invalid_ctime;
-                emitEvent(e, Deleted);
-                // If the parent dir was already watched, tell it something changed
-                Entry *parentEntry = entry(e->parentDirectory());
-                if (parentEntry) {
-                    parentEntry->dirty = true;
-                }
-                // Add entry to parent dir to notice if the entry gets recreated
-                addEntry(nullptr, e->parentDirectory(), e, true /*isDir*/);
-            }
-            if (event->mask & IN_IGNORED) {
-                // Causes bug #207361 with kernels 2.6.31 and 2.6.32!
-                // e->wd = -1;
-            }
-            if (event->mask & (IN_CREATE | IN_MOVED_TO)) {
-                Entry *sub_entry = e->findSubEntry(tpath);
-
-                qCDebug(KDIRWATCH) << "-->got CREATE signal for" << (tpath) << "sub_entry=" << sub_entry;
-
-                if (sub_entry) {
-                    // We were waiting for this new file/dir to be created
-                    sub_entry->dirty = true;
-                    rescan_timer.start(0); // process this asap, to start watching that dir
-                } else if (e->isDir && !e->m_clients.empty()) {
-                    const QList<const Client *> clients = e->inotifyClientsForFileOrDir(isDir);
-                    // See discussion in addEntry for why we don't addEntry for individual
-                    // files in WatchFiles mode with inotify.
-                    if (isDir) {
-                        for (const Client *client : clients) {
-                            addEntry(client->instance, tpath, nullptr, isDir, isDir ? client->m_watchModes : KDirWatch::WatchDirOnly);
-                        }
-                    }
-                    if (!clients.isEmpty()) {
-                        emitEvent(e, Created, tpath);
-                        qCDebug(KDIRWATCH).nospace() << clients.count() << " instance(s) monitoring the new " << (isDir ? "dir " : "file ") << tpath;
-                    }
-                    e->m_pendingFileChanges.append(e->path);
-                    if (!rescan_timer.isActive()) {
-                        rescan_timer.start(m_PollInterval); // singleshot
-                    }
-                }
-            }
-            if (event->mask & (IN_DELETE | IN_MOVED_FROM)) {
-                if ((e->isDir) && (!e->m_clients.empty())) {
-                    // A file in this directory has been removed.  It wasn't an explicitly
-                    // watched file as it would have its own watch descriptor, so
-                    // no addEntry/ removeEntry bookkeeping should be required.  Emit
-                    // the event immediately if any clients are interested.
-                    const KDirWatch::WatchModes flag = isDir ? KDirWatch::WatchSubDirs : KDirWatch::WatchFiles;
-                    int counter = std::count_if(e->m_clients.cbegin(), e->m_clients.cend(), [flag](const Client &client) {
-                        return client.m_watchModes & flag;
-                    });
-
-                    if (counter != 0) {
-                        emitEvent(e, Deleted, tpath);
-                    }
-                }
-            }
-            if (event->mask & (IN_MODIFY | IN_ATTRIB)) {
-                if ((e->isDir) && (!e->m_clients.empty())) {
-                    // A file in this directory has been changed.  No
-                    // addEntry/ removeEntry bookkeeping should be required.
-                    // Add the path to the list of pending file changes if
-                    // there are any interested clients.
-                    // QT_STATBUF stat_buf;
-                    // QByteArray tpath = QFile::encodeName(e->path+'/'+path);
-                    // QT_STAT(tpath, &stat_buf);
-                    // bool isDir = S_ISDIR(stat_buf.st_mode);
-
-                    // The API doc is somewhat vague as to whether we should emit
-                    // dirty() for implicitly watched files when WatchFiles has
-                    // not been specified - we'll assume they are always interested,
-                    // regardless.
-                    // Don't worry about duplicates for the time
-                    // being; this is handled in slotRescan.
-                    e->m_pendingFileChanges.append(tpath);
-                    // Avoid stat'ing the directory if only an entry inside it changed.
-                    e->dirty = (wasDirty || (path.isEmpty() && (event->mask & IN_ATTRIB)));
-                }
-            }
-
-            if (!rescan_timer.isActive()) {
-                rescan_timer.start(m_PollInterval); // singleshot
-            }
+            processEvent(event);
         }
         if (bytesAvailable > 0) {
             // copy partial event to beginning of buffer
@@ -411,6 +446,7 @@ void KDirWatchPrivate::inotifyEventReceived()
             offsetStartRead = bytesAvailable;
         }
     }
+#endif
 #endif
 }
 
