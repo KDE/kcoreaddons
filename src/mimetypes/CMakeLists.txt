@@ -1,8 +1,7 @@
 # always install the mime-types
 install(FILES kde6.xml DESTINATION ${KDE_INSTALL_MIMEDIR})
 
-# for KDE frameworks 5 we require at least version 1.8
-find_package(SharedMimeInfo 1.8)
+find_package(SharedMimeInfo 2.1)
 set_package_properties(SharedMimeInfo PROPERTIES
     TYPE OPTIONAL
     PURPOSE "Allows KDE applications to determine file types"
