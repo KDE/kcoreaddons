@@ -18,6 +18,8 @@
 
 #include <libprocstat.h>
 
+#include "kuser.h"
+
 namespace KProcessList
 {
 struct ProcStat {
@@ -115,7 +117,7 @@ public:
             }
 
             pid_t pid = proc->ki_pid;
-            QString user = QString::fromLocal8Bit(proc->ki_login);
+            QString user = KUser(proc->ki_ruid).loginName();
             return KProcessInfo(pid, command_line.join(QString::fromLocal8Bit(" ")), command, user);
         }
     };
