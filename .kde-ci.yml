@@ -8,7 +8,7 @@ Dependencies:
 
 Options:
  test-before-installing: true
- require-passing-tests-on: ['Linux']
+ require-passing-tests-on: ['Linux', 'FreeBSD']
  cppcheck-arguments:
   - --enable=warning,style,performance
   - --suppress-xml=cppcheck-suppressions.xml
