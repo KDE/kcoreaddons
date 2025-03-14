@@ -271,7 +271,6 @@ void KDirWatchPrivate::inotifyEventReceived()
 
     auto processEvent = [this](const struct inotify_event *const event)
     {
-        QString path;
         // strip trailing null chars, see inotify_event documentation
         // these must not end up in the final QString version of path
         int len = event->len;
@@ -279,9 +278,7 @@ void KDirWatchPrivate::inotifyEventReceived()
             --len;
         }
         QByteArray cpath(event->name, len);
-        if (len) {
-            path = QFile::decodeName(cpath);
-        }
+        const QString path = len ? QFile::decodeName(cpath) : QString();
 
         if (!path.isEmpty() && isNoisyFile(cpath.data())) {
             return;
