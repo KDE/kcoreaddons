@@ -17,8 +17,6 @@
 #include <memory>
 #include <vector>
 
-using namespace KDevCoreAddons;
-
 class PublicSequentialCompoundJob : public KSequentialCompoundJob
 {
 public:
@@ -208,7 +206,7 @@ void KSequentialCompoundJobTest::addRemoveClearSubjob()
     QCOMPARE(subjob->parent(), nullptr);
     QVERIFY(!compoundJob->removeSubjob(subjob));
 
-    subjob->emitInfoMessage("hi");
+    subjob->emitInfoMessage(QStringLiteral("hi"));
     QCOMPARE(subjobSpy.infoMessage.count(), 1);
     subjob->setPercent(10);
     QCOMPARE(subjobSpy.percentChanged.count(), 1);
@@ -224,11 +222,11 @@ void KSequentialCompoundJobTest::addRemoveClearSubjob()
     QCOMPARE(compoundSpy.infoMessage.count(), 0);
     QCOMPARE(compoundSpy.percentChanged.count(), 0);
 
-    subjob->emitInfoMessage("there");
+    subjob->emitInfoMessage(QStringLiteral("there"));
     QCOMPARE(subjobSpy.infoMessage.count(), 2);
     QCOMPARE(compoundSpy.infoMessage.count(), 1);
     QCOMPARE(compoundSpy.infoMessage.constLast().at(0).value<KJob *>(), subjob);
-    QCOMPARE(compoundSpy.infoMessage.constLast().at(1), "there");
+    QCOMPARE(compoundSpy.infoMessage.constLast().at(1), QStringLiteral("there"));
 
     subjob->setPercent(25);
     QCOMPARE(subjobSpy.percentChanged.count(), 2);
@@ -256,7 +254,7 @@ void KSequentialCompoundJobTest::addRemoveClearSubjob()
     QCOMPARE(subjob->parent(), nullptr);
     QVERIFY(!compoundJob->removeSubjob(subjob));
 
-    subjob->emitInfoMessage("!");
+    subjob->emitInfoMessage(QStringLiteral("!"));
     QCOMPARE(subjobSpy.infoMessage.count(), 3);
     subjob->setPercent(91);
     QCOMPARE(subjobSpy.percentChanged.count(), 4);
@@ -305,17 +303,17 @@ void KSequentialCompoundJobTest::addClearSubjobs()
     QVERIFY(!compoundJob->addSubjob(subjob1));
     QCOMPARE(compoundJob->subjobs(), expectedSubjobList);
 
-    subjob1->emitInfoMessage("take");
+    subjob1->emitInfoMessage(QStringLiteral("take"));
     QCOMPARE(subjob1Spy.infoMessage.count(), 1);
     QCOMPARE(compoundSpy.infoMessage.count(), 1);
     QCOMPARE(compoundSpy.infoMessage.constLast().at(0).value<KJob *>(), subjob1);
-    QCOMPARE(compoundSpy.infoMessage.constLast().at(1), "take");
+    QCOMPARE(compoundSpy.infoMessage.constLast().at(1), QStringLiteral("take"));
 
-    subjob2->emitInfoMessage("that");
+    subjob2->emitInfoMessage(QStringLiteral("that"));
     QCOMPARE(subjob2Spy.infoMessage.count(), 1);
     QCOMPARE(compoundSpy.infoMessage.count(), 2);
     QCOMPARE(compoundSpy.infoMessage.constLast().at(0).value<KJob *>(), subjob2);
-    QCOMPARE(compoundSpy.infoMessage.constLast().at(1), "that");
+    QCOMPARE(compoundSpy.infoMessage.constLast().at(1), QStringLiteral("that"));
 
     subjob1->setPercent(31);
     QCOMPARE(subjob1Spy.percentChanged.count(), 1);
@@ -358,8 +356,8 @@ void KSequentialCompoundJobTest::addClearSubjobs()
     QVERIFY(!compoundJob->removeSubjob(subjob1));
     QCOMPARE(compoundJob->subjobs(), {});
 
-    subjob1->emitInfoMessage("lost");
-    subjob2->emitInfoMessage("too");
+    subjob1->emitInfoMessage(QStringLiteral("lost"));
+    subjob2->emitInfoMessage(QStringLiteral("too"));
     subjob1->setPercent(99);
     subjob2->setPercent(100);
     QCOMPARE(compoundSpy.infoMessage.count(), 2);
@@ -521,10 +519,10 @@ void KSequentialCompoundJobTest::abortOnSubjobError()
 
     QCOMPARE(started2Spy.count(), 0);
     subjob1->setError(244);
-    subjob1->setErrorText("Crashed");
+    subjob1->setErrorText(QStringLiteral("Crashed"));
     subjob1->emitResult();
     QCOMPARE(compoundJob->error(), 244);
-    QCOMPARE(compoundJob->errorText(), "Crashed");
+    QCOMPARE(compoundJob->errorText(), QStringLiteral("Crashed"));
     QCOMPARE(compoundSpy.finished.count(), 1);
     QCOMPARE(compoundSpy.result.count(), 1);
 
@@ -565,7 +563,7 @@ void KSequentialCompoundJobTest::disableAbortOnSubjobError()
 
     QCOMPARE(started2Spy.count(), 0);
     subjob1->setError(105);
-    subjob1->setErrorText("Failed");
+    subjob1->setErrorText(QStringLiteral("Failed"));
     subjob1->emitResult();
     QCOMPARE(started2Spy.count(), 1);
     QCOMPARE(subjob1->parent(), nullptr);
@@ -582,13 +580,13 @@ void KSequentialCompoundJobTest::disableAbortOnSubjobError()
     QCOMPARE(compoundSpy.percentChanged.constLast().at(1), 50);
     QCOMPARE(compoundJob->percent(), 50);
     QCOMPARE(compoundJob->error(), 0);
-    QCOMPARE(compoundJob->errorText(), "");
+    QCOMPARE(compoundJob->errorText(), QStringLiteral(""));
     QCOMPARE(compoundSpy.finished.count(), 0);
     QCOMPARE(compoundSpy.result.count(), 0);
 
     QFETCH(const bool, lastSubjobError);
     const int errorCode = lastSubjobError ? 902 : 0;
-    const QString errorText = lastSubjobError ? "broken pipe" : "";
+    const QString errorText = lastSubjobError ? QStringLiteral("broken pipe") : QString();
     if (lastSubjobError) {
         subjob2->setError(errorCode);
         subjob2->setErrorText(errorText);
@@ -636,10 +634,10 @@ void KSequentialCompoundJobTest::finishWrongSubjob()
     compoundJob->start();
 
     subjob2->setError(543);
-    subjob2->setErrorText("Canceled");
+    subjob2->setErrorText(QStringLiteral("Canceled"));
     subjob2->emitResult();
     QCOMPARE(subjob2->error(), 543);
-    QCOMPARE(subjob2->errorText(), "Canceled");
+    QCOMPARE(subjob2->errorText(), QStringLiteral("Canceled"));
     QCOMPARE(started2Spy.count(), 0);
     QCOMPARE(subjob2Spy.finished.count(), 1);
     QCOMPARE(subjob2Spy.result.count(), 1);
@@ -651,7 +649,7 @@ void KSequentialCompoundJobTest::finishWrongSubjob()
     QVERIFY(!subjob2);
 
     QCOMPARE(compoundJob->error(), 0);
-    QCOMPARE(compoundJob->errorText(), "");
+    QCOMPARE(compoundJob->errorText(), QString());
     QCOMPARE(compoundSpy.finished.count(), 0);
     QCOMPARE(compoundSpy.result.count(), 0);
 
@@ -659,7 +657,7 @@ void KSequentialCompoundJobTest::finishWrongSubjob()
     QCOMPARE(subjob1->parent(), nullptr);
     QCOMPARE(compoundJob->subjobs(), {});
     QCOMPARE(compoundJob->error(), 0);
-    QCOMPARE(compoundJob->errorText(), "");
+    QCOMPARE(compoundJob->errorText(), QString());
     QCOMPARE(compoundSpy.finished.count(), 1);
     QCOMPARE(compoundSpy.result.count(), 1);
 
@@ -709,7 +707,7 @@ void KSequentialCompoundJobTest::killUnstartedCompoundJob()
         QVERIFY(spy->job);
         // no need to kill unstarted subjobs, just destroy them
         QCOMPARE(spy->job->error(), 0);
-        QCOMPARE(spy->job->errorText(), "");
+        QCOMPARE(spy->job->errorText(), QString());
     }
     QTest::qWait(1);
     QVERIFY(!compoundJob);
@@ -759,13 +757,13 @@ void KSequentialCompoundJobTest::killFinishedCompoundJob()
     QCOMPARE(compoundSpy.finished.count(), 1);
     QCOMPARE(compoundSpy.result.count(), 1);
     QCOMPARE(compoundJob->error(), 0);
-    QCOMPARE(compoundJob->errorText(), "");
+    QCOMPARE(compoundJob->errorText(), QString());
 
     QVERIFY(compoundJob);
     for (const auto &spy : subjobSpies) {
         QVERIFY(spy->job);
         QCOMPARE(spy->job->error(), 0);
-        QCOMPARE(spy->job->errorText(), "");
+        QCOMPARE(spy->job->errorText(), QString());
     }
     QTest::qWait(1);
     QVERIFY(!compoundJob);
@@ -814,7 +812,7 @@ void KSequentialCompoundJobTest::killRunningCompoundJob()
         QVERIFY(spy->job);
         if (spy.get() != &firstSubjobSpy) {
             QCOMPARE(spy->job->error(), 0);
-            QCOMPARE(spy->job->errorText(), "");
+            QCOMPARE(spy->job->errorText(), QString());
         }
     }
     QTest::qWait(1);
@@ -858,9 +856,9 @@ void KSequentialCompoundJobTest::killingSubjobFails()
     QCOMPARE(compoundJob->subjobs().count(), subjobSpies.size());
 
     QCOMPARE(firstSubjobSpy.job->error(), 0);
-    QCOMPARE(firstSubjobSpy.job->errorText(), "");
+    QCOMPARE(firstSubjobSpy.job->errorText(), QString());
     QCOMPARE(compoundJob->error(), 0);
-    QCOMPARE(compoundJob->errorText(), "");
+    QCOMPARE(compoundJob->errorText(), QString());
 
     // unstarted subjobs are simply removed when finished, their errors are ignored
 
@@ -891,7 +889,7 @@ void KSequentialCompoundJobTest::killingSubjobFails()
     QVERIFY(!compoundJob->subjobs().contains(killedSubjobSpy.job));
 
     QCOMPARE(compoundJob->error(), 0);
-    QCOMPARE(compoundJob->errorText(), "");
+    QCOMPARE(compoundJob->errorText(), QString());
 
     firstSubjobSpy.job->emitResult();
     QCOMPARE(firstSubjobSpy.started.count(), 1);

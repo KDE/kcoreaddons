@@ -14,11 +14,9 @@
 
 #include "kcompoundjob_p.h"
 
-namespace KDevCoreAddons
-{
 // This is a private class, but it's exported for KIO::Job's
 // usage. Other Job classes in KDE Frameworks may use it too.
-class KDEVPLATFORMUTIL_EXPORT KSequentialCompoundJobPrivate : public KCompoundJobPrivate
+class KCOREADDONS_EXPORT KSequentialCompoundJobPrivate : public KCompoundJobPrivate
 {
 public:
     KSequentialCompoundJobPrivate();
@@ -45,7 +43,5 @@ public:
 
     Q_DECLARE_PUBLIC(KSequentialCompoundJob)
 };
-
-} // namespace KDevCoreAddons
 
 #endif
