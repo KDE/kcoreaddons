@@ -10,12 +10,9 @@
 #ifndef KSEQUENTIALCOMPOUNDJOB_H
 #define KSEQUENTIALCOMPOUNDJOB_H
 
-#include "kcompoundjob.h"
+#include <kcoreaddons_export.h>
+#include <kcompoundjob.h>
 
-#include <util/utilexport.h>
-
-namespace KDevCoreAddons
-{
 class KSequentialCompoundJobPrivate;
 /*!
  * \class KSequentialCompoundJob ksequentialcompoundjob.h KSequentialCompoundJob
@@ -30,7 +27,7 @@ class KSequentialCompoundJobPrivate;
  * addSubjob() protected. KSimpleSequentialCompoundJob makes addSubjob() public
  * and can be used on its own.
  */
-class KDEVPLATFORMUTIL_EXPORT KSequentialCompoundJob : public KCompoundJob
+class KCOREADDONS_EXPORT KSequentialCompoundJob : public KCompoundJob
 {
     Q_OBJECT
 public:
@@ -101,7 +98,5 @@ protected:
 private:
     Q_DECLARE_PRIVATE(KSequentialCompoundJob)
 };
-
-} // namespace KDevCoreAddons
 
 #endif

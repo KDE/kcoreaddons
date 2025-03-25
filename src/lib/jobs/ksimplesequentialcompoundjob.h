@@ -9,26 +9,21 @@
 #ifndef KSIMPLESEQUENTIALCOMPOUNDJOB_H
 #define KSIMPLESEQUENTIALCOMPOUNDJOB_H
 
-#include "ksequentialcompoundjob.h"
+#include <kcoreaddons_export.h>
+#include <ksequentialcompoundjob.h>
 
-#include <util/utilexport.h>
-
-namespace KDevCoreAddons
-{
 /*!
  * \class KSimpleSequentialCompoundJob ksimplesequentialcompoundjob.h KSimpleSequentialCompoundJob
  *
  * A sequential compound job with public addSubjob().
  * \sa KSequentialCompoundJob
  */
-class KDEVPLATFORMUTIL_EXPORT KSimpleSequentialCompoundJob : public KSequentialCompoundJob
+class KCOREADDONS_EXPORT KSimpleSequentialCompoundJob : public KSequentialCompoundJob
 {
     Q_OBJECT
 public:
     using KSequentialCompoundJob::addSubjob;
     using KSequentialCompoundJob::KSequentialCompoundJob;
 };
-
-} // namespace KDevCoreAddons
 
 #endif

@@ -124,9 +124,11 @@ target_sources(KF6CoreAddons PRIVATE
     io/kfileutils.cpp
     io/knetworkmounts.cpp
     jobs/kcompositejob.cpp
+    jobs/kcompoundjob.cpp
     jobs/kjob.cpp
     jobs/kjobtrackerinterface.cpp
     jobs/kjobuidelegate.cpp
+    jobs/ksequentialcompoundjob.cpp
     plugin/kpluginfactory.cpp
     plugin/kpluginmetadata.cpp
     plugin/kstaticpluginhelpers.cpp
