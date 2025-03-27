@@ -93,7 +93,7 @@ protected:
 
     bool doKill() override;
 
-    KSequentialCompoundJob(KSequentialCompoundJobPrivate &dd, QObject *parent);
+    KCOREADDONS_NO_EXPORT KSequentialCompoundJob(KSequentialCompoundJobPrivate &dd, QObject *parent);
 
 private:
     Q_DECLARE_PRIVATE(KSequentialCompoundJob)

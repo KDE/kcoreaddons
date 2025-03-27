@@ -105,7 +105,7 @@ protected Q_SLOTS:
     virtual void subjobInfoMessage(KJob *job, const QString &message);
 
 protected:
-    KCompoundJob(KCompoundJobPrivate &dd, QObject *parent);
+    KCOREADDONS_NO_EXPORT KCompoundJob(KCompoundJobPrivate &dd, QObject *parent);
 
 private:
     Q_DECLARE_PRIVATE(KCompoundJob)
