@@ -161,9 +161,12 @@ target_sources(KF6CoreAddons PRIVATE
     io/kfileutils.h
     io/knetworkmounts.h
     jobs/kcompositejob.h
+    jobs/kcompoundjob.h
     jobs/kjob.h
     jobs/kjobtrackerinterface.h
     jobs/kjobuidelegate.h
+    jobs/ksequentialcompoundjob.h
+    jobs/ksimplesequentialcompoundjob.h
     plugin/kpluginfactory.h
     plugin/kpluginmetadata.h
     randomness/krandom.h
@@ -320,9 +323,12 @@ ecm_generate_headers(KCoreAddons_HEADERS
 ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
         KCompositeJob
+        KCompoundJob
         KJob
         KJobTrackerInterface
         KJobUiDelegate
+        KSequentialCompoundJob
+        KSimpleSequentialCompoundJob
     RELATIVE jobs
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )

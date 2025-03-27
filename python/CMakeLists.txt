@@ -24,6 +24,7 @@ set(generated_sources
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kbackup_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kcharmacroexpander_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kcompositejob_wrapper.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kcompoundjob_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kdirwatch_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kfilesystemtype_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kfileutils_wrapper.cpp
@@ -45,9 +46,11 @@ set(generated_sources
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kprocess_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/krandom_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kruntimeplatform_wrapper.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/ksequentialcompoundjob_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kshareddatacache_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kshell_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/ksignalhandler_wrapper.cpp
+    ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/ksimplesequentialcompoundjob_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kstringhandler_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/ktexttohtml_wrapper.cpp
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kurlmimedata_wrapper.cpp
