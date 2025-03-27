@@ -9,6 +9,7 @@
 
 #include "ksequentialcompoundjob.h"
 #include "ksequentialcompoundjob_p.h"
+
 #include "kcoreaddons_debug.h"
 
 KSequentialCompoundJobPrivate::KSequentialCompoundJobPrivate() = default;

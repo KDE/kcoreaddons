@@ -10,8 +10,8 @@
 #ifndef KSEQUENTIALCOMPOUNDJOB_H
 #define KSEQUENTIALCOMPOUNDJOB_H
 
-#include <kcoreaddons_export.h>
 #include <kcompoundjob.h>
+#include <kcoreaddons_export.h>
 
 class KSequentialCompoundJobPrivate;
 /*!

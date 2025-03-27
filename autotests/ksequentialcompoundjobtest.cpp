@@ -580,7 +580,7 @@ void KSequentialCompoundJobTest::disableAbortOnSubjobError()
     QCOMPARE(compoundSpy.percentChanged.constLast().at(1), 50);
     QCOMPARE(compoundJob->percent(), 50);
     QCOMPARE(compoundJob->error(), 0);
-    QCOMPARE(compoundJob->errorText(), QStringLiteral(""));
+    QCOMPARE(compoundJob->errorText(), QString());
     QCOMPARE(compoundSpy.finished.count(), 0);
     QCOMPARE(compoundSpy.result.count(), 0);
 
