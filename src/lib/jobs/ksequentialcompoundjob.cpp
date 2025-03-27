@@ -24,7 +24,7 @@ void KSequentialCompoundJobPrivate::startNextSubjob()
 {
     ++m_jobIndex;
     Q_ASSERT(!m_subjobs.empty());
-    auto *const job = m_subjobs.front();
+    auto *const job = m_subjobs.constFirst();
 
     qCDebug(KCOREADDONS_DEBUG) << "starting subjob" << m_jobIndex + 1 << "of" << m_jobCount << ':' << job;
     job->start();
@@ -160,7 +160,7 @@ bool KSequentialCompoundJob::doKill()
         return true;
     }
 
-    auto *const job = d->m_subjobs.front();
+    auto *const job = d->m_subjobs.constFirst();
     qCDebug(KCOREADDONS_DEBUG) << "killing running subjob" << job;
 
     d->m_killingSubjob = true;
