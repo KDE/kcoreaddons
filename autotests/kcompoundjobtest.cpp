@@ -238,3 +238,5 @@ void KCompoundJobTest::testFinishingSubjob()
 }
 
 QTEST_GUILESS_MAIN(KCompoundJobTest)
+
+#include "moc_kcompoundjobtest.cpp"
