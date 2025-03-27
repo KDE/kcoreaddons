@@ -35,6 +35,7 @@ SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accept
     <namespace-type name="KBackup" />
     <object-type name="KCharMacroExpander" />
     <object-type name="KCompositeJob" />
+    <object-type name="KCompoundJob" />
     <object-type name="KDirWatch">
         <enum-type name="Method" />
         <enum-type name="WatchMode" flags="WatchModes" />
@@ -85,6 +86,7 @@ SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accept
     </object-type>
     <namespace-type name="KRandom" />
     <namespace-type name="KRuntimePlatform" />
+    <object-type name="KSequentialCompoundJob" />
     <object-type name="KSharedDataCache">
         <enum-type name="EvictionPolicy" />
     </object-type>
@@ -98,6 +100,7 @@ SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accept
         </modify-function>
     </namespace-type>
     <object-type name="KSignalHandler" />
+    <object-type name="KSimpleSequentialCompoundJob" />
     <namespace-type name="KStringHandler" />
     <namespace-type name="KTextToHTML">
         <enum-type name="Option" flags="Options" />
