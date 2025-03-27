@@ -1012,3 +1012,5 @@ void KSequentialCompoundJobTest::killRunningCompoundJobRepeatedly()
 }
 
 QTEST_GUILESS_MAIN(KSequentialCompoundJobTest)
+
+#include "moc_ksequentialcompoundjobtest.cpp"
