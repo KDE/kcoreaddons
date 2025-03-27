@@ -61,7 +61,12 @@ class KCompoundJobTest : public QObject
     Q_OBJECT
 
 public:
-    enum class Action { Finish, KillVerbosely, KillQuietly, Destroy };
+    enum class Action {
+        Finish,
+        KillVerbosely,
+        KillQuietly,
+        Destroy
+    };
     Q_ENUM(Action)
 
     KCompoundJobTest();
