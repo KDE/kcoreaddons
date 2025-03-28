@@ -26,6 +26,8 @@ class KSequentialCompoundJobPrivate;
  * called before start(). A derived class that adds subjobs itself can keep
  * addSubjob() protected. KSimpleSequentialCompoundJob makes addSubjob() public
  * and can be used on its own.
+ *
+ * @since 6.14
  */
 class KCOREADDONS_EXPORT KSequentialCompoundJob : public KCompoundJob
 {
