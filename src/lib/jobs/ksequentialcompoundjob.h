@@ -22,10 +22,10 @@ class KSequentialCompoundJobPrivate;
  * information, overall progress and errors are propagated from subjobs.
  *
  * The public API does not allow to add subjobs, so KSequentialCompoundJob is
- * usable only as a base class. addSubjob() is protected because it should be
+ * usable only as a base class. addSubjob() is \c protected because it should be
  * called before start(). A derived class that adds subjobs itself can keep
- * addSubjob() protected. KSimpleSequentialCompoundJob makes addSubjob() public
- * and can be used on its own.
+ * addSubjob() \c protected. KSimpleSequentialCompoundJob makes addSubjob()
+ * \c public and can be used on its own.
  *
  * \since 6.15
  */
@@ -34,19 +34,19 @@ class KCOREADDONS_EXPORT KSequentialCompoundJob : public KCompoundJob
     Q_OBJECT
 public:
     /*!
-     * Creates a new KSequentialCompoundJob object.
+     * Create a new KSequentialCompoundJob object.
      *
      * \a parent the parent QObject
      */
     explicit KSequentialCompoundJob(QObject *parent = nullptr);
 
     /*!
-     * Destroys a KSequentialCompoundJob object.
+     * Destroy a KSequentialCompoundJob object.
      */
     ~KSequentialCompoundJob() override;
 
     /*!
-     * Configures whether this compound job finishes as soon as
+     * Configure whether this compound job finishes as soon as
      * a subjob finishes with error.
      *
      * By default, unless \a abort is set to \c false, when a subjob
@@ -56,17 +56,18 @@ public:
     void setAbortOnSubjobError(bool abort);
 
     /*!
-     * Starts running subjobs beginning with the first subjob in the list
+     * Start running subjobs beginning with the first subjob in the list.
      */
     void start() override;
 
 protected Q_SLOTS:
     /*!
      * \warning The default implementations of removeSubjob() and clearSubjobs()
-     * are inherited from KCompoundJob. They simply deregister subjobs and never
-     * finish the compound job or start the next subjob in the list. They also
-     * do not adjust progress data. As a result, if these functions are called,
-     * the compound job's progress will likely never reach 100%.
+     *          are inherited from KCompoundJob. They simply deregister and
+     *          disown subjobs, and never finish the compound job or start the
+     *          next subjob in the list. They also do not adjust progress data.
+     *          As a result, if a derived class calls one of these functions,
+     *          the progress of the compound job will likely never reach 100%.
      *
      * \sa addSubjob()
      */
@@ -79,11 +80,18 @@ protected Q_SLOTS:
      */
     virtual void subjobPercentChanged(KJob *job, unsigned long percent);
 
+    /*!
+     * This slot is invoked whenever a subjob finishes.
+     *
+     * The default implementation calls removeSubjob() on the finished subjob,
+     * updates the overall progress of this compound job,
+     * propagates subjob errors, and starts the next subjob.
+     */
     void subjobFinished(KJob *job) override;
 
 protected:
     /*!
-     * Adds a subjob that will run once all preceding subjobs finish
+     * Add a subjob that will run once all preceding subjobs finish.
      *
      * If possible, all subjobs should be added before calling start().
      * If a subjob is added after the compound job's percent() becomes
@@ -93,6 +101,9 @@ protected:
      */
     bool addSubjob(KJob *job) override;
 
+    /*!
+     * Kill this job and the subjob that is currently running, if any.
+     */
     bool doKill() override;
 
     KCOREADDONS_NO_EXPORT KSequentialCompoundJob(KSequentialCompoundJobPrivate &dd, QObject *parent);

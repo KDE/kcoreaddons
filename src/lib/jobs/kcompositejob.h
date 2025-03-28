@@ -38,7 +38,7 @@ class KCompositeJobPrivate;
  *    of a composite job's and its subjobs' finished() and result() signals can break things.
  * 2. Two protected virtual slots are renamed in KCompoundJob:
  *    slotResult() to subjobFinished() and slotInfoMessage() to subjobInfoMessage().
- * 3. The protected function clearSubjobs() is virtual in KCompoundJob.
+ * 3. The protected function clearSubjobs() is \c virtual in KCompoundJob.
  * 4. Unlike KCompositeJob::slotResult(), KCompoundJob::subjobFinished() does not acquire the
  *    error code and text of a subjob that finishes after the compound job itself finishes.
  */

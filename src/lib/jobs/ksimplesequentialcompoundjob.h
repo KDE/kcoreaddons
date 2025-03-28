@@ -15,7 +15,7 @@
 /*!
  * \class KSimpleSequentialCompoundJob ksimplesequentialcompoundjob.h KSimpleSequentialCompoundJob
  *
- * A sequential compound job with public addSubjob().
+ * A sequential compound job with \c public addSubjob().
  * \sa KSequentialCompoundJob
  *
  * \since 6.15
