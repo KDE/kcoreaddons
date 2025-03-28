@@ -21,18 +21,41 @@ class KCompositeJobPrivate;
  *
  * \brief The base class for all jobs able to be composed of one
  * or more subjobs.
+ *
+ * \deprecated [6.15] in favor of a new replacement class KCompoundJob.
+ *
+ * Differences between the two classes to be aware of while porting to KCompoundJob:
+ * 1. The most significant difference between KCompositeJob and KCompoundJob is
+ *    that the former connects a virtual subjob-finished slot to the result() and
+ *    the latter - to the finished() signal of each subjob. Thus, unlike KCompositeJob,
+ *    KCompoundJob also removes subjobs that are killed quietly or destroyed.
+ *    This difference between the two classes causes the following possibly breaking change.
+ *    If a KJob emits the result() signal, it always does so right after emitting the
+ *    finished() signal. Therefore, KCompositeJob always handles a subjob's result after all
+ *    slots connected to the subjob's finished() signal return. In contrast, KCompoundJob's
+ *    handling of a finishing subjob can occur in between the invocations of the slots connected
+ *    to the subjob's finished() signal. Therefore, porting code that depends on relative order
+ *    of a composite job's and its subjobs' finished() and result() signals can break things.
+ * 2. Two protected virtual slots are renamed in KCompoundJob:
+ *    slotResult() to subjobFinished() and slotInfoMessage() to subjobInfoMessage().
+ * 3. The protected function clearSubjobs() is virtual in KCompoundJob.
+ * 4. Unlike KCompositeJob::slotResult(), KCompoundJob::subjobFinished() does not acquire the
+ *    error code and text of a subjob that finishes after the compound job itself finishes.
  */
 class KCOREADDONS_EXPORT KCompositeJob : public KJob
 {
     Q_OBJECT
 
 public:
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(6, 15)
     /*!
      * Creates a new KCompositeJob object.
      *
      * \a parent the parent QObject
      */
+    KCOREADDONS_DEPRECATED_VERSION(6, 15, "Use KCompoundJob instead")
     explicit KCompositeJob(QObject *parent = nullptr);
+#endif
 
     ~KCompositeJob() override;
 
@@ -104,7 +127,10 @@ protected Q_SLOTS:
     virtual void slotInfoMessage(KJob *job, const QString &message);
 
 protected:
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(6, 15)
+    KCOREADDONS_DEPRECATED_VERSION(6, 15, "Use KCompoundJob instead")
     KCOREADDONS_NO_EXPORT KCompositeJob(KCompositeJobPrivate &dd, QObject *parent);
+#endif
 
 private:
     Q_DECLARE_PRIVATE(KCompositeJob)
