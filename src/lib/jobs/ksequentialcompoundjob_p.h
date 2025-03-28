@@ -23,9 +23,9 @@ public:
     bool isCurrentlyRunningSubjob(KJob *job) const;
 
     /**
-     * Starts m_subjobs.front().
+     * Start @a m_subjobs.front().
      *
-     * @pre !m_subjobs.empty()
+     * @pre @a !m_subjobs.empty()
      */
     void startNextSubjob();
 

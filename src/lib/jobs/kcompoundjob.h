@@ -49,7 +49,7 @@ protected:
      * Note that the compound job takes ownership of @p job
      *
      * @param job the subjob to add
-     * @return true if the job has been added correctly, false otherwise
+     * @return whether the job has been added correctly
      */
     virtual bool addSubjob(KJob *job);
 
@@ -59,26 +59,22 @@ protected:
      * The ownership of @p job is passed on to the caller.
      *
      * @param job the subjob to remove
-     * @return true if the job has been removed correctly, false otherwise
+     * @return whether the job has been removed correctly
      */
     virtual bool removeSubjob(KJob *job);
 
     /**
-     * Checks if this job has subjobs running.
-     *
-     * @return true if we still have subjobs running, false otherwise
+     * @return whether this job has subjobs running
      */
     bool hasSubjobs() const;
 
     /**
-     * Retrieves the list of the subjobs.
-     *
-     * @return the full list of sub jobs
+     * @return the full list of subjobs
      */
     const QList<KJob *> &subjobs() const;
 
     /**
-     * Clears the list of subjobs.
+     * Clear the list of subjobs.
      *
      * Note that this will *not* delete the subjobs.
      * Ownership of the subjobs is passed on to the caller.
@@ -87,9 +83,10 @@ protected:
 
 protected Q_SLOTS:
     /**
-     * Called whenever a subjob finishes.
-     * Default implementation checks for errors and propagates
-     * to parent job, and in all cases it calls removeSubjob.
+     * This slot is invoked whenever a subjob finishes.
+     *
+     * The default implementation checks for errors and propagates
+     * to the compound job, and in all cases calls removeSubjob().
      *
      * @param job the subjob
      */
