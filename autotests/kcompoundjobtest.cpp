@@ -74,7 +74,9 @@ void TestCompoundJob::subjobFinished(KJob *job)
     KCompoundJob::subjobFinished(job);
 
     if (error()) {
-        return; // KCompoundJob::subjobFinished() must have called emitResult().
+        // KCompoundJob::subjobFinished() must have called emitResult()
+        QVERIFY(isFinished());
+        return;
     }
     if (hasSubjobs()) {
         // start next
