@@ -4,7 +4,7 @@
 set(bindings_library "KCoreAddons")
 
 set(wrapped_header ${CMAKE_CURRENT_SOURCE_DIR}/bindings.h)
-set(typesystem_file ${CMAKE_CURRENT_SOURCE_DIR}/bindings.xml)
+set(typesystem_file ${CMAKE_CURRENT_SOURCE_DIR}/typesystem_kcoreaddons.xml)
 
 set(generated_sources
     ${CMAKE_CURRENT_BINARY_DIR}/KCoreAddons/kcoreaddons_module_wrapper.cpp
