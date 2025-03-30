@@ -1090,7 +1090,7 @@ Notes:
     <comment xml:lang="zh_TW">KPhotoAlbum 匯入</comment>
     <glob pattern="*.kim"/>
   </mime-type>
-  <mime-type type="image/x-hdr"> <!-- TODO fdo report -->
+  <mime-type type="image/x-hdr"> <!-- https://gitlab.freedesktop.org/xdg/shared-mime-info/-/merge_requests/320 -->
     <comment>HDR image</comment>
     <comment xml:lang="ar">صورة HDR</comment>
     <comment xml:lang="ast">Imaxe HDR</comment>
