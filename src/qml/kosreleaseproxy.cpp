@@ -101,3 +101,5 @@ QString KOSReleaseProxy::extraValue(const QString &key) const
 {
     return os.extraValue(key);
 }
+
+#include "moc_kosreleaseproxy.cpp"
