@@ -1,14 +1,14 @@
 # Korean messages for kdelibs.
 # Copyright (C) Free Software Foundation, Inc.
 # Cho Sung Jae <cho.sungjae@gmail.com>, 2007.
-# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2024-12-24 16:40+0100\n"
+"PO-Revision-Date: 2025-04-06 22:59+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -233,15 +233,12 @@ msgstr "BSD 3항 \"신규\" 및 \"개정판\" 라이선스"
 #: lib/kaboutdata.cpp:403
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:404
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Q 공중 라이선스"
+msgstr "Mozilla 공중 라이선스 2.0"
 
 #: lib/kaboutdata.cpp:408
 msgctxt "KAboutLicense|@item license"
@@ -678,10 +675,7 @@ msgstr "%1 YiB"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:330
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
@@ -689,10 +683,7 @@ msgstr[0] "%n일"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:335
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
@@ -700,10 +691,7 @@ msgstr[0] "%n시간"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:340
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
@@ -711,10 +699,7 @@ msgstr[0] "%n분"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:345
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
@@ -759,21 +744,17 @@ msgstr "%1시간 %2분 %3초"
 #. ----------
 #. @item:intext abbreviated amount of hours and abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:405 lib/util/kformatprivate.cpp:410
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
 
 #. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 %2%3"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2 %3"
-msgstr "%1 %2%3"
+msgstr "%1 %2 %3"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:422
@@ -941,29 +922,25 @@ msgstr "%1 %2"
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr ""
+msgstr "%1피트"
 
 #: lib/util/kformatprivate.cpp:613 lib/util/kformatprivate.cpp:615
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1분"
+msgstr "%1마일"
 
 #: lib/util/kformatprivate.cpp:621
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 m"
 
 #: lib/util/kformatprivate.cpp:624 lib/util/kformatprivate.cpp:626
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 kB"
+msgstr "%1 km"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
