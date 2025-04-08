@@ -8,11 +8,9 @@
 
 static void markCurrentFunctionAsTranslationBinding(const QObject *obj)
 {
-#if QT_VERSION > QT_VERSION_CHECK(6, 6, 0)
     if (auto engine = qmlEngine(obj); engine) {
         engine->markCurrentFunctionAsTranslationBinding();
     }
-#endif
 }
 
 QString Formats::formatByteSize(double size, int precision) const
