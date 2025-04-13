@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons5_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-03-23 23:59-0300\n"
+"PO-Revision-Date: 2025-03-24 00:12-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -743,7 +743,7 @@ msgstr "%1min%2s"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m"
-msgstr "%1h%2min"
+msgstr "%1h%2"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
 #: lib/util/kformatprivate.cpp:380
