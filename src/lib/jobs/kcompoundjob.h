@@ -47,6 +47,7 @@ protected:
      * the finished() signal has been emitted by the job.
      *
      * Note that the compound job takes ownership of @p job
+     * until it starts and finishes.
      *
      * @param job the subjob to add
      * @return whether the job has been added correctly
