@@ -47,6 +47,7 @@ protected:
      * the finished() signal has been emitted by the job.
      *
      * Note that the compound job takes ownership of \a job
+     * until it starts and finishes.
      *
      * \a job the subjob to add
      *
