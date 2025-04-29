@@ -71,120 +71,120 @@ void KSequentialCompoundJobTest::initTestCase()
 
 void KSequentialCompoundJobTest::runZeroJobs()
 {
-    QPointer master(new KSimpleSequentialCompoundJob);
-    JobSpy masterSpy(master);
+    QPointer compoundJob(new KSimpleSequentialCompoundJob);
+    JobSpy compoundSpy(compoundJob);
 
-    QCOMPARE(masterSpy.finished.count(), 0);
-    QCOMPARE(masterSpy.result.count(), 0);
-    master->start();
-    QCOMPARE(masterSpy.finished.count(), 1);
-    QCOMPARE(masterSpy.result.count(), 1);
+    QCOMPARE(compoundSpy.finished.count(), 0);
+    QCOMPARE(compoundSpy.result.count(), 0);
+    compoundJob->start();
+    QCOMPARE(compoundSpy.finished.count(), 1);
+    QCOMPARE(compoundSpy.result.count(), 1);
 
     QTest::qWait(1);
-    QVERIFY(!master);
+    QVERIFY(!compoundJob);
 }
 
 void KSequentialCompoundJobTest::runOneJob()
 {
-    QPointer slave(new TestJob);
+    QPointer subjob(new TestJob);
 
-    QPointer master(new KSimpleSequentialCompoundJob);
-    QVERIFY(master->addSubjob(slave));
-    JobSpy masterSpy(master);
+    QPointer compoundJob(new KSimpleSequentialCompoundJob);
+    QVERIFY(compoundJob->addSubjob(subjob));
+    JobSpy compoundSpy(compoundJob);
 
-    QSignalSpy startedSpy(slave, &TestJob::started);
-    JobSpy slaveSpy(slave);
+    QSignalSpy startedSpy(subjob, &TestJob::started);
+    JobSpy subjobSpy(subjob);
 
-    master->start();
+    compoundJob->start();
     QCOMPARE(startedSpy.count(), 1);
-    QCOMPARE(slaveSpy.finished.count(), 0);
-    QCOMPARE(masterSpy.finished.count(), 0);
+    QCOMPARE(subjobSpy.finished.count(), 0);
+    QCOMPARE(compoundSpy.finished.count(), 0);
 
-    QCOMPARE(masterSpy.percentChanged.count(), 0);
-    QCOMPARE(master->percent(), 0);
+    QCOMPARE(compoundSpy.percentChanged.count(), 0);
+    QCOMPARE(compoundJob->percent(), 0);
 
-    slave->emitResult();
+    subjob->emitResult();
 
-    QCOMPARE(masterSpy.percentChanged.count(), 1);
-    QCOMPARE(master->percent(), 100);
+    QCOMPARE(compoundSpy.percentChanged.count(), 1);
+    QCOMPARE(compoundJob->percent(), 100);
 
-    QCOMPARE(masterSpy.finished.count(), 1);
-    QCOMPARE(masterSpy.result.count(), 1);
+    QCOMPARE(compoundSpy.finished.count(), 1);
+    QCOMPARE(compoundSpy.result.count(), 1);
 
     QCOMPARE(startedSpy.count(), 1);
-    QCOMPARE(slaveSpy.finished.count(), 1);
-    QCOMPARE(slaveSpy.result.count(), 1);
+    QCOMPARE(subjobSpy.finished.count(), 1);
+    QCOMPARE(subjobSpy.result.count(), 1);
 
     QTest::qWait(1);
 
-    QVERIFY(!slave);
-    QVERIFY(!master);
+    QVERIFY(!subjob);
+    QVERIFY(!compoundJob);
 
-    QCOMPARE(slaveSpy.percentChanged.count(), 0);
-    QCOMPARE(masterSpy.percentChanged.count(), 1);
+    QCOMPARE(subjobSpy.percentChanged.count(), 0);
+    QCOMPARE(compoundSpy.percentChanged.count(), 1);
 }
 
 void KSequentialCompoundJobTest::runTwoJobs()
 {
-    QPointer slave1(new TestJob);
-    QPointer slave2(new TestJob);
+    QPointer subjob1(new TestJob);
+    QPointer subjob2(new TestJob);
 
-    QPointer master(new KSimpleSequentialCompoundJob);
-    QVERIFY(master->addSubjob(slave1));
-    QVERIFY(master->addSubjob(slave2));
-    JobSpy masterSpy(master);
+    QPointer compoundJob(new KSimpleSequentialCompoundJob);
+    QVERIFY(compoundJob->addSubjob(subjob1));
+    QVERIFY(compoundJob->addSubjob(subjob2));
+    JobSpy compoundSpy(compoundJob);
 
-    QSignalSpy started1Spy(slave1, &TestJob::started);
-    QSignalSpy started2Spy(slave2, &TestJob::started);
-    JobSpy slave1Spy(slave1);
-    JobSpy slave2Spy(slave2);
+    QSignalSpy started1Spy(subjob1, &TestJob::started);
+    QSignalSpy started2Spy(subjob2, &TestJob::started);
+    JobSpy subjob1Spy(subjob1);
+    JobSpy subjob2Spy(subjob2);
 
-    master->start();
+    compoundJob->start();
     QCOMPARE(started1Spy.count(), 1);
-    QCOMPARE(slave1Spy.finished.count(), 0);
+    QCOMPARE(subjob1Spy.finished.count(), 0);
     QCOMPARE(started2Spy.count(), 0);
-    QCOMPARE(slave2Spy.finished.count(), 0);
-    QCOMPARE(masterSpy.finished.count(), 0);
+    QCOMPARE(subjob2Spy.finished.count(), 0);
+    QCOMPARE(compoundSpy.finished.count(), 0);
 
-    QCOMPARE(masterSpy.percentChanged.count(), 0);
-    QCOMPARE(master->percent(), 0);
+    QCOMPARE(compoundSpy.percentChanged.count(), 0);
+    QCOMPARE(compoundJob->percent(), 0);
 
-    slave1->emitResult();
+    subjob1->emitResult();
 
-    QCOMPARE(masterSpy.percentChanged.count(), 1);
-    QCOMPARE(master->percent(), 50);
-
-    QCOMPARE(started1Spy.count(), 1);
-    QCOMPARE(slave1Spy.finished.count(), 1);
-    QCOMPARE(started2Spy.count(), 1);
-    QCOMPARE(slave2Spy.finished.count(), 0);
-    QCOMPARE(masterSpy.finished.count(), 0);
-
-    slave2->emitResult();
-
-    QCOMPARE(masterSpy.percentChanged.count(), 2);
-    QCOMPARE(master->percent(), 100);
-
-    QCOMPARE(masterSpy.finished.count(), 1);
-    QCOMPARE(masterSpy.result.count(), 1);
+    QCOMPARE(compoundSpy.percentChanged.count(), 1);
+    QCOMPARE(compoundJob->percent(), 50);
 
     QCOMPARE(started1Spy.count(), 1);
-    QCOMPARE(slave1Spy.finished.count(), 1);
-    QCOMPARE(slave1Spy.result.count(), 1);
+    QCOMPARE(subjob1Spy.finished.count(), 1);
+    QCOMPARE(started2Spy.count(), 1);
+    QCOMPARE(subjob2Spy.finished.count(), 0);
+    QCOMPARE(compoundSpy.finished.count(), 0);
+
+    subjob2->emitResult();
+
+    QCOMPARE(compoundSpy.percentChanged.count(), 2);
+    QCOMPARE(compoundJob->percent(), 100);
+
+    QCOMPARE(compoundSpy.finished.count(), 1);
+    QCOMPARE(compoundSpy.result.count(), 1);
+
+    QCOMPARE(started1Spy.count(), 1);
+    QCOMPARE(subjob1Spy.finished.count(), 1);
+    QCOMPARE(subjob1Spy.result.count(), 1);
 
     QCOMPARE(started2Spy.count(), 1);
-    QCOMPARE(slave2Spy.finished.count(), 1);
-    QCOMPARE(slave2Spy.result.count(), 1);
+    QCOMPARE(subjob2Spy.finished.count(), 1);
+    QCOMPARE(subjob2Spy.result.count(), 1);
 
     QTest::qWait(1);
 
-    QVERIFY(!slave1);
-    QVERIFY(!slave2);
-    QVERIFY(!master);
+    QVERIFY(!subjob1);
+    QVERIFY(!subjob2);
+    QVERIFY(!compoundJob);
 
-    QCOMPARE(slave1Spy.percentChanged.count(), 0);
-    QCOMPARE(slave2Spy.percentChanged.count(), 0);
-    QCOMPARE(masterSpy.percentChanged.count(), 2);
+    QCOMPARE(subjob1Spy.percentChanged.count(), 0);
+    QCOMPARE(subjob2Spy.percentChanged.count(), 0);
+    QCOMPARE(compoundSpy.percentChanged.count(), 2);
 }
 
 void KSequentialCompoundJobTest::addRemoveClearSubjob_data()
