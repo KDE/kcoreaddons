@@ -17,12 +17,12 @@
 # Meni Livne <livne@kde.org>, 2007.
 # tahmar1900 <tahmar1900@gmail.com>, 2008, 2009.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
-# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-01-25 14:35+0200\n"
+"PO-Revision-Date: 2025-04-30 10:06+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"X-Generator: Lokalize 24.12.3\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:243
@@ -272,122 +272,122 @@ msgstr "הספרייה %1 לא מציעה KPluginFactory."
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
 msgid "y"
-msgstr ""
+msgstr "y"
 
 #: lib/util/kformatprivate.cpp:101
 msgctxt "KFormat|SI prefix for 10^⁻21"
 msgid "z"
-msgstr ""
+msgstr "z"
 
 #: lib/util/kformatprivate.cpp:102
 msgctxt "KFormat|SI prefix for 10^⁻18"
 msgid "a"
-msgstr ""
+msgstr "a"
 
 #: lib/util/kformatprivate.cpp:103
 msgctxt "KFormat|SI prefix for 10^⁻15"
 msgid "f"
-msgstr ""
+msgstr "f"
 
 #: lib/util/kformatprivate.cpp:104
 msgctxt "KFormat|SI prefix for 10^⁻12"
 msgid "p"
-msgstr ""
+msgstr "p"
 
 #: lib/util/kformatprivate.cpp:105
 msgctxt "KFormat|SI prefix for 10^⁻9"
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #: lib/util/kformatprivate.cpp:106
 msgctxt "KFormat|SI prefix for 10^⁻6"
 msgid "µ"
-msgstr ""
+msgstr "µ"
 
 #: lib/util/kformatprivate.cpp:107
 msgctxt "KFormat|SI prefix for 10^⁻3"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: lib/util/kformatprivate.cpp:109
 msgctxt "KFormat|SI prefix for 10^3"
 msgid "k"
-msgstr ""
+msgstr "ק"
 
 #: lib/util/kformatprivate.cpp:109
 msgctxt "KFormat|IEC binary prefix for 2^10"
 msgid "Ki"
-msgstr ""
+msgstr "Ki"
 
 #: lib/util/kformatprivate.cpp:110
 msgctxt "KFormat|SI prefix for 10^6"
 msgid "M"
-msgstr ""
+msgstr "מ"
 
 #: lib/util/kformatprivate.cpp:110
 msgctxt "KFormat|IEC binary prefix for 2^20"
 msgid "Mi"
-msgstr ""
+msgstr "Mi"
 
 #: lib/util/kformatprivate.cpp:111
 msgctxt "KFormat|SI prefix for 10^9"
 msgid "G"
-msgstr ""
+msgstr "ג"
 
 #: lib/util/kformatprivate.cpp:111
 msgctxt "KFormat|IEC binary prefix for 2^30"
 msgid "Gi"
-msgstr ""
+msgstr "Gi"
 
 #: lib/util/kformatprivate.cpp:112
 msgctxt "KFormat|SI prefix for 10^12"
 msgid "T"
-msgstr ""
+msgstr "ט"
 
 #: lib/util/kformatprivate.cpp:112
 msgctxt "KFormat|IEC binary prefix for 2^40"
 msgid "Ti"
-msgstr ""
+msgstr "Ti"
 
 #: lib/util/kformatprivate.cpp:113
 msgctxt "KFormat|SI prefix for 10^15"
 msgid "P"
-msgstr ""
+msgstr "פ"
 
 #: lib/util/kformatprivate.cpp:113
 msgctxt "KFormat|IEC binary prefix for 2^50"
 msgid "Pi"
-msgstr ""
+msgstr "Pi"
 
 #: lib/util/kformatprivate.cpp:114
 msgctxt "KFormat|SI prefix for 10^18"
 msgid "E"
-msgstr ""
+msgstr "א"
 
 #: lib/util/kformatprivate.cpp:114
 msgctxt "KFormat|IEC binary prefix for 2^60"
 msgid "Ei"
-msgstr ""
+msgstr "Ei"
 
 #: lib/util/kformatprivate.cpp:115
 msgctxt "KFormat|SI prefix for 10^21"
 msgid "Z"
-msgstr ""
+msgstr "ז"
 
 #: lib/util/kformatprivate.cpp:115
 msgctxt "KFormat|IEC binary prefix for 2^70"
 msgid "Zi"
-msgstr ""
+msgstr "Zi"
 
 #: lib/util/kformatprivate.cpp:116
 msgctxt "KFormat|SI prefix for 10^24"
 msgid "Y"
-msgstr ""
+msgstr "יY"
 
 #: lib/util/kformatprivate.cpp:116
 msgctxt "KFormat|IEC binary prefix for 2^80"
 msgid "Yi"
-msgstr ""
+msgstr "Yi"
 
 #: lib/util/kformatprivate.cpp:125
 msgctxt "KFormat|Symbol of binary digit"
