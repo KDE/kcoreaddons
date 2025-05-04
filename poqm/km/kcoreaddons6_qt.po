@@ -416,7 +416,7 @@ msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "បណ្ណាល័យ %1 មិនផ្ដល់​រោងចក្រ​ឆបគ្នា​នឹង KDE 4 ទេ ។"
 
-#: lib/plugin/kpluginfactory.h:386
+#: lib/plugin/kpluginfactory.h:424
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"

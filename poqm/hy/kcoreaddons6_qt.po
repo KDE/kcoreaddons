@@ -423,7 +423,7 @@ msgstr ""
 "%1 գրադարանը չի տրամադրում տարրերի ստեղծման մեխանիզմ, որը համապատասխանում է "
 "KDE 4։"
 
-#: lib/plugin/kpluginfactory.h:386
+#: lib/plugin/kpluginfactory.h:424
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"

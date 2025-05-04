@@ -345,7 +345,7 @@ msgid "The library %1 does not offer a KPluginFactory."
 msgstr ""
 "Библиотека %1 не предоставляет механизма создания компонентов KPluginFactory."
 
-#: lib/plugin/kpluginfactory.h:386
+#: lib/plugin/kpluginfactory.h:424
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"

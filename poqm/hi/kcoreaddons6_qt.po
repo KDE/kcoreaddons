@@ -344,7 +344,7 @@ msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "संग्रह %1 केप्लगइन फ़ैक्टरी प्रदान नहीं करता।"
 
-#: lib/plugin/kpluginfactory.h:386
+#: lib/plugin/kpluginfactory.h:424
 #, fuzzy, qt-format
 #| msgctxt "KPluginFactory|"
 #| msgid "KPluginFactory could not load the plugin: %1"

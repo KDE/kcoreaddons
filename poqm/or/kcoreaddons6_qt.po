@@ -402,7 +402,7 @@ msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "ଲାଇବ୍ରେରୀ %1 KDE 4 ସୁସଙ୍ଗତ କାରଖାନା ପ୍ରଦାନ କରେନାହିଁ।"
 
-#: lib/plugin/kpluginfactory.h:386
+#: lib/plugin/kpluginfactory.h:424
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
