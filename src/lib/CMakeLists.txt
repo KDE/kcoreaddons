@@ -146,6 +146,8 @@ target_sources(KF6CoreAddons PRIVATE
     util/ksignalhandler.cpp
     util/kmemoryinfo.cpp
     util/kruntimeplatform.cpp
+    util/ksystemclockskewnotifier.cpp
+    util/ksystemclockskewnotifierengine.cpp
 
     kaboutdata.h
     kcoreaddons.h
@@ -177,6 +179,12 @@ target_sources(KF6CoreAddons PRIVATE
     util/kmemoryinfo.h
     util/kruntimeplatform.h
 )
+
+if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Android")
+    target_sources(KF6CoreAddons PRIVATE util/ksystemclockskewnotifierengine_linux.cpp)
+elseif(HAVE_QTDBUS)
+    target_sources(KF6CoreAddons PRIVATE util/ksystemclockskewnotifierengine_dbus.cpp)
+endif()
 
 if(NOT IOS)
     target_sources(KF6CoreAddons PRIVATE
@@ -352,6 +360,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KRuntimePlatform
         KSandbox
         KMemoryInfo
+        KSystemClockSkewNotifier
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )

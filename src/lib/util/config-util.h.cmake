@@ -3,3 +3,5 @@
 #cmakedefine01 HAVE_GETGROUPLIST
 
 #cmakedefine01 HAVE_DLADDR
+
+#cmakedefine01 HAVE_QTDBUS
