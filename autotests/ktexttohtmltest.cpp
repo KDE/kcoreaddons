@@ -329,6 +329,9 @@ void KTextToHTMLTest::testHtmlConvert_data()
                       << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
                       << "the /etc/{rsyslog.d,syslog-ng.d}/package.rpmnew file";
 
+    QTest::newRow("bug504078") << "You should see a _<foo>_ on this line." << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                               << "You should see a <u>_<foo>_</u> on this line.";
+
     // This test has problems with the encoding, apparently.
     // QTest::newRow( "" ) << "*Ça fait plaisir de pouvoir utiliser des lettres accentuées dans du"
     //                       " texte mis en forme*." << 0x09 << "<b>Ça fait plaisir de pouvoir"
