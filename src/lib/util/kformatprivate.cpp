@@ -575,6 +575,16 @@ QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocal
             return tr("%n minute(s) ago", nullptr, minutesToNow);
         }
     }
+    if (secsToNow <= 0 && -secsToNow < secsInAHour) {
+        const int minutesFromNow = -secsToNow / 60;
+        if (minutesFromNow < 1) {
+            return tr("Now");
+        }
+        //: @item:intext %1 is a whole number
+        //~ singular In %n minute
+        //~ plural In %n minutes
+        return tr("In %n minute(s)", nullptr, minutesFromNow);
+    }
 
     const auto timeFormatType = format == QLocale::FormatType::LongFormat ? QLocale::FormatType::ShortFormat : format;
     const qint64 daysToNow = dateTime.daysTo(now);
