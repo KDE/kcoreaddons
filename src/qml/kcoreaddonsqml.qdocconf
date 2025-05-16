@@ -16,6 +16,8 @@ depends += \
     qtqml \
     kcoreaddons
 
+navigation.landingpage  = "KCoreAddons"
+
 qhp.projects            = KCoreAddonsQml
 
 qhp.KCoreAddonsQml.file                = kcoreaddonsqml.qhp
