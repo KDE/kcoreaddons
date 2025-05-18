@@ -1,5 +1,5 @@
 /*
-    This file is part of the KDE Baloo Project
+    This file is part of the KDE libraries
     SPDX-FileCopyrightText: 2014 Raphael Kubo da Costa <rakuco@FreeBSD.org>
 
     SPDX-License-Identifier: LGPL-2.1-or-later
@@ -8,7 +8,6 @@
 #ifndef FILESYSTEMMETADATA_XATTR_P_H
 #define FILESYSTEMMETADATA_XATTR_P_H
 
-#include <QDebug>
 #include <QFile>
 
 #if defined(Q_OS_LINUX) || defined(__GLIBC__)

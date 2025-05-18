@@ -1,5 +1,5 @@
 /*
-    This file is part of the KDE Baloo Project
+    This file is part of the KDE libraries
     SPDX-FileCopyrightText: 2014 Raphael Kubo da Costa <rakuco@FreeBSD.org>
 
     SPDX-License-Identifier: LGPL-2.1-or-later
@@ -10,7 +10,6 @@
 
 #include <QDebug>
 #include <QFile>
-#include <dirent.h>
 
 #include <QFileInfo>
 #include <windows.h>
@@ -28,8 +27,7 @@ inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
                                       NULL,
                                       OPEN_EXISTING,
                                       FILE_FLAG_SEQUENTIAL_SCAN,
-                                      NULL),
-                        &CloseHandle);
+                                      NULL));
 
     if (hFile == INVALID_HANDLE_VALUE) {
         DWORD error = ::GetLastError();
@@ -195,11 +193,7 @@ QStringList k_queryAttributes(QStringView path)
         return fileAttributes;
     }
 
-    const QByteArrayView prefix("user.");
     for (const auto &entry : entries) {
-        if (!entry.startsWith(prefix)) {
-            continue;
-        }
         fileAttributes.append(QString::fromLocal8Bit(entry).sliced(prefix.size()));
     }
     return fileAttributes;

@@ -191,8 +191,11 @@ endif()
 
 if(WIN32)
     target_sources(KF6CoreAddons PRIVATE io/xattr_p_win.h)
-else()
+elseif(LINUX OR APPLE OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "NetBSD")
     target_sources(KF6CoreAddons PRIVATE io/xattr_p_unix.h)
+else()
+    # OpenBSD, Haiku...
+    target_sources(KF6CoreAddons PRIVATE io/xattr_p_unsupported.h)
 endif()
 
 if(NOT IOS)
