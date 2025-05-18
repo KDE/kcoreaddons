@@ -123,6 +123,7 @@ target_sources(KF6CoreAddons PRIVATE
     io/kurlmimedata.cpp
     io/kfileutils.cpp
     io/knetworkmounts.cpp
+    io/filesystemmetadata.cpp
     jobs/kcompositejob.cpp
     jobs/kjob.cpp
     jobs/kjobtrackerinterface.cpp
@@ -158,6 +159,8 @@ target_sources(KF6CoreAddons PRIVATE
     io/kurlmimedata.h
     io/kfileutils.h
     io/knetworkmounts.h
+    io/filesystemmetadata.h
+    io/xattr_p.h
     jobs/kcompositejob.h
     jobs/kjob.h
     jobs/kjobtrackerinterface.h
