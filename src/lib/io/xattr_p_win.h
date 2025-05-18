@@ -21,13 +21,15 @@ namespace
 inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
 {
     const QString fullADSName = path + QLatin1String(":user.") + name;
-    HANDLE hFile = ::CreateFileW(reinterpret_cast<const WCHAR *>(fullADSName.utf16()),
-                                 GENERIC_READ,
-                                 FILE_SHARE_READ,
-                                 NULL,
-                                 OPEN_EXISTING,
-                                 FILE_FLAG_SEQUENTIAL_SCAN,
-                                 NULL);
+    using unique_file_t = std::unique_ptr<HANDLE, decltype(&CloseHandle)>;
+    unique_file_t hFile(::CreateFileW(reinterpret_cast<const WCHAR *>(fullADSName.utf16()),
+                                      GENERIC_READ,
+                                      FILE_SHARE_READ,
+                                      NULL,
+                                      OPEN_EXISTING,
+                                      FILE_FLAG_SEQUENTIAL_SCAN,
+                                      NULL),
+                        &CloseHandle);
 
     if (hFile == INVALID_HANDLE_VALUE) {
         DWORD error = ::GetLastError();
@@ -40,7 +42,6 @@ inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
     BOOL ret = GetFileSizeEx(hFile, &lsize);
 
     if (!ret || lsize.QuadPart > 0x7fffffff || lsize.QuadPart == 0) {
-        CloseHandle(hFile);
         value->clear();
         return lsize.QuadPart == 0 ? 0 : -1;
     }
@@ -49,7 +50,6 @@ inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
     QByteArray data(lsize.QuadPart, Qt::Uninitialized);
     // should we care about attributes longer than 2GiB? - unix xattr are restricted to much lower values
     ret = ::ReadFile(hFile, data.data(), data.size(), &r, NULL);
-    CloseHandle(hFile);
 
     if (!ret) {
         DWORD error = ::GetLastError();
