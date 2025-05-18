@@ -5,7 +5,12 @@
 */
 
 #include "filesystemmetadata.h"
-#include "xattr_p.h"
+
+#if defined(Q_OS_WIN)
+#include "xattr_p_win.h"
+#else
+#include "xattr_p_unix.h"
+#endif
 
 class FilesystemMetaDataPrivate
 {

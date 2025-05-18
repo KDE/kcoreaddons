@@ -160,7 +160,7 @@ target_sources(KF6CoreAddons PRIVATE
     io/kfileutils.h
     io/knetworkmounts.h
     io/filesystemmetadata.h
-    io/xattr_p.h
+
     jobs/kcompositejob.h
     jobs/kjob.h
     jobs/kjobtrackerinterface.h
@@ -187,6 +187,12 @@ if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Android")
     target_sources(KF6CoreAddons PRIVATE util/ksystemclockskewnotifierengine_linux.cpp)
 elseif(HAVE_QTDBUS)
     target_sources(KF6CoreAddons PRIVATE util/ksystemclockskewnotifierengine_dbus.cpp)
+endif()
+
+if(WIN32)
+    target_sources(KF6CoreAddons PRIVATE io/xattr_p_win.h)
+else()
+    target_sources(KF6CoreAddons PRIVATE io/xattr_p_unix.h)
 endif()
 
 if(NOT IOS)
