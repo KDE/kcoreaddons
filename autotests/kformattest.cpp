@@ -425,6 +425,18 @@ void KFormatTest::formatRelativeDate()
     QLocale frenchLocal = QLocale::French;
     KFormat formatFrench(frenchLocal);
     QCOMPARE(formatFrench.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QStringLiteral("Dimanche 3 octobre 2021 at 05:33"));
+
+    // narrow format
+    now = QDateTime::currentDateTime();
+    testDateTime = now.addSecs(-1);
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::NarrowFormat), "Just now"_L1);
+    testDateTime = now.addSecs(1);
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::NarrowFormat), "Now"_L1);
+
+    testDateTime = now.addSecs(-300);
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::NarrowFormat), "5 min(s) ago"_L1);
+    testDateTime = now.addSecs(300);
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::NarrowFormat), "5 min(s)"_L1);
 }
 
 void KFormatTest::formatDistance()

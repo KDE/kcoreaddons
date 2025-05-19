@@ -568,17 +568,26 @@ QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocal
         const int minutesToNow = secsToNow / 60;
         if (minutesToNow <= 1) {
             return tr("Just now");
-        } else {
-            //: @item:intext %1 is a whole number
-            //~ singular %n minute ago
-            //~ plural %n minutes ago
-            return tr("%n minute(s) ago", nullptr, minutesToNow);
+        } else if (format == QLocale::NarrowFormat) {
+            //: @item:intext %1 is a whole number, abbreviate minute value
+            //~ singular %n min ago
+            //~ plural %n mins ago
+            return tr("%n min(s) ago", nullptr, minutesToNow);
         }
+        //: @item:intext %1 is a whole number
+        //~ singular %n minute ago
+        //~ plural %n minutes ago
+        return tr("%n minute(s) ago", nullptr, minutesToNow);
     }
     if (secsToNow <= 0 && -secsToNow < secsInAHour) {
         const int minutesFromNow = -secsToNow / 60;
         if (minutesFromNow < 1) {
             return tr("Now");
+        } else if (format == QLocale::NarrowFormat) {
+            //: @item:intext %1 is a whole number, abbreviate minute value
+            //~ singular %n min
+            //~ plural %n mins
+            return tr("%n min(s)", nullptr, minutesFromNow);
         }
         //: @item:intext %1 is a whole number
         //~ singular In %n minute
