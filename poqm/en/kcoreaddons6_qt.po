@@ -96,3 +96,12 @@ msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
 msgstr[0] "%n minute ago"
 msgstr[1] "%n minutes ago"
+
+#. @item:intext %1 is a whole number
+#: ../lib/util/kformatprivate.cpp:586
+#, qt-format
+msgctxt "KFormat|"
+msgid "In %n minute(s)"
+msgid_plural "In %n minute(s)"
+msgstr[0] "In %n minute"
+msgstr[1] "In %n minutes"

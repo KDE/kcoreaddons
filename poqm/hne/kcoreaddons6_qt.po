@@ -1095,8 +1095,25 @@ msgid_plural "%n minute(s) ago"
 msgstr[0] "%1 मिनट"
 msgstr[1] "%1 मिनट"
 
+#: lib/util/kformatprivate.cpp:581
+#, fuzzy
+#| msgid "No"
+msgctxt "KFormat|"
+msgid "Now"
+msgstr "नइ"
+
+#. @item:intext %1 is a whole number
+#: lib/util/kformatprivate.cpp:586
+#, fuzzy, qt-format
+#| msgid "%1 minutes"
+msgctxt "KFormat|"
+msgid "In %n minute(s)"
+msgid_plural "In %n minute(s)"
+msgstr[0] "%1 मिनट"
+msgstr[1] "%1 मिनट"
+
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
-#: lib/util/kformatprivate.cpp:591
+#: lib/util/kformatprivate.cpp:601
 #, fuzzy, qt-format
 #| msgctxt ""
 #| "@item:intext days and hours. This uses the previous item:intext messages. "
@@ -1107,7 +1124,7 @@ msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 अउ %2"
 
-#: lib/util/kformatprivate.cpp:609
+#: lib/util/kformatprivate.cpp:619
 #, fuzzy, qt-format
 #| msgid "%1 file"
 #| msgid_plural "%1 files"
@@ -1115,20 +1132,20 @@ msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
 msgstr "%1 फाइल"
 
-#: lib/util/kformatprivate.cpp:613 lib/util/kformatprivate.cpp:615
+#: lib/util/kformatprivate.cpp:623 lib/util/kformatprivate.cpp:625
 #, fuzzy, qt-format
 #| msgid "%1 minutes"
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
 msgstr "%1 मिनट"
 
-#: lib/util/kformatprivate.cpp:621
+#: lib/util/kformatprivate.cpp:631
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:624 lib/util/kformatprivate.cpp:626
+#: lib/util/kformatprivate.cpp:634 lib/util/kformatprivate.cpp:636
 #, fuzzy, qt-format
 #| msgid "%1 B"
 msgctxt "KFormat|distance in kilometer"
@@ -5623,9 +5640,6 @@ msgstr ""
 
 #~ msgid "&No"
 #~ msgstr "नइ (&N)"
-
-#~ msgid "No"
-#~ msgstr "नइ"
 
 #~ msgid "&Discard"
 #~ msgstr "फेंकव (&D)"
