@@ -239,7 +239,7 @@ public:
      * Formatting options for formatDistance()
      *
      * \since 6.11
-
+     *
      * \value LocaleDistanceUnits Automatically select metric or imperial units based on the current locale
      * \value MetricDistanceUnits Force the use of metric unites regardless of the current locale
      */
