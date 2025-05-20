@@ -137,13 +137,6 @@ struct KCOREADDONS_EXPORT KUserId : public KUserOrGroupId<K_UID> {
         : KUserOrGroupId(uid)
     {
     }
-    KUserId(const KUserId &other)
-        : KUserOrGroupId(other)
-    {
-    }
-    ~KUserId()
-    {
-    }
     /* Returns a KUserId for the user with name \a name, or an invalid KUserId if no
      * user with this name was found on the system
      */
@@ -168,13 +161,6 @@ struct KCOREADDONS_EXPORT KGroupId : public KUserOrGroupId<K_GID> {
     /* Creates an KGroupId from the native group ID type */
     explicit KGroupId(K_GID gid)
         : KUserOrGroupId(gid)
-    {
-    }
-    KGroupId(const KGroupId &other)
-        : KUserOrGroupId(other)
-    {
-    }
-    ~KGroupId()
     {
     }
     /* Returns A KGroupId for the user with name \a name, or an invalid KGroupId if no
