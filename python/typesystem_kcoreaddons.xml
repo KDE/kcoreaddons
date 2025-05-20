@@ -13,7 +13,7 @@ SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accept
         <value-type name="Result" />
     </namespace-type>
     <namespace-type name="KProcessList">
-        <object-type name="KProcessInfo" />
+        <value-type name="KProcessInfo" />
     </namespace-type>
     <namespace-type name="KSandbox">
         <object-type name="ProcessContext" />
@@ -23,14 +23,14 @@ SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accept
             </modify-argument>
         </modify-function>
     </namespace-type>
-    <object-type name="KAboutComponent" />
-    <object-type name="KAboutData" />
-    <object-type name="KAboutLicense">
+    <value-type name="KAboutComponent" />
+    <value-type name="KAboutData" />
+    <value-type name="KAboutLicense">
         <enum-type name="LicenseKey" />
         <enum-type name="NameFormat" />
         <enum-type name="VersionRestriction" />
-    </object-type>
-    <object-type name="KAboutPerson" />
+    </value-type>
+    <value-type name="KAboutPerson" />
     <object-type name="KAutoSaveFile" />
     <namespace-type name="KBackup" />
     <object-type name="KCharMacroExpander" />
@@ -43,15 +43,15 @@ SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accept
         <enum-type name="Type" />
     </namespace-type>
     <namespace-type name="KFileUtils" />
-    <object-type name="KFormat">
+    <value-type name="KFormat">
         <enum-type name="BinarySizeUnits" />
         <enum-type name="BinaryUnitDialect" />
         <enum-type name="DistanceFormatOption" flags="DistanceFormatOptions" />
         <enum-type name="DurationFormatOption" flags="DurationFormatOptions" />
         <enum-type name="Unit" />
         <enum-type name="UnitPrefix" />
-    </object-type>
-    <object-type name="KGroupId" />
+    </value-type>
+    <value-type name="KGroupId" />
     <object-type name="KJob">
         <enum-type name="Capability" flags="Capabilities"  />
         <enum-type name="KillVerbosity" />
@@ -68,7 +68,7 @@ SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accept
     </object-type>
     <namespace-type name="KMacroExpander" />
     <object-type name="KMacroExpanderBase" />
-    <object-type name="KMemoryInfo" />
+    <value-type name="KMemoryInfo" />
     <object-type name="KNetworkMounts">
         <enum-type name="KNetworkMountOption" />
         <enum-type name="KNetworkMountsType" />
@@ -105,12 +105,12 @@ SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accept
     <namespace-type name="KUrlMimeData">
         <enum-type name="DecodeOption" flags="DecodeOptions" />
     </namespace-type>
-    <object-type name="KUser">
+    <value-type name="KUser">
         <enum-type name="UIDMode" />
         <enum-type name="UserProperty" />
-    </object-type>
-    <object-type name="KUserGroup" />
-    <object-type name="KUserId" />
+    </value-type>
+    <value-type name="KUserGroup" />
+    <value-type name="KUserId" />
     <object-type name="KWordMacroExpander" />
 
 </typesystem>
