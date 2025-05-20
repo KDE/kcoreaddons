@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons5_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-01-22 09:28+0200\n"
+"PO-Revision-Date: 2025-05-19 09:09+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -956,21 +956,18 @@ msgstr[3] "%n хвилину тому"
 #: lib/util/kformatprivate.cpp:581
 msgctxt "KFormat|"
 msgid "Now"
-msgstr ""
+msgstr "Зараз"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:586
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "%n хвилина"
-msgstr[1] "%n хвилини"
-msgstr[2] "%n хвилин"
-msgstr[3] "%n хвилина"
+msgstr[0] "За %n хвилину"
+msgstr[1] "За %n хвилини"
+msgstr[2] "За %n хвилин"
+msgstr[3] "За %n хвилину"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:601
