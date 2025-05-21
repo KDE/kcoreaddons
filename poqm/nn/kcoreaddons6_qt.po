@@ -943,9 +943,6 @@ msgstr ""
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:586
 #, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"

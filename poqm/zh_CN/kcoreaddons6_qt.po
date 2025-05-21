@@ -909,7 +909,7 @@ msgstr[0] "%n 分钟前"
 #: lib/util/kformatprivate.cpp:581
 msgctxt "KFormat|"
 msgid "Now"
-msgstr ""
+msgstr "现在"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:586
@@ -917,7 +917,7 @@ msgstr ""
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] ""
+msgstr[0] "在 %n 分钟内"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:601
