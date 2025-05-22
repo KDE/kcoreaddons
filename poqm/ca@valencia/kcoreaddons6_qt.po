@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-01-22 10:54+0100\n"
+"PO-Revision-Date: 2025-05-19 13:24+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -936,19 +936,16 @@ msgstr[1] "fa %n minuts"
 #: lib/util/kformatprivate.cpp:581
 msgctxt "KFormat|"
 msgid "Now"
-msgstr ""
+msgstr "Ara"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:586
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "%n minut"
-msgstr[1] "%n minuts"
+msgstr[0] "D'ací a %n minut"
+msgstr[1] "D'ací a %n minuts"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:601

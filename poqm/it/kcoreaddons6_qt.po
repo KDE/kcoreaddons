@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-01-22 15:40+0100\n"
+"PO-Revision-Date: 2025-05-19 17:02+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 25.04.1\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -931,23 +931,18 @@ msgstr[0] "%n minuto fa"
 msgstr[1] "%n minuti fa"
 
 #: lib/util/kformatprivate.cpp:581
-#, fuzzy
-#| msgid "No"
 msgctxt "KFormat|"
 msgid "Now"
-msgstr "No"
+msgstr "Adesso"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:586
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "%n minuto"
-msgstr[1] "%n minuti"
+msgstr[0] "Tra %n minuto"
+msgstr[1] "Tra %n minuti"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:601
