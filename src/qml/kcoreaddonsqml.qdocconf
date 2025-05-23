@@ -26,8 +26,8 @@ qhp.KCoreAddonsQml.virtualFolder       = kcoreaddonsqml
 qhp.KCoreAddonsQml.indexTitle          = KCoreAddons QML
 qhp.KCoreAddonsQml.indexRoot           =
 
-qhp.KCoreAddonsQml.subprojects         = classes
-qhp.KCoreAddonsQml.subprojects.classes.title = QML Types
-qhp.KCoreAddonsQml.subprojects.classes.indexTitle = KCoreAddons QML Types
-qhp.KCoreAddonsQml.subprojects.classes.selectors = class fake:headerfile
-qhp.KCoreAddonsQml.subprojects.classes.sortPages = true
+qhp.KCoreAddonsQml.subprojects         = qmltypes
+qhp.KCoreAddonsQml.subprojects.qmltypes.title = QML Types
+qhp.KCoreAddonsQml.subprojects.qmltypes.indexTitle = KCoreAddons QML Types
+qhp.KCoreAddonsQml.subprojects.qmltypes.selectors = qmlmodule:org.kde.coreaddons
+qhp.KCoreAddonsQml.subprojects.qmltypes.sortPages = true
