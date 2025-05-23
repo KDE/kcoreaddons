@@ -20,7 +20,7 @@ navigation.landingpage = "KCoreAddons"
 qhp.projects            = KCoreAddons
 
 qhp.KCoreAddons.file                = kcoreaddons.qhp
-qhp.KCoreAddons.namespace           = org.qt-project.kcoreaddons.$QT_VERSION_TAG
+qhp.KCoreAddons.namespace           = org.kde.kcoreaddons.$QT_VERSION_TAG
 qhp.KCoreAddons.virtualFolder       = kcoreaddons
 qhp.KCoreAddons.indexTitle          = KCoreAddons
 qhp.KCoreAddons.indexRoot           =
