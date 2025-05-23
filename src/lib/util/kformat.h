@@ -236,6 +236,24 @@ public:
     Q_FLAG(DurationFormatOptions)
 
     /*!
+     * Format flags for formatTime()
+     *
+     * \value DoNotAddTimeZone Equivalent to the QLocale time formatting, does not add any timezone information
+     * \value AddTimezoneAbbreviation Adds the (translated) timezone abbreviation when timezone information is present, e.g. "12:23 CET"
+     * \value AddTimezoneAbbreviationIfNeeded Adds the (translated) timezone abbreviation when timezone information is present and differs from the current
+     * local timezone.
+     *
+     * \since 6.15
+     */
+    enum TimeFormatOption {
+        DoNotAddTimeZone = 0x0,
+        AddTimezoneAbbreviation = 0x1,
+        AddTimezoneAbbreviationIfNeeded = 0x2,
+    };
+    Q_DECLARE_FLAGS(TimeFormatOptions, TimeFormatOption)
+    Q_FLAG(TimeFormatOptions)
+
+    /*!
      * Formatting options for formatDistance()
      *
      * \since 6.11
@@ -407,6 +425,21 @@ public:
      * Returns the date as a string
      */
     QString formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const;
+
+    /*!
+     * Returns a time value formatted as string considering the timezone.
+     *
+     * This behaves like QLocale::toString(QTime, QLocale::FormatType) but can be
+     * made to add additional timezone information via \a options.
+     *
+     * \a dateTime the time to be formatted, as a full QDateTime object so timezone informations
+     * remain available.
+     * \a format the format used for formatting the time value
+     * \a options controls how timezone information should be formatted
+     *
+     * \since 6.15
+     */
+    [[nodiscard]] QString formatTime(const QDateTime &dateTime, QLocale::FormatType format, TimeFormatOptions options = KFormat::DoNotAddTimeZone) const;
 
     /*!
      * Converts \a value to the appropriate string representation

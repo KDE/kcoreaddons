@@ -40,6 +40,8 @@ public:
 
     QString formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const;
 
+    [[nodiscard]] QString formatTime(const QDateTime &dateTime, QLocale::FormatType format, KFormat::TimeFormatOptions options) const;
+
     [[nodiscard]] QString formatDistance(double value, KFormat::DistanceFormatOptions options) const;
 
 private:

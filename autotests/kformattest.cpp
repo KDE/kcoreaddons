@@ -24,6 +24,7 @@ void setupEnvironment()
     // ignore translations
     qputenv("XDG_DATA_DIRS", "does-not-exist");
 #endif
+    qputenv("TZ", "Asia/Kolkata");
 }
 Q_CONSTRUCTOR_FUNCTION(setupEnvironment)
 
@@ -437,6 +438,37 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::NarrowFormat), "5 min(s) ago"_L1);
     testDateTime = now.addSecs(300);
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::NarrowFormat), "5 min(s)"_L1);
+}
+
+void KFormatTest::formatTime()
+{
+    KFormat fmt(QLocale(u"en_GB"));
+    QCOMPARE(fmt.formatTime({{2025, 5, 23}, {12, 23, 45}, QTimeZone::LocalTime}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviation), "12:23"_L1);
+    QCOMPARE(fmt.formatTime({{2025, 5, 23}, {12, 23, 45}, QTimeZone::utc()}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviation), "12:23 UTC"_L1);
+    QCOMPARE(fmt.formatTime({{2025, 5, 23}, {12, 23, 45}, QTimeZone::utc()}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviationIfNeeded), "12:23 UTC"_L1);
+    QCOMPARE(fmt.formatTime({{2025, 5, 23}, {12, 23, 45}, QTimeZone("Asia/Kolkata")}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviationIfNeeded),
+             "12:23"_L1);
+    QCOMPARE(fmt.formatTime({{2025, 5, 23}, {12, 23, 45}, QTimeZone("Asia/Kolkata")}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviation), "12:23 IST"_L1);
+    QCOMPARE(fmt.formatTime({{2025, 5, 23}, {12, 23, 45}, QTimeZone("Europe/Brussels")}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviationIfNeeded),
+             "12:23 CEST"_L1);
+    QCOMPARE(fmt.formatTime({{2025, 1, 23}, {12, 23, 45}, QTimeZone("Europe/Brussels")}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviation),
+             "12:23 CET"_L1);
+    QCOMPARE(fmt.formatTime({{2025, 1, 23}, {12, 23, 45}, QTimeZone("Europe/Brussels")}, QLocale::ShortFormat, KFormat::DoNotAddTimeZone), "12:23"_L1);
+
+    QCOMPARE(fmt.formatTime({{2025, 1, 23}, {12, 23, 45}, QTimeZone::fromSecondsAheadOfUtc(0)}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviationIfNeeded),
+             "12:23 UTC"_L1);
+    QCOMPARE(fmt.formatTime({{2025, 1, 23}, {12, 23, 45}, QTimeZone::fromSecondsAheadOfUtc(8 * 3600)},
+                            QLocale::ShortFormat,
+                            KFormat::AddTimezoneAbbreviationIfNeeded),
+             "12:23 UTC+08:00"_L1);
+    QCOMPARE(fmt.formatTime({{2025, 1, 23}, {12, 23, 45}, QTimeZone::fromSecondsAheadOfUtc(5.5 * 3600)},
+                            QLocale::ShortFormat,
+                            KFormat::AddTimezoneAbbreviationIfNeeded),
+             "12:23"_L1);
+
+    KFormat de_fmt(QLocale(u"de_DE"));
+    QCOMPARE(de_fmt.formatTime({{2025, 5, 23}, {12, 23, 45}, QTimeZone("Europe/Brussels")}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviationIfNeeded),
+             "12:23 MESZ"_L1);
 }
 
 void KFormatTest::formatDistance()
