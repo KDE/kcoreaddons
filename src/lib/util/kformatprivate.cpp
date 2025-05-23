@@ -15,8 +15,11 @@
 #include <QDateTime>
 #include <QSettings>
 #include <QStandardPaths>
+#include <QTimeZone>
 
 #include <math.h>
+
+using namespace Qt::Literals;
 
 KFormatPrivate::KFormatPrivate(const QLocale &locale)
     : m_locale(locale)
@@ -610,6 +613,30 @@ QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocal
     QString formattedDate = tr("%1 at %2").arg(dateString, m_locale.toString(dateTime.time(), timeFormatType));
 
     return formattedDate.replace(0, 1, formattedDate.at(0).toUpper());
+}
+
+[[nodiscard]] static bool needsTimeZone(const QDateTime &dt)
+{
+    if (dt.timeSpec() == Qt::TimeZone && dt.timeZone().abbreviation(dt) != QTimeZone::systemTimeZone().abbreviation(dt)) {
+        return true;
+    }
+    if (dt.timeSpec() == Qt::OffsetFromUTC && QTimeZone::systemTimeZone().offsetFromUtc(dt) != dt.offsetFromUtc()) {
+        return true;
+    }
+    if (dt.timeSpec() == Qt::UTC && QTimeZone::systemTimeZone() != QTimeZone::utc()) {
+        return true;
+    }
+    return false;
+}
+
+QString KFormatPrivate::formatTime(const QDateTime &dateTime, QLocale::FormatType format, KFormat::TimeFormatOptions options) const
+{
+    auto output = m_locale.toString(dateTime.time(), format);
+    if (options == KFormat::DefaultTimeFormat || (options == KFormat::AppendTimezoneAbbreviationIfNeeded && !needsTimeZone(dateTime))) {
+        return output;
+    }
+    const auto tz = dateTime.timeSpec() != Qt::LocalTime ? dateTime.timeZone().abbreviation(dateTime) : QString();
+    return tz.isEmpty() ? output : output + ' '_L1 + tz;
 }
 
 QString KFormatPrivate::formatDistance(double distance, KFormat::DistanceFormatOptions options) const
