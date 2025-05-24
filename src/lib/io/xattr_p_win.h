@@ -8,6 +8,8 @@
 #ifndef FILESYSTEMMETADATA_XATTR_P_H
 #define FILESYSTEMMETADATA_XATTR_P_H
 
+#include "kcoreaddons_debug.h"
+
 #include <QDebug>
 #include <QFile>
 
@@ -20,14 +22,13 @@ namespace
 inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
 {
     const QString fullADSName = path + QLatin1String(":user.") + name;
-    using unique_file_t = std::unique_ptr<HANDLE, decltype(&CloseHandle)>;
-    unique_file_t hFile(::CreateFileW(reinterpret_cast<const WCHAR *>(fullADSName.utf16()),
-                                      GENERIC_READ,
-                                      FILE_SHARE_READ,
-                                      NULL,
-                                      OPEN_EXISTING,
-                                      FILE_FLAG_SEQUENTIAL_SCAN,
-                                      NULL));
+    HANDLE hFile = ::CreateFileW(reinterpret_cast<const WCHAR *>(fullADSName.utf16()),
+                                 GENERIC_READ,
+                                 FILE_SHARE_READ,
+                                 NULL,
+                                 OPEN_EXISTING,
+                                 FILE_FLAG_SEQUENTIAL_SCAN,
+                                 NULL);
 
     if (hFile == INVALID_HANDLE_VALUE) {
         DWORD error = ::GetLastError();
@@ -35,6 +36,9 @@ inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
         qCWarning(KCOREADDONS_DEBUG) << "failed to open ADS:" << message << fullADSName;
         return -1;
     }
+    auto cleanup = qScopeGuard([hFile] {
+        CloseHandle(hFile);
+    });
 
     LARGE_INTEGER lsize;
     BOOL ret = GetFileSizeEx(hFile, &lsize);
@@ -90,6 +94,9 @@ inline int k_setxattr(const QString &path, const QString &name, const QString &v
         qCWarning(KCOREADDONS_DEBUG) << "failed to open file to write to ADS:" << message << error << fullADSName;
         return -1; // unknown error
     }
+    auto cleanup = qScopeGuard([hFile] {
+        CloseHandle(hFile);
+    });
 
     DWORD count = 0;
 
@@ -99,11 +106,9 @@ inline int k_setxattr(const QString &path, const QString &name, const QString &v
         std::string message = std::system_category().message(error);
         qCWarning(KCOREADDONS_DEBUG) << "failed to write to ADS:" << message << error << fullADSName;
 
-        CloseHandle(hFile);
         return -1; // unknown error
     }
 
-    CloseHandle(hFile);
     return 0; // Success
 }
 
@@ -134,7 +139,7 @@ inline int k_removexattr(const QString &path, QStringView name)
     return ret;
 }
 
-inline bool k_isSupported(const QString &path)
+inline bool k_isSupported(const QStringView &path)
 {
     QFileInfo f(path);
     const QString drive = QString(f.absolutePath().left(2)) + QStringLiteral("\\");
@@ -193,7 +198,11 @@ QStringList k_queryAttributes(QStringView path)
         return fileAttributes;
     }
 
+    const QByteArrayView prefix("user.");
     for (const auto &entry : entries) {
+        if (!entry.startsWith(prefix)) {
+            continue;
+        }
         fileAttributes.append(QString::fromLocal8Bit(entry).sliced(prefix.size()));
     }
     return fileAttributes;
