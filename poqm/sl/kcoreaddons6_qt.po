@@ -946,8 +946,22 @@ msgctxt "KFormat|"
 msgid "Just now"
 msgstr "Prav zdaj"
 
-#. @item:intext %1 is a whole number
+#. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:575
+#, fuzzy, qt-format
+#| msgctxt "KFormat|"
+#| msgid "%n minute(s) ago"
+#| msgid_plural "%n minute(s) ago"
+msgctxt "KFormat|"
+msgid "%n min(s) ago"
+msgid_plural "%n min(s) ago"
+msgstr[0] "pred %n minuto"
+msgstr[1] "pred %n minutama"
+msgstr[2] "pred %n minutami"
+msgstr[3] "pred %n minutami"
+
+#. @item:intext %1 is a whole number
+#: lib/util/kformatprivate.cpp:580
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
@@ -957,13 +971,27 @@ msgstr[1] "pred %n minutama"
 msgstr[2] "pred %n minutami"
 msgstr[3] "pred %n minutami"
 
-#: lib/util/kformatprivate.cpp:581
+#: lib/util/kformatprivate.cpp:585
 msgctxt "KFormat|"
 msgid "Now"
 msgstr "Sedaj"
 
+#. @item:intext %1 is a whole number, abbreviate minute value
+#: lib/util/kformatprivate.cpp:590
+#, fuzzy, qt-format
+#| msgctxt "KFormat|"
+#| msgid "%n minute(s)"
+#| msgid_plural "%n minute(s)"
+msgctxt "KFormat|"
+msgid "%n min(s)"
+msgid_plural "%n min(s)"
+msgstr[0] "%n minuta"
+msgstr[1] "%n minuti"
+msgstr[2] "%n minute"
+msgstr[3] "%n minut"
+
 #. @item:intext %1 is a whole number
-#: lib/util/kformatprivate.cpp:586
+#: lib/util/kformatprivate.cpp:595
 #, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
@@ -974,31 +1002,31 @@ msgstr[2] "V %n minutah"
 msgstr[3] "V %n minutah"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
-#: lib/util/kformatprivate.cpp:601
+#: lib/util/kformatprivate.cpp:610
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 ob %2"
 
-#: lib/util/kformatprivate.cpp:619
+#: lib/util/kformatprivate.cpp:628
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
 msgstr "%1 čevljev"
 
-#: lib/util/kformatprivate.cpp:623 lib/util/kformatprivate.cpp:625
+#: lib/util/kformatprivate.cpp:632 lib/util/kformatprivate.cpp:634
 #, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
 msgstr "%1 milj"
 
-#: lib/util/kformatprivate.cpp:631
+#: lib/util/kformatprivate.cpp:640
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
 msgstr "%1 m"
 
-#: lib/util/kformatprivate.cpp:634 lib/util/kformatprivate.cpp:636
+#: lib/util/kformatprivate.cpp:643 lib/util/kformatprivate.cpp:645
 #, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"

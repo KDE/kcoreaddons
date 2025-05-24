@@ -88,8 +88,17 @@ msgid_plural "%n second(s)"
 msgstr[0] "%n second"
 msgstr[1] "%n seconds"
 
-#. @item:intext %1 is a whole number
+#. @item:intext %1 is a whole number, abbreviate minute value
 #: ../lib/util/kformatprivate.cpp:575
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n min(s) ago"
+msgid_plural "%n min(s) ago"
+msgstr[0] "%n min ago"
+msgstr[1] "%n mins ago"
+
+#. @item:intext %1 is a whole number
+#: ../lib/util/kformatprivate.cpp:580
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
@@ -97,8 +106,17 @@ msgid_plural "%n minute(s) ago"
 msgstr[0] "%n minute ago"
 msgstr[1] "%n minutes ago"
 
+#. @item:intext %1 is a whole number, abbreviate minute value
+#: ../lib/util/kformatprivate.cpp:590
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n min(s)"
+msgid_plural "%n min(s)"
+msgstr[0] "%n min"
+msgstr[1] "%n mins"
+
 #. @item:intext %1 is a whole number
-#: ../lib/util/kformatprivate.cpp:586
+#: ../lib/util/kformatprivate.cpp:595
 #, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"

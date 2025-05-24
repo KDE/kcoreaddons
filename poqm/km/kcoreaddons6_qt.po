@@ -1126,8 +1126,18 @@ msgctxt "KFormat|"
 msgid "Just now"
 msgstr ""
 
-#. @item:intext %1 is a whole number
+#. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:575
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
+#| msgid "%1 minutes"
+msgctxt "KFormat|"
+msgid "%n min(s) ago"
+msgid_plural "%n min(s) ago"
+msgstr[0] "%1 នាទី"
+
+#. @item:intext %1 is a whole number
+#: lib/util/kformatprivate.cpp:580
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
 #| msgid "%1 minutes"
@@ -1136,15 +1146,25 @@ msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
 msgstr[0] "%1 នាទី"
 
-#: lib/util/kformatprivate.cpp:581
+#: lib/util/kformatprivate.cpp:585
 #, fuzzy
 #| msgid "No"
 msgctxt "KFormat|"
 msgid "Now"
 msgstr "ទេ"
 
+#. @item:intext %1 is a whole number, abbreviate minute value
+#: lib/util/kformatprivate.cpp:590
+#, fuzzy, qt-format
+#| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
+#| msgid "%1 minutes"
+msgctxt "KFormat|"
+msgid "%n min(s)"
+msgid_plural "%n min(s)"
+msgstr[0] "%1 នាទី"
+
 #. @item:intext %1 is a whole number
-#: lib/util/kformatprivate.cpp:586
+#: lib/util/kformatprivate.cpp:595
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
 #| msgid "%1 minutes"
@@ -1154,7 +1174,7 @@ msgid_plural "In %n minute(s)"
 msgstr[0] "%1 នាទី"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
-#: lib/util/kformatprivate.cpp:601
+#: lib/util/kformatprivate.cpp:610
 #, fuzzy, qt-format
 #| msgctxt ""
 #| "@item:intext days and hours. This uses the previous item:intext messages. "
@@ -1165,7 +1185,7 @@ msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 និង %2"
 
-#: lib/util/kformatprivate.cpp:619
+#: lib/util/kformatprivate.cpp:628
 #, fuzzy, qt-format
 #| msgid "%1 file"
 #| msgid_plural "%1 files"
@@ -1173,7 +1193,7 @@ msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
 msgstr "%1 ឯកសារ"
 
-#: lib/util/kformatprivate.cpp:623 lib/util/kformatprivate.cpp:625
+#: lib/util/kformatprivate.cpp:632 lib/util/kformatprivate.cpp:634
 #, fuzzy, qt-format
 #| msgctxt "@item:intext %1 is a real number, e.g. 1.23 minutes"
 #| msgid "%1 minutes"
@@ -1181,13 +1201,13 @@ msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
 msgstr "%1 នាទី"
 
-#: lib/util/kformatprivate.cpp:631
+#: lib/util/kformatprivate.cpp:640
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:634 lib/util/kformatprivate.cpp:636
+#: lib/util/kformatprivate.cpp:643 lib/util/kformatprivate.cpp:645
 #, fuzzy, qt-format
 #| msgctxt "size in 1000 bytes"
 #| msgid "%1 kB"
