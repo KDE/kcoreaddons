@@ -31,3 +31,5 @@ qhp.KCoreAddonsQml.subprojects.qmltypes.title = QML Types
 qhp.KCoreAddonsQml.subprojects.qmltypes.indexTitle = KCoreAddons QML Types
 qhp.KCoreAddonsQml.subprojects.qmltypes.selectors = qmlmodule:org.kde.coreaddons
 qhp.KCoreAddonsQml.subprojects.qmltypes.sortPages = true
+
+tagfile = kcoreaddonsqml.tags

@@ -30,3 +30,5 @@ qhp.KCoreAddons.subprojects.classes.title = C++ Classes
 qhp.KCoreAddons.subprojects.classes.indexTitle = KCoreAddons C++ Classes
 qhp.KCoreAddons.subprojects.classes.selectors = class fake:headerfile
 qhp.KCoreAddons.subprojects.classes.sortPages = true
+
+tagfile = kcoreaddons.tags
