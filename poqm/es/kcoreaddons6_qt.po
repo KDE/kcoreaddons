@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons6_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-20 01:35+0100\n"
+"PO-Revision-Date: 2025-05-24 11:23+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -922,10 +922,7 @@ msgstr "Ahora mismo"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:575
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
@@ -948,10 +945,7 @@ msgstr "Ahora"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:590
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"

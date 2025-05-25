@@ -23,7 +23,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-20 22:06+0300\n"
+"PO-Revision-Date: 2025-05-24 19:20+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -929,10 +929,7 @@ msgstr "Şimdi"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:575
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
@@ -955,10 +952,7 @@ msgstr "Şimdi"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:590
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"

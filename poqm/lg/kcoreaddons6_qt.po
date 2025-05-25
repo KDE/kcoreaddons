@@ -1,17 +1,18 @@
+# SPDX-FileCopyrightText: 2025 Kizito Birabwa <kbirabwa@yahoo.co.uk>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2025-05-25 00:02+0100\n"
 "Last-Translator: Kizito Birabwa <kbirabwa@yahoo.co.uk>\n"
-"Language-Team: \n"
+"Language-Team: Luganda\n"
 "Language: lg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 "X-Language: lg_UG\n"
 "X-Source-Language: C\n"
 
@@ -240,15 +241,12 @@ msgstr "Layisinsi eya Kakwakkulizo ka BSD-3 \"Empya\" oba \"Ennongoose\""
 #: lib/kaboutdata.cpp:403
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:404
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "Apache License 2.0"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Layisinsi eya Apache Luwandika 2.0"
+msgstr "Layisinsi eya Mozilla eya Bonna Luwandika 2.0"
 
 #: lib/kaboutdata.cpp:408
 msgctxt "KAboutLicense|@item license"
@@ -687,10 +685,7 @@ msgstr "YiB %1"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:330
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
@@ -699,10 +694,7 @@ msgstr[1] "Nnaku %n"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:335
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
@@ -711,10 +703,7 @@ msgstr[1] "Saawa %n"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:340
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
@@ -723,10 +712,7 @@ msgstr[1] "Dakiika %n"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:345
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
@@ -772,21 +758,17 @@ msgstr "%1h%2m%3s"
 #. ----------
 #. @item:intext abbreviated amount of hours and abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:405 lib/util/kformatprivate.cpp:410
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
-msgstr "%2 %1"
+msgstr "%1 %2"
 
 #. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:414
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 %2%3"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2 %3"
-msgstr "%2%3 %1"
+msgstr "%1 %2 %3"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:422
@@ -942,10 +924,7 @@ msgstr "Kakano"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:575
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
@@ -964,14 +943,11 @@ msgstr[1] "Dakiika %n emabega"
 #: lib/util/kformatprivate.cpp:585
 msgctxt "KFormat|"
 msgid "Now"
-msgstr ""
+msgstr "Kakati"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:590
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
@@ -980,15 +956,12 @@ msgstr[1] "Dakiika %n"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:595
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "Dakiika %n"
-msgstr[1] "Dakiika %n"
+msgstr[0] "Mu dakiika %n"
+msgstr[1] "Mu dakiika %n"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:610
@@ -1001,29 +974,25 @@ msgstr "%1 ku %2"
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr ""
+msgstr "ft %1"
 
 #: lib/util/kformatprivate.cpp:632 lib/util/kformatprivate.cpp:634
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "Dakiika %1"
+msgstr "mayilo %1"
 
 #: lib/util/kformatprivate.cpp:640
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "m %1"
 
 #: lib/util/kformatprivate.cpp:643 lib/util/kformatprivate.cpp:645
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "kB %1"
+msgstr "km %1"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
