@@ -222,7 +222,8 @@ public:
      * \value ShowMilliseconds Include milliseconds in format, e.g. 1:23:45.678
      * \value HideSeconds Hide the seconds, e.g. 1:23 or 1h23m, overrides ShowMilliseconds
      * \value FoldHours Fold the hours into the minutes, e.g. 83:45 or 83m45s, overrides HideSeconds
-     * \value [since 6.11] AbbreviatedDuration Use abbreviated units (e.g. 1 hr 23 min), as a middle ground between just unit initials (InitialDuration) and fully spelled out units (formatSpelloutDuration)
+     * \value [since 6.11] AbbreviatedDuration Use abbreviated units (e.g. 1 hr 23 min), as a middle ground between just unit initials (InitialDuration) and
+     * fully spelled out units (formatSpelloutDuration). This always includes up to 2 components.
      */
     enum DurationFormatOption {
         DefaultDuration = 0x0,

@@ -122,12 +122,11 @@ void KFormatTest::formatValue()
              QString::fromUtf8("10.6 µm"));
 }
 
-enum TimeConstants {
-    MSecsInDay = 86400000,
-    MSecsInHour = 3600000,
-    MSecsInMinute = 60000,
-    MSecsInSecond = 1000,
-};
+constexpr quint64 MSecsInYear = (quint64)1000 * 60 * 60 * 24 * 365; // approximation of a year
+constexpr quint64 MSecsInDay = 1000 * 60 * 60 * 24;
+constexpr quint64 MSecsInHour = 3600000;
+constexpr quint64 MSecsInMinute = 60000;
+constexpr quint64 MSecsInSecond = 1000;
 
 void KFormatTest::formatDuration()
 {
@@ -292,10 +291,16 @@ void KFormatTest::formatAbbreviatedDuration()
     QCOMPARE(fmt.formatDuration(MSecsInSecond, opt), "1 sec"_L1);
     QCOMPARE(fmt.formatDuration(MSecsInMinute, opt), "1 min 0 sec"_L1);
     QCOMPARE(fmt.formatDuration(MSecsInMinute, opt | KFormat::HideSeconds), "1 min"_L1);
-    QCOMPARE(fmt.formatDuration(MSecsInHour, opt), "1 hr 0 min 0 sec"_L1);
+    QCOMPARE(fmt.formatDuration(MSecsInHour, opt), "1 hr 0 min"_L1);
     QCOMPARE(fmt.formatDuration(MSecsInHour, opt | KFormat::HideSeconds), "1 hr 0 min"_L1);
     QCOMPARE(fmt.formatDuration(MSecsInHour, opt | KFormat::HideSeconds | KFormat::FoldHours), "60 min"_L1);
     QCOMPARE(fmt.formatDuration(12 * MSecsInHour + 59 * MSecsInMinute, opt | KFormat::HideSeconds), "12 hr 59 min"_L1);
+    QCOMPARE(fmt.formatDuration(17 * MSecsInDay + 2 * MSecsInHour + 19 * MSecsInMinute, opt), "17 d 2 hr"_L1);
+    QCOMPARE(fmt.formatDuration(19 * MSecsInMinute + 5 * MSecsInSecond, opt), "19 min 5 sec"_L1);
+    QCOMPARE(fmt.formatDuration(19 * MSecsInMinute + 5 * MSecsInSecond, opt | KFormat::HideSeconds), "19 min"_L1);
+    QCOMPARE(fmt.formatDuration(2 * MSecsInYear + 2 * MSecsInHour + 19 * MSecsInMinute, opt), "2 yr"_L1);
+
+    QCOMPARE(fmt.formatDuration(2 * MSecsInYear + 4 * MSecsInDay + 19 * MSecsInMinute, opt), "2 yr 4 d"_L1);
 }
 
 void KFormatTest::formatDecimalDuration()
