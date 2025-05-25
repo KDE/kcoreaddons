@@ -358,14 +358,14 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
         ms = qRound64(ms / (qreal)MSecsInSecond) * MSecsInSecond;
     }
 
-    int hours = ms / MSecsInHour;
-    ms = ms % MSecsInHour;
-    int minutes = ms / MSecsInMinute;
-    ms = ms % MSecsInMinute;
-    int seconds = ms / MSecsInSecond;
-    ms = ms % MSecsInSecond;
-
     if ((options & KFormat::InitialDuration) == KFormat::InitialDuration) {
+        int hours = ms / MSecsInHour;
+        ms = ms % MSecsInHour;
+        int minutes = ms / MSecsInMinute;
+        ms = ms % MSecsInMinute;
+        int seconds = ms / MSecsInSecond;
+        ms = ms % MSecsInSecond;
+
         if ((options & KFormat::FoldHours) == KFormat::FoldHours && (options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
             //: @item:intext Duration format minutes, seconds and milliseconds
             return tr("%1m%2.%3s").arg(hours * 60 + minutes, 1, 10, QLatin1Char('0')).arg(seconds, 2, 10, QLatin1Char('0')).arg(ms, 3, 10, QLatin1Char('0'));
@@ -388,13 +388,44 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
         }
 
     } else if (options & KFormat::AbbreviatedDuration) {
+        int days = ms / MSecsInDay;
+        ms = ms % MSecsInDay;
+        int hours = ms / MSecsInHour;
+        ms = ms % MSecsInHour;
+        int minutes = ms / MSecsInMinute;
+        ms = ms % MSecsInMinute;
+        int seconds = ms / MSecsInSecond;
+        ms = ms % MSecsInSecond;
+
         if (options & KFormat::FoldHours) {
             minutes += 60 * hours;
             hours = 0;
         }
 
-        if (hours == 0 && minutes == 0) {
+        if (days == 0 && hours == 0 && minutes == 0) {
             return (options & KFormat::HideSeconds) ? formatSingleAbbreviatedDuration(Minutes, minutes) : formatSingleAbbreviatedDuration(Seconds, seconds);
+        }
+
+        if (days != 0) {
+            if (options & KFormat::HideSeconds) {
+                // Also hide the minutes as not really relevant when talking in days
+                if (minutes > 30) {
+                    hours++;
+                }
+                if (hours == 0) {
+                    return formatSingleAbbreviatedDuration(Days, days);
+                } else {
+                    //: @item:intext abbreviated amount of days and abbreviated amount of hours
+                    return tr("%1 %2").arg(formatSingleAbbreviatedDuration(Days, days), formatSingleAbbreviatedDuration(Hours, hours));
+                }
+            }
+
+            //: @item:intext abbreviated amount of days, abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
+            return tr("%1 %2 %3 %4")
+                .arg(formatSingleAbbreviatedDuration(Days, days),
+                     formatSingleAbbreviatedDuration(Hours, hours),
+                     formatSingleAbbreviatedDuration(Minutes, minutes),
+                     formatSingleAbbreviatedDuration(Seconds, seconds));
         }
 
         if (hours == 0) {
@@ -417,6 +448,13 @@ QString KFormatPrivate::formatDuration(quint64 msecs, KFormat::DurationFormatOpt
                  formatSingleAbbreviatedDuration(Seconds, seconds));
 
     } else {
+        int hours = ms / MSecsInHour;
+        ms = ms % MSecsInHour;
+        int minutes = ms / MSecsInMinute;
+        ms = ms % MSecsInMinute;
+        int seconds = ms / MSecsInSecond;
+        ms = ms % MSecsInSecond;
+
         if ((options & KFormat::FoldHours) == KFormat::FoldHours && (options & KFormat::ShowMilliseconds) == KFormat::ShowMilliseconds) {
             //: @item:intext Duration format minutes, seconds and milliseconds
             return tr("%1:%2.%3").arg(hours * 60 + minutes, 1, 10, QLatin1Char('0')).arg(seconds, 2, 10, QLatin1Char('0')).arg(ms, 3, 10, QLatin1Char('0'));
