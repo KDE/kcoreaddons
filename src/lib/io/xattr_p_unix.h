@@ -36,7 +36,7 @@
 
 namespace
 {
-inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
+inline ssize_t k_getxattr(const QString &path, QStringView name, QByteArray *value)
 {
     const QByteArray p = QFile::encodeName(path);
     const char *encodedPath = p.constData();
@@ -84,7 +84,7 @@ inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
 
         if (r >= 0) {
             data.resize(r);
-            *value = QString::fromUtf8(data);
+            *value = data;
             return size;
         } else {
             // ERANGE
@@ -93,7 +93,7 @@ inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
     }
 }
 
-inline int k_setxattr(const QString &path, const QString &name, const QString &value)
+inline int k_setxattr(const QString &path, const QString &name, const QByteArray &value)
 {
     const QByteArray p = QFile::encodeName(path);
     const char *encodedPath = p.constData();
@@ -105,10 +105,8 @@ inline int k_setxattr(const QString &path, const QString &name, const QString &v
 #endif
     const char *attributeName = n.constData();
 
-    const QByteArray v = value.toUtf8();
-    const void *attributeValue = v.constData();
-
-    const size_t valueSize = v.size();
+    const void *attributeValue = value.constData();
+    const size_t valueSize = value.size();
 
 #if defined(Q_OS_LINUX) || (defined(__GLIBC__) && !defined(__stub_setxattr))
     int result = setxattr(encodedPath, attributeName, attributeValue, valueSize, 0);

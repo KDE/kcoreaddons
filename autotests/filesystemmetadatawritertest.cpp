@@ -70,7 +70,7 @@ void FilesystemMetaDataWriterTest::testMissingPermision()
     QVERIFY(opt.has_value());
     FilesystemMetaData md = *opt;
 
-    auto result = md.setAttribute(QStringLiteral("test"), QStringLiteral("my-value"));
+    auto result = md.setAttribute(QStringLiteral("test"), QStringLiteral("my-value").toUtf8());
     QCOMPARE(result, FilesystemMetaData::MissingPermission);
 
     QVERIFY(m_writerTestFile.setPermissions(QFileDevice::ReadOwner | QFileDevice::WriteOwner));
@@ -88,7 +88,7 @@ void FilesystemMetaDataWriterTest::testMetadataSize()
 
     // all implementations should support at least 512 B
     const auto smallSize = 512; // 512 B
-    auto smallValue = QString(smallSize, QLatin1Char('a'));
+    auto smallValue = QByteArray(smallSize, 'a');
     auto result = md.setAttribute(QStringLiteral("test"), smallValue);
     QCOMPARE(result, FilesystemMetaData::NoError);
     QCOMPARE(md.attribute(QStringLiteral("test")), smallValue);
@@ -96,7 +96,7 @@ void FilesystemMetaDataWriterTest::testMetadataSize()
     // a big value, equal to the maximum value of an extended attribute according to Linux VFS
     // applies to XFS, btrfs...
     auto maxSize = 64 * 1024;
-    const auto bigValue = QString(maxSize, QLatin1Char('a')); // 64 kB
+    const auto bigValue = QByteArray(maxSize, 'a'); // 64 kB
     result = md.setAttribute(QStringLiteral("test"), bigValue);
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_WIN)
     // BSD VFS has no such limit to 64 kB
@@ -108,7 +108,7 @@ void FilesystemMetaDataWriterTest::testMetadataSize()
 
     // In Linux, The VFS-imposed limits on attribute names and
     // values are 255 bytes and 64 kB, respectively.
-    auto excessiveValue = QString(maxSize + 1, QLatin1Char('a'));
+    auto excessiveValue = QByteArray(maxSize + 1, 'a');
     result = md.setAttribute(QStringLiteral("test"), excessiveValue);
 #if defined(Q_OS_FREEBSD) || defined(Q_OS_NETBSD) || defined(Q_OS_WIN)
     QCOMPARE(result, FilesystemMetaData::NoError);
@@ -129,7 +129,7 @@ void FilesystemMetaDataWriterTest::testMetadataNameTooLong()
     // BSD and Linux have a limit of the attribute name of 255 bytes
     // Windows has by default a limit on filename that applies to filesystem metadata
     auto longName = QString(256, QLatin1Char('a'));
-    int result = md.setAttribute(longName, QStringLiteral("smallValue"));
+    int result = md.setAttribute(longName, QStringLiteral("smallValue").toUtf8());
     QCOMPARE(result, FilesystemMetaData::NameToolong);
 }
 
@@ -143,27 +143,27 @@ void FilesystemMetaDataWriterTest::test()
     QStringList expected;
 
     // Attribute
-    md.setAttribute(QStringLiteral("test.attribute"), QStringLiteral("attribute"));
-    QCOMPARE(md.attribute(QStringLiteral("test.attribute")), QStringLiteral("attribute"));
+    md.setAttribute(QStringLiteral("test.attribute"), QStringLiteral("attribute").toUtf8());
+    QCOMPARE(md.attribute(QStringLiteral("test.attribute")), QStringLiteral("attribute").toUtf8());
     expected = QStringList{QStringLiteral("test.attribute")};
     QCOMPARE(md.attributes(), expected);
-    md.setAttribute(QStringLiteral("test.attribute2"), QStringLiteral("attribute2"));
-    QCOMPARE(md.attribute(QStringLiteral("test.attribute2")), QStringLiteral("attribute2"));
+    md.setAttribute(QStringLiteral("test.attribute2"), QStringLiteral("attribute2").toUtf8());
+    QCOMPARE(md.attribute(QStringLiteral("test.attribute2")), QStringLiteral("attribute2").toUtf8());
     QCOMPARE(md.attributes().length(), 2);
 
-    md.setAttribute(QStringLiteral("test.attribute"), QString());
+    md.setAttribute(QStringLiteral("test.attribute"), QByteArray());
     QVERIFY(!md.hasAttribute(QStringLiteral("test.attribute")));
     expected = QStringList{QStringLiteral("test.attribute2")};
     QCOMPARE(md.attributes(), expected);
-    md.setAttribute(QStringLiteral("test.attribute2"), QString());
+    md.setAttribute(QStringLiteral("test.attribute2"), QByteArray());
     QVERIFY(!md.hasAttribute(QStringLiteral("test.attribute2")));
     QCOMPARE(md.attributes(), {});
 
     // Check for side effects of calling sequence
     QVERIFY(!md.hasAttribute(QStringLiteral("test.check_contains")));
-    md.setAttribute(QStringLiteral("test.check_contains"), QStringLiteral("dummy"));
+    md.setAttribute(QStringLiteral("test.check_contains"), QStringLiteral("dummy").toUtf8());
     QVERIFY(md.hasAttribute(QStringLiteral("test.check_contains")));
-    md.setAttribute(QStringLiteral("test.check_contains"), QString());
+    md.setAttribute(QStringLiteral("test.check_contains"), QByteArray());
     QVERIFY(!md.hasAttribute(QStringLiteral("test.check_contains")));
 }
 
@@ -182,11 +182,11 @@ void FilesystemMetaDataWriterTest::testRemoveMetadata()
     QVERIFY(opt.has_value());
     FilesystemMetaData md = *opt;
 
-    const auto tagValue = QStringLiteral("this/is/a/test/tag");
+    const auto tagValue = QStringLiteral("this/is/a/test/tag").toUtf8();
     QCOMPARE(md.setAttribute(QStringLiteral("tag"), tagValue), FilesystemMetaData::NoError);
     QVERIFY(md.hasAttribute(QStringLiteral("tag")));
 
-    QCOMPARE(md.setAttribute(QStringLiteral("tag"), QString{}), FilesystemMetaData::NoError);
+    QCOMPARE(md.setAttribute(QStringLiteral("tag"), QByteArray{}), FilesystemMetaData::NoError);
     QVERIFY(!md.hasAttribute(QStringLiteral("tag")));
 }
 
@@ -199,11 +199,11 @@ void FilesystemMetaDataWriterTest::testMetadataFolder()
     QVERIFY(opt.has_value());
     FilesystemMetaData md = *opt;
 
-    const auto tagValue = QStringLiteral("this/is/a/test/tag");
+    const auto tagValue = QStringLiteral("this/is/a/test/tag").toUtf8();
     QCOMPARE(md.setAttribute(QStringLiteral("tag"), tagValue), FilesystemMetaData::NoError);
     QVERIFY(md.hasAttribute(QStringLiteral("tag")));
 
-    QCOMPARE(md.setAttribute(QStringLiteral("tag"), QString{}), FilesystemMetaData::NoError);
+    QCOMPARE(md.setAttribute(QStringLiteral("tag"), QByteArray{}), FilesystemMetaData::NoError);
     QVERIFY(!md.hasAttribute(QStringLiteral("tag")));
 
     QVERIFY(QDir().rmdir(dirPath));

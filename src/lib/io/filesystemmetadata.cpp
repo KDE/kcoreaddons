@@ -51,7 +51,7 @@ QString FilesystemMetaData::filePath() const
     return d->filePath;
 }
 
-FilesystemMetaData::Error FilesystemMetaData::setAttribute(const QString &key, const QString &value)
+FilesystemMetaData::Error FilesystemMetaData::setAttribute(const QString &key, const QByteArray &value)
 {
     int result;
     if (!value.isEmpty()) {
@@ -92,9 +92,9 @@ bool FilesystemMetaData::hasAttribute(QStringView key) const
     return k_hasAttribute(d->filePath, key);
 }
 
-QString FilesystemMetaData::attribute(QStringView key) const
+QByteArray FilesystemMetaData::attribute(QStringView key) const
 {
-    QString value;
+    QByteArray value;
     k_getxattr(d->filePath, key, &value);
 
     return value;

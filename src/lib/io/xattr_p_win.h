@@ -19,7 +19,7 @@
 
 namespace
 {
-inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
+inline ssize_t k_getxattr(const QString &path, QStringView name, QByteArray *value)
 {
     const QString fullADSName = path + QLatin1String(":user.") + name;
     HANDLE hFile = ::CreateFileW(reinterpret_cast<const WCHAR *>(fullADSName.utf16()),
@@ -67,11 +67,11 @@ inline ssize_t k_getxattr(const QString &path, QStringView name, QString *value)
 
     data.resize(r);
 
-    *value = QString::fromUtf8(data);
+    *value = data;
     return r;
 }
 
-inline int k_setxattr(const QString &path, const QString &name, const QString &value)
+inline int k_setxattr(const QString &path, const QString &name, const QByteArray &value)
 {
     const QString fullADSName = path + QLatin1String(":user.") + name;
     if (fullADSName.size() > MAX_PATH) {
@@ -100,8 +100,7 @@ inline int k_setxattr(const QString &path, const QString &name, const QString &v
 
     DWORD count = 0;
 
-    const QByteArray v = value.toUtf8();
-    if (!::WriteFile(hFile, v.constData(), v.size(), &count, NULL)) {
+    if (!::WriteFile(hFile, value.constData(), value.size(), &count, NULL)) {
         DWORD error = ::GetLastError();
         std::string message = std::system_category().message(error);
         qCWarning(KCOREADDONS_DEBUG) << "failed to write to ADS:" << message << error << fullADSName;
@@ -179,10 +178,10 @@ QStringList k_queryAttributes(QStringView path)
         FILE_STREAM_INFO *p = fi;
         while (p->NextEntryOffset != NULL) {
             p = (FILE_STREAM_INFO *)((char *)p + p->NextEntryOffset);
-            entry = QString::fromUtf16((char16_t *)p->StreamName, p->StreamNameLength / sizeof(char16_t));
-            // entries are of the form ":user.key:$DATA"
-            entry.chop(6);
-            entries.append(entry.sliced(1).toLocal8Bit());
+            entry = QString::fromUtf16((char16_t *)p->StreamName, p->StreamNameLength);
+            // entries are of the form ":key:$DATA"
+            entry.chop(6); // remove :$DATA
+            fileAttributes.append(entry.sliced(1)); // remove leading ":"
         }
     } else {
         DWORD error = ::GetLastError();
@@ -194,17 +193,6 @@ QStringList k_queryAttributes(QStringView path)
     delete[] fi;
     CloseHandle(hFile);
 
-    if (entries.size() == 0) {
-        return fileAttributes;
-    }
-
-    const QByteArrayView prefix("user.");
-    for (const auto &entry : entries) {
-        if (!entry.startsWith(prefix)) {
-            continue;
-        }
-        fileAttributes.append(QString::fromLocal8Bit(entry).sliced(prefix.size()));
-    }
     return fileAttributes;
 }
 }

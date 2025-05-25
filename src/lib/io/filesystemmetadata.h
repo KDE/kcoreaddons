@@ -72,7 +72,7 @@ public:
      *
      * \a name the name of the metadata attribute
      */
-    QString attribute(QStringView name) const;
+    QByteArray attribute(QStringView name) const;
 
     /*!
      * Adds a metadata attribute to the file.
@@ -80,7 +80,7 @@ public:
      * \a name the name of the metadata to add
      * \a value the value to set
      */
-    Error setAttribute(const QString &name, const QString &value);
+    Error setAttribute(const QString &name, const QByteArray &value);
 
     /*!
      * Whether the file has a value for the specified attribute
