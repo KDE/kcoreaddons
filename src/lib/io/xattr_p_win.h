@@ -138,7 +138,7 @@ inline int k_removexattr(const QString &path, QStringView name)
     return ret;
 }
 
-inline bool k_isSupported(const QStringView &path)
+inline bool k_isSupported(const QString &path)
 {
     QFileInfo f(path);
     const QString drive = QString(f.absolutePath().left(2)) + QStringLiteral("\\");
@@ -151,9 +151,6 @@ inline bool k_isSupported(const QStringView &path)
 QStringList k_queryAttributes(QStringView path)
 {
     QStringList fileAttributes;
-    if (!k_isSupported(path)) {
-        return fileAttributes;
-    }
 
     HANDLE hFile = ::CreateFile(reinterpret_cast<const WCHAR *>(path.utf16()),
                                 GENERIC_READ,

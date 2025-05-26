@@ -51,7 +51,7 @@ public:
      *
      * \a filePath the path of the file
      *
-     * It return std::nullopt_t if the file sytem metadata is not supported for the file
+     * \return std::nullopt_t if the file sytem metadata is not supported for the file
      */
     static std::optional<FilesystemMetaData> forFile(const QString &filePath);
 
