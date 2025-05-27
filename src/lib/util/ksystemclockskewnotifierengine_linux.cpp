@@ -17,7 +17,7 @@
 #define TFD_TIMER_CANCEL_ON_SET (1 << 1)
 #endif
 
-KLinuxSystemClockSkewNotifierEngine *KLinuxSystemClockSkewNotifierEngine::create(QObject *parent)
+std::shared_ptr<KLinuxSystemClockSkewNotifierEngine> KLinuxSystemClockSkewNotifierEngine::create()
 {
     int fd = timerfd_create(CLOCK_REALTIME, O_CLOEXEC | O_NONBLOCK);
     if (fd == -1) {
@@ -32,12 +32,11 @@ KLinuxSystemClockSkewNotifierEngine *KLinuxSystemClockSkewNotifierEngine::create
         close(fd);
         return nullptr;
     }
-    return new KLinuxSystemClockSkewNotifierEngine(fd, parent);
+    return std::make_shared<KLinuxSystemClockSkewNotifierEngine>(fd);
 }
 
-KLinuxSystemClockSkewNotifierEngine::KLinuxSystemClockSkewNotifierEngine(int fd, QObject *parent)
-    : KSystemClockSkewNotifierEngine(parent)
-    , m_fd(fd)
+KLinuxSystemClockSkewNotifierEngine::KLinuxSystemClockSkewNotifierEngine(int fd)
+    : m_fd(fd)
 {
     const QSocketNotifier *notifier = new QSocketNotifier(m_fd, QSocketNotifier::Read, this);
     connect(notifier, &QSocketNotifier::activated, this, &KLinuxSystemClockSkewNotifierEngine::handleTimerCancelled);

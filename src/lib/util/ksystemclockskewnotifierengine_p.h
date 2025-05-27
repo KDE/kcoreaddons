@@ -13,10 +13,10 @@ class KSystemClockSkewNotifierEngine : public QObject
     Q_OBJECT
 
 public:
-    static KSystemClockSkewNotifierEngine *create(QObject *parent);
+    static std::shared_ptr<KSystemClockSkewNotifierEngine> globalInstance();
 
 protected:
-    explicit KSystemClockSkewNotifierEngine(QObject *parent);
+    explicit KSystemClockSkewNotifierEngine(QObject *parent = nullptr);
 
 Q_SIGNALS:
     void skewed();

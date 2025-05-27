@@ -13,8 +13,7 @@ class KDBusSystemClockSkewNotifierEngine : public KSystemClockSkewNotifierEngine
     Q_OBJECT
 
 public:
-    static KDBusSystemClockSkewNotifierEngine *create(QObject *parent);
+    static std::shared_ptr<KDBusSystemClockSkewNotifierEngine> create();
 
-private:
-    KDBusSystemClockSkewNotifierEngine(QObject *parent);
+    KDBusSystemClockSkewNotifierEngine();
 };

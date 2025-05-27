@@ -16,7 +16,7 @@ public:
     void unloadNotifierEngine();
 
     KSystemClockSkewNotifier *notifier;
-    KSystemClockSkewNotifierEngine *engine = nullptr;
+    std::shared_ptr<KSystemClockSkewNotifierEngine> engine;
     bool isActive = false;
 };
 
@@ -27,10 +27,10 @@ KSystemClockSkewNotifierPrivate::KSystemClockSkewNotifierPrivate(KSystemClockSke
 
 void KSystemClockSkewNotifierPrivate::loadNotifierEngine()
 {
-    engine = KSystemClockSkewNotifierEngine::create(notifier);
+    engine = KSystemClockSkewNotifierEngine::globalInstance();
 
     if (engine) {
-        QObject::connect(engine, &KSystemClockSkewNotifierEngine::skewed, notifier, &KSystemClockSkewNotifier::skewed);
+        QObject::connect(engine.get(), &KSystemClockSkewNotifierEngine::skewed, notifier, &KSystemClockSkewNotifier::skewed);
     }
 }
 
@@ -40,10 +40,8 @@ void KSystemClockSkewNotifierPrivate::unloadNotifierEngine()
         return;
     }
 
-    QObject::disconnect(engine, &KSystemClockSkewNotifierEngine::skewed, notifier, &KSystemClockSkewNotifier::skewed);
-    engine->deleteLater();
-
-    engine = nullptr;
+    QObject::disconnect(engine.get(), &KSystemClockSkewNotifierEngine::skewed, notifier, &KSystemClockSkewNotifier::skewed);
+    engine.reset();
 }
 
 KSystemClockSkewNotifier::KSystemClockSkewNotifier(QObject *parent)

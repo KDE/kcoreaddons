@@ -13,14 +13,14 @@ class KLinuxSystemClockSkewNotifierEngine : public KSystemClockSkewNotifierEngin
     Q_OBJECT
 
 public:
-    static KLinuxSystemClockSkewNotifierEngine *create(QObject *parent);
+    static std::shared_ptr<KLinuxSystemClockSkewNotifierEngine> create();
+
+    KLinuxSystemClockSkewNotifierEngine(int fd);
     ~KLinuxSystemClockSkewNotifierEngine() override;
 
 private Q_SLOTS:
     void handleTimerCancelled();
 
 private:
-    KLinuxSystemClockSkewNotifierEngine(int fd, QObject *parent);
-
     int m_fd;
 };

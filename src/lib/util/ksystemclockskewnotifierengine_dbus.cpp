@@ -8,13 +8,12 @@
 
 #include <QDBusConnection>
 
-KDBusSystemClockSkewNotifierEngine *KDBusSystemClockSkewNotifierEngine::create(QObject *parent)
+std::shared_ptr<KDBusSystemClockSkewNotifierEngine> KDBusSystemClockSkewNotifierEngine::create()
 {
-    return new KDBusSystemClockSkewNotifierEngine(parent);
+    return std::make_shared<KDBusSystemClockSkewNotifierEngine>();
 }
 
-KDBusSystemClockSkewNotifierEngine::KDBusSystemClockSkewNotifierEngine(QObject *parent)
-    : KSystemClockSkewNotifierEngine(parent)
+KDBusSystemClockSkewNotifierEngine::KDBusSystemClockSkewNotifierEngine()
 {
     QDBusConnection::sessionBus().connect(QString(),
                                           QStringLiteral("/org/kde/kcmshell_clock"),
