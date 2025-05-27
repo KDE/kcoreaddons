@@ -14,15 +14,22 @@
 #include "ksystemclockskewnotifierengine_dbus.h"
 #endif
 
-KSystemClockSkewNotifierEngine *KSystemClockSkewNotifierEngine::create(QObject *parent)
+std::shared_ptr<KSystemClockSkewNotifierEngine> KSystemClockSkewNotifierEngine::globalInstance()
 {
+    static std::weak_ptr<KSystemClockSkewNotifierEngine> singleton;
+    if (auto instance = singleton.lock()) {
+        return instance;
+    }
+
+    std::shared_ptr<KSystemClockSkewNotifierEngine> instance;
 #if defined(Q_OS_LINUX)
-    return KLinuxSystemClockSkewNotifierEngine::create(parent);
+    instance = KLinuxSystemClockSkewNotifierEngine::create();
 #elif HAVE_QTDBUS
-    return KDBusSystemClockSkewNotifierEngine::create(parent);
-#else
-    return nullptr;
+    instance = KDBusSystemClockSkewNotifierEngine::create();
 #endif
+
+    singleton = instance;
+    return instance;
 }
 
 KSystemClockSkewNotifierEngine::KSystemClockSkewNotifierEngine(QObject *parent)
