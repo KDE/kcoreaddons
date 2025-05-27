@@ -24,7 +24,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-20 09:40+0200\n"
+"PO-Revision-Date: 2025-05-25 11:32+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -938,15 +938,12 @@ msgstr "À l'instant"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:575
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
-msgstr[0] "Il y a %n minutes"
-msgstr[1] "Il y a %n minutes"
+msgstr[0] "Il y a %n minutes"
+msgstr[1] "Il y a %n minutes"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:580
@@ -964,15 +961,12 @@ msgstr "Maintenant"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:590
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
-msgstr[0] "%n minute"
-msgstr[1] "%n minutes"
+msgstr[0] "%n minute(s)"
+msgstr[1] "%n minutes"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:595

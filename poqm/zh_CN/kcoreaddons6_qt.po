@@ -900,14 +900,11 @@ msgstr "刚刚"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:575
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
-msgstr[0] "%n 分钟前"
+msgstr[0] ""
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:580
@@ -924,14 +921,11 @@ msgstr "现在"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:590
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
-msgstr[0] "%n 分"
+msgstr[0] ""
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:595
