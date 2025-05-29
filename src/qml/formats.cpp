@@ -49,6 +49,28 @@ QString Formats::formatRelativeDateTime(const QDateTime &dateTime, QLocale::Form
     return m_format.formatRelativeDateTime(dateTime, format);
 }
 
+[[nodiscard]] static QVariant readProperty(const QVariant &obj, const QString &propertyName)
+{
+    const auto mo = QMetaType(obj.userType()).metaObject();
+    if (!mo) {
+        return {};
+    }
+
+    const auto idx = mo->indexOfProperty(propertyName.toUtf8().constData());
+    if (idx < 0) {
+        return {};
+    }
+
+    const auto prop = mo->property(idx);
+    return prop.readOnGadget(obj.constData());
+}
+
+QString Formats::formatTime(const QVariant &obj, const QString &propertyName, QLocale::FormatType format, KFormat::TimeFormatOptions options) const
+{
+    const auto dt = readProperty(obj, propertyName).toDateTime();
+    return m_format.formatTime(dt, format, options);
+}
+
 QString Formats::formatDistance(double value, KFormat::DistanceFormatOptions options) const
 {
     markCurrentFunctionAsTranslationBinding(this);
