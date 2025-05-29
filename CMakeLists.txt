@@ -24,7 +24,6 @@ include(ECMGeneratePkgConfigFile)
 include(ECMQtDeclareLoggingCategory)
 include(ECMSetupQtPluginMacroNames)
 include(ECMDeprecationSettings)
-include(CMakeDependentOption)
 include(ECMGenerateQDoc)
 
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
@@ -90,13 +89,19 @@ if (BSDLIKE)
     endif()
 endif()
 
-# For the Python bindings
-find_package(Python3 3.9 COMPONENTS Interpreter Development)
-find_package(Shiboken6)
-find_package(PySide6)
+option(BUILD_PYTHON_BINDINGS "Build Python bindings" ON)
 
-# Python Bindings
-cmake_dependent_option(BUILD_PYTHON_BINDINGS "Generate Python Bindings" ON "TARGET Shiboken6::libshiboken AND TARGET PySide6::pyside6" OFF)
+# Only Linux and FreeBSD CI has the relevant packages
+if (ANDROID OR APPLE OR WIN32 OR NOT BUILD_SHARED_LIBS)
+    set(BUILD_PYTHON_BINDINGS OFF)
+endif()
+
+if (BUILD_PYTHON_BINDINGS)
+    find_package(Python3 3.9 REQUIRED COMPONENTS Interpreter Development)
+    find_package(Shiboken6 REQUIRED)
+    find_package(PySide6 REQUIRED)
+endif()
+
 add_feature_info(PYTHON_BINDINGS ${BUILD_PYTHON_BINDINGS} "Python bindings")
 
 # shall we use DBus?
