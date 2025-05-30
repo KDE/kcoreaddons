@@ -1,6 +1,8 @@
 # KDE - kdelibs/kdelibs4.po Russian translation.
 # Copyright (C) 2005, KDE Russian translation team.
 #
+# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2025 Alexander Yavorsky <kekcuha@gmail.com>
+# SPDX-FileCopyrightText: 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 # Denis Perchine <dyp@perchine.com>, 2000.
 # Gregory Mokhin <mok@kde.ru>, 2000, 2004, 2005.
 # Albert R. Valiev <darkstar@altlinux.ru>, 2002, 2008.
@@ -14,22 +16,21 @@
 # Inga Barinova <ingabarinova@gmail.com>, 2012.
 # Julia Dronova <juliette.tux@gmail.com>, 2012.
 # Alexander Lakhin <exclusion@gmail.com>, 2013.
-# SPDX-FileCopyrightText: 2019, 2020, 2021, 2022, 2023, 2025 Alexander Yavorsky <kekcuha@gmail.com>
 # Мария Шикунова <translation-team@basealt.ru>, 2022.
-# SPDX-FileCopyrightText: 2025 Olesya Gerasimenko <translation-team@basealt.ru>
+# Alexander Yavorsky <kekcuha@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-20 21:26+0300\n"
+"PO-Revision-Date: 2025-05-29 12:06+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 21.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Environment: kde\n"
@@ -949,16 +950,13 @@ msgstr "Только что"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:578
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
-msgstr[0] "%n минуту назад"
-msgstr[1] "%n минуты назад"
-msgstr[2] "%n минут назад"
+msgstr[0] "%n мин назад"
+msgstr[1] "%n мин назад"
+msgstr[2] "%n мин назад"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:583
@@ -977,16 +975,13 @@ msgstr "Сейчас"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:593
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
-msgstr[0] "%n минута"
-msgstr[1] "%n минуты"
-msgstr[2] "%n минут"
+msgstr[0] "%n мин"
+msgstr[1] "%n мин"
+msgstr[2] "%n мин"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:598
