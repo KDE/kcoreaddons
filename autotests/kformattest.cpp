@@ -442,6 +442,11 @@ void KFormatTest::formatRelativeDate()
 
 void KFormatTest::formatTime()
 {
+    if (QTimeZone::systemTimeZone().id() != "Asia/Kolkata") {
+        qDebug() << QTimeZone::systemTimeZone().id();
+        QSKIP("Changing timezone not working on this platform!");
+    }
+
     KFormat fmt(QLocale(u"en_GB"));
     QCOMPARE(fmt.formatTime({{2025, 5, 23}, {12, 23, 45}, QTimeZone::LocalTime}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviation), "12:23"_L1);
     QCOMPARE(fmt.formatTime({{2025, 5, 23}, {12, 23, 45}, QTimeZone::utc()}, QLocale::ShortFormat, KFormat::AddTimezoneAbbreviation), "12:23 UTC"_L1);

@@ -11,6 +11,9 @@ TestCase {
     name: "KFormatQml"
 
     function test_formatTime() {
+        if (_obj.systemTimeZone !== "Asia/Kolkata") {
+            skip("timezone change not supported on this platform");
+        }
         compare(KCoreAddons.Format.formatTime(_obj, "euTime", Locale.ShortFormat, KCoreAddons.FormatTypes.AddTimezoneAbbreviationIfNeeded), "12:34 CEST");
         compare(KCoreAddons.Format.formatTime(_obj, "indiaTime", Locale.ShortFormat, KCoreAddons.FormatTypes.AddTimezoneAbbreviationIfNeeded), "12:34");
         compare(KCoreAddons.Format.formatTime(_obj, "utcTime", Locale.ShortFormat, KCoreAddons.FormatTypes.AddTimezoneAbbreviationIfNeeded), "12:34 UTC");

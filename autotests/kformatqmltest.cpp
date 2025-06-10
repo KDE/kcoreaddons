@@ -22,10 +22,16 @@ class Object
     Q_PROPERTY(QDateTime euTime MEMBER m_euTime)
     Q_PROPERTY(QDateTime indiaTime MEMBER m_indiaTime)
     Q_PROPERTY(QDateTime utcTime MEMBER m_utcTime)
+    Q_PROPERTY(QString systemTimeZone READ systemTimeZone)
 private:
     QDateTime m_euTime = {{2025, 5, 29}, {12, 34}, QTimeZone("Europe/Brussels")};
     QDateTime m_indiaTime = {{2025, 5, 29}, {12, 34}, QTimeZone("Asia/Kolkata")};
     QDateTime m_utcTime = {{2025, 5, 29}, {12, 34}, QTimeZone::utc()};
+
+    [[nodiscard]] QString systemTimeZone() const
+    {
+        return QString::fromUtf8(QTimeZone::systemTimeZone().id());
+    }
 };
 
 class KFormatQmlSetup : public QObject
