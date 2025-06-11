@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-04-06 22:59+0200\n"
+"PO-Revision-Date: 2025-06-10 23:53+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -908,10 +908,7 @@ msgstr "지금"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:578
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
@@ -928,14 +925,11 @@ msgstr[0] "%n분 전"
 #: lib/util/kformatprivate.cpp:588
 msgctxt "KFormat|"
 msgid "Now"
-msgstr ""
+msgstr "지금"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:593
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
@@ -943,10 +937,7 @@ msgstr[0] "%n분"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:598
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
