@@ -20,7 +20,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons5_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-03-24 00:12-0300\n"
+"PO-Revision-Date: 2025-06-11 07:41-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.2\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -928,19 +928,16 @@ msgstr "Há dois dias"
 #: lib/util/kformatprivate.cpp:573
 msgctxt "KFormat|"
 msgid "Just now"
-msgstr "Agora"
+msgstr "Agora mesmo"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:578
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
-msgstr[0] "%n minuto atrás"
-msgstr[1] "%n minutos atrás"
+msgstr[0] "%n minuto(s) atrás"
+msgstr[1] "%n minuto(s) atrás"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:583
@@ -948,37 +945,31 @@ msgstr[1] "%n minutos atrás"
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%n minuto atrás"
-msgstr[1] "%n minutos atrás"
+msgstr[0] "%n minuto(s) atrás"
+msgstr[1] "%n minuto(s) atrás"
 
 #: lib/util/kformatprivate.cpp:588
 msgctxt "KFormat|"
 msgid "Now"
-msgstr ""
+msgstr "Agora"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:593
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
-msgstr[0] "%n minuto"
-msgstr[1] "%n minutos"
+msgstr[0] "%n min(s)"
+msgstr[1] "%n min(s)"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:598
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "%n minuto"
-msgstr[1] "%n minutos"
+msgstr[0] "Em %n minuto(s)"
+msgstr[1] "Em %n minuto(s)"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:613
