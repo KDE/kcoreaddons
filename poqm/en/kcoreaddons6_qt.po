@@ -7,8 +7,17 @@ msgstr ""
 "X-Language: en\n"
 "X-Qt-Contexts: true\n"
 
-#. @item:intext abbreviated amount of days
+#. @item:intext abbreviated amount of years
 #: ../lib/util/kformatprivate.cpp:333
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n yr"
+msgid_plural "%n yr"
+msgstr[0] "%n yr"
+msgstr[1] "%n yr"
+
+#. @item:intext abbreviated amount of days
+#: ../lib/util/kformatprivate.cpp:338
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
@@ -17,7 +26,7 @@ msgstr[0] "%n d"
 msgstr[1] "%n d"
 
 #. @item:intext abbreviated amount of hours
-#: ../lib/util/kformatprivate.cpp:338
+#: ../lib/util/kformatprivate.cpp:343
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
@@ -26,7 +35,7 @@ msgstr[0] "%n hr"
 msgstr[1] "%n hr"
 
 #. @item:intext abbreviated amount of minutes
-#: ../lib/util/kformatprivate.cpp:343
+#: ../lib/util/kformatprivate.cpp:348
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
@@ -35,7 +44,7 @@ msgstr[0] "%n min"
 msgstr[1] "%n min"
 
 #. @item:intext abbreviated amount of seconds
-#: ../lib/util/kformatprivate.cpp:348
+#: ../lib/util/kformatprivate.cpp:353
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
@@ -44,7 +53,7 @@ msgstr[0] "%n sec"
 msgstr[1] "%n sec"
 
 #. @item:intext %1 is a whole number
-#: ../lib/util/kformatprivate.cpp:467
+#: ../lib/util/kformatprivate.cpp:497
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n millisecond(s)"
@@ -53,7 +62,16 @@ msgstr[0] "%n millisecond"
 msgstr[1] "%n milliseconds"
 
 #. @item:intext %n is a whole number
-#: ../lib/util/kformatprivate.cpp:478
+#: ../lib/util/kformatprivate.cpp:508
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n year(s)"
+msgid_plural "%n year(s)"
+msgstr[0] "%n year"
+msgstr[1] "%n years"
+
+#. @item:intext %n is a whole number
+#: ../lib/util/kformatprivate.cpp:513
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n day(s)"
@@ -62,7 +80,7 @@ msgstr[0] "%n day"
 msgstr[1] "%n days"
 
 #. @item:intext %n is a whole number
-#: ../lib/util/kformatprivate.cpp:483
+#: ../lib/util/kformatprivate.cpp:518
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n hour(s)"
@@ -71,7 +89,7 @@ msgstr[0] "%n hour"
 msgstr[1] "%n hours"
 
 #. @item:intext %n is a whole number
-#: ../lib/util/kformatprivate.cpp:488
+#: ../lib/util/kformatprivate.cpp:523
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s)"
@@ -80,7 +98,7 @@ msgstr[0] "%n minute"
 msgstr[1] "%n minutes"
 
 #. @item:intext %n is a whole number
-#: ../lib/util/kformatprivate.cpp:493
+#: ../lib/util/kformatprivate.cpp:528
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n second(s)"
@@ -89,7 +107,7 @@ msgstr[0] "%n second"
 msgstr[1] "%n seconds"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
-#: ../lib/util/kformatprivate.cpp:578
+#: ../lib/util/kformatprivate.cpp:613
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
@@ -98,7 +116,7 @@ msgstr[0] "%n min ago"
 msgstr[1] "%n mins ago"
 
 #. @item:intext %1 is a whole number
-#: ../lib/util/kformatprivate.cpp:583
+#: ../lib/util/kformatprivate.cpp:618
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
@@ -107,7 +125,7 @@ msgstr[0] "%n minute ago"
 msgstr[1] "%n minutes ago"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
-#: ../lib/util/kformatprivate.cpp:593
+#: ../lib/util/kformatprivate.cpp:628
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
@@ -116,7 +134,7 @@ msgstr[0] "%n min"
 msgstr[1] "%n mins"
 
 #. @item:intext %1 is a whole number
-#: ../lib/util/kformatprivate.cpp:598
+#: ../lib/util/kformatprivate.cpp:633
 #, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"

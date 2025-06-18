@@ -695,8 +695,17 @@ msgctxt "KFormat|IECBinaryDialect"
 msgid "%1 YiB"
 msgstr "%1 YiB"
 
-#. @item:intext abbreviated amount of days
+#. @item:intext abbreviated amount of years
 #: lib/util/kformatprivate.cpp:333
+#, qt-format
+msgctxt "KFormat|"
+msgid "%n yr"
+msgid_plural "%n yr"
+msgstr[0] ""
+msgstr[1] ""
+
+#. @item:intext abbreviated amount of days
+#: lib/util/kformatprivate.cpp:338
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%n day(s)"
@@ -708,7 +717,7 @@ msgstr[0] "%n hari"
 msgstr[1] "%n hari"
 
 #. @item:intext abbreviated amount of hours
-#: lib/util/kformatprivate.cpp:338
+#: lib/util/kformatprivate.cpp:343
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%n hour(s)"
@@ -720,7 +729,7 @@ msgstr[0] "%n jam"
 msgstr[1] "%n jam"
 
 #. @item:intext abbreviated amount of minutes
-#: lib/util/kformatprivate.cpp:343
+#: lib/util/kformatprivate.cpp:348
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%n minute(s)"
@@ -732,7 +741,7 @@ msgstr[0] "%n minit"
 msgstr[1] "%n minit"
 
 #. @item:intext abbreviated amount of seconds
-#: lib/util/kformatprivate.cpp:348
+#: lib/util/kformatprivate.cpp:353
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%n second(s)"
@@ -744,47 +753,52 @@ msgstr[0] "%n saat"
 msgstr[1] "%n saat"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
-#: lib/util/kformatprivate.cpp:374
+#: lib/util/kformatprivate.cpp:379
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2.%3s"
 msgstr "%1m%2.%3s"
 
 #. @item:intext Duration format minutes and seconds
-#: lib/util/kformatprivate.cpp:377
+#: lib/util/kformatprivate.cpp:382
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2s"
 msgstr "%1m%2s"
 
 #. @item:intext Duration format hours and minutes
-#: lib/util/kformatprivate.cpp:380
+#: lib/util/kformatprivate.cpp:385
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m"
 msgstr "%1j%2m"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
-#: lib/util/kformatprivate.cpp:383
+#: lib/util/kformatprivate.cpp:388
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3.%4s"
 msgstr "%1j%2m%3.%4s"
 
 #. @item:intext Duration format hours, minutes, seconds
-#: lib/util/kformatprivate.cpp:390
+#: lib/util/kformatprivate.cpp:396
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3s"
 msgstr "%1j%2m%3s"
 
-#. @item:intext abbreviated amount of minutes and abbreviated amount of seconds
+#. @item:intext abbreviated amount of years and abbreviated amount of days
+#. ----------
+#. @item:intext abbreviated amount of days and abbreviated amount of hours
 #. ----------
 #. @item:intext abbreviated amount of hours and abbreviated amount of minutes
 #. ----------
+#. @item:intext abbreviated amount of minutes and abbreviated amount of seconds
+#. ----------
 #. %1 is a formatted time (from QLocale.toString), %2 is a localized timezone abbreviation (from QTimeZone::displayName(QTimeZone::ShortName)).
-#: lib/util/kformatprivate.cpp:408 lib/util/kformatprivate.cpp:413
-#: lib/util/kformatprivate.cpp:645
+#: lib/util/kformatprivate.cpp:432 lib/util/kformatprivate.cpp:441
+#: lib/util/kformatprivate.cpp:446 lib/util/kformatprivate.cpp:454
+#: lib/util/kformatprivate.cpp:680
 #, fuzzy, qt-format
 #| msgctxt "KFormat|no Prefix"
 #| msgid "%1 %2"
@@ -792,17 +806,8 @@ msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#. @item:intext abbreviated amount of hours, abbreviated amount of minutes and abbreviated amount of seconds
-#: lib/util/kformatprivate.cpp:417
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 %2%3"
-msgctxt "KFormat|"
-msgid "%1 %2 %3"
-msgstr "%1 %2%3"
-
 #. @item:intext Duration format minutes, seconds and milliseconds
-#: lib/util/kformatprivate.cpp:425
+#: lib/util/kformatprivate.cpp:459
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2.%3"
@@ -811,56 +816,56 @@ msgstr "%1:%2.%3"
 #. @item:intext Duration format minutes and seconds
 #. ----------
 #. @item:intext Duration format hours and minutes
-#: lib/util/kformatprivate.cpp:428 lib/util/kformatprivate.cpp:431
+#: lib/util/kformatprivate.cpp:462 lib/util/kformatprivate.cpp:465
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2"
 msgstr "%1:%2"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
-#: lib/util/kformatprivate.cpp:434
+#: lib/util/kformatprivate.cpp:468
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2:%3.%4"
 msgstr "%1:%2:%3.%4"
 
 #. @item:intext Duration format hours, minutes, seconds
-#: lib/util/kformatprivate.cpp:441
+#: lib/util/kformatprivate.cpp:476
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2:%3"
 msgstr "%1:%2:%3"
 
 #. @item:intext %1 is a real number, e.g. 1.23 days
-#: lib/util/kformatprivate.cpp:453
+#: lib/util/kformatprivate.cpp:483
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 days"
 msgstr "%1 hari"
 
 #. @item:intext %1 is a real number, e.g. 1.23 hours
-#: lib/util/kformatprivate.cpp:456
+#: lib/util/kformatprivate.cpp:486
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 hours"
 msgstr "%1 jam"
 
 #. @item:intext %1 is a real number, e.g. 1.23 minutes
-#: lib/util/kformatprivate.cpp:459
+#: lib/util/kformatprivate.cpp:489
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 minutes"
 msgstr "%1 minit"
 
 #. @item:intext %1 is a real number, e.g. 1.23 seconds
-#: lib/util/kformatprivate.cpp:462
+#: lib/util/kformatprivate.cpp:492
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 seconds"
 msgstr "%1 saat"
 
 #. @item:intext %1 is a whole number
-#: lib/util/kformatprivate.cpp:467
+#: lib/util/kformatprivate.cpp:497
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n millisecond(s)"
@@ -869,7 +874,19 @@ msgstr[0] "%n milisaat"
 msgstr[1] "%n milisaat"
 
 #. @item:intext %n is a whole number
-#: lib/util/kformatprivate.cpp:478
+#: lib/util/kformatprivate.cpp:508
+#, fuzzy, qt-format
+#| msgctxt "KFormat|"
+#| msgid "%n hour(s)"
+#| msgid_plural "%n hour(s)"
+msgctxt "KFormat|"
+msgid "%n year(s)"
+msgid_plural "%n year(s)"
+msgstr[0] "%n jam"
+msgstr[1] "%n jam"
+
+#. @item:intext %n is a whole number
+#: lib/util/kformatprivate.cpp:513
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n day(s)"
@@ -878,7 +895,7 @@ msgstr[0] "%n hari"
 msgstr[1] "%n hari"
 
 #. @item:intext %n is a whole number
-#: lib/util/kformatprivate.cpp:483
+#: lib/util/kformatprivate.cpp:518
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n hour(s)"
@@ -887,7 +904,7 @@ msgstr[0] "%n jam"
 msgstr[1] "%n jam"
 
 #. @item:intext %n is a whole number
-#: lib/util/kformatprivate.cpp:488
+#: lib/util/kformatprivate.cpp:523
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s)"
@@ -896,7 +913,7 @@ msgstr[0] "%n minit"
 msgstr[1] "%n minit"
 
 #. @item:intext %n is a whole number
-#: lib/util/kformatprivate.cpp:493
+#: lib/util/kformatprivate.cpp:528
 #, qt-format
 msgctxt "KFormat|"
 msgid "%n second(s)"
@@ -909,52 +926,52 @@ msgstr[1] "%n saat"
 #. @item:intext hours and minutes. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #. ----------
 #. @item:intext minutes and seconds. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
-#: lib/util/kformatprivate.cpp:518 lib/util/kformatprivate.cpp:524
-#: lib/util/kformatprivate.cpp:530
+#: lib/util/kformatprivate.cpp:553 lib/util/kformatprivate.cpp:559
+#: lib/util/kformatprivate.cpp:565
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 and %2"
 msgstr "%1 dan %2"
 
-#: lib/util/kformatprivate.cpp:541
+#: lib/util/kformatprivate.cpp:576
 msgctxt ""
 "KFormat|used when a relative date string can't be generated because the date "
 "is invalid"
 msgid "Invalid date"
 msgstr "Tarikh Tidak Sah"
 
-#: lib/util/kformatprivate.cpp:551
+#: lib/util/kformatprivate.cpp:586
 msgctxt "KFormat|"
 msgid "In two days"
 msgstr "Dalam dua hari"
 
-#: lib/util/kformatprivate.cpp:553
+#: lib/util/kformatprivate.cpp:588
 msgctxt "KFormat|"
 msgid "Tomorrow"
 msgstr "Esok"
 
-#: lib/util/kformatprivate.cpp:555
+#: lib/util/kformatprivate.cpp:590
 msgctxt "KFormat|"
 msgid "Today"
 msgstr "Hari ini"
 
-#: lib/util/kformatprivate.cpp:557
+#: lib/util/kformatprivate.cpp:592
 msgctxt "KFormat|"
 msgid "Yesterday"
 msgstr "Semalam"
 
-#: lib/util/kformatprivate.cpp:559
+#: lib/util/kformatprivate.cpp:594
 msgctxt "KFormat|"
 msgid "Two days ago"
 msgstr "Dua hari lalu"
 
-#: lib/util/kformatprivate.cpp:573
+#: lib/util/kformatprivate.cpp:608
 msgctxt "KFormat|"
 msgid "Just now"
 msgstr "Baru-baru Ini"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
-#: lib/util/kformatprivate.cpp:578
+#: lib/util/kformatprivate.cpp:613
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%1 minutes ago"
@@ -965,7 +982,7 @@ msgstr[0] "%1 minit lalu"
 msgstr[1] "%1 minit lalu"
 
 #. @item:intext %1 is a whole number
-#: lib/util/kformatprivate.cpp:583
+#: lib/util/kformatprivate.cpp:618
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%1 minutes ago"
@@ -975,7 +992,7 @@ msgid_plural "%n minute(s) ago"
 msgstr[0] "%1 minit lalu"
 msgstr[1] "%1 minit lalu"
 
-#: lib/util/kformatprivate.cpp:588
+#: lib/util/kformatprivate.cpp:623
 #, fuzzy
 #| msgid "No"
 msgctxt "KFormat|"
@@ -983,7 +1000,7 @@ msgid "Now"
 msgstr "Tidak"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
-#: lib/util/kformatprivate.cpp:593
+#: lib/util/kformatprivate.cpp:628
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%n minute(s)"
@@ -995,7 +1012,7 @@ msgstr[0] "%n minit"
 msgstr[1] "%n minit"
 
 #. @item:intext %1 is a whole number
-#: lib/util/kformatprivate.cpp:598
+#: lib/util/kformatprivate.cpp:633
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%n minute(s)"
@@ -1007,7 +1024,7 @@ msgstr[0] "%n minit"
 msgstr[1] "%n minit"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
-#: lib/util/kformatprivate.cpp:613
+#: lib/util/kformatprivate.cpp:648
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%1 and %2"
@@ -1015,7 +1032,7 @@ msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 dan %2"
 
-#: lib/util/kformatprivate.cpp:661
+#: lib/util/kformatprivate.cpp:696
 #, fuzzy, qt-format
 #| msgid "%1 file"
 #| msgid_plural "%1 files"
@@ -1023,7 +1040,7 @@ msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
 msgstr "%1 fail"
 
-#: lib/util/kformatprivate.cpp:665 lib/util/kformatprivate.cpp:667
+#: lib/util/kformatprivate.cpp:700 lib/util/kformatprivate.cpp:702
 #, fuzzy, qt-format
 #| msgctxt "KFormat|"
 #| msgid "%1 minutes"
@@ -1031,13 +1048,13 @@ msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
 msgstr "%1 minit"
 
-#: lib/util/kformatprivate.cpp:673
+#: lib/util/kformatprivate.cpp:708
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:676 lib/util/kformatprivate.cpp:678
+#: lib/util/kformatprivate.cpp:711 lib/util/kformatprivate.cpp:713
 #, fuzzy, qt-format
 #| msgctxt "KFormat|MetricBinaryDialect"
 #| msgid "%1 kB"
@@ -1070,6 +1087,13 @@ msgstr "Gagal untuk melaksanakan `lsof' kod ralat %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob tidak disokong oleh Windows"
+
+#, fuzzy
+#~| msgctxt "KFormat|MetricBinaryDialect"
+#~| msgid "%1 %2%3"
+#~ msgctxt "KFormat|"
+#~ msgid "%1 %2 %3"
+#~ msgstr "%1 %2%3"
 
 #~ msgctxt "KPluginLoader|"
 #~ msgid "The library %1 does not offer a KPluginFactory."
