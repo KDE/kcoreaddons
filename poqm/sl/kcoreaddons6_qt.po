@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-25 05:56+0200\n"
+"PO-Revision-Date: 2025-06-18 06:58+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100>=3 && n"
 "%100<=4 ? 2 : 3);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Poedit 3.6\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:252
@@ -695,10 +695,10 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%n leto"
+msgstr[1] "%n leti"
+msgstr[2] "%n leta"
+msgstr[3] "%n let"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -867,17 +867,14 @@ msgstr[3] "%n milisekund"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n ura"
-msgstr[1] "%n uri"
-msgstr[2] "%n ure"
-msgstr[3] "%n ur"
+msgstr[0] "%n leto"
+msgstr[1] "%n leti"
+msgstr[2] "%n leta"
+msgstr[3] "%n let"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513

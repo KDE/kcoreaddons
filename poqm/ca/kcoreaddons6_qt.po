@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-24 11:08+0200\n"
+"PO-Revision-Date: 2025-06-18 08:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -691,8 +691,8 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%n any"
+msgstr[1] "%n anys"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -851,15 +851,12 @@ msgstr[1] "%n mil·lisegons"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n hora"
-msgstr[1] "%n hores"
+msgstr[0] "%n any"
+msgstr[1] "%n anys"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
@@ -1040,7 +1037,3 @@ msgstr "Ha fallat en executar «lsof». Codi d'error %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "Windows no admet KListOpenFilesJob"
-
-#~ msgctxt "KFormat|"
-#~ msgid "%1 %2 %3"
-#~ msgstr "%1 %2 %3"

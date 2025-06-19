@@ -22,7 +22,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2025-05-25 10:19+0300\n"
+"PO-Revision-Date: 2025-06-18 15:58+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -693,10 +693,10 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "שנה"
+msgstr[1] "שנתיים"
+msgstr[2] "%n שנה"
+msgstr[3] "%n שנים"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -865,17 +865,14 @@ msgstr[3] "%n מילישניות"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "שעה"
-msgstr[1] "שעתיים"
-msgstr[2] "%n שעות"
-msgstr[3] "%n שעות"
+msgstr[0] "שנה"
+msgstr[1] "שנתיים"
+msgstr[2] "%n שנה"
+msgstr[3] "%n שנים"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513

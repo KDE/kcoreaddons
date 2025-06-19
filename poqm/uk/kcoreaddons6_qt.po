@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons5_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-24 09:44+0300\n"
+"PO-Revision-Date: 2025-06-18 08:25+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -691,10 +691,10 @@ msgstr "%1 ЙіБ"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%n р"
+msgstr[1] "%n р"
+msgstr[2] "%n р"
+msgstr[3] "%n р"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -863,17 +863,14 @@ msgstr[3] "%n мілісекунда"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n година"
-msgstr[1] "%n години"
-msgstr[2] "%n годин"
-msgstr[3] "%n година"
+msgstr[0] "%n рік"
+msgstr[1] "%n роки"
+msgstr[2] "%n років"
+msgstr[3] "%n рік"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513

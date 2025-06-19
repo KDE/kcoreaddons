@@ -672,8 +672,8 @@ msgstr "%1 იიბ"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%n წ"
+msgstr[1] "%n წ"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -832,15 +832,12 @@ msgstr[1] "%n მილიწამი"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n საათი"
-msgstr[1] "%n საათი"
+msgstr[0] "%n წელი"
+msgstr[1] "%n წელი"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
