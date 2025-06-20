@@ -21,7 +21,7 @@ class KCompoundJobPrivate;
  * The base class for all jobs able to be composed of one
  * or more subjobs.
  *
- * @since 6.14
+ * \since 6.15
  */
 class KCOREADDONS_EXPORT KCompoundJob : public KJob
 {

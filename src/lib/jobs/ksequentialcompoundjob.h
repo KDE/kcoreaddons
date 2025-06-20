@@ -27,7 +27,7 @@ class KSequentialCompoundJobPrivate;
  * addSubjob() protected. KSimpleSequentialCompoundJob makes addSubjob() public
  * and can be used on its own.
  *
- * @since 6.14
+ * \since 6.15
  */
 class KCOREADDONS_EXPORT KSequentialCompoundJob : public KCompoundJob
 {

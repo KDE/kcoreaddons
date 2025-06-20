@@ -18,7 +18,7 @@
  * A sequential compound job with public addSubjob().
  * \sa KSequentialCompoundJob
  *
- * @since 6.14
+ * \since 6.15
  */
 class KCOREADDONS_EXPORT KSimpleSequentialCompoundJob : public KSequentialCompoundJob
 {
