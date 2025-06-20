@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons6_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-24 11:23+0100\n"
+"PO-Revision-Date: 2025-06-19 02:58+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.04.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -687,8 +687,8 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%n a"
+msgstr[1] "%n a"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -847,15 +847,12 @@ msgstr[1] "%n milisegundos"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n hora"
-msgstr[1] "%n horas"
+msgstr[0] "%n año"
+msgstr[1] "%n años"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
@@ -1035,7 +1032,3 @@ msgstr "No se ha podido ejecutar `lsof'. Código de error: %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob no se puede usar en Windows"
-
-#~ msgctxt "KFormat|"
-#~ msgid "%1 %2 %3"
-#~ msgstr "%1 %2 %3"

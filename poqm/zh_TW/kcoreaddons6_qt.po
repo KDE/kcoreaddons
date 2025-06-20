@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-24 21:26+0900\n"
+"PO-Revision-Date: 2025-06-19 21:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -699,7 +699,7 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
+msgstr[0] "%n 年"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -853,14 +853,11 @@ msgstr[0] "%n 毫秒"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n 小時"
+msgstr[0] "%n 年"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
