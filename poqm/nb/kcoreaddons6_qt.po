@@ -857,9 +857,6 @@ msgstr[1] "%n millisekunder"
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
 #, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
@@ -1044,7 +1041,3 @@ msgstr "Klarte ikke kjøre «lsof». Feilkode: %1"
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "KListOpenFilesJob er ikke støttet på Windows"
-
-#~ msgctxt "KFormat|"
-#~ msgid "%1 %2 %3"
-#~ msgstr "%1 %2 %3"
