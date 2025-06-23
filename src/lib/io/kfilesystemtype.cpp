@@ -17,8 +17,6 @@
 #include <QCoreApplication>
 #include <QFile>
 
-#include <array>
-
 struct FsInfo {
     KFileSystemType::Type type = KFileSystemType::Unknown;
     const char *name = nullptr;
@@ -26,7 +24,7 @@ struct FsInfo {
 
 #ifndef Q_OS_WIN
 // clang-format off
-static const std::array<FsInfo, 19> s_fsMap = {{
+static constexpr FsInfo s_fsMap[] = {
     {KFileSystemType::Nfs, "nfs"},
     {KFileSystemType::Nfs, "nfs4"},
     {KFileSystemType::Smb, "smb"},
@@ -46,15 +44,16 @@ static const std::array<FsInfo, 19> s_fsMap = {{
     {KFileSystemType::Fat, "vfat"},
     {KFileSystemType::Fat, "msdos"},
     {KFileSystemType::Fuse, "fuseblk"},
-}};
+    {KFileSystemType::Nfs, "afs"}, // bug 375623, another remote file system
+};
 // clang-format on
 
 inline KFileSystemType::Type kde_typeFromName(const QLatin1String name)
 {
-    auto it = std::find_if(s_fsMap.cbegin(), s_fsMap.cend(), [name](const auto &fsInfo) {
+    auto it = std::find_if(std::begin(s_fsMap), std::end(s_fsMap), [name](const auto &fsInfo) {
         return QLatin1String(fsInfo.name) == name;
     });
-    return it != s_fsMap.cend() ? it->type : KFileSystemType::Other;
+    return it != std::end(s_fsMap) ? it->type : KFileSystemType::Other;
 }
 
 inline KFileSystemType::Type kde_typeFromName(const char *c)
