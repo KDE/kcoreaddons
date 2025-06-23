@@ -674,7 +674,7 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
+msgstr[0] "%n 年"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -832,7 +832,7 @@ msgstr[0] "%n 毫秒"
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] ""
+msgstr[0] "%n 年"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
