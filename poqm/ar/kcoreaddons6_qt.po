@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-28 15:38+0300\n"
-"PO-Revision-Date: 2025-05-27 18:15+0400\n"
+"PO-Revision-Date: 2025-06-26 11:14+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -684,12 +684,12 @@ msgstr "%1 ي.بايت"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%n سنة"
+msgstr[1] "سنة واحدة"
+msgstr[2] "سنتين"
+msgstr[3] "%n سنوات"
+msgstr[4] "%n سنة"
+msgstr[5] "%n سنة"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -868,19 +868,16 @@ msgstr[5] "%n ملي‌ثانية"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "أقل من ساعة"
-msgstr[1] "ساعة واحدة"
-msgstr[2] "ساعتان"
-msgstr[3] "%n ساعات"
-msgstr[4] "%n ساعة"
-msgstr[5] "%n ساعة"
+msgstr[0] "%n سنة"
+msgstr[1] "سنة"
+msgstr[2] "سنتين"
+msgstr[3] "%n سنوات"
+msgstr[4] "%n سنة"
+msgstr[5] "%n سنة"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
