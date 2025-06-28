@@ -657,7 +657,7 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     watch.stopDirScan(m_path);
 
-    qCDebug(KCOREADDONS_DEBUG) << "create file 2 at" << QDateTime::currentDateTime().toMSecsSinceEpoch();
+    qCDebug(KCOREADDONS_DEBUG) << "create file 2 at" << QDateTime::currentMSecsSinceEpoch();
     const QString file2 = createFile(2);
     QSignalSpy spyDirty(&watch, &KDirWatch::dirty);
     QTest::qWait(200);
@@ -677,7 +677,7 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     waitUntilMTimeChange(m_path); // necessary for the mtime comparison in scanEntry
 
-    qCDebug(KCOREADDONS_DEBUG) << "create file 3 at" << QDateTime::currentDateTime().toMSecsSinceEpoch();
+    qCDebug(KCOREADDONS_DEBUG) << "create file 3 at" << QDateTime::currentMSecsSinceEpoch();
     const QString file3 = createFile(3);
 #ifdef Q_OS_WIN
     if (watch.internalMethod() == KDirWatch::QFSWatch) {
