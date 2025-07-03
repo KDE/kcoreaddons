@@ -19,6 +19,8 @@
 #include <QLocale>
 #include <QLoggingCategory>
 
+#include <private/qlocale_p.h> // QSystemLocale
+
 class LibraryPathRestorer
 {
 public:
@@ -173,6 +175,10 @@ private Q_SLOTS:
 
     void testTranslations()
     {
+        const auto restoreDefaultLocale = qScopeGuard([prior = QLocale()]() {
+            QLocale::setDefault(prior);
+        });
+
         QJsonParseError e;
         QJsonObject jo = QJsonDocument::fromJson(
                              "{ \"KPlugin\": {\n"
@@ -201,6 +207,39 @@ private Q_SLOTS:
         QLocale::setDefault(QLocale(QStringLiteral("fr_FR")));
         QCOMPARE(m.name(), QStringLiteral("Name"));
         QCOMPARE(m.description(), QStringLiteral("Description"));
+    }
+
+    void testTranslationsWithOverrideLanguage()
+    {
+        const auto restoreDefaultLocale = qScopeGuard([prior = QLocale()]() {
+            QLocale::setDefault(prior);
+        });
+
+        // simulate usage of language override (kxmlgui);
+        // we need to create a new QSystemLocale to make Qt update the locale
+        qputenv("LANGUAGE", "de_DE:fr_FR");
+        QSystemLocale newSystemLocale{};
+
+        QJsonParseError e;
+        QJsonObject jo = QJsonDocument::fromJson(
+                             "{ \"KPlugin\": {\n"
+                             "\"Name\": \"Name\",\n"
+                             "\"Name[de]\": \"Name (de)\",\n"
+                             "\"Name[de_DE]\": \"Name (de_DE)\",\n"
+                             "\"Description\": \"Description\",\n"
+                             "\"Description[de]\": \"Beschreibung (de)\",\n"
+                             "\"Description[de_DE]\": \"Beschreibung (de_DE)\"\n"
+                             "}\n}",
+                             &e)
+                             .object();
+        KPluginMetaData m(jo, QString());
+        QCOMPARE(m.name(), QStringLiteral("Name (de_DE)"));
+        QCOMPARE(m.description(), QStringLiteral("Beschreibung (de_DE)"));
+
+        // verify that manually set default locale is preferred
+        QLocale::setDefault(QLocale(QStringLiteral("de_CH")));
+        QCOMPARE(m.name(), QStringLiteral("Name (de)"));
+        QCOMPARE(m.description(), QStringLiteral("Beschreibung (de)"));
     }
 
     void testReadStringList()
