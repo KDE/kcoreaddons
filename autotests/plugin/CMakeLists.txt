@@ -3,6 +3,10 @@ if (NOT TARGET Qt6::Widgets)
     return()
 endif()
 
+if (Qt6_VERSION VERSION_GREATER_EQUAL "6.10.0")
+    find_package(Qt6CorePrivate ${Qt6_VERSION} EXACT CONFIG REQUIRED)
+endif()
+
 add_library(plugin_classes plugins.cpp)
 generate_export_header(plugin_classes)
 
@@ -33,6 +37,7 @@ ecm_add_tests(
     ${autotests_OPTIONAL_SRCS}
     LINK_LIBRARIES Qt6::Test Qt6::Widgets KF6::CoreAddons autotests_static
 )
+target_link_libraries(kpluginmetadatatest Qt6::CorePrivate)
 if (NOT WIN32)
     target_link_libraries(kpluginfactorytest plugin_classes)
 endif()

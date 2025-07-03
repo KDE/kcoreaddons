@@ -9,9 +9,29 @@
 
 #include <QJsonObject>
 
+static QString getDefaultLocaleName()
+{
+#if defined(Q_OS_WIN) || defined(Q_OS_MAC)
+    if (QLocale() == QLocale::system()) {
+        // If the default locale hasn't been changed then
+        // On Windows and Apple OSs, we cannot use QLocale::system() if an application-specific
+        // language was set by kxmlgui because Qt ignores LANGUAGE on Windows and Apple OSs.
+        if (const auto firstLanguage = qEnvironmentVariable("LANGUAGE").section(u':', 0, 0, QString::SectionSkipEmpty); !firstLanguage.isEmpty()) {
+            return firstLanguage;
+        }
+        // Also prefer the configured display language over the system language
+        if (const auto languages = QLocale::system().uiLanguages(); !languages.isEmpty()) {
+            // uiLanguages() uses dashes as separator, but KConfig assumes underscores
+            return languages.value(0).replace(u'-', u'_');
+        }
+    }
+#endif
+    return QLocale().name();
+}
+
 QJsonValue KJsonUtils::readTranslatedValue(const QJsonObject &jo, const QString &key, const QJsonValue &defaultValue)
 {
-    QString languageWithCountry = QLocale().name();
+    QString languageWithCountry = getDefaultLocaleName();
     auto it = jo.constFind(key + QLatin1Char('[') + languageWithCountry + QLatin1Char(']'));
     if (it != jo.constEnd()) {
         return it.value();
