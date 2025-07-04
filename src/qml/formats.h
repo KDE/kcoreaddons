@@ -121,7 +121,7 @@ public:
      * which would destroy its timezone information.
      * The formatting itself is done via KFormat::formatTime, see that for \a format and \a options.
      *
-     * \since 6.15
+     * \since 6.16
      */
     Q_INVOKABLE [[nodiscard]] QString formatTime(const QVariant &obj,
                                                  const QString &propertyName,
