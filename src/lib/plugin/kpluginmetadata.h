@@ -266,7 +266,7 @@ public:
      * Reads the plugin metadata from a QPluginLoader instance. You must call QPluginLoader::setFileName()
      * or use the appropriate constructor on \a loader before calling this.
      *
-     * \a option Added in 6.0, see enum docs
+     * \a options Whether or not plugins without JSON metadata are considered valid.
      */
     KPluginMetaData(const QPluginLoader &loader, KPluginMetaDataOptions options = {});
 
@@ -275,6 +275,8 @@ public:
      *
      * Platform-specific library suffixes may be omitted since \a file will be resolved
      * using the same logic as QPluginLoader.
+     *
+     * \a options Whether or not plugins without JSON metadata are considered valid.
      *
      * \sa QPluginLoader::setFileName()
      */
@@ -318,25 +320,25 @@ public:
      *
      * \a pluginId The Id of the plugin. The id should be the same as the filename, see KPluginMetaData::pluginId()
      *
-     * \a option Added in 6.0, see enum docs
+     * \a options Whether or not plugins without JSON metadata are considered valid.
      *
      * \since 5.84
      */
     static KPluginMetaData findPluginById(const QString &directory, const QString &pluginId, KPluginMetaDataOptions options = {});
 
     /*!
-     * Find all plugins inside \a directory. Only plugins which have JSON metadata will be considered.
+     * Find all plugins inside \a directory that satisfy a filter.
      *
      * \a directory The directory to search for plugins. If a relative path is given for \a directory,
      * all entries of QCoreApplication::libraryPaths() will be checked with \a directory appended as a
      * subdirectory. If an absolute path is given only that directory will be searched.
      *
      * \a filter a callback function that returns \c true if the found plugin should be loaded
-     * and \c false if it should be skipped. If this argument is omitted all plugins will be loaded
+     * and \c false if it should be skipped. If this argument is omitted all plugins will be loaded.
      *
-     * \a option Weather or not allow plugins with empty metadata to be considered valid
+     * \a options Whether or not plugins without JSON metadata are considered valid.
      *
-     * Returns all plugins found in \a directory that fulfil the constraints of \a filter
+     * Returns all plugins found in \a directory that fulfill the constraints of \a filter
      * \since 5.86
      */
     static QList<KPluginMetaData>
