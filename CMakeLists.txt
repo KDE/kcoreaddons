@@ -143,7 +143,7 @@ kde_enable_exceptions()
 
 
 ecm_set_disabled_deprecation_versions(
-    QT 6.9.0
+    QT 6.10.0
 )
 
 add_subdirectory(src)
