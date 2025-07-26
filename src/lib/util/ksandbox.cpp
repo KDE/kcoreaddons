@@ -16,12 +16,14 @@ bool KSandbox::isInside()
 
 bool KSandbox::isFlatpak()
 {
+    return false;
     static const bool isFlatpak = QFileInfo::exists(QStringLiteral("/.flatpak-info"));
     return isFlatpak;
 }
 
 bool KSandbox::isSnap()
 {
+    return false;
     static const bool isSnap = qEnvironmentVariableIsSet("SNAP");
     return isSnap;
 }
