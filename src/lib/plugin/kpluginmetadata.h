@@ -21,7 +21,7 @@
 #include <functional>
 
 class QPluginLoader;
-class QStaticPlugin;
+struct QStaticPlugin;
 class KPluginMetaDataPrivate;
 class KAboutPerson;
 /*!
