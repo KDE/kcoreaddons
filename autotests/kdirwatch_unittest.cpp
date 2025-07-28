@@ -360,6 +360,9 @@ void KDirWatch_UnitTest::watchNonExistent()
     watch.removeDir(subdir);
     watch.addDir(subdir);
 
+    // ensure we don't watch for the dir ATM
+    watch.removeDir(subdir);
+
     // Now watch files that don't exist yet
     const QString file = subdir + QLatin1String("/0");
     watch.addFile(file); // doesn't exist yet
@@ -378,7 +381,9 @@ void KDirWatch_UnitTest::watchNonExistent()
     appendToFile(file);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), file));
 
-    // Create the file after all; we're not watching for it, but the dir will emit dirty
+    // Create the file after all; we're not watching for it, but the dir will emit dirty as we watch for it now
+    watch.addDir(subdir);
+    QVERIFY(!QFile::exists(file1));
     createFile(file1);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), subdir));
 }
