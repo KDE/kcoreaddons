@@ -338,11 +338,12 @@ void KJobTest::testEmitAtMostOnce()
     }
 
     QVERIFY(!job->isFinished());
-    loop.processEvents(QEventLoop::AllEvents, 2000);
-    QCOMPARE(destroyed_spy.size(), autoDelete);
-    if (!autoDelete) {
-        QVERIFY(job->isFinished());
+    if (autoDelete) {
+        QTRY_COMPARE_WITH_TIMEOUT(destroyed_spy.size(), 1, 5000);
+    } else {
+        QTRY_VERIFY_WITH_TIMEOUT(job->isFinished(), 5000);
     }
+    QCOMPARE(destroyed_spy.size(), autoDelete);
 
     QVERIFY(!actions.empty());
     // The first action alone should determine the job's error and result.
