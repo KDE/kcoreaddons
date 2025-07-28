@@ -78,6 +78,7 @@ private Q_SLOTS: // test methods
     void testRefcounting();
     void testRelativeRefcounting();
     void testMoveToThread();
+    void testWindowsDriveRemoved();
 
 protected Q_SLOTS: // internal slots
     void nestedEventLoopSlot();
@@ -761,6 +762,18 @@ void KDirWatch_UnitTest::testMoveToThread()
     const QString file = dir.path() + QLatin1String("/bar");
     createFile(file);
     waitUntilMTimeChange(file);
+}
+
+void KDirWatch_UnitTest::testWindowsDriveRemoved()
+{
+    // test that cleanPath works as needed
+    // we use that in Entry::parentDirectory
+    // for a removed drive we need to have it loop back to the drive to do cycle checking
+    // see KDirWatchPrivate::useQFSWatch & bug 499865 comment there
+    QVERIFY(QDir(QLatin1String("Y:/")).isRoot());
+    QCOMPARE(QDir::cleanPath(QLatin1String("Y:/test/..")), QLatin1String("Y:/"));
+    QCOMPARE(QDir::cleanPath(QLatin1String("Y:/..")), QLatin1String("Y:/"));
+    QCOMPARE(QDir::cleanPath(QLatin1String("Y://..")), QLatin1String("Y:/"));
 }
 
 #include "kdirwatch_unittest.moc"
