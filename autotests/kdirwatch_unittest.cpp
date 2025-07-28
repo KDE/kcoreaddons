@@ -558,6 +558,12 @@ void KDirWatch_UnitTest::testMoveTo()
         QCOMPARE(spyDirty[1][0].toString(), filetemp);
     }
 
+#ifdef Q_OS_WIN
+    if (watch.internalMethod() == KDirWatch::QFSWatch) {
+        QEXPECT_FAIL(nullptr, "QFSWatch fails here on Windows!", Continue);
+    }
+#endif
+
     // make sure we're still watching it
     appendToFile(file1);
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), file1));
@@ -567,11 +573,6 @@ void KDirWatch_UnitTest::testMoveTo()
     // Just touch another file to trigger a findSubEntry - this where the crash happened
     waitUntilMTimeChange(m_path);
     createFile(filetemp);
-#ifdef Q_OS_WIN
-    if (watch.internalMethod() == KDirWatch::QFSWatch) {
-        QEXPECT_FAIL(nullptr, "QFSWatch fails here on Windows!", Continue);
-    }
-#endif
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
 }
 
