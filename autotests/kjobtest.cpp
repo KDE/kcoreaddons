@@ -410,27 +410,27 @@ void KJobTest::testElapseTimeSuspendResume()
     QSignalSpy suspended_spy(m_innerJob, &KJob::suspended);
     QSignalSpy resume_spy(m_innerJob, &KJob::resumed);
 
-    QTimer::singleShot(50, m_innerJob, [this]() {
+    QTimer::singleShot(500, m_innerJob, [this]() {
         m_innerJob->suspend();
-        QCOMPARE_GE(m_innerJob->elapsedTime(), 50);
-        QCOMPARE_LE(m_innerJob->elapsedTime(), 80);
+        QCOMPARE_GE(m_innerJob->elapsedTime(), 400);
+        QCOMPARE_LE(m_innerJob->elapsedTime(), 600);
     });
-    QTimer::singleShot(100, m_innerJob, &KJob::resume);
+    QTimer::singleShot(1000, m_innerJob, &KJob::resume);
 
-    QTimer::singleShot(150, m_innerJob, [this]() {
+    QTimer::singleShot(1500, m_innerJob, [this]() {
         m_innerJob->suspend();
-        QCOMPARE_GE(m_innerJob->elapsedTime(), 100);
-        QCOMPARE_LE(m_innerJob->elapsedTime(), 140);
+        QCOMPARE_GE(m_innerJob->elapsedTime(), 900);
+        QCOMPARE_LE(m_innerJob->elapsedTime(), 1100);
     });
-    QTimer::singleShot(200, m_innerJob, [this]() {
+    QTimer::singleShot(2000, m_innerJob, [this]() {
         m_innerJob->resume();
         m_innerJob->makeItFinish();
     });
 
     QVERIFY(m_innerJob->exec());
 
-    QCOMPARE_GE(m_innerJob->elapsedTime(), 100);
-    QCOMPARE_LE(m_innerJob->elapsedTime(), 140);
+    QCOMPARE_GE(m_innerJob->elapsedTime(), 900);
+    QCOMPARE_LE(m_innerJob->elapsedTime(), 1100);
 
     QCOMPARE(suspended_spy.count(), 2);
     QCOMPARE(resume_spy.count(), 2);
