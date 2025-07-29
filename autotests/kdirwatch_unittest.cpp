@@ -78,6 +78,7 @@ private Q_SLOTS: // test methods
     void testRefcounting();
     void testRelativeRefcounting();
     void testMoveToThread();
+    void testWindowsDriveRemoved();
 
 protected Q_SLOTS: // internal slots
     void nestedEventLoopSlot();
@@ -719,8 +720,8 @@ void KDirWatch_UnitTest::testRelativeRefcounting()
     // its entries with it regardless of whether the entry was well-formed
     KDirWatch watch0;
 
-    if (watch0.internalMethod() != KDirWatch::INotify) {
-        // Only test on inotify. Otherwise Entry count expectations may diverge.
+    if (watch0.internalMethod() != KDirWatch::INotify && watch0.internalMethod() != KDirWatch::QFSWatch) {
+        // Only test on inotify & QFileSystemWatcher. Otherwise Entry count expectations may diverge.
         return;
     }
 
@@ -731,8 +732,10 @@ void KDirWatch_UnitTest::testRelativeRefcounting()
         // NOTE: addFile actually adds two entires: one for '.' to watch for the appearance of the file and one for the file.
         QCOMPARE(watch0.d->m_mapEntries.size(), initialSize + 2);
     }
-    // NOTE: we leak the directory entry from above but it has no clients so it's mostly harmless
-    QCOMPARE(watch0.d->m_mapEntries.size(), initialSize + 1);
+
+    // NOTE: we leak did the directory entry from above but, that was fixed with the use of QFileInfo(path).absolutePath();
+    // in KDirWatchPrivate::Entry::parentDirectory()
+    QCOMPARE(watch0.d->m_mapEntries.size(), initialSize);
 }
 
 void KDirWatch_UnitTest::testMoveToThread()
@@ -761,6 +764,24 @@ void KDirWatch_UnitTest::testMoveToThread()
     const QString file = dir.path() + QLatin1String("/bar");
     createFile(file);
     waitUntilMTimeChange(file);
+}
+
+void KDirWatch_UnitTest::testWindowsDriveRemoved()
+{
+    // test that QDir::isRoot works as needed
+    // we use that in Entry::isRoot
+    // see KDirWatchPrivate::useQFSWatch & bug 499865 comment there
+#ifdef Q_OS_WIN
+    QVERIFY(QDir(QLatin1String("Y://")).isRoot());
+    QVERIFY(QDir(QLatin1String("Y:/")).isRoot());
+    QVERIFY(QDir(QLatin1String("Y:\\")).isRoot());
+    QVERIFY(QDir(QLatin1String("Y:\\\\")).isRoot());
+    QVERIFY(!QDir(QLatin1String("Y:/a")).isRoot());
+#else
+    QVERIFY(QDir(QLatin1String("/")).isRoot());
+    QVERIFY(QDir(QLatin1String("//")).isRoot());
+    QVERIFY(!QDir(QLatin1String("/test")).isRoot());
+#endif
 }
 
 #include "kdirwatch_unittest.moc"

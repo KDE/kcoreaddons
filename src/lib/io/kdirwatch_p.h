@@ -118,7 +118,12 @@ public:
         int msecLeft, freq;
         bool isDir;
 
+        // is this already an entry for the root / or a full drive Y:?
+        bool isRoot() const;
+
+        // go up one level
         QString parentDirectory() const;
+
         void addClient(KDirWatch *, KDirWatch::WatchModes);
         void removeClient(KDirWatch *);
         int clientCount() const;

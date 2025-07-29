@@ -305,13 +305,17 @@ void KDirWatchPrivate::inotifyEventReceived()
             e->wd = -1;
             e->m_ctime = invalid_ctime;
             emitEvent(e, Deleted);
-            // If the parent dir was already watched, tell it something changed
-            Entry *parentEntry = entry(e->parentDirectory());
-            if (parentEntry) {
-                parentEntry->dirty = true;
+
+            // don't walk up over / or drives
+            if (!e->isRoot()) {
+                // If the parent dir was already watched, tell it something changed
+                Entry *parentEntry = entry(e->parentDirectory());
+                if (parentEntry) {
+                    parentEntry->dirty = true;
+                }
+                // Add entry to parent dir to notice if the entry gets recreated
+                addEntry(nullptr, e->parentDirectory(), e, true /*isDir*/);
             }
-            // Add entry to parent dir to notice if the entry gets recreated
-            addEntry(nullptr, e->parentDirectory(), e, true /*isDir*/);
         }
         if (event->mask & IN_IGNORED) {
             // Causes bug #207361 with kernels 2.6.31 and 2.6.32!
@@ -508,9 +512,14 @@ int KDirWatchPrivate::Entry::clientCount() const
     return clients;
 }
 
+bool KDirWatchPrivate::Entry::isRoot() const
+{
+    return QDir(path).isRoot();
+}
+
 QString KDirWatchPrivate::Entry::parentDirectory() const
 {
-    return QDir::cleanPath(path + QLatin1String("/.."));
+    return QFileInfo(path).absolutePath();
 }
 
 QList<const KDirWatchPrivate::Client *> KDirWatchPrivate::Entry::clientsForFileOrDir(const QString &tpath, bool *isDir) const
@@ -675,6 +684,11 @@ bool KDirWatchPrivate::useINotify(Entry *e)
     e->m_mode = INotifyMode;
 
     if (e->m_status == NonExistent) {
+        // be safe, don't walk upwards on /
+        if (e->isRoot()) {
+            return false;
+        }
+
         addEntry(nullptr, e->parentDirectory(), e, true);
         return true;
     }
@@ -710,6 +724,14 @@ bool KDirWatchPrivate::useQFSWatch(Entry *e)
     e->dirty = false;
 
     if (e->m_status == NonExistent) {
+        // be safe, don't walk upwards on drive level or /
+        // on e.g. Windows we can end up with a removed drive Y:
+        // parentDirectory() will then just keep looping with that, see bug 499865
+        // just abort if we loop, is correct for all platforms
+        if (e->isRoot()) {
+            return false;
+        }
+
         addEntry(nullptr, e->parentDirectory(), e, true /*isDir*/);
         return true;
     }
@@ -1023,11 +1045,7 @@ void KDirWatchPrivate::removeEntry(KDirWatch *instance, Entry *e, Entry *sub_ent
         removeWatch(e);
     } else {
         // Removed a NonExistent entry - we just remove it from the parent
-        if (e->isDir) {
-            removeEntry(nullptr, e->parentDirectory(), e);
-        } else {
-            removeEntry(nullptr, QFileInfo(e->path).absolutePath(), e);
-        }
+        removeEntry(nullptr, e->parentDirectory(), e);
     }
 
     if (e->m_mode == StatMode) {
@@ -1453,7 +1471,11 @@ void KDirWatchPrivate::slotRescan()
                 if (s_verboseDebug) {
                     qCDebug(KDIRWATCH) << "scanEntry says" << entry->path << "was deleted";
                 }
-                addEntry(nullptr, entry->parentDirectory(), entry, true);
+
+                // be safe, don't walk upwards on drive level or /
+                if (!entry->isRoot()) {
+                    addEntry(nullptr, entry->parentDirectory(), entry, true);
+                }
             } else if (ev == Created) {
                 if (s_verboseDebug) {
                     qCDebug(KDIRWATCH) << "scanEntry says" << entry->path << "was created. wd=" << entry->wd;
@@ -1604,10 +1626,9 @@ void KDirWatchPrivate::fswEventReceived(const QString &path)
             emitEvent(entry, ev);
         }
         if (ev == Deleted) {
-            if (entry->isDir) {
+            // be safe, don't walk upwards on drive level or /
+            if (!entry->isRoot()) {
                 addEntry(nullptr, entry->parentDirectory(), entry, true);
-            } else {
-                addEntry(nullptr, QFileInfo(entry->path).absolutePath(), entry, true);
             }
         } else if (ev == Created) {
             // We were waiting for it to appear; now watch it
