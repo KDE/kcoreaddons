@@ -40,10 +40,9 @@ if (KCOREADDONS_USE_QML)
 endif()
 
 ecm_setup_qtplugin_macro_names(
-    JSON_NONE
+    MACRO_NAMES
         "K_PLUGIN_FACTORY"
         "K_PLUGIN_CLASS"
-    JSON_ARG2
         "K_PLUGIN_FACTORY_WITH_JSON"
         "K_PLUGIN_CLASS_WITH_JSON"
     CONFIG_CODE_VARIABLE
