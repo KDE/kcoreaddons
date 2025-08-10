@@ -1487,4 +1487,21 @@ private:
     std::unique_ptr<class KAboutDataPrivate> const d;
 };
 
+class KCOREADDONS_EXPORT KAboutDataListener : public QObject
+{
+    Q_OBJECT
+public:
+    static KAboutDataListener *instance();
+
+Q_SIGNALS:
+    /*!
+     * Notifies that KAboutData::setApplicationData was called.
+     **/
+    void applicationDataChanged();
+
+protected:
+    static std::unique_ptr<KAboutDataListener> s_theListener;
+    friend class KAboutData;
+};
+
 #endif

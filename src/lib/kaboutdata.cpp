@@ -1199,6 +1199,10 @@ void KAboutData::setApplicationData(const KAboutData &aboutData)
     // Options are to remove the overlapping properties of KAboutData for cleancode, or making the
     // overlapping properties official shadow properties of their Q*Application countparts, though
     // that increases behavioural complexity a little.
+
+    if (KAboutDataListener::s_theListener) {
+        Q_EMIT KAboutDataListener::s_theListener->applicationDataChanged();
+    }
 }
 
 // only for KCrash (no memory allocation allowed)
@@ -1272,6 +1276,16 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
     if (foundArgument) {
         ::exit(EXIT_SUCCESS);
     }
+}
+
+std::unique_ptr<KAboutDataListener> KAboutDataListener::s_theListener = nullptr;
+
+KAboutDataListener *KAboutDataListener::instance()
+{
+    if (!s_theListener) {
+        s_theListener = std::make_unique<KAboutDataListener>();
+    }
+    return s_theListener.get();
 }
 
 #include "moc_kaboutdata.cpp"
