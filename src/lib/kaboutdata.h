@@ -1487,4 +1487,34 @@ private:
     std::unique_ptr<class KAboutDataPrivate> const d;
 };
 
+/*!
+ * \class KAboutDataListener
+ * \inheaderfile KAboutData
+ * \inmodule KCoreAddons
+ *
+ * \brief Notify about changes in the global application data
+ *
+ * KAboutData has a globally accessible instance that represents the aboutdata
+ * of the current process. This class allows us to notify about this information
+ * having changed.
+ *
+ * \since 6.18
+ */
+class KCOREADDONS_EXPORT KAboutDataListener : public QObject
+{
+    Q_OBJECT
+public:
+    static KAboutDataListener *instance();
+
+Q_SIGNALS:
+    /*!
+     * Notifies that KAboutData::setApplicationData was called.
+     **/
+    void applicationDataChanged();
+
+protected:
+    static std::unique_ptr<KAboutDataListener> s_theListener;
+    friend class KAboutData;
+};
+
 #endif
