@@ -18,6 +18,7 @@
  */
 namespace KTextToHTML
 {
+Q_NAMESPACE_EXPORT(KCOREADDONS_EXPORT)
 /*!
  * \since 5.5.0
  *
@@ -36,6 +37,7 @@ enum Option {
 };
 Q_DECLARE_FLAGS(Options, Option)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Options)
+Q_FLAG_NS(Options)
 
 /*!
  * Converts plaintext into html. The following characters are converted

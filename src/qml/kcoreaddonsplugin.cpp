@@ -10,6 +10,17 @@
 #include <QQmlExtensionPlugin>
 
 #include <KAboutData>
+#include <KTextToHTML>
+
+class KTextToHtmlWrapper
+{
+    Q_GADGET
+    Q_INVOKABLE [[nodiscard]] static QString
+    convertToHtml(const QString &plainText, const KTextToHTML::Options &options, int maxUrlLen = 4096, int maxAddressLen = 255)
+    {
+        return KTextToHTML::convertToHtml(plainText, options, maxUrlLen, maxAddressLen);
+    }
+};
 
 class KCoreAddonsPlugin : public QQmlExtensionPlugin
 {
@@ -21,6 +32,9 @@ public:
     {
         qmlRegisterSingletonType(uri, 1, 0, "AboutData", [](QQmlEngine *engine, QJSEngine *) -> QJSValue {
             return engine->toScriptValue(KAboutData::applicationData());
+        });
+        qmlRegisterSingletonType(uri, 1, 0, "KTextToHTML", [](QQmlEngine *engine, QJSEngine *) -> QJSValue {
+            return engine->toScriptValue(KTextToHtmlWrapper());
         });
     }
 };
