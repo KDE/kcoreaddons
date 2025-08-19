@@ -111,6 +111,14 @@ public:
     bool insert(const QString &key, const QByteArray &data);
 
     /*!
+     * Attempts to remove an entry with the specified \a key. Returns \c true if an entry has
+     * been removed; otherwise returns \c false.
+     *
+     * \since 6.18
+     */
+    bool remove(const QString &key);
+
+    /*!
      * Returns the data in the cache named by \a key (even if it's some other
      * process's data named with the same key!), stored in \a destination. If there is
      * no entry named by \a key then \a destination is left unchanged. The return value

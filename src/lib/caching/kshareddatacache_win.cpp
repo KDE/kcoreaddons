@@ -53,6 +53,11 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
     return d->cache.insert(key, new QByteArray(data));
 }
 
+bool KSharedDataCache::remove(const QString &key)
+{
+    return d->cache.remove(key);
+}
+
 bool KSharedDataCache::find(const QString &key, QByteArray *destination) const
 {
     QByteArray *value = d->cache.object(key);

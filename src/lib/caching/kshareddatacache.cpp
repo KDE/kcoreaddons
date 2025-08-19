@@ -338,6 +338,29 @@ bool KSharedDataCache::insert(const QString &key, const QByteArray &data)
     }
 }
 
+bool KSharedDataCache::remove(const QString &key)
+{
+    try {
+        const Private::CacheLocker lock(d);
+        if (lock.failed()) {
+            return false;
+        }
+
+        const QByteArray encodedKey = key.toUtf8();
+        const qint32 entry = d->shm->findNamedEntry(encodedKey);
+        if (entry == -1) {
+            return false;
+        }
+
+        d->shm->removeEntry(entry);
+        return true;
+    } catch (KSDCCorrupted) {
+        d->recoverCorruptedCache();
+    }
+
+    return false;
+}
+
 bool KSharedDataCache::find(const QString &key, QByteArray *destination) const
 {
     try {

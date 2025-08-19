@@ -22,10 +22,16 @@ class KSharedDataCacheTest : public QObject
 private Q_SLOTS:
     void initTestCase();
     void simpleInsert();
+    void remove();
 };
 
 void KSharedDataCacheTest::initTestCase()
 {
+}
+
+static QString makeCacheFileName(const QString &cacheName)
+{
+    return QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/") + cacheName + QLatin1String(".kcache");
 }
 
 void KSharedDataCacheTest::simpleInsert()
@@ -33,8 +39,7 @@ void KSharedDataCacheTest::simpleInsert()
     const QLatin1String cacheName("myTestCache");
     const QLatin1String key("mypic");
     // clear the cache
-    QString cacheFile = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QLatin1String("/") + cacheName + QLatin1String(".kcache");
-    QFile file(cacheFile);
+    QFile file(makeCacheFileName(cacheName));
     if (file.exists()) {
         QVERIFY(file.remove());
     }
@@ -57,6 +62,34 @@ void KSharedDataCacheTest::simpleInsert()
     // and another read
     QVERIFY(cache.find(key, &result));
     QCOMPARE(result, data);
+}
+
+void KSharedDataCacheTest::remove()
+{
+    const QLatin1String cacheName("remove");
+
+    // remove a cache from previous test runs
+    QFile file(makeCacheFileName(cacheName));
+    if (file.exists()) {
+        QVERIFY(file.remove());
+    }
+
+    KSharedDataCache cache(cacheName, 5 * 1024 * 1024);
+
+    // foo is not in the cache yet
+    QVERIFY(!cache.remove(QStringLiteral("foo")));
+
+    // add a foo item
+    QVERIFY(cache.insert(QStringLiteral("foo"), QByteArrayLiteral("bar")));
+    QVERIFY(cache.contains(QStringLiteral("foo")));
+
+    // remove foo
+    QVERIFY(cache.remove(QStringLiteral("foo")));
+    QVERIFY(!cache.contains(QStringLiteral("foo")));
+
+    // attempt to remove foo again
+    QVERIFY(!cache.remove(QStringLiteral("foo")));
+    QVERIFY(!cache.contains(QStringLiteral("foo")));
 }
 
 QTEST_MAIN(KSharedDataCacheTest)
