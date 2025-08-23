@@ -45,7 +45,7 @@ KSignalHandler::KSignalHandler()
     fcntl(KSignalHandlerPrivate::signalFd[0], F_SETFD, FD_CLOEXEC);
     fcntl(KSignalHandlerPrivate::signalFd[1], F_SETFD, FD_CLOEXEC);
 
-    QTimer::singleShot(0, [this] {
+    QTimer::singleShot(0, this, [this] {
         d->m_handler = new QSocketNotifier(KSignalHandlerPrivate::signalFd[1], QSocketNotifier::Read, this);
         connect(d->m_handler, &QSocketNotifier::activated, d.get(), &KSignalHandlerPrivate::handleSignal);
     });
