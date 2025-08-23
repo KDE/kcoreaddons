@@ -12,6 +12,7 @@
 #include <QTextStream>
 #include <QUrl>
 
+// clazy:excludeall=non-pod-global-static
 const QString etcPasswd = QStringLiteral("/etc/passwd");
 const QString accountsServiceIconPath = QStringLiteral("/var/lib/AccountsService/icons");
 
