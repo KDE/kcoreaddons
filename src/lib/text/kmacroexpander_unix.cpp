@@ -50,7 +50,7 @@ inline static bool isSpecial(QChar cUnicode)
 
 static QString quoteArg(const QString &arg)
 {
-    if (!arg.length()) {
+    if (arg.isEmpty()) {
         return QStringLiteral("''");
     }
     for (int i = 0; i < arg.length(); i++) {

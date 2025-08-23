@@ -294,7 +294,7 @@ inline static bool isSpecial(QChar cUnicode)
 
 QString KShell::quoteArg(const QString &arg)
 {
-    if (!arg.length()) {
+    if (arg.isEmpty()) {
         return QStringLiteral("''");
     }
     for (int i = 0; i < arg.length(); i++) {
