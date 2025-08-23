@@ -285,8 +285,7 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
     if (!isDocumentsPortalAvailable()) {
         return false;
     }
-    QList<QUrl> urls = mimeData->urls();
-
+    const QList<QUrl> urls = mimeData->urls();
     bool onlyLocalFiles = true;
     for (const auto &url : urls) {
         const auto isLocal = url.isLocalFile();
@@ -330,7 +329,7 @@ bool KUrlMimeData::exportUrlsToPortal(QMimeData *mimeData)
         iface->deleteLater();
     });
 
-    auto optionalPaths = fuseRedirect(urls, onlyLocalFiles);
+    const auto optionalPaths = fuseRedirect(urls, onlyLocalFiles);
     if (!optionalPaths.has_value()) {
         qCWarning(KCOREADDONS_DEBUG) << "Failed to mount with fuse!";
         return false;
