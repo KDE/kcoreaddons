@@ -680,6 +680,11 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     qCDebug(KCOREADDONS_DEBUG) << "create file 3 at" << QDateTime::currentMSecsSinceEpoch();
     const QString file3 = createFile(3);
+#ifdef Q_OS_WIN
+    if (watch.internalMethod() == KDirWatch::QFSWatch) {
+        QEXPECT_FAIL(nullptr, "QFSWatch fails here on Windows!", Continue);
+    }
+#endif
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
 
     QFile::remove(file2);
