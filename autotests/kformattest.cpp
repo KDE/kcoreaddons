@@ -402,6 +402,7 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("Just now"));
 
     // 1 second ahead
+    now = QDateTime::currentDateTime();
     testDateTime = now.addSecs(1);
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat), QStringLiteral("Now"));
 
