@@ -75,7 +75,6 @@ Notes:
     <comment xml:lang="tr">RELAX NG</comment>
     <comment xml:lang="uk">RELAX NG</comment>
     <comment xml:lang="vi">RELAX NG</comment>
-    <comment xml:lang="x_test">xxRELAX NGxx</comment>
     <comment xml:lang="zh_CN">RELAX NG</comment>
     <comment xml:lang="zh_TW">RELAX NG</comment>
     <glob pattern="*.rng"/>
@@ -134,7 +133,6 @@ Notes:
     <comment xml:lang="tr">CD sesi</comment>
     <comment xml:lang="uk">звуковий компакт-диск</comment>
     <comment xml:lang="vi">âm thanh CD</comment>
-    <comment xml:lang="x_test">xxCD audioxx</comment>
     <comment xml:lang="zh_CN">CD 音频</comment>
     <comment xml:lang="zh_TW">CD 音效</comment>
     <glob pattern="*.cda"/>
@@ -192,7 +190,6 @@ Notes:
     <comment xml:lang="tr">SNF biteşlem yazıtipi</comment>
     <comment xml:lang="uk">растровий файл SNF</comment>
     <comment xml:lang="vi">phông chữ kiểu bản đồ bit SNF</comment>
-    <comment xml:lang="x_test">xxSNF bitmap fontxx</comment>
     <comment xml:lang="zh_CN">SNF 点阵字体</comment>
     <comment xml:lang="zh_TW">SNF Bitmap 字型</comment>
     <glob pattern="*.snf"/>
@@ -252,7 +249,6 @@ Notes:
     <comment xml:lang="tr">Java programcığı</comment>
     <comment xml:lang="uk">аплет Java</comment>
     <comment xml:lang="vi">tiểu ứng dụng Java</comment>
-    <comment xml:lang="x_test">xxJava appletxx</comment>
     <comment xml:lang="zh_CN">Java 小程序</comment>
     <comment xml:lang="zh_TW">Java applet</comment>
   </mime-type>
@@ -309,7 +305,6 @@ Notes:
     <comment xml:lang="tr">KHTML Uzatma Adaptörü</comment>
     <comment xml:lang="uk">адаптер розширень KHTML</comment>
     <comment xml:lang="vi">bộ tiếp hợp mở rộng KHTML</comment>
-    <comment xml:lang="x_test">xxKHTML Extension Adaptorxx</comment>
     <comment xml:lang="zh_CN">KHTML 扩展适配器</comment>
     <comment xml:lang="zh_TW">KHTML 延伸裝置</comment>
   </mime-type>
@@ -367,7 +362,6 @@ Notes:
     <comment xml:lang="tr">KDE renk şeması</comment>
     <comment xml:lang="uk">схема кольорів KDE</comment>
     <comment xml:lang="vi">quy hoạch màu KDE</comment>
-    <comment xml:lang="x_test">xxKDE color schemexx</comment>
     <comment xml:lang="zh_CN">KDE 配色方案</comment>
     <comment xml:lang="zh_TW">KDE 配色</comment>
     <acronym>KDE</acronym>
@@ -429,7 +423,6 @@ Notes:
     <comment xml:lang="tr">KNewStuff paketi</comment>
     <comment xml:lang="uk">пакунок KNewStuff</comment>
     <comment xml:lang="vi">gói KNewStuff</comment>
-    <comment xml:lang="x_test">xxKNewStuff packagexx</comment>
     <comment xml:lang="zh_CN">KNewStuff 软件包</comment>
     <comment xml:lang="zh_TW">KNewStuff 套件</comment>
     <glob pattern="*.kns"/>
@@ -487,7 +480,6 @@ Notes:
     <comment xml:lang="tr">K Cüzdan cüzdanı</comment>
     <comment xml:lang="uk">торбинка KWallet</comment>
     <comment xml:lang="vi">ví KWallet</comment>
-    <comment xml:lang="x_test">xxKWallet walletxx</comment>
     <comment xml:lang="zh_CN">KWallet 密码库</comment>
     <comment xml:lang="zh_TW">KWallet 錢包</comment>
     <magic priority="80">
@@ -548,7 +540,6 @@ Notes:
     <comment xml:lang="tr">Kugar rapor şablonu</comment>
     <comment xml:lang="uk">шаблон звіту Kugar</comment>
     <comment xml:lang="vi">mẫu báo cáo Kugar</comment>
-    <comment xml:lang="x_test">xxKugar report templatexx</comment>
     <comment xml:lang="zh_CN">Kugar 报表模板</comment>
     <comment xml:lang="zh_TW">Kugar 報告樣本</comment>
     <glob pattern="*.kut"/>
@@ -608,7 +599,6 @@ Notes:
     <comment xml:lang="tr">plasmoid</comment>
     <comment xml:lang="uk">плазмоїд</comment>
     <comment xml:lang="vi">plasmoid</comment>
-    <comment xml:lang="x_test">xxplasmoidxx</comment>
     <comment xml:lang="zh_CN">Plasma 小程序</comment>
     <comment xml:lang="zh_TW">Plasma 小程式</comment>
     <glob pattern="*.plasmoid"/>
@@ -667,7 +657,6 @@ Notes:
     <comment xml:lang="tr">SuperKaramba teması</comment>
     <comment xml:lang="uk">тема SuperKaramba</comment>
     <comment xml:lang="vi">chủ đề SuperKaramba</comment>
-    <comment xml:lang="x_test">xxSuperKaramba themexx</comment>
     <comment xml:lang="zh_CN">SuperKaramba 主题</comment>
     <comment xml:lang="zh_TW">SuperKaramba 主題</comment>
     <glob pattern="*.skz"/>
@@ -725,7 +714,6 @@ Notes:
     <comment xml:lang="tr">Calligra Plan proje yönetimi belgesi</comment>
     <comment xml:lang="uk">документ керування роботами Plan зі складу Calligra</comment>
     <comment xml:lang="vi">tài liệu quản lí dự án Calligra Plan</comment>
-    <comment xml:lang="x_test">xxCalligra Plan project management documentxx</comment>
     <comment xml:lang="zh_CN">Calligra Plan 项目管理文档</comment>
     <comment xml:lang="zh_TW">Calligra Plan 專案管理文件</comment>
     <glob pattern="*.plan"/>
@@ -783,7 +771,6 @@ Notes:
     <comment xml:lang="tr">Calligra Plan iş paketi belgesi</comment>
     <comment xml:lang="uk">пакунок роботи Plan зі складу Calligra</comment>
     <comment xml:lang="vi">tài liệu gói công việc Calligra Plan</comment>
-    <comment xml:lang="x_test">xxCalligra Plan work package documentxx</comment>
     <comment xml:lang="zh_CN">Calligra Plan 工作包文档</comment>
     <comment xml:lang="zh_TW">Calligra Plan 工作套件文件</comment>
     <glob pattern="*.planwork"/>
@@ -841,7 +828,6 @@ Notes:
     <comment xml:lang="tr">KPlato proje yönetimi belgesi</comment>
     <comment xml:lang="uk">документ керування роботами KPlato</comment>
     <comment xml:lang="vi">tài liệu quản lí dự án KPlato</comment>
-    <comment xml:lang="x_test">xxKPlato project management documentxx</comment>
     <comment xml:lang="zh_CN">KPlato 项目管理文档</comment>
     <comment xml:lang="zh_TW">KPlato 專案管理文件</comment>
     <glob pattern="*.kplato"/>
@@ -899,7 +885,6 @@ Notes:
     <comment xml:lang="tr">KPlato proje yönetimi çalışma paketi</comment>
     <comment xml:lang="uk">пакунок проєкту керування роботами KPlato</comment>
     <comment xml:lang="vi">gói công việc quản lí dự án KPlato</comment>
-    <comment xml:lang="x_test">xxKPlato project management work packagexx</comment>
     <comment xml:lang="zh_CN">KPlato 项目管理工作包</comment>
     <comment xml:lang="zh_TW">KPlato 專案管理工作套件</comment>
     <glob pattern="*.kplatowork"/>
@@ -957,7 +942,6 @@ Notes:
     <comment xml:lang="tr">Kugar arşivi</comment>
     <comment xml:lang="uk">архів Kugar</comment>
     <comment xml:lang="vi">kho trữ Kugar</comment>
-    <comment xml:lang="x_test">xxKugar archivexx</comment>
     <comment xml:lang="zh_CN">Kugar 存档文件</comment>
     <comment xml:lang="zh_TW">Kugar 封存檔</comment>
     <glob pattern="*.kug"/>
@@ -1017,7 +1001,6 @@ Notes:
     <comment xml:lang="tr">web arşivi</comment>
     <comment xml:lang="uk">вебархів</comment>
     <comment xml:lang="vi">kho trữ web</comment>
-    <comment xml:lang="x_test">xxweb archivexx</comment>
     <comment xml:lang="zh_CN">网页存档文件</comment>
     <comment xml:lang="zh_TW">網頁封存檔</comment>
     <glob pattern="*.war"/>
@@ -1076,7 +1059,6 @@ Notes:
     <comment xml:lang="tr">W3C XML şeması</comment>
     <comment xml:lang="uk">схема XML W3C</comment>
     <comment xml:lang="vi">sơ đồ XML W3C</comment>
-    <comment xml:lang="x_test">xxW3C XML schemaxx</comment>
     <comment xml:lang="zh_CN">W3C XML 结构定义</comment>
     <comment xml:lang="zh_TW">W3C XML 機制</comment>
     <glob pattern="*.xsd"/>
@@ -1134,7 +1116,6 @@ Notes:
     <comment xml:lang="tr">RealAudio eklenti dosyası</comment>
     <comment xml:lang="uk">файл додатка RealAudio</comment>
     <comment xml:lang="vi">tệp phần cài cắm RealAudio</comment>
-    <comment xml:lang="x_test">xxRealAudio plugin filexx</comment>
     <comment xml:lang="zh_CN">RealAudio 插件文件</comment>
     <comment xml:lang="zh_TW">RealAudio 外掛程式檔案</comment>
   </mime-type>
@@ -1191,7 +1172,6 @@ Notes:
     <comment xml:lang="tr">KPhotoAlbum içe aktar</comment>
     <comment xml:lang="uk">файли імпортування KPhotoAlbum</comment>
     <comment xml:lang="vi">phần nhập khẩu KPhotoAlbum</comment>
-    <comment xml:lang="x_test">xxKPhotoAlbum importxx</comment>
     <comment xml:lang="zh_CN">KPhotoAlbum 导入文件</comment>
     <comment xml:lang="zh_TW">KPhotoAlbum 匯入</comment>
     <glob pattern="*.kim"/>
@@ -1250,7 +1230,6 @@ Notes:
     <comment xml:lang="tr">HDR resmi</comment>
     <comment xml:lang="uk">зображення HDR</comment>
     <comment xml:lang="vi">ảnh HDR</comment>
-    <comment xml:lang="x_test">xxHDR imagexx</comment>
     <comment xml:lang="zh_CN">HDR 图像</comment>
     <comment xml:lang="zh_TW">HDR 影像</comment>
     <acronym>HDR</acronym>
@@ -1312,7 +1291,6 @@ Notes:
     <comment xml:lang="tr">KDE ham resim biçimleri</comment>
     <comment xml:lang="uk">формати цифрових негативів KDE</comment>
     <comment xml:lang="vi">các định dạng ảnh thô ở KDE</comment>
-    <comment xml:lang="x_test">xxKDE raw image formatsxx</comment>
     <comment xml:lang="zh_CN">KDE RAW 图像格式</comment>
     <comment xml:lang="zh_TW">KDE 原始影像格式</comment>
     <glob pattern="*.bay"/>
@@ -1380,7 +1358,6 @@ Notes:
     <comment xml:lang="tr">Intel® onaltılık nesne dosyası</comment>
     <comment xml:lang="uk">шістнадцятковий об'єктний файл Intel®</comment>
     <comment xml:lang="vi">tệp đối tượng thập lục phân Intel®</comment>
-    <comment xml:lang="x_test">xxIntel® hexadecimal object filexx</comment>
     <comment xml:lang="zh_CN">Intel® 十六进制对象文件</comment>
     <comment xml:lang="zh_TW">Intel® hexadecimal 物件檔</comment>
     <glob pattern="*.hex"/>
@@ -1438,7 +1415,6 @@ Notes:
     <comment xml:lang="tr">Kate dosya listesi yükleyici eklentisi listesi</comment>
     <comment xml:lang="uk">список файлів Kate</comment>
     <comment xml:lang="vi">danh sách của phần cài cắm "Bộ tải danh sách tệp" trong Kate</comment>
-    <comment xml:lang="x_test">xxKate file list loader plugin listxx</comment>
     <comment xml:lang="zh_CN">Kate 文件列表加载器插件列表</comment>
     <comment xml:lang="zh_TW">Kate 檔案清單載入器外掛程式清單</comment>
     <glob pattern="*.katefl"/>
@@ -1498,7 +1474,6 @@ Notes:
     <comment xml:lang="tr">abc müzik notalama dosyası</comment>
     <comment xml:lang="uk">файл нотного стану abc</comment>
     <comment xml:lang="vi">tệp kí hiệu âm nhạc abc</comment>
-    <comment xml:lang="x_test">xxabc musical notation filexx</comment>
     <comment xml:lang="zh_CN">abc 乐谱文件</comment>
     <comment xml:lang="zh_TW">abc 音樂通知檔</comment>
     <magic priority="80">
@@ -1562,7 +1537,6 @@ Notes:
     <comment xml:lang="tr">yazıtipi paketi</comment>
     <comment xml:lang="uk">пакунок шрифтів</comment>
     <comment xml:lang="vi">gói phông chữ</comment>
-    <comment xml:lang="x_test">xxfonts packagexx</comment>
     <comment xml:lang="zh_CN">字体包</comment>
     <comment xml:lang="zh_TW">字型套件</comment>
     <glob pattern="*.fonts.zip"/>
@@ -1623,7 +1597,6 @@ Notes:
     <comment xml:lang="tr">Windows sunucusu</comment>
     <comment xml:lang="uk">сервер Windows</comment>
     <comment xml:lang="vi">máy chủ Windows</comment>
-    <comment xml:lang="x_test">xxWindows serverxx</comment>
     <comment xml:lang="zh_CN">Windows 服务器</comment>
     <comment xml:lang="zh_TW">Windows 伺服器</comment>
   </mime-type>
@@ -1682,7 +1655,6 @@ Notes:
     <comment xml:lang="tr">Windows çalışma grubu</comment>
     <comment xml:lang="uk">робоча група Windows</comment>
     <comment xml:lang="vi">nhóm làm việc Windows</comment>
-    <comment xml:lang="x_test">xxWindows workgroupxx</comment>
     <comment xml:lang="zh_CN">Windows 工作组</comment>
     <comment xml:lang="zh_TW">Windows 工作群組</comment>
   </mime-type>
@@ -1741,7 +1713,6 @@ Notes:
     <comment xml:lang="tr">KDE sistem izleyici</comment>
     <comment xml:lang="uk">монітор системи KDE</comment>
     <comment xml:lang="vi">trình giám sát hệ thống KDE</comment>
-    <comment xml:lang="x_test">xxKDE system monitorxx</comment>
     <comment xml:lang="zh_CN">KDE 系统监视器</comment>
     <comment xml:lang="zh_TW">KDE 系統監視器</comment>
     <glob pattern="*.sgrd"/>
@@ -1801,7 +1772,6 @@ Notes:
     <comment xml:lang="tr">KDE teması</comment>
     <comment xml:lang="uk">тема KDE</comment>
     <comment xml:lang="vi">chủ đề KDE</comment>
-    <comment xml:lang="x_test">xxKDE themexx</comment>
     <comment xml:lang="zh_CN">KDE 主题</comment>
     <comment xml:lang="zh_TW">KDE 主題</comment>
     <glob pattern="*.kth"/>
@@ -1861,7 +1831,6 @@ Notes:
     <comment xml:lang="tr">Quanta projesi</comment>
     <comment xml:lang="uk">проєкт Quanta</comment>
     <comment xml:lang="vi">dự án Quanta</comment>
-    <comment xml:lang="x_test">xxQuanta projectxx</comment>
     <comment xml:lang="zh_CN">Quanta 工程</comment>
     <comment xml:lang="zh_TW">Quanta 專案</comment>
     <glob pattern="*.quanta"/>
@@ -1921,7 +1890,6 @@ Notes:
     <comment xml:lang="tr">Kommander dosyası</comment>
     <comment xml:lang="uk">файл Kommander</comment>
     <comment xml:lang="vi">tệp Kommander</comment>
-    <comment xml:lang="x_test">xxKommander filexx</comment>
     <comment xml:lang="zh_CN">Kommander 文件</comment>
     <comment xml:lang="zh_TW">Kommander 檔案</comment>
     <glob pattern="*.kmdr"/>
@@ -1981,7 +1949,6 @@ Notes:
     <comment xml:lang="tr">patates</comment>
     <comment xml:lang="uk">картопля</comment>
     <comment xml:lang="vi">potato</comment>
-    <comment xml:lang="x_test">xxpotatoxx</comment>
     <comment xml:lang="zh_CN">potato 文件</comment>
     <comment xml:lang="zh_TW">馬鈴薯</comment>
     <glob pattern="*.tuberling"/>
@@ -2040,7 +2007,6 @@ Notes:
     <comment xml:lang="tr">Kolf kaydedilmiş oyunu</comment>
     <comment xml:lang="uk">збережена гра Kolf</comment>
     <comment xml:lang="vi">bàn chơi Kolf đã lưu</comment>
-    <comment xml:lang="x_test">xxKolf saved gamexx</comment>
     <comment xml:lang="zh_CN">Kolf 游戏存档</comment>
     <comment xml:lang="zh_TW">Kolf 遊戲存檔</comment>
     <magic priority="80">
@@ -2101,7 +2067,6 @@ Notes:
     <comment xml:lang="tr">Kolf etabı</comment>
     <comment xml:lang="uk">майданчик Kolf</comment>
     <comment xml:lang="vi">sân Kolf</comment>
-    <comment xml:lang="x_test">xxKolf coursexx</comment>
     <comment xml:lang="zh_CN">Kolf 场地</comment>
     <comment xml:lang="zh_TW">Kolf 球場</comment>
     <magic priority="80">
@@ -2166,7 +2131,6 @@ Notes:
     <comment xml:lang="tr">Okular belge arşivi</comment>
     <comment xml:lang="uk">архів документа Okular</comment>
     <comment xml:lang="vi">kho trữ tài liệu Okular</comment>
-    <comment xml:lang="x_test">xxOkular document archivexx</comment>
     <comment xml:lang="zh_CN">Okular 文档存档</comment>
     <comment xml:lang="zh_TW">Okular 文件封存檔</comment>
     <glob pattern="*.okular"/>
@@ -2226,7 +2190,6 @@ Notes:
     <comment xml:lang="tr">Cabri çizimi</comment>
     <comment xml:lang="uk">рисунок Cabri</comment>
     <comment xml:lang="vi">hình Cabri</comment>
-    <comment xml:lang="x_test">xxCabri figurexx</comment>
     <comment xml:lang="zh_CN">Cabri 图形</comment>
     <comment xml:lang="zh_TW">Cabri 圖形</comment>
     <magic priority="80">
@@ -2289,7 +2252,6 @@ Notes:
     <comment xml:lang="tr">Dr. Geo çizimi</comment>
     <comment xml:lang="uk">рисунок Dr. Geo</comment>
     <comment xml:lang="vi">hình Dr. Geo</comment>
-    <comment xml:lang="x_test">xxDr. Geo figurexx</comment>
     <comment xml:lang="zh_CN">Dr. Geo 图形</comment>
     <comment xml:lang="zh_TW">Dr. Geo 圖形</comment>
     <magic priority="80">
@@ -2351,7 +2313,6 @@ Notes:
     <comment xml:lang="tr">KGeo çizimi</comment>
     <comment xml:lang="uk">рисунок KGeo</comment>
     <comment xml:lang="vi">hình KGeo</comment>
-    <comment xml:lang="x_test">xxKGeo figurexx</comment>
     <comment xml:lang="zh_CN">KGeo 图形</comment>
     <comment xml:lang="zh_TW">KGeo 圖形</comment>
     <glob pattern="*.kgeo"/>
@@ -2410,7 +2371,6 @@ Notes:
     <comment xml:lang="tr">Kig çizimi</comment>
     <comment xml:lang="uk">рисунок Kig</comment>
     <comment xml:lang="vi">hình Kig</comment>
-    <comment xml:lang="x_test">xxKig figurexx</comment>
     <comment xml:lang="zh_CN">Kig 图形</comment>
     <comment xml:lang="zh_TW">Kig 圖形</comment>
     <glob pattern="*.kig"/>
@@ -2470,7 +2430,6 @@ Notes:
     <comment xml:lang="tr">KSeg belgesi</comment>
     <comment xml:lang="uk">документ KSeg</comment>
     <comment xml:lang="vi">tài liệu KSeg</comment>
-    <comment xml:lang="x_test">xxKSeg documentxx</comment>
     <comment xml:lang="zh_CN">KSeg 文档</comment>
     <comment xml:lang="zh_TW">KSeg 文件</comment>
     <glob pattern="*.seg"/>
@@ -2529,7 +2488,6 @@ Notes:
     <comment xml:lang="tr">Söz dağarcığı çalışma belgesi</comment>
     <comment xml:lang="uk">документ вправ зі словником</comment>
     <comment xml:lang="vi">tài liệu huấn luyện viên từ vựng</comment>
-    <comment xml:lang="x_test">xxvocabulary trainer documentxx</comment>
     <comment xml:lang="zh_CN">词汇训练文档</comment>
     <comment xml:lang="zh_TW">字彙訓練師文件</comment>
     <glob pattern="*.kvtml"/>
@@ -2588,7 +2546,6 @@ Notes:
     <comment xml:lang="tr">KmPlot dosyası</comment>
     <comment xml:lang="uk">файл KmPlot</comment>
     <comment xml:lang="vi">tệp KmPlot</comment>
-    <comment xml:lang="x_test">xxKmPlot filexx</comment>
     <comment xml:lang="zh_CN">KmPlot 文件</comment>
     <comment xml:lang="zh_TW">KmPlot 檔案</comment>
     <glob pattern="*.fkt"/>
@@ -2646,7 +2603,6 @@ Notes:
     <comment xml:lang="tr">K Sözcük Oyunu söz dağarcığı</comment>
     <comment xml:lang="uk">словник KWordQuiz</comment>
     <comment xml:lang="vi">từ vựng KWordQuiz</comment>
-    <comment xml:lang="x_test">xxKWordQuiz vocabularyxx</comment>
     <comment xml:lang="zh_CN">KWordQuiz 词汇表</comment>
     <comment xml:lang="zh_TW">KWordQuiz 字彙</comment>
     <glob pattern="*.wql"/>
@@ -2705,7 +2661,6 @@ Notes:
     <comment xml:lang="tr">Cachegrind/Callgrind profil dökümü</comment>
     <comment xml:lang="uk">дамп профілювання Cachegrind/Callgrind</comment>
     <comment xml:lang="vi">phần xổ tiểu sử Cachegrind/Callgrind</comment>
-    <comment xml:lang="x_test">xxCachegrind/Callgrind profile dumpxx</comment>
     <comment xml:lang="zh_CN">Cachegrind/Callgrind 配置转储文件</comment>
     <comment xml:lang="zh_TW">Cachegrind/Callgrind 分析檔傾印</comment>
     <glob pattern="cachegrind.out*"/>
@@ -2764,7 +2719,6 @@ Notes:
     <comment xml:lang="tr">Umbrello UML Modelleyici dosyası</comment>
     <comment xml:lang="uk">файл програми для моделювання UML Umbrello</comment>
     <comment xml:lang="vi">tệp Trình tạo mô hình UML Umbrello</comment>
-    <comment xml:lang="x_test">xxUmbrello UML Modeller filexx</comment>
     <comment xml:lang="zh_CN">Umbrello UML 建模文件</comment>
     <comment xml:lang="zh_TW">Umbrello UML 建模工具檔</comment>
     <glob pattern="*.xmi"/>
@@ -2826,7 +2780,6 @@ Notes:
     <comment xml:lang="tr">Windows bağlantısı</comment>
     <comment xml:lang="uk">посилання Windows</comment>
     <comment xml:lang="vi">liên kết Windows</comment>
-    <comment xml:lang="x_test">xxWindows linkxx</comment>
     <comment xml:lang="zh_CN">Windows 链接</comment>
     <comment xml:lang="zh_TW">Windows 連結檔案</comment>
     <alias type="application/x-win-lnk"/>
@@ -2888,7 +2841,6 @@ Notes:
     <comment xml:lang="tr">K İndir indirme listesi</comment>
     <comment xml:lang="uk">список отримань KGet</comment>
     <comment xml:lang="vi">danh sách tải về KGet</comment>
-    <comment xml:lang="x_test">xxKGet download listxx</comment>
     <comment xml:lang="zh_CN">KGet 下载列表</comment>
     <comment xml:lang="zh_TW">KGet 下載清單</comment>
     <glob pattern="*.kgt"/>
@@ -2946,7 +2898,6 @@ Notes:
     <comment xml:lang="tr">Kopete duygu simgeleri arşivi</comment>
     <comment xml:lang="uk">архів емоційок Kopete</comment>
     <comment xml:lang="vi">kho trữ hình biểu cảm Kopete</comment>
-    <comment xml:lang="x_test">xxKopete emoticons archivexx</comment>
     <comment xml:lang="zh_CN">Kopete 表情存档</comment>
     <comment xml:lang="zh_TW">Kopete 表情圖示封存檔</comment>
     <glob pattern="*.kopete-emoticons"/>
@@ -3005,7 +2956,6 @@ Notes:
     <comment xml:lang="tr">ICQ kişisi</comment>
     <comment xml:lang="uk">контакт ICQ</comment>
     <comment xml:lang="vi">liên hệ ICQ</comment>
-    <comment xml:lang="x_test">xxICQ contactxx</comment>
     <comment xml:lang="zh_CN">ICQ 联系人</comment>
     <comment xml:lang="zh_TW">ICQ 聯絡人</comment>
     <glob pattern="*.uin"/>
@@ -3066,7 +3016,6 @@ Notes:
     <comment xml:lang="tr">Microsoft Medya Biçimi</comment>
     <comment xml:lang="uk">Microsoft Media Format</comment>
     <comment xml:lang="vi">Định dạng phương tiện Microsoft</comment>
-    <comment xml:lang="x_test">xxMicrosoft Media Formatxx</comment>
     <comment xml:lang="zh_CN">Microsoft 媒体格式</comment>
     <comment xml:lang="zh_TW">微軟媒體格式</comment>
     <sub-class-of type="video/x-ms-wmv"/>
@@ -3130,7 +3079,6 @@ Notes:
     <comment xml:lang="tr">Turtle RDF belgesi</comment>
     <comment xml:lang="uk">документ RDF Turtle</comment>
     <comment xml:lang="vi">tài liệu RDF Turtle</comment>
-    <comment xml:lang="x_test">xxTurtle RDF documentxx</comment>
     <comment xml:lang="zh_CN">Turtle RDF 文档</comment>
     <comment xml:lang="zh_TW">Turtle RDF 文件</comment>
     <sub-class-of type="text/plain" />
@@ -3188,7 +3136,6 @@ Notes:
     <comment xml:lang="tr">Softimage PIC resmi</comment>
     <comment xml:lang="uk">зображення PIC Softimage</comment>
     <comment xml:lang="vi">ảnh PIC Softimage</comment>
-    <comment xml:lang="x_test">xxSoftimage PIC imagexx</comment>
     <comment xml:lang="zh_CN">Softimage PIC 图像</comment>
     <comment xml:lang="zh_TW">Softimage PIC 影像</comment>
     <magic priority="80">
@@ -3249,7 +3196,6 @@ Notes:
     <comment xml:lang="tr">KConfigXT Yapılandırma Seçenekleri</comment>
     <comment xml:lang="uk">параметри налаштування KConfigXT</comment>
     <comment xml:lang="vi">các lựa chọn cấu hình KConfigXT</comment>
-    <comment xml:lang="x_test">xxKConfigXT Configuration Optionsxx</comment>
     <comment xml:lang="zh_CN">KConfigXT 配置选项</comment>
     <comment xml:lang="zh_TW">KConfigXT 設定選項</comment>
     <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
@@ -3313,7 +3259,6 @@ Notes:
     <comment xml:lang="tr">KConfigXT Kod Oluşturma Seçenekleri</comment>
     <comment xml:lang="uk">параметри створення коду KConfigXT</comment>
     <comment xml:lang="vi">các lựa chọn tạo mã KConfigXT</comment>
-    <comment xml:lang="x_test">xxKConfigXT Code Generation Optionsxx</comment>
     <comment xml:lang="zh_CN">KConfigXT 代码生成选项</comment>
     <comment xml:lang="zh_TW">KConfigXT 代碼產生選項</comment>
     <generic-icon name="text-plain"/>
@@ -3373,7 +3318,6 @@ Notes:
     <comment xml:lang="tr">KXMLGUI UI Bildirimi</comment>
     <comment xml:lang="uk">оголошення інтерфейсу KXMLGUI</comment>
     <comment xml:lang="vi">khai báo UI KXMLGUI</comment>
-    <comment xml:lang="x_test">xxKXMLGUI UI Declarationxx</comment>
     <comment xml:lang="zh_CN">KXMLGUI 界面声明</comment>
     <comment xml:lang="zh_TW">KXMLGUI UI 宣告</comment>
     <generic-icon name="application-xml"/> <!-- placeholder until there is an own icon -->
@@ -3437,7 +3381,6 @@ Notes:
     <comment xml:lang="tr">KNotification Beyanı</comment>
     <comment xml:lang="uk">оголошення KNotification</comment>
     <comment xml:lang="vi">khai báo KNotification</comment>
-    <comment xml:lang="x_test">xxKNotification Declarationxx</comment>
     <comment xml:lang="zh_CN">Knotification 声明</comment>
     <comment xml:lang="zh_TW">KNotification 宣告</comment>
     <generic-icon name="text-plain"/> <!-- placeholder until there is an own icon -->
@@ -3498,7 +3441,6 @@ Notes:
     <comment xml:lang="tr">KCrash Raporu</comment>
     <comment xml:lang="uk">звіт KCrash</comment>
     <comment xml:lang="vi">báo cáo KCrash</comment>
-    <comment xml:lang="x_test">xxKCrash Reportxx</comment>
     <comment xml:lang="zh_CN">KCrash 报告</comment>
     <comment xml:lang="zh_TW">KCrash 報告</comment>
     <generic-icon name="text-plain"/>
