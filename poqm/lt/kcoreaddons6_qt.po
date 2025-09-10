@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2024-02-09 00:57+0200\n"
+"PO-Revision-Date: 2025-09-09 23:37+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:251
@@ -82,6 +82,8 @@ msgid ""
 "You can find the full term <a href=\"https://spdx.org/licenses/%1.html\">the "
 "SPDX website</a>"
 msgstr ""
+"Visas sąlygas galite rasti <a href=\"https://spdx.org/licenses/%1.html"
+"\">SPDX interneto svetainėje</a>"
 
 #: lib/kaboutdata.cpp:295
 msgctxt "KAboutLicense|"
@@ -177,84 +179,72 @@ msgstr "MIT licencija"
 #: lib/kaboutdata.cpp:379
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
-msgstr ""
+msgstr "CC0"
 
 #: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr ""
+msgstr "Creative Commons Zero"
 
 #: lib/kaboutdata.cpp:383
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "QPL v1.0"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
-msgstr "QPL v1.0"
+msgstr "ODbL v1.0"
 
 #: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Open Data Commons Open Database licencija v1.0"
 
 #: lib/kaboutdata.cpp:387
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "Apache 2.0"
 
 #: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "Apache licencija 2.0"
 
 #: lib/kaboutdata.cpp:391
-#, fuzzy
-#| msgctxt "KFileSystemType|"
-#| msgid "FAT"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
-msgstr "FAT"
+msgstr "FTL"
 
 #: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Freetype projekto licencija"
 
 #: lib/kaboutdata.cpp:395
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
-msgstr "BSD licencija"
+msgstr "Boost licencija"
 
 #: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Boost programinės įrangos licencija 1.0"
 
 #: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "BSD-3-Clause"
 
 #: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "BSD 3-Clause „Nauja“ ar „Pataisyta“ licencija"
 
 #: lib/kaboutdata.cpp:403
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:404
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Q viešoji licencija"
+msgstr "Mozilla viešoji licencija 2.0"
 
 #: lib/kaboutdata.cpp:408
 msgctxt "KAboutLicense|@item license"
@@ -694,66 +684,54 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%n m."
+msgstr[1] "%n m."
+msgstr[2] "%n m."
+msgstr[3] "%n m."
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
-msgstr[0] "%n diena"
-msgstr[1] "%n dienos"
-msgstr[2] "%n dienų"
-msgstr[3] "%n diena"
+msgstr[0] "%n d."
+msgstr[1] "%n d."
+msgstr[2] "%n d."
+msgstr[3] "%n d."
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:343
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
-msgstr[0] "%n valanda"
-msgstr[1] "%n valandos"
-msgstr[2] "%n valandų"
-msgstr[3] "%n valanda"
+msgstr[0] "%n val."
+msgstr[1] "%n val."
+msgstr[2] "%n val."
+msgstr[3] "%n val."
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:348
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
-msgstr[0] "%n minutė"
-msgstr[1] "%n minutės"
-msgstr[2] "%n minučių"
-msgstr[3] "%n minutė"
+msgstr[0] "%n min."
+msgstr[1] "%n min."
+msgstr[2] "%n min."
+msgstr[3] "%n min."
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:353
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
-msgstr[0] "%n sekundė"
-msgstr[1] "%n sekundės"
-msgstr[2] "%n sekundžių"
-msgstr[3] "%n sekundė"
+msgstr[0] "%n sek."
+msgstr[1] "%n sek."
+msgstr[2] "%n sek."
+msgstr[3] "%n sek."
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:379
@@ -802,9 +780,7 @@ msgstr "%1val.%2min.%3sek."
 #: lib/util/kformatprivate.cpp:432 lib/util/kformatprivate.cpp:441
 #: lib/util/kformatprivate.cpp:446 lib/util/kformatprivate.cpp:454
 #: lib/util/kformatprivate.cpp:680
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
@@ -880,17 +856,14 @@ msgstr[3] "%n milisekundė"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n valanda"
-msgstr[1] "%n valandos"
-msgstr[2] "%n valandų"
-msgstr[3] "%n valanda"
+msgstr[0] "%n metai"
+msgstr[1] "%n metai"
+msgstr[2] "%n metų"
+msgstr[3] "%n metai"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
@@ -987,17 +960,14 @@ msgstr "Ką tik"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:613
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
-msgstr[0] "Prieš %n minutę"
-msgstr[1] "Prieš %n minutes"
-msgstr[2] "Prieš %n minučių"
-msgstr[3] "Prieš %n minutę"
+msgstr[0] "Prieš %n min."
+msgstr[1] "Prieš %n min."
+msgstr[2] "Prieš %n min."
+msgstr[3] "Prieš %n min."
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:618
@@ -1013,35 +983,29 @@ msgstr[3] "Prieš %n minutę"
 #: lib/util/kformatprivate.cpp:623
 msgctxt "KFormat|"
 msgid "Now"
-msgstr ""
+msgstr "Dabar"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:628
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
-msgstr[0] "%n minutė"
-msgstr[1] "%n minutės"
-msgstr[2] "%n minučių"
-msgstr[3] "%n minutė"
+msgstr[0] "%n min."
+msgstr[1] "%n min."
+msgstr[2] "%n min."
+msgstr[3] "%n min."
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:633
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "%n minutė"
-msgstr[1] "%n minutės"
-msgstr[2] "%n minučių"
-msgstr[3] "%n minutė"
+msgstr[0] "Po %n minutės"
+msgstr[1] "Po %n minučių"
+msgstr[2] "Po %n minučių"
+msgstr[3] "Po %n minutės"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:648
@@ -1054,29 +1018,25 @@ msgstr "%1, %2"
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr ""
+msgstr "%1 ft"
 
 #: lib/util/kformatprivate.cpp:700 lib/util/kformatprivate.cpp:702
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1 min."
+msgstr "%1 mi"
 
 #: lib/util/kformatprivate.cpp:708
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 m"
 
 #: lib/util/kformatprivate.cpp:711 lib/util/kformatprivate.cpp:713
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 kB"
+msgstr "%1 km"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
