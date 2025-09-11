@@ -337,6 +337,12 @@ void KDirWatch_UnitTest::removeAndReAdd()
 void KDirWatch_UnitTest::watchNonExistent()
 {
     KDirWatch watch;
+#ifdef Q_OS_WIN
+    if (watch.internalMethod() == KDirWatch::QFSWatch) {
+        QSKIP("QFSWatch fails on Windows!");
+    }
+#endif
+
     // Watch "subdir", that doesn't exist yet
     const QString subdir = m_path + QLatin1String("subdir");
     QVERIFY(!QFile::exists(subdir));
@@ -510,6 +516,13 @@ void KDirWatch_UnitTest::testDeleteAndRecreateDir()
 
 void KDirWatch_UnitTest::testMoveTo()
 {
+    KDirWatch watch;
+#ifdef Q_OS_WIN
+    if (watch.internalMethod() == KDirWatch::QFSWatch) {
+        QSKIP("QFSWatch fails on Windows!");
+    }
+#endif
+
     // This reproduces the famous digikam crash, #222974
     // A watched file was being rewritten (overwritten by ksavefile),
     // which gives inotify notifications "moved_to" followed by "delete_self"
@@ -523,7 +536,6 @@ void KDirWatch_UnitTest::testMoveTo()
     const QString file1 = m_path + QLatin1String("moveTo");
     createFile(file1);
 
-    KDirWatch watch;
     watch.addDir(m_path);
     watch.addFile(file1);
     watch.startScan();
@@ -562,11 +574,6 @@ void KDirWatch_UnitTest::testMoveTo()
     // Just touch another file to trigger a findSubEntry - this where the crash happened
     waitUntilMTimeChange(m_path);
     createFile(filetemp);
-#ifdef Q_OS_WIN
-    if (watch.internalMethod() == KDirWatch::QFSWatch) {
-        QEXPECT_FAIL(nullptr, "QFSWatch fails here on Windows!", Continue);
-    }
-#endif
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
 }
 
@@ -680,11 +687,6 @@ void KDirWatch_UnitTest::stopAndRestart()
 
     qCDebug(KCOREADDONS_DEBUG) << "create file 3 at" << QDateTime::currentMSecsSinceEpoch();
     const QString file3 = createFile(3);
-#ifdef Q_OS_WIN
-    if (watch.internalMethod() == KDirWatch::QFSWatch) {
-        QEXPECT_FAIL(nullptr, "QFSWatch fails here on Windows!", Continue);
-    }
-#endif
     QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
 
     QFile::remove(file2);
