@@ -257,43 +257,43 @@ msgstr ""
 "ჯგუფების მიერ.</p><p>დამატებითი ინფორმაციისთვის  KDE ინტერნაციონალიზაციის "
 "შესახებ ეწვიეთ http://i18n.kde.org</p>"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "ავტორის შესახებ ინფორმაციის ჩვენება."
 
-#: lib/kaboutdata.cpp:1227
+#: lib/kaboutdata.cpp:1231
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "ლიცენზიის შესახებ ინფორმაციის ჩვენება."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "ამ აპლიკაციის სამუშაო მაგიდის ჩანაწერის საბაზისო ფაილის სახელი."
 
-#: lib/kaboutdata.cpp:1230
+#: lib/kaboutdata.cpp:1234
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "ფაილის სახელი"
 
-#: lib/kaboutdata.cpp:1240
+#: lib/kaboutdata.cpp:1244
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "პროგრამის ავტორმა ანონიმად დარჩენა მოისურვა."
 
-#: lib/kaboutdata.cpp:1242
+#: lib/kaboutdata.cpp:1246
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1-ის ავტორები:"
 
-#: lib/kaboutdata.cpp:1253
+#: lib/kaboutdata.cpp:1257
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "გთხოვთ გამოიყენოთ http://bugs.kde.org შეცდომების შეტყობინებისთვის."
 
-#: lib/kaboutdata.cpp:1255
+#: lib/kaboutdata.cpp:1259
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

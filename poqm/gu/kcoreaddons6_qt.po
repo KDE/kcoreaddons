@@ -340,31 +340,31 @@ msgstr ""
 "p><p>વધુ માહિતી માટે KDE આંતરરાષ્ટ્રિયકરણની મુલાકાત લો <a href=\"http://l10n.kde."
 "org\">http://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1230
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "લેખક જાણકારી બતાવો"
 
-#: lib/kaboutdata.cpp:1227
+#: lib/kaboutdata.cpp:1231
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "લાઈસન્સ જાણકારી બતાવો"
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1230
+#: lib/kaboutdata.cpp:1234
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1240
+#: lib/kaboutdata.cpp:1244
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -372,7 +372,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "આ કાર્યક્રમ કોઈક દ્વારા લખાયેલ છે કે જેને ગુમનામ રહેવું છે."
 
-#: lib/kaboutdata.cpp:1242
+#: lib/kaboutdata.cpp:1246
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -384,14 +384,14 @@ msgstr ""
 "%1 લખાયું છે આમનાં દ્વારા\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1253
+#: lib/kaboutdata.cpp:1257
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "મહેરબાની કરી ક્ષતિઓનો અહેવાલ આપવા માટે http://bugs.kde.org નો ઉપયોગ કરો.\n"
 
-#: lib/kaboutdata.cpp:1255
+#: lib/kaboutdata.cpp:1259
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"

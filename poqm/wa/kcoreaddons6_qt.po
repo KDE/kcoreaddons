@@ -348,33 +348,33 @@ msgstr ""
 "d' infôrmåcions sol rifondou walon, vizitez <a href=\"http://rifondou.walon."
 "org\">http://rifondou.walon.org/</a></p>"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1230
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Mostere l' infôrmåcion so l' oteur"
 
-#: lib/kaboutdata.cpp:1227
+#: lib/kaboutdata.cpp:1231
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Mostere l' infôrmåcion sol licince"
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1230
+#: lib/kaboutdata.cpp:1234
 #, fuzzy
 #| msgid "Filename Error"
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "Åk ni va nén avou l' no do fitchî"
 
-#: lib/kaboutdata.cpp:1240
+#: lib/kaboutdata.cpp:1244
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -382,7 +382,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Ci programe ci a stî scrît pa ene sakî ki vout dmorer anonime."
 
-#: lib/kaboutdata.cpp:1242
+#: lib/kaboutdata.cpp:1246
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -394,14 +394,14 @@ msgstr ""
 "%1 a stî scrît pa\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1253
+#: lib/kaboutdata.cpp:1257
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "S' i vs plait, eployîz http://bugs.kde.org po rapoirter les bugs.\n"
 
-#: lib/kaboutdata.cpp:1255
+#: lib/kaboutdata.cpp:1259
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"

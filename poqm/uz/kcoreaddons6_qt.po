@@ -301,33 +301,33 @@ msgstr ""
 "href=\"http://www.uni-bremen.de/~kmashrab/to-uzbek-linux.html\">\"Linuks "
 "oʻzbekcha gapiradi\"</a> loyihasining veb-saytiga qarang.</p>"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1230
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Muallif haqida maʼlumotni koʻrsatish"
 
-#: lib/kaboutdata.cpp:1227
+#: lib/kaboutdata.cpp:1231
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Litsenziya haqida maʼlumotni koʻrsatish"
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1230
+#: lib/kaboutdata.cpp:1234
 #, fuzzy
 #| msgid "Vietnamese"
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "Vetnamcha"
 
-#: lib/kaboutdata.cpp:1240
+#: lib/kaboutdata.cpp:1244
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -336,7 +336,7 @@ msgid "This application was written by somebody who wants to remain anonymous."
 msgstr ""
 "Ushbu dastur ismini oshkor qilishni istamagan kishi tomonidan yozilgan."
 
-#: lib/kaboutdata.cpp:1242
+#: lib/kaboutdata.cpp:1246
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -349,7 +349,7 @@ msgstr ""
 "%2\n"
 "tomonidan yozilgan."
 
-#: lib/kaboutdata.cpp:1253
+#: lib/kaboutdata.cpp:1257
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
@@ -358,7 +358,7 @@ msgstr ""
 "Iltimos, xato haqida xabar berish uchun http://bugs.kde.org veb-saytidan "
 "foydalaning.\n"
 
-#: lib/kaboutdata.cpp:1255
+#: lib/kaboutdata.cpp:1259
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"

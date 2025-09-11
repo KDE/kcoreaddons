@@ -280,43 +280,43 @@ msgstr ""
 "bin/mailman/listinfo/lugos-slo\">lugos-slo</a>.</p><p>Na teh mestih se lahko "
 "tudi pridružite skupnosti prevajalcev KDE-ja.</p>"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Pokaži podrobnosti o avtorju."
 
-#: lib/kaboutdata.cpp:1227
+#: lib/kaboutdata.cpp:1231
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Pokaži podrobnosti o licenci."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Osnovno ime datoteke namiznega vnosa za ta program."
 
-#: lib/kaboutdata.cpp:1230
+#: lib/kaboutdata.cpp:1234
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "ime datoteke"
 
-#: lib/kaboutdata.cpp:1240
+#: lib/kaboutdata.cpp:1244
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Ta program je napisal nekdo, ki želi ostati anonimen."
 
-#: lib/kaboutdata.cpp:1242
+#: lib/kaboutdata.cpp:1246
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 je napisal(a):"
 
-#: lib/kaboutdata.cpp:1253
+#: lib/kaboutdata.cpp:1257
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Za poročanje o napakah in željah uporabite https://bugs.kde.org."
 
-#: lib/kaboutdata.cpp:1255
+#: lib/kaboutdata.cpp:1259
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

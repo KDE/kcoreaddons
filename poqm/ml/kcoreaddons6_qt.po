@@ -283,43 +283,43 @@ msgstr ""
 "ത്തനങ്ങളില്‍ പങ്കുചേരാനും <a href=\"http://smc.org.in\">https://smc.org.in </a> എന്ന "
 "വെബ്സൈറ്റ് സന്ദര്‍ശിക്കുക</p>"
 
-#: lib/kaboutdata.cpp:1226
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "രചയിതാവിനെക്കുറിച്ചുള്ള വിവരം കാണിക്കുക."
 
-#: lib/kaboutdata.cpp:1227
+#: lib/kaboutdata.cpp:1231
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "അനുമതി പത്രത്തെക്കുറിച്ചുള്ള വിവരം കാണിക്കുക."
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "ഈ പ്രയോഗത്തിനുള്ള ഡെസ്ക്ടോപ്പ് എൻട്രിയുടെ അടിസ്ഥാന ഫയൽ പേര്."
 
-#: lib/kaboutdata.cpp:1230
+#: lib/kaboutdata.cpp:1234
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "ഫയൽ നാമം"
 
-#: lib/kaboutdata.cpp:1240
+#: lib/kaboutdata.cpp:1244
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "പേര് വെളിപ്പെടുത്താനാഗ്രഹിയ്ക്കാത്തൊരാളാണ് ഈ പ്രയോഗമെഴുതിയിട്ടുള്ളത്."
 
-#: lib/kaboutdata.cpp:1242
+#: lib/kaboutdata.cpp:1246
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 എഴുതിയത്:"
 
-#: lib/kaboutdata.cpp:1253
+#: lib/kaboutdata.cpp:1257
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "ദയവായി പിശകുകളറിയിക്കുന്നതിനായി https://bugs.kde.org ഉപയോഗിക്കുക."
 
-#: lib/kaboutdata.cpp:1255
+#: lib/kaboutdata.cpp:1259
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
