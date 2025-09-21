@@ -25,7 +25,6 @@
 #include <QSharedData>
 #include <QStandardPaths>
 #include <QTextStream>
-#include <QUrl>
 
 #include <algorithm>
 

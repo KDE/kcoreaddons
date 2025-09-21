@@ -10,7 +10,6 @@
 #include <QFile>
 #include <QHostInfo>
 #include <QTextStream>
-#include <QUrl>
 
 // clazy:excludeall=non-pod-global-static
 const QString etcPasswd = QStringLiteral("/etc/passwd");
