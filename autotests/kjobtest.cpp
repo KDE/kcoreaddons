@@ -395,12 +395,13 @@ void KJobTest::testNestedExec()
 
 void KJobTest::testElapseTime()
 {
+    // we use 100 ms and some fuzzy compare below to not jitter that easily
     m_innerJob = new WaitJob();
-    QTimer::singleShot(10, m_innerJob, &WaitJob::makeItFinish);
+    QTimer::singleShot(100, m_innerJob, &WaitJob::makeItFinish);
     QVERIFY(m_innerJob->exec());
 
-    QCOMPARE_GE(m_innerJob->elapsedTime(), 10);
-    QCOMPARE_LE(m_innerJob->elapsedTime(), 14);
+    QCOMPARE_GE(m_innerJob->elapsedTime(), 90);
+    QCOMPARE_LE(m_innerJob->elapsedTime(), 110);
 }
 
 void KJobTest::testElapseTimeSuspendResume()
