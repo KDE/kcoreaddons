@@ -11,20 +11,21 @@
 # Rolf Eike Beer <kde@opensource.sf-tec.de>, 2012.
 # Frank Steinmetzger <dev-kde@felsenfleischer.de>, 2022.
 # SPDX-FileCopyrightText: 2025 Flori G <Renner03@protonmail.com>
+# SPDX-FileCopyrightText: 2025 Alois Spitzbart <spitz234@hotmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcoreaddons6_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-02-22 02:39+0100\n"
-"Last-Translator: Flori G <Renner03@protonmail.com>\n"
+"PO-Revision-Date: 2025-09-17 23:15+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 25.08.0\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:243
@@ -710,8 +711,8 @@ msgstr "%1 Sekunden"
 msgctxt "KFormat|"
 msgid "%n millisecond(s)"
 msgid_plural "%n millisecond(s)"
-msgstr[0] "%n Millisekunde(n)"
-msgstr[1] "%n Millisekunde(n)"
+msgstr[0] "%n Millisekunde"
+msgstr[1] "%n Millisekunden"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:415
@@ -719,8 +720,8 @@ msgstr[1] "%n Millisekunde(n)"
 msgctxt "KFormat|"
 msgid "%n day(s)"
 msgid_plural "%n day(s)"
-msgstr[0] "%n Tag(e)"
-msgstr[1] "%n Tag(e)"
+msgstr[0] "%n Tag"
+msgstr[1] "%n Tage"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:420
@@ -728,8 +729,8 @@ msgstr[1] "%n Tag(e)"
 msgctxt "KFormat|"
 msgid "%n hour(s)"
 msgid_plural "%n hour(s)"
-msgstr[0] "%n Stunde(n)"
-msgstr[1] "%n Stunde(n)"
+msgstr[0] "%n Stunde"
+msgstr[1] "%n Stunden"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:425
@@ -737,8 +738,8 @@ msgstr[1] "%n Stunde(n)"
 msgctxt "KFormat|"
 msgid "%n minute(s)"
 msgid_plural "%n minute(s)"
-msgstr[0] "%n Minute(n)"
-msgstr[1] "%n Minute(n)"
+msgstr[0] "%n Minute"
+msgstr[1] "%n Minuten"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:430
@@ -746,8 +747,8 @@ msgstr[1] "%n Minute(n)"
 msgctxt "KFormat|"
 msgid "%n second(s)"
 msgid_plural "%n second(s)"
-msgstr[0] "%n Sekunde(n)"
-msgstr[1] "%n Sekunde(n)"
+msgstr[0] "%n Sekunde"
+msgstr[1] "%n Sekunden"
 
 #. @item:intext days and hours. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #. ----------
@@ -804,7 +805,7 @@ msgstr "Gerade eben"
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "Vor %n Minuten"
+msgstr[0] "Vor %n Minute"
 msgstr[1] "Vor %n Minuten"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
