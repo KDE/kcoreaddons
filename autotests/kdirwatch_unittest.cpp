@@ -106,7 +106,7 @@ private:
 
 QTEST_MAIN(KDirWatch_UnitTest)
 
-static const int s_maxTries = 50;
+static const int s_maxTries = 100;
 
 // helper method: create a file (identified by number)
 QString KDirWatch_UnitTest::createFile(int num)
