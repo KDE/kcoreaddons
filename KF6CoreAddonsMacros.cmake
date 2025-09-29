@@ -58,6 +58,9 @@ function(kcoreaddons_add_plugin plugin)
         return()
     endif()
 
+    if (NOT CMAKE_LIBRARY_OUTPUT_DIRECTORY)
+        message(FATAL_ERROR "CMAKE_LIBRARY_OUTPUT_DIRECTORY is not set, set it explicitly or include KDECMakeSettings")
+    endif()
     set_target_properties(${plugin} PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_LIBRARY_OUTPUT_DIRECTORY}/${ARGS_INSTALL_NAMESPACE}")
 
     if (NOT KCOREADDONS_INTERNAL_SKIP_PLUGIN_INSTALLATION)
