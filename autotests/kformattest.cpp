@@ -346,7 +346,6 @@ void KFormatTest::formatRelativeDate()
     KFormat format(QLocale::c());
 
     QDate testDate = QDate::currentDate();
-
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::LongFormat), QStringLiteral("Today"));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::ShortFormat), QStringLiteral("Today"));
     QCOMPARE(format.formatRelativeDate(testDate, QLocale::NarrowFormat), QStringLiteral("Today"));
@@ -436,10 +435,9 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(formatFrench.formatRelativeDateTime(testDateTime, QLocale::LongFormat), QStringLiteral("Dimanche 3 octobre 2021 at 05:33"));
 
     // narrow format
-    now = QDateTime::currentDateTime();
-    testDateTime = now.addSecs(-1);
+    testDateTime = QDateTime::currentDateTime().addSecs(-1);
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::NarrowFormat), "Just now"_L1);
-    testDateTime = now.addSecs(1);
+    testDateTime = QDateTime::currentDateTime().addSecs(1);
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::NarrowFormat), "Now"_L1);
 
     testDateTime = QDateTime::currentDateTime().addSecs(-330);
