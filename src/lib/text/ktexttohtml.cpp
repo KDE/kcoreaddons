@@ -317,6 +317,13 @@ QString KTextToHTMLHelper::getUrl(bool *badurl)
                     return QString();
                 }
                 if (mText.at(mPos) == QLatin1Char('"')) {
+                    // URL ending with " such as: file:///srv/http" are not valid, see BUG:507952
+                    if (beforeUrl != QLatin1Char('"')) {
+                        if (badurl) {
+                            *badurl = true;
+                        }
+                        return QString();
+                    }
                     previousCharIsADoubleQuote = true;
                 } else {
                     previousCharIsADoubleQuote = false;

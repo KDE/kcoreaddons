@@ -403,6 +403,10 @@ void KTextToHTMLTest::testHtmlConvert_data()
     QTest::newRow("two url with space") << "http://www.kde.org/standards/kcfg/1.0 http://www.kde.org/" << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
                                         << "<a href=\"http://www.kde.org/standards/kcfg/1.0\">http://www.kde.org/standards/kcfg/1.0</a> <a "
                                            "href=\"http://www.kde.org/\">http://www.kde.org/</a>";
+    QTest::newRow("url ends with double-quote") << "file:///srv/http\"" << KTextToHTML::Options(KTextToHTML::PreserveSpaces) << "file:///srv/http&quot;";
+    QTest::newRow("url in middle of string ends with double-quote")
+        << "echo \"Server = file:///srv/http\" >> /etc/pacman.conf" << KTextToHTML::Options(KTextToHTML::PreserveSpaces)
+        << "echo &quot;Server = file:///srv/http&quot; &gt;&gt; /etc/pacman.conf";
 
     // Bug kmail
     QTest::newRow("two url with space-2")
