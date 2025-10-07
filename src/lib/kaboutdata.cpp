@@ -277,9 +277,10 @@ QString KAboutLicense::text() const
     case KAboutLicense::BSD_3_Clause:
     case KAboutLicense::CC0_V1:
     case KAboutLicense::MPL_V2:
-        result += QCoreApplication::translate("KAboutLicense", "This program is distributed under the terms of the %1.").arg(name(KAboutLicense::ShortName))
-            + u"\n\n"_s
-            + QCoreApplication::translate("KAboutLicense", "You can find the full term <a href=\"https://spdx.org/licenses/%1.html\">the SPDX website</a>")
+        result +=
+            QCoreApplication::translate("KAboutLicense", "<p>This program is distributed under the terms of the %1.</p>").arg(name(KAboutLicense::ShortName))
+            + QCoreApplication::translate("KAboutLicense",
+                                          "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html\">the SPDX website</a>.</p>")
                   .arg(d->spdxID());
         break;
     case KAboutLicense::Custom:
