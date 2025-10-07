@@ -544,10 +544,6 @@ protected:
         }
     };
 
-    // Use std::enable_if_t once C++14 can be relied on
-    template<bool B, class T = void>
-    using enable_if_t = typename std::enable_if<B, T>::type;
-
     /*!
      * Uses a default instance creation function depending on the type of interface. If the
      * interface inherits from
@@ -566,7 +562,7 @@ protected:
      *
      * If those constructor methods are not callable this overload is not available.
      */
-    template<class T, enable_if_t<InheritanceChecker<T>::enabled, int> = 0>
+    template<class T, std::enable_if_t<InheritanceChecker<T>::enabled, int> = 0>
     void registerPlugin()
     {
         CreateInstanceWithMetaDataFunction instanceFunction = InheritanceChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
@@ -591,7 +587,7 @@ protected:
      *
      * If those constructor methods are not callable this overload is not available.
      */
-    template<class T, enable_if_t<InheritanceWithMetaDataChecker<T>::enabled, int> = 0>
+    template<class T, std::enable_if_t<InheritanceWithMetaDataChecker<T>::enabled, int> = 0>
     void registerPlugin()
     {
         CreateInstanceWithMetaDataFunction instanceFunction = InheritanceWithMetaDataChecker<T>().createInstanceFunction(static_cast<T *>(nullptr));
