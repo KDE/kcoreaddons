@@ -75,23 +75,29 @@ msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "未知"
 
-#: lib/kaboutdata.cpp:280 lib/kaboutdata.cpp:301
-#, qt-format
+#: lib/kaboutdata.cpp:281
+#, fuzzy, qt-format
+#| msgctxt "KAboutLicense|"
+#| msgid "This program is distributed under the terms of the %1."
 msgctxt "KAboutLicense|"
-msgid "This program is distributed under the terms of the %1."
+msgid "<p>This program is distributed under the terms of the %1.</p>"
 msgstr "這個程式以 %1 的條款散佈。"
 
 #: lib/kaboutdata.cpp:282
-#, qt-format
+#, fuzzy, qt-format
+#| msgctxt "KAboutLicense|"
+#| msgid ""
+#| "You can find the full term <a href=\"https://spdx.org/licenses/%1.html"
+#| "\">the SPDX website</a>"
 msgctxt "KAboutLicense|"
 msgid ""
-"You can find the full term <a href=\"https://spdx.org/licenses/%1.html\">the "
-"SPDX website</a>"
+"<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
+"\">the SPDX website</a>.</p>"
 msgstr ""
 "您可以在 <a href=\"https://spdx.org/licenses/%1.html\">SPDX 網站上</a>閱讀條"
 "款全文"
 
-#: lib/kaboutdata.cpp:293
+#: lib/kaboutdata.cpp:294
 msgctxt "KAboutLicense|"
 msgid ""
 "No licensing terms for this program have been specified.\n"
@@ -102,167 +108,173 @@ msgstr ""
 "請檢查文件或原始碼來檢查是否有任何\n"
 "授權條款。\n"
 
-#: lib/kaboutdata.cpp:345
+#: lib/kaboutdata.cpp:302
+#, qt-format
+msgctxt "KAboutLicense|"
+msgid "This program is distributed under the terms of the %1."
+msgstr "這個程式以 %1 的條款散佈。"
+
+#: lib/kaboutdata.cpp:346
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v2"
 msgstr "GPL v2"
 
-#: lib/kaboutdata.cpp:346
+#: lib/kaboutdata.cpp:347
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
 msgstr "GNU 通用公共授權第二版"
 
-#: lib/kaboutdata.cpp:349
+#: lib/kaboutdata.cpp:350
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
 msgstr "LGPL v2"
 
-#: lib/kaboutdata.cpp:350
+#: lib/kaboutdata.cpp:351
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
 msgstr "GNU LGPL 第二版"
 
-#: lib/kaboutdata.cpp:353
+#: lib/kaboutdata.cpp:354
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD License"
 msgstr "BSD 授權"
 
-#: lib/kaboutdata.cpp:354
+#: lib/kaboutdata.cpp:355
 msgctxt "KAboutLicense|@item license"
 msgid "BSD License"
 msgstr "BSD 授權"
-
-#: lib/kaboutdata.cpp:357
-msgctxt "KAboutLicense|@item license (short name)"
-msgid "Artistic License"
-msgstr "藝術授權"
 
 #: lib/kaboutdata.cpp:358
+msgctxt "KAboutLicense|@item license (short name)"
+msgid "Artistic License"
+msgstr "藝術授權"
+
+#: lib/kaboutdata.cpp:359
 msgctxt "KAboutLicense|@item license"
 msgid "Artistic License"
 msgstr "藝術授權"
 
-#: lib/kaboutdata.cpp:361
+#: lib/kaboutdata.cpp:362
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "GPL v3"
 msgstr "GPL v3"
 
-#: lib/kaboutdata.cpp:362
+#: lib/kaboutdata.cpp:363
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
 msgstr "GNU 通用公共授權第三版"
 
-#: lib/kaboutdata.cpp:365
+#: lib/kaboutdata.cpp:366
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v3"
 msgstr "LGPL v3"
 
-#: lib/kaboutdata.cpp:366
+#: lib/kaboutdata.cpp:367
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
 msgstr "GNU LGPL 第三版"
 
-#: lib/kaboutdata.cpp:369
+#: lib/kaboutdata.cpp:370
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2.1"
 msgstr "LGPL v2.1"
 
-#: lib/kaboutdata.cpp:370
+#: lib/kaboutdata.cpp:371
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
 msgstr "GNU LGPL 第2.1版"
 
-#: lib/kaboutdata.cpp:373
+#: lib/kaboutdata.cpp:374
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
 msgstr "MIT 授權"
 
-#: lib/kaboutdata.cpp:374
+#: lib/kaboutdata.cpp:375
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
 msgstr "MIT 授權"
 
-#: lib/kaboutdata.cpp:377
+#: lib/kaboutdata.cpp:378
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
 msgstr "CC0"
 
-#: lib/kaboutdata.cpp:378
+#: lib/kaboutdata.cpp:379
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
 msgstr "創用 CC 0"
 
-#: lib/kaboutdata.cpp:381
+#: lib/kaboutdata.cpp:382
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
 msgstr "ODbL v1.0"
 
-#: lib/kaboutdata.cpp:382
+#: lib/kaboutdata.cpp:383
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
 msgstr "Open Data Commons 開放資料庫授權 v1.0"
 
-#: lib/kaboutdata.cpp:385
+#: lib/kaboutdata.cpp:386
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
 msgstr "Apache 2.0"
 
-#: lib/kaboutdata.cpp:386
+#: lib/kaboutdata.cpp:387
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
 msgstr "Apache 授權條款 2.0"
 
-#: lib/kaboutdata.cpp:389
+#: lib/kaboutdata.cpp:390
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
 msgstr "FTL"
 
-#: lib/kaboutdata.cpp:390
+#: lib/kaboutdata.cpp:391
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
 msgstr "Freetype 專案授權條款"
 
-#: lib/kaboutdata.cpp:393
+#: lib/kaboutdata.cpp:394
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
 msgstr "Boost 授權條款"
 
-#: lib/kaboutdata.cpp:394
+#: lib/kaboutdata.cpp:395
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
 msgstr "Boost 軟體授權條款 1.0"
 
-#: lib/kaboutdata.cpp:397
+#: lib/kaboutdata.cpp:398
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
 msgstr "BSD-3-Clause"
 
-#: lib/kaboutdata.cpp:398
+#: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
 msgstr "BSD 3-Clause「新版」(\"New\") 或「改訂版」(\"Revised\") 授權條款"
 
-#: lib/kaboutdata.cpp:401
+#: lib/kaboutdata.cpp:402
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
 msgstr "MPL 2.0"
 
-#: lib/kaboutdata.cpp:402
+#: lib/kaboutdata.cpp:403
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
 msgstr "Mozilla 公開授權 2.0"
 
-#: lib/kaboutdata.cpp:406
+#: lib/kaboutdata.cpp:407
 msgctxt "KAboutLicense|@item license"
 msgid "Custom"
 msgstr "自訂"
 
-#: lib/kaboutdata.cpp:409
+#: lib/kaboutdata.cpp:410
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
 msgstr "未指定"
 
-#: lib/kaboutdata.cpp:991
+#: lib/kaboutdata.cpp:992
 msgctxt "KAboutData|replace this with information about your translation team"
 msgid ""
 "<p>KDE is translated into many languages thanks to the work of the "
@@ -284,43 +296,43 @@ msgstr ""
 "構。</p><p>若是需要對於 KDE 國際化更進一步的資訊，請參考 <a href=\"http://"
 "l10n.kde.org/\">http://l10n.kde.org/</a></p></blockquote>"
 
-#: lib/kaboutdata.cpp:1228
+#: lib/kaboutdata.cpp:1229
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "顯示作者資訊。"
 
-#: lib/kaboutdata.cpp:1229
+#: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "顯示版權資訊。"
 
-#: lib/kaboutdata.cpp:1231
+#: lib/kaboutdata.cpp:1232
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "這個應用程式的桌面項目基礎檔案名稱。"
 
-#: lib/kaboutdata.cpp:1232
+#: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "檔案名稱"
 
-#: lib/kaboutdata.cpp:1242
+#: lib/kaboutdata.cpp:1243
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "這個應用程式是由某個不願透露姓名的人編寫。"
 
-#: lib/kaboutdata.cpp:1244
+#: lib/kaboutdata.cpp:1245
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 的作者是："
 
-#: lib/kaboutdata.cpp:1255
+#: lib/kaboutdata.cpp:1256
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "請使用 http://bugs.kde.org 報告問題。"
 
-#: lib/kaboutdata.cpp:1257
+#: lib/kaboutdata.cpp:1258
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
