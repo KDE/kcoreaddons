@@ -11,7 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Qt-Contexts: true\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 
 #: lib/io/kfilesystemtype.cpp:251
 msgctxt "KFileSystemType|"
@@ -59,26 +59,20 @@ msgid "Unknown"
 msgstr "უცნობი"
 
 #: lib/kaboutdata.cpp:281
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "პროგრამა ვრცელდება %1 სალიცენზიო პირობებით."
+msgstr "<p>პროგრამა ვრცელდება %1 სალიცენზიო პირობებით.</p>"
 
 #: lib/kaboutdata.cpp:282
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid ""
-#| "You can find the full term <a href=\"https://spdx.org/licenses/%1.html"
-#| "\">the SPDX website</a>"
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
-"სრული ტექსტი <a href=\"https://spdx.org/licenses/%1.html\">SPDX-ის "
-"ვებგვერდზე</a> შეგიძლიათ, იპოვოთ"
+"<p>სრული ტექსტი <a href=\"https://spdx.org/licenses/%1.html\">SPDX-ის "
+"ვებგვერდზე</a> შეგიძლიათ, იპოვოთ</p>"
 
 #: lib/kaboutdata.cpp:294
 msgctxt "KAboutLicense|"

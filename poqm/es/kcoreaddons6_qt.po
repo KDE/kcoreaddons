@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons6_qt\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-06-19 02:58+0100\n"
+"PO-Revision-Date: 2025-10-08 17:42+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "First-Translator: Boris Wesslowski <Boris@Wesslowski.com>\n"
-"X-Generator: Lokalize 25.04.2\n"
+"X-Generator: Lokalize 25.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Qt-Contexts: true\n"
 
@@ -72,26 +72,20 @@ msgid "Unknown"
 msgstr "Desconocido"
 
 #: lib/kaboutdata.cpp:281
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "Este programa se distribuye bajo los términos de la %1."
+msgstr "<p>Este programa se distribuye bajo las condiciones de la %1.</p>"
 
 #: lib/kaboutdata.cpp:282
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid ""
-#| "You can find the full term <a href=\"https://spdx.org/licenses/%1.html"
-#| "\">the SPDX website</a>"
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
-"Puede encontrar las condiciones en <a href=\"https://spdx.org/licenses/%1."
-"html\">el sitio web de SPDX</a>"
+"<p>Puede encontrar todas las condiciones en <a href=\"https://spdx.org/"
+"licenses/%1.html\">el sitio web de SPDX</a>.</p>"
 
 #: lib/kaboutdata.cpp:294
 msgctxt "KAboutLicense|"
@@ -100,15 +94,15 @@ msgid ""
 "Please check the documentation or the source for any\n"
 "licensing terms.\n"
 msgstr ""
-"No se han indicado los términos de la licencia de este programa.\n"
-"Consulte la documentación o el código fuente para ver los\n"
-"términos de la licencia.\n"
+"No se han indicado las condiciones de la licencia de este programa.\n"
+"Consulte la documentación o el código fuente para ver las\n"
+"condiciones de la licencia.\n"
 
 #: lib/kaboutdata.cpp:302
 #, qt-format
 msgctxt "KAboutLicense|"
 msgid "This program is distributed under the terms of the %1."
-msgstr "Este programa se distribuye bajo los términos de la %1."
+msgstr "Este programa se distribuye bajo las condiciones de la %1."
 
 #: lib/kaboutdata.cpp:346
 msgctxt "KAboutLicense|@item license (short name)"
