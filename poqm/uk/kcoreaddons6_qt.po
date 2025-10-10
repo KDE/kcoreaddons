@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons5_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-06-18 08:25+0300\n"
+"PO-Revision-Date: 2025-10-09 19:04+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -71,26 +71,20 @@ msgid "Unknown"
 msgstr "Невідома"
 
 #: lib/kaboutdata.cpp:281
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "Ця програма розповсюджується за умовами %1."
+msgstr "<p>Ця програма розповсюджується за умовами %1.</p>"
 
 #: lib/kaboutdata.cpp:282
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid ""
-#| "You can find the full term <a href=\"https://spdx.org/licenses/%1.html"
-#| "\">the SPDX website</a>"
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
-"Умови повністю можна знайти на <a href=\"https://spdx.org/licenses/%1.html"
-"\">сайті SPDX</a>"
+"<p>Умови повністю можна знайти на <a href=\"https://spdx.org/licenses/%1.html"
+"\">сайті SPDX</a>.</p>"
 
 #: lib/kaboutdata.cpp:294
 msgctxt "KAboutLicense|"
