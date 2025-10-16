@@ -31,7 +31,7 @@ set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprec
 option(ENABLE_PCH "Enable precompile headers for faster builds" ON)
 option(KCOREADDONS_USE_QML "Build the QML plugin" ON)
 
-set(REQUIRED_QT_VERSION 6.7.0)
+set(REQUIRED_QT_VERSION 6.8.0)
 find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
 if (KCOREADDONS_USE_QML)
     find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Qml Network)
