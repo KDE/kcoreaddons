@@ -273,7 +273,7 @@ void KJobTest::testKill()
     loop.exec();
     QCOMPARE(destroyed_spy.size(), 1);
 
-    QVERIFY(m_jobFinishCount.size() == (finishedEmitCount - resultEmitCount));
+    QCOMPARE(m_jobFinishCount.size(), (finishedEmitCount - resultEmitCount));
     m_jobFinishCount.clear();
 }
 
@@ -287,7 +287,7 @@ void KJobTest::testDestroy()
     QCOMPARE(m_resultCount, 0);
     QCOMPARE(m_finishedCount, 1);
 
-    QVERIFY(m_jobFinishCount.size() == 1);
+    QCOMPARE(m_jobFinishCount.size(), 1);
     m_jobFinishCount.clear();
 }
 
@@ -372,13 +372,13 @@ void KJobTest::testDelegateUsage()
     TestJobUiDelegate *delegate = new TestJobUiDelegate;
     QPointer<TestJobUiDelegate> guard(delegate);
 
-    QVERIFY(job1->uiDelegate() == nullptr);
+    QCOMPARE(job1->uiDelegate(), nullptr);
     job1->setUiDelegate(delegate);
-    QVERIFY(job1->uiDelegate() == delegate);
+    QCOMPARE(job1->uiDelegate(), delegate);
 
-    QVERIFY(job2->uiDelegate() == nullptr);
+    QCOMPARE(job2->uiDelegate(), nullptr);
     job2->setUiDelegate(delegate);
-    QVERIFY(job2->uiDelegate() == nullptr);
+    QCOMPARE(job2->uiDelegate(), nullptr);
 
     delete job1;
     delete job2;
@@ -464,8 +464,8 @@ void KJobTest::slotResult(KJob *job)
     // Ensure the job has already emitted finished() if we are tracking from
     // setupErrorResultFinished
     if (m_jobFinishCount.contains(job)) {
-        QVERIFY(m_jobFinishCount.value(job) == 1);
-        QVERIFY(m_jobFinishCount.remove(job) == 1 /* num items removed */);
+        QCOMPARE(m_jobFinishCount.value(job), 1);
+        QCOMPARE(m_jobFinishCount.remove(job), 1 /* num items removed */);
     }
 
     if (job->error()) {

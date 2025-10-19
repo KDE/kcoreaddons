@@ -366,7 +366,7 @@ void KAboutDataTest::testLicenseSPDXID()
                              QLatin1String(ShortDescription),
                              KAboutLicense::GPL_V2);
         aboutData.setLicense(KAboutLicense::LicenseKey(i));
-        QVERIFY(aboutData.licenses().count() == 1);
+        QCOMPARE(aboutData.licenses().count(), 1);
         const auto license = aboutData.licenses().constFirst();
         auto licenseFromKeyword = KAboutLicense::byKeyword(license.spdx());
 

@@ -29,7 +29,7 @@ void KMemoryInfoTest::operators()
 {
     KMemoryInfo m;
     auto m1 = m;
-    QVERIFY(m == m1);
+    QCOMPARE(m, m1);
 
     // paranoia check
     QVERIFY(m.totalPhysical() != 0);

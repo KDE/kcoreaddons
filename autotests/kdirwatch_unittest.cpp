@@ -639,7 +639,7 @@ void KDirWatch_UnitTest::testHardlinkChange()
 
     QFile::remove(existingFile);
     const QString testFile = m_path + QLatin1String("TestFile");
-    QVERIFY(::link(QFile::encodeName(testFile).constData(), QFile::encodeName(existingFile).constData()) == 0); // make ExistingFile "point" to TestFile
+    QCOMPARE(::link(QFile::encodeName(testFile).constData(), QFile::encodeName(existingFile).constData()), 0); // make ExistingFile "point" to TestFile
     QVERIFY(QFile::exists(existingFile));
 
     QVERIFY(waitForRecreationSignal(watch, existingFile));

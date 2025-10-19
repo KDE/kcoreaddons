@@ -27,23 +27,23 @@ QTEST_MAIN(KProcessListTest)
 void KProcessListTest::testKProcessInfoConstructionAssignment()
 {
     KProcessList::KProcessInfo processInfoDefaultConstructed;
-    QVERIFY(processInfoDefaultConstructed.isValid() == false);
+    QCOMPARE(processInfoDefaultConstructed.isValid(), false);
     const qint64 pid(42);
     const QString name(QStringLiteral("/bin/some_exe"));
     const QString user(QStringLiteral("some_user"));
     KProcessList::KProcessInfo processInfo(pid, name, user);
-    QVERIFY(processInfo.isValid() == true);
+    QCOMPARE(processInfo.isValid(), true);
     QCOMPARE(processInfo.pid(), pid);
     QCOMPARE(processInfo.name(), name);
     QCOMPARE(processInfo.user(), user);
     KProcessList::KProcessInfo processInfoCopy(processInfo);
-    QVERIFY(processInfoCopy.isValid() == true);
+    QCOMPARE(processInfoCopy.isValid(), true);
     QCOMPARE(processInfoCopy.pid(), pid);
     QCOMPARE(processInfoCopy.name(), name);
     QCOMPARE(processInfoCopy.user(), user);
     KProcessList::KProcessInfo processInfoAssignment;
     processInfoAssignment = processInfo;
-    QVERIFY(processInfoAssignment.isValid() == true);
+    QCOMPARE(processInfoAssignment.isValid(), true);
     QCOMPARE(processInfoAssignment.pid(), pid);
     QCOMPARE(processInfoAssignment.name(), name);
     QCOMPARE(processInfoAssignment.user(), user);
@@ -52,13 +52,13 @@ void KProcessListTest::testKProcessInfoConstructionAssignment()
 void KProcessListTest::testProcessInfoList()
 {
     KProcessList::KProcessInfoList processInfoList = KProcessList::processInfoList();
-    QVERIFY(processInfoList.empty() == false);
+    QCOMPARE(processInfoList.empty(), false);
     auto testProcessIterator = std::find_if(processInfoList.begin(), processInfoList.end(), [](const KProcessList::KProcessInfo &info) {
         return QDir::fromNativeSeparators(info.command()).endsWith(QLatin1String("/") + getTestExeName());
     });
     QVERIFY(testProcessIterator != processInfoList.end());
     const auto &processInfo = *testProcessIterator;
-    QVERIFY(processInfo.isValid() == true);
+    QCOMPARE(processInfo.isValid(), true);
     QVERIFY(QDir::fromNativeSeparators(processInfo.command()).endsWith(QLatin1String("/") + getTestExeName()));
     QCOMPARE(processInfo.name(), getTestExeName());
     QCOMPARE(processInfo.pid(), QCoreApplication::applicationPid());
@@ -69,7 +69,7 @@ void KProcessListTest::testProcessInfo()
 {
     const qint64 testExePid = QCoreApplication::applicationPid();
     KProcessList::KProcessInfo processInfo = KProcessList::processInfo(testExePid);
-    QVERIFY(processInfo.isValid() == true);
+    QCOMPARE(processInfo.isValid(), true);
     QVERIFY(QDir::fromNativeSeparators(processInfo.command()).endsWith(QLatin1String("/") + getTestExeName()));
     QCOMPARE(processInfo.pid(), testExePid);
     QCOMPARE(processInfo.user(), KUser().loginName());
@@ -78,7 +78,7 @@ void KProcessListTest::testProcessInfo()
 void KProcessListTest::testProcessInfoNotFound()
 {
     KProcessList::KProcessInfo processInfo = KProcessList::processInfo(-1);
-    QVERIFY(processInfo.isValid() == false);
+    QCOMPARE(processInfo.isValid(), false);
 }
 
 #include "moc_kprocesslisttest.cpp"

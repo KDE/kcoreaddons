@@ -38,7 +38,7 @@ void KFuzzyMatcherTest::testMatchSimple()
     QFETCH(QString, inputstr);
     QFETCH(bool, expected);
 
-    QVERIFY(KFuzzyMatcher::matchSimple(pattern, inputstr) == expected);
+    QCOMPARE(KFuzzyMatcher::matchSimple(pattern, inputstr), expected);
 }
 
 void KFuzzyMatcherTest::testMatch_data()
