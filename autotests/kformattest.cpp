@@ -392,8 +392,13 @@ void KFormatTest::formatRelativeDate()
     }
 
     QDateTime testDateTime = now.addSecs(-3600);
+#if QT_VERSION >= QT_VERSION_CHECK(6, 11, 0)
+    QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat),
+             QStringLiteral("Today at %1").arg(testDateTime.toString(QStringLiteral("hh:mm"))));
+#else
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::ShortFormat),
              QStringLiteral("Today at %1").arg(testDateTime.toString(QStringLiteral("hh:mm:ss"))));
+#endif
 
     // 1 second ago
     now = QDateTime::currentDateTime();
