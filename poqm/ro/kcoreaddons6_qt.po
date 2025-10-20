@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-10-18 15:10+0100\n"
+"PO-Revision-Date: 2025-10-19 10:28+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -64,12 +64,10 @@ msgid "Unknown"
 msgstr "Necunoscut"
 
 #: lib/kaboutdata.cpp:281
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "Acest program este distribuit sub termenii %1."
+msgstr "<p>Acest program este distribuit sub termenii %1.</p>"
 
 #: lib/kaboutdata.cpp:282
 #, qt-format
@@ -78,6 +76,8 @@ msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
+"<p>Puteți găsi termenii compleți pe <a href=\"https://spdx.org/licenses/%1."
+"html\">saitul SPDX</a>.</p>"
 
 #: lib/kaboutdata.cpp:294
 msgctxt "KAboutLicense|"
@@ -194,7 +194,7 @@ msgstr "ODbL v1.0"
 #: lib/kaboutdata.cpp:383
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Licență Open Data Commons Open Database v1.0"
 
 #: lib/kaboutdata.cpp:386
 msgctxt "KAboutLicense|@item license (short name)"
@@ -214,7 +214,7 @@ msgstr "FTL"
 #: lib/kaboutdata.cpp:391
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Licența proiectului Freetype"
 
 #: lib/kaboutdata.cpp:394
 msgctxt "KAboutLicense|@item license (short name)"
@@ -224,30 +224,27 @@ msgstr "Licența Boost"
 #: lib/kaboutdata.cpp:395
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Boost Software License 1.0"
 
 #: lib/kaboutdata.cpp:398
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "BSD-3-Clause"
 
 #: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "Licența „nouă” sau „revizuită” BSD cu trei clauze"
 
 #: lib/kaboutdata.cpp:402
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:403
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Licența Publică Q"
+msgstr "Licența Publică Mozilla 2.0"
 
 #: lib/kaboutdata.cpp:407
 msgctxt "KAboutLicense|@item license"
@@ -689,61 +686,49 @@ msgstr "%1 YiO"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%n an"
+msgstr[1] "%n ani"
+msgstr[2] "%n ani"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
 msgstr[0] "%n zi"
 msgstr[1] "%n zile"
-msgstr[2] "%n de zile"
+msgstr[2] "%n zile"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:343
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
 msgstr[0] "%n oră"
 msgstr[1] "%n ore"
-msgstr[2] "%n de ore"
+msgstr[2] "%n ore"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:348
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
-msgstr[0] "%n minut"
-msgstr[1] "%n minute"
-msgstr[2] "%n de minute"
+msgstr[0] "%n min"
+msgstr[1] "%n min"
+msgstr[2] "%n min"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:353
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
-msgstr[0] "%n secundă"
-msgstr[1] "%n secunde"
-msgstr[2] "%n de secunde"
+msgstr[0] "%n sec"
+msgstr[1] "%n sec"
+msgstr[2] "%n sec"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:379
@@ -792,9 +777,7 @@ msgstr "%1h%2m%3s"
 #: lib/util/kformatprivate.cpp:432 lib/util/kformatprivate.cpp:441
 #: lib/util/kformatprivate.cpp:446 lib/util/kformatprivate.cpp:454
 #: lib/util/kformatprivate.cpp:680
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
@@ -869,16 +852,13 @@ msgstr[2] "%n de milisecunde"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n oră"
-msgstr[1] "%n ore"
-msgstr[2] "%n de ore"
+msgstr[0] "%n an"
+msgstr[1] "%n ani"
+msgstr[2] "%n de ani"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
