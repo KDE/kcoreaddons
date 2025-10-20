@@ -79,7 +79,7 @@ endfunction()
 
 # This macro imports the plugins for the given namespace that were
 # registered using the kcoreaddons_add_plugin function.
-# This includes the initailization statements and linking the plugins to the given target.
+# This includes the initialization statements and linking the plugins to the given target.
 #
 # In case the plugins are used in both the executable and multiple autotests it it recommended to
 # bundle the static plugins in a shared lib for the autotests. In case of shared libs the plugin registrations
