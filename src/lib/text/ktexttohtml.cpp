@@ -572,3 +572,5 @@ QString KTextToHTML::convertToHtml(const QString &plainText, const KTextToHTML::
 
     return result;
 }
+
+#include "moc_ktexttohtml.cpp"
