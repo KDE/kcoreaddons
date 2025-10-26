@@ -70,8 +70,6 @@ msgstr "Ukjend"
 
 #: lib/kaboutdata.cpp:281
 #, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
 msgstr "Dette programmet er distribuert etter vilkåra i %1."
