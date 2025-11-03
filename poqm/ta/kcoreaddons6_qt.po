@@ -10,15 +10,15 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-01-26 17:00+0530\n"
+"PO-Revision-Date: 2025-11-02 13:38+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
-"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 25.08.1\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:251
@@ -67,26 +67,20 @@ msgid "Unknown"
 msgstr "தெரியாதது"
 
 #: lib/kaboutdata.cpp:281
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "%1 உரிமத்தின் கீழ் இந்நிரல் விநியோகிக்கப்படுகிறது. "
+msgstr "<p>%1 உரிமத்திற்கிணங்க இந்நிரல் வழங்கப்படுகிறது.</p>"
 
 #: lib/kaboutdata.cpp:282
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid ""
-#| "You can find the full term <a href=\"https://spdx.org/licenses/%1.html"
-#| "\">the SPDX website</a>"
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
-"முழு உரிமத்தை <a href=\"https://spdx.org/licenses/%1.html\">SPDX இணையதளத்தில்</"
-"a> படிக்கலாம்"
+"<p>முழு உரிமத்தை <a href=\"https://spdx.org/licenses/%1.html\">SPDX "
+"இணையதளத்தில்</a> படிக்கலாம்.</p>"
 
 #: lib/kaboutdata.cpp:294
 msgctxt "KAboutLicense|"
@@ -693,8 +687,8 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%n வரு."
+msgstr[1] "%n வரு."
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -853,15 +847,12 @@ msgstr[1] "%n மில்லிநொடிகள்"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n மணிநேரம்"
-msgstr[1] "%n மணிநேரம்"
+msgstr[0] "%n வருடம்"
+msgstr[1] "%n வருடம்"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
@@ -950,15 +941,12 @@ msgstr "இப்போது"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:613
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
 msgstr[0] "%n நிமிடத்திற்கு முன்"
-msgstr[1] "%n நிமிடங்களுக்கு முன்"
+msgstr[1] "%n நிமிடத்திற்கு முன்"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:618
@@ -970,35 +958,27 @@ msgstr[0] "%n நிமிடத்திற்கு முன்"
 msgstr[1] "%n நிமிடங்களுக்கு முன்"
 
 #: lib/util/kformatprivate.cpp:623
-#, fuzzy
-#| msgid "No"
 msgctxt "KFormat|"
 msgid "Now"
-msgstr "இல்லை"
+msgstr "இப்போது"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:628
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
-msgstr[0] "%n நிமிடம்"
-msgstr[1] "%n நிமிடங்கள்"
+msgstr[0] "%n நிமி."
+msgstr[1] "%n நிமி."
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:633
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "%n நிமிடம்"
-msgstr[1] "%n நிமிடங்கள்"
+msgstr[0] "%n நிமிடத்தில்"
+msgstr[1] "%n நிமிடத்தில்"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:648
