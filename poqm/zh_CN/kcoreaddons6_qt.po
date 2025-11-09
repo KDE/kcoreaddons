@@ -61,26 +61,20 @@ msgid "Unknown"
 msgstr "未知"
 
 #: lib/kaboutdata.cpp:281
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "本程序在 %1 的条款下进行分发。"
+msgstr "<p>本程序在 %1 的条款下进行分发。</p>"
 
 #: lib/kaboutdata.cpp:282
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid ""
-#| "You can find the full term <a href=\"https://spdx.org/licenses/%1.html"
-#| "\">the SPDX website</a>"
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
-"您可以在 <a href=\"https://spdx.org/licenses/%1.html\">SPDX 网站查看完整条款"
-"</a>"
+"<p>您可以在 <a href=\"https://spdx.org/licenses/%1.html\">SPDX 网站</a>上查看"
+"完整条款</p>"
 
 #: lib/kaboutdata.cpp:294
 msgctxt "KAboutLicense|"
@@ -284,7 +278,7 @@ msgstr "显示许可证信息。"
 #: lib/kaboutdata.cpp:1232
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
-msgstr "此应用程序的基准 desktop 文件名"
+msgstr "此应用程序的桌面项的基准文件名"
 
 #: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
