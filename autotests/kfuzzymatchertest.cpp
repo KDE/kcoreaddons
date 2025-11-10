@@ -112,9 +112,9 @@ void KFuzzyMatcherTest::testMatch_data()
                              QStringLiteral("Marath, Will of the Wild"),
                              QStringLiteral("Maralen of the Mornsong"),
                              QStringLiteral("Maralen of the Mornsong Avatar"),
-                             QStringLiteral("Marshal's Anthem"),
                              QStringLiteral("Marshaling the Troops"),
                              QStringLiteral("Marchesa, the Black Rose"),
+                             QStringLiteral("Marshal's Anthem"),
                              QStringLiteral("Mark for Death"),
                              QStringLiteral("Master Apothecary"),
                              QStringLiteral("Mazirek, Kraul Death Priest"),
@@ -122,9 +122,9 @@ void KFuzzyMatcherTest::testMatch_data()
                              QStringLiteral("Akroma, Angel of Wrath Avatar"),
                              QStringLiteral("Commander's Authority"),
                              QStringLiteral("Homeward Path"),
-                             QStringLiteral("Shaman of the Great Hunt"),
                              QStringLiteral("Halimar Wavewatch"),
                              QStringLiteral("Pyromancer's Swath"),
+                             QStringLiteral("Shaman of the Great Hunt"),
                              QStringLiteral("Silumgar, the Drifting Death")
                              }
                           << 17;
@@ -139,9 +139,9 @@ void KFuzzyMatcherTest::testMatch_data()
                                 QStringLiteral("BumpLLL"),
                               }
                           << QStringList{
+                             QStringLiteral("BumpLLL"),
                              QStringLiteral("SVisualLoggerLogsList.h"),
                              QStringLiteral("LeapFromLostAllan"),
-                             QStringLiteral("BumpLLL"),
                              QStringLiteral("StringHandlerLogList.txt"),
                              QStringLiteral("SimpleFileLogger.cpp"),
                              }
