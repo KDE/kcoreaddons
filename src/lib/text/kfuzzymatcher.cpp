@@ -58,8 +58,6 @@ static bool match_recursive(QStringView::const_iterator pattern,
     // Loop through pattern and str looking for a match
     bool firstMatch = true;
     QChar currentPatternChar = toLower(*pattern);
-    // Are we matching in sequence start from start?
-    bool matchingInSequence = true;
     while (pattern != patternEnd && str != strEnd) {
         // Found match
         if (currentPatternChar == toLower(*str)) {
@@ -78,7 +76,7 @@ static bool match_recursive(QStringView::const_iterator pattern,
             uint8_t recursiveMatches[maxMatches];
             int recursiveScore = 0;
             const auto strNextChar = std::next(str);
-            if (!matchingInSequence && match_recursive(pattern, strNextChar, recursiveScore, strBegin,
+            if (match_recursive(pattern, strNextChar, recursiveScore, strBegin,
                                 strEnd, patternEnd, matches, recursiveMatches,
                                 nextMatch, totalMatches, recursionCount)) {
                 // Pick best recursive score
@@ -93,8 +91,6 @@ static bool match_recursive(QStringView::const_iterator pattern,
             matches[nextMatch++] = (uint8_t)(std::distance(strBegin, str));
             ++pattern;
             currentPatternChar = toLower(*pattern);
-        } else {
-            matchingInSequence = false;
         }
         ++str;
     }
@@ -104,70 +100,110 @@ static bool match_recursive(QStringView::const_iterator pattern,
 
     // Calculate score
     if (matched) {
-        static constexpr int sequentialBonus = 25;
-        static constexpr int separatorBonus = 25; // bonus if match occurs after a separator
-        static constexpr int camelBonus = 25; // bonus if match is uppercase and prev is lower
-        static constexpr int firstLetterBonus = 15; // bonus if the first letter is matched
+        static constexpr int firstSepScoreDiff = 3;
 
-        static constexpr int leadingLetterPenalty = -5; // penalty applied for every letter in str before the first match
-        static constexpr int maxLeadingLetterPenalty = -15; // maximum penalty for leading letters
+        static constexpr int sequentialBonus = 20;
+        static constexpr int separatorBonus = 25; // bonus if match occurs after a separator
+        static constexpr int firstLetterBonus = 15; // bonus if the first letter is matched
+        static constexpr int firstLetterSepMatchBonus = firstLetterBonus - firstSepScoreDiff; // bonus if the first matched letter is camel or separator
+
         static constexpr int unmatchedLetterPenalty = -1; // penalty for every letter that doesn't matter
 
-        static constexpr int nonBeginSequenceBonus = 10;
+        int nonBeginSequenceBonus = 10;
+        // points by which nonBeginSequenceBonus is increment on every matched letter
+        static constexpr int nonBeginSequenceIncrement = 4;
 
         // Initialize score
         outScore = 100;
 
-        // Apply leading letter penalty
-        const int penalty = std::max(leadingLetterPenalty * matches[0], maxLeadingLetterPenalty);
-
-        outScore += penalty;
+#define debug_algo 0
+#if debug_algo
+#define dbg(...) qDebug(__VA_ARGS__)
+#else
+#define dbg(...)
+#endif
 
         // Apply unmatched penalty
         const int unmatched = (int)(std::distance(strBegin, strEnd)) - nextMatch;
         outScore += unmatchedLetterPenalty * unmatched;
+        dbg("unmatchedLetterPenalty, unmatched count: %d, outScore: %d", unmatched, outScore);
 
-        uint8_t seqs[maxMatches] = {0};
+        bool inSeparatorSeq = false;
+        int i = 0;
+        if (matches[i] == 0) {
+            // First letter match has the highest score
+            outScore += firstLetterBonus + separatorBonus;
+            dbg("firstLetterBonus, outScore: %d", outScore);
+            inSeparatorSeq = true;
+        } else {
+            const QChar neighbor = *(strBegin + matches[i] - 1);
+            const QChar curr = *(strBegin + matches[i]);
+            const bool neighborSeparator = neighbor == QLatin1Char('_') || neighbor == QLatin1Char(' ');
+            if (neighborSeparator || (neighbor.isLower() && curr.isUpper())) {
+                // the first letter that got matched was a special char .e., camel or at a separator
+                outScore += firstLetterSepMatchBonus + separatorBonus;
+                dbg("firstLetterSepMatchBonus at %d, letter: %c, outScore: %d", matches[i], curr.toLatin1(), outScore);
+                inSeparatorSeq = true;
+            } else {
+                // nothing
+                nonBeginSequenceBonus += nonBeginSequenceIncrement;
+            }
+            // We didn't match any special positions, apply leading penalty
+            outScore += -(matches[i]);
+            dbg("LeadingPenalty because no first letter match, outScore: %d", outScore);
+        }
+        i++;
 
+        bool allConsecutive = true;
         // Apply ordering bonuses
-        int j = 0;
-        for (int i = 0; i < nextMatch; ++i) {
+        for (; i < nextMatch; ++i) {
             const uint8_t currIdx = matches[i];
-
-            if (i > 0) {
-                const uint8_t prevIdx = matches[i - 1];
-
-                // Sequential
-                if (currIdx == (prevIdx + 1)) {
-                    if (j > 0 && seqs[j - 1] == i - 1){
-                        outScore += sequentialBonus;
-                        seqs[j++] = i;
-                    } else {
-                        // In sequence, but from first char
-                        outScore += nonBeginSequenceBonus;
-                    }
+            const uint8_t prevIdx = matches[i - 1];
+            // Sequential
+            if (currIdx == (prevIdx + 1)) {
+                if (i == matches[i]) {
+                    // We are in a sequence beginning from first letter
+                    outScore += sequentialBonus;
+                    dbg("sequentialBonus at %d, letter: %c, outScore: %d", matches[i], (strBegin + currIdx)->toLatin1(), outScore);
+                } else if (inSeparatorSeq) {
+                    // we are in a sequence beginning from a separator like camelHump or underscore
+                    outScore += sequentialBonus - firstSepScoreDiff;
+                    dbg("in separator seq, [sequentialBonus - 5] at %d, letter: %c, outScore: %d", matches[i], (strBegin + currIdx)->toLatin1(), outScore);
+                } else {
+                    // We are in a random sequence
+                    outScore += nonBeginSequenceBonus;
+                    nonBeginSequenceBonus += nonBeginSequenceIncrement;
+                    dbg("nonBeginSequenceBonus at %d, letter: %c, outScore: %d", matches[i], (strBegin + currIdx)->toLatin1(), outScore);
                 }
+            } else {
+                allConsecutive = false;
+
+                // there is a gap between matching chars, apply penalty
+                int penalty = -((currIdx - prevIdx)) - 2;
+                outScore += penalty;
+                inSeparatorSeq = false;
+                nonBeginSequenceBonus = 10;
+                dbg("gap penalty[%d] at %d, letter: %c, outScore: %d", penalty, matches[i], (strBegin + currIdx)->toLatin1(), outScore);
             }
 
             // Check for bonuses based on neighbor character value
-            if (currIdx > 0) {
-                // Camel case
-                const QChar neighbor = *(strBegin + currIdx - 1);
-                const QChar curr = *(strBegin + currIdx);
-                if (neighbor.isLower() && curr.isUpper()) {
-                    outScore += camelBonus;
-                }
-
-                // Separator
-                const bool neighborSeparator = neighbor == QLatin1Char('_') || neighbor == QLatin1Char(' ');
-                if (neighborSeparator) {
-                    outScore += separatorBonus;
-                }
-            } else {
-                // First letter
-                outScore += firstLetterBonus;
-                seqs[j++] = i;
+            // Camel case
+            const QChar neighbor = *(strBegin + currIdx - 1);
+            const QChar curr = *(strBegin + currIdx);
+            // if camel case bonus, then not snake / separator.
+            // This prevents double bonuses
+            const bool neighborSeparator = neighbor == QLatin1Char('_') || neighbor == QLatin1Char(' ');
+            if (neighborSeparator || (neighbor.isLower() && curr.isUpper())) {
+                outScore += separatorBonus;
+                dbg("separatorBonus at %d, letter: %c, outScore: %d", matches[i], (strBegin + currIdx)->toLatin1(), outScore);
+                inSeparatorSeq = true;
+                continue;
             }
+        }
+
+        if (allConsecutive && nextMatch >= 4) {
+            outScore *= 2;
+            dbg("allConsecutive double the score, outScore: %d", outScore);
         }
     }
 
