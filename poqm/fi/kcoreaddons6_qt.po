@@ -26,7 +26,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-07-10 19:37+0300\n"
+"PO-Revision-Date: 2025-11-02 15:15+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -34,7 +34,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:251
@@ -83,26 +83,20 @@ msgid "Unknown"
 msgstr "Tuntematon"
 
 #: lib/kaboutdata.cpp:281
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "Tätä ohjelmaa levitetään %1 -lisenssin mukaisesti."
+msgstr "<p>Tätä ohjelmaa levitetään %1 -lisenssin mukaisesti.</p>"
 
 #: lib/kaboutdata.cpp:282
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid ""
-#| "You can find the full term <a href=\"https://spdx.org/licenses/%1.html"
-#| "\">the SPDX website</a>"
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
-"Täydet ehdot löydät <a href=\"https://spdx.org/licenses/%1.html\">SPDX:n "
-"sivustolta</a>"
+"<p>Täydet ehdot löytää <a href=\"https://spdx.org/licenses/%1.html\">SPDX:n "
+"sivustolta</a>.</p>"
 
 #: lib/kaboutdata.cpp:294
 msgctxt "KAboutLicense|"
