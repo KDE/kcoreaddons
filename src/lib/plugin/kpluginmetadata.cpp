@@ -265,12 +265,12 @@ KPluginMetaData::findPlugins(const QString &directory, std::function<bool(const 
     QSet<QString> addedPluginIds;
     const qint64 nowTs = QDateTime::currentMSecsSinceEpoch(); // For the initial load, stating all files is not needed
     const bool checkCache = options.testFlags(KPluginMetaData::CacheMetaData);
-    std::vector<KPluginMetaData> &cache = (*s_pluginNamespaceCache)[directory];
     KPluginMetaDataPrivate::forEachPlugin(directory, [&](const QFileInfo &pluginInfo) {
         const QString pluginFile = pluginInfo.absoluteFilePath();
 
         KPluginMetaData metadata;
         if (checkCache) {
+            std::vector<KPluginMetaData> &cache = (*s_pluginNamespaceCache)[directory];
             const auto it = std::find_if(cache.begin(), cache.end(), [&pluginFile](const KPluginMetaData &data) {
                 return pluginFile == data.fileName();
             });
