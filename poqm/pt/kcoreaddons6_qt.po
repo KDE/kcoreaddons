@@ -1,11 +1,12 @@
+# SPDX-FileCopyrightText: 2025 César <cesarapclaudio@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-12-18 14:02+0000\n"
-"Last-Translator: José Nuno Pires <zepires@gmail.com>\n"
-"Language-Team: pt <kde-i18n-pt@kde.org>\n"
+"PO-Revision-Date: 2025-05-28 01:27+0100\n"
+"Last-Translator: César <cesarapclaudio@gmail.com>\n"
+"Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,11 +27,11 @@ msgstr ""
 "X-POFile-IgnoreConsistency: Untrusted\n"
 "X-POFile-IgnoreConsistency: Export\n"
 "X-POFile-SpellExtra: Hiragana Backspace Print PgUp Ins\n"
-"X-POFile-SpellExtra: ModificadoresEspaço Yi Lao Return gpg Caps Lock kab\n"
+"X-POFile-SpellExtra: ModificadoresEspaÃ§o Yi Lao Return gpg Caps Lock kab\n"
 "X-POFile-SpellExtra: aRts tags Buhid Insert Gurmukhi Malayalam Scroll\n"
 "X-POFile-SpellExtra: Delete Ogham PgDn Kannada Tab Home Katakana SysReq\n"
-"X-POFile-SpellExtra: KConvertTest Khmer OutraOpção Bopomofo\n"
-"X-POFile-SpellExtra: MarcasCombinatórias Enter UmaOpção Devanagari\n"
+"X-POFile-SpellExtra: KConvertTest Khmer OutraOpÃ§Ã£o Bopomofo\n"
+"X-POFile-SpellExtra: MarcasCombinatÃ³rias Enter UmaOpÃ§Ã£o Devanagari\n"
 "X-POFile-SpellExtra: Hanunoo Sinhala JanelaAutoExemplo Lars Ian help\n"
 "X-POFile-IgnoreConsistency: Try Different\n"
 "X-POFile-IgnoreConsistency: Delete\n"
@@ -43,7 +44,7 @@ msgstr ""
 "X-POFile-SpellExtra: Sebastian Geiser Far kdeinit Weis Mordad Yau Hausmann\n"
 "X-POFile-SpellExtra: execprefix autostart Dirk Nov Elul shanbe Farvardin\n"
 "X-POFile-SpellExtra: KApplication bin tagcloudtest displayname IFrame yo\n"
-"X-POFile-SpellExtra: Aza Adar Sáb dah XIM Sha Sonnet testregression Jamo\n"
+"X-POFile-SpellExtra: Aza Adar SÃ¡b dah XIM Sha Sonnet testregression Jamo\n"
 "X-POFile-SpellExtra: Shawwal Bah KConf IPA Hijri Sab Testkhtml Jeroen\n"
 "X-POFile-SpellExtra: QWidget dumps KJSEmbed Arb qttest stderr Kho ban Kha\n"
 "X-POFile-SpellExtra: PathLengthExceeded Tai shn Ago KrossTest Ithnain\n"
@@ -60,7 +61,7 @@ msgstr ""
 "X-POFile-SpellExtra: Jumee Stephan TestRegression Knoll frames HOME Jum\n"
 "X-POFile-SpellExtra: DISPLAY KNewStuff Awal Rajab pt plastik InvalidHost\n"
 "X-POFile-SpellExtra: kdemain STDOUT Jun Jul Kulow Yaum pa Chahar widgets\n"
-"X-POFile-SpellExtra: man KUnitTest pm KDEPIM TAB Waldo CL CC Balinês\n"
+"X-POFile-SpellExtra: man KUnitTest pm KDEPIM TAB Waldo CL CC BalinÃªs\n"
 "X-POFile-SpellExtra: Nagri Kangxi QLayout qtplugininstance regression\n"
 "X-POFile-SpellExtra: multipart Jalali Phags Set servname nograb\n"
 "X-POFile-SpellExtra: International Frame CGIs Stylesheet Library Sex Seg\n"
@@ -72,25 +73,25 @@ msgstr ""
 "X-POFile-SpellExtra: client Mai Bastian document config TiB Jones AC\n"
 "X-POFile-SpellExtra: KBuildSycoca Bahman offthespot Mueller Tang ye Thu\n"
 "X-POFile-SpellExtra: Sabt NKo aisocktype mixed Carriage Thl aiflags\n"
-"X-POFile-SpellExtra: Muharram Reinhart Kontact Cantonês Page icon\n"
+"X-POFile-SpellExtra: Muharram Reinhart Kontact CantonÃªs Page icon\n"
 "X-POFile-SpellExtra: makekdewidgets ManyColor Heshvan Kross Ith bind Antti\n"
 "X-POFile-SpellExtra: DXS Tamuz Shahrivar sessionId sh KJSCmd Av KLibLoader\n"
 "X-POFile-SpellExtra: Mehr GiB Arbi dograb AssinaturaFalhou prefix\n"
-"X-POFile-SpellExtra: Hexagramas ize AutoAssinado NãoConfiável Qi Down\n"
-"X-POFile-SpellExtra: directory Índicas ise Oxygen info shared share usr\n"
+"X-POFile-SpellExtra: Hexagramas ize AutoAssinado NÃ£oConfiÃ¡vel Qi Down\n"
+"X-POFile-SpellExtra: directory Ãndicas ise Oxygen info shared share usr\n"
 "X-POFile-IgnoreConsistency: Separate Folders\n"
 "X-POFile-SpellExtra: XDGDATADIRS KTTS Control PrtScr Hyper Sys Win Screen\n"
 "X-POFile-SpellExtra: Req Break AltGr ReadOnly SHM EOF Re abc ABC QPL Kate\n"
 "X-POFile-SpellExtra: Serif Sans KFormula URIs raster opengl favicons Solid\n"
 "X-POFile-SpellExtra: Harald Fernengel KTTSD baseline Resource writeall\n"
-"X-POFile-SpellExtra: Trüg YiB PiB YB ZB EB PB EiB ZiB GB TB KIdleTest\n"
-"X-POFile-SpellExtra: Freddi KIdleTime Cha Āshwin Budhavãra Suk Paush\n"
-"X-POFile-SpellExtra: Shrāvana Somavãra Phālgun Raviãra Phā Māg\n"
-"X-POFile-SpellExtra: Bhādrapad Chaitra Māgh Sukravãra Āshādha\n"
-"X-POFile-SpellExtra: Agrahayana Bud Shr Guruvãra Mañ Gur Vaishākh Jya\n"
-"X-POFile-SpellExtra: Kārtik Agr Jyaishtha Kār Āsh Bhā Rav milisegundo\n"
-"X-POFile-SpellExtra: Āsw Mañgalvã Sanivãra Mayek Ol Saurashtra\n"
-"X-POFile-SpellExtra: Sundanês Viet Lisu Kayah Chiki Lepcha Meetei Cham\n"
+"X-POFile-SpellExtra: TrÃ¼g YiB PiB YB ZB EB PB EiB ZiB GB TB KIdleTest\n"
+"X-POFile-SpellExtra: Freddi KIdleTime Cha Ä€shwin BudhavÃ£ra Suk Paush\n"
+"X-POFile-SpellExtra: ShrÄvana SomavÃ£ra PhÄlgun RaviÃ£ra PhÄ MÄg\n"
+"X-POFile-SpellExtra: BhÄdrapad Chaitra MÄgh SukravÃ£ra Ä€shÄdha\n"
+"X-POFile-SpellExtra: Agrahayana Bud Shr GuruvÃ£ra MaÃ± Gur VaishÄkh Jya\n"
+"X-POFile-SpellExtra: KÄrtik Agr Jyaishtha KÄr Ä€sh BhÄ Rav milisegundo\n"
+"X-POFile-SpellExtra: Ä€sw MaÃ±galvÃ£ SanivÃ£ra Mayek Ol Saurashtra\n"
+"X-POFile-SpellExtra: SundanÃªs Viet Lisu Kayah Chiki Lepcha Meetei Cham\n"
 "X-POFile-SpellExtra: Rejang Tham Bamum Pshoment Pas Ptiou Neh Genbot Hamus\n"
 "X-POFile-SpellExtra: Pag Paope Pesnau Pes Hed Magabit Ehu Tahsas Yak Mag\n"
 "X-POFile-SpellExtra: Tob Pef Kou Pam Pao Tequemt Paremhotep Psh nabot\n"
@@ -98,15 +99,16 @@ msgstr ""
 "X-POFile-SpellExtra: Pashons Mes LarguraxAltura Kia Qedame Ham Gen Hedar\n"
 "X-POFile-SpellExtra: Parmoute Teq Mesore Nehase Kouji Yakatit Maksegno\n"
 "X-POFile-SpellExtra: Paone Sen Meshir Pagumen Thoout Hamle Epe Mak\n"
-"X-POFile-SpellExtra: Tkyriakē Ehud Tho Qed Pti Psoou Segno Tah Rob\n"
-"X-POFile-SpellExtra: Miyazya Meskerem Tobe Peftoou Epep Tky pastabase Fã\n"
+"X-POFile-SpellExtra: TkyriakÄ“ Ehud Tho Qed Pti Psoou Segno Tah Rob\n"
+"X-POFile-SpellExtra: Miyazya Meskerem Tobe Peftoou Epep Tky pastabase FÃ£\n"
 "X-POFile-SpellExtra: KVTML USD Colaborativos Hunspell Jovie AM PM mails\n"
 "X-POFile-SpellExtra: mbuttonGroup Blog blog np cp nc UTC Mandaico Batak\n"
-"X-POFile-SpellExtra: DQTDECLARATIVEDEBUG QML slot pedro mantê Pocinhas\n"
-"X-POFile-SpellExtra: Reconstrói ii Del iii querê KPluginFactory Ki Ei Zi\n"
+"X-POFile-SpellExtra: DQTDECLARATIVEDEBUG QML slot pedro mantÃª Pocinhas\n"
+"X-POFile-SpellExtra: ReconstrÃ³i ii Del iii querÃª KPluginFactory Ki Ei Zi\n"
 "X-POFile-IgnoreConsistency: Update\n"
 "X-Qt-Contexts: true\n"
 "X-POFile-SpellExtra: Gi KListOpenFilesJob lsof FAT RAMFS NTFS ExFAT FUSE\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: lib/io/kfilesystemtype.cpp:251
 msgctxt "KFileSystemType|"
@@ -162,12 +164,18 @@ msgid "<p>This program is distributed under the terms of the %1.</p>"
 msgstr "Este programa é distribuído nos termos da licença %1."
 
 #: lib/kaboutdata.cpp:282
-#, qt-format
+#, fuzzy, qt-format
+#| msgctxt "KAboutLicense|"
+#| msgid ""
+#| "You can find the full term <a href=\"https://spdx.org/licenses/%1.html"
+#| "\">the SPDX website</a>"
 msgctxt "KAboutLicense|"
 msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
+"Pode encontrar os termos completos <a href=\"https://spdx.org/licenses/%1."
+"html\">no website da SPDX</a>"
 
 #: lib/kaboutdata.cpp:294
 msgctxt "KAboutLicense|"
@@ -176,7 +184,7 @@ msgid ""
 "Please check the documentation or the source for any\n"
 "licensing terms.\n"
 msgstr ""
-"Os termos da licença deste programa não foram indicados.\n"
+"Os termos da licença deste programa não foram especificados.\n"
 "Por favor consulte a documentação ou o código-fonte para mais\n"
 "informações acerca da licença.\n"
 
@@ -194,7 +202,7 @@ msgstr "GPL v2"
 #: lib/kaboutdata.cpp:347
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 2"
-msgstr "Licença Pública da GNU Versão 2"
+msgstr "Licença Pública Geral da GNU Versão 2"
 
 #: lib/kaboutdata.cpp:350
 msgctxt "KAboutLicense|@item license (short name)"
@@ -204,7 +212,7 @@ msgstr "LGPL v2"
 #: lib/kaboutdata.cpp:351
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2"
-msgstr "Licença Pública da GNU Lata Versão 2"
+msgstr "Licença Pública Menor da GNU Versão 2"
 
 #: lib/kaboutdata.cpp:354
 msgctxt "KAboutLicense|@item license (short name)"
@@ -234,7 +242,7 @@ msgstr "GPL v3"
 #: lib/kaboutdata.cpp:363
 msgctxt "KAboutLicense|@item license"
 msgid "GNU General Public License Version 3"
-msgstr "Licença Pública da GNU Versão 3"
+msgstr "Licença Pública Geral da GNU Versão 3"
 
 #: lib/kaboutdata.cpp:366
 msgctxt "KAboutLicense|@item license (short name)"
@@ -244,7 +252,7 @@ msgstr "LGPL v3"
 #: lib/kaboutdata.cpp:367
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 3"
-msgstr "Licença Pública Lata da GNU Versão 3"
+msgstr "Licença Pública Menor da GNU Versão 3"
 
 #: lib/kaboutdata.cpp:370
 msgctxt "KAboutLicense|@item license (short name)"
@@ -254,105 +262,87 @@ msgstr "LGPL v2.1"
 #: lib/kaboutdata.cpp:371
 msgctxt "KAboutLicense|@item license"
 msgid "GNU Lesser General Public License Version 2.1"
-msgstr "Licença Pública da GNU Lata Versão 2.1"
+msgstr "Licença Pública Menor da GNU Versão 2.1"
 
 #: lib/kaboutdata.cpp:374
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "Licença BSD"
+msgstr "Licença MIT"
 
 #: lib/kaboutdata.cpp:375
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "Licença BSD"
+msgstr "Licença MIT"
 
 #: lib/kaboutdata.cpp:378
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
-msgstr ""
+msgstr "CC0"
 
 #: lib/kaboutdata.cpp:379
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr ""
+msgstr "Creative Commons Zero"
 
 #: lib/kaboutdata.cpp:382
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "QPL v1.0"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
-msgstr "QPL v1.0"
+msgstr "ODbL v1.0"
 
 #: lib/kaboutdata.cpp:383
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Licença de Base de Dados Aberta da Open Data Commons v1.0"
 
 #: lib/kaboutdata.cpp:386
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "Apache 2.0"
 
 #: lib/kaboutdata.cpp:387
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "Licença Apache 2.0"
 
 #: lib/kaboutdata.cpp:390
-#, fuzzy
-#| msgctxt "KFileSystemType|"
-#| msgid "FAT"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
-msgstr "FAT"
+msgstr "FTL"
 
 #: lib/kaboutdata.cpp:391
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Licença do Projecto Freetype"
 
 #: lib/kaboutdata.cpp:394
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
-msgstr "Licença BSD"
+msgstr "Licença Boost"
 
 #: lib/kaboutdata.cpp:395
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Licença Boost Software 1.0"
 
 #: lib/kaboutdata.cpp:398
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "Cláusula-BSD-3"
 
 #: lib/kaboutdata.cpp:399
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "Licença \"Nova\" ou \"Revista\" da Cláusula-BSD-3"
 
 #: lib/kaboutdata.cpp:402
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:403
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Licença Pública Q"
+msgstr "Licença Pública Mozilla 2.0"
 
 #: lib/kaboutdata.cpp:407
 msgctxt "KAboutLicense|@item license"
@@ -362,7 +352,7 @@ msgstr "Personalizada"
 #: lib/kaboutdata.cpp:410
 msgctxt "KAboutLicense|@item license"
 msgid "Not specified"
-msgstr "Não indicada"
+msgstr "Não especificada"
 
 #: lib/kaboutdata.cpp:992
 msgctxt "KAboutData|replace this with information about your translation team"
@@ -372,25 +362,25 @@ msgid ""
 "internationalization visit <a href=\"https://l10n.kde.org\">https://l10n.kde."
 "org</a></p>"
 msgstr ""
-"<p>O KDE está traduzido em várias línguas, graças ao trabalho das várias "
-"equipas de traduções por todo o mundo.</p><p>Para mais informações acerca da "
-"equipa de localização do KDE para Português visite <a href=\"http://kde-pt."
-"dyndns.org/\">http://kde-pt.dyndns.org/</a></p>"
+"<p>O KDE é traduzido para várias línguas graças ao trabalho das muitas "
+"equipas de tradução espalhadas pelo mundo.</p><p>Para mais informações "
+"acerca da internacionalização do KDE visite <a href=\"https://l10n.kde.org"
+"\">https://l10n.kde.org</a></p>"
 
 #: lib/kaboutdata.cpp:1229
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
-msgstr "Mostra informações sobre o autor."
+msgstr "Mostra informação sobre o autor."
 
 #: lib/kaboutdata.cpp:1230
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
-msgstr "Mostra informações sobre a licença."
+msgstr "Mostra informação sobre a licença."
 
 #: lib/kaboutdata.cpp:1232
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
-msgstr "O nome de base dos ficheiros do item 'desktop' para esta aplicação."
+msgstr "O nome de base do ficheiro 'desktop' para esta aplicação."
 
 #: lib/kaboutdata.cpp:1233
 msgctxt "KAboutData CLI|"
@@ -444,41 +434,65 @@ msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "O KPluginFactory não conseguiu criar uma instância %1 de %2"
 
 #: lib/util/kformatprivate.cpp:103
+#, fuzzy
+#| msgctxt "KFormat|SI prefix for 10^â»24"
+#| msgid "y"
 msgctxt "KFormat|SI prefix for 10^⁻24"
 msgid "y"
 msgstr "y"
 
 #: lib/util/kformatprivate.cpp:104
+#, fuzzy
+#| msgctxt "KFormat|SI prefix for 10^â»21"
+#| msgid "z"
 msgctxt "KFormat|SI prefix for 10^⁻21"
 msgid "z"
 msgstr "z"
 
 #: lib/util/kformatprivate.cpp:105
+#, fuzzy
+#| msgctxt "KFormat|SI prefix for 10^â»18"
+#| msgid "a"
 msgctxt "KFormat|SI prefix for 10^⁻18"
 msgid "a"
 msgstr "a"
 
 #: lib/util/kformatprivate.cpp:106
+#, fuzzy
+#| msgctxt "KFormat|SI prefix for 10^â»15"
+#| msgid "f"
 msgctxt "KFormat|SI prefix for 10^⁻15"
 msgid "f"
 msgstr "f"
 
 #: lib/util/kformatprivate.cpp:107
+#, fuzzy
+#| msgctxt "KFormat|SI prefix for 10^â»12"
+#| msgid "p"
 msgctxt "KFormat|SI prefix for 10^⁻12"
 msgid "p"
 msgstr "p"
 
 #: lib/util/kformatprivate.cpp:108
+#, fuzzy
+#| msgctxt "KFormat|SI prefix for 10^â»9"
+#| msgid "n"
 msgctxt "KFormat|SI prefix for 10^⁻9"
 msgid "n"
 msgstr "n"
 
 #: lib/util/kformatprivate.cpp:109
+#, fuzzy
+#| msgctxt "KFormat|SI prefix for 10^â»6"
+#| msgid "Âµ"
 msgctxt "KFormat|SI prefix for 10^⁻6"
 msgid "µ"
-msgstr "µ"
+msgstr "Âµ"
 
 #: lib/util/kformatprivate.cpp:110
+#, fuzzy
+#| msgctxt "KFormat|SI prefix for 10^â»3"
+#| msgid "m"
 msgctxt "KFormat|SI prefix for 10^⁻3"
 msgid "m"
 msgstr "m"
@@ -797,10 +811,7 @@ msgstr[1] ""
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
@@ -809,10 +820,7 @@ msgstr[1] "%n dias"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:343
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
@@ -821,10 +829,7 @@ msgstr[1] "%n horas"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:348
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
@@ -833,10 +838,7 @@ msgstr[1] "%n minutos"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:353
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
@@ -890,9 +892,7 @@ msgstr "%1h%2m%3s"
 #: lib/util/kformatprivate.cpp:432 lib/util/kformatprivate.cpp:441
 #: lib/util/kformatprivate.cpp:446 lib/util/kformatprivate.cpp:454
 #: lib/util/kformatprivate.cpp:680
-#, fuzzy, qt-format
-#| msgctxt "KFormat|no Prefix"
-#| msgid "%1 %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
 msgstr "%1 %2"
@@ -1063,15 +1063,12 @@ msgstr "Mesmo agora"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:613
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s) ago"
-#| msgid_plural "%n minute(s) ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
-msgstr[0] "há %n minuto"
-msgstr[1] "há %n minutos"
+msgstr[0] "Há %n min"
+msgstr[1] "Há %n mins"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:618
@@ -1079,32 +1076,26 @@ msgstr[1] "há %n minutos"
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "há %n minuto"
-msgstr[1] "há %n minutos"
+msgstr[0] "Há %n minuto"
+msgstr[1] "Há %n minutos"
 
 #: lib/util/kformatprivate.cpp:623
 msgctxt "KFormat|"
 msgid "Now"
-msgstr ""
+msgstr "Agora"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:628
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
-msgstr[0] "%n minuto"
-msgstr[1] "%n minutos"
+msgstr[0] "%n min"
+msgstr[1] "%n mins"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:633
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
@@ -1122,40 +1113,36 @@ msgstr "%1 às %2"
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr ""
+msgstr "%1 pé"
 
 #: lib/util/kformatprivate.cpp:700 lib/util/kformatprivate.cpp:702
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1 minutos"
+msgstr "%1 milha"
 
 #: lib/util/kformatprivate.cpp:708
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 metro"
 
 #: lib/util/kformatprivate.cpp:711 lib/util/kformatprivate.cpp:713
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 kB"
+msgstr "%1 quilómetro"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
 msgctxt "QObject|"
 msgid "Path %1 doesn't exist"
-msgstr "A localização %1 não existe"
+msgstr "O caminho %1 não existe"
 
 #: lib/util/klistopenfilesjob_unix.cpp:46
 msgctxt "QObject|"
 msgid "Could not find lsof executable in PATH:"
-msgstr "Não foi possível encontrar o executável 'lsof' na PATH:"
+msgstr "Não foi possível encontrar o executável 'lsof' no PATH:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
 #, qt-format
@@ -1168,13 +1155,12 @@ msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
 msgstr "O KListOpenFilesJob não tem suporte para o Windows"
 
-#, fuzzy
 #~| msgctxt "KFormat|MetricBinaryDialect"
 #~| msgid "%1 %2%3"
 #~ msgctxt "KFormat|"
 #~ msgid "%1 %2 %3"
-#~ msgstr "%1 %2%3"
+#~ msgstr "%1 %2 %3"
 
 #~ msgctxt "KPluginLoader|"
 #~ msgid "The library %1 does not offer a KPluginFactory."
-#~ msgstr "A biblioteca %1 não possui um KPluginFactory."
+#~ msgstr "A biblioteca %1 nÃ£o possui um KPluginFactory."
