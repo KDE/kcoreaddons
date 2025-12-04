@@ -961,7 +961,7 @@ Notes:
     <comment xml:lang="nn">vevarkiv</comment>
     <comment xml:lang="pa">ਵੈੱਬ ਅਕਾਇਵ</comment>
     <comment xml:lang="pl">archiwum sieciowe</comment>
-    <comment xml:lang="pt">pacote Web</comment>
+    <comment xml:lang="pt">arquivo web</comment>
     <comment xml:lang="pt_BR">arquivo Web</comment>
     <comment xml:lang="ro">arhivă web</comment>
     <comment xml:lang="ru">Веб-архив</comment>
@@ -1293,7 +1293,6 @@ Notes:
     <comment xml:lang="nn">Intel®-heksobjektfil</comment>
     <comment xml:lang="pa">Intel® ਹੈਕਸਾਡੈਸੀਮਲ ਆਬਜੈਕਟ ਫਾਇਲ</comment>
     <comment xml:lang="pl">Szesnastkowy plik obiektowy Intel®</comment>
-    <comment xml:lang="pt">Ficheiro-objecto em hexadecimal da Intel®</comment>
     <comment xml:lang="pt_BR">arquivo objeto em hexadecimal da Intel®</comment>
     <comment xml:lang="ro">fișier cu obiect hexazecimal Intel®</comment>
     <comment xml:lang="ru">Файл Intel HEX</comment>
@@ -1683,7 +1682,7 @@ Notes:
     <comment xml:lang="nn">KDE-systemovervaking</comment>
     <comment xml:lang="pa">KDE ਸਿਸਟਮ ਮਾਨੀਟਰ</comment>
     <comment xml:lang="pl">Monitor systemowy KDE</comment>
-    <comment xml:lang="pt">Monitor do sistema KDE</comment>
+    <comment xml:lang="pt">Monitor de sistema KDE</comment>
     <comment xml:lang="pt_BR">monitor do sistema do KDE</comment>
     <comment xml:lang="ro">monitor de sistem KDE</comment>
     <comment xml:lang="ru">Системный монитор KDE</comment>
@@ -2790,7 +2789,7 @@ Notes:
     <comment xml:lang="nn">Umbrello UML Modeller-fil</comment>
     <comment xml:lang="pa">ਉਮਬਰਿੱਲੋ UML ਮੋਡੇਲਰ ਫਾਇਲ</comment>
     <comment xml:lang="pl">Plik programu modelującego Umbrello UML</comment>
-    <comment xml:lang="pt">Ficheiro de modelação em UML do Umbrello</comment>
+    <comment xml:lang="pt">Ficheiro de Modelação em UML do Umbrello</comment>
     <comment xml:lang="pt_BR">arquivo do modelador UML Umbrello</comment>
     <comment xml:lang="ro">fișier Modelator UML Umbrello</comment>
     <comment xml:lang="ru">Модель Umbrello</comment>
