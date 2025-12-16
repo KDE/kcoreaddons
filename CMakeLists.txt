@@ -29,11 +29,11 @@ include(ECMGenerateQDoc)
 set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprecated API excluded from the build [default=0].")
 
 option(ENABLE_PCH "Enable precompile headers for faster builds" ON)
-option(KCOREADDONS_USE_QML "Build the QML plugin" ON)
+option(USE_QML "Build the QML plugin" ON)
 
 set(REQUIRED_QT_VERSION 6.8.0)
 find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
-if (KCOREADDONS_USE_QML)
+if (USE_QML)
     find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Qml Network)
     find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG OPTIONAL_COMPONENTS QuickTest)
     include(ECMQmlModule)

@@ -1,6 +1,6 @@
 add_subdirectory(lib)
 add_subdirectory(mimetypes)
-if (KCOREADDONS_USE_QML)
+if (USE_QML)
     add_subdirectory(qml)
 endif()
 
