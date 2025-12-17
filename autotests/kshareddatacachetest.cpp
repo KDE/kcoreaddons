@@ -7,7 +7,6 @@
 
 #include <kshareddatacache.h>
 
-#include <QStandardPaths>
 #include <QTest>
 
 #include <QObject>
