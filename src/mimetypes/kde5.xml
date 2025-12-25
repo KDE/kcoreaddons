@@ -44,6 +44,7 @@ Notes:
     <comment xml:lang="fa">ریلکس ان‌جی</comment>
     <comment xml:lang="fi">RELAX NG</comment>
     <comment xml:lang="fr">RELAX NG</comment>
+    <comment xml:lang="ga">RELAX NG</comment>
     <comment xml:lang="gl">RELAX NG</comment>
     <comment xml:lang="he">RELAX NG</comment>
     <comment xml:lang="hi">रिलॅक्स एनजी</comment>
@@ -101,6 +102,7 @@ Notes:
     <comment xml:lang="fa">صدای CD</comment>
     <comment xml:lang="fi">CD-ääni</comment>
     <comment xml:lang="fr">CD audio</comment>
+    <comment xml:lang="ga">Fuaim dhlúthdhiosca</comment>
     <comment xml:lang="gl">CD de son</comment>
     <comment xml:lang="he">CD audio</comment>
     <comment xml:lang="hi">सीडी ऑडियो</comment>
@@ -159,6 +161,7 @@ Notes:
     <comment xml:lang="fa">قلم بیت‌مپ اس‌ان‌اف</comment>
     <comment xml:lang="fi">SNF-bittikarttafontti</comment>
     <comment xml:lang="fr">Police « bitmap SNF »</comment>
+    <comment xml:lang="ga">Cló Giotánmhapach SNF</comment>
     <comment xml:lang="gl">Fonte de mapa de bits SNF</comment>
     <comment xml:lang="he">SNF bitmap font</comment>
     <comment xml:lang="hi">एस एन एफ बिटमैप फोंट</comment>
@@ -218,6 +221,7 @@ Notes:
     <comment xml:lang="fa">برنامک جاوا</comment>
     <comment xml:lang="fi">Java-sovelma</comment>
     <comment xml:lang="fr">Applet Java</comment>
+    <comment xml:lang="ga">Feidhmchláirín Java</comment>
     <comment xml:lang="gl">Miniaplicativo de Java</comment>
     <comment xml:lang="he">Java applet</comment>
     <comment xml:lang="hi">जावा ऐपलेट</comment>
@@ -330,6 +334,7 @@ Notes:
     <comment xml:lang="fa">طرح رنگ کی‌دی‌ای</comment>
     <comment xml:lang="fi">KDE-värimalli</comment>
     <comment xml:lang="fr">Schéma de couleurs de KDE</comment>
+    <comment xml:lang="ga">Téama dathanna de chuid KDE</comment>
     <comment xml:lang="gl">Esquema de cores de KDE</comment>
     <comment xml:lang="he">ערכת צבע של KDE</comment>
     <comment xml:lang="hi">केडीई रंग योजना</comment>
@@ -391,6 +396,7 @@ Notes:
     <comment xml:lang="fa">بستهٔ KNewStuff</comment>
     <comment xml:lang="fi">KNewStuff-paketti</comment>
     <comment xml:lang="fr">Paquet pour KNewStuff</comment>
+    <comment xml:lang="ga">Pacáiste KNewStuff</comment>
     <comment xml:lang="gl">Paquete de KNewStuff</comment>
     <comment xml:lang="he">חבילה של KNewStuff</comment>
     <comment xml:lang="hi">के-न्यूस्टफ पैकेज</comment>
@@ -449,6 +455,7 @@ Notes:
     <comment xml:lang="fa">کیف‌پول KWallet</comment>
     <comment xml:lang="fi">KWallet-lompakko</comment>
     <comment xml:lang="fr">Portefeuille pour KWallet</comment>
+    <comment xml:lang="ga">Sparán KWallet</comment>
     <comment xml:lang="gl">Carteira de KWallet</comment>
     <comment xml:lang="he">ארנק של KWallet</comment>
     <comment xml:lang="hi">के-वॉलेट बटुआ</comment>
@@ -567,6 +574,7 @@ Notes:
     <comment xml:lang="fa">پلاسموید</comment>
     <comment xml:lang="fi">sovelma</comment>
     <comment xml:lang="fr">composant graphique</comment>
+    <comment xml:lang="ga">plasmóid</comment>
     <comment xml:lang="gl">trebello</comment>
     <comment xml:lang="he">פלזמויד</comment>
     <comment xml:lang="hi">प्लास्मोइड</comment>
@@ -626,6 +634,7 @@ Notes:
     <comment xml:lang="fa">زمینهٔ SuperKaramba</comment>
     <comment xml:lang="fi">SuperKaramba-teema</comment>
     <comment xml:lang="fr">Thème pour SuperKaramba</comment>
+    <comment xml:lang="ga">Téama SuperKaramba</comment>
     <comment xml:lang="gl">Tema de SuperKaramba</comment>
     <comment xml:lang="he">ערכת עיצוב של SuperKaramba</comment>
     <comment xml:lang="hi">सूपरकरंबा स्वरूपण</comment>
@@ -683,6 +692,7 @@ Notes:
     <comment xml:lang="fa">سند مدیریت پروژهٔ Calligra Plan</comment>
     <comment xml:lang="fi">Calligra Plan -projektinhallintatiedosto</comment>
     <comment xml:lang="fr">Document de gestion de projets pour Calligra Plan</comment>
+    <comment xml:lang="ga">Cáipéis Bhainisteoireachta Tionscadail Calligra Plan</comment>
     <comment xml:lang="gl">Proxecto do Calligra Plan</comment>
     <comment xml:lang="he">מסמך ניהול מיזמים של Calligra Plan</comment>
     <comment xml:lang="hi">कैलिग्रा प्लान परियोजना प्रबंधन दस्तावेज़ </comment>
@@ -740,6 +750,7 @@ Notes:
     <comment xml:lang="fa">سند کار بستهٔ Calligra Plan</comment>
     <comment xml:lang="fi">Calligra Plan -työpakettitiedosto</comment>
     <comment xml:lang="fr">Document de lots de travaux pour Calligra Plan</comment>
+    <comment xml:lang="ga">Cáipéis phacáiste oibre Calligra Plan</comment>
     <comment xml:lang="gl">Paquete de traballo do Calligra Plan</comment>
     <comment xml:lang="he">מסמך חבילת עבודה של Calligra Plan</comment>
     <comment xml:lang="hi">कॉलिग्रा प्लान कार्य पैकेज दस्तावेज़ </comment>
@@ -797,6 +808,7 @@ Notes:
     <comment xml:lang="fa">اسناد مدیریت پروژهٔ KPlato</comment>
     <comment xml:lang="fi">KPLato-projektinhallintatiedosto</comment>
     <comment xml:lang="fr">Document de gestion de projets pour KPlato</comment>
+    <comment xml:lang="ga">Cáipéis Bhainisteoireachta Tionscadail KPlato</comment>
     <comment xml:lang="gl">Proxecto de KPlato</comment>
     <comment xml:lang="he">מסמך ניהול מיזמים של KPlato</comment>
     <comment xml:lang="hi">के-प्लॅटो परियोजना प्रबंधन दस्तावेज़</comment>
@@ -854,6 +866,7 @@ Notes:
     <comment xml:lang="fa">بستهٔ کار مدیریت پروژهٔ Kplato</comment>
     <comment xml:lang="fi">KPlato-projektinhallinnan työpaketti</comment>
     <comment xml:lang="fr">Lots de travaux du logiciel de gestion de projets pour KPlato</comment>
+    <comment xml:lang="ga">Pacáiste oibre bainisteoireachta tionscadail KPlato</comment>
     <comment xml:lang="gl">Paquete de traballo de KPlato</comment>
     <comment xml:lang="he">חבילת עבודת ניהול מיזמים של KPlato</comment>
     <comment xml:lang="hi">के-प्लॅटो परियोजना प्रबंधन कार्य पैकेज</comment>
@@ -911,6 +924,7 @@ Notes:
     <comment xml:lang="fa">آرشیو Kugar</comment>
     <comment xml:lang="fi">Kugar-arkisto</comment>
     <comment xml:lang="fr">Archive pour Kugar</comment>
+    <comment xml:lang="ga">Cartlann Kugar</comment>
     <comment xml:lang="gl">Arquivo de Kugar</comment>
     <comment xml:lang="he">ארכיון של Kugar</comment>
     <comment xml:lang="hi">कूगर अभिलेखागार</comment>
@@ -969,6 +983,7 @@ Notes:
     <comment xml:lang="fa">بایگانی وب</comment>
     <comment xml:lang="fi">verkkoarkisto</comment>
     <comment xml:lang="fr">Archive Internet</comment>
+    <comment xml:lang="ga">cartlann ghréasáin</comment>
     <comment xml:lang="gl">arquivo web</comment>
     <comment xml:lang="he">ארכיון אינטרנט</comment>
     <comment xml:lang="hi">वेब अभिलेखागार</comment>
@@ -1028,6 +1043,7 @@ Notes:
     <comment xml:lang="fa">الگوی W3C XML</comment>
     <comment xml:lang="fi">W3C XML -skeema</comment>
     <comment xml:lang="fr">Schéma « XML W3C »</comment>
+    <comment xml:lang="ga">Scéimre XML W3C</comment>
     <comment xml:lang="gl">Esquema XML do W3C</comment>
     <comment xml:lang="he">סכמת XML של W3C</comment>
     <comment xml:lang="hi">डब्ल्यू त्री सी एक्स एम एल स्कीमा</comment>
@@ -1141,6 +1157,7 @@ Notes:
     <comment xml:lang="fa">درون‌ریختهٔ کی‌فوتوآلبوم</comment>
     <comment xml:lang="fi">KPhotoAlbum-tuonti</comment>
     <comment xml:lang="fr">Importation pour KPhotoAlbum</comment>
+    <comment xml:lang="ga">Iompórtáil KPhotoAlbum</comment>
     <comment xml:lang="gl">Importación de KPhotoAlbum</comment>
     <comment xml:lang="he">ייבוא של KPhotoAlbum</comment>
     <comment xml:lang="hi">केफोटोआलबम आयात</comment>
@@ -1198,6 +1215,7 @@ Notes:
     <comment xml:lang="fa">تصویر اچ‌دی‌آر</comment>
     <comment xml:lang="fi">HDR-kuva</comment>
     <comment xml:lang="fr">Image Haute définition « HDR »</comment>
+    <comment xml:lang="ga">Íomhá HDR</comment>
     <comment xml:lang="gl">Imaxe de HDR</comment>
     <comment xml:lang="he">תמונת HDR (אבחנה גבוהה)</comment>
     <comment xml:lang="hi">एचडीआर छवि</comment>
@@ -1260,6 +1278,7 @@ Notes:
     <comment xml:lang="fa">قالب های تصویری خام کی‌دی‌ای</comment>
     <comment xml:lang="fi">KDE-raakakuvamuoto</comment>
     <comment xml:lang="fr">Formats d'image « raw » pour KDE</comment>
+    <comment xml:lang="ga">Formáidí amha íomhánna de chuid KDE</comment>
     <comment xml:lang="gl">Formatos de imaxe raw de KDE</comment>
     <comment xml:lang="he">תסדירי תמונות גולמיות של KDE</comment>
     <comment xml:lang="hi">केडीई रॉ छवि प्रारूप</comment>
@@ -1327,6 +1346,7 @@ Notes:
     <comment xml:lang="fa">پروندهٔ شیء شانزده‌شانزدهی اینتل®</comment>
     <comment xml:lang="fi">Intelin heksadesimaalinen objektitiedosto</comment>
     <comment xml:lang="fr">Fichier objet hexadécimal « Intel® »</comment>
+    <comment xml:lang="ga">Comhad oibiachta heicsidheachúlach Intel®</comment>
     <comment xml:lang="gl">Ficheiro de obxecto hexadecimal de Intel®</comment>
     <comment xml:lang="he">קובץ עצם הקסדצימלי של Intel®‎</comment>
     <comment xml:lang="hi">इंटेल® षोडश आधारी ऑब्जैक्ट फ़ाइल</comment>
@@ -1384,6 +1404,7 @@ Notes:
     <comment xml:lang="fa">سیاههٔ افزایهٔ بارکنندهٔ سیاهه‌ پروندهٔ کِیت</comment>
     <comment xml:lang="fi">Kate-tiedostoluettelon latausliitännäisen luettelo</comment>
     <comment xml:lang="fr">Liste de modules externes pour le chargeur de liste de fichiers pour Kate</comment>
+    <comment xml:lang="ga">Liosta de bhreiseáin luchtaithe liostaí comhad do Kate</comment>
     <comment xml:lang="gl">Lista de complementos do cargador de lista de ficheiros de Kate</comment>
     <comment xml:lang="he">רשימת תוספי טעינת רשימות קבצים של Kate</comment>
     <comment xml:lang="hi">केट फ़ाइल सूची लोडर प्लगइन सूची</comment>
@@ -1442,6 +1463,7 @@ Notes:
     <comment xml:lang="fa">پروندهٔ نشانه‌گذاری آهنگین abc</comment>
     <comment xml:lang="fi">abc-musiikkinuottikirjoitustiedosto</comment>
     <comment xml:lang="fr">Fichier de notation musicale « ABC »</comment>
+    <comment xml:lang="ga">Comhad nodaireachta ceoil abc</comment>
     <comment xml:lang="gl">ficheiro de notación musical abc</comment>
     <comment xml:lang="he">קובץ סימון מוזיקלי של abc</comment>
     <comment xml:lang="hi">एबीसी संगीत संकेतन फ़ाइल </comment>
@@ -1505,6 +1527,7 @@ Notes:
     <comment xml:lang="fa">بستهٔ فونت ها</comment>
     <comment xml:lang="fi">fonttipaketti</comment>
     <comment xml:lang="fr">Paquet de fontes de caractères</comment>
+    <comment xml:lang="ga">pacáiste clónna</comment>
     <comment xml:lang="gl">paquete de fontes</comment>
     <comment xml:lang="he">חבילת גופנים</comment>
     <comment xml:lang="hi">फोंट पैकेज</comment>
@@ -1565,6 +1588,7 @@ Notes:
     <comment xml:lang="fa">کارساز ویندوز</comment>
     <comment xml:lang="fi">Windows-palvelin</comment>
     <comment xml:lang="fr">Serveur Windows</comment>
+    <comment xml:lang="ga">Freastalaí Windows</comment>
     <comment xml:lang="gl">Servidor de Windows</comment>
     <comment xml:lang="he">שרת Windows</comment>
     <comment xml:lang="hi">विंडोज़ सरवर</comment>
@@ -1623,6 +1647,7 @@ Notes:
     <comment xml:lang="fa">کارگروه ویندوز</comment>
     <comment xml:lang="fi">Windows-työryhmä</comment>
     <comment xml:lang="fr">Groupe de travail Windows</comment>
+    <comment xml:lang="ga">Grúpa oibre Windows</comment>
     <comment xml:lang="gl">Grupo de traballo de Windows</comment>
     <comment xml:lang="he">קבוצת עבודה של Windows</comment>
     <comment xml:lang="hi">विंडोज़ वर्कग्रुप</comment>
@@ -1681,6 +1706,7 @@ Notes:
     <comment xml:lang="fa">نظارت ساختار کی‌دی‌ای</comment>
     <comment xml:lang="fi">KDE:n järjestelmänvalvonta</comment>
     <comment xml:lang="fr">Moniteur système pour KDE</comment>
+    <comment xml:lang="ga">Monatóir an chórais KDE</comment>
     <comment xml:lang="gl">Monitor do sistema de KDE</comment>
     <comment xml:lang="he">צג מערכת של KDE</comment>
     <comment xml:lang="hi">केडीई तंत्र मॉनीटर</comment>
@@ -1740,6 +1766,7 @@ Notes:
     <comment xml:lang="fa">زمینهٔ کی‌دی‌ای</comment>
     <comment xml:lang="fi">KDE-teema</comment>
     <comment xml:lang="fr">Thème de KDE</comment>
+    <comment xml:lang="ga">Téama KDE</comment>
     <comment xml:lang="gl">Tema de KDE</comment>
     <comment xml:lang="he">ערכת עיצוב של KDE</comment>
     <comment xml:lang="hi">केडीई स्वरूपण</comment>
@@ -1800,6 +1827,7 @@ Notes:
     <comment xml:lang="fa">پروژهٔ Quanta</comment>
     <comment xml:lang="fi">Quanta-projekti</comment>
     <comment xml:lang="fr">Projet pour Quanta</comment>
+    <comment xml:lang="ga">Tionscadal Quanta</comment>
     <comment xml:lang="gl">Proxecto de Quanta</comment>
     <comment xml:lang="he">מיזם Quanta</comment>
     <comment xml:lang="hi">क्वांटा परियोजना</comment>
@@ -1858,6 +1886,7 @@ Notes:
     <comment xml:lang="fa">پروندهٔ Kommander</comment>
     <comment xml:lang="fi">Kommander-tiedosto</comment>
     <comment xml:lang="fr">Fichier pour Kommander</comment>
+    <comment xml:lang="ga">Comhad Kommander</comment>
     <comment xml:lang="gl">Ficheiro do Kommander</comment>
     <comment xml:lang="he">קובץ Kommander</comment>
     <comment xml:lang="hi">कमांडर फ़ाइल</comment>
@@ -1917,6 +1946,7 @@ Notes:
     <comment xml:lang="fa">سیب زمینی</comment>
     <comment xml:lang="fi">peruna</comment>
     <comment xml:lang="fr">patate</comment>
+    <comment xml:lang="ga">práta</comment>
     <comment xml:lang="gl">potato</comment>
     <comment xml:lang="he">potato</comment>
     <comment xml:lang="hi">आलू का खेल</comment>
@@ -1975,6 +2005,7 @@ Notes:
     <comment xml:lang="fa">بازی ذخیره شدهٔ کولف</comment>
     <comment xml:lang="fi">Tallennettu Kolf-peli</comment>
     <comment xml:lang="fr">Partie enregistrée pour Kolf </comment>
+    <comment xml:lang="ga">Cluiche sábháilte Kolf</comment>
     <comment xml:lang="gl">Partida de Kolf</comment>
     <comment xml:lang="he">משחק שמור של Kolf</comment>
     <comment xml:lang="hi">कोल्फ का सहेजा गया खेल</comment>
@@ -2036,6 +2067,7 @@ Notes:
     <comment xml:lang="fa">دورهٔ کولف</comment>
     <comment xml:lang="fi">Kolf-rata</comment>
     <comment xml:lang="fr">Parcours pour Kolf</comment>
+    <comment xml:lang="ga">Cúrsa Kolf</comment>
     <comment xml:lang="gl">Campo de Kolf</comment>
     <comment xml:lang="he">מסלול של Kolf</comment>
     <comment xml:lang="hi">कोल्फ कोर्स</comment>
@@ -2099,6 +2131,7 @@ Notes:
     <comment xml:lang="fa">آرشیو اسناد Okular</comment>
     <comment xml:lang="fi">Okular-tiedostoarkisto</comment>
     <comment xml:lang="fr">Archive de documents pour Okular</comment>
+    <comment xml:lang="ga">Cartlann cáipéisí Okular</comment>
     <comment xml:lang="gl">Arquivo de documento de Okular</comment>
     <comment xml:lang="he">ארכיון מסמך של Okular</comment>
     <comment xml:lang="hi">ऑकुलर दस्तावेज़ अभिलेखागार</comment>
@@ -2158,6 +2191,7 @@ Notes:
     <comment xml:lang="fa">تصویر کابری</comment>
     <comment xml:lang="fi">Cabri-kuvio</comment>
     <comment xml:lang="fr">Figure pour Cabri</comment>
+    <comment xml:lang="ga">Léaráid Cabri</comment>
     <comment xml:lang="gl">Figura de Cabri</comment>
     <comment xml:lang="he">דמות של Cabri</comment>
     <comment xml:lang="hi">केबरी आकृति</comment>
@@ -2220,6 +2254,7 @@ Notes:
     <comment xml:lang="fa">تصویر دکتر جئو</comment>
     <comment xml:lang="fi">Dr. Geo -kuvio</comment>
     <comment xml:lang="fr">Figure pour « Dr. Géo »</comment>
+    <comment xml:lang="ga">Léaráid Dr. Geo</comment>
     <comment xml:lang="gl">Figura de Dr. Geo</comment>
     <comment xml:lang="he">דמות של Dr. Geo</comment>
     <comment xml:lang="hi">डॉ. जिओ आकृति</comment>
@@ -2281,6 +2316,7 @@ Notes:
     <comment xml:lang="fa">تصویر کی‌جئو</comment>
     <comment xml:lang="fi">KGeo-kuvio</comment>
     <comment xml:lang="fr">Figure pour KGeo</comment>
+    <comment xml:lang="ga">Léaráid KGeo</comment>
     <comment xml:lang="gl">Figura de KGeo</comment>
     <comment xml:lang="he">דמות של KGeo</comment>
     <comment xml:lang="hi">के-जिओ आकृति</comment>
@@ -2339,6 +2375,7 @@ Notes:
     <comment xml:lang="fa">تصویر کیگ</comment>
     <comment xml:lang="fi">Kig-kuvio</comment>
     <comment xml:lang="fr">Dessin pour Kig</comment>
+    <comment xml:lang="ga">Léaráid Kig</comment>
     <comment xml:lang="gl">Figura de Kig</comment>
     <comment xml:lang="he">דמות של Kig</comment>
     <comment xml:lang="hi">केआइजी आकृति</comment>
@@ -2398,6 +2435,7 @@ Notes:
     <comment xml:lang="fa">سند کی‌سج</comment>
     <comment xml:lang="fi">KSeg-tiedosto</comment>
     <comment xml:lang="fr">Document pour KSeg</comment>
+    <comment xml:lang="ga">Cáipéis KSeg</comment>
     <comment xml:lang="gl">Documento de KSeg</comment>
     <comment xml:lang="he">מסמך של KSeg</comment>
     <comment xml:lang="hi">के-सेग दस्तावेज़</comment>
@@ -2457,6 +2495,7 @@ Notes:
     <comment xml:lang="fa">سند یادگیری واژگان</comment>
     <comment xml:lang="fi">sanavaraston koulutustiedosto</comment>
     <comment xml:lang="fr">Document d'apprentissage du vocabulaire</comment>
+    <comment xml:lang="ga">cáipéis traenálaí stóir focal</comment>
     <comment xml:lang="gl">documento de práctica de vocabulario</comment>
     <comment xml:lang="he">מסמך אימון אוצר מילים</comment>
     <comment xml:lang="hi">शब्दावली प्रशिक्षक दस्तावेज़</comment>
@@ -2514,6 +2553,7 @@ Notes:
     <comment xml:lang="fa">پروندهٔ کی‌ام‌پلات</comment>
     <comment xml:lang="fi">KmPlot-tiedosto</comment>
     <comment xml:lang="fr">Fichier pour KmPlot</comment>
+    <comment xml:lang="ga">Comhad KmPlot</comment>
     <comment xml:lang="gl">Ficheiro de KmPlot</comment>
     <comment xml:lang="he">קובץ KmPlot</comment>
     <comment xml:lang="hi">के-एम-प्लॉट फ़ाइल</comment>
@@ -2572,6 +2612,7 @@ Notes:
     <comment xml:lang="fa">واژگان کی‌وردکوییز</comment>
     <comment xml:lang="fi">KWordQuiz-sanasto</comment>
     <comment xml:lang="fr">Vocabulaire pour KWordQuiz</comment>
+    <comment xml:lang="ga">Stór Focal KWordQuiz</comment>
     <comment xml:lang="gl">Vocabulario de KWordQuiz</comment>
     <comment xml:lang="he">אוצר מילים של KWordQuiz</comment>
     <comment xml:lang="hi">के-वर्ड-क्विज शब्दावली</comment>
@@ -2630,6 +2671,7 @@ Notes:
     <comment xml:lang="fa">زبالهٔ نمایهٔ Cachegrind/Callgrind</comment>
     <comment xml:lang="fi">Cachegrind/Callgrind-profiilivedos</comment>
     <comment xml:lang="fr">Vidage de profil pour Cachegrind / Callgrind</comment>
+    <comment xml:lang="ga">Próifíl dhumpáilte Cachegrind/Callgrind</comment>
     <comment xml:lang="gl">Envorcado de perfil de Cachegrind/Callgrind</comment>
     <comment xml:lang="he">היטל פרופיל Cachegrind/Callgrind</comment>
     <comment xml:lang="hi">कैशे/कॉलग्राइंड प्रोफ़ाइल डंप</comment>
@@ -2688,6 +2730,7 @@ Notes:
     <comment xml:lang="fa">پروندهٔ مدل‌ساز یوام‌ال آمبرلو</comment>
     <comment xml:lang="fi">Umbrello UML Modeller -tiedosto</comment>
     <comment xml:lang="fr">Fichier de modélisation « UML » pour Umbrello</comment>
+    <comment xml:lang="ga">Samhaltóir UML Umbrello</comment>
     <comment xml:lang="gl">Ficheiro de modelo UML de Umbrello</comment>
     <comment xml:lang="he">קובץ ממדל UML של Umbrello</comment>
     <comment xml:lang="hi"> उंब्रेल्लो यूएमएल मोडलर फ़ाइल</comment>
@@ -2748,6 +2791,7 @@ Notes:
     <comment xml:lang="fa">پیوند ویندوز</comment>
     <comment xml:lang="fi">Windows-linkki</comment>
     <comment xml:lang="fr">Lien pour Windows</comment>
+    <comment xml:lang="ga">Nasc Windows</comment>
     <comment xml:lang="gl">Ligazón de Windows</comment>
     <comment xml:lang="he">קישור ב־Windows</comment>
     <comment xml:lang="hi">विंडोज़ लिंक</comment>
@@ -2809,6 +2853,7 @@ Notes:
     <comment xml:lang="fa">فهرست بارگیری KGet</comment>
     <comment xml:lang="fi">KGet-latausluettelo</comment>
     <comment xml:lang="fr">Liste de téléchargements pour KGet</comment>
+    <comment xml:lang="ga">Liosta íosluchtuithe KGet</comment>
     <comment xml:lang="gl">Lista de descargas de KGet</comment>
     <comment xml:lang="he">רשימת הורדות של KGet</comment>
     <comment xml:lang="hi">के-गेट डाउनलोड सूची</comment>
@@ -2867,6 +2912,7 @@ Notes:
     <comment xml:lang="fa">بایگانی شکلک‌های کوپت</comment>
     <comment xml:lang="fi">Kopete-hymiöarkisto</comment>
     <comment xml:lang="fr">Archive d'émoticônes pour Kopete</comment>
+    <comment xml:lang="ga">Cartlann straoiseog Kopete</comment>
     <comment xml:lang="gl">Arquivo de emoticonas de Kopete</comment>
     <comment xml:lang="he">ארכיון פרצופונים של Kopete</comment>
     <comment xml:lang="hi">कोपिट इमोटिकॉन्स अभिलेखागार</comment>
@@ -2924,6 +2970,7 @@ Notes:
     <comment xml:lang="fa">آشنای آی‌سی‌کیو</comment>
     <comment xml:lang="fi">ICQ-yhteystieto</comment>
     <comment xml:lang="fr">Contact « ICQ »</comment>
+    <comment xml:lang="ga">Teagmháil ICQ</comment>
     <comment xml:lang="gl">Contacto do ICQ</comment>
     <comment xml:lang="he">איש קשר של ICQ</comment>
     <comment xml:lang="hi">आइ सी क्यू सम्पर्क</comment>
@@ -2984,6 +3031,7 @@ Notes:
     <comment xml:lang="fa">قالب رسانه‌ای مایکروسافت</comment>
     <comment xml:lang="fi">Microsoft Media -muoto</comment>
     <comment xml:lang="fr">Format « Microsoft Média »</comment>
+    <comment xml:lang="ga">Formáid Mheán Microsoft</comment>
     <comment xml:lang="gl">Formato de medios de Microsoft</comment>
     <comment xml:lang="he">תסדיר מדיה של Microsoft</comment>
     <comment xml:lang="hi">माइक्रोसॉफ़्ट मीडिया प्रारूप</comment>
@@ -3048,6 +3096,7 @@ Notes:
     <comment xml:lang="fa">سند آردی‌اف ترتل</comment>
     <comment xml:lang="fi">Turtle RDF -tiedosto</comment>
     <comment xml:lang="fr">Document « RDF » pour Turtle</comment>
+    <comment xml:lang="ga">Cáipéis RDF Turtle</comment>
     <comment xml:lang="gl">Documento RDF de Turtle</comment>
     <comment xml:lang="he">מסמך RDF של Turtle</comment>
     <comment xml:lang="hi">टर्टल आरडीएफ दस्तावेज़</comment>
@@ -3105,6 +3154,7 @@ Notes:
     <comment xml:lang="fa">تصویر پیک سافت‌ایمیج</comment>
     <comment xml:lang="fi">Softimage PIC -kuva</comment>
     <comment xml:lang="fr">Image « PIC » de Softimage</comment>
+    <comment xml:lang="ga">Íomhá PIC Softimage</comment>
     <comment xml:lang="gl">Imaxe PIC de Softimage</comment>
     <comment xml:lang="he">תמונת PIC של Softimage</comment>
     <comment xml:lang="hi">सॉफ्टइमेज पीआइसी छवि</comment>
@@ -3165,6 +3215,7 @@ Notes:
     <comment xml:lang="fa">گزینه‌های پیکربندی KConfigXT</comment>
     <comment xml:lang="fi">KConfigXT-asetusvalinnat</comment>
     <comment xml:lang="fr">Options de configuration pour KConfigXT</comment>
+    <comment xml:lang="ga">KConfigXT Roghanna Cumrú</comment>
     <comment xml:lang="gl">Opcións de configuración de KConfigXT</comment>
     <comment xml:lang="he">אפשרויות הגדרה של KConfigXT</comment>
     <comment xml:lang="hi">के-कोंफिग-एक्सटी विन्यास विकल्प</comment>
@@ -3228,6 +3279,7 @@ Notes:
     <comment xml:lang="fa">گزینه‌های تولید کد KConfigXT</comment>
     <comment xml:lang="fi">KConfigXT-koodinluontivalinnat</comment>
     <comment xml:lang="fr">Options de génération de code pour KConfigXT</comment>
+    <comment xml:lang="ga">KConfigXT Roghanna Cód Giniúintí</comment>
     <comment xml:lang="gl">Opcións de xeración de código de KConfigXT</comment>
     <comment xml:lang="he">אפשרויות חילול קוד של KConfigXT</comment>
     <comment xml:lang="hi">के-कोंफिग-एक्सटी कोड उत्पादन विकल्प</comment>
@@ -3287,6 +3339,7 @@ Notes:
     <comment xml:lang="fa">اعلام KXMLGUI UI</comment>
     <comment xml:lang="fi">KXMLGUI-käyttöliittymäasettelu</comment>
     <comment xml:lang="fr">Déclaration d'interface « KXMLGUI »</comment>
+    <comment xml:lang="ga">KXMLGUI UI Dearbhaithe</comment>
     <comment xml:lang="gl">Declaración de interface gráfica de KXMLGUI</comment>
     <comment xml:lang="he">הצהרת ממשק משתמש של KXMLGUI</comment>
     <comment xml:lang="hi">के-एक्सएमएल-जीयूआइ घोषणापत्र</comment>
@@ -3350,6 +3403,7 @@ Notes:
     <comment xml:lang="fa">اعلام Knotification</comment>
     <comment xml:lang="fi">KNotification-deklaraatio</comment>
     <comment xml:lang="fr">Déclaration de KNotification</comment>
+    <comment xml:lang="ga">KNotification Dearbhaithe</comment>
     <comment xml:lang="gl">Declaración de KNotification</comment>
     <comment xml:lang="he">הצהרה של KNotification</comment>
     <comment xml:lang="hi">के-नोटिफिकेशन घोषणापत्र</comment>
@@ -3409,6 +3463,7 @@ Notes:
     <comment xml:lang="fa">گزارش KCrash</comment>
     <comment xml:lang="fi">KCrash-raportti</comment>
     <comment xml:lang="fr">Rapport de KCrash</comment>
+    <comment xml:lang="ga">KCrash Tuairisc</comment>
     <comment xml:lang="gl">Informe de KCrash</comment>
     <comment xml:lang="he">דוח של KCrash</comment>
     <comment xml:lang="hi">के-क्रॅश रिपोर्ट</comment>
