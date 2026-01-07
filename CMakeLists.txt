@@ -71,6 +71,11 @@ else()
     set(HAVE_SYS_INOTIFY_H FALSE)
 endif()
 
+if (CMAKE_SYSTEM_NAME MATCHES "Linux")
+    find_package(LibMount REQUIRED)
+    set(HAVE_LIB_MOUNT ${LibMount_FOUND})
+endif()
+
 set(HAVE_PROCSTAT FALSE)
 string(REGEX MATCH "[Bb][Ss][Dd]" BSDLIKE ${CMAKE_SYSTEM_NAME})
 if (BSDLIKE)

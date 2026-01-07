@@ -272,6 +272,10 @@ if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
     target_link_libraries(KF6CoreAddons PRIVATE kvm)
 endif()
 
+if(HAVE_LIB_MOUNT)
+  target_link_libraries(KF6CoreAddons PRIVATE LibMount::LibMount)
+endif()
+
 if (HAVE_PROCSTAT)
     target_link_libraries(KF6CoreAddons PRIVATE Procstat::Procstat)
 endif()
