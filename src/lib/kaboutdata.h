@@ -765,6 +765,27 @@ public:
      */
     static void setApplicationData(const KAboutData &aboutData);
 
+    /*!
+     * Create about data from an AppStream file.
+     *
+     * This fills all fields of the returned KAboutData object that can be
+     * found in the the given AppStream file, including (translated) name,
+     * license, URLs, etc. Note that most importantly the version number
+     * is not included in this.
+     *
+     * \a appStreamFileName The AppStream file can be specified in one of three ways:
+     * \list
+     * \li As an absolute file path.
+     * \li As an application id. The AppStream file is then searched in the default
+     *     install locations.
+     * \li As an empty string, which defaults to the application id of the
+     *     current QGuiApplication instance.
+     * \endlist
+     *
+     * \since 6.23
+     */
+    static KAboutData fromAppStream(const QString &appStreamFileName = {});
+
 public:
     // KF6: remove constructor that includes catalogName, and put default
     //      values back in for shortDescription and licenseType

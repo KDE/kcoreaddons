@@ -13,6 +13,9 @@
 #include <QObject>
 #include <QTest>
 #include <QTextStream>
+
+using namespace Qt::Literals;
+
 #ifndef Q_OS_WIN
 void initLocale()
 {
@@ -40,6 +43,7 @@ private Q_SLOTS:
     void testLicenseOrLater();
 
     void testProductName();
+    void testAppStream();
 };
 
 static const char AppName[] = "app";
@@ -406,6 +410,20 @@ void KAboutDataTest::testProductName()
     aboutData.setProductName("frameworks-kcoreaddons/aboutdata");
     QCOMPARE(aboutData.productName(), QString::fromLatin1("frameworks-kcoreaddons/aboutdata"));
     QCOMPARE(aboutData.internalProductName(), "frameworks-kcoreaddons/aboutdata");
+}
+
+void KAboutDataTest::testAppStream()
+{
+    auto aboutData = KAboutData::fromAppStream(QFINDTESTDATA("data/org.kde.coreaddons.test-app.metainfo.xml"_L1));
+    QCOMPARE(aboutData.organizationDomain(), "kde.org"_L1);
+    QCOMPARE(aboutData.licenses().size(), 1);
+    QCOMPARE(aboutData.licenses()[0].key(), KAboutLicense::LGPL_V2);
+    QCOMPARE(aboutData.licenses()[0].name(), "LGPL v2"_L1);
+    QCOMPARE(aboutData.licenses()[0].spdx(), "LGPL-2.0+"_L1);
+    QCOMPARE(aboutData.homepage(), "https://apps.kde.org/coreaddons-test-app"_L1);
+    QCOMPARE(aboutData.bugAddress(), "https://bugs.kde.org/enter_bug.cgi?format=guided&product=frameworks-coreaddons"_L1);
+    QCOMPARE(aboutData.displayName(), "Test App (untranslated)"_L1);
+    QCOMPARE(aboutData.shortDescription(), "Test App Description (untranslated)"_L1);
 }
 
 QTEST_MAIN(KAboutDataTest)

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ SPDX-FileCopyrightText: Volker Krause <vkrause@kde.org>
+ SPDX-License-Identifier: CC0-1.0
+-->
+<component type="desktop-application">
+  <id>org.kde.coreaddons.test-app</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LGPL-2.0-or-later</project_license>
+  <content_rating type="oars-1.1"/>
+  <developer id="kde.org">
+    <name translate="no">KDE</name>
+  </developer>
+  <name>Test App (untranslated)</name>
+  <name xml:lang="de">Test App (German)</name>
+  <name xml:lang="en-GB">Test App (British)</name>
+  <summary>Test App Description (untranslated)</summary>
+  <summary xml:lang="de">Test App Description (German)</summary>
+  <summary xml:lang="en-GB">Test App Description (British)</summary>
+  <categories>
+    <category>Office</category>
+    <category>Utility</category>
+  </categories>
+  <url type="homepage">https://apps.kde.org/coreaddons-test-app</url>
+  <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=frameworks-coreaddons</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=itinerary&amp;source=appdata</url>
+  <url type="vcs-browser">https://invent.kde.org/frameworks/kcoreaddons</url>
+  <project_group>KDE</project_group>
+  <provides>
+    <binary>coreaddons-test-app</binary>
+  </provides>
+  <launchable type="desktop-id">org.kde.coreaddons.test-app.desktop</launchable>
+  <releases>
+    <release version="25.12.1" date="2026-01-08">
+      <description>
+        <ul>
+          <li>Patch release change 1.</li>
+          <li>Patch release change 2.</li>
+        </ul>
+      </description>
+    </release>
+    <release version="25.12.0" date="2025-12-11">
+      <description>
+        <ul>
+          <li>Feature release change 1.</li>
+          <li>Feature release change 2.</li>
+          <li>Feature release change 3.</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+  <custom>
+    <value key="KDE::matrix">#frameworks-devel:kde.org</value>
+  </custom>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </recommends>
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+</component>
