@@ -1037,7 +1037,7 @@ msgstr "No s'ha pogut trobar l'executable «lsof» en la PATH:"
 #, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "No s'ha pogut executar «lsof». Codi d'error %1"
+msgstr "Ha fallat mentre s'executava «lsof». Codi d'error %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
