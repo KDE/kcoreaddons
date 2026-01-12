@@ -183,9 +183,8 @@ KFileSystemType::Type probeFuseBlkType(const QByteArray &path)
 static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 {
 #if HAVE_LIB_MOUNT
-    QLatin1String fstype;
-
     if (struct libmnt_table *table = mnt_new_table()) {
+        QLatin1String fstype;
         if (mnt_table_parse_mtab(table, nullptr) == 0) {
             struct libmnt_fs *fs = mnt_table_find_mountpoint(table, path.constData(), MNT_ITER_BACKWARD);
             if (fs) {
