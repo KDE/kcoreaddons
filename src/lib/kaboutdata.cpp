@@ -18,6 +18,7 @@
 #include <QCommandLineParser>
 #include <QCoreApplication>
 #include <QFile>
+#include <QFileInfo>
 #include <QHash>
 #include <QJsonObject>
 #include <QList>
@@ -25,6 +26,7 @@
 #include <QSharedData>
 #include <QStandardPaths>
 #include <QTextStream>
+#include <QXmlStreamReader>
 
 #include <algorithm>
 
@@ -1291,6 +1293,110 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
     if (foundArgument) {
         ::exit(EXIT_SUCCESS);
     }
+}
+
+[[nodiscard]] static QString resolveLanguage(const std::unordered_map<QString, QString> &value)
+{
+    const auto langs = QLocale().uiLanguages();
+    for (auto langIt = langs.begin(); langIt != langs.end(); ++langIt) {
+        auto it = value.find(*langIt);
+        if (it != value.end()) {
+            return (*it).second;
+        }
+
+        const auto idx = (*langIt).indexOf('-'_L1);
+        if (idx <= 0) {
+            continue;
+        }
+        const auto genericLang = QStringView(*langIt).left(idx);
+        if (std::next(langIt) != langs.end() && (*std::next(langIt)).startsWith(genericLang)) {
+            continue;
+        }
+        it = value.find(genericLang.toString());
+        if (it != value.end()) {
+            return (*it).second;
+        }
+    }
+
+    const auto it = value.find(QString());
+    return it != value.end() ? (*it).second : QString();
+}
+
+KAboutData KAboutData::fromAppStream(const QString &appStreamFileName)
+{
+    KAboutData *aboutData = s_registry->m_appData;
+    if (!aboutData) {
+        aboutData = new KAboutData(QCoreApplication::applicationName(), QString(), QString());
+        aboutData->setBugAddress(QByteArray());
+        s_registry->m_appData = aboutData;
+    }
+
+    QFile appStreamFile;
+    if (QFileInfo(appStreamFileName).isAbsolute()) {
+        appStreamFile.setFileName(appStreamFileName);
+    } else if (!appStreamFileName.isEmpty()) {
+        const auto p = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "metainfo/"_L1 + appStreamFileName, QStandardPaths::LocateFile);
+        appStreamFile.setFileName(p);
+    }
+
+    if (appStreamFile.fileName().isEmpty()) {
+        const auto appId = appStreamFileName.isEmpty() ? QCoreApplication::instance()->property("desktopFileName").toString() : appStreamFileName;
+        for (const auto &variant : {"metainfo"_L1, "appdata"_L1}) {
+            const auto p =
+                QStandardPaths::locate(QStandardPaths::GenericDataLocation, "metainfo/"_L1 + appId + '.'_L1 + variant + ".xml"_L1, QStandardPaths::LocateFile);
+            if (!p.isEmpty()) {
+                appStreamFile.setFileName(p);
+                break;
+            }
+        }
+    }
+
+    if (appStreamFile.fileName().isEmpty() || !appStreamFile.open(QFile::ReadOnly)) {
+        qCWarning(KABOUTDATA) << "Failed to open appStreamFile" << appStreamFile.fileName() << appStreamFile.errorString();
+        return *aboutData;
+    }
+
+    std::unordered_map<QString, QString> appName, appSummary;
+    QXmlStreamReader reader(&appStreamFile);
+    while (!reader.atEnd() && !reader.hasError()) {
+        const auto token = reader.readNext();
+        if (token != QXmlStreamReader::StartElement) {
+            continue;
+        }
+
+        if (reader.name() == "component"_L1) {
+            // recurse into
+        } else if (reader.name() == "id"_L1) {
+            aboutData->setDesktopFileName(reader.readElementText());
+        } else if (reader.name() == "project_license"_L1) {
+            aboutData->addLicense(KAboutLicense::byKeyword(reader.readElementText()));
+        } else if (reader.name() == "developer"_L1) {
+            aboutData->setOrganizationDomain(reader.attributes().value("id"_L1).toUtf8());
+            // where to put developer-name?
+            reader.skipCurrentElement();
+        } else if (reader.name() == "name"_L1) {
+            const auto lang = reader.attributes().value("http://www.w3.org/XML/1998/namespace"_L1, "lang"_L1).toString();
+            appName[lang] = reader.readElementText();
+        } else if (reader.name() == "summary"_L1) {
+            const auto lang = reader.attributes().value("http://www.w3.org/XML/1998/namespace"_L1, "lang"_L1).toString();
+            appSummary[lang] = reader.readElementText();
+        } else if (reader.name() == "url"_L1) {
+            const auto type = reader.attributes().value("type"_L1);
+            if (type == "homepage"_L1) {
+                aboutData->setHomepage(reader.readElementText());
+            } else if (type == "bugtracker"_L1) {
+                aboutData->setBugAddress(reader.readElementText().toUtf8());
+            } else {
+                reader.skipCurrentElement();
+            }
+        } else {
+            reader.skipCurrentElement();
+        }
+    }
+
+    aboutData->setDisplayName(resolveLanguage(appName));
+    aboutData->setShortDescription(resolveLanguage(appSummary));
+    return *aboutData;
 }
 
 std::unique_ptr<KAboutDataListener> KAboutDataListener::s_theListener = nullptr;
