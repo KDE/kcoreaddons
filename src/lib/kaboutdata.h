@@ -1160,6 +1160,16 @@ public:
     KAboutData &setLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction);
 
     /*!
+     * Sets the license.
+     *
+     * \a license a license object, obtained e.g. via KAboutLicense::byKeyword().
+     * \sa addLicense, addLicenseText, setLicenseText, setLicenseTextFile
+     *
+     * \since 6.23
+     */
+    KAboutData &setLicense(KAboutLicense &&license);
+
+    /*!
      * Adds a license identifier.
      *
      * If there is only one unknown license set, e.g. by using the default
@@ -1186,6 +1196,16 @@ public:
      * \since 5.37
      */
     KAboutData &addLicense(KAboutLicense::LicenseKey licenseKey, KAboutLicense::VersionRestriction versionRestriction);
+
+    /*!
+     * Adds a license.
+     *
+     * \a license a license object, obtained e.g. via KAboutLicense::byKeyword().
+     * \sa addLicenseText, setLicense, setLicenseText, setLicenseTextFile
+     *
+     * \since 6.23
+     */
+    KAboutData &addLicense(KAboutLicense &&license);
 
     /*!
      * Defines the copyright statement to show when displaying the license.

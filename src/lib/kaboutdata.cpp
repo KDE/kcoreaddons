@@ -801,6 +801,13 @@ KAboutData &KAboutData::setLicense(KAboutLicense::LicenseKey licenseKey, KAboutL
     return *this;
 }
 
+KAboutData &KAboutData::setLicense(KAboutLicense &&license)
+{
+    license.d->_aboutData = this;
+    d->_licenseList[0] = std::move(license);
+    return *this;
+}
+
 KAboutData &KAboutData::addLicense(KAboutLicense::LicenseKey licenseKey)
 {
     return addLicense(licenseKey, KAboutLicense::OnlyThisVersion);
@@ -815,6 +822,15 @@ KAboutData &KAboutData::addLicense(KAboutLicense::LicenseKey licenseKey, KAboutL
     } else {
         d->_licenseList.append(KAboutLicense(licenseKey, versionRestriction, this));
     }
+    return *this;
+}
+
+KAboutData &KAboutData::addLicense(KAboutLicense &&license)
+{
+    if (d->_licenseList.size() == 1 && d->_licenseList[0].key() == KAboutLicense::Unknown) {
+        return setLicense(std::move(license));
+    }
+    d->_licenseList.push_back(std::move(license));
     return *this;
 }
 
