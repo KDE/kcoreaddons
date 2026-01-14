@@ -588,6 +588,72 @@ private:
 Q_DECLARE_TYPEINFO(KAboutComponent, Q_RELOCATABLE_TYPE);
 
 /*!
+ * \class KAboutRelease
+ * \inmodule KCoreAddons
+ *
+ * \brief An individual release note of a program or plugin.
+ *
+ * This represents an AppStream release note of an individual version.
+ *
+ * \see https://www.freedesktop.org/software/appstream/docs/sect-Metadata-Releases.html
+ *
+ * \since 6.23
+ */
+class KCOREADDONS_EXPORT KAboutRelease
+{
+    Q_GADGET
+    /*!
+     * \property KAboutRelease::version
+     */
+    Q_PROPERTY(QString version READ version)
+    /*!
+     * \property KAboutRelease::date
+     */
+    Q_PROPERTY(QDate date READ date)
+    /*!
+     * \property KAboutRelease::description
+     */
+    Q_PROPERTY(QString description READ description)
+    /*!
+     * \property KAboutRelease::url
+     */
+    Q_PROPERTY(QUrl url READ url)
+public:
+    explicit KAboutRelease();
+    explicit KAboutRelease(const QString &version, const QDate &date, const QString &description, const QUrl &url);
+    KAboutRelease(const KAboutRelease &);
+    KAboutRelease(KAboutRelease &&) noexcept;
+    ~KAboutRelease();
+    KAboutRelease &operator=(const KAboutRelease &);
+    KAboutRelease &operator=(KAboutRelease &&) noexcept;
+
+    /*!
+     * Retursn the version this release note refers to.
+     */
+    [[nodiscard]] QString version() const;
+    /*!
+     * Returns the date on which this version was released.
+     */
+    [[nodiscard]] QDate date() const;
+    /*!
+     * Returns the (translated) release notes.
+     *
+     * This is provided as restricted rich text, following what the description tag
+     * in AppStream allows. This is suitable for consumption by Qt rich text labels.
+     */
+    [[nodiscard]] QString description() const;
+    /*!
+     * Returns a URL to a website with more information about the release.
+     */
+    [[nodiscard]] QUrl url() const;
+
+private:
+    QSharedDataPointer<class KAboutReleasePrivate> d;
+};
+
+Q_DECLARE_TYPEINFO(KAboutRelease, Q_RELOCATABLE_TYPE);
+
+/*!
  * \class KAboutData
  * \inmodule KCoreAddons
  *
@@ -732,6 +798,12 @@ class KCOREADDONS_EXPORT KAboutData
      * \property KAboutData::desktopFileName
      */
     Q_PROPERTY(QString desktopFileName READ desktopFileName CONSTANT)
+
+    /*!
+     * \property KAboutData::releases
+     */
+    Q_PROPERTY(QList<KAboutRelease> releases READ releases)
+
 public:
     /*!
      * Returns the KAboutData for the application.
@@ -1518,6 +1590,19 @@ public:
      * \since 5.16
      **/
     QString desktopFileName() const;
+
+    /*!
+     * Adds a release note for this application.
+     * \sa releases()
+     * \since 6.23
+     */
+    KAboutData &addRelease(KAboutRelease &&release);
+    /*!
+     * Returns all release notes for this application.
+     * \sa addRelease()
+     * \since 6.23
+     */
+    [[nodiscard]] QList<KAboutRelease> releases() const;
 
 private:
     friend void KCrash::defaultCrashHandler(int sig);

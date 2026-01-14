@@ -533,6 +533,57 @@ KAboutLicense KAboutComponent::license() const
 
 KAboutComponent &KAboutComponent::operator=(const KAboutComponent &other) = default;
 
+class KAboutReleasePrivate : public QSharedData
+{
+public:
+    QString m_version;
+    QDate m_date;
+    QString m_description;
+    QUrl m_url;
+};
+
+KAboutRelease::KAboutRelease()
+    : d(new KAboutReleasePrivate)
+{
+}
+
+KAboutRelease::KAboutRelease(const QString &version, const QDate &date, const QString &description, const QUrl &url)
+    : d(new KAboutReleasePrivate)
+{
+    d->m_version = version;
+    d->m_date = date;
+    d->m_description = description;
+    d->m_url = url;
+}
+
+KAboutRelease::KAboutRelease(const KAboutRelease &) = default;
+KAboutRelease::KAboutRelease(KAboutRelease &&) noexcept = default;
+
+KAboutRelease::~KAboutRelease() = default;
+
+KAboutRelease &KAboutRelease::operator=(const KAboutRelease &) = default;
+KAboutRelease &KAboutRelease::operator=(KAboutRelease &&) noexcept = default;
+
+QString KAboutRelease::version() const
+{
+    return d->m_version;
+}
+
+QDate KAboutRelease::date() const
+{
+    return d->m_date;
+}
+
+QString KAboutRelease::description() const
+{
+    return d->m_description;
+}
+
+QUrl KAboutRelease::url() const
+{
+    return d->m_url;
+}
+
 class KAboutDataPrivate
 {
 public:
@@ -551,6 +602,7 @@ public:
     QList<KAboutPerson> _translatorList;
     QList<KAboutComponent> _componentList;
     QList<KAboutLicense> _licenseList;
+    QList<KAboutRelease> _releaseList;
     QVariant programLogo;
     QString customAuthorPlainText, customAuthorRichText;
     bool customAuthorTextEnabled;
@@ -1097,6 +1149,17 @@ QString KAboutData::desktopFileName() const
 
     return hostComponents.join(dotChar);
 #endif
+}
+
+KAboutData &KAboutData::addRelease(KAboutRelease &&release)
+{
+    d->_releaseList.push_back(std::move(release));
+    return *this;
+}
+
+QList<KAboutRelease> KAboutData::releases() const
+{
+    return d->_releaseList;
 }
 
 class KAboutDataRegistry
