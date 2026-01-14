@@ -35,19 +35,28 @@
       <description>
         <ul>
           <li>Patch release change 1.</li>
-          <li>Patch release change 2.</li>
+          <li>Patch release change 2 &amp; 3.</li>
         </ul>
       </description>
     </release>
     <release version="25.12.0" date="2025-12-11">
       <description>
+        <p>&quot;Cool&quot; (untranslated) Features:</p>
+        <p xml:lang="en-GB">&quot;Cool&quot; (British) Features:</p>
+        <p xml:lang="de">&quot;Cool&quot; (German) Features:</p>
         <ul>
-          <li>Feature release change 1.</li>
-          <li>Feature release change 2.</li>
+          <li><em>Important</em> untranslated feature release change 1.</li>
+          <li xml:lang="en-GB"><em>Important</em> British feature release change 1.</li>
+          <li xml:lang="de"><em>Important</em> German feature release change 1.</li>
+          <li>Not so <em>important</em> untranslated feature release change 2.</li>
+          <li xml:lang="en-GB">Not so <em>important</em> British feature release change 2.</li>
+          <li xml:lang="de">Not so <em>important</em> German feature release change 2.</li>
           <li>Feature release change 3.</li>
         </ul>
       </description>
+      <url>https://kde.org/announcements/gear/25.12.0/</url>
     </release>
+    <release version="24.08.0" date="2024-08-01"/>
   </releases>
   <custom>
     <value key="KDE::matrix">#frameworks-devel:kde.org</value>

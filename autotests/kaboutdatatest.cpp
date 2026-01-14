@@ -424,6 +424,18 @@ void KAboutDataTest::testAppStream()
     QCOMPARE(aboutData.bugAddress(), "https://bugs.kde.org/enter_bug.cgi?format=guided&product=frameworks-coreaddons"_L1);
     QCOMPARE(aboutData.displayName(), "Test App (untranslated)"_L1);
     QCOMPARE(aboutData.shortDescription(), "Test App Description (untranslated)"_L1);
+
+    QCOMPARE(aboutData.releases().size(), 2);
+    QCOMPARE(aboutData.releases()[0].version(), "25.12.1"_L1);
+    QCOMPARE(aboutData.releases()[0].date(), QDate(2026, 1, 8));
+    QCOMPARE(aboutData.releases()[0].description(), "<ul><li>Patch release change 1.</li><li>Patch release change 2 &amp; 3.</li></ul>"_L1);
+    QVERIFY(aboutData.releases()[0].url().isEmpty());
+    QCOMPARE(aboutData.releases()[1].version(), "25.12.0"_L1);
+    QCOMPARE(aboutData.releases()[1].date(), QDate(2025, 12, 11));
+    QCOMPARE(aboutData.releases()[1].url(), QUrl("https://kde.org/announcements/gear/25.12.0/"_L1));
+    QCOMPARE(
+        aboutData.releases()[1].description(),
+        "<p>&quot;Cool&quot; (untranslated) Features:</p><ul><li><em>Important</em> untranslated feature release change 1.</li><li>Not so <em>important</em> untranslated feature release change 2.</li><li>Feature release change 3.</li></ul>"_L1);
 }
 
 QTEST_MAIN(KAboutDataTest)

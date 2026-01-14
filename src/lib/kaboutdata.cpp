@@ -1385,6 +1385,71 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
     return it != value.end() ? (*it).second : QString();
 }
 
+// built-in entities that QXmlStreamReader resolves and that we need to re-apply to rich text content
+struct {
+    const unsigned char c;
+    const char entity[5];
+} static constexpr const entity_map[] = {
+    {'<', "lt"},
+    {'>', "gt"},
+    {'&', "amp"},
+    {'\'', "apos"},
+    {'"', "quot"},
+};
+
+[[nodiscard]] static QString quoteEntities(QStringView s)
+{
+    QString out;
+    out.reserve(s.size());
+    for (const auto c : s) {
+        const auto it = std::ranges::find_if(entity_map, [c](const auto &m) {
+            return m.c == c.cell() && c.row() == 0;
+        });
+        if (it != std::end(entity_map)) {
+            out += '&'_L1 + QLatin1StringView((*it).entity) + ';'_L1;
+        } else {
+            out.push_back(c);
+        }
+    }
+    return out;
+}
+
+[[nodiscard]] static QString readAppStreamDescription(QXmlStreamReader &reader)
+{
+    QString desc;
+
+    QString elemName;
+    std::unordered_map<QString, QString> translationBuffer;
+
+    while (!reader.atEnd() && !reader.hasError()) {
+        const auto token = reader.readNext();
+        if (token == QXmlStreamReader::EndElement) {
+            break;
+        }
+        if (token == QXmlStreamReader::StartElement) {
+            const auto lang = reader.attributes().value("http://www.w3.org/XML/1998/namespace"_L1, "lang"_L1).toString();
+            if ((lang.isEmpty() || elemName != reader.name()) && !translationBuffer.empty()) {
+                desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
+                translationBuffer.clear();
+            }
+            elemName = reader.name().toString();
+            translationBuffer[lang] = readAppStreamDescription(reader);
+        }
+        if (token == QXmlStreamReader::Characters && !reader.isWhitespace()) {
+            if (!translationBuffer.empty()) {
+                desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
+                translationBuffer.clear();
+            }
+            desc += quoteEntities(reader.text());
+        }
+    }
+    if (!translationBuffer.empty()) {
+        desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
+    }
+
+    return desc.trimmed();
+}
+
 KAboutData KAboutData::fromAppStream(const QString &appStreamFileName)
 {
     KAboutData *aboutData = s_registry->m_appData;
@@ -1427,7 +1492,7 @@ KAboutData KAboutData::fromAppStream(const QString &appStreamFileName)
             continue;
         }
 
-        if (reader.name() == "component"_L1) {
+        if (reader.name() == "component"_L1 || reader.name() == "releases"_L1) {
             // recurse into
         } else if (reader.name() == "id"_L1) {
             aboutData->setDesktopFileName(reader.readElementText());
@@ -1451,6 +1516,33 @@ KAboutData KAboutData::fromAppStream(const QString &appStreamFileName)
                 aboutData->setBugAddress(reader.readElementText().toUtf8());
             } else {
                 reader.skipCurrentElement();
+            }
+        } else if (reader.name() == "release"_L1) {
+            const auto version = reader.attributes().value("version"_L1).toString();
+            const auto date = QDate::fromString(QStringView(reader.attributes().value("date")).left(10), Qt::ISODate);
+            QString desc;
+            QUrl url;
+
+            while (!reader.atEnd() && !reader.hasError()) {
+                const auto token = reader.readNext();
+                if (token == QXmlStreamReader::EndElement && reader.name() == "release"_L1) {
+                    break;
+                }
+                if (token != QXmlStreamReader::StartElement) {
+                    continue;
+                }
+
+                if (reader.name() == "url"_L1) {
+                    url = QUrl(reader.readElementText());
+                } else if (reader.name() == "description"_L1) {
+                    desc = readAppStreamDescription(reader);
+                } else {
+                    reader.skipCurrentElement();
+                }
+            }
+
+            if (!version.isEmpty() && !desc.isEmpty()) {
+                aboutData->addRelease(KAboutRelease(version, date, desc, url));
             }
         } else {
             reader.skipCurrentElement();
