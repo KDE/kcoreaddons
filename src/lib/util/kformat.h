@@ -370,14 +370,14 @@ public:
     /*!
      * Returns a string formatted to a relative date style.
      *
-     * If the \a date falls within one week before or after the current date
+     * If the \a date falls within 2 days before or after the current date
      * then a relative date string will be returned, such as:
      * \list
      * \li Yesterday
      * \li Today
      * \li Tomorrow
-     * \li Last Tuesday
-     * \li Next Wednesday
+     * \li Two days ago
+     * \li In two days
      * \endlist
      *
      * If the \a date falls outside this period then the \a format is used.
@@ -393,14 +393,14 @@ public:
     /*!
      * Returns a string formatted to a relative datetime style.
      *
-     * If the \a dateTime falls within one week before or after the current date
+     * If the \a dateTime falls within 2 days before or after the current date
      * then a relative date string will be returned, such as:
      * \list
      * \li Yesterday at 3:00pm
      * \li Today at 3:00pm
      * \li Tomorrow at 3:00pm
-     * \li Last Tuesday at 3:00pm
-     * \li Next Wednesday at 3:00pm
+     * \li Two days ago at 3:00pm
+     * \li In Two days at 3:00pm
      * \endlist
      *
      * If the \a dateTime falls within one hour of the current time.

@@ -81,14 +81,14 @@ public:
      *
      * Returns a string formatted to a relative date style.
      *
-     * If the date falls within one week before or after the current date
+     * If the date falls within 2 days before or after the current date
      * then a relative date string will be returned, such as:
      * \list
      * \li Yesterday
      * \li Today
      * \li Tomorrow
-     * \li Last Tuesday
-     * \li Next Wednesday
+     * \li Two days ago
+     * \li In Two days
      * \endlist
      * If the date falls outside this period then the format is used
      */
@@ -99,14 +99,14 @@ public:
      *
      * Returns a string formatted to a relative datetime style.
      *
-     * If the dateTime falls within one week before or after the current date
+     * If the dateTime falls within 2 days before or after the current date
      * then a relative date string will be returned, such as:
      * \list
      * \li Yesterday, 3:00pm
      * \li Today, 3:00pm
      * \li Tomorrow, 3:00pm
-     * \li Last Tuesday, 3:00pm
-     * \li Next Wednesday, 3:00pm
+     * \li Two days ago, 3:00pm
+     * \li In Two days, 3:00pm
      * \endlist
      *
      * If the datetime falls outside this period then the format is used
