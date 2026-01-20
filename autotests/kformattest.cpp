@@ -22,7 +22,7 @@ void setupEnvironment()
 {
 #ifndef Q_OS_WIN
     // ignore translations
-    qputenv("XDG_DATA_DIRS", "does-not-exist");
+    qputenv("XDG_DATA_DIRS", "/does-not-exist");
 #endif
     qputenv("TZ", "Asia/Kolkata");
 }
