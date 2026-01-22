@@ -1450,7 +1450,7 @@ struct {
     return desc.trimmed();
 }
 
-KAboutData KAboutData::fromAppStream(const QString &appStreamFileName)
+KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
 {
     KAboutData *aboutData = s_registry->m_appData;
     if (!aboutData) {
@@ -1459,26 +1459,7 @@ KAboutData KAboutData::fromAppStream(const QString &appStreamFileName)
         s_registry->m_appData = aboutData;
     }
 
-    QFile appStreamFile;
-    if (QFileInfo(appStreamFileName).isAbsolute()) {
-        appStreamFile.setFileName(appStreamFileName);
-    } else if (!appStreamFileName.isEmpty()) {
-        const auto p = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "metainfo/"_L1 + appStreamFileName, QStandardPaths::LocateFile);
-        appStreamFile.setFileName(p);
-    }
-
-    if (appStreamFile.fileName().isEmpty()) {
-        const auto appId = appStreamFileName.isEmpty() ? QCoreApplication::instance()->property("desktopFileName").toString() : appStreamFileName;
-        for (const auto &variant : {"metainfo"_L1, "appdata"_L1}) {
-            const auto p =
-                QStandardPaths::locate(QStandardPaths::GenericDataLocation, "metainfo/"_L1 + appId + '.'_L1 + variant + ".xml"_L1, QStandardPaths::LocateFile);
-            if (!p.isEmpty()) {
-                appStreamFile.setFileName(p);
-                break;
-            }
-        }
-    }
-
+    QFile appStreamFile(appStreamFileName);
     if (appStreamFile.fileName().isEmpty() || !appStreamFile.open(QFile::ReadOnly)) {
         qCWarning(KABOUTDATA) << "Failed to open appStreamFile" << appStreamFile.fileName() << appStreamFile.errorString();
         return *aboutData;
@@ -1552,6 +1533,25 @@ KAboutData KAboutData::fromAppStream(const QString &appStreamFileName)
     aboutData->setDisplayName(resolveLanguage(appName));
     aboutData->setShortDescription(resolveLanguage(appSummary));
     return *aboutData;
+}
+
+KAboutData KAboutData::fromAppStreamId(const QString &applicationId)
+{
+    for (const auto &variant : {"metainfo"_L1, "appdata"_L1}) {
+        const auto p = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
+                                              "metainfo/"_L1 + applicationId + '.'_L1 + variant + ".xml"_L1,
+                                              QStandardPaths::LocateFile);
+        if (!p.isEmpty()) {
+            return KAboutData::fromAppStreamFile(p);
+        }
+    }
+
+    return KAboutData();
+}
+
+KAboutData KAboutData::fromAppStreamForApplication()
+{
+    return KAboutData::fromAppStreamId(QCoreApplication::instance()->property("desktopFileName").toString());
 }
 
 std::unique_ptr<KAboutDataListener> KAboutDataListener::s_theListener = nullptr;

@@ -845,18 +845,44 @@ public:
      * license, URLs, etc. Note that most importantly the version number
      * is not included in this.
      *
-     * \a appStreamFileName The AppStream file can be specified in one of three ways:
-     * \list
-     * \li As an absolute file path.
-     * \li As an application id. The AppStream file is then searched in the default
-     *     install locations.
-     * \li As an empty string, which defaults to the application id of the
-     *     current QGuiApplication instance.
-     * \endlist
+     * \a appStreamFileName A path to the AppStream file to read.
+     *
+     * \sa fromAppStreamId, fromAppStreamForApplication
+     * \since 6.23
+     */
+    static KAboutData fromAppStreamFile(const QString &appStreamFileName);
+
+    /*!
+     * Create about data from an AppStream file.
+     *
+     * This fills all fields of the returned KAboutData object that can be
+     * found in the the given AppStream file, including (translated) name,
+     * license, URLs, etc. Note that most importantly the version number
+     * is not included in this.
+     *
+     * \a applicationId An application identifier used to find the corresponding
+     *    AppStream file in the default install location.
+     *
+     * \sa fromAppStreamFile, fromAppStreamForApplication
+     * \since 6.23
+     */
+    static KAboutData fromAppStreamId(const QString &applicationId);
+
+    /*!
+     * Create about data from the AppStream file of the current application.
+     *
+     * This fills all fields of the returned KAboutData object that can be
+     * found in the the given AppStream file, including (translated) name,
+     * license, URLs, etc. Note that most importantly the version number
+     * is not included in this.
+     *
+     * QGuiApplication::desktopFileName has to be set prior to calling this.
+     *
+     * \sa fromAppStreamFile, fromAppStreamId
      *
      * \since 6.23
      */
-    static KAboutData fromAppStream(const QString &appStreamFileName = {});
+    static KAboutData fromAppStreamForApplication();
 
 public:
     // KF6: remove constructor that includes catalogName, and put default
