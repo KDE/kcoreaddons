@@ -414,7 +414,7 @@ void KAboutDataTest::testProductName()
 
 void KAboutDataTest::testAppStream()
 {
-    auto aboutData = KAboutData::fromAppStream(QFINDTESTDATA("data/org.kde.coreaddons.test-app.metainfo.xml"_L1));
+    auto aboutData = KAboutData::fromAppStreamFile(QFINDTESTDATA("data/org.kde.coreaddons.test-app.metainfo.xml"_L1));
     QCOMPARE(aboutData.organizationDomain(), "kde.org"_L1);
     QCOMPARE(aboutData.licenses().size(), 1);
     QCOMPARE(aboutData.licenses()[0].key(), KAboutLicense::LGPL_V2);
