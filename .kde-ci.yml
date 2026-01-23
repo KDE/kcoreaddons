@@ -16,3 +16,4 @@ Options:
   #  - --library=cppcheck-kio-defines.xml
  cppcheck-ignore-files:
   - autotests
+ enable-lsan: True
