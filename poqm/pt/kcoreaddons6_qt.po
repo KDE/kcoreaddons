@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2025 César <cesarapclaudio@gmail.com>
+# SPDX-FileCopyrightText: 2025, 2026 César <cesarapclaudio@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2025-05-28 01:27+0100\n"
-"Last-Translator: César <cesarapclaudio@gmail.com>\n"
+"PO-Revision-Date: 2026-01-26 23:46+0000\n"
+"Last-Translator: César A. P. Cláudio <cesarapclaudio@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -108,7 +108,7 @@ msgstr ""
 "X-POFile-IgnoreConsistency: Update\n"
 "X-Qt-Contexts: true\n"
 "X-POFile-SpellExtra: Gi KListOpenFilesJob lsof FAT RAMFS NTFS ExFAT FUSE\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: lib/io/kfilesystemtype.cpp:251
 msgctxt "KFileSystemType|"
@@ -156,25 +156,19 @@ msgid "Unknown"
 msgstr "Desconhecido"
 
 #: lib/kaboutdata.cpp:281
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "Este programa é distribuído nos termos da licença %1."
+msgstr "<p>Este programa é distribuído nos termos da licença %1.</p>"
 
 #: lib/kaboutdata.cpp:282
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid ""
-#| "You can find the full term <a href=\"https://spdx.org/licenses/%1.html"
-#| "\">the SPDX website</a>"
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
-"Pode encontrar os termos completos <a href=\"https://spdx.org/licenses/%1."
+"<p>Pode encontrar os termos completos <a href=\"https://spdx.org/licenses/%1."
 "html\">no website da SPDX</a>"
 
 #: lib/kaboutdata.cpp:294
@@ -407,7 +401,7 @@ msgstr "Use por favor o https://bugs.kde.org para comunicar erros."
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
-msgstr "Por favor, comunique os erros para %1."
+msgstr "Por favor, comunique erros para %1."
 
 #: lib/plugin/kpluginfactory.cpp:33
 #, qt-format
@@ -434,65 +428,41 @@ msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "O KPluginFactory não conseguiu criar uma instância %1 de %2"
 
 #: lib/util/kformatprivate.cpp:103
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»24"
-#| msgid "y"
 msgctxt "KFormat|SI prefix for 10^⁻24"
 msgid "y"
-msgstr "y"
+msgstr "y "
 
 #: lib/util/kformatprivate.cpp:104
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»21"
-#| msgid "z"
 msgctxt "KFormat|SI prefix for 10^⁻21"
 msgid "z"
 msgstr "z"
 
 #: lib/util/kformatprivate.cpp:105
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»18"
-#| msgid "a"
 msgctxt "KFormat|SI prefix for 10^⁻18"
 msgid "a"
 msgstr "a"
 
 #: lib/util/kformatprivate.cpp:106
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»15"
-#| msgid "f"
 msgctxt "KFormat|SI prefix for 10^⁻15"
 msgid "f"
 msgstr "f"
 
 #: lib/util/kformatprivate.cpp:107
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»12"
-#| msgid "p"
 msgctxt "KFormat|SI prefix for 10^⁻12"
 msgid "p"
 msgstr "p"
 
 #: lib/util/kformatprivate.cpp:108
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»9"
-#| msgid "n"
 msgctxt "KFormat|SI prefix for 10^⁻9"
 msgid "n"
 msgstr "n"
 
 #: lib/util/kformatprivate.cpp:109
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»6"
-#| msgid "Âµ"
 msgctxt "KFormat|SI prefix for 10^⁻6"
 msgid "µ"
-msgstr "Âµ"
+msgstr "µ"
 
 #: lib/util/kformatprivate.cpp:110
-#, fuzzy
-#| msgctxt "KFormat|SI prefix for 10^â»3"
-#| msgid "m"
 msgctxt "KFormat|SI prefix for 10^⁻3"
 msgid "m"
 msgstr "m"
@@ -806,8 +776,8 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%n ano"
+msgstr[1] "%n anos"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
@@ -1034,7 +1004,7 @@ msgstr "Data inválida"
 #: lib/util/kformatprivate.cpp:586
 msgctxt "KFormat|"
 msgid "In two days"
-msgstr "Daqui a dois dias"
+msgstr "Dentro de dois dias"
 
 #: lib/util/kformatprivate.cpp:588
 msgctxt "KFormat|"
