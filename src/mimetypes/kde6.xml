@@ -131,7 +131,7 @@ Notes:
     <comment xml:lang="nn">CD-lyd</comment>
     <comment xml:lang="pa">CD ਆਡੀਓ</comment>
     <comment xml:lang="pl">Płyta CD z dźwiękiem</comment>
-    <comment xml:lang="pt">Áudio de CD</comment>
+    <comment xml:lang="pt">Áudio em CD</comment>
     <comment xml:lang="pt_BR">áudio de CD</comment>
     <comment xml:lang="ro">CD audio</comment>
     <comment xml:lang="ru">Дорожка на Audio CD</comment>
@@ -458,7 +458,7 @@ Notes:
     <comment xml:lang="nn">KWallet-lommebok</comment>
     <comment xml:lang="pa">KWallet ਵਾਲਟ</comment>
     <comment xml:lang="pl">Portfel KDE</comment>
-    <comment xml:lang="pt">Carteira da KWallet</comment>
+    <comment xml:lang="pt">Carteira do KWallet</comment>
     <comment xml:lang="pt_BR">carteira do KWallet</comment>
     <comment xml:lang="ro">portofel KWallet</comment>
     <comment xml:lang="ru">Бумажник KWallet</comment>
@@ -1313,6 +1313,7 @@ Notes:
     <comment xml:lang="nn">Intel®-heksobjektfil</comment>
     <comment xml:lang="pa">Intel® ਹੈਕਸਾਡੈਸੀਮਲ ਆਬਜੈਕਟ ਫਾਇਲ</comment>
     <comment xml:lang="pl">Szesnastkowy plik obiektowy Intel®</comment>
+    <comment xml:lang="pt">Ficheiro-objeto hexadecimal Intel®</comment>
     <comment xml:lang="pt_BR">arquivo objeto em hexadecimal da Intel®</comment>
     <comment xml:lang="ro">fișier cu obiect hexazecimal Intel®</comment>
     <comment xml:lang="ru">Файл Intel HEX</comment>
@@ -1841,7 +1842,7 @@ Notes:
     <comment xml:lang="nn">Quanta-prosjekt</comment>
     <comment xml:lang="pa">ਕੁਆਂਟਾ ਪਰੋਜੈਕਟ</comment>
     <comment xml:lang="pl">Projekt Quanta</comment>
-    <comment xml:lang="pt">Projecto do Quanta</comment>
+    <comment xml:lang="pt">Projeto do Quanta</comment>
     <comment xml:lang="pt_BR">projeto do Quanta</comment>
     <comment xml:lang="ro">proiect Quanta</comment>
     <comment xml:lang="ru">Проект Quanta</comment>
