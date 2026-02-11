@@ -4,9 +4,9 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2026-01-26 23:46+0000\n"
+"PO-Revision-Date: 2026-02-10 21:42+0000\n"
 "Last-Translator: César A. P. Cláudio <cesarapclaudio@gmail.com>\n"
-"Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
+"Language-Team: pt\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,7 +108,7 @@ msgstr ""
 "X-POFile-IgnoreConsistency: Update\n"
 "X-Qt-Contexts: true\n"
 "X-POFile-SpellExtra: Gi KListOpenFilesJob lsof FAT RAMFS NTFS ExFAT FUSE\n"
-"X-Generator: Lokalize 25.12.1\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #: lib/io/kfilesystemtype.cpp:251
 msgctxt "KFileSystemType|"
@@ -936,15 +936,12 @@ msgstr[1] "%n milisegundos"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n hora"
-msgstr[1] "%n horas"
+msgstr[0] "%n ano(s)"
+msgstr[1] "%n ano(s)"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
@@ -1029,7 +1026,7 @@ msgstr "Há dois dias"
 #: lib/util/kformatprivate.cpp:608
 msgctxt "KFormat|"
 msgid "Just now"
-msgstr "Mesmo agora"
+msgstr "Agora mesmo"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:613
@@ -1123,7 +1120,7 @@ msgstr "Não foi possível executar o `lsof'. Código de erro %1"
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
-msgstr "O KListOpenFilesJob não tem suporte para o Windows"
+msgstr "KListOpenFilesJob não é suportado no Windows"
 
 #~| msgctxt "KFormat|MetricBinaryDialect"
 #~| msgid "%1 %2%3"
