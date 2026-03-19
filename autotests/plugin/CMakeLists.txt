@@ -34,7 +34,6 @@ target_link_libraries(org.kde.test KF6::CoreAddons)
 ecm_add_tests(
     kpluginmetadatatest.cpp
     kpluginfactorytest.cpp
-    ${autotests_OPTIONAL_SRCS}
     LINK_LIBRARIES Qt6::Test Qt6::Widgets KF6::CoreAddons autotests_static
 )
 target_link_libraries(kpluginmetadatatest Qt6::CorePrivate)
