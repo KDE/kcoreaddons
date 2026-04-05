@@ -13,6 +13,7 @@
 
 #include <QTest>
 #include <QTimeZone>
+#include <QCryptographicHash>
 
 #include "kformat.h"
 
@@ -30,6 +31,8 @@ Q_CONSTRUCTOR_FUNCTION(setupEnvironment)
 
 void KFormatTest::formatByteSize()
 {
+    QCryptographicHash fileNameHash(QCryptographicHash::Sha1);
+
     QLocale locale(QLocale::c());
     locale.setNumberOptions(QLocale::DefaultNumberOptions); // Qt >= 5.6 sets QLocale::OmitGroupSeparator for the C locale
     KFormat format(locale);
