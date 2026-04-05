@@ -13,6 +13,8 @@
 
 #include <QTest>
 #include <QTimeZone>
+#include <QThread>
+#include <QCryptographicHash>
 
 #include "kformat.h"
 
@@ -28,8 +30,39 @@ void setupEnvironment()
 }
 Q_CONSTRUCTOR_FUNCTION(setupEnvironment)
 
+class Worker : public QObject
+ {
+     Q_OBJECT
+
+ public Q_SLOTS:
+     void doWork() {
+        QCryptographicHash fileNameHash(QCryptographicHash::Sha1);
+        fileNameHash.addData("hola");
+         qDebug() << "DoWork" << fileNameHash.result();
+        Q_EMIT resultReady();
+     }
+
+ Q_SIGNALS:
+     void resultReady();
+ };
+
+
 void KFormatTest::formatByteSize()
 {
+        QThread t;
+
+    Worker *worker = new Worker;
+    worker->moveToThread(&t);
+    QObject::connect(&t, &QThread::finished, worker, &QObject::deleteLater);
+    QObject::connect(&t, &QThread::started, worker, &Worker::doWork);
+    QObject::connect(worker, &Worker::resultReady, &t, [&t] {
+        t.quit();
+    }, Qt::DirectConnection
+    );
+
+    t.start();
+    t.wait();
+
     QLocale locale(QLocale::c());
     locale.setNumberOptions(QLocale::DefaultNumberOptions); // Qt >= 5.6 sets QLocale::OmitGroupSeparator for the C locale
     KFormat format(locale);
@@ -524,3 +557,4 @@ void KFormatTest::formatDistance()
 QTEST_MAIN(KFormatTest)
 
 #include "moc_kformattest.cpp"
+#include "kformattest.moc"
