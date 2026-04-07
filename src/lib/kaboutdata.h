@@ -620,7 +620,11 @@ class KCOREADDONS_EXPORT KAboutRelease
     Q_PROPERTY(QUrl url READ url)
 public:
     explicit KAboutRelease();
-    explicit KAboutRelease(const QString &version, const QDate &date, const QString &description, const QUrl &url);
+    KCOREADDONS_NO_EXPORT explicit KAboutRelease(const QString &version,
+                                                 const QDate &date,
+                                                 const QString &description,
+                                                 const QString &untranslatedDescription,
+                                                 const QUrl &url);
     KAboutRelease(const KAboutRelease &);
     KAboutRelease(KAboutRelease &&) noexcept;
     ~KAboutRelease();
@@ -642,6 +646,16 @@ public:
      * in AppStream allows. This is suitable for consumption by Qt rich text labels.
      */
     [[nodiscard]] QString description() const;
+    /*!
+     * Returns the untranslated release notes.
+     *
+     * This is not meant for displaying to users, but for detecting changes
+     * since the last display, when display release notes on development versions.
+     *
+     * \see description
+     */
+    [[nodiscard]] QString untranslatedDescription() const;
+
     /*!
      * Returns a URL to a website with more information about the release.
      */

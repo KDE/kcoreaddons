@@ -539,6 +539,7 @@ public:
     QString m_version;
     QDate m_date;
     QString m_description;
+    QString m_untranslatedDescription;
     QUrl m_url;
 };
 
@@ -547,12 +548,13 @@ KAboutRelease::KAboutRelease()
 {
 }
 
-KAboutRelease::KAboutRelease(const QString &version, const QDate &date, const QString &description, const QUrl &url)
+KAboutRelease::KAboutRelease(const QString &version, const QDate &date, const QString &description, const QString &untranslatedDescription, const QUrl &url)
     : d(new KAboutReleasePrivate)
 {
     d->m_version = version;
     d->m_date = date;
     d->m_description = description;
+    d->m_untranslatedDescription = untranslatedDescription;
     d->m_url = url;
 }
 
@@ -577,6 +579,11 @@ QDate KAboutRelease::date() const
 QString KAboutRelease::description() const
 {
     return d->m_description;
+}
+
+QString KAboutRelease::untranslatedDescription() const
+{
+    return d->m_untranslatedDescription;
 }
 
 QUrl KAboutRelease::url() const
@@ -1358,9 +1365,8 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
     }
 }
 
-[[nodiscard]] static QString resolveLanguage(const std::unordered_map<QString, QString> &value)
+[[nodiscard]] static QString resolveLanguage(const std::unordered_map<QString, QString> &value, const QStringList &langs = QLocale().uiLanguages())
 {
-    const auto langs = QLocale().uiLanguages();
     for (auto langIt = langs.begin(); langIt != langs.end(); ++langIt) {
         auto it = value.find(*langIt);
         if (it != value.end()) {
@@ -1414,9 +1420,14 @@ struct {
     return out;
 }
 
-[[nodiscard]] static QString readAppStreamDescription(QXmlStreamReader &reader)
-{
+struct AppDataDesc {
     QString desc;
+    QString rawDesc;
+};
+
+[[nodiscard]] static AppDataDesc readAppStreamDescription(QXmlStreamReader &reader)
+{
+    AppDataDesc desc;
 
     QString elemName;
     std::unordered_map<QString, QString> translationBuffer;
@@ -1429,25 +1440,33 @@ struct {
         if (token == QXmlStreamReader::StartElement) {
             const auto lang = reader.attributes().value("http://www.w3.org/XML/1998/namespace"_L1, "lang"_L1).toString();
             if ((lang.isEmpty() || elemName != reader.name()) && !translationBuffer.empty()) {
-                desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
+                desc.desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
                 translationBuffer.clear();
             }
             elemName = reader.name().toString();
-            translationBuffer[lang] = readAppStreamDescription(reader);
+            auto subDesc = readAppStreamDescription(reader);
+            translationBuffer[lang] = std::move(subDesc.desc);
+            if (lang.isEmpty() && !translationBuffer.empty()) {
+                desc.rawDesc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer, {}) + "</"_L1 + elemName + '>'_L1;
+            }
         }
         if (token == QXmlStreamReader::Characters && !reader.isWhitespace()) {
             if (!translationBuffer.empty()) {
-                desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
+                desc.desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
+                desc.rawDesc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer, {}) + "</"_L1 + elemName + '>'_L1;
                 translationBuffer.clear();
             }
-            desc += quoteEntities(reader.text());
+            desc.desc += quoteEntities(reader.text());
+            desc.rawDesc += quoteEntities(reader.text());
         }
     }
     if (!translationBuffer.empty()) {
-        desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
+        desc.desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
     }
 
-    return desc.trimmed();
+    desc.desc = std::move(desc.desc).trimmed();
+    desc.rawDesc = std::move(desc.rawDesc).trimmed();
+    return desc;
 }
 
 KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
@@ -1501,7 +1520,7 @@ KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
         } else if (reader.name() == "release"_L1) {
             const auto version = reader.attributes().value("version"_L1).toString();
             const auto date = QDate::fromString(QStringView(reader.attributes().value("date")).left(10), Qt::ISODate);
-            QString desc;
+            AppDataDesc desc;
             QUrl url;
 
             while (!reader.atEnd() && !reader.hasError()) {
@@ -1522,8 +1541,8 @@ KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
                 }
             }
 
-            if (!version.isEmpty() && !desc.isEmpty()) {
-                aboutData->addRelease(KAboutRelease(version, date, desc, url));
+            if (!version.isEmpty() && !desc.desc.isEmpty()) {
+                aboutData->addRelease(KAboutRelease(version, date, desc.desc, desc.rawDesc, url));
             }
         } else {
             reader.skipCurrentElement();
