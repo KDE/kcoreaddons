@@ -79,6 +79,14 @@ void KShellTest::quoteArg()
     QCOMPARE(KShell::quoteArg(QStringLiteral("a % space")), QStringLiteral("\"a %PERCENT_SIGN% space\""));
 #else
     QCOMPARE(KShell::quoteArg(QStringLiteral("a space")), QStringLiteral("'a space'"));
+    QCOMPARE(KShell::quoteArg(QStringLiteral("a\x01")), QStringLiteral("a"));
+    QCOMPARE(KShell::quoteArg(QStringLiteral("\x01")), QStringLiteral("''"));
+    QCOMPARE(KShell::quoteArg(QStringLiteral("a\x02")), QStringLiteral("a"));
+    QCOMPARE(KShell::quoteArg(QStringLiteral("a\x7f")), QStringLiteral("a"));
+    QCOMPARE(KShell::quoteArg(QStringLiteral("🫠")), QStringLiteral("🫠"));
+    QCOMPARE(KShell::quoteArg(QStringLiteral("👩‍👩‍👧‍👦")), QStringLiteral("👩‍👩‍👧‍👦"));
+    QCOMPARE(KShell::quoteArg(QStringLiteral("ひらがな")), QStringLiteral("ひらがな"));
+    QCOMPARE(KShell::quoteArg(QStringLiteral("ひらがな\x1")), QStringLiteral("ひらがな"));
 #endif
 }
 
@@ -124,7 +132,7 @@ void KShellTest::splitJoin()
     QCOMPARE(err, KShell::NoError);
 #else
     QCOMPARE(sj(QString::fromUtf8("\"~qU4rK\" 'text' 'jo'\"jo\" $'crap' $'\\\\\\'\\e\\x21' ha\\ lo \\a"), KShell::NoOptions, &err),
-             QString::fromUtf8("'~qU4rK' text jojo crap '\\'\\''\x1b!' 'ha lo' a"));
+             QString::fromUtf8("'~qU4rK' text jojo crap '\\'\\''!' 'ha lo' a"));
     QCOMPARE(err, KShell::NoError);
 
     QCOMPARE(sj(QStringLiteral("\"~qU4rK\" 'text'"), KShell::TildeExpand, &err), QStringLiteral("'~qU4rK' text"));
