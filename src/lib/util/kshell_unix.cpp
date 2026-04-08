@@ -294,14 +294,19 @@ inline static bool isSpecial(QChar cUnicode)
 
 QString KShell::quoteArg(const QString &arg)
 {
-    if (arg.isEmpty()) {
+    auto quoted = arg;
+    quoted.removeIf([](const QChar &input) {
+        return input.category() == QChar::Other_Control;
+    });
+    if (quoted.isEmpty()) {
         return QStringLiteral("''");
     }
-    for (int i = 0; i < arg.length(); i++) {
-        if (isSpecial(arg.unicode()[i])) {
+
+    for (int i = 0; i < quoted.length(); i++) {
+        if (isSpecial(quoted.unicode()[i])) {
             QChar q(QLatin1Char('\''));
-            return q + QString(arg).replace(q, QLatin1String("'\\''")) + q;
+            return q + QString(quoted).replace(q, QLatin1String("'\\''")) + q;
         }
     }
-    return arg;
+    return quoted;
 }
