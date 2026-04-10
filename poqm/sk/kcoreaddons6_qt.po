@@ -84,6 +84,8 @@ msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
+"<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
+"\">the SPDX website</a>.</p>"
 
 #: lib/kaboutdata.cpp:296
 msgctxt "KAboutLicense|"
@@ -200,17 +202,17 @@ msgstr "QPL v1.0"
 #: lib/kaboutdata.cpp:385
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Open Data Commons Open Database License v1.0"
 
 #: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "Apache 2.0"
 
 #: lib/kaboutdata.cpp:389
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "Apache License 2.0"
 
 #: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license (short name)"
@@ -230,22 +232,22 @@ msgstr "Licencia BSD"
 #: lib/kaboutdata.cpp:397
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Boost Software License 1.0"
 
 #: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "BSD-3-Clause"
 
 #: lib/kaboutdata.cpp:401
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "BSD 3-Clause \"New\" or \"Revised\" License"
 
 #: lib/kaboutdata.cpp:404
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:405
 msgctxt "KAboutLicense|@item license"
@@ -690,9 +692,9 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%n r."
+msgstr[1] "%n r."
+msgstr[2] "%n r."
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
