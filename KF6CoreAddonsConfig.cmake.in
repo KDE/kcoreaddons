@@ -28,6 +28,10 @@ if(NOT @BUILD_SHARED_LIBS@)
     if (@UDev_FOUND@)
         find_dependency(UDev)
     endif()
+
+    if (@LibMount_FOUND@)
+        find_dependency(LibMount)
+    endif()
 endif()
 
 @PACKAGE_SETUP_AUTOMOC_VARIABLES@
