@@ -330,7 +330,11 @@ void KTextToHTMLTest::testHtmlConvert_data()
                       << "the /etc/{rsyslog.d,syslog-ng.d}/package.rpmnew file";
 
     QTest::newRow("bug504078") << "You should see a _<foo>_ on this line." << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
-                               << "You should see a <u>_<foo>_</u> on this line.";
+                               << "You should see a <u>_&lt;foo&gt;_</u> on this line.";
+
+    QTest::newRow("angle-brackets-in-italic") << "\t/* prefixed with <bus>: */"
+                                              << KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::HighlightText)
+                                              << "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>/* prefixed with &lt;bus&gt;: */</i>";
 
     // This test has problems with the encoding, apparently.
     // QTest::newRow( "" ) << "*Ça fait plaisir de pouvoir utiliser des lettres accentuées dans du"
