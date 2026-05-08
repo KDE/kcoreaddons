@@ -226,7 +226,6 @@ ecm_qt_export_logging_category(
     IDENTIFIER KDIRWATCH
     CATEGORY_NAME kf.coreaddons.kdirwatch
     OLD_CATEGORY_NAMES kf5.kcoreaddons.kdirwatch
-    DEFAULT_SEVERITY Warning
     DESCRIPTION "KDirWatch (KCoreAddons)"
     EXPORT KCOREADDONS
 )
