@@ -281,7 +281,7 @@ public:
         LGPL = 2,
         LGPL_V2 = LGPL,
 #if KCOREADDONS_ENABLE_DEPRECATED_SINCE(6, 9)
-        BSDL KCOREADDONS_ENUMERATOR_DEPRECATED_VERSION(6, 9, "Use BSD_2_Clause") = 3,
+        BSDL KCOREADDONS_DEPRECATED_VERSION(6, 9, "Use BSD_2_Clause") = 3,
 #endif
         BSD_2_Clause = 3,
         Artistic = 4,
