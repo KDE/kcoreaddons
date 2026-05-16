@@ -280,8 +280,8 @@ msgstr ""
 "Nederlandstalige KDE-pagina <a href=\"https://www.kde.nl\">https://www.kde."
 "nl</a>. Algemene informatie over de vertaling van KDE is te vinden op <a "
 "href=\"https://l10n.kde.org\">https://l10n.kde.org</a>.</p><p>Komt u een "
-"foutje tegen in een vertaling? Meld dit op <a href=\"https://www.kde.nl/bugs"
-"\">https://www.kde.nl/bugs</a></p>"
+"foutje tegen in een vertaling? Meld dit op <a href=\"https://bugs.kde.org"
+"\">https://bugs.kde.org</a></p>"
 
 #: lib/kaboutdata.cpp:1317
 msgctxt "KAboutData CLI|"
