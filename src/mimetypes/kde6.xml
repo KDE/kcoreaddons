@@ -57,6 +57,7 @@ Notes:
     <comment xml:lang="ie">RELAX NG</comment>
     <comment xml:lang="is">RELAX NG</comment>
     <comment xml:lang="it">RELAX NG</comment>
+    <comment xml:lang="ja">RELAX NG</comment>
     <comment xml:lang="ka">RELAX NG</comment>
     <comment xml:lang="ko">RELAX NG</comment>
     <comment xml:lang="lg">RELAX NG</comment>
@@ -122,6 +123,7 @@ Notes:
     <comment xml:lang="ie">Audio CD</comment>
     <comment xml:lang="is">CD hljóð</comment>
     <comment xml:lang="it">Audio CD</comment>
+    <comment xml:lang="ja">CD オーディオ</comment>
     <comment xml:lang="ka">CD აუდიო</comment>
     <comment xml:lang="ko">CD 오디오</comment>
     <comment xml:lang="lg">CD ey'ebiwulirizibwa</comment>
@@ -189,6 +191,7 @@ Notes:
     <comment xml:lang="ie">fonde bitmap SNF</comment>
     <comment xml:lang="is">SNF bitamyndaletur</comment>
     <comment xml:lang="it">Carattere bitmap SNF</comment>
+    <comment xml:lang="ja">SNF ビットマップフォント</comment>
     <comment xml:lang="ka">SNF ბიტური რუკის ფონტი</comment>
     <comment xml:lang="ko">SNF 비트맵 글꼴</comment>
     <comment xml:lang="lg">Nnukuta za lulyo lw'enkula SNF oluzikongojjera mu mapu za pikiseli</comment>
@@ -257,6 +260,7 @@ Notes:
     <comment xml:lang="ie">applette Java</comment>
     <comment xml:lang="is">Java forritlingur</comment>
     <comment xml:lang="it">Applet Java</comment>
+    <comment xml:lang="ja">Java アプレット</comment>
     <comment xml:lang="ka">Java აპლეტი</comment>
     <comment xml:lang="ko">자바 애플릿</comment>
     <comment xml:lang="lg">Bupuloguramu bwa mu Java</comment>
@@ -322,6 +326,7 @@ Notes:
     <comment xml:lang="ie">schema de colores de KDE</comment>
     <comment xml:lang="is">KDE litastef</comment>
     <comment xml:lang="it">Schema di colori di KDE</comment>
+    <comment xml:lang="ja">KDE カラースキーム</comment>
     <comment xml:lang="ka">KDE -ის ფერის სქემა</comment>
     <comment xml:lang="ko">KDE 색 구성표</comment>
     <comment xml:lang="lg">Lulyo lwa langi KDE z'ekozesa</comment>
@@ -392,6 +397,7 @@ Notes:
     <comment xml:lang="ie">paccage de KNewStuff</comment>
     <comment xml:lang="is">KNewStuff pakki</comment>
     <comment xml:lang="it">Pacchetto di KNewStuff</comment>
+    <comment xml:lang="ja">KNewStuff パッケージ</comment>
     <comment xml:lang="ka">KNewStuff -ის პაკეტი</comment>
     <comment xml:lang="ko">KNewStuff 패키지</comment>
     <comment xml:lang="lg">Ekiwanulibwa KNewStuff</comment>
@@ -459,6 +465,7 @@ Notes:
     <comment xml:lang="ie">porta-papere de KWallet</comment>
     <comment xml:lang="is">KWallet veski</comment>
     <comment xml:lang="it">Portafogli KWallet</comment>
+    <comment xml:lang="ja">KWallet ウォレット</comment>
     <comment xml:lang="ka">KWallet -ის საფულე</comment>
     <comment xml:lang="ko">KWallet 지갑</comment>
     <comment xml:lang="lg">Seefu eya mu KWallet</comment>
@@ -529,6 +536,7 @@ Notes:
     <comment xml:lang="ie">plasmoid</comment>
     <comment xml:lang="is">plasmíð</comment>
     <comment xml:lang="it">plasmoide</comment>
+    <comment xml:lang="ja">plasmoid</comment>
     <comment xml:lang="ka">პლაზმოიდი</comment>
     <comment xml:lang="ko">plasmoid</comment>
     <comment xml:lang="lg">pulazimoidi</comment>
@@ -596,6 +604,7 @@ Notes:
     <comment xml:lang="ie">tema de SuperKaramba</comment>
     <comment xml:lang="is">SuperKaramba þema</comment>
     <comment xml:lang="it">Tema di SuperKaramba</comment>
+    <comment xml:lang="ja">SuperKaramba テーマ</comment>
     <comment xml:lang="ka">SuperKaramba -ის თემა</comment>
     <comment xml:lang="ko">SuperKaramba 테마</comment>
     <comment xml:lang="lg">Lulyo lw'endabika olukoledwa SuperKaramba</comment>
@@ -662,6 +671,7 @@ Notes:
     <comment xml:lang="ie">document de gerentie de projectes de Calligra Plan</comment>
     <comment xml:lang="is">Calligra Plan verkstjórnunarskjal</comment>
     <comment xml:lang="it">Documento di gestione dei progetti di Calligra Plan</comment>
+    <comment xml:lang="ja">Calligra Plan プロジェクト管理文書</comment>
     <comment xml:lang="ka">Calligra Plan პროექტის მართვის დოკუმენტი</comment>
     <comment xml:lang="ko">Caligra Plan 프로젝트 관리 문서</comment>
     <comment xml:lang="lg">Kiwandiko kya ntambula ya pulojekiti ekya mu Calligra Plan</comment>
@@ -728,6 +738,7 @@ Notes:
     <comment xml:lang="ie">document de labor de Calligra Plan</comment>
     <comment xml:lang="is">Calligra Plan verkpakkaskjal</comment>
     <comment xml:lang="it">Documento dei pacchetti di lavoro di Calligra Plan</comment>
+    <comment xml:lang="ja">Calligra Plan プロジェクト管理文書</comment>
     <comment xml:lang="ka">Calligra Plan სამუშაოს პაკეტის დოკუმენტი</comment>
     <comment xml:lang="ko">Caligra Plan 작업 패키지 문서</comment>
     <comment xml:lang="lg">Kiwandiko kya mulimu ekya mu Calligra Plan</comment>
@@ -794,6 +805,7 @@ Notes:
     <comment xml:lang="ie">paccage de gerentie de projectes de KPlato</comment>
     <comment xml:lang="is">KPlato verkstjórnunarskjal</comment>
     <comment xml:lang="it">Documento di gestione dei progetti di KPlato</comment>
+    <comment xml:lang="ja">KPlato プロジェクト管理文書</comment>
     <comment xml:lang="ka">KPlato პროექტის მართვის დოკუმენტი</comment>
     <comment xml:lang="ko">KPlato 프로젝트 관리 문서</comment>
     <comment xml:lang="lg">Kiwandiko kya ntambula y'a pulojekiti ekya mu KPlato</comment>
@@ -860,6 +872,7 @@ Notes:
     <comment xml:lang="ie">paccage de labor de gerentie de projectes de KPlato</comment>
     <comment xml:lang="is">KPlato vinnupakki verkstjórnunar</comment>
     <comment xml:lang="it">Pacchetto di lavoro di gestione dei progetti di KPlato</comment>
+    <comment xml:lang="ja">KPlato プロジェクト管理作業パッケージ</comment>
     <comment xml:lang="ka">KPlato პროექტის მართვის სამუშაოს პაკეტი</comment>
     <comment xml:lang="ko">KPlato 프로젝트 관리 작업 패키지</comment>
     <comment xml:lang="lg">Kiwandiko kya mulimu ekya mu KPlato</comment>
@@ -926,6 +939,7 @@ Notes:
     <comment xml:lang="ie">Archive de Kugar</comment>
     <comment xml:lang="is">Kugar safnskrá</comment>
     <comment xml:lang="it">Archivio di Kugar</comment>
+    <comment xml:lang="ja">Kugar アーカイブ</comment>
     <comment xml:lang="ka">Kugar -ის არქივი</comment>
     <comment xml:lang="ko">Kugar 압축 파일</comment>
     <comment xml:lang="lg">Fayiro eya mu Kugar empakire</comment>
@@ -993,6 +1007,7 @@ Notes:
     <comment xml:lang="ie">Archive de web</comment>
     <comment xml:lang="is">vefsafnskrá</comment>
     <comment xml:lang="it">Archivio web</comment>
+    <comment xml:lang="ja">ウェブアーカイブ</comment>
     <comment xml:lang="ka">ვებ-არქივი</comment>
     <comment xml:lang="ko">웹 압축 파일</comment>
     <comment xml:lang="lg">kkuŋaanizo ly'ebivudde ku mutimbagano</comment>
@@ -1061,6 +1076,7 @@ Notes:
     <comment xml:lang="ie">Schema XML W3C</comment>
     <comment xml:lang="is">W3C XML skema</comment>
     <comment xml:lang="it">Schema XML W3C</comment>
+    <comment xml:lang="ja">W3C XML スキーマ</comment>
     <comment xml:lang="ka">W3C XML სქემა</comment>
     <comment xml:lang="ko">W3C XML 스키마</comment>
     <comment xml:lang="lg">Amateeka aga W3C agafuga ebiteekebwa mu bitundu by'ekiwandiko kya mu XML n'enteekateeka y'ebika bya byo</comment>
@@ -1127,6 +1143,7 @@ Notes:
     <comment xml:lang="ie">importation de KPhotoAlbum</comment>
     <comment xml:lang="is">KPhotoAlbum innflutningur</comment>
     <comment xml:lang="it">Importazione di KPhotoAlbum</comment>
+    <comment xml:lang="ja">KPhotoAlbum インポート</comment>
     <comment xml:lang="ka">KPhotoAlbum -ში შეტანა</comment>
     <comment xml:lang="ko">KPhotoAlbum 가져오기</comment>
     <comment xml:lang="lg">Ekinone ekya KPhotoAlbum</comment>
@@ -1193,6 +1210,7 @@ Notes:
     <comment xml:lang="ie">Image HDR</comment>
     <comment xml:lang="is">HDR-mynd</comment>
     <comment xml:lang="it">Immagine HDR</comment>
+    <comment xml:lang="ja">HDR イメージ</comment>
     <comment xml:lang="ka">HDR გამოსახულება</comment>
     <comment xml:lang="ko">HDR 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya kika kya HDR</comment>
@@ -1264,6 +1282,7 @@ Notes:
     <comment xml:lang="ie">formates de images RAW de KDE</comment>
     <comment xml:lang="is">KDE RAW myndskráasnið</comment>
     <comment xml:lang="it">Formati di immagine raw di KDE</comment>
+    <comment xml:lang="ja">KDE raw イメージ形式</comment>
     <comment xml:lang="ka">KDE -ის გამოსახულების დაუმუშავებელი ფორმატები</comment>
     <comment xml:lang="ko">KDE RAW 그림 형식</comment>
     <comment xml:lang="lg">Ebika bya fayiro eza mu KDE ez'ebifaananyi ezitali enfuulemu</comment>
@@ -1340,6 +1359,7 @@ Notes:
     <comment xml:lang="ie">file hexadecimal de objecte de Intel®</comment>
     <comment xml:lang="is">Intel® hexadesimal hlutaskrá</comment>
     <comment xml:lang="it">File oggetto esadecimale Intel®</comment>
+    <comment xml:lang="ja">Intel® 十六進オブジェクトファイル</comment>
     <comment xml:lang="ka">Intel® თექვსმეტობითი ობიექტის ფაილი</comment>
     <comment xml:lang="ko">Intel® 16진수 개체 파일</comment>
     <comment xml:lang="lg">Fayiro ey'enkozesa ya hekisadeka eya Intel®</comment>
@@ -1406,6 +1426,7 @@ Notes:
     <comment xml:lang="ie">liste de cargatores de liste de files de Kate</comment>
     <comment xml:lang="is">Kate skráahleðsluíforritalisti</comment>
     <comment xml:lang="it">Elenco delle estensioni del caricatore di elenchi di file di Kate</comment>
+    <comment xml:lang="ja">Kate ファイルリストローダプラグインリスト</comment>
     <comment xml:lang="ka">Kate -ის ფაილების სიის ჩამტვირთავი დამატებების სია</comment>
     <comment xml:lang="ko">Kate 파일 목록 로더 플러그인 목록</comment>
     <comment xml:lang="lg">Lukalala lwa fayiro olutegeerebwa ekyongerwako ekikozi ky'enkalala ekya mu Kate</comment>
@@ -1473,6 +1494,7 @@ Notes:
     <comment xml:lang="ie">file de musical notation abc</comment>
     <comment xml:lang="is">abc nótnaskriftarskrá</comment>
     <comment xml:lang="it">File di notazione musicale abc</comment>
+    <comment xml:lang="ja">abc ミュージカルノーテーションファイル</comment>
     <comment xml:lang="ka">abc მუსიკალურ ნოტაციების ფაილი</comment>
     <comment xml:lang="ko">abc 악보 파일</comment>
     <comment xml:lang="lg">fayiro eyimbisibwa eya mu mpandika ya abc</comment>
@@ -1545,6 +1567,7 @@ Notes:
     <comment xml:lang="ie">paccage de fondes</comment>
     <comment xml:lang="is">leturpakki</comment>
     <comment xml:lang="it">Pacchetto di caratteri</comment>
+    <comment xml:lang="ja">フォントパッケージ</comment>
     <comment xml:lang="ka">ფონტების პაკეტი</comment>
     <comment xml:lang="ko">글꼴 패키지</comment>
     <comment xml:lang="lg">kitereke kya ndyo za nkula y'ennukuta</comment>
@@ -1614,6 +1637,7 @@ Notes:
     <comment xml:lang="ie">servitore de Windows</comment>
     <comment xml:lang="is">Windows miðlari</comment>
     <comment xml:lang="it">Server Windows</comment>
+    <comment xml:lang="ja">Windows サーバ</comment>
     <comment xml:lang="ka">Windows სერვერი</comment>
     <comment xml:lang="ko">Windows 서버</comment>
     <comment xml:lang="lg">Kompyuta ewereza ekolera ku Windows</comment>
@@ -1681,6 +1705,7 @@ Notes:
     <comment xml:lang="ie">labor-gruppe de Windows</comment>
     <comment xml:lang="is">Windows vinnuhópur</comment>
     <comment xml:lang="it">Gruppo di lavoro di Windows</comment>
+    <comment xml:lang="ja">Windows ワークグループ</comment>
     <comment xml:lang="ka">Windows -ის სამუშაო ჯგუფი</comment>
     <comment xml:lang="ko">Windows 작업 그룹</comment>
     <comment xml:lang="lg">Kikungo kya mu Windows</comment>
@@ -1748,6 +1773,7 @@ Notes:
     <comment xml:lang="ie">monitor del sistema de KDE</comment>
     <comment xml:lang="is">KDE kerfiseftirlit</comment>
     <comment xml:lang="it">Monitor di sistema di KDE</comment>
+    <comment xml:lang="ja">KDE システムモニタ</comment>
     <comment xml:lang="ka">KDE -ის სისტემური მონიტორი</comment>
     <comment xml:lang="ko">KDE 시스템 모니터</comment>
     <comment xml:lang="lg">Kirabirizasisitemu kya mu KDE</comment>
@@ -1816,6 +1842,7 @@ Notes:
     <comment xml:lang="ie">Tema de KDE</comment>
     <comment xml:lang="is">KDE þema</comment>
     <comment xml:lang="it">Tema di KDE</comment>
+    <comment xml:lang="ja">KDE テーマ</comment>
     <comment xml:lang="ka">KDE -ის თემა</comment>
     <comment xml:lang="ko">KDE 테마</comment>
     <comment xml:lang="lg">Lulyo lwa ndabika ya KDE</comment>
@@ -1885,6 +1912,7 @@ Notes:
     <comment xml:lang="ie">Projecte de Quanta</comment>
     <comment xml:lang="is">Quanta verkefni</comment>
     <comment xml:lang="it">Progetto Quanta</comment>
+    <comment xml:lang="ja">Quanta プロジェクト</comment>
     <comment xml:lang="ka">Quanta -ის პროექტი</comment>
     <comment xml:lang="ko">Quanta 프로젝트</comment>
     <comment xml:lang="lg">Pulojekiti ya mu Quanta</comment>
@@ -1952,6 +1980,7 @@ Notes:
     <comment xml:lang="ie">File de Kommander</comment>
     <comment xml:lang="is">Kommander skrá</comment>
     <comment xml:lang="it">File di Kommander</comment>
+    <comment xml:lang="ja">Kommander ファイル</comment>
     <comment xml:lang="ka">Kommander -ის ფაილი</comment>
     <comment xml:lang="ko">Kommander 파일</comment>
     <comment xml:lang="lg">Fayiro eya mu Kommander</comment>
@@ -2020,6 +2049,7 @@ Notes:
     <comment xml:lang="ie">potato</comment>
     <comment xml:lang="is">kartafla (potato)</comment>
     <comment xml:lang="it">patata</comment>
+    <comment xml:lang="ja">potato</comment>
     <comment xml:lang="ka">კარტოფილი</comment>
     <comment xml:lang="ko">potato</comment>
     <comment xml:lang="lg">potato</comment>
@@ -2086,6 +2116,7 @@ Notes:
     <comment xml:lang="ie">partie gardat de Kolf</comment>
     <comment xml:lang="is">Vistaður Kolf-leikur</comment>
     <comment xml:lang="it">Partita salvata di Kolf</comment>
+    <comment xml:lang="ja">Kolf 保存されたゲーム</comment>
     <comment xml:lang="ka">Kolf -ის შენახული თამაში</comment>
     <comment xml:lang="ko">Kolf 저장된 게임</comment>
     <comment xml:lang="lg">Luzannya lwa Kolf oluterekedwa</comment>
@@ -2156,6 +2187,7 @@ Notes:
     <comment xml:lang="ie">curse de Kolf</comment>
     <comment xml:lang="is">Kolf-braut</comment>
     <comment xml:lang="it">Campo di Kolf</comment>
+    <comment xml:lang="ja">Kolf コース</comment>
     <comment xml:lang="ka">Kolf -ის კურსი</comment>
     <comment xml:lang="ko">Kolf 코스</comment>
     <comment xml:lang="lg">Kizanyiro kya Kolf</comment>
@@ -2228,6 +2260,7 @@ Notes:
     <comment xml:lang="ie">archive de document de Okular</comment>
     <comment xml:lang="is">Okular skjalasafnskrá</comment>
     <comment xml:lang="it">Archivio di documenti di Okular</comment>
+    <comment xml:lang="ja">Okular 文書アーカイブ</comment>
     <comment xml:lang="ka">Okular -ის დოკუმენტების არქივი</comment>
     <comment xml:lang="ko">Okular 문서 압축 파일</comment>
     <comment xml:lang="lg">Kipakire kya biwandiko bya mu Okular</comment>
@@ -2296,6 +2329,7 @@ Notes:
     <comment xml:lang="ie">figura de Cabri</comment>
     <comment xml:lang="is">Cabri teikning</comment>
     <comment xml:lang="it">Figura di Cabri</comment>
+    <comment xml:lang="ja">Cabri figure</comment>
     <comment xml:lang="ka">Cabri -ის ფიგურა</comment>
     <comment xml:lang="ko">Cabri 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya mu Cabri</comment>
@@ -2367,6 +2401,7 @@ Notes:
     <comment xml:lang="ie">figura de Dr. Geo figure</comment>
     <comment xml:lang="is">Dr. Geo teikning</comment>
     <comment xml:lang="it">Figura di Dr. Geo</comment>
+    <comment xml:lang="ja">Dr. Geo figure</comment>
     <comment xml:lang="ka">Dr. Geo -ის ფიგურა</comment>
     <comment xml:lang="ko">Dr. Geo 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya mu Dr. Geo</comment>
@@ -2437,6 +2472,7 @@ Notes:
     <comment xml:lang="ie">figura KGeo</comment>
     <comment xml:lang="is">KGeo teikning</comment>
     <comment xml:lang="it">Figura di KGeo</comment>
+    <comment xml:lang="ja">KGeo figure</comment>
     <comment xml:lang="ka">KGeo -ის ფიგურა</comment>
     <comment xml:lang="ko">KGeo 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya mu KGeo</comment>
@@ -2504,6 +2540,7 @@ Notes:
     <comment xml:lang="ie">figura de Kig</comment>
     <comment xml:lang="is">Kig teikning</comment>
     <comment xml:lang="it">Figura di Kig</comment>
+    <comment xml:lang="ja">Kig figure</comment>
     <comment xml:lang="ka">Kig -ის ფიგურა</comment>
     <comment xml:lang="ko">Kig 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya mu Kig</comment>
@@ -2572,6 +2609,7 @@ Notes:
     <comment xml:lang="ie">document de KSeg</comment>
     <comment xml:lang="is">KSeg skjal</comment>
     <comment xml:lang="it">Documento di KSeg</comment>
+    <comment xml:lang="ja">KSeg 文書</comment>
     <comment xml:lang="ka">KSeg -ის დოკუმენტი</comment>
     <comment xml:lang="ko">KSeg 문서</comment>
     <comment xml:lang="lg">Kiwandiko kya mu KSeg</comment>
@@ -2640,6 +2678,7 @@ Notes:
     <comment xml:lang="ie">documente de exercitie de vocabularium</comment>
     <comment xml:lang="is">orðaforðaþjálfunarskjal</comment>
     <comment xml:lang="it">Documento di allenamento a vocabolario</comment>
+    <comment xml:lang="ja">ボキャブラリトレーナー文書</comment>
     <comment xml:lang="ka">ლექსიკონის სწავლის დოკუმენტი</comment>
     <comment xml:lang="ko">단어장</comment>
     <comment xml:lang="lg">kiwandiko kya mu puloguramu ey'okugaziya obumanyirivu mu lulimi</comment>
@@ -2706,6 +2745,7 @@ Notes:
     <comment xml:lang="ie">file de KmPlot</comment>
     <comment xml:lang="is">KmPlot skrá</comment>
     <comment xml:lang="it">File di KmPlot</comment>
+    <comment xml:lang="ja">KmPlot ファイル</comment>
     <comment xml:lang="ka">KmPlot -ის ფაილი</comment>
     <comment xml:lang="ko">KmPlot 파일</comment>
     <comment xml:lang="lg">Fayiro ya mu KmPlot</comment>
@@ -2773,6 +2813,7 @@ Notes:
     <comment xml:lang="ie">vocabularium de KWordQuiz</comment>
     <comment xml:lang="is">KWordQuiz orðaforði</comment>
     <comment xml:lang="it">Vocabolario di KWordQuiz</comment>
+    <comment xml:lang="ja">KWordQuiz ボキャブラリ</comment>
     <comment xml:lang="ka">KWordQuiz -ის ლექსიკონი</comment>
     <comment xml:lang="ko">KWordQuiz 단어장</comment>
     <comment xml:lang="lg">Lukalala lw'ebigambo olwa mu KWordQuiz</comment>
@@ -2840,6 +2881,7 @@ Notes:
     <comment xml:lang="ie">dump de profil de Cachegrind/Callgrind</comment>
     <comment xml:lang="is">Cachegrind/Callgrind sniðdump</comment>
     <comment xml:lang="it">Dump di profilatura di Cachegrind/Callgrind</comment>
+    <comment xml:lang="ja">Cachegrind/Callgrind プロファイルダンプ</comment>
     <comment xml:lang="ka">Cachegrind/Callgrind პროფილის დამპი</comment>
     <comment xml:lang="ko">Cachegrind/Callgrind 프로필 덤프</comment>
     <comment xml:lang="lg">Fayiro ey'ebizuulidwa Cachegrind oba Callgrind</comment>
@@ -2906,6 +2948,7 @@ Notes:
     <comment xml:lang="ie">file de Umbrello UML Modeller</comment>
     <comment xml:lang="is">Umbrello UML Modeller skrá</comment>
     <comment xml:lang="it">File del modellatore UML Umbrello</comment>
+    <comment xml:lang="ja">Umbrello UML モデラーファイル</comment>
     <comment xml:lang="ka">Umbrello UML მოდელერის ფაილი</comment>
     <comment xml:lang="ko">Umbrello UML 모델러 파일</comment>
     <comment xml:lang="lg">Fayiro eya mu Umbrello puloguramu eyeyambisa UML okutegeka enkwatagana y'ebitundu by'ebiwandike</comment>
@@ -2975,6 +3018,7 @@ Notes:
     <comment xml:lang="ie">ligament de Windows</comment>
     <comment xml:lang="is">Windows tengill</comment>
     <comment xml:lang="it">Collegamento di Windows</comment>
+    <comment xml:lang="ja">Windows リンク</comment>
     <comment xml:lang="ka">Windows -ის ბმული</comment>
     <comment xml:lang="ko">Windows 링크</comment>
     <comment xml:lang="lg">Nyunzi ya mu Windows</comment>
@@ -3045,6 +3089,7 @@ Notes:
     <comment xml:lang="ie">liste de descargas de KGet</comment>
     <comment xml:lang="is">KGet niðurhalslisti</comment>
     <comment xml:lang="it">Elenco di scaricamenti di KGet</comment>
+    <comment xml:lang="ja">KGet ダウンロードリスト</comment>
     <comment xml:lang="ka">KGet გადმოწერების სია</comment>
     <comment xml:lang="ko">KGet 다운로드 목록</comment>
     <comment xml:lang="lg">Lukalala lwa bya kuwanulibwa lwa mu KGet</comment>
@@ -3112,6 +3157,7 @@ Notes:
     <comment xml:lang="ie">archive de emoticones de Kopete</comment>
     <comment xml:lang="is">Kopete lyndistáknasafn</comment>
     <comment xml:lang="it">Archivio di faccine di Kopete</comment>
+    <comment xml:lang="ja">Kopete 感情アイコンアーカイブ</comment>
     <comment xml:lang="ka">Kopete -ის ემოციების არქივი</comment>
     <comment xml:lang="ko">Kopete 이모티콘 압축 파일</comment>
     <comment xml:lang="lg">Kipakire ekirimu emotikoni eza mu Kopete</comment>
@@ -3178,6 +3224,7 @@ Notes:
     <comment xml:lang="ie">contacte ICQ</comment>
     <comment xml:lang="is">ICQ tengiliður</comment>
     <comment xml:lang="it">Contatto ICQ</comment>
+    <comment xml:lang="ja">ICQ コンタクト</comment>
     <comment xml:lang="ka">ICQ -ის კონტაქტი</comment>
     <comment xml:lang="ko">ICQ 대화 상대</comment>
     <comment xml:lang="lg">Kontakiti ya mu ICQ</comment>
@@ -3247,6 +3294,7 @@ Notes:
     <comment xml:lang="ie">formate Microsoft Media</comment>
     <comment xml:lang="is">Microsoft Media Format</comment>
     <comment xml:lang="it">Formato multimediale di Microsoft</comment>
+    <comment xml:lang="ja">Microsoft メディアフォーマット</comment>
     <comment xml:lang="ka">Microsoft Media ფორმატი</comment>
     <comment xml:lang="ko">Microsoft 미디어 포맷</comment>
     <comment xml:lang="lg">Entegeka ya mediya engattike eya Microsoft</comment>
@@ -3320,6 +3368,7 @@ Notes:
     <comment xml:lang="ie">documente RDF de Turtle</comment>
     <comment xml:lang="is">Turtle RDF skjal</comment>
     <comment xml:lang="it">Documento Turtle RDF</comment>
+    <comment xml:lang="ja">Turtle RDF 文書</comment>
     <comment xml:lang="ka">Turtle RDF დოკუმენტი</comment>
     <comment xml:lang="ko">Turtle RDF 문서</comment>
     <comment xml:lang="lg">Kiwandiko eky'enkwatagana z'ebifunibwa ekya mu mpandika ya Turtle</comment>
@@ -3386,6 +3435,7 @@ Notes:
     <comment xml:lang="ie">image PIC de Softimage</comment>
     <comment xml:lang="is">Softimage PIC mynd</comment>
     <comment xml:lang="it">Immagine Softimage PIC</comment>
+    <comment xml:lang="ja">Softimage PIC 画像</comment>
     <comment xml:lang="ka">Softimage PIC გამოსახულება</comment>
     <comment xml:lang="ko">Softimage PIC 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya mu Softimage eky'ekika kya PIC</comment>
