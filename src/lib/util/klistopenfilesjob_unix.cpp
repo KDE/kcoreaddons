@@ -28,7 +28,7 @@ public:
             lsofError(error);
         });
 
-        QObject::connect(&lsofProcess, qOverload<int, QProcess::ExitStatus>(&QProcess::finished), job, [this](int exitCode, QProcess::ExitStatus exitStatus) {
+        QObject::connect(&lsofProcess, &QProcess::finished, job, [this](int exitCode, QProcess::ExitStatus exitStatus) {
             lsofFinished(exitCode, exitStatus);
         });
     }
