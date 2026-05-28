@@ -11,7 +11,7 @@
 /*!
  * \namespace KSandbox
  * \inmodule KCoreAddons
- * \brief Utility functions for use inside application sandboxes such as flatpak or snap.
+ * \brief Utility functions for use inside application sandboxes such as Flatpak or Snap.
  * \since 5.95
  */
 namespace KSandbox
@@ -23,12 +23,12 @@ namespace KSandbox
 KCOREADDONS_EXPORT bool isInside();
 
 /*!
- * Returns whether the application is inside a flatpak sandbox
+ * Returns whether the application is inside a Flatpak sandbox
  */
 KCOREADDONS_EXPORT bool isFlatpak();
 
 /*!
- * Returns whether the application is inside a snap sandbox
+ * Returns whether the application is inside a Snap sandbox
  */
 KCOREADDONS_EXPORT bool isSnap();
 

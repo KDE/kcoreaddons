@@ -6,6 +6,8 @@ target_sources(kcoreaddonsplugin PRIVATE
     kuserproxy.cpp
     kuserproxy.h
     kosreleaseproxy.cpp
+    sandbox.cpp
+    sandbox.h
     types.h
 )
 target_link_libraries(kcoreaddonsplugin PRIVATE
