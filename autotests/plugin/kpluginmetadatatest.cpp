@@ -389,21 +389,21 @@ private Q_SLOTS:
         QCOMPARE(plugins[1].pluginId(), QStringLiteral("qtplugin")); // ID is not the filename, it is set in the JSON metadata
 
         // filter accepts none
-        plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), [](const KPluginMetaData &) {
+        plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), [](const KPluginMetaData &) noexcept {
             return false;
         });
         std::sort(plugins.begin(), plugins.end(), sortPlugins);
         QCOMPARE(plugins.size(), 0);
 
         // filter accepts all
-        plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), [](const KPluginMetaData &) {
+        plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), [](const KPluginMetaData &) noexcept {
             return true;
         });
         std::sort(plugins.begin(), plugins.end(), sortPlugins);
         QCOMPARE(plugins.size(), 2);
 
         // mimetype filter. Only one match, jsonplugin2 is specific to text/html.
-        auto supportTextPlain = [](const KPluginMetaData &metaData) {
+        auto supportTextPlain = [](const KPluginMetaData &metaData) noexcept {
             return metaData.supportsMimeType(QStringLiteral("text/plain"));
         };
         plugins = KPluginMetaData::findPlugins(QStringLiteral("namespace"), supportTextPlain);

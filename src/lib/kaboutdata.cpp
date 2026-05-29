@@ -1172,7 +1172,7 @@ QList<KAboutRelease> KAboutData::releases() const
 class KAboutDataRegistry
 {
 public:
-    KAboutDataRegistry()
+    KAboutDataRegistry() noexcept
         : m_appData(nullptr)
     {
     }
