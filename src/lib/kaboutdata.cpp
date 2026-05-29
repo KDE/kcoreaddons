@@ -1363,7 +1363,7 @@ void KAboutData::processCommandLine(QCommandLineParser *parser)
 
     const QString desktopFileName = parser->value(QStringLiteral("desktopfile"));
     if (!desktopFileName.isEmpty()) {
-        d->desktopFileName = desktopFileName;
+        setApplicationData(setDesktopFileName(desktopFileName));
     }
 
     if (foundArgument) {
