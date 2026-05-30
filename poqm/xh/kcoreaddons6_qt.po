@@ -334,7 +334,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "%1 yabhalwa ngumntu ofuna ukuhlala engaziwa."
 
-#: lib/kaboutdata.cpp:1333
+#: lib/kaboutdata.cpp:1339
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -346,7 +346,7 @@ msgstr ""
 "%1 yabhalwa ngu\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1344
+#: lib/kaboutdata.cpp:1350
 #, fuzzy
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
@@ -354,7 +354,7 @@ msgstr ""
 "Nceda sebenzisa i http://bugs.kde.org ukuchaza amagciwane, ungabhaleli "
 "ababhali nkqo.\n"
 
-#: lib/kaboutdata.cpp:1346
+#: lib/kaboutdata.cpp:1352
 #, fuzzy, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

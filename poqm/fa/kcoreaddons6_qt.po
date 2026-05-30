@@ -324,18 +324,18 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "این برنامه توسط کسی نوشته شده که می‌خواهد ناشناس باقی بماند."
 
-#: lib/kaboutdata.cpp:1333
+#: lib/kaboutdata.cpp:1339
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 نوشته شده به دست:"
 
-#: lib/kaboutdata.cpp:1344
+#: lib/kaboutdata.cpp:1350
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "برای گزارش اشکال‌ها لطفاً از http://bugs.kde.org استفاده کنید."
 
-#: lib/kaboutdata.cpp:1346
+#: lib/kaboutdata.cpp:1352
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

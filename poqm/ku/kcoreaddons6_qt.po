@@ -388,7 +388,7 @@ msgstr ""
 "Ev sepan ji aliyê kesekî/e ku naxwaze navê wî/ê deşîfre bibe hatiye "
 "nivîsandin."
 
-#: lib/kaboutdata.cpp:1333
+#: lib/kaboutdata.cpp:1339
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -400,7 +400,7 @@ msgstr ""
 "%1 ji hêla\n"
 "%2 ve hatiye nivîsandin"
 
-#: lib/kaboutdata.cpp:1344
+#: lib/kaboutdata.cpp:1350
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
@@ -409,7 +409,7 @@ msgstr ""
 "Ji kerema xwe bo ragihandina çewtiyan navnîşana http://bugs.kde.org  bikar "
 "bîne.\n"
 
-#: lib/kaboutdata.cpp:1346
+#: lib/kaboutdata.cpp:1352
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"

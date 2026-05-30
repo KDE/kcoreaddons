@@ -322,13 +322,13 @@ msgstr ""
 "Chaidh an aplacaid seo a sgrìobhadh le cuideigin nach eil airson ainm "
 "foillseachadh."
 
-#: lib/kaboutdata.cpp:1333
+#: lib/kaboutdata.cpp:1339
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "Chaidh %1 a sgrìobhadh le:"
 
-#: lib/kaboutdata.cpp:1344
+#: lib/kaboutdata.cpp:1350
 #, fuzzy
 #| msgctxt "KAboutData CLI|"
 #| msgid "Please use http://bugs.kde.org to report bugs."
@@ -336,7 +336,7 @@ msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Cleachd http://bugs.kde.org gus aithris a dhèanamh air bugaichean."
 
-#: lib/kaboutdata.cpp:1346
+#: lib/kaboutdata.cpp:1352
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

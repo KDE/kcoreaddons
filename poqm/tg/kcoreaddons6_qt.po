@@ -320,20 +320,20 @@ msgstr ""
 "Ин барнома аз тарафи шахсе навишта шудааст, ки намехоҳад номи худро ошкор "
 "намояд."
 
-#: lib/kaboutdata.cpp:1333
+#: lib/kaboutdata.cpp:1339
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 аз ҷониби барномасози зерин навишта шудааст:"
 
-#: lib/kaboutdata.cpp:1344
+#: lib/kaboutdata.cpp:1350
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr ""
 "Барои фиристодани гузориш дар бораи хато, лутфан, аз сомонаи https://bugs."
 "kde.org истифода баред."
 
-#: lib/kaboutdata.cpp:1346
+#: lib/kaboutdata.cpp:1352
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."
