@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2026-01-23 11:09-0500\n"
+"PO-Revision-Date: 2026-05-30 17:11-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:275
@@ -185,7 +185,7 @@ msgstr "CC0"
 #: lib/kaboutdata.cpp:381
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr "ئىجادىيەت ئورتاقلىق ئىجازەتنامىسى نۆل"
+msgstr " ئىجادىيەت ئورتاقلىق ئىجازەتنامىسى نۆل"
 
 #: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license (short name)"
