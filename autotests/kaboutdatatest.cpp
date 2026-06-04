@@ -244,8 +244,6 @@ void KAboutDataTest::testSetAddLicense()
     licenseFileStream << LicenseFileText;
     licenseFile.close();
 
-    const QString lineFeed = QString::fromLatin1("\n\n");
-
     KAboutData aboutData(QString::fromLatin1(AppName),
                          QLatin1String(ProgramName),
                          QString::fromLatin1(Version),
