@@ -20,7 +20,7 @@ QTEST_MAIN(KAutoSaveFileTest)
 
 void KAutoSaveFileTest::initTestCase()
 {
-    QCoreApplication::instance()->setApplicationName(QLatin1String("qttest")); // TODO do this in qtestlib itself
+    QCoreApplication::setApplicationName(QLatin1String("qttest")); // TODO do this in qtestlib itself
 }
 
 void KAutoSaveFileTest::cleanupTestCase()
