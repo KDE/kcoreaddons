@@ -16,7 +16,7 @@ class KAutoSaveFileTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS:
-    void initTestCase();
+    static void initTestCase();
     void test_readWrite();
     void test_fileNameMaxLength();
     void test_fileStaleFiles();
