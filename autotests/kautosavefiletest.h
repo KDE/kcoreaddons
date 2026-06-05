@@ -21,7 +21,7 @@ private Q_SLOTS:
     void test_fileNameMaxLength();
     static void test_fileStaleFiles();
     void test_applicationStaleFiles();
-    void test_locking();
+    static void test_locking();
     void cleanupTestCase();
 
 private:
