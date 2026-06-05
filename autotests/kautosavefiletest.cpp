@@ -110,7 +110,7 @@ void KAutoSaveFileTest::test_fileStaleFiles()
 
     // Make sure the stale file is found
 
-    const auto listOfStaleFiles = saveFile.staleFiles(normalFile, QStringLiteral("qttest"));
+    const auto listOfStaleFiles = KAutoSaveFile::staleFiles(normalFile, QStringLiteral("qttest"));
     QCOMPARE(listOfStaleFiles.count(), 1);
     saveFile.releaseLock();
     qDeleteAll(listOfStaleFiles);
