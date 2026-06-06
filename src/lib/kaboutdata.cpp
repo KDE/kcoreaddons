@@ -1429,6 +1429,7 @@ struct {
 struct AppDataDesc {
     QString desc;
     QString rawDesc;
+    bool isTranslated = false;
 };
 
 [[nodiscard]] static AppDataDesc readAppStreamDescription(QXmlStreamReader &reader)
@@ -1445,15 +1446,22 @@ struct AppDataDesc {
         }
         if (token == QXmlStreamReader::StartElement) {
             const auto lang = reader.attributes().value("http://www.w3.org/XML/1998/namespace"_L1, "lang"_L1).toString();
+            desc.isTranslated |= !lang.isEmpty();
             if ((lang.isEmpty() || elemName != reader.name()) && !translationBuffer.empty()) {
                 desc.desc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer) + "</"_L1 + elemName + '>'_L1;
                 translationBuffer.clear();
             }
             elemName = reader.name().toString();
             auto subDesc = readAppStreamDescription(reader);
-            translationBuffer[lang] = std::move(subDesc.desc);
-            if (lang.isEmpty() && !translationBuffer.empty()) {
-                desc.rawDesc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer, {}) + "</"_L1 + elemName + '>'_L1;
+            if (subDesc.isTranslated) {
+                desc.desc += '<'_L1 + elemName + '>'_L1 + subDesc.desc + "</"_L1 + elemName + '>'_L1;
+                desc.rawDesc += '<'_L1 + elemName + '>'_L1 + subDesc.rawDesc + "</"_L1 + elemName + '>'_L1;
+                desc.isTranslated = true;
+            } else {
+                translationBuffer[lang] = std::move(subDesc.desc);
+                if (lang.isEmpty() && !translationBuffer.empty()) {
+                    desc.rawDesc += '<'_L1 + elemName + '>'_L1 + resolveLanguage(translationBuffer, {}) + "</"_L1 + elemName + '>'_L1;
+                }
             }
         }
         if (token == QXmlStreamReader::Characters && !reader.isWhitespace()) {
@@ -1498,8 +1506,11 @@ KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
             continue;
         }
 
-        if (reader.name() == "component"_L1 || reader.name() == "releases"_L1) {
+        if (reader.name() == "component"_L1) {
             // recurse into
+        } else if (reader.name() == "releases"_L1) {
+            aboutData->d->_releaseList.clear();
+            // and recurse into
         } else if (reader.name() == "id"_L1) {
             aboutData->setDesktopFileName(reader.readElementText());
         } else if (reader.name() == "project_license"_L1) {
