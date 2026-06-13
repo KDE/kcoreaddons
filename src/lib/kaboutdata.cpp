@@ -1574,12 +1574,19 @@ KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
 KAboutData KAboutData::fromAppStreamId(const QString &applicationId)
 {
     for (const auto &variant : {"metainfo"_L1, "appdata"_L1}) {
+#ifndef Q_OS_ANDROID
         const auto p = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
                                               "metainfo/"_L1 + applicationId + '.'_L1 + variant + ".xml"_L1,
                                               QStandardPaths::LocateFile);
         if (!p.isEmpty()) {
             return KAboutData::fromAppStreamFile(p);
         }
+#else
+        const auto p = "assets:/share/metainfo/"_L1 + applicationId + '.'_L1 + variant + ".xml"_L1;
+        if (QFileInfo::exists(p)) {
+            return KAboutData::fromAppStreamFile(p);
+        }
+#endif
     }
 
     return KAboutData();
