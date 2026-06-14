@@ -425,6 +425,7 @@ void KAboutDataTest::testAppStream()
     QCOMPARE(aboutData.bugAddress(), "https://bugs.kde.org/enter_bug.cgi?format=guided&product=frameworks-coreaddons"_L1);
     QCOMPARE(aboutData.displayName(), "Test App (untranslated)"_L1);
     QCOMPARE(aboutData.shortDescription(), "Test App Description (untranslated)"_L1);
+    QCOMPARE(aboutData.componentName(), "coreaddons-test-app"_L1);
 
     QCOMPARE(aboutData.releases().size(), 2);
     QCOMPARE(aboutData.releases()[0].version(), "25.12.1"_L1);

@@ -1483,6 +1483,25 @@ struct AppDataDesc {
     return desc;
 }
 
+[[nodiscard]] static QStringList readAppStreamBinaries(QXmlStreamReader &reader)
+{
+    QStringList l;
+    while (!reader.atEnd() && !reader.hasError()) {
+        const auto token = reader.readNext();
+        if (token == QXmlStreamReader::EndElement) {
+            break;
+        }
+        if (token == QXmlStreamReader::StartElement) {
+            if (reader.name() == "binary"_L1) {
+                l.push_back(reader.readElementText());
+            } else {
+                reader.skipCurrentElement();
+            }
+        }
+    }
+    return l;
+}
+
 KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
 {
     KAboutData *aboutData = s_registry->m_appData;
@@ -1519,6 +1538,11 @@ KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
             aboutData->setOrganizationDomain(reader.attributes().value("id"_L1).toUtf8());
             // where to put developer-name?
             reader.skipCurrentElement();
+        } else if (reader.name() == "provides"_L1) {
+            const auto l = readAppStreamBinaries(reader);
+            if (l.size() == 1) {
+                aboutData->setComponentName(l.front());
+            }
         } else if (reader.name() == "name"_L1) {
             const auto lang = reader.attributes().value("http://www.w3.org/XML/1998/namespace"_L1, "lang"_L1).toString();
             appName[lang] = reader.readElementText();
