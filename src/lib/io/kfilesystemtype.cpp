@@ -74,13 +74,11 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
     return kde_typeFromName(buf.f_fstypename);
 }
 
-#elif defined(Q_OS_LINUX) || defined(Q_OS_HURD)
+#elif defined(Q_OS_LINUX)
 #include <sys/statfs.h>
 
-#ifdef Q_OS_LINUX
 #include <linux/magic.h> // A lot of the filesystem superblock MAGIC numbers
 #include <sys/stat.h>
-#endif
 
 // Add known missig magics
 // Can use https://github.com/systemd/systemd/blob/main/src/basic/missing_magic.h
@@ -120,7 +118,6 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #define AUTOFSNG_SUPER_MAGIC 0x7d92b1a0
 #endif
 
-#ifdef Q_OS_HURD
 #ifndef NFS_SUPER_MAGIC
 #define NFS_SUPER_MAGIC 0x00006969
 #endif
@@ -135,7 +132,6 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #endif
 #ifndef RAMFS_MAGIC
 #define RAMFS_MAGIC 0x858458F6
-#endif
 #endif
 
 KFileSystemType::Type probeFuseBlkType(const QByteArray &path)
@@ -247,6 +243,30 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #else
     return kde_typeFromName(buf.f_basetype);
 #endif
+}
+
+#elif defined(Q_OS_HURD)
+#include <sys/statfs.h>
+#include <hurd/hurd_types.h>
+
+static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
+{
+    struct statfs buf;
+    if (statfs(path.constData(), &buf) != 0) {
+        return KFileSystemType::Unknown;
+    }
+
+    switch (buf.f_type) {
+    case FSTYPE_NFS:
+    case FSTYPE_AFS:
+        return KFileSystemType::Nfs;
+    case FSTYPE_MSLOSS:
+        return KFileSystemType::Fat;
+    case FSTYPE_MEMFS:
+        return KFileSystemType::Ramfs;
+    default:
+        return KFileSystemType::Other;
+    }
 }
 #endif
 #else
