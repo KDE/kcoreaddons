@@ -25,47 +25,47 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Qt-Contexts: true\n"
 
-#: lib/io/kfilesystemtype.cpp:275
+#: lib/io/kfilesystemtype.cpp:295
 msgctxt "KFileSystemType|"
 msgid "NFS"
 msgstr "NFS"
 
-#: lib/io/kfilesystemtype.cpp:277
+#: lib/io/kfilesystemtype.cpp:297
 msgctxt "KFileSystemType|"
 msgid "SMB"
 msgstr "SMB"
 
-#: lib/io/kfilesystemtype.cpp:279
+#: lib/io/kfilesystemtype.cpp:299
 msgctxt "KFileSystemType|"
 msgid "FAT"
 msgstr "FAT"
 
-#: lib/io/kfilesystemtype.cpp:281
+#: lib/io/kfilesystemtype.cpp:301
 msgctxt "KFileSystemType|"
 msgid "RAMFS"
 msgstr "RAMFS"
 
-#: lib/io/kfilesystemtype.cpp:283
+#: lib/io/kfilesystemtype.cpp:303
 msgctxt "KFileSystemType|"
 msgid "Other"
 msgstr "Інша"
 
-#: lib/io/kfilesystemtype.cpp:285
+#: lib/io/kfilesystemtype.cpp:305
 msgctxt "KFileSystemType|"
 msgid "NTFS"
 msgstr "NTFS"
 
-#: lib/io/kfilesystemtype.cpp:287
+#: lib/io/kfilesystemtype.cpp:307
 msgctxt "KFileSystemType|"
 msgid "ExFAT"
 msgstr "ExFAT"
 
-#: lib/io/kfilesystemtype.cpp:289
+#: lib/io/kfilesystemtype.cpp:309
 msgctxt "KFileSystemType|"
 msgid "FUSE"
 msgstr "FUSE"
 
-#: lib/io/kfilesystemtype.cpp:291
+#: lib/io/kfilesystemtype.cpp:311
 msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "Невідома"
