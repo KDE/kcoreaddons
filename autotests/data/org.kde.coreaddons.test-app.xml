@@ -60,6 +60,7 @@
   </releases>
   <custom>
     <value key="KDE::matrix">#frameworks-devel:kde.org</value>
+    <value key="FOO::something_else">some value</value>
   </custom>
   <recommends>
     <control>keyboard</control>

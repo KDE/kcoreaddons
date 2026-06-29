@@ -1632,6 +1632,58 @@ public:
     QString desktopFileName() const;
 
     /*!
+     * Types of URLs associated with application metadata.
+     *
+     * This includes URL types defined in the AppStream specification
+     * as well as KDE extensions to that.
+     *
+     * \value Homepage The application homepage.
+     * \value Bugtracker The application's bug tracking system, for users to report issues.
+     * \value Faq A FAQ page for this application.
+     * \value Help User reference or documentation.
+     * \value Donation Information on how to donate to this project.
+     * \value Translate Page about how to contribute to translating the application.
+     * \value Contact Page with contact information of the vendor/developer.
+     * \value VCSBrowser Link to the Git forge or similar with the application source code.
+     * \value Contribute Information on how to contribute to this application.
+     *
+     * \value XKDEMatrixRoom Matrix room for this application (KDE::matrix AppStream extension).
+     * \value XKDEForum Web forum/forum section for this application (KDE::forum AppStream extension).
+     * \value XKDEMastodon Mastodon account about this applications (KDE::mastodon AppStream extension).
+     *
+     * \sa https://www.freedesktop.org/software/appstream/docs/chap-Metadata.html#tag-url
+     * \since 6.29
+     */
+    enum UrlType {
+        Homepage,
+        Bugtracker,
+        Faq,
+        Help,
+        Donation,
+        Translate,
+        Contact,
+        VCSBrowser,
+        Contribute,
+        // KDE extensions
+        XKDEMatrixRoom,
+        XKDEForum,
+        XKDEMastodon,
+        // TODO: wiki: currently not read from AppStream by apps.kde.org
+    };
+
+    /*!
+     * Sets the URL of the given type.
+     * \since 6.29
+     */
+    KAboutData &setUrl(KAboutData::UrlType type, const QString &url);
+    /*!
+     * Returns the URL of the given type, if available.
+     * This is typically populated from AppStream application metadata.
+     * \since 6.29
+     */
+    [[nodiscard]] QString url(KAboutData::UrlType type) const;
+
+    /*!
      * Adds a release note for this application.
      * \sa releases()
      * \since 6.26

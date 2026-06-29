@@ -422,6 +422,9 @@ void KAboutDataTest::testAppStream()
     QCOMPARE(aboutData.licenses()[0].name(), "LGPL v2"_L1);
     QCOMPARE(aboutData.licenses()[0].spdx(), "LGPL-2.0+"_L1);
     QCOMPARE(aboutData.homepage(), "https://apps.kde.org/coreaddons-test-app"_L1);
+    QCOMPARE(aboutData.url(KAboutData::Homepage), "https://apps.kde.org/coreaddons-test-app"_L1);
+    QCOMPARE(aboutData.url(KAboutData::VCSBrowser), "https://invent.kde.org/frameworks/kcoreaddons"_L1);
+    QCOMPARE(aboutData.url(KAboutData::XKDEMatrixRoom), "#frameworks-devel:kde.org"_L1);
     QCOMPARE(aboutData.bugAddress(), "https://bugs.kde.org/enter_bug.cgi?format=guided&product=frameworks-coreaddons"_L1);
     QCOMPARE(aboutData.displayName(), "Test App (untranslated)"_L1);
     QCOMPARE(aboutData.shortDescription(), "Test App Description (untranslated)"_L1);
