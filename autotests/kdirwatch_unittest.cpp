@@ -499,19 +499,18 @@ void KDirWatch_UnitTest::testDeleteAndRecreateDir()
 {
     // Like KDirModelTest::testOverwriteFileWithDir does at the end.
     // The linux-2.6.31 bug made kdirwatch emit deletion signals about the -new- dir!
-    QTemporaryDir *tempDir1 = new QTemporaryDir(QDir::tempPath() + QLatin1Char('/') + QLatin1String("olddir-"));
+    auto tempDir1 = std::make_unique<QTemporaryDir>(QDir::tempPath() + QLatin1Char('/') + QLatin1String("olddir-"));
     KDirWatch watch;
     const QString path1 = tempDir1->path() + QLatin1Char('/');
     watch.addDir(path1);
 
-    delete tempDir1;
-    QTemporaryDir *tempDir2 = new QTemporaryDir(QDir::tempPath() + QLatin1Char('/') + QLatin1String("newdir-"));
+    tempDir1.reset();
+
+    auto tempDir2 = std::make_unique<QTemporaryDir>(QDir::tempPath() + QLatin1Char('/') + QLatin1String("newdir-"));
     const QString path2 = tempDir2->path() + QLatin1Char('/');
     watch.addDir(path2);
 
     QVERIFY(waitForOneSignal(watch, SIGNAL(deleted(QString)), path1));
-
-    delete tempDir2;
 }
 
 void KDirWatch_UnitTest::testMoveTo()
@@ -750,17 +749,17 @@ void KDirWatch_UnitTest::testMoveToThread()
         auto watch = new KDirWatch;
         watch->addDir(dir.path());
 
-        auto thread = new QThread;
-        watch->moveToThread(thread);
-        thread->start();
+        QThread thread;
+        watch->moveToThread(&thread);
+        thread.start();
 
         waitUntilMTimeChange(dir.path());
 
-        QObject::connect(thread, &QThread::finished, thread, &QObject::deleteLater);
-        QObject::connect(thread, &QThread::finished, watch, &QObject::deleteLater);
+        QObject::connect(&thread, &QThread::finished, &thread, &QObject::deleteLater);
+        QObject::connect(&thread, &QThread::finished, watch, &QObject::deleteLater);
 
-        thread->quit();
-        thread->wait();
+        thread.quit();
+        thread.wait();
     }
     // trigger an event on the now deleted watch. This should not crash!
     const QString file = dir.path() + QLatin1String("/bar");
