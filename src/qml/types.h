@@ -22,4 +22,10 @@ struct KAboutReleaseForeign {
     QML_FOREIGN(KAboutRelease)
 };
 
+namespace KAboutDataForeign
+{
+Q_NAMESPACE
+QML_NAMED_ELEMENT(AboutUrlType)
+QML_FOREIGN_NAMESPACE(KAboutData)
+}
 #endif

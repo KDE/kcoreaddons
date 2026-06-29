@@ -603,7 +603,7 @@ public:
     QString _shortDescription;
     QString _copyrightStatement;
     QString _otherText;
-    QString _homepageAddress;
+    QHash<KAboutData::UrlType, QString> _urls;
     QList<KAboutPerson> _authorList;
     QList<KAboutPerson> _creditList;
     QList<KAboutPerson> _translatorList;
@@ -653,7 +653,7 @@ KAboutData::KAboutData(const QString &_componentName,
     d->_licenseList.append(KAboutLicense(licenseType, this));
     d->_copyrightStatement = _copyrightStatement;
     d->_otherText = text;
-    d->_homepageAddress = homePageAddress;
+    d->_urls[KAboutData::Homepage] = homePageAddress;
     d->_bugAddress = bugAddress.toUtf8();
 
     QUrl homePageUrl(homePageAddress);
@@ -909,7 +909,7 @@ KAboutData &KAboutData::setOtherText(const QString &_otherText)
 
 KAboutData &KAboutData::setHomepage(const QString &homepage)
 {
-    d->_homepageAddress = homepage;
+    d->_urls[KAboutData::Homepage] = homepage;
     return *this;
 }
 
@@ -993,7 +993,7 @@ QString KAboutData::shortDescription() const
 
 QString KAboutData::homepage() const
 {
-    return d->_homepageAddress;
+    return d->_urls.value(KAboutData::Homepage);
 }
 
 QString KAboutData::bugAddress() const
@@ -1156,6 +1156,17 @@ QString KAboutData::desktopFileName() const
 
     return hostComponents.join(dotChar);
 #endif
+}
+
+KAboutData &KAboutData::setUrl(KAboutData::UrlType type, const QString &url)
+{
+    d->_urls[type] = url;
+    return *this;
+}
+
+QString KAboutData::url(KAboutData::UrlType type) const
+{
+    return d->_urls.value(type);
 }
 
 KAboutData &KAboutData::addRelease(KAboutRelease &&release)
@@ -1502,6 +1513,24 @@ struct AppDataDesc {
     return l;
 }
 
+struct {
+    QLatin1StringView name;
+    KAboutData::UrlType type;
+} static constexpr const url_type_map[] = {
+    {"homepage"_L1, KAboutData::Homepage},
+    {"bugtracker"_L1, KAboutData::Bugtracker},
+    {"faq"_L1, KAboutData::Faq},
+    {"help"_L1, KAboutData::Help},
+    {"donation"_L1, KAboutData::Donation},
+    {"translate"_L1, KAboutData::Translate},
+    {"contact"_L1, KAboutData::Contact},
+    {"vcs-browser"_L1, KAboutData::VCSBrowser},
+    {"contribute"_L1, KAboutData::Contribute},
+    {"KDE::matrix"_L1, KAboutData::XKDEMatrixRoom},
+    {"KDE::forum"_L1, KAboutData::XKDEForum},
+    {"KDE::mastodon"_L1, KAboutData::XKDEMastodon},
+};
+
 KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
 {
     KAboutData *aboutData = s_registry->m_appData;
@@ -1525,7 +1554,7 @@ KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
             continue;
         }
 
-        if (reader.name() == "component"_L1) {
+        if (reader.name() == "component"_L1 || reader.name() == "custom"_L1) {
             // recurse into
         } else if (reader.name() == "releases"_L1) {
             aboutData->d->_releaseList.clear();
@@ -1551,12 +1580,15 @@ KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
             appSummary[lang] = reader.readElementText();
         } else if (reader.name() == "url"_L1) {
             const auto type = reader.attributes().value("type"_L1);
-            if (type == "homepage"_L1) {
-                aboutData->setHomepage(reader.readElementText());
-            } else if (type == "bugtracker"_L1) {
-                aboutData->setBugAddress(reader.readElementText().toUtf8());
-            } else {
-                reader.skipCurrentElement();
+            for (const auto &m : url_type_map) {
+                if (m.name != type) {
+                    continue;
+                }
+                aboutData->setUrl(m.type, reader.readElementText());
+                if (m.name == "bugtracker"_L1) {
+                    aboutData->setBugAddress(aboutData->url(KAboutData::Bugtracker).toUtf8());
+                }
+                break;
             }
         } else if (reader.name() == "release"_L1) {
             const auto version = reader.attributes().value("version"_L1).toString();
@@ -1584,6 +1616,15 @@ KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
 
             if (!version.isEmpty() && !desc.desc.isEmpty()) {
                 aboutData->addRelease(KAboutRelease(version, date, desc.desc, desc.rawDesc, url));
+            }
+        } else if (reader.name() == "value"_L1) {
+            const auto key = reader.attributes().value("key"_L1);
+            for (const auto &m : url_type_map) {
+                if (m.name != key) {
+                    continue;
+                }
+                aboutData->setUrl(m.type, reader.readElementText());
+                break;
             }
         } else {
             reader.skipCurrentElement();
