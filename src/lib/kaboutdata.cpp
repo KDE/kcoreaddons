@@ -610,6 +610,7 @@ public:
     QList<KAboutComponent> _componentList;
     QList<KAboutLicense> _licenseList;
     QList<KAboutRelease> _releaseList;
+    QList<KAboutData> _pluginList;
     QVariant programLogo;
     QString customAuthorPlainText, customAuthorRichText;
     bool customAuthorTextEnabled;
@@ -742,6 +743,12 @@ KAboutData &KAboutData::addAuthor(const KAboutPerson &author)
     return *this;
 }
 
+KAboutData &KAboutData::addAuthors(const QList<KAboutPerson> &authors)
+{
+    d->_authorList.append(authors);
+    return *this;
+}
+
 KAboutData &KAboutData::addCredit(const KAboutPerson &person)
 {
     d->_creditList.append(person);
@@ -757,6 +764,12 @@ KAboutData &KAboutData::addCredit(const QString &name, const QString &task, cons
 KAboutData &KAboutData::setTranslator(const QString &name, const QString &emailAddress)
 {
     d->_translatorList = KAboutDataPrivate::parseTranslators(name, emailAddress);
+    return *this;
+}
+
+KAboutData &KAboutData::addTranslators(const QList<KAboutPerson> &translators)
+{
+    d->_translatorList.append(translators);
     return *this;
 }
 
@@ -780,6 +793,12 @@ KAboutData &
 KAboutData::addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, const QString &pathToLicenseFile)
 {
     d->_componentList.append(KAboutComponent(name, description, version, webAddress, pathToLicenseFile));
+    return *this;
+}
+
+KAboutData &KAboutData::addPlugin(const KAboutData &metadata)
+{
+    d->_pluginList.append(metadata);
     return *this;
 }
 
@@ -1077,6 +1096,11 @@ QString KAboutData::aboutTranslationTeam()
 QString KAboutData::otherText() const
 {
     return d->_otherText;
+}
+
+QList<KAboutData> KAboutData::plugins() const
+{
+    return d->_pluginList;
 }
 
 QList<KAboutComponent> KAboutData::components() const

@@ -1002,6 +1002,14 @@ public:
     KAboutData &addAuthor(const KAboutPerson &author);
 
     /*!
+     * Adds a list of authors
+     *
+     * \a authors the authors
+     * \since 6.28
+     */
+    KAboutData &addAuthors(const QList<KAboutPerson> &authors);
+
+    /*!
      * Defines an author.
      *
      * You can call this function as many times as you need. Each entry is
@@ -1109,6 +1117,16 @@ public:
     KAboutData &setTranslator(const QString &name, const QString &emailAddress);
 
     /*!
+     * \brief Adds a list of persons to the translator list
+     *
+     * \a translators the translators
+     *
+     * \since 6.28
+     *
+     */
+    KAboutData &addTranslators(const QList<KAboutPerson> &translators);
+
+    /*!
      * Add a component that is used by the application.
      *
      * You can call this function as many times as you need. Each entry is
@@ -1173,6 +1191,15 @@ public:
      */
     KAboutData &
     addComponent(const QString &name, const QString &description, const QString &version, const QString &webAddress, const QString &pathToLicenseFile);
+
+    /*!
+     * Adds a KAboutData to the plugin list
+     *
+     * \a metadata the plugin metadata in aboutdata format
+     *
+     * \since 6.28
+     */
+    KAboutData &addPlugin(const KAboutData &metadata);
 
     /*!
      * Defines a license text, which is translated.
@@ -1504,6 +1531,13 @@ public:
      * Returns a list of translators.
      */
     QList<KAboutPerson> translators() const;
+
+    /*!
+     * Returns a list of plugins
+     *
+     * \since 6.28
+     */
+    QList<KAboutData> plugins() const;
 
     /*!
      * Returns a message about the translation team.
