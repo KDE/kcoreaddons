@@ -24,6 +24,7 @@ class QPluginLoader;
 struct QStaticPlugin;
 class KPluginMetaDataPrivate;
 class KAboutPerson;
+class KAboutData;
 /*!
   \class KPluginMetaData
   \inmodule KCoreAddons
@@ -541,6 +542,13 @@ public:
      */
     QStringList value(QStringView key, const QStringList &defaultValue) const;
     QStringList value(const QString &key, const QStringList &defaultValue) const; // TODO KF7: remove
+
+    /*!
+     * Converts the metadata in here in as close as possible to KAboutData
+     *
+     * \since 6.28
+     */
+    KAboutData toAboutData() const;
 
     /*!
      *

@@ -570,6 +570,28 @@ QStaticPlugin KPluginMetaData::staticPlugin() const
     return d->staticPlugin.value();
 }
 
+KAboutData KPluginMetaData::toAboutData() const
+{
+    KAboutData newData;
+    newData.setDisplayName(name());
+    auto licenseKey = KAboutLicense::byKeyword(license()).key();
+    if (licenseKey <= 0) {
+        newData.setLicenseText(licenseText());
+    } else {
+        newData.setLicense(KAboutLicense::byKeyword(license()).key());
+    }
+    newData.addAuthors(authors());
+    newData.setBugAddress(bugReportUrl().toUtf8());
+    newData.setHomepage(website());
+    newData.setShortDescription(description());
+    newData.addTranslators(translators());
+    newData.setVersion(version().toUtf8());
+    // we can' set icon to program logo.
+    // KPluginMetaData contains a string that hopefully can be loaded from theme
+    // KAboutData has a QVariant containnig some sort of image
+    return newData;
+}
+
 QDebug operator<<(QDebug debug, const KPluginMetaData &metaData)
 {
     QDebugStateSaver saver(debug);
