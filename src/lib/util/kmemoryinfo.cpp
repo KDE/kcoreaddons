@@ -39,6 +39,13 @@ Q_LOGGING_CATEGORY(LOG_KMEMORYINFO, "kf.coreaddons.kmemoryinfo", QtWarningMsg)
      #include <stdlib.h>
      #include <strings.h>
      #include <unistd.h>
+#elif defined(Q_OS_HURD)
+     extern "C" {
+          #include <mach/mach.h>
+          #include <mach/vm_param.h>
+          #include <mach/mach_interface.h>
+          #include <mach/gnumach.h>
+     }
 #endif
 // clang-format on
 
@@ -509,6 +516,35 @@ bool KMemoryInfo::update()
         return false;
     }
     d->m_cached = bcstats.numbufpages * pagesize / 1024;
+
+    return true;
+}
+
+#elif defined(Q_OS_HURD)
+/*****************************************************************************
+ * GNU/Hurd
+ ****************************************************************************/
+
+bool KMemoryInfo::update()
+{
+    vm_statistics_data_t vmstats;
+    vm_cache_statistics_data_t cache_stats;
+
+    if (vm_statistics(mach_task_self(), &vmstats) != 0) {
+        return false;
+    }
+
+    if (vm_cache_statistics(mach_task_self(), &cache_stats) != 0) {
+        return false;
+    }
+
+    d->m_totalPhysical = static_cast<quint64>(vmstats.free_count + vmstats.active_count + vmstats.inactive_count + vmstats.wire_count) * PAGE_SIZE;
+    d->m_freePhysical = static_cast<quint64>(vmstats.free_count) * PAGE_SIZE;
+    d->m_totalSwapFile = 0; // TODO
+    d->m_freeSwapFile = 0; // TODO
+    d->m_cached = static_cast<quint64>(cache_stats.cache_count) * PAGE_SIZE;
+    d->m_buffers = 0;
+    d->m_availablePhysical = d->m_totalPhysical - d->m_freePhysical;
 
     return true;
 }
