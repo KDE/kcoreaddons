@@ -1618,6 +1618,11 @@ KAboutData KAboutData::fromAppStreamId(const QString &applicationId)
 
 KAboutData KAboutData::fromAppStreamForApplication()
 {
+    if (!s_registry->m_appData && QCoreApplication::instance()) {
+        // initialize with information already set on QCoreApplication
+        // to avoid things going out of sync when calling setters in the wrong order
+        std::ignore = KAboutData::applicationData();
+    }
     return KAboutData::fromAppStreamId(QCoreApplication::instance()->property("desktopFileName").toString());
 }
 

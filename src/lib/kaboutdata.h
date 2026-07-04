@@ -892,6 +892,10 @@ public:
      *
      * QGuiApplication::desktopFileName has to be set prior to calling this.
      *
+     * Properties not provided by AppStream data but set on QGuiApplication
+     * are being set as well, in the same way as KAboutData::applicationData()
+     * does (since 6.28).
+     *
      * \sa fromAppStreamFile, fromAppStreamId
      *
      * \since 6.26
