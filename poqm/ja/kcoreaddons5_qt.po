@@ -1,4 +1,5 @@
 # Translation of kdelibs4 into Japanese.
+# SPDX-FileCopyrightText: 2022, 2026 Ryuichi Yamada <ryuichi_ya220@outlook.jp>
 # This file is distributed under the same license as the kdelibs package.
 # Taiki Komoda <kom@kde.gr.jp>, 2002, 2004, 2006, 2010.
 # Noboru Sinohara <shinobo@leo.bekkoame.ne.jp>, 2004.
@@ -8,7 +9,6 @@
 # Shinichi Tsunoda <tsuno@ngy.1st.ne.jp>, 2005.
 # Yukiko Bando <ybando@k6.dion.ne.jp>, 2006, 2007, 2008, 2009, 2010.
 # Tomohiro Hyakutake <tomhioo@outlook.jp>, 2019.
-# Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2022.
 # Fumiaki Okushi <fumiaki.okushi@gmail.com>, 2006, 2007, 2008, 2010, 2011, 2019, 2022.
 #
 msgid ""
@@ -16,8 +16,8 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2022-08-20 23:07-0700\n"
-"Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
+"PO-Revision-Date: 2026-07-02 21:39+0900\n"
+"Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: qtrich\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 26.04.2\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:243
@@ -67,7 +67,7 @@ msgstr "ExFAT"
 #: lib/io/kfilesystemtype.cpp:257
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "FUSE"
 
 #: lib/io/kfilesystemtype.cpp:259
 msgctxt "KFileSystemType|"
@@ -792,13 +792,11 @@ msgstr "たった今"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:515
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes ago"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%1 分前"
+msgstr[0] "%n 分前"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:531
@@ -819,12 +817,10 @@ msgid "Could not find lsof executable in PATH:"
 msgstr "パスに lsof 実行ファイルが見つかりませんでした:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
-#, fuzzy, qt-format
-#| msgctxt "QObject|"
-#| msgid "Failed to execute `lsof' error code %1"
+#, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "'lsof' の実行に失敗しました エラーコード %1"
+msgstr "'lsof' の実行に失敗しました。エラーコード %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
