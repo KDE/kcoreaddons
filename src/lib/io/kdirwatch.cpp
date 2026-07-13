@@ -1616,7 +1616,7 @@ QString KDirWatchPrivate::inotifyEventName(const inotify_event *event) const
     if (event->mask & IN_UNMOUNT) {
         return QStringLiteral("IN_UNMOUNT");
     }
-    return QStringLiteral("UNKWOWN");
+    return QStringLiteral("UNKNOWN");
 }
 #endif
 
