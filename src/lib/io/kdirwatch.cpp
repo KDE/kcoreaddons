@@ -1898,5 +1898,3 @@ bool KDirWatch::event(QEvent *event)
 
 #include "moc_kdirwatch.cpp"
 #include "moc_kdirwatch_p.cpp"
-
-// sven
