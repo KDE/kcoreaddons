@@ -1571,38 +1571,52 @@ void KDirWatchPrivate::unref(KDirWatch *watch)
 #if HAVE_SYS_INOTIFY_H
 QString KDirWatchPrivate::inotifyEventName(const inotify_event *event) const
 {
-    if (event->mask & IN_OPEN)
+    if (event->mask & IN_OPEN) {
         return QStringLiteral("OPEN");
-    else if (event->mask & IN_CLOSE_NOWRITE)
+    }
+    if (event->mask & IN_CLOSE_NOWRITE) {
         return QStringLiteral("CLOSE_NOWRITE");
-    else if (event->mask & IN_CLOSE_WRITE)
+    }
+    if (event->mask & IN_CLOSE_WRITE) {
         return QStringLiteral("CLOSE_WRITE");
-    else if (event->mask & IN_MOVED_TO)
+    }
+    if (event->mask & IN_MOVED_TO) {
         return QStringLiteral("MOVED_TO");
-    else if (event->mask & IN_MOVED_FROM)
+    }
+    if (event->mask & IN_MOVED_FROM) {
         return QStringLiteral("MOVED_FROM");
-    else if (event->mask & IN_MOVE)
+    }
+    if (event->mask & IN_MOVE) {
         return QStringLiteral("MOVE");
-    else if (event->mask & IN_CREATE)
+    }
+    if (event->mask & IN_CREATE) {
         return QStringLiteral("CREATE");
-    else if (event->mask & IN_DELETE)
+    }
+    if (event->mask & IN_DELETE) {
         return QStringLiteral("DELETE");
-    else if (event->mask & IN_DELETE_SELF)
+    }
+    if (event->mask & IN_DELETE_SELF) {
         return QStringLiteral("DELETE_SELF");
-    else if (event->mask & IN_MOVE_SELF)
+    }
+    if (event->mask & IN_MOVE_SELF) {
         return QStringLiteral("MOVE_SELF");
-    else if (event->mask & IN_ATTRIB)
+    }
+    if (event->mask & IN_ATTRIB) {
         return QStringLiteral("ATTRIB");
-    else if (event->mask & IN_MODIFY)
+    }
+    if (event->mask & IN_MODIFY) {
         return QStringLiteral("MODIFY");
-    if (event->mask & IN_ACCESS)
+    }
+    if (event->mask & IN_ACCESS) {
         return QStringLiteral("ACCESS");
-    if (event->mask & IN_IGNORED)
+    }
+    if (event->mask & IN_IGNORED) {
         return QStringLiteral("IGNORED");
-    if (event->mask & IN_UNMOUNT)
+    }
+    if (event->mask & IN_UNMOUNT) {
         return QStringLiteral("IN_UNMOUNT");
-    else
-        return QStringLiteral("UNKWOWN");
+    }
+    return QStringLiteral("UNKWOWN");
 }
 #endif
 
