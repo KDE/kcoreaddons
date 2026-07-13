@@ -1571,6 +1571,7 @@ void KDirWatchPrivate::unref(KDirWatch *watch)
 #if HAVE_SYS_INOTIFY_H
 QString KDirWatchPrivate::inotifyEventName(const inotify_event *event) const
 {
+    // FIXME: mind that this code is wrong when multiple bits are set in the same mask
     if (event->mask & IN_OPEN) {
         return QStringLiteral("OPEN");
     }
