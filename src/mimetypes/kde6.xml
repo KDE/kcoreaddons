@@ -1443,6 +1443,7 @@ Notes:
     <comment xml:lang="bs">Kate lista fajlova za učitavanje liste dodataka</comment>
     <comment xml:lang="ca">Llista de connector carregador de la llista de fitxers del Kate</comment>
     <comment xml:lang="ca@valencia">Llista de connector carregador de la llista de fitxers de Kate</comment>
+    <comment xml:lang="cs">Seznam souborů pro načítání seznamů modulů Kate</comment>
     <comment xml:lang="cy">Rhestr mewnbillgyn llwythwr rhestr ffeil Kate</comment>
     <comment xml:lang="da">Liste over plugins til fillisteindlæsning i Kate</comment>
     <comment xml:lang="de">Kate-Dateilisten-Modul</comment>
@@ -1475,7 +1476,7 @@ Notes:
     <comment xml:lang="ml">കേറ്റ് ഫയല്‍ പട്ടിക ലഭ്യമാക്കുന്നതിന്റെ സംയോജകങ്ങളുടെ പട്ടിക</comment>
     <comment xml:lang="my">ကိတ်ပ်ဖိုင်လ်စာရင်းတင်သွင်းမှုပလပ်ဂင်စာရင်း</comment>
     <comment xml:lang="nan_TW">Kate 檔案單載入器外掛程式 ê 單</comment>
-    <comment xml:lang="nan_TW@latin">Kate tóng-àn tuann tsài-ji̍p-khì guā-kuà-tîng-sik ê tuann</comment>
+    <comment xml:lang="nan_TW@latin">Kate tóng-àn-tuann tsài-ji̍p-khì guā-kuà-tîng-sik ê lia̍t-tuann</comment>
     <comment xml:lang="nb">Programtilleggliste for filliste-laster i Kate</comment>
     <comment xml:lang="nl">Kate bestandenlijstlader voor pluginlijst</comment>
     <comment xml:lang="nn">Programtillegg­liste for filliste-lastar i Kate</comment>
@@ -3186,7 +3187,7 @@ Notes:
     <comment xml:lang="ml">കെഗെറ്റ് ഡൌണ്‍ലോഡ് പട്ടിക</comment>
     <comment xml:lang="my">ကေဂတ် ဒေါင်းလုတ်စာရင်း</comment>
     <comment xml:lang="nan_TW">KGet 下載單</comment>
-    <comment xml:lang="nan_TW@latin">KGet hā-tsài tuann</comment>
+    <comment xml:lang="nan_TW@latin">KGet hā-tsài lia̍t-tuann</comment>
     <comment xml:lang="nb">KGet-nedlastingsliste</comment>
     <comment xml:lang="nl">KGet-downloadlijst</comment>
     <comment xml:lang="nn">KGet-nedlastingsliste</comment>
@@ -3800,6 +3801,7 @@ Notes:
     <comment xml:lang="bs">KNotification Deklaracija</comment>
     <comment xml:lang="ca">Declaració del KNotification</comment>
     <comment xml:lang="ca@valencia">Declaració del KNotification</comment>
+    <comment xml:lang="cs">Deklarace KNotification</comment>
     <comment xml:lang="cy">Datganiad KNotification</comment>
     <comment xml:lang="da">KNotification-erklæring</comment>
     <comment xml:lang="de">KNotification-Deklaration</comment>
