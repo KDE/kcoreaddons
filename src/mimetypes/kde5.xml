@@ -1420,6 +1420,7 @@ Notes:
     <comment xml:lang="bs">Kate lista fajlova za učitavanje liste dodataka</comment>
     <comment xml:lang="ca">Llista de connector carregador de la llista de fitxers del Kate</comment>
     <comment xml:lang="ca@valencia">Llista de connector carregador de la llista de fitxers de Kate</comment>
+    <comment xml:lang="cs">Seznam souborů pro načítání seznamů modulů Kate</comment>
     <comment xml:lang="cy">Rhestr mewnbillgyn llwythwr rhestr ffeil Kate</comment>
     <comment xml:lang="de">Kate-Dateilisten-Modul</comment>
     <comment xml:lang="el">Λίστα αρχείου φόρτωσης λίστας πρόσθετων Kate</comment>
@@ -3449,6 +3450,7 @@ Notes:
     <comment xml:lang="bs">KNotification Deklaracija</comment>
     <comment xml:lang="ca">Declaració del KNotification</comment>
     <comment xml:lang="ca@valencia">Declaració del KNotification</comment>
+    <comment xml:lang="cs">Deklarace KNotification</comment>
     <comment xml:lang="cy">Datganiad KNotification</comment>
     <comment xml:lang="de">KNotification-Deklaration</comment>
     <comment xml:lang="el">Δήλωση KNotification</comment>
