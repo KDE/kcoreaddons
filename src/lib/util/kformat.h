@@ -84,6 +84,7 @@ public:
      * \value UnitExaByte EiB/EB/EB 2^60/10^18 bytes
      * \value UnitZettaByte ZiB/ZB/ZB 2^70/10^21 bytes
      * \value UnitYottaByte YiB/YB/YB 2^80/10^24 bytes
+     * \omitvalue UnitLastUnit
      */
     enum BinarySizeUnits {
         DefaultBinaryUnits = -1,

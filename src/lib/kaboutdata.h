@@ -595,7 +595,7 @@ Q_DECLARE_TYPEINFO(KAboutComponent, Q_RELOCATABLE_TYPE);
  *
  * This represents an AppStream release note of an individual version.
  *
- * \see https://www.freedesktop.org/software/appstream/docs/sect-Metadata-Releases.html
+ * \sa https://www.freedesktop.org/software/appstream/docs/sect-Metadata-Releases.html
  *
  * \since 6.26
  */
@@ -652,7 +652,7 @@ public:
      * This is not meant for displaying to users, but for detecting changes
      * since the last display, when display release notes on development versions.
      *
-     * \see description
+     * \sa description
      */
     [[nodiscard]] QString untranslatedDescription() const;
 

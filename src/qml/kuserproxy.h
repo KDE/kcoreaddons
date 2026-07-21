@@ -48,7 +48,6 @@
  *  \endcode
  *
  * \brief User provides read-only access to the user's personal information.
- * \sa KUser
  */
 class KUserProxy : public QObject
 {

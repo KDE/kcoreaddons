@@ -148,7 +148,7 @@ public:
     [[nodiscard]] QString logo() const;
 
     /*!
-     * \qmlmethod list<string> KOSRelease::extraKeys
+     * \qmlmethod list<string> KOSRelease::extraKeys()
      */
     Q_INVOKABLE [[nodiscard]] QStringList extraKeys() const;
 
