@@ -261,43 +261,43 @@ msgstr ""
 "<p>KDE 由世界各地 ê 翻譯團隊 ê 拚勢來翻譯做足濟語言。</p> <p>KDE 國際化 ê 資"
 "訊會使參考 <a href=\"https://l10n.kde.org\">https://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1317
+#: lib/kaboutdata.cpp:1328
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "顯示作者資料。"
 
-#: lib/kaboutdata.cpp:1318
+#: lib/kaboutdata.cpp:1329
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "顯示授權條款資料。"
 
-#: lib/kaboutdata.cpp:1320
+#: lib/kaboutdata.cpp:1331
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "這个應用程式 ê desktop 項目 ê 基礎檔名。"
 
-#: lib/kaboutdata.cpp:1321
+#: lib/kaboutdata.cpp:1332
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "檔案名"
 
-#: lib/kaboutdata.cpp:1331
+#: lib/kaboutdata.cpp:1342
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "這个應用程式 ê 作者希望匿名。"
 
-#: lib/kaboutdata.cpp:1339
+#: lib/kaboutdata.cpp:1350
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 ê 作者："
 
-#: lib/kaboutdata.cpp:1350
+#: lib/kaboutdata.cpp:1361
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "請用 https://bugs.kde.org 來回報錯誤。"
 
-#: lib/kaboutdata.cpp:1352
+#: lib/kaboutdata.cpp:1363
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

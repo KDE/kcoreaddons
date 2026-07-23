@@ -286,43 +286,43 @@ msgstr ""
 "p><p>Du finner mer informasjon om internasjonalisering av KDE-programmene på "
 "<a href=\"https://l10n.kde.org/\">https://l10n.kde.org/</a>.</p>"
 
-#: lib/kaboutdata.cpp:1317
+#: lib/kaboutdata.cpp:1328
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Vis opphaverinformasjon."
 
-#: lib/kaboutdata.cpp:1318
+#: lib/kaboutdata.cpp:1329
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Vis lisensinformasjon."
 
-#: lib/kaboutdata.cpp:1320
+#: lib/kaboutdata.cpp:1331
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Filnavn-stammen til skrivebordsoppføringen til programmet."
 
-#: lib/kaboutdata.cpp:1321
+#: lib/kaboutdata.cpp:1332
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "filnavn"
 
-#: lib/kaboutdata.cpp:1331
+#: lib/kaboutdata.cpp:1342
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Dette programmet er skrevet av noen som ønsker å være anonyme."
 
-#: lib/kaboutdata.cpp:1339
+#: lib/kaboutdata.cpp:1350
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 er skrevet av:"
 
-#: lib/kaboutdata.cpp:1350
+#: lib/kaboutdata.cpp:1361
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Bruk https://bugs.kde.org/ for å rapportere feil."
 
-#: lib/kaboutdata.cpp:1352
+#: lib/kaboutdata.cpp:1363
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

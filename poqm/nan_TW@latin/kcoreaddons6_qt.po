@@ -263,43 +263,43 @@ msgstr ""
 "tsē gí-giân.</p> <p>KDE kok-tsè-huà ê tsu-sìn ē-sái tsham-khó <a href="
 "\"https://l10n.kde.org\">https://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1317
+#: lib/kaboutdata.cpp:1328
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Hián-sī tsok-tsiá tsu-liāu."
 
-#: lib/kaboutdata.cpp:1318
+#: lib/kaboutdata.cpp:1329
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Hián-sī siū-khuân-tiâu-khuán tsu-liāu."
 
-#: lib/kaboutdata.cpp:1320
+#: lib/kaboutdata.cpp:1331
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "Tsit-ê ìng-iōng-tîng-sik ê desktop hāng-bo̍k ê ki-tshóo tóng-miâ."
 
-#: lib/kaboutdata.cpp:1321
+#: lib/kaboutdata.cpp:1332
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "tóng-àn-miâ"
 
-#: lib/kaboutdata.cpp:1331
+#: lib/kaboutdata.cpp:1342
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Tsit-ê ìng-iōng-tîng-sik ê tsok-tsiá hi-bāng li̍k-miâ."
 
-#: lib/kaboutdata.cpp:1339
+#: lib/kaboutdata.cpp:1350
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 ê tsok-tsiá:"
 
-#: lib/kaboutdata.cpp:1350
+#: lib/kaboutdata.cpp:1361
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "Tshiánn iōng https://bugs.kde.org lâi huê-pò tshò-gōo."
 
-#: lib/kaboutdata.cpp:1352
+#: lib/kaboutdata.cpp:1363
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

@@ -288,43 +288,43 @@ msgstr ""
 "है।</p><p>केडीई के अंतर्राष्ट्रीयकरण के बारे में और अधिक जानकारी के लिए यहाँ जाएँ: <a href="
 "\"http://l10n.kde.org\">http://l10n.kde.org</a></p>"
 
-#: lib/kaboutdata.cpp:1317
+#: lib/kaboutdata.cpp:1328
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "लेखक की जानकारी दिखाएँ"
 
-#: lib/kaboutdata.cpp:1318
+#: lib/kaboutdata.cpp:1329
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "लाइसेंस की जानकारी दिखाएँ"
 
-#: lib/kaboutdata.cpp:1320
+#: lib/kaboutdata.cpp:1331
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr "इस अनुप्रयोग के लिए डेस्कटॉप प्रविष्टि का आधार फ़ाइल नाम।"
 
-#: lib/kaboutdata.cpp:1321
+#: lib/kaboutdata.cpp:1332
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr "फ़ाइल का नाम"
 
-#: lib/kaboutdata.cpp:1331
+#: lib/kaboutdata.cpp:1342
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "इस अनुप्रयोग को किसी ऐसे व्यक्ति द्वारा लिखा गया है जो बेनाम बने रहना चाहते हैं।"
 
-#: lib/kaboutdata.cpp:1339
+#: lib/kaboutdata.cpp:1350
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "%1 was written by:"
 msgstr "%1 के लेखक :"
 
-#: lib/kaboutdata.cpp:1350
+#: lib/kaboutdata.cpp:1361
 msgctxt "KAboutData CLI|"
 msgid "Please use https://bugs.kde.org to report bugs."
 msgstr "कृपया http://bugs.kde.org का उपयोग बग रिपोर्ट के लिए करें।"
 
-#: lib/kaboutdata.cpp:1352
+#: lib/kaboutdata.cpp:1363
 #, qt-format
 msgctxt "KAboutData CLI|"
 msgid "Please report bugs to %1."

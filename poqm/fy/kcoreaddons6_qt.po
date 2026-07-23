@@ -357,31 +357,31 @@ msgstr ""
 "algemiene ynformaasje oer de ynternasjonalisaasje fan KDE op http://l10n.kde."
 "org</p>"
 
-#: lib/kaboutdata.cpp:1317
+#: lib/kaboutdata.cpp:1328
 #, fuzzy
 #| msgid "Show author information"
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
 msgstr "Skriuwersynformaasje sjen litte"
 
-#: lib/kaboutdata.cpp:1318
+#: lib/kaboutdata.cpp:1329
 #, fuzzy
 #| msgid "Show license information"
 msgctxt "KAboutData CLI|"
 msgid "Show license information."
 msgstr "Lisinsje-ynformaasje sjen litte"
 
-#: lib/kaboutdata.cpp:1320
+#: lib/kaboutdata.cpp:1331
 msgctxt "KAboutData CLI|"
 msgid "The base file name of the desktop entry for this application."
 msgstr ""
 
-#: lib/kaboutdata.cpp:1321
+#: lib/kaboutdata.cpp:1332
 msgctxt "KAboutData CLI|"
 msgid "file name"
 msgstr ""
 
-#: lib/kaboutdata.cpp:1331
+#: lib/kaboutdata.cpp:1342
 #, fuzzy
 #| msgid ""
 #| "This application was written by somebody who wants to remain anonymous."
@@ -389,7 +389,7 @@ msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
 msgstr "Dizze applikaasje is skreaun troch ien dy anonym winsk te bliuwen."
 
-#: lib/kaboutdata.cpp:1339
+#: lib/kaboutdata.cpp:1350
 #, fuzzy, qt-format
 #| msgctxt "the 2nd argument is a list of name+address, one on each line"
 #| msgid ""
@@ -401,7 +401,7 @@ msgstr ""
 "%1 is skreaun troch\n"
 "%2"
 
-#: lib/kaboutdata.cpp:1350
+#: lib/kaboutdata.cpp:1361
 #, fuzzy
 #| msgid "Please use http://bugs.kde.org to report bugs.\n"
 msgctxt "KAboutData CLI|"
@@ -409,7 +409,7 @@ msgid "Please use https://bugs.kde.org to report bugs."
 msgstr ""
 "Brûk http://bugs.kde.org om brekkings (programmaflaters) te rapportearjen.\n"
 
-#: lib/kaboutdata.cpp:1352
+#: lib/kaboutdata.cpp:1363
 #, fuzzy, qt-format
 #| msgid "Please report bugs to %1.\n"
 msgctxt "KAboutData CLI|"
