@@ -11,6 +11,7 @@
 
 #include <kcoreaddons_export.h>
 
+#include <QAnyStringView>
 #include <QString>
 
 /*!
@@ -50,6 +51,15 @@ enum Type {
  * \since 5.0
  */
 KCOREADDONS_EXPORT Type fileSystemType(const QString &path);
+
+/*!
+ * Returns the filesystem type for a filesystem type name as reported by the
+ * kernel (for example "vfat", "ntfs3", "nfs4", "cifs"), one of
+ * KFileSystemType::Type. Returns KFileSystemType::Other for an unrecognized name.
+ *
+ * \since 6.30
+ */
+KCOREADDONS_EXPORT Type fileSystemTypeForName(QAnyStringView fsTypeName);
 
 /*!
  * Returns the possibly translated name of a filesystem corresponding to a

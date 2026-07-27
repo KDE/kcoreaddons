@@ -17,49 +17,37 @@
 #include <QCoreApplication>
 #include <QFile>
 
+using namespace Qt::StringLiterals;
+
 struct FsInfo {
     KFileSystemType::Type type = KFileSystemType::Unknown;
-    const char *name = nullptr;
+    const QLatin1StringView name;
 };
 
-#ifndef Q_OS_WIN
 // clang-format off
 static constexpr FsInfo s_fsMap[] = {
-    {KFileSystemType::Nfs, "nfs"},
-    {KFileSystemType::Nfs, "nfs4"},
-    {KFileSystemType::Smb, "smb"},
-    {KFileSystemType::Fat, "fat"},
-    {KFileSystemType::Ramfs, "ramfs"},
-    {KFileSystemType::Other, "other"},
-    {KFileSystemType::Ntfs, "ntfs"},
-    {KFileSystemType::Ntfs, "ntfs3"},
-    {KFileSystemType::Exfat, "exfat"},
-    {KFileSystemType::Unknown, "unknown"},
-    {KFileSystemType::Nfs, "autofs"},
-    {KFileSystemType::Nfs, "cachefs"},
-    {KFileSystemType::Nfs, "fuse.sshfs"},
-    {KFileSystemType::Nfs, "xtreemfs@"}, // #178678
-    {KFileSystemType::Smb, "smbfs"},
-    {KFileSystemType::Smb, "cifs"},
-    {KFileSystemType::Fat, "vfat"},
-    {KFileSystemType::Fat, "msdos"},
-    {KFileSystemType::Fuse, "fuseblk"},
-    {KFileSystemType::Nfs, "afs"}, // bug 375623, another remote file system
+    {KFileSystemType::Nfs, "afs"_L1}, // bug 375623, another remote file system
+    {KFileSystemType::Nfs, "autofs"_L1},
+    {KFileSystemType::Nfs, "cachefs"_L1},
+    {KFileSystemType::Nfs, "fuse.sshfs"_L1},
+    {KFileSystemType::Nfs, "nfs"_L1},
+    {KFileSystemType::Nfs, "nfs4"_L1},
+    {KFileSystemType::Nfs, "xtreemfs@"_L1}, // #178678
+    {KFileSystemType::Smb, "cifs"_L1},
+    {KFileSystemType::Smb, "smb"_L1},
+    {KFileSystemType::Smb, "smbfs"_L1},
+    {KFileSystemType::Fat, "fat"_L1},
+    {KFileSystemType::Fat, "msdos"_L1},
+    {KFileSystemType::Fat, "vfat"_L1},
+    {KFileSystemType::Ramfs, "ramfs"_L1},
+    {KFileSystemType::Ntfs, "ntfs"_L1},
+    {KFileSystemType::Ntfs, "ntfs3"_L1},
+    {KFileSystemType::Exfat, "exfat"_L1},
+    {KFileSystemType::Fuse, "fuseblk"_L1},
 };
 // clang-format on
 
-inline KFileSystemType::Type kde_typeFromName(const QLatin1String name)
-{
-    auto it = std::find_if(std::begin(s_fsMap), std::end(s_fsMap), [name](const auto &fsInfo) {
-        return QLatin1String(fsInfo.name) == name;
-    });
-    return it != std::end(s_fsMap) ? it->type : KFileSystemType::Other;
-}
-
-inline KFileSystemType::Type kde_typeFromName(const char *c)
-{
-    return kde_typeFromName(QLatin1String(c));
-}
+#ifndef Q_OS_WIN
 
 #if defined(Q_OS_BSD4) && !defined(Q_OS_NETBSD)
 #include <sys/mount.h>
@@ -71,7 +59,7 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
     if (statfs(path.constData(), &buf) != 0) {
         return KFileSystemType::Unknown;
     }
-    return kde_typeFromName(buf.f_fstypename);
+    return KFileSystemType::fileSystemTypeForName(QLatin1StringView(buf.f_fstypename));
 }
 
 #elif defined(Q_OS_LINUX)
@@ -160,8 +148,8 @@ KFileSystemType::Type probeFuseBlkType(const QByteArray &path)
         return Nfs;
     }
 
-    const QLatin1String fsType(udev_device_get_property_value(devPtr.get(), "ID_FS_TYPE"));
-    return kde_typeFromName(fsType);
+    const QLatin1StringView fsType(udev_device_get_property_value(devPtr.get(), "ID_FS_TYPE"));
+    return KFileSystemType::fileSystemTypeForName(fsType);
 #endif
 
     return Fuse;
@@ -181,19 +169,19 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
 #if HAVE_LIB_MOUNT
     using LibmntTable = std::unique_ptr<struct libmnt_table, decltype(&mnt_free_table)>;
     if (auto table = LibmntTable(mnt_new_table(), mnt_free_table)) {
-        QLatin1String fstype;
+        QLatin1StringView fstype;
         if (mnt_table_parse_mtab(table.get(), nullptr) == 0) {
             struct libmnt_fs *fs = mnt_table_find_mountpoint(table.get(), path.constData(), MNT_ITER_BACKWARD);
             if (fs) {
-                fstype = QLatin1String(mnt_fs_get_fstype(fs));
+                fstype = QLatin1StringView(mnt_fs_get_fstype(fs));
             }
         }
 
         if (!fstype.isEmpty()) {
-            if (fstype == QLatin1String("fuseblk")) {
+            if (fstype == "fuseblk"_L1) {
                 return probeFuseBlkType(path);
             }
-            return kde_typeFromName(fstype);
+            return KFileSystemType::fileSystemTypeForName(fstype);
         }
     }
 #endif
@@ -239,9 +227,9 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
         return KFileSystemType::Unknown;
     }
 #if defined(Q_OS_NETBSD)
-    return kde_typeFromName(buf.f_fstypename);
+    return KFileSystemType::fileSystemTypeForName(QLatin1StringView(buf.f_fstypename));
 #else
-    return kde_typeFromName(buf.f_basetype);
+    return KFileSystemType::fileSystemTypeForName(QLatin1StringView(buf.f_basetype));
 #endif
 }
 
@@ -286,6 +274,14 @@ KFileSystemType::Type KFileSystemType::fileSystemType(const QString &path)
     } else {
         return determineFileSystemTypeImpl(QFile::encodeName(path));
     }
+}
+
+KFileSystemType::Type KFileSystemType::fileSystemTypeForName(QAnyStringView fsTypeName)
+{
+    auto it = std::find_if(std::begin(s_fsMap), std::end(s_fsMap), [fsTypeName](const FsInfo &fsInfo) {
+        return fsTypeName == fsInfo.name;
+    });
+    return it != std::end(s_fsMap) ? it->type : KFileSystemType::Other;
 }
 
 QString KFileSystemType::fileSystemName(KFileSystemType::Type type)
