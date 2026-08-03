@@ -7,6 +7,8 @@
 # Axel Bojer <fri_programvare@bojer.no>, 2005, 2006.
 # Nils Kristian Tomren <slx@nilsk.net>, 2005, 2007.
 # Øyvind A. Holm <sunny@sunbase.org>, 2009.
+# Martin Hansen <mh306602@gmail.com>, 2025.
+# Karl Ove Hufthammer <karl@huftis.org>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
