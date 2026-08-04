@@ -49,7 +49,7 @@ static constexpr FsInfo s_fsMap[] = {
 
 #ifndef Q_OS_WIN
 
-#if defined(Q_OS_BSD4) && !defined(Q_OS_NETBSD)
+#if defined(Q_OS_FREEBSD) || defined(Q_OS_OPENBSD) || defined(Q_OS_DARWIN)
 #include <sys/mount.h>
 #include <sys/param.h>
 
@@ -216,8 +216,7 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
     }
 }
 
-#elif defined(Q_OS_AIX) || defined(Q_OS_HPUX) || defined(Q_OS_QNX) || defined(Q_OS_SCO) || defined(Q_OS_UNIXWARE) || defined(Q_OS_RELIANT)                     \
-    || defined(Q_OS_NETBSD)
+#elif defined(Q_OS_NETBSD)
 #include <sys/statvfs.h>
 
 KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
@@ -226,11 +225,7 @@ KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
     if (statvfs(path.constData(), &buf) != 0) {
         return KFileSystemType::Unknown;
     }
-#if defined(Q_OS_NETBSD)
     return KFileSystemType::fileSystemTypeForName(QLatin1StringView(buf.f_fstypename));
-#else
-    return KFileSystemType::fileSystemTypeForName(QLatin1StringView(buf.f_basetype));
-#endif
 }
 
 #elif defined(Q_OS_HURD)

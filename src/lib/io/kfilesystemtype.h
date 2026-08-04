@@ -27,7 +27,7 @@ namespace KFileSystemType
  * \value Smb SMB/CIFS mount (networked but with some FAT-like behavior)
  * \value Fat FAT or similar (msdos, FAT, VFAT)
  * \value Ramfs RAMDISK mount
- * \value Other Ext3, Ext4, ReiserFs, and so on. "Normal" local filesystems.
+ * \value Other Ext3, Ext4, Btrfs, and so on. "Normal" local filesystems.
  * \value [since 5.85] Ntfs NTFS filesystem
  * \value [since 5.86] Exfat ExFat filesystem
  * \value [since 5.100] Fuse (Filesystem in USErspace), this is used for a variety of underlying filesystems.
