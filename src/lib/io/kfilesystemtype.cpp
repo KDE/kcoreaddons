@@ -156,8 +156,9 @@ KFileSystemType::Type probeFuseBlkType(const QByteArray &path)
     // 'b' for block devices
     auto devPtr = UDevicePtr(udev_device_new_from_devnum(udevP.get(), 'b', buf.st_dev), udev_device_unref);
     if (!devPtr) {
-        // If is not block device, assume conservatively it is a remote FS under FUSE.
-        return Nfs;
+        // No block device, so a program is serving these files, and it can be serving them from
+        // anywhere, this machine or another one.
+        return FuseNoDev;
     }
 
     const QLatin1String fsType(udev_device_get_property_value(devPtr.get(), "ID_FS_TYPE"));
@@ -306,6 +307,7 @@ QString KFileSystemType::fileSystemName(KFileSystemType::Type type)
     case KFileSystemType::Exfat:
         return QCoreApplication::translate("KFileSystemType", "ExFAT");
     case KFileSystemType::Fuse:
+    case KFileSystemType::FuseNoDev:
         return QCoreApplication::translate("KFileSystemType", "FUSE");
     case KFileSystemType::Unknown:
         return QCoreApplication::translate("KFileSystemType", "Unknown");

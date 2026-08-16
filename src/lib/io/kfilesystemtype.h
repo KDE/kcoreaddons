@@ -29,7 +29,12 @@ namespace KFileSystemType
  * \value Other Ext3, Ext4, ReiserFs, and so on. "Normal" local filesystems.
  * \value [since 5.85] Ntfs NTFS filesystem
  * \value [since 5.86] Exfat ExFat filesystem
- * \value [since 5.100] Fuse (Filesystem in USErspace), this is used for a variety of underlying filesystems.
+ * \value [since 5.100] Fuse (Filesystem in USErspace) on a block device, holding a filesystem this
+ * machine could not name. The kernel calls this kind of mount fuseblk.
+ * \value [since 6.30] FuseNoDev A fuse mount with no block device behind it, the kind
+ * /proc/filesystems marks nodev, which is a different thing from the nodev mount option. The files
+ * come from a program rather than from a filesystem on a disk, and that program may be serving a
+ * directory that lives on another machine.
  */
 enum Type {
     Unknown,
@@ -40,7 +45,9 @@ enum Type {
     Other,
     Ntfs,
     Exfat,
+    // TODO KF7: rename to FuseBlk
     Fuse,
+    FuseNoDev,
 };
 
 /*!
