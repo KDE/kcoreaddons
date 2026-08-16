@@ -100,7 +100,12 @@ public:
     class Entry
     {
     public:
-        ~Entry();
+        // Declared and empty, so that Entry keeps the copy semantics QMap gives it today, and
+        // defined here, so that a QMap of entries can be walked from outside the library.
+        ~Entry()
+        {
+        }
+
         // instances interested in events
         std::vector<Client> m_clients;
         // nonexistent entries of this directory
@@ -252,6 +257,20 @@ public:
 
     bool _isStopped;
     bool verboseDebug;
+
+#ifdef BUILD_TESTING
+    // Instrumentation for the autotests, compiled in only when BUILD_TESTING is on. The
+    // autotests reach it as friends of KDirWatch, through its d pointer.
+
+    // How many entries were stat-ed because their own poll interval elapsed, since the last
+    // time the counts were cleared. An entry watched through QFileSystemWatcher is counted
+    // in neither this nor the next one.
+    int m_pollScanCount = 0;
+    // How many entries were stat-ed because a notification arrived for them, since the last
+    // time the counts were cleared. A stat that both reasons ask for at once is counted here
+    // and in the poll count both.
+    int m_notificationScanCount = 0;
+#endif
 
 private:
     // Public objects that reference this thread-local private instance.

@@ -458,10 +458,6 @@ void KDirWatchPrivate::inotifyEventReceived()
 #endif
 }
 
-KDirWatchPrivate::Entry::~Entry()
-{
-}
-
 /* In inotify mode, only entries which are marked dirty are scanned.
  * We first need to mark all yet nonexistent, but possible created
  * entries as dirty...
@@ -1251,6 +1247,14 @@ int KDirWatchPrivate::scanEntry(Entry *e)
             // we know nothing has changed, no need to stat
             return NoChange;
         }
+#ifdef BUILD_TESTING
+        if (pollDue) {
+            m_pollScanCount++;
+        }
+        if (e->dirty) {
+            m_notificationScanCount++;
+        }
+#endif
         e->dirty = false;
     }
 
@@ -1262,6 +1266,9 @@ int KDirWatchPrivate::scanEntry(Entry *e)
         if (!e->pollTimeoutReached(freq)) {
             return NoChange;
         }
+#ifdef BUILD_TESTING
+        m_pollScanCount++;
+#endif
     }
 
     QT_STATBUF stat_buf;
