@@ -191,8 +191,9 @@ KDirWatchPrivate::KDirWatchPrivate()
     m_PollInterval = qEnvironmentVariableIsSet(s_envPoll) ? qEnvironmentVariableIntValue(s_envPoll) : 500;
 
     m_preferredMethod = methodFromString(qEnvironmentVariableIsSet(s_envMethod) ? qgetenv(s_envMethod) : "default");
-    // The nfs method defaults to the normal (local) method
-    m_nfsPreferredMethod = methodFromString(qEnvironmentVariableIsSet(s_envNfsMethod) ? qgetenv(s_envNfsMethod) : "Stat");
+    // A network mount takes the same notification method as a local path, and is polled on top
+    // of it. Setting the variable picks one method and drops the other.
+    m_nfsPreferredMethod = qEnvironmentVariableIsSet(s_envNfsMethod) ? methodFromString(qgetenv(s_envNfsMethod)) : m_preferredMethod;
 
     QList<QByteArray> availableMethods;
 
@@ -633,6 +634,9 @@ QDebug operator<<(QDebug debug, const KDirWatchPrivate::Entry &entry)
         debug << " inotify_wd=" << entry.wd;
     }
 #endif
+    if (entry.m_polled) {
+        debug << ", polled every " << entry.freq << "msec";
+    }
     debug << ", has " << entry.m_clients.size() << " clients";
     debug.space();
     if (!entry.m_entries.isEmpty()) {
@@ -753,16 +757,14 @@ bool KDirWatchPrivate::useQFSWatch(Entry *e)
 }
 #endif
 
-bool KDirWatchPrivate::useStat(Entry *e)
+// Stat the entry every <interval> milliseconds from now on. The entry keeps whatever
+// notification watch it has, the two run side by side.
+void KDirWatchPrivate::pollEntry(Entry *e, int interval)
 {
-    if (isNetworkMount(e->path)) {
-        useFreq(e, m_nfsPollInterval);
-    } else {
-        useFreq(e, m_PollInterval);
-    }
+    useFreq(e, interval);
 
-    if (e->m_mode != StatMode) {
-        e->m_mode = StatMode;
+    if (!e->m_polled) {
+        e->m_polled = true;
         statEntries++;
 
         if (statEntries == 1) {
@@ -771,6 +773,12 @@ bool KDirWatchPrivate::useStat(Entry *e)
             qCDebug(KDIRWATCH) << " Started Polling Timer, freq " << freq;
         }
     }
+}
+
+bool KDirWatchPrivate::useStat(Entry *e)
+{
+    pollEntry(e, isNetworkMount(e->path) ? m_nfsPollInterval : m_PollInterval);
+    e->m_mode = StatMode;
 
     qCDebug(KDIRWATCH) << " Setup Stat (freq " << e->freq << ") for " << e->path;
 
@@ -888,6 +896,7 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path, Entry
     // now setup the notification method
     e->m_mode = UnknownMode;
     e->msecLeft = 0;
+    e->m_polled = false;
 
     if (isNoisyFile(QFile::encodeName(path).data())) {
         return;
@@ -930,18 +939,18 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path, Entry
 
 void KDirWatchPrivate::addWatch(Entry *e)
 {
-    // If the watch is on a network filesystem use the nfsPreferredMethod as the
-    // default, otherwise use preferredMethod as the default, if the methods are
-    // the same we can skip the mountpoint check
+    // A network mount is polled with stat on top of its notification watch, and the watch is
+    // kept. inotify reports what this machine does, as soon as it happens, and the poll is what
+    // sees the changes another client on the share made. Watching a share is the one case where
+    // both are needed, so an entry can have both. #177892.
 
-    // A separate method is configurable for network mounts because inotify only reports
-    // the changes this machine makes. Polling with stat is what sees the rest. #177892.
+    // The method for network mounts is configurable on its own, so that a setup which only ever
+    // wants the poll can drop the notification watch.
 
     KDirWatch::Method preferredMethod = m_preferredMethod;
-    if (m_nfsPreferredMethod != m_preferredMethod) {
-        if (isNetworkMount(e->path)) {
-            preferredMethod = m_nfsPreferredMethod;
-        }
+    if (isNetworkMount(e->path)) {
+        pollEntry(e, m_nfsPollInterval);
+        preferredMethod = m_nfsPreferredMethod;
     }
 
     // Try the appropriate preferred method from the config first
@@ -1052,7 +1061,7 @@ void KDirWatchPrivate::removeEntry(KDirWatch *instance, Entry *e, Entry *sub_ent
         removeEntry(nullptr, e->parentDirectory(), e);
     }
 
-    if (e->m_mode == StatMode) {
+    if (e->m_polled) {
         statEntries--;
         if (statEntries == 0) {
             m_statRescanTimer.stop(); // stop timer if lists are empty
@@ -1086,7 +1095,7 @@ void KDirWatchPrivate::removeEntries(KDirWatch *instance)
         if (clientIt != entry.m_clients.end()) {
             clientIt->count = 1; // forces deletion of instance as client
             pathList.append(entry.path);
-        } else if (entry.m_mode == StatMode && entry.freq < minfreq) {
+        } else if (entry.m_polled && entry.freq < minfreq) {
             minfreq = entry.freq;
         }
     }
@@ -1234,8 +1243,12 @@ int KDirWatchPrivate::scanEntry(Entry *e)
     }
 
     if (e->m_mode == INotifyMode) {
-        // we know nothing has changed, no need to stat
-        if (!e->dirty) {
+        // A notification means something changed. A polled entry, which is one on a network
+        // mount, is stat-ed when its interval elapses as well, since a change made on another
+        // machine arrives without any notification.
+        const bool pollDue = e->m_polled && e->pollTimeoutReached(freq);
+        if (!e->dirty && !pollDue) {
+            // we know nothing has changed, no need to stat
             return NoChange;
         }
         e->dirty = false;
@@ -1246,11 +1259,9 @@ int KDirWatchPrivate::scanEntry(Entry *e)
         // e.g. when using 500msec global timer, a entry
         // with freq=5000 is only watched every 10th time
 
-        e->msecLeft -= freq;
-        if (e->msecLeft > 0) {
+        if (!e->pollTimeoutReached(freq)) {
             return NoChange;
         }
-        e->msecLeft += e->freq;
     }
 
     QT_STATBUF stat_buf;

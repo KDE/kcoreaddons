@@ -117,6 +117,21 @@ public:
         entryMode m_mode;
         int msecLeft, freq;
         bool isDir;
+        // true while the entry is stat-ed on the poll timer, either as its only watch or
+        // alongside a notification watch
+        bool m_polled;
+
+        // Counts the poll timer interval down against the entry's own interval. Returns true
+        // once the entry is due for a stat, and starts a new countdown.
+        bool pollTimeoutReached(int timerInterval)
+        {
+            msecLeft -= timerInterval;
+            if (msecLeft > 0) {
+                return false;
+            }
+            msecLeft += freq;
+            return true;
+        }
 
         // is this already an entry for the root / or a full drive Y:?
         bool isRoot() const;
@@ -173,6 +188,7 @@ public:
 
     void resetList(KDirWatch *instance, bool skippedToo);
     void useFreq(Entry *e, int newFreq);
+    void pollEntry(Entry *e, int interval);
     void addEntry(KDirWatch *instance, const QString &_path, Entry *sub_entry, bool isDir, KDirWatch::WatchModes watchModes = KDirWatch::WatchDirOnly);
     void removeEntry(KDirWatch *instance, const QString &path, Entry *sub_entry);
     void removeEntry(KDirWatch *instance, Entry *e, Entry *sub_entry);
