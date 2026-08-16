@@ -194,7 +194,17 @@ static KFileSystemType::Type determineFileSystemTypeImpl(const QByteArray &path)
             if (fstype == QLatin1String("fuseblk")) {
                 return probeFuseBlkType(path);
             }
-            return kde_typeFromName(fstype);
+            const KFileSystemType::Type type = kde_typeFromName(fstype);
+            // The kernel names a fuse mount after the program serving it, so the name reads
+            // fuse.sshfs, fuse.rclone, fuse.gvfsd-fuse and so on, one per backing store, and
+            // plain fuse when the program named no subtype. The table above cannot list them
+            // all, and the name of any of them already says nodev, which is the whole of what
+            // the block device lookup would have found out.
+            const bool isFuseName = fstype == QLatin1String("fuse") || fstype.startsWith(QLatin1String("fuse."));
+            if (type == KFileSystemType::Other && isFuseName) {
+                return KFileSystemType::FuseNoDev;
+            }
+            return type;
         }
     }
 #endif
