@@ -45,8 +45,8 @@ class KDirWatchPrivate;
  * The implementation uses the INOTIFY functionality on LINUX.
  * As a last resort, a regular polling for change of modification times
  * is done; the polling interval is a global config option:
- * DirWatch/PollInterval and DirWatch/NFSPollInterval for NFS mounted
- * directories.
+ * DirWatch/PollInterval and DirWatch/NFSPollInterval for directories on a
+ * network mount, which is either NFS or SMB.
  * The choice of implementation can be adjusted by the user, with the key
  * [DirWatch] PreferredMethod={Stat|QFSWatch|inotify}
  *

@@ -125,6 +125,14 @@ static const char *methodToString(KDirWatch::Method method)
     return nullptr;
 }
 
+// A file on a network mount lives on another machine, which can change it without the local
+// kernel ever seeing the write. Those mounts get the network settings below.
+static bool isNetworkMount(const QString &path)
+{
+    const KFileSystemType::Type fileSystemType = KFileSystemType::fileSystemType(path);
+    return fileSystemType == KFileSystemType::Nfs || fileSystemType == KFileSystemType::Smb;
+}
+
 static const char s_envNfsPoll[] = "KDIRWATCH_NFSPOLLINTERVAL";
 static const char s_envPoll[] = "KDIRWATCH_POLLINTERVAL";
 static const char s_envMethod[] = "KDIRWATCH_METHOD";
@@ -747,7 +755,7 @@ bool KDirWatchPrivate::useQFSWatch(Entry *e)
 
 bool KDirWatchPrivate::useStat(Entry *e)
 {
-    if (KFileSystemType::fileSystemType(e->path) == KFileSystemType::Nfs) { // TODO: or Smbfs?
+    if (isNetworkMount(e->path)) {
         useFreq(e, m_nfsPollInterval);
     } else {
         useFreq(e, m_PollInterval);
@@ -926,14 +934,12 @@ void KDirWatchPrivate::addWatch(Entry *e)
     // default, otherwise use preferredMethod as the default, if the methods are
     // the same we can skip the mountpoint check
 
-    // This allows to configure a different method for NFS mounts, since inotify
-    // cannot detect changes made by other machines. However as a default inotify
-    // is fine, since the most common case is a NFS-mounted home, where all changes
-    // are made locally. #177892.
+    // A separate method is configurable for network mounts because inotify only reports
+    // the changes this machine makes. Polling with stat is what sees the rest. #177892.
 
     KDirWatch::Method preferredMethod = m_preferredMethod;
     if (m_nfsPreferredMethod != m_preferredMethod) {
-        if (KFileSystemType::fileSystemType(e->path) == KFileSystemType::Nfs) {
+        if (isNetworkMount(e->path)) {
             preferredMethod = m_nfsPreferredMethod;
         }
     }
