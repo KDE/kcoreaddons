@@ -290,6 +290,7 @@ Notes:
     <comment xml:lang="gl">Adaptador de extensión de KHTML</comment>
     <comment xml:lang="he">KHTML Extension Adaptor</comment>
     <comment xml:lang="hi">केएचटीएमएल विस्तारण अडैप्टर</comment>
+    <comment xml:lang="hr">KHTML adapter proširenja</comment>
     <comment xml:lang="hu">KHTML-es kiterjesztéskezelő</comment>
     <comment xml:lang="ia">Adaptator pro KHTML Extension</comment>
     <comment xml:lang="id">Adaptor Ekstensi KHTML</comment>
@@ -536,6 +537,7 @@ Notes:
     <comment xml:lang="gl">Modelo de informe de Kugar</comment>
     <comment xml:lang="he">תבנית דוח Kugar</comment>
     <comment xml:lang="hi">कूगर रिपोर्ट टेम्पलेट</comment>
+    <comment xml:lang="hr">Kugar predložak izvještaja</comment>
     <comment xml:lang="hu">Kugar-jelentéssablon</comment>
     <comment xml:lang="ia">Kugar : patrono de reporto</comment>
     <comment xml:lang="id">Template laporan Kugar</comment>
@@ -1141,6 +1143,7 @@ Notes:
     <comment xml:lang="gl">Ficheiro de complemento de RealAudio</comment>
     <comment xml:lang="he">קובץ תוסף RealAudio</comment>
     <comment xml:lang="hi">रिअल-ऑडियो प्लगइन फ़ाइल</comment>
+    <comment xml:lang="hr">priključna datoteka za RealAudio</comment>
     <comment xml:lang="hu">RealAudio-bővítményfájl</comment>
     <comment xml:lang="ia">File de plugin de RealAudio</comment>
     <comment xml:lang="id">File Plugin RealAudio</comment>
