@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2011-08-18 04:06+0200\n"
-"PO-Revision-Date: 2025-11-08 23:51+0100\n"
-"Last-Translator: Igor Dobrača <igor.dobraca@skole.hr>\n"
+"PO-Revision-Date: 2026-08-18 09:44+0200\n"
+"Last-Translator: Igor Dobrača <igor.dobraca@gmail.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -21,6 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 3.9\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:243
@@ -126,17 +127,11 @@ msgid "Artistic License"
 msgstr "Umjetnička licenca"
 
 #: lib/kaboutdata.cpp:337
-#, fuzzy
-#| msgctxt "@item license (short name)"
-#| msgid "QPL v1.0"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "QPL v1.0"
 msgstr "QPL v1.0"
 
 #: lib/kaboutdata.cpp:338
-#, fuzzy
-#| msgctxt "@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Q Public License"
 msgstr "Q Javna Licenca"
@@ -260,11 +255,10 @@ msgid "KPluginFactory could not create a %1 instance from %2"
 msgstr "KPluginFactory nije mogao stvoriti %1 instancu iz %2"
 
 #: lib/plugin/kpluginloader.cpp:109
-#, fuzzy, qt-format
-#| msgid "The library %1 does not offer a KDE 4 compatible factory."
+#, qt-format
 msgctxt "KPluginLoader|"
 msgid "The library %1 does not offer a KPluginFactory."
-msgstr "Biblioteka %1 ne nudi KDE 4 kompatibilnu radionicu."
+msgstr "Biblioteka %1 ne nudi KPluginFactory."
 
 #: lib/util/kformatprivate.cpp:100
 msgctxt "KFormat|SI prefix for 10^⁻24"
