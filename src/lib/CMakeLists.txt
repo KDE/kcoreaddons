@@ -381,6 +381,7 @@ if(UNIX)
     ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
         HEADER_NAMES
             KSafeStringError
+            KFileDescriptor
         RELATIVE util
         REQUIRED_HEADERS KCoreAddons_HEADERS
     )
