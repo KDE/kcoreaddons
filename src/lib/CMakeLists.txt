@@ -370,6 +370,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KSandbox
         KMemoryInfo
         KSystemClockSkewNotifier
+        KFileDescriptor
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
