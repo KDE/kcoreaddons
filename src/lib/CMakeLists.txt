@@ -191,7 +191,10 @@ target_sources(KF6CoreAddons PRIVATE
 )
 
 if(CMAKE_SYSTEM_NAME MATCHES "Linux" OR CMAKE_SYSTEM_NAME MATCHES "Android")
-    target_sources(KF6CoreAddons PRIVATE util/ksystemclockskewnotifierengine_linux.cpp)
+    target_sources(KF6CoreAddons PRIVATE
+        util/ksystemclockskewnotifierengine_linux.cpp
+        util/kfiledescriptor.cpp
+    )
 elseif(HAVE_QTDBUS)
     target_sources(KF6CoreAddons PRIVATE util/ksystemclockskewnotifierengine_dbus.cpp)
 endif()
@@ -381,6 +384,7 @@ if(UNIX)
     ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
         HEADER_NAMES
             KSafeStringError
+            KFileDescriptor
         RELATIVE util
         REQUIRED_HEADERS KCoreAddons_HEADERS
     )
