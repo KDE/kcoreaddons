@@ -88,6 +88,7 @@ if (WIN32)
 endif ()
 if (UNIX)
     add_unit_test(klistopenfilesjobtest_unix)
+    add_unit_test(ksafestringerrortest)
 endif ()
 
 if(NOT IOS)

@@ -82,6 +82,10 @@ if (WIN32)
     )
 endif ()
 
+if(UNIX)
+    target_sources(KF6CoreAddons PRIVATE util/ksafestringerror.cpp)
+endif()
+
 if (UNIX AND NOT IOS)
     target_sources(KF6CoreAddons PRIVATE
         text/kmacroexpander_unix.cpp
@@ -373,6 +377,14 @@ ecm_generate_headers(KCoreAddons_HEADERS
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
+if(UNIX)
+    ecm_generate_headers(KCoreAddons_HEADERS
+        HEADER_NAMES
+            KSafeStringError
+        RELATIVE util
+        REQUIRED_HEADERS KCoreAddons_HEADERS
+    )
+endif()
 
 install(TARGETS KF6CoreAddons EXPORT KF6CoreAddonsTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
 
