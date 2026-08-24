@@ -82,6 +82,10 @@ if (WIN32)
     )
 endif ()
 
+if(UNIX)
+    target_sources(KF6CoreAddons PRIVATE util/ksafestrerror.cpp)
+endif()
+
 if (UNIX AND NOT IOS)
     target_sources(KF6CoreAddons PRIVATE
         text/kmacroexpander_unix.cpp
@@ -370,6 +374,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
         KSandbox
         KMemoryInfo
         KSystemClockSkewNotifier
+        KSafeStrerror
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
