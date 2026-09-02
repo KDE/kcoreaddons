@@ -598,7 +598,7 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatTyp
 
 QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const
 {
-    const QDateTime now = QDateTime::currentDateTime();
+    const QDateTime now = QDateTime::currentDateTime(QTimeZone::UTC);
 
     const auto secsToNow = dateTime.secsTo(now);
     constexpr int secsInAHour = 60 * 60;
