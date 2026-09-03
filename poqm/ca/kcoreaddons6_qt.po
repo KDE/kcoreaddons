@@ -3,10 +3,10 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007 Sebastià Pla i Sanz <sps@sastia.com>
-# SPDX-FileCopyrightText: 2003, 2006, 2011, 2012, 2013, 2014, 2017, 2020, 2021, 2022 Antoni Bella Pérez <antonibella5@yahoo.com>
-# SPDX-FileCopyrightText: 2004, 2005, 2007 Albert Astals Cid <aacid@kde.org>
-# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022, 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 1998-2007 Sebastià Pla i Sanz <sps@sastia.com>
+# SPDX-FileCopyrightText: 2003, 2006, 2011-2014, 2017, 2020-2022 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2004-2005, 2007 Albert Astals Cid <aacid@kde.org>
+# SPDX-FileCopyrightText: 2007-2020, 2022-2025 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2009 Robert Millan <rmh@aybabtu.com>
 # SPDX-FileCopyrightText: 2010 Orestes Mas <orestes@tsc.upc.edu>
 # SPDX-FileCopyrightText: 2019 Empar Montoro Martín <montoro_mde@gva.es>
@@ -27,47 +27,47 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Qt-Contexts: true\n"
 
-#: lib/io/kfilesystemtype.cpp:295
+#: lib/io/kfilesystemtype.cpp:306
 msgctxt "KFileSystemType|"
 msgid "NFS"
 msgstr "NFS"
 
-#: lib/io/kfilesystemtype.cpp:297
+#: lib/io/kfilesystemtype.cpp:308
 msgctxt "KFileSystemType|"
 msgid "SMB"
 msgstr "SMB"
 
-#: lib/io/kfilesystemtype.cpp:299
+#: lib/io/kfilesystemtype.cpp:310
 msgctxt "KFileSystemType|"
 msgid "FAT"
 msgstr "FAT"
 
-#: lib/io/kfilesystemtype.cpp:301
+#: lib/io/kfilesystemtype.cpp:312
 msgctxt "KFileSystemType|"
 msgid "RAMFS"
 msgstr "RAMFS"
 
-#: lib/io/kfilesystemtype.cpp:303
+#: lib/io/kfilesystemtype.cpp:314
 msgctxt "KFileSystemType|"
 msgid "Other"
 msgstr "Altra"
 
-#: lib/io/kfilesystemtype.cpp:305
+#: lib/io/kfilesystemtype.cpp:316
 msgctxt "KFileSystemType|"
 msgid "NTFS"
 msgstr "NTFS"
 
-#: lib/io/kfilesystemtype.cpp:307
+#: lib/io/kfilesystemtype.cpp:318
 msgctxt "KFileSystemType|"
 msgid "ExFAT"
 msgstr "ExFAT"
 
-#: lib/io/kfilesystemtype.cpp:309
+#: lib/io/kfilesystemtype.cpp:321
 msgctxt "KFileSystemType|"
 msgid "FUSE"
 msgstr "FUSE"
 
-#: lib/io/kfilesystemtype.cpp:311
+#: lib/io/kfilesystemtype.cpp:323
 msgctxt "KFileSystemType|"
 msgid "Unknown"
 msgstr "Desconegut"
