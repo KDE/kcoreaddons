@@ -177,3 +177,10 @@ else()
     return()
 endif()
 add_test(NAME kformatqmltest COMMAND kformatqmltest ${_qmltest_args} -input kformatqmltest.qml WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_unit_test(knarrowtest)
+ecm_add_test(knarrowexceptiontest.cpp
+    TEST_NAME knarrowexceptiontest
+    LINK_LIBRARIES Qt6::Test KF6::CoreAddons autotests_static)
+kde_target_enable_exceptions(knarrowexceptiontest PUBLIC)
+set_property(TARGET knarrowexceptiontest PROPERTY CXX_STANDARD 23) # for std::expected

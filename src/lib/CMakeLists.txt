@@ -357,6 +357,7 @@ ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
         KMacroExpander
         KStringHandler
         KTextToHTML
+        KNarrow
     RELATIVE text
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
