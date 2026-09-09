@@ -176,3 +176,8 @@ else()
     return()
 endif()
 add_test(NAME kformatqmltest COMMAND kformatqmltest ${_qmltest_args} -input kformatqmltest.qml WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_unit_test(knarrowtest)
+add_unit_test(knarrowexceptiontest)
+kde_target_enable_exceptions(knarrowexceptiontest PUBLIC)
+set_property(TARGET knarrowexceptiontest PROPERTY CXX_STANDARD 23)
