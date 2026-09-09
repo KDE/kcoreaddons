@@ -158,6 +158,7 @@ target_sources(KF6CoreAddons PRIVATE
     util/kruntimeplatform.cpp
     util/ksystemclockskewnotifier.cpp
     util/ksystemclockskewnotifierengine.cpp
+    util/knarrow.cpp
 
     kaboutdata.h
     kcoreaddons.h
@@ -377,6 +378,7 @@ ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
         KSandbox
         KMemoryInfo
         KSystemClockSkewNotifier
+        KNarrow
     RELATIVE util
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
