@@ -25,12 +25,20 @@ if(NOT @BUILD_SHARED_LIBS@)
         find_dependency(Qt6DBus @REQUIRED_QT_VERSION@)
     endif()
 
-    if (@UDev_FOUND@)
-        find_dependency(UDev)
-    endif()
+    if (@UDev_FOUND@ OR @LibMount_FOUND@)
+        # FindUDev & FindLibMount only provided by ECM, so temporarily add its find modules
+        set(_popped_CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH})
+        find_dependency(ECM @ECM_VERSION@)
+        list(APPEND CMAKE_MODULE_PATH ${ECM_FIND_MODULE_DIR})
 
-    if (@LibMount_FOUND@)
-        find_dependency(LibMount)
+        if (@UDev_FOUND@)
+            find_dependency(UDev)
+        endif()
+
+        if (@LibMount_FOUND@)
+            find_dependency(LibMount)
+        endif()
+        set(CMAKE_MODULE_PATH ${_popped_CMAKE_MODULE_PATH})
     endif()
 endif()
 
