@@ -17,3 +17,4 @@ Options:
  cppcheck-ignore-files:
   - autotests
  enable-lsan: True
+ run-installed-library-check: True
