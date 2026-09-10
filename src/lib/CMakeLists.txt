@@ -300,18 +300,18 @@ target_include_directories(KF6CoreAddons INTERFACE "$<INSTALL_INTERFACE:${KDE_IN
 
 target_compile_definitions(KF6CoreAddons INTERFACE "$<INSTALL_INTERFACE:KCOREADDONS_LIB>")
 
-ecm_generate_headers(KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
     HEADER_NAMES
         KAboutData,KAboutPerson,KAboutLicense,KAboutComponent
         KCoreAddons
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
     HEADER_NAMES KSharedDataCache
     RELATIVE caching
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
     HEADER_NAMES
         KAutoSaveFile
         KDirWatch
@@ -324,7 +324,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
     RELATIVE io
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
     HEADER_NAMES
         KCompositeJob
         KJob
@@ -333,20 +333,20 @@ ecm_generate_headers(KCoreAddons_HEADERS
     RELATIVE jobs
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
     HEADER_NAMES
         KPluginFactory
         KPluginMetaData
     RELATIVE plugin
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
     HEADER_NAMES
         KRandom
     RELATIVE randomness
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
     HEADER_NAMES
         KJsonUtils
         KFuzzyMatcher
@@ -356,7 +356,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
     RELATIVE text
     REQUIRED_HEADERS KCoreAddons_HEADERS
 )
-ecm_generate_headers(KCoreAddons_HEADERS
+ecm_generate_headers(KCoreAddons_CamelCase_HEADERS
     HEADER_NAMES
         KFormat
         KOSRelease
@@ -378,6 +378,7 @@ install(TARGETS KF6CoreAddons EXPORT KF6CoreAddonsTargets ${KF_INSTALL_TARGETS_D
 
 install(FILES
     ${KCoreAddons_HEADERS}
+    ${KCoreAddons_CamelCase_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kcoreaddons_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KCoreAddons COMPONENT Devel
 )
@@ -386,3 +387,16 @@ install(FILES plugin/kpluginmetadata.schema.json DESTINATION ${KDE_INSTALL_DATAD
 install(FILES ${METATYPES_FILE} DESTINATION ${KDE_INSTALL_QTMETATYPESDIR})
 
 ecm_generate_qdoc(KF6CoreAddons kcoreaddons.qdocconf)
+
+ecm_add_installed_library_check(KF6CoreAddons
+    PACKAGE_NAME "KF6CoreAddons"
+    PACKAGE_TARGET_NAMESPACE "KF6::"
+)
+
+ecm_installed_library_check_include_strings(KF6CoreAddons
+    HEADERS ${KCoreAddons_CamelCase_HEADERS}
+)
+
+ecm_installed_library_check_version_preprocessor_macros(KF6CoreAddons
+    PREFIX KCOREADDONS
+)
