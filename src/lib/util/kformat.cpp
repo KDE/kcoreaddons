@@ -82,6 +82,11 @@ QString KFormat::formatTime(const QDateTime &dateTime, QLocale::FormatType forma
     return d->formatTime(dateTime, format, options);
 }
 
+QString KFormat::formatDateTime(const QDateTime &dateTime, QLocale::FormatType format, TimeFormatOptions options) const
+{
+    return d->formatDateTime(dateTime, format, options);
+}
+
 QString KFormat::formatDistance(double distance, KFormat::DistanceFormatOptions options) const
 {
     return d->formatDistance(distance, options);

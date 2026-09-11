@@ -39,8 +39,11 @@ public:
     QString formatRelativeDate(const QDate &date, QLocale::FormatType format) const;
 
     QString formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const;
+    [[nodiscard]] QString formatDateTimeHelper(const QString &output, const QDateTime &dateTime, KFormat::TimeFormatOptions options) const;
 
     [[nodiscard]] QString formatTime(const QDateTime &dateTime, QLocale::FormatType format, KFormat::TimeFormatOptions options) const;
+
+    [[nodiscard]] QString formatDateTime(const QDateTime &dateTime, QLocale::FormatType format, KFormat::TimeFormatOptions options) const;
 
     [[nodiscard]] QString formatDistance(double value, KFormat::DistanceFormatOptions options) const;
 

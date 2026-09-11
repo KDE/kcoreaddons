@@ -658,12 +658,11 @@ QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocal
     return dt.timeZone().offsetFromUtc(dt) != QTimeZone::systemTimeZone().offsetFromUtc(dt);
 }
 
-QString KFormatPrivate::formatTime(const QDateTime &dateTime, QLocale::FormatType format, KFormat::TimeFormatOptions options) const
+QString KFormatPrivate::formatDateTimeHelper(const QString &localeStr, const QDateTime &dateTime, KFormat::TimeFormatOptions options) const
 {
-    auto output = m_locale.toString(dateTime.time(), format);
     if (options == KFormat::DoNotAddTimeZone || dateTime.timeSpec() == Qt::LocalTime
         || ((options & KFormat::AddTimezoneAbbreviationIfNeeded) && !needsTimeZone(dateTime))) {
-        return output;
+        return localeStr;
     }
 
     QString tzAbbr;
@@ -674,10 +673,24 @@ QString KFormatPrivate::formatTime(const QDateTime &dateTime, QLocale::FormatTyp
         tzAbbr = tz.displayName(QTimeZone::GenericTime, QTimeZone::ShortName, m_locale);
     }
     if (tzAbbr.isEmpty()) {
-        return output;
+        return localeStr;
     }
-    /*: %1 is a formatted time (from QLocale.toString), %2 is a localized timezone abbreviation (from QTimeZone::displayName(QTimeZone::ShortName)). */
-    return tr("%1 %2").arg(output, tzAbbr);
+    /*: %1 is a formatted datetime or time (from QLocale.toString)
+     *  %2 is a localized timezone abbreviation (from QTimeZone::displayName(QTimeZone::ShortName)).
+     */
+    return tr("%1 %2").arg(localeStr, tzAbbr);
+}
+
+QString KFormatPrivate::formatTime(const QDateTime &dateTime, QLocale::FormatType format, KFormat::TimeFormatOptions options) const
+{
+    auto output = m_locale.toString(dateTime.time(), format);
+    return formatDateTimeHelper(output, dateTime, options);
+}
+
+QString KFormatPrivate::formatDateTime(const QDateTime &dateTime, QLocale::FormatType format, KFormat::TimeFormatOptions options) const
+{
+    auto output = m_locale.toString(dateTime, format);
+    return formatDateTimeHelper(output, dateTime, options);
 }
 
 QString KFormatPrivate::formatDistance(double distance, KFormat::DistanceFormatOptions options) const
