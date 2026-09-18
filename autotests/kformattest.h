@@ -27,6 +27,7 @@ private Q_SLOTS:
     void formatSpelloutDuration();
     void formatRelativeDate();
     void formatTime();
+    void formatDateTime();
     void formatValue();
     void formatDistance();
 };

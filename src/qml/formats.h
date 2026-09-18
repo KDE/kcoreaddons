@@ -129,6 +129,21 @@ public:
                                                  KFormat::TimeFormatOptions options = KFormat::DoNotAddTimeZone) const;
 
     /*!
+     * \qmlmethod string Format::formatDateTime(var object, string propertyName, int format, int options)
+     *
+     * Applies time formatting to the QDateTime value found in the property \a propertyName in object \a object.
+     * This indirection is necessary to avoid the QDateTime value to ever be exposed to QML's JS runtime,
+     * which would destroy its timezone information.
+     * The formatting itself is done via KFormat::formatDateTime, see that for \a format and \a options.
+     *
+     * \since 6.31
+     */
+    Q_INVOKABLE [[nodiscard]] QString formatDateTime(const QVariant &obj,
+                                                     const QString &propertyName,
+                                                     QLocale::FormatType format = QLocale::ShortFormat,
+                                                     KFormat::TimeFormatOptions options = KFormat::DoNotAddTimeZone) const;
+
+    /*!
      * \qmlmethod string Format::formatDistance(real distance, enumeration options)
      *
      * Formats a distance value given in meters in appropriate units for
