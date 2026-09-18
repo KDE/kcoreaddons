@@ -1638,21 +1638,32 @@ KAboutData KAboutData::fromAppStreamFile(const QString &appStreamFileName)
 
 KAboutData KAboutData::fromAppStreamId(const QString &applicationId)
 {
-    for (const auto &variant : {"metainfo"_L1, "appdata"_L1}) {
 #ifndef Q_OS_ANDROID
-        const auto p = QStandardPaths::locate(QStandardPaths::GenericDataLocation,
-                                              "metainfo/"_L1 + applicationId + '.'_L1 + variant + ".xml"_L1,
-                                              QStandardPaths::LocateFile);
-        if (!p.isEmpty()) {
-            return KAboutData::fromAppStreamFile(p);
-        }
+    // If there's multiple different versions of the same application installed, prefer
+    // the one in the same prefix as the running application, not the one first in the search path
+    // This avoids e.g. seeing the wrong release notes when having a older or newer Flatpak installed
+    // alongside a version on the host.
+    QStringList paths;
+    for (const auto &variant : {"metainfo"_L1, "appdata"_L1}) {
+        paths += QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
+                                           "metainfo/"_L1 + applicationId + '.'_L1 + variant + ".xml"_L1,
+                                           QStandardPaths::LocateFile);
+    }
+    if (!paths.isEmpty()) {
+        const auto appPath = QCoreApplication::applicationDirPath();
+        const auto it = std::ranges::max_element(paths, [&appPath](const QString &p1, const QString &p2) {
+            return std::distance(p1.begin(), std::ranges::mismatch(p1, appPath).in1) < std::distance(p2.begin(), std::ranges::mismatch(p2, appPath).in1);
+        });
+        return KAboutData::fromAppStreamFile(*it);
+    }
 #else
+    for (const auto &variant : {"metainfo"_L1, "appdata"_L1}) {
         const auto p = "assets:/share/metainfo/"_L1 + applicationId + '.'_L1 + variant + ".xml"_L1;
         if (QFileInfo::exists(p)) {
             return KAboutData::fromAppStreamFile(p);
         }
-#endif
     }
+#endif
 
     return KAboutData();
 }
