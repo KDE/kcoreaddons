@@ -3,13 +3,14 @@
 # Toplica Tanaskovic <toptan@kde.org.yu>, 2003, 2004, 2005.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017.
 # Dalibor Djuric <daliborddjuric@gmail.com>, 2009, 2010, 2011.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcoreaddons5_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2017-10-14 23:06+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-09-18 12:00+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -26,55 +27,53 @@ msgstr ""
 #: lib/io/kfilesystemtype.cpp:306
 msgctxt "KFileSystemType|"
 msgid "NFS"
-msgstr ""
+msgstr "НФС"
 
 #: lib/io/kfilesystemtype.cpp:308
 msgctxt "KFileSystemType|"
 msgid "SMB"
-msgstr ""
+msgstr "СМБ"
 
 #: lib/io/kfilesystemtype.cpp:310
 msgctxt "KFileSystemType|"
 msgid "FAT"
-msgstr ""
+msgstr "ФАТ"
 
 #: lib/io/kfilesystemtype.cpp:312
 msgctxt "KFileSystemType|"
 msgid "RAMFS"
-msgstr ""
+msgstr "РАМФС"
 
 #: lib/io/kfilesystemtype.cpp:314
 msgctxt "KFileSystemType|"
 msgid "Other"
-msgstr ""
+msgstr "друго"
 
 #: lib/io/kfilesystemtype.cpp:316
 msgctxt "KFileSystemType|"
 msgid "NTFS"
-msgstr ""
+msgstr "НТФС"
 
 #: lib/io/kfilesystemtype.cpp:318
 msgctxt "KFileSystemType|"
 msgid "ExFAT"
-msgstr ""
+msgstr "ексФАТ"
 
 #: lib/io/kfilesystemtype.cpp:321
 msgctxt "KFileSystemType|"
 msgid "FUSE"
-msgstr ""
+msgstr "ФУСЕ"
 
 #: lib/io/kfilesystemtype.cpp:323
 msgctxt "KFileSystemType|"
 msgid "Unknown"
-msgstr ""
+msgstr "непознато"
 
 #: lib/kaboutdata.cpp:283
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "Услови за дистрибуирање програма: %1."
+msgstr "<p>Услови за дистрибуирање програма: %1.</p>"
 
 #: lib/kaboutdata.cpp:284
 #, qt-format
@@ -83,6 +82,8 @@ msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
+"<p>Пуне услове можете наћи на <a href=\"https://spdx.org/licenses/%1.html"
+"\">сајту СПДИкса</a>.</p>"
 
 #: lib/kaboutdata.cpp:296
 msgctxt "KAboutLicense|"
@@ -114,7 +115,7 @@ msgstr "Гнуова Општа јавна лиценца, верзија 2"
 #: lib/kaboutdata.cpp:352
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "LGPL v2"
-msgstr "МОЈЛ в3"
+msgstr "МОЈЛ в2"
 
 #: lib/kaboutdata.cpp:353
 msgctxt "KAboutLicense|@item license"
@@ -172,99 +173,84 @@ msgid "GNU Lesser General Public License Version 2.1"
 msgstr "Гнуова Мања општа јавна лиценца, верзија 2.1"
 
 #: lib/kaboutdata.cpp:376
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MIT License"
-msgstr "БСД"
+msgstr "МИТ"
 
 #: lib/kaboutdata.cpp:377
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license"
 msgid "MIT License"
-msgstr "БСД"
+msgstr "МИТ лиценца"
 
 #: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
-msgstr ""
+msgstr "ЦЦ0"
 
 #: lib/kaboutdata.cpp:381
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr ""
+msgstr "Кријејтив комонс зеро"
 
 #: lib/kaboutdata.cpp:384
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "QPL v1.0"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
-msgstr "КуПЛ 1.0"
+msgstr "ОДбЛ в1.0"
 
 #: lib/kaboutdata.cpp:385
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Опен дата комонсова Отворена лиценца базе података, верзија 1.0"
 
 #: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "Апач 2.0"
 
 #: lib/kaboutdata.cpp:389
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "Апачева лиценца 2.0"
 
 #: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
-msgstr ""
+msgstr "ФТЛ"
 
 #: lib/kaboutdata.cpp:393
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Лиценца пројекта Фритајп"
 
 #: lib/kaboutdata.cpp:396
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
-msgstr "БСД"
+msgstr "Буст"
 
 #: lib/kaboutdata.cpp:397
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Бустова софтверска лиценца 1.0"
 
 #: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "БСД с 3 клаузуле"
 
 #: lib/kaboutdata.cpp:401
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "БСД лиценца с 3 клаузуле („нова“ или „ревидирана“)"
 
 #: lib/kaboutdata.cpp:404
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "МПЛ 2.0"
 
 #: lib/kaboutdata.cpp:405
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Ку јавна лиценца"
+msgstr "Мозилина јавна лиценца 2.0"
 
 #: lib/kaboutdata.cpp:409
 msgctxt "KAboutLicense|@item license"
@@ -285,12 +271,13 @@ msgid ""
 "org</a></p>"
 msgstr ""
 "<html><p>О преводу КДЕ‑а на српски језик можете читати на страницама <a "
-"href='http://sr.l10n.kde.org'>sr.l10n.kde.org</a>. Међу њима се налазе <a "
-"href='http://sr.l10n.kde.org/pojmovnik.php'>појмовник</a> и <a href='http://"
-"sr.l10n.kde.org/trapnakron/'>трапнакрон</a>, који вам могу послужити да "
-"разјасните појмове и повежете преведене с изворним изразима када год вам то "
-"затреба.</p><p>За детаљније информације о локализацији КДЕ‑а уопште, "
-"посетите <a href='https://l10n.kde.org'>https://l10n.kde.org</a>.</p></html>"
+"href='https://sr.l10n.kde.org'>sr.l10n.kde.org</a>. Међу њима се налазе <a "
+"href='https://sr.l10n.kde.org/pojmovnik.php'>појмовник</a> и <a "
+"href='https://sr.l10n.kde.org/trapnakron/'>трапнакрон</a>, који вам могу "
+"послужити да разјасните појмове и повежете преведене с изворним изразима "
+"када год вам то затреба.</p><p>За детаљније информације о локализацији КДЕ‑а "
+"уопште, посетите <a href='https://l10n.kde.org'>https://l10n.kde.org</a>.</"
+"p></html>"
 
 #: lib/kaboutdata.cpp:1328
 msgctxt "KAboutData CLI|"
@@ -338,18 +325,16 @@ msgstr "Пријавите грешке на %1."
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not find plugin %1"
-msgstr ""
+msgstr "Не могу да нађем прикључак %1"
 
 #: lib/plugin/kpluginfactory.cpp:42
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "Could not load plugin from %1: %2"
-msgstr ""
+msgstr "Не могу да учитам прикључак из %1: %2"
 
 #: lib/plugin/kpluginfactory.cpp:53
-#, fuzzy, qt-format
-#| msgctxt "KPluginLoader|"
-#| msgid "The library %1 does not offer a KPluginFactory."
+#, qt-format
 msgctxt "KPluginFactory|"
 msgid "The library %1 does not offer a KPluginFactory."
 msgstr "Библиотека %1 не нуди KPluginFactory."
@@ -358,161 +343,161 @@ msgstr "Библиотека %1 не нуди KPluginFactory."
 #, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
-msgstr ""
+msgstr "KPluginFactory не може да направи примерак %1 из %2"
 
 #: lib/util/kformatprivate.cpp:103
 msgctxt "KFormat|SI prefix for 10^⁻24"
 msgid "y"
-msgstr ""
+msgstr "y"
 
 #: lib/util/kformatprivate.cpp:104
 msgctxt "KFormat|SI prefix for 10^⁻21"
 msgid "z"
-msgstr ""
+msgstr "z"
 
 #: lib/util/kformatprivate.cpp:105
 msgctxt "KFormat|SI prefix for 10^⁻18"
 msgid "a"
-msgstr ""
+msgstr "a"
 
 #: lib/util/kformatprivate.cpp:106
 msgctxt "KFormat|SI prefix for 10^⁻15"
 msgid "f"
-msgstr ""
+msgstr "f"
 
 #: lib/util/kformatprivate.cpp:107
 msgctxt "KFormat|SI prefix for 10^⁻12"
 msgid "p"
-msgstr ""
+msgstr "p"
 
 #: lib/util/kformatprivate.cpp:108
 msgctxt "KFormat|SI prefix for 10^⁻9"
 msgid "n"
-msgstr ""
+msgstr "n"
 
 #: lib/util/kformatprivate.cpp:109
 msgctxt "KFormat|SI prefix for 10^⁻6"
 msgid "µ"
-msgstr ""
+msgstr "µ"
 
 #: lib/util/kformatprivate.cpp:110
 msgctxt "KFormat|SI prefix for 10^⁻3"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: lib/util/kformatprivate.cpp:112
 msgctxt "KFormat|SI prefix for 10^3"
 msgid "k"
-msgstr ""
+msgstr "k"
 
 #: lib/util/kformatprivate.cpp:112
 msgctxt "KFormat|IEC binary prefix for 2^10"
 msgid "Ki"
-msgstr ""
+msgstr "Ki"
 
 #: lib/util/kformatprivate.cpp:113
 msgctxt "KFormat|SI prefix for 10^6"
 msgid "M"
-msgstr ""
+msgstr "M"
 
 #: lib/util/kformatprivate.cpp:113
 msgctxt "KFormat|IEC binary prefix for 2^20"
 msgid "Mi"
-msgstr ""
+msgstr "Mi"
 
 #: lib/util/kformatprivate.cpp:114
 msgctxt "KFormat|SI prefix for 10^9"
 msgid "G"
-msgstr ""
+msgstr "G"
 
 #: lib/util/kformatprivate.cpp:114
 msgctxt "KFormat|IEC binary prefix for 2^30"
 msgid "Gi"
-msgstr ""
+msgstr "Gi"
 
 #: lib/util/kformatprivate.cpp:115
 msgctxt "KFormat|SI prefix for 10^12"
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: lib/util/kformatprivate.cpp:115
 msgctxt "KFormat|IEC binary prefix for 2^40"
 msgid "Ti"
-msgstr ""
+msgstr "Ti"
 
 #: lib/util/kformatprivate.cpp:116
 msgctxt "KFormat|SI prefix for 10^15"
 msgid "P"
-msgstr ""
+msgstr "P"
 
 #: lib/util/kformatprivate.cpp:116
 msgctxt "KFormat|IEC binary prefix for 2^50"
 msgid "Pi"
-msgstr ""
+msgstr "Pi"
 
 #: lib/util/kformatprivate.cpp:117
 msgctxt "KFormat|SI prefix for 10^18"
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #: lib/util/kformatprivate.cpp:117
 msgctxt "KFormat|IEC binary prefix for 2^60"
 msgid "Ei"
-msgstr ""
+msgstr "Ei"
 
 #: lib/util/kformatprivate.cpp:118
 msgctxt "KFormat|SI prefix for 10^21"
 msgid "Z"
-msgstr ""
+msgstr "Z"
 
 #: lib/util/kformatprivate.cpp:118
 msgctxt "KFormat|IEC binary prefix for 2^70"
 msgid "Zi"
-msgstr ""
+msgstr "Zi"
 
 #: lib/util/kformatprivate.cpp:119
 msgctxt "KFormat|SI prefix for 10^24"
 msgid "Y"
-msgstr ""
+msgstr "Y"
 
 #: lib/util/kformatprivate.cpp:119
 msgctxt "KFormat|IEC binary prefix for 2^80"
 msgid "Yi"
-msgstr ""
+msgstr "Yi"
 
 #: lib/util/kformatprivate.cpp:128
 msgctxt "KFormat|Symbol of binary digit"
 msgid "bit"
-msgstr ""
+msgstr "bit"
 
 #: lib/util/kformatprivate.cpp:131
 msgctxt "KFormat|Symbol of byte"
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: lib/util/kformatprivate.cpp:134
 msgctxt "KFormat|Symbol of meter"
 msgid "m"
-msgstr ""
+msgstr "m"
 
 #: lib/util/kformatprivate.cpp:137
 msgctxt "KFormat|Symbol of hertz"
 msgid "Hz"
-msgstr ""
+msgstr "Hz"
 
 #. value without prefix, format "<val> <unit>"
 #: lib/util/kformatprivate.cpp:146
 #, qt-format
 msgctxt "KFormat|no Prefix"
 msgid "%1 %2"
-msgstr ""
+msgstr "%1 %2"
 
 #. value with prefix, format "<val> <prefix><unit>"
 #: lib/util/kformatprivate.cpp:165
 #, qt-format
 msgctxt "KFormat|MetricBinaryDialect"
 msgid "%1 %2%3"
-msgstr ""
+msgstr "%1 %2%3"
 
 #. MetricBinaryDialect size in bytes
 #: lib/util/kformatprivate.cpp:219
@@ -709,61 +694,49 @@ msgstr "%1 YiB"
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%n г"
+msgstr[1] "%n г"
+msgstr[2] "%n г"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:338
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
-msgstr[0] "%n дан"
-msgstr[1] "%n дана"
-msgstr[2] "%n дана"
+msgstr[0] "%n д"
+msgstr[1] "%n д"
+msgstr[2] "%n д"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:343
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
-msgstr[0] "%n сат"
-msgstr[1] "%n сата"
-msgstr[2] "%n сати"
+msgstr[0] "%n ч"
+msgstr[1] "%n ч"
+msgstr[2] "%n ч"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:348
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
-msgstr[0] "%n минут"
-msgstr[1] "%n минута"
-msgstr[2] "%n минута"
+msgstr[0] "%n мин"
+msgstr[1] "%n мин"
+msgstr[2] "%n мин"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:353
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n second(s)"
-#| msgid_plural "%n second(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
-msgstr[0] "%n секунда"
-msgstr[1] "%n секунде"
-msgstr[2] "%n секунди"
+msgstr[0] "%n с"
+msgstr[1] "%n с"
+msgstr[2] "%n с"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:379
@@ -811,18 +784,18 @@ msgstr "%1ч%2м%3с"
 #. %1 is a formatted time (from QLocale.toString), %2 is a localized timezone abbreviation (from QTimeZone::displayName(QTimeZone::ShortName)).
 #: lib/util/kformatprivate.cpp:432 lib/util/kformatprivate.cpp:441
 #: lib/util/kformatprivate.cpp:446 lib/util/kformatprivate.cpp:454
-#: lib/util/kformatprivate.cpp:680
+#: lib/util/kformatprivate.cpp:682
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
-msgstr ""
+msgstr "%1 %2"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:459
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1:%2.%3"
-msgstr "%1.%2.%3"
+msgstr "%1.%2,%3"
 
 #. @item:intext Duration format minutes and seconds
 #. ----------
@@ -887,16 +860,13 @@ msgstr[2] "%n милисекунди"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:508
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n сат"
-msgstr[1] "%n сата"
-msgstr[2] "%n сати"
+msgstr[0] "%n година"
+msgstr[1] "%n године"
+msgstr[2] "%n година"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:513
@@ -958,13 +928,9 @@ msgid "Invalid date"
 msgstr "лош датум"
 
 #: lib/util/kformatprivate.cpp:586
-#, fuzzy
-#| msgctxt "KFormat|"
-#| msgid "%n day(s)"
-#| msgid_plural "%n day(s)"
 msgctxt "KFormat|"
 msgid "In two days"
-msgstr "%n дан"
+msgstr "прекосутра"
 
 #: lib/util/kformatprivate.cpp:588
 msgctxt "KFormat|"
@@ -984,129 +950,107 @@ msgstr "јуче"
 #: lib/util/kformatprivate.cpp:594
 msgctxt "KFormat|"
 msgid "Two days ago"
-msgstr ""
+msgstr "прекјуче"
 
 #: lib/util/kformatprivate.cpp:608
 msgctxt "KFormat|"
 msgid "Just now"
-msgstr ""
+msgstr "управо сада"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:613
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
-msgstr[0] "%n минут"
-msgstr[1] "%n минута"
-msgstr[2] "%n минута"
+msgstr[0] "пре %n мин"
+msgstr[1] "пре %n мин"
+msgstr[2] "пре %n мин"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:618
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
-msgstr[0] "%n минут"
-msgstr[1] "%n минута"
-msgstr[2] "%n минута"
+msgstr[0] "пре %n минут"
+msgstr[1] "пре %n минута"
+msgstr[2] "пре %n минута"
 
 #: lib/util/kformatprivate.cpp:623
 msgctxt "KFormat|"
 msgid "Now"
-msgstr ""
+msgstr "сада"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:628
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
-msgstr[0] "%n минут"
-msgstr[1] "%n минута"
-msgstr[2] "%n минута"
+msgstr[0] "%n мин"
+msgstr[1] "%n мин"
+msgstr[2] "%n мин"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:633
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "%n минут"
-msgstr[1] "%n минута"
-msgstr[2] "%n минута"
+msgstr[0] "за %n минут"
+msgstr[1] "за %n минута"
+msgstr[2] "за %n минута"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:648
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 and %2"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%1 at %2"
-msgstr "%1 и %2"
+msgstr "%1 у %2"
 
-#: lib/util/kformatprivate.cpp:696
+#: lib/util/kformatprivate.cpp:698
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr ""
+msgstr "%1 ft"
 
-#: lib/util/kformatprivate.cpp:700 lib/util/kformatprivate.cpp:702
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#: lib/util/kformatprivate.cpp:702 lib/util/kformatprivate.cpp:704
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1 минута"
+msgstr "%1 mi"
 
-#: lib/util/kformatprivate.cpp:708
+#: lib/util/kformatprivate.cpp:710
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 m"
 
-#: lib/util/kformatprivate.cpp:711 lib/util/kformatprivate.cpp:713
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#: lib/util/kformatprivate.cpp:713 lib/util/kformatprivate.cpp:715
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 kB"
+msgstr "%1 km"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
 msgctxt "QObject|"
 msgid "Path %1 doesn't exist"
-msgstr ""
+msgstr "Путања %1 не постоји"
 
 #: lib/util/klistopenfilesjob_unix.cpp:46
 msgctxt "QObject|"
 msgid "Could not find lsof executable in PATH:"
-msgstr ""
+msgstr "Не могу да нађем извршни фајл lsof у PATH‑у:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
 #, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr ""
+msgstr "Неуспело извршавање наредбе lsof. Кôд грешке %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
-msgstr ""
-
-#~ msgctxt "KFormat|"
-#~ msgid "%1, %2"
-#~ msgstr "%1, %2"
+msgstr "KListOpenFilesJob није подржан на Виндоузу"

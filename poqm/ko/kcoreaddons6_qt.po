@@ -765,7 +765,7 @@ msgstr "%1시간 %2분 %3초"
 #. %1 is a formatted time (from QLocale.toString), %2 is a localized timezone abbreviation (from QTimeZone::displayName(QTimeZone::ShortName)).
 #: lib/util/kformatprivate.cpp:432 lib/util/kformatprivate.cpp:441
 #: lib/util/kformatprivate.cpp:446 lib/util/kformatprivate.cpp:454
-#: lib/util/kformatprivate.cpp:680
+#: lib/util/kformatprivate.cpp:682
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
@@ -970,25 +970,25 @@ msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 %2"
 
-#: lib/util/kformatprivate.cpp:696
+#: lib/util/kformatprivate.cpp:698
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
 msgstr "%1피트"
 
-#: lib/util/kformatprivate.cpp:700 lib/util/kformatprivate.cpp:702
+#: lib/util/kformatprivate.cpp:702 lib/util/kformatprivate.cpp:704
 #, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
 msgstr "%1마일"
 
-#: lib/util/kformatprivate.cpp:708
+#: lib/util/kformatprivate.cpp:710
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
 msgstr "%1 m"
 
-#: lib/util/kformatprivate.cpp:711 lib/util/kformatprivate.cpp:713
+#: lib/util/kformatprivate.cpp:713 lib/util/kformatprivate.cpp:715
 #, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"

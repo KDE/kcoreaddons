@@ -897,7 +897,7 @@ msgstr ""
 #. %1 is a formatted time (from QLocale.toString), %2 is a localized timezone abbreviation (from QTimeZone::displayName(QTimeZone::ShortName)).
 #: lib/util/kformatprivate.cpp:432 lib/util/kformatprivate.cpp:441
 #: lib/util/kformatprivate.cpp:446 lib/util/kformatprivate.cpp:454
-#: lib/util/kformatprivate.cpp:680
+#: lib/util/kformatprivate.cpp:682
 #, fuzzy, qt-format
 #| msgctxt "concatenation of dates and time"
 #| msgid "%1 %2"
@@ -1141,7 +1141,7 @@ msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 %2"
 
-#: lib/util/kformatprivate.cpp:696
+#: lib/util/kformatprivate.cpp:698
 #, fuzzy, qt-format
 #| msgid "%1 file"
 #| msgid_plural "%1 files"
@@ -1149,20 +1149,20 @@ msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
 msgstr "%1 restr"
 
-#: lib/util/kformatprivate.cpp:700 lib/util/kformatprivate.cpp:702
+#: lib/util/kformatprivate.cpp:702 lib/util/kformatprivate.cpp:704
 #, fuzzy, qt-format
 #| msgid "%1 minutes"
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
 msgstr "%1 munut"
 
-#: lib/util/kformatprivate.cpp:708
+#: lib/util/kformatprivate.cpp:710
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
 msgstr ""
 
-#: lib/util/kformatprivate.cpp:711 lib/util/kformatprivate.cpp:713
+#: lib/util/kformatprivate.cpp:713 lib/util/kformatprivate.cpp:715
 #, fuzzy, qt-format
 #| msgid "%1 B"
 msgctxt "KFormat|distance in kilometer"
