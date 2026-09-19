@@ -9,6 +9,8 @@ target_sources(kcoreaddonsplugin PRIVATE
     sandbox.cpp
     sandbox.h
     types.h
+    kdatetimefactory.cpp
+    kdatetimefactory.h
 )
 target_link_libraries(kcoreaddonsplugin PRIVATE
     Qt6::Core

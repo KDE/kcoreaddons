@@ -44,6 +44,6 @@ public Q_SLOTS:
     }
 };
 
-QUICK_TEST_MAIN_WITH_SETUP(kformatqmltest, KFormatQmlSetup)
+QUICK_TEST_MAIN_WITH_SETUP(qmltests, KFormatQmlSetup)
 
-#include "kformatqmltest.moc"
+#include "qmltests.moc"

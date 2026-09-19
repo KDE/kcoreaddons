@@ -143,6 +143,7 @@ target_sources(KF6CoreAddons PRIVATE
     text/kmacroexpander.cpp
     text/kstringhandler.cpp
     text/ktexttohtml.cpp
+    util/kdatetime.cpp
     util/kformat.cpp
     util/kformatprivate.cpp
     util/kosrelease.cpp
@@ -176,6 +177,7 @@ target_sources(KF6CoreAddons PRIVATE
     text/kmacroexpander.h
     text/kstringhandler.h
     text/ktexttohtml.h
+    util/kdatetime.h
     util/kformat.h
     util/kosrelease.h
     util/kprocesslist.h
@@ -358,6 +360,7 @@ ecm_generate_headers(KCoreAddons_HEADERS
 )
 ecm_generate_headers(KCoreAddons_HEADERS
     HEADER_NAMES
+        KDateTime
         KFormat
         KOSRelease
         KUser

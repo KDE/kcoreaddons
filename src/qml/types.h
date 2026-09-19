@@ -5,6 +5,7 @@
 #define TYPES_H
 
 #include <kaboutdata.h>
+#include <kdatetime.h>
 #include <ktexttohtml.h>
 
 #include <qqmlregistration.h>
@@ -28,4 +29,11 @@ Q_NAMESPACE
 QML_NAMED_ELEMENT(AboutUrlType)
 QML_FOREIGN_NAMESPACE(KAboutData)
 }
+
+struct KDateTimeForeign {
+    Q_GADGET
+    QML_VALUE_TYPE(KDateTime)
+    QML_FOREIGN(KDateTime)
+};
+
 #endif
