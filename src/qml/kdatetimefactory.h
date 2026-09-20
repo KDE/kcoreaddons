@@ -6,6 +6,7 @@
 #include <kdatetime.h>
 
 #include <QDateTime>
+#include <QLocale>
 #include <QObject>
 #include <qqmlregistration.h>
 
@@ -37,6 +38,11 @@ public:
      * \brief Returns dateTime wrapped in a DateTime.
      */
     Q_INVOKABLE KDateTime fromDateTime(const QDateTime &dateTime) const;
+
+    /*!
+     * \brief Parses a localized time and returns it on today's date.
+     */
+    Q_INVOKABLE KDateTime fromLocaleTimeString(const QString &value, QLocale::FormatType format) const;
 
     /*!
      * \brief Returns an invalid DateTime, for example to clear a bound.

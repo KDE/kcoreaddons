@@ -159,6 +159,21 @@ QString KDateTime::toLocaleTimeString(QLocale::FormatType format) const
     return QLocale().toString(m_dateTime.toLocalTime().time(), format);
 }
 
+bool KDateTime::sameDay(const KDateTime &right) const
+{
+    return m_dateTime.toLocalTime().date() == right.m_dateTime.toLocalTime().date();
+}
+
+bool KDateTime::sameTime(const KDateTime &right) const
+{
+    return m_dateTime.toLocalTime().time() == right.m_dateTime.toLocalTime().time();
+}
+
+qint64 KDateTime::msecsTo(const KDateTime &right) const
+{
+    return m_dateTime.msecsTo(right.m_dateTime);
+}
+
 KDateTime KDateTime::addDays(int days) const
 {
     return KDateTime(m_dateTime.addDays(days));

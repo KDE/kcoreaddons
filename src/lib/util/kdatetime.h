@@ -167,6 +167,18 @@ public:
     Q_INVOKABLE QString toLocaleTimeString(QLocale::FormatType format) const;
 
     /*!
+     * \brief Returns whether this date and right fall on the same local day.
+     */
+    Q_INVOKABLE bool sameDay(const KDateTime &right) const;
+
+    /*!
+     * \brief Returns whether this date and right have the same local time.
+     */
+    Q_INVOKABLE bool sameTime(const KDateTime &right) const;
+
+    Q_INVOKABLE qint64 msecsTo(const KDateTime &right) const;
+
+    /*!
      * \brief Returns a copy of this date and time, days later (or earlier if negative).
      */
     Q_INVOKABLE KDateTime addDays(int days) const;
@@ -226,3 +238,5 @@ private:
 };
 
 KCOREADDONS_EXPORT QDebug operator<<(QDebug debug, const KDateTime &dateTime);
+
+Q_DECLARE_METATYPE(KDateTime)

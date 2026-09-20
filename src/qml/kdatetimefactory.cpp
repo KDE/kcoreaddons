@@ -18,6 +18,12 @@ KDateTime KDateTimeFactory::fromDateTime(const QDateTime &dateTime) const
     return KDateTime(dateTime);
 }
 
+KDateTime KDateTimeFactory::fromLocaleTimeString(const QString &value, QLocale::FormatType format) const
+{
+    const auto time = QLocale().toTime(value, format);
+    return time.isValid() ? KDateTime(QDateTime(QDate::currentDate(), time)) : KDateTime();
+}
+
 KDateTime KDateTimeFactory::invalid() const
 {
     return KDateTime();
