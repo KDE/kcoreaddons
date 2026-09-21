@@ -119,6 +119,29 @@ private Q_SLOTS:
         QLocale::setDefault(previousLocale);
     }
 
+    void testToLocaleTimeString()
+    {
+        const QLocale previousLocale;
+        QLocale::setDefault(QLocale(QLocale::English, QLocale::UnitedStates));
+
+        const KDateTime dt(QDateTime(QDate(2024, 3, 15), QTime(14, 30, 15)));
+        QCOMPARE(dt.toLocaleTimeString(QStringLiteral("hh:mm:ss")), QStringLiteral("14:30:15"));
+
+        QLocale::setDefault(previousLocale);
+    }
+
+    void testSameDay()
+    {
+        const KDateTime first(QDateTime(QDate(2024, 3, 15), QTime(10, 0)));
+        const KDateTime later(QDateTime(QDate(2024, 3, 15), QTime(22, 0)));
+        const KDateTime nextDay(QDateTime(QDate(2024, 3, 16), QTime(10, 0)));
+
+        QVERIFY(first.sameDay(later));
+        QVERIFY(!first.sameDay(nextDay));
+        QVERIFY(first.sameTime(KDateTime(QDateTime(QDate(2024, 3, 16), QTime(10, 0)))));
+        QVERIFY(!first.sameTime(KDateTime(QDateTime(QDate(2024, 3, 15), QTime(10, 1)))));
+    }
+
     void testStartOfDay()
     {
         const KDateTime dt(QDateTime(QDate(2024, 3, 15), QTime(14, 30, 15), QTimeZone("Europe/Berlin")));
