@@ -23,6 +23,7 @@ class KJobPrivate;
 /*!
  * \class KJob
  * \inmodule KCoreAddons
+ * \inqmlmodule org.kde.coreaddons
  *
  * \brief The base class for all jobs.
  *
