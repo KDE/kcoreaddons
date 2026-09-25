@@ -32,6 +32,11 @@ set(EXCLUDE_DEPRECATED_BEFORE_AND_AT 0 CACHE STRING "Control the range of deprec
 option(ENABLE_PCH "Enable precompile headers for faster builds" ON)
 option(KCOREADDONS_USE_QML "Build the QML plugin" ON)
 
+cmake_policy(SET CMP0156 NEW)
+cmake_policy(SET CMP0179 NEW)
+cmake_policy(SET CMP0200 NEW)
+cmake_policy(SET CMP0181 NEW)
+
 set(REQUIRED_QT_VERSION 6.9.0)
 find_package(Qt6 ${REQUIRED_QT_VERSION} CONFIG REQUIRED Core)
 if (KCOREADDONS_USE_QML)
