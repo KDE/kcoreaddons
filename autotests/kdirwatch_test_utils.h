@@ -103,6 +103,14 @@ inline int createDirectoryTree(const QString &basePath, int depth = 4)
 
 inline void waitUntilAfter(const QDateTime &ctime)
 {
+#ifndef Q_OS_WIN
+    // KDirWatch compares timestamps to the nanosecond, so a change only needs a later one than the
+    // last change. The file system clock moves in steps of a few milliseconds.
+    while (QDateTime::currentDateTime() <= ctime.addMSecs(20)) {
+        QTest::qWait(5);
+    }
+#else
+    // KDirWatch compares whole seconds here.
     int totalWait = 0;
     QDateTime now;
     Q_FOREVER {
@@ -119,6 +127,7 @@ inline void waitUntilAfter(const QDateTime &ctime)
     }
     // if (totalWait > 0)
     qCDebug(KCOREADDONS_DEBUG) << "Waited" << totalWait << "ms so that now" << now.toString(Qt::ISODate) << "is >" << ctime.toString(Qt::ISODate);
+#endif
 }
 inline void waitUntilMTimeChange(const QString &path)
 {
