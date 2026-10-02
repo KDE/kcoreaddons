@@ -34,10 +34,11 @@
 #include <QTimer>
 class QSocketNotifier;
 
+#include <chrono>
 #include <ctime>
 #include <sys/types.h> // time_t, ino_t
 
-#define invalid_ctime (static_cast<time_t>(-1))
+inline constexpr std::chrono::nanoseconds invalid_ctime{-1};
 
 #if HAVE_QFILESYSTEMWATCHER
 #include <QFileSystemWatcher>
@@ -107,8 +108,8 @@ public:
         QList<Entry *> m_entries;
         QString path;
 
-        // the last observed modification time
-        time_t m_ctime;
+        // the last observed modification time, since the epoch
+        std::chrono::nanoseconds m_ctime;
         // last observed inode
         ino_t m_ino;
         // the last observed link count

@@ -14,9 +14,11 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QSignalSpy>
+
 #include <QTemporaryDir>
 #include <QTest>
 #include <QThread>
+#include <algorithm>
 #include <sys/stat.h>
 #ifdef Q_OS_UNIX
 #include <unistd.h> // ::link()
@@ -63,6 +65,7 @@ private Q_SLOTS: // test methods
         s_staticObject()->m_dirWatch.addFile(m_path + QLatin1String("ExistingFile"));
     }
     void touchOneFile();
+    void twoChangesInOneSecond();
     void touch1000Files();
     void watchAndModifyOneFile();
     void removeAndReAdd();
@@ -271,6 +274,36 @@ void KDirWatch_UnitTest::touchOneFile() // watch a dir, create a file in it
     QCOMPARE(spyCreated.count(), 0); // "This is not emitted when creating a file is created in a watched directory."
 
     removeFile(0);
+}
+
+void KDirWatch_UnitTest::twoChangesInOneSecond() // watch a dir, create two files in it within one second
+{
+#ifdef Q_OS_WIN
+    if (m_stat) {
+        QSKIP("stat() has whole seconds only on Windows");
+    }
+#endif
+    KDirWatch watch;
+    watch.addDir(m_path);
+    watch.startScan();
+
+    // Both changes fall in one second when they start at the beginning of one.
+    const qint64 previousSecond = QDateTime::currentSecsSinceEpoch();
+    while (QDateTime::currentSecsSinceEpoch() == previousSecond) {
+        QTest::qWait(10);
+    }
+    const qint64 second = QDateTime::currentSecsSinceEpoch();
+
+    createFile(0);
+    QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
+    createFile(1);
+    QVERIFY(waitForOneSignal(watch, SIGNAL(dirty(QString)), m_path));
+
+    removeFile(0);
+    removeFile(1);
+    if (QDateTime::currentSecsSinceEpoch() != second) {
+        QSKIP("The two changes did not fall within one second");
+    }
 }
 
 void KDirWatch_UnitTest::touch1000Files()
@@ -572,8 +605,11 @@ void KDirWatch_UnitTest::testMoveTo()
         QCOMPARE(spyCreated.count(), 1);
         QCOMPARE(spyCreated[0][0].toString(), file1);
 
-        QCOMPARE(spyDirty.size(), 2);
-        QCOMPARE(spyDirty[1][0].toString(), filetemp);
+        // The directory comes once from the inotify events and once more from its own timestamp.
+        QVERIFY(spyDirty.size() >= 2);
+        QVERIFY(std::any_of(spyDirty.cbegin(), spyDirty.cend(), [&filetemp](const QVariantList &args) {
+            return args[0].toString() == filetemp;
+        }));
     }
 
     // make sure we're still watching it
