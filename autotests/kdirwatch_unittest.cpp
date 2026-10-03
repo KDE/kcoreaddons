@@ -69,6 +69,7 @@ private Q_SLOTS: // test methods
     void watchNonExistent();
     void watchNonExistentWithSingleton();
     void testDelete();
+    void testDeleteAndRecreateFile_data();
     void testDeleteAndRecreateFile();
     void testDeleteAndRecreateDir();
     void testMoveTo();
@@ -420,11 +421,22 @@ void KDirWatch_UnitTest::testDelete()
     QCOMPARE(spyDirty.count(), 0);
 }
 
+void KDirWatch_UnitTest::testDeleteAndRecreateFile_data()
+{
+    QTest::addColumn<QString>("subdirName");
+    QTest::addColumn<QString>("fileName");
+    QTest::newRow("ascii") << QStringLiteral("subdir_delete_ascii") << QStringLiteral("/1");
+    QTest::newRow("unicode-file") << QStringLiteral("subdir_delete_unicode_file") << QStringLiteral("/\u8cc7\u6599-\u00e9");
+    QTest::newRow("unicode-directory") << QStringLiteral("subdir_delete_\u8cc7\u6599") << QStringLiteral("/1");
+}
+
 void KDirWatch_UnitTest::testDeleteAndRecreateFile() // Useful for /etc/localtime for instance
 {
-    const QString subdir = m_path + QLatin1String("subdir");
+    QFETCH(QString, subdirName);
+    QFETCH(QString, fileName);
+    const QString subdir = m_path + subdirName;
     QDir().mkdir(subdir);
-    const QString file1 = subdir + QLatin1String("/1");
+    const QString file1 = subdir + fileName;
     if (!QFile::exists(file1)) {
         createFile(file1);
     }

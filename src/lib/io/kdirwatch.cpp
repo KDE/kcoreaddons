@@ -131,6 +131,19 @@ static const char s_envMethod[] = "KDIRWATCH_METHOD";
 static const char s_envNfsMethod[] = "KDIRWATCH_NFSMETHOD";
 static const char s_envVerboseDebug[] = "KDIRWATCH_VERBOSE";
 
+static int statPath(const QString &path, QT_STATBUF *statBuffer)
+{
+#ifdef Q_OS_WIN
+#ifdef QT_LARGEFILE_SUPPORT
+    return ::_wstati64(qUtf16Printable(path), statBuffer);
+#else
+    return ::_wstat(qUtf16Printable(path), statBuffer);
+#endif
+#else
+    return QT_STAT(QFile::encodeName(path).constData(), statBuffer);
+#endif
+}
+
 //
 // Class KDirWatchPrivate (singleton)
 //
@@ -815,7 +828,7 @@ void KDirWatchPrivate::addEntry(KDirWatch *instance, const QString &_path, Entry
     // we have a new path to watch
 
     QT_STATBUF stat_buf;
-    bool exists = (QT_STAT(QFile::encodeName(path).constData(), &stat_buf) == 0);
+    bool exists = (statPath(path, &stat_buf) == 0);
 
     auto newIt = m_mapEntries.insert(path, Entry());
     // the insert does a copy, so we have to use <e> now
@@ -1152,7 +1165,7 @@ bool KDirWatchPrivate::restartEntryScan(KDirWatch *instance, Entry *e, bool noti
     if (wasWatching == 0) {
         if (!notify) {
             QT_STATBUF stat_buf;
-            bool exists = (QT_STAT(QFile::encodeName(e->path).constData(), &stat_buf) == 0);
+            bool exists = (statPath(e->path, &stat_buf) == 0);
             if (exists) {
                 // ctime is the 'creation time' on windows, but with qMax
                 // we get the latest change of any kind, on any platform.
@@ -1248,7 +1261,7 @@ int KDirWatchPrivate::scanEntry(Entry *e)
     }
 
     QT_STATBUF stat_buf;
-    const bool exists = (QT_STAT(QFile::encodeName(e->path).constData(), &stat_buf) == 0);
+    const bool exists = (statPath(e->path, &stat_buf) == 0);
     if (exists) {
         if (e->m_status == NonExistent) {
             // ctime is the 'creation time' on windows, but with qMax
