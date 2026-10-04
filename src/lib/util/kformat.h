@@ -444,6 +444,20 @@ public:
     [[nodiscard]] QString formatTime(const QDateTime &dateTime, QLocale::FormatType format, TimeFormatOptions options = KFormat::DoNotAddTimeZone) const;
 
     /*!
+     * Returns a datetime value formatted as string considering the timezone.
+     *
+     * This behaves like QLocale::toString(QDateTime, QLocale::FormatType) but can be
+     * made to add additional timezone information via \a options.
+     *
+     * \a dateTime the datetime to be formatted.
+     * \a format the format used for formatting the time value
+     * \a options controls how timezone information should be formatted
+     *
+     * \since 6.31
+     */
+    [[nodiscard]] QString formatDateTime(const QDateTime &dateTime, QLocale::FormatType format, TimeFormatOptions options = KFormat::DoNotAddTimeZone) const;
+
+    /*!
      * Converts \a value to the appropriate string representation
      *
      * Example:

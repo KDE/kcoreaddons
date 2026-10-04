@@ -71,6 +71,12 @@ QString Formats::formatTime(const QVariant &obj, const QString &propertyName, QL
     return m_format.formatTime(dt, format, options);
 }
 
+QString Formats::formatDateTime(const QVariant &obj, const QString &propertyName, QLocale::FormatType format, KFormat::TimeFormatOptions options) const
+{
+    const auto dt = readProperty(obj, propertyName).toDateTime();
+    return m_format.formatDateTime(dt, format, options);
+}
+
 QString Formats::formatDistance(double value, KFormat::DistanceFormatOptions options) const
 {
     markCurrentFunctionAsTranslationBinding(this);
