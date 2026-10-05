@@ -97,7 +97,7 @@ msgid ""
 "\">the SPDX website</a>.</p>"
 msgstr ""
 "<p>Полные условия доступны на <a href=\"https://spdx.org/licenses/%1.html"
-"\">веб-сайте SPDX</a></p>"
+"\">веб-сайте SPDX</a>.</p>"
 
 #: lib/kaboutdata.cpp:296
 msgctxt "KAboutLicense|"
@@ -795,10 +795,10 @@ msgstr "%1ч%2м%3с"
 #. ----------
 #. @item:intext abbreviated amount of minutes and abbreviated amount of seconds
 #. ----------
-#. %1 is a formatted time (from QLocale.toString), %2 is a localized timezone abbreviation (from QTimeZone::displayName(QTimeZone::ShortName)).
+#. %1 is a formatted datetime or time (from QLocale.toString) * %2 is a localized timezone abbreviation (from QTimeZone::displayName(QTimeZone::ShortName)).
 #: lib/util/kformatprivate.cpp:432 lib/util/kformatprivate.cpp:441
 #: lib/util/kformatprivate.cpp:446 lib/util/kformatprivate.cpp:454
-#: lib/util/kformatprivate.cpp:682
+#: lib/util/kformatprivate.cpp:681
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 %2"
@@ -932,7 +932,7 @@ msgstr[2] "%n секунд"
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 and %2"
-msgstr "%1 %2"
+msgstr "%1 и %2"
 
 #: lib/util/kformatprivate.cpp:576
 msgctxt ""
@@ -944,7 +944,7 @@ msgstr "Недопустимая дата"
 #: lib/util/kformatprivate.cpp:586
 msgctxt "KFormat|"
 msgid "In two days"
-msgstr "В течение двух дней"
+msgstr "Через два дня"
 
 #: lib/util/kformatprivate.cpp:588
 msgctxt "KFormat|"
@@ -1012,7 +1012,7 @@ msgstr[2] "%n мин"
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "Через %n минут"
+msgstr[0] "Через %n минуту"
 msgstr[1] "Через %n минуты"
 msgstr[2] "Через %n минут"
 
@@ -1023,25 +1023,25 @@ msgctxt "KFormat|"
 msgid "%1 at %2"
 msgstr "%1 в %2"
 
-#: lib/util/kformatprivate.cpp:698
+#: lib/util/kformatprivate.cpp:713
 #, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
 msgstr "%1 фут/футов/фута"
 
-#: lib/util/kformatprivate.cpp:702 lib/util/kformatprivate.cpp:704
+#: lib/util/kformatprivate.cpp:717 lib/util/kformatprivate.cpp:719
 #, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
 msgstr "%1 миля/миль/мили"
 
-#: lib/util/kformatprivate.cpp:710
+#: lib/util/kformatprivate.cpp:725
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
 msgstr "%1 м"
 
-#: lib/util/kformatprivate.cpp:713 lib/util/kformatprivate.cpp:715
+#: lib/util/kformatprivate.cpp:728 lib/util/kformatprivate.cpp:730
 #, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
