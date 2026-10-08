@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons5_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2026-09-18 12:00+0200\n"
+"PO-Revision-Date: 2026-10-07 15:30+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
@@ -56,7 +56,7 @@ msgstr "NTFS"
 #: lib/io/kfilesystemtype.cpp:318
 msgctxt "KFileSystemType|"
 msgid "ExFAT"
-msgstr "eksFAT"
+msgstr "exFAT"
 
 #: lib/io/kfilesystemtype.cpp:321
 msgctxt "KFileSystemType|"
@@ -82,7 +82,7 @@ msgid ""
 "\">the SPDX website</a>.</p>"
 msgstr ""
 "<p>Pune uslove možete naći na <a href=\"https://spdx.org/licenses/%1.html"
-"\">sajtu SPDIksa</a>.</p>"
+"\">sajtu SPDIks‑a</a>.</p>"
 
 #: lib/kaboutdata.cpp:296
 msgctxt "KAboutLicense|"
@@ -189,7 +189,7 @@ msgstr "CC0"
 #: lib/kaboutdata.cpp:381
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr "Krijejtiv komons zero"
+msgstr "Creative Commons zero"
 
 #: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license (short name)"
@@ -204,12 +204,12 @@ msgstr "Open data komonsova Otvorena licenca baze podataka, verzija 1.0"
 #: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr "Apač 2.0"
+msgstr "Apache 2.0"
 
 #: lib/kaboutdata.cpp:389
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr "Apačeva licenca 2.0"
+msgstr "Apachejeva licenca 2.0"
 
 #: lib/kaboutdata.cpp:392
 msgctxt "KAboutLicense|@item license (short name)"
@@ -219,7 +219,7 @@ msgstr "FTL"
 #: lib/kaboutdata.cpp:393
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr "Licenca projekta Fritajp"
+msgstr "Licenca projekta FreeType"
 
 #: lib/kaboutdata.cpp:396
 msgctxt "KAboutLicense|@item license (short name)"
@@ -229,7 +229,7 @@ msgstr "Boost"
 #: lib/kaboutdata.cpp:397
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr "Bustova softverska licenca 1.0"
+msgstr "Boostova softverska licenca 1.0"
 
 #: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license (short name)"
@@ -249,7 +249,7 @@ msgstr "MPL 2.0"
 #: lib/kaboutdata.cpp:405
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Mozilina javna licenca 2.0"
+msgstr "Mozillina javna licenca 2.0"
 
 #: lib/kaboutdata.cpp:409
 msgctxt "KAboutLicense|@item license"
@@ -1041,15 +1041,15 @@ msgstr "Putanja %1 ne postoji"
 #: lib/util/klistopenfilesjob_unix.cpp:46
 msgctxt "QObject|"
 msgid "Could not find lsof executable in PATH:"
-msgstr "Ne mogu da nađem izvršni fajl lsof u PATH‑u:"
+msgstr "Ne mogu da nađem izvršni fajl lsof u promjenljivoj PATH:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
 #, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "Neuspjelo izvršavanje naredbe lsof. Kôd greške %1"
+msgstr "Ne mogu da izvršim naredbu lsof. Kôd greške %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
 msgid "KListOpenFilesJob is not supported on Windows"
-msgstr "KListOpenFilesJob nije podržan na Vindouzu"
+msgstr "KListOpenFilesJob nije podržan na Windowsu"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcoreaddons5_qt\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2026-09-18 12:00+0200\n"
+"PO-Revision-Date: 2026-10-07 15:30+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
@@ -82,7 +82,7 @@ msgid ""
 "\">the SPDX website</a>.</p>"
 msgstr ""
 "<p>Пуне услове можете наћи на <a href=\"https://spdx.org/licenses/%1.html"
-"\">сајту СПДИкса</a>.</p>"
+"\">сајту СПДИкс‑а</a>.</p>"
 
 #: lib/kaboutdata.cpp:296
 msgctxt "KAboutLicense|"
@@ -189,7 +189,7 @@ msgstr "ЦЦ0"
 #: lib/kaboutdata.cpp:381
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr "Кријејтив комонс зеро"
+msgstr "Криејтив комонс зеро"
 
 #: lib/kaboutdata.cpp:384
 msgctxt "KAboutLicense|@item license (short name)"
@@ -1041,13 +1041,13 @@ msgstr "Путања %1 не постоји"
 #: lib/util/klistopenfilesjob_unix.cpp:46
 msgctxt "QObject|"
 msgid "Could not find lsof executable in PATH:"
-msgstr "Не могу да нађем извршни фајл lsof у PATH‑у:"
+msgstr "Не могу да нађем извршни фајл lsof у промјенљивој PATH:"
 
 #: lib/util/klistopenfilesjob_unix.cpp:55
 #, qt-format
 msgctxt "QObject|"
 msgid "Failed to execute `lsof'. Error code %1"
-msgstr "Неуспјело извршавање наредбе lsof. Кôд грешке %1"
+msgstr "Не могу да извршим наредбу lsof. Кôд грешке %1"
 
 #: lib/util/klistopenfilesjob_win.cpp:27
 msgctxt "QObject|"
