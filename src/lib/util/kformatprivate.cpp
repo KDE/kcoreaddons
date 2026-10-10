@@ -572,11 +572,16 @@ QString KFormatPrivate::formatSpelloutDuration(quint64 msecs) const
 
 QString KFormatPrivate::formatRelativeDate(const QDate &date, QLocale::FormatType format) const
 {
+    return formatRelativeDate(date, QDate::currentDate(), format);
+}
+
+QString KFormatPrivate::formatRelativeDate(const QDate &date, const QDate &today, QLocale::FormatType format) const
+{
     if (!date.isValid()) {
         return tr("Invalid date", "used when a relative date string can't be generated because the date is invalid");
     }
 
-    const qint64 daysTo = QDate::currentDate().daysTo(date);
+    const qint64 daysTo = today.daysTo(date);
     if (daysTo > 2 || daysTo < -2) {
         return m_locale.toString(date, format);
     }
@@ -634,10 +639,13 @@ QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocal
     }
 
     const auto timeFormatType = format == QLocale::FormatType::LongFormat ? QLocale::FormatType::ShortFormat : format;
-    const qint64 daysToNow = dateTime.daysTo(now);
+    // QDateTime::daysTo() compares the dates without converting them to the same time zone,
+    // so take today's date in the time zone of dateTime.
+    const QDate today = now.toTimeZone(dateTime.timeRepresentation()).date();
+    const qint64 daysToNow = dateTime.date().daysTo(today);
     QString dateString;
     if (daysToNow < 2 && daysToNow > -2) {
-        dateString = formatRelativeDate(dateTime.date(), format);
+        dateString = formatRelativeDate(dateTime.date(), today, format);
     } else {
         dateString = m_locale.toString(dateTime.date(), format);
     }

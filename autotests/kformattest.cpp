@@ -452,6 +452,37 @@ void KFormatTest::formatRelativeDate()
     QCOMPARE(format.formatRelativeDateTime(testDateTime, QLocale::NarrowFormat), "5 min(s)"_L1);
 }
 
+void KFormatTest::formatRelativeDateTimeInOtherTimeZone_data()
+{
+    QTest::addColumn<QByteArray>("timeZone");
+    QTest::addColumn<int>("daysFromToday");
+    QTest::addColumn<QString>("expectedDay");
+
+    // The local time zone is Asia/Kolkata. These zones are 11 hours behind and 14 hours ahead of UTC,
+    // so their date differs from the UTC date or from the local date for most of the day.
+    QTest::newRow("Pago Pago, yesterday") << QByteArray("Pacific/Pago_Pago") << -1 << QStringLiteral("Yesterday");
+    QTest::newRow("Pago Pago, tomorrow") << QByteArray("Pacific/Pago_Pago") << 1 << QStringLiteral("Tomorrow");
+    QTest::newRow("Kiritimati, yesterday") << QByteArray("Pacific/Kiritimati") << -1 << QStringLiteral("Yesterday");
+    QTest::newRow("Kiritimati, tomorrow") << QByteArray("Pacific/Kiritimati") << 1 << QStringLiteral("Tomorrow");
+}
+
+void KFormatTest::formatRelativeDateTimeInOtherTimeZone()
+{
+    QFETCH(QByteArray, timeZone);
+    QFETCH(int, daysFromToday);
+    QFETCH(QString, expectedDay);
+
+    const QTimeZone zone(timeZone);
+    QVERIFY(zone.isValid());
+    KFormat format(QLocale::c());
+
+    // The day is counted in the time zone of the date, which is also the one its time is shown in.
+    const QDate today = QDateTime::currentDateTime(zone).date();
+    const QDateTime dateTime(today.addDays(daysFromToday), QTime(12, 0), zone);
+    QCOMPARE(format.formatRelativeDateTime(dateTime, QLocale::ShortFormat),
+             QStringLiteral("%1 at %2").arg(expectedDay, QLocale::c().toString(QTime(12, 0), QLocale::ShortFormat)));
+}
+
 void KFormatTest::formatTime()
 {
     if (QTimeZone::systemTimeZone().id() != "Asia/Kolkata") {
