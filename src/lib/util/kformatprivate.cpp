@@ -17,6 +17,7 @@
 #include <QStandardPaths>
 #include <QTimeZone>
 
+#include <limits>
 #include <math.h>
 
 using namespace Qt::Literals;
@@ -604,8 +605,14 @@ QString KFormatPrivate::formatRelativeDate(const QDate &date, const QDate &today
 QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocale::FormatType format) const
 {
     const QDateTime now = QDateTime::currentDateTime(QTimeZone::UTC);
+    // QDateTime::daysTo() compares the dates without converting them to the same time zone,
+    // so take today's date in the time zone of dateTime.
+    const QDate today = now.toTimeZone(dateTime.timeRepresentation()).date();
+    const qint64 daysToNow = dateTime.date().daysTo(today);
 
-    const auto secsToNow = dateTime.secsTo(now);
+    // Within an hour of now is within two days of today, even where a zone skipped a day to cross the
+    // date line, which spares secsTo() a time zone conversion for every older date.
+    const auto secsToNow = daysToNow <= 2 && daysToNow >= -2 ? dateTime.secsTo(now) : std::numeric_limits<qint64>::max();
     constexpr int secsInAHour = 60 * 60;
     if (secsToNow >= 0 && secsToNow < secsInAHour) {
         const int minutesToNow = secsToNow / 60;
@@ -639,10 +646,6 @@ QString KFormatPrivate::formatRelativeDateTime(const QDateTime &dateTime, QLocal
     }
 
     const auto timeFormatType = format == QLocale::FormatType::LongFormat ? QLocale::FormatType::ShortFormat : format;
-    // QDateTime::daysTo() compares the dates without converting them to the same time zone,
-    // so take today's date in the time zone of dateTime.
-    const QDate today = now.toTimeZone(dateTime.timeRepresentation()).date();
-    const qint64 daysToNow = dateTime.date().daysTo(today);
     QString dateString;
     if (daysToNow < 2 && daysToNow > -2) {
         dateString = formatRelativeDate(dateTime.date(), today, format);
