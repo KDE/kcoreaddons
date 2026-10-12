@@ -153,7 +153,7 @@ KCOREADDONS_EXPORT bool matchSimple(QStringView pattern, QStringView str);
  * \brief This is the main function which does scored fuzzy matching.
  *
  * The return value of this function contains Result#score which should be used to
- * sort the results. Without sorting of the results this function won't very effective.
+ * sort the results. Without sorting of the results this function won't be very effective.
  *
  * If \a pattern is empty, the function will return \c true
  *
