@@ -16,20 +16,29 @@
 # nikos, 2011.
 # Stelios <sstavra@gmail.com>, 2012, 2013, 2020, 2021, 2023.
 # Dimitris Kardarakos <dimkard@gmail.com>, 2015, 2016.
+# SPDX-FileCopyrightText: 2026 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2026 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2026 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2026 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2026 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2026 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2026 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2026 SPDX-FileCopyrightText :
+# SPDX-FileCopyrightText: 2026 Λευτέρης Τ. <tripoleft@protonmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs4\n"
 "Report-Msgid-Bugs-To: http://bugs.kde.org\n"
 "POT-Creation-Date: 2014-03-23 01:50+0000\n"
-"PO-Revision-Date: 2023-10-25 23:23+0300\n"
-"Last-Translator: Stelios <sstavra@gmail.com>\n"
-"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"PO-Revision-Date: 2026-10-13 13:59+0300\n"
+"Last-Translator: Λευτέρης Τ. <tripoleft@protonmail.com>\n"
+"Language-Team: Greek <kde-i18n-doc@kde.org>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Qt-Contexts: true\n"
 
 #: lib/io/kfilesystemtype.cpp:306
@@ -78,12 +87,10 @@ msgid "Unknown"
 msgstr "Άγνωστο"
 
 #: lib/kaboutdata.cpp:283
-#, fuzzy, qt-format
-#| msgctxt "KAboutLicense|"
-#| msgid "This program is distributed under the terms of the %1."
+#, qt-format
 msgctxt "KAboutLicense|"
 msgid "<p>This program is distributed under the terms of the %1.</p>"
-msgstr "Το πρόγραμμα διανέμεται υπό τους όρους της %1."
+msgstr "<p>Το πρόγραμμα διανέμεται υπό τους όρους της %1.</p>"
 
 #: lib/kaboutdata.cpp:284
 #, qt-format
@@ -92,6 +99,8 @@ msgid ""
 "<p>You can find the full terms on <a href=\"https://spdx.org/licenses/%1.html"
 "\">the SPDX website</a>.</p>"
 msgstr ""
+"<p>Μπορείτε να βρείτε τους πλήρεις όρους στην <a href=\"https://spdx.org/"
+"licenses/%1.html\">ιστοσελίδα SPDX</a>.</p>"
 
 #: lib/kaboutdata.cpp:296
 msgctxt "KAboutLicense|"
@@ -193,84 +202,73 @@ msgstr "Άδεια ΜΙΤ"
 #: lib/kaboutdata.cpp:380
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "CC0"
-msgstr ""
+msgstr "CC0"
 
 #: lib/kaboutdata.cpp:381
 msgctxt "KAboutLicense|@item license"
 msgid "Creative Commons Zero"
-msgstr ""
+msgstr "Creative Commons Μηδέν"
 
 #: lib/kaboutdata.cpp:384
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "QPL v1.0"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "ODbL v1.0"
-msgstr "QPL v1.0"
+msgstr "ODbL v1.0"
 
 #: lib/kaboutdata.cpp:385
+#, fuzzy
 msgctxt "KAboutLicense|@item license"
 msgid "Open Data Commons Open Database License v1.0"
-msgstr ""
+msgstr "Άδεια Open Data Commons Open Database  v1.0"
 
 #: lib/kaboutdata.cpp:388
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Apache 2.0"
-msgstr ""
+msgstr "Apache 2.0"
 
 #: lib/kaboutdata.cpp:389
 msgctxt "KAboutLicense|@item license"
 msgid "Apache License 2.0"
-msgstr ""
+msgstr "Άδεια Apache 2.0"
 
 #: lib/kaboutdata.cpp:392
-#, fuzzy
-#| msgctxt "KFileSystemType|"
-#| msgid "FAT"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "FTL"
-msgstr "FAT"
+msgstr "FTL"
 
 #: lib/kaboutdata.cpp:393
 msgctxt "KAboutLicense|@item license"
 msgid "Freetype Project License"
-msgstr ""
+msgstr "Άδεια Έργου Freetype"
 
 #: lib/kaboutdata.cpp:396
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license (short name)"
-#| msgid "BSD License"
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "Boost License"
-msgstr "Άδεια BSD"
+msgstr "Άδεια Boost"
 
 #: lib/kaboutdata.cpp:397
 msgctxt "KAboutLicense|@item license"
 msgid "Boost Software License 1.0"
-msgstr ""
+msgstr "Άδεια Λογισμικού Boost 1.0"
 
 #: lib/kaboutdata.cpp:400
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "BSD-3-Clause"
-msgstr ""
+msgstr "BSD-3-Clause"
 
 #: lib/kaboutdata.cpp:401
 msgctxt "KAboutLicense|@item license"
 msgid "BSD 3-Clause \"New\" or \"Revised\" License"
-msgstr ""
+msgstr "BSD-3-Clause \"Νέα\" ή \"Αναθεωρημένη\" Άδεια"
 
 #: lib/kaboutdata.cpp:404
 msgctxt "KAboutLicense|@item license (short name)"
 msgid "MPL 2.0"
-msgstr ""
+msgstr "MPL 2.0"
 
 #: lib/kaboutdata.cpp:405
-#, fuzzy
-#| msgctxt "KAboutLicense|@item license"
-#| msgid "Q Public License"
 msgctxt "KAboutLicense|@item license"
 msgid "Mozilla Public License 2.0"
-msgstr "Δημόσια άδεια Q"
+msgstr "Δημόσια Άδεια Mozilla 2.0"
 
 #: lib/kaboutdata.cpp:409
 msgctxt "KAboutLicense|@item license"
@@ -298,7 +296,7 @@ msgstr ""
 #: lib/kaboutdata.cpp:1328
 msgctxt "KAboutData CLI|"
 msgid "Show author information."
-msgstr "Εμφάνιση πληροφοριών για τον συγγραφέα."
+msgstr "Εμφάνιση πληροφοριών συγγραφέα."
 
 #: lib/kaboutdata.cpp:1329
 msgctxt "KAboutData CLI|"
@@ -320,7 +318,8 @@ msgstr "όνομα αρχείου"
 #: lib/kaboutdata.cpp:1342
 msgctxt "KAboutData CLI|"
 msgid "This application was written by somebody who wants to remain anonymous."
-msgstr "Αυτή η εφαρμογή γράφτηκε από κάποιον που θέλει να παραμείνει ανώνυμος."
+msgstr ""
+"Αυτή η εφαρμογή δημιουργήθηκε από κάποιον που θέλει να παραμείνει ανώνυμος."
 
 #: lib/kaboutdata.cpp:1350
 #, qt-format
@@ -358,10 +357,10 @@ msgid "The library %1 does not offer a KPluginFactory."
 msgstr "Η βιβλιοθήκη %1 δεν προσφέρει KPluginFactory."
 
 #: lib/plugin/kpluginfactory.h:424
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "KPluginFactory|"
 msgid "KPluginFactory could not create a %1 instance from %2"
-msgstr "Αδυναμία του KPluginFactory να δημιουργήσει μια διεργασία %1 από το %2"
+msgstr "Αδυναμία του KPluginFactory να δημιουργήσει μια οντότητα %1 από το %2"
 
 #: lib/util/kformatprivate.cpp:104
 msgctxt "KFormat|SI prefix for 10^⁻24"
@@ -708,12 +707,12 @@ msgstr "%1 YiB"
 
 #. @item:intext abbreviated amount of years
 #: lib/util/kformatprivate.cpp:334
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "KFormat|"
 msgid "%n yr"
 msgid_plural "%n yr"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%n έ"
+msgstr[1] "%n έ"
 
 #. @item:intext abbreviated amount of days
 #: lib/util/kformatprivate.cpp:339
@@ -724,8 +723,8 @@ msgstr[1] ""
 msgctxt "KFormat|"
 msgid "%n d"
 msgid_plural "%n d"
-msgstr[0] "%n ημέρα(ες)"
-msgstr[1] "%n ημέρα(ες)"
+msgstr[0] "%n η"
+msgstr[1] "%n η"
 
 #. @item:intext abbreviated amount of hours
 #: lib/util/kformatprivate.cpp:344
@@ -736,8 +735,8 @@ msgstr[1] "%n ημέρα(ες)"
 msgctxt "KFormat|"
 msgid "%n hr"
 msgid_plural "%n hr"
-msgstr[0] "%n ώρα(ες)"
-msgstr[1] "%n ώρα(ες)"
+msgstr[0] "%n ώ"
+msgstr[1] "%n ώ"
 
 #. @item:intext abbreviated amount of minutes
 #: lib/util/kformatprivate.cpp:349
@@ -748,8 +747,8 @@ msgstr[1] "%n ώρα(ες)"
 msgctxt "KFormat|"
 msgid "%n min"
 msgid_plural "%n min"
-msgstr[0] "%n λεπτό(ά)"
-msgstr[1] "%n λεπτό(ά)"
+msgstr[0] "%n λ"
+msgstr[1] "%n λ"
 
 #. @item:intext abbreviated amount of seconds
 #: lib/util/kformatprivate.cpp:354
@@ -760,43 +759,43 @@ msgstr[1] "%n λεπτό(ά)"
 msgctxt "KFormat|"
 msgid "%n sec"
 msgid_plural "%n sec"
-msgstr[0] "%n δευτερόλεπτo(α)"
-msgstr[1] "%n δευτερόλεπτo(α)"
+msgstr[0] "%n δλ"
+msgstr[1] "%n δλ"
 
 #. @item:intext Duration format minutes, seconds and milliseconds
 #: lib/util/kformatprivate.cpp:380
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2.%3s"
-msgstr "%1m%2.%3s"
+msgstr "%1λ%2.%3δλ"
 
 #. @item:intext Duration format minutes and seconds
 #: lib/util/kformatprivate.cpp:383
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1m%2s"
-msgstr "%1m%2s"
+msgstr "%1λ%2δλ"
 
 #. @item:intext Duration format hours and minutes
 #: lib/util/kformatprivate.cpp:386
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m"
-msgstr "%1h%2m"
+msgstr "%1ώ%2λ"
 
 #. @item:intext Duration format hours, minutes, seconds, milliseconds
 #: lib/util/kformatprivate.cpp:389
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3.%4s"
-msgstr "%1h%2m%3.%4s"
+msgstr "%1ώ%2λ%3.%4δλ"
 
 #. @item:intext Duration format hours, minutes, seconds
 #: lib/util/kformatprivate.cpp:397
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1h%2m%3s"
-msgstr "%1h%2m%3s"
+msgstr "%1ώ%2λ%3δλ"
 
 #. @item:intext abbreviated amount of years and abbreviated amount of days
 #. ----------
@@ -879,20 +878,17 @@ msgstr "%1 δευτερόλεπτα"
 msgctxt "KFormat|"
 msgid "%n millisecond(s)"
 msgid_plural "%n millisecond(s)"
-msgstr[0] "%n χιλιοστό(α) του δευτερολέπτου"
-msgstr[1] "%n χιλιοστό(α) του δευτερολέπτου"
+msgstr[0] "%n χιλιοστό του δευτερολέπτου"
+msgstr[1] "%n χιλιοστά του δευτερολέπτου"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:509
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n hour(s)"
-#| msgid_plural "%n hour(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n year(s)"
 msgid_plural "%n year(s)"
-msgstr[0] "%n ώρα(ες)"
-msgstr[1] "%n ώρα(ες)"
+msgstr[0] "%n έτος"
+msgstr[1] "%n έτη"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:514
@@ -900,8 +896,8 @@ msgstr[1] "%n ώρα(ες)"
 msgctxt "KFormat|"
 msgid "%n day(s)"
 msgid_plural "%n day(s)"
-msgstr[0] "%n ημέρα(ες)"
-msgstr[1] "%n ημέρα(ες)"
+msgstr[0] "%n ημέρα"
+msgstr[1] "%n ημέρες"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:519
@@ -909,8 +905,8 @@ msgstr[1] "%n ημέρα(ες)"
 msgctxt "KFormat|"
 msgid "%n hour(s)"
 msgid_plural "%n hour(s)"
-msgstr[0] "%n ώρα(ες)"
-msgstr[1] "%n ώρα(ες)"
+msgstr[0] "%n ώρα"
+msgstr[1] "%n ώρες"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:524
@@ -918,8 +914,8 @@ msgstr[1] "%n ώρα(ες)"
 msgctxt "KFormat|"
 msgid "%n minute(s)"
 msgid_plural "%n minute(s)"
-msgstr[0] "%n λεπτό(ά)"
-msgstr[1] "%n λεπτό(ά)"
+msgstr[0] "%n λεπτό"
+msgstr[1] "%n λεπτά"
 
 #. @item:intext %n is a whole number
 #: lib/util/kformatprivate.cpp:529
@@ -927,8 +923,8 @@ msgstr[1] "%n λεπτό(ά)"
 msgctxt "KFormat|"
 msgid "%n second(s)"
 msgid_plural "%n second(s)"
-msgstr[0] "%n δευτερόλεπτo(α)"
-msgstr[1] "%n δευτερόλεπτo(α)"
+msgstr[0] "%n δευτερόλεπτο"
+msgstr[1] "%n δευτερόλεπτα"
 
 #. @item:intext days and hours. This uses the previous item:intext messages. If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #. ----------
@@ -952,7 +948,7 @@ msgstr "Μη έγκυρη ημερομηνία"
 #: lib/util/kformatprivate.cpp:592
 msgctxt "KFormat|"
 msgid "In two days"
-msgstr "Σε δύο ημέρες"
+msgstr "Σε δύο μέρες"
 
 #: lib/util/kformatprivate.cpp:594
 msgctxt "KFormat|"
@@ -972,7 +968,7 @@ msgstr "Χθες"
 #: lib/util/kformatprivate.cpp:600
 msgctxt "KFormat|"
 msgid "Two days ago"
-msgstr "Δύο ημέρες πριν"
+msgstr "Δύο μέρες πριν"
 
 #: lib/util/kformatprivate.cpp:620
 msgctxt "KFormat|"
@@ -988,12 +984,12 @@ msgstr "Μόλις τώρα"
 msgctxt "KFormat|"
 msgid "%n min(s) ago"
 msgid_plural "%n min(s) ago"
-msgstr[0] "%n λεπτά πριν"
-msgstr[1] "%n λεπτά πριν"
+msgstr[0] "%n λεπτό πριν"
+msgstr[1] "%n λεπτό πριν"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:630
-#, qt-format
+#, fuzzy, qt-format
 msgctxt "KFormat|"
 msgid "%n minute(s) ago"
 msgid_plural "%n minute(s) ago"
@@ -1001,72 +997,58 @@ msgstr[0] "%n λεπτά πριν"
 msgstr[1] "%n λεπτά πριν"
 
 #: lib/util/kformatprivate.cpp:635
-#, fuzzy
-#| msgid "No"
 msgctxt "KFormat|"
 msgid "Now"
-msgstr "Όχι"
+msgstr "Τώρα"
 
 #. @item:intext %1 is a whole number, abbreviate minute value
 #: lib/util/kformatprivate.cpp:640
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "%n min(s)"
 msgid_plural "%n min(s)"
-msgstr[0] "%n λεπτό(ά)"
-msgstr[1] "%n λεπτό(ά)"
+msgstr[0] "%n λεπτό"
+msgstr[1] "%n λεπτά"
 
 #. @item:intext %1 is a whole number
 #: lib/util/kformatprivate.cpp:645
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%n minute(s)"
-#| msgid_plural "%n minute(s)"
+#, qt-format
 msgctxt "KFormat|"
 msgid "In %n minute(s)"
 msgid_plural "In %n minute(s)"
-msgstr[0] "%n λεπτό(ά)"
-msgstr[1] "%n λεπτό(ά)"
+msgstr[0] "Σε %n λεπτό"
+msgstr[1] "Σε %n λεπτά"
 
 #. relative datetime with %1 result of QLocale.toString(date, format) or formatRelativeDate and %2 result of QLocale.toString(time, timeformatType) If this does not fit the grammar of your language please contact the i18n team to solve the problem
 #: lib/util/kformatprivate.cpp:659
 #, qt-format
 msgctxt "KFormat|"
 msgid "%1 at %2"
-msgstr "%1 %2"
+msgstr "%1 στις %2"
 
 #: lib/util/kformatprivate.cpp:724
-#, fuzzy, qt-format
-#| msgid "%1 file"
-#| msgid_plural "%1 files"
+#, qt-format
 msgctxt "KFormat|distance in feet"
 msgid "%1 ft"
-msgstr "%1 αρχείο"
+msgstr "%1 πδ"
 
 #: lib/util/kformatprivate.cpp:728 lib/util/kformatprivate.cpp:730
-#, fuzzy, qt-format
-#| msgctxt "KFormat|"
-#| msgid "%1 minutes"
+#, qt-format
 msgctxt "KFormat|distance in miles"
 msgid "%1 mi"
-msgstr "%1 λεπτά"
+msgstr "%1 μίλ"
 
 #: lib/util/kformatprivate.cpp:736
 #, qt-format
 msgctxt "KFormat|distance in meter"
 msgid "%1 m"
-msgstr ""
+msgstr "%1 μ"
 
 #: lib/util/kformatprivate.cpp:739 lib/util/kformatprivate.cpp:741
-#, fuzzy, qt-format
-#| msgctxt "KFormat|MetricBinaryDialect"
-#| msgid "%1 kB"
+#, qt-format
 msgctxt "KFormat|distance in kilometer"
 msgid "%1 km"
-msgstr "%1 kB"
+msgstr "%1 χλμ"
 
 #: lib/util/klistopenfilesjob_unix.cpp:39
 #, qt-format
