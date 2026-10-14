@@ -24,6 +24,7 @@ Notes:
   <mime-type type="application/relaxng">
     <sub-class-of type="application/xml"/>
     <comment>RELAX NG</comment>
+    <comment xml:lang="af">RELAX NG</comment>
     <comment xml:lang="ar">‏RELAX NG</comment>
     <comment xml:lang="ast">RELAX NG</comment>
     <comment xml:lang="az">RELAX NG</comment>
@@ -95,6 +96,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-cda">
     <comment>CD audio</comment>
+    <comment xml:lang="af">CD-klank</comment>
     <comment xml:lang="ar">صوت CD</comment>
     <comment xml:lang="ast">CD d'audiu</comment>
     <comment xml:lang="az">CD səsi</comment>
@@ -169,6 +171,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-font-snf">
     <comment>SNF bitmap font</comment>
+    <comment xml:lang="af">SNF-bitmaplettertipe</comment>
     <comment xml:lang="ar">خط SNF bitmap</comment>
     <comment xml:lang="ast">Fonte de mapa de bits SNF</comment>
     <comment xml:lang="az">SNF bitmap şrifti</comment>
@@ -244,6 +247,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-java-applet">
     <comment>Java applet</comment>
+    <comment xml:lang="af">Java-applet</comment>
     <comment xml:lang="ar">بريمج جافا</comment>
     <comment xml:lang="ast">Applet de Java</comment>
     <comment xml:lang="az">Java applet</comment>
@@ -316,6 +320,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kcsrc">
     <comment>KDE color scheme</comment>
+    <comment xml:lang="af">KDE-kleurskema</comment>
     <comment xml:lang="ar">مخطط ألوان كِيدِي</comment>
     <comment xml:lang="ast">Esquema de colores de KDE</comment>
     <comment xml:lang="az">KDE rəng sxemi</comment>
@@ -393,6 +398,7 @@ Notes:
   <mime-type type="application/x-kns">
     <sub-class-of type="application/zip"/>
     <comment>KNewStuff package</comment>
+    <comment xml:lang="af">KNewStuff-pakket</comment>
     <comment xml:lang="ar">حزمة KNewStuff</comment>
     <comment xml:lang="ast">Paquete de KNewStuff</comment>
     <comment xml:lang="az">KNewStuff paketi</comment>
@@ -467,6 +473,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kwallet"> <!-- fdo #6326 rejected, will stay KDE-specific -->
     <comment>KWallet wallet</comment>
+    <comment xml:lang="af">KWallet-beursie</comment>
     <comment xml:lang="ar">حافظة KWallet</comment>
     <comment xml:lang="ast">Cartera de KWallet</comment>
     <comment xml:lang="az">KWallet cüzdanı</comment>
@@ -544,6 +551,7 @@ Notes:
   <mime-type type="application/x-plasma">
     <sub-class-of type="application/zip"/>
     <comment>plasmoid</comment>
+    <comment xml:lang="af">plasmoid</comment>
     <comment xml:lang="ar">بلازمود</comment>
     <comment xml:lang="ast">Plasmoide</comment>
     <comment xml:lang="az">plasmoid</comment>
@@ -617,6 +625,7 @@ Notes:
   <mime-type type="application/x-superkaramba">
     <sub-class-of type="application/zip"/>
     <comment>SuperKaramba theme</comment>
+    <comment xml:lang="af">SuperKaramba-tema</comment>
     <comment xml:lang="ar">سمة SuperKaramba</comment>
     <comment xml:lang="ast">Estilu de Superkaramba</comment>
     <comment xml:lang="az">SuperKaramba mövzusu</comment>
@@ -690,6 +699,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-vnd.kde.plan">
     <comment>Calligra Plan project management document</comment>
+    <comment xml:lang="af">Calligra Plan-projekbestuursdokument</comment>
     <comment xml:lang="ar">وثيقة إدارة مشاريع Calligra Plan</comment>
     <comment xml:lang="ast">Documentu de xestión de proyeutos de Calligra Plan</comment>
     <comment xml:lang="az">Calligra Plan layihəsi darəetmə sənədi</comment>
@@ -763,6 +773,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-vnd.kde.plan.work">
     <comment>Calligra Plan work package document</comment>
+    <comment xml:lang="af">Calligra Plan-werkpakketdokument</comment>
     <comment xml:lang="ar">وثيقة حزمة عمل Calligra Plan</comment>
     <comment xml:lang="ast">Documentu del paquete llaboral de Calligra Plan</comment>
     <comment xml:lang="az">Calligra Plan iş paketi sənədi</comment>
@@ -836,6 +847,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-vnd.kde.kplato">
     <comment>KPlato project management document</comment>
+    <comment xml:lang="af">KPlato-projekbestuursdokument</comment>
     <comment xml:lang="ar">وثيقة إدارة مشاريع KPlato</comment>
     <comment xml:lang="ast">Documentu de xestión de proyeutos de KPlato</comment>
     <comment xml:lang="az">KPlato layihəsi idarəetmə sənədi</comment>
@@ -909,6 +921,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-vnd.kde.kplato.work">
     <comment>KPlato project management work package</comment>
+    <comment xml:lang="af">KPlato-projekbestuurswerkpakket</comment>
     <comment xml:lang="ar">حزمة عمل إدارة مشاريع KPlato</comment>
     <comment xml:lang="ast">Paquete de trabayu de la xestión de proyeutos de KPlato</comment>
     <comment xml:lang="az">KPlato idarəetmə sənədi iş paketi</comment>
@@ -982,6 +995,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-vnd.kde.kugar.mixed">
     <comment>Kugar archive</comment>
+    <comment xml:lang="af">Kugar-argief</comment>
     <comment xml:lang="ar">أرشيف Kugar</comment>
     <comment xml:lang="ast">Archivu de Kugar</comment>
     <comment xml:lang="az">Kugar arxivi</comment>
@@ -1056,6 +1070,7 @@ Notes:
   <mime-type type="application/x-webarchive">
     <sub-class-of type="application/x-compressed-tar"/>
     <comment>web archive</comment>
+    <comment xml:lang="af">webargief</comment>
     <comment xml:lang="ar">أرشيف ويب</comment>
     <comment xml:lang="ast">Archivu web</comment>
     <comment xml:lang="az">veb arxiv</comment>
@@ -1131,6 +1146,7 @@ Notes:
   <mime-type type="application/xsd"> <!-- fdo s-m-i adds *.xsd to application/xml, i.e. no subclass. Good enough? This here creates a glob conflict... -->
     <sub-class-of type="application/xml"/>
     <comment>W3C XML schema</comment>
+    <comment xml:lang="af">W3C-XML-skema</comment>
     <comment xml:lang="ar">مخطط W3C XML</comment>
     <comment xml:lang="ast">Esquema XML del W3C</comment>
     <comment xml:lang="az">W3C XML sxemi</comment>
@@ -1204,6 +1220,7 @@ Notes:
   </mime-type>
   <mime-type type="application/vnd.kde.kphotoalbum-import"> <!-- fdo #12732 rejected, will stay KDE-specific -->
     <comment>KPhotoAlbum import</comment>
+    <comment xml:lang="af">KPhotoAlbum-invoer</comment>
     <comment xml:lang="ar">استيراد KPhotoAlbum</comment>
     <comment xml:lang="ast">Importación de KPhotoAlbum</comment>
     <comment xml:lang="az">KPhotoAlbum fotoalbom arxivi</comment>
@@ -1277,6 +1294,7 @@ Notes:
   </mime-type>
   <mime-type type="image/x-hdr"> <!-- https://gitlab.freedesktop.org/xdg/shared-mime-info/-/merge_requests/320 -->
     <comment>HDR image</comment>
+    <comment xml:lang="af">HDR-beeld</comment>
     <comment xml:lang="ar">صورة HDR</comment>
     <comment xml:lang="ast">Imaxe HDR</comment>
     <comment xml:lang="az">HDR şəkili</comment>
@@ -1355,6 +1373,7 @@ Notes:
   <mime-type type="image/x-kde-raw">
     <sub-class-of type="image/x-dcraw"/>
     <comment>KDE raw image formats</comment>
+    <comment xml:lang="af">KDE-rou-beeldformate</comment>
     <comment xml:lang="ar">تنسيقات صورة خامة لكِيدِي</comment>
     <comment xml:lang="ast">Formatos d'imaxe en bruto de KDE</comment>
     <comment xml:lang="az">KDE raw şəkil formatı</comment>
@@ -1439,6 +1458,7 @@ Notes:
   <mime-type type="text/x-hex">
     <sub-class-of type="text/plain"/>
     <comment>Intel® hexadecimal object file</comment>
+    <comment xml:lang="af">Intel®-heksadesimale-objeklêer</comment>
     <comment xml:lang="ar">ملف كائن سداسي عشر Intel®</comment>
     <comment xml:lang="ast">Ficheru Intel® HEX</comment>
     <comment xml:lang="az">Intel® HEX faylı</comment>
@@ -1512,6 +1532,7 @@ Notes:
   <mime-type type="text/x-katefilelist">
     <sub-class-of type="text/plain"/>
     <comment>Kate file list loader plugin list</comment>
+    <comment xml:lang="af">Kate-lêerlyslaaier-inproplys</comment>
     <comment xml:lang="ar">قائمة ملحقات محملات قائمة ملفات لكيت</comment>
     <comment xml:lang="ast">Llista de plugins del cargador de la llista de ficheros de Kate</comment>
     <comment xml:lang="az">Kate fayllar siyahısı yükləyici qoşması</comment>
@@ -1586,6 +1607,7 @@ Notes:
   <mime-type type="text/vnd.abc"> <!-- fdo #6578, needs update -->
     <sub-class-of type="text/plain"/>
     <comment>abc musical notation file</comment>
+    <comment xml:lang="af">abc-musieknotasielêer</comment>
     <comment xml:lang="ar">ملف كراسة موسيقية abc</comment>
     <comment xml:lang="ast">Ficheru d'anotaciones musicales abc</comment>
     <comment xml:lang="az">abc not yazısı</comment>
@@ -1665,6 +1687,7 @@ Notes:
   <mime-type type="application/vnd.kde.fontspackage">
     <sub-class-of type="application/zip"/>
     <comment>fonts package</comment>
+    <comment xml:lang="af">lettertipepakket</comment>
     <comment xml:lang="ar">حزمة خطوط</comment>
     <comment xml:lang="ast">Paquete de fontes</comment>
     <comment xml:lang="az">şrift paketi</comment>
@@ -1741,6 +1764,7 @@ Notes:
   <mime-type type="application/x-smb-server"> <!-- KDE-specific -->
     <sub-class-of type="inode/directory"/>
     <comment>Windows server</comment>
+    <comment xml:lang="af">Windows-bediener</comment>
     <comment xml:lang="ar">خادم ويندوز</comment>
     <comment xml:lang="ast">Sirvidor de Windows</comment>
     <comment xml:lang="az">Windows serveri</comment>
@@ -1815,6 +1839,7 @@ Notes:
   <mime-type type="application/x-smb-workgroup"> <!-- KDE-specific -->
     <sub-class-of type="inode/directory"/>
     <comment>Windows workgroup</comment>
+    <comment xml:lang="af">Windows-werkgroep</comment>
     <comment xml:lang="ar">مجموعة عمل ويندوز</comment>
     <comment xml:lang="ast">Grupu de trabayu de Windows</comment>
     <comment xml:lang="az">Windows iş qrupu</comment>
@@ -1889,6 +1914,7 @@ Notes:
   <mime-type type="application/x-ksysguard">
     <!-- <sub-class-of type="application/xml"/> -->
     <comment>KDE system monitor</comment>
+    <comment xml:lang="af">KDE-stelselmonitor</comment>
     <comment xml:lang="ar">نظام مراقبة كِيدِي</comment>
     <comment xml:lang="ast">Monitor del sistema de KDE</comment>
     <comment xml:lang="az">KDE sistem izləyicisi</comment>
@@ -1964,6 +1990,7 @@ Notes:
   <mime-type type="application/x-ktheme">
     <sub-class-of type="application/zip"/>
     <comment>KDE theme</comment>
+    <comment xml:lang="af">KDE-tema</comment>
     <comment xml:lang="ar">سمة كِيدِي</comment>
     <comment xml:lang="ast">Estilu de KDE</comment>
     <comment xml:lang="az">KDE mövzusu</comment>
@@ -2040,6 +2067,7 @@ Notes:
   <mime-type type="application/x-quanta">
     <sub-class-of type="text/plain"/>
     <comment>Quanta project</comment>
+    <comment xml:lang="af">Quanta-projek</comment>
     <comment xml:lang="ar">مشروع  Quanta</comment>
     <comment xml:lang="ast">Proyeutu de Quanta</comment>
     <comment xml:lang="az">Quanta layihəsi</comment>
@@ -2114,6 +2142,7 @@ Notes:
   <mime-type type="application/x-kommander">
     <sub-class-of type="text/plain"/>
     <comment>Kommander file</comment>
+    <comment xml:lang="af">Kommander-lêer</comment>
     <comment xml:lang="ar">ملف Kommander</comment>
     <comment xml:lang="ast">Ficheru de Kommander</comment>
     <comment xml:lang="az">Kommander faylı</comment>
@@ -2189,6 +2218,7 @@ Notes:
 
   <mime-type type="application/x-tuberling">
     <comment>potato</comment>
+    <comment xml:lang="af">aartappel</comment>
     <comment xml:lang="ar">بطاطا</comment>
     <comment xml:lang="ast">Pataca</comment>
     <comment xml:lang="az">kartof oğlan</comment>
@@ -2262,6 +2292,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kolf">
     <comment>Kolf saved game</comment>
+    <comment xml:lang="af">Kolf-gestoorde speletjie</comment>
     <comment xml:lang="ar">لعبة Kolf محفوظة</comment>
     <comment xml:lang="ast">Partida guardada de Kolf</comment>
     <comment xml:lang="az">Kolf saxlanılan oyunu</comment>
@@ -2339,6 +2370,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kourse">
     <comment>Kolf course</comment>
+    <comment xml:lang="af">Kolf-baan</comment>
     <comment xml:lang="ar">دورة Kolf</comment>
     <comment xml:lang="ast">Campu de Kolf</comment>
     <comment xml:lang="az">Kolf meydançası</comment>
@@ -2418,6 +2450,7 @@ Notes:
 
   <mime-type type="application/vnd.kde.okular-archive">
     <comment>Okular document archive</comment>
+    <comment xml:lang="af">Okular-dokumentargief</comment>
     <comment xml:lang="ar">أرشيف مستند أوكلار</comment>
     <comment xml:lang="ast">Archivu de documentos d'Okular</comment>
     <comment xml:lang="az">Okular sənəd arxivi</comment>
@@ -2493,6 +2526,7 @@ Notes:
 
   <mime-type type="application/x-cabri">
     <comment>Cabri figure</comment>
+    <comment xml:lang="af">Cabri-figuur</comment>
     <comment xml:lang="ar">صورة Cabri</comment>
     <comment xml:lang="ast">Figura de Cabri</comment>
     <comment xml:lang="az">Cabri fiquru</comment>
@@ -2571,6 +2605,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-drgeo">
     <comment>Dr. Geo figure</comment>
+    <comment xml:lang="af">Dr. Geo-figuur</comment>
     <comment xml:lang="ar">صورة Dr. Geo</comment>
     <comment xml:lang="ast">Figura de Dr. Geo</comment>
     <comment xml:lang="az">Dr. Geo fiquru</comment>
@@ -2648,6 +2683,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kgeo">
     <comment>KGeo figure</comment>
+    <comment xml:lang="af">KGeo-figuur</comment>
     <comment xml:lang="ar">صورة KGeo</comment>
     <comment xml:lang="ast">Figura de KGeo</comment>
     <comment xml:lang="az">KGeo fiquru</comment>
@@ -2722,6 +2758,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kig">
     <comment>Kig figure</comment>
+    <comment xml:lang="af">Kig-figuur</comment>
     <comment xml:lang="ar">صورة Kig</comment>
     <comment xml:lang="ast">Figura de Kig</comment>
     <comment xml:lang="az">Kig fiquru</comment>
@@ -2797,6 +2834,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kseg">
     <comment>KSeg document</comment>
+    <comment xml:lang="af">KSeg-dokument</comment>
     <comment xml:lang="ar">وثيقة KSeg</comment>
     <comment xml:lang="ast">Documentu de KSeg</comment>
     <comment xml:lang="az">KSeg sənədi</comment>
@@ -2872,6 +2910,7 @@ Notes:
   <mime-type type="application/x-kvtml">
     <sub-class-of type="application/xml"/>
     <comment>vocabulary trainer document</comment>
+    <comment xml:lang="af">woordeskatopleierdokument</comment>
     <comment xml:lang="ar">وثيقة مدرب المفردات</comment>
     <comment xml:lang="ast">Documentu de práutica de vocabulariu</comment>
     <comment xml:lang="az">söz ehtiyatını artırmaq</comment>
@@ -2945,6 +2984,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kmplot">
     <comment>KmPlot file</comment>
+    <comment xml:lang="af">KmPlot-lêer</comment>
     <comment xml:lang="ar">ملف KmPlot</comment>
     <comment xml:lang="ast">Ficheru de KmPlot</comment>
     <comment xml:lang="az">KmPlot faylı</comment>
@@ -3019,6 +3059,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kwordquiz">
     <comment>KWordQuiz vocabulary</comment>
+    <comment xml:lang="af">KWordQuiz-woordeskat</comment>
     <comment xml:lang="ar">مفردات KWordQuiz</comment>
     <comment xml:lang="ast">Vocabulariu de KWordQuiz</comment>
     <comment xml:lang="az">KWordQuiz lüğəti</comment>
@@ -3093,6 +3134,7 @@ Notes:
 
   <mime-type type="application/x-kcachegrind">
     <comment>Cachegrind/Callgrind profile dump</comment>
+    <comment xml:lang="af">Cachegrind/Callgrind-profielstorting</comment>
     <comment xml:lang="ar">تشكيلة تفريغ Cachegrind/Callgrind</comment>
     <comment xml:lang="ast">Volquiáu de perfiles de Cachegrind/Callgrind</comment>
     <comment xml:lang="az">Cachegrind/Callgrind profil məlumatı</comment>
@@ -3166,6 +3208,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-uml">
     <comment>Umbrello UML Modeller file</comment>
+    <comment xml:lang="af">Umbrello-UML-modelleerderlêer</comment>
     <comment xml:lang="ar">ملف Umbrello UML Modeller</comment>
     <comment xml:lang="ast">Ficheru d'Umbrello</comment>
     <comment xml:lang="az">Umbrello UML Modeller faylı</comment>
@@ -3242,6 +3285,7 @@ Notes:
 
   <mime-type type="application/x-ms-shortcut">
     <comment>Windows link</comment>
+    <comment xml:lang="af">Windows-skakel</comment>
     <comment xml:lang="ar">وصلة ويندوز</comment>
     <comment xml:lang="ast">Enllaz de Windows</comment>
     <comment xml:lang="az">Windows yarlığı</comment>
@@ -3319,6 +3363,7 @@ Notes:
   <mime-type type="application/x-kgetlist">
     <sub-class-of type="application/xml"/>
     <comment>KGet download list</comment>
+    <comment xml:lang="af">KGet-aflaaielys</comment>
     <comment xml:lang="ar">قائمة تنزيل KGet</comment>
     <comment xml:lang="ast">Llista de descargues de KGet</comment>
     <comment xml:lang="az">KGet yükləmə siyahısı</comment>
@@ -3393,6 +3438,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-kopete-emoticons">
     <comment>Kopete emoticons archive</comment>
+    <comment xml:lang="af">Kopete-emosikonargief</comment>
     <comment xml:lang="ar">أرشف ابتسامات Kopete</comment>
     <comment xml:lang="ast">Archivu de fustaxes de Kopete</comment>
     <comment xml:lang="az">Kopete ifadələr arxivi</comment>
@@ -3466,6 +3512,7 @@ Notes:
   </mime-type>
   <mime-type type="application/x-icq">
     <comment>ICQ contact</comment>
+    <comment xml:lang="af">ICQ-kontak</comment>
     <comment xml:lang="ar">جهة اتصال ICQ</comment>
     <comment xml:lang="ast">Contautu d'ICQ</comment>
     <comment xml:lang="az">ICQ əlaqəsi</comment>
@@ -3542,6 +3589,7 @@ Notes:
 
   <mime-type type="video/x-ms-wmp"> <!-- fdo #19671, rejected because "not a file type, only a plugin type" -->
     <comment>Microsoft Media Format</comment>
+    <comment xml:lang="af">Microsoft-mediaformaat</comment>
     <comment xml:lang="ar">تنسيق وسائط مايكروسوفت</comment>
     <comment xml:lang="ast">Formatu multimedia de Microsoft</comment>
     <comment xml:lang="az">Microsoft Media Format</comment>
@@ -3622,6 +3670,7 @@ Notes:
   <!-- Important: the SPARQL RDF query lanaguge uses turtle encoding for graph patterns. -->
   <mime-type xmlns="http://www.freedesktop.org/standards/shared-mime-info" type="application/x-turtle"> <!-- fdo #18089, but not in followup #32812 -->
     <comment>Turtle RDF document</comment>
+    <comment xml:lang="af">Turtle-RDF-dokument</comment>
     <comment xml:lang="ar">وثيقة Turtle RDF</comment>
     <comment xml:lang="ast">Documentu RDF de Turtle</comment>
     <comment xml:lang="az">Turtle RDF sənədi</comment>
@@ -3695,6 +3744,7 @@ Notes:
   </mime-type>
   <mime-type type="image/x-pic"> <!-- fdo #26038, needs update -->
     <comment>Softimage PIC image</comment>
+    <comment xml:lang="af">Softimage-PIC-beeld</comment>
     <comment xml:lang="ar">صورة PIC</comment>
     <comment xml:lang="ast">Imaxe PIC de Softimage</comment>
     <comment xml:lang="az">Softimage PIC şəkili</comment>
@@ -3771,6 +3821,7 @@ Notes:
   </mime-type>
   <mime-type type="application/vnd.kde.kcfg">
     <comment>KConfigXT Configuration Options</comment>
+    <comment xml:lang="af">KConfigXT-opstellingsopsies</comment>
     <comment xml:lang="ar">خيارات ضبط KConfigXT</comment>
     <comment xml:lang="ast">Opciones de configuración de KConfigXT</comment>
     <comment xml:lang="az">KConfigXT konfiqurasiya seçimləri</comment>
@@ -3849,6 +3900,7 @@ Notes:
   </mime-type>
   <mime-type type="application/vnd.kde.kcfgc">
     <comment>KConfigXT Code Generation Options</comment>
+    <comment xml:lang="af">KConfigXT-kodegenereringsopsies</comment>
     <comment xml:lang="ar">خيارات توليد رمز KConfigXT</comment>
     <comment xml:lang="ast">Opciones pa la xeneración de códigu de KConfigXT</comment>
     <comment xml:lang="az">KConfigXT kod yaratma seçimləri</comment>
@@ -3923,6 +3975,7 @@ Notes:
   </mime-type>
   <mime-type type="application/vnd.kde.kxmlguirc">
     <comment>KXMLGUI UI Declaration</comment>
+    <comment xml:lang="af">KXMLGUI-UI-deklarasie</comment>
     <comment xml:lang="ar">تعريف عناصر واجهة KXMLGUI</comment>
     <comment xml:lang="ast">Declaración de la IU de KXMLGUI</comment>
     <comment xml:lang="az">KXMLGUI UI Deklarasiyası</comment>
@@ -4002,6 +4055,7 @@ Notes:
   </mime-type>
   <mime-type type="application/vnd.kde.knotificationrc">
     <comment>KNotification Declaration</comment>
+    <comment xml:lang="af">KNotification-deklarasie</comment>
     <comment xml:lang="ar">تعريف KNotification</comment>
     <comment xml:lang="ast">Declaración de KNotification</comment>
     <comment xml:lang="az">KNotification Deklarasiyası</comment>
@@ -4076,6 +4130,7 @@ Notes:
   </mime-type>
   <mime-type type="text/vnd.kde.kcrash-report">
     <comment>KCrash Report</comment>
+    <comment xml:lang="af">KCrash-rapport</comment>
     <comment xml:lang="ar">تقرير KCrash</comment>
     <comment xml:lang="ast">Informe de KCrash</comment>
     <comment xml:lang="az">KCrash Hesabatı</comment>
