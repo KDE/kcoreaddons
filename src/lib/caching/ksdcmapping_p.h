@@ -162,7 +162,6 @@ private:
                 ::msync(m_mapped, m_mapSize, MS_INVALIDATE | MS_ASYNC);
             }
 #endif
-            ::munmap(m_mapped, m_mapSize);
             if (0 != ::munmap(m_mapped, m_mapSize)) {
                 qCCritical(KCOREADDONS_DEBUG) << "Unable to unmap shared memory segment" << static_cast<void *>(m_mapped) << ":" << ::strerror(errno);
             }
