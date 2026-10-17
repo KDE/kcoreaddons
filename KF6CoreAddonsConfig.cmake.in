@@ -8,15 +8,6 @@ if(NOT @BUILD_SHARED_LIBS@)
         find_dependency(Threads)
     endif()
 
-    # Should be if(Inotify_FOUND) here, but for some reason this doesn't work when building statically
-    # due to ECM's FindInotify.cmake misbehavior — see https://bugs.kde.org/show_bug.cgi?id=460656 for details.
-    # This workaround stops CMake from failing on Linux by relying on the fact that Inotify is built into
-    # kernel there, so no additional linking is required, resulting in an empty Inotify_LIBRARIES var.
-    # The issue (most likely) persists on BSD, though, where Inotify is, in fact, provided by a library.
-    if(@Inotify_LIBRARIES@)
-        find_dependency(Inotify)
-    endif()
-
     if(@Procstat_FOUND@)
         find_dependency(Procstat)
     endif()
@@ -25,11 +16,20 @@ if(NOT @BUILD_SHARED_LIBS@)
         find_dependency(Qt6DBus @REQUIRED_QT_VERSION@)
     endif()
 
-    if (@UDev_FOUND@ OR @LibMount_FOUND@)
+    if (@UDev_FOUND@ OR @LibMount_FOUND@ OR "@Inotify_LIBRARIES@")
         # FindUDev & FindLibMount only provided by ECM, so temporarily add its find modules
         set(_popped_CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH})
         find_dependency(ECM @ECM_VERSION@)
         list(APPEND CMAKE_MODULE_PATH ${ECM_FIND_MODULE_DIR})
+
+        # Should be if(Inotify_FOUND) here, but for some reason this doesn't work when building statically
+        # due to ECM's FindInotify.cmake misbehavior — see https://bugs.kde.org/show_bug.cgi?id=460656 for details.
+        # This workaround stops CMake from failing on Linux by relying on the fact that Inotify is built into
+        # kernel there, so no additional linking is required, resulting in an empty Inotify_LIBRARIES var.
+        # The issue (most likely) persists on BSD, though, where Inotify is, in fact, provided by a library.
+        if(@Inotify_LIBRARIES@)
+            find_dependency(Inotify)
+        endif()
 
         if (@UDev_FOUND@)
             find_dependency(UDev)
