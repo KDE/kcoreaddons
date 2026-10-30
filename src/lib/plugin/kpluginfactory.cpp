@@ -13,7 +13,6 @@
 
 #include "kcoreaddons_debug.h"
 #include <QPluginLoader>
-#include <algorithm>
 
 KPluginFactory::KPluginFactory()
     : d(new KPluginFactoryPrivate)

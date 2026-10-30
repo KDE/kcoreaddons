@@ -19,9 +19,6 @@
 #include <QTextStream>
 #include <QVarLengthArray>
 
-#include <algorithm>
-#include <iostream>
-
 typedef QVarLengthArray<int> intSequenceType;
 
 static const char *binpath;

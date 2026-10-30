@@ -6,7 +6,6 @@
 */
 
 #include "../src/lib/text/ktexttohtml.h"
-#include "../src/lib/text/ktexttohtml_p.h"
 
 #include <QDebug>
 #include <QTest>
