@@ -453,7 +453,7 @@ public:
      * \a format the format used for formatting the time value
      * \a options controls how timezone information should be formatted
      *
-     * \since 6.31
+     * \since 6.32
      */
     [[nodiscard]] QString formatDateTime(const QDateTime &dateTime, QLocale::FormatType format, TimeFormatOptions options = KFormat::DoNotAddTimeZone) const;
 
