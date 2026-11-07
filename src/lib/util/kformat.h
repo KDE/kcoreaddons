@@ -494,6 +494,7 @@ public:
                         KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust,
                         KFormat::BinaryUnitDialect dialect = KFormat::DefaultBinaryDialect) const;
 
+    // TODO KF7: remove in favor of the method below
     /*!
      * Converts \a value to the appropriate string representation
      *
@@ -521,8 +522,8 @@ public:
      * \sa UnitPrefix
      * \since 5.49
      */
-    // TODO KF7: remove in favor of the method below
     QString formatValue(double value, const QString &unit, int precision = 1, KFormat::UnitPrefix prefix = KFormat::UnitPrefix::AutoAdjust) const;
+
     /*!
      * Converts \a value to the appropriate string representation.
      *
