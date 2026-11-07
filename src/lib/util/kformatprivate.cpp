@@ -17,6 +17,7 @@
 #include <QStandardPaths>
 #include <QTimeZone>
 
+#include <cmath>
 #include <limits>
 #include <math.h>
 
@@ -204,8 +205,9 @@ QString KFormatPrivate::formatByteSize(double size, int precision, KFormat::Bina
         }
     }
 
-    // Bytes, no rounding
-    if (unit == 0) {
+    // Bytes, and sizes that are a whole number of the unit, have no fractional part: "4 KiB" is
+    // exactly 4 KiB, while "4.0 KiB" was rounded to it
+    if (unit == 0 || size == std::trunc(size)) {
         precision = 0;
     }
 

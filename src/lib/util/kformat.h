@@ -294,7 +294,8 @@ public:
      * iec    = formatByteSize(1024, 1, KFormat::IECBinaryDialect, KFormat::UnitKiloByte);
      * jedec  = formatByteSize(1024, 1, KFormat::JEDECBinaryDialect, KFormat::UnitKiloByte);
      * small  = formatByteSize(100);
-     * // metric == "1.0 kB", iec == "1.0 KiB", jedec == "1.0 KB", small == "100 B"
+     * near   = formatByteSize(1000, 1, KFormat::IECBinaryDialect, KFormat::UnitKiloByte);
+     * // metric == "1 kB", iec == "1 KiB", jedec == "1 KB", small == "100 B", near == "1.0 KiB"
      * \endcode
      *
      * \a size size in bytes
@@ -302,7 +303,9 @@ public:
      * \a precision number of places after the decimal point to use.  KDE uses
      *        1 by default so when in doubt use 1.  Whenever KFormat::UnitByte is used
      *        (either explicitly or autoselected from KFormat::DefaultBinaryUnits),
-     *        the fractional part is always omitted.
+     *        the fractional part is always omitted.  Since KF 6.33 it is also omitted
+     *        when the size is a whole number of the unit, so a fractional part made
+     *        of zeros means the size was rounded.
      *
      * \a dialect binary unit standard to use.  Use DefaultBinaryDialect to
      *        use the localized user selection unless you need to use a specific
