@@ -85,6 +85,23 @@ void KFormatTest::formatByteSize()
     QCOMPARE(format.formatByteSize(2.3e22, 2, KFormat::MetricBinaryDialect), QStringLiteral("23.00 ZB"));
     QCOMPARE(format.formatByteSize(1.0e27, 1, KFormat::MetricBinaryDialect), QStringLiteral("1,000.0 YB"));
 
+    // With OmitZeroFraction, a size that is a whole number of the unit has no fractional part
+    const auto omit = KFormat::OmitZeroFraction;
+    const auto autoUnit = KFormat::DefaultBinaryUnits;
+    QCOMPARE(format.formatByteSize(4096, 1, KFormat::IECBinaryDialect, autoUnit, omit), QStringLiteral("4 KiB"));
+    QCOMPARE(format.formatByteSize(4097, 1, KFormat::IECBinaryDialect, autoUnit, omit), QStringLiteral("4.0 KiB"));
+    QCOMPARE(format.formatByteSize(-4096, 1, KFormat::IECBinaryDialect, autoUnit, omit), QStringLiteral("-4 KiB"));
+    QCOMPARE(format.formatByteSize(1536, 1, KFormat::IECBinaryDialect, autoUnit, omit), QStringLiteral("1.5 KiB"));
+    QCOMPARE(format.formatByteSize(1536, 2, KFormat::IECBinaryDialect, autoUnit, omit), QStringLiteral("1.50 KiB"));
+    QCOMPARE(format.formatByteSize(1023, 1, KFormat::IECBinaryDialect, autoUnit, omit), QStringLiteral("1,023 B"));
+    QCOMPARE(format.formatByteSize(3 * 1024 * 1024, 2, KFormat::IECBinaryDialect, autoUnit, omit), QStringLiteral("3 MiB"));
+    QCOMPARE(format.formatByteSize(1024, 1, KFormat::JEDECBinaryDialect, autoUnit, omit), QStringLiteral("1 KB"));
+    QCOMPARE(format.formatByteSize(4000, 1, KFormat::MetricBinaryDialect, autoUnit, omit), QStringLiteral("4 kB"));
+    QCOMPARE(format.formatByteSize(4096, 1, KFormat::MetricBinaryDialect, autoUnit, omit), QStringLiteral("4.1 kB"));
+    QCOMPARE(format.formatByteSize(4096, 1, KFormat::IECBinaryDialect, KFormat::UnitMegaByte, omit), QStringLiteral("0.0 MiB"));
+    // Without it, the fractional part stays
+    QCOMPARE(format.formatByteSize(4096, 1, KFormat::IECBinaryDialect, autoUnit, KFormat::DefaultByteSizeFormat), QStringLiteral("4.0 KiB"));
+
     // Spattering of specific units
     QCOMPARE(format.formatByteSize(823000, 3, KFormat::IECBinaryDialect, KFormat::UnitMegaByte), QStringLiteral("0.785 MiB"));
     QCOMPARE(format.formatByteSize(1234034.0, 4, KFormat::JEDECBinaryDialect, KFormat::UnitByte), QStringLiteral("1,234,034 B"));

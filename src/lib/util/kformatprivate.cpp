@@ -17,6 +17,7 @@
 #include <QStandardPaths>
 #include <QTimeZone>
 
+#include <cmath>
 #include <limits>
 #include <math.h>
 
@@ -166,7 +167,11 @@ QString KFormatPrivate::formatValue(double value,
     return tr("%1 %2%3", "MetricBinaryDialect").arg(numString, prefixString, unitString);
 }
 
-QString KFormatPrivate::formatByteSize(double size, int precision, KFormat::BinaryUnitDialect dialect, KFormat::BinarySizeUnits units) const
+QString KFormatPrivate::formatByteSize(double size,
+                                       int precision,
+                                       KFormat::BinaryUnitDialect dialect,
+                                       KFormat::BinarySizeUnits units,
+                                       KFormat::ByteSizeFormatOptions options) const
 {
     // Current KDE default is IECBinaryDialect
     const auto fallbackDialect = KFormat::IECBinaryDialect;
@@ -204,8 +209,9 @@ QString KFormatPrivate::formatByteSize(double size, int precision, KFormat::Bina
         }
     }
 
-    // Bytes, no rounding
-    if (unit == 0) {
+    // Bytes have no fractional part, and with OmitZeroFraction neither has a whole number of the
+    // unit: "4 KiB" is exactly 4 KiB, while "4.0 KiB" was rounded to it
+    if (unit == 0 || (options.testFlag(KFormat::OmitZeroFraction) && size == std::trunc(size))) {
         precision = 0;
     }
 

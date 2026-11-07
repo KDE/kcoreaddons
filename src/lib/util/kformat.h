@@ -216,6 +216,22 @@ public:
     };
 
     /*!
+     * Format flags for formatByteSize()
+     *
+     * \since 6.33
+     *
+     * \value DefaultByteSizeFormat Show the fractional part with the given precision, e.g. "4.0 KiB"
+     * \value OmitZeroFraction Leave out the fractional part when the size is a whole number of the
+     * unit, e.g. "4 KiB", so that "4.0 KiB" only shows a size that was rounded
+     */
+    enum ByteSizeFormatOption {
+        DefaultByteSizeFormat = 0x0,
+        OmitZeroFraction = 0x1,
+    };
+    Q_DECLARE_FLAGS(ByteSizeFormatOptions, ByteSizeFormatOption)
+    Q_FLAG(ByteSizeFormatOptions)
+
+    /*!
      * Format flags for formatDuration()
      *
      * \value DefaultDuration Default formatting in localized 1:23:45 format
@@ -322,6 +338,26 @@ public:
                            int precision = 1,
                            KFormat::BinaryUnitDialect dialect = KFormat::DefaultBinaryDialect,
                            KFormat::BinarySizeUnits units = KFormat::DefaultBinaryUnits) const;
+
+    /*!
+     * Converts \a size from bytes to the appropriate string representation,
+     * as formatByteSize() above, with the format \a options.
+     *
+     * Example:
+     * \code
+     * QString whole, rounded;
+     * whole   = formatByteSize(4096, 1, KFormat::IECBinaryDialect, KFormat::DefaultBinaryUnits, KFormat::OmitZeroFraction);
+     * rounded = formatByteSize(4097, 1, KFormat::IECBinaryDialect, KFormat::DefaultBinaryUnits, KFormat::OmitZeroFraction);
+     * // whole == "4 KiB", rounded == "4.0 KiB"
+     * \endcode
+     *
+     * \since 6.33
+     */
+    [[nodiscard]] QString formatByteSize(double size,
+                                         int precision,
+                                         KFormat::BinaryUnitDialect dialect,
+                                         KFormat::BinarySizeUnits units,
+                                         KFormat::ByteSizeFormatOptions options) const;
 
     /*!
      * Given a number of milliseconds, converts that to a string containing
@@ -582,6 +618,7 @@ private:
     QSharedDataPointer<KFormatPrivate> d;
 };
 
+Q_DECLARE_OPERATORS_FOR_FLAGS(KFormat::ByteSizeFormatOptions)
 Q_DECLARE_OPERATORS_FOR_FLAGS(KFormat::DurationFormatOptions)
 Q_DECLARE_OPERATORS_FOR_FLAGS(KFormat::DistanceFormatOptions)
 

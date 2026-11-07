@@ -33,7 +33,16 @@ KFormat::~KFormat()
 
 QString KFormat::formatByteSize(double size, int precision, KFormat::BinaryUnitDialect dialect, KFormat::BinarySizeUnits units) const
 {
-    return d->formatByteSize(size, precision, dialect, units);
+    return d->formatByteSize(size, precision, dialect, units, KFormat::DefaultByteSizeFormat);
+}
+
+QString KFormat::formatByteSize(double size,
+                                int precision,
+                                KFormat::BinaryUnitDialect dialect,
+                                KFormat::BinarySizeUnits units,
+                                KFormat::ByteSizeFormatOptions options) const
+{
+    return d->formatByteSize(size, precision, dialect, units, options);
 }
 
 QString KFormat::formatValue(double value, KFormat::Unit unit, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const

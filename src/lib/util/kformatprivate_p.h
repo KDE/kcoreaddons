@@ -25,7 +25,11 @@ public:
     explicit KFormatPrivate(const QLocale &locale);
     ~KFormatPrivate();
 
-    QString formatByteSize(double size, int precision, KFormat::BinaryUnitDialect dialect, KFormat::BinarySizeUnits units) const;
+    QString formatByteSize(double size,
+                           int precision,
+                           KFormat::BinaryUnitDialect dialect,
+                           KFormat::BinarySizeUnits units,
+                           KFormat::ByteSizeFormatOptions options) const;
 
     QString
     formatValue(double value, KFormat::Unit unit, QString unitString, int precision, KFormat::UnitPrefix prefix, KFormat::BinaryUnitDialect dialect) const;
