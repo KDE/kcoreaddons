@@ -436,7 +436,9 @@ public:
      *
      * \a dateTime the time to be formatted, as a full QDateTime object so timezone informations
      * remain available.
+     *
      * \a format the format used for formatting the time value
+     *
      * \a options controls how timezone information should be formatted
      *
      * \since 6.15
@@ -450,7 +452,9 @@ public:
      * made to add additional timezone information via \a options.
      *
      * \a dateTime the datetime to be formatted.
+     *
      * \a format the format used for formatting the time value
+     *
      * \a options controls how timezone information should be formatted
      *
      * \since 6.32
