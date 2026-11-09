@@ -17,7 +17,7 @@
 class KPluginFactoryPrivate
 {
 public:
-    using PluginWithMetadata = QPair<const QMetaObject *, KPluginFactory::CreateInstanceWithMetaDataFunction>;
+    using PluginWithMetadata = std::pair<const QMetaObject *, KPluginFactory::CreateInstanceWithMetaDataFunction>;
     KPluginMetaData metaData;
     std::vector<PluginWithMetadata> createInstanceWithMetaDataHash;
 };
