@@ -19,8 +19,10 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QLocale>
+#include <QMap>
 #include <QMimeDatabase>
 #include <QPluginLoader>
+#include <QSet>
 #include <QStandardPaths>
 
 #include "kaboutdata.h"

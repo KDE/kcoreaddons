@@ -6,6 +6,8 @@
 
 #include "ksignalhandler.h"
 #include "kcoreaddons_debug.h"
+
+#include <QSet>
 #include <QSocketNotifier>
 #include <QTimer>
 

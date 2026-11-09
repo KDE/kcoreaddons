@@ -13,6 +13,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QHash>
 #include <QStandardPaths>
 
 KNetworkMountsPrivate::KNetworkMountsPrivate(KNetworkMounts *qq)

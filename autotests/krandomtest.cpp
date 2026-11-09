@@ -15,6 +15,7 @@
 #include <QObject>
 #include <QProcess>
 #include <QRegularExpression>
+#include <QSet>
 #include <QString>
 #include <QTextStream>
 #include <QVarLengthArray>

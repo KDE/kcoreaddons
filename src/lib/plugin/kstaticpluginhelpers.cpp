@@ -6,6 +6,9 @@
 #include "kcoreaddons_export.h"
 #include "kstaticpluginhelpers_p.h"
 
+#include <QHash>
+#include <QMap>
+
 typedef QHash<QString, QMap<QString, QStaticPlugin>> StaticPluginMap;
 Q_GLOBAL_STATIC(StaticPluginMap, s_staticPlugins)
 

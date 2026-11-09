@@ -12,6 +12,8 @@
 #include "kuser.h"
 
 #include <QFileInfo>
+#include <QMap>
+#include <QVarLengthArray>
 
 #include <cerrno>
 #include <grp.h>

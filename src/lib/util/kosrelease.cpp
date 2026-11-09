@@ -7,6 +7,7 @@
 #include "kosrelease.h"
 
 #include <QFile>
+#include <QHash>
 
 #include "kcoreaddons_debug.h"
 #include "kshell.h"
