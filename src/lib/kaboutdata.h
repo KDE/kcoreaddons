@@ -14,6 +14,7 @@
 #ifndef KABOUTDATA_H
 #define KABOUTDATA_H
 
+#include <QObject>
 #include <QSharedDataPointer>
 #include <QString>
 #include <QUrl>
