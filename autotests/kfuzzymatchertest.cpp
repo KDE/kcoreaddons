@@ -164,7 +164,7 @@ void KFuzzyMatcherTest::testMatch_data()
 
 static QStringList matchHelper(const QString &pattern, const QStringList &input)
 {
-    QList<QPair<QString, int>> actual;
+    QList<std::pair<QString, int>> actual;
     for (int i = 0; i < input.size(); ++i) {
         KFuzzyMatcher::Result res = KFuzzyMatcher::match(pattern, input.at(i));
         if (res.matched) {
@@ -173,7 +173,7 @@ static QStringList matchHelper(const QString &pattern, const QStringList &input)
     }
 
     // sort descending based on score
-    std::sort(actual.begin(), actual.end(), [](const QPair<QString, int> &l, const QPair<QString, int> &r) {
+    std::sort(actual.begin(), actual.end(), [](const std::pair<QString, int> &l, const std::pair<QString, int> &r) {
         return l.second > r.second;
     });
 
@@ -202,7 +202,7 @@ void KFuzzyMatcherTest::testMatchedRanges_data()
     QTest::addColumn<QString>("pattern");
     QTest::addColumn<QString>("string");
 
-    using Range = QPair<int, int>;
+    using Range = std::pair<int, int>;
     QTest::addColumn<QList<Range>>("expectedRanges");
 
     QTest::addColumn<bool>("matchingOnly");
@@ -220,7 +220,7 @@ void KFuzzyMatcherTest::testMatchedRanges()
     QFETCH(QString, pattern);
     QFETCH(QString, string);
     QFETCH(bool, matchingOnly);
-    using Range = QPair<int, int>;
+    using Range = std::pair<int, int>;
     QFETCH(QList<Range>, expectedRanges);
 
     const auto matchMode = matchingOnly ? KFuzzyMatcher::RangeType::FullyMatched : KFuzzyMatcher::RangeType::All;

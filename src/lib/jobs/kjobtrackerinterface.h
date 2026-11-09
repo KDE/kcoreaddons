@@ -13,9 +13,12 @@
 #include <kjob.h>
 
 #include <QObject>
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(6, 33)
 #include <QPair>
+#endif
 
 #include <memory>
+#include <utility>
 
 /*!
  * \class KJobTrackerInterface
@@ -121,7 +124,7 @@ protected Q_SLOTS:
      *
      * \a field2 second field (localized name and value)
      */
-    virtual void description(KJob *job, const QString &title, const QPair<QString, QString> &field1, const QPair<QString, QString> &field2);
+    virtual void description(KJob *job, const QString &title, const std::pair<QString, QString> &field1, const std::pair<QString, QString> &field2);
 
     /*!
      * Called to display state information about a job.

@@ -11,10 +11,15 @@
 #ifndef KJOB_H
 #define KJOB_H
 
-#include <QObject>
-#include <QPair>
 #include <kcoreaddons_export.h>
+
+#include <QObject>
+#if KCOREADDONS_ENABLE_DEPRECATED_SINCE(6, 33)
+#include <QPair>
+#endif
+
 #include <memory>
+#include <utility>
 
 class KJobUiDelegate;
 
@@ -30,7 +35,7 @@ class KJobPrivate;
  * For all jobs created in an application, the code looks like
  *
  * \code
- * void SomeClass::methodWithAsynchronousJobCall()
+ * void SoeClass::methodWithAsynchronousJobCall()
  * {
  *   KJob *job = someoperation(some parameters);
  *   connect(job, &KJob::result, this, &SomeClass::handleResult);
@@ -520,8 +525,8 @@ Q_SIGNALS:
      */
     void description(KJob *job,
                      const QString &title,
-                     const QPair<QString, QString> &field1 = QPair<QString, QString>(),
-                     const QPair<QString, QString> &field2 = QPair<QString, QString>());
+                     const std::pair<QString, QString> &field1 = std::pair<QString, QString>(),
+                     const std::pair<QString, QString> &field2 = std::pair<QString, QString>());
     /*!
      * Emitted to display state information about this job.
      * Examples of message are "Resolving host", "Connecting to host...", etc.
