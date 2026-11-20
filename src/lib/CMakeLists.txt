@@ -409,6 +409,7 @@ ecm_generate_qdoc(KF6CoreAddons kcoreaddons.qdocconf)
 ecm_add_installed_library_check(KF6CoreAddons
     PACKAGE_NAME "KF6CoreAddons"
     PACKAGE_TARGET_NAMESPACE "KF6::"
+    QT_STRICT_MODE_LEVEL 6.12
 )
 
 ecm_installed_library_check_include_strings(KF6CoreAddons
