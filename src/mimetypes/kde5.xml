@@ -2278,7 +2278,7 @@ Notes:
     <comment xml:lang="ie">figura de Cabri</comment>
     <comment xml:lang="is">Cabri teikning</comment>
     <comment xml:lang="it">Figura di Cabri</comment>
-    <comment xml:lang="ja">Cabri figure</comment>
+    <comment xml:lang="ja">Cabri 図表ファイル</comment>
     <comment xml:lang="ka">Cabri -ის ფიგურა</comment>
     <comment xml:lang="ko">Cabri 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya mu Cabri</comment>
@@ -2343,7 +2343,7 @@ Notes:
     <comment xml:lang="ie">figura de Dr. Geo figure</comment>
     <comment xml:lang="is">Dr. Geo teikning</comment>
     <comment xml:lang="it">Figura di Dr. Geo</comment>
-    <comment xml:lang="ja">Dr. Geo figure</comment>
+    <comment xml:lang="ja">Dr. Geo 図表ファイル</comment>
     <comment xml:lang="ka">Dr. Geo -ის ფიგურა</comment>
     <comment xml:lang="ko">Dr. Geo 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya mu Dr. Geo</comment>
@@ -2407,7 +2407,7 @@ Notes:
     <comment xml:lang="ie">figura KGeo</comment>
     <comment xml:lang="is">KGeo teikning</comment>
     <comment xml:lang="it">Figura di KGeo</comment>
-    <comment xml:lang="ja">KGeo figure</comment>
+    <comment xml:lang="ja">KGeo 図表ファイル</comment>
     <comment xml:lang="ka">KGeo -ის ფიგურა</comment>
     <comment xml:lang="ko">KGeo 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya mu KGeo</comment>
@@ -2468,7 +2468,7 @@ Notes:
     <comment xml:lang="ie">figura de Kig</comment>
     <comment xml:lang="is">Kig teikning</comment>
     <comment xml:lang="it">Figura di Kig</comment>
-    <comment xml:lang="ja">Kig figure</comment>
+    <comment xml:lang="ja">Kig 図表ファイル</comment>
     <comment xml:lang="ka">Kig -ის ფიგურა</comment>
     <comment xml:lang="ko">Kig 그림</comment>
     <comment xml:lang="lg">Kifaananyi kya mu Kig</comment>
@@ -3336,6 +3336,7 @@ Notes:
     <comment xml:lang="ie">parametres de configuration de KConfigXT</comment>
     <comment xml:lang="is">Stillingar á uppsetningu KConfigXT</comment>
     <comment xml:lang="it">Opzioni di configurazione KConfigXT</comment>
+    <comment xml:lang="ja">KConfigXT 設定オプション</comment>
     <comment xml:lang="ka">KConfigXT მორგების პარამეტრები</comment>
     <comment xml:lang="ko">KConfigXT 설정 옵션</comment>
     <comment xml:lang="lg">Ebisoboka bya mu nteekateeka za KConfigXT</comment>
@@ -3401,6 +3402,7 @@ Notes:
     <comment xml:lang="ie">parametres de code-generation de KConfigXT</comment>
     <comment xml:lang="is">Stillingar á kóðasmíði KConfigXT</comment>
     <comment xml:lang="it">Opzioni di generazione codice KConfigXT</comment>
+    <comment xml:lang="ja">KConfigXT コード生成オプション</comment>
     <comment xml:lang="ka">KConfigXT კოდის გენერაციის მორგება</comment>
     <comment xml:lang="ko">KConfigXT 코드 생성 옵션</comment>
     <comment xml:lang="lg">Ebisoboka bya mu nteekateeka za KConfig ez'okufumba biragiro</comment>
@@ -3462,6 +3464,7 @@ Notes:
     <comment xml:lang="ie">declaration de IdU de KXMLGUI</comment>
     <comment xml:lang="is">KXMLGUI UI-skilgreining</comment>
     <comment xml:lang="it">Dichiarazione UI KXMLGUI</comment>
+    <comment xml:lang="ja">KXMLGUI UI 宣言ファイル</comment>
     <comment xml:lang="ka">KXMLGUI UI დეკლარაცია</comment>
     <comment xml:lang="ko">KXMLGUI UI 선언</comment>
     <comment xml:lang="lg">Kitundu ekiteekateeka enkozesa ya KXML UI mu kiwandiko</comment>
@@ -3528,6 +3531,7 @@ Notes:
     <comment xml:lang="ie">declaration de KNotification</comment>
     <comment xml:lang="is">KNotification skilgreining</comment>
     <comment xml:lang="it">Dichiarazione KNotification</comment>
+    <comment xml:lang="ja">KNotification 宣言ファイル</comment>
     <comment xml:lang="ka">KNotification დეკლარაცია</comment>
     <comment xml:lang="ko">KNotification 선언</comment>
     <comment xml:lang="lg">Kitundu ekiteekateeka enkozesa y'ebiragiro bya mu kiwandiko kya KNotification</comment>
@@ -3589,6 +3593,7 @@ Notes:
     <comment xml:lang="ie">raporta de KCrash</comment>
     <comment xml:lang="is">KCrash hrunskýrsla</comment>
     <comment xml:lang="it">Rapporto di KCrash</comment>
+    <comment xml:lang="ja">KCrash レポート</comment>
     <comment xml:lang="ka">KCrash ანგარიში</comment>
     <comment xml:lang="ko">KCrash 보고서</comment>
     <comment xml:lang="lg">Alipoota ya KCrash</comment>
