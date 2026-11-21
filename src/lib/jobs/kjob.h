@@ -742,6 +742,19 @@ protected:
     void emitResult();
 
     /*!
+     * Ends this job with the error code \a errorCode and the error text \a errorText, as
+     * setError(), setErrorText() and emitResult() do one after the other. \a errorCode is not
+     * NoError: a job that succeeds calls emitResult().
+     *
+     * This function calls KJob::emitResult(), which is not virtual. A subclass that hides
+     * emitResult() with its own also needs its own emitErrorResult(), which calls that one.
+     *
+     * \sa setError(), setErrorText(), emitResult()
+     * \since 6.33
+     */
+    void emitErrorResult(int errorCode, const QString &errorText = QString());
+
+    /*!
      * Utility function for inherited jobs.
      * Emits the percent signal if bigger than previous value,
      * after calculating it from the parameters.

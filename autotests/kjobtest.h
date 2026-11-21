@@ -22,6 +22,7 @@ public:
     ~TestJob() override;
 
     void start() override;
+    using KJob::emitErrorResult;
     using KJob::isFinished;
     using KJob::setProgressUnit;
 
@@ -70,6 +71,8 @@ public Q_SLOTS:
 private Q_SLOTS:
     void testEmitResult_data();
     void testEmitResult();
+    void testEmitErrorResult_data();
+    void testEmitErrorResult();
     void testProgressTracking();
     void testExec_data();
     void testExec();

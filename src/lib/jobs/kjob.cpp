@@ -358,6 +358,14 @@ void KJob::emitResult()
     }
 }
 
+void KJob::emitErrorResult(int errorCode, const QString &errorText)
+{
+    Q_ASSERT_X(errorCode != NoError, "KJob::emitErrorResult", "a job that succeeds calls emitResult()");
+    setError(errorCode);
+    setErrorText(errorText);
+    emitResult();
+}
+
 void KJob::emitPercent(qulonglong processedAmount, qulonglong totalAmount)
 {
     if (totalAmount != 0) {

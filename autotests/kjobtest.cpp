@@ -64,6 +64,36 @@ void KJobTest::testEmitResult()
     QCOMPARE(destroyed_spy.size(), 1);
 }
 
+void KJobTest::testEmitErrorResult_data()
+{
+    QTest::addColumn<QString>("errorText");
+
+    QTest::newRow("with a text") << QStringLiteral("the text");
+    QTest::newRow("without a text") << QString();
+}
+
+void KJobTest::testEmitErrorResult()
+{
+    // The job ends with the error and the text given with the result. A text set before is replaced.
+    QFETCH(QString, errorText);
+    TestJob *job = new TestJob;
+    job->setErrorText(QStringLiteral("an earlier text"));
+    QSignalSpy resultSpy(job, &KJob::result);
+    QSignalSpy destroyedSpy(job, &QObject::destroyed);
+
+    if (errorText.isNull()) {
+        job->emitErrorResult(KJob::UserDefinedError);
+    } else {
+        job->emitErrorResult(KJob::UserDefinedError, errorText);
+    }
+
+    QCOMPARE(resultSpy.size(), 1);
+    QVERIFY(job->isFinished());
+    QCOMPARE(job->error(), KJob::UserDefinedError);
+    QCOMPARE(job->errorText(), errorText);
+    QVERIFY(destroyedSpy.wait());
+}
+
 void KJobTest::testProgressTracking()
 {
     TestJob *testJob = new TestJob;
