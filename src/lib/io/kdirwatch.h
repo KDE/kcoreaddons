@@ -89,22 +89,23 @@ public:
     ~KDirWatch() override;
 
     /*!
-     * Adds a directory to be watched.
+     * Adds a directory \a path to be watched.
      *
-     * The directory does not have to exist. When \a watchModes is set to
+     * The directory does not have to exist.
+     *
+     * When \a watchModes is set to
      * WatchDirOnly (the default), the signals dirty(), created(), deleted()
      * can be emitted, all for the watched directory.
+     *
      * When \a watchModes is set to WatchFiles, all files in the watched
      * directory are watched for changes, too. Thus, the signals dirty(),
      * created(), deleted() can be emitted.
+     *
      * When \a watchModes is set to WatchSubDirs, all subdirs are watched using
      * the same flags specified in \a watchModes (symlinks aren't followed).
+     *
      * If the \a path points to a symlink to a directory, the target directory
      * is watched instead. If you want to watch the link, use \a addFile().
-     *
-     * \a path the path to watch
-     *
-     * \a watchModes watch modes
      *
      * \sa  KDirWatch::WatchMode
      */
@@ -122,8 +123,6 @@ public:
      * Returns the time the directory/file was last changed.
      *
      * \a path the file to check
-     *
-     * Returns the date of the last modification
      */
     QDateTime ctime(const QString &path) const;
 
