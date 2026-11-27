@@ -101,15 +101,14 @@ static QString portalServiceName()
 
 static bool isKIOFuseAvailable()
 {
-    static bool available = QDBusConnection::sessionBus().interface()
-        && QDBusConnection::sessionBus().interface()->activatableServiceNames().value().contains(kioFuseServiceName());
+    static bool available =
+        QDBusConnection::sessionBus().interface() && QDBusConnection::sessionBus().interface()->startService(kioFuseServiceName()).isValid();
     return available;
 }
 
 bool KUrlMimeData::isDocumentsPortalAvailable()
 {
-    static bool available =
-        QDBusConnection::sessionBus().interface() && QDBusConnection::sessionBus().interface()->activatableServiceNames().value().contains(portalServiceName());
+    static bool available = QDBusConnection::sessionBus().interface() && QDBusConnection::sessionBus().interface()->startService(portalServiceName()).isValid();
     return available;
 }
 
@@ -174,7 +173,7 @@ QList<QUrl> KUrlMimeData::urlsFromMimeData(const QMimeData *mimeData, DecodeOpti
     QList<QUrl> uris;
 
 #if HAVE_QTDBUS
-    if (!hasSameSourceId(mimeData) && isDocumentsPortalAvailable() && mimeData->hasFormat(portalFormat())) {
+    if (!hasSameSourceId(mimeData) && mimeData->hasFormat(portalFormat()) && isDocumentsPortalAvailable()) {
         uris = extractPortalUriList(mimeData);
         if (static const auto force = qEnvironmentVariableIntValue("KCOREADDONS_FORCE_DOCUMENTS_PORTAL"); force == 1) {
             // The environment variable is FOR TESTING ONLY!
